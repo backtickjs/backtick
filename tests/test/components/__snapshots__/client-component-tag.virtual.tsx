@@ -15,7 +15,7 @@ const Badge = cs.lift((() => (__cs_props: {
 
 const badges = cs.lift(((__cs_For = cs.splice(For), __cs_Badge = cs.splice(Badge)) => {
     const __cs_scale = cs.splice((createSignal))(1);
-    return <div>{<__cs_For each={[1, 2]}>{__cs_n => <__cs_Badge n={__cs_n * __cs_scale[0]()}/>}</__cs_For>}{<button onclick={() => __cs_scale[1](__cs_scale[0]() * 2)}>double</button>}</div>;
+    return (<div>{<__cs_For each={[1, 2]}>{__cs_n => <__cs_Badge n={__cs_n * __cs_scale[0]()}/>}</__cs_For>}{<button onclick={() => __cs_scale[1](__cs_scale[0]() * 2)}>double</button>}</div>);
 })());
 
 it("clientComponentTag", async (t) => {

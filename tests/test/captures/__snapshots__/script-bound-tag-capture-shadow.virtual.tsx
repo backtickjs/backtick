@@ -41,10 +41,10 @@ it("scriptBoundTagScope", async (t) => {
     cs.lift(((__cs_Card = cs.splice(Card)) => {
     const __cs_twice = (__cs_Card: (props: {
         n: number;
-    }) => JSX.Element) => <div>{<__cs_Card n={1}/>}{<__cs_Card n={2}/>}</div>;
-    return <section>{<__cs_Card title={"host"}/>}{__cs_twice((__cs_props: {
-        n: number;
-    }) => <i>{"row " + __cs_props.n}</i>)}</section>;
+    }) => JSX.Element) => (<div>{<__cs_Card n={1}/>}{<__cs_Card n={2}/>}</div>);
+    return (<section>{<__cs_Card title={"host"}/>}{__cs_twice((__cs_props: {
+            n: number;
+        }) => (<i>{"row " + __cs_props.n}</i>))}</section>);
 })()),
   );
 });

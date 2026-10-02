@@ -69,9 +69,6 @@ describe("a comment above a statement in a script", () => {
       );
     }`);
     assert.match(virtualCode, /\/\/ above an element\n\s*<div>/);
-    assert.match(
-      virtualCode,
-      /\{cs\.lift\(\/\* in a child \*\/ __cs_total\)\}/,
-    );
+    assert.match(virtualCode, /\{\/\* in a child \*\/ ?__cs_total\}/);
   });
 });

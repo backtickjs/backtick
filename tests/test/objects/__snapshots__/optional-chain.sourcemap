@@ -1,149 +1,151 @@
-cs.lift((() =>    → cs`
-(                 → (
-__cs_p            → p
-:                 → : 
-{\n               → { 
-x                 → x
-:                 → : 
-number            → number
-;                 → 
-\n}               →  }
- |                →  | 
-null              → null
-) => {\n          → ) => {\n  
-return            → return 
-__cs_p            → p
-?.                → ?.
-x                 → x
-;                 → ;
-\n}               → \n}
-)())              → `
-cs.lift((() =>    → cs`
-(                 → (
-__cs_o            → o
-:                 → : 
-{\n               → { 
-inner             → inner
-:                 → : 
-{\n               → { 
-z                 → z
-:                 → : 
-number            → number
-;                 → 
-\n    }           →  }
- |                →  | 
-null              → null
-;                 → 
-\n}               →  }
- |                →  | 
-null              → null
-) => {\n          → ) => {\n  
-return            → return 
-__cs_o            → o
-?.                → ?.
-inner             → inner
-?.                → ?.
-z                 → z
-;                 → ;
-\n}               → \n}
-)())              → `
-cs.lift((() =>    → cs`
-(                 → (
-__cs_s            → s
-:                 → : 
-string            → string
- |                →  | 
-null              → null
-) => {\n          → ) => {\n  
-return            → return 
-__cs_s            → s
-?.                → ?.
-concat            → concat
-(                 → (
-"!"               → "!"
-)                 → )
-;                 → ;
-\n}               → \n}
-)())              → `
-cs.lift((() => (  → cs`
-{                 → ({\n      
-found             → found
-:                 → : 
-cs.splice(        →  [-semantic]
-(pick)            → $pick
-)                 →  [-semantic]
-(                 → (
-{                 → { 
-x                 → x
-:                 → : 
-5                 → 5
- }                →  }
-)                 → )
-,                 → ,\n      
-missing           → missing
-:                 → : 
-cs.splice(        →  [-semantic]
-(pick)            → $pick
-)                 →  [-semantic]
-(                 → (
-null              → null
-)                 → )
-,                 → ,\n      
-deep              → deep
-:                 → : 
-cs.splice(        →  [-semantic]
-(deep)            → $deep
-)                 →  [-semantic]
-(                 → (
-{                 → { 
-inner             → inner
-:                 → : 
-{                 → { 
-z                 → z
-:                 → : 
-7                 → 7
- }                →  }
- }                →  }
-)                 → )
-,                 → ,\n      
-cut               → cut
-:                 → : 
-cs.splice(        →  [-semantic]
-(deep)            → $deep
-)                 →  [-semantic]
-(                 → (
-{                 → { 
-inner             → inner
-:                 → : 
-null              → null
- }                →  }
-)                 → )
-,                 → ,\n      
-top               → top
-:                 → : 
-cs.splice(        →  [-semantic]
-(deep)            → $deep
-)                 →  [-semantic]
-(                 → (
-null              → null
-)                 → )
-,                 → ,\n      
-loud              → loud
-:                 → : 
-cs.splice(        →  [-semantic]
-(shout)           → $shout
-)                 →  [-semantic]
-(                 → (
-"hi"              → "hi"
-)                 → )
-,                 → ,\n      
-silent            → silent
-:                 → : 
-cs.splice(        →  [-semantic]
-(shout)           → $shout
-)                 →  [-semantic]
-(                 → (
-null              → null
-)                 → )
- }                → ,\n    })
-))())             → `
+cs.lift((() =>   → cs`
+(                → (
+__cs_p           → p
+:                → : 
+{\n              → { 
+x                → x
+:                → : 
+number           → number
+;                → 
+\n}              →  }
+ |               →  | 
+null             → null
+) => {\n         → ) => {\n  
+return           → return 
+__cs_p           → p
+?.               → ?.
+x                → x
+;                → ;
+\n}              → \n}
+)())             → `
+cs.lift((() =>   → cs`
+(                → (
+__cs_o           → o
+:                → : 
+{\n              → { 
+inner            → inner
+:                → : 
+{\n              → { 
+z                → z
+:                → : 
+number           → number
+;                → 
+\n    }          →  }
+ |               →  | 
+null             → null
+;                → 
+\n}              →  }
+ |               →  | 
+null             → null
+) => {\n         → ) => {\n  
+return           → return 
+__cs_o           → o
+?.               → ?.
+inner            → inner
+?.               → ?.
+z                → z
+;                → ;
+\n}              → \n}
+)())             → `
+cs.lift((() =>   → cs`
+(                → (
+__cs_s           → s
+:                → : 
+string           → string
+ |               →  | 
+null             → null
+) => {\n         → ) => {\n  
+return           → return 
+__cs_s           → s
+?.               → ?.
+concat           → concat
+(                → (
+"!"              → "!"
+)                → )
+;                → ;
+\n}              → \n}
+)())             → `
+cs.lift((() =>   → cs`
+(                → (
+{                → {\n      
+found            → found
+:                → : 
+cs.splice(       →  [-semantic]
+(pick)           → $pick
+)                →  [-semantic]
+(                → (
+{                → { 
+x                → x
+:                → : 
+5                → 5
+ }               →  }
+)                → )
+,                → ,\n      
+missing          → missing
+:                → : 
+cs.splice(       →  [-semantic]
+(pick)           → $pick
+)                →  [-semantic]
+(                → (
+null             → null
+)                → )
+,                → ,\n      
+deep             → deep
+:                → : 
+cs.splice(       →  [-semantic]
+(deep)           → $deep
+)                →  [-semantic]
+(                → (
+{                → { 
+inner            → inner
+:                → : 
+{                → { 
+z                → z
+:                → : 
+7                → 7
+ }               →  }
+ }               →  }
+)                → )
+,                → ,\n      
+cut              → cut
+:                → : 
+cs.splice(       →  [-semantic]
+(deep)           → $deep
+)                →  [-semantic]
+(                → (
+{                → { 
+inner            → inner
+:                → : 
+null             → null
+ }               →  }
+)                → )
+,                → ,\n      
+top              → top
+:                → : 
+cs.splice(       →  [-semantic]
+(deep)           → $deep
+)                →  [-semantic]
+(                → (
+null             → null
+)                → )
+,                → ,\n      
+loud             → loud
+:                → : 
+cs.splice(       →  [-semantic]
+(shout)          → $shout
+)                →  [-semantic]
+(                → (
+"hi"             → "hi"
+)                → )
+,                → ,\n      
+silent           → silent
+:                → : 
+cs.splice(       →  [-semantic]
+(shout)          → $shout
+)                →  [-semantic]
+(                → (
+null             → null
+)                → )
+ }               → ,\n    }
+)                → )
+)())             → `

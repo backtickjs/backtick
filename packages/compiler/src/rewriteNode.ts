@@ -330,8 +330,15 @@ function rewriteNodeImpl(
     };
   }
 
+  // Kept, as written: a comment between `return (` and what it returns stays
+  // inside them, where without them the return would end at the line break.
   if (ts.isParenthesizedExpression(node)) {
-    return rewriteNode(ts, state, node.expression);
+    const inner = rewriteNode(ts, state, node.expression);
+    return {
+      virtual: ts.factory.createParenthesizedExpression(
+        inner.virtual as ts.Expression,
+      ),
+    };
   }
 
   if (ts.isAsExpression(node)) {
@@ -657,10 +664,18 @@ function rewriteNodeImpl(
             continue;
           }
           const rewritten = rewriteNode(ts, state, child.expression);
+          // As the child it was written as, at its position: the printer
+          // writes a comment inside the braces only for a child it parsed.
           virtualChildren.push(
-            ts.factory.createJsxExpression(
-              undefined,
-              rewritten.virtual as ts.Expression,
+            ts.setOriginalNode(
+              ts.setTextRange(
+                ts.factory.createJsxExpression(
+                  undefined,
+                  rewritten.virtual as ts.Expression,
+                ),
+                child,
+              ),
+              child,
             ),
           );
           continue;

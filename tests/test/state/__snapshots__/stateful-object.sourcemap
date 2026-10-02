@@ -65,7 +65,8 @@ cs.splice(              →  [-semantic]
 ;                       → ;
 \n                      → \n      
 return                  → return 
-<                       → (\n        <
+(                       → (\n        
+<                       → <
 button                  → button
                         → \n          
 onclick                 → onclick
@@ -87,6 +88,7 @@ get                     → get
 ()                      → ()
 }</                     → }\n        </
 button                  → button
->                       → >\n      )
+>                       → >
+)                       → \n      )
 ;                       → ;
 \n})())                 → \n    }`

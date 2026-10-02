@@ -16,7 +16,7 @@ async function Panel(props: { body: Client<JSXElement> }) {
     const __cs_Badge = (__cs_p: {
         n: number;
     }) => <i>{"panel " + __cs_p.n}</i>;
-    return <section>{<__cs_Badge n={0}/>}{cs.splice((props)).body}</section>;
+    return (<section>{<__cs_Badge n={0}/>}{cs.splice((props)).body}</section>);
 })());
 }
 
@@ -29,12 +29,12 @@ const scriptBoundTagCarried = cs.lift((() => {
     const __cs_Badge = (__cs_p: {
         n: number;
         children: JSX.Element;
-    }) => <b>{"outer " + __cs_p.n}{__cs_p.children}</b>;
-    return <div>{cs.splice((
+    }) => (<b>{"outer " + __cs_p.n}{__cs_p.children}</b>);
+    return (<div>{cs.splice((
           <Panel
             body={cs.lift((() => <__cs_Badge n={__cs_count[0]()}>{<u>{"kid " + __cs_count[0]()}</u>}</__cs_Badge>)())}
           />
-        ))}{<button onclick={() => __cs_count[1](__cs_count[0]() + 1)}>more</button>}</div>;
+        ))}{<button onclick={() => __cs_count[1](__cs_count[0]() + 1)}>more</button>}</div>);
 })());
 
 it("scriptBoundTagCarried", async (t) => {

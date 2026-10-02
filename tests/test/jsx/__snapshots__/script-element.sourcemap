@@ -42,7 +42,8 @@ __cs_label                                → label
 ;                                         → ;
 \n                                        → \n      
 return                                    → return 
-<                                         → (\n        <
+(                                         → (\n        
+<                                         → <
 div                                       → div
                                           →  
 style                                     → style
@@ -107,7 +108,8 @@ span                                      → span
 >                                         → >
 }</                                       → \n        </
 div                                       → div
->                                         → >\n      )
+>                                         → >
+)                                         → \n      )
 ;                                         → ;
 \n    }                                   → \n    }
 ;                                         → ;

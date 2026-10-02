@@ -122,7 +122,8 @@ JSX                                       → JSX
 .                                         → .
 Element                                   → Element
 ) =>                                      → ) => 
-<                                         → (\n        <
+(                                         → (\n        
+<                                         → <
 div                                       → div
 >{                                        → >\n          
 <                                         → <
@@ -144,11 +145,13 @@ n                                         → n
 />                                        →  />
 }</                                       → \n        </
 div                                       → div
->                                         → >\n      )
+>                                         → >
+)                                         → \n      )
 ;                                         → ;
 \n                                        → \n\n      
 return                                    → return 
-<                                         → (\n        <
+(                                         → (\n        
+<                                         → <
 section                                   → section
 >{                                        → >\n          
 <                                         → <
@@ -170,9 +173,10 @@ n                                         → n
 :                                         → : 
 number                                    → number
 ;                                         → 
-\n    }                                   →  }
+\n        }                               →  }
 ) =>                                      → ) => 
-<                                         → (\n            <
+(                                         → (\n            
+<                                         → <
 i                                         → i
 >{                                        → >{
 "row "                                    → "row "
@@ -182,10 +186,12 @@ __cs_props                                → props
 n                                         → n
 }</                                       → }</
 i                                         → i
->                                         → >\n          )
+>                                         → >
+)                                         → \n          )
 )                                         → )
 }</                                       → }\n        </
 section                                   → section
->                                         → >\n      )
+>                                         → >
+)                                         → \n      )
 ;                                         → ;
 \n})())                                   → \n    }`

@@ -15,9 +15,9 @@ async function Card() {
     const __cs_row = (__cs_size: number) => {
         const __cs_css = "font-size: " + __cs_size + "px";
         const __cs_press = () => __cs_label[1]("held");
-        return <div style={__cs_css}>{<span style={__cs_css} onclick={() => __cs_label[1]("pressed")}>{__cs_label[0]()}</span>}{<span style={"font-size: 8px"}>fixed</span>}{<span style={__cs_css} onclick={__cs_press}>
+        return (<div style={__cs_css}>{<span style={__cs_css} onclick={() => __cs_label[1]("pressed")}>{__cs_label[0]()}</span>}{<span style={"font-size: 8px"}>fixed</span>}{<span style={__cs_css} onclick={__cs_press}>
             held
-          </span>}</div>;
+          </span>}</div>);
     };
     return <div style={"padding: 0"}>{__cs_row(12)}</div>;
 })());

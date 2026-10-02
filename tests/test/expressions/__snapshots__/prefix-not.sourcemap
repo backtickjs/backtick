@@ -19,11 +19,12 @@ return           → return
 \n    }          → \n      }
 \n               → \n      
 return           → return 
-!(               → !
+!                → !
+(                → (
 __cs_count       → count
  >               →  > 
 3                → 3
-)                → 
+)                → )
  ?               →  ? 
 "room left"      → "room left"
  :               →  : 

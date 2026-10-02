@@ -18,8 +18,9 @@ cs.splice(                                →  [-semantic]
 (createMemo)                              → $createMemo
 )                                         →  [-semantic]
 (                                         → (\n            
-() => (                                   → () => 
-{                                         → ({ 
+() =>                                     → () => 
+(                                         → (
+{                                         → { 
 isBig                                     → isBig
 :                                         → : 
 __cs_n                                    → n
@@ -37,8 +38,8 @@ __cs_n                                    → n
 0                                         → 0
 ]                                         → ]
 ()                                        → ()
- }                                        →  })
-)                                         → 
+ }                                        →  }
+)                                         → )
 ,                                         → ,\n            
 undefined                                 → undefined
 ,                                         → ,\n            
@@ -88,7 +89,8 @@ isBig                                     → isBig
 ;                                         → ;
 \n                                        → \n          
 return                                    → return 
-<                                         → (\n            <
+(                                         → (\n            
+<                                         → <
 div                                       → div
 >{                                        → >\n              
 <                                         → <
@@ -125,7 +127,8 @@ p                                         → p
 >                                         → >
 }</                                       → \n            </
 div                                       → div
->                                         → >\n          )
+>                                         → >
+)                                         → \n          )
 ;                                         → ;
 \n}                                       → \n        }
 )())                                      → `
@@ -191,7 +194,8 @@ x                                         → x
 ;                                         → ;
 \n                                        → \n          
 return                                    → return 
-<                                         → (\n            <
+(                                         → (\n            
+<                                         → <
 div                                       → div
 >{                                        → >\n              
 <                                         → <
@@ -232,7 +236,8 @@ p                                         → p
 >                                         → >
 }</                                       → \n            </
 div                                       → div
->                                         → >\n          )
+>                                         → >
+)                                         → \n          )
 ;                                         → ;
 \n}                                       → \n        }
 )())                                      → `
@@ -346,7 +351,8 @@ __cs_n                                    → n
 ;                                         → ;
 \n                                        → \n          
 return                                    → return 
-<                                         → (\n            <
+(                                         → (\n            
+<                                         → <
 div                                       → div
 >{                                        → >\n              
 <                                         → <
@@ -377,7 +383,8 @@ p                                         → p
 >                                         → >
 }</                                       → \n            </
 div                                       → div
->                                         → >\n          )
+>                                         → >
+)                                         → \n          )
 ;                                         → ;
 \n}                                       → \n        }
 )())                                      → `
@@ -426,7 +433,8 @@ x                                         → x
 ;                                         → ;
 \n                                        → \n          
 return                                    → return 
-<                                         → (\n            <
+(                                         → (\n            
+<                                         → <
 div                                       → div
 >{                                        → >\n              
 <                                         → <
@@ -467,7 +475,8 @@ p                                         → p
 >                                         → >
 }</                                       → \n            </
 div                                       → div
->                                         → >\n          )
+>                                         → >
+)                                         → \n          )
 ;                                         → ;
 \n}                                       → \n        }
 )())                                      → `

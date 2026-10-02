@@ -110,6 +110,7 @@ abs                     → abs
 ;                       → ;
 \n                      → \n      
 return                  → return 
+(                       → (\n        
 __cs_rounded            → rounded
  +                      →  +\n        
 "|"                     → "|"
@@ -152,23 +153,26 @@ fround                  → fround
 )                       → )
  +                      →  +\n        
 "|"                     → "|"
- + (                    →  +\n        
+ +                      →  +\n        
+(                       → (
 cs.globalThis.          → 
 Math                    → Math
 .                       → .
 PI                      → PI
  >                      →  > 
 3.14                    → 3.14
-)                       → 
+)                       → )
  +                      →  +\n        
 ","                     → ","
- + (                    →  +\n        
+ +                      →  +\n        
+(                       → (
 cs.globalThis.          → 
 Math                    → Math
 .                       → .
 E                       → E
  >                      →  > 
 2.71                    → 2.71
+)                       → )
 )                       → \n      )
 ;                       → ;
 \n})())                 → \n    }`

@@ -33,7 +33,7 @@ describe("equals", () => {
         cs.globalThis.window.console.log();
         return __cs_size().isBig ? "big" : "small";
     };
-    return <div>{<button onclick={() => __cs_n[1](__cs_n[0]() + 1)}>add</button>}{<p>{__cs_label()}</p>}</div>;
+    return (<div>{<button onclick={() => __cs_n[1](__cs_n[0]() + 1)}>add</button>}{<p>{__cs_label()}</p>}</div>);
 })()),
       ),
     );
@@ -57,9 +57,9 @@ describe("equals", () => {
         cs.globalThis.window.console.log();
         return "x " + __cs_point[0]().x;
     };
-    return <div>{<button onclick={() => __cs_point[1]({ x: __cs_point[0]().x })}>
+    return (<div>{<button onclick={() => __cs_point[1]({ x: __cs_point[0]().x })}>
                 same
-              </button>}{<p>{__cs_label()}</p>}</div>;
+              </button>}{<p>{__cs_label()}</p>}</div>);
 })()),
       ),
     );
@@ -93,7 +93,7 @@ describe("equals", () => {
         cs.globalThis.window.console.log();
         return "n " + __cs_n[0]();
     };
-    return <div>{<button onclick={() => __cs_n[1](1)}>same</button>}{<p>{__cs_label()}</p>}</div>;
+    return (<div>{<button onclick={() => __cs_n[1](1)}>same</button>}{<p>{__cs_label()}</p>}</div>);
 })()),
       ),
     );
@@ -110,9 +110,9 @@ describe("equals", () => {
         cs.globalThis.window.console.log();
         return "x " + __cs_point[0]().x;
     };
-    return <div>{<button onclick={() => __cs_point[1]({ x: __cs_point[0]().x })}>
+    return (<div>{<button onclick={() => __cs_point[1]({ x: __cs_point[0]().x })}>
                 same
-              </button>}{<p>{__cs_label()}</p>}</div>;
+              </button>}{<p>{__cs_label()}</p>}</div>);
 })()),
       ),
     );

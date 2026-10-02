@@ -17,7 +17,7 @@ async function SwappableRows() {
         const __cs_held = __cs_ids[0]();
         __cs_ids[1](__cs_held.with(1, __cs_held[3]).with(3, __cs_held[1]));
     };
-    return <div>{<button onclick={__cs_swap}>swap</button>}{<table>{<tbody>{<__cs_For each={__cs_ids[0]()}>{(__cs_id: number) => <tr id={"row-" + __cs_id}>{<td>{"row " + __cs_id}</td>}</tr>}</__cs_For>}</tbody>}</table>}</div>;
+    return (<div>{<button onclick={__cs_swap}>swap</button>}{<table>{<tbody>{<__cs_For each={__cs_ids[0]()}>{(__cs_id: number) => (<tr id={"row-" + __cs_id}>{<td>{"row " + __cs_id}</td>}</tr>)}</__cs_For>}</tbody>}</table>}</div>);
 })());
 }
 

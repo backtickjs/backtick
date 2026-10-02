@@ -23,7 +23,7 @@ const colorName: Client<(c: Color) => string> = cs.lift((() => (__cs_c: Color) =
 async function Swatch() {
   return cs.lift((() => {
     const __cs_held = cs.splice((createSignal))(cs.splice(Color.Red));
-    return <span onclick={() => __cs_held[1](cs.splice(Color.Blue))}>{cs.splice((colorName))(__cs_held[0]())}</span>;
+    return (<span onclick={() => __cs_held[1](cs.splice(Color.Blue))}>{cs.splice((colorName))(__cs_held[0]())}</span>);
 })());
 }
 

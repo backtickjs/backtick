@@ -33,16 +33,17 @@ cs.splice(       →  [-semantic]
 (createRoot)     → $createRoot
 )                →  [-semantic]
 (                → (
-() => (          → () => 
-{                → ({ 
+() =>            → () => 
+(                → (
+{                → { 
 x                → x
 :                → : 
 1                → 1
- }               →  })
+ }               →  }
+)                → )
 [                → [
 0                → 0
 ]                → ]
-)                → 
 )                → )
 )())             → `
 cs.lift((() =>   → cs`
@@ -51,14 +52,15 @@ cs.splice(       →  [-semantic]
 )                →  [-semantic]
 (                → (
 () =>            → () => 
-(                → 
+(                → (
 7                → 7
  as              →  as 
 unknown          → unknown
  as              →  as 
 number           → number
 []               → []
-)[               → [
+)                → )
+[                → [
 0                → 0
 ]                → ]
 )                → )
@@ -101,12 +103,14 @@ cs.lift((() =>   → cs`
 ]                → ]
 )())             → `
 cs.lift((() =>   → cs`
-(                → 
-{                → ({ 
+(                → (
+(                → (
+{                → { 
 x                → x
 :                → : 
 1                → 1
- }               →  })
+ }               →  }
+)                → )
  as              →  as 
 {\n              → { 
 [                → [
@@ -117,7 +121,8 @@ string           → string
 number           → number
 ;                → 
 \n}              →  }
-)[               → [
+)                → )
+[                → [
 "y"              → "y"
 ]                → ]
 )())             → `

@@ -19,7 +19,8 @@ JSX                     → JSX
 .                       → .
 Element                 → Element
 ) =>                    → ) => 
-<                       → (\n        <
+(                       → (\n        
+<                       → <
 ul                      → ul
 >{                      → >\n          {
 cs.splice(              → ${ [-semantic]
@@ -49,7 +50,8 @@ n                       → n
 )                       → } [-semantic]
 }</                     → }\n        </
 ul                      → ul
->                       → >\n      )
+>                       → >
+)                       → \n      )
 ;                       → ;
 \n                      → \n      
 return                  → return 

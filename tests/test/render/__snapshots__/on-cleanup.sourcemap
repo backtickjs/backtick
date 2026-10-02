@@ -179,7 +179,8 @@ p                                       → p
 cs.lift((() =>                          → cs`
 () => {\n                               → () => {\n          
 return                                  → return 
-<                                       → (\n            <
+(                                       → (\n            
+<                                       → <
 button                                  → button
                                         →  
 onclick                                 → onclick
@@ -201,7 +202,8 @@ log                                     → log
 }                                       → }
 >\n              press\n            </  → >\n              press\n            </
 button                                  → button
->                                       → >\n          )
+>                                       → >
+)                                       → \n          )
 ;                                       → ;
 \n}                                     → \n        }
 )())                                    → `

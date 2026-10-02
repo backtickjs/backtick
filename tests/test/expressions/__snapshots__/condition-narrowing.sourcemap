@@ -1,112 +1,114 @@
-cs.lift((() =>    → cs`
-true              → true
-)())              → `
-cs.lift((() =>    → cs`
-(                 → (\n  
-__cs_text         → text
-:                 → : 
-string            → string
- |                →  | 
-null              → null
-,                 → ,\n  
-__cs_upper        → upper
-:                 → : 
-boolean           → boolean
-) => {\n          → ,\n) => {\n  
-if (              → if (
-__cs_upper        → upper
- &&               →  && 
-__cs_text         → text
- !==              →  !== 
-null              → null
-)                 → ) 
-{\n               → {\n    
-return            → return 
-__cs_text         → text
-.                 → .
-toUpperCase       → toUpperCase
-()                → ()
-;                 → ;
-\n    }           → \n  }
-\n                → \n  
-if (              → if (
-cs.splice(        → ${ [-semantic]
-flags.strict      → flags.strict
-)                 → } [-semantic]
- &&               →  && 
-__cs_text         → text
- !==              →  !== 
-null              → null
- &&               →  && 
-__cs_text         → text
-.                 → .
-charAt            → charAt
-(                 → (
-0                 → 0
-)                 → )
- ===              →  === 
-"!"               → "!"
-)                 → ) 
-{\n               → {\n    
-return            → return 
-__cs_text         → text
-.                 → .
-concat            → concat
-(                 → (
-"?"               → "?"
-)                 → )
-;                 → ;
-\n    }           → \n  }
-\n                → \n  
-return            → return 
-"none"            → "none"
-;                 → ;
-\n}               → \n}
-)())              → `
-cs.lift((() => (  → cs`
-{                 → ({\n      
-missing           → missing
-:                 → : 
-cs.splice(        →  [-semantic]
-(label)           → $label
-)                 →  [-semantic]
-(                 → (
-null              → null
-,                 → , 
-true              → true
-)                 → )
-,                 → ,\n      
-loud              → loud
-:                 → : 
-cs.splice(        →  [-semantic]
-(label)           → $label
-)                 →  [-semantic]
-(                 → (
-"!hi"             → "!hi"
-,                 → , 
-true              → true
-)                 → )
-,                 → ,\n      
-quiet             → quiet
-:                 → : 
-cs.splice(        →  [-semantic]
-(label)           → $label
-)                 →  [-semantic]
-(                 → (
-"!hi"             → "!hi"
-,                 → , 
-false             → false
-)                 → )
-,                 → ,\n      
-plain             → plain
-:                 → : 
-cs.splice(        →  [-semantic]
-(label)           → $label
-)                 →  [-semantic]
-(                 → (
-"zz"              → "zz"
-,                 → , 
-false             → false
-)                 → )
- }                → ,\n    })
-))())             → `
+cs.lift((() =>   → cs`
+true             → true
+)())             → `
+cs.lift((() =>   → cs`
+(                → (\n  
+__cs_text        → text
+:                → : 
+string           → string
+ |               →  | 
+null             → null
+,                → ,\n  
+__cs_upper       → upper
+:                → : 
+boolean          → boolean
+) => {\n         → ,\n) => {\n  
+if (             → if (
+__cs_upper       → upper
+ &&              →  && 
+__cs_text        → text
+ !==             →  !== 
+null             → null
+)                → ) 
+{\n              → {\n    
+return           → return 
+__cs_text        → text
+.                → .
+toUpperCase      → toUpperCase
+()               → ()
+;                → ;
+\n    }          → \n  }
+\n               → \n  
+if (             → if (
+cs.splice(       → ${ [-semantic]
+flags.strict     → flags.strict
+)                → } [-semantic]
+ &&              →  && 
+__cs_text        → text
+ !==             →  !== 
+null             → null
+ &&              →  && 
+__cs_text        → text
+.                → .
+charAt           → charAt
+(                → (
+0                → 0
+)                → )
+ ===             →  === 
+"!"              → "!"
+)                → ) 
+{\n              → {\n    
+return           → return 
+__cs_text        → text
+.                → .
+concat           → concat
+(                → (
+"?"              → "?"
+)                → )
+;                → ;
+\n    }          → \n  }
+\n               → \n  
+return           → return 
+"none"           → "none"
+;                → ;
+\n}              → \n}
+)())             → `
+cs.lift((() =>   → cs`
+(                → (
+{                → {\n      
+missing          → missing
+:                → : 
+cs.splice(       →  [-semantic]
+(label)          → $label
+)                →  [-semantic]
+(                → (
+null             → null
+,                → , 
+true             → true
+)                → )
+,                → ,\n      
+loud             → loud
+:                → : 
+cs.splice(       →  [-semantic]
+(label)          → $label
+)                →  [-semantic]
+(                → (
+"!hi"            → "!hi"
+,                → , 
+true             → true
+)                → )
+,                → ,\n      
+quiet            → quiet
+:                → : 
+cs.splice(       →  [-semantic]
+(label)          → $label
+)                →  [-semantic]
+(                → (
+"!hi"            → "!hi"
+,                → , 
+false            → false
+)                → )
+,                → ,\n      
+plain            → plain
+:                → : 
+cs.splice(       →  [-semantic]
+(label)          → $label
+)                →  [-semantic]
+(                → (
+"zz"             → "zz"
+,                → , 
+false            → false
+)                → )
+ }               → ,\n    }
+)                → )
+)())             → `

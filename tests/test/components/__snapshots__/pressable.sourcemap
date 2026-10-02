@@ -11,7 +11,8 @@ cs.splice(                 →  [-semantic]
 ;                          → ;
 \n                         → \n    
 return                     → return 
-<                          → (\n      <
+(                          → (\n      
+<                          → <
 button                     → button
                            → \n        
 id                         → id
@@ -82,6 +83,7 @@ span                       → span
 >                          → >
 }</                        → \n      </
 button                     → button
->                          → >\n    )
+>                          → >
+)                          → \n    )
 ;                          → ;
 \n})())                    → \n  }`

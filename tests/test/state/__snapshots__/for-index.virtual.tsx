@@ -19,7 +19,7 @@ async function RotatingRows() {
         const __cs_held = __cs_names[0]();
         __cs_names[1]([__cs_held[2], __cs_held[0], __cs_held[1]]);
     };
-    return <div>{<span onclick={__cs_rotate}>rotate</span>}{<div>{<__cs_For each={__cs_names[0]()}>{(__cs_name: string, __cs_index: () => number) => <span>{__cs_name + " at " + __cs_index()}</span>}</__cs_For>}</div>}</div>;
+    return (<div>{<span onclick={__cs_rotate}>rotate</span>}{<div>{<__cs_For each={__cs_names[0]()}>{(__cs_name: string, __cs_index: () => number) => (<span>{__cs_name + " at " + __cs_index()}</span>)}</__cs_For>}</div>}</div>);
 })());
 }
 

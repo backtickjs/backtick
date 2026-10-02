@@ -17,7 +17,8 @@ __cs_order                                → order
 :                                         → : 
 Order                                     → Order
 ) =>                                      → ) => 
-<                                         → (\n          <
+(                                         → (\n          
+<                                         → <
 div                                       → div
 >{                                        → >\n            
 <                                         → <
@@ -111,7 +112,8 @@ span                                      → span
 >                                         → >
 }</                                       → \n          </
 div                                       → div
->                                         → >\n        )
+>                                         → >
+)                                         → \n        )
 }</                                       → }\n      </
 __cs_For                                  → For
 >                                         → >

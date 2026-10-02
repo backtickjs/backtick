@@ -34,7 +34,7 @@ async function Rows() {
     const __cs_clear = () => {
         __cs_ids[1]([]);
     };
-    return <>{<span onclick={__cs_clear}>clear</span>}{<__cs_For each={__cs_ids[0]()}>{(__cs_id: number) => <span>{"row " + __cs_id}</span>}</__cs_For>}</>;
+    return (<>{<span onclick={__cs_clear}>clear</span>}{<__cs_For each={__cs_ids[0]()}>{(__cs_id: number) => <span>{"row " + __cs_id}</span>}</__cs_For>}</>);
 })());
 }
 

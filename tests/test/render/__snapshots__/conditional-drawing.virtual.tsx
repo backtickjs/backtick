@@ -41,10 +41,10 @@ const Held = cs.lift((() => (__cs_props: {
 
 const conditionalDrawing = cs.lift(((__cs_Held = cs.splice(Held)) => {
     const __cs_builds = cs.splice((createSignal))(0);
-    return <div>{<span>{"builds " + __cs_builds[0]()}</span>}{<section>{<__cs_Held again={() => {
+    return (<div>{<span>{"builds " + __cs_builds[0]()}</span>}{<section>{<__cs_Held again={() => {
         __cs_builds[1](__cs_builds[0]() + 1);
         return __cs_builds[0]() < 5;
-    }}/>}</section>}</div>;
+    }}/>}</section>}</div>);
 })());
 
 describe("a component whose drawing is a conditional", () => {

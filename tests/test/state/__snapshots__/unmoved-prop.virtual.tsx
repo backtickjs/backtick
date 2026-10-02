@@ -14,7 +14,7 @@ async function SelectableRows() {
   return cs.lift(((__cs_For = cs.splice(For)) => {
     const __cs_selected = cs.splice((createSignal))(0);
     const __cs_isSelected = cs.splice((createSelector))(__cs_selected[0]);
-    return <div>{<span onclick={() => __cs_selected[1](1)}>select</span>}{<div>{<__cs_For each={[0, 1, 2]}>{(__cs_id: number) => <a href={__cs_isSelected(__cs_id) ? "#open" : "#closed"}>{"row " + __cs_id}</a>}</__cs_For>}</div>}</div>;
+    return (<div>{<span onclick={() => __cs_selected[1](1)}>select</span>}{<div>{<__cs_For each={[0, 1, 2]}>{(__cs_id: number) => (<a href={__cs_isSelected(__cs_id) ? "#open" : "#closed"}>{"row " + __cs_id}</a>)}</__cs_For>}</div>}</div>);
 })());
 }
 

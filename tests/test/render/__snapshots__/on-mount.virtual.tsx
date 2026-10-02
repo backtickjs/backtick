@@ -44,7 +44,7 @@ describe("onMount", () => {
       await evaluate(
         cs.lift((() => () => {
     const __cs_said = cs.splice((createSignal))("not yet");
-    return <button onclick={() => cs.splice((onMount))(() => __cs_said[1]("ran"))}>{__cs_said[0]()}</button>;
+    return (<button onclick={() => cs.splice((onMount))(() => __cs_said[1]("ran"))}>{__cs_said[0]()}</button>);
 })()),
       ),
     );

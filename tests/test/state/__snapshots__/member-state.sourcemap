@@ -39,11 +39,12 @@ cs.splice(                                →  [-semantic]
 )                                         →  [-semantic]
 (                                         → (
 "row "                                    → "row "
- + (                                      →  + 
+ +                                        →  + 
+(                                         → (
 __cs_from                                 → from
  +                                        →  + 
 __cs_at                                   → at
-)                                         → 
+)                                         → )
 )                                         → )
  }                                        →  }
 ;                                         → ;
@@ -68,7 +69,8 @@ __cs_build                                → build
 ;                                         → ;
 \n                                        → \n\n    
 return                                    → return 
-<                                         → (\n      <
+(                                         → (\n      
+<                                         → <
 div                                       → div
 >{                                        → >\n        
 <                                         → <
@@ -96,7 +98,8 @@ __cs_row                                  → row
 :                                         → : 
 Row                                       → Row
 ) =>                                      → ) => 
-<                                         → (\n              <
+(                                         → (\n              
+<                                         → <
 li                                        → li
                                           →  
 onclick                                   → onclick
@@ -122,7 +125,8 @@ label                                     → label
 ()                                        → ()
 }</                                       → }</
 li                                        → li
->                                         → >\n            )
+>                                         → >
+)                                         → \n            )
 }</                                       → }\n          </
 __cs_For                                  → For
 >                                         → >
@@ -131,6 +135,7 @@ ul                                        → ul
 >                                         → >
 }</                                       → \n      </
 div                                       → div
->                                         → >\n    )
+>                                         → >
+)                                         → \n    )
 ;                                         → ;
 \n})())                                   → \n  }`

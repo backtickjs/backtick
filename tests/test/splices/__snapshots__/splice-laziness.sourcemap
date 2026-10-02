@@ -28,8 +28,9 @@ throw                                     → throw
 "the guarded fragment must never evaluate"→ "the guarded fragment must never evaluate"
 ;                                         → ;
 \n})())                                   → \n}`
-cs.lift((() => (                          → cs`
-{                                         → ({\n      
+cs.lift((() =>                            → cs`
+(                                         → (
+{                                         → {\n      
 taken                                     → taken
 :                                         → : 
 cs.splice(                                → ${ [-semantic]
@@ -47,5 +48,6 @@ guard(broken)                             → guard(broken)
 (                                         → (
 false                                     → false
 )                                         → )
- }                                        → ,\n    })
-))())                                     → `
+ }                                        → ,\n    }
+)                                         → )
+)())                                      → `

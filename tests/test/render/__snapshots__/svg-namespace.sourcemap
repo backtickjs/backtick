@@ -42,7 +42,8 @@ number                                    → number
 ;                                         → 
 \n    }                                   →  }
 ) =>                                      → ) => 
-<                                         → (\n    <
+(                                         → (\n    
+<                                         → <
 circle                                    → circle
                                           →  
 cx                                        → cx
@@ -75,11 +76,13 @@ title                                     → title
 >                                         → >
 }</                                       → \n    </
 circle                                    → circle
->                                         → >\n  )
+>                                         → >
+)                                         → \n  )
 ;                                         → ;
 \n                                        → \n\n  
 return                                    → return 
-<                                         → (\n    <
+(                                         → (\n    
+<                                         → <
 div                                       → div
 >{                                        → >\n      
 <                                         → <
@@ -179,6 +182,7 @@ svg                                       → svg
 >                                         → >
 }</                                       → \n    </
 div                                       → div
->                                         → >\n  )
+>                                         → >
+)                                         → \n  )
 ;                                         → ;
 \n})())                                   → \n}`

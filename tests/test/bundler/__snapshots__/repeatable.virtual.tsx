@@ -22,7 +22,7 @@ const page = () => cs.lift(((__cs_For = cs.splice(For)) => {
     const __cs_count = cs.splice((createSignal))(1);
     const __cs_rows = [1, 2, 3];
     const __cs_total = __cs_count[0]() + cs.splice(cs.lift((() => __cs_rows.length)()));
-    return <section>{cs.splice((<Card title="element" />))}{cs.splice((<Card title={shared} />))}{<p>{cs.splice((doubled))(__cs_count[0]())}</p>}{<p>{cs.splice((pair))(1)(2)}</p>}{<p>{cs.splice((shared))}</p>}{<p>{__cs_total}</p>}{<ul>{<__cs_For each={__cs_rows}>{(__cs_row: number) => <li>{__cs_row + __cs_count[0]()}</li>}</__cs_For>}</ul>}</section>;
+    return (<section>{cs.splice((<Card title="element" />))}{cs.splice((<Card title={shared} />))}{<p>{cs.splice((doubled))(__cs_count[0]())}</p>}{<p>{cs.splice((pair))(1)(2)}</p>}{<p>{cs.splice((shared))}</p>}{<p>{__cs_total}</p>}{<ul>{<__cs_For each={__cs_rows}>{(__cs_row: number) => <li>{__cs_row + __cs_count[0]()}</li>}</__cs_For>}</ul>}</section>);
 })());
 
 const code = async (value: Client<unknown>) => (await bundle(value)).code;

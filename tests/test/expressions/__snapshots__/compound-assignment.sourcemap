@@ -50,9 +50,11 @@ __cs_total              → total
 const                   → const 
 __cs_answered           → answered
  =                      →  = 
+(                       → (
 __cs_total              → total
  +=                     →  += 
 2                       → 2
+)                       → )
 ;                       → ;
 \n                      → \n      
 let                     → let 

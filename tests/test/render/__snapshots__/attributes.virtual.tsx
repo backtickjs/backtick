@@ -94,12 +94,12 @@ describe("a field's value", () => {
     return cs.lift((() => {
     const __cs_text = cs.splice((createSignal))("first");
     const __cs_isOn = cs.splice((createSignal))(false);
-    return <div>{<input aria-label={"text"} value={__cs_text[0]()}/>}{<input type={"checkbox"} aria-label={"on"} checked={__cs_isOn[0]()}/>}{<button onclick={() => {
+    return (<div>{<input aria-label={"text"} value={__cs_text[0]()}/>}{<input type={"checkbox"} aria-label={"on"} checked={__cs_isOn[0]()}/>}{<button onclick={() => {
         __cs_text[1]("second");
         __cs_isOn[1](true);
     }}>
             write
-          </button>}</div>;
+          </button>}</div>);
 })());
   }
 

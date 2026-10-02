@@ -102,9 +102,9 @@ describe("onCleanup", () => {
     const { unmount } = render(
       await evaluate(
         cs.lift((() => () => {
-    return <button onclick={() => cs.splice((onCleanup))(() => cs.globalThis.window.console.log())}>
+    return (<button onclick={() => cs.splice((onCleanup))(() => cs.globalThis.window.console.log())}>
               press
-            </button>;
+            </button>);
 })()),
       ),
     );

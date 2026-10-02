@@ -8,7 +8,8 @@ span                    → span
 style                   → style
 ={                      → ={
 "font-size: "           → "font-size: "
- + (                    →  + 
+ +                      →  + 
+(                       → (
 cs.splice(              →  [-semantic]
 (selected)              → $selected
 )                       →  [-semantic]
@@ -24,7 +25,7 @@ cs.splice(              →  [-semantic]
 20                      → 20
  :                      →  : 
 16                      → 16
-)                       → 
+)                       → )
  +                      →  + 
 "px"                    → "px"
 }                       → }
@@ -84,7 +85,8 @@ cs.splice(              →  [-semantic]
 ;                       → ;
 \n                      → \n    
 return                  → return 
-<                       → (\n      <
+(                       → (\n      
+<                       → <
 div                     → div
 >{                      → >\n        
 <                       → <
@@ -130,6 +132,7 @@ __cs_selected           → selected
 )                       → } [-semantic]
 }</                     → }\n      </
 div                     → div
->                       → >\n    )
+>                       → >
+)                       → \n    )
 ;                       → ;
 \n})())                 → \n  }`

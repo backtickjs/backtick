@@ -82,7 +82,8 @@ length                                    → length
 ;                                         → ;
 \n                                        → \n  
 return                                    → return 
-<                                         → (\n    <
+(                                         → (\n    
+<                                         → <
 section                                   → section
 >{                                        → >\n      {
 cs.splice(                                → ${ [-semantic]
@@ -181,7 +182,8 @@ ul                                        → ul
 >                                         → >
 }</                                       → \n    </
 section                                   → section
->                                         → >\n  )
+>                                         → >
+)                                         → \n  )
 ;                                         → ;
 \n})())                                   → \n}`
 cs.lift((() =>                            → cs`

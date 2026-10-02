@@ -30,7 +30,7 @@ describe("computed", () => {
         cs.globalThis.window.console.log();
         return __cs_n[0]() * 2;
     });
-    return <div>{<button onclick={() => __cs_n[1](__cs_n[0]() + 1)}>add</button>}{<p>{"a " + __cs_doubled()}</p>}{<p>{"b " + __cs_doubled()}</p>}{<p>{"c " + __cs_doubled()}</p>}</div>;
+    return (<div>{<button onclick={() => __cs_n[1](__cs_n[0]() + 1)}>add</button>}{<p>{"a " + __cs_doubled()}</p>}{<p>{"b " + __cs_doubled()}</p>}{<p>{"c " + __cs_doubled()}</p>}</div>);
 })()),
       ),
     );
@@ -52,7 +52,7 @@ describe("computed", () => {
         cs.globalThis.window.console.log();
         return __cs_isBig() ? "big" : "small";
     };
-    return <div>{<button onclick={() => __cs_n[1](__cs_n[0]() + 1)}>add</button>}{<p>{__cs_label()}</p>}</div>;
+    return (<div>{<button onclick={() => __cs_n[1](__cs_n[0]() + 1)}>add</button>}{<p>{__cs_label()}</p>}</div>);
 })()),
       ),
     );

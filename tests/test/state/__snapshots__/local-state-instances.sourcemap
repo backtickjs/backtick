@@ -11,7 +11,8 @@ cs.splice(                  →  [-semantic]
 ;                           → ;
 \n                          → \n    
 return                      → return 
-<                           → (\n      <
+(                           → (\n      
+<                           → <
 span                        → span
                             → \n        
 style                       → style
@@ -48,7 +49,8 @@ __cs_size                   → size
 }                           → }
 >\n        press\n      </  → \n      >\n        press\n      </
 span                        → span
->                           → >\n    )
+>                           → >
+)                           → \n    )
 ;                           → ;
 \n})())                     → \n  }`
 cs.lift((() =>              → cs`

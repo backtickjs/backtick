@@ -25,7 +25,8 @@ __cs_selected                             → selected
 ;                                         → ;
 \n                                        → \n    
 return                                    → return 
-<                                         → (\n      <
+(                                         → (\n      
+<                                         → <
 div                                       → div
 >{                                        → >\n        
 <                                         → <
@@ -68,7 +69,8 @@ __cs_id                                   → id
 :                                         → : 
 number                                    → number
 ) =>                                      → ) => 
-<                                         → (\n              <
+(                                         → (\n              
+<                                         → <
 a                                         → a
                                           →  
 href                                      → href
@@ -88,7 +90,8 @@ __cs_id                                   → id
 __cs_id                                   → id
 }</                                       → }</
 a                                         → a
->                                         → >\n            )
+>                                         → >
+)                                         → \n            )
 }</                                       → }\n          </
 __cs_For                                  → For
 >                                         → >
@@ -97,6 +100,7 @@ div                                       → div
 >                                         → >
 }</                                       → \n      </
 div                                       → div
->                                         → >\n    )
+>                                         → >
+)                                         → \n    )
 ;                                         → ;
 \n})())                                   → \n  }`

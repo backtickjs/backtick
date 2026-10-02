@@ -1,6 +1,7 @@
 cs.lift((() => {\n        → cs`{\n    
 return                    → return 
-<                         → (\n      <
+(                         → (\n      
+<                         → <
 span                      → span
 >{                        → >\n        {
 "/at?q="                  → "/at?q="
@@ -28,6 +29,7 @@ decodeURIComponent        → decodeURIComponent
 )                         → )
 }</                       → }\n      </
 span                      → span
->                         → >\n    )
+>                         → >
+)                         → \n    )
 ;                         → ;
 \n})())                   → \n  }`

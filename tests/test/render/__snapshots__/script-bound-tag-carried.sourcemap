@@ -26,7 +26,8 @@ i                                        → i
 ;                                        → ;
 \n                                       → \n    
 return                                   → return 
-<                                        → (\n      <
+(                                        → (\n      
+<                                        → <
 section                                  → section
 >{                                       → >\n        
 <                                        → <
@@ -45,7 +46,8 @@ cs.splice(                               →  [-semantic]
 body                                     → body
 }</                                      → }\n      </
 section                                  → section
->                                        → >\n    )
+>                                        → >
+)                                        → \n    )
 ;                                        → ;
 \n})())                                  → \n  }`
 cs.lift((() => {\n                       → cs`{\n  
@@ -80,7 +82,8 @@ Element                                  → Element
 ;                                        → 
 \n    }                                  →  }
 ) =>                                     → ) => 
-<                                        → (\n    <
+(                                        → (\n    
+<                                        → <
 b                                        → b
 >{                                       → >\n      {
 "outer "                                 → "outer "
@@ -94,11 +97,13 @@ __cs_p                                   → p
 children                                 → children
 }</                                      → }\n    </
 b                                        → b
->                                        → >\n  )
+>                                        → >
+)                                        → \n  )
 ;                                        → ;
 \n                                       → \n\n  
 return                                   → return 
-<                                        → (\n    <
+(                                        → (\n    
+<                                        → <
 div                                      → div
 >{                                       → >\n      {\n        
 cs.splice(                               → ${ [-semantic]
@@ -161,6 +166,7 @@ button                                   → button
 >                                        → >
 }</                                      → \n    </
 div                                      → div
->                                        → >\n  )
+>                                        → >
+)                                        → \n  )
 ;                                        → ;
 \n})())                                  → \n}`

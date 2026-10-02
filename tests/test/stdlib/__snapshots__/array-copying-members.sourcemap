@@ -67,6 +67,7 @@ toSpliced               → toSpliced
 ;                       → ;
 \n                      → \n      
 return                  → return 
+(                       → (\n        
 __cs_sorted             → sorted
 .                       → .
 join                    → join
@@ -109,5 +110,6 @@ join                    → join
 (                       → (
 ","                     → ","
 )                       → )
+)                       → \n      )
 ;                       → ;
 \n})())                 → \n    }`

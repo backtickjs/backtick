@@ -24,7 +24,7 @@ async function Rows() {
     const __cs_label = (__cs_row: Row) => {
         return __cs_row.label;
     };
-    return <div>{<span onclick={() => __cs_add({ id: 1, label: "one" })}>add</span>}{<div>{<__cs_For each={__cs_rows[0]()}>{(__cs_row: Row) => <span>{__cs_label(__cs_row)}</span>}</__cs_For>}</div>}</div>;
+    return (<div>{<span onclick={() => __cs_add({ id: 1, label: "one" })}>add</span>}{<div>{<__cs_For each={__cs_rows[0]()}>{(__cs_row: Row) => <span>{__cs_label(__cs_row)}</span>}</__cs_For>}</div>}</div>);
 })());
 }
 

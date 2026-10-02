@@ -20,10 +20,10 @@ async function Labels() {
             __cs_label[1](__cs_label[0]() + " !!!");
         }
     };
-    return <div>{<button onclick={__cs_update}>update</button>}{<table>{<tbody>{<__cs_For each={__cs_rows}>{(__cs_row: {
-        id: number;
-        label: Signal<string>;
-    }) => <tr id={"row-" + __cs_row.id}>{<td>{__cs_row.label[0]()}</td>}</tr>}</__cs_For>}</tbody>}</table>}</div>;
+    return (<div>{<button onclick={__cs_update}>update</button>}{<table>{<tbody>{<__cs_For each={__cs_rows}>{(__cs_row: {
+            id: number;
+            label: Signal<string>;
+        }) => (<tr id={"row-" + __cs_row.id}>{<td>{__cs_row.label[0]()}</td>}</tr>)}</__cs_For>}</tbody>}</table>}</div>);
 })());
 }
 

@@ -39,7 +39,8 @@ number                  → number
 ;                       → ;
 \n                      → \n    
 return                  → return 
-<                       → (\n      <
+(                       → (\n      
+<                       → <
 span                    → span
                         → \n        
 onclick                 → onclick
@@ -102,6 +103,7 @@ __cs_step               → step
 ()                      → ()
 }</                     → }\n      </
 span                    → span
->                       → >\n    )
+>                       → >
+)                       → \n    )
 ;                       → ;
 \n})())                 → \n  }`

@@ -1,51 +1,53 @@
-cs.lift((() => (  → cs`
-{                 → ({\n      
-under             → under
-:                 → : 
-cs.splice(        →  [-semantic]
-(low)             → $low
-)                 →  [-semantic]
- <                →  < 
-cs.splice(        →  [-semantic]
-(high)            → $high
-)                 →  [-semantic]
-,                 → ,\n      
-atMost            → atMost
-:                 → : 
-cs.splice(        →  [-semantic]
-(low)             → $low
-)                 →  [-semantic]
- <=               →  <= 
-cs.splice(        →  [-semantic]
-(high)            → $high
-)                 →  [-semantic]
-,                 → ,\n      
-over              → over
-:                 → : 
-cs.splice(        →  [-semantic]
-(high)            → $high
-)                 →  [-semantic]
- >                →  > 
-cs.splice(        →  [-semantic]
-(low)             → $low
-)                 →  [-semantic]
-,                 → ,\n      
-between           → between
-:                 → : 
-cs.splice(        →  [-semantic]
-(low)             → $low
-)                 →  [-semantic]
- <                →  < 
-cs.splice(        →  [-semantic]
-(high)            → $high
-)                 →  [-semantic]
- &&               →  && 
-cs.splice(        →  [-semantic]
-(high)            → $high
-)                 →  [-semantic]
- >                →  > 
-cs.splice(        →  [-semantic]
-(low)             → $low
-)                 →  [-semantic]
- }                → ,\n    })
-))())             → `
+cs.lift((() =>   → cs`
+(                → (
+{                → {\n      
+under            → under
+:                → : 
+cs.splice(       →  [-semantic]
+(low)            → $low
+)                →  [-semantic]
+ <               →  < 
+cs.splice(       →  [-semantic]
+(high)           → $high
+)                →  [-semantic]
+,                → ,\n      
+atMost           → atMost
+:                → : 
+cs.splice(       →  [-semantic]
+(low)            → $low
+)                →  [-semantic]
+ <=              →  <= 
+cs.splice(       →  [-semantic]
+(high)           → $high
+)                →  [-semantic]
+,                → ,\n      
+over             → over
+:                → : 
+cs.splice(       →  [-semantic]
+(high)           → $high
+)                →  [-semantic]
+ >               →  > 
+cs.splice(       →  [-semantic]
+(low)            → $low
+)                →  [-semantic]
+,                → ,\n      
+between          → between
+:                → : 
+cs.splice(       →  [-semantic]
+(low)            → $low
+)                →  [-semantic]
+ <               →  < 
+cs.splice(       →  [-semantic]
+(high)           → $high
+)                →  [-semantic]
+ &&              →  && 
+cs.splice(       →  [-semantic]
+(high)           → $high
+)                →  [-semantic]
+ >               →  > 
+cs.splice(       →  [-semantic]
+(low)            → $low
+)                →  [-semantic]
+ }               → ,\n    }
+)                → )
+)())             → `

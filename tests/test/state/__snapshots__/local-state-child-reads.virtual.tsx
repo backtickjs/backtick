@@ -28,7 +28,7 @@ const ReadingRow = async ({
 async function ReadingPanel() {
   return cs.lift((() => {
     const __cs_selected = cs.splice((createSignal))(0);
-    return <div>{<span onclick={() => __cs_selected[1](1)}>select</span>}{cs.splice((<ReadingRow id={cs.lift((() => 0)())} selected={cs.lift((() => __cs_selected)())} />))}{cs.splice((<ReadingRow id={cs.lift((() => 1)())} selected={cs.lift((() => __cs_selected)())} />))}</div>;
+    return (<div>{<span onclick={() => __cs_selected[1](1)}>select</span>}{cs.splice((<ReadingRow id={cs.lift((() => 0)())} selected={cs.lift((() => __cs_selected)())} />))}{cs.splice((<ReadingRow id={cs.lift((() => 1)())} selected={cs.lift((() => __cs_selected)())} />))}</div>);
 })());
 }
 

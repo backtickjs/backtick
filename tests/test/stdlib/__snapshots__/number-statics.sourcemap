@@ -106,7 +106,8 @@ isFinite                                  → isFinite
 ;                                         → ;
 \n                                        → \n    
 return                                    → return 
-<                                         → (\n      <
+(                                         → (\n      
+<                                         → <
 span                                      → span
 >{                                        → >\n        {
 __cs_whole                                → whole
@@ -132,6 +133,7 @@ __cs_largest                              → largest
 __cs_safe                                 → safe
 }</                                       → }\n      </
 span                                      → span
->                                         → >\n    )
+>                                         → >
+)                                         → \n    )
 ;                                         → ;
 \n})())                                   → \n  }`

@@ -74,7 +74,8 @@ cs.splice(         →  [-semantic]
 ;                  → ;
 \n                 → \n          
 return             → return 
-<                  → (\n            <
+(                  → (\n            
+<                  → <
 button             → button
                    →  
 onclick            → onclick
@@ -102,7 +103,8 @@ __cs_said          → said
 ()                 → ()
 }</                → }\n            </
 button             → button
->                  → >\n          )
+>                  → >
+)                  → \n          )
 ;                  → ;
 \n}                → \n        }
 )())               → `

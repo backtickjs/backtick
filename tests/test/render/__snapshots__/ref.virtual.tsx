@@ -13,7 +13,7 @@ describe("ref", () => {
       await evaluate(
         cs.lift((() => () => {
     const __cs_field = cs.splice((createSignal))<HTMLInputElement | null>(null);
-    return <div>{<input aria-label={"name"} ref={__cs_element => __cs_field[1](__cs_element)}/>}{<button onclick={() => __cs_field[0]()?.focus()}>edit</button>}</div>;
+    return (<div>{<input aria-label={"name"} ref={__cs_element => __cs_field[1](__cs_element)}/>}{<button onclick={() => __cs_field[0]()?.focus()}>edit</button>}</div>);
 })()),
       ),
     );
@@ -25,7 +25,7 @@ describe("ref", () => {
     render(
       await evaluate(
         cs.lift((() => () => {
-    return <input aria-label={"name"} ref={__cs_element => cs.splice((onMount))(() => __cs_element.focus())}/>;
+    return (<input aria-label={"name"} ref={__cs_element => cs.splice((onMount))(() => __cs_element.focus())}/>);
 })()),
       ),
     );
@@ -62,7 +62,7 @@ describe("ref", () => {
           cs.lift((() => () => {
     const __cs_shown = cs.splice((createSignal))(true);
     const __cs_n = cs.splice((createSignal))(0);
-    return <div>{<button onclick={() => __cs_n[1](__cs_n[0]() + 1)}>{"n " + __cs_n[0]()}</button>}{__cs_shown[0]() ? <p ref={() => cs.globalThis.window.console.log(__cs_n[0]())}>shown</p> : null}</div>;
+    return (<div>{<button onclick={() => __cs_n[1](__cs_n[0]() + 1)}>{"n " + __cs_n[0]()}</button>}{__cs_shown[0]() ? (<p ref={() => cs.globalThis.window.console.log(__cs_n[0]())}>shown</p>) : null}</div>);
 })()),
         ),
       );

@@ -35,7 +35,8 @@ __cs_ids                                  → ids
 ;                                         → ;
 \n                                        → \n    
 return                                    → return 
-<>{                                       → (\n      <>\n        
+(                                         → (\n      
+<>{                                       → <>\n        
 <                                         → <
 span                                      → span
                                           →  
@@ -76,7 +77,8 @@ span                                      → span
 }</                                       → }</
 __cs_For                                  → For
 >                                         → >
-}</>                                      → \n      </>\n    )
+}</>                                      → \n      </>
+)                                         → \n    )
 ;                                         → ;
 \n})())                                   → \n  }`
 cs.lift((() =>                            → cs`

@@ -1,6 +1,7 @@
 cs.lift((() => {\n      → cs`{\n    
 return                  → return 
-<                       → (\n      <
+(                       → (\n      
+<                       → <
 span                    → span
 >{                      → >{
 cs.globalThis.          → 
@@ -20,6 +21,7 @@ fromCodePoint           → fromCodePoint
 ()                      → ()
 }</                     → }</
 span                    → span
->                       → >\n    )
+>                       → >
+)                       → \n    )
 ;                       → ;
 \n})())                 → \n  }`

@@ -11,7 +11,8 @@ cs.splice(              →  [-semantic]
 ;                       → ;
 \n                      → \n\n      
 return                  → return 
-<                       → (\n        <
+(                       → (\n        
+<                       → <
 form                    → form
                         → \n          
 onsubmit                → onsubmit
@@ -121,6 +122,7 @@ button                  → button
 >                       → >
 }</                     → \n        </
 form                    → form
->                       → >\n      )
+>                       → >
+)                       → \n      )
 ;                       → ;
 \n})())                 → \n    }`

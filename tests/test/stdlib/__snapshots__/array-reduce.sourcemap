@@ -77,6 +77,7 @@ number                  → number
 ;                       → ;
 \n                      → \n      
 return                  → return 
+(                       → (\n        
 __cs_total              → total
 .                       → .
 toFixed                 → toFixed
@@ -105,5 +106,6 @@ __cs_one                → one
 ,                       → , 
 0                       → 0
 )                       → )
+)                       → \n      )
 ;                       → ;
 \n})())                 → \n    }`

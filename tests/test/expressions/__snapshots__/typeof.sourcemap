@@ -39,14 +39,15 @@ a                       → a
 1                       → 1
  }                      →  }
 ,                       → ,\n        
-typeof (                → typeof 
-(                       → ((
+typeof                  → typeof 
+(                       → (
+(                       → (
 __cs_n                  → n
 :                       → : 
 number                  → number
 ) =>                    → ) => 
 __cs_n                  → n
-)                       → 
+)                       → )
 ,                       → ,\n        
 typeof                  → typeof 
 cs.globalThis.          → 

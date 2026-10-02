@@ -32,7 +32,8 @@ Color.Red               → Color.Red
 ;                       → ;
 \n                      → \n    
 return                  → return 
-<                       → (\n      <
+(                       → (\n      
+<                       → <
 span                    → span
                         →  
 onclick                 → onclick
@@ -61,6 +62,7 @@ __cs_held               → held
 )                       → )
 }</                     → }\n      </
 span                    → span
->                       → >\n    )
+>                       → >
+)                       → \n    )
 ;                       → ;
 \n})())                 → \n  }`

@@ -57,7 +57,8 @@ cs.splice(              →  [-semantic]
 ;                       → ;
 \n                      → \n    
 return                  → return 
-<                       → (\n      <
+(                       → (\n      
+<                       → <
 div                     → div
 >{                      → >\n        {
 cs.splice(              → ${ [-semantic]
@@ -77,6 +78,7 @@ __cs_size               → size
 )                       → } [-semantic]
 }</                     → }\n      </
 div                     → div
->                       → >\n    )
+>                       → >
+)                       → \n    )
 ;                       → ;
 \n})())                 → \n  }`

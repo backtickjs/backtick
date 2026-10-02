@@ -88,7 +88,8 @@ cs.splice(                                →  [-semantic]
 ;                                         → ;
 \n                                        → \n\n  
 return                                    → return 
-<                                         → (\n    <
+(                                         → (\n    
+<                                         → <
 div                                       → div
 >{                                        → >\n      
 <                                         → <
@@ -146,6 +147,7 @@ section                                   → section
 >                                         → >
 }</                                       → \n    </
 div                                       → div
->                                         → >\n  )
+>                                         → >
+)                                         → \n  )
 ;                                         → ;
 \n})())                                   → \n}`

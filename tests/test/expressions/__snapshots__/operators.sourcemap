@@ -291,14 +291,16 @@ __cs_n                  → n
 \n                      → \n      
 const                   → const 
 __cs_last               → last
- = (                    →  = 
+ =                      →  = 
+(                       → (
 __cs_n                  → n
 ++                      → ++
 ,                       → , 
 __cs_n                  → n
  +                      →  + 
 10                      → 10
-);                      → ;
+)                       → )
+;                       → ;
 \n                      → \n      
 return                  → return 
 [                       → [

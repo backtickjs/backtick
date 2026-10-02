@@ -12,7 +12,7 @@ describe("a read by key", () => {
     assert.equal(await evaluate(cs.lift((() => cs.splice((createRoot))(() => "abc"["0"]))())), "a");
     assert.equal(
       // @ts-expect-error: an object's type names its keys
-      await evaluate(cs.lift((() => cs.splice((createRoot))(() => ({ x: 1 }[0])))())),
+      await evaluate(cs.lift((() => cs.splice((createRoot))(() => ({ x: 1 })[0]))())),
       undefined,
     );
     assert.equal(
@@ -27,7 +27,7 @@ describe("a read by key", () => {
       cs.lift((() => [5, 31, 7][9])()),
       cs.lift((() => [5, 31, 7][1.5])()),
       cs.lift((() => [5, 31, 7][-1])()),
-      cs.lift((() => ({ x: 1 } as {
+      cs.lift((() => (({ x: 1 }) as {
     [key: string]: number;
 })["y"])()),
       cs.lift((() => "abc"[9])()),

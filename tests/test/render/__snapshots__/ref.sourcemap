@@ -16,7 +16,8 @@ null              → null
 ;                 → ;
 \n                → \n          
 return            → return 
-<                 → (\n            <
+(                 → (\n            
+<                 → <
 div               → div
 >{                → >\n              
 <                 → <
@@ -61,14 +62,16 @@ button            → button
 >                 → >
 }</               → \n            </
 div               → div
->                 → >\n          )
+>                 → >
+)                 → \n          )
 ;                 → ;
 \n}               → \n        }
 )())              → `
 cs.lift((() =>    → cs`
 () => {\n         → () => {\n          
 return            → return 
-<                 → (\n            <
+(                 → (\n            
+<                 → <
 input             → input
                   → \n              
 aria-label        → aria-label
@@ -91,7 +94,8 @@ focus             → focus
 ()                → ()
 )                 → )
 }                 → }
-/>                → \n            />\n          )
+/>                → \n            />
+)                 → \n          )
 ;                 → ;
 \n}               → \n        }
 )())              → `
@@ -136,7 +140,8 @@ cs.splice(        →  [-semantic]
 ;                 → ;
 \n                → \n            
 return            → return 
-<                 → (\n              <
+(                 → (\n              
+<                 → <
 div               → div
 >{                → >\n                
 <                 → <
@@ -177,7 +182,8 @@ __cs_shown        → shown
 ]                 → ]
 ()                → ()
  ?                →  ? 
-<                 → (\n                  <
+(                 → (\n                  
+<                 → <
 p                 → p
                   →  
 ref               → ref
@@ -199,12 +205,14 @@ __cs_n            → n
 }                 → }
 >shown</          → >shown</
 p                 → p
->                 → >\n                )
+>                 → >
+)                 → \n                )
  :                →  : 
 null              → null
 }</               → }\n              </
 div               → div
->                 → >\n            )
+>                 → >
+)                 → \n            )
 ;                 → ;
 \n}               → \n          }
 )())              → `

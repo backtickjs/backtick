@@ -1,5 +1,6 @@
-cs.lift((() => (        → cs`
-{                       → ({\n      
+cs.lift((() =>          → cs`
+(                       → (
+{                       → {\n      
 list                    → list
 :                       → : 
 cs.splice(              → ${ [-semantic]
@@ -11,5 +12,6 @@ obj                     → obj
 cs.splice(              → ${ [-semantic]
 { k: 3 }                → { k: 3 }
 )                       → } [-semantic]
- }                      → ,\n    })
-))())                   → `
+ }                      → ,\n    }
+)                       → )
+)())                    → `

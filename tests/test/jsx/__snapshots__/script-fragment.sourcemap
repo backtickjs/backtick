@@ -4,7 +4,8 @@ __cs_name                   → name
 :                           → : 
 string                      → string
 ) =>                        → ) => 
-<>{                         → (\n  <>\n    
+(                           → (\n  
+<>{                         → <>\n    
 <                           → <
 span                        → span
 >a sentence across lines</  → >a sentence across lines</
@@ -20,7 +21,8 @@ __cs_name                   → name
 }</                         → }\n    </
 span                        → span
 >                           → >
-}</>                        → \n  </>\n)
+}</>                        → \n  </>
+)                           → \n)
 )())                        → `
 cs.lift((() =>              → cs`
 <                           → <

@@ -31,10 +31,10 @@ const WaitingList = cs.lift(((__cs_For = cs.splice(For)) => (__cs_props: {
 
 const forBuildsOnce = cs.lift(((__cs_WaitingList = cs.splice(WaitingList)) => {
     const __cs_asked = cs.splice((createSignal))(0);
-    return <div>{<span>{"asked " + __cs_asked[0]()}</span>}{<__cs_WaitingList more={() => {
+    return (<div>{<span>{"asked " + __cs_asked[0]()}</span>}{<__cs_WaitingList more={() => {
         __cs_asked[1](__cs_asked[0]() + 1);
         return __cs_asked[0]() < 5;
-    }}/>}</div>;
+    }}/>}</div>);
 })());
 
 it("forBuildsOnce", async (t) => {

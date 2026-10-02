@@ -20,9 +20,9 @@ it("statefulObject", async (t) => {
     "statefulObject",
     cs.lift((() => {
     const __cs_c = cs.splice((counter))(10);
-    return <button onclick={() => {
+    return (<button onclick={() => {
         __cs_c.add(5);
-    }}>{__cs_c.get()}</button>;
+    }}>{__cs_c.get()}</button>);
 })()),
   );
 });
