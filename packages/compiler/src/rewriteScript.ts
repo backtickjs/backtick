@@ -35,6 +35,24 @@ export function rewriteScript(
 ): RewrittenScript {
   const { sourceFile, sourceNode, fileWithPlaceholders } = clientScript;
 
+  // A script that can't be rewritten is left as written at runtime. Its
+  // virtual code is built rather than the source node, which is printed
+  // against the template's text and would read as something else; `never`
+  // fits wherever the script stands, so nothing else is reported for it.
+  const leftAsWritten = (diagnostics: Diagnostic[]): RewrittenScript => ({
+    virtual: call(ts, "cs", "lift", [
+      ts.factory.createAsExpression(
+        ts.factory.createIdentifier("undefined"),
+        ts.factory.createKeywordTypeNode(ts.SyntaxKind.NeverKeyword),
+      ),
+    ]),
+    runtime: sourceNode,
+    emitted: null,
+    sourceMaps: new Map(),
+    codeInformation: new Map(),
+    diagnostics,
+  });
+
   const [statement] = fileWithPlaceholders.statements;
   let scriptNode: ts.Expression | ts.Block;
   if (statement && ts.isExpressionStatement(statement)) {
@@ -42,14 +60,13 @@ export function rewriteScript(
   } else if (statement && ts.isBlock(statement)) {
     scriptNode = statement;
   } else {
-    return {
-      virtual: sourceNode,
-      runtime: sourceNode,
-      emitted: null,
-      sourceMaps: new Map(),
-      codeInformation: new Map(),
-      diagnostics: [],
-    };
+    return leftAsWritten([]);
+  }
+
+  // A `${…}` written where the script has text rather than code is no splice.
+  const unspliced = unsplicedSpans(ts, clientScript);
+  if (unspliced.length > 0) {
+    return leftAsWritten(unspliced);
   }
 
   const state: RewriteState = {
@@ -185,9 +202,10 @@ function mayAwait(ts: typeof import("typescript"), node: ts.Node): boolean {
   for (let parent = node.parent; parent; parent = parent.parent) {
     if (ts.isFunctionLike(parent)) {
       return (
-        ts.getModifiers(parent as ts.FunctionLikeDeclaration)?.some(
-          (modifier) => modifier.kind === ts.SyntaxKind.AsyncKeyword,
-        ) ?? false
+        ts
+          .getModifiers(parent as ts.FunctionLikeDeclaration)
+          ?.some((modifier) => modifier.kind === ts.SyntaxKind.AsyncKeyword) ??
+        false
       );
     }
   }
@@ -204,4 +222,28 @@ function hasAwait(ts: typeof import("typescript"), node: ts.Node): boolean {
     return false;
   }
   return ts.forEachChild(node, (child) => hasAwait(ts, child)) ?? false;
+}
+
+// Each `${…}` that isn't a splice: written in text (JSX text, a string, a
+// comment) rather than code, where nothing reads its placeholder.
+function unsplicedSpans(
+  ts: typeof import("typescript"),
+  { sourceFile, sourceNode, splices }: ClientScript,
+): Diagnostic[] {
+  const spans = ts.isTemplateExpression(sourceNode.template)
+    ? sourceNode.template.templateSpans
+    : [];
+  return spans
+    .filter((_, index) => splices[`$0splice${index}`] === undefined)
+    .map((span) => ({
+      range: {
+        start: span.expression.getFullStart() - 2, // at `${`
+        end: span.literal.getStart(sourceFile) + 1, // past `}`
+      },
+      message:
+        "This `${…}` is in text, not code, so it isn't spliced. As an " +
+        "element's child, write it in braces: `{${…}}`.",
+      category: ts.DiagnosticCategory.Error,
+      code: 0,
+    }));
 }
