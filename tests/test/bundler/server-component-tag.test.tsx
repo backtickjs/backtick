@@ -12,7 +12,7 @@ function Rule() {
 it("refuses a server component as a tag in a script", async () => {
   await assert.rejects(
     bundler.build({
-      // @ts-expect-error: not assignable to parameter of type 'Client<any>'.
+      // @ts-expect-error: not assignable to parameter of type 'Spliceable'.
       input: cs`<div><Rule /></div>`,
       external: {},
     }),

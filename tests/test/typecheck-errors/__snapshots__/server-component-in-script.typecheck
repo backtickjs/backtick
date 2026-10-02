@@ -1,0 +1,12 @@
+20:30 error TS2345: Argument of type '({ label }: { label: Client<string>; }) => Promise<Client<Element>>' is not assignable to parameter of type 'Spliceable'.
+20:35 error TS2604: JSX element type 'Row' does not have any construct or call signatures.
+20:35 error TS2786: 'Row' cannot be used as a JSX component.
+  Its type 'unknown' is not a valid JSX element type.
+23:26 error TS2345: Argument of type '({ text }: { text: string | Client<string>; }) => Client<Element>' is not assignable to parameter of type 'Spliceable'.
+23:27 error TS2604: JSX element type 'Title' does not have any construct or call signatures.
+23:27 error TS2786: 'Title' cannot be used as a JSX component.
+  Its type 'unknown' is not a valid JSX element type.
+26:27 error TS2345: Argument of type '() => Client<Element>' is not assignable to parameter of type 'Spliceable'.
+26:33 error TS2604: JSX element type 'Rule' does not have any construct or call signatures.
+26:33 error TS2786: 'Rule' cannot be used as a JSX component.
+  Its type 'unknown' is not a valid JSX element type.

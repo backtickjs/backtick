@@ -1,7 +1,7 @@
 import { cs } from "@backtickjs/core";
 
-// A `${…}` in text isn't a splice, so it keeps its braces; the one in code is
-// shortened.
+// A `${…}` in text still binds `name` on the host, but the script has nowhere
+// to put its value, so it keeps its braces; only the one in code is shortened.
 export const inText = (name: string) => cs`{
   // ${name}
   const greeting = "Hello, ${name}";
