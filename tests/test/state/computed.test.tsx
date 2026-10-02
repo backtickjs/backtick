@@ -10,17 +10,18 @@ import { evaluate } from "../evaluate.ts";
 // logs.
 let runs = 0;
 const log = globalThis.window.console.log;
-beforeEach(() => {
-  runs = 0;
-  globalThis.window.console.log = () => {
-    runs = runs + 1;
-  };
-});
-afterEach(() => {
-  globalThis.window.console.log = log;
-});
 
 describe("computed", () => {
+  beforeEach(() => {
+    runs = 0;
+    globalThis.window.console.log = () => {
+      runs = runs + 1;
+    };
+  });
+  afterEach(() => {
+    globalThis.window.console.log = log;
+  });
+
   it("runs once per change, however many read it", async () => {
     render(
       await evaluate(

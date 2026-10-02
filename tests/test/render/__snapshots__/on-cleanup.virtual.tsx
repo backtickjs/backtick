@@ -15,19 +15,20 @@ import { evaluate } from "../evaluate.ts";
 // logs.
 let runs = 0;
 const log = globalThis.window.console.log;
-beforeEach(() => {
-  runs = 0;
-  globalThis.window.console.log = () => {
-    runs = runs + 1;
-  };
-});
-afterEach(() => {
-  globalThis.window.console.log = log;
-});
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 describe("onCleanup", () => {
+  beforeEach(() => {
+    runs = 0;
+    globalThis.window.console.log = () => {
+      runs = runs + 1;
+    };
+  });
+  afterEach(() => {
+    globalThis.window.console.log = log;
+  });
+
   it("runs when the drawing is removed", async () => {
     const { unmount } = render(
       await evaluate(

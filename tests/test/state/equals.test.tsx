@@ -10,19 +10,20 @@ import { evaluate } from "../evaluate.ts";
 // logs, and reads what was logged.
 let logged: unknown[][] = [];
 const log = globalThis.window.console.log;
-beforeEach(() => {
-  logged = [];
-  globalThis.window.console.log = (...values: unknown[]) => {
-    logged.push(values);
-  };
-});
-afterEach(() => {
-  globalThis.window.console.log = log;
-});
 
 const press = () => userEvent.click(screen.getByRole("button"));
 
 describe("equals", () => {
+  beforeEach(() => {
+    logged = [];
+    globalThis.window.console.log = (...values: unknown[]) => {
+      logged.push(values);
+    };
+  });
+  afterEach(() => {
+    globalThis.window.console.log = log;
+  });
+
   it("keeps a memo's readers from updating for an equal value", async () => {
     render(
       await evaluate(

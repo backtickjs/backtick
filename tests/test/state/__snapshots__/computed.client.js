@@ -1,4 +1,4 @@
-// 27:9
+// 28:9
 ($splice0, $splice1) => () => {
     const n = $splice0()(1);
     const doubled = $splice1()(() => {
@@ -13,7 +13,7 @@
             </div>);
 }
 
-// 55:9
+// 56:9
 ($splice0, $splice1) => () => {
     const n = $splice0()(1);
     const isBig = $splice1()(() => n[0]() > 2);

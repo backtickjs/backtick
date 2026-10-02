@@ -1,4 +1,4 @@
-// 29:9
+// 30:9
 ($splice0, $splice1) => () => {
     const n = $splice0()(1);
     const size = $splice1()(() => ({ isBig: n[0]() > 2, n: n[0]() }), undefined, { equals: (previous, next) => previous.isBig === next.isBig });
@@ -12,7 +12,7 @@
             </div>);
 }
 
-// 63:9
+// 64:9
 ($splice0) => () => {
     const point = $splice0()({ x: 1 }, { equals: (previous, next) => previous.x === next.x });
     const label = () => {
@@ -27,7 +27,7 @@
             </div>);
 }
 
-// 90:9
+// 91:9
 ($splice0) => () => {
     const n = $splice0()(1, {
         equals: (previous, next) => {
@@ -38,7 +38,7 @@
     return <button onclick={() => n[1](2)}>{"n " + n[0]()}</button>;
 }
 
-// 109:9
+// 110:9
 ($splice0) => () => {
     const n = $splice0()(1);
     const label = () => {
@@ -51,7 +51,7 @@
             </div>);
 }
 
-// 131:9
+// 132:9
 ($splice0) => () => {
     const point = $splice0()({ x: 1 });
     const label = () => {
