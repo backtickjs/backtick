@@ -7,10 +7,6 @@ import semver from "semver";
 
 const IDENTIFIER = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
 
-// A tag JSX reads as an intrinsic element, and a name it reads as an attribute.
-const TAG = /^[a-z][A-Za-z0-9-]*(:[A-Za-z][A-Za-z0-9-]*)?$/;
-const ATTRIBUTE = /^[A-Za-z_$][A-Za-z0-9_$-]*(:[A-Za-z_$][A-Za-z0-9_$-]*)?$/;
-
 /**
  * What a bundle imports, keyed by specifier and export, each bound once; the
  * packages it may import them from, which the client provides, by version;
@@ -126,40 +122,10 @@ export function importDeclaration(
 }
 
 /**
- * An element as JSX: `<tag attr={value}>{child}</tag>`. What each attribute
- * and child may change is the framework compiler's to decide. A child that is
- * itself an element is written as one, which is how it is told apart: nothing
- * else a bundle writes starts with `<`.
- */
-export function jsxElement(
-  tag: string,
-  attributes: readonly (readonly [string, string])[],
-  children: readonly string[],
-): string {
-  if (!TAG.test(tag) && !tag.startsWith("$")) {
-    throw new Error(`\`${tag}\` is not a tag JSX can write`);
-  }
-  let open = `<${tag}`;
-  for (const [name, value] of attributes) {
-    if (!ATTRIBUTE.test(name)) {
-      throw new Error(`\`${name}\` is not a prop name JSX can write`);
-    }
-    open += ` ${name}={${value}}`;
-  }
-  if (children.length === 0) {
-    return `${open} />`;
-  }
-  const inner = children
-    .map((child) => (child.startsWith("<") ? child : `{${child}}`))
-    .join("");
-  return `${open}>${inner}</${tag}>`;
-}
-
-/**
  * A script a component drew, as an element: `<$Component body={() => …} />`,
  * a component whose body is that call, so it runs the way a component's does.
  */
 export function componentElement(names: Names, body: string): string {
   names.usesComponent = true;
-  return jsxElement("$Component", [["body", thunk(body)]], []);
+  return `<$Component body={${thunk(body)}} />`;
 }

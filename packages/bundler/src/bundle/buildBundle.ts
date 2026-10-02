@@ -18,7 +18,6 @@ import {
   call,
   createNames,
   imported,
-  jsxElement,
   literal,
   object,
   componentElement,
@@ -331,64 +330,26 @@ export async function buildBundle(
     const type = jsx.type;
     if (typeof type === "function" && !isClientImport(type)) {
       const expansion = await expandJsxElement(jsx, type, elementExpansions);
-      // A script is what runs on the client; an element it drew instead has no
-      // setup of its own to guard.
+      // A script is what runs on the client; anything else it answered (another
+      // component's element, a list, nothing) has no setup of its own to guard.
       return isClientScript(expansion)
         ? componentElement(names, await render(expansion, scope))
         : render(expansion, scope);
     }
-    // A client component (an import, or a script answering one) is client
-    // code, so on the host it can't be a tag: it is one in a script.
-    if (typeof type !== "string") {
-      const tag = isClientImport(type) ? `\`<${type.name}>\`` : "A script";
+    // An element and a client component (an import, or a script answering
+    // one) are client code, so on the host they can't be tags: they are tags
+    // in a script.
+    if (typeof type === "string") {
       throw new Error(
-        `${tag} is a client component, so it can't be a tag on the host. ` +
-          "Use it as a tag in a script.",
+        `\`<${type}>\` is drawn by the client, so it belongs in a script: ` +
+          `cs\`<${type}>…</${type}>\`.`,
       );
     }
-    const written: [string, string][] = [];
-    let children: string[] = [];
-    // The adapter's JSX runtime hands over the props JSX wrote, an object.
-    const props = jsx.props as { readonly [key: string]: unknown };
-    for (const [key, entry] of Object.entries(props)) {
-      if (entry === undefined) {
-        continue;
-      }
-      if (key !== "children") {
-        written.push([key, await renderProp(jsx, key, entry, scope)]);
-        continue;
-      }
-      // Each child its own: an array is several, and `null` is none.
-      const each = Array.isArray(entry) ? entry : entry === null ? [] : [entry];
-      children = [];
-      for (const child of each) {
-        children.push(await renderProp(jsx, key, child, scope));
-      }
-    }
-    return jsxElement(type, written, children);
-  };
-
-  // A prop, as an expression in the enclosing script's scope.
-  const renderProp = async (
-    jsx: JsxElement,
-    key: string,
-    value: unknown,
-    scope: Scope,
-  ): Promise<string> => {
-    try {
-      return await render(value as Spliceable, scope);
-    } catch (cause) {
-      // A component runs while its props render, so what surfaces here may
-      // be the app's own failure rather than a value that cannot cross — and
-      // app code may throw anything, not only an error.
-      const said = cause instanceof Error ? cause.message : String(cause);
-      throw new Error(
-        `In the \`${key}\` prop of <${String(jsx.type)} />: ${said}`,
-        {
-          cause,
-        },
-      );
-    }
+    const tag = isClientImport(type) ? `\`<${type.name}>\`` : "A script";
+    throw new Error(
+      `${tag} is a client component, so it can't be a tag on the host. ` +
+        "Use it as a tag in a script.",
+    );
   };
 
   // Nothing encloses the root, so nothing it holds can capture.

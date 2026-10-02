@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { createJsxElement, isClientImport } from "@backtickjs/core";
+import { cs, isClientImport } from "@backtickjs/core";
 import { solid } from "../dist/plugin.js";
 import * as main from "../dist/index.js";
 import * as store from "../dist/store.js";
@@ -128,12 +128,16 @@ describe("a page's import map", () => {
   });
 
   it("maps what Solid's compiler imports", async () => {
-    // A drawing with an event: templates, insertion, and delegated events.
+    // A drawing with an event: templates, insertion, and delegated events. A
+    // script as the compiler writes one, as this file isn't compiled.
+    const drawing = cs.create(
+      "imports:1:0",
+      { params: [] },
+      "() => <button onclick={() => {}}>{String(1)}</button>",
+      '{"version":3,"sources":[],"names":[],"mappings":""}',
+    );
     const bundle = await bundler.build({
-      input: createJsxElement("button", {
-        onclick: vocabulary.batch,
-        children: ["a"],
-      }),
+      input: drawing,
       external: { "solid-js": solidVersion },
       plugins: [solid()],
     });
