@@ -4,10 +4,7 @@ import * as $module0 from "solid-js/web";
 const $modules = {
   "1tbbj72floguq:14:15": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
     const web_2 = require("solid-js/web");
     const web_3 = require("solid-js/web");
@@ -39,10 +36,7 @@ const $modules = {
   },
   "1tbbj72floguq:12:14": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
     const web_2 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<b>`);
@@ -59,9 +53,7 @@ const $exports = {
 };
 const $require = (id) => {
   if (!(id in $exports)) {
-    const module = {
-      exports: {},
-    };
+    const module = { exports: {} };
     $exports[id] = module.exports;
     $modules[id](module, module.exports, $require);
     $exports[id] = module.exports;

@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {  → expressions/step.test.tsx 12:8 {…
 let      → expressions/step.test.tsx 13:7 let 
 total    → expressions/step.test.tsx 13:11 total

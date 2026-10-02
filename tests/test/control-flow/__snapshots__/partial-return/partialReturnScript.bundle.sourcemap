@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {  → control-flow/partial-return.test.tsx 10:8 {…
 let      → control-flow/partial-return.test.tsx 11:7 let 
 n        → control-flow/partial-return.test.tsx 11:11 n

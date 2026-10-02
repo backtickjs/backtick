@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {      → stdlib/object-entries.test.tsx 11:8 {…
 const        → stdlib/object-entries.test.tsx 12:7 const 
 held         → stdlib/object-entries.test.tsx 12:13 held

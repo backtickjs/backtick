@@ -1,10 +1,7 @@
 const $modules = {
   "3jzoitmu8iit8:31:4": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $splice1) => ({
       taken: $splice0()(true),
       skipped: $splice1()(false),
@@ -12,10 +9,7 @@ const $modules = {
   },
   "3jzoitmu8iit8:13:9": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0) => (flag) => {
       if (flag) {
         return $splice0();
@@ -25,18 +19,12 @@ const $modules = {
   },
   "3jzoitmu8iit8:21:11": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = () => "evaluated";
   },
   "3jzoitmu8iit8:23:15": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = () => {
       throw "the guarded fragment must never evaluate";
     };
@@ -45,9 +33,7 @@ const $modules = {
 const $exports = {};
 const $require = (id) => {
   if (!(id in $exports)) {
-    const module = {
-      exports: {},
-    };
+    const module = { exports: {} };
     $exports[id] = module.exports;
     $modules[id](module, module.exports, $require);
     $exports[id] = module.exports;

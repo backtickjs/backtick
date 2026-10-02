@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => (      → expressions/prefix-not.test.tsx 10:8 (ready:…
 ready        → expressions/prefix-not.test.tsx 10:9 ready
 ,            → expressions/prefix-not.test.tsx 10:23 , 

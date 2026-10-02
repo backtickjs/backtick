@@ -3,10 +3,7 @@ import * as $module0 from "solid-js/web";
 const $modules = {
   "1qtri6ano7i0b:37:4": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
     const web_2 = require("solid-js/web");
     const web_3 = require("solid-js/web");
@@ -74,9 +71,7 @@ const $exports = {
 };
 const $require = (id) => {
   if (!(id in $exports)) {
-    const module = {
-      exports: {},
-    };
+    const module = { exports: {} };
     $exports[id] = module.exports;
     $modules[id](module, module.exports, $require);
     $exports[id] = module.exports;
@@ -88,91 +83,46 @@ export default $cs0(
   () => [
     {
       id: "ord-1000",
-      customer: {
-        name: "Customer 0",
-        city: "Montréal",
-      },
+      customer: { name: "Customer 0", city: "Montréal" },
       items: [
-        {
-          sku: "SKU-0-A",
-          qty: 1,
-        },
-        {
-          sku: "SKU-0-B",
-          qty: 1,
-        },
+        { sku: "SKU-0-A", qty: 1 },
+        { sku: "SKU-0-B", qty: 1 },
       ],
       total: 45.23,
     },
     {
       id: "ord-1001",
-      customer: {
-        name: "Customer 1",
-        city: "Toronto",
-      },
+      customer: { name: "Customer 1", city: "Toronto" },
       items: [
-        {
-          sku: "SKU-1-A",
-          qty: 2,
-        },
-        {
-          sku: "SKU-1-B",
-          qty: 1,
-        },
+        { sku: "SKU-1-A", qty: 2 },
+        { sku: "SKU-1-B", qty: 1 },
       ],
       total: 46.23,
     },
     {
       id: "ord-1002",
-      customer: {
-        name: "Customer 2",
-        city: "Montréal",
-      },
+      customer: { name: "Customer 2", city: "Montréal" },
       items: [
-        {
-          sku: "SKU-2-A",
-          qty: 3,
-        },
-        {
-          sku: "SKU-2-B",
-          qty: 1,
-        },
+        { sku: "SKU-2-A", qty: 3 },
+        { sku: "SKU-2-B", qty: 1 },
       ],
       total: 47.23,
     },
     {
       id: "ord-1003",
-      customer: {
-        name: "Customer 3",
-        city: "Toronto",
-      },
+      customer: { name: "Customer 3", city: "Toronto" },
       items: [
-        {
-          sku: "SKU-3-A",
-          qty: 1,
-        },
-        {
-          sku: "SKU-3-B",
-          qty: 1,
-        },
+        { sku: "SKU-3-A", qty: 1 },
+        { sku: "SKU-3-B", qty: 1 },
       ],
       total: 48.23,
     },
     {
       id: "ord-1004",
-      customer: {
-        name: "Customer 4",
-        city: "Montréal",
-      },
+      customer: { name: "Customer 4", city: "Montréal" },
       items: [
-        {
-          sku: "SKU-4-A",
-          qty: 2,
-        },
-        {
-          sku: "SKU-4-B",
-          qty: 1,
-        },
+        { sku: "SKU-4-A", qty: 2 },
+        { sku: "SKU-4-B", qty: 1 },
       ],
       total: 49.23,
     },

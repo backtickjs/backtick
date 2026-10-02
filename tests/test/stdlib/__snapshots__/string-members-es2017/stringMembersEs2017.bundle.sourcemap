@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {     → stdlib/string-members-es2017.test.tsx 12:8 {…
 const       → stdlib/string-members-es2017.test.tsx 13:7 const 
 word        → stdlib/string-members-es2017.test.tsx 13:13 word

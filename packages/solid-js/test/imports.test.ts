@@ -1,19 +1,12 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, it } from "node:test";
-import { bundler } from "@backtickjs/bundler";
-import { cs, isClientImport } from "@backtickjs/core";
+import { isClientImport } from "@backtickjs/core";
 import { solid } from "../dist/plugin.js";
 import * as main from "../dist/index.js";
 import * as store from "../dist/store.js";
 import * as web from "../dist/web.js";
 import ts from "typescript";
-
-// The Solid these tests' client loads: the installed one.
-const { version: solidVersion } = JSON.parse(
-  readFileSync(new URL(import.meta.resolve("solid-js/package.json")), "utf8"),
-) as { version: string };
 
 // What a page's import map maps, as the examples write it: each module a
 // bundle may import, by the file in the `solid-js` package that is its browser
@@ -127,22 +120,13 @@ describe("a page's import map", () => {
     }
   });
 
-  it("maps what Solid's compiler imports", async () => {
-    // A drawing with an event: templates, insertion, and delegated events. A
-    // script as the compiler writes one, as this file isn't compiled.
-    const drawing = cs.create(
-      "imports:1:0",
-      { params: [] },
-      "(module, exports, require) => {\nexports.default = () => <button onclick={() => {}}>{String(1)}</button>;\n}",
-      '{"version":3,"sources":[],"names":[],"mappings":""}',
-      [],
+  it("maps what Solid's compiler imports", () => {
+    // A drawing with an event: templates, insertion, and delegated events, as
+    // a build hands Solid's compiler a script's module.
+    const { code } = solid()(
+      "export default () => <button onclick={() => {}}>{String(1)}</button>;",
+      "imports.jsx",
     );
-    const bundle = await bundler.build({
-      input: drawing,
-      external: { "solid-js": solidVersion },
-      plugins: [solid()],
-    });
-    const { code } = bundle.generate({ format: "es" });
     const written = [...code.matchAll(/^import .* from "([^"]+)";$/gm)].map(
       ([, from]) => from!,
     );

@@ -1,13 +1,11 @@
 import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
 import { render } from "@backtickjs/solid-js/web";
-import { solid } from "@backtickjs/solid-js/plugin";
 import { Main } from "./Main.js";
 
 const bundle = await bundler.build({
   input: cs`$render(() => ${(<Main />)}, document.getElementById("main")!)`,
   external: { "solid-js": "1.9.14" },
-  plugins: [solid()],
 });
 
 const { code } = bundle.generate({ format: "es" });

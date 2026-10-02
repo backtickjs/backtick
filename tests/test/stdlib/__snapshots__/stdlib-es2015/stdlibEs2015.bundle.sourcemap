@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {       → stdlib/stdlib-es2015.test.tsx 12:8 {…
 const         → stdlib/stdlib-es2015.test.tsx 13:7 const 
 xs            → stdlib/stdlib-es2015.test.tsx 13:13 xs

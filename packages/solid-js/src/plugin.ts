@@ -2,9 +2,10 @@ import { transformSync } from "@babel/core";
 import preset from "babel-preset-solid";
 
 /**
- * Solid's compiler as a bundler plugin: the bundle's JSX as Solid's template
- * and DOM code, importing from `solid-js/web`. Typed by its shape, which is the
- * bundler's `Plugin`, so the adapter needn't depend on the bundler.
+ * Solid's compiler as a build's compile step: a script's module, its JSX as
+ * Solid's template and DOM code, importing from `solid-js/web`. Typed by its
+ * shape, which is the compiler's `Plugin`, so the adapter needn't depend on the
+ * compiler.
  */
 export function solid(): (
   code: string,
@@ -22,6 +23,6 @@ export function solid(): (
   };
 }
 
-// What a build names to compile scripts for Solid: `@backtickjs/solid-js/plugin`
-// in the `tspatch` plugin's `plugins`, or imported by a Bun preload.
+// What a project names to compile its scripts for Solid, in its `package.json`:
+// `"backtick": { "plugins": ["@backtickjs/solid-js/plugin"] }`.
 export default solid;

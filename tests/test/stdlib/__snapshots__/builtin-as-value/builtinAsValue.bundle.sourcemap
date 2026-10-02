@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {  → stdlib/builtin-as-value.test.tsx 16:8 {…
 const    → stdlib/builtin-as-value.test.tsx 17:7 const 
 floor    → stdlib/builtin-as-value.test.tsx 17:13 floor

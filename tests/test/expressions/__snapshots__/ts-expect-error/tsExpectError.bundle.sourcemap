@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {  → expressions/ts-expect-error.test.tsx 12:8 {…
 const    → expressions/ts-expect-error.test.tsx 14:7 const 
 count    → expressions/ts-expect-error.test.tsx 14:13 count

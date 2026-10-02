@@ -1,18 +1,12 @@
 const $modules = {
   "zqr0jsdf8ub6:38:4": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $splice1) => $splice0() + $splice1();
   },
   "zqr0jsdf8ub6:17:9": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $splice1) => {
       const outer = $splice0();
       return $splice1(outer);
@@ -20,26 +14,17 @@ const $modules = {
   },
   "zqr0jsdf8ub6:38:14": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = () => 1;
   },
   "zqr0jsdf8ub6:27:9": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0) => $splice0() + 1;
   },
   "zqr0jsdf8ub6:19:17": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $capture1) => {
       const middle = 10;
       return middle + $splice0($capture1);
@@ -47,27 +32,19 @@ const $modules = {
   },
   "zqr0jsdf8ub6:21:29": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($capture0) => $capture0;
   },
   "zqr0jsdf8ub6:38:31": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = () => 2;
   },
 };
 const $exports = {};
 const $require = (id) => {
   if (!(id in $exports)) {
-    const module = {
-      exports: {},
-    };
+    const module = { exports: {} };
     $exports[id] = module.exports;
     $modules[id](module, module.exports, $require);
     $exports[id] = module.exports;

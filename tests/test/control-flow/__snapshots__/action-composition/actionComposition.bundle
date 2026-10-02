@@ -1,30 +1,21 @@
 const $modules = {
   "3q2gz79xhvvfp:20:4": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0) => {
       $splice0();
     };
   },
   "3q2gz79xhvvfp:12:31": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0) => {
       $splice0();
     };
   },
   "3q2gz79xhvvfp:8:30": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = () => {
       const x = 1;
     };
@@ -33,9 +24,7 @@ const $modules = {
 const $exports = {};
 const $require = (id) => {
   if (!(id in $exports)) {
-    const module = {
-      exports: {},
-    };
+    const module = { exports: {} };
     $exports[id] = module.exports;
     $modules[id](module, module.exports, $require);
     $exports[id] = module.exports;

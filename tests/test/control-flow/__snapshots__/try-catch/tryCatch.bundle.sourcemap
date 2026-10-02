@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {                  → control-flow/try-catch.test.tsx 9:8 {…
 const                    → control-flow/try-catch.test.tsx 10:7 const 
 message                  → control-flow/try-catch.test.tsx 10:13 message

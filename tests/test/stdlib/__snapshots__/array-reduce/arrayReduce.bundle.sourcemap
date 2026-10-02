@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {  → stdlib/array-reduce.test.tsx 13:8 {…
 const    → stdlib/array-reduce.test.tsx 14:7 const 
 prices   → stdlib/array-reduce.test.tsx 14:13 prices

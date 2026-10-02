@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {  → objects/index-past-end.test.tsx 13:8 {…
 const    → objects/index-past-end.test.tsx 14:7 const 
 names    → objects/index-past-end.test.tsx 14:13 names

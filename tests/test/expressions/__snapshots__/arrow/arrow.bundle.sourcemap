@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {  → expressions/arrow.test.tsx 9:8 {…
 const    → expressions/arrow.test.tsx 10:7 const 
 base     → expressions/arrow.test.tsx 10:13 base

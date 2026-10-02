@@ -264,12 +264,6 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
-      '@jridgewell/remapping':
-        specifier: ^2.3.5
-        version: 2.3.5
-      '@jridgewell/trace-mapping':
-        specifier: ^0.3.31
-        version: 0.3.31
       semver:
         specifier: ^7.8.1
         version: 7.8.1
@@ -403,9 +397,6 @@ importers:
         specifier: 1.9.14
         version: 1.9.14
     devDependencies:
-      '@backtickjs/bundler':
-        specifier: workspace:^0.1.0
-        version: link:../bundler
       '@backtickjs/prettier-plugin':
         specifier: workspace:*
         version: link:../prettier-plugin

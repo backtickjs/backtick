@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {  → expressions/operators.test.tsx 89:8 {…
 let      → expressions/operators.test.tsx 90:7 let 
 n        → expressions/operators.test.tsx 90:11 n

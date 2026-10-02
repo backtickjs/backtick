@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 $splice0          → state/stateful-object.test.tsx 24:8 {…
  => {             → state/stateful-object.test.tsx 24:8 {…
 const             → state/stateful-object.test.tsx 25:7 const 
@@ -61,7 +62,8 @@ return            → state/stateful-object.test.tsx 12:3 return
 {                 → state/stateful-object.test.tsx 12:10 {
 get               → state/stateful-object.test.tsx 13:5 get
 :                 → state/stateful-object.test.tsx 13:8 : 
-() =>             → state/stateful-object.test.tsx 13:10 () => 
+()                → state/stateful-object.test.tsx 13:10 () 
+=>                → state/stateful-object.test.tsx 13:10 ()…
 count             → state/stateful-object.test.tsx 13:16 count
 [                 → state/stateful-object.test.tsx 13:21 [
 0                 → state/stateful-object.test.tsx 13:22 0

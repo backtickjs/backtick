@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {   → expressions/typeof.test.tsx 35:8 {…
 const     → expressions/typeof.test.tsx 36:7 const 
 measure   → expressions/typeof.test.tsx 36:13 measure

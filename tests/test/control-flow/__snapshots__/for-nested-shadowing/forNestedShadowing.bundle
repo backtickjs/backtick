@@ -1,10 +1,7 @@
 const $modules = {
   "lj6vk8127ex6:12:4": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = () => {
       let out = "";
       for (let i = 0; i < 2; i = i + 1) {
@@ -20,9 +17,7 @@ const $modules = {
 const $exports = {};
 const $require = (id) => {
   if (!(id in $exports)) {
-    const module = {
-      exports: {},
-    };
+    const module = { exports: {} };
     $exports[id] = module.exports;
     $modules[id](module, module.exports, $require);
     $exports[id] = module.exports;

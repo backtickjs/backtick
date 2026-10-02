@@ -1,53 +1,48 @@
-(           → @backtickjs/solid-js/src/jsx-runtime.ts 352:13 $createComponent(()…
-$splice0    → @backtickjs/solid-js/src/jsx-runtime.ts 352:13 $createComponent(()…
-,           → @backtickjs/solid-js/src/jsx-runtime.ts 352:13 $createComponent(()…
-$splice1    → @backtickjs/solid-js/src/jsx-runtime.ts 352:13 $createComponent(()…
-) =>        → @backtickjs/solid-js/src/jsx-runtime.ts 352:13 $createComponent(()…
-$splice0    → @backtickjs/solid-js/src/jsx-runtime.ts 352:13 $createComponent(()…
-()          → @backtickjs/solid-js/src/jsx-runtime.ts 352:13 $createComponent(()…
-(           → @backtickjs/solid-js/src/jsx-runtime.ts 352:29 (
-() =>       → @backtickjs/solid-js/src/jsx-runtime.ts 352:30 () => 
-$splice1    → @backtickjs/solid-js/src/jsx-runtime.ts 352:36 $element,…
-()          → @backtickjs/solid-js/src/jsx-runtime.ts 352:36 $element,…
-,           → @backtickjs/solid-js/src/jsx-runtime.ts 352:44 , 
-{}          → @backtickjs/solid-js/src/jsx-runtime.ts 352:46 {}
-)           → @backtickjs/solid-js/src/jsx-runtime.ts 352:48 )
-;           → @backtickjs/solid-js/src/jsx-runtime.ts 352:49 `;…
-() => {     → stdlib/number-parsing.test.tsx 9:13 {…
-const       → stdlib/number-parsing.test.tsx 10:5 const 
-whole       → stdlib/number-parsing.test.tsx 10:11 whole
- =          → stdlib/number-parsing.test.tsx 10:16  = 
-Number      → stdlib/number-parsing.test.tsx 10:19 Number
-.           → stdlib/number-parsing.test.tsx 10:25 .
-parseInt    → stdlib/number-parsing.test.tsx 10:26 parseInt
-(           → stdlib/number-parsing.test.tsx 10:34 (
-"42px"      → stdlib/number-parsing.test.tsx 10:35 "42px"
-)           → stdlib/number-parsing.test.tsx 10:41 )
-;           → stdlib/number-parsing.test.tsx 10:42 ;
-const       → stdlib/number-parsing.test.tsx 11:5 const 
-based       → stdlib/number-parsing.test.tsx 11:11 based
- =          → stdlib/number-parsing.test.tsx 11:16  = 
-Number      → stdlib/number-parsing.test.tsx 11:19 Number
-.           → stdlib/number-parsing.test.tsx 11:25 .
-parseInt    → stdlib/number-parsing.test.tsx 11:26 parseInt
-(           → stdlib/number-parsing.test.tsx 11:34 (
-"ff"        → stdlib/number-parsing.test.tsx 11:35 "ff"
-,           → stdlib/number-parsing.test.tsx 11:39 , 
-16          → stdlib/number-parsing.test.tsx 11:41 16
-)           → stdlib/number-parsing.test.tsx 11:43 )
-;           → stdlib/number-parsing.test.tsx 11:44 ;
-const       → stdlib/number-parsing.test.tsx 12:5 const 
-fractional  → stdlib/number-parsing.test.tsx 12:11 fractional
- =          → stdlib/number-parsing.test.tsx 12:21  = 
-Number      → stdlib/number-parsing.test.tsx 12:24 Number
-.           → stdlib/number-parsing.test.tsx 12:30 .
-parseFloat  → stdlib/number-parsing.test.tsx 12:31 parseFloat
-(           → stdlib/number-parsing.test.tsx 12:41 (
-"1.5"       → stdlib/number-parsing.test.tsx 12:42 "1.5"
-)           → stdlib/number-parsing.test.tsx 12:47 )
-;           → stdlib/number-parsing.test.tsx 12:48 ;
-return      → stdlib/number-parsing.test.tsx 13:5 return 
-_tmpl$      → stdlib/number-parsing.test.tsx 13:5 return…
-();         → stdlib/number-parsing.test.tsx 13:5 return…
-}           → stdlib/number-parsing.test.tsx 14:3 }
-;           → stdlib/number-parsing.test.tsx 14:4 `;…
+// (carries sourcesContent)
+($splice0, $splice1) => $splice0()  → @backtickjs/solid-js/src/jsx-runtime.ts 352:13 $createComponent(()…
+(                                   → @backtickjs/solid-js/src/jsx-runtime.ts 352:29 (
+()                                  → @backtickjs/solid-js/src/jsx-runtime.ts 352:30 () 
+=>                                  → @backtickjs/solid-js/src/jsx-runtime.ts 352:33 =>
+$splice1()                          → @backtickjs/solid-js/src/jsx-runtime.ts 352:36 $element,…
+,                                   → @backtickjs/solid-js/src/jsx-runtime.ts 352:44 , 
+{}                                  → @backtickjs/solid-js/src/jsx-runtime.ts 352:46 {}
+)                                   → @backtickjs/solid-js/src/jsx-runtime.ts 352:48 )
+);                                  → @backtickjs/solid-js/src/jsx-runtime.ts 352:49 `;…
+() => {                             → stdlib/number-parsing.test.tsx 9:13 {…
+const                               → stdlib/number-parsing.test.tsx 10:5 const 
+whole                               → stdlib/number-parsing.test.tsx 10:11 whole
+ =                                  → stdlib/number-parsing.test.tsx 10:16  = 
+Number                              → stdlib/number-parsing.test.tsx 10:19 Number
+.                                   → stdlib/number-parsing.test.tsx 10:25 .
+parseInt                            → stdlib/number-parsing.test.tsx 10:26 parseInt
+(                                   → stdlib/number-parsing.test.tsx 10:34 (
+"42px"                              → stdlib/number-parsing.test.tsx 10:35 "42px"
+)                                   → stdlib/number-parsing.test.tsx 10:41 )
+;                                   → stdlib/number-parsing.test.tsx 10:42 ;
+const                               → stdlib/number-parsing.test.tsx 11:5 const 
+based                               → stdlib/number-parsing.test.tsx 11:11 based
+ =                                  → stdlib/number-parsing.test.tsx 11:16  = 
+Number                              → stdlib/number-parsing.test.tsx 11:19 Number
+.                                   → stdlib/number-parsing.test.tsx 11:25 .
+parseInt                            → stdlib/number-parsing.test.tsx 11:26 parseInt
+(                                   → stdlib/number-parsing.test.tsx 11:34 (
+"ff"                                → stdlib/number-parsing.test.tsx 11:35 "ff"
+,                                   → stdlib/number-parsing.test.tsx 11:39 , 
+16                                  → stdlib/number-parsing.test.tsx 11:41 16
+)                                   → stdlib/number-parsing.test.tsx 11:43 )
+;                                   → stdlib/number-parsing.test.tsx 11:44 ;
+const                               → stdlib/number-parsing.test.tsx 12:5 const 
+fractional                          → stdlib/number-parsing.test.tsx 12:11 fractional
+ =                                  → stdlib/number-parsing.test.tsx 12:21  = 
+Number                              → stdlib/number-parsing.test.tsx 12:24 Number
+.                                   → stdlib/number-parsing.test.tsx 12:30 .
+parseFloat                          → stdlib/number-parsing.test.tsx 12:31 parseFloat
+(                                   → stdlib/number-parsing.test.tsx 12:41 (
+"1.5"                               → stdlib/number-parsing.test.tsx 12:42 "1.5"
+)                                   → stdlib/number-parsing.test.tsx 12:47 )
+;                                   → stdlib/number-parsing.test.tsx 12:48 ;
+return                              → stdlib/number-parsing.test.tsx 13:5 return 
+_tmpl$                              → stdlib/number-parsing.test.tsx 13:5 return…
+();                                 → stdlib/number-parsing.test.tsx 13:5 return…
+}                                   → stdlib/number-parsing.test.tsx 14:3 }
+;                                   → stdlib/number-parsing.test.tsx 14:4 `;…

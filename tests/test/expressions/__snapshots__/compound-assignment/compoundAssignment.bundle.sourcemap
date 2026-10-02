@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {   → expressions/compound-assignment.test.tsx 12:8 {…
 let       → expressions/compound-assignment.test.tsx 13:7 let 
 n         → expressions/compound-assignment.test.tsx 13:11 n

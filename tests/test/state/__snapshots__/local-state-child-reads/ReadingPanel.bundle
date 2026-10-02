@@ -4,18 +4,12 @@ import * as $module0 from "solid-js/web";
 const $modules = {
   "1uptcsn9236u2:352:9": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
   },
   "2qf83pi6ieetw:34:9": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
     const web_2 = require("solid-js/web");
     const web_3 = require("solid-js/web");
@@ -35,10 +29,7 @@ const $modules = {
   },
   "2qf83pi6ieetw:26:6": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
     const web_2 = require("solid-js/web");
     const web_3 = require("solid-js/web");
@@ -74,34 +65,22 @@ const $modules = {
   },
   "2qf83pi6ieetw:39:45": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($capture0) => $capture0;
   },
   "2qf83pi6ieetw:39:28": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = () => 0;
   },
   "2qf83pi6ieetw:40:45": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($capture0) => $capture0;
   },
   "2qf83pi6ieetw:40:28": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = () => 1;
   },
 };
@@ -110,9 +89,7 @@ const $exports = {
 };
 const $require = (id) => {
   if (!(id in $exports)) {
-    const module = {
-      exports: {},
-    };
+    const module = { exports: {} };
     $exports[id] = module.exports;
     $modules[id](module, module.exports, $require);
     $exports[id] = module.exports;

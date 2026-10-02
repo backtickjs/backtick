@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {  → expressions/comments.test.tsx 11:8 {…
 const    → expressions/comments.test.tsx 13:7 const 
 count    → expressions/comments.test.tsx 13:13 count

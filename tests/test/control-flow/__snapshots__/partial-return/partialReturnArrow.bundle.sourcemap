@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {  → control-flow/partial-return.test.tsx 23:8 {…
 const    → control-flow/partial-return.test.tsx 24:7 const 
 pick     → control-flow/partial-return.test.tsx 24:13 pick

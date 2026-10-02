@@ -1,10 +1,7 @@
 const $modules = {
   "2dtorvijco8u0:24:4": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $splice1, $splice2) => ({
       found: $splice0()({
         x: 5,
@@ -25,30 +22,21 @@ const $modules = {
   },
   "2dtorvijco8u0:8:13": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = () => (p) => {
       return p?.x;
     };
   },
   "2dtorvijco8u0:12:13": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = () => (o) => {
       return o?.inner?.z;
     };
   },
   "2dtorvijco8u0:16:14": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = () => (s) => {
       return s?.concat("!");
     };
@@ -57,9 +45,7 @@ const $modules = {
 const $exports = {};
 const $require = (id) => {
   if (!(id in $exports)) {
-    const module = {
-      exports: {},
-    };
+    const module = { exports: {} };
     $exports[id] = module.exports;
     $modules[id](module, module.exports, $require);
     $exports[id] = module.exports;

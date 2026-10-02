@@ -4,10 +4,7 @@ import * as $module0 from "solid-js/web";
 const $modules = {
   "n9l2dbsvcmsm:13:30": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
     const web_2 = require("solid-js/web");
     const web_3 = require("solid-js/web");
@@ -36,10 +33,7 @@ const $modules = {
   },
   "n9l2dbsvcmsm:19:9": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
     exports.default = ($capture0, $capture1) =>
       (0, web_1.createComponent)($capture0, {
@@ -50,10 +44,7 @@ const $modules = {
   },
   "n9l2dbsvcmsm:21:10": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $capture1, $capture2) => {
       const skipped = 10;
       return $splice0($capture1, $capture2);
@@ -61,10 +52,7 @@ const $modules = {
   },
   "n9l2dbsvcmsm:23:19": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
     exports.default = ($capture0, $capture1) =>
       (0, web_1.createComponent)($capture0, {
@@ -75,10 +63,7 @@ const $modules = {
   },
   "n9l2dbsvcmsm:26:9": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
     const web_2 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<section>`);
@@ -91,10 +76,7 @@ const $modules = {
   },
   "n9l2dbsvcmsm:26:24": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
     exports.default = ($capture0, $capture1) =>
       (0, web_1.createComponent)($capture0, {
@@ -105,10 +87,7 @@ const $modules = {
   },
   "n9l2dbsvcmsm:28:10": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
     exports.default = ($tag0, $capture1, $capture2) =>
       (0, web_1.createComponent)($tag0, {
@@ -127,9 +106,7 @@ const $exports = {
 };
 const $require = (id) => {
   if (!(id in $exports)) {
-    const module = {
-      exports: {},
-    };
+    const module = { exports: {} };
     $exports[id] = module.exports;
     $modules[id](module, module.exports, $require);
     $exports[id] = module.exports;

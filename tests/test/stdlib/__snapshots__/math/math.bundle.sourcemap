@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {  → stdlib/math.test.tsx 12:8 {…
 const    → stdlib/math.test.tsx 13:7 const 
 rounded  → stdlib/math.test.tsx 13:13 rounded

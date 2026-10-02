@@ -1,10 +1,7 @@
 const $modules = {
   "g29mnwu0pbnr:27:4": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0) => ({
       missing: $splice0()(null, true),
       loud: $splice0()("!hi", true),
@@ -14,10 +11,7 @@ const $modules = {
   },
   "g29mnwu0pbnr:10:71": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0) => (text, upper) => {
       if (upper && text !== null) {
         return text.toUpperCase();
@@ -30,19 +24,14 @@ const $modules = {
   },
   "g29mnwu0pbnr:8:24": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = () => true;
   },
 };
 const $exports = {};
 const $require = (id) => {
   if (!(id in $exports)) {
-    const module = {
-      exports: {},
-    };
+    const module = { exports: {} };
     $exports[id] = module.exports;
     $modules[id](module, module.exports, $require);
     $exports[id] = module.exports;

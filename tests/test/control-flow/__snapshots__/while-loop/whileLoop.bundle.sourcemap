@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {  → control-flow/while-loop.test.tsx 9:8 {…
 let      → control-flow/while-loop.test.tsx 10:7 let 
 i        → control-flow/while-loop.test.tsx 10:11 i

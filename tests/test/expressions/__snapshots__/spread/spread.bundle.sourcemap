@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {  → expressions/spread.test.tsx 12:8 {…
 const    → expressions/spread.test.tsx 13:7 const 
 front    → expressions/spread.test.tsx 13:13 front

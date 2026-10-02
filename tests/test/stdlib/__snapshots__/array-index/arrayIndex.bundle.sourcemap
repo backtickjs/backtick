@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {  → stdlib/array-index.test.tsx 11:8 {…
 const    → stdlib/array-index.test.tsx 12:7 const 
 coins    → stdlib/array-index.test.tsx 12:13 coins

@@ -1,6 +1,5 @@
 import { bundler } from "@backtickjs/bundler";
 import type { Client, Spliceable, Spliced } from "@backtickjs/core";
-import { solid } from "@backtickjs/solid-js/plugin";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 import type { JSXElement } from "@backtickjs/solid-js";
 import { drawing } from "./drawing.tsx";
@@ -20,9 +19,9 @@ export type Evaluated<T> = T extends JSX.Element
       : T;
 
 /**
- * A value as the module a page imports: compiled by Solid, against the modules
- * a page's import map provides — Solid's, and the one an app adds beside them
- * (see `stdlib/target-builtins.test.tsx`).
+ * A value as the module a page imports, its scripts compiled by Solid when the
+ * test file was, against the modules a page's import map provides — Solid's,
+ * and the one an app adds beside them (see `stdlib/target-builtins.test.tsx`).
  */
 export async function bundle(
   value: Spliceable,
@@ -30,7 +29,6 @@ export async function bundle(
   const built = await bundler.build({
     input: value,
     external: { "solid-js": "1.9.14", app: "1.0.0", "acme-ui": "1.0.0" },
-    plugins: [solid()],
   });
   const { code, map } = built.generate({ format: "es", sourcemap: "hidden" });
   return { code, map: map! };

@@ -2,7 +2,7 @@ import type { BundleTree } from "../bundle/buildBundle.js";
 import type { ClientScript } from "@backtickjs/core";
 import { importDeclaration, string } from "./code.js";
 
-const MODULE_ID = "bundle.jsx";
+const MODULE_ID = "bundle.js";
 
 // A module table's `require`: a module's exports, its entry run the first time
 // it is asked for.
@@ -18,14 +18,12 @@ const RUNTIME = `const $require = (id) => {
 
 /**
  * A bundle tree as a module whose default export is the tree's root: the value
- * bundled, as its scripts wrote it. The export is how the value is found again
- * once plugins have transformed the module (they may add statements after it);
- * what a caller gets is `generate`'s, in the format they asked for.
+ * bundled, as its scripts wrote it; what a caller gets is `generate`'s, in the
+ * format they asked for.
  *
- * The module is its imports, a module table of its scripts, and the root. A
- * script's JSX, where its framework didn't compile it when its host was built,
- * is kept for the framework's compiler to compile as it compiles any module.
- * Its imports are the client's to resolve, through an import map in a page.
+ * The module is its imports, a module table of its scripts, each compiled for
+ * its framework when its host was built, and the root. Its imports are the
+ * client's to resolve, through an import map in a page.
  *
  * Its map leads into the host files its scripts were written in: an index
  * map, each script's own map a section where the script stands. What the

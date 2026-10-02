@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {        → stdlib/timers.test.tsx 25:8 {…
 const          → stdlib/timers.test.tsx 26:7 const 
 stop           → stdlib/timers.test.tsx 26:13 stop

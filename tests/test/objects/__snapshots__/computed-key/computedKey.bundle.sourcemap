@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {  → objects/computed-key.test.tsx 13:8 {…
 const    → objects/computed-key.test.tsx 14:7 const 
 base     → objects/computed-key.test.tsx 14:13 base

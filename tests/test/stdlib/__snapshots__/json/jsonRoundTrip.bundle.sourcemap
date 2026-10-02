@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {    → stdlib/json.test.tsx 12:8 {…
 const      → stdlib/json.test.tsx 13:7 const 
 numbers    → stdlib/json.test.tsx 13:13 numbers

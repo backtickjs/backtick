@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {        → stdlib/array-queries.test.tsx 12:8 {…
 const          → stdlib/array-queries.test.tsx 13:7 const 
 coins          → stdlib/array-queries.test.tsx 13:13 coins

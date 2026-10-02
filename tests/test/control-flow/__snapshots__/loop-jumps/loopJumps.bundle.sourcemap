@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {    → control-flow/loop-jumps.test.tsx 12:8 {…
 let        → control-flow/loop-jumps.test.tsx 13:7 let 
 out        → control-flow/loop-jumps.test.tsx 13:11 out

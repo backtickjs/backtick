@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { decodedMappings, TraceMap } from "@jridgewell/trace-mapping";
+import { decodedMappings, FlattenMap } from "@jridgewell/trace-mapping";
 
 const escape = (text: string): string =>
   text.replace(/\\/g, "\\\\").replace(/\t/g, "\\t");
@@ -17,7 +17,8 @@ const sourcePath = (source: string): string =>
 // host text it maps to, read from the file under this directory. What the
 // bundler wrote around the scripts maps to nothing, and is left out.
 export function renderBundleMappings(code: string, map: string): string {
-  const traced = new TraceMap(map);
+  // An index map, each script's map a section, read as one.
+  const traced = new FlattenMap(map);
   const sources = new Map<number, string[]>();
   const lines = (index: number): string[] => {
     let text = sources.get(index);

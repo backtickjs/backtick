@@ -1,17 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createImport } from "@backtickjs/core";
-import { bundler, type Plugin } from "../dist/index.js";
-
-// A plugin adding `text` to the end of the module, as a framework's compile
-// step adds statements after the value (Solid's `delegateEvents`). Its map
-// maps nothing; maps through a real plugin are `tests/`'s to check.
-const appending =
-  (text: string): Plugin =>
-  (code) => ({
-    code: `${code}\n${text}`,
-    map: JSON.stringify({ version: 3, sources: [], names: [], mappings: "" }),
-  });
+import { bundler } from "../dist/index.js";
 
 test("the output is a module whose default export is the value", async () => {
   const bundle = await bundler.build({ input: 42, external: {} });
@@ -40,42 +30,6 @@ test("a map is written only where one is asked for", async () => {
     code: `${code}\n//# sourceMappingURL=data:application/json;charset=utf-8,${encodeURIComponent(map!)}`,
     map,
   });
-});
-
-test("a plugin's statements follow the value", async () => {
-  const bundle = await bundler.build({
-    input: 1,
-    external: {},
-    plugins: [appending("globalThis.appended = true;")],
-  });
-  assert.match(
-    bundle.generate({ format: "es" }).code,
-    /\nexport default \(1\);\nglobalThis\.appended = true;$/,
-  );
-});
-
-test("a plugin is given the code and the bundle's id", async () => {
-  const seen: string[] = [];
-  await bundler.build({
-    input: 1,
-    external: {},
-    plugins: [
-      (code, id) => {
-        seen.push(code, id);
-        return {
-          code,
-          map: JSON.stringify({
-            version: 3,
-            sources: [],
-            names: [],
-            mappings: "",
-          }),
-        };
-      },
-    ],
-  });
-  assert.match(seen[0]!, /\nexport default \(1\);$/);
-  assert.equal(seen[1], "bundle.jsx");
 });
 
 test("a script's import from a package the client doesn't provide is refused", async () => {

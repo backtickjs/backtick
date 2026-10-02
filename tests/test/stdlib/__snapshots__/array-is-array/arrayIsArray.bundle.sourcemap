@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {  → stdlib/array-is-array.test.tsx 11:8 {…
 return   → stdlib/array-is-array.test.tsx 12:7 return 
 [        → stdlib/array-is-array.test.tsx 12:14 [

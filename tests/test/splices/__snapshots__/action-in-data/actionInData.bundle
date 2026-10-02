@@ -1,10 +1,7 @@
 const $modules = {
   "1es21es7404j7:15:4": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $splice1) => {
       const list = $splice0();
       const map = $splice1();
@@ -13,10 +10,7 @@ const $modules = {
   },
   "1es21es7404j7:7:15": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = () => {
       const x = 1;
     };
@@ -25,9 +19,7 @@ const $modules = {
 const $exports = {};
 const $require = (id) => {
   if (!(id in $exports)) {
-    const module = {
-      exports: {},
-    };
+    const module = { exports: {} };
     $exports[id] = module.exports;
     $modules[id](module, module.exports, $require);
     $exports[id] = module.exports;
@@ -38,7 +30,5 @@ const $cs0 = $require("1es21es7404j7:15:4").default;
 const $cs1 = $require("1es21es7404j7:7:15").default;
 export default $cs0(
   () => [$cs1()],
-  () => ({
-    press: $cs1(),
-  }),
+  () => ({ press: $cs1() }),
 );

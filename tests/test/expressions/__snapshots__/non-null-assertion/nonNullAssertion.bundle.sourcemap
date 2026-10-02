@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {  → expressions/non-null-assertion.test.tsx 12:8 {…
 const    → expressions/non-null-assertion.test.tsx 13:7 const 
 rows     → expressions/non-null-assertion.test.tsx 13:13 rows

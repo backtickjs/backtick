@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {  → stdlib/object-values.test.tsx 11:8 {…
 const    → stdlib/object-values.test.tsx 12:7 const 
 prices   → stdlib/object-values.test.tsx 12:13 prices

@@ -46,7 +46,6 @@
     "solid-js": "1.9.14"
   },
   "devDependencies": {
-    "@backtickjs/bundler": "workspace:^0.1.0",
     "@backtickjs/prettier-plugin": "workspace:*",
     "@backtickjs/tsc": "workspace:^0.1.0",
     "@backtickjs/tspatch-plugin": "workspace:^0.1.0",

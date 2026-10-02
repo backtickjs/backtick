@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {  → objects/object-spread.test.tsx 17:8 {…
 const    → objects/object-spread.test.tsx 18:7 const 
 base     → objects/object-spread.test.tsx 18:13 base

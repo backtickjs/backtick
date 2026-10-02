@@ -1,10 +1,7 @@
 const $modules = {
   "o3ttyh4dq4dw:15:4": (module, exports, require) => {
     "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true,
-    });
+    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0) => (currency) => {
       const table = $splice0();
       const asked = table[currency] ?? 0;
@@ -16,9 +13,7 @@ const $modules = {
 const $exports = {};
 const $require = (id) => {
   if (!(id in $exports)) {
-    const module = {
-      exports: {},
-    };
+    const module = { exports: {} };
     $exports[id] = module.exports;
     $modules[id](module, module.exports, $require);
     $exports[id] = module.exports;
@@ -26,7 +21,4 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("o3ttyh4dq4dw:15:4").default;
-export default $cs0(() => ({
-  usd: 3,
-  eur: 4,
-}));
+export default $cs0(() => ({ usd: 3, eur: 4 }));

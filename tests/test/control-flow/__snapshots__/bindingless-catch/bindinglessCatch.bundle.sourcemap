@@ -1,3 +1,4 @@
+// (carries sourcesContent)
 () => {   → control-flow/bindingless-catch.test.tsx 11:8 {…
 try       → control-flow/bindingless-catch.test.tsx 12:7 try 
 {         → control-flow/bindingless-catch.test.tsx 12:11 {
