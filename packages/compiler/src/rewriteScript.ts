@@ -140,12 +140,14 @@ export function rewriteScript(
       ),
     );
   const body = rewritten.virtual as ts.Block | ts.Expression;
-  // A splice that awaits is the host's `await`, where the template is: the
-  // script's function is async, and awaited there, so it typechecks only
-  // where the host may await.
-  const awaits = Object.values(clientScript.splices).some(
-    (splice) => splice.kind === "braced" && hasAwait(ts, splice.expression),
-  );
+  // A splice that awaits is the host's `await`, where the template is: where
+  // the host may await, the script's function is async, and awaited there;
+  // elsewhere it isn't, so the splice's own `await` is refused where written.
+  const awaits =
+    mayAwait(ts, sourceNode) &&
+    Object.values(clientScript.splices).some(
+      (splice) => splice.kind === "braced" && hasAwait(ts, splice.expression),
+    );
   const run = iife(ts, hostTags, body, awaits);
   const virtual = call(ts, "cs", "lift", [
     awaits ? ts.factory.createAwaitExpression(run) : run,
@@ -175,6 +177,21 @@ export function rewriteScript(
     codeInformation: state.codeInformation,
     diagnostics,
   };
+}
+
+// Whether host code at `node` may `await`: in an async function, or at a
+// module's top level.
+function mayAwait(ts: typeof import("typescript"), node: ts.Node): boolean {
+  for (let parent = node.parent; parent; parent = parent.parent) {
+    if (ts.isFunctionLike(parent)) {
+      return (
+        ts.getModifiers(parent as ts.FunctionLikeDeclaration)?.some(
+          (modifier) => modifier.kind === ts.SyntaxKind.AsyncKeyword,
+        ) ?? false
+      );
+    }
+  }
+  return true;
 }
 
 // An `await` in host code, but not one inside a function it holds, which is

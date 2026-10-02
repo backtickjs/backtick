@@ -9,5 +9,5 @@ async function fetchGreeting() {
 // template isn't async, as anywhere else in host code.
 export function greeting() {
   // @ts-expect-error: 'await' expressions are only allowed within async functions and at the top levels of modules.
-  return cs.lift(await (async () => cs.splice(await fetchGreeting()) + "!")());
+  return cs.lift((() => cs.splice(await fetchGreeting()) + "!")());
 }
