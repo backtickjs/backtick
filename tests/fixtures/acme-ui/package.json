@@ -1,0 +1,11 @@
+{
+  "name": "acme-ui",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A stand-in third-party Solid library, for the tests: plain Solid, nothing of Backtick's",
+  "type": "module",
+  "exports": "./index.ts",
+  "dependencies": {
+    "solid-js": "1.9.14"
+  }
+}

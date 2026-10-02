@@ -29,7 +29,7 @@ export async function bundle(
 ): Promise<{ code: string; map: string }> {
   const built = await bundler.build({
     input: value,
-    external: { "solid-js": "1.9.14", app: "1.0.0" },
+    external: { "solid-js": "1.9.14", app: "1.0.0", "acme-ui": "1.0.0" },
     plugins: [solid()],
   });
   const { code, map } = built.generate({ format: "es", sourcemap: "hidden" });

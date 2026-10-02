@@ -131,9 +131,8 @@ export const Suspense: Client<typeof Solid.Suspense> = solid("Suspense");
 export const sharedConfig: Client<typeof Solid.sharedConfig> =
   solid("sharedConfig");
 
-// The adapter's, where Solid's names its own: what a tag is typed through here.
-export type { JSX } from "./jsx-runtime.js";
-export type { JSXElement } from "solid-js";
+// Solid's own; the jsx-runtime's namespace types JSX expressions.
+export type { JSX, JSXElement } from "solid-js";
 
 // dev
 export const DEV: Client<typeof Solid.DEV> = solid("DEV");

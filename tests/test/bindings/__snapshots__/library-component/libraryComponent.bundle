@@ -4,7 +4,7 @@ import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<span>`),
   _tmpl$2 = /*#__PURE__*/ _$template(`<b>+`);
 import { createSignal as $i0 } from "solid-js";
-import { Button as $i1 } from "app";
+import { Button as $i1 } from "acme-ui";
 const $cs0 = ($splice0, $tag1) => {
   const count = $splice0()(0);
   return _$createComponent($tag1, {

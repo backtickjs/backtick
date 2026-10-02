@@ -10,13 +10,13 @@ import { snapshotCase } from "../snapshotCase.ts";
 // component, typed with the library's own declaration.
 const Button = createImport({
   name: "Button",
-  from: "app",
+  from: "acme-ui",
   version: "^1.0.0",
 });
 // In a script, the library's component as the library types it: a handler, a
 // slot taking script JSX, and children.
 const counter = cs.create(
-  "2ibpabspfxrad:21:16",
+  "z7pf43t1b5za:21:16",
   {
     params: [
       { kind: "splice", value: createSignal, bindings: [] },
@@ -29,7 +29,7 @@ const counter = cs.create(
 // A prop the library doesn't take a value for, caught as Solid would.
 // @ts-expect-error: Type '"large"' is not assignable to type '"primary" | "ghost"'.
 export const wrongVariant = cs.create(
-  "2ibpabspfxrad:36:28",
+  "z7pf43t1b5za:36:28",
   { params: [{ kind: "tag", value: Button }] },
   '($tag0) => <$tag0 variant="large" onClick={() => { }}>\n  Save\n</$tag0>',
   '{"version":3,"file":"library-component.test.jsx","sourceRoot":"","sources":["bindings/library-component.test.tsx"],"names":[],"mappings":"AAmC+B,WAAA,CAAC,KAAM,CAAC,OAAO,CAAC,OAAO,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,GAAE,CAAC,CAAC,CACvE;;AACF,EAAE,KAAM,CAAC"}',

@@ -9,6 +9,8 @@ packages:
   # untouched, outside the workspace.
   - "!apps/conformance"
   - "tests"
+  # A stand-in third-party library the tests bind to.
+  - "tests/fixtures/*"
   - "examples/*"
 
 linkWorkspacePackages: true

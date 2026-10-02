@@ -33,8 +33,10 @@ export const load: LoadHook = async (url, context, nextLoad) => {
 // module whoever imports it — a test, `draw`'s bundle, a page's script, Solid
 // itself — as a browser resolves an import map. Solid is its DOM build, the one
 // a page runs, where Node would pick its server build; `app` is the module an
-// app adds beside it (see `stdlib/target-builtins.test.tsx`).
+// app adds beside it (see `stdlib/target-builtins.test.tsx`); `acme-ui` a
+// library it installs (see `bindings/library-component.test.tsx`).
 const APP = new URL("./stdlib/app.ts", import.meta.url).href;
+const ACME_UI = new URL("../fixtures/acme-ui/index.ts", import.meta.url).href;
 
 const ADAPTER = pathToFileURL(
   createRequire(import.meta.url).resolve("@backtickjs/solid-js"),
@@ -43,6 +45,9 @@ const ADAPTER = pathToFileURL(
 export const resolve: ResolveHook = (specifier, context, nextResolve) => {
   if (specifier === "app") {
     return { url: APP, shortCircuit: true };
+  }
+  if (specifier === "acme-ui") {
+    return { url: ACME_UI, shortCircuit: true };
   }
   if (specifier === "solid-js" || specifier.startsWith("solid-js/")) {
     return nextResolve(specifier, {

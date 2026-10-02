@@ -511,6 +511,9 @@ importers:
       '@testing-library/user-event':
         specifier: ^14.6.7
         version: 14.6.7(@testing-library/dom@10.4.2)
+      acme-ui:
+        specifier: workspace:*
+        version: link:fixtures/acme-ui
       global-jsdom:
         specifier: ^30.0.0
         version: 30.0.0(jsdom@30.0.1)
@@ -520,12 +523,15 @@ importers:
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
-      solid-js:
-        specifier: 1.9.14
-        version: 1.9.14
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
+
+  tests/fixtures/acme-ui:
+    dependencies:
+      solid-js:
+        specifier: 1.9.14
+        version: 1.9.14
 
 packages:
 

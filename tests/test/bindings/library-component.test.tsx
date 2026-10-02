@@ -4,7 +4,7 @@ import { cs, createImport } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
-import type { Button as LibraryButton } from "../stdlib/app.ts";
+import type { Button as LibraryButton } from "acme-ui";
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 
@@ -12,7 +12,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // component, typed with the library's own declaration.
 const Button = createImport<typeof LibraryButton>({
   name: "Button",
-  from: "app",
+  from: "acme-ui",
   version: "^1.0.0",
 });
 
