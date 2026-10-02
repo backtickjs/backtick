@@ -1,0 +1,8 @@
+<button class="primary" onclick={[function]}>
+  <b>
+    {"+"}
+  </b>
+  <span>
+    {"Pressed 0 times"}
+  </span>
+</button>

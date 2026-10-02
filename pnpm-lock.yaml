@@ -520,6 +520,9 @@ importers:
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
+      solid-js:
+        specifier: 1.9.14
+        version: 1.9.14
       typescript:
         specifier: ^6.0.3
         version: 6.0.3

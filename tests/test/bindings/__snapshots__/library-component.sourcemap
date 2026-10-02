@@ -1,0 +1,87 @@
+cs.lift(((__cs_Button = cs.splice(Button)) => {\n    → cs`{\n  
+const                                     → const 
+__cs_count                                → count
+ =                                        →  = 
+cs.splice(                                →  [-semantic]
+(createSignal)                            → $createSignal
+)                                         →  [-semantic]
+(                                         → (
+0                                         → 0
+)                                         → )
+;                                         → ;
+\n                                        → \n  
+return                                    → return 
+(                                         → (\n    
+<                                         → <
+__cs_Button                               → Button
+                                          → \n      
+variant                                   → variant
+={                                        → =
+"primary"                                 → "primary"
+}                                         → 
+                                          → \n      
+icon                                      → icon
+={                                        → ={
+<                                         → <
+b                                         → b
+>+</                                      → >+</
+b                                         → b
+>                                         → >
+}                                         → }
+                                          → \n      
+onClick                                   → onClick
+={                                        → ={
+() =>                                     → () => 
+__cs_count                                → count
+[                                         → [
+1                                         → 1
+]                                         → ]
+(                                         → (
+__cs_count                                → count
+[                                         → [
+0                                         → 0
+]                                         → ]
+()                                        → ()
+ +                                        →  + 
+1                                         → 1
+)                                         → )
+}                                         → }
+>{                                        → \n    >\n      
+<                                         → <
+span                                      → span
+>{                                        → >{
+"Pressed "                                → "Pressed "
+ +                                        →  + 
+__cs_count                                → count
+[                                         → [
+0                                         → 0
+]                                         → ]
+()                                        → ()
+ +                                        →  + 
+" times"                                  → " times"
+}</                                       → }</
+span                                      → span
+>                                         → >
+}</                                       → \n    </
+__cs_Button                               → Button
+>                                         → >
+)                                         → \n  )
+;                                         → ;
+\n})())                                   → \n}`
+cs.lift(((__cs_Button = cs.splice(Button)) => → cs`
+<                                         → <
+__cs_Button                               → Button
+                                          →  
+variant                                   → variant
+={                                        → =
+"large"                                   → "large"
+}                                         → 
+                                          →  
+onClick                                   → onClick
+={                                        → ={
+() => {\n}                                → () => {}
+}                                         → }
+>\n  Save\n</                             → >\n  Save\n</
+__cs_Button                               → Button
+>                                         → >
+)())                                      → `
