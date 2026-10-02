@@ -56,6 +56,7 @@ async function printScript(
     "`",
     reinjectSplices(
       stripTrailingSemicolon(docWithPlaceholders),
+      script,
       expressions,
       print,
     ),
@@ -65,6 +66,7 @@ async function printScript(
 
 function reinjectSplices(
   formatted: Doc,
+  script: ClientScript,
   expressions: readonly Expression[],
   print: Print,
 ): Doc {
@@ -72,7 +74,7 @@ function reinjectSplices(
     if (typeof current !== "string" || !current.includes("$0splice")) {
       return current;
     }
-    return replacePlaceholders(current, expressions, print);
+    return replacePlaceholders(current, script, expressions, print);
   });
 }
 
@@ -82,6 +84,7 @@ function reinjectSplices(
 // the spliced-in expression, finishing with whatever text trails the last one.
 function replacePlaceholders(
   text: string,
+  script: ClientScript,
   expressions: readonly Expression[],
   print: Print,
 ): Doc {
@@ -93,8 +96,14 @@ function replacePlaceholders(
     parts.push(text.slice(textStart, match.index));
     const expression = expressions[spliceIndex];
     // A braced splice holding a bare identifier prints as its unbraced
-    // shorthand: `${x}` reads as `$x`. A `$`-led name keeps its braces.
-    if (expression?.type === "Identifier" && !expression.name.startsWith("$")) {
+    // shorthand: `${x}` reads as `$x`. A `$`-led name keeps its braces, and so
+    // does a `${…}` in text (a string, a comment, JSX text), which isn't a
+    // splice: there `$x` would be the text itself.
+    if (
+      script.splices[match[0]] !== undefined &&
+      expression?.type === "Identifier" &&
+      !expression.name.startsWith("$")
+    ) {
       parts.push(`$${expression.name}`);
     } else {
       parts.push(["${", print(["quasi", "expressions", spliceIndex]), "}"]);
