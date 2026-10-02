@@ -1,8 +1,22 @@
 import { readFileSync } from "node:fs";
+import { createRequire } from "node:module";
 import path from "node:path";
-import { transform } from "@backtickjs/compiler";
+import { type Plugin, transform } from "@backtickjs/compiler";
 import type { PluginConfig, TransformerExtras } from "ts-patch";
 import type ts from "typescript";
+
+// The project's `package.json`, as far as a build reads it: its name, and its
+// `backtick` key, naming the modules that make its framework's compile steps.
+interface PackageJson {
+  readonly name: string;
+  readonly backtick?: { readonly plugins?: readonly string[] };
+}
+
+// A compile step's module, as Babel's presets are: named in a config, resolved
+// from the project, its default export making the step.
+interface PluginModule {
+  default: () => Plugin;
+}
 
 /**
  * Use it from a `tsconfig.json`:
@@ -15,7 +29,12 @@ import type ts from "typescript";
  * }
  * ```
  *
- * and compile with `tspc` (from `ts-patch`) instead of `tsc`.
+ * and compile with `tspc` (from `ts-patch`) instead of `tsc`. The framework's
+ * compile steps are the project's, named in its `package.json`:
+ *
+ * ```json
+ * "backtick": { "plugins": ["@backtickjs/solid-js/plugin"] }
+ * ```
  */
 export default function transformer(
   program: ts.Program,
@@ -29,9 +48,14 @@ export default function transformer(
   const root = path.posix.dirname(
     program.getCompilerOptions().configFilePath as string,
   );
-  const { name } = JSON.parse(
+  const { name, backtick } = JSON.parse(
     readFileSync(path.join(root, "package.json"), "utf8"),
-  ) as { name: string };
+  ) as PackageJson;
+  // Loaded as the project resolves them, at once, as a transformer is.
+  const require = createRequire(path.resolve(root, "package.json"));
+  const plugins = (backtick?.plugins ?? []).map((specifier) =>
+    (require(specifier) as PluginModule).default(),
+  );
   return transform(
     ts,
     (diagnostic) => {
@@ -41,6 +65,7 @@ export default function transformer(
     {
       sourceName: (fileName) =>
         path.posix.join(name, path.posix.relative(root, fileName)),
+      plugins,
     },
   );
 }

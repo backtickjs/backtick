@@ -43,5 +43,10 @@
     "@backtickjs/tsc": "^0.1.0",
     "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"
+  },
+  "backtick": {
+    "plugins": [
+      "@backtickjs/solid-js/plugin"
+    ]
   }
 }

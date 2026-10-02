@@ -21,3 +21,7 @@ export function solid(): (
     return { code: result.code!, map: JSON.stringify(result.map) };
   };
 }
+
+// What a build names to compile scripts for Solid: `@backtickjs/solid-js/plugin`
+// in the `tspatch` plugin's `plugins`, or imported by a Bun preload.
+export default solid;

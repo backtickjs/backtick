@@ -1,10 +1,12 @@
 import { readFileSync } from "node:fs";
+import { createRequire } from "node:module";
 import path from "node:path";
-import { transform } from "@backtickjs/compiler";
+import { type Plugin, transform } from "@backtickjs/compiler";
 import { plugin } from "bun";
 import ts from "typescript";
 
 const compilerOptions = loadCompilerOptions();
+const plugins = loadPlugins();
 
 /**
  * Use it from a `bunfig.toml`:
@@ -17,6 +19,13 @@ const compilerOptions = loadCompilerOptions();
  *
  * ```sh
  * bun --preload @backtickjs/bun-plugin ./src/index.ts
+ * ```
+ *
+ * The framework's compile steps are the project's, named in its
+ * `package.json`:
+ *
+ * ```json
+ * "backtick": { "plugins": ["@backtickjs/solid-js/plugin"] }
  * ```
  */
 plugin({
@@ -46,7 +55,9 @@ plugin({
         compilerOptions,
         transformers: {
           before: [
-            transform(ts, (diagnostic) => diagnostics.push(diagnostic)),
+            transform(ts, (diagnostic) => diagnostics.push(diagnostic), {
+              plugins,
+            }),
             addBunPragma(ts),
           ],
         },
@@ -75,6 +86,24 @@ plugin({
     });
   },
 });
+
+// A compile step's module, as Babel's presets are: named in a config, resolved
+// from the project, its default export making the step.
+interface PluginModule {
+  default: () => Plugin;
+}
+
+// The compile steps the project's `package.json` names under `backtick`.
+function loadPlugins(): Plugin[] {
+  const file = path.join(process.cwd(), "package.json");
+  const { backtick } = JSON.parse(readFileSync(file, "utf8")) as {
+    backtick?: { plugins?: readonly string[] };
+  };
+  const require = createRequire(file);
+  return (backtick?.plugins ?? []).map((specifier) =>
+    (require(specifier) as PluginModule).default(),
+  );
+}
 
 function loadCompilerOptions(): ts.CompilerOptions {
   const configPath = ts.findConfigFile(
