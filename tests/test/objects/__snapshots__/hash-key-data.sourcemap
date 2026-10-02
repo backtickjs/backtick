@@ -1,6 +1,6 @@
-cs.lift(            → cs`
+cs.lift((() =>      → cs`
 () =>               → () => 
 cs.splice(          → ${ [-semantic]
 { "#call": "#f0" }  → { "#call": "#f0" }
 )                   → } [-semantic]
-)                   → `
+)())                → `

@@ -7,8 +7,8 @@ it("coreComponents", async (t) => {
     t,
     "coreComponents",
     <div style="padding: 8px">
-      <span style="font-size: 12px" onclick={cs.lift(() => {
-})}>
+      <span style="font-size: 12px" onclick={cs.lift((() => () => {
+})())}>
         hi
       </span>
       <img src="https://example.com/a.png" />

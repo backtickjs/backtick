@@ -2,7 +2,7 @@ import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { render } from "@backtickjs/solid-js";
+import { render } from "@backtickjs/solid-js/web";
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 // Text a page's markup would end early on, were the bundle written into it.
@@ -20,7 +20,7 @@ async function draw(element) {
   drawn.push(container);
   await evaluate(
     cs.create(
-      "1j0y3ej7rwt2w:25:4",
+      "13kggozl76hsb:25:4",
       {
         params: [
           { kind: "splice", value: render, bindings: [] },

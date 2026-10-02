@@ -18,10 +18,10 @@ return                  → return
 __cs_apply              → apply
 (                       → (
 cs.splice(              → ${ [-semantic]
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 () =>                   → () => 
 2                       → 2
-)                       → `
+)())                    → `
 )                       → } [-semantic]
 )                       → )
 ;                       → ;

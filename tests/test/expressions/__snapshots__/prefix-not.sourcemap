@@ -1,33 +1,33 @@
-cs.lift(      → cs`
-(             → (
-__cs_ready    → ready
-:             → : 
-boolean       → boolean
-,             → , 
-__cs_count    → count
-:             → : 
-number        → number
-) => {\n      → ) => {\n      
-if (          → if (
-!             → !
-__cs_ready    → ready
-)             → ) 
-{\n           → {\n        
-return        → return 
-"waiting"     → "waiting"
-;             → ;
-\n    }       → \n      }
-\n            → \n      
-return        → return 
-!(            → !
-__cs_count    → count
- >            →  > 
-3             → 3
-)             → 
- ?            →  ? 
-"room left"   → "room left"
- :            →  : 
-"full"        → "full"
-;             → ;
-\n}           → \n    }
-)             → `
+cs.lift((() =>   → cs`
+(                → (
+__cs_ready       → ready
+:                → : 
+boolean          → boolean
+,                → , 
+__cs_count       → count
+:                → : 
+number           → number
+) => {\n         → ) => {\n      
+if (             → if (
+!                → !
+__cs_ready       → ready
+)                → ) 
+{\n              → {\n        
+return           → return 
+"waiting"        → "waiting"
+;                → ;
+\n    }          → \n      }
+\n               → \n      
+return           → return 
+!(               → !
+__cs_count       → count
+ >               →  > 
+3                → 3
+)                → 
+ ?               →  ? 
+"room left"      → "room left"
+ :               →  : 
+"full"           → "full"
+;                → ;
+\n}              → \n    }
+)())             → `

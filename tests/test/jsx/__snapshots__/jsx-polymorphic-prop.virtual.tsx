@@ -6,7 +6,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // the JSX analogue of the `splice-sharing` fixture. The entry takes a thunk
 // parameter, and each `onPress`'s `#call` passes its own splice as a `#thunk`.
 function make(n: number): Client<() => number> {
-  return cs.lift(() => cs.splice((n)));
+  return cs.lift((() => () => cs.splice((n)))());
 }
 
 it("jsxPolymorphicProp", async (t) => {

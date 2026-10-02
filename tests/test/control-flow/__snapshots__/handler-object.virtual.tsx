@@ -10,9 +10,9 @@ const beep: Client<void> = cs.lift((() => {
     __cs_n = 1;
 })());
 
-const onTap: Client<(id: number) => void> = cs.lift((__cs_id: number) => {
+const onTap: Client<(id: number) => void> = cs.lift((() => (__cs_id: number) => {
     cs.splice((beep));
-});
+})());
 
 it("handlerObject", async (t) => {
   await snapshotCase(

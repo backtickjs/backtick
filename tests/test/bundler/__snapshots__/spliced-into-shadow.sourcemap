@@ -10,9 +10,9 @@ __cs_first              → first
  =                      →  = 
 cs.splice(              → ${ [-semantic]
 keep(                   → keep(
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 __cs_total              → total
-)                       → `
+)())                    → `
 )                       → )
 )                       → } [-semantic]
 ;                       → ;

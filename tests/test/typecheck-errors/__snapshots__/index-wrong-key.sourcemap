@@ -1,4 +1,4 @@
-cs.lift(                                  → cs`
+cs.lift((() =>                            → cs`
 (                                         → (
 __cs_name                                 → name
 :                                         → : 
@@ -53,4 +53,4 @@ __cs_wrong                                → wrong
 __cs_which                                → which
 ;                                         → ;
 \n}                                       → \n}
-)                                         → `
+)())                                      → `

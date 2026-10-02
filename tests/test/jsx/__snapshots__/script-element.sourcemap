@@ -46,20 +46,20 @@ return                                    → return
 div                                       → div
                                           →  
 style                                     → style
-={cs.lift(                                → ={
+={                                        → ={
 __cs_css                                  → css
-)}                                        → }
->{cs.lift(                                → >\n          
+}                                         → }
+>{                                        → >\n          
 <                                         → <
 span                                      → span
                                           →  
 style                                     → style
-={cs.lift(                                → ={
+={                                        → ={
 __cs_css                                  → css
-)}                                        → }
+}                                         → }
                                           →  
 onclick                                   → onclick
-={cs.lift(                                → ={
+={                                        → ={
 () =>                                     → () => 
 __cs_label                                → label
 [                                         → [
@@ -68,44 +68,44 @@ __cs_label                                → label
 (                                         → (
 "pressed"                                 → "pressed"
 )                                         → )
-)}                                        → }
->{cs.lift(                                → >\n            {
+}                                         → }
+>{                                        → >\n            {
 __cs_label                                → label
 [                                         → [
 0                                         → 0
 ]                                         → ]
 ()                                        → ()
-)}</                                      → }\n          </
+}</                                       → }\n          </
 span                                      → span
 >                                         → >
-)}{cs.lift(                               → \n          
+}{                                        → \n          
 <                                         → <
 span                                      → span
                                           →  
 style                                     → style
-={cs.lift(                                → =
+={                                        → =
 "font-size: 8px"                          → "font-size: 8px"
-)}                                        → 
+}                                         → 
 >fixed</                                  → >fixed</
 span                                      → span
 >                                         → >
-)}{cs.lift(                               → \n          
+}{                                        → \n          
 <                                         → <
 span                                      → span
                                           →  
 style                                     → style
-={cs.lift(                                → ={
+={                                        → ={
 __cs_css                                  → css
-)}                                        → }
+}                                         → }
                                           →  
 onclick                                   → onclick
-={cs.lift(                                → ={
+={                                        → ={
 __cs_press                                → press
-)}                                        → }
+}                                         → }
 >\n            held\n          </         → >\n            held\n          </
 span                                      → span
 >                                         → >
-)}</                                      → \n        </
+}</                                       → \n        </
 div                                       → div
 >                                         → >\n      )
 ;                                         → ;
@@ -117,15 +117,15 @@ return                                    → return
 div                                       → div
                                           →  
 style                                     → style
-={cs.lift(                                → =
+={                                        → =
 "padding: 0"                              → "padding: 0"
-)}                                        → 
->{cs.lift(                                → >{
+}                                         → 
+>{                                        → >{
 __cs_row                                  → row
 (                                         → (
 12                                        → 12
 )                                         → )
-)}</                                      → }</
+}</                                       → }</
 div                                       → div
 >                                         → >
 ;                                         → ;

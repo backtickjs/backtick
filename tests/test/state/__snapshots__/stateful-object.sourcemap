@@ -1,4 +1,4 @@
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 (                       → (
 __cs_initial            → initial
 :                       → : 
@@ -51,7 +51,7 @@ __cs_n                  → n
  }                      → ,\n  }
 ;                       → ;
 \n}                     → \n}
-)                       → `
+)())                    → `
 cs.lift((() => {\n      → cs`{\n      
 const                   → const 
 __cs_c                  → c
@@ -69,7 +69,7 @@ return                  → return
 button                  → button
                         → \n          
 onclick                 → onclick
-={cs.lift(              → ={
+={                      → ={
 () => {\n               → () => {\n            
 __cs_c                  → c
 .                       → .
@@ -79,13 +79,13 @@ add                     → add
 )                       → )
 ;                       → ;
 \n    }                 → \n          }
-)}                      → }
->{cs.lift(              → \n        >\n          {
+}                       → }
+>{                      → \n        >\n          {
 __cs_c                  → c
 .                       → .
 get                     → get
 ()                      → ()
-)}</                    → }\n        </
+}</                     → }\n        </
 button                  → button
 >                       → >\n      )
 ;                       → ;

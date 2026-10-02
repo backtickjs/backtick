@@ -1,33 +1,33 @@
-cs.lift(      → cs`
-cs.splice(    →  [-semantic]
-(createRoot)  → $createRoot
-)             →  [-semantic]
-(             → (
-() =>         → () => 
-cs.splice(    →  [-semantic]
-(nothing)     → $nothing
-)             →  [-semantic]
-)             → )
-)             → `
-cs.lift(      → cs`
-cs.splice(    →  [-semantic]
-(createRoot)  → $createRoot
-)             →  [-semantic]
-(             → (
-() =>         → () => 
-cs.splice(    →  [-semantic]
-(data)        → $data
-)             →  [-semantic]
-)             → )
-)             → `
-cs.lift(      → cs`
-cs.splice(    →  [-semantic]
-(createRoot)  → $createRoot
-)             →  [-semantic]
-(             → (
-() =>         → () => 
-cs.splice(    →  [-semantic]
-(data)        → $data
-)             →  [-semantic]
-)             → )
-)             → `
+cs.lift((() =>   → cs`
+cs.splice(       →  [-semantic]
+(createRoot)     → $createRoot
+)                →  [-semantic]
+(                → (
+() =>            → () => 
+cs.splice(       →  [-semantic]
+(nothing)        → $nothing
+)                →  [-semantic]
+)                → )
+)())             → `
+cs.lift((() =>   → cs`
+cs.splice(       →  [-semantic]
+(createRoot)     → $createRoot
+)                →  [-semantic]
+(                → (
+() =>            → () => 
+cs.splice(       →  [-semantic]
+(data)           → $data
+)                →  [-semantic]
+)                → )
+)())             → `
+cs.lift((() =>   → cs`
+cs.splice(       →  [-semantic]
+(createRoot)     → $createRoot
+)                →  [-semantic]
+(                → (
+() =>            → () => 
+cs.splice(       →  [-semantic]
+(data)           → $data
+)                →  [-semantic]
+)                → )
+)())             → `

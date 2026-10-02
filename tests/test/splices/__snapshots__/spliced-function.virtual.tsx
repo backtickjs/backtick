@@ -13,6 +13,6 @@ it("splicedFunction", async (t) => {
   await snapshotCase(
     t,
     "splicedFunction",
-    cs.lift(() => cs.splice((n: Client<number>) => n)),
+    cs.lift((() => () => cs.splice((n: Client<number>) => n))()),
   );
 });

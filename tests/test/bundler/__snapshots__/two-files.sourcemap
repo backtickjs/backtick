@@ -1,13 +1,13 @@
-cs.lift(     → cs`
-<            → <
-p            → p
->{cs.lift(   → >\n      {
-"in "        → "in "
-)}{cs.lift(  → }\n      {
-cs.splice(   → ${ [-semantic]
-(<Badge />)  → (<Badge />)
-)            → } [-semantic]
-)}</         → }\n    </
-p            → p
->            → >
-)            → `
+cs.lift((() =>   → cs`
+<                → <
+p                → p
+>{               → >\n      {
+"in "            → "in "
+}{               → }\n      {
+cs.splice(       → ${ [-semantic]
+(<Badge />)      → (<Badge />)
+)                → } [-semantic]
+}</              → }\n    </
+p                → p
+>                → >
+)())             → `

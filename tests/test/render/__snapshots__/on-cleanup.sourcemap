@@ -1,4 +1,4 @@
-cs.lift(                                → cs`
+cs.lift((() =>                          → cs`
 () => {\n                               → () => {\n          
 cs.splice(                              →  [-semantic]
 (onCleanup)                             → $onCleanup
@@ -23,8 +23,8 @@ p                                       → p
 >                                       → >
 ;                                       → ;
 \n}                                     → \n        }
-)                                       → `
-cs.lift(                                → cs`
+)())                                    → `
+cs.lift((() =>                          → cs`
 () => {\n                               → () => {\n          
 const                                   → const 
 __cs_n                                  → n
@@ -78,7 +78,7 @@ return                                  → return
 button                                  → button
                                         →  
 onclick                                 → onclick
-={cs.lift(                              → ={
+={                                      → ={
 () =>                                   → () => 
 __cs_n                                  → n
 [                                       → [
@@ -93,17 +93,17 @@ __cs_n                                  → n
  +                                      →  + 
 1                                       → 1
 )                                       → )
-)}                                      → }
->{cs.lift(                              → >{
+}                                       → }
+>{                                      → >{
 __cs_doubled                            → doubled
 ()                                      → ()
-)}</                                    → }</
+}</                                     → }</
 button                                  → button
 >                                       → >
 ;                                       → ;
 \n}                                     → \n        }
-)                                       → `
-cs.lift(                                → cs`
+)())                                    → `
+cs.lift((() =>                          → cs`
 () => {\n                               → () => {\n          
 const                                   → const 
 __cs_timer                              → timer
@@ -175,15 +175,15 @@ p                                       → p
 >                                       → >
 ;                                       → ;
 \n}                                     → \n        }
-)                                       → `
-cs.lift(                                → cs`
+)())                                    → `
+cs.lift((() =>                          → cs`
 () => {\n                               → () => {\n          
 return                                  → return 
 <                                       → (\n            <
 button                                  → button
                                         →  
 onclick                                 → onclick
-={cs.lift(                              → ={
+={                                      → ={
 () =>                                   → () => 
 cs.splice(                              →  [-semantic]
 (onCleanup)                             → $onCleanup
@@ -198,10 +198,10 @@ console                                 → console
 log                                     → log
 ()                                      → ()
 )                                       → )
-)}                                      → }
+}                                       → }
 >\n              press\n            </  → >\n              press\n            </
 button                                  → button
 >                                       → >\n          )
 ;                                       → ;
 \n}                                     → \n        }
-)                                       → `
+)())                                    → `

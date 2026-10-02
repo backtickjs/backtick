@@ -40,7 +40,7 @@ parseFloat              → parseFloat
 return                  → return 
 <                       → <
 span                    → span
->{cs.lift(              → >{
+>{                      → >{
 __cs_whole              → whole
  +                      →  + 
 __cs_based              → based
@@ -48,7 +48,7 @@ __cs_based              → based
 __cs_fractional         → fractional
  +                      →  + 
 ""                      → ""
-)}</                    → }</
+}</                     → }</
 span                    → span
 >                       → >
 ;                       → ;

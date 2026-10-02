@@ -24,53 +24,53 @@ false                               → false
 return                              → return 
 <                                   → (\n        <
 div                                 → div
->{cs.lift(                          → >\n          
+>{                                  → >\n          
 <                                   → <
 input                               → input
                                     →  
 aria-label                          → aria-label
-={cs.lift(                          → =
+={                                  → =
 "text"                              → "text"
-)}                                  → 
+}                                   → 
                                     →  
 value                               → value
-={cs.lift(                          → ={
+={                                  → ={
 __cs_text                           → text
 [                                   → [
 0                                   → 0
 ]                                   → ]
 ()                                  → ()
-)}                                  → }
+}                                   → }
 />                                  →  />
-)}{cs.lift(                         → \n          
+}{                                  → \n          
 <                                   → <
 input                               → input
                                     →  
 type                                → type
-={cs.lift(                          → =
+={                                  → =
 "checkbox"                          → "checkbox"
-)}                                  → 
+}                                   → 
                                     →  
 aria-label                          → aria-label
-={cs.lift(                          → =
+={                                  → =
 "on"                                → "on"
-)}                                  → 
+}                                   → 
                                     →  
 checked                             → checked
-={cs.lift(                          → ={
+={                                  → ={
 __cs_isOn                           → isOn
 [                                   → [
 0                                   → 0
 ]                                   → ]
 ()                                  → ()
-)}                                  → }
+}                                   → }
 />                                  →  />
-)}{cs.lift(                         → \n          
+}{                                  → \n          
 <                                   → <
 button                              → button
                                     → \n            
 onclick                             → onclick
-={cs.lift(                          → ={
+={                                  → ={
 () => {\n                           → () => {\n              
 __cs_text                           → text
 [                                   → [
@@ -90,11 +90,11 @@ true                                → true
 )                                   → )
 ;                                   → ;
 \n    }                             → \n            }
-)}                                  → }
+}                                   → }
 >\n            write\n          </  → \n          >\n            write\n          </
 button                              → button
 >                                   → >
-)}</                                → \n        </
+}</                                 → \n        </
 div                                 → div
 >                                   → >\n      )
 ;                                   → ;

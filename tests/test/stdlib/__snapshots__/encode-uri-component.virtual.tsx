@@ -8,7 +8,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // as a string first. Decoding reads the same bytes back.
 async function Encoded() {
   return cs.lift((() => {
-    return <span>{cs.lift("/at?q=" + cs.globalThis.encodeURIComponent("a b+c&d#\u00E9") + "&page=" + cs.globalThis.encodeURIComponent(2.5) + " " + cs.globalThis.decodeURIComponent("a%20b%2Bc%26d%23%C3%A9"))}</span>;
+    return <span>{"/at?q=" + cs.globalThis.encodeURIComponent("a b+c&d#\u00E9") + "&page=" + cs.globalThis.encodeURIComponent(2.5) + " " + cs.globalThis.decodeURIComponent("a%20b%2Bc%26d%23%C3%A9")}</span>;
 })());
 }
 

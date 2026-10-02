@@ -590,16 +590,11 @@ function rewriteNodeImpl(
 
     // `<>` and `<Fragment>` lower the same way
     const isFragment = opening === null || isFragmentTag(tagName);
-    // A component tag naming a binding: a function the script holds, called
-    // with its props. Its attributes are client values of the props it takes,
-    // so they are written as they are rather than lifted.
-    const held =
-      opening !== null &&
-      !isFragment &&
-      isComponentTag(tagName) &&
-      state.bindings.has(opening.tagName as ts.Identifier);
-    const lift = (expression: ts.Expression): ts.Expression =>
-      held ? expression : call(ts, "cs", "lift", [expression]);
+    // A component tag is written mangled: the script's own binding of that
+    // name, or, for a host tag, the alias declared around the script as the
+    // tag spliced — a server component with its props lowered to their client
+    // values, a client import as what it is on the client.
+    const component = !isFragment && isComponentTag(tagName);
 
     // In source order, because a host may care that `type` precedes `value`.
     const attributes: ts.JsxAttribute[] = [];
@@ -633,16 +628,13 @@ function rewriteNodeImpl(
       // the element the offset happened to land.
       const written = ts.factory.createIdentifier(name);
       state.mappings.set(written, attribute.name);
-      // Lifted, all of them: everything written in a script is client code,
-      // and a prop admits it either as `Prop<T>`'s `Client` side or, for a
-      // structured one, as a `Client` of the whole. A handler admits nothing
-      // else — `Client<() => void>` has no plain form, which is what keeps a
-      // host function out of a place only client code can go.
+      // As written: everything in a script is client code, which a tag's props
+      // take as they are, a host tag's lowered to its client values.
       const attributeVirtual = ts.factory.createJsxAttribute(
         written,
         ts.factory.createJsxExpression(
           undefined,
-          lift(value.virtual as ts.Expression),
+          value.virtual as ts.Expression,
         ),
       );
       state.mappings.set(attributeVirtual, attribute);
@@ -668,7 +660,7 @@ function rewriteNodeImpl(
           virtualChildren.push(
             ts.factory.createJsxExpression(
               undefined,
-              lift(rewritten.virtual as ts.Expression),
+              rewritten.virtual as ts.Expression,
             ),
           );
           continue;
@@ -677,7 +669,7 @@ function rewriteNodeImpl(
         virtualChildren.push(
           ts.factory.createJsxExpression(
             undefined,
-            lift(rewritten.virtual as ts.Expression),
+            rewritten.virtual as ts.Expression,
           ),
         );
       }
@@ -689,7 +681,7 @@ function rewriteNodeImpl(
     // renaming one of a pair has to reach that one and not its partner.
     const tag = (source: ts.JsxTagNameExpression): ts.Identifier => {
       const written = ts.factory.createIdentifier(
-        held ? mangle(tagName) : tagName,
+        component ? mangle(tagName) : tagName,
       );
       state.mappings.set(written, source);
       return written;

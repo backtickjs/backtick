@@ -5,7 +5,7 @@ __cs_x                  → x
 1                       → 1
 ;                       → ;
 \n})())                 → \n}`
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 () => {\n               → () => {\n  
 let                     → let 
 __cs_n                  → n
@@ -18,8 +18,8 @@ __cs_n                  → n
 1                       → 1
 ;                       → ;
 \n}                     → \n}
-)                       → `
-cs.lift(                → cs`
+)())                    → `
+cs.lift((() =>          → cs`
 (                       → (
 __cs_b                  → b
 :                       → : 
@@ -56,4 +56,4 @@ return                  → return
 __cs_n                  → n
 ;                       → ;
 \n}                     → \n    }
-)                       → `
+)())                    → `

@@ -12,11 +12,11 @@ it("objectIndex", async (t) => {
   await snapshotCase(
     t,
     "objectIndex",
-    cs.lift((__cs_currency: string) => {
+    cs.lift((() => (__cs_currency: string) => {
     const __cs_table = cs.splice((rates));
     const __cs_asked = __cs_table[__cs_currency] ?? 0;
     const __cs_usd = __cs_table["usd"] ?? 0;
     return __cs_asked + __cs_usd;
-}),
+})()),
   );
 });

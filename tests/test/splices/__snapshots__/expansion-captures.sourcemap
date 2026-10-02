@@ -1,33 +1,33 @@
-cs.lift(                 → cs`
+cs.lift((() =>           → cs`
 [                        → [
 1                        → 1
 ,                        → , 
 2                        → 2
 ]                        → ]
-)                        → `
-cs.lift(                 → cs`
+)())                     → `
+cs.lift((() =>           → cs`
 <                        → <
 li                       → li
->{cs.lift(               → >\n          {
+>{                       → >\n          {
 cs.splice(               →  [-semantic]
 (label)                  → $label
 )                        →  [-semantic]
-)} {cs.lift(             → } {
+} {                      → } {
 cs.splice(               →  [-semantic]
 (n)                      → $n
 )                        →  [-semantic]
-)}</                     → }\n        </
+}</                      → }\n        </
 li                       → li
 >                        → >
-)                        → `
-cs.lift(                 → cs`
+)())                     → `
+cs.lift((() =>           → cs`
 cs.splice(               →  [-semantic]
 (rows)                   → $rows
 )                        →  [-semantic]
 (                        → (
 "row"                    → "row"
 )                        → )
-)                        → `
+)())                     → `
 cs.lift((() => {\n       → cs`{\n      
 const                    → const 
 __cs_base                → base
@@ -40,13 +40,13 @@ __cs_add                 → add
  =                       →  = 
 cs.splice(               → ${ [-semantic]
 (n: Client<number>) =>   → (n: Client<number>) => 
-cs.lift(                 → cs`
+cs.lift((() =>           → cs`
 __cs_base                → base
  +                       →  + 
 cs.splice(               →  [-semantic]
 (n)                      → $n
 )                        →  [-semantic]
-)                        → `
+)())                     → `
 )                        → } [-semantic]
 ;                        → ;
 \n                       → \n      

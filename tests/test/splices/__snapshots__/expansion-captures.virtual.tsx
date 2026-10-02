@@ -11,16 +11,16 @@ import { snapshotCase } from "../snapshotCase.ts";
 // two expansions, the inner capturing the outer's argument.
 const rows = (label: Client<string>) => (
   <ul>
-    <For each={cs.lift([1, 2])}>
+    <For each={cs.lift((() => [1, 2])())}>
       {(n: Client<number>) =>
-        cs.lift(<li>{cs.lift(cs.splice((label)))} {cs.lift(cs.splice((n)))}</li>)
+        cs.lift((() => <li>{cs.splice((label))} {cs.splice((n))}</li>)())
       }
     </For>
   </ul>
 );
 
 it("expansionCapturesArgument", async (t) => {
-  await snapshotCase(t, "expansionCapturesArgument", cs.lift(cs.splice((rows))("row")));
+  await snapshotCase(t, "expansionCapturesArgument", cs.lift((() => cs.splice((rows))("row"))()));
 });
 
 // A host function written inside a script, whose script reads the enclosing
@@ -31,7 +31,7 @@ it("expansionCapturesBinding", async (t) => {
     "expansionCapturesBinding",
     cs.lift((() => {
     const __cs_base = 10;
-    const __cs_add = cs.splice((n: Client<number>) => cs.lift(__cs_base + cs.splice((n))));
+    const __cs_add = cs.splice((n: Client<number>) => cs.lift((() => __cs_base + cs.splice((n)))()));
     return __cs_add(1) + __cs_add(2);
 })()),
   );

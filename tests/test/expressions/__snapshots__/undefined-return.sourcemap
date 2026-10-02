@@ -1,7 +1,7 @@
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 () =>                   → () => 
 "hi"                    → "hi"
-)                       → `
+)())                    → `
 cs.lift((() => {\n      → cs`{\n      
 const                   → const 
 __cs_stored             → stored

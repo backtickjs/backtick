@@ -13,11 +13,11 @@ count                                     → count
 1                                         → 1
 ;                                         → ;
 \n})())                                   → \n}`
-cs.lift(                                  → cs`
+cs.lift((() =>                            → cs`
 cs.globalThis.                            → 
 window                                    → window
 .                                         → .
 location                                  → location
 .                                         → .
 href                                      → href
-)                                         → `
+)())                                      → `

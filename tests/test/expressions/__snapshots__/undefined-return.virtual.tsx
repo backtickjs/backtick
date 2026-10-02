@@ -8,7 +8,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // boundary.
 type Maybe = string | undefined;
 
-const lying: Client<() => Maybe> = cs.lift(() => "hi");
+const lying: Client<() => Maybe> = cs.lift((() => () => "hi")());
 
 it("undefinedReturn", async (t) => {
   await snapshotCase(

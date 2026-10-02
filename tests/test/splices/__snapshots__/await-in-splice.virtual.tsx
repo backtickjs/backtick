@@ -10,5 +10,5 @@ async function fetchGreeting() {
 // compiled output wraps it in no function — so `await` works wherever the
 // template itself may await, here at module top level.
 it("awaitInSplice", async (t) => {
-  await snapshotCase(t, "awaitInSplice", cs.lift(cs.splice(await fetchGreeting()) + "!"));
+  await snapshotCase(t, "awaitInSplice", cs.lift((() => cs.splice(await fetchGreeting()) + "!")()));
 });

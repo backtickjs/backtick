@@ -20,18 +20,18 @@ const rows = ["first", "second"];
 
 const indexed = (
   <ul>
-    <Index each={cs.lift(cs.splice((rows)))}>
-      {cs.lift((__cs_row: () => string, __cs_index: number) => <li>{cs.lift(__cs_index + ": " + __cs_row())}</li>)}
+    <Index each={cs.lift((() => cs.splice((rows)))())}>
+      {cs.lift((() => (__cs_row: () => string, __cs_index: number) => <li>{__cs_index + ": " + __cs_row()}</li>)())}
     </Index>
   </ul>
 );
 
 const switched = (
   <Switch fallback={<p>none</p>}>
-    <Match when={cs.lift(1 > 2)}>
+    <Match when={cs.lift((() => 1 > 2)())}>
       <p>wrong</p>
     </Match>
-    <Match when={cs.lift(2 > 1)}>
+    <Match when={cs.lift((() => 2 > 1)())}>
       <p>right</p>
     </Match>
   </Switch>

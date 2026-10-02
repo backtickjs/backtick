@@ -14,11 +14,11 @@ const scriptBoundTagCapture = cs.lift((() => {
     const __cs_count = cs.splice((createSignal))(0);
     const __cs_Badge = (__cs_props: {
         n: number;
-    }) => <b>{cs.lift("n " + __cs_props.n)}</b>;
-    return <div>{cs.lift(cs.splice(cs.lift(<__cs_Badge n={__cs_count[0]()}/>)))}{cs.lift(cs.splice(cs.lift((() => {
+    }) => <b>{"n " + __cs_props.n}</b>;
+    return <div>{cs.splice(cs.lift((() => <__cs_Badge n={__cs_count[0]()}/>)()))}{cs.splice(cs.lift((() => {
     const __cs_skipped = 10;
-    return cs.splice(cs.lift(<__cs_Badge n={__cs_count[0]() + 100}/>));
-})())))}{cs.lift(cs.splice((<section>{cs.lift(<__cs_Badge n={__cs_count[0]() + 1000}/>)}</section>)))}{cs.lift(cs.splice(cs.lift(<For each={cs.lift([1, 2])}>{cs.lift((__cs_m: number) => <__cs_Badge n={__cs_m * __cs_count[0]()}/>)}</For>)))}{cs.lift(<button onclick={cs.lift(() => __cs_count[1](__cs_count[0]() + 1))}>more</button>)}</div>;
+    return cs.splice(cs.lift((() => <__cs_Badge n={__cs_count[0]() + 100}/>)()));
+})()))}{cs.splice((<section>{cs.lift((() => <__cs_Badge n={__cs_count[0]() + 1000}/>)())}</section>))}{cs.splice(cs.lift(((__cs_For = cs.splice(For)) => <__cs_For each={[1, 2]}>{(__cs_m: number) => <__cs_Badge n={__cs_m * __cs_count[0]()}/>}</__cs_For>)()))}{<button onclick={() => __cs_count[1](__cs_count[0]() + 1)}>more</button>}</div>;
 })());
 
 it("scriptBoundTagCapture", async (t) => {

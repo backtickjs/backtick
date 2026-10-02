@@ -14,9 +14,9 @@ const returnsBoolean = (_n: Client<number>) => true;
 const returnsString = (_n: Client<number>) => "text";
 const returnsArray = (n: Client<number>) => [n, 2];
 const returnsObject = (n: Client<number>) => ({ value: n, label: "n" });
-const returnsScript = (n: Client<number>) => cs.lift(cs.splice((n)) + 1);
+const returnsScript = (n: Client<number>) => cs.lift((() => cs.splice((n)) + 1)());
 const returnsFunction = (n: Client<number>) => (m: Client<number>) =>
-  cs.lift(cs.splice((n)) * cs.splice((m)));
+  cs.lift((() => cs.splice((n)) * cs.splice((m)))());
 const returnsElement = (n: Client<number>): JSX.Element => <b>{n}</b>;
 
 it("hostFunctionReturns", async (t) => {

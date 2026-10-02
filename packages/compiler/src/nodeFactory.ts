@@ -17,38 +17,39 @@ export function call(
   );
 }
 
-/** (<params>) => <body> */
-export function arrow(
+/** <name> = <initializer> — a parameter with a default */
+export function parameter(
   ts: typeof import("typescript"),
-  params: string[],
-  body: ts.ConciseBody,
-): ts.ArrowFunction {
-  return ts.factory.createArrowFunction(
+  name: string,
+  initializer: ts.Expression,
+): ts.ParameterDeclaration {
+  return ts.factory.createParameterDeclaration(
     undefined,
     undefined,
-    params.map((name) =>
-      ts.factory.createParameterDeclaration(
-        undefined,
-        undefined,
-        name,
-        undefined,
-        undefined,
-        undefined,
-      ),
-    ),
+    name,
     undefined,
     undefined,
-    body,
+    initializer,
   );
 }
 
-/** (() => <body>)() */
+/** ((<params>) => <body>)() */
 export function iife(
   ts: typeof import("typescript"),
+  params: ts.ParameterDeclaration[],
   body: ts.ConciseBody,
 ): ts.CallExpression {
   return ts.factory.createCallExpression(
-    ts.factory.createParenthesizedExpression(arrow(ts, [], body)),
+    ts.factory.createParenthesizedExpression(
+      ts.factory.createArrowFunction(
+        undefined,
+        undefined,
+        params,
+        undefined,
+        undefined,
+        body,
+      ),
+    ),
     undefined,
     [],
   );

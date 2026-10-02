@@ -1,4 +1,4 @@
-cs.lift(                                  → cs`
+cs.lift((() =>                            → cs`
 () => {\n                                 → () => {\n      
 const                                     → const 
 __cs_held                                 → held
@@ -214,4 +214,4 @@ __cs_held                                 → held
 ()                                        → ()
 ;                                         → ;
 \n}                                       → \n    }
-)                                         → `
+)())                                      → `

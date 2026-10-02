@@ -43,7 +43,7 @@ return                  → return
 span                    → span
                         → \n        
 onclick                 → onclick
-={cs.lift(              → ={
+={                      → ={
 () => {\n               → () => {\n          
 __cs_flag               → flag
 [                       → [
@@ -76,8 +76,8 @@ __cs_step               → step
 )                       → )
 ;                       → ;
 \n    }                 → \n        }
-)}                      → }
->{cs.lift(              → \n      >\n        {
+}                       → }
+>{                      → \n      >\n        {
 __cs_flag               → flag
 [                       → [
 0                       → 0
@@ -100,7 +100,7 @@ __cs_step               → step
 ]                       → ]
 ()                      → ()
 ()                      → ()
-)}</                    → }\n      </
+}</                     → }\n      </
 span                    → span
 >                       → >\n    )
 ;                       → ;

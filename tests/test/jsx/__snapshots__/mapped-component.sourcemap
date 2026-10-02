@@ -1,21 +1,21 @@
-cs.lift(    → cs`
-cs.splice(  →  [-semantic]
-(rows)      → $rows
-)           →  [-semantic]
-)           → `
-cs.lift(    → cs`
-(           → (
-__cs_row    → row
-:           → : 
-number      → number
-) =>        → ) => 
-cs.splice(  → ${ [-semantic]
-(<span>{    → (<span>{
-cs.lift(    → cs`
-"row "      → "row "
- +          →  + 
-__cs_row    → row
-)           → `
-}</span>)   → }</span>)
-)           → } [-semantic]
-)           → `
+cs.lift((() =>   → cs`
+cs.splice(       →  [-semantic]
+(rows)           → $rows
+)                →  [-semantic]
+)())             → `
+cs.lift((() =>   → cs`
+(                → (
+__cs_row         → row
+:                → : 
+number           → number
+) =>             → ) => 
+cs.splice(       → ${ [-semantic]
+(<span>{         → (<span>{
+cs.lift((() =>   → cs`
+"row "           → "row "
+ +               →  + 
+__cs_row         → row
+)())             → `
+}</span>)        → }</span>)
+)                → } [-semantic]
+)())             → `

@@ -38,9 +38,9 @@ __cs_base               → base
 return                  → return 
 cs.splice(              → ${ [-semantic]
 outerBase(              → outerBase(
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 __cs_base               → base
-)                       → `
+)())                    → `
 )                       → )
 )                       → } [-semantic]
 ;                       → ;

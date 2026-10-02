@@ -15,7 +15,7 @@ return                  → return
 form                    → form
                         → \n          
 onsubmit                → onsubmit
-={cs.lift(              → ={
+={                      → ={
 __cs_event              → event
  => {\n                 → ) => {\n            
 __cs_event              → event
@@ -41,13 +41,13 @@ cancelable              → cancelable
 )                       → )
 ;                       → ;
 \n    }                 → \n          }
-)}                      → }
->{cs.lift(              → \n        >\n          
+}                       → }
+>{                      → \n        >\n          
 <                       → <
 textarea                → textarea
                         →  
 oninput                 → oninput
-={cs.lift(              → ={
+={                      → ={
 __cs_event              → event
  =>                     → ) => 
 __cs_said               → said
@@ -61,14 +61,14 @@ currentTarget           → currentTarget
 .                       → .
 value                   → value
 )                       → )
-)}                      → }
+}                       → }
 />                      →  />
-)}{cs.lift(             → \n          
+}{                      → \n          
 <                       → <
 input                   → input
                         →  
 oninput                 → oninput
-={cs.lift(              → ={
+={                      → ={
 __cs_event              → event
  =>                     → ) => 
 __cs_said               → said
@@ -82,14 +82,14 @@ currentTarget           → currentTarget
 .                       → .
 value                   → value
 )                       → )
-)}                      → }
+}                       → }
 />                      →  />
-)}{cs.lift(             → \n          
+}{                      → \n          
 <                       → <
 button                  → button
                         → \n            
 onclick                 → onclick
-={cs.lift(              → ={
+={                      → ={
 __cs_event              → event
  =>                     → ) =>\n              
 __cs_said               → said
@@ -109,17 +109,17 @@ currentTarget           → currentTarget
 .                       → .
 tagName                 → tagName
 )                       → )
-)}                      → \n            }
->{cs.lift(              → \n          >\n            {
+}                       → \n            }
+>{                      → \n          >\n            {
 __cs_said               → said
 [                       → [
 0                       → 0
 ]                       → ]
 ()                      → ()
-)}</                    → }\n          </
+}</                     → }\n          </
 button                  → button
 >                       → >
-)}</                    → \n        </
+}</                     → \n        </
 form                    → form
 >                       → >\n      )
 ;                       → ;

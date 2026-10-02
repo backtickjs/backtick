@@ -1,4 +1,4 @@
-cs.lift(          → cs`
+cs.lift((() =>    → cs`
 () => {\n         → () => {\n          
 const             → const 
 __cs_field        → field
@@ -18,17 +18,17 @@ null              → null
 return            → return 
 <                 → (\n            <
 div               → div
->{cs.lift(        → >\n              
+>{                → >\n              
 <                 → <
 input             → input
                   →  
 aria-label        → aria-label
-={cs.lift(        → =
+={                → =
 "name"            → "name"
-)}                → 
+}                 → 
                   →  
 ref               → ref
-={cs.lift(        → ={
+={                → ={
 __cs_element      → element
  =>               → ) => 
 __cs_field        → field
@@ -38,14 +38,14 @@ __cs_field        → field
 (                 → (
 __cs_element      → element
 )                 → )
-)}                → }
+}                 → }
 />                →  />
-)}{cs.lift(       → \n              
+}{                → \n              
 <                 → <
 button            → button
                   →  
 onclick           → onclick
-={cs.lift(        → ={
+={                → ={
 () =>             → () => 
 __cs_field        → field
 [                 → [
@@ -55,29 +55,29 @@ __cs_field        → field
 ?.                → ?.
 focus             → focus
 ()                → ()
-)}                → }
+}                 → }
 >edit</           → >edit</
 button            → button
 >                 → >
-)}</              → \n            </
+}</               → \n            </
 div               → div
 >                 → >\n          )
 ;                 → ;
 \n}               → \n        }
-)                 → `
-cs.lift(          → cs`
+)())              → `
+cs.lift((() =>    → cs`
 () => {\n         → () => {\n          
 return            → return 
 <                 → (\n            <
 input             → input
                   → \n              
 aria-label        → aria-label
-={cs.lift(        → =
+={                → =
 "name"            → "name"
-)}                → 
+}                 → 
                   → \n              
 ref               → ref
-={cs.lift(        → ={
+={                → ={
 __cs_element      → element
  =>               → ) => 
 cs.splice(        →  [-semantic]
@@ -90,28 +90,28 @@ __cs_element      → element
 focus             → focus
 ()                → ()
 )                 → )
-)}                → }
+}                 → }
 />                → \n            />\n          )
 ;                 → ;
 \n}               → \n        }
-)                 → `
-cs.lift(          → cs`
+)())              → `
+cs.lift((() =>    → cs`
 () =>             → () => 
 <                 → <
 input             → input
                   →  
 aria-label        → aria-label
-={cs.lift(        → =
+={                → =
 "name"            → "name"
-)}                → 
+}                 → 
                   →  
 ref               → ref
-={cs.lift(        → ={
+={                → ={
 () => {\n}        → () => {}
-)}                → }
+}                 → }
 />                →  />
-)                 → `
-cs.lift(          → cs`
+)())              → `
+cs.lift((() =>    → cs`
 () => {\n         → () => {\n            
 const             → const 
 __cs_shown        → shown
@@ -138,12 +138,12 @@ cs.splice(        →  [-semantic]
 return            → return 
 <                 → (\n              <
 div               → div
->{cs.lift(        → >\n                
+>{                → >\n                
 <                 → <
 button            → button
                   →  
 onclick           → onclick
-={cs.lift(        → ={
+={                → ={
 () =>             → () => 
 __cs_n            → n
 [                 → [
@@ -158,8 +158,8 @@ __cs_n            → n
  +                →  + 
 1                 → 1
 )                 → )
-)}                → }
->{cs.lift(        → >\n                  {
+}                 → }
+>{                → >\n                  {
 "n "              → "n "
  +                →  + 
 __cs_n            → n
@@ -167,10 +167,10 @@ __cs_n            → n
 0                 → 0
 ]                 → ]
 ()                → ()
-)}</              → }\n                </
+}</               → }\n                </
 button            → button
 >                 → >
-)}{cs.lift(       → \n                {
+}{                → \n                {
 __cs_shown        → shown
 [                 → [
 0                 → 0
@@ -181,7 +181,7 @@ __cs_shown        → shown
 p                 → p
                   →  
 ref               → ref
-={cs.lift(        → ={
+={                → ={
 () =>             → () => 
 cs.globalThis.    → 
 window            → window
@@ -196,15 +196,15 @@ __cs_n            → n
 ]                 → ]
 ()                → ()
 )                 → )
-)}                → }
+}                 → }
 >shown</          → >shown</
 p                 → p
 >                 → >\n                )
  :                →  : 
 null              → null
-)}</              → }\n              </
+}</               → }\n              </
 div               → div
 >                 → >\n            )
 ;                 → ;
 \n}               → \n          }
-)                 → `
+)())              → `

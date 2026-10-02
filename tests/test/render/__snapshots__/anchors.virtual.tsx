@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { evaluate } from "../evaluate.ts";
 import { cs } from "@backtickjs/core";
-import { createRoot, createSignal, For, insert } from "@backtickjs/solid-js";
+import { createRoot, createSignal, For } from "@backtickjs/solid-js";
+import { insert } from "@backtickjs/solid-js/web";
 import { screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
@@ -28,12 +29,12 @@ import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 // The anchor tests below draw this into a target that is already holding
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
-  return cs.lift((() => {
+  return cs.lift(((__cs_For = cs.splice(For)) => {
     const __cs_ids = cs.splice((createSignal))<number[]>([1, 2, 3]);
     const __cs_clear = () => {
         __cs_ids[1]([]);
     };
-    return <>{cs.lift(<span onclick={cs.lift(__cs_clear)}>clear</span>)}{cs.lift(<For each={cs.lift(__cs_ids[0]())}>{cs.lift((__cs_id: number) => <span>{cs.lift("row " + __cs_id)}</span>)}</For>)}</>;
+    return <>{<span onclick={__cs_clear}>clear</span>}{<__cs_For each={__cs_ids[0]()}>{(__cs_id: number) => <span>{"row " + __cs_id}</span>}</__cs_For>}</>;
 })());
 }
 
@@ -82,11 +83,11 @@ async function drawAt(
   selector: string,
 ): Promise<void> {
   const id = parent.id;
-  const unmount = await evaluate(cs.lift(cs.splice((createRoot))((__cs_dispose: () => void) => {
+  const unmount = await evaluate(cs.lift((() => cs.splice((createRoot))((__cs_dispose: () => void) => {
     const __cs_parent = cs.globalThis.document.getElementById(cs.splice((id)))!;
     cs.splice((insert))(__cs_parent, cs.splice((value)), __cs_parent.querySelector(cs.splice((selector))));
     return __cs_dispose;
-})));
+}))()));
   undo.push(unmount);
 }
 

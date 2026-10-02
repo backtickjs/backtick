@@ -17,7 +17,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 function innerBase(carried: Client<number>): Client<number> {
   return cs.lift((() => {
     const __cs_base = 100;
-    return cs.splice(cs.lift(__cs_base + cs.splice((carried))));
+    return cs.splice(cs.lift((() => __cs_base + cs.splice((carried)))()));
 })());
 }
 
@@ -27,7 +27,7 @@ it("foreignCaptureShadow", async (t) => {
     "foreignCaptureShadow",
     cs.lift((() => {
     const __cs_base = 1;
-    return cs.splice(innerBase(cs.lift(__cs_base)));
+    return cs.splice(innerBase(cs.lift((() => __cs_base)())));
 })()),
   );
 });

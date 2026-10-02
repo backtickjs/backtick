@@ -27,28 +27,28 @@ it("refuses a capture spliced where it is shadowed", async () => {
   await assert.rejects(
     bundler.build({
       input: cs.create(
-        "38gnycjdllkkn:34:6",
+        "qfjmdn3bl9zp:33:13",
         {
           params: [
             {
               kind: "splice",
               value: keep(
                 cs.create(
-                  "38gnycjdllkkn:36:29",
+                  "qfjmdn3bl9zp:35:29",
                   {
-                    params: [{ kind: "capture", key: "total$38gnycjdllkkn$0" }],
+                    params: [{ kind: "capture", key: "total$qfjmdn3bl9zp$0" }],
                   },
                   "($capture0) => $capture0",
-                  '{"version":3,"file":"spliced-into-shadow.test.jsx","sourceRoot":"","sources":["bundler/spliced-into-shadow.test.tsx"],"names":[],"mappings":"AAmCgC,eAAA,SAAK"}',
+                  '{"version":3,"file":"spliced-into-shadow.test.jsx","sourceRoot":"","sources":["bundler/spliced-into-shadow.test.tsx"],"names":[],"mappings":"AAkCgC,eAAA,SAAK"}',
                 ),
               ),
-              bindings: ["total$38gnycjdllkkn$0"],
+              bindings: ["total$qfjmdn3bl9zp$0"],
             },
             { kind: "splice", value: again(), bindings: [] },
           ],
         },
         "($splice0, $splice1) => {\n    const total = 1;\n    const first = $splice0(total);\n    {\n        const total = 2;\n        return first + total + $splice1();\n    }\n}",
-        '{"version":3,"file":"spliced-into-shadow.test.jsx","sourceRoot":"","sources":["bundler/spliced-into-shadow.test.tsx"],"names":[],"mappings":"AAiCS;IACD,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,MAAM,KAAK,GAAG,eAAC,CAAkB;IACjC,CAAC;QACC,MAAM,KAAK,GAAG,CAAC,CAAC;QAChB,OAAO,KAAK,GAAG,KAAK,GAAG,UAAC,CAAU;IACpC,CAAC;AACH,CAAC"}',
+        '{"version":3,"file":"spliced-into-shadow.test.jsx","sourceRoot":"","sources":["bundler/spliced-into-shadow.test.tsx"],"names":[],"mappings":"AAgCgB;IACR,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,MAAM,KAAK,GAAG,eAAC,CAAkB;IACjC,CAAC;QACC,MAAM,KAAK,GAAG,CAAC,CAAC;QAChB,OAAO,KAAK,GAAG,KAAK,GAAG,UAAC,CAAU;IACpC,CAAC;AACH,CAAC"}',
       ),
       external: {},
     }),

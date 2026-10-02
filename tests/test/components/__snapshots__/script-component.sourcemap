@@ -1,22 +1,22 @@
-cs.lift((() => {\n      → cs`{\n      
-return                  → return 
-<                       → (\n        <
-div                     → div
->{cs.lift(              → >\n          
-<                       → <
-Card                    → Card
-                        →  
-title                   → title
-={cs.lift(              → =
-"totals"                → "totals"
-)}                      → 
-/>                      →  />
-)}{cs.lift(             → \n          
-<                       → <
-Badge                   → Badge
- />                     →  />
-)}</                    → \n        </
-div                     → div
->                       → >\n      )
-;                       → ;
-\n})())                 → \n    }`
+cs.lift(((__cs_Card = cs.splice(Card), __cs_Badge = cs.splice(Badge)) => {\n    → cs`{\n      
+return                                    → return 
+<                                         → (\n        <
+div                                       → div
+>{                                        → >\n          
+<                                         → <
+__cs_Card                                 → Card
+                                          →  
+title                                     → title
+={                                        → =
+"totals"                                  → "totals"
+}                                         → 
+/>                                        →  />
+}{                                        → \n          
+<                                         → <
+__cs_Badge                                → Badge
+ />                                       →  />
+}</                                       → \n        </
+div                                       → div
+>                                         → >\n      )
+;                                         → ;
+\n})())                                   → \n    }`

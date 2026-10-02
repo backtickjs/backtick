@@ -1,4 +1,4 @@
-cs.lift(                                  → cs`
+cs.lift((() =>                            → cs`
 (                                         → (
 __cs_flag                                 → flag
 :                                         → : 
@@ -19,16 +19,16 @@ return                                    → return
 "skipped"                                 → "skipped"
 ;                                         → ;
 \n}                                       → \n  }
-)                                         → `
-cs.lift(                                  → cs`
+)())                                      → `
+cs.lift((() =>                            → cs`
 "evaluated"                               → "evaluated"
-)                                         → `
+)())                                      → `
 cs.lift((() => {\n                        → cs`{\n  
 throw                                     → throw 
 "the guarded fragment must never evaluate"→ "the guarded fragment must never evaluate"
 ;                                         → ;
 \n})())                                   → \n}`
-cs.lift(                                  → cs`
+cs.lift((() => (                          → cs`
 {                                         → ({\n      
 taken                                     → taken
 :                                         → : 
@@ -48,4 +48,4 @@ guard(broken)                             → guard(broken)
 false                                     → false
 )                                         → )
  }                                        → ,\n    })
-)                                         → `
+))())                                     → `

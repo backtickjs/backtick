@@ -16,14 +16,14 @@ enum Color {
   Blue = 1,
 }
 
-const colorName: Client<(c: Color) => string> = cs.lift((__cs_c: Color) => {
+const colorName: Client<(c: Color) => string> = cs.lift((() => (__cs_c: Color) => {
     return __cs_c === cs.splice(Color.Blue) ? "blue" : "red";
-});
+})());
 
 async function Swatch() {
   return cs.lift((() => {
     const __cs_held = cs.splice((createSignal))(cs.splice(Color.Red));
-    return <span onclick={cs.lift(() => __cs_held[1](cs.splice(Color.Blue)))}>{cs.lift(cs.splice((colorName))(__cs_held[0]()))}</span>;
+    return <span onclick={() => __cs_held[1](cs.splice(Color.Blue))}>{cs.splice((colorName))(__cs_held[0]())}</span>;
 })());
 }
 

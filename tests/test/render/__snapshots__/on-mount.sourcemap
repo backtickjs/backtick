@@ -1,4 +1,4 @@
-cs.lift(           → cs`
+cs.lift((() =>     → cs`
 () => {\n          → () => {\n        
 const              → const 
 __cs_count         → count
@@ -46,7 +46,7 @@ __cs_count         → count
 return             → return 
 <                  → <
 p                  → p
->{cs.lift(         → >{
+>{                 → >{
 "mounted "         → "mounted "
  +                 →  + 
 __cs_count         → count
@@ -54,13 +54,13 @@ __cs_count         → count
 0                  → 0
 ]                  → ]
 ()                 → ()
-)}</               → }</
+}</                → }</
 p                  → p
 >                  → >
 ;                  → ;
 \n}                → \n      }
-)                  → `
-cs.lift(           → cs`
+)())               → `
+cs.lift((() =>     → cs`
 () => {\n          → () => {\n          
 const              → const 
 __cs_said          → said
@@ -78,7 +78,7 @@ return             → return
 button             → button
                    →  
 onclick            → onclick
-={cs.lift(         → ={
+={                 → ={
 () =>              → () => 
 cs.splice(         →  [-semantic]
 (onMount)          → $onMount
@@ -93,16 +93,16 @@ __cs_said          → said
 "ran"              → "ran"
 )                  → )
 )                  → )
-)}                 → }
->{cs.lift(         → >\n              {
+}                  → }
+>{                 → >\n              {
 __cs_said          → said
 [                  → [
 0                  → 0
 ]                  → ]
 ()                 → ()
-)}</               → }\n            </
+}</                → }\n            </
 button             → button
 >                  → >\n          )
 ;                  → ;
 \n}                → \n        }
-)                  → `
+)())               → `

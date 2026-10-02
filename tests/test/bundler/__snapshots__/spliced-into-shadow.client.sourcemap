@@ -1,31 +1,31 @@
-// 34:7
-($splice0, $splice1) => {  → 34:10 {…
+// 33:14
+($splice0, $splice1) => {  → 33:17 {…
+const                      → 34:9 const 
+total                      → 34:15 total
+ =                         → 34:20  = 
+1                          → 34:23 1
+;                          → 34:24 ;
 const                      → 35:9 const 
-total                      → 35:15 total
+first                      → 35:15 first
  =                         → 35:20  = 
-1                          → 35:23 1
-;                          → 35:24 ;
-const                      → 36:9 const 
-first                      → 36:15 first
- =                         → 36:20  = 
-$splice0(total)            → 36:23 ${keep(cs`total`)};…
-;                          → 36:24 {keep(cs`total`)};…
-{                          → 37:9 {
-const                      → 38:11 const 
-total                      → 38:17 total
- =                         → 38:22  = 
-2                          → 38:25 2
-;                          → 38:26 ;
-return                     → 39:11 return 
-first                      → 39:18 first
- +                         → 39:23  + 
-total                      → 39:26 total
- +                         → 39:31  + 
-$splice1()                 → 39:34 ${again()};…
-;                          → 39:35 {again()};…
-}                          → 40:9 }
-}                          → 41:7 }
+$splice0(total)            → 35:23 ${keep(cs`total`)};…
+;                          → 35:24 {keep(cs`total`)};…
+{                          → 36:9 {
+const                      → 37:11 const 
+total                      → 37:17 total
+ =                         → 37:22  = 
+2                          → 37:25 2
+;                          → 37:26 ;
+return                     → 38:11 return 
+first                      → 38:18 first
+ +                         → 38:23  + 
+total                      → 38:26 total
+ +                         → 38:31  + 
+$splice1()                 → 38:34 ${again()};…
+;                          → 38:35 {again()};…
+}                          → 39:9 }
+}                          → 40:7 }
 
-// 36:30
-($capture0) =>   → 36:33 total`)};…
-$capture0        → 36:33 total`)};…
+// 35:30
+($capture0) =>   → 35:33 total`)};…
+$capture0        → 35:33 total`)};…

@@ -26,12 +26,12 @@ it("splicedComponentTwice", async (t) => {
   await snapshotCase(
     t,
     "splicedComponentTwice",
-    cs.lift(<div>{cs.lift(cs.splice(cs.lift((() => {
+    cs.lift((() => <div>{cs.splice(cs.lift((() => {
     const __cs_Heading = cs.splice((Card));
     return <__cs_Heading title={"first"}/>;
-})())))}{cs.lift(cs.splice(cs.lift((() => {
+})()))}{cs.splice(cs.lift((() => {
     const __cs_Heading = cs.splice((Card));
     return <__cs_Heading title={"second"}/>;
-})())))}</div>),
+})()))}</div>)()),
   );
 });

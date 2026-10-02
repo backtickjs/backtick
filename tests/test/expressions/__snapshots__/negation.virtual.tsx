@@ -11,11 +11,11 @@ it("negation", async (t) => {
   await snapshotCase(
     t,
     "negation",
-    cs.lift((__cs_count: number) => {
+    cs.lift((() => (__cs_count: number) => {
     const __cs_floor = -1;
     const __cs_step = -__cs_count;
     return __cs_floor + __cs_step + -2;
-}),
+})()),
   );
 });
 

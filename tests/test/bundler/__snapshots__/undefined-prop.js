@@ -31,10 +31,10 @@ describe("an undefined prop", () => {
         _jsx(Pill, {
           label: "focused",
           ref: cs.create(
-            "2un0jwmh4hogh:41:41",
+            "30g9hm5l8s924:41:35",
             { params: [{ kind: "splice", value: onMount, bindings: [] }] },
             "($splice0) => (el) => $splice0()(() => el.focus())",
-            '{"version":3,"file":"undefined-prop.test.jsx","sourceRoot":"","sources":["bundler/undefined-prop.test.tsx"],"names":[],"mappings":"AAwC4C,cAAA,CAAC,EAAE,EAAE,EAAE,CAAC,UAAQ,CAAC,GAAG,EAAE,CAAC,EAAE,CAAC,KAAK,EAAE,CAAC"}',
+            '{"version":3,"file":"undefined-prop.test.jsx","sourceRoot":"","sources":["bundler/undefined-prop.test.tsx"],"names":[],"mappings":"AAwCsC,cAAA,CAAC,EAAE,EAAE,EAAE,CAAC,UAAQ,CAAC,GAAG,EAAE,CAAC,EAAE,CAAC,KAAK,EAAE,CAAC"}',
           ),
         }),
       ),

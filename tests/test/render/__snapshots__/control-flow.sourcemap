@@ -1,9 +1,9 @@
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 cs.splice(              →  [-semantic]
 (rows)                  → $rows
 )                       →  [-semantic]
-)                       → `
-cs.lift(                → cs`
+)())                    → `
+cs.lift((() =>          → cs`
 (                       → (
 __cs_row                → row
 :                       → : 
@@ -16,27 +16,27 @@ number                  → number
 ) =>                    → ) => 
 <                       → (\n        <
 li                      → li
->{cs.lift(              → >{
+>{                      → >{
 __cs_index              → index
  +                      →  + 
 ": "                    → ": "
  +                      →  + 
 __cs_row                → row
 ()                      → ()
-)}</                    → }</
+}</                     → }</
 li                      → li
 >                       → >\n      )
-)                       → `
-cs.lift(                → cs`
+)())                    → `
+cs.lift((() =>          → cs`
 1                       → 1
  >                      →  > 
 2                       → 2
-)                       → `
-cs.lift(                → cs`
+)())                    → `
+cs.lift((() =>          → cs`
 2                       → 2
  >                      →  > 
 1                       → 1
-)                       → `
+)())                    → `
 cs.lift((() => {\n      → cs`{\n      
 throw                   → throw 
 "drawn wrong"           → "drawn wrong"

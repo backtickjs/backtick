@@ -15,17 +15,17 @@ return                     → return
 button                     → button
                            → \n        
 id                         → id
-={cs.lift(                 → =
+={                         → =
 "row"                      → "row"
-)}                         → 
+}                          → 
                            → \n        
 style                      → style
-={cs.lift(                 → =
+={                         → =
 "display: flex; gap: 8px"  → "display: flex; gap: 8px"
-)}                         → 
+}                          → 
                            → \n        
 onclick                    → onclick
-={cs.lift(                 → ={
+={                         → ={
 () =>                      → () => 
 __cs_count                 → count
 [                          → [
@@ -40,16 +40,16 @@ __cs_count                 → count
  +                         →  + 
 1                          → 1
 )                          → )
-)}                         → }
->{cs.lift(                 → \n      >\n        
+}                          → }
+>{                         → \n      >\n        
 <                          → <
 span                       → span
                            →  
 style                      → style
-={cs.lift(                 → =
+={                         → =
 "font-weight: 700"         → "font-weight: 700"
-)}                         → 
->{cs.lift(                 → >{
+}                          → 
+>{                         → >{
 __cs_count                 → count
 [                          → [
 0                          → 0
@@ -61,13 +61,13 @@ __cs_count                 → count
 "\\u2611"                  → "☑"
  :                         →  : 
 "\\u2610"                  → "☐"
-)}</                       → }</
+}</                        → }</
 span                       → span
 >                          → >
-)}{cs.lift(                → \n        
+}{                         → \n        
 <                          → <
 span                       → span
->{cs.lift(                 → >{
+>{                         → >{
 "pressed "                 → "pressed "
  +                         →  + 
 __cs_count                 → count
@@ -77,10 +77,10 @@ __cs_count                 → count
 ()                         → ()
  +                         →  + 
 " times"                   → " times"
-)}</                       → }</
+}</                        → }</
 span                       → span
 >                          → >
-)}</                       → \n      </
+}</                        → \n      </
 button                     → button
 >                          → >\n    )
 ;                          → ;

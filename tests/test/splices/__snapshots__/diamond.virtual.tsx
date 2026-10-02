@@ -7,7 +7,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // shares each script rather than re-expanding it per path, so the payload has
 // one entry per level (linear) — not one per path, which would blow up as
 // 2^depth.
-const d0 = cs.lift(1);
+const d0 = cs.lift((() => 1)());
 
 const d1 = cs.lift((() => {
     return cs.splice((d0)) + cs.splice((d0));

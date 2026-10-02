@@ -14,14 +14,14 @@ import { render } from "@solidjs/testing-library";
 // `title` or an `a`, whose names both languages use, is whichever one encloses
 // it.
 async function Ring() {
-  return cs.lift(<circle cx={cs.lift("5")} cy={cs.lift("5")} r={cs.lift("4")} fill={cs.lift("none")} stroke={cs.lift("currentColor")}/>);
+  return cs.lift((() => <circle cx={"5"} cy={"5"} r={"4"} fill={"none"} stroke={"currentColor"}/>)());
 }
 
-const svgNamespace = cs.lift((() => {
+const svgNamespace = cs.lift(((__cs_Ring = cs.splice(Ring), __cs_For = cs.splice(For)) => {
     const __cs_Dot = (__cs_props: {
         x: number;
-    }) => <circle cx={cs.lift(__cs_props.x)} cy={cs.lift("5")} r={cs.lift("2")}>{cs.lift(<title>{cs.lift("dot " + __cs_props.x)}</title>)}</circle>;
-    return <div>{cs.lift(<a href={cs.lift("/shapes")}>{cs.lift("shapes")}</a>)}{cs.lift(<svg viewBox={cs.lift("0 0 30 10")} width={cs.lift("120")}>{cs.lift(<Ring />)}{cs.lift(<For each={cs.lift([10, 20])}>{cs.lift((__cs_x: number) => <__cs_Dot x={__cs_x}/>)}</For>)}{cs.lift(<foreignObject x={cs.lift("0")} y={cs.lift("0")} width={cs.lift("10")} height={cs.lift("10")}>{cs.lift(<p>{cs.lift("html again")}</p>)}</foreignObject>)}</svg>)}</div>;
+    }) => <circle cx={__cs_props.x} cy={"5"} r={"2"}>{<title>{"dot " + __cs_props.x}</title>}</circle>;
+    return <div>{<a href={"/shapes"}>{"shapes"}</a>}{<svg viewBox={"0 0 30 10"} width={"120"}>{<__cs_Ring />}{<__cs_For each={[10, 20]}>{(__cs_x: number) => <__cs_Dot x={__cs_x}/>}</__cs_For>}{<foreignObject x={"0"} y={"0"} width={"10"} height={"10"}>{<p>{"html again"}</p>}</foreignObject>}</svg>}</div>;
 })());
 
 it("svgNamespace", async (t) => {

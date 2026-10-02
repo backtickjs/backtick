@@ -24,8 +24,8 @@ it("scriptComponent", async (t) => {
   await snapshotCase(
     t,
     "scriptComponent",
-    cs.lift((() => {
-    return <div>{cs.lift(<Card title={cs.lift("totals")}/>)}{cs.lift(<Badge />)}</div>;
+    cs.lift(((__cs_Card = cs.splice(Card), __cs_Badge = cs.splice(Badge)) => {
+    return <div>{<__cs_Card title={"totals"}/>}{<__cs_Badge />}</div>;
 })()),
   );
 });

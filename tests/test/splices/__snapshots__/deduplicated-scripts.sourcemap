@@ -1,18 +1,18 @@
-cs.lift(    → cs`
-7           → 7
-)           → `
-cs.lift(    → cs`
-{           → ({ 
-a           → a
-:           → : 
-cs.splice(  →  [-semantic]
-(leaf)      → $leaf
-)           →  [-semantic]
-,           → , 
-b           → b
-:           → : 
-cs.splice(  →  [-semantic]
-(leaf)      → $leaf
-)           →  [-semantic]
- }          →  })
-)           → `
+cs.lift((() =>    → cs`
+7                 → 7
+)())              → `
+cs.lift((() => (  → cs`
+{                 → ({ 
+a                 → a
+:                 → : 
+cs.splice(        →  [-semantic]
+(leaf)            → $leaf
+)                 →  [-semantic]
+,                 → , 
+b                 → b
+:                 → : 
+cs.splice(        →  [-semantic]
+(leaf)            → $leaf
+)                 →  [-semantic]
+ }                →  })
+))())             → `

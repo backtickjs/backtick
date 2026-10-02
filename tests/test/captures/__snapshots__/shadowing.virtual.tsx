@@ -18,7 +18,7 @@ it("shadowing", async (t) => {
     "shadowing",
     cs.lift((() => {
     const __cs_total = 1;
-    return cs.splice(addOwnTotal(cs.lift(__cs_total), 100));
+    return cs.splice(addOwnTotal(cs.lift((() => __cs_total)()), 100));
 })()),
   );
 });

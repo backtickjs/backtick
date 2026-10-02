@@ -1,11 +1,11 @@
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 cs.splice(              →  [-semantic]
 (n)                     → $n
 )                       →  [-semantic]
  +                      →  + 
 1                       → 1
-)                       → `
-cs.lift(                → cs`
+)())                    → `
+cs.lift((() =>          → cs`
 cs.splice(              →  [-semantic]
 (n)                     → $n
 )                       →  [-semantic]
@@ -13,7 +13,7 @@ cs.splice(              →  [-semantic]
 cs.splice(              →  [-semantic]
 (m)                     → $m
 )                       →  [-semantic]
-)                       → `
+)())                    → `
 cs.lift((() => {\n      → cs`{\n      
 const                   → const 
 __cs_none               → none

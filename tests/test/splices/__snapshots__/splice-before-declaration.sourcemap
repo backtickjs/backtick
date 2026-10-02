@@ -27,20 +27,20 @@ __cs_spliced            → spliced
 __cs_after              → after
 ;                       → ;
 \n})())                 → \n  }`
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 cs.splice(              → ${ [-semantic]
 sandwich(               → sandwich(
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 10                      → 10
-)                       → `
+)())                    → `
 )                       → )
 )                       → } [-semantic]
  +                      →  + 
 cs.splice(              → ${ [-semantic]
 sandwich(               → sandwich(
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 20                      → 20
-)                       → `
+)())                    → `
 )                       → )
 )                       → } [-semantic]
-)                       → `
+)())                    → `

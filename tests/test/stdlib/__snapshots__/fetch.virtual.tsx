@@ -12,7 +12,7 @@ it("fetchRequests", async (t) => {
   await snapshotCase(
     t,
     "fetchRequests",
-    cs.lift(() => {
+    cs.lift((() => () => {
     const __cs_held = cs.splice((createSignal))("waiting");
     cs.globalThis.window.fetch("/cases/built-ins/Math/trunc/Math.trunc_Success", { signal: cs.globalThis.window.AbortSignal.timeout(3000) }).then((__cs_response: Response) => {
         if (__cs_response.status !== 200) {
@@ -30,6 +30,6 @@ it("fetchRequests", async (t) => {
         __cs_held[1](cs.globalThis.String(__cs_error));
     });
     return __cs_held[0]();
-}),
+})()),
   );
 });

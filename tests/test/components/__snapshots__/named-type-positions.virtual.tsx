@@ -16,7 +16,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 type Row = { id: number; label: string };
 
 async function Rows() {
-  return cs.lift((() => {
+  return cs.lift(((__cs_For = cs.splice(For)) => {
     const __cs_rows = cs.splice((createSignal))<Row[]>([]);
     const __cs_add = (__cs_row: Row) => {
         __cs_rows[1]([__cs_row]);
@@ -24,7 +24,7 @@ async function Rows() {
     const __cs_label = (__cs_row: Row) => {
         return __cs_row.label;
     };
-    return <div>{cs.lift(<span onclick={cs.lift(() => __cs_add({ id: 1, label: "one" }))}>add</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift(__cs_rows[0]())}>{cs.lift((__cs_row: Row) => <span>{cs.lift(__cs_label(__cs_row))}</span>)}</For>)}</div>)}</div>;
+    return <div>{<span onclick={() => __cs_add({ id: 1, label: "one" })}>add</span>}{<div>{<__cs_For each={__cs_rows[0]()}>{(__cs_row: Row) => <span>{__cs_label(__cs_row)}</span>}</__cs_For>}</div>}</div>;
 })());
 }
 

@@ -18,10 +18,10 @@ title                   → title
 />                      →  />
 ;                       → ;
 \n})())                 → \n    }`
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 <                       → <
 div                     → div
->{cs.lift(              → >\n      {\n        
+>{                      → >\n      {\n        
 cs.splice(              → ${ [-semantic]
 cs.lift((() => {\n      → cs`{\n          
 const                   → const 
@@ -44,7 +44,7 @@ title                   → title
 ;                       → ;
 \n})())                 → \n        }`
 )                       → } [-semantic]
-)}{cs.lift(             → \n      }\n      {\n        
+}{                      → \n      }\n      {\n        
 cs.splice(              → ${ [-semantic]
 cs.lift((() => {\n      → cs`{\n          
 const                   → const 
@@ -67,7 +67,7 @@ title                   → title
 ;                       → ;
 \n})())                 → \n        }`
 )                       → } [-semantic]
-)}</                    → \n      }\n    </
+}</                     → \n      }\n    </
 div                     → div
 >                       → >
-)                       → `
+)())                    → `

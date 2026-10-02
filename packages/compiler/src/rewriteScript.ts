@@ -7,11 +7,12 @@ import {
   paramName,
   scriptEdits,
 } from "./emitScript.js";
-import { call, iife } from "./nodeFactory.js";
+import { call, iife, parameter } from "./nodeFactory.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution, ResolvedParam } from "./resolveBindings.js";
 import { type RewriteState, rewriteNode } from "./rewriteNode.js";
 import type { SourceRange } from "./SourceRange.js";
+import { mangle } from "./unmangle.js";
 
 export interface RewrittenScript {
   virtual: ts.Node;
@@ -127,11 +128,19 @@ export function rewriteScript(
     ),
   });
 
-  const virtual = call(ts, "cs", "lift", [
-    ts.isBlock(rewritten.virtual)
-      ? iife(ts, rewritten.virtual)
-      : (rewritten.virtual as ts.Expression),
-  ]);
+  // The host tags it names, each declared spliced: a parameter defaulted to
+  // `cs.splice(Day)`, so the script's JSX reads it as the client sees it.
+  const hostTags = params
+    .filter((param) => param.kind === "tag")
+    .map(({ key }) =>
+      parameter(
+        ts,
+        mangle(key),
+        call(ts, "cs", "splice", [ts.factory.createIdentifier(key)]),
+      ),
+    );
+  const body = rewritten.virtual as ts.Block | ts.Expression;
+  const virtual = call(ts, "cs", "lift", [iife(ts, hostTags, body)]);
 
   sourceMaps.set(virtual, scriptRange);
 

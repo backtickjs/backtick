@@ -15,7 +15,7 @@ return                      → return
 span                        → span
                             → \n        
 style                       → style
-={cs.lift(                  → ={
+={                          → ={
 "font-size: "               → "font-size: "
  +                          →  + 
 __cs_size                   → size
@@ -25,10 +25,10 @@ __cs_size                   → size
 ()                          → ()
  +                          →  + 
 "px"                        → "px"
-)}                          → }
+}                           → }
                             → \n        
 onclick                     → onclick
-={cs.lift(                  → ={
+={                          → ={
 () => {\n                   → () => {\n          
 __cs_size                   → size
 [                           → [
@@ -45,7 +45,7 @@ __cs_size                   → size
 )                           → )
 ;                           → ;
 \n    }                     → \n        }
-)}                          → }
+}                           → }
 >\n        press\n      </  → \n      >\n        press\n      </
 span                        → span
 >                           → >\n    )

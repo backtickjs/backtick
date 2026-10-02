@@ -17,8 +17,8 @@ function labelled(label: Client<string>) {
   return cs.lift((() => {
     const __cs_Card = (__cs_props: {
         n: number;
-    }) => <i>{cs.lift(cs.splice((label)) + __cs_props.n)}</i>;
-    return <p>{cs.lift(cs.splice(cs.lift(<__cs_Card n={1}/>)))}</p>;
+    }) => <i>{cs.splice((label)) + __cs_props.n}</i>;
+    return <p>{cs.splice(cs.lift((() => <__cs_Card n={1}/>)()))}</p>;
 })());
 }
 
@@ -26,7 +26,7 @@ it("scriptBoundTagCaptureShadow", async (t) => {
   await snapshotCase(
     t,
     "scriptBoundTagCaptureShadow",
-    cs.lift(<div>{cs.lift(<Card title={cs.lift("host")}/>)}{cs.lift(cs.splice(labelled(cs.lift("a"))))}{cs.lift(cs.splice(labelled(cs.lift("b"))))}</div>),
+    cs.lift(((__cs_Card = cs.splice(Card)) => <div>{<__cs_Card title={"host"}/>}{cs.splice(labelled(cs.lift((() => "a")())))}{cs.splice(labelled(cs.lift((() => "b")())))}</div>)()),
   );
 });
 
@@ -37,13 +37,13 @@ it("scriptBoundTagScope", async (t) => {
   await snapshotCase(
     t,
     "scriptBoundTagScope",
-    cs.lift((() => {
+    cs.lift(((__cs_Card = cs.splice(Card)) => {
     const __cs_twice = (__cs_Card: (props: {
         n: number;
-    }) => JSX.Element) => <div>{cs.lift(<__cs_Card n={1}/>)}{cs.lift(<__cs_Card n={2}/>)}</div>;
-    return <section>{cs.lift(<Card title={cs.lift("host")}/>)}{cs.lift(__cs_twice((__cs_props: {
+    }) => JSX.Element) => <div>{<__cs_Card n={1}/>}{<__cs_Card n={2}/>}</div>;
+    return <section>{<__cs_Card title={"host"}/>}{__cs_twice((__cs_props: {
         n: number;
-    }) => <i>{cs.lift("row " + __cs_props.n)}</i>))}</section>;
+    }) => <i>{"row " + __cs_props.n}</i>)}</section>;
 })()),
   );
 });

@@ -16,4 +16,4 @@ export const assigned = cs.lift((() => {
     cs.globalThis.count = 1;
 })());
 
-export const global = cs.lift(cs.globalThis.window.location.href);
+export const global = cs.lift((() => cs.globalThis.window.location.href)());

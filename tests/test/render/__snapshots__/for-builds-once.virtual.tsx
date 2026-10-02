@@ -19,23 +19,23 @@ import { evaluate } from "../evaluate.ts";
 const answerItems = ["one", "two"];
 
 async function WaitingList({ more }: { more: Prop<() => boolean> }) {
-  return cs.lift((() => {
+  return cs.lift(((__cs_For = cs.splice(For)) => {
     const __cs_items = cs.splice((createSignal))<string[]>([]);
     const __cs_started = cs.globalThis.window.setTimeout(() => {
         if (cs.splice((more))()) {
             __cs_items[1](cs.splice((answerItems)));
         }
     }, 0);
-    return <For each={cs.lift(__cs_items[0]())}>{cs.lift((__cs_item: string) => <em>{cs.lift(__cs_item)}</em>)}</For>;
+    return <__cs_For each={__cs_items[0]()}>{(__cs_item: string) => <em>{__cs_item}</em>}</__cs_For>;
 })());
 }
 
-const forBuildsOnce = cs.lift((() => {
+const forBuildsOnce = cs.lift(((__cs_WaitingList = cs.splice(WaitingList)) => {
     const __cs_asked = cs.splice((createSignal))(0);
-    return <div>{cs.lift(<span>{cs.lift("asked " + __cs_asked[0]())}</span>)}{cs.lift(<WaitingList more={cs.lift(() => {
+    return <div>{<span>{"asked " + __cs_asked[0]()}</span>}{<__cs_WaitingList more={() => {
         __cs_asked[1](__cs_asked[0]() + 1);
         return __cs_asked[0]() < 5;
-    })}/>)}</div>;
+    }}/>}</div>;
 })());
 
 it("forBuildsOnce", async (t) => {

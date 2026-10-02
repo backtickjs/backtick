@@ -1,4 +1,4 @@
-// 31:10
+// 32:10
 ($splice0, $tag1) => {
     const ids = $splice0()([1, 2, 3]);
     const clear = () => {
@@ -10,7 +10,7 @@
       </>);
 }
 
-// 90:34
+// 91:34
 ($splice0, $splice1, $splice2, $splice3, $splice4) => $splice0()((dispose) => {
     const parent = document.getElementById($splice1());
     $splice2()(parent, $splice3(), parent.querySelector($splice4()));

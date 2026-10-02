@@ -1,4 +1,4 @@
-cs.lift(                                  → cs`
+cs.lift((() =>                            → cs`
 () => {\n                                 → () => {\n  
 let                                       → let 
 __cs_n                                    → n
@@ -11,7 +11,7 @@ __cs_n                                    → n
 1                                         → 1
 ;                                         → ;
 \n}                                       → \n}
-)                                         → `
+)())                                      → `
 cs.lift((() => {\n                        → cs`{\n  
 const                                     → const 
 __cs_x                                    → x
@@ -36,7 +36,7 @@ cs.splice(                                →  [-semantic]
 ()                                        → ()
 ;                                         → ;
 \n})())                                   → \n}`
-cs.lift(                                  → cs`
+cs.lift((() =>                            → cs`
 (                                         → (
 __cs_text                                 → text
 :                                         → : 
@@ -46,7 +46,7 @@ return                                    → return
 __cs_text                                 → text
 ;                                         → ;
 \n}                                       → \n}
-)                                         → `
+)())                                      → `
 cs.lift((() => {\n    // @ts-expect-error: Argument of type 'boolean' is not assignable to parameter of type 'string'.\n    → cs`{\n  // @ts-expect-error: Argument of type 'boolean' is not assignable to parameter of type 'string'.\n  
 const                                     → const 
 __cs_x                                    → x

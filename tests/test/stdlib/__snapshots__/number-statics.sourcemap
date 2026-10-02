@@ -108,7 +108,7 @@ isFinite                                  → isFinite
 return                                    → return 
 <                                         → (\n      <
 span                                      → span
->{cs.lift(                                → >\n        {
+>{                                        → >\n        {
 __cs_whole                                → whole
  +                                        →  +\n          
 " "                                       → " "
@@ -130,7 +130,7 @@ __cs_largest                              → largest
 " "                                       → " "
  +                                        →  +\n          
 __cs_safe                                 → safe
-)}</                                      → }\n      </
+}</                                       → }\n      </
 span                                      → span
 >                                         → >\n    )
 ;                                         → ;

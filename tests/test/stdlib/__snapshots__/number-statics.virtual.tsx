@@ -14,7 +14,7 @@ async function Checked() {
     const __cs_fractional = cs.globalThis.Number.isInteger(2.5);
     // Unconverted, so a string that reads as a number is still not one.
     const __cs_written = cs.globalThis.Number.isFinite("2");
-    return <span>{cs.lift(__cs_whole + " " + __cs_fractional + " " + __cs_written + " " + __cs_positive + " " + __cs_largest + " " + __cs_safe)}</span>;
+    return <span>{__cs_whole + " " + __cs_fractional + " " + __cs_written + " " + __cs_positive + " " + __cs_largest + " " + __cs_safe}</span>;
 })());
 }
 

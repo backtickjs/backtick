@@ -10,7 +10,7 @@ const make = (f: Client<(n: number) => Signal<number>>) =>
     return cs.splice((f))(1)[0]();
 })());
 
-const wrapped = cs.lift((__cs_n: number) => cs.splice((createSignal))(__cs_n + 10));
+const wrapped = cs.lift((() => (__cs_n: number) => cs.splice((createSignal))(__cs_n + 10))());
 
 it("builtinHoleSharing", async (t) => {
   await snapshotCase(

@@ -1,10 +1,10 @@
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 cs.splice(              →  [-semantic]
 (lhs)                   → $lhs
 )                       →  [-semantic]
  +                      →  + 
 2                       → 2
-)                       → `
+)())                    → `
 cs.lift((() => {\n      → cs`{\n      
 const                   → const 
 __cs_foo$               → foo$
@@ -15,9 +15,9 @@ __cs_foo$               → foo$
 return                  → return 
 cs.splice(              → ${ [-semantic]
 add(                    → add(
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 __cs_foo$               → foo$
-)                       → `
+)())                    → `
 )                       → )
 )                       → } [-semantic]
 ;                       → ;

@@ -8,7 +8,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // the empty string rather than refusing the way an empty `Math.min` does.
 async function Written() {
   return cs.lift((() => {
-    return <span>{cs.lift(cs.globalThis.String.fromCodePoint(72, 105) + cs.globalThis.String.fromCodePoint())}</span>;
+    return <span>{cs.globalThis.String.fromCodePoint(72, 105) + cs.globalThis.String.fromCodePoint()}</span>;
 })());
 }
 

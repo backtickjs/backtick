@@ -2,7 +2,7 @@ cs.lift((() => {\n      → cs`{\n
 return                  → return 
 <                       → (\n      <
 span                    → span
->{cs.lift(              → >\n        {
+>{                      → >\n        {
 cs.globalThis.          → 
 String                  → String
 .                       → .
@@ -22,7 +22,7 @@ fromCharCode            → fromCharCode
 ,                       → , 
 56832                   → 0xde00
 )                       → )
-)}</                    → }\n      </
+}</                     → }\n      </
 span                    → span
 >                       → >\n    )
 ;                       → ;

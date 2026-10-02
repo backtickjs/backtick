@@ -1,102 +1,102 @@
-cs.lift((() => {\n      → cs`{\n    
-const                   → const 
-__cs_selected           → selected
- =                      →  = 
-cs.splice(              →  [-semantic]
-(createSignal)          → $createSignal
-)                       →  [-semantic]
-(                       → (
-0                       → 0
-)                       → )
-;                       → ;
-\n                      → \n    
-const                   → const 
-__cs_isSelected         → isSelected
- =                      →  = 
-cs.splice(              →  [-semantic]
-(createSelector)        → $createSelector
-)                       →  [-semantic]
-(                       → (
-__cs_selected           → selected
-[                       → [
-0                       → 0
-]                       → ]
-)                       → )
-;                       → ;
-\n                      → \n    
-return                  → return 
-<                       → (\n      <
-div                     → div
->{cs.lift(              → >\n        
-<                       → <
-span                    → span
-                        →  
-onclick                 → onclick
-={cs.lift(              → ={
-() =>                   → () => 
-__cs_selected           → selected
-[                       → [
-1                       → 1
-]                       → ]
-(                       → (
-1                       → 1
-)                       → )
-)}                      → }
->select</               → >select</
-span                    → span
->                       → >
-)}{cs.lift(             → \n        
-<                       → <
-div                     → div
->{cs.lift(              → >\n          
-<                       → <
-For                     → For
-                        →  
-each                    → each
-={cs.lift(              → ={
-[                       → [
-0                       → 0
-,                       → , 
-1                       → 1
-,                       → , 
-2                       → 2
-]                       → ]
-)}                      → }
->{cs.lift(              → >\n            {
-(                       → (
-__cs_id                 → id
-:                       → : 
-number                  → number
-) =>                    → ) => 
-<                       → (\n              <
-a                       → a
-                        →  
-href                    → href
-={cs.lift(              → ={
-__cs_isSelected         → isSelected
-(                       → (
-__cs_id                 → id
-)                       → )
- ?                      →  ? 
-"#open"                 → "#open"
- :                      →  : 
-"#closed"               → "#closed"
-)}                      → }
->{cs.lift(              → >{
-"row "                  → "row "
- +                      →  + 
-__cs_id                 → id
-)}</                    → }</
-a                       → a
->                       → >\n            )
-)}</                    → }\n          </
-For                     → For
->                       → >
-)}</                    → \n        </
-div                     → div
->                       → >
-)}</                    → \n      </
-div                     → div
->                       → >\n    )
-;                       → ;
-\n})())                 → \n  }`
+cs.lift(((__cs_For = cs.splice(For)) => {\n    → cs`{\n    
+const                                     → const 
+__cs_selected                             → selected
+ =                                        →  = 
+cs.splice(                                →  [-semantic]
+(createSignal)                            → $createSignal
+)                                         →  [-semantic]
+(                                         → (
+0                                         → 0
+)                                         → )
+;                                         → ;
+\n                                        → \n    
+const                                     → const 
+__cs_isSelected                           → isSelected
+ =                                        →  = 
+cs.splice(                                →  [-semantic]
+(createSelector)                          → $createSelector
+)                                         →  [-semantic]
+(                                         → (
+__cs_selected                             → selected
+[                                         → [
+0                                         → 0
+]                                         → ]
+)                                         → )
+;                                         → ;
+\n                                        → \n    
+return                                    → return 
+<                                         → (\n      <
+div                                       → div
+>{                                        → >\n        
+<                                         → <
+span                                      → span
+                                          →  
+onclick                                   → onclick
+={                                        → ={
+() =>                                     → () => 
+__cs_selected                             → selected
+[                                         → [
+1                                         → 1
+]                                         → ]
+(                                         → (
+1                                         → 1
+)                                         → )
+}                                         → }
+>select</                                 → >select</
+span                                      → span
+>                                         → >
+}{                                        → \n        
+<                                         → <
+div                                       → div
+>{                                        → >\n          
+<                                         → <
+__cs_For                                  → For
+                                          →  
+each                                      → each
+={                                        → ={
+[                                         → [
+0                                         → 0
+,                                         → , 
+1                                         → 1
+,                                         → , 
+2                                         → 2
+]                                         → ]
+}                                         → }
+>{                                        → >\n            {
+(                                         → (
+__cs_id                                   → id
+:                                         → : 
+number                                    → number
+) =>                                      → ) => 
+<                                         → (\n              <
+a                                         → a
+                                          →  
+href                                      → href
+={                                        → ={
+__cs_isSelected                           → isSelected
+(                                         → (
+__cs_id                                   → id
+)                                         → )
+ ?                                        →  ? 
+"#open"                                   → "#open"
+ :                                        →  : 
+"#closed"                                 → "#closed"
+}                                         → }
+>{                                        → >{
+"row "                                    → "row "
+ +                                        →  + 
+__cs_id                                   → id
+}</                                       → }</
+a                                         → a
+>                                         → >\n            )
+}</                                       → }\n          </
+__cs_For                                  → For
+>                                         → >
+}</                                       → \n        </
+div                                       → div
+>                                         → >
+}</                                       → \n      </
+div                                       → div
+>                                         → >\n    )
+;                                         → ;
+\n})())                                   → \n  }`

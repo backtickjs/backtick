@@ -22,9 +22,9 @@ __cs_middle             → middle
  +                      →  + 
 cs.splice(              → ${ [-semantic]
 same(                   → same(
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 __cs_outer              → outer
-)                       → `
+)())                    → `
 )                       → )
 )                       → } [-semantic]
 ;                       → ;
@@ -33,27 +33,27 @@ __cs_outer              → outer
 )                       → } [-semantic]
 ;                       → ;
 \n})())                 → \n  }`
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 cs.splice(              →  [-semantic]
 (start)                 → $start
 )                       →  [-semantic]
  +                      →  + 
 1                       → 1
-)                       → `
-cs.lift(                → cs`
+)())                    → `
+cs.lift((() =>          → cs`
 cs.splice(              → ${ [-semantic]
 wrap(                   → wrap(
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 1                       → 1
-)                       → `
+)())                    → `
 )                       → )
 )                       → } [-semantic]
  +                      →  + 
 cs.splice(              → ${ [-semantic]
 wrap(                   → wrap(
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 2                       → 2
-)                       → `
+)())                    → `
 )                       → )
 )                       → } [-semantic]
-)                       → `
+)())                    → `

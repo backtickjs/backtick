@@ -30,10 +30,9 @@ const again = (): Client<number> => {
 it("refuses a capture spliced where it is shadowed", async () => {
   await assert.rejects(
     bundler.build({
-      input:
-      cs.lift((() => {
+      input: cs.lift((() => {
     const __cs_total = 1;
-    const __cs_first = cs.splice(keep(cs.lift(__cs_total)));
+    const __cs_first = cs.splice(keep(cs.lift((() => __cs_total)())));
     {
         const __cs_total = 2;
         return __cs_first + __cs_total + cs.splice(again());

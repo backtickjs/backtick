@@ -12,7 +12,7 @@ cs.splice(              →  [-semantic]
 ()                      → ()
 ;                       → ;
 \n})())                 → \n  }`
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 (                       → (
 __cs_n                  → n
 :                       → : 
@@ -26,7 +26,7 @@ __cs_n                  → n
  +                      →  + 
 10                      → 10
 )                       → )
-)                       → `
+)())                    → `
 cs.lift((() => {\n      → cs`{\n      
 return                  → return 
 cs.splice(              → ${ [-semantic]

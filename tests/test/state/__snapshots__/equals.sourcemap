@@ -1,4 +1,4 @@
-cs.lift(                                  → cs`
+cs.lift((() =>                            → cs`
 () => {\n                                 → () => {\n          
 const                                     → const 
 __cs_n                                    → n
@@ -90,12 +90,12 @@ isBig                                     → isBig
 return                                    → return 
 <                                         → (\n            <
 div                                       → div
->{cs.lift(                                → >\n              
+>{                                        → >\n              
 <                                         → <
 button                                    → button
                                           →  
 onclick                                   → onclick
-={cs.lift(                                → ={
+={                                        → ={
 () =>                                     → () => 
 __cs_n                                    → n
 [                                         → [
@@ -110,26 +110,26 @@ __cs_n                                    → n
  +                                        →  + 
 1                                         → 1
 )                                         → )
-)}                                        → }
+}                                         → }
 >add</                                    → >add</
 button                                    → button
 >                                         → >
-)}{cs.lift(                               → \n              
+}{                                        → \n              
 <                                         → <
 p                                         → p
->{cs.lift(                                → >{
+>{                                        → >{
 __cs_label                                → label
 ()                                        → ()
-)}</                                      → }</
+}</                                       → }</
 p                                         → p
 >                                         → >
-)}</                                      → \n            </
+}</                                       → \n            </
 div                                       → div
 >                                         → >\n          )
 ;                                         → ;
 \n}                                       → \n        }
-)                                         → `
-cs.lift(                                  → cs`
+)())                                      → `
+cs.lift((() =>                            → cs`
 () => {\n                                 → () => {\n          
 const                                     → const 
 __cs_point                                → point
@@ -193,12 +193,12 @@ x                                         → x
 return                                    → return 
 <                                         → (\n            <
 div                                       → div
->{cs.lift(                                → >\n              
+>{                                        → >\n              
 <                                         → <
 button                                    → button
                                           →  
 onclick                                   → onclick
-={cs.lift(                                → ={
+={                                        → ={
 () =>                                     → () => 
 __cs_point                                → point
 [                                         → [
@@ -217,26 +217,26 @@ __cs_point                                → point
 x                                         → x
  }                                        →  }
 )                                         → )
-)}                                        → }
+}                                         → }
 >\n                same\n              </ → >\n                same\n              </
 button                                    → button
 >                                         → >
-)}{cs.lift(                               → \n              
+}{                                        → \n              
 <                                         → <
 p                                         → p
->{cs.lift(                                → >{
+>{                                        → >{
 __cs_label                                → label
 ()                                        → ()
-)}</                                      → }</
+}</                                       → }</
 p                                         → p
 >                                         → >
-)}</                                      → \n            </
+}</                                       → \n            </
 div                                       → div
 >                                         → >\n          )
 ;                                         → ;
 \n}                                       → \n        }
-)                                         → `
-cs.lift(                                  → cs`
+)())                                      → `
+cs.lift((() =>                            → cs`
 () => {\n                                 → () => {\n          
 const                                     → const 
 __cs_n                                    → n
@@ -283,7 +283,7 @@ return                                    → return
 button                                    → button
                                           →  
 onclick                                   → onclick
-={cs.lift(                                → ={
+={                                        → ={
 () =>                                     → () => 
 __cs_n                                    → n
 [                                         → [
@@ -292,8 +292,8 @@ __cs_n                                    → n
 (                                         → (
 2                                         → 2
 )                                         → )
-)}                                        → }
->{cs.lift(                                → >{
+}                                         → }
+>{                                        → >{
 "n "                                      → "n "
  +                                        →  + 
 __cs_n                                    → n
@@ -301,13 +301,13 @@ __cs_n                                    → n
 0                                         → 0
 ]                                         → ]
 ()                                        → ()
-)}</                                      → }</
+}</                                       → }</
 button                                    → button
 >                                         → >
 ;                                         → ;
 \n}                                       → \n        }
-)                                         → `
-cs.lift(                                  → cs`
+)())                                      → `
+cs.lift((() =>                            → cs`
 () => {\n                                 → () => {\n          
 const                                     → const 
 __cs_n                                    → n
@@ -348,12 +348,12 @@ __cs_n                                    → n
 return                                    → return 
 <                                         → (\n            <
 div                                       → div
->{cs.lift(                                → >\n              
+>{                                        → >\n              
 <                                         → <
 button                                    → button
                                           →  
 onclick                                   → onclick
-={cs.lift(                                → ={
+={                                        → ={
 () =>                                     → () => 
 __cs_n                                    → n
 [                                         → [
@@ -362,26 +362,26 @@ __cs_n                                    → n
 (                                         → (
 1                                         → 1
 )                                         → )
-)}                                        → }
+}                                         → }
 >same</                                   → >same</
 button                                    → button
 >                                         → >
-)}{cs.lift(                               → \n              
+}{                                        → \n              
 <                                         → <
 p                                         → p
->{cs.lift(                                → >{
+>{                                        → >{
 __cs_label                                → label
 ()                                        → ()
-)}</                                      → }</
+}</                                       → }</
 p                                         → p
 >                                         → >
-)}</                                      → \n            </
+}</                                       → \n            </
 div                                       → div
 >                                         → >\n          )
 ;                                         → ;
 \n}                                       → \n        }
-)                                         → `
-cs.lift(                                  → cs`
+)())                                      → `
+cs.lift((() =>                            → cs`
 () => {\n                                 → () => {\n          
 const                                     → const 
 __cs_point                                → point
@@ -428,12 +428,12 @@ x                                         → x
 return                                    → return 
 <                                         → (\n            <
 div                                       → div
->{cs.lift(                                → >\n              
+>{                                        → >\n              
 <                                         → <
 button                                    → button
                                           →  
 onclick                                   → onclick
-={cs.lift(                                → ={
+={                                        → ={
 () =>                                     → () => 
 __cs_point                                → point
 [                                         → [
@@ -452,22 +452,22 @@ __cs_point                                → point
 x                                         → x
  }                                        →  }
 )                                         → )
-)}                                        → }
+}                                         → }
 >\n                same\n              </ → >\n                same\n              </
 button                                    → button
 >                                         → >
-)}{cs.lift(                               → \n              
+}{                                        → \n              
 <                                         → <
 p                                         → p
->{cs.lift(                                → >{
+>{                                        → >{
 __cs_label                                → label
 ()                                        → ()
-)}</                                      → }</
+}</                                       → }</
 p                                         → p
 >                                         → >
-)}</                                      → \n            </
+}</                                       → \n            </
 div                                       → div
 >                                         → >\n          )
 ;                                         → ;
 \n}                                       → \n        }
-)                                         → `
+)())                                      → `

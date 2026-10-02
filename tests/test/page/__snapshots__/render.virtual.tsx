@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { render } from "@backtickjs/solid-js";
+import { render } from "@backtickjs/solid-js/web";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
@@ -22,7 +22,7 @@ async function draw(element: JSX.Element): Promise<Element> {
   document.body.append(container);
   drawn.push(container);
   await evaluate(
-    cs.lift(cs.splice((render))(() => cs.splice((element)), cs.globalThis.document.getElementById(cs.splice((id))) as HTMLElement)),
+    cs.lift((() => cs.splice((render))(() => cs.splice((element)), cs.globalThis.document.getElementById(cs.splice((id))) as HTMLElement))()),
   );
   return container;
 }

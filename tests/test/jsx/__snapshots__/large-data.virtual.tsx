@@ -35,21 +35,21 @@ it("largeData", async (t) => {
     t,
     "largeData",
     <div>
-      <For each={cs.lift(cs.splice((orders)))}>
-        {cs.lift((__cs_order: Order) => cs.splice((
+      <For each={cs.lift((() => cs.splice((orders)))())}>
+        {cs.lift((() => (__cs_order: Order) => cs.splice((
             <div>
               <img
-                src={cs.lift("https://img.example.com/" + __cs_order.id + ".png")}
+                src={cs.lift((() => "https://img.example.com/" + __cs_order.id + ".png")())}
                 alt=""
               />
-              <span>{cs.lift(__cs_order.customer.name)}</span>
-              <span>{cs.lift(__cs_order.customer.city)}</span>
-              <For each={cs.lift(__cs_order.items)}>
-                {cs.lift((__cs_item: Item) => cs.splice((<span>{cs.lift(__cs_item.sku + " x" + __cs_item.qty)}</span>)))}
+              <span>{cs.lift((() => __cs_order.customer.name)())}</span>
+              <span>{cs.lift((() => __cs_order.customer.city)())}</span>
+              <For each={cs.lift((() => __cs_order.items)())}>
+                {cs.lift((() => (__cs_item: Item) => cs.splice((<span>{cs.lift((() => __cs_item.sku + " x" + __cs_item.qty)())}</span>)))())}
               </For>
-              <span>{cs.lift("$" + __cs_order.total)}</span>
+              <span>{cs.lift((() => "$" + __cs_order.total)())}</span>
             </div>
-          )))}
+          )))())}
       </For>
     </div>,
   );

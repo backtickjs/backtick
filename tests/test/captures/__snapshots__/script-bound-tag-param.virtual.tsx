@@ -13,10 +13,10 @@ it("scriptBoundTagParam", async (t) => {
     cs.lift((() => {
     const __cs_twice = (__cs_Row: (p: {
         n: number;
-    }) => JSX.Element) => <ul>{cs.lift(cs.splice(cs.lift(<__cs_Row n={1}/>)))}{cs.lift(cs.splice(cs.lift(<__cs_Row n={2}/>)))}</ul>;
+    }) => JSX.Element) => <ul>{cs.splice(cs.lift((() => <__cs_Row n={1}/>)()))}{cs.splice(cs.lift((() => <__cs_Row n={2}/>)()))}</ul>;
     return __cs_twice((__cs_p: {
         n: number;
-    }) => <li>{cs.lift("row " + __cs_p.n)}</li>);
+    }) => <li>{"row " + __cs_p.n}</li>);
 })()),
   );
 });

@@ -1,4 +1,4 @@
-cs.lift(           → cs`
+cs.lift((() =>     → cs`
 (                  → (
 __cs_label         → label
 :                  → : 
@@ -17,11 +17,11 @@ __cs_label         → label
  }                 →  }
 ;                  → ;
 \n}                → \n  }
-)                  → `
-cs.lift(           → cs`
+)())               → `
+cs.lift((() =>     → cs`
 "font-size: 16px"  → "font-size: 16px"
-)                  → `
-cs.lift(           → cs`
+)())               → `
+cs.lift((() =>     → cs`
 () => {\n          → () => {\n        
 const              → const 
 __cs_row           → row
@@ -53,8 +53,8 @@ label              → label
 )                  → )
 ;                  → ;
 \n}                → \n      }
-)                  → `
-cs.lift(           → cs`
+)())               → `
+cs.lift((() =>     → cs`
 cs.splice(         →  [-semantic]
 (build)            → $build
 )                  →  [-semantic]
@@ -67,4 +67,4 @@ label              → label
 0                  → 0
 ]                  → ]
 ()                 → ()
-)                  → `
+)())               → `

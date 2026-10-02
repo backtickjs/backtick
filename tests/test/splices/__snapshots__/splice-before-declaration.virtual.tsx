@@ -25,6 +25,6 @@ it("spliceBeforeDeclaration", async (t) => {
   await snapshotCase(
     t,
     "spliceBeforeDeclaration",
-    cs.lift(cs.splice(sandwich(cs.lift(10))) + cs.splice(sandwich(cs.lift(20)))),
+    cs.lift((() => cs.splice(sandwich(cs.lift((() => 10)()))) + cs.splice(sandwich(cs.lift((() => 20)()))))()),
   );
 });

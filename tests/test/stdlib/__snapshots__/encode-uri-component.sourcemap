@@ -2,7 +2,7 @@ cs.lift((() => {\n        → cs`{\n
 return                    → return 
 <                         → (\n      <
 span                      → span
->{cs.lift(                → >\n        {
+>{                        → >\n        {
 "/at?q="                  → "/at?q="
  +                        →  +\n          
 cs.globalThis.            → 
@@ -26,7 +26,7 @@ decodeURIComponent        → decodeURIComponent
 (                         → (
 "a%20b%2Bc%26d%23%C3%A9"  → "a%20b%2Bc%26d%23%C3%A9"
 )                         → )
-)}</                      → }\n      </
+}</                       → }\n      </
 span                      → span
 >                         → >\n    )
 ;                         → ;

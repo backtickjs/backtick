@@ -1,14 +1,14 @@
-cs.lift(    → cs`
-<           → <
-Greeting    → Greeting
-            →  
-person      → person
-={cs.lift(  → ={
-{           → { 
-firstName   → firstName
-:           → : 
-"ada"       → "ada"
- }          →  }
-)}          → }
-/>          →  />
-)           → `
+cs.lift(((__cs_Greeting = cs.splice(Greeting)) => → cs`
+<                                         → <
+__cs_Greeting                             → Greeting
+                                          →  
+person                                    → person
+={                                        → ={
+{                                         → { 
+firstName                                 → firstName
+:                                         → : 
+"ada"                                     → "ada"
+ }                                        →  }
+}                                         → }
+/>                                        →  />
+)())                                      → `

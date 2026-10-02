@@ -1,120 +1,120 @@
-cs.lift((() => {\n      → cs`{\n    
-const                   → const 
-__cs_rows               → rows
- =                      →  = 
-cs.splice(              →  [-semantic]
-(createSignal)          → $createSignal
-)                       →  [-semantic]
-<                       → <
-Row                     → Row
-[]                      → []
->(                      → >(
-[]                      → []
-)                       → )
-;                       → ;
-\n                      → \n    
-const                   → const 
-__cs_add                → add
- =                      →  = 
-(                       → (
-__cs_row                → row
-:                       → : 
-Row                     → Row
-) => {\n                → ) => {\n      
-__cs_rows               → rows
-[                       → [
-1                       → 1
-]                       → ]
-(                       → (
-[                       → [
-__cs_row                → row
-]                       → ]
-)                       → )
-;                       → ;
-\n    }                 → \n    }
-;                       → ;
-\n                      → \n    
-const                   → const 
-__cs_label              → label
- =                      →  = 
-(                       → (
-__cs_row                → row
-:                       → : 
-Row                     → Row
-) => {\n                → ) => {\n      
-return                  → return 
-__cs_row                → row
-.                       → .
-label                   → label
-;                       → ;
-\n    }                 → \n    }
-;                       → ;
-\n                      → \n    
-return                  → return 
-<                       → (\n      <
-div                     → div
->{cs.lift(              → >\n        
-<                       → <
-span                    → span
-                        →  
-onclick                 → onclick
-={cs.lift(              → ={
-() =>                   → () => 
-__cs_add                → add
-(                       → (
-{                       → { 
-id                      → id
-:                       → : 
-1                       → 1
-,                       → , 
-label                   → label
-:                       → : 
-"one"                   → "one"
- }                      →  }
-)                       → )
-)}                      → }
->add</                  → >add</
-span                    → span
->                       → >
-)}{cs.lift(             → \n        
-<                       → <
-div                     → div
->{cs.lift(              → >\n          
-<                       → <
-For                     → For
-                        →  
-each                    → each
-={cs.lift(              → ={
-__cs_rows               → rows
-[                       → [
-0                       → 0
-]                       → ]
-()                      → ()
-)}                      → }
->{cs.lift(              → >{
-(                       → (
-__cs_row                → row
-:                       → : 
-Row                     → Row
-) =>                    → ) => 
-<                       → <
-span                    → span
->{cs.lift(              → >{
-__cs_label              → label
-(                       → (
-__cs_row                → row
-)                       → )
-)}</                    → }</
-span                    → span
->                       → >
-)}</                    → }</
-For                     → For
->                       → >
-)}</                    → \n        </
-div                     → div
->                       → >
-)}</                    → \n      </
-div                     → div
->                       → >\n    )
-;                       → ;
-\n})())                 → \n  }`
+cs.lift(((__cs_For = cs.splice(For)) => {\n    → cs`{\n    
+const                                     → const 
+__cs_rows                                 → rows
+ =                                        →  = 
+cs.splice(                                →  [-semantic]
+(createSignal)                            → $createSignal
+)                                         →  [-semantic]
+<                                         → <
+Row                                       → Row
+[]                                        → []
+>(                                        → >(
+[]                                        → []
+)                                         → )
+;                                         → ;
+\n                                        → \n    
+const                                     → const 
+__cs_add                                  → add
+ =                                        →  = 
+(                                         → (
+__cs_row                                  → row
+:                                         → : 
+Row                                       → Row
+) => {\n                                  → ) => {\n      
+__cs_rows                                 → rows
+[                                         → [
+1                                         → 1
+]                                         → ]
+(                                         → (
+[                                         → [
+__cs_row                                  → row
+]                                         → ]
+)                                         → )
+;                                         → ;
+\n    }                                   → \n    }
+;                                         → ;
+\n                                        → \n    
+const                                     → const 
+__cs_label                                → label
+ =                                        →  = 
+(                                         → (
+__cs_row                                  → row
+:                                         → : 
+Row                                       → Row
+) => {\n                                  → ) => {\n      
+return                                    → return 
+__cs_row                                  → row
+.                                         → .
+label                                     → label
+;                                         → ;
+\n    }                                   → \n    }
+;                                         → ;
+\n                                        → \n    
+return                                    → return 
+<                                         → (\n      <
+div                                       → div
+>{                                        → >\n        
+<                                         → <
+span                                      → span
+                                          →  
+onclick                                   → onclick
+={                                        → ={
+() =>                                     → () => 
+__cs_add                                  → add
+(                                         → (
+{                                         → { 
+id                                        → id
+:                                         → : 
+1                                         → 1
+,                                         → , 
+label                                     → label
+:                                         → : 
+"one"                                     → "one"
+ }                                        →  }
+)                                         → )
+}                                         → }
+>add</                                    → >add</
+span                                      → span
+>                                         → >
+}{                                        → \n        
+<                                         → <
+div                                       → div
+>{                                        → >\n          
+<                                         → <
+__cs_For                                  → For
+                                          →  
+each                                      → each
+={                                        → ={
+__cs_rows                                 → rows
+[                                         → [
+0                                         → 0
+]                                         → ]
+()                                        → ()
+}                                         → }
+>{                                        → >{
+(                                         → (
+__cs_row                                  → row
+:                                         → : 
+Row                                       → Row
+) =>                                      → ) => 
+<                                         → <
+span                                      → span
+>{                                        → >{
+__cs_label                                → label
+(                                         → (
+__cs_row                                  → row
+)                                         → )
+}</                                       → }</
+span                                      → span
+>                                         → >
+}</                                       → }</
+__cs_For                                  → For
+>                                         → >
+}</                                       → \n        </
+div                                       → div
+>                                         → >
+}</                                       → \n      </
+div                                       → div
+>                                         → >\n    )
+;                                         → ;
+\n})())                                   → \n  }`

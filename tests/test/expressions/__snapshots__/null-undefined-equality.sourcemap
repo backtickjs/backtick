@@ -1,102 +1,102 @@
-cs.lift(       → cs`
-cs.splice(     →  [-semantic]
-(createRoot)   → $createRoot
-)              →  [-semantic]
-(              → (
-() =>          → () => 
-null           → null
- ===           →  === 
-null           → null
-)              → )
-)              → `
-cs.lift(       → cs`
-cs.splice(     →  [-semantic]
-(createRoot)   → $createRoot
-)              →  [-semantic]
-(              → (
-() =>          → () => 
-undefined      → undefined
- ===           →  === 
-undefined      → undefined
-)              → )
-)              → `
-cs.lift(       → cs`
-cs.splice(     →  [-semantic]
-(createRoot)   → $createRoot
-)              →  [-semantic]
-(              → (
-() =>          → () => 
-null           → null
- !==           →  !== 
-undefined      → undefined
-)              → )
-)              → `
-cs.lift(       → cs`
-cs.splice(     →  [-semantic]
-(createRoot)   → $createRoot
-)              →  [-semantic]
-(              → (
-() =>          → () => 
-null           → null
- ===           →  === 
-undefined      → undefined
-)              → )
-)              → `
-cs.lift(       → cs`
-cs.splice(     →  [-semantic]
-(createRoot)   → $createRoot
-)              →  [-semantic]
-(              → (
-() => {\n      → () => {\n        
-const          → const 
-__cs_names     → names
- =             →  = 
-[              → [
-"a"            → "a"
-]              → ]
-;              → ;
-\n             → \n        
-return         → return 
-[              → [\n          
-cs.splice(     →  [-semantic]
-(nothing)      → $nothing
-)              →  [-semantic]
- ===           →  === 
-undefined      → undefined
-,              → ,\n          
-cs.splice(     →  [-semantic]
-(nothing)      → $nothing
-)              →  [-semantic]
- !==           →  !== 
-null           → null
-,              → ,\n          
-cs.splice(     →  [-semantic]
-(empty)        → $empty
-)              →  [-semantic]
- ===           →  === 
-null           → null
-,              → ,\n          
-cs.splice(     →  [-semantic]
-(empty)        → $empty
-)              →  [-semantic]
- !==           →  !== 
-undefined      → undefined
-,              → ,\n          
-__cs_names     → names
-[              → [
-1              → 1
-]              → ]
- ===           →  === 
-undefined      → undefined
-,              → ,\n          
-__cs_names     → names
-[              → [
-1              → 1
-]              → ]
- !==           →  !== 
-null           → null
-]              → ,\n        ]
-;              → ;
-\n}            → \n      }
-)              → )
-)              → `
+cs.lift((() =>   → cs`
+cs.splice(       →  [-semantic]
+(createRoot)     → $createRoot
+)                →  [-semantic]
+(                → (
+() =>            → () => 
+null             → null
+ ===             →  === 
+null             → null
+)                → )
+)())             → `
+cs.lift((() =>   → cs`
+cs.splice(       →  [-semantic]
+(createRoot)     → $createRoot
+)                →  [-semantic]
+(                → (
+() =>            → () => 
+undefined        → undefined
+ ===             →  === 
+undefined        → undefined
+)                → )
+)())             → `
+cs.lift((() =>   → cs`
+cs.splice(       →  [-semantic]
+(createRoot)     → $createRoot
+)                →  [-semantic]
+(                → (
+() =>            → () => 
+null             → null
+ !==             →  !== 
+undefined        → undefined
+)                → )
+)())             → `
+cs.lift((() =>   → cs`
+cs.splice(       →  [-semantic]
+(createRoot)     → $createRoot
+)                →  [-semantic]
+(                → (
+() =>            → () => 
+null             → null
+ ===             →  === 
+undefined        → undefined
+)                → )
+)())             → `
+cs.lift((() =>   → cs`
+cs.splice(       →  [-semantic]
+(createRoot)     → $createRoot
+)                →  [-semantic]
+(                → (
+() => {\n        → () => {\n        
+const            → const 
+__cs_names       → names
+ =               →  = 
+[                → [
+"a"              → "a"
+]                → ]
+;                → ;
+\n               → \n        
+return           → return 
+[                → [\n          
+cs.splice(       →  [-semantic]
+(nothing)        → $nothing
+)                →  [-semantic]
+ ===             →  === 
+undefined        → undefined
+,                → ,\n          
+cs.splice(       →  [-semantic]
+(nothing)        → $nothing
+)                →  [-semantic]
+ !==             →  !== 
+null             → null
+,                → ,\n          
+cs.splice(       →  [-semantic]
+(empty)          → $empty
+)                →  [-semantic]
+ ===             →  === 
+null             → null
+,                → ,\n          
+cs.splice(       →  [-semantic]
+(empty)          → $empty
+)                →  [-semantic]
+ !==             →  !== 
+undefined        → undefined
+,                → ,\n          
+__cs_names       → names
+[                → [
+1                → 1
+]                → ]
+ ===             →  === 
+undefined        → undefined
+,                → ,\n          
+__cs_names       → names
+[                → [
+1                → 1
+]                → ]
+ !==             →  !== 
+null             → null
+]                → ,\n        ]
+;                → ;
+\n}              → \n      }
+)                → )
+)())             → `

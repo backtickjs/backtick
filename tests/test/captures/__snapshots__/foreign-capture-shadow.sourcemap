@@ -7,13 +7,13 @@ __cs_base               → base
 \n                      → \n    
 return                  → return 
 cs.splice(              → ${ [-semantic]
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 __cs_base               → base
  +                      →  + 
 cs.splice(              →  [-semantic]
 (carried)               → $carried
 )                       →  [-semantic]
-)                       → `
+)())                    → `
 )                       → } [-semantic]
 ;                       → ;
 \n})())                 → \n  }`
@@ -27,9 +27,9 @@ __cs_base               → base
 return                  → return 
 cs.splice(              → ${ [-semantic]
 innerBase(              → innerBase(
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 __cs_base               → base
-)                       → `
+)())                    → `
 )                       → )
 )                       → } [-semantic]
 ;                       → ;

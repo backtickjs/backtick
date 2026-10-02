@@ -25,17 +25,17 @@ const ReadingRow = async ({
   selected: Client<Signal<number>>;
 }) => (
   <div>
-    <span style={cs.lift("font-size: " + (cs.splice((selected))[0]() === cs.splice((id)) ? 20 : 16) + "px")}>
-      {cs.lift("row " + cs.splice((id)) + " of " + cs.splice((selected))[0]())}
+    <span style={cs.lift((() => "font-size: " + (cs.splice((selected))[0]() === cs.splice((id)) ? 20 : 16) + "px")())}>
+      {cs.lift((() => "row " + cs.splice((id)) + " of " + cs.splice((selected))[0]())())}
     </span>
-    {cs.lift(cs.splice((selected))[0]() === cs.splice((id)) ? cs.splice((<span>marker</span>)) : null)}
+    {cs.lift((() => cs.splice((selected))[0]() === cs.splice((id)) ? cs.splice((<span>marker</span>)) : null)())}
   </div>
 );
 
 async function ReadingPanel() {
-  return cs.lift((() => {
+  return cs.lift(((__cs_ReadingRow = cs.splice(ReadingRow)) => {
     const __cs_selected = cs.splice((createSignal))(0);
-    return <div>{cs.lift(<span onclick={cs.lift(() => __cs_selected[1](1))}>select</span>)}{cs.lift(<ReadingRow id={cs.lift(0)} selected={cs.lift(__cs_selected)}/>)}{cs.lift(<ReadingRow id={cs.lift(1)} selected={cs.lift(__cs_selected)}/>)}</div>;
+    return <div>{<span onclick={() => __cs_selected[1](1)}>select</span>}{<__cs_ReadingRow id={0} selected={__cs_selected}/>}{<__cs_ReadingRow id={1} selected={__cs_selected}/>}</div>;
 })());
 }
 

@@ -27,7 +27,7 @@ it("deepShadowing", async (t) => {
     "deepShadowing",
     cs.lift((() => {
     const __cs_base = 10;
-    return cs.splice(outerBase(cs.lift(__cs_base)));
+    return cs.splice(outerBase(cs.lift((() => __cs_base)())));
 })()),
   );
 });

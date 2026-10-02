@@ -1,14 +1,14 @@
-cs.lift(    → cs`
-__cs_el     → el
- =>         → ) => 
-cs.splice(  →  [-semantic]
-(onMount)   → $onMount
-)           →  [-semantic]
-(           → (
-() =>       → () => 
-__cs_el     → el
-.           → .
-focus       → focus
-()          → ()
-)           → )
-)           → `
+cs.lift((() =>   → cs`
+__cs_el          → el
+ =>              → ) => 
+cs.splice(       →  [-semantic]
+(onMount)        → $onMount
+)                →  [-semantic]
+(                → (
+() =>            → () => 
+__cs_el          → el
+.                → .
+focus            → focus
+()               → ()
+)                → )
+)())             → `

@@ -25,6 +25,6 @@ it("shadowedHole", async (t) => {
   await snapshotCase(
     t,
     "shadowedHole",
-    cs.lift(cs.splice(wrapShadowed(cs.lift(10))) + cs.splice(wrapShadowed(cs.lift(20)))),
+    cs.lift((() => cs.splice(wrapShadowed(cs.lift((() => 10)()))) + cs.splice(wrapShadowed(cs.lift((() => 20)()))))()),
   );
 });

@@ -1,6 +1,6 @@
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 1                       → 1
-)                       → `
+)())                    → `
 cs.lift((() => {\n      → cs`{\n  
 return                  → return 
 cs.splice(              →  [-semantic]

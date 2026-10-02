@@ -21,20 +21,20 @@ cs.splice(              →  [-semantic]
 ;                       → ;
 \n    }                 → \n    }
 \n})())                 → \n  }`
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 cs.splice(              → ${ [-semantic]
 wrapShadowed(           → wrapShadowed(
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 10                      → 10
-)                       → `
+)())                    → `
 )                       → )
 )                       → } [-semantic]
  +                      →  + 
 cs.splice(              → ${ [-semantic]
 wrapShadowed(           → wrapShadowed(
-cs.lift(                → cs`
+cs.lift((() =>          → cs`
 20                      → 20
-)                       → `
+)())                    → `
 )                       → )
 )                       → } [-semantic]
-)                       → `
+)())                    → `

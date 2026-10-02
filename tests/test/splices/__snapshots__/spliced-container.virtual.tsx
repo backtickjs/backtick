@@ -11,12 +11,12 @@ import { snapshotCase } from "../snapshotCase.ts";
 // host wrote. Read the other way — from the client's type back to what the host
 // may write — this shape is the one TypeScript cannot infer, and a splice has
 // nowhere to name it, since the compiler writes the call.
-const originX = cs.lift(1);
+const originX = cs.lift((() => 1)());
 
-const label = cs.lift("origin");
+const label = cs.lift((() => "origin")());
 
 const point = { x: originX, label };
 
 it("splicedContainer", async (t) => {
-  await snapshotCase(t, "splicedContainer", cs.lift(cs.splice((point)).x + 1));
+  await snapshotCase(t, "splicedContainer", cs.lift((() => cs.splice((point)).x + 1)()));
 });
