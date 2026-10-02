@@ -9,8 +9,10 @@
     "test/**/*.mjs",
     "test/**/*.ts",
     "test/**/*.runtime.tsx",
-    // A helper with a script in it, imported by `snapshotCase.ts`.
+    // Helpers with a script in them, imported by `snapshotCase.ts` and
+    // `evaluate.ts`.
     "test/inRoot.tsx",
+    "test/drawing.tsx",
     "test/**/*.virtual.tsx"
   ],
   "exclude": [

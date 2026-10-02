@@ -36,11 +36,6 @@ export function printBundle(tree: BundleTree): { code: string; map: string } {
     module.script(script);
     module.line(";");
   }
-  // Each host function the bundle expanded, declared once however many places
-  // name it.
-  for (const [label, code] of tree.expansions) {
-    module.line(`const ${label} = ${code};`);
-  }
   // Parenthesized, so a root that is a function isn't a declaration.
   module.write(`export default (${tree.root});`);
 

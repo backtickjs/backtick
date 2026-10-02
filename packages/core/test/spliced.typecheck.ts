@@ -23,16 +23,14 @@ list satisfies number[];
 spliced("host label") satisfies string;
 spliced([1, [true, null]]) satisfies (number | (boolean | null)[])[];
 
-// A host function taking and answering with scripts becomes the client
-// function it stands for.
-declare const double: (n: Client<number>) => Client<number>;
+// A client function is a script, and splices as the function it is.
+declare const double: Client<(n: number) => number>;
 spliced(double)(1) satisfies number;
 
-// So does a component: its props become what each member is on the client.
-declare const card: (props: {
-  readonly title: Client<string> | string;
-}) => Client<number>;
-spliced(card)({ title: "a" }) satisfies number;
+// A host function is host code, and doesn't splice.
+declare const card: (props: { readonly title: string }) => Client<number>;
+// @ts-expect-error: a host function isn't spliceable
+spliced(card);
 
 // An action is a script like any other, in data too.
 declare const action: Client<void>;

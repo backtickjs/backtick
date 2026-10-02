@@ -1,18 +1,27 @@
 cs.lift((() =>                            → cs`
-cs.splice(                                →  [-semantic]
-(n)                                       → $n
-)                                         →  [-semantic]
+(                                         → (
+__cs_n                                    → n
+:                                         → : 
+number                                    → number
+) =>                                      → ) => 
+__cs_n                                    → n
  *                                        →  * 
 2                                         → 2
 )())                                      → `
 cs.lift((() =>                            → cs`
-cs.splice(                                →  [-semantic]
-(n)                                       → $n
-)                                         →  [-semantic]
+(                                         → (
+__cs_n                                    → n
+:                                         → : 
+number                                    → number
+) =>                                      → ) => 
+(                                         → (
+__cs_m                                    → m
+:                                         → : 
+number                                    → number
+) =>                                      → ) => 
+__cs_n                                    → n
  +                                        →  + 
-cs.splice(                                →  [-semantic]
-(m)                                       → $m
-)                                         →  [-semantic]
+__cs_m                                    → m
 )())                                      → `
 cs.lift((() =>                            → cs`
 "shared"                                  → "shared"
@@ -27,14 +36,6 @@ cs.splice(                                →  [-semantic]
 (                                         → (
 1                                         → 1
 )                                         → )
-;                                         → ;
-\n                                        → \n  
-const                                     → const 
-__cs_Heading                              → Heading
- =                                        →  = 
-cs.splice(                                →  [-semantic]
-(Card)                                    → $Card
-)                                         →  [-semantic]
 ;                                         → ;
 \n                                        → \n  
 const                                     → const 
@@ -70,16 +71,7 @@ length                                    → length
 return                                    → return 
 <                                         → (\n    <
 section                                   → section
->{                                        → >\n      
-<                                         → <
-__cs_Heading                              → Heading
-                                          →  
-title                                     → title
-={                                        → =
-"spliced"                                 → "spliced"
-}                                         → 
-/>                                        →  />
-}{                                        → \n      {
+>{                                        → >\n      {
 cs.splice(                                → ${ [-semantic]
 (<Card title="element" />)                → (<Card title="element" />)
 )                                         → } [-semantic]

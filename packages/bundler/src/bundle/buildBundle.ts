@@ -6,12 +6,10 @@ import {
 } from "@backtickjs/core";
 import { isClientImport, type Spliceable } from "@backtickjs/core";
 
-import { expandFunction, type FunctionExpansions } from "./expandFunction.js";
 import {
   type ElementExpansions,
   expandJsxElement,
 } from "./expandJsxElement.js";
-import { type Hole, holeOf, type HostParam } from "./holes.js";
 import { bindingsOf, capturesOf } from "./params.js";
 import { sourceName } from "./bindingKey.js";
 import {
@@ -22,7 +20,6 @@ import {
   imported,
   jsxElement,
   literal,
-  member,
   object,
   componentElement,
   thunk,
@@ -37,7 +34,6 @@ import type { Names } from "../print/code.js";
  */
 export interface BundleTree {
   readonly scripts: readonly (readonly [string, ClientScript])[];
-  readonly expansions: readonly (readonly [string, string])[];
   readonly root: string;
   readonly names: Names;
 }
@@ -47,37 +43,10 @@ export interface BundleTree {
 // those can meet a binding.
 const RESERVED = ["arguments", "await", "eval", "yield"];
 
-// What an expansion's declaration takes from where it is referenced: an
-// argument of an enclosing expansion, or the key of a binding an enclosing
-// thunk was handed.
-type Capture = HostParam | string;
-
-// A host function as the bundle declares it: `$expn` and its number, what a
-// reference hands it, and its code.
-//
-// Curried, captures then arguments, where a script takes both in one list: a
-// script reference is a call answering the script's value, but a function's
-// is the function itself, which the client calls later with arguments of its
-// own. So a reference fixes the captures and leaves the arguments open, with
-// no parameter of its own to name, and so none to shadow.
-interface Declaration {
-  readonly label: string;
-  readonly captures: readonly Capture[];
-  readonly code: string;
-}
-
-// The expansion whose declaration is being written: its own parameters, and
-// what it captures, each at the position the body first reached it.
-interface Frame {
-  readonly own: ReadonlySet<HostParam>;
-  readonly captures: Map<Capture, number>;
-}
-
 // What encloses a value being rendered: the bindings the thunks around it were
-// handed, and the declaration it is written into, if one.
+// handed.
 interface Scope {
   readonly bindings: ReadonlySet<string>;
-  readonly frame?: Frame;
 }
 
 const rootScope: Scope = { bindings: new Set() };
@@ -104,7 +73,6 @@ export async function buildBundle(
   external: Readonly<Record<string, string>>,
 ): Promise<BundleTree> {
   const names = createNames(external);
-  const functionExpansions: FunctionExpansions = new WeakMap();
   const elementExpansions: ElementExpansions = new WeakMap();
   // Each script's number, in the order rendering first reaches it. Two
   // scripts written at one source location are one declaration, so the first
@@ -151,41 +119,6 @@ export async function buildBundle(
     used.add(name);
     displayed.set(key, name);
     return name;
-  };
-
-  // What a declaration names a capture: `$capture` and where it stands, the
-  // capture recorded the first time the body reaches it.
-  const captureName = (frame: Frame, capture: Capture): string => {
-    let at = frame.captures.get(capture);
-    if (at === undefined) {
-      at = frame.captures.size;
-      frame.captures.set(capture, at);
-    }
-    return `$capture${at}`;
-  };
-
-  // An argument of an expansion, read where the value stands: its own
-  // parameter inside its declaration, and a capture inside any other.
-  const paramRead = (param: HostParam, scope: Scope): string => {
-    if (scope.frame === undefined) {
-      throw new Error(
-        "Can't splice an argument of a host function outside the function: " +
-          "it stands for a value only a call on the client supplies.",
-      );
-    }
-    return scope.frame.own.has(param)
-      ? param.name
-      : captureName(scope.frame, param);
-  };
-
-  // How a hole is reached: its parameter, then each member read off it, read
-  // where the drawing reads it.
-  const holeRead = (hole: Hole, scope: Scope): string => {
-    let read = paramRead(hole.param, scope);
-    for (const step of hole.path) {
-      read = member(read, step);
-    }
-    return read;
   };
 
   // The script-declared bindings a hole feeds its thunk, so a spliced fragment
@@ -245,51 +178,6 @@ export async function buildBundle(
     return labelOf(target);
   };
 
-  // Each host function's label, taken when rendering first reaches it, so an
-  // outer function is numbered before those its body reaches; and its
-  // declaration, once its body is written. A body is written in a scope of its
-  // own, so it reads its own arguments as its parameters and everything else it
-  // reaches as a capture, wherever it is referenced from.
-  const labels = new Map<object, string>();
-  const declarations = new Map<string, Declaration>();
-  const declareExpansion = async (
-    value: (...args: never[]) => unknown,
-  ): Promise<Declaration> => {
-    const known = labels.get(value);
-    if (known !== undefined) {
-      const declaration = declarations.get(known);
-      // Labelled but not yet written: its body reached it again.
-      if (declaration === undefined) {
-        throw new Error(
-          "Can't splice a host function that answers with itself: its " +
-            "expansion would never end.",
-        );
-      }
-      return declaration;
-    }
-    const expansion = await expandFunction(value, functionExpansions);
-    const label = `$expn${labels.size}`;
-    labels.set(value, label);
-    const frame: Frame = {
-      own: new Set(expansion.params),
-      captures: new Map(),
-    };
-    const body = arrow(
-      expansion.params.map((param) => param.name),
-      await render(expansion.returned, { bindings: new Set(), frame }),
-    );
-    // Always taking its captures first, even none, so every reference is a
-    // call.
-    const captures = [...frame.captures.keys()];
-    const code = arrow(
-      captures.map((_, at) => `$capture${at}`),
-      body,
-    );
-    const declaration = { label, captures, code };
-    declarations.set(label, declaration);
-    return declaration;
-  };
-
   // Writes a value as the code it becomes: composition as data, which is what
   // a bundle is. A script reference is a call naming which script and
   // what to hand it; everything else is its literal form. Rendered in order,
@@ -299,13 +187,6 @@ export async function buildBundle(
     value: Spliceable,
     scope: Scope = rootScope,
   ): Promise<string> => {
-    // A hole sentinel a host function stored somewhere in what it answered: the
-    // client argument it stands for has no value until the client runs, so it
-    // is a reference to the enclosing expansion's parameter.
-    const hole = holeOf(value);
-    if (hole !== undefined) {
-      return holeRead(hole, scope);
-    }
     if (isClientScript(value)) {
       const target = scriptFor(value);
       declare(target);
@@ -338,19 +219,13 @@ export async function buildBundle(
       }
       return array(elements);
     }
-    // A host function has no data form — client code is written in `cs`...` and
-    // reaches a script as a script — so it is expanded rather than carried, and
-    // declared as the arrow it is: its holes the parameters, and the call the
-    // tag wrote binding them. A reference hands it what it captures.
+    // A host function is host code, which never reaches the client: client
+    // code is written in a script, and reaches another as one.
     if (typeof value === "function") {
-      const declaration = await declareExpansion(value);
-      return call(
-        declaration.label,
-        declaration.captures.map((capture) =>
-          typeof capture === "string"
-            ? capExpr(capture, scope)
-            : paramRead(capture, scope),
-        ),
+      throw new Error(
+        "Can't splice a host function: it's host code, and only runs on the " +
+          "host. Write a client function as a script instead: " +
+          "cs`(n: number) => ...`.",
       );
     }
     // Only plain objects cross structurally. A class instance would land here
@@ -381,11 +256,6 @@ export async function buildBundle(
     if (scope.bindings.has(key)) {
       return displayName(key);
     }
-    // Inside a declaration, a binding the body doesn't bind itself is the
-    // reference's to hand over.
-    if (scope.frame !== undefined) {
-      return captureName(scope.frame, key);
-    }
     throw new Error(
       `Can't thread the capture \`${sourceName(key)}\`: nothing encloses ` +
         "this reference to supply it. A fragment carries the bindings it was " +
@@ -414,7 +284,7 @@ export async function buildBundle(
       // client component. A server component is host code, used in a splice.
       if (kind === "tag") {
         if (typeof arg === "function") {
-          const name = arg.name;
+          const { name } = arg as (...args: never) => unknown;
           throw new Error(
             `\`<${name}>\` is a server component, so it can't be a tag in a ` +
               "script, whose tags are client components. Use it in a splice: " +
@@ -441,10 +311,7 @@ export async function buildBundle(
         continue;
       }
       // Otherwise a thunk names them and calls the fragment with what it wants.
-      const inner = {
-        bindings: new Set([...scope.bindings, ...passed]),
-        frame: scope.frame,
-      };
+      const inner = { bindings: new Set([...scope.bindings, ...passed]) };
       parts.push(arrow(passed.map(displayName), await render(arg, inner)));
     }
     for (const key of capturesOf(target)) {
@@ -524,9 +391,5 @@ export async function buildBundle(
       scripts.push([labelOf(script), script]);
     }
   }
-  // In label order, which is the order rendering first reached each.
-  const expansions = [...labels.values()].map(
-    (label) => [label, declarations.get(label)!.code] as const,
-  );
-  return { scripts, expansions, root, names };
+  return { scripts, root, names };
 }

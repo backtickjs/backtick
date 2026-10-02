@@ -5,6 +5,6 @@ import { cs, type Client, type Spliceable } from "@backtickjs/core";
  * what `render` takes. A `.tsx` file of its own, as only those are compiled by
  * Backtick.
  */
-export function drawing(value: Spliceable): Client<() => unknown> {
+export function drawing(value: Spliceable): Client<unknown> {
   return cs`() => $value`;
 }

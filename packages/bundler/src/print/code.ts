@@ -47,13 +47,6 @@ export function literal(value: string | number | boolean | null): string {
 
 export const undefinedValue = "void 0";
 
-/** A member read by name: `.name` where it is an identifier, `["name"]` where not. */
-export function member(object: string, name: string): string {
-  return IDENTIFIER.test(name)
-    ? `${object}.${name}`
-    : `${object}[${string(name)}]`;
-}
-
 export function call(callee: string, args: readonly string[]): string {
   return `${callee}(${args.join(", ")})`;
 }

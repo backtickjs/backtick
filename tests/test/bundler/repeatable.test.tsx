@@ -10,8 +10,8 @@ import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
 // bookkeeping is — their numbers, the names captures print under, the thunks a
 // hole feeds — so this is the bundler's own repeatability test with them in.
 
-const doubled = (n: Client<number>) => cs`$n * 2`;
-const pair = (n: Client<number>) => (m: Client<number>) => cs`$n + $m`;
+const doubled = cs`(n: number) => n * 2`;
+const pair = cs`(n: number) => (m: number) => n + m`;
 
 function Card(props: { readonly title: Prop<string> }) {
   return <h2>{props.title}</h2>;
@@ -21,12 +21,10 @@ const shared = cs`"shared"`;
 
 const page = () => cs`{
   const count = $createSignal(1);
-  const Heading = $Card;
   const rows = [1, 2, 3];
   const total = count[0]() + ${cs`rows.length`};
   return (
     <section>
-      <Heading title="spliced" />
       {${(<Card title="element" />)}}
       {${(<Card title={shared} />)}}
       <p>{$doubled(count[0]())}</p>
@@ -45,7 +43,7 @@ const code = async (value: Client<unknown>) => (await bundle(value)).code;
 it("bundles the same every time, with scripts in it", async () => {
   const first = await code(page());
   assert.equal(await code(page()), first);
-  // Other bundles in between, sharing its host functions and scripts.
+  // Other bundles in between, sharing its scripts and components.
   await code(cs`$doubled(1)`);
   await code(cs`$pair(1)(2) + $shared.length`);
   await code(cs`${(<Card title="other" />)}`);

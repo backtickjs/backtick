@@ -5,18 +5,21 @@ import { es } from "./es.ts";
 
 // A bundle is a function of what was spliced alone: bundling it again, or after
 // other bundles, writes the same code. Nothing the bundler keeps while bundling
-// (expansions, element results, names) may carry over from one bundle to the
-// next.
+// (element results, names) may carry over from one bundle to the next.
 
-const identity = (n: never) => n;
-const pair = (n: never) => (m: never) => [n, m];
-const Badge = (props: { label: never }) => [props.label];
+const Badge = (props: { label: string }) => [props.label];
+const Pill = (props: { label: string }) => props.label;
 
 const values: Record<string, Spliceable> = {
-  "a host function": identity,
-  "a host function answering a host function": pair,
   "an element whose component runs": createJsxElement(Badge, { label: "a" }),
-  "a function spliced twice": [identity, identity],
+  "two elements of one component": [
+    createJsxElement(Badge, { label: "a" }),
+    createJsxElement(Badge, { label: "b" }),
+  ],
+  "elements of two components": [
+    createJsxElement(Badge, { label: "a" }),
+    createJsxElement(Pill, { label: "b" }),
+  ],
 };
 
 for (const [name, value] of Object.entries(values)) {
