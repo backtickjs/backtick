@@ -154,7 +154,8 @@ function getDirectSplices(
   sourceFile: ts.SourceFile,
   fileWithPlaceholders: ts.SourceFile,
 ): { [placeholder: string]: Splice } {
-  const splices: { [placeholder: string]: Splice } = {};
+  // No prototype: a script's `valueOf` or `constructor` is no splice.
+  const splices: { [placeholder: string]: Splice } = Object.create(null);
 
   const template = taggedTemplate.template;
   const spans = ts.isTemplateExpression(template) ? template.templateSpans : [];

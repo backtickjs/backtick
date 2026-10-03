@@ -1,18 +1,15 @@
 {
   "compilerOptions": {
-    "verbatimModuleSyntax": true,
-    "module": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "target": "ESNext",
-    "moduleResolution": "Bundler",
+    "strict": true,
     "noEmit": true,
-    "types": [
-      "bun"
-    ],
-    "jsx": "react-jsx",
-    "jsxImportSource": "@backtickjs/ui-platform-sdk"
+    "allowImportingTsExtensions": true,
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "types": ["node"]
   },
-  "include": [
-    "src",
-    "scripts"
-  ]
+  "include": ["src", "scripts"]
 }

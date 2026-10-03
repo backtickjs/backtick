@@ -4,10 +4,6 @@ packages:
   # Built here and never published to npm: an editor extension and the
   # benchmark app.
   - "apps/*"
-  # Parked while the two-compiler architecture settles (docs/dual-compiler.md):
-  # the website (apps/backtickjs.com/*) and conformance stay in the repo,
-  # untouched, outside the workspace.
-  - "!apps/conformance"
   - "tests"
   # A stand-in third-party library the tests bind to.
   - "tests/fixtures/*"

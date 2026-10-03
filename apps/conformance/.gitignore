@@ -1,2 +1,4 @@
-# A clone of tc39/test262, made by `pnpm build`: see scripts/fetchTest262.ts.
+# A clone of tc39/test262: see scripts/fetchTest262.ts.
 test262/
+# The last run's results, beside the committed baseline.
+.cache/

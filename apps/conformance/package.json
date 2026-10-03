@@ -3,29 +3,23 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "The page a client passes by drawing it: one row per case, judged by the client under test",
+  "description": "ECMA-262's own tests, test262, each run byte for byte as a client script",
   "scripts": {
-    "start": "bun src/index.tsx",
+    "conformance": "node scripts/fetchTest262.ts && node --experimental-vm-modules src/run.ts",
+    "typecheck": "tsc --noEmit",
     "format": "prettier --write src scripts",
     "format:check": "prettier --check src scripts",
-    "typecheck": "backtick-tsc --noEmit",
-    "clean": "rm -rf node_modules dist .cache test262"
+    "clean": "rm -rf node_modules .cache test262"
   },
   "dependencies": {
-    "@backtickjs/bun-plugin": "workspace:*",
     "@backtickjs/bundler": "workspace:*",
     "@backtickjs/compiler": "workspace:*",
     "@backtickjs/core": "workspace:*",
-    "@backtickjs/ui-platform-sdk": "workspace:*",
-    "@backtickjs/web-page": "workspace:*",
-    "@backtickjs/web-sdk": "workspace:*",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "yaml": "^2.9.1"
   },
   "devDependencies": {
-    "@backtickjs/prettier-plugin": "workspace:*",
-    "@backtickjs/tsc": "workspace:*",
-    "@types/bun": "^1.3.14",
-    "prettier": "^3.6.2",
-    "yaml": "^2.9.1"
+    "@types/node": "^25.9.1",
+    "prettier": "^3.6.2"
   }
 }
