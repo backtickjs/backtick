@@ -106,9 +106,9 @@ describe("a splice in the editor", () => {
     assert.equal(hover("${count}", 2), "const count: 1");
   });
 
-  // A known gap: at the start of a script, the `cs.lift(…)` the script is
-  // written in shows through.
-  it.todo("hovers nothing of the wrapper at the start of a script", () => {
+  // At the start of a script, the `cs.lift(…)` the script is written in
+  // doesn't show through.
+  it("hovers nothing of the wrapper at the start of a script", () => {
     assert.doesNotMatch(hover("$count + 1", 0), wrapper);
   });
 

@@ -14,6 +14,8 @@ export interface ClientScript {
   splices: { [placeholder: string]: Splice };
 
   toSourceRange: (node: ts.Node) => SourceRange;
+  // an offset in the placeholder text, in the host file
+  toSourceOffset: (offset: number) => number;
 }
 
 // A host value read into a client script: braced — a `${...}` template
@@ -131,6 +133,7 @@ function getDirectScripts(
       textWithPlaceholders,
       fileWithPlaceholders,
       toSourceRange,
+      toSourceOffset: (offset) => toSourceOffset(mappings, offset),
       splices,
     });
   });
