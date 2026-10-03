@@ -78,7 +78,12 @@ export function rewriteScript(
     return leftAsWritten(unspliced);
   }
 
-  const diagnostics = refusals(ts, clientScript);
+  // Nor is a script that writes what it can't: emitting it may not be
+  // possible, as a declared `$` name is a splice, not a name.
+  const refused = refusals(ts, clientScript);
+  if (refused.length > 0) {
+    return leftAsWritten(refused);
+  }
 
   const scriptRange: SourceRange = {
     start: sourceNode.getStart(sourceFile),
@@ -150,7 +155,7 @@ export function rewriteScript(
     runtime: { id, metadata, emitted },
     awaits,
     leftAsWritten: false,
-    diagnostics,
+    diagnostics: [],
   };
 }
 

@@ -9,7 +9,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { availableParallelism } from "node:os";
 import { join } from "node:path";
 import vm from "node:vm";
-import { compile } from "./compile.ts";
+import { type Compiled, compile } from "./compile.ts";
 import { realm, test262Module } from "./realm.ts";
 import { notApplicable, type Test, tests } from "./tests.ts";
 
@@ -88,9 +88,11 @@ const plainly = (test: Test) =>
 
 // Through Backtick: the test as a client script, compiled, bundled, and its
 // bundle run as the module a client loads.
-async function throughBacktick(test: Test): Promise<string | null> {
+async function throughBacktick(
+  test: Test,
+  compiled: Compiled,
+): Promise<string | null> {
   const early = test.negative?.phase === "parse";
-  const compiled = await compile(test);
   if ("refused" in compiled) {
     return early ? null : `refused: ${compiled.refused[0]}`;
   }
@@ -118,11 +120,20 @@ async function judge(test: Test): Promise<Result> {
   if (skip !== null) {
     return result("skip", skip);
   }
+  // A test declaring its own `$` name, as some declare `$DONE`, can't be a
+  // script: every `$` name is a splice. The compiler says which do.
+  const compiled = await compile(test);
+  if (
+    "refused" in compiled &&
+    compiled.refused.every((message) => message.startsWith("`$`-prefixed"))
+  ) {
+    return result("skip", "declares a `$` name: a script splices every one");
+  }
   const plain = await plainly(test);
   if (plain !== null) {
     return result("engine", plain);
   }
-  const backtick = await throughBacktick(test);
+  const backtick = await throughBacktick(test, compiled);
   return backtick === null ? result("pass") : result("fail", backtick);
 }
 
@@ -247,26 +258,39 @@ function report(results: Result[]) {
     `${JSON.stringify(results, null, 2)}\n`,
   );
 
-  // What fails, committed: a run says what it fixed and what it broke.
+  // What fails and why, committed: a run says what it fixed, what it broke,
+  // and what now fails another way. A reason's first line only, as the rest
+  // is a stack or a long message.
   const baselineFile = join(import.meta.dirname, "../baseline.json");
-  const failing = results
-    .filter(({ status }) => status === "fail")
-    .map(({ path }) => path);
+  const failing = Object.fromEntries(
+    results
+      .filter(({ status }) => status === "fail")
+      .map(({ path, reason = "" }) => [path, reason.split("\n")[0]!]),
+  );
   if (update) {
     writeFileSync(baselineFile, `${JSON.stringify(failing, null, 2)}\n`);
-    console.log(`baseline: ${failing.length} failing`);
+    console.log(`baseline: ${Object.keys(failing).length} failing`);
   } else if (existsSync(baselineFile)) {
-    const baseline = new Set(
-      (JSON.parse(readFileSync(baselineFile, "utf8")) as string[]).filter(
-        (path) => path.startsWith(filter),
-      ),
-    );
+    const baseline = Object.entries(
+      JSON.parse(readFileSync(baselineFile, "utf8")) as Record<string, string>,
+    ).filter(([path]) => path.startsWith(filter));
+    const before = new Map(baseline);
     const ran = new Map(results.map(({ path, status }) => [path, status]));
-    const broke = failing.filter((path) => !baseline.has(path));
-    const fixed = [...baseline].filter((path) => ran.get(path) === "pass");
-    console.log(`\n${fixed.length} fixed, ${broke.length} newly failing`);
+    const broke = Object.keys(failing).filter((path) => !before.has(path));
+    const changed = Object.keys(failing).filter(
+      (path) => before.has(path) && before.get(path) !== failing[path],
+    );
+    const fixed = baseline.filter(([path]) => ran.get(path) === "pass");
+    console.log(
+      `\n${fixed.length} fixed, ${broke.length} newly failing, ${changed.length} failing differently`,
+    );
     for (const path of broke) {
-      console.log(`  failing: ${path}`);
+      console.log(`  failing: ${path}\n    ${failing[path]}`);
+    }
+    for (const path of changed) {
+      console.log(
+        `  differently: ${path}\n    was ${before.get(path)}\n    now ${failing[path]}`,
+      );
     }
     process.exitCode = broke.length > 0 ? 1 : 0;
   }
