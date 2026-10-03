@@ -69,6 +69,24 @@ export function rewriteScript(
     end: sourceNode.getEnd(),
   };
 
+  // A script that doesn't parse is reported as TypeScript's parser read it.
+  const parseErrors = parseDiagnostics(fileWithPlaceholders);
+  if (parseErrors.length > 0) {
+    return leftAsWritten(
+      parseErrors.map((diagnostic) => ({
+        range: {
+          start: clientScript.toSourceOffset(diagnostic.start!),
+          end: clientScript.toSourceOffset(
+            diagnostic.start! + diagnostic.length!,
+          ),
+        },
+        message: ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n"),
+        category: ts.DiagnosticCategory.Error,
+        code: diagnostic.code,
+      })),
+    );
+  }
+
   // A script is one expression or one block: statements go in braces.
   const [statement] = fileWithPlaceholders.statements;
   if (
@@ -313,4 +331,11 @@ function strictReason(name: string): string | null {
     default:
       return null;
   }
+}
+
+// A file's parse errors. Internal to TypeScript, which reports them only
+// through a program; a script has no program of its own.
+function parseDiagnostics(file: ts.SourceFile): readonly ts.Diagnostic[] {
+  return (file as unknown as { parseDiagnostics: ts.Diagnostic[] })
+    .parseDiagnostics;
 }

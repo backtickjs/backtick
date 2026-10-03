@@ -57,6 +57,10 @@ describe("refusals", () => {
     }
   });
 
+  it("a script that doesn't parse is refused as TypeScript reads it", () => {
+    assert.deepStrictEqual(refusals("a("), ["')' expected."]);
+  });
+
   it("a name strict mode forbids is refused", () => {
     assert.deepStrictEqual(refusals("{ const await = 1; }"), [
       "`await` is not allowed as a variable declaration name: it is " +
