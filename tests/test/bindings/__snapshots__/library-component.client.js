@@ -3,9 +3,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0, $tag1) => {
-    const count = $splice0()(0);
-    return (<$tag1 variant="primary" icon={<b>+</b>} onClick={() => count[1](count[0]() + 1)}>
-      <span>{"Pressed " + count[0]() + " times"}</span>
+    const [count, setCount] = $splice0()(0);
+    return (<$tag1 variant="primary" icon={<b>+</b>} onClick={() => setCount(count() + 1)}>
+      <span>{"Pressed " + count() + " times"}</span>
     </$tag1>);
 });
 }

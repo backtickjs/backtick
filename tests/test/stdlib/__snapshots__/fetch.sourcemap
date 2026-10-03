@@ -8,7 +8,12 @@ cs.lift((() =>                            →  [-semantic -navigation]
 \n                                        → \n      
 const                                     → const
                                           →  
+[                                         → [
 __cs_held                                 → held
+,                                         → ,
+                                          →  
+__cs_setHeld                              → setHeld
+]                                         → ]
                                           →  
 =                                         → =
                                           →  
@@ -113,10 +118,7 @@ unknown                                   → unknown
                                           →  
 {                                         → {
 \n                                        → \n          
-__cs_held                                 → held
-[                                         → [
-1                                         → 1
-]                                         → ]
+__cs_setHeld                              → setHeld
 (                                         → (
 __cs_value                                → value
                                           →  
@@ -151,10 +153,7 @@ unknown                                   → unknown
                                           →  
 {                                         → {
 \n                                        → \n          
-__cs_held                                 → held
-[                                         → [
-1                                         → 1
-]                                         → ]
+__cs_setHeld                              → setHeld
 (                                         → (
 "failed — "                               → "failed — "
                                           →  
@@ -261,10 +260,7 @@ string                                    → string
                                           →  
 {                                         → {
 \n                                        → \n            
-__cs_held                                 → held
-[                                         → [
-1                                         → 1
-]                                         → ]
+__cs_setHeld                              → setHeld
 (                                         → (
 __cs_text                                 → text
 )                                         → )
@@ -284,10 +280,7 @@ unknown                                   → unknown
                                           →  
 {                                         → {
 \n                                        → \n            
-__cs_held                                 → held
-[                                         → [
-1                                         → 1
-]                                         → ]
+__cs_setHeld                              → setHeld
 (                                         → (
 String                                    → String
 (                                         → (
@@ -305,9 +298,6 @@ __cs_error                                → error
 return                                    → return
                                           →  
 __cs_held                                 → held
-[                                         → [
-0                                         → 0
-]                                         → ]
 (                                         → (
 )                                         → )
 ;                                         → ;

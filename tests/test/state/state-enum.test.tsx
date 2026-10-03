@@ -22,11 +22,9 @@ const colorName: Client<(c: Color) => string> = cs`(c: Color) => {
 
 async function Swatch() {
   return cs`{
-    const held = $createSignal(${Color.Red});
+    const [held, setHeld] = $createSignal(${Color.Red});
     return (
-      <span onclick={() => held[1](${Color.Blue})}>
-        {$colorName(held[0]())}
-      </span>
+      <span onclick={() => setHeld(${Color.Blue})}>{$colorName(held())}</span>
     );
   }`;
 }

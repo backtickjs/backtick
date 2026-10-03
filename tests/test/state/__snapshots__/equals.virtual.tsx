@@ -28,9 +28,9 @@ describe("equals", () => {
     render(
       await evaluate(
         cs.lift((() => () => {
-          const __cs_n = cs.splice((createSignal))(1);
+          const [__cs_n, __cs_setN] = cs.splice((createSignal))(1);
           const __cs_size = cs.splice((createMemo))(
-            () => ({ isBig: __cs_n[0]() > 2, n: __cs_n[0]() }),
+            () => ({ isBig: __cs_n() > 2, n: __cs_n() }),
             undefined,
             { equals: (__cs_previous, __cs_next) => __cs_previous.isBig === __cs_next.isBig },
           );
@@ -40,7 +40,7 @@ describe("equals", () => {
           };
           return (
             <div>
-              <button onclick={() => __cs_n[1](__cs_n[0]() + 1)}>add</button>
+              <button onclick={() => __cs_setN(__cs_n() + 1)}>add</button>
               <p>{__cs_label()}</p>
             </div>
           );
@@ -62,19 +62,17 @@ describe("equals", () => {
     render(
       await evaluate(
         cs.lift((() => () => {
-          const __cs_point = cs.splice((createSignal))(
+          const [__cs_point, __cs_setPoint] = cs.splice((createSignal))(
             { x: 1 },
             { equals: (__cs_previous, __cs_next) => __cs_previous.x === __cs_next.x },
           );
           const __cs_label = () => {
             cs.globalThis.window.console.log();
-            return "x " + __cs_point[0]().x;
+            return "x " + __cs_point().x;
           };
           return (
             <div>
-              <button onclick={() => __cs_point[1]({ x: __cs_point[0]().x })}>
-                same
-              </button>
+              <button onclick={() => __cs_setPoint({ x: __cs_point().x })}>same</button>
               <p>{__cs_label()}</p>
             </div>
           );
@@ -89,13 +87,13 @@ describe("equals", () => {
     render(
       await evaluate(
         cs.lift((() => () => {
-          const __cs_n = cs.splice((createSignal))(1, {
+          const [__cs_n, __cs_setN] = cs.splice((createSignal))(1, {
             equals: (__cs_previous, __cs_next) => {
               cs.globalThis.window.console.log(__cs_previous, __cs_next);
               return __cs_previous === __cs_next;
             },
           });
-          return <button onclick={() => __cs_n[1](2)}>{"n " + __cs_n[0]()}</button>;
+          return <button onclick={() => __cs_setN(2)}>{"n " + __cs_n()}</button>;
         })()),
       ),
     );
@@ -108,14 +106,14 @@ describe("equals", () => {
     render(
       await evaluate(
         cs.lift((() => () => {
-          const __cs_n = cs.splice((createSignal))(1);
+          const [__cs_n, __cs_setN] = cs.splice((createSignal))(1);
           const __cs_label = () => {
             cs.globalThis.window.console.log();
-            return "n " + __cs_n[0]();
+            return "n " + __cs_n();
           };
           return (
             <div>
-              <button onclick={() => __cs_n[1](1)}>same</button>
+              <button onclick={() => __cs_setN(1)}>same</button>
               <p>{__cs_label()}</p>
             </div>
           );
@@ -130,16 +128,14 @@ describe("equals", () => {
     render(
       await evaluate(
         cs.lift((() => () => {
-          const __cs_point = cs.splice((createSignal))({ x: 1 });
+          const [__cs_point, __cs_setPoint] = cs.splice((createSignal))({ x: 1 });
           const __cs_label = () => {
             cs.globalThis.window.console.log();
-            return "x " + __cs_point[0]().x;
+            return "x " + __cs_point().x;
           };
           return (
             <div>
-              <button onclick={() => __cs_point[1]({ x: __cs_point[0]().x })}>
-                same
-              </button>
+              <button onclick={() => __cs_setPoint({ x: __cs_point().x })}>same</button>
               <p>{__cs_label()}</p>
             </div>
           );

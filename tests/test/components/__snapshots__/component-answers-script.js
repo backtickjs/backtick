@@ -12,10 +12,10 @@ import { snapshotCase } from "../snapshotCase.ts";
 // draw nothing.
 async function Panel() {
   return cs.create(
-    "3bpy25n6ucj1q:14:9",
+    "4mst6ui5kdcm:14:9",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
-    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<em>`);\nexports.default = $splice0 => {\n    const n = $splice0()(2);\n    return (() => {\n        var _el$ = _tmpl$();\n        (0, web_2.insert)(_el$, () => n[0]());\n        return _el$;\n    })();\n};\n}',
-    '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAaYA,QAAA;IACR,MAAMC,CAAC,GAAGD,QAAA,EAAa,CAAC,CAAC,CAAC;IAC1B;QAAA,IAAAE,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,QAAYD,CAAC,CAAC,CAAC,CAAC,EAAE;QAAA,OAAAC,IAAA;IAAA;AACpB,CAAC","names":["$splice0","n","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["components/component-answers-script.test.tsx"]}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<em>`);\nexports.default = $splice0 => {\n    const [n, setN] = $splice0()(2);\n    return (() => {\n        var _el$ = _tmpl$();\n        (0, web_2.insert)(_el$, n);\n        return _el$;\n    })();\n};\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAaYA,QAAA;IACR,MAAM,CAACC,CAAC,EAAEC,IAAI,CAAC,GAAGF,QAAA,EAAa,CAAC,CAAC,CAAC;IAClC;QAAA,IAAAG,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,EAAYF,CAAC;QAAA,OAAAE,IAAA;IAAA;AACf,CAAC","names":["$splice0","n","setN","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["components/component-answers-script.test.tsx"]}',
     ["solid-js/web"],
   );
 }
@@ -24,7 +24,7 @@ it("componentAnswersScript", async (t) => {
     t,
     "componentAnswersScript",
     cs.create(
-      "3bpy25n6ucj1q:24:4",
+      "4mst6ui5kdcm:24:4",
       { params: [{ kind: "splice", value: _jsx(Panel, {}), bindings: [] }] },
       '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, $splice0);\n    return _el$;\n})();\n}',
       '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAuBOA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAMD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAqB","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["components/component-answers-script.test.tsx"]}',

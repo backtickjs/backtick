@@ -102,16 +102,16 @@ describe("a field's value", () => {
   // defaults, so a write that reaches the attribute changes nothing shown.
   async function Field() {
     return cs`{
-      const text = $createSignal("first");
-      const isOn = $createSignal(false);
+      const [text, setText] = $createSignal("first");
+      const [isOn, setIsOn] = $createSignal(false);
       return (
         <div>
-          <input aria-label="text" value={text[0]()} />
-          <input type="checkbox" aria-label="on" checked={isOn[0]()} />
+          <input aria-label="text" value={text()} />
+          <input type="checkbox" aria-label="on" checked={isOn()} />
           <button
             onclick={() => {
-              text[1]("second");
-              isOn[1](true);
+              setText("second");
+              setIsOn(true);
             }}
           >
             write

@@ -3,7 +3,12 @@ cs.lift((() =>    →  [-semantic -navigation]
 \n                → \n    
 const             → const
                   →  
+[                 → [
 __cs_selected     → selected
+,                 → ,
+                  →  
+__cs_setSelected  → setSelected
+]                 → ]
                   →  
 =                 → =
                   →  
@@ -26,9 +31,6 @@ cs.splice(        →  [-semantic -navigation]
 )                 →  [-semantic -navigation]
 (                 → (
 __cs_selected     → selected
-[                 → [
-0                 → 0
-]                 → ]
 )                 → )
 ;                 → ;
 \n                → \n    
@@ -51,10 +53,7 @@ onclick           → onclick
                   →  
 =>                → =>
                   →  
-__cs_selected     → selected
-[                 → [
-1                 → 1
-]                 → ]
+__cs_setSelected  → setSelected
 (                 → (
 1                 → 1
 )                 → )

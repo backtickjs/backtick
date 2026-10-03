@@ -19,14 +19,14 @@ const Button = createImport<typeof LibraryButton>({
 // In a script, the library's component as the library types it: a handler, a
 // slot taking script JSX, and children.
 const counter = cs`{
-  const count = $createSignal(0);
+  const [count, setCount] = $createSignal(0);
   return (
     <Button
       variant="primary"
       icon={<b>+</b>}
-      onClick={() => count[1](count[0]() + 1)}
+      onClick={() => setCount(count() + 1)}
     >
-      <span>{"Pressed " + count[0]() + " times"}</span>
+      <span>{"Pressed " + count() + " times"}</span>
     </Button>
   );
 }`;

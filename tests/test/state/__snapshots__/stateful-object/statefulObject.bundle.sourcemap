@@ -50,14 +50,18 @@ $splice0          → state/stateful-object.test.tsx 10:20 (initial:…
 initial           → state/stateful-object.test.tsx 10:21 initial
  => {             → state/stateful-object.test.tsx 10:36 )…
 const             → state/stateful-object.test.tsx 11:3 const 
-count             → state/stateful-object.test.tsx 11:9 count
- =                → state/stateful-object.test.tsx 11:14  = 
-$splice0          → state/stateful-object.test.tsx 11:17 $createSignal(initial);…
-()                → state/stateful-object.test.tsx 11:17 $createSignal(initial);…
-(                 → state/stateful-object.test.tsx 11:30 (
-initial           → state/stateful-object.test.tsx 11:31 initial
-)                 → state/stateful-object.test.tsx 11:38 )
-;                 → state/stateful-object.test.tsx 11:39 ;
+[                 → state/stateful-object.test.tsx 11:9 [
+count             → state/stateful-object.test.tsx 11:10 count
+,                 → state/stateful-object.test.tsx 11:15 , 
+setCount          → state/stateful-object.test.tsx 11:17 setCount
+]                 → state/stateful-object.test.tsx 11:25 ]
+ =                → state/stateful-object.test.tsx 11:26  = 
+$splice0          → state/stateful-object.test.tsx 11:29 $createSignal(initial);…
+()                → state/stateful-object.test.tsx 11:29 $createSignal(initial);…
+(                 → state/stateful-object.test.tsx 11:42 (
+initial           → state/stateful-object.test.tsx 11:43 initial
+)                 → state/stateful-object.test.tsx 11:50 )
+;                 → state/stateful-object.test.tsx 11:51 ;
 return            → state/stateful-object.test.tsx 12:3 return 
 {                 → state/stateful-object.test.tsx 12:10 {
 get               → state/stateful-object.test.tsx 13:5 get
@@ -65,29 +69,20 @@ get               → state/stateful-object.test.tsx 13:5 get
 ()                → state/stateful-object.test.tsx 13:10 () 
 =>                → state/stateful-object.test.tsx 13:10 ()…
 count             → state/stateful-object.test.tsx 13:16 count
-[                 → state/stateful-object.test.tsx 13:21 [
-0                 → state/stateful-object.test.tsx 13:22 0
-]                 → state/stateful-object.test.tsx 13:23 ]
-()                → state/stateful-object.test.tsx 13:24 ()
-,                 → state/stateful-object.test.tsx 13:26 ,
+()                → state/stateful-object.test.tsx 13:21 ()
+,                 → state/stateful-object.test.tsx 13:23 ,
 add               → state/stateful-object.test.tsx 14:5 add
 :                 → state/stateful-object.test.tsx 14:8 : 
 n                 → state/stateful-object.test.tsx 14:11 n
  => {             → state/stateful-object.test.tsx 14:20 )…
-count             → state/stateful-object.test.tsx 15:7 count
-[                 → state/stateful-object.test.tsx 15:12 [
-1                 → state/stateful-object.test.tsx 15:13 1
-]                 → state/stateful-object.test.tsx 15:14 ]
+setCount          → state/stateful-object.test.tsx 15:7 setCount
 (                 → state/stateful-object.test.tsx 15:15 (
 count             → state/stateful-object.test.tsx 15:16 count
-[                 → state/stateful-object.test.tsx 15:21 [
-0                 → state/stateful-object.test.tsx 15:22 0
-]                 → state/stateful-object.test.tsx 15:23 ]
-()                → state/stateful-object.test.tsx 15:24 ()
- +                → state/stateful-object.test.tsx 15:26  + 
-n                 → state/stateful-object.test.tsx 15:29 n
-)                 → state/stateful-object.test.tsx 15:30 )
-;                 → state/stateful-object.test.tsx 15:31 ;
+()                → state/stateful-object.test.tsx 15:21 ()
+ +                → state/stateful-object.test.tsx 15:23  + 
+n                 → state/stateful-object.test.tsx 15:26 n
+)                 → state/stateful-object.test.tsx 15:27 )
+;                 → state/stateful-object.test.tsx 15:28 ;
 }                 → state/stateful-object.test.tsx 16:5 }
 ;                 → state/stateful-object.test.tsx 17:4 ;
 }                 → state/stateful-object.test.tsx 18:1 }

@@ -12,17 +12,17 @@ import { evaluate } from "../evaluate.ts";
 // the two rows and nothing else.
 async function SwappableRows() {
   return cs`{
-    const ids = $createSignal<number[]>([1, 2, 3, 4, 5]);
+    const [ids, setIds] = $createSignal<number[]>([1, 2, 3, 4, 5]);
     const swap = () => {
-      const held = ids[0]();
-      ids[1](held.with(1, held[3]).with(3, held[1]));
+      const held = ids();
+      setIds(held.with(1, held[3]).with(3, held[1]));
     };
     return (
       <div>
         <button onclick={swap}>swap</button>
         <table>
           <tbody>
-            <For each={ids[0]()}>
+            <For each={ids()}>
               {(id: number) => (
                 <tr id={"row-" + id}>
                   <td>{"row " + id}</td>

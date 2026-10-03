@@ -1,24 +1,25 @@
 // 14:10
 ($splice0, $splice1, $tag2) => {  → 14:13 {…
 const                             → 15:5 const 
-selected                          → 15:11 selected
- =                                → 15:19  = 
-$splice0()                        → 15:22 $createSignal(0);…
-(                                 → 15:35 (
-0                                 → 15:36 0
-)                                 → 15:37 )
-;                                 → 15:38 ;
+[                                 → 15:11 [
+selected                          → 15:12 selected
+,                                 → 15:20 , 
+setSelected                       → 15:22 setSelected
+]                                 → 15:33 ]
+ =                                → 15:34  = 
+$splice0()                        → 15:37 $createSignal(0);…
+(                                 → 15:50 (
+0                                 → 15:51 0
+)                                 → 15:52 )
+;                                 → 15:53 ;
 const                             → 16:5 const 
 isSelected                        → 16:11 isSelected
  =                                → 16:21  = 
-$splice1()                        → 16:24 $createSelector(selected[0]);…
+$splice1()                        → 16:24 $createSelector(selected);…
 (                                 → 16:39 (
 selected                          → 16:40 selected
-[                                 → 16:48 [
-0                                 → 16:49 0
-]                                 → 16:50 ]
-)                                 → 16:51 )
-;                                 → 16:52 ;
+)                                 → 16:48 )
+;                                 → 16:49 ;
 return                            → 17:5 return 
 (                                 → 17:12 (
 <                                 → 18:7 <
@@ -31,10 +32,7 @@ onclick                           → 19:15 onclick
 {                                 → 19:23 {
 ()                                → 19:24 () 
 =>                                → 19:27 =>
-selected                          → 19:30 selected
-[                                 → 19:38 [
-1                                 → 19:39 1
-]                                 → 19:40 ]
+setSelected                       → 19:30 setSelected
 (                                 → 19:41 (
 1                                 → 19:42 1
 )                                 → 19:43 )

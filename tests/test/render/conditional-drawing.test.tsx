@@ -28,28 +28,28 @@ import { evaluate } from "../evaluate.ts";
 // ends one: once it stops saying yes, nothing is written and nothing runs
 // again. Without that, this case does not stop.
 const Held = cs`(props: { again: () => boolean }) => {
-  const shown = $createSignal(false);
+  const [shown, setShown] = $createSignal(false);
 
   const started = window.setTimeout(() => {
     if (props.again()) {
-      shown[1](true);
+      setShown(true);
     }
   }, 0);
 
-  return <>{shown[0]() ? <em>shown</em> : <i>waiting</i>}</>;
+  return <>{shown() ? <em>shown</em> : <i>waiting</i>}</>;
 }`;
 
 const conditionalDrawing = cs`{
-  const builds = $createSignal(0);
+  const [builds, setBuilds] = $createSignal(0);
 
   return (
     <div>
-      <span>{"builds " + builds[0]()}</span>
+      <span>{"builds " + builds()}</span>
       <section>
         <Held
           again={() => {
-            builds[1](builds[0]() + 1);
-            return builds[0]() < 5;
+            setBuilds(builds() + 1);
+            return builds() < 5;
           }}
         />
       </section>

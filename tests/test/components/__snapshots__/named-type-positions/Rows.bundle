@@ -8,7 +8,7 @@ const $modules = {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
   },
-  "3njqkp1magllx:19:9": (module, exports, require) => {
+  "1stjcbjgwgnjt:19:9": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -20,9 +20,9 @@ const $modules = {
       ),
       _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<span>`);
     exports.default = ($splice0, $tag1) => {
-      const rows = $splice0()([]);
+      const [rows, setRows] = $splice0()([]);
       const add = (row) => {
-        rows[1]([row]);
+        setRows([row]);
       };
       const label = (row) => {
         return row.label;
@@ -40,7 +40,7 @@ const $modules = {
           _el$3,
           (0, web_4.createComponent)($tag1, {
             get each() {
-              return rows[0]();
+              return rows();
             },
             children: (row) =>
               (() => {
@@ -69,7 +69,7 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("1uptcsn9236u2:352:9").default;
-const $cs1 = $require("3njqkp1magllx:19:9").default;
+const $cs1 = $require("1stjcbjgwgnjt:19:9").default;
 export default $cs0(
   () => $i0,
   () => $cs1(() => $i1, $i2),

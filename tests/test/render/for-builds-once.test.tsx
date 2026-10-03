@@ -18,27 +18,27 @@ import { evaluate } from "../evaluate.ts";
 const answerItems = ["one", "two"];
 
 const WaitingList = cs`(props: { more: () => boolean }) => {
-  const items = $createSignal<string[]>([]);
+  const [items, setItems] = $createSignal<string[]>([]);
 
   const started = window.setTimeout(() => {
     if (props.more()) {
-      items[1]($answerItems);
+      setItems($answerItems);
     }
   }, 0);
 
-  return <For each={items[0]()}>{(item: string) => <em>{item}</em>}</For>;
+  return <For each={items()}>{(item: string) => <em>{item}</em>}</For>;
 }`;
 
 const forBuildsOnce = cs`{
-  const asked = $createSignal(0);
+  const [asked, setAsked] = $createSignal(0);
 
   return (
     <div>
-      <span>{"asked " + asked[0]()}</span>
+      <span>{"asked " + asked()}</span>
       <WaitingList
         more={() => {
-          asked[1](asked[0]() + 1);
-          return asked[0]() < 5;
+          setAsked(asked() + 1);
+          return asked() < 5;
         }}
       />
     </div>

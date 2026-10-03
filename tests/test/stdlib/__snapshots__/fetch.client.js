@@ -3,7 +3,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0) => () => {
-    const held = $splice0()("waiting");
+    const [held, setHeld] = $splice0()("waiting");
     window
         .fetch("/cases/built-ins/Math/trunc/Math.trunc_Success", {
         signal: window.AbortSignal.timeout(3000),
@@ -15,10 +15,10 @@ exports.default = (($splice0) => () => {
         return response.json();
     })
         .then((value) => {
-        held[1](value === null ? "null" : "a value");
+        setHeld(value === null ? "null" : "a value");
     })
         .catch((error) => {
-        held[1]("failed — " + String(error));
+        setHeld("failed — " + String(error));
     });
     window
         .fetch("/cases", {
@@ -28,10 +28,10 @@ exports.default = (($splice0) => () => {
     })
         .then((response) => response.text())
         .then((text) => {
-        held[1](text);
+        setHeld(text);
     }, (error) => {
-        held[1](String(error));
+        setHeld(String(error));
     });
-    return held[0]();
+    return held();
 });
 }

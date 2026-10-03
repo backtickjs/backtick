@@ -8,7 +8,12 @@ cs.lift((() =>    →  [-semantic -navigation]
 \n                → \n        
 const             → const
                   →  
+[                 → [
 __cs_count        → count
+,                 → ,
+                  →  
+__cs_setCount     → setCount
+]                 → ]
                   →  
 =                 → =
                   →  
@@ -40,15 +45,9 @@ log               → log
 )                 → )
 ;                 → ;
 \n                → \n          
-__cs_count        → count
-[                 → [
-1                 → 1
-]                 → ]
+__cs_setCount     → setCount
 (                 → (
 __cs_count        → count
-[                 → [
-0                 → 0
-]                 → ]
 (                 → (
 )                 → )
                   →  
@@ -73,9 +72,6 @@ p                 → p
 +                 → +
                   →  
 __cs_count        → count
-[                 → [
-0                 → 0
-]                 → ]
 (                 → (
 )                 → )
 }                 → }
@@ -96,7 +92,12 @@ cs.lift((() =>    →  [-semantic -navigation]
 \n                → \n          
 const             → const
                   →  
+[                 → [
 __cs_said         → said
+,                 → ,
+                  →  
+__cs_setSaid      → setSaid
+]                 → ]
                   →  
 =                 → =
                   →  
@@ -132,10 +133,7 @@ cs.splice(        →  [-semantic -navigation]
                   →  
 =>                → =>
                   →  
-__cs_said         → said
-[                 → [
-1                 → 1
-]                 → ]
+__cs_setSaid      → setSaid
 (                 → (
 "ran"             → "ran"
 )                 → )
@@ -145,9 +143,6 @@ __cs_said         → said
 \n                → \n              
 {                 → {
 __cs_said         → said
-[                 → [
-0                 → 0
-]                 → ]
 (                 → (
 )                 → )
 }                 → }

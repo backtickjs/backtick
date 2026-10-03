@@ -14,23 +14,23 @@ it("eventHandlers", async (t) => {
     t,
     "eventHandlers",
     cs`{
-      const said = $createSignal("");
+      const [said, setSaid] = $createSignal("");
 
       return (
         <form
           onsubmit={(event) => {
             event.preventDefault();
-            said[1](event.type + " " + event.cancelable);
+            setSaid(event.type + " " + event.cancelable);
           }}
         >
-          <textarea oninput={(event) => said[1](event.currentTarget.value)} />
-          <input oninput={(event) => said[1](event.currentTarget.value)} />
+          <textarea oninput={(event) => setSaid(event.currentTarget.value)} />
+          <input oninput={(event) => setSaid(event.currentTarget.value)} />
           <button
             onclick={(event) =>
-              said[1](event.clientX + " " + event.currentTarget.tagName)
+              setSaid(event.clientX + " " + event.currentTarget.tagName)
             }
           >
-            {said[0]()}
+            {said()}
           </button>
         </form>
       );

@@ -16,34 +16,46 @@ $splice1                            → state/state-widening.test.tsx 24:13 {…
 $splice2                            → state/state-widening.test.tsx 24:13 {…
 ) => {                              → state/state-widening.test.tsx 24:13 {…
 const                               → state/state-widening.test.tsx 25:5 const 
-flag                                → state/state-widening.test.tsx 25:11 flag
- =                                  → state/state-widening.test.tsx 25:15  = 
-$splice0                            → state/state-widening.test.tsx 25:18 $createSignal(true);…
-()                                  → state/state-widening.test.tsx 25:18 $createSignal(true);…
-(                                   → state/state-widening.test.tsx 25:31 (
-true                                → state/state-widening.test.tsx 25:32 true
-)                                   → state/state-widening.test.tsx 25:36 )
-;                                   → state/state-widening.test.tsx 25:37 ;
+[                                   → state/state-widening.test.tsx 25:11 [
+flag                                → state/state-widening.test.tsx 25:12 flag
+,                                   → state/state-widening.test.tsx 25:16 , 
+setFlag                             → state/state-widening.test.tsx 25:18 setFlag
+]                                   → state/state-widening.test.tsx 25:25 ]
+ =                                  → state/state-widening.test.tsx 25:26  = 
+$splice0                            → state/state-widening.test.tsx 25:29 $createSignal(true);…
+()                                  → state/state-widening.test.tsx 25:29 $createSignal(true);…
+(                                   → state/state-widening.test.tsx 25:42 (
+true                                → state/state-widening.test.tsx 25:43 true
+)                                   → state/state-widening.test.tsx 25:47 )
+;                                   → state/state-widening.test.tsx 25:48 ;
 const                               → state/state-widening.test.tsx 26:5 const 
-tone                                → state/state-widening.test.tsx 26:11 tone
- =                                  → state/state-widening.test.tsx 26:15  = 
-$splice0                            → state/state-widening.test.tsx 26:18 $createSignal(${Tone.Warm});…
-()                                  → state/state-widening.test.tsx 26:18 $createSignal(${Tone.Warm});…
-(                                   → state/state-widening.test.tsx 26:31 (
-$splice1                            → state/state-widening.test.tsx 26:32 ${Tone.Warm});…
-()                                  → state/state-widening.test.tsx 26:32 ${Tone.Warm});…
-)                                   → state/state-widening.test.tsx 26:33 {Tone.Warm});…
-;                                   → state/state-widening.test.tsx 26:45 ;
+[                                   → state/state-widening.test.tsx 26:11 [
+tone                                → state/state-widening.test.tsx 26:12 tone
+,                                   → state/state-widening.test.tsx 26:16 , 
+setTone                             → state/state-widening.test.tsx 26:18 setTone
+]                                   → state/state-widening.test.tsx 26:25 ]
+ =                                  → state/state-widening.test.tsx 26:26  = 
+$splice0                            → state/state-widening.test.tsx 26:29 $createSignal(${Tone.Warm});…
+()                                  → state/state-widening.test.tsx 26:29 $createSignal(${Tone.Warm});…
+(                                   → state/state-widening.test.tsx 26:42 (
+$splice1                            → state/state-widening.test.tsx 26:43 ${Tone.Warm});…
+()                                  → state/state-widening.test.tsx 26:43 ${Tone.Warm});…
+)                                   → state/state-widening.test.tsx 26:44 {Tone.Warm});…
+;                                   → state/state-widening.test.tsx 26:56 ;
 const                               → state/state-widening.test.tsx 27:5 const 
-step                                → state/state-widening.test.tsx 27:11 step
- =                                  → state/state-widening.test.tsx 27:15  = 
-$splice0                            → state/state-widening.test.tsx 27:18 $createSignal<()…
-()                                  → state/state-widening.test.tsx 27:18 $createSignal<()…
-(                                   → state/state-widening.test.tsx 27:31 <()…
-() =>                               → state/state-widening.test.tsx 27:46 () => 
-0                                   → state/state-widening.test.tsx 27:52 0
-)                                   → state/state-widening.test.tsx 27:53 )
-;                                   → state/state-widening.test.tsx 27:54 ;
+[                                   → state/state-widening.test.tsx 27:11 [
+step                                → state/state-widening.test.tsx 27:12 step
+,                                   → state/state-widening.test.tsx 27:16 , 
+setStep                             → state/state-widening.test.tsx 27:18 setStep
+]                                   → state/state-widening.test.tsx 27:25 ]
+ =                                  → state/state-widening.test.tsx 27:26  = 
+$splice0                            → state/state-widening.test.tsx 27:29 $createSignal<()…
+()                                  → state/state-widening.test.tsx 27:29 $createSignal<()…
+(                                   → state/state-widening.test.tsx 27:42 <()…
+() =>                               → state/state-widening.test.tsx 27:57 () => 
+0                                   → state/state-widening.test.tsx 27:63 0
+)                                   → state/state-widening.test.tsx 27:64 )
+;                                   → state/state-widening.test.tsx 27:65 ;
 return (() => {                     → state/state-widening.test.tsx 28:5 return…
 var                                 → state/state-widening.test.tsx 28:5 return…
 _el$                                → state/state-widening.test.tsx 28:5 return…
@@ -55,27 +67,18 @@ _el$                                → state/state-widening.test.tsx 28:5 retur
 $$click                             → state/state-widening.test.tsx 28:5 return…
  =                                  → state/state-widening.test.tsx 28:5 return…
 () => {                             → state/state-widening.test.tsx 30:18 () => {
-flag                                → state/state-widening.test.tsx 31:11 flag
-[                                   → state/state-widening.test.tsx 31:15 [
-1                                   → state/state-widening.test.tsx 31:16 1
-]                                   → state/state-widening.test.tsx 31:17 ]
+setFlag                             → state/state-widening.test.tsx 31:11 setFlag
 (                                   → state/state-widening.test.tsx 31:18 (
 false                               → state/state-widening.test.tsx 31:19 false
 )                                   → state/state-widening.test.tsx 31:24 )
 ;                                   → state/state-widening.test.tsx 31:25 ;
-tone                                → state/state-widening.test.tsx 32:11 tone
-[                                   → state/state-widening.test.tsx 32:15 [
-1                                   → state/state-widening.test.tsx 32:16 1
-]                                   → state/state-widening.test.tsx 32:17 ]
+setTone                             → state/state-widening.test.tsx 32:11 setTone
 (                                   → state/state-widening.test.tsx 32:18 (
 $splice2                            → state/state-widening.test.tsx 32:19 ${Tone.Cool});…
 ()                                  → state/state-widening.test.tsx 32:19 ${Tone.Cool});…
 )                                   → state/state-widening.test.tsx 32:20 {Tone.Cool});…
 ;                                   → state/state-widening.test.tsx 32:32 ;
-step                                → state/state-widening.test.tsx 33:11 step
-[                                   → state/state-widening.test.tsx 33:15 [
-1                                   → state/state-widening.test.tsx 33:16 1
-]                                   → state/state-widening.test.tsx 33:17 ]
+setStep                             → state/state-widening.test.tsx 33:11 setStep
 (                                   → state/state-widening.test.tsx 33:18 (
 () =>                               → state/state-widening.test.tsx 33:19 () => 
 () =>                               → state/state-widening.test.tsx 33:25 () => 
@@ -89,31 +92,22 @@ step                                → state/state-widening.test.tsx 33:11 step
 _el$                                → state/state-widening.test.tsx 34:10 }…
 , () =>                             → state/state-widening.test.tsx 34:10 }…
 flag                                → state/state-widening.test.tsx 36:10 flag
-[                                   → state/state-widening.test.tsx 36:14 [
-0                                   → state/state-widening.test.tsx 36:15 0
-]                                   → state/state-widening.test.tsx 36:16 ]
-()                                  → state/state-widening.test.tsx 36:17 ()
- +                                  → state/state-widening.test.tsx 36:19  + 
-" "                                 → state/state-widening.test.tsx 36:22 " "
- +                                  → state/state-widening.test.tsx 36:25  + 
-tone                                → state/state-widening.test.tsx 36:28 tone
-[                                   → state/state-widening.test.tsx 36:32 [
-0                                   → state/state-widening.test.tsx 36:33 0
-]                                   → state/state-widening.test.tsx 36:34 ]
-()                                  → state/state-widening.test.tsx 36:35 ()
+()                                  → state/state-widening.test.tsx 36:14 ()
+ +                                  → state/state-widening.test.tsx 36:16  + 
+" "                                 → state/state-widening.test.tsx 36:19 " "
+ +                                  → state/state-widening.test.tsx 36:22  + 
+tone                                → state/state-widening.test.tsx 36:25 tone
+()                                  → state/state-widening.test.tsx 36:29 ()
+ +                                  → state/state-widening.test.tsx 36:31  + 
+" "                                 → state/state-widening.test.tsx 36:34 " "
  +                                  → state/state-widening.test.tsx 36:37  + 
-" "                                 → state/state-widening.test.tsx 36:40 " "
- +                                  → state/state-widening.test.tsx 36:43  + 
-step                                → state/state-widening.test.tsx 36:46 step
-[                                   → state/state-widening.test.tsx 36:50 [
-0                                   → state/state-widening.test.tsx 36:51 0
-]                                   → state/state-widening.test.tsx 36:52 ]
-()                                  → state/state-widening.test.tsx 36:53 ()
-()                                  → state/state-widening.test.tsx 36:55 ()
-);                                  → state/state-widening.test.tsx 36:57 }…
-return                              → state/state-widening.test.tsx 36:57 }…
-_el$                                → state/state-widening.test.tsx 36:57 }…
-;                                   → state/state-widening.test.tsx 36:57 }…
-})();                               → state/state-widening.test.tsx 36:57 }…
+step                                → state/state-widening.test.tsx 36:40 step
+()                                  → state/state-widening.test.tsx 36:44 ()
+()                                  → state/state-widening.test.tsx 36:46 ()
+);                                  → state/state-widening.test.tsx 36:48 }…
+return                              → state/state-widening.test.tsx 36:48 }…
+_el$                                → state/state-widening.test.tsx 36:48 }…
+;                                   → state/state-widening.test.tsx 36:48 }…
+})();                               → state/state-widening.test.tsx 36:48 }…
 }                                   → state/state-widening.test.tsx 39:3 }
 ;                                   → state/state-widening.test.tsx 39:4 `;…

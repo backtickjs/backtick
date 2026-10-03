@@ -83,7 +83,12 @@ cs.lift((() =>                           →  [-semantic -navigation]
 \n                                       → \n  
 const                                    → const
                                          →  
+[                                        → [
 __cs_count                               → count
+,                                        → ,
+                                         →  
+__cs_setCount                            → setCount
+]                                        → ]
                                          →  
 =                                        → =
                                          →  
@@ -175,9 +180,6 @@ n                                        → n
 =                                        → =
 {                                        → {
 __cs_count                               → count
-[                                        → [
-0                                        → 0
-]                                        → ]
 (                                        → (
 )                                        → )
 }                                        → }
@@ -192,9 +194,6 @@ u                                        → u
 +                                        → +
                                          →  
 __cs_count                               → count
-[                                        → [
-0                                        → 0
-]                                        → ]
 (                                        → (
 )                                        → )
 }                                        → }
@@ -224,15 +223,9 @@ onclick                                  → onclick
                                          →  
 =>                                       → =>
                                          →  
-__cs_count                               → count
-[                                        → [
-1                                        → 1
-]                                        → ]
+__cs_setCount                            → setCount
 (                                        → (
 __cs_count                               → count
-[                                        → [
-0                                        → 0
-]                                        → ]
 (                                        → (
 )                                        → )
                                          →  

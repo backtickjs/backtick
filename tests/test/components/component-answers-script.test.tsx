@@ -12,8 +12,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // draw nothing.
 async function Panel() {
   return cs`{
-    const n = $createSignal(2);
-    return <em>{n[0]()}</em>;
+    const [n, setN] = $createSignal(2);
+    return <em>{n()}</em>;
   }`;
 }
 

@@ -13,7 +13,7 @@ it("fetchRequests", async (t) => {
     t,
     "fetchRequests",
     cs.lift((() => () => {
-      const __cs_held = cs.splice((createSignal))("waiting");
+      const [__cs_held, __cs_setHeld] = cs.splice((createSignal))("waiting");
 
       cs.globalThis.window
         .fetch("/cases/built-ins/Math/trunc/Math.trunc_Success", {
@@ -26,10 +26,10 @@ it("fetchRequests", async (t) => {
           return __cs_response.json();
         })
         .then((__cs_value: unknown) => {
-          __cs_held[1](__cs_value === null ? "null" : "a value");
+          __cs_setHeld(__cs_value === null ? "null" : "a value");
         })
         .catch((__cs_error: unknown) => {
-          __cs_held[1]("failed — " + cs.globalThis.String(__cs_error));
+          __cs_setHeld("failed — " + cs.globalThis.String(__cs_error));
         });
 
       cs.globalThis.window
@@ -41,14 +41,14 @@ it("fetchRequests", async (t) => {
         .then((__cs_response: Response) => __cs_response.text())
         .then(
           (__cs_text: string) => {
-            __cs_held[1](__cs_text);
+            __cs_setHeld(__cs_text);
           },
           (__cs_error: unknown) => {
-            __cs_held[1](cs.globalThis.String(__cs_error));
+            __cs_setHeld(cs.globalThis.String(__cs_error));
           },
         );
 
-      return __cs_held[0]();
+      return __cs_held();
     })()),
   );
 });

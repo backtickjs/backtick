@@ -12,11 +12,11 @@ import { snapshotCase } from "../snapshotCase.ts";
 const Badge = cs.lift((() => (__cs_props: { n: number }) => <b>{"badge " + __cs_props.n}</b>)());
 
 const badges = cs.lift((() => {
-  const __cs_scale = cs.splice((createSignal))(1);
+  const [__cs_scale, __cs_setScale] = cs.splice((createSignal))(1);
   return (
     <div>
-      {(void For, cs.splice(For)({ each: [1, 2], children: (__cs_n) => cs.splice(Badge)({ n: __cs_n * __cs_scale[0](), }) }))}
-      <button onclick={() => __cs_scale[1](__cs_scale[0]() * 2)}>double</button>
+      {(void For, cs.splice(For)({ each: [1, 2], children: (__cs_n) => cs.splice(Badge)({ n: __cs_n * __cs_scale(), }) }))}
+      <button onclick={() => __cs_setScale(__cs_scale() * 2)}>double</button>
     </div>
   );
 })());

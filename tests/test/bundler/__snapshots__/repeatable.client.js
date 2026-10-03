@@ -31,24 +31,24 @@ exports.default = (() => "shared");
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0, $splice1, $splice2, $splice3, $splice4, $splice5, $splice6, $tag7) => {
-    const count = $splice0()(1);
+    const [count, setCount] = $splice0()(1);
     const rows = [1, 2, 3];
-    const total = count[0]() + $splice1(rows);
+    const total = count() + $splice1(rows);
     return (<section>
       {$splice2(rows)}
       {$splice3(rows)}
-      <p>{$splice4(rows)(count[0]())}</p>
+      <p>{$splice4(rows)(count())}</p>
       <p>{$splice5(rows)(1)(2)}</p>
       <p>{$splice6(rows)}</p>
       <p>{total}</p>
       <ul>
-        <$tag7 each={rows}>{(row) => <li>{row + count[0]()}</li>}</$tag7>
+        <$tag7 each={rows}>{(row) => <li>{row + count()}</li>}</$tag7>
       </ul>
     </section>);
 });
 }
 
-// 24:32
+// 24:29
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });

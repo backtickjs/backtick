@@ -3,7 +3,12 @@ cs.lift((() =>             →  [-semantic -navigation]
 \n                         → \n    
 const                      → const
                            →  
+[                          → [
 __cs_count                 → count
+,                          → ,
+                           →  
+__cs_setCount              → setCount
+]                          → ]
                            →  
 =                          → =
                            →  
@@ -38,15 +43,9 @@ onclick                    → onclick
                            →  
 =>                         → =>
                            →  
-__cs_count                 → count
-[                          → [
-1                          → 1
-]                          → ]
+__cs_setCount              → setCount
 (                          → (
 __cs_count                 → count
-[                          → [
-0                          → 0
-]                          → ]
 (                          → (
 )                          → )
                            →  
@@ -67,9 +66,6 @@ style                      → style
 >                          → >
 {                          → {
 __cs_count                 → count
-[                          → [
-0                          → 0
-]                          → ]
 (                          → (
 )                          → )
                            →  
@@ -99,9 +95,6 @@ span                       → span
 +                          → +
                            →  
 __cs_count                 → count
-[                          → [
-0                          → 0
-]                          → ]
 (                          → (
 )                          → )
                            →  

@@ -278,7 +278,10 @@ export function resolveBindings(
           const declaration = symbol.declarations?.find(
             (each) => each.getSourceFile() === file,
           );
-          if (declaration === undefined || declaration.getEnd() > position) {
+          if (
+            declaration === undefined ||
+            declared(ts, declaration).getEnd() > position
+          ) {
             return [];
           }
           const key = keyOf(declaration);
@@ -430,4 +433,21 @@ function nodeAt(file: ts.SourceFile, position: number): ts.Node {
   };
   file.forEachChild(visit);
   return found;
+}
+
+// What declares a name, whole: a name a pattern destructures is declared when
+// the declaration it is in is, initializer and all, not where the pattern ends.
+function declared(
+  ts: typeof import("typescript"),
+  declaration: ts.Declaration,
+): ts.Node {
+  let at: ts.Node = declaration;
+  while (
+    ts.isBindingElement(at) ||
+    ts.isObjectBindingPattern(at) ||
+    ts.isArrayBindingPattern(at)
+  ) {
+    at = at.parent;
+  }
+  return at;
 }

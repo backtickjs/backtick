@@ -7,7 +7,7 @@ const $modules = {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
   },
-  "1ge8r4d9ywy2n:17:9": (module, exports, require) => {
+  "1m4wzlyymm6k1:17:9": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -18,14 +18,14 @@ const $modules = {
       `<button id=row style=display:flex;gap:8px><span style=font-weight:700></span><span>`,
     );
     exports.default = ($splice0) => {
-      const count = $splice0()(0);
+      const [count, setCount] = $splice0()(0);
       return (() => {
         var _el$ = _tmpl$(),
           _el$2 = _el$.firstChild,
           _el$3 = _el$2.nextSibling;
-        _el$.$$click = () => count[1](count[0]() + 1);
-        (0, web_3.insert)(_el$2, () => (count[0]() > 0 ? "☑" : "☐"));
-        (0, web_3.insert)(_el$3, () => "pressed " + count[0]() + " times");
+        _el$.$$click = () => setCount(count() + 1);
+        (0, web_3.insert)(_el$2, () => (count() > 0 ? "☑" : "☐"));
+        (0, web_3.insert)(_el$3, () => "pressed " + count() + " times");
         return _el$;
       })();
     };
@@ -45,7 +45,7 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("1uptcsn9236u2:352:9").default;
-const $cs1 = $require("1ge8r4d9ywy2n:17:9").default;
+const $cs1 = $require("1m4wzlyymm6k1:17:9").default;
 export default $cs0(
   () => $i0,
   () => $cs1(() => $i1),

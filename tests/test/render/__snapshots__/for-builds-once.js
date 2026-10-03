@@ -16,7 +16,7 @@ import { evaluate } from "../evaluate.ts";
 // one: once it stops saying yes, nothing is written and nothing runs again.
 const answerItems = ["one", "two"];
 const WaitingList = cs.create(
-  "3mqkkm2axxnw5:20:20",
+  "3ovp4jeekae3x:20:20",
   {
     params: [
       { kind: "splice", value: createSignal, bindings: [] },
@@ -24,20 +24,20 @@ const WaitingList = cs.create(
       { kind: "tag", value: For },
     ],
   },
-  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<em>`);\nexports.default = ($splice0, $splice1, $tag2) => props => {\n    const items = $splice0()([]);\n    const started = window.setTimeout(() => {\n        if (props.more()) {\n            items[1]($splice1());\n        }\n    }, 0);\n    return (0, web_3.createComponent)($tag2, {\n        get each() {\n            return items[0]();\n        },\n        children: item => (() => {\n            var _el$ = _tmpl$();\n            (0, web_2.insert)(_el$, item);\n            return _el$;\n        })()\n    });\n};\n}',
-  '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAmBuB,CAAAA,QAAA,EAAAC,QAAA,EAAAC,KAAA,KAACC,KAA8B;IACpD,MAAMC,KAAK,GAAGJ,QAAA,EAAa,CAAW,EAAE,CAAC;IAEzC,MAAMK,OAAO,GAAGC,MAAM,CAACC,UAAU,CAAC;QAChC,IAAIJ,KAAK,CAACK,IAAI,EAAE,EAAE;YAChBJ,KAAK,CAAC,CAAC,CAAC,CAACH,QAAA,EAAY,CAAC;QACxB;IACF,CAAC,EAAE,CAAC,CAAC;IAEL,OAAAQ,yBAAA,EAAQP,KAAG;QAAA,IAACQ,IAAIA;YAAA,OAAEN,KAAK,CAAC,CAAC,CAAC,EAAE;QAAA;QAAAO,QAAA,EAAIC,IAAY;YAAA,IAAAC,IAAA,GAAAC,MAAA;YAAAC,gBAAA,EAAAF,IAAA,EAAUD,IAAI;YAAA,OAAAC,IAAA;QAAA;KAAM;AAClE,CAAC","names":["$splice0","$splice1","$tag2","props","items","started","window","setTimeout","more","_$createComponent","each","children","item","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["render/for-builds-once.test.tsx"]}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<em>`);\nexports.default = ($splice0, $splice1, $tag2) => props => {\n    const [items, setItems] = $splice0()([]);\n    const started = window.setTimeout(() => {\n        if (props.more()) {\n            setItems($splice1());\n        }\n    }, 0);\n    return (0, web_3.createComponent)($tag2, {\n        get each() {\n            return items();\n        },\n        children: item => (() => {\n            var _el$ = _tmpl$();\n            (0, web_2.insert)(_el$, item);\n            return _el$;\n        })()\n    });\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAmBuB,CAAAA,QAAA,EAAAC,QAAA,EAAAC,KAAA,KAACC,KAA8B;IACpD,MAAM,CAACC,KAAK,EAAEC,QAAQ,CAAC,GAAGL,QAAA,EAAa,CAAW,EAAE,CAAC;IAErD,MAAMM,OAAO,GAAGC,MAAM,CAACC,UAAU,CAAC;QAChC,IAAIL,KAAK,CAACM,IAAI,EAAE,EAAE;YAChBJ,QAAQ,CAACJ,QAAA,EAAY,CAAC;QACxB;IACF,CAAC,EAAE,CAAC,CAAC;IAEL,OAAAS,yBAAA,EAAQR,KAAG;QAAA,IAACS,IAAIA;YAAA,OAAEP,KAAK,EAAE;QAAA;QAAAQ,QAAA,EAAIC,IAAY;YAAA,IAAAC,IAAA,GAAAC,MAAA;YAAAC,gBAAA,EAAAF,IAAA,EAAUD,IAAI;YAAA,OAAAC,IAAA;QAAA;KAAM;AAC/D,CAAC","names":["$splice0","$splice1","$tag2","props","items","setItems","started","window","setTimeout","more","_$createComponent","each","children","item","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["render/for-builds-once.test.tsx"]}',
   ["solid-js/web"],
 );
 const forBuildsOnce = cs.create(
-  "3mqkkm2axxnw5:32:22",
+  "3ovp4jeekae3x:32:22",
   {
     params: [
       { kind: "splice", value: createSignal, bindings: [] },
       { kind: "tag", value: WaitingList },
     ],
   },
-  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span>`);\nexports.default = ($splice0, $tag1) => {\n    const asked = $splice0()(0);\n    return (() => {\n        var _el$ = _tmpl$(), _el$2 = _el$.firstChild;\n        (0, web_3.insert)(_el$2, () => "asked " + asked[0]());\n        (0, web_3.insert)(_el$, (0, web_2.createComponent)($tag1, {\n            more: () => {\n                asked[1](asked[0]() + 1);\n                return asked[0]() < 5;\n            }\n        }), null);\n        return _el$;\n    })();\n};\n}',
-  '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBA+ByB,CAAAA,QAAA,EAAAC,KAAA;IACvB,MAAMC,KAAK,GAAGF,QAAA,EAAa,CAAC,CAAC,CAAC;IAE9B;QAAA,IAAAG,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;QAAAC,gBAAA,EAAAF,KAAA,QAEW,QAAQ,GAAGH,KAAK,CAAC,CAAC,CAAC,EAAE;QAAAK,gBAAA,EAAAJ,IAAA,EAAAK,yBAAA,EAC3BP,KAAW;YACVQ,IAAI,EAAEA,GAAA;gBACJP,KAAK,CAAC,CAAC,CAAC,CAACA,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;gBACxB,OAAOA,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC;YACvB;SAAC;QAAA,OAAAC,IAAA;IAAA;AAIT,CAAC","names":["$splice0","$tag1","asked","_el$","_tmpl$","_el$2","firstChild","_$insert","_$createComponent","more"],"ignoreList":[],"sources":["render/for-builds-once.test.tsx"]}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span>`);\nexports.default = ($splice0, $tag1) => {\n    const [asked, setAsked] = $splice0()(0);\n    return (() => {\n        var _el$ = _tmpl$(), _el$2 = _el$.firstChild;\n        (0, web_3.insert)(_el$2, () => "asked " + asked());\n        (0, web_3.insert)(_el$, (0, web_2.createComponent)($tag1, {\n            more: () => {\n                setAsked(asked() + 1);\n                return asked() < 5;\n            }\n        }), null);\n        return _el$;\n    })();\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBA+ByB,CAAAA,QAAA,EAAAC,KAAA;IACvB,MAAM,CAACC,KAAK,EAAEC,QAAQ,CAAC,GAAGH,QAAA,EAAa,CAAC,CAAC,CAAC;IAE1C;QAAA,IAAAI,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;QAAAC,gBAAA,EAAAF,KAAA,QAEW,QAAQ,GAAGJ,KAAK,EAAE;QAAAM,gBAAA,EAAAJ,IAAA,EAAAK,yBAAA,EACxBR,KAAW;YACVS,IAAI,EAAEA,GAAA;gBACJP,QAAQ,CAACD,KAAK,EAAE,GAAG,CAAC,CAAC;gBACrB,OAAOA,KAAK,EAAE,GAAG,CAAC;YACpB;SAAC;QAAA,OAAAE,IAAA;IAAA;AAIT,CAAC","names":["$splice0","$tag1","asked","setAsked","_el$","_tmpl$","_el$2","firstChild","_$insert","_$createComponent","more"],"ignoreList":[],"sources":["render/for-builds-once.test.tsx"]}',
   ["solid-js/web"],
 );
 it("forBuildsOnce", async (t) => {

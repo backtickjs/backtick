@@ -28,7 +28,7 @@ async function Panel(props: { body: Client<JSXElement> }) {
 // — and still calls the one it was written under, since that is the binding it
 // carries. The tag holds children too, read through the same record.
 const scriptBoundTagCarried = cs`{
-  const count = $createSignal(0);
+  const [count, setCount] = $createSignal(0);
   const Badge = (p: { n: number; children: JSX.Element }) => (
     <b>
       {"outer " + p.n}
@@ -41,13 +41,13 @@ const scriptBoundTagCarried = cs`{
       {
         ${(
           <Panel
-            body={cs`<Badge n={count[0]()}>
-              <u>{"kid " + count[0]()}</u>
+            body={cs`<Badge n={count()}>
+              <u>{"kid " + count()}</u>
             </Badge>`}
           />
         )}
       }
-      <button onclick={() => count[1](count[0]() + 1)}>more</button>
+      <button onclick={() => setCount(count() + 1)}>more</button>
     </div>
   );
 }`;

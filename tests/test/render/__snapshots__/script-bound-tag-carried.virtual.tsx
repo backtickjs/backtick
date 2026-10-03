@@ -28,7 +28,7 @@ async function Panel(props: { body: Client<JSXElement> }) {
 // — and still calls the one it was written under, since that is the binding it
 // carries. The tag holds children too, read through the same record.
 const scriptBoundTagCarried = cs.lift((() => {
-  const __cs_count = cs.splice((createSignal))(0);
+  const [__cs_count, __cs_setCount] = cs.splice((createSignal))(0);
   const __cs_Badge = (__cs_p: { n: number; children: JSX.Element }) => (
     <b>
       {"outer " + __cs_p.n}
@@ -41,13 +41,13 @@ const scriptBoundTagCarried = cs.lift((() => {
       {
         cs.splice((
           <Panel
-            body={cs.lift((() => <__cs_Badge n={__cs_count[0]()}>
-              <u>{"kid " + __cs_count[0]()}</u>
+            body={cs.lift((() => <__cs_Badge n={__cs_count()}>
+              <u>{"kid " + __cs_count()}</u>
             </__cs_Badge>)())}
           />
         ))
       }
-      <button onclick={() => __cs_count[1](__cs_count[0]() + 1)}>more</button>
+      <button onclick={() => __cs_setCount(__cs_count() + 1)}>more</button>
     </div>
   );
 })());

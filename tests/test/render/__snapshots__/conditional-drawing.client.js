@@ -3,13 +3,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0) => (props) => {
-    const shown = $splice0()(false);
+    const [shown, setShown] = $splice0()(false);
     const started = window.setTimeout(() => {
         if (props.again()) {
-            shown[1](true);
+            setShown(true);
         }
     }, 0);
-    return <>{shown[0]() ? <em>shown</em> : <i>waiting</i>}</>;
+    return <>{shown() ? <em>shown</em> : <i>waiting</i>}</>;
 });
 }
 
@@ -18,13 +18,13 @@ exports.default = (($splice0) => (props) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0, $tag1) => {
-    const builds = $splice0()(0);
+    const [builds, setBuilds] = $splice0()(0);
     return (<div>
-      <span>{"builds " + builds[0]()}</span>
+      <span>{"builds " + builds()}</span>
       <section>
         <$tag1 again={() => {
-            builds[1](builds[0]() + 1);
-            return builds[0]() < 5;
+            setBuilds(builds() + 1);
+            return builds() < 5;
         }}/>
       </section>
     </div>);

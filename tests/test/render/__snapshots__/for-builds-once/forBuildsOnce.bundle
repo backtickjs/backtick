@@ -2,7 +2,7 @@ import { createSignal as $i0 } from "solid-js";
 import { For as $i1 } from "solid-js";
 import * as $module0 from "solid-js/web";
 const $modules = {
-  "3mqkkm2axxnw5:32:22": (module, exports, require) => {
+  "3ovp4jeekae3x:32:22": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -10,17 +10,17 @@ const $modules = {
     const web_3 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span>`);
     exports.default = ($splice0, $tag1) => {
-      const asked = $splice0()(0);
+      const [asked, setAsked] = $splice0()(0);
       return (() => {
         var _el$ = _tmpl$(),
           _el$2 = _el$.firstChild;
-        (0, web_3.insert)(_el$2, () => "asked " + asked[0]());
+        (0, web_3.insert)(_el$2, () => "asked " + asked());
         (0, web_3.insert)(
           _el$,
           (0, web_2.createComponent)($tag1, {
             more: () => {
-              asked[1](asked[0]() + 1);
-              return asked[0]() < 5;
+              setAsked(asked() + 1);
+              return asked() < 5;
             },
           }),
           null,
@@ -29,7 +29,7 @@ const $modules = {
       })();
     };
   },
-  "3mqkkm2axxnw5:20:20": (module, exports, require) => {
+  "3ovp4jeekae3x:20:20": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -37,15 +37,15 @@ const $modules = {
     const web_3 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<em>`);
     exports.default = ($splice0, $splice1, $tag2) => (props) => {
-      const items = $splice0()([]);
+      const [items, setItems] = $splice0()([]);
       const started = window.setTimeout(() => {
         if (props.more()) {
-          items[1]($splice1());
+          setItems($splice1());
         }
       }, 0);
       return (0, web_3.createComponent)($tag2, {
         get each() {
-          return items[0]();
+          return items();
         },
         children: (item) =>
           (() => {
@@ -69,8 +69,8 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $cs0 = $require("3mqkkm2axxnw5:32:22").default;
-const $cs1 = $require("3mqkkm2axxnw5:20:20").default;
+const $cs0 = $require("3ovp4jeekae3x:32:22").default;
+const $cs1 = $require("3ovp4jeekae3x:20:20").default;
 export default $cs0(
   () => $i0,
   $cs1(

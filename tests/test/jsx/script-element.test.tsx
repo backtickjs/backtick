@@ -9,17 +9,17 @@ import { snapshotCase } from "../snapshotCase.ts";
 // written, not what it is.
 async function Card() {
   return cs`{
-    const label = $createSignal("hi");
+    const [label, setLabel] = $createSignal("hi");
 
     // A handler written inline and one held under a name: both are client code,
     // and a handler prop takes a function and nothing else.
     const row = (size: number) => {
       const css = "font-size: " + size + "px";
-      const press = () => label[1]("held");
+      const press = () => setLabel("held");
       return (
         <div style={css}>
-          <span style={css} onclick={() => label[1]("pressed")}>
-            {label[0]()}
+          <span style={css} onclick={() => setLabel("pressed")}>
+            {label()}
           </span>
           <span style="font-size: 8px">fixed</span>
           <span style={css} onclick={press}>

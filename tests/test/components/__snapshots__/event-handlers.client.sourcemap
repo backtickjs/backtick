@@ -1,13 +1,17 @@
 // 16:5
 ($splice0) => {  → 16:8 {…
 const            → 17:7 const 
-said             → 17:13 said
- =               → 17:17  = 
-$splice0()       → 17:20 $createSignal("");…
-(                → 17:33 (
-""               → 17:34 ""
-)                → 17:36 )
-;                → 17:37 ;
+[                → 17:13 [
+said             → 17:14 said
+,                → 17:18 , 
+setSaid          → 17:20 setSaid
+]                → 17:27 ]
+ =               → 17:28  = 
+$splice0()       → 17:31 $createSignal("");…
+(                → 17:44 (
+""               → 17:45 ""
+)                → 17:47 )
+;                → 17:48 ;
 return           → 19:7 return 
 (                → 19:14 (
 <                → 20:9 <
@@ -25,10 +29,7 @@ event            → 22:13 event
 preventDefault   → 22:19 preventDefault
 ()               → 22:33 ()
 ;                → 22:35 ;
-said             → 23:13 said
-[                → 23:17 [
-1                → 23:18 1
-]                → 23:19 ]
+setSaid          → 23:13 setSaid
 (                → 23:20 (
 event            → 23:21 event
 .                → 23:26 .
@@ -53,10 +54,7 @@ oninput          → 26:21 oninput
 event            → 26:31 event
 )                → 26:36 ) 
 =>               → 26:38 =>
-said             → 26:41 said
-[                → 26:45 [
-1                → 26:46 1
-]                → 26:47 ]
+setSaid          → 26:41 setSaid
 (                → 26:48 (
 event            → 26:49 event
 .                → 26:54 .
@@ -75,10 +73,7 @@ oninput          → 27:18 oninput
 event            → 27:28 event
 )                → 27:33 ) 
 =>               → 27:35 =>
-said             → 27:38 said
-[                → 27:42 [
-1                → 27:43 1
-]                → 27:44 ]
+setSaid          → 27:38 setSaid
 (                → 27:45 (
 event            → 27:46 event
 .                → 27:51 .
@@ -97,10 +92,7 @@ onclick          → 29:13 onclick
 event            → 29:23 event
 )                → 29:28 ) 
 =>               → 29:30 =>
-said             → 30:15 said
-[                → 30:19 [
-1                → 30:20 1
-]                → 30:21 ]
+setSaid          → 30:15 setSaid
 (                → 30:22 (
 event            → 30:23 event
 .                → 30:28 .
@@ -118,11 +110,8 @@ tagName          → 30:65 tagName
 >                → 31:14 …
 {                → 33:13 {
 said             → 33:14 said
-[                → 33:18 [
-0                → 33:19 0
-]                → 33:20 ]
-()               → 33:21 ()
-}                → 33:23 }
+()               → 33:18 ()
+}                → 33:20 }
 </               → 34:11 </
 button           → 34:13 button
 >                → 34:19 >

@@ -133,7 +133,12 @@ cs.lift((() =>               →  [-semantic -navigation]
 \n                           → \n      
 const                        → const
                              →  
+[                            → [
 __cs_text                    → text
+,                            → ,
+                             →  
+__cs_setText                 → setText
+]                            → ]
                              →  
 =                            → =
                              →  
@@ -147,7 +152,12 @@ cs.splice(                   →  [-semantic -navigation]
 \n                           → \n      
 const                        → const
                              →  
+[                            → [
 __cs_isOn                    → isOn
+,                            → ,
+                             →  
+__cs_setIsOn                 → setIsOn
+]                            → ]
                              →  
 =                            → =
                              →  
@@ -178,9 +188,6 @@ value                        → value
 =                            → =
 {                            → {
 __cs_text                    → text
-[                            → [
-0                            → 0
-]                            → ]
 (                            → (
 )                            → )
 }                            → }
@@ -203,9 +210,6 @@ checked                      → checked
 =                            → =
 {                            → {
 __cs_isOn                    → isOn
-[                            → [
-0                            → 0
-]                            → ]
 (                            → (
 )                            → )
 }                            → }
@@ -226,19 +230,13 @@ onclick                      → onclick
                              →  
 {                            → {
 \n                           → \n              
-__cs_text                    → text
-[                            → [
-1                            → 1
-]                            → ]
+__cs_setText                 → setText
 (                            → (
 "second"                     → "second"
 )                            → )
 ;                            → ;
 \n                           → \n              
-__cs_isOn                    → isOn
-[                            → [
-1                            → 1
-]                            → ]
+__cs_setIsOn                 → setIsOn
 (                            → (
 true                         → true
 )                            → )

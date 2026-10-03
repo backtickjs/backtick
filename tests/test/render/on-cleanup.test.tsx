@@ -47,12 +47,12 @@ describe("onCleanup", () => {
     render(
       await evaluate(
         cs`() => {
-          const n = $createSignal(1);
+          const [n, setN] = $createSignal(1);
           const doubled = $createMemo(() => {
             $onCleanup(() => window.console.log());
-            return n[0]() * 2;
+            return n() * 2;
           });
-          return <button onclick={() => n[1](n[0]() + 1)}>{doubled()}</button>;
+          return <button onclick={() => setN(n() + 1)}>{doubled()}</button>;
         }`,
       ),
     );
@@ -81,11 +81,11 @@ describe("onCleanup", () => {
     const { unmount } = render(
       await evaluate(
         cs`() => {
-          const timer = $createSignal(0);
+          const [timer, setTimer] = $createSignal(0);
           $onMount(() => {
-            timer[1](window.setInterval(() => window.console.log(), 5));
+            setTimer(window.setInterval(() => window.console.log(), 5));
           });
-          $onCleanup(() => window.clearInterval(timer[0]()));
+          $onCleanup(() => window.clearInterval(timer()));
           return <p>ticking</p>;
         }`,
       ),

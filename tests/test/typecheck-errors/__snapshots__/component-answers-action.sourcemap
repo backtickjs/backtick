@@ -3,7 +3,12 @@ cs.lift((() =>   →  [-semantic -navigation]
 \n               → \n    
 const            → const
                  →  
+[                → [
 __cs_n           → n
+,                → ,
+                 →  
+__cs_setN        → setN
+]                → ]
                  →  
 =                → =
                  →  
@@ -15,10 +20,7 @@ cs.splice(       →  [-semantic -navigation]
 )                → )
 ;                → ;
 \n               → \n    
-__cs_n           → n
-[                → [
-1                → 1
-]                → ]
+__cs_setN        → setN
 (                → (
 3                → 3
 )                → )

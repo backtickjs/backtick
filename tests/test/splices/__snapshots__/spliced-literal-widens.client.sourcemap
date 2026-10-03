@@ -1,33 +1,35 @@
 // 28:5
 ($splice0, $splice1, $splice2, $splice3) => {  → 28:8 {…
 const                                          → 29:7 const 
-n                                              → 29:13 n
- =                                             → 29:14  = 
-$splice0()                                     → 29:17 $createSignal($five);…
-(                                              → 29:30 (
-$splice1()                                     → 29:31 $five);…
-)                                              → 29:36 )
-;                                              → 29:37 ;
-n                                              → 30:7 n
-[                                              → 30:8 [
-1                                              → 30:9 1
-]                                              → 30:10 ]
+[                                              → 29:13 [
+n                                              → 29:14 n
+,                                              → 29:15 , 
+setN                                           → 29:17 setN
+]                                              → 29:21 ]
+ =                                             → 29:22  = 
+$splice0()                                     → 29:25 $createSignal($five);…
+(                                              → 29:38 (
+$splice1()                                     → 29:39 $five);…
+)                                              → 29:44 )
+;                                              → 29:45 ;
+setN                                           → 30:7 setN
 (                                              → 30:11 (
 6                                              → 30:12 6
 )                                              → 30:13 )
 ;                                              → 30:14 ;
 const                                          → 31:7 const 
-c                                              → 31:13 c
- =                                             → 31:14  = 
-$splice0()                                     → 31:17 $createSignal(${Color.Red});…
-(                                              → 31:30 (
-$splice2()                                     → 31:31 ${Color.Red});…
-)                                              → 31:32 {Color.Red});…
-;                                              → 31:44 ;
-c                                              → 32:7 c
-[                                              → 32:8 [
-1                                              → 32:9 1
-]                                              → 32:10 ]
+[                                              → 31:13 [
+c                                              → 31:14 c
+,                                              → 31:15 , 
+setC                                           → 31:17 setC
+]                                              → 31:21 ]
+ =                                             → 31:22  = 
+$splice0()                                     → 31:25 $createSignal(${Color.Red});…
+(                                              → 31:38 (
+$splice2()                                     → 31:39 ${Color.Red});…
+)                                              → 31:40 {Color.Red});…
+;                                              → 31:52 ;
+setC                                           → 32:7 setC
 (                                              → 32:11 (
 $splice3()                                     → 32:12 ${Color.Blue});…
 )                                              → 32:13 {Color.Blue});…

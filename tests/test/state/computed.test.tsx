@@ -26,14 +26,14 @@ describe("computed", () => {
     render(
       await evaluate(
         cs`() => {
-          const n = $createSignal(1);
+          const [n, setN] = $createSignal(1);
           const doubled = $createMemo(() => {
             window.console.log();
-            return n[0]() * 2;
+            return n() * 2;
           });
           return (
             <div>
-              <button onclick={() => n[1](n[0]() + 1)}>add</button>
+              <button onclick={() => setN(n() + 1)}>add</button>
               <p>{"a " + doubled()}</p>
               <p>{"b " + doubled()}</p>
               <p>{"c " + doubled()}</p>
@@ -54,15 +54,15 @@ describe("computed", () => {
     render(
       await evaluate(
         cs`() => {
-          const n = $createSignal(1);
-          const isBig = $createMemo(() => n[0]() > 2);
+          const [n, setN] = $createSignal(1);
+          const isBig = $createMemo(() => n() > 2);
           const label = () => {
             window.console.log();
             return isBig() ? "big" : "small";
           };
           return (
             <div>
-              <button onclick={() => n[1](n[0]() + 1)}>add</button>
+              <button onclick={() => setN(n() + 1)}>add</button>
               <p>{label()}</p>
             </div>
           );

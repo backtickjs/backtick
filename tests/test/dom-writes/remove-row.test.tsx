@@ -12,18 +12,16 @@ import { evaluate } from "../evaluate.ts";
 // removal.
 async function RemovableRows() {
   return cs`{
-    const ids = $createSignal<number[]>([1, 2, 3, 4, 5]);
+    const [ids, setIds] = $createSignal<number[]>([1, 2, 3, 4, 5]);
     return (
       <table>
         <tbody>
-          <For each={ids[0]()}>
+          <For each={ids()}>
             {(id: number) => (
               <tr id={"row-" + id}>
                 <td>
                   <button
-                    onclick={() =>
-                      ids[1](ids[0]().filter((each) => each !== id))
-                    }
+                    onclick={() => setIds(ids().filter((each) => each !== id))}
                   >
                     {"remove " + id}
                   </button>

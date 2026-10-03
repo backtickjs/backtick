@@ -8,11 +8,11 @@ import { snapshotCase } from "../snapshotCase.ts";
 // together. Reading is a value, so it stands in a children position; writing is
 // an action, so it stands in a handler.
 const counter = cs`(initial: number) => {
-  const count = $createSignal(initial);
+  const [count, setCount] = $createSignal(initial);
   return {
-    get: () => count[0](),
+    get: () => count(),
     add: (n: number) => {
-      count[1](count[0]() + n);
+      setCount(count() + n);
     },
   };
 }`;

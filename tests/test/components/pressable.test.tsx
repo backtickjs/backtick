@@ -15,15 +15,15 @@ import { evaluate } from "../evaluate.ts";
 // one tap target while staying separately styled.
 async function Row() {
   return cs`{
-    const count = $createSignal(0);
+    const [count, setCount] = $createSignal(0);
     return (
       <button
         id="row"
         style="display: flex; gap: 8px"
-        onclick={() => count[1](count[0]() + 1)}
+        onclick={() => setCount(count() + 1)}
       >
-        <span style="font-weight: 700">{count[0]() > 0 ? "☑" : "☐"}</span>
-        <span>{"pressed " + count[0]() + " times"}</span>
+        <span style="font-weight: 700">{count() > 0 ? "☑" : "☐"}</span>
+        <span>{"pressed " + count() + " times"}</span>
       </button>
     );
   }`;

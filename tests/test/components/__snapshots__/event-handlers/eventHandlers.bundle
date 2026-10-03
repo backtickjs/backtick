@@ -1,7 +1,7 @@
 import { createSignal as $i0 } from "solid-js";
 import * as $module0 from "solid-js/web";
 const $modules = {
-  "1s1l8g4skisa9:16:4": (module, exports, require) => {
+  "1o71qih1bz0ns:16:4": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -11,7 +11,7 @@ const $modules = {
       `<form><textarea></textarea><input><button>`,
     );
     exports.default = ($splice0) => {
-      const said = $splice0()("");
+      const [said, setSaid] = $splice0()("");
       return (() => {
         var _el$ = _tmpl$(),
           _el$2 = _el$.firstChild,
@@ -19,13 +19,13 @@ const $modules = {
           _el$4 = _el$3.nextSibling;
         _el$.addEventListener("submit", (event) => {
           event.preventDefault();
-          said[1](event.type + " " + event.cancelable);
+          setSaid(event.type + " " + event.cancelable);
         });
-        _el$2.$$input = (event) => said[1](event.currentTarget.value);
-        _el$3.$$input = (event) => said[1](event.currentTarget.value);
+        _el$2.$$input = (event) => setSaid(event.currentTarget.value);
+        _el$3.$$input = (event) => setSaid(event.currentTarget.value);
         _el$4.$$click = (event) =>
-          said[1](event.clientX + " " + event.currentTarget.tagName);
-        (0, web_3.insert)(_el$4, () => said[0]());
+          setSaid(event.clientX + " " + event.currentTarget.tagName);
+        (0, web_3.insert)(_el$4, said);
         return _el$;
       })();
     };
@@ -44,5 +44,5 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $cs0 = $require("1s1l8g4skisa9:16:4").default;
+const $cs0 = $require("1o71qih1bz0ns:16:4").default;
 export default $cs0(() => $i0);

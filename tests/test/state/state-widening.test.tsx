@@ -22,18 +22,18 @@ enum Tone {
 
 async function Widened() {
   return cs`{
-    const flag = $createSignal(true);
-    const tone = $createSignal(${Tone.Warm});
-    const step = $createSignal<() => number>(() => 0);
+    const [flag, setFlag] = $createSignal(true);
+    const [tone, setTone] = $createSignal(${Tone.Warm});
+    const [step, setStep] = $createSignal<() => number>(() => 0);
     return (
       <span
         onclick={() => {
-          flag[1](false);
-          tone[1](${Tone.Cool});
-          step[1](() => () => 1);
+          setFlag(false);
+          setTone(${Tone.Cool});
+          setStep(() => () => 1);
         }}
       >
-        {flag[0]() + " " + tone[0]() + " " + step[0]()()}
+        {flag() + " " + tone() + " " + step()()}
       </span>
     );
   }`;

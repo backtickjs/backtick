@@ -3,13 +3,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0, $splice1) => {
-    const shown = $splice0()(false);
+    const [shown, setShown] = $splice0()(false);
     const started = window.setTimeout(() => {
         if ($splice1()()) {
-            shown[1](true);
+            setShown(true);
         }
     }, 0);
-    const read = shown[0]();
+    const read = shown();
     return <em>{"read " + read}</em>;
 });
 }
@@ -19,10 +19,10 @@ exports.default = (($splice0, $splice1) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0, $splice1) => {
-    const builds = $splice0()(0);
+    const [builds, setBuilds] = $splice0()(0);
     return (<div>
-      <span>{"builds " + builds[0]()}</span>
-      <section>{$splice1(builds)}</section>
+      <span>{"builds " + builds()}</span>
+      <section>{$splice1(builds, setBuilds)}</section>
     </div>);
 });
 }
@@ -31,8 +31,8 @@ exports.default = (($splice0, $splice1) => {
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($capture0) => () => {
-    $capture0[1]($capture0[0]() + 1);
-    return $capture0[0]() < 5;
+exports.default = (($capture0, $capture1) => () => {
+    $capture0($capture1() + 1);
+    return $capture1() < 5;
 });
 }

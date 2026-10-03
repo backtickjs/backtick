@@ -12,11 +12,13 @@ describe("ref", () => {
     render(
       await evaluate(
         cs`() => {
-          const field = $createSignal<HTMLInputElement | null>(null);
+          const [field, setField] = $createSignal<HTMLInputElement | null>(
+            null,
+          );
           return (
             <div>
-              <input aria-label="name" ref={(element) => field[1](element)} />
-              <button onclick={() => field[0]()?.focus()}>edit</button>
+              <input aria-label="name" ref={(element) => setField(element)} />
+              <button onclick={() => field()?.focus()}>edit</button>
             </div>
           );
         }`,
@@ -69,15 +71,13 @@ describe("ref", () => {
       render(
         await evaluate(
           cs`() => {
-            const shown = $createSignal(true);
-            const n = $createSignal(0);
+            const [shown, setShown] = $createSignal(true);
+            const [n, setN] = $createSignal(0);
             return (
               <div>
-                <button onclick={() => n[1](n[0]() + 1)}>
-                  {"n " + n[0]()}
-                </button>
-                {shown[0]() ? (
-                  <p ref={() => window.console.log(n[0]())}>shown</p>
+                <button onclick={() => setN(n() + 1)}>{"n " + n()}</button>
+                {shown() ? (
+                  <p ref={() => window.console.log(n())}>shown</p>
                 ) : null}
               </div>
             );

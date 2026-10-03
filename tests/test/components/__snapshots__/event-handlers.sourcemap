@@ -3,7 +3,12 @@ cs.lift((() =>    →  [-semantic -navigation]
 \n                → \n      
 const             → const
                   →  
+[                 → [
 __cs_said         → said
+,                 → ,
+                  →  
+__cs_setSaid      → setSaid
+]                 → ]
                   →  
 =                 → =
                   →  
@@ -40,10 +45,7 @@ preventDefault    → preventDefault
 )                 → )
 ;                 → ;
 \n                → \n            
-__cs_said         → said
-[                 → [
-1                 → 1
-]                 → ]
+__cs_setSaid      → setSaid
 (                 → (
 __cs_event        → event
 .                 → .
@@ -78,10 +80,7 @@ __cs_event        → event
                   →  
 =>                → =>
                   →  
-__cs_said         → said
-[                 → [
-1                 → 1
-]                 → ]
+__cs_setSaid      → setSaid
 (                 → (
 __cs_event        → event
 .                 → .
@@ -106,10 +105,7 @@ __cs_event        → event
                   →  
 =>                → =>
                   →  
-__cs_said         → said
-[                 → [
-1                 → 1
-]                 → ]
+__cs_setSaid      → setSaid
 (                 → (
 __cs_event        → event
 .                 → .
@@ -134,10 +130,7 @@ __cs_event        → event
                   →  
 =>                → =>
 \n                → \n              
-__cs_said         → said
-[                 → [
-1                 → 1
-]                 → ]
+__cs_setSaid      → setSaid
 (                 → (
 __cs_event        → event
 .                 → .
@@ -162,9 +155,6 @@ tagName           → tagName
 \n                → \n            
 {                 → {
 __cs_said         → said
-[                 → [
-0                 → 0
-]                 → ]
 (                 → (
 )                 → )
 }                 → }

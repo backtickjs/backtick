@@ -16,26 +16,27 @@ $splice1                            → state/unmoved-prop.test.tsx 14:13 {…
 $tag2                               → state/unmoved-prop.test.tsx 14:13 {…
 ) => {                              → state/unmoved-prop.test.tsx 14:13 {…
 const                               → state/unmoved-prop.test.tsx 15:5 const 
-selected                            → state/unmoved-prop.test.tsx 15:11 selected
- =                                  → state/unmoved-prop.test.tsx 15:19  = 
-$splice0                            → state/unmoved-prop.test.tsx 15:22 $createSignal(0);…
-()                                  → state/unmoved-prop.test.tsx 15:22 $createSignal(0);…
-(                                   → state/unmoved-prop.test.tsx 15:35 (
-0                                   → state/unmoved-prop.test.tsx 15:36 0
-)                                   → state/unmoved-prop.test.tsx 15:37 )
-;                                   → state/unmoved-prop.test.tsx 15:38 ;
+[                                   → state/unmoved-prop.test.tsx 15:11 [
+selected                            → state/unmoved-prop.test.tsx 15:12 selected
+,                                   → state/unmoved-prop.test.tsx 15:20 , 
+setSelected                         → state/unmoved-prop.test.tsx 15:22 setSelected
+]                                   → state/unmoved-prop.test.tsx 15:33 ]
+ =                                  → state/unmoved-prop.test.tsx 15:34  = 
+$splice0                            → state/unmoved-prop.test.tsx 15:37 $createSignal(0);…
+()                                  → state/unmoved-prop.test.tsx 15:37 $createSignal(0);…
+(                                   → state/unmoved-prop.test.tsx 15:50 (
+0                                   → state/unmoved-prop.test.tsx 15:51 0
+)                                   → state/unmoved-prop.test.tsx 15:52 )
+;                                   → state/unmoved-prop.test.tsx 15:53 ;
 const                               → state/unmoved-prop.test.tsx 16:5 const 
 isSelected                          → state/unmoved-prop.test.tsx 16:11 isSelected
  =                                  → state/unmoved-prop.test.tsx 16:21  = 
-$splice1                            → state/unmoved-prop.test.tsx 16:24 $createSelector(selected[0]);…
-()                                  → state/unmoved-prop.test.tsx 16:24 $createSelector(selected[0]);…
+$splice1                            → state/unmoved-prop.test.tsx 16:24 $createSelector(selected);…
+()                                  → state/unmoved-prop.test.tsx 16:24 $createSelector(selected);…
 (                                   → state/unmoved-prop.test.tsx 16:39 (
 selected                            → state/unmoved-prop.test.tsx 16:40 selected
-[                                   → state/unmoved-prop.test.tsx 16:48 [
-0                                   → state/unmoved-prop.test.tsx 16:49 0
-]                                   → state/unmoved-prop.test.tsx 16:50 ]
-)                                   → state/unmoved-prop.test.tsx 16:51 )
-;                                   → state/unmoved-prop.test.tsx 16:52 ;
+)                                   → state/unmoved-prop.test.tsx 16:48 )
+;                                   → state/unmoved-prop.test.tsx 16:49 ;
 return (() => {                     → state/unmoved-prop.test.tsx 17:5 return…
 var                                 → state/unmoved-prop.test.tsx 17:5 return…
 _el$                                → state/unmoved-prop.test.tsx 17:5 return…
@@ -59,10 +60,7 @@ _el$2                               → state/unmoved-prop.test.tsx 17:5 return�
 $$click                             → state/unmoved-prop.test.tsx 17:5 return…
  =                                  → state/unmoved-prop.test.tsx 17:5 return…
 () =>                               → state/unmoved-prop.test.tsx 19:24 () => 
-selected                            → state/unmoved-prop.test.tsx 19:30 selected
-[                                   → state/unmoved-prop.test.tsx 19:38 [
-1                                   → state/unmoved-prop.test.tsx 19:39 1
-]                                   → state/unmoved-prop.test.tsx 19:40 ]
+setSelected                         → state/unmoved-prop.test.tsx 19:30 setSelected
 (                                   → state/unmoved-prop.test.tsx 19:41 (
 1                                   → state/unmoved-prop.test.tsx 19:42 1
 )                                   → state/unmoved-prop.test.tsx 19:43 )

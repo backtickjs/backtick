@@ -2,7 +2,7 @@ import { createSignal as $i0 } from "solid-js";
 import { For as $i1 } from "solid-js";
 import * as $module0 from "solid-js/web";
 const $modules = {
-  "1tbbj72floguq:14:15": (module, exports, require) => {
+  "3ajz5kksa1pnz:14:15": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -11,7 +11,7 @@ const $modules = {
     const web_4 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><button>double`);
     exports.default = ($splice0, $tag1, $tag2) => {
-      const scale = $splice0()(1);
+      const [scale, setScale] = $splice0()(1);
       return (() => {
         var _el$ = _tmpl$(),
           _el$2 = _el$.firstChild;
@@ -22,19 +22,19 @@ const $modules = {
             children: (n) =>
               (0, web_4.createComponent)($tag2, {
                 get n() {
-                  return n * scale[0]();
+                  return n * scale();
                 },
               }),
           }),
           _el$2,
         );
-        _el$2.$$click = () => scale[1](scale[0]() * 2);
+        _el$2.$$click = () => setScale(scale() * 2);
         return _el$;
       })();
     };
     (0, web_2.delegateEvents)(["click"]);
   },
-  "1tbbj72floguq:12:14": (module, exports, require) => {
+  "3ajz5kksa1pnz:12:14": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -60,6 +60,6 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $cs0 = $require("1tbbj72floguq:14:15").default;
-const $cs1 = $require("1tbbj72floguq:12:14").default;
+const $cs0 = $require("3ajz5kksa1pnz:14:15").default;
+const $cs1 = $require("3ajz5kksa1pnz:12:14").default;
 export default $cs0(() => $i0, $i1, $cs1());

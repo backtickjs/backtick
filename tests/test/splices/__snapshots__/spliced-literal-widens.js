@@ -24,7 +24,7 @@ it("splicedLiteralWidens", async (t) => {
     t,
     "splicedLiteralWidens",
     cs.create(
-      "39eg5n9do9wwo:28:4",
+      "2z8p56bmxvsx1:28:4",
       {
         params: [
           { kind: "splice", value: createSignal, bindings: [] },
@@ -33,8 +33,8 @@ it("splicedLiteralWidens", async (t) => {
           { kind: "splice", value: Color.Blue, bindings: [] },
         ],
       },
-      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2, $splice3) => {\n    const n = $splice0()($splice1());\n    n[1](6);\n    const c = $splice0()($splice2());\n    c[1]($splice3());\n};\n}',
-      '{"version":3,"file":"module.jsx","mappings":";;;kBA2BO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA;IACD,MAAMC,CAAC,GAAGJ,QAAA,EAAa,CAACC,QAAA,EAAK,CAAC;IAC9BG,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IACP,MAAMC,CAAC,GAAGL,QAAA,EAAa,CAACE,QAAA,EAAC,CAAY;IACrCG,CAAC,CAAC,CAAC,CAAC,CAACF,QAAA,EAAC,CAAa;AACrB,CAAC","names":["$splice0","$splice1","$splice2","$splice3","n","c"],"ignoreList":[],"sources":["splices/spliced-literal-widens.test.tsx"]}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2, $splice3) => {\n    const [n, setN] = $splice0()($splice1());\n    setN(6);\n    const [c, setC] = $splice0()($splice2());\n    setC($splice3());\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBA2BO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA;IACD,MAAM,CAACC,CAAC,EAAEC,IAAI,CAAC,GAAGL,QAAA,EAAa,CAACC,QAAA,EAAK,CAAC;IACtCI,IAAI,CAAC,CAAC,CAAC;IACP,MAAM,CAACC,CAAC,EAAEC,IAAI,CAAC,GAAGP,QAAA,EAAa,CAACE,QAAA,EAAC,CAAY;IAC7CK,IAAI,CAACJ,QAAA,EAAC,CAAa;AACrB,CAAC","names":["$splice0","$splice1","$splice2","$splice3","n","setN","c","setC"],"ignoreList":[],"sources":["splices/spliced-literal-widens.test.tsx"]}',
       [],
     ),
   );

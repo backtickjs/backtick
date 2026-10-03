@@ -26,12 +26,12 @@ describe("onMount", () => {
   it("runs once, after the drawing is in the page", async () => {
     const drawing = await evaluate(
       cs`() => {
-        const count = $createSignal(0);
+        const [count, setCount] = $createSignal(0);
         $onMount(() => {
           window.console.log();
-          count[1](count[0]() + 1);
+          setCount(count() + 1);
         });
-        return <p>{"mounted " + count[0]()}</p>;
+        return <p>{"mounted " + count()}</p>;
       }`,
     );
     const seen = await logged(async () => render(drawing));
@@ -43,10 +43,10 @@ describe("onMount", () => {
     render(
       await evaluate(
         cs`() => {
-          const said = $createSignal("not yet");
+          const [said, setSaid] = $createSignal("not yet");
           return (
-            <button onclick={() => $onMount(() => said[1]("ran"))}>
-              {said[0]()}
+            <button onclick={() => $onMount(() => setSaid("ran"))}>
+              {said()}
             </button>
           );
         }`,

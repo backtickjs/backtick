@@ -3,15 +3,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0) => () => {
-    const field = $splice0()(null);
+    const [field, setField] = $splice0()(null);
     return (<div>
-              <input aria-label="name" ref={(element) => field[1](element)}/>
-              <button onclick={() => field[0]()?.focus()}>edit</button>
+              <input aria-label="name" ref={(element) => setField(element)}/>
+              <button onclick={() => field()?.focus()}>edit</button>
             </div>);
 });
 }
 
-// 32:9
+// 34:9
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -20,25 +20,23 @@ exports.default = (($splice0) => () => {
 });
 }
 
-// 47:22
+// 49:22
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (() => () => <input aria-label="name" ref={() => { }}/>);
 }
 
-// 71:11
+// 73:11
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0) => () => {
-    const shown = $splice0()(true);
-    const n = $splice0()(0);
+    const [shown, setShown] = $splice0()(true);
+    const [n, setN] = $splice0()(0);
     return (<div>
-                <button onclick={() => n[1](n[0]() + 1)}>
-                  {"n " + n[0]()}
-                </button>
-                {shown[0]() ? (<p ref={() => window.console.log(n[0]())}>shown</p>) : null}
+                <button onclick={() => setN(n() + 1)}>{"n " + n()}</button>
+                {shown() ? (<p ref={() => window.console.log(n())}>shown</p>) : null}
               </div>);
 });
 }

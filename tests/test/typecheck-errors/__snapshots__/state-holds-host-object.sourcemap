@@ -3,7 +3,12 @@ cs.lift((() =>                            →  [-semantic -navigation]
 \n  // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.\n  → \n  // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.\n  
 const                                     → const
                                           →  
+[                                         → [
 __cs_held                                 → held
+,                                         → ,
+                                          →  
+__cs_setHeld                              → setHeld
+]                                         → ]
                                           →  
 =                                         → =
                                           →  
@@ -17,10 +22,7 @@ cs.splice(                                →  [-semantic -navigation]
 )                                         → )
 ;                                         → ;
 \n  // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.\n  → \n  // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.\n  
-__cs_held                                 → held
-[                                         → [
-1                                         → 1
-]                                         → ]
+__cs_setHeld                              → setHeld
 (                                         → (
 cs.splice(                                →  [-semantic -navigation]
 (host)                                    → $host

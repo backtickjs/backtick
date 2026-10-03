@@ -3,7 +3,12 @@ cs.lift((() =>   →  [-semantic -navigation]
 \n               → \n      
 const            → const
                  →  
+[                → [
 __cs_n           → n
+,                → ,
+                 →  
+__cs_setN        → setN
+]                → ]
                  →  
 =                → =
                  →  
@@ -17,10 +22,7 @@ cs.splice(       →  [-semantic -navigation]
 )                → )
 ;                → ;
 \n               → \n      
-__cs_n           → n
-[                → [
-1                → 1
-]                → ]
+__cs_setN        → setN
 (                → (
 6                → 6
 )                → )
@@ -28,7 +30,12 @@ __cs_n           → n
 \n               → \n      
 const            → const
                  →  
+[                → [
 __cs_c           → c
+,                → ,
+                 →  
+__cs_setC        → setC
+]                → ]
                  →  
 =                → =
                  →  
@@ -42,10 +49,7 @@ Color.Red        → Color.Red
 )                → )
 ;                → ;
 \n               → \n      
-__cs_c           → c
-[                → [
-1                → 1
-]                → ]
+__cs_setC        → setC
 (                → (
 cs.splice(       →  [-semantic -navigation]
 Color.Blue       → Color.Blue

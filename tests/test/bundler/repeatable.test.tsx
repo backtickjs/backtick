@@ -19,19 +19,19 @@ function Card(props: { readonly title: string | Client<string> }) {
 const shared = cs`"shared"`;
 
 const page = () => cs`{
-  const count = $createSignal(1);
+  const [count, setCount] = $createSignal(1);
   const rows = [1, 2, 3];
-  const total = count[0]() + ${cs`rows.length`};
+  const total = count() + ${cs`rows.length`};
   return (
     <section>
       {${(<Card title="element" />)}}
       {${(<Card title={shared} />)}}
-      <p>{$doubled(count[0]())}</p>
+      <p>{$doubled(count())}</p>
       <p>{$pair(1)(2)}</p>
       <p>{$shared}</p>
       <p>{total}</p>
       <ul>
-        <For each={rows}>{(row: number) => <li>{row + count[0]()}</li>}</For>
+        <For each={rows}>{(row: number) => <li>{row + count()}</li>}</For>
       </ul>
     </section>
   );

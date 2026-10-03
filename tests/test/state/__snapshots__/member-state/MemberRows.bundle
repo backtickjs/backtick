@@ -8,7 +8,7 @@ const $modules = {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
   },
-  "3i0bbei0uxpv9:20:9": (module, exports, require) => {
+  "4mx6mlcrdt7k:20:9": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -31,7 +31,7 @@ const $modules = {
           },
         );
       };
-      const held = $splice0()(build(1));
+      const [held, setHeld] = $splice0()(build(1));
       return (() => {
         var _el$ = _tmpl$(),
           _el$2 = _el$.firstChild;
@@ -39,7 +39,7 @@ const $modules = {
           _el$2,
           (0, web_4.createComponent)($tag1, {
             get each() {
-              return held[0]();
+              return held();
             },
             children: (row) =>
               (() => {
@@ -69,7 +69,7 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("1uptcsn9236u2:352:9").default;
-const $cs1 = $require("3i0bbei0uxpv9:20:9").default;
+const $cs1 = $require("4mx6mlcrdt7k:20:9").default;
 export default $cs0(
   () => $i0,
   () => $cs1(() => $i1, $i2),

@@ -11,30 +11,30 @@ import { evaluate } from "../evaluate.ts";
 // build it again, with a signal never written and a timer never fired.
 async function Held({ again }: { again: Client<() => boolean> }) {
   return cs`{
-    const shown = $createSignal(false);
+    const [shown, setShown] = $createSignal(false);
 
     const started = window.setTimeout(() => {
       if ($again()) {
-        shown[1](true);
+        setShown(true);
       }
     }, 0);
 
-    const read = shown[0]();
+    const read = shown();
     return <em>{"read " + read}</em>;
   }`;
 }
 
 const held = cs`{
-  const builds = $createSignal(0);
+  const [builds, setBuilds] = $createSignal(0);
   return (
     <div>
-      <span>{"builds " + builds[0]()}</span>
+      <span>{"builds " + builds()}</span>
       <section>{
         ${(
           <Held
             again={cs`() => {
-              builds[1](builds[0]() + 1);
-              return builds[0]() < 5;
+              setBuilds(builds() + 1);
+              return builds() < 5;
             }`}
           />
         )}

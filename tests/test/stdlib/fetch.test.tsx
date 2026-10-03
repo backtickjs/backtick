@@ -13,7 +13,7 @@ it("fetchRequests", async (t) => {
     t,
     "fetchRequests",
     cs`() => {
-      const held = $createSignal("waiting");
+      const [held, setHeld] = $createSignal("waiting");
 
       window
         .fetch("/cases/built-ins/Math/trunc/Math.trunc_Success", {
@@ -26,10 +26,10 @@ it("fetchRequests", async (t) => {
           return response.json();
         })
         .then((value: unknown) => {
-          held[1](value === null ? "null" : "a value");
+          setHeld(value === null ? "null" : "a value");
         })
         .catch((error: unknown) => {
-          held[1]("failed — " + String(error));
+          setHeld("failed — " + String(error));
         });
 
       window
@@ -41,14 +41,14 @@ it("fetchRequests", async (t) => {
         .then((response: Response) => response.text())
         .then(
           (text: string) => {
-            held[1](text);
+            setHeld(text);
           },
           (error: unknown) => {
-            held[1](String(error));
+            setHeld(String(error));
           },
         );
 
-      return held[0]();
+      return held();
     }`,
   );
 });

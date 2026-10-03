@@ -12,11 +12,11 @@ import { children, drawn } from "./dom.ts";
 // the host hears nothing about it.
 async function SelectableRows() {
   return cs`{
-    const selected = $createSignal(0);
-    const isSelected = $createSelector(selected[0]);
+    const [selected, setSelected] = $createSignal(0);
+    const isSelected = $createSelector(selected);
     return (
       <div>
-        <span onclick={() => selected[1](1)}>select</span>
+        <span onclick={() => setSelected(1)}>select</span>
         <div>
           <For each={[0, 1, 2]}>
             {(id: number) => (

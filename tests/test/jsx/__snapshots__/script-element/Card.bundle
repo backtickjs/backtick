@@ -7,7 +7,7 @@ const $modules = {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
   },
-  "2qvr46mfkosun:11:9": (module, exports, require) => {
+  "2q1v1u7r59ezx:11:9": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -20,17 +20,17 @@ const $modules = {
       ),
       _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<div style=padding:0>`);
     exports.default = ($splice0) => {
-      const label = $splice0()("hi");
+      const [label, setLabel] = $splice0()("hi");
       const row = (size) => {
         const css = "font-size: " + size + "px";
-        const press = () => label[1]("held");
+        const press = () => setLabel("held");
         return (() => {
           var _el$ = _tmpl$(),
             _el$2 = _el$.firstChild,
             _el$3 = _el$2.nextSibling,
             _el$4 = _el$3.nextSibling;
-          _el$2.$$click = () => label[1]("pressed");
-          (0, web_5.insert)(_el$2, () => label[0]());
+          _el$2.$$click = () => setLabel("pressed");
+          (0, web_5.insert)(_el$2, label);
           _el$4.$$click = press;
           (0, web_4.effect)(
             (_p$) => {
@@ -73,7 +73,7 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("1uptcsn9236u2:352:9").default;
-const $cs1 = $require("2qvr46mfkosun:11:9").default;
+const $cs1 = $require("2q1v1u7r59ezx:11:9").default;
 export default $cs0(
   () => $i0,
   () => $cs1(() => $i1),

@@ -3,7 +3,12 @@ cs.lift((() =>                            →  [-semantic -navigation]
 \n                                        → \n    
 const                                     → const
                                           →  
+[                                         → [
 __cs_label                                → label
+,                                         → ,
+                                          →  
+__cs_setLabel                             → setLabel
+]                                         → ]
                                           →  
 =                                         → =
                                           →  
@@ -60,10 +65,7 @@ __cs_press                                → press
                                           →  
 =>                                        → =>
                                           →  
-__cs_label                                → label
-[                                         → [
-1                                         → 1
-]                                         → ]
+__cs_setLabel                             → setLabel
 (                                         → (
 "held"                                    → "held"
 )                                         → )
@@ -100,10 +102,7 @@ onclick                                   → onclick
                                           →  
 =>                                        → =>
                                           →  
-__cs_label                                → label
-[                                         → [
-1                                         → 1
-]                                         → ]
+__cs_setLabel                             → setLabel
 (                                         → (
 "pressed"                                 → "pressed"
 )                                         → )
@@ -112,9 +111,6 @@ __cs_label                                → label
 \n                                        → \n            
 {                                         → {
 __cs_label                                → label
-[                                         → [
-0                                         → 0
-]                                         → ]
 (                                         → (
 )                                         → )
 }                                         → }

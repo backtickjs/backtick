@@ -9,7 +9,7 @@ const $modules = {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
   },
-  "22k5zjmfkrtpf:14:9": (module, exports, require) => {
+  "275nzio4tc3rr:14:9": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -23,13 +23,13 @@ const $modules = {
       ),
       _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<a>`);
     exports.default = ($splice0, $splice1, $tag2) => {
-      const selected = $splice0()(0);
-      const isSelected = $splice1()(selected[0]);
+      const [selected, setSelected] = $splice0()(0);
+      const isSelected = $splice1()(selected);
       return (() => {
         var _el$ = _tmpl$(),
           _el$2 = _el$.firstChild,
           _el$3 = _el$2.nextSibling;
-        _el$2.$$click = () => selected[1](1);
+        _el$2.$$click = () => setSelected(1);
         (0, web_5.insert)(
           _el$3,
           (0, web_6.createComponent)($tag2, {
@@ -68,7 +68,7 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("1uptcsn9236u2:352:9").default;
-const $cs1 = $require("22k5zjmfkrtpf:14:9").default;
+const $cs1 = $require("275nzio4tc3rr:14:9").default;
 export default $cs0(
   () => $i0,
   () =>

@@ -28,9 +28,9 @@ describe("equals", () => {
     render(
       await evaluate(
         cs`() => {
-          const n = $createSignal(1);
+          const [n, setN] = $createSignal(1);
           const size = $createMemo(
-            () => ({ isBig: n[0]() > 2, n: n[0]() }),
+            () => ({ isBig: n() > 2, n: n() }),
             undefined,
             { equals: (previous, next) => previous.isBig === next.isBig },
           );
@@ -40,7 +40,7 @@ describe("equals", () => {
           };
           return (
             <div>
-              <button onclick={() => n[1](n[0]() + 1)}>add</button>
+              <button onclick={() => setN(n() + 1)}>add</button>
               <p>{label()}</p>
             </div>
           );
@@ -62,19 +62,17 @@ describe("equals", () => {
     render(
       await evaluate(
         cs`() => {
-          const point = $createSignal(
+          const [point, setPoint] = $createSignal(
             { x: 1 },
             { equals: (previous, next) => previous.x === next.x },
           );
           const label = () => {
             window.console.log();
-            return "x " + point[0]().x;
+            return "x " + point().x;
           };
           return (
             <div>
-              <button onclick={() => point[1]({ x: point[0]().x })}>
-                same
-              </button>
+              <button onclick={() => setPoint({ x: point().x })}>same</button>
               <p>{label()}</p>
             </div>
           );
@@ -89,13 +87,13 @@ describe("equals", () => {
     render(
       await evaluate(
         cs`() => {
-          const n = $createSignal(1, {
+          const [n, setN] = $createSignal(1, {
             equals: (previous, next) => {
               window.console.log(previous, next);
               return previous === next;
             },
           });
-          return <button onclick={() => n[1](2)}>{"n " + n[0]()}</button>;
+          return <button onclick={() => setN(2)}>{"n " + n()}</button>;
         }`,
       ),
     );
@@ -108,14 +106,14 @@ describe("equals", () => {
     render(
       await evaluate(
         cs`() => {
-          const n = $createSignal(1);
+          const [n, setN] = $createSignal(1);
           const label = () => {
             window.console.log();
-            return "n " + n[0]();
+            return "n " + n();
           };
           return (
             <div>
-              <button onclick={() => n[1](1)}>same</button>
+              <button onclick={() => setN(1)}>same</button>
               <p>{label()}</p>
             </div>
           );
@@ -130,16 +128,14 @@ describe("equals", () => {
     render(
       await evaluate(
         cs`() => {
-          const point = $createSignal({ x: 1 });
+          const [point, setPoint] = $createSignal({ x: 1 });
           const label = () => {
             window.console.log();
-            return "x " + point[0]().x;
+            return "x " + point().x;
           };
           return (
             <div>
-              <button onclick={() => point[1]({ x: point[0]().x })}>
-                same
-              </button>
+              <button onclick={() => setPoint({ x: point().x })}>same</button>
               <p>{label()}</p>
             </div>
           );

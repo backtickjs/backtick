@@ -7,7 +7,7 @@ const $modules = {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
   },
-  "2y9ue12ubdzr3:24:9": (module, exports, require) => {
+  "2ias6y3c2j9wa:24:9": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -15,20 +15,17 @@ const $modules = {
     const web_3 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>`);
     exports.default = ($splice0, $splice1, $splice2) => {
-      const flag = $splice0()(true);
-      const tone = $splice0()($splice1());
-      const step = $splice0()(() => 0);
+      const [flag, setFlag] = $splice0()(true);
+      const [tone, setTone] = $splice0()($splice1());
+      const [step, setStep] = $splice0()(() => 0);
       return (() => {
         var _el$ = _tmpl$();
         _el$.$$click = () => {
-          flag[1](false);
-          tone[1]($splice2());
-          step[1](() => () => 1);
+          setFlag(false);
+          setTone($splice2());
+          setStep(() => () => 1);
         };
-        (0, web_3.insert)(
-          _el$,
-          () => flag[0]() + " " + tone[0]() + " " + step[0]()(),
-        );
+        (0, web_3.insert)(_el$, () => flag() + " " + tone() + " " + step()());
         return _el$;
       })();
     };
@@ -48,7 +45,7 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("1uptcsn9236u2:352:9").default;
-const $cs1 = $require("2y9ue12ubdzr3:24:9").default;
+const $cs1 = $require("2ias6y3c2j9wa:24:9").default;
 export default $cs0(
   () => $i0,
   () =>

@@ -24,7 +24,12 @@ boolean          → boolean
 \n               → \n  
 const            → const
                  →  
+[                → [
 __cs_shown       → shown
+,                → ,
+                 →  
+__cs_setShown    → setShown
+]                → ]
                  →  
 =                → =
                  →  
@@ -65,10 +70,7 @@ again            → again
                  →  
 {                → {
 \n               → \n      
-__cs_shown       → shown
-[                → [
-1                → 1
-]                → ]
+__cs_setShown    → setShown
 (                → (
 true             → true
 )                → )
@@ -89,9 +91,6 @@ return           → return
 >                → >
 {                → {
 __cs_shown       → shown
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
                  →  
@@ -128,7 +127,12 @@ cs.lift((() =>   →  [-semantic -navigation]
 \n               → \n  
 const            → const
                  →  
+[                → [
 __cs_builds      → builds
+,                → ,
+                 →  
+__cs_setBuilds   → setBuilds
+]                → ]
                  →  
 =                → =
                  →  
@@ -157,9 +161,6 @@ span             → span
 +                → +
                  →  
 __cs_builds      → builds
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
 }                → }
@@ -184,15 +185,9 @@ again            → again
                  →  
 {                → {
 \n               → \n            
-__cs_builds      → builds
-[                → [
-1                → 1
-]                → ]
+__cs_setBuilds   → setBuilds
 (                → (
 __cs_builds      → builds
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
                  →  
@@ -205,9 +200,6 @@ __cs_builds      → builds
 return           → return
                  →  
 __cs_builds      → builds
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
                  →  

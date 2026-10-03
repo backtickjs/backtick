@@ -3,14 +3,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0, $splice1) => () => {
-    const n = $splice0()(1);
-    const size = $splice1()(() => ({ isBig: n[0]() > 2, n: n[0]() }), undefined, { equals: (previous, next) => previous.isBig === next.isBig });
+    const [n, setN] = $splice0()(1);
+    const size = $splice1()(() => ({ isBig: n() > 2, n: n() }), undefined, { equals: (previous, next) => previous.isBig === next.isBig });
     const label = () => {
         window.console.log();
         return size().isBig ? "big" : "small";
     };
     return (<div>
-              <button onclick={() => n[1](n[0]() + 1)}>add</button>
+              <button onclick={() => setN(n() + 1)}>add</button>
               <p>{label()}</p>
             </div>);
 });
@@ -21,66 +21,62 @@ exports.default = (($splice0, $splice1) => () => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0) => () => {
-    const point = $splice0()({ x: 1 }, { equals: (previous, next) => previous.x === next.x });
+    const [point, setPoint] = $splice0()({ x: 1 }, { equals: (previous, next) => previous.x === next.x });
     const label = () => {
         window.console.log();
-        return "x " + point[0]().x;
+        return "x " + point().x;
     };
     return (<div>
-              <button onclick={() => point[1]({ x: point[0]().x })}>
-                same
-              </button>
+              <button onclick={() => setPoint({ x: point().x })}>same</button>
               <p>{label()}</p>
             </div>);
 });
 }
 
-// 91:9
+// 89:9
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0) => () => {
-    const n = $splice0()(1, {
+    const [n, setN] = $splice0()(1, {
         equals: (previous, next) => {
             window.console.log(previous, next);
             return previous === next;
         },
     });
-    return <button onclick={() => n[1](2)}>{"n " + n[0]()}</button>;
+    return <button onclick={() => setN(2)}>{"n " + n()}</button>;
 });
 }
 
-// 110:9
+// 108:9
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0) => () => {
-    const n = $splice0()(1);
+    const [n, setN] = $splice0()(1);
     const label = () => {
         window.console.log();
-        return "n " + n[0]();
+        return "n " + n();
     };
     return (<div>
-              <button onclick={() => n[1](1)}>same</button>
+              <button onclick={() => setN(1)}>same</button>
               <p>{label()}</p>
             </div>);
 });
 }
 
-// 132:9
+// 130:9
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0) => () => {
-    const point = $splice0()({ x: 1 });
+    const [point, setPoint] = $splice0()({ x: 1 });
     const label = () => {
         window.console.log();
-        return "x " + point[0]().x;
+        return "x " + point().x;
     };
     return (<div>
-              <button onclick={() => point[1]({ x: point[0]().x })}>
-                same
-              </button>
+              <button onclick={() => setPoint({ x: point().x })}>same</button>
               <p>{label()}</p>
             </div>);
 });

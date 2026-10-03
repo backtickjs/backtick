@@ -6,8 +6,8 @@ import { createSignal } from "@backtickjs/solid-js";
 // without returning, has nothing to draw.
 async function Panel() {
   return cs`{
-    const n = $createSignal(2);
-    n[1](3);
+    const [n, setN] = $createSignal(2);
+    setN(3);
   }`;
 }
 

@@ -12,14 +12,14 @@ import { createSignal } from "@backtickjs/solid-js";
 // against `Spliceable`, which a `Date` is not.
 const host = new Date();
 export default cs.create(
-  "10cqsff4bmc90:16:15",
+  "3ar4dvnw04184:16:15",
   {
     params: [
       { kind: "splice", value: createSignal, bindings: [] },
       { kind: "splice", value: host, bindings: [] },
     ],
   },
-  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => {\n    const held = $splice0()($splice1());\n    held[1]($splice1());\n};\n}',
-  '{"version":3,"file":"module.jsx","mappings":";;;kBAekB,CAAAA,QAAA,EAAAC,QAAA;IAEhB,MAAMC,IAAI,GAAGF,QAAA,EAAa,CAACC,QAAA,EAAK,CAAC;IAEjCC,IAAI,CAAC,CAAC,CAAC,CAACD,QAAA,EAAK,CAAC;AAChB,CAAC","names":["$splice0","$splice1","held"],"ignoreList":[],"sources":["typecheck-errors/state-holds-host-object.test.tsx"]}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => {\n    const [held, setHeld] = $splice0()($splice1());\n    setHeld($splice1());\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAekB,CAAAA,QAAA,EAAAC,QAAA;IAEhB,MAAM,CAACC,IAAI,EAAEC,OAAO,CAAC,GAAGH,QAAA,EAAa,CAACC,QAAA,EAAK,CAAC;IAE5CE,OAAO,CAACF,QAAA,EAAK,CAAC;AAChB,CAAC","names":["$splice0","$splice1","held","setHeld"],"ignoreList":[],"sources":["typecheck-errors/state-holds-host-object.test.tsx"]}',
   [],
 );

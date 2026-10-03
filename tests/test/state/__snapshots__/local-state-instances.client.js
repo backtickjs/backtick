@@ -3,9 +3,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0) => {
-    const size = $splice0()(16);
-    return (<span style={"font-size: " + size[0]() + "px"} onclick={() => {
-            size[1](size[0]() + 1);
+    const [size, setSize] = $splice0()(16);
+    return (<span style={"font-size: " + size() + "px"} onclick={() => {
+            setSize(size() + 1);
         }}>
         press
       </span>);

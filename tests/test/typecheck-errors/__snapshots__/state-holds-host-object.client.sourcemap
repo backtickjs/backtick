@@ -1,17 +1,18 @@
 // 16:16
 ($splice0, $splice1) => {  → 16:19 {…
 const                      → 18:3 const 
-held                       → 18:9 held
- =                         → 18:13  = 
-$splice0()                 → 18:16 $createSignal($host);…
-(                          → 18:29 (
-$splice1()                 → 18:30 $host);…
-)                          → 18:35 )
-;                          → 18:36 ;
-held                       → 20:3 held
-[                          → 20:7 [
-1                          → 20:8 1
-]                          → 20:9 ]
+[                          → 18:9 [
+held                       → 18:10 held
+,                          → 18:14 , 
+setHeld                    → 18:16 setHeld
+]                          → 18:23 ]
+ =                         → 18:24  = 
+$splice0()                 → 18:27 $createSignal($host);…
+(                          → 18:40 (
+$splice1()                 → 18:41 $host);…
+)                          → 18:46 )
+;                          → 18:47 ;
+setHeld                    → 20:3 setHeld
 (                          → 20:10 (
 $splice1()                 → 20:11 $host);…
 )                          → 20:16 )

@@ -35,7 +35,12 @@ cs.lift((() =>   →  [-semantic -navigation]
 \n               → \n    
 const            → const
                  →  
+[                → [
 __cs_held        → held
+,                → ,
+                 →  
+__cs_setHeld     → setHeld
+]                → ]
                  →  
 =                → =
                  →  
@@ -64,10 +69,7 @@ onclick          → onclick
                  →  
 =>               → =>
                  →  
-__cs_held        → held
-[                → [
-1                → 1
-]                → ]
+__cs_setHeld     → setHeld
 (                → (
 cs.splice(       →  [-semantic -navigation]
 Color.Blue       → Color.Blue
@@ -75,21 +77,16 @@ Color.Blue       → Color.Blue
 )                → )
 }                → }
 >                → >
-\n               → \n        
 {                → {
 cs.splice(       →  [-semantic -navigation]
 (colorName)      → $colorName
 )                →  [-semantic -navigation]
 (                → (
 __cs_held        → held
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
 )                → )
 }                → }
-\n               → \n      
 <                → <
 /                → /
 span             → span

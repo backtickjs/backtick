@@ -13,12 +13,12 @@ exports.default = (($splice0) => () => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0, $splice1, $splice2) => () => {
-    const n = $splice0()(1);
+    const [n, setN] = $splice0()(1);
     const doubled = $splice1()(() => {
         $splice2()(() => window.console.log());
-        return n[0]() * 2;
+        return n() * 2;
     });
-    return <button onclick={() => n[1](n[0]() + 1)}>{doubled()}</button>;
+    return <button onclick={() => setN(n() + 1)}>{doubled()}</button>;
 });
 }
 
@@ -27,11 +27,11 @@ exports.default = (($splice0, $splice1, $splice2) => () => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0, $splice1, $splice2) => () => {
-    const timer = $splice0()(0);
+    const [timer, setTimer] = $splice0()(0);
     $splice1()(() => {
-        timer[1](window.setInterval(() => window.console.log(), 5));
+        setTimer(window.setInterval(() => window.console.log(), 5));
     });
-    $splice2()(() => window.clearInterval(timer[0]()));
+    $splice2()(() => window.clearInterval(timer()));
     return <p>ticking</p>;
 });
 }

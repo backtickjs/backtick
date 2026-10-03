@@ -2,14 +2,18 @@
 $splice0                                          → stdlib/fetch.test.tsx 15:8 ()…
  => () => {                                       → stdlib/fetch.test.tsx 15:8 ()…
 const                                             → stdlib/fetch.test.tsx 16:7 const 
-held                                              → stdlib/fetch.test.tsx 16:13 held
- =                                                → stdlib/fetch.test.tsx 16:17  = 
-$splice0                                          → stdlib/fetch.test.tsx 16:20 $createSignal("waiting");…
-()                                                → stdlib/fetch.test.tsx 16:20 $createSignal("waiting");…
-(                                                 → stdlib/fetch.test.tsx 16:33 (
-"waiting"                                         → stdlib/fetch.test.tsx 16:34 "waiting"
-)                                                 → stdlib/fetch.test.tsx 16:43 )
-;                                                 → stdlib/fetch.test.tsx 16:44 ;
+[                                                 → stdlib/fetch.test.tsx 16:13 [
+held                                              → stdlib/fetch.test.tsx 16:14 held
+,                                                 → stdlib/fetch.test.tsx 16:18 , 
+setHeld                                           → stdlib/fetch.test.tsx 16:20 setHeld
+]                                                 → stdlib/fetch.test.tsx 16:27 ]
+ =                                                → stdlib/fetch.test.tsx 16:28  = 
+$splice0                                          → stdlib/fetch.test.tsx 16:31 $createSignal("waiting");…
+()                                                → stdlib/fetch.test.tsx 16:31 $createSignal("waiting");…
+(                                                 → stdlib/fetch.test.tsx 16:44 (
+"waiting"                                         → stdlib/fetch.test.tsx 16:45 "waiting"
+)                                                 → stdlib/fetch.test.tsx 16:54 )
+;                                                 → stdlib/fetch.test.tsx 16:55 ;
 window                                            → stdlib/fetch.test.tsx 18:7 window
 .                                                 → stdlib/fetch.test.tsx 18:13 …
 fetch                                             → stdlib/fetch.test.tsx 19:10 fetch
@@ -62,10 +66,7 @@ then                                              → stdlib/fetch.test.tsx 28:1
 (                                                 → stdlib/fetch.test.tsx 28:14 (
 value                                             → stdlib/fetch.test.tsx 28:16 value
  => {                                             → stdlib/fetch.test.tsx 28:30 )…
-held                                              → stdlib/fetch.test.tsx 29:11 held
-[                                                 → stdlib/fetch.test.tsx 29:15 [
-1                                                 → stdlib/fetch.test.tsx 29:16 1
-]                                                 → stdlib/fetch.test.tsx 29:17 ]
+setHeld                                           → stdlib/fetch.test.tsx 29:11 setHeld
 (                                                 → stdlib/fetch.test.tsx 29:18 (
 value                                             → stdlib/fetch.test.tsx 29:19 value
  ===                                              → stdlib/fetch.test.tsx 29:24  === 
@@ -83,10 +84,7 @@ catch                                             → stdlib/fetch.test.tsx 31:1
 (                                                 → stdlib/fetch.test.tsx 31:15 (
 error                                             → stdlib/fetch.test.tsx 31:17 error
  => {                                             → stdlib/fetch.test.tsx 31:31 )…
-held                                              → stdlib/fetch.test.tsx 32:11 held
-[                                                 → stdlib/fetch.test.tsx 32:15 [
-1                                                 → stdlib/fetch.test.tsx 32:16 1
-]                                                 → stdlib/fetch.test.tsx 32:17 ]
+setHeld                                           → stdlib/fetch.test.tsx 32:11 setHeld
 (                                                 → stdlib/fetch.test.tsx 32:18 (
 "failed — "                                       → stdlib/fetch.test.tsx 32:19 "failed — "
  +                                                → stdlib/fetch.test.tsx 32:30  + 
@@ -148,10 +146,7 @@ then                                              → stdlib/fetch.test.tsx 42:1
 (                                                 → stdlib/fetch.test.tsx 42:14 (
 text                                              → stdlib/fetch.test.tsx 43:12 text
  => {                                             → stdlib/fetch.test.tsx 43:24 )…
-held                                              → stdlib/fetch.test.tsx 44:13 held
-[                                                 → stdlib/fetch.test.tsx 44:17 [
-1                                                 → stdlib/fetch.test.tsx 44:18 1
-]                                                 → stdlib/fetch.test.tsx 44:19 ]
+setHeld                                           → stdlib/fetch.test.tsx 44:13 setHeld
 (                                                 → stdlib/fetch.test.tsx 44:20 (
 text                                              → stdlib/fetch.test.tsx 44:21 text
 )                                                 → stdlib/fetch.test.tsx 44:25 )
@@ -160,10 +155,7 @@ text                                              → stdlib/fetch.test.tsx 44:2
 ,                                                 → stdlib/fetch.test.tsx 45:12 ,…
 error                                             → stdlib/fetch.test.tsx 46:12 error
  => {                                             → stdlib/fetch.test.tsx 46:26 )…
-held                                              → stdlib/fetch.test.tsx 47:13 held
-[                                                 → stdlib/fetch.test.tsx 47:17 [
-1                                                 → stdlib/fetch.test.tsx 47:18 1
-]                                                 → stdlib/fetch.test.tsx 47:19 ]
+setHeld                                           → stdlib/fetch.test.tsx 47:13 setHeld
 (                                                 → stdlib/fetch.test.tsx 47:20 (
 String                                            → stdlib/fetch.test.tsx 47:21 String
 (                                                 → stdlib/fetch.test.tsx 47:27 (
@@ -176,10 +168,7 @@ error                                             → stdlib/fetch.test.tsx 47:2
 ;                                                 → stdlib/fetch.test.tsx 49:10 ;
 return                                            → stdlib/fetch.test.tsx 51:7 return 
 held                                              → stdlib/fetch.test.tsx 51:14 held
-[                                                 → stdlib/fetch.test.tsx 51:18 [
-0                                                 → stdlib/fetch.test.tsx 51:19 0
-]                                                 → stdlib/fetch.test.tsx 51:20 ]
-()                                                → stdlib/fetch.test.tsx 51:21 ()
-;                                                 → stdlib/fetch.test.tsx 51:23 ;
+()                                                → stdlib/fetch.test.tsx 51:18 ()
+;                                                 → stdlib/fetch.test.tsx 51:20 ;
 }                                                 → stdlib/fetch.test.tsx 52:5 }
 ;                                                 → stdlib/fetch.test.tsx 52:6 `,…

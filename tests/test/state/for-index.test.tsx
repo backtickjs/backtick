@@ -14,16 +14,16 @@ import { children, drawn, text } from "./dom.ts";
 // drawn — leaves all three stale.
 async function RotatingRows() {
   return cs`{
-    const names = $createSignal<string[]>(["a", "b", "c"]);
+    const [names, setNames] = $createSignal<string[]>(["a", "b", "c"]);
     const rotate = () => {
-      const held = names[0]();
-      names[1]([held[2], held[0], held[1]]);
+      const held = names();
+      setNames([held[2], held[0], held[1]]);
     };
     return (
       <div>
         <span onclick={rotate}>rotate</span>
         <div>
-          <For each={names[0]()}>
+          <For each={names()}>
             {(name: string, index: () => number) => (
               <span>{name + " at " + index()}</span>
             )}

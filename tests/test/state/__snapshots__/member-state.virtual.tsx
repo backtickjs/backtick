@@ -24,12 +24,12 @@ async function MemberRows() {
       });
     };
 
-    const __cs_held = cs.splice((createSignal))(__cs_build(1));
+    const [__cs_held, __cs_setHeld] = cs.splice((createSignal))(__cs_build(1));
 
     return (
       <div>
         <ul class="rows">
-          {(void For, cs.splice(For)({ each: __cs_held[0](), children: (__cs_row: Row) => (
+          {(void For, cs.splice(For)({ each: __cs_held(), children: (__cs_row: Row) => (
               <li onclick={() => __cs_row.label[1]("pressed")}>{__cs_row.label[0]()}</li>
             ) }))}
         </ul>

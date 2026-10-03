@@ -3,7 +3,12 @@ cs.lift((() =>   →  [-semantic -navigation]
 \n               → \n  
 const            → const
                  →  
+[                → [
 __cs_count       → count
+,                → ,
+                 →  
+__cs_setCount    → setCount
+]                → ]
                  →  
 =                → =
                  →  
@@ -73,9 +78,6 @@ n                → n
 =                → =
 {                → {
 __cs_count       → count
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
 }                → }
@@ -112,9 +114,6 @@ n                → n
 =                → =
 {                → {
 __cs_count       → count
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
                  →  
@@ -151,9 +150,6 @@ n                → n
 =                → =
 {                → {
 __cs_count       → count
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
                  →  
@@ -191,7 +187,7 @@ each             → each
                  →  
 2                → 2
 ]                → ]
-children         → \n          {(m: number) => <Badge n={m * count[0]()} />}\n        
+children         → \n          {(m: number) => <Badge n={m * count()} />}\n        
 (                → (
 __cs_m           → m
 :                → :
@@ -212,9 +208,6 @@ __cs_m           → m
 *                → *
                  →  
 __cs_count       → count
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
 }                → }
@@ -238,15 +231,9 @@ onclick          → onclick
                  →  
 =>               → =>
                  →  
-__cs_count       → count
-[                → [
-1                → 1
-]                → ]
+__cs_setCount    → setCount
 (                → (
 __cs_count       → count
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
                  →  

@@ -8,7 +8,12 @@ cs.lift((() =>        →  [-semantic -navigation]
 \n                    → \n          
 const                 → const
                       →  
+[                     → [
 __cs_field            → field
+,                     → ,
+                      →  
+__cs_setField         → setField
+]                     → ]
                       →  
 =                     → =
                       →  
@@ -23,7 +28,10 @@ HTMLInputElement      → HTMLInputElement
 null                  → null
 >                     → >
 (                     → (
+\n                    → \n            
 null                  → null
+,                     → ,
+\n                    → \n          
 )                     → )
 ;                     → ;
 \n                    → \n          
@@ -51,10 +59,7 @@ __cs_element          → element
                       →  
 =>                    → =>
                       →  
-__cs_field            → field
-[                     → [
-1                     → 1
-]                     → ]
+__cs_setField         → setField
 (                     → (
 __cs_element          → element
 )                     → )
@@ -75,9 +80,6 @@ onclick               → onclick
 =>                    → =>
                       →  
 __cs_field            → field
-[                     → [
-0                     → 0
-]                     → ]
 (                     → (
 )                     → )
 ?.                    → ?.
@@ -190,7 +192,12 @@ cs.lift((() =>        →  [-semantic -navigation]
 \n                    → \n            
 const                 → const
                       →  
+[                     → [
 __cs_shown            → shown
+,                     → ,
+                      →  
+__cs_setShown         → setShown
+]                     → ]
                       →  
 =                     → =
                       →  
@@ -204,7 +211,12 @@ true                  → true
 \n                    → \n            
 const                 → const
                       →  
+[                     → [
 __cs_n                → n
+,                     → ,
+                      →  
+__cs_setN             → setN
+]                     → ]
                       →  
 =                     → =
                       →  
@@ -235,15 +247,9 @@ onclick               → onclick
                       →  
 =>                    → =>
                       →  
-__cs_n                → n
-[                     → [
-1                     → 1
-]                     → ]
+__cs_setN             → setN
 (                     → (
 __cs_n                → n
-[                     → [
-0                     → 0
-]                     → ]
 (                     → (
 )                     → )
                       →  
@@ -253,20 +259,15 @@ __cs_n                → n
 )                     → )
 }                     → }
 >                     → >
-\n                    → \n                  
 {                     → {
 "n "                  → "n "
                       →  
 +                     → +
                       →  
 __cs_n                → n
-[                     → [
-0                     → 0
-]                     → ]
 (                     → (
 )                     → )
 }                     → }
-\n                    → \n                
 <                     → <
 /                     → /
 button                → button
@@ -274,9 +275,6 @@ button                → button
 \n                    → \n                
 {                     → {
 __cs_shown            → shown
-[                     → [
-0                     → 0
-]                     → ]
 (                     → (
 )                     → )
                       →  
@@ -302,9 +300,6 @@ console               → console
 log                   → log
 (                     → (
 __cs_n                → n
-[                     → [
-0                     → 0
-]                     → ]
 (                     → (
 )                     → )
 )                     → )

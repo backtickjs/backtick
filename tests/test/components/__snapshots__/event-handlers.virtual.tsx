@@ -14,23 +14,23 @@ it("eventHandlers", async (t) => {
     t,
     "eventHandlers",
     cs.lift((() => {
-      const __cs_said = cs.splice((createSignal))("");
+      const [__cs_said, __cs_setSaid] = cs.splice((createSignal))("");
 
       return (
         <form
           onsubmit={(__cs_event) => {
             __cs_event.preventDefault();
-            __cs_said[1](__cs_event.type + " " + __cs_event.cancelable);
+            __cs_setSaid(__cs_event.type + " " + __cs_event.cancelable);
           }}
         >
-          <textarea oninput={(__cs_event) => __cs_said[1](__cs_event.currentTarget.value)} />
-          <input oninput={(__cs_event) => __cs_said[1](__cs_event.currentTarget.value)} />
+          <textarea oninput={(__cs_event) => __cs_setSaid(__cs_event.currentTarget.value)} />
+          <input oninput={(__cs_event) => __cs_setSaid(__cs_event.currentTarget.value)} />
           <button
             onclick={(__cs_event) =>
-              __cs_said[1](__cs_event.clientX + " " + __cs_event.currentTarget.tagName)
+              __cs_setSaid(__cs_event.clientX + " " + __cs_event.currentTarget.tagName)
             }
           >
-            {__cs_said[0]()}
+            {__cs_said()}
           </button>
         </form>
       );

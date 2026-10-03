@@ -11,25 +11,25 @@ import { evaluate } from "../evaluate.ts";
 // it the way it captures any binding, and calls it as a component: once, with
 // its props read on access.
 const scriptBoundTagCapture = cs`{
-  const count = $createSignal(0);
+  const [count, setCount] = $createSignal(0);
   const Badge = (props: { n: number }) => <b>{"n " + props.n}</b>;
 
   return (
     <div>
-      {${cs`<Badge n={count[0]()} />`}}
+      {${cs`<Badge n={count()} />`}}
       {
         ${cs`{
           const skipped = 10;
-          return ${cs`<Badge n={count[0]() + 100} />`};
+          return ${cs`<Badge n={count() + 100} />`};
         }`}
       }
-      {${cs`<section>{${cs`<Badge n={count[0]() + 1000} />`}}</section>`}}
+      {${cs`<section>{${cs`<Badge n={count() + 1000} />`}}</section>`}}
       {
         ${cs`<For each={[1, 2]}>
-          {(m: number) => <Badge n={m * count[0]()} />}
+          {(m: number) => <Badge n={m * count()} />}
         </For>`}
       }
-      <button onclick={() => count[1](count[0]() + 1)}>more</button>
+      <button onclick={() => setCount(count() + 1)}>more</button>
     </div>
   );
 }`;

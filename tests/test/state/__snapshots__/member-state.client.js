@@ -8,10 +8,10 @@ exports.default = (($splice0, $tag1) => {
             return { id: from + at, label: $splice0()("row " + (from + at)) };
         });
     };
-    const held = $splice0()(build(1));
+    const [held, setHeld] = $splice0()(build(1));
     return (<div>
         <ul class="rows">
-          <$tag1 each={held[0]()}>
+          <$tag1 each={held()}>
             {(row) => (<li onclick={() => row.label[1]("pressed")}>{row.label[0]()}</li>)}
           </$tag1>
         </ul>

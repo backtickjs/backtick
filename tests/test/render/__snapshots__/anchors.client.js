@@ -3,13 +3,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0, $tag1) => {
-    const ids = $splice0()([1, 2, 3]);
+    const [ids, setIds] = $splice0()([1, 2, 3]);
     const clear = () => {
-        ids[1]([]);
+        setIds([]);
     };
     return (<>
         <span onclick={clear}>clear</span>
-        <$tag1 each={ids[0]()}>{(id) => <span>{"row " + id}</span>}</$tag1>
+        <$tag1 each={ids()}>{(id) => <span>{"row " + id}</span>}</$tag1>
       </>);
 });
 }

@@ -19,16 +19,16 @@ const page =
 
 export async function TodoList() {
   return cs`{
-    const filter = $createSignal("all");
-    const tasks = $createSignal($initial);
+    const [filter, setFilter] = $createSignal("all");
+    const [tasks, setTasks] = $createSignal($initial);
 
     // A function rather than a value: what a prop holds is re-read whenever
     // what it names changes, and a value computed here would be computed once.
     const showing = () => {
-      return tasks[0]().filter((task) => {
-        if (filter[0]() === "all") {
+      return tasks().filter((task) => {
+        if (filter() === "all") {
           return true;
-        } else if (filter[0]() === "done") {
+        } else if (filter() === "done") {
           return task.isDone;
         } else {
           return !task.isDone;
@@ -39,8 +39,8 @@ export async function TodoList() {
     // By label rather than by position: the list draws the filtered array, so a
     // task's place in what is shown is not its place in \`tasks\`.
     const onPress = (label: string) => {
-      tasks[1](
-        tasks[0]().map((task) =>
+      setTasks(
+        tasks().map((task) =>
           task.label === label
             ? { label: task.label, isDone: !task.isDone }
             : task,
@@ -53,9 +53,9 @@ export async function TodoList() {
         <h1 style="margin: 0; font-size: 24px">Today</h1>
 
         <p style="margin: 0; font-size: 16px; color: #71717a">
-          {tasks[0]().filter((task) => task.isDone).length +
+          {tasks().filter((task) => task.isDone).length +
             " of " +
-            tasks[0]().length +
+            tasks().length +
             " done"}
         </p>
 
@@ -64,15 +64,15 @@ export async function TodoList() {
             {(value: string) => (
               <button
                 id={"filter-" + value}
-                onclick={() => filter[1](value)}
+                onclick={() => setFilter(value)}
                 // The style is a string here, so what changes with the filter is
                 // written into it rather than set as a property.
                 style={
                   "background: none; border: 0; padding: 0;" +
                   " cursor: pointer; font-size: 15px; font-weight: " +
-                  (filter[0]() === value ? "700" : "400") +
+                  (filter() === value ? "700" : "400") +
                   "; color: " +
-                  (filter[0]() === value ? "#18181b" : "#71717a")
+                  (filter() === value ? "#18181b" : "#71717a")
                 }
               >
                 {value === "todo" ? "To do" : value === "done" ? "Done" : "All"}

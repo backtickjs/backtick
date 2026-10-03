@@ -23,12 +23,12 @@ export async function WeatherCard() {
   const source = isLive ? "open-meteo.com" : "sample week (offline)";
 
   return cs`{
-    const unit = $createSignal("C");
+    const [unit, setUnit] = $createSignal("C");
 
     // Only Celsius crosses the wire. Fahrenheit is arithmetic on numbers the
     // client already holds, so the toggle costs no request.
     const show = (celsius: number) => {
-      return unit[0]() === "F"
+      return unit() === "F"
         ? Math.round((celsius * 9) / 5 + 32)
         : Math.round(celsius);
     };
@@ -44,13 +44,13 @@ export async function WeatherCard() {
             {(value: string) => (
               <button
                 id={"unit-" + value}
-                onclick={() => unit[1](value)}
+                onclick={() => setUnit(value)}
                 style={
                   "background: none; border: 0; padding: 0; cursor: pointer;" +
                   " font-size: 15px; font-weight: " +
-                  (unit[0]() === value ? "700" : "400") +
+                  (unit() === value ? "700" : "400") +
                   "; color: " +
-                  (unit[0]() === value ? "#18181b" : "#71717a")
+                  (unit() === value ? "#18181b" : "#71717a")
                 }
               >
                 {"°" + value}

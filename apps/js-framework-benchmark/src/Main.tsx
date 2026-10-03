@@ -67,17 +67,17 @@ const NOUNS = [
 
 export async function Main(): Promise<Client<JSX.Element>> {
   return cs`{
-    const data = $createSignal<Row[]>([]);
-    const selected = $createSignal(0);
-    const rowId = $createSignal(1);
+    const [data, setData] = $createSignal<Row[]>([]);
+    const [selected, setSelected] = $createSignal(0);
+    const [rowId, setRowId] = $createSignal(1);
 
     const word = (list: string[]) => {
       return list[Math.round(Math.random() * 1000) % list.length];
     };
 
     const buildData = (count: number) => {
-      const from = rowId[0]();
-      rowId[1](from + count);
+      const from = rowId();
+      setRowId(from + count);
       return Array.from({ length: count }, (_, index) => {
         return {
           id: from + index,
@@ -89,19 +89,19 @@ export async function Main(): Promise<Client<JSX.Element>> {
     };
 
     const run = () => {
-      data[1](buildData(1000));
+      setData(buildData(1000));
     };
 
     const runLots = () => {
-      data[1](buildData(10000));
+      setData(buildData(10000));
     };
 
     const add = () => {
-      data[1]([...data[0](), ...buildData(1000)]);
+      setData([...data(), ...buildData(1000)]);
     };
 
     const partialUpdate = () => {
-      const rows = data[0]();
+      const rows = data();
       for (let index = 0; index < rows.length; index = index + 10) {
         const label = rows[index].label;
         label[1](label[0]() + " !!!");
@@ -109,22 +109,22 @@ export async function Main(): Promise<Client<JSX.Element>> {
     };
 
     const clear = () => {
-      data[1]([]);
+      setData([]);
     };
 
     const swapRows = () => {
-      const rows = data[0]();
+      const rows = data();
       if (rows.length > 998) {
-        data[1](rows.with(1, rows[998]).with(998, rows[1]));
+        setData(rows.with(1, rows[998]).with(998, rows[1]));
       }
     };
 
     const select = (id: number) => {
-      selected[1](id);
+      setSelected(id);
     };
 
     const remove = (id: number) => {
-      data[1](data[0]().filter((row) => row.id !== id));
+      setData(data().filter((row) => row.id !== id));
     };
 
     return (
@@ -202,9 +202,9 @@ export async function Main(): Promise<Client<JSX.Element>> {
         </div>
         <table class="table table-hover table-striped test-data">
           <tbody>
-            <For each={data[0]()}>
+            <For each={data()}>
               {(row: Row) => (
-                <tr class={selected[0]() === row.id ? "danger" : ""}>
+                <tr class={selected() === row.id ? "danger" : ""}>
                   <td class="col-md-1">{row.id}</td>
                   <td class="col-md-4">
                     <a onclick={() => select(row.id)}>{row.label[0]()}</a>

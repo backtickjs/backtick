@@ -3,7 +3,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0) => {
-    const n = $splice0()(2);
-    n[1](3);
+    const [n, setN] = $splice0()(2);
+    setN(3);
 });
 }

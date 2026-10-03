@@ -26,14 +26,14 @@ describe("computed", () => {
     render(
       await evaluate(
         cs.lift((() => () => {
-          const __cs_n = cs.splice((createSignal))(1);
+          const [__cs_n, __cs_setN] = cs.splice((createSignal))(1);
           const __cs_doubled = cs.splice((createMemo))(() => {
             cs.globalThis.window.console.log();
-            return __cs_n[0]() * 2;
+            return __cs_n() * 2;
           });
           return (
             <div>
-              <button onclick={() => __cs_n[1](__cs_n[0]() + 1)}>add</button>
+              <button onclick={() => __cs_setN(__cs_n() + 1)}>add</button>
               <p>{"a " + __cs_doubled()}</p>
               <p>{"b " + __cs_doubled()}</p>
               <p>{"c " + __cs_doubled()}</p>
@@ -54,15 +54,15 @@ describe("computed", () => {
     render(
       await evaluate(
         cs.lift((() => () => {
-          const __cs_n = cs.splice((createSignal))(1);
-          const __cs_isBig = cs.splice((createMemo))(() => __cs_n[0]() > 2);
+          const [__cs_n, __cs_setN] = cs.splice((createSignal))(1);
+          const __cs_isBig = cs.splice((createMemo))(() => __cs_n() > 2);
           const __cs_label = () => {
             cs.globalThis.window.console.log();
             return __cs_isBig() ? "big" : "small";
           };
           return (
             <div>
-              <button onclick={() => __cs_n[1](__cs_n[0]() + 1)}>add</button>
+              <button onclick={() => __cs_setN(__cs_n() + 1)}>add</button>
               <p>{__cs_label()}</p>
             </div>
           );

@@ -59,7 +59,12 @@ cs.lift((() =>              →  [-semantic -navigation]
 \n                          → \n  
 const                       → const
                             →  
+[                           → [
 __cs_count                  → count
+,                           → ,
+                            →  
+__cs_setCount               → setCount
+]                           → ]
                             →  
 =                           → =
                             →  
@@ -95,9 +100,6 @@ __cs_total                  → total
 =                           → =
                             →  
 __cs_count                  → count
-[                           → [
-0                           → 0
-]                           → ]
 (                           → (
 )                           → )
                             →  
@@ -141,9 +143,6 @@ cs.splice(                  →  [-semantic -navigation]
 )                           →  [-semantic -navigation]
 (                           → (
 __cs_count                  → count
-[                           → [
-0                           → 0
-]                           → ]
 (                           → (
 )                           → )
 )                           → )
@@ -207,7 +206,7 @@ For                         → For
 {                           → For
 each                        → each
 __cs_rows                   → rows
-children                    → {(row: number) => <li>{row + count[0]()}</li>}
+children                    → {(row: number) => <li>{row + count()}</li>}
 (                           → (
 __cs_row                    → row
 :                           → :
@@ -226,9 +225,6 @@ __cs_row                    → row
 +                           → +
                             →  
 __cs_count                  → count
-[                           → [
-0                           → 0
-]                           → ]
 (                           → (
 )                           → )
 }                           → }

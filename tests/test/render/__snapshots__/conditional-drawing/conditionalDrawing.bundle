@@ -1,7 +1,7 @@
 import { createSignal as $i0 } from "solid-js";
 import * as $module0 from "solid-js/web";
 const $modules = {
-  "2u9nfrz55jzvf:42:27": (module, exports, require) => {
+  "142uaowqtumqx:42:27": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -11,18 +11,18 @@ const $modules = {
       `<div><span></span><section>`,
     );
     exports.default = ($splice0, $tag1) => {
-      const builds = $splice0()(0);
+      const [builds, setBuilds] = $splice0()(0);
       return (() => {
         var _el$ = _tmpl$(),
           _el$2 = _el$.firstChild,
           _el$3 = _el$2.nextSibling;
-        (0, web_3.insert)(_el$2, () => "builds " + builds[0]());
+        (0, web_3.insert)(_el$2, () => "builds " + builds());
         (0, web_3.insert)(
           _el$3,
           (0, web_2.createComponent)($tag1, {
             again: () => {
-              builds[1](builds[0]() + 1);
-              return builds[0]() < 5;
+              setBuilds(builds() + 1);
+              return builds() < 5;
             },
           }),
         );
@@ -30,7 +30,7 @@ const $modules = {
       })();
     };
   },
-  "2u9nfrz55jzvf:30:13": (module, exports, require) => {
+  "142uaowqtumqx:30:13": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -38,14 +38,14 @@ const $modules = {
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<em>shown`),
       _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<i>waiting`);
     exports.default = ($splice0) => (props) => {
-      const shown = $splice0()(false);
+      const [shown, setShown] = $splice0()(false);
       const started = window.setTimeout(() => {
         if (props.again()) {
-          shown[1](true);
+          setShown(true);
         }
       }, 0);
       return (0, web_2.memo)(() =>
-        (0, web_2.memo)(() => !!shown[0]())() ? _tmpl$() : _tmpl$2(),
+        (0, web_2.memo)(() => !!shown())() ? _tmpl$() : _tmpl$2(),
       );
     };
   },
@@ -62,8 +62,8 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $cs0 = $require("2u9nfrz55jzvf:42:27").default;
-const $cs1 = $require("2u9nfrz55jzvf:30:13").default;
+const $cs0 = $require("142uaowqtumqx:42:27").default;
+const $cs1 = $require("142uaowqtumqx:30:13").default;
 export default $cs0(
   () => $i0,
   $cs1(() => $i0),

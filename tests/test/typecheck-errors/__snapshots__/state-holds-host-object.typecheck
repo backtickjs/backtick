@@ -1,4 +1,4 @@
-18:31 error TS2345: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.
+18:42 error TS2345: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.
   Type 'Date' is not assignable to type '{ readonly [key: string]: Spliceable; }'.
     Index signature for type 'string' is missing in type 'Date'.
 20:12 error TS2345: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.

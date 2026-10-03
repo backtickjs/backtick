@@ -6,10 +6,10 @@ import { createSignal } from "@backtickjs/solid-js";
 // without returning, has nothing to draw.
 async function Panel() {
   return cs.create(
-    "2413tlntseciz:8:9",
+    "2xy1eggezr754:8:9",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
-    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const n = $splice0()(2);\n    n[1](3);\n};\n}',
-    '{"version":3,"file":"module.jsx","mappings":";;;kBAOYA,QAAA;IACR,MAAMC,CAAC,GAAGD,QAAA,EAAa,CAAC,CAAC,CAAC;IAC1BC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACT,CAAC","names":["$splice0","n"],"ignoreList":[],"sources":["typecheck-errors/component-answers-action.test.tsx"]}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const [n, setN] = $splice0()(2);\n    setN(3);\n};\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;kBAOYA,QAAA;IACR,MAAM,CAACC,CAAC,EAAEC,IAAI,CAAC,GAAGF,QAAA,EAAa,CAAC,CAAC,CAAC;IAClCE,IAAI,CAAC,CAAC,CAAC;AACT,CAAC","names":["$splice0","n","setN"],"ignoreList":[],"sources":["typecheck-errors/component-answers-action.test.tsx"]}',
     [],
   );
 }

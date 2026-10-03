@@ -3,7 +3,12 @@ cs.lift((() =>   →  [-semantic -navigation]
 \n               → \n    
 const            → const
                  →  
+[                → [
 __cs_flag        → flag
+,                → ,
+                 →  
+__cs_setFlag     → setFlag
+]                → ]
                  →  
 =                → =
                  →  
@@ -17,7 +22,12 @@ true             → true
 \n               → \n    
 const            → const
                  →  
+[                → [
 __cs_tone        → tone
+,                → ,
+                 →  
+__cs_setTone     → setTone
+]                → ]
                  →  
 =                → =
                  →  
@@ -33,7 +43,12 @@ Tone.Warm        → Tone.Warm
 \n               → \n    
 const            → const
                  →  
+[                → [
 __cs_step        → step
+,                → ,
+                 →  
+__cs_setStep     → setStep
+]                → ]
                  →  
 =                → =
                  →  
@@ -75,19 +90,13 @@ onclick          → onclick
                  →  
 {                → {
 \n               → \n          
-__cs_flag        → flag
-[                → [
-1                → 1
-]                → ]
+__cs_setFlag     → setFlag
 (                → (
 false            → false
 )                → )
 ;                → ;
 \n               → \n          
-__cs_tone        → tone
-[                → [
-1                → 1
-]                → ]
+__cs_setTone     → setTone
 (                → (
 cs.splice(       →  [-semantic -navigation]
 Tone.Cool        → Tone.Cool
@@ -95,10 +104,7 @@ Tone.Cool        → Tone.Cool
 )                → )
 ;                → ;
 \n               → \n          
-__cs_step        → step
-[                → [
-1                → 1
-]                → ]
+__cs_setStep     → setStep
 (                → (
 (                → (
 )                → )
@@ -121,9 +127,6 @@ __cs_step        → step
 \n               → \n        
 {                → {
 __cs_flag        → flag
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
                  →  
@@ -134,9 +137,6 @@ __cs_flag        → flag
 +                → +
                  →  
 __cs_tone        → tone
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
                  →  
@@ -147,9 +147,6 @@ __cs_tone        → tone
 +                → +
                  →  
 __cs_step        → step
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
 (                → (

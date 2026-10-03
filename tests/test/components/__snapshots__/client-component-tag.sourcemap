@@ -36,7 +36,12 @@ cs.lift((() =>   →  [-semantic -navigation]
 \n               → \n  
 const            → const
                  →  
+[                → [
 __cs_scale       → scale
+,                → ,
+                 →  
+__cs_setScale    → setScale
+]                → ]
                  →  
 =                → =
                  →  
@@ -68,7 +73,7 @@ each             → each
                  →  
 2                → 2
 ]                → ]
-children         → {(n) => <Badge n={n * scale[0]()} />}
+children         → {(n) => <Badge n={n * scale()} />}
 (                → (
 __cs_n           → n
 )                → )
@@ -85,9 +90,6 @@ __cs_n           → n
 *                → *
                  →  
 __cs_scale       → scale
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
 }                → 
@@ -104,15 +106,9 @@ onclick          → onclick
                  →  
 =>               → =>
                  →  
-__cs_scale       → scale
-[                → [
-1                → 1
-]                → ]
+__cs_setScale    → setScale
 (                → (
 __cs_scale       → scale
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
                  →  

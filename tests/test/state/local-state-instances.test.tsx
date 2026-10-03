@@ -11,12 +11,12 @@ import { children, drawn, fontSize } from "./dom.ts";
 // of one script, and each declares a signal of its own.
 async function OwnCounter() {
   return cs`{
-    const size = $createSignal(16);
+    const [size, setSize] = $createSignal(16);
     return (
       <span
-        style={"font-size: " + size[0]() + "px"}
+        style={"font-size: " + size() + "px"}
         onclick={() => {
-          size[1](size[0]() + 1);
+          setSize(size() + 1);
         }}
       >
         press

@@ -30,14 +30,14 @@ import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs`{
-    const ids = $createSignal<number[]>([1, 2, 3]);
+    const [ids, setIds] = $createSignal<number[]>([1, 2, 3]);
     const clear = () => {
-      ids[1]([]);
+      setIds([]);
     };
     return (
       <>
         <span onclick={clear}>clear</span>
-        <For each={ids[0]()}>{(id: number) => <span>{"row " + id}</span>}</For>
+        <For each={ids()}>{(id: number) => <span>{"row " + id}</span>}</For>
       </>
     );
   }`;

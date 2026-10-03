@@ -3,7 +3,12 @@ cs.lift((() =>   →  [-semantic -navigation]
 \n               → \n    
 const            → const
                  →  
+[                → [
 __cs_rows        → rows
+,                → ,
+                 →  
+__cs_setRows     → setRows
+]                → ]
                  →  
 =                → =
                  →  
@@ -38,10 +43,7 @@ Row              → Row
                  →  
 {                → {
 \n               → \n      
-__cs_rows        → rows
-[                → [
-1                → 1
-]                → ]
+__cs_setRows     → setRows
 (                → (
 [                → [
 __cs_row         → row
@@ -134,9 +136,6 @@ For              → For
 {                → For
 each             → each
 __cs_rows        → rows
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
 children         → {(row: Row) => <span>{label(row)}</span>}

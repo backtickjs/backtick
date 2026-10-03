@@ -17,9 +17,9 @@ type Row = { id: number; label: string };
 
 async function Rows() {
   return cs`{
-    const rows = $createSignal<Row[]>([]);
+    const [rows, setRows] = $createSignal<Row[]>([]);
     const add = (row: Row) => {
-      rows[1]([row]);
+      setRows([row]);
     };
     const label = (row: Row) => {
       return row.label;
@@ -28,7 +28,7 @@ async function Rows() {
       <div>
         <span onclick={() => add({ id: 1, label: "one" })}>add</span>
         <div>
-          <For each={rows[0]()}>{(row: Row) => <span>{label(row)}</span>}</For>
+          <For each={rows()}>{(row: Row) => <span>{label(row)}</span>}</For>
         </div>
       </div>
     );

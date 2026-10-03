@@ -91,7 +91,12 @@ __cs_at           → at
 \n\n              → \n\n    
 const             → const
                   →  
+[                 → [
 __cs_held         → held
+,                 → ,
+                  →  
+__cs_setHeld      → setHeld
+]                 → ]
                   →  
 =                 → =
                   →  
@@ -129,9 +134,6 @@ For               → For
 {                 → For
 each              → each
 __cs_held         → held
-[                 → [
-0                 → 0
-]                 → ]
 (                 → (
 )                 → )
 children          → \n            {(row: Row) => (\n              <li onclick={() => row.label[1]("pressed")}>{row.label[0]()}</li>\n            )}\n          

@@ -12,8 +12,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // draw nothing.
 async function Panel() {
   return cs.lift((() => {
-    const __cs_n = cs.splice((createSignal))(2);
-    return <em>{__cs_n[0]()}</em>;
+    const [__cs_n, __cs_setN] = cs.splice((createSignal))(2);
+    return <em>{__cs_n()}</em>;
   })());
 }
 

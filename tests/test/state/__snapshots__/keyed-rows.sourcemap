@@ -3,7 +3,12 @@ cs.lift((() =>   →  [-semantic -navigation]
 \n               → \n    
 const            → const
                  →  
+[                → [
 __cs_ids         → ids
+,                → ,
+                 →  
+__cs_setIds      → setIds
+]                → ]
                  →  
 =                → =
                  →  
@@ -48,17 +53,11 @@ __cs_held        → held
 =                → =
                  →  
 __cs_ids         → ids
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
 ;                → ;
 \n               → \n      
-__cs_ids         → ids
-[                → [
-1                → 1
-]                → ]
+__cs_setIds      → setIds
 (                → (
 __cs_held        → held
 .                → .
@@ -102,15 +101,9 @@ __cs_drop        → drop
                  →  
 {                → {
 \n               → \n      
-__cs_ids         → ids
-[                → [
-1                → 1
-]                → ]
+__cs_setIds      → setIds
 (                → (
 __cs_ids         → ids
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
 .                → .
@@ -183,12 +176,9 @@ For              → For
 {                → For
 each             → each
 __cs_ids         → ids
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
-children         → \n            {(id: number) => <span>{"row " + id}</span>}\n          
+children         → {(id: number) => <span>{"row " + id}</span>}
 (                → (
 __cs_id          → id
 :                → :

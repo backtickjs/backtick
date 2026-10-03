@@ -12,7 +12,12 @@ number           → number
 \n               → \n  
 const            → const
                  →  
+[                → [
 __cs_count       → count
+,                → ,
+                 →  
+__cs_setCount    → setCount
+]                → ]
                  →  
 =                → =
                  →  
@@ -37,9 +42,6 @@ get              → get
 =>               → =>
                  →  
 __cs_count       → count
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
 ,                → ,
@@ -58,15 +60,9 @@ number           → number
                  →  
 {                → {
 \n               → \n      
-__cs_count       → count
-[                → [
-1                → 1
-]                → ]
+__cs_setCount    → setCount
 (                → (
 __cs_count       → count
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
                  →  

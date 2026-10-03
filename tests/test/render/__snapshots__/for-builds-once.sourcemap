@@ -24,7 +24,12 @@ boolean          → boolean
 \n               → \n  
 const            → const
                  →  
+[                → [
 __cs_items       → items
+,                → ,
+                 →  
+__cs_setItems    → setItems
+]                → ]
                  →  
 =                → =
                  →  
@@ -71,10 +76,7 @@ more             → more
                  →  
 {                → {
 \n               → \n      
-__cs_items       → items
-[                → [
-1                → 1
-]                → ]
+__cs_setItems    → setItems
 (                → (
 cs.splice(       →  [-semantic -navigation]
 (answerItems)    → $answerItems
@@ -100,9 +102,6 @@ For              → For
 {                → For
 each             → each
 __cs_items       → items
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
 children         → {(item: string) => <em>{item}</em>}
@@ -134,7 +133,12 @@ cs.lift((() =>   →  [-semantic -navigation]
 \n               → \n  
 const            → const
                  →  
+[                → [
 __cs_asked       → asked
+,                → ,
+                 →  
+__cs_setAsked    → setAsked
+]                → ]
                  →  
 =                → =
                  →  
@@ -163,9 +167,6 @@ span             → span
 +                → +
                  →  
 __cs_asked       → asked
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
 }                → }
@@ -186,15 +187,9 @@ more             → more
                  →  
 {                → {
 \n               → \n          
-__cs_asked       → asked
-[                → [
-1                → 1
-]                → ]
+__cs_setAsked    → setAsked
 (                → (
 __cs_asked       → asked
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
                  →  
@@ -207,9 +202,6 @@ __cs_asked       → asked
 return           → return
                  →  
 __cs_asked       → asked
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
                  →  

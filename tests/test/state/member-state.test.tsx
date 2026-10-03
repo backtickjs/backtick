@@ -24,12 +24,12 @@ async function MemberRows() {
       });
     };
 
-    const held = $createSignal(build(1));
+    const [held, setHeld] = $createSignal(build(1));
 
     return (
       <div>
         <ul class="rows">
-          <For each={held[0]()}>
+          <For each={held()}>
             {(row: Row) => (
               <li onclick={() => row.label[1]("pressed")}>{row.label[0]()}</li>
             )}

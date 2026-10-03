@@ -16,14 +16,14 @@ exports.default = (($splice0) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0, $splice1) => {
-    const count = $splice0()(0);
+    const [count, setCount] = $splice0()(0);
     const Badge = (p) => (<b>
       {"outer " + p.n}
       {p.children}
     </b>);
     return (<div>
       {$splice1(count, Badge)}
-      <button onclick={() => count[1](count[0]() + 1)}>more</button>
+      <button onclick={() => setCount(count() + 1)}>more</button>
     </div>);
 });
 }
@@ -32,7 +32,7 @@ exports.default = (($splice0, $splice1) => {
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($capture0, $capture1) => <$capture0 n={$capture1[0]()}>
-              <u>{"kid " + $capture1[0]()}</u>
+exports.default = (($capture0, $capture1) => <$capture0 n={$capture1()}>
+              <u>{"kid " + $capture1()}</u>
             </$capture0>);
 }

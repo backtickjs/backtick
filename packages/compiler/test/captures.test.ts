@@ -200,6 +200,22 @@ describe("captures", () => {
       );
     });
 
+    it("a destructured name, not handed to a hole in its own initializer", () => {
+      const source =
+        "const script = cs`{ const [a, b] = ${cs`a`}; return ${cs`[a, b]`}; }`;";
+      const parsed = parseSourceText(ts, "test.ts", source);
+      const { params } = resolveBindings(ts, parsed.scripts, "hash");
+      const [script] = parsed.scripts;
+      assert.deepStrictEqual(
+        params
+          .get(script!)!
+          .flatMap((param) =>
+            param.kind === "splice" ? [param.bindings] : [],
+          ),
+        [[], ["a$hash$0", "b$hash$1"]],
+      );
+    });
+
     it("a catch binding, in its handler only", () => {
       assert.deepStrictEqual(
         nested(

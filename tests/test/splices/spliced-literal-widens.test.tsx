@@ -26,10 +26,10 @@ it("splicedLiteralWidens", async (t) => {
     t,
     "splicedLiteralWidens",
     cs`{
-      const n = $createSignal($five);
-      n[1](6);
-      const c = $createSignal(${Color.Red});
-      c[1](${Color.Blue});
+      const [n, setN] = $createSignal($five);
+      setN(6);
+      const [c, setC] = $createSignal(${Color.Red});
+      setC(${Color.Blue});
     }`,
   );
 });

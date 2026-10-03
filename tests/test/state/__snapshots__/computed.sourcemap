@@ -8,7 +8,12 @@ cs.lift((() =>    →  [-semantic -navigation]
 \n                → \n          
 const             → const
                   →  
+[                 → [
 __cs_n            → n
+,                 → ,
+                  →  
+__cs_setN         → setN
+]                 → ]
                   →  
 =                 → =
                   →  
@@ -49,9 +54,6 @@ log               → log
 return            → return
                   →  
 __cs_n            → n
-[                 → [
-0                 → 0
-]                 → ]
 (                 → (
 )                 → )
                   →  
@@ -83,15 +85,9 @@ onclick           → onclick
                   →  
 =>                → =>
                   →  
-__cs_n            → n
-[                 → [
-1                 → 1
-]                 → ]
+__cs_setN         → setN
 (                 → (
 __cs_n            → n
-[                 → [
-0                 → 0
-]                 → ]
 (                 → (
 )                 → )
                   →  
@@ -177,7 +173,12 @@ cs.lift((() =>    →  [-semantic -navigation]
 \n                → \n          
 const             → const
                   →  
+[                 → [
 __cs_n            → n
+,                 → ,
+                  →  
+__cs_setN         → setN
+]                 → ]
                   →  
 =                 → =
                   →  
@@ -205,9 +206,6 @@ cs.splice(        →  [-semantic -navigation]
 =>                → =>
                   →  
 __cs_n            → n
-[                 → [
-0                 → 0
-]                 → ]
 (                 → (
 )                 → )
                   →  
@@ -276,15 +274,9 @@ onclick           → onclick
                   →  
 =>                → =>
                   →  
-__cs_n            → n
-[                 → [
-1                 → 1
-]                 → ]
+__cs_setN         → setN
 (                 → (
 __cs_n            → n
-[                 → [
-0                 → 0
-]                 → ]
 (                 → (
 )                 → )
                   →  

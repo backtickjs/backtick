@@ -3,8 +3,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0) => {
-    const n = $splice0()(2);
-    return <em>{n[0]()}</em>;
+    const [n, setN] = $splice0()(2);
+    return <em>{n()}</em>;
 });
 }
 

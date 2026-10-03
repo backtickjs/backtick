@@ -3,7 +3,12 @@ cs.lift((() =>   →  [-semantic -navigation]
 \n               → \n    
 const            → const
                  →  
+[                → [
 __cs_size        → size
+,                → ,
+                 →  
+__cs_setSize     → setSize
+]                → ]
                  →  
 =                → =
                  →  
@@ -30,9 +35,6 @@ style            → style
 +                → +
                  →  
 __cs_size        → size
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
                  →  
@@ -51,15 +53,9 @@ onclick          → onclick
                  →  
 {                → {
 \n               → \n          
-__cs_size        → size
-[                → [
-1                → 1
-]                → ]
+__cs_setSize     → setSize
 (                → (
 __cs_size        → size
-[                → [
-0                → 0
-]                → ]
 (                → (
 )                → )
                  →  

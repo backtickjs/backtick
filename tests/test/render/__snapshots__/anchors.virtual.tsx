@@ -30,14 +30,14 @@ import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs.lift((() => {
-    const __cs_ids = cs.splice((createSignal))<number[]>([1, 2, 3]);
+    const [__cs_ids, __cs_setIds] = cs.splice((createSignal))<number[]>([1, 2, 3]);
     const __cs_clear = () => {
-      __cs_ids[1]([]);
+      __cs_setIds([]);
     };
     return (
       <>
         <span onclick={__cs_clear}>clear</span>
-        {(void For, cs.splice(For)({ each: __cs_ids[0](), children: (__cs_id: number) => <span>{"row " + __cs_id}</span> }))}
+        {(void For, cs.splice(For)({ each: __cs_ids(), children: (__cs_id: number) => <span>{"row " + __cs_id}</span> }))}
       </>
     );
   })());

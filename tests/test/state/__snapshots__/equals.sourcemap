@@ -1,746 +1,727 @@
-cs.lift((() =>        →  [-semantic -navigation]
-(                     → (
-)                     → )
-                      →  
-=>                    → =>
-                      →  
-{                     → {
-\n                    → \n          
-const                 → const
-                      →  
-__cs_n                → n
-                      →  
-=                     → =
-                      →  
-cs.splice(            →  [-semantic -navigation]
-(createSignal)        → $createSignal
-)                     →  [-semantic -navigation]
-(                     → (
-1                     → 1
-)                     → )
-;                     → ;
-\n                    → \n          
-const                 → const
-                      →  
-__cs_size             → size
-                      →  
-=                     → =
-                      →  
-cs.splice(            →  [-semantic -navigation]
-(createMemo)          → $createMemo
-)                     →  [-semantic -navigation]
-(                     → (
-\n                    → \n            
-(                     → (
-)                     → )
-                      →  
-=>                    → =>
-                      →  
-(                     → (
-{                     → {
-                      →  
-isBig                 → isBig
-:                     → :
-                      →  
-__cs_n                → n
-[                     → [
-0                     → 0
-]                     → ]
-(                     → (
-)                     → )
-                      →  
->                     → >
-                      →  
-2                     → 2
-,                     → ,
-                      →  
-n                     → n
-:                     → :
-                      →  
-__cs_n                → n
-[                     → [
-0                     → 0
-]                     → ]
-(                     → (
-)                     → )
-                      →  
-}                     → }
-)                     → )
-,                     → ,
-\n                    → \n            
-undefined             → undefined
-,                     → ,
-\n                    → \n            
-{                     → {
-                      →  
-equals                → equals
-:                     → :
-                      →  
-(                     → (
-__cs_previous         → previous
-,                     → ,
-                      →  
-__cs_next             → next
-)                     → )
-                      →  
-=>                    → =>
-                      →  
-__cs_previous         → previous
-.                     → .
-isBig                 → isBig
-                      →  
-===                   → ===
-                      →  
-__cs_next             → next
-.                     → .
-isBig                 → isBig
-                      →  
-}                     → }
-,                     → ,
-\n                    → \n          
-)                     → )
-;                     → ;
-\n                    → \n          
-const                 → const
-                      →  
-__cs_label            → label
-                      →  
-=                     → =
-                      →  
-(                     → (
-)                     → )
-                      →  
-=>                    → =>
-                      →  
-{                     → {
-\n                    → \n            
-window                → window
-.                     → .
-console               → console
-.                     → .
-log                   → log
-(                     → (
-)                     → )
-;                     → ;
-\n                    → \n            
-return                → return
-                      →  
-__cs_size             → size
-(                     → (
-)                     → )
-.                     → .
-isBig                 → isBig
-                      →  
-?                     → ?
-                      →  
-"big"                 → "big"
-                      →  
-:                     → :
-                      →  
-"small"               → "small"
-;                     → ;
-\n                    → \n          
-}                     → }
-;                     → ;
-\n                    → \n          
-return                → return
-                      →  
-(                     → (
-\n                    → \n            
-<                     → <
-div                   → div
->                     → >
-\n                    → \n              
-<                     → <
-button                → button
-                      →  
-onclick               → onclick
-=                     → =
-{                     → {
-(                     → (
-)                     → )
-                      →  
-=>                    → =>
-                      →  
-__cs_n                → n
-[                     → [
-1                     → 1
-]                     → ]
-(                     → (
-__cs_n                → n
-[                     → [
-0                     → 0
-]                     → ]
-(                     → (
-)                     → )
-                      →  
-+                     → +
-                      →  
-1                     → 1
-)                     → )
-}                     → }
->                     → >
-add                   → add
-<                     → <
-/                     → /
-button                → button
->                     → >
-\n                    → \n              
-<                     → <
-p                     → p
->                     → >
-{                     → {
-__cs_label            → label
-(                     → (
-)                     → )
-}                     → }
-<                     → <
-/                     → /
-p                     → p
->                     → >
-\n                    → \n            
-<                     → <
-/                     → /
-div                   → div
->                     → >
-\n                    → \n          
-)                     → )
-;                     → ;
-\n                    → \n        
-}                     → }
-cs.lift((() =>        →  [-semantic -navigation]
-(                     → (
-)                     → )
-                      →  
-=>                    → =>
-                      →  
-{                     → {
-\n                    → \n          
-const                 → const
-                      →  
-__cs_point            → point
-                      →  
-=                     → =
-                      →  
-cs.splice(            →  [-semantic -navigation]
-(createSignal)        → $createSignal
-)                     →  [-semantic -navigation]
-(                     → (
-\n                    → \n            
-{                     → {
-                      →  
-x                     → x
-:                     → :
-                      →  
-1                     → 1
-                      →  
-}                     → }
-,                     → ,
-\n                    → \n            
-{                     → {
-                      →  
-equals                → equals
-:                     → :
-                      →  
-(                     → (
-__cs_previous         → previous
-,                     → ,
-                      →  
-__cs_next             → next
-)                     → )
-                      →  
-=>                    → =>
-                      →  
-__cs_previous         → previous
-.                     → .
-x                     → x
-                      →  
-===                   → ===
-                      →  
-__cs_next             → next
-.                     → .
-x                     → x
-                      →  
-}                     → }
-,                     → ,
-\n                    → \n          
-)                     → )
-;                     → ;
-\n                    → \n          
-const                 → const
-                      →  
-__cs_label            → label
-                      →  
-=                     → =
-                      →  
-(                     → (
-)                     → )
-                      →  
-=>                    → =>
-                      →  
-{                     → {
-\n                    → \n            
-window                → window
-.                     → .
-console               → console
-.                     → .
-log                   → log
-(                     → (
-)                     → )
-;                     → ;
-\n                    → \n            
-return                → return
-                      →  
-"x "                  → "x "
-                      →  
-+                     → +
-                      →  
-__cs_point            → point
-[                     → [
-0                     → 0
-]                     → ]
-(                     → (
-)                     → )
-.                     → .
-x                     → x
-;                     → ;
-\n                    → \n          
-}                     → }
-;                     → ;
-\n                    → \n          
-return                → return
-                      →  
-(                     → (
-\n                    → \n            
-<                     → <
-div                   → div
->                     → >
-\n                    → \n              
-<                     → <
-button                → button
-                      →  
-onclick               → onclick
-=                     → =
-{                     → {
-(                     → (
-)                     → )
-                      →  
-=>                    → =>
-                      →  
-__cs_point            → point
-[                     → [
-1                     → 1
-]                     → ]
-(                     → (
-{                     → {
-                      →  
-x                     → x
-:                     → :
-                      →  
-__cs_point            → point
-[                     → [
-0                     → 0
-]                     → ]
-(                     → (
-)                     → )
-.                     → .
-x                     → x
-                      →  
-}                     → }
-)                     → )
-}                     → }
->                     → >
-\n                    → \n                
-same\n                → same\n              
-<                     → <
-/                     → /
-button                → button
->                     → >
-\n                    → \n              
-<                     → <
-p                     → p
->                     → >
-{                     → {
-__cs_label            → label
-(                     → (
-)                     → )
-}                     → }
-<                     → <
-/                     → /
-p                     → p
->                     → >
-\n                    → \n            
-<                     → <
-/                     → /
-div                   → div
->                     → >
-\n                    → \n          
-)                     → )
-;                     → ;
-\n                    → \n        
-}                     → }
-cs.lift((() =>        →  [-semantic -navigation]
-(                     → (
-)                     → )
-                      →  
-=>                    → =>
-                      →  
-{                     → {
-\n                    → \n          
-const                 → const
-                      →  
-__cs_n                → n
-                      →  
-=                     → =
-                      →  
-cs.splice(            →  [-semantic -navigation]
-(createSignal)        → $createSignal
-)                     →  [-semantic -navigation]
-(                     → (
-1                     → 1
-,                     → ,
-                      →  
-{                     → {
-\n                    → \n            
-equals                → equals
-:                     → :
-                      →  
-(                     → (
-__cs_previous         → previous
-,                     → ,
-                      →  
-__cs_next             → next
-)                     → )
-                      →  
-=>                    → =>
-                      →  
-{                     → {
-\n                    → \n              
-window                → window
-.                     → .
-console               → console
-.                     → .
-log                   → log
-(                     → (
-__cs_previous         → previous
-,                     → ,
-                      →  
-__cs_next             → next
-)                     → )
-;                     → ;
-\n                    → \n              
-return                → return
-                      →  
-__cs_previous         → previous
-                      →  
-===                   → ===
-                      →  
-__cs_next             → next
-;                     → ;
-\n                    → \n            
-}                     → }
-,                     → ,
-\n                    → \n          
-}                     → }
-)                     → )
-;                     → ;
-\n                    → \n          
-return                → return
-                      →  
-<                     → <
-button                → button
-                      →  
-onclick               → onclick
-=                     → =
-{                     → {
-(                     → (
-)                     → )
-                      →  
-=>                    → =>
-                      →  
-__cs_n                → n
-[                     → [
-1                     → 1
-]                     → ]
-(                     → (
-2                     → 2
-)                     → )
-}                     → }
->                     → >
-{                     → {
-"n "                  → "n "
-                      →  
-+                     → +
-                      →  
-__cs_n                → n
-[                     → [
-0                     → 0
-]                     → ]
-(                     → (
-)                     → )
-}                     → }
-<                     → <
-/                     → /
-button                → button
->                     → >
-;                     → ;
-\n                    → \n        
-}                     → }
-cs.lift((() =>        →  [-semantic -navigation]
-(                     → (
-)                     → )
-                      →  
-=>                    → =>
-                      →  
-{                     → {
-\n                    → \n          
-const                 → const
-                      →  
-__cs_n                → n
-                      →  
-=                     → =
-                      →  
-cs.splice(            →  [-semantic -navigation]
-(createSignal)        → $createSignal
-)                     →  [-semantic -navigation]
-(                     → (
-1                     → 1
-)                     → )
-;                     → ;
-\n                    → \n          
-const                 → const
-                      →  
-__cs_label            → label
-                      →  
-=                     → =
-                      →  
-(                     → (
-)                     → )
-                      →  
-=>                    → =>
-                      →  
-{                     → {
-\n                    → \n            
-window                → window
-.                     → .
-console               → console
-.                     → .
-log                   → log
-(                     → (
-)                     → )
-;                     → ;
-\n                    → \n            
-return                → return
-                      →  
-"n "                  → "n "
-                      →  
-+                     → +
-                      →  
-__cs_n                → n
-[                     → [
-0                     → 0
-]                     → ]
-(                     → (
-)                     → )
-;                     → ;
-\n                    → \n          
-}                     → }
-;                     → ;
-\n                    → \n          
-return                → return
-                      →  
-(                     → (
-\n                    → \n            
-<                     → <
-div                   → div
->                     → >
-\n                    → \n              
-<                     → <
-button                → button
-                      →  
-onclick               → onclick
-=                     → =
-{                     → {
-(                     → (
-)                     → )
-                      →  
-=>                    → =>
-                      →  
-__cs_n                → n
-[                     → [
-1                     → 1
-]                     → ]
-(                     → (
-1                     → 1
-)                     → )
-}                     → }
->                     → >
-same                  → same
-<                     → <
-/                     → /
-button                → button
->                     → >
-\n                    → \n              
-<                     → <
-p                     → p
->                     → >
-{                     → {
-__cs_label            → label
-(                     → (
-)                     → )
-}                     → }
-<                     → <
-/                     → /
-p                     → p
->                     → >
-\n                    → \n            
-<                     → <
-/                     → /
-div                   → div
->                     → >
-\n                    → \n          
-)                     → )
-;                     → ;
-\n                    → \n        
-}                     → }
-cs.lift((() =>        →  [-semantic -navigation]
-(                     → (
-)                     → )
-                      →  
-=>                    → =>
-                      →  
-{                     → {
-\n                    → \n          
-const                 → const
-                      →  
-__cs_point            → point
-                      →  
-=                     → =
-                      →  
-cs.splice(            →  [-semantic -navigation]
-(createSignal)        → $createSignal
-)                     →  [-semantic -navigation]
-(                     → (
-{                     → {
-                      →  
-x                     → x
-:                     → :
-                      →  
-1                     → 1
-                      →  
-}                     → }
-)                     → )
-;                     → ;
-\n                    → \n          
-const                 → const
-                      →  
-__cs_label            → label
-                      →  
-=                     → =
-                      →  
-(                     → (
-)                     → )
-                      →  
-=>                    → =>
-                      →  
-{                     → {
-\n                    → \n            
-window                → window
-.                     → .
-console               → console
-.                     → .
-log                   → log
-(                     → (
-)                     → )
-;                     → ;
-\n                    → \n            
-return                → return
-                      →  
-"x "                  → "x "
-                      →  
-+                     → +
-                      →  
-__cs_point            → point
-[                     → [
-0                     → 0
-]                     → ]
-(                     → (
-)                     → )
-.                     → .
-x                     → x
-;                     → ;
-\n                    → \n          
-}                     → }
-;                     → ;
-\n                    → \n          
-return                → return
-                      →  
-(                     → (
-\n                    → \n            
-<                     → <
-div                   → div
->                     → >
-\n                    → \n              
-<                     → <
-button                → button
-                      →  
-onclick               → onclick
-=                     → =
-{                     → {
-(                     → (
-)                     → )
-                      →  
-=>                    → =>
-                      →  
-__cs_point            → point
-[                     → [
-1                     → 1
-]                     → ]
-(                     → (
-{                     → {
-                      →  
-x                     → x
-:                     → :
-                      →  
-__cs_point            → point
-[                     → [
-0                     → 0
-]                     → ]
-(                     → (
-)                     → )
-.                     → .
-x                     → x
-                      →  
-}                     → }
-)                     → )
-}                     → }
->                     → >
-\n                    → \n                
-same\n                → same\n              
-<                     → <
-/                     → /
-button                → button
->                     → >
-\n                    → \n              
-<                     → <
-p                     → p
->                     → >
-{                     → {
-__cs_label            → label
-(                     → (
-)                     → )
-}                     → }
-<                     → <
-/                     → /
-p                     → p
->                     → >
-\n                    → \n            
-<                     → <
-/                     → /
-div                   → div
->                     → >
-\n                    → \n          
-)                     → )
-;                     → ;
-\n                    → \n        
-}                     → }
+cs.lift((() =>    →  [-semantic -navigation]
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n          
+const             → const
+                  →  
+[                 → [
+__cs_n            → n
+,                 → ,
+                  →  
+__cs_setN         → setN
+]                 → ]
+                  →  
+=                 → =
+                  →  
+cs.splice(        →  [-semantic -navigation]
+(createSignal)    → $createSignal
+)                 →  [-semantic -navigation]
+(                 → (
+1                 → 1
+)                 → )
+;                 → ;
+\n                → \n          
+const             → const
+                  →  
+__cs_size         → size
+                  →  
+=                 → =
+                  →  
+cs.splice(        →  [-semantic -navigation]
+(createMemo)      → $createMemo
+)                 →  [-semantic -navigation]
+(                 → (
+\n                → \n            
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+(                 → (
+{                 → {
+                  →  
+isBig             → isBig
+:                 → :
+                  →  
+__cs_n            → n
+(                 → (
+)                 → )
+                  →  
+>                 → >
+                  →  
+2                 → 2
+,                 → ,
+                  →  
+n                 → n
+:                 → :
+                  →  
+__cs_n            → n
+(                 → (
+)                 → )
+                  →  
+}                 → }
+)                 → )
+,                 → ,
+\n                → \n            
+undefined         → undefined
+,                 → ,
+\n                → \n            
+{                 → {
+                  →  
+equals            → equals
+:                 → :
+                  →  
+(                 → (
+__cs_previous     → previous
+,                 → ,
+                  →  
+__cs_next         → next
+)                 → )
+                  →  
+=>                → =>
+                  →  
+__cs_previous     → previous
+.                 → .
+isBig             → isBig
+                  →  
+===               → ===
+                  →  
+__cs_next         → next
+.                 → .
+isBig             → isBig
+                  →  
+}                 → }
+,                 → ,
+\n                → \n          
+)                 → )
+;                 → ;
+\n                → \n          
+const             → const
+                  →  
+__cs_label        → label
+                  →  
+=                 → =
+                  →  
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n            
+window            → window
+.                 → .
+console           → console
+.                 → .
+log               → log
+(                 → (
+)                 → )
+;                 → ;
+\n                → \n            
+return            → return
+                  →  
+__cs_size         → size
+(                 → (
+)                 → )
+.                 → .
+isBig             → isBig
+                  →  
+?                 → ?
+                  →  
+"big"             → "big"
+                  →  
+:                 → :
+                  →  
+"small"           → "small"
+;                 → ;
+\n                → \n          
+}                 → }
+;                 → ;
+\n                → \n          
+return            → return
+                  →  
+(                 → (
+\n                → \n            
+<                 → <
+div               → div
+>                 → >
+\n                → \n              
+<                 → <
+button            → button
+                  →  
+onclick           → onclick
+=                 → =
+{                 → {
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+__cs_setN         → setN
+(                 → (
+__cs_n            → n
+(                 → (
+)                 → )
+                  →  
++                 → +
+                  →  
+1                 → 1
+)                 → )
+}                 → }
+>                 → >
+add               → add
+<                 → <
+/                 → /
+button            → button
+>                 → >
+\n                → \n              
+<                 → <
+p                 → p
+>                 → >
+{                 → {
+__cs_label        → label
+(                 → (
+)                 → )
+}                 → }
+<                 → <
+/                 → /
+p                 → p
+>                 → >
+\n                → \n            
+<                 → <
+/                 → /
+div               → div
+>                 → >
+\n                → \n          
+)                 → )
+;                 → ;
+\n                → \n        
+}                 → }
+cs.lift((() =>    →  [-semantic -navigation]
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n          
+const             → const
+                  →  
+[                 → [
+__cs_point        → point
+,                 → ,
+                  →  
+__cs_setPoint     → setPoint
+]                 → ]
+                  →  
+=                 → =
+                  →  
+cs.splice(        →  [-semantic -navigation]
+(createSignal)    → $createSignal
+)                 →  [-semantic -navigation]
+(                 → (
+\n                → \n            
+{                 → {
+                  →  
+x                 → x
+:                 → :
+                  →  
+1                 → 1
+                  →  
+}                 → }
+,                 → ,
+\n                → \n            
+{                 → {
+                  →  
+equals            → equals
+:                 → :
+                  →  
+(                 → (
+__cs_previous     → previous
+,                 → ,
+                  →  
+__cs_next         → next
+)                 → )
+                  →  
+=>                → =>
+                  →  
+__cs_previous     → previous
+.                 → .
+x                 → x
+                  →  
+===               → ===
+                  →  
+__cs_next         → next
+.                 → .
+x                 → x
+                  →  
+}                 → }
+,                 → ,
+\n                → \n          
+)                 → )
+;                 → ;
+\n                → \n          
+const             → const
+                  →  
+__cs_label        → label
+                  →  
+=                 → =
+                  →  
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n            
+window            → window
+.                 → .
+console           → console
+.                 → .
+log               → log
+(                 → (
+)                 → )
+;                 → ;
+\n                → \n            
+return            → return
+                  →  
+"x "              → "x "
+                  →  
++                 → +
+                  →  
+__cs_point        → point
+(                 → (
+)                 → )
+.                 → .
+x                 → x
+;                 → ;
+\n                → \n          
+}                 → }
+;                 → ;
+\n                → \n          
+return            → return
+                  →  
+(                 → (
+\n                → \n            
+<                 → <
+div               → div
+>                 → >
+\n                → \n              
+<                 → <
+button            → button
+                  →  
+onclick           → onclick
+=                 → =
+{                 → {
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+__cs_setPoint     → setPoint
+(                 → (
+{                 → {
+                  →  
+x                 → x
+:                 → :
+                  →  
+__cs_point        → point
+(                 → (
+)                 → )
+.                 → .
+x                 → x
+                  →  
+}                 → }
+)                 → )
+}                 → }
+>                 → >
+same              → same
+<                 → <
+/                 → /
+button            → button
+>                 → >
+\n                → \n              
+<                 → <
+p                 → p
+>                 → >
+{                 → {
+__cs_label        → label
+(                 → (
+)                 → )
+}                 → }
+<                 → <
+/                 → /
+p                 → p
+>                 → >
+\n                → \n            
+<                 → <
+/                 → /
+div               → div
+>                 → >
+\n                → \n          
+)                 → )
+;                 → ;
+\n                → \n        
+}                 → }
+cs.lift((() =>    →  [-semantic -navigation]
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n          
+const             → const
+                  →  
+[                 → [
+__cs_n            → n
+,                 → ,
+                  →  
+__cs_setN         → setN
+]                 → ]
+                  →  
+=                 → =
+                  →  
+cs.splice(        →  [-semantic -navigation]
+(createSignal)    → $createSignal
+)                 →  [-semantic -navigation]
+(                 → (
+1                 → 1
+,                 → ,
+                  →  
+{                 → {
+\n                → \n            
+equals            → equals
+:                 → :
+                  →  
+(                 → (
+__cs_previous     → previous
+,                 → ,
+                  →  
+__cs_next         → next
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n              
+window            → window
+.                 → .
+console           → console
+.                 → .
+log               → log
+(                 → (
+__cs_previous     → previous
+,                 → ,
+                  →  
+__cs_next         → next
+)                 → )
+;                 → ;
+\n                → \n              
+return            → return
+                  →  
+__cs_previous     → previous
+                  →  
+===               → ===
+                  →  
+__cs_next         → next
+;                 → ;
+\n                → \n            
+}                 → }
+,                 → ,
+\n                → \n          
+}                 → }
+)                 → )
+;                 → ;
+\n                → \n          
+return            → return
+                  →  
+<                 → <
+button            → button
+                  →  
+onclick           → onclick
+=                 → =
+{                 → {
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+__cs_setN         → setN
+(                 → (
+2                 → 2
+)                 → )
+}                 → }
+>                 → >
+{                 → {
+"n "              → "n "
+                  →  
++                 → +
+                  →  
+__cs_n            → n
+(                 → (
+)                 → )
+}                 → }
+<                 → <
+/                 → /
+button            → button
+>                 → >
+;                 → ;
+\n                → \n        
+}                 → }
+cs.lift((() =>    →  [-semantic -navigation]
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n          
+const             → const
+                  →  
+[                 → [
+__cs_n            → n
+,                 → ,
+                  →  
+__cs_setN         → setN
+]                 → ]
+                  →  
+=                 → =
+                  →  
+cs.splice(        →  [-semantic -navigation]
+(createSignal)    → $createSignal
+)                 →  [-semantic -navigation]
+(                 → (
+1                 → 1
+)                 → )
+;                 → ;
+\n                → \n          
+const             → const
+                  →  
+__cs_label        → label
+                  →  
+=                 → =
+                  →  
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n            
+window            → window
+.                 → .
+console           → console
+.                 → .
+log               → log
+(                 → (
+)                 → )
+;                 → ;
+\n                → \n            
+return            → return
+                  →  
+"n "              → "n "
+                  →  
++                 → +
+                  →  
+__cs_n            → n
+(                 → (
+)                 → )
+;                 → ;
+\n                → \n          
+}                 → }
+;                 → ;
+\n                → \n          
+return            → return
+                  →  
+(                 → (
+\n                → \n            
+<                 → <
+div               → div
+>                 → >
+\n                → \n              
+<                 → <
+button            → button
+                  →  
+onclick           → onclick
+=                 → =
+{                 → {
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+__cs_setN         → setN
+(                 → (
+1                 → 1
+)                 → )
+}                 → }
+>                 → >
+same              → same
+<                 → <
+/                 → /
+button            → button
+>                 → >
+\n                → \n              
+<                 → <
+p                 → p
+>                 → >
+{                 → {
+__cs_label        → label
+(                 → (
+)                 → )
+}                 → }
+<                 → <
+/                 → /
+p                 → p
+>                 → >
+\n                → \n            
+<                 → <
+/                 → /
+div               → div
+>                 → >
+\n                → \n          
+)                 → )
+;                 → ;
+\n                → \n        
+}                 → }
+cs.lift((() =>    →  [-semantic -navigation]
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n          
+const             → const
+                  →  
+[                 → [
+__cs_point        → point
+,                 → ,
+                  →  
+__cs_setPoint     → setPoint
+]                 → ]
+                  →  
+=                 → =
+                  →  
+cs.splice(        →  [-semantic -navigation]
+(createSignal)    → $createSignal
+)                 →  [-semantic -navigation]
+(                 → (
+{                 → {
+                  →  
+x                 → x
+:                 → :
+                  →  
+1                 → 1
+                  →  
+}                 → }
+)                 → )
+;                 → ;
+\n                → \n          
+const             → const
+                  →  
+__cs_label        → label
+                  →  
+=                 → =
+                  →  
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n            
+window            → window
+.                 → .
+console           → console
+.                 → .
+log               → log
+(                 → (
+)                 → )
+;                 → ;
+\n                → \n            
+return            → return
+                  →  
+"x "              → "x "
+                  →  
++                 → +
+                  →  
+__cs_point        → point
+(                 → (
+)                 → )
+.                 → .
+x                 → x
+;                 → ;
+\n                → \n          
+}                 → }
+;                 → ;
+\n                → \n          
+return            → return
+                  →  
+(                 → (
+\n                → \n            
+<                 → <
+div               → div
+>                 → >
+\n                → \n              
+<                 → <
+button            → button
+                  →  
+onclick           → onclick
+=                 → =
+{                 → {
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+__cs_setPoint     → setPoint
+(                 → (
+{                 → {
+                  →  
+x                 → x
+:                 → :
+                  →  
+__cs_point        → point
+(                 → (
+)                 → )
+.                 → .
+x                 → x
+                  →  
+}                 → }
+)                 → )
+}                 → }
+>                 → >
+same              → same
+<                 → <
+/                 → /
+button            → button
+>                 → >
+\n                → \n              
+<                 → <
+p                 → p
+>                 → >
+{                 → {
+__cs_label        → label
+(                 → (
+)                 → )
+}                 → }
+<                 → <
+/                 → /
+p                 → p
+>                 → >
+\n                → \n            
+<                 → <
+/                 → /
+div               → div
+>                 → >
+\n                → \n          
+)                 → )
+;                 → ;
+\n                → \n        
+}                 → }

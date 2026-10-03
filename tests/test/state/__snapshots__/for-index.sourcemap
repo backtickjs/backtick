@@ -3,7 +3,12 @@ cs.lift((() =>    →  [-semantic -navigation]
 \n                → \n    
 const             → const
                   →  
+[                 → [
 __cs_names        → names
+,                 → ,
+                  →  
+__cs_setNames     → setNames
+]                 → ]
                   →  
 =                 → =
                   →  
@@ -48,17 +53,11 @@ __cs_held         → held
 =                 → =
                   →  
 __cs_names        → names
-[                 → [
-0                 → 0
-]                 → ]
 (                 → (
 )                 → )
 ;                 → ;
 \n                → \n      
-__cs_names        → names
-[                 → [
-1                 → 1
-]                 → ]
+__cs_setNames     → setNames
 (                 → (
 [                 → [
 __cs_held         → held
@@ -118,9 +117,6 @@ For               → For
 {                 → For
 each              → each
 __cs_names        → names
-[                 → [
-0                 → 0
-]                 → ]
 (                 → (
 )                 → )
 children          → \n            {(name: string, index: () => number) => (\n              <span>{name + " at " + index()}</span>\n            )}\n          

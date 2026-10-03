@@ -7,7 +7,7 @@ const $modules = {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
   },
-  "2d5qp9itzo9r0:14:9": (module, exports, require) => {
+  "mej4dpurz1ya:14:9": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -16,14 +16,14 @@ const $modules = {
     const web_4 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>press`);
     exports.default = ($splice0) => {
-      const size = $splice0()(16);
+      const [size, setSize] = $splice0()(16);
       return (() => {
         var _el$ = _tmpl$();
         _el$.$$click = () => {
-          size[1](size[0]() + 1);
+          setSize(size() + 1);
         };
         (0, web_4.effect)((_$p) =>
-          (0, web_3.style)(_el$, "font-size: " + size[0]() + "px", _$p),
+          (0, web_3.style)(_el$, "font-size: " + size() + "px", _$p),
         );
         return _el$;
       })();
@@ -44,7 +44,7 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("1uptcsn9236u2:352:9").default;
-const $cs1 = $require("2d5qp9itzo9r0:14:9").default;
+const $cs1 = $require("mej4dpurz1ya:14:9").default;
 export default $cs0(
   () => $i0,
   () => $cs1(() => $i1),
