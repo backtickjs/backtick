@@ -27,7 +27,7 @@ toUpperCase      → 15:17 toUpperCase
 }                → 16:3 }
 if (             → 17:3 if (
 $splice0()       → 17:7 ${flags.strict}…
- &&              → 17:8 {flags.strict}…
+ &&              → 17:22  && 
 text             → 17:26 text
  !==             → 17:30  !== 
 null             → 17:35 null

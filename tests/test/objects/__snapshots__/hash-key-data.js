@@ -11,7 +11,7 @@ it("hashKeyData", async (t) => {
       "m50lyvn0wkye:8:39",
       { params: [{ kind: "splice", value: { "#call": "#f0" }, bindings: [] }] },
       '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => () => $splice0();\n}',
-      '{"version":3,"file":"module.jsx","mappings":";;;kBAO0CA,QAAA,UAAMA,QAAA,EAAC","names":["$splice0"],"ignoreList":[],"sources":["objects/hash-key-data.test.tsx"]}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAO0CA,QAAA,UAAMA,QAAA,EAAqB","names":["$splice0"],"ignoreList":[],"sources":["objects/hash-key-data.test.tsx"]}',
       [],
     ),
   );

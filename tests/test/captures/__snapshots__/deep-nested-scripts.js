@@ -46,7 +46,7 @@ it("deepNestedScripts", async (t) => {
         ],
       },
       '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0();\n}',
-      '{"version":3,"file":"module.jsx","mappings":";;;kBAUgDA,QAAA,IAAAA,QAAA,EAAC","names":["$splice0"],"ignoreList":[],"sources":["captures/deep-nested-scripts.test.tsx"]}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAUgDA,QAAA,IAAAA,QAAA,EAAoB","names":["$splice0"],"ignoreList":[],"sources":["captures/deep-nested-scripts.test.tsx"]}',
       [],
     ),
   );

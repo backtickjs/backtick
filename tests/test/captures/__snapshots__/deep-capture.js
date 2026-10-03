@@ -43,7 +43,7 @@ function wrap(start) {
               ],
             },
             '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $capture1) => {\n    const middle = 10;\n    return middle + $splice0($capture1);\n};\n}',
-            '{"version":3,"file":"module.jsx","mappings":";;;kBAmBgB,CAAAA,QAAA,EAAAC,SAAA;IACV,MAAMC,MAAM,GAAG,EAAE;IACjB,OAAOA,MAAM,GAAGF,QAAA,CAAAC,SAAA,CAAC;AACnB,CAAC","names":["$splice0","$capture1","middle"],"ignoreList":[],"sources":["captures/deep-capture.test.tsx"]}',
+            '{"version":3,"file":"module.jsx","mappings":";;;kBAmBgB,CAAAA,QAAA,EAAAC,SAAA;IACV,MAAMC,MAAM,GAAG,EAAE;IACjB,OAAOA,MAAM,GAAGF,QAAA,CAAAC,SAAA,CAAY;AAC9B,CAAC","names":["$splice0","$capture1","middle"],"ignoreList":[],"sources":["captures/deep-capture.test.tsx"]}',
             [],
           ),
           bindings: ["outer$22sufdxid1i7s$0"],
@@ -51,7 +51,7 @@ function wrap(start) {
       ],
     },
     '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => {\n    const outer = $splice0();\n    return $splice1(outer);\n};\n}',
-    '{"version":3,"file":"module.jsx","mappings":";;;kBAiBY,CAAAA,QAAA,EAAAC,QAAA;IACR,MAAMC,KAAK,GAAGF,QAAA,EAAM;IACpB,OAAOC,QAAA,CAAAC,KAAA,CAAC;AAIV,CAAC","names":["$splice0","$splice1","outer"],"ignoreList":[],"sources":["captures/deep-capture.test.tsx"]}',
+    '{"version":3,"file":"module.jsx","mappings":";;;kBAiBY,CAAAA,QAAA,EAAAC,QAAA;IACR,MAAMC,KAAK,GAAGF,QAAA,EAAM;IACpB,OAAOC,QAAA,CAAAC,KAAA,CAGJ;AACL,CAAC","names":["$splice0","$splice1","outer"],"ignoreList":[],"sources":["captures/deep-capture.test.tsx"]}',
     [],
   );
 }
@@ -92,7 +92,7 @@ it("deepCapture", async (t) => {
         ],
       },
       '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0() + $splice1();\n}',
-      '{"version":3,"file":"module.jsx","mappings":";;;kBA2B0C,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAC,GAAgBC,QAAA,EAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["captures/deep-capture.test.tsx"]}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBA2B0C,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAc,GAAGC,QAAA,EAAc","names":["$splice0","$splice1"],"ignoreList":[],"sources":["captures/deep-capture.test.tsx"]}',
       [],
     ),
   );

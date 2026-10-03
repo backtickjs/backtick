@@ -66,7 +66,7 @@ it("spliceSharing", async (t) => {
         ],
       },
       '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => ({\n    x: $splice0(),\n    y: $splice1()\n});\n}',
-      '{"version":3,"file":"module.jsx","mappings":";;;kBAYO,CAAAA,QAAA,EAAAC,QAAA,MAAC;IACFC,CAAC,EAAEF,QAAA,EAAC;IACJG,CAAC,EAAEF,QAAA;CACJ,CAAC","names":["$splice0","$splice1","x","y"],"ignoreList":[],"sources":["splices/splice-sharing.test.tsx"]}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAYO,CAAAA,QAAA,EAAAC,QAAA,MAAC;IACFC,CAAC,EAAEF,QAAA,EAAoB;IACvBG,CAAC,EAAEF,QAAA;CACJ,CAAC","names":["$splice0","$splice1","x","y"],"ignoreList":[],"sources":["splices/splice-sharing.test.tsx"]}',
       [],
     ),
   );

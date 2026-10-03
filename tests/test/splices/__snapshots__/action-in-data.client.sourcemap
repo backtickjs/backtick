@@ -14,12 +14,12 @@ const                      → 16:7 const
 list                       → 16:13 list
  =                         → 16:17  = 
 $splice0()                 → 16:20 ${[action]};…
-;                          → 16:21 {[action]};…
+;                          → 16:31 ;
 const                      → 17:7 const 
 map                        → 17:13 map
  =                         → 17:16  = 
 $splice1()                 → 17:19 ${{…
-;                          → 17:20 {{…
+;                          → 17:39 ;
 return                     → 18:7 return 
 list                       → 18:14 list
 .                          → 18:18 .

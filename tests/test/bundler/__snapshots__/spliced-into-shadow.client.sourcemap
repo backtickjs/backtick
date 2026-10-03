@@ -9,7 +9,7 @@ const                      → 35:9 const
 first                      → 35:15 first
  =                         → 35:20  = 
 $splice0(total)            → 35:23 ${keep(cs`total`)};…
-;                          → 35:24 {keep(cs`total`)};…
+;                          → 35:41 ;
 {                          → 36:9 {
 const                      → 37:11 const 
 total                      → 37:17 total
@@ -22,7 +22,7 @@ first                      → 38:18 first
 total                      → 38:26 total
  +                         → 38:31  + 
 $splice1()                 → 38:34 ${again()};…
-;                          → 38:35 {again()};…
+;                          → 38:44 ;
 }                          → 39:9 }
 }                          → 40:7 }
 );                         → 40:8 `,…

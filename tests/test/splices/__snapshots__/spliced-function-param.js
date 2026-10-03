@@ -27,7 +27,7 @@ it("splicedFunctionParam", async (t) => {
         ],
       },
       '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const apply = f => f() + 1;\n    return apply($splice0());\n};\n}',
-      '{"version":3,"file":"module.jsx","mappings":";;;kBAYOA,QAAA;IACD,MAAMC,KAAK,GAAIC,CAAe,IAAKA,CAAC,EAAE,GAAG,CAAC;IAC1C,OAAOD,KAAK,CAACD,QAAA,EAAC,CAAc;AAC9B,CAAC","names":["$splice0","apply","f"],"ignoreList":[],"sources":["splices/spliced-function-param.test.tsx"]}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAYOA,QAAA;IACD,MAAMC,KAAK,GAAIC,CAAe,IAAKA,CAAC,EAAE,GAAG,CAAC;IAC1C,OAAOD,KAAK,CAACD,QAAA,EAAc,CAAC;AAC9B,CAAC","names":["$splice0","apply","f"],"ignoreList":[],"sources":["splices/spliced-function-param.test.tsx"]}',
       [],
     ),
   );

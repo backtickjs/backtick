@@ -44,7 +44,7 @@ it("spliceLaziness", async (t) => {
         ],
       },
       '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => ({\n    taken: $splice0()(true),\n    skipped: $splice1()(false)\n});\n}',
-      '{"version":3,"file":"module.jsx","mappings":";;;kBA8BO,CAAAA,QAAA,EAAAC,QAAA,MAAC;IACFC,KAAK,EAAEF,QAAA,EAAC,CAAY,IAAI,CAAC;IACzBG,OAAO,EAAEF,QAAA,EAAC,CAAgB,KAAK;CAChC,CAAC","names":["$splice0","$splice1","taken","skipped"],"ignoreList":[],"sources":["splices/splice-laziness.test.tsx"]}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBA8BO,CAAAA,QAAA,EAAAC,QAAA,MAAC;IACFC,KAAK,EAAEF,QAAA,EAAY,CAAC,IAAI,CAAC;IACzBG,OAAO,EAAEF,QAAA,EAAgB,CAAC,KAAK;CAChC,CAAC","names":["$splice0","$splice1","taken","skipped"],"ignoreList":[],"sources":["splices/splice-laziness.test.tsx"]}',
       [],
     ),
   );

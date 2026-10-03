@@ -11,7 +11,7 @@ it("reservedKey", async (t) => {
       "2a27difszbs8:8:39",
       { params: [{ kind: "splice", value: { "#": "value" }, bindings: [] }] },
       '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => () => $splice0();\n}',
-      '{"version":3,"file":"module.jsx","mappings":";;;kBAO0CA,QAAA,UAAMA,QAAA,EAAC","names":["$splice0"],"ignoreList":[],"sources":["objects/reserved-key.test.tsx"]}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAO0CA,QAAA,UAAMA,QAAA,EAAmB","names":["$splice0"],"ignoreList":[],"sources":["objects/reserved-key.test.tsx"]}',
       [],
     ),
   );

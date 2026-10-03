@@ -36,14 +36,14 @@ const heldElement = cs.create(
     ],
   },
   '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => () => {\n    const tree = $splice0();\n    return tree;\n};\n}',
-  '{"version":3,"file":"module.jsx","mappings":";;;kBAcuBA,QAAA;IACrB,MAAMC,IAAI,GAAGD,QAAA,EAAC;IACd,OAAOC,IAAI;AACb,CAAC","names":["$splice0","tree"],"ignoreList":[],"sources":["jsx/tree-in-variable.test.tsx"]}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAcuBA,QAAA;IACrB,MAAMC,IAAI,GAAGD,QAAA,EAAc;IAC3B,OAAOC,IAAI;AACb,CAAC","names":["$splice0","tree"],"ignoreList":[],"sources":["jsx/tree-in-variable.test.tsx"]}',
   [],
 );
 const heldComponent = cs.create(
   "3cjyucql1m4dw:20:22",
   { params: [{ kind: "splice", value: _jsx(HeldRow, {}), bindings: [] }] },
   '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => () => {\n    const tree = $splice0();\n    return tree;\n};\n}',
-  '{"version":3,"file":"module.jsx","mappings":";;;kBAmByBA,QAAA;IACvB,MAAMC,IAAI,GAAGD,QAAA,EAAC;IACd,OAAOC,IAAI;AACb,CAAC","names":["$splice0","tree"],"ignoreList":[],"sources":["jsx/tree-in-variable.test.tsx"]}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAmByBA,QAAA;IACvB,MAAMC,IAAI,GAAGD,QAAA,EAAgB;IAC7B,OAAOC,IAAI;AACb,CAAC","names":["$splice0","tree"],"ignoreList":[],"sources":["jsx/tree-in-variable.test.tsx"]}',
   [],
 );
 it("treeInVariable", async (t) => {

@@ -1,6 +1,6 @@
 // 14:42
 ($splice0) => $splice0()  → 14:45 ${await…
- +                        → 14:46 {await…
+ +                        → 14:69  + 
 "!"                       → 14:72 "!"
 );                        → 14:75 `);…
 
@@ -10,7 +10,7 @@ const            → 22:7 const
 greeting         → 22:13 greeting
  =               → 22:21  = 
 $splice0()       → 22:24 ${await…
-;                → 22:25 {await…
+;                → 22:48 ;
 return           → 23:7 return 
 greeting         → 23:14 greeting
  +               → 23:22  + 

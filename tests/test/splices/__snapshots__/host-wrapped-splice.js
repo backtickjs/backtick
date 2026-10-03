@@ -46,7 +46,7 @@ function wrap(start) {
                 ],
               },
               '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $capture1) => {\n    const middle = 10;\n    return middle + $splice0($capture1);\n};\n}',
-              '{"version":3,"file":"module.jsx","mappings":";;;kBAkBoB,CAAAA,QAAA,EAAAC,SAAA;IACd,MAAMC,MAAM,GAAG,EAAE;IACjB,OAAOA,MAAM,GAAGF,QAAA,CAAAC,SAAA,CAAC;AACnB,CAAC","names":["$splice0","$capture1","middle"],"ignoreList":[],"sources":["splices/host-wrapped-splice.test.tsx"]}',
+              '{"version":3,"file":"module.jsx","mappings":";;;kBAkBoB,CAAAA,QAAA,EAAAC,SAAA;IACd,MAAMC,MAAM,GAAG,EAAE;IACjB,OAAOA,MAAM,GAAGF,QAAA,CAAAC,SAAA,CAAkB;AACpC,CAAC","names":["$splice0","$capture1","middle"],"ignoreList":[],"sources":["splices/host-wrapped-splice.test.tsx"]}',
               [],
             ),
           ),
@@ -55,7 +55,7 @@ function wrap(start) {
       ],
     },
     '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => {\n    const outer = $splice0();\n    return $splice1(outer);\n};\n}',
-    '{"version":3,"file":"module.jsx","mappings":";;;kBAgBY,CAAAA,QAAA,EAAAC,QAAA;IACR,MAAMC,KAAK,GAAGF,QAAA,EAAM;IACpB,OAAOC,QAAA,CAAAC,KAAA,CAAC;AAIV,CAAC","names":["$splice0","$splice1","outer"],"ignoreList":[],"sources":["splices/host-wrapped-splice.test.tsx"]}',
+    '{"version":3,"file":"module.jsx","mappings":";;;kBAgBY,CAAAA,QAAA,EAAAC,QAAA;IACR,MAAMC,KAAK,GAAGF,QAAA,EAAM;IACpB,OAAOC,QAAA,CAAAC,KAAA,CAGH;AACN,CAAC","names":["$splice0","$splice1","outer"],"ignoreList":[],"sources":["splices/host-wrapped-splice.test.tsx"]}',
     [],
   );
 }
@@ -108,7 +108,7 @@ it("hostWrappedSplice", async (t) => {
         ],
       },
       '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0() + $splice1();\n}',
-      '{"version":3,"file":"module.jsx","mappings":";;;kBAqCO,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAC,GAAgBC,QAAA,EAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/host-wrapped-splice.test.tsx"]}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAqCO,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAc,GAAGC,QAAA,EAAc","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/host-wrapped-splice.test.tsx"]}',
       [],
     ),
   );

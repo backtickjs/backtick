@@ -21,7 +21,7 @@ const script = cs.create(
     ],
   },
   '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => () => {\n    const x = 1;\n    return $splice0(x);\n};\n}',
-  '{"version":3,"file":"module.jsx","mappings":";;;kBAMkBA,QAAA;IAChB,MAAMC,CAAC,GAAG,CAAC;IACX,OAAOD,QAAA,CAAAC,CAAA,CAAC;AACV,CAAC","names":["$splice0","x"],"ignoreList":[],"sources":["captures/jsx-capture.test.tsx"]}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAMkBA,QAAA;IAChB,MAAMC,CAAC,GAAG,CAAC;IACX,OAAOD,QAAA,CAAAC,CAAA,CAAiC;AAC1C,CAAC","names":["$splice0","x"],"ignoreList":[],"sources":["captures/jsx-capture.test.tsx"]}',
   [],
 );
 it("jsxCapture", async (t) => {

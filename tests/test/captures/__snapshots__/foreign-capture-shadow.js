@@ -36,7 +36,7 @@ function innerBase(carried) {
       ],
     },
     '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const base = 100;\n    return $splice0(base);\n};\n}',
-    '{"version":3,"file":"module.jsx","mappings":";;;kBAiBYA,QAAA;IACR,MAAMC,IAAI,GAAG,GAAG;IAChB,OAAOD,QAAA,CAAAC,IAAA,CAAC;AACV,CAAC","names":["$splice0","base"],"ignoreList":[],"sources":["captures/foreign-capture-shadow.test.tsx"]}',
+    '{"version":3,"file":"module.jsx","mappings":";;;kBAiBYA,QAAA;IACR,MAAMC,IAAI,GAAG,GAAG;IAChB,OAAOD,QAAA,CAAAC,IAAA,CAAsB;AAC/B,CAAC","names":["$splice0","base"],"ignoreList":[],"sources":["captures/foreign-capture-shadow.test.tsx"]}',
     [],
   );
 }
@@ -64,7 +64,7 @@ it("foreignCaptureShadow", async (t) => {
         ],
       },
       '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const base = 1;\n    return $splice0(base);\n};\n}',
-      '{"version":3,"file":"module.jsx","mappings":";;;kBA2BOA,QAAA;IACD,MAAMC,IAAI,GAAG,CAAC;IACd,OAAOD,QAAA,CAAAC,IAAA,CAAC;AACV,CAAC","names":["$splice0","base"],"ignoreList":[],"sources":["captures/foreign-capture-shadow.test.tsx"]}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBA2BOA,QAAA;IACD,MAAMC,IAAI,GAAG,CAAC;IACd,OAAOD,QAAA,CAAAC,IAAA,CAAsB;AAC/B,CAAC","names":["$splice0","base"],"ignoreList":[],"sources":["captures/foreign-capture-shadow.test.tsx"]}',
       [],
     ),
   );

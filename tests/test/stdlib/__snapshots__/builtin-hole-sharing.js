@@ -30,7 +30,7 @@ it("builtinHoleSharing", async (t) => {
         ],
       },
       '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => {\n    return $splice0() + $splice1();\n};\n}',
-      '{"version":3,"file":"module.jsx","mappings":";;;kBAkBO,CAAAA,QAAA,EAAAC,QAAA;IACD,OAAOD,QAAA,EAAC,GAAuBC,QAAA,EAAC;AAClC,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["stdlib/builtin-hole-sharing.test.tsx"]}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAkBO,CAAAA,QAAA,EAAAC,QAAA;IACD,OAAOD,QAAA,EAAqB,GAAGC,QAAA,EAAgB;AACjD,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["stdlib/builtin-hole-sharing.test.tsx"]}',
       [],
     ),
   );

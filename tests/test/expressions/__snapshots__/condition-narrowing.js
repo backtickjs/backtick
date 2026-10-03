@@ -17,7 +17,7 @@ const label = cs.create(
   "g29mnwu0pbnr:10:71",
   { params: [{ kind: "splice", value: flags.strict, bindings: [] }] },
   '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => (text, upper) => {\n    if (upper && text !== null) {\n        return text.toUpperCase();\n    }\n    if ($splice0() && text !== null && text.charAt(0) === "!") {\n        return text.concat("?");\n    }\n    return "none";\n};\n}',
-  '{"version":3,"file":"module.jsx","mappings":";;;kBAS0EA,QAAA,KACxEC,IAAmB,EACnBC,KAAc;IAEd,IAAIA,KAAK,IAAID,IAAI,KAAK,IAAI,EAAE;QAC1B,OAAOA,IAAI,CAACE,WAAW,EAAE;IAC3B;IACA,IAAIH,QAAA,EAAC,IAAkBC,IAAI,KAAK,IAAI,IAAIA,IAAI,CAACG,MAAM,CAAC,CAAC,CAAC,KAAK,GAAG,EAAE;QAC9D,OAAOH,IAAI,CAACI,MAAM,CAAC,GAAG,CAAC;IACzB;IACA,OAAO,MAAM;AACf,CAAC","names":["$splice0","text","upper","toUpperCase","charAt","concat"],"ignoreList":[],"sources":["expressions/condition-narrowing.test.tsx"]}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAS0EA,QAAA,KACxEC,IAAmB,EACnBC,KAAc;IAEd,IAAIA,KAAK,IAAID,IAAI,KAAK,IAAI,EAAE;QAC1B,OAAOA,IAAI,CAACE,WAAW,EAAE;IAC3B;IACA,IAAIH,QAAA,EAAe,IAAIC,IAAI,KAAK,IAAI,IAAIA,IAAI,CAACG,MAAM,CAAC,CAAC,CAAC,KAAK,GAAG,EAAE;QAC9D,OAAOH,IAAI,CAACI,MAAM,CAAC,GAAG,CAAC;IACzB;IACA,OAAO,MAAM;AACf,CAAC","names":["$splice0","text","upper","toUpperCase","charAt","concat"],"ignoreList":[],"sources":["expressions/condition-narrowing.test.tsx"]}',
   [],
 );
 it("conditionNarrowing", async (t) => {

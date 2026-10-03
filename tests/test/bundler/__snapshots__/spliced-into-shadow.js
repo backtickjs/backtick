@@ -49,7 +49,7 @@ it("refuses a capture spliced where it is shadowed", async () => {
           ],
         },
         '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => {\n    const total = 1;\n    const first = $splice0(total);\n    {\n        const total = 2;\n        return first + total + $splice1();\n    }\n};\n}',
-        '{"version":3,"file":"module.jsx","mappings":";;;kBAgCgB,CAAAA,QAAA,EAAAC,QAAA;IACR,MAAMC,KAAK,GAAG,CAAC;IACf,MAAMC,KAAK,GAAGH,QAAA,CAAAE,KAAA,CAAC;IACf;QACE,MAAMA,KAAK,GAAG,CAAC;QACf,OAAOC,KAAK,GAAGD,KAAK,GAAGD,QAAA,EAAC;IAC1B;AACF,CAAC","names":["$splice0","$splice1","total","first"],"ignoreList":[],"sources":["bundler/spliced-into-shadow.test.tsx"]}',
+        '{"version":3,"file":"module.jsx","mappings":";;;kBAgCgB,CAAAA,QAAA,EAAAC,QAAA;IACR,MAAMC,KAAK,GAAG,CAAC;IACf,MAAMC,KAAK,GAAGH,QAAA,CAAAE,KAAA,CAAkB;IAChC;QACE,MAAMA,KAAK,GAAG,CAAC;QACf,OAAOC,KAAK,GAAGD,KAAK,GAAGD,QAAA,EAAU;IACnC;AACF,CAAC","names":["$splice0","$splice1","total","first"],"ignoreList":[],"sources":["bundler/spliced-into-shadow.test.tsx"]}',
         [],
       ),
       external: {},

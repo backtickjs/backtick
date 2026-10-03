@@ -26,7 +26,7 @@ it("capturedObjectAssignment", async (t) => {
         ],
       },
       '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const counter = {\n        count: 0\n    };\n    const bump = $splice0(counter);\n    bump();\n    bump();\n    return counter.count;\n};\n}',
-      '{"version":3,"file":"module.jsx","mappings":";;;kBAWOA,QAAA;IACD,MAAMC,OAAO,GAAG;QAAEC,KAAK,EAAE;KAAG;IAC5B,MAAMC,IAAI,GAAGH,QAAA,CAAAC,OAAA,CAAC;IAGdE,IAAI,EAAE;IACNA,IAAI,EAAE;IACN,OAAOF,OAAO,CAACC,KAAK;AACtB,CAAC","names":["$splice0","counter","count","bump"],"ignoreList":[],"sources":["captures/captured-object-assignment.test.tsx"]}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAWOA,QAAA;IACD,MAAMC,OAAO,GAAG;QAAEC,KAAK,EAAE;KAAG;IAC5B,MAAMC,IAAI,GAAGH,QAAA,CAAAC,OAAA,CAEV;IACHE,IAAI,EAAE;IACNA,IAAI,EAAE;IACN,OAAOF,OAAO,CAACC,KAAK;AACtB,CAAC","names":["$splice0","counter","count","bump"],"ignoreList":[],"sources":["captures/captured-object-assignment.test.tsx"]}',
       [],
     ),
   );

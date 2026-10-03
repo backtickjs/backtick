@@ -101,12 +101,12 @@ export function scriptEdits(
  * Emits a script's code by compiling its own text with TypeScript, with
  * `edits` applied.
  *
- * TypeScript is handed the script's text alone, every `${…}` hole replaced by
- * `0` padded to the same length, so a position in what it parses is the host
- * file's less where the script starts: an edit is found by where it starts,
- * and the source map is moved to where the script stands in the host file.
- * The script alone, not the host file blanked around it: that would make each
- * script cost what the whole file does.
+ * TypeScript is handed the script's text alone, as `parseFile` read it: its
+ * template's escapes decoded, every `${…}` hole its placeholder. An edit is
+ * found where its name stands in the host file, and the source map is moved
+ * there, through the script's own offsets. The script alone, not the host file
+ * blanked around it: that would make each script cost what the whole file
+ * does.
  */
 export function emitScript(
   ts: typeof import("typescript"),
@@ -115,24 +115,6 @@ export function emitScript(
   edits: ReadonlyMap<number, Edit>,
 ): EmittedScript {
   const sourceFile = script.sourceFile;
-  const text = sourceFile.text;
-  const template = script.sourceNode.template;
-  const start = template.getStart(sourceFile) + 1; // past `
-  const end = template.getEnd() - 1; // before `
-  const blank = (from: number, to: number, fill = ""): string =>
-    fill + text.slice(from + fill.length, to).replace(/[^\r\n]/g, " ");
-  let aligned = "";
-  let at = start;
-  if (ts.isTemplateExpression(template)) {
-    for (const span of template.templateSpans) {
-      const dollarBrace = span.expression.getFullStart() - 2;
-      const afterBrace = span.literal.getStart(sourceFile) + 1;
-      aligned +=
-        text.slice(at, dollarBrace) + blank(dollarBrace, afterBrace, "0");
-      at = afterBrace;
-    }
-  }
-  aligned += text.slice(at, end);
 
   const transformer: ts.TransformerFactory<ts.SourceFile> =
     (context) => (file) => {
@@ -154,13 +136,15 @@ export function emitScript(
         if (ts.isTypeNode(node)) {
           return node;
         }
-        if (ts.isIdentifier(node) || ts.isNumericLiteral(node)) {
-          const edit = edits.get(start + node.getStart(file));
+        if (ts.isIdentifier(node)) {
+          const edit = edits.get(script.toSourceOffset(node.getStart(file)));
           return edit === undefined ? node : edited(edit, node);
         }
         // `{ count }` names a key as well as a value.
         if (ts.isShorthandPropertyAssignment(node)) {
-          const edit = edits.get(start + node.name.getStart(file));
+          const edit = edits.get(
+            script.toSourceOffset(node.name.getStart(file)),
+          );
           if (edit !== undefined) {
             return f.createPropertyAssignment(
               node.name.text,
@@ -196,7 +180,7 @@ export function emitScript(
       ]);
     };
 
-  const output = ts.transpileModule(aligned, {
+  const output = ts.transpileModule(script.textWithPlaceholders, {
     fileName: sourceFile.fileName,
     compilerOptions: {
       target: ts.ScriptTarget.ESNext,
@@ -215,17 +199,26 @@ export function emitScript(
     .replace(/;\s*$/, "");
   return {
     code,
-    map: moved(output.sourceMapText!, sourceFile, start),
+    map: moved(output.sourceMapText!, script),
   };
 }
 
-// A map into the script's text, moved to where the script starts in the host
-// file: every line down by the script's line, and the script's first line
-// across by its column. Named as the host file was, not relative to an output
-// file there is none of, so maps from files in different directories can be
-// combined.
-function moved(map: string, sourceFile: ts.SourceFile, start: number): string {
-  const { line, character } = sourceFile.getLineAndCharacterOfPosition(start);
+// A map into the script's text, moved to where each position stands in the
+// host file. Named as the host file was, not relative to an output file there
+// is none of, so maps from files in different directories can be combined.
+function moved(map: string, script: ClientScript): string {
+  const sourceFile = script.sourceFile;
+  const lineStarts = [0];
+  for (const line of script.textWithPlaceholders.matchAll(/\r\n|\n|\r/g)) {
+    lineStarts.push(line.index + line[0].length);
+  }
+  // Lines are 1-based here, columns 0-based.
+  const original = (line: number, column: number) => {
+    const at = sourceFile.getLineAndCharacterOfPosition(
+      script.toSourceOffset(lineStarts[line - 1]! + column),
+    );
+    return { line: at.line + 1, column: at.character };
+  };
   const into = new GenMapping({ file: sourceFile.fileName });
   eachMapping(new TraceMap(map), (mapping) => {
     if (mapping.originalLine === null) {
@@ -244,14 +237,7 @@ function moved(map: string, sourceFile: ts.SourceFile, start: number): string {
         column: mapping.generatedColumn,
       },
       source: sourceFile.fileName,
-      // Lines are 1-based here, columns 0-based.
-      original: {
-        line: mapping.originalLine + line,
-        column:
-          mapping.originalLine === 1
-            ? mapping.originalColumn + character
-            : mapping.originalColumn,
-      },
+      original: original(mapping.originalLine, mapping.originalColumn),
     });
   });
   // TypeScript's own map, with only where it points changed.

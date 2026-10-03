@@ -28,7 +28,7 @@ setHeld                                        → 25:18 setHeld
 $splice0()                                     → 25:29 $createSignal(${Color.Red});…
 (                                              → 25:42 (
 $splice1()                                     → 25:43 ${Color.Red});…
-)                                              → 25:44 {Color.Red});…
+)                                              → 25:55 )
 ;                                              → 25:56 ;
 return                                         → 26:5 return 
 (                                              → 26:12 (
@@ -42,7 +42,7 @@ onclick                                        → 27:13 onclick
 setHeld                                        → 27:28 setHeld
 (                                              → 27:35 (
 $splice2()                                     → 27:36 ${Color.Blue})}>{$colorName(held())}</span>…
-)                                              → 27:37 {Color.Blue})}>{$colorName(held())}</span>…
+)                                              → 27:49 )
 }                                              → 27:50 }
 >                                              → 27:51 >
 {                                              → 27:52 {

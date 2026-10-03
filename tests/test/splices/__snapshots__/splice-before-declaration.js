@@ -57,7 +57,7 @@ it("spliceBeforeDeclaration", async (t) => {
         ],
       },
       '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0() + $splice1();\n}',
-      '{"version":3,"file":"module.jsx","mappings":";;;kBA2BO,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAC,GAAqBC,QAAA,EAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/splice-before-declaration.test.tsx"]}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBA2BO,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAmB,GAAGC,QAAA,EAAmB","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/splice-before-declaration.test.tsx"]}',
       [],
     ),
   );

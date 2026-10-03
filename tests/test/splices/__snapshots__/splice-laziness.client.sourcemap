@@ -36,14 +36,14 @@ throw                                       → 24:3 throw
 taken                      → 32:7 taken
 :                          → 32:12 : 
 $splice0()                 → 32:14 ${guard(ok)}(true),…
-(                          → 32:15 {guard(ok)}(true),…
+(                          → 32:26 (
 true                       → 32:27 true
 )                          → 32:31 )
 ,                          → 32:32 ,
 skipped                    → 33:7 skipped
 :                          → 33:14 : 
 $splice1()                 → 33:16 ${guard(broken)}(false),…
-(                          → 33:17 {guard(broken)}(false),…
+(                          → 33:32 (
 false                      → 33:33 false
 )                          → 33:38 )
 ,                          → 33:39 ,

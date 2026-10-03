@@ -19,7 +19,7 @@ const colorName = cs.create(
   "3ekonqoxkrl1q:19:48",
   { params: [{ kind: "splice", value: Color.Blue, bindings: [] }] },
   '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => c => {\n    return c === $splice0() ? "blue" : "red";\n};\n}',
-  '{"version":3,"file":"module.jsx","mappings":";;;kBAkBmDA,QAAA,IAACC,CAAQ;IAC1D,OAAOA,CAAC,KAAKD,QAAA,EAAC,GAAe,MAAM,GAAG,KAAK;AAC7C,CAAC","names":["$splice0","c"],"ignoreList":[],"sources":["state/state-enum.test.tsx"]}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAkBmDA,QAAA,IAACC,CAAQ;IAC1D,OAAOA,CAAC,KAAKD,QAAA,EAAa,GAAG,MAAM,GAAG,KAAK;AAC7C,CAAC","names":["$splice0","c"],"ignoreList":[],"sources":["state/state-enum.test.tsx"]}',
   [],
 );
 async function Swatch() {
@@ -34,7 +34,7 @@ async function Swatch() {
       ],
     },
     '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>`);\nexports.default = ($splice0, $splice1, $splice2, $splice3) => {\n    const [held, setHeld] = $splice0()($splice1());\n    return (() => {\n        var _el$ = _tmpl$();\n        _el$.$$click = () => setHeld($splice2());\n        (0, web_3.insert)(_el$, () => $splice3()(held()));\n        return _el$;\n    })();\n};\n(0, web_2.delegateEvents)(["click"]);\n}',
-    '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAuBY,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA;IACR,MAAM,CAACC,IAAI,EAAEC,OAAO,CAAC,GAAGL,QAAA,EAAa,CAACC,QAAA,EAAC,CAAY;IACnD;QAAA,IAAAK,IAAA,GAAAC,MAAA;QAAAD,IAAA,CAAAE,OAAA,GACiB,MAAMH,OAAO,CAACH,QAAA,EAAC,CAAa;QAAAO,gBAAA,EAAAH,IAAA,QAAGH,QAAA,EAAU,CAACC,IAAI,EAAE,CAAC;QAAA,OAAAE,IAAA;IAAA;AAEpE,CAAC","names":["$splice0","$splice1","$splice2","$splice3","held","setHeld","_el$","_tmpl$","$$click","_$insert"],"ignoreList":[],"sources":["state/state-enum.test.tsx"]}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAuBY,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA;IACR,MAAM,CAACC,IAAI,EAAEC,OAAO,CAAC,GAAGL,QAAA,EAAa,CAACC,QAAA,EAAY,CAAC;IACnD;QAAA,IAAAK,IAAA,GAAAC,MAAA;QAAAD,IAAA,CAAAE,OAAA,GACiB,MAAMH,OAAO,CAACH,QAAA,EAAa,CAAC;QAAAO,gBAAA,EAAAH,IAAA,QAAGH,QAAA,EAAU,CAACC,IAAI,EAAE,CAAC;QAAA,OAAAE,IAAA;IAAA;AAEpE,CAAC","names":["$splice0","$splice1","$splice2","$splice3","held","setHeld","_el$","_tmpl$","$$click","_$insert"],"ignoreList":[],"sources":["state/state-enum.test.tsx"]}',
     ["solid-js/web"],
   );
 }

@@ -57,7 +57,7 @@ const scriptBoundTagCapture = cs.create(
             ],
           },
           '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $capture1, $capture2) => {\n    const skipped = 10;\n    return $splice0($capture1, $capture2);\n};\n}',
-          '{"version":3,"file":"module.jsx","mappings":";;;kBAoBa,CAAAA,QAAA,EAAAC,SAAA,EAAAC,SAAA;IACH,MAAMC,OAAO,GAAG,EAAE;IAClB,OAAOH,QAAA,CAAAC,SAAA,EAAAC,SAAA,CAAC;AACV,CAAC","names":["$splice0","$capture1","$capture2","skipped"],"ignoreList":[],"sources":["render/script-bound-tag-capture.test.tsx"]}',
+          '{"version":3,"file":"module.jsx","mappings":";;;kBAoBa,CAAAA,QAAA,EAAAC,SAAA,EAAAC,SAAA;IACH,MAAMC,OAAO,GAAG,EAAE;IAClB,OAAOH,QAAA,CAAAC,SAAA,EAAAC,SAAA,CAAkC;AAC3C,CAAC","names":["$splice0","$capture1","$capture2","skipped"],"ignoreList":[],"sources":["render/script-bound-tag-capture.test.tsx"]}',
           [],
         ),
         bindings: ["count$3dnmz2nwnczai$0", "Badge$3dnmz2nwnczai$2"],

@@ -23,7 +23,7 @@ it("nestedScripts", async (t) => {
         ],
       },
       '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const x = 0;\n    return $splice0(x);\n};\n}',
-      '{"version":3,"file":"module.jsx","mappings":";;;kBAQOA,QAAA;IACD,MAAMC,CAAC,GAAG,CAAC;IACX,OAAOD,QAAA,CAAAC,CAAA,CAAC;AACV,CAAC","names":["$splice0","x"],"ignoreList":[],"sources":["captures/nested-scripts.test.tsx"]}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAQOA,QAAA;IACD,MAAMC,CAAC,GAAG,CAAC;IACX,OAAOD,QAAA,CAAAC,CAAA,CAAQ;AACjB,CAAC","names":["$splice0","x"],"ignoreList":[],"sources":["captures/nested-scripts.test.tsx"]}',
       [],
     ),
   );

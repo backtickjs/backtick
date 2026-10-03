@@ -22,7 +22,7 @@ setTone                              → 26:18 setTone
 $splice0()                           → 26:29 $createSignal(${Tone.Warm});…
 (                                    → 26:42 (
 $splice1()                           → 26:43 ${Tone.Warm});…
-)                                    → 26:44 {Tone.Warm});…
+)                                    → 26:55 )
 ;                                    → 26:56 ;
 const                                → 27:5 const 
 [                                    → 27:11 [
@@ -56,7 +56,7 @@ false                                → 31:19 false
 setTone                              → 32:11 setTone
 (                                    → 32:18 (
 $splice2()                           → 32:19 ${Tone.Cool});…
-)                                    → 32:20 {Tone.Cool});…
+)                                    → 32:31 )
 ;                                    → 32:32 ;
 setStep                              → 33:11 setStep
 (                                    → 33:18 (

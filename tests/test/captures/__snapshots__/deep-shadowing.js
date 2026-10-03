@@ -6,7 +6,7 @@ function outerBase(inner) {
     "8up2nb5o0inm:7:9",
     { params: [{ kind: "splice", value: middleBase(inner), bindings: [] }] },
     '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const base = 1;\n    return base + $splice0();\n};\n}',
-    '{"version":3,"file":"module.jsx","mappings":";;;kBAMYA,QAAA;IACR,MAAMC,IAAI,GAAG,CAAC;IACd,OAAOA,IAAI,GAAGD,QAAA,EAAC;AACjB,CAAC","names":["$splice0","base"],"ignoreList":[],"sources":["captures/deep-shadowing.test.tsx"]}',
+    '{"version":3,"file":"module.jsx","mappings":";;;kBAMYA,QAAA;IACR,MAAMC,IAAI,GAAG,CAAC;IACd,OAAOA,IAAI,GAAGD,QAAA,EAAoB;AACpC,CAAC","names":["$splice0","base"],"ignoreList":[],"sources":["captures/deep-shadowing.test.tsx"]}',
     [],
   );
 }
@@ -47,7 +47,7 @@ it("deepShadowing", async (t) => {
         ],
       },
       '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const base = 10;\n    return $splice0(base);\n};\n}',
-      '{"version":3,"file":"module.jsx","mappings":";;;kBA2BOA,QAAA;IACD,MAAMC,IAAI,GAAG,EAAE;IACf,OAAOD,QAAA,CAAAC,IAAA,CAAC;AACV,CAAC","names":["$splice0","base"],"ignoreList":[],"sources":["captures/deep-shadowing.test.tsx"]}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBA2BOA,QAAA;IACD,MAAMC,IAAI,GAAG,EAAE;IACf,OAAOD,QAAA,CAAAC,IAAA,CAAsB;AAC/B,CAAC","names":["$splice0","base"],"ignoreList":[],"sources":["captures/deep-shadowing.test.tsx"]}',
       [],
     ),
   );

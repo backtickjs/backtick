@@ -13,7 +13,7 @@ const              → 14:7 const
 bump               → 14:13 bump
  =                 → 14:17  = 
 $splice0(counter)  → 14:20 ${cs`()…
-;                  → 14:21 {cs`()…
+;                  → 16:10 ;
 bump               → 17:7 bump
 ()                 → 17:11 ()
 ;                  → 17:13 ;
