@@ -35,6 +35,28 @@ describe("refusals", () => {
     }
   });
 
+  it("a script that isn't one expression or one block is refused", () => {
+    for (const body of [
+      "a(); b()",
+      "a()\nb()",
+      "const x = 1",
+      "if (a) b()",
+      "",
+    ]) {
+      assert.deepStrictEqual(
+        refusals(body),
+        [
+          "A `cs` client script is one expression or one block: write " +
+            "statements in braces, e.g. cs`{ a(); b(); }`.",
+        ],
+        body,
+      );
+    }
+    for (const body of ["a()", "a();", "{ a(); b(); }"]) {
+      assert.deepStrictEqual(refusals(body), [], body);
+    }
+  });
+
   it("a name strict mode forbids is refused", () => {
     assert.deepStrictEqual(refusals("{ const await = 1; }"), [
       "`await` is not allowed as a variable declaration name: it is " +

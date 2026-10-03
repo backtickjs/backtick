@@ -64,12 +64,27 @@ export function rewriteScript(
     diagnostics,
   });
 
+  const scriptRange: SourceRange = {
+    start: sourceNode.getStart(sourceFile),
+    end: sourceNode.getEnd(),
+  };
+
+  // A script is one expression or one block: statements go in braces.
   const [statement] = fileWithPlaceholders.statements;
   if (
-    !statement ||
-    !(ts.isExpressionStatement(statement) || ts.isBlock(statement))
+    fileWithPlaceholders.statements.length !== 1 ||
+    !(ts.isExpressionStatement(statement!) || ts.isBlock(statement!))
   ) {
-    return leftAsWritten([]);
+    return leftAsWritten([
+      {
+        range: scriptRange,
+        message:
+          "A `cs` client script is one expression or one block: write " +
+          "statements in braces, e.g. cs`{ a(); b(); }`.",
+        category: ts.DiagnosticCategory.Error,
+        code: 0,
+      },
+    ]);
   }
 
   // A `${…}` written where the script has text rather than code is no splice.
@@ -85,10 +100,6 @@ export function rewriteScript(
     return leftAsWritten(refused);
   }
 
-  const scriptRange: SourceRange = {
-    start: sourceNode.getStart(sourceFile),
-    end: sourceNode.getEnd(),
-  };
   // Which script this is (see `ClientScript.id`): its line from 1, and its
   // column from 0.
   const { line, character } = sourceFile.getLineAndCharacterOfPosition(
