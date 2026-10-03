@@ -63,8 +63,6 @@ function bindingKey(state: RewriteState, identifier: ts.Identifier): string {
 // strict-mode checks never see these.
 function bannedReason(name: string): string | null {
   switch (name) {
-    case "undefined":
-      return "it would hide the `undefined` value in that scope";
     case "eval":
     case "arguments":
       return "strict mode forbids binding it";

@@ -1,3 +1,0 @@
-10:9-10:18 error TS0: `undefined` is not allowed as a variable declaration name: it would hide the `undefined` value in that scope.
-14:23-14:32 error TS0: `undefined` is not allowed as a parameter name: it would hide the `undefined` value in that scope.
-19:12-19:21 error TS0: `undefined` is not allowed as a variable declaration name: it would hide the `undefined` value in that scope.
