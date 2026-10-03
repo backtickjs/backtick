@@ -29,7 +29,7 @@ function attributes(element: Element): Record<string, string> {
 
 describe("a prop", () => {
   it("is written as an attribute", async () => {
-    const link = await drawn(cs.lift((() => <a href={"/counter"} id={"press"}>
+    const link = await drawn(cs.lift((() => <a href="/counter" id="press">
       go
     </a>)()));
     assert.deepEqual(attributes(link), { href: "/counter", id: "press" });
@@ -41,7 +41,11 @@ describe("an svg tag", () => {
   // inserts, and it draws nothing. The prefix, which the runtime adds to a
   // tag drawn inside an `svg`, is what says which namespace it is from.
   it("is made in the SVG namespace, without its prefix", async () => {
-    const root = await drawn(cs.lift((() => <div>{<svg>{<path />}</svg>}</div>)()));
+    const root = await drawn(cs.lift((() => <div>
+      <svg>
+        <path />
+      </svg>
+    </div>)()));
     const path = root.querySelector("path")!;
     assert.equal(path.namespaceURI, SVG);
     assert.equal(path.localName, "path");
@@ -54,7 +58,7 @@ describe("an attribute's case", () => {
   // cannot serve both: lowercasing is what makes a prop and an attribute the
   // same name in HTML, and what loses `viewBox` in SVG.
   it("is kept in the SVG namespace", async () => {
-    const svg = await drawn(cs.lift((() => <svg viewBox={"0 0 279 38"}/>)()));
+    const svg = await drawn(cs.lift((() => <svg viewBox="0 0 279 38" />)()));
     assert.deepEqual(attributes(svg), { viewBox: "0 0 279 38" });
   });
 
@@ -62,7 +66,10 @@ describe("an attribute's case", () => {
   // and the string handed to `setAttribute` are one name — nothing here has a
   // table to get from one to another.
   it("writes a hyphenated presentation name straight through", async () => {
-    const svg = await drawn(cs.lift((() => <svg>{<path stroke-width={2} fill-rule={"evenodd"}/>}{<filter color-interpolation-filters={"sRGB"}/>}</svg>)()));
+    const svg = await drawn(cs.lift((() => <svg>
+      <path stroke-width={2} fill-rule="evenodd" />
+      <filter color-interpolation-filters="sRGB" />
+    </svg>)()));
     assert.deepEqual(attributes(svg.querySelector("path")!), {
       "stroke-width": "2",
       "fill-rule": "evenodd",
@@ -74,7 +81,10 @@ describe("an attribute's case", () => {
 
   // And the ones SVG spells camel itself, which lowercasing would lose.
   it("leaves an attribute SVG spells camel alone", async () => {
-    const svg = await drawn(cs.lift((() => <svg>{<linearGradient gradientTransform={"rotate(90)"}/>}{<feTurbulence numOctaves={3}/>}</svg>)()));
+    const svg = await drawn(cs.lift((() => <svg>
+      <linearGradient gradientTransform="rotate(90)" />
+      <feTurbulence numOctaves={3} />
+    </svg>)()));
     assert.deepEqual(attributes(svg.children[0]!), {
       gradientTransform: "rotate(90)",
     });
@@ -82,7 +92,7 @@ describe("an attribute's case", () => {
   });
 
   it("is still folded down in HTML", async () => {
-    const div = await drawn(cs.lift((() => <div tabIndex={2}/>)()));
+    const div = await drawn(cs.lift((() => <div tabIndex={2} />)()));
     assert.deepEqual(attributes(div), { tabindex: "2" });
   });
 });
@@ -92,15 +102,23 @@ describe("a field's value", () => {
   // defaults, so a write that reaches the attribute changes nothing shown.
   async function Field() {
     return cs.lift((() => {
-    const __cs_text = cs.splice((createSignal))("first");
-    const __cs_isOn = cs.splice((createSignal))(false);
-    return (<div>{<input aria-label={"text"} value={__cs_text[0]()}/>}{<input type={"checkbox"} aria-label={"on"} checked={__cs_isOn[0]()}/>}{<button onclick={() => {
-        __cs_text[1]("second");
-        __cs_isOn[1](true);
-    }}>
+      const __cs_text = cs.splice((createSignal))("first");
+      const __cs_isOn = cs.splice((createSignal))(false);
+      return (
+        <div>
+          <input aria-label="text" value={__cs_text[0]()} />
+          <input type="checkbox" aria-label="on" checked={__cs_isOn[0]()} />
+          <button
+            onclick={() => {
+              __cs_text[1]("second");
+              __cs_isOn[1](true);
+            }}
+          >
             write
-          </button>}</div>);
-})());
+          </button>
+        </div>
+      );
+    })());
   }
 
   it("follows a write after the field was edited", async () => {

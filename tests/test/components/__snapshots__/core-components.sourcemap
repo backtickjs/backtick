@@ -1,37 +1,49 @@
-cs.lift((() =>               → cs`
+cs.lift((() =>               →  [-semantic -navigation]
 <                            → <
 div                          → div
                              →  
 style                        → style
-={                           → =
+=                            → =
 "padding: 8px"               → "padding: 8px"
-}                            → 
->{                           → >\n      
+>                            → >
+\n                           → \n      
 <                            → <
 span                         → span
                              →  
 style                        → style
-={                           → =
+=                            → =
 "font-size: 12px"            → "font-size: 12px"
-}                            → 
                              →  
 onclick                      → onclick
-={                           → ={
-() => {\n}                   → () => {}
+=                            → =
+{                            → {
+(                            → (
+)                            → )
+                             →  
+=>                           → =>
+                             →  
+{                            → {
 }                            → }
->\n        hi\n      </      → >\n        hi\n      </
+}                            → }
+>                            → >
+\n                           → \n        
+hi\n                         → hi\n      
+<                            → <
+/                            → /
 span                         → span
 >                            → >
-}{                           → \n      
+\n                           → \n      
 <                            → <
 img                          → img
                              →  
 src                          → src
-={                           → =
+=                            → =
 "https://example.com/a.png"  → "https://example.com/a.png"
-}                            → 
-/>                           →  />
-}</                          → \n    </
+                             →  
+/                            → /
+>                            → >
+\n                           → \n    
+<                            → <
+/                            → /
 div                          → div
 >                            → >
-)())                         → `

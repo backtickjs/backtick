@@ -1,43 +1,65 @@
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 (                → (
 __cs_currency    → currency
-:                → : 
+:                → :
+                 →  
 string           → string
-) => {\n         → ) => {\n      
-const            → const 
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n      
+const            → const
+                 →  
 __cs_table       → table
- =               →  = 
-cs.splice(       →  [-semantic]
+                 →  
+=                → =
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (rates)          → $rates
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 ;                → ;
 \n               → \n      
-const            → const 
+const            → const
+                 →  
 __cs_asked       → asked
- =               →  = 
+                 →  
+=                → =
+                 →  
 __cs_table       → table
 [                → [
 __cs_currency    → currency
 ]                → ]
- ??              →  ?? 
+                 →  
+??               → ??
+                 →  
 0                → 0
 ;                → ;
 \n               → \n      
-const            → const 
+const            → const
+                 →  
 __cs_usd         → usd
- =               →  = 
+                 →  
+=                → =
+                 →  
 __cs_table       → table
 [                → [
 "usd"            → "usd"
 ]                → ]
- ??              →  ?? 
+                 →  
+??               → ??
+                 →  
 0                → 0
 ;                → ;
 \n               → \n      
-return           → return 
+return           → return
+                 →  
 __cs_asked       → asked
- +               →  + 
+                 →  
++                → +
+                 →  
 __cs_usd         → usd
 ;                → ;
-\n}              → \n    }
-)())             → `
+\n               → \n    
+}                → }

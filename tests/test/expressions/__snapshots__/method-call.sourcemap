@@ -1,21 +1,30 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_greeting           → greeting
- =                      →  = 
-"Hello"                 → "Hello"
-;                       → ;
-\n                      → \n      
-return                  → return 
-__cs_greeting           → greeting
-.                       → .
-concat                  → concat
-(                       → (
-", "                    → ", "
-,                       → , 
-"World"                 → "World"
-)                       → )
-.                       → .
-toUpperCase             → toUpperCase
-()                      → ()
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_greeting    → greeting
+                 →  
+=                → =
+                 →  
+"Hello"          → "Hello"
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+__cs_greeting    → greeting
+.                → .
+concat           → concat
+(                → (
+", "             → ", "
+,                → ,
+                 →  
+"World"          → "World"
+)                → )
+.                → .
+toUpperCase      → toUpperCase
+(                → (
+)                → )
+;                → ;
+\n               → \n    
+}                → }

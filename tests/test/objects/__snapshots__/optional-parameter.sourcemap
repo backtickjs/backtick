@@ -1,10 +1,18 @@
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 (                → (
 __cs_name        → name
-?:               → ?: 
+?                → ?
+:                → :
+                 →  
 string           → string
-) => {\n         → ) => {\n  
-return           → return 
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n  
+return           → return
+                 →  
 __cs_name        → name
 ?.               → ?.
 concat           → concat
@@ -12,81 +20,115 @@ concat           → concat
 "!"              → "!"
 )                → )
 ;                → ;
-\n}              → \n}
-)())             → `
-cs.lift((() =>   → cs`
-() =>            → () => 
+\n               → \n
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
 2                → 2
-)())             → `
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 (                → (
 __cs_cb          → cb
-?:               → ?: 
-() =>            → () => 
+?                → ?
+:                → :
+                 →  
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
 number           → number
-) => {\n         → ) => {\n  
-return           → return 
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n  
+return           → return
+                 →  
 __cs_cb          → cb
-?.()             → ?.()
- ??              →  ?? 
+?.               → ?.
+(                → (
+)                → )
+                 →  
+??               → ??
+                 →  
 0                → 0
 ;                → ;
-\n}              → \n}
-)())             → `
-cs.lift((() =>   → cs`
+\n               → \n
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
 (                → (
-{                → {\n      
+{                → {
+\n               → \n      
 named            → named
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (greet)          → $greet
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
 "hi"             → "hi"
 )                → )
-,                → ,\n      
+,                → ,
+\n               → \n      
 explicit         → explicit
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (greet)          → $greet
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
 undefined        → undefined
 )                → )
-,                → ,\n      
+,                → ,
+\n               → \n      
 omitted          → omitted
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (greet)          → $greet
-)                →  [-semantic]
-()               → ()
-,                → ,\n      
-supplied         → supplied
-:                → : 
-cs.splice(       →  [-semantic]
-(callIfGiven)    → $callIfGiven
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
-cs.splice(       →  [-semantic]
-(double)         → $double
-)                →  [-semantic]
 )                → )
-,                → ,\n      
-fallback         → fallback
-:                → : 
-cs.splice(       →  [-semantic]
+,                → ,
+\n               → \n      
+supplied         → supplied
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (callIfGiven)    → $callIfGiven
-)                →  [-semantic]
+)                →  [-semantic -navigation]
+(                → (
+cs.splice(       →  [-semantic -navigation]
+(double)         → $double
+)                →  [-semantic -navigation]
+)                → )
+,                → ,
+\n               → \n      
+fallback         → fallback
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
+(callIfGiven)    → $callIfGiven
+)                →  [-semantic -navigation]
 (                → (
 undefined        → undefined
 )                → )
-,                → ,\n      
+,                → ,
+\n               → \n      
 omittedCallback  → omittedCallback
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (callIfGiven)    → $callIfGiven
-)                →  [-semantic]
-()               → ()
- }               → ,\n    }
+)                →  [-semantic -navigation]
+(                → (
 )                → )
-)())             → `
+,                → ,
+\n               → \n    
+}                → }
+)                → )

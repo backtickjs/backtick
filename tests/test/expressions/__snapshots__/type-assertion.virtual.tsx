@@ -17,11 +17,9 @@ it("typeAssertion", async (t) => {
     t,
     "typeAssertion",
     cs.lift((() => {
-    const __cs_page = cs.globalThis.JSON.parse(cs.splice((answered))) as {
-        rows: string[];
-        count: number;
-    };
-    return __cs_page.rows[0] + " of " + __cs_page.count;
-})()),
+      const __cs_page = cs.globalThis.JSON.parse(cs.splice((answered))) as { rows: string[]; count: number };
+
+      return __cs_page.rows[0] + " of " + __cs_page.count;
+    })()),
   );
 });

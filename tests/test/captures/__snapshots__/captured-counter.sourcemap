@@ -1,32 +1,58 @@
-cs.lift((() => {\n      → cs`{\n      
-let                     → let 
-__cs_count              → count
- =                      →  = 
-0                       → 0
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_bump               → bump
- =                      →  = 
-() => {\n               → () => {\n        
-__cs_count              → count
- =                      →  = 
-__cs_count              → count
- +                      →  + 
-1                       → 1
-;                       → ;
-\n                      → \n        
-return                  → return 
-__cs_count              → count
-;                       → ;
-\n    }                 → \n      }
-;                       → ;
-\n                      → \n      
-return                  → return 
-__cs_bump               → bump
-()                      → ()
- +                      →  + 
-__cs_bump               → bump
-()                      → ()
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+let              → let
+                 →  
+__cs_count       → count
+                 →  
+=                → =
+                 →  
+0                → 0
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_bump        → bump
+                 →  
+=                → =
+                 →  
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n        
+__cs_count       → count
+                 →  
+=                → =
+                 →  
+__cs_count       → count
+                 →  
++                → +
+                 →  
+1                → 1
+;                → ;
+\n               → \n        
+return           → return
+                 →  
+__cs_count       → count
+;                → ;
+\n               → \n      
+}                → }
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+__cs_bump        → bump
+(                → (
+)                → )
+                 →  
++                → +
+                 →  
+__cs_bump        → bump
+(                → (
+)                → )
+;                → ;
+\n               → \n    
+}                → }

@@ -1,18 +1,22 @@
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
-span             → span
->x</             → >x</
 span             → span
 >                → >
-)())             → `
-cs.lift((() =>   → cs`
+x                → x
+<                → <
+/                → /
+span             → span
+>                → >
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 div              → div
->{               → >{
-cs.splice(       → ${ [-semantic]
+>                → >
+{                → {
+cs.splice(       →  [-semantic -navigation]
 (<Outer />)      → (<Outer />)
-)                → } [-semantic]
-}</              → }</
+)                →  [-semantic -navigation]
+}                → }
+<                → <
+/                → /
 div              → div
 >                → >
-)())             → `

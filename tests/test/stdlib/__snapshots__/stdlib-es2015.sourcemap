@@ -1,144 +1,210 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_xs                 → xs
- =                      →  = 
-[                       → [
-3                       → 3
-,                       → , 
-8                       → 8
-,                       → , 
-12                      → 12
-,                       → , 
-5                       → 5
-]                       → ]
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_word               → word
- =                      →  = 
-"backtick"              → "backtick"
-;                       → ;
-\n                      → \n      
-return                  → return 
-{                       → {\n        
-found                   → found
-:                       → : 
-__cs_xs                 → xs
-.                       → .
-find                    → find
-(                       → (
-__cs_x                  → x
- =>                     → ) => 
-__cs_x                  → x
- >                      →  > 
-7                       → 7
-)                       → )
-,                       → ,\n        
-missing                 → missing
-:                       → : 
-__cs_xs                 → xs
-.                       → .
-find                    → find
-(                       → (
-__cs_x                  → x
- =>                     → ) => 
-__cs_x                  → x
- >                      →  > 
-100                     → 100
-)                       → )
- ===                    →  === 
-undefined               → undefined
-,                       → ,\n        
-at                      → at
-:                       → : 
-__cs_xs                 → xs
-.                       → .
-findIndex               → findIndex
-(                       → (
-__cs_x                  → x
- =>                     → ) => 
-__cs_x                  → x
- >                      →  > 
-7                       → 7
-)                       → )
-,                       → ,\n        
-nowhere                 → nowhere
-:                       → : 
-__cs_xs                 → xs
-.                       → .
-findIndex               → findIndex
-(                       → (
-__cs_x                  → x
- =>                     → ) => 
-__cs_x                  → x
- >                      →  > 
-100                     → 100
-)                       → )
-,                       → ,\n        
-includes                → includes
-:                       → : 
-__cs_word               → word
-.                       → .
-includes                → includes
-(                       → (
-"tick"                  → "tick"
-)                       → )
-,                       → ,\n        
-startsWith              → startsWith
-:                       → : 
-__cs_word               → word
-.                       → .
-startsWith              → startsWith
-(                       → (
-"back"                  → "back"
-)                       → )
-,                       → ,\n        
-endsWith                → endsWith
-:                       → : 
-__cs_word               → word
-.                       → .
-endsWith                → endsWith
-(                       → (
-"tick"                  → "tick"
-,                       → , 
-4                       → 4
-)                       → )
-,                       → ,\n        
-repeated                → repeated
-:                       → : 
-"ab"                    → "ab"
-.                       → .
-repeat                  → repeat
-(                       → (
-3                       → 3
-)                       → )
-,                       → ,\n        
-codePoint               → codePoint
-:                       → : 
-"\\uD83D\\uDE00"        → "\\u{1F600}"
-.                       → .
-codePointAt             → codePointAt
-(                       → (
-0                       → 0
-)                       → )
-,                       → ,\n        
-keys                    → keys
-:                       → : 
-cs.globalThis.          → 
-Object                  → Object
-.                       → .
-keys                    → keys
-(                       → (
-{                       → { 
-a                       → a
-:                       → : 
-1                       → 1
-,                       → , 
-b                       → b
-:                       → : 
-2                       → 2
- }                      →  }
-)                       → )
- }                      → ,\n      }
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_xs          → xs
+                 →  
+=                → =
+                 →  
+[                → [
+3                → 3
+,                → ,
+                 →  
+8                → 8
+,                → ,
+                 →  
+12               → 12
+,                → ,
+                 →  
+5                → 5
+]                → ]
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_word        → word
+                 →  
+=                → =
+                 →  
+"backtick"       → "backtick"
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+{                → {
+\n               → \n        
+found            → found
+:                → :
+                 →  
+__cs_xs          → xs
+.                → .
+find             → find
+(                → (
+(                → (
+__cs_x           → x
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_x           → x
+                 →  
+>                → >
+                 →  
+7                → 7
+)                → )
+,                → ,
+\n               → \n        
+missing          → missing
+:                → :
+                 →  
+__cs_xs          → xs
+.                → .
+find             → find
+(                → (
+(                → (
+__cs_x           → x
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_x           → x
+                 →  
+>                → >
+                 →  
+100              → 100
+)                → )
+                 →  
+===              → ===
+                 →  
+undefined        → undefined
+,                → ,
+\n               → \n        
+at               → at
+:                → :
+                 →  
+__cs_xs          → xs
+.                → .
+findIndex        → findIndex
+(                → (
+(                → (
+__cs_x           → x
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_x           → x
+                 →  
+>                → >
+                 →  
+7                → 7
+)                → )
+,                → ,
+\n               → \n        
+nowhere          → nowhere
+:                → :
+                 →  
+__cs_xs          → xs
+.                → .
+findIndex        → findIndex
+(                → (
+(                → (
+__cs_x           → x
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_x           → x
+                 →  
+>                → >
+                 →  
+100              → 100
+)                → )
+,                → ,
+\n               → \n        
+includes         → includes
+:                → :
+                 →  
+__cs_word        → word
+.                → .
+includes         → includes
+(                → (
+"tick"           → "tick"
+)                → )
+,                → ,
+\n               → \n        
+startsWith       → startsWith
+:                → :
+                 →  
+__cs_word        → word
+.                → .
+startsWith       → startsWith
+(                → (
+"back"           → "back"
+)                → )
+,                → ,
+\n               → \n        
+endsWith         → endsWith
+:                → :
+                 →  
+__cs_word        → word
+.                → .
+endsWith         → endsWith
+(                → (
+"tick"           → "tick"
+,                → ,
+                 →  
+4                → 4
+)                → )
+,                → ,
+\n               → \n        
+repeated         → repeated
+:                → :
+                 →  
+"ab"             → "ab"
+.                → .
+repeat           → repeat
+(                → (
+3                → 3
+)                → )
+,                → ,
+\n               → \n        
+codePoint        → codePoint
+:                → :
+                 →  
+"\\u{1F600}"     → "\\u{1F600}"
+.                → .
+codePointAt      → codePointAt
+(                → (
+0                → 0
+)                → )
+,                → ,
+\n               → \n        
+keys             → keys
+:                → :
+                 →  
+Object           → Object
+.                → .
+keys             → keys
+(                → (
+{                → {
+                 →  
+a                → a
+:                → :
+                 →  
+1                → 1
+,                → ,
+                 →  
+b                → b
+:                → :
+                 →  
+2                → 2
+                 →  
+}                → }
+)                → )
+,                → ,
+\n               → \n      
+}                → }
+;                → ;
+\n               → \n    
+}                → }

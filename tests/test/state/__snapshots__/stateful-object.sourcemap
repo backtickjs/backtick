@@ -1,94 +1,149 @@
-cs.lift((() =>          → cs`
-(                       → (
-__cs_initial            → initial
-:                       → : 
-number                  → number
-) => {\n                → ) => {\n  
-const                   → const 
-__cs_count              → count
- =                      →  = 
-cs.splice(              →  [-semantic]
-(createSignal)          → $createSignal
-)                       →  [-semantic]
-(                       → (
-__cs_initial            → initial
-)                       → )
-;                       → ;
-\n                      → \n  
-return                  → return 
-{                       → {\n    
-get                     → get
-:                       → : 
-() =>                   → () => 
-__cs_count              → count
-[                       → [
-0                       → 0
-]                       → ]
-()                      → ()
-,                       → ,\n    
-add                     → add
-:                       → : 
-(                       → (
-__cs_n                  → n
-:                       → : 
-number                  → number
-) => {\n                → ) => {\n      
-__cs_count              → count
-[                       → [
-1                       → 1
-]                       → ]
-(                       → (
-__cs_count              → count
-[                       → [
-0                       → 0
-]                       → ]
-()                      → ()
- +                      →  + 
-__cs_n                  → n
-)                       → )
-;                       → ;
-\n        }             → \n    }
- }                      → ,\n  }
-;                       → ;
-\n}                     → \n}
-)())                    → `
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_c                  → c
- =                      →  = 
-cs.splice(              →  [-semantic]
-(counter)               → $counter
-)                       →  [-semantic]
-(                       → (
-10                      → 10
-)                       → )
-;                       → ;
-\n                      → \n      
-return                  → return 
-(                       → (\n        
-<                       → <
-button                  → button
-                        → \n          
-onclick                 → onclick
-={                      → ={
-() => {\n               → () => {\n            
-__cs_c                  → c
-.                       → .
-add                     → add
-(                       → (
-5                       → 5
-)                       → )
-;                       → ;
-\n    }                 → \n          }
-}                       → }
->{                      → \n        >\n          {
-__cs_c                  → c
-.                       → .
-get                     → get
-()                      → ()
-}</                     → }\n        </
-button                  → button
->                       → >
-)                       → \n      )
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+(                → (
+__cs_initial     → initial
+:                → :
+                 →  
+number           → number
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n  
+const            → const
+                 →  
+__cs_count       → count
+                 →  
+=                → =
+                 →  
+cs.splice(       →  [-semantic -navigation]
+(createSignal)   → $createSignal
+)                →  [-semantic -navigation]
+(                → (
+__cs_initial     → initial
+)                → )
+;                → ;
+\n               → \n  
+return           → return
+                 →  
+{                → {
+\n               → \n    
+get              → get
+:                → :
+                 →  
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_count       → count
+[                → [
+0                → 0
+]                → ]
+(                → (
+)                → )
+,                → ,
+\n               → \n    
+add              → add
+:                → :
+                 →  
+(                → (
+__cs_n           → n
+:                → :
+                 →  
+number           → number
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n      
+__cs_count       → count
+[                → [
+1                → 1
+]                → ]
+(                → (
+__cs_count       → count
+[                → [
+0                → 0
+]                → ]
+(                → (
+)                → )
+                 →  
++                → +
+                 →  
+__cs_n           → n
+)                → )
+;                → ;
+\n               → \n    
+}                → }
+,                → ,
+\n               → \n  
+}                → }
+;                → ;
+\n               → \n
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_c           → c
+                 →  
+=                → =
+                 →  
+cs.splice(       →  [-semantic -navigation]
+(counter)        → $counter
+)                →  [-semantic -navigation]
+(                → (
+10               → 10
+)                → )
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+(                → (
+\n               → \n        
+<                → <
+button           → button
+\n               → \n          
+onclick          → onclick
+=                → =
+{                → {
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n            
+__cs_c           → c
+.                → .
+add              → add
+(                → (
+5                → 5
+)                → )
+;                → ;
+\n               → \n          
+}                → }
+}                → }
+\n               → \n        
+>                → >
+\n               → \n          
+{                → {
+__cs_c           → c
+.                → .
+get              → get
+(                → (
+)                → )
+}                → }
+\n               → \n        
+<                → <
+/                → /
+button           → button
+>                → >
+\n               → \n      
+)                → )
+;                → ;
+\n               → \n    
+}                → }

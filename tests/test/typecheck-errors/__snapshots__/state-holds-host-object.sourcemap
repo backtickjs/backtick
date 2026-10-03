@@ -1,25 +1,31 @@
-cs.lift((() => {\n    // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.\n    → cs`{\n  // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.\n  
-const                                     → const 
+cs.lift((() =>                            →  [-semantic -navigation]
+{                                         → {
+\n  // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.\n  → \n  // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.\n  
+const                                     → const
+                                          →  
 __cs_held                                 → held
- =                                        →  = 
-cs.splice(                                →  [-semantic]
+                                          →  
+=                                         → =
+                                          →  
+cs.splice(                                →  [-semantic -navigation]
 (createSignal)                            → $createSignal
-)                                         →  [-semantic]
+)                                         →  [-semantic -navigation]
 (                                         → (
-cs.splice(                                →  [-semantic]
+cs.splice(                                →  [-semantic -navigation]
 (host)                                    → $host
-)                                         →  [-semantic]
+)                                         →  [-semantic -navigation]
 )                                         → )
 ;                                         → ;
-\n    // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.\n    → \n  // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.\n  
+\n  // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.\n  → \n  // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.\n  
 __cs_held                                 → held
 [                                         → [
 1                                         → 1
 ]                                         → ]
 (                                         → (
-cs.splice(                                →  [-semantic]
+cs.splice(                                →  [-semantic -navigation]
 (host)                                    → $host
-)                                         →  [-semantic]
+)                                         →  [-semantic -navigation]
 )                                         → )
 ;                                         → ;
-\n})())                                   → \n}`
+\n                                        → \n
+}                                         → }

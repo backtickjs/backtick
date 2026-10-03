@@ -1,61 +1,110 @@
-cs.lift((() => {\n      → cs`{\n      
-let                     → let 
-__cs_out                → out
- =                      →  = 
-""                      → ""
-;                       → ;
-\n                      → \n      
-for (                   → for (
-let                     → let 
-__cs_i                  → i
- =                      →  = 
-0                       → 0
-;                       → ; 
-__cs_i                  → i
- <                      →  < 
-5                       → 5
-;                       → ; 
-__cs_i                  → i
- =                      →  = 
-__cs_i                  → i
- +                      →  + 
-1                       → 1
-)                       → ) 
-{\n                     → {\n        
-if (                    → if (
-__cs_i                  → i
- ===                    →  === 
-1                       → 1
-)                       → ) 
-{\n                     → {\n          
-continue;               → continue;
-\n        }             → \n        }
-\n                      → \n        
-while (                 → while (
-true                    → true
-)                       → ) 
-{\n                     → {\n          
-__cs_out                → out
- =                      →  = 
-__cs_out                → out
- +                      →  + 
-__cs_i                  → i
-;                       → ;
-\n                      → \n          
-break;                  → break;
-\n        }             → \n        }
-\n                      → \n        
-if (                    → if (
-__cs_i                  → i
- ===                    →  === 
-3                       → 3
-)                       → ) 
-{\n                     → {\n          
-break;                  → break;
-\n        }             → \n        }
-\n    }                 → \n      }
-\n                      → \n      
-return                  → return 
-__cs_out                → out
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+let              → let
+                 →  
+__cs_out         → out
+                 →  
+=                → =
+                 →  
+""               → ""
+;                → ;
+\n               → \n      
+for              → for
+                 →  
+(                → (
+let              → let
+                 →  
+__cs_i           → i
+                 →  
+=                → =
+                 →  
+0                → 0
+;                → ;
+                 →  
+__cs_i           → i
+                 →  
+<                → <
+                 →  
+5                → 5
+;                → ;
+                 →  
+__cs_i           → i
+                 →  
+=                → =
+                 →  
+__cs_i           → i
+                 →  
++                → +
+                 →  
+1                → 1
+)                → )
+                 →  
+{                → {
+\n               → \n        
+if               → if
+                 →  
+(                → (
+__cs_i           → i
+                 →  
+===              → ===
+                 →  
+1                → 1
+)                → )
+                 →  
+{                → {
+\n               → \n          
+continue         → continue
+;                → ;
+\n               → \n        
+}                → }
+\n               → \n        
+while            → while
+                 →  
+(                → (
+true             → true
+)                → )
+                 →  
+{                → {
+\n               → \n          
+__cs_out         → out
+                 →  
+=                → =
+                 →  
+__cs_out         → out
+                 →  
++                → +
+                 →  
+__cs_i           → i
+;                → ;
+\n               → \n          
+break            → break
+;                → ;
+\n               → \n        
+}                → }
+\n               → \n        
+if               → if
+                 →  
+(                → (
+__cs_i           → i
+                 →  
+===              → ===
+                 →  
+3                → 3
+)                → )
+                 →  
+{                → {
+\n               → \n          
+break            → break
+;                → ;
+\n               → \n        
+}                → }
+\n               → \n      
+}                → }
+\n               → \n      
+return           → return
+                 →  
+__cs_out         → out
+;                → ;
+\n               → \n    
+}                → }

@@ -6,9 +6,7 @@ import { For } from "@backtickjs/solid-js";
 
 // A client component written as a tag on the host, past the typechecker:
 // refused when bundling, as it is a tag in a script.
-const Badge = cs.lift((() => (__cs_props: {
-    n: number;
-}) => <b>{__cs_props.n}</b>)());
+const Badge = cs.lift((() => (__cs_props: { n: number }) => <b>{__cs_props.n}</b>)());
 
 it("refuses a client import as a tag on the host", async () => {
   await assert.rejects(

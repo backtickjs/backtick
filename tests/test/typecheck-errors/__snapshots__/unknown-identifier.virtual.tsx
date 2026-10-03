@@ -7,13 +7,13 @@ import { cs } from "@backtickjs/core";
 const hostValue = 5;
 
 export const host = cs.lift((() => {
-    // @ts-expect-error: Property 'hostValue' does not exist on type 'GlobalThis'.
-    return cs.globalThis.hostValue + 1;
+  // @ts-expect-error: Property 'hostValue' does not exist on type 'GlobalThis'.
+  return cs.globalThis.hostValue + 1;
 })());
 
 export const assigned = cs.lift((() => {
-    // @ts-expect-error: Property 'count' does not exist on type 'GlobalThis'.
-    cs.globalThis.count = 1;
+  // @ts-expect-error: Property 'count' does not exist on type 'GlobalThis'.
+  cs.globalThis.count = 1;
 })());
 
 export const global = cs.lift((() => cs.globalThis.window.location.href)());

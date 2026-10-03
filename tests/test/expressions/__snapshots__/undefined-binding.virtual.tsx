@@ -11,9 +11,9 @@ describe("a script's own `undefined`", () => {
     assert.equal(
       await evaluate(
         cs.lift((() => cs.splice((createRoot))(() => {
-    const __cs_undefined = 1;
-    return __cs_undefined;
-}))()),
+          const __cs_undefined = 1;
+          return __cs_undefined;
+        }))()),
       ),
       1,
     );
@@ -29,11 +29,11 @@ describe("a script's own `undefined`", () => {
     assert.equal(
       await evaluate(
         cs.lift((() => cs.splice((createRoot))(() => {
-    {
-        const __cs_undefined = 1;
-    }
-    return undefined;
-}))()),
+          {
+            const __cs_undefined = 1;
+          }
+          return undefined;
+        }))()),
       ),
       undefined,
     );

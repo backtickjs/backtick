@@ -6,11 +6,11 @@ import { snapshotCase } from "../snapshotCase.ts";
 // An action — a block with no `return` — types `Client<void>` natively and
 // composes as a block running it in statement position.
 const effects: Client<void> = cs.lift((() => {
-    const __cs_x = 1;
+  const __cs_x = 1;
 })());
 
 const composed: Client<void> = cs.lift((() => {
-    cs.splice((effects));
+  cs.splice((effects));
 })());
 
 it("actionComposition", async (t) => {
@@ -18,7 +18,7 @@ it("actionComposition", async (t) => {
     t,
     "actionComposition",
     cs.lift((() => {
-    cs.splice((composed));
-})()),
+      cs.splice((composed));
+    })()),
   );
 });

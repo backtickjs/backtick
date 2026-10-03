@@ -10,9 +10,9 @@ it("tsExpectError", async (t) => {
     t,
     "tsExpectError",
     cs.lift((() => {
-    // @ts-expect-error: a string is not a number
-    const __cs_count: number = "one";
-    return __cs_count;
-})()),
+      // @ts-expect-error: a string is not a number
+      const __cs_count: number = "one";
+      return __cs_count;
+    })()),
   );
 });

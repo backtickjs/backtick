@@ -1,54 +1,90 @@
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 true             → true
-)())             → `
-cs.lift((() =>   → cs`
-(                → (\n  
+cs.lift((() =>   →  [-semantic -navigation]
+(                → (
+\n               → \n  
 __cs_text        → text
-:                → : 
+:                → :
+                 →  
 string           → string
- |               →  | 
+                 →  
+|                → |
+                 →  
 null             → null
-,                → ,\n  
+,                → ,
+\n               → \n  
 __cs_upper       → upper
-:                → : 
+:                → :
+                 →  
 boolean          → boolean
-) => {\n         → ,\n) => {\n  
-if (             → if (
+,                → ,
+\n               → \n
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n  
+if               → if
+                 →  
+(                → (
 __cs_upper       → upper
- &&              →  && 
+                 →  
+&&               → &&
+                 →  
 __cs_text        → text
- !==             →  !== 
+                 →  
+!==              → !==
+                 →  
 null             → null
-)                → ) 
-{\n              → {\n    
-return           → return 
+)                → )
+                 →  
+{                → {
+\n               → \n    
+return           → return
+                 →  
 __cs_text        → text
 .                → .
 toUpperCase      → toUpperCase
-()               → ()
+(                → (
+)                → )
 ;                → ;
-\n    }          → \n  }
 \n               → \n  
-if (             → if (
-cs.splice(       → ${ [-semantic]
+}                → }
+\n               → \n  
+if               → if
+                 →  
+(                → (
+cs.splice(       →  [-semantic -navigation]
 flags.strict     → flags.strict
-)                → } [-semantic]
- &&              →  && 
+)                →  [-semantic -navigation]
+                 →  
+&&               → &&
+                 →  
 __cs_text        → text
- !==             →  !== 
+                 →  
+!==              → !==
+                 →  
 null             → null
- &&              →  && 
+                 →  
+&&               → &&
+                 →  
 __cs_text        → text
 .                → .
 charAt           → charAt
 (                → (
 0                → 0
 )                → )
- ===             →  === 
+                 →  
+===              → ===
+                 →  
 "!"              → "!"
-)                → ) 
-{\n              → {\n    
-return           → return 
+)                → )
+                 →  
+{                → {
+\n               → \n    
+return           → return
+                 →  
 __cs_text        → text
 .                → .
 concat           → concat
@@ -56,59 +92,74 @@ concat           → concat
 "?"              → "?"
 )                → )
 ;                → ;
-\n    }          → \n  }
 \n               → \n  
-return           → return 
+}                → }
+\n               → \n  
+return           → return
+                 →  
 "none"           → "none"
 ;                → ;
-\n}              → \n}
-)())             → `
-cs.lift((() =>   → cs`
+\n               → \n
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
 (                → (
-{                → {\n      
+{                → {
+\n               → \n      
 missing          → missing
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (label)          → $label
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
 null             → null
-,                → , 
+,                → ,
+                 →  
 true             → true
 )                → )
-,                → ,\n      
+,                → ,
+\n               → \n      
 loud             → loud
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (label)          → $label
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
 "!hi"            → "!hi"
-,                → , 
+,                → ,
+                 →  
 true             → true
 )                → )
-,                → ,\n      
+,                → ,
+\n               → \n      
 quiet            → quiet
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (label)          → $label
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
 "!hi"            → "!hi"
-,                → , 
+,                → ,
+                 →  
 false            → false
 )                → )
-,                → ,\n      
+,                → ,
+\n               → \n      
 plain            → plain
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (label)          → $label
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
 "zz"             → "zz"
-,                → , 
+,                → ,
+                 →  
 false            → false
 )                → )
- }               → ,\n    }
+,                → ,
+\n               → \n    
+}                → }
 )                → )
-)())             → `

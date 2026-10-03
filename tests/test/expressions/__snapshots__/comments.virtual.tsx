@@ -9,17 +9,17 @@ it("comments", async (t) => {
     t,
     "comments",
     cs.lift((() => {
-    // leading line comment
-    const __cs_count = 1; // trailing line comment
-    /* block comment */
-    if (__cs_count === 1) {
+      // leading line comment
+      const __cs_count = 1; // trailing line comment
+      /* block comment */
+      if (__cs_count === 1) {
         // branch comment
         return "one";
-    }
-    /**
-     * doc comment
-     */
-    return "many";
-})()),
+      }
+      /**
+       * doc comment
+       */
+      return "many";
+    })()),
   );
 });

@@ -1,117 +1,139 @@
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 div              → div
                  →  
 class            → class
-={               → =
+=                → =
 "a"              → "a"
-}                → 
-/>               →  />
-)())             → `
-cs.lift((() =>   → cs`
+                 →  
+/                → /
+>                → >
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 blink            → blink
- />              →  />
-)())             → `
-cs.lift((() =>   → cs`
+                 →  
+/                → /
+>                → >
+cs.lift((() =>   →  [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 NotATag          → NotATag
 )                →  [-semantic -navigation]
-(                →  [-semantic -navigation -verification]
-{}               → NotATag
-)                →  /> [-semantic -navigation -verification]
-)())             → `
-cs.lift((() =>   → cs`
-<>{              → <>\n  
+{                → NotATag
+}                → 
+cs.lift((() =>   →  [-semantic -navigation]
+<                → <
+>                → >
+\n               → \n  
 <                → <
 span             → span
->a</             → >a</
+>                → >
+a                → a
+<                → <
+/                → /
 span             → span
 >                → >
-}</>             → \n</>
-)())             → `
-cs.lift((() =>   → cs`
-(void            → <For each={[] as number[]}>{(n) => <i>{n}</i>}</ [-semantic -navigation -verification]
+\n               → \n
+<                → <
+/                → /
+>                → >
+cs.lift((() =>   →  [-semantic -navigation]
 For              → For
-,                →  [-semantic -navigation -verification]
 cs.splice(       →  [-semantic -navigation]
 For              → For
 )                →  [-semantic -navigation]
-(                →  [-semantic -navigation -verification]
-{                → For 
+{                → For
 each             → each
-:                → ={
-[]               → []
- as              →  as 
+[                → [
+]                → ]
+                 →  
+as               → as
+                 →  
 number           → number
-[]               → []
-, children:      → >{
+[                → [
+]                → ]
+children         → {(n) => <i>{n}</i>}
+(                → (
 __cs_n           → n
- =>              → ) => 
+)                → )
+                 →  
+=>               → =>
+                 →  
 <                → <
 i                → i
->{               → >{
+>                → >
+{                → {
 __cs_n           → n
-}</              → }</
+}                → }
+<                → <
+/                → /
 i                → i
 >                → >
- }               → 
-))               → > [-semantic -navigation -verification]
-)())             → `
-cs.lift((() =>   → cs`
+}                → 
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 div              → div
                  →  
 nosuch           → nosuch
-={               → ={
+=                → =
+{                → {
 1                → 1
 }                → }
-/>               →  />
-)())             → `
-cs.lift((() =>   → cs`
+                 →  
+/                → /
+>                → >
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 div              → div
                  →  
 class            → class
-={               → ={
+=                → =
+{                → {
 1                → 1
 }                → }
-/>               →  />
-)())             → `
-cs.lift((() =>   → cs`
+                 →  
+/                → /
+>                → >
+cs.lift((() =>   →  [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 Fragment         → Fragment
 )                →  [-semantic -navigation]
-(                →  [-semantic -navigation -verification]
-{}               → Fragment
-)                →  /> [-semantic -navigation -verification]
-)())             → `
-cs.lift((() =>   → cs`
+{                → Fragment
+}                → 
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
-div              → div
->hello</         → >hello</
 div              → div
 >                → >
-)())             → `
-cs.lift((() =>   → cs`
+hello            → hello
+<                → <
+/                → /
+div              → div
+>                → >
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 div              → div
->{               → >{
+>                → >
+{                → {
 1                → 1
-}</              → }</
+}                → }
+<                → <
+/                → /
 div              → div
 >                → >
-)())             → `
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 div              → div
->{               → >\n  
+>                → >
+\n               → \n  
 <                → <
 span             → span
->a</             → >a</
+>                → >
+a                → a
+<                → <
+/                → /
 span             → span
 >                → >
-}</              → \n</
+\n               → \n
+<                → <
+/                → /
 div              → div
 >                → >
-)())             → `

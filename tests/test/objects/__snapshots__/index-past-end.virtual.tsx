@@ -11,8 +11,8 @@ it("indexPastEnd", async (t) => {
     t,
     "indexPastEnd",
     cs.lift((() => {
-    const __cs_names = ["zero", "one"];
-    return __cs_names[9];
-})()),
+      const __cs_names = ["zero", "one"];
+      return __cs_names[9];
+    })()),
   );
 });

@@ -1,29 +1,37 @@
-cs.lift(await (async () =>          → cs`
-cs.splice(                          → ${ [-semantic]
-await fetchGreeting()               → await fetchGreeting()
-)                                   → } [-semantic]
- +                                  →  + 
-"!"                                 → "!"
-)())                                → `
-cs.lift(await (async () => {\n      → cs`{\n      
-const                               → const 
-__cs_greeting                       → greeting
- =                                  →  = 
-cs.splice(                          → ${ [-semantic]
-await fetchGreeting()               → await fetchGreeting()
-)                                   → } [-semantic]
-;                                   → ;
-\n                                  → \n      
-return                              → return 
-__cs_greeting                       → greeting
- +                                  →  + 
-"!"                                 → "!"
-;                                   → ;
-\n})())                             → \n    }`
-cs.lift((() =>                      → cs`
-cs.globalThis.                      → 
-fetch                               → fetch
-(                                   → (
-"/rows"                             → "/rows"
-)                                   → )
-)())                                → `
+cs.lift(await (async () =>   →  [-semantic -navigation]
+cs.splice(                   →  [-semantic -navigation]
+await fetchGreeting()        → await fetchGreeting()
+)                            →  [-semantic -navigation]
+                             →  
++                            → +
+                             →  
+"!"                          → "!"
+cs.lift(await (async () =>   →  [-semantic -navigation]
+{                            → {
+\n                           → \n      
+const                        → const
+                             →  
+__cs_greeting                → greeting
+                             →  
+=                            → =
+                             →  
+cs.splice(                   →  [-semantic -navigation]
+await fetchGreeting()        → await fetchGreeting()
+)                            →  [-semantic -navigation]
+;                            → ;
+\n                           → \n      
+return                       → return
+                             →  
+__cs_greeting                → greeting
+                             →  
++                            → +
+                             →  
+"!"                          → "!"
+;                            → ;
+\n                           → \n    
+}                            → }
+cs.lift((() =>               →  [-semantic -navigation]
+fetch                        → fetch
+(                            → (
+"/rows"                      → "/rows"
+)                            → )

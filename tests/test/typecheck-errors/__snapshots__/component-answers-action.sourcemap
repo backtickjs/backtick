@@ -1,21 +1,27 @@
-cs.lift((() => {\n      → cs`{\n    
-const                   → const 
-__cs_n                  → n
- =                      →  = 
-cs.splice(              →  [-semantic]
-(createSignal)          → $createSignal
-)                       →  [-semantic]
-(                       → (
-2                       → 2
-)                       → )
-;                       → ;
-\n                      → \n    
-__cs_n                  → n
-[                       → [
-1                       → 1
-]                       → ]
-(                       → (
-3                       → 3
-)                       → )
-;                       → ;
-\n})())                 → \n  }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n    
+const            → const
+                 →  
+__cs_n           → n
+                 →  
+=                → =
+                 →  
+cs.splice(       →  [-semantic -navigation]
+(createSignal)   → $createSignal
+)                →  [-semantic -navigation]
+(                → (
+2                → 2
+)                → )
+;                → ;
+\n               → \n    
+__cs_n           → n
+[                → [
+1                → 1
+]                → ]
+(                → (
+3                → 3
+)                → )
+;                → ;
+\n               → \n  
+}                → }

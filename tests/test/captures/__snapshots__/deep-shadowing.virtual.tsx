@@ -7,14 +7,14 @@ function outerBase(inner: Client<number>): Client<number> {
   return cs.lift((() => {
     const __cs_base = 1;
     return __cs_base + cs.splice(middleBase(inner));
-})());
+  })());
 }
 
 function middleBase(inner: Client<number>): Client<number> {
   return cs.lift((() => {
     const __cs_base = 2;
     return __cs_base * cs.splice((inner));
-})());
+  })());
 }
 
 // `cs`base`` is written under the outer `base`, but is threaded through two
@@ -26,8 +26,8 @@ it("deepShadowing", async (t) => {
     t,
     "deepShadowing",
     cs.lift((() => {
-    const __cs_base = 10;
-    return cs.splice(outerBase(cs.lift((() => __cs_base)())));
-})()),
+      const __cs_base = 10;
+      return cs.splice(outerBase(cs.lift((() => __cs_base)())));
+    })()),
   );
 });

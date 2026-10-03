@@ -1,50 +1,71 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_floor              → floor
- =                      →  = 
-cs.globalThis.          → 
-Math                    → Math
-.                       → .
-floor                   → floor
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_apply              → apply
- =                      →  = 
-(                       → (
-__cs_f                  → f
-:                       → : 
-(                       → (
-n                       → n
-:                       → : 
-number                  → number
-) =>                    → ) => 
-number                  → number
-,                       → , 
-__cs_n                  → n
-:                       → : 
-number                  → number
-) =>                    → ) => 
-__cs_f                  → f
-(                       → (
-__cs_n                  → n
-)                       → )
-;                       → ;
-\n                      → \n      
-return                  → return 
-__cs_floor              → floor
-(                       → (
-3.5                     → 3.5
-)                       → )
- +                      →  + 
-__cs_apply              → apply
-(                       → (
-cs.globalThis.          → 
-Math                    → Math
-.                       → .
-ceil                    → ceil
-,                       → , 
-3.5                     → 3.5
-)                       → )
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_floor       → floor
+                 →  
+=                → =
+                 →  
+Math             → Math
+.                → .
+floor            → floor
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_apply       → apply
+                 →  
+=                → =
+                 →  
+(                → (
+__cs_f           → f
+:                → :
+                 →  
+(                → (
+n                → n
+:                → :
+                 →  
+number           → number
+)                → )
+                 →  
+=>               → =>
+                 →  
+number           → number
+,                → ,
+                 →  
+__cs_n           → n
+:                → :
+                 →  
+number           → number
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_f           → f
+(                → (
+__cs_n           → n
+)                → )
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+__cs_floor       → floor
+(                → (
+3.5              → 3.5
+)                → )
+                 →  
++                → +
+                 →  
+__cs_apply       → apply
+(                → (
+Math             → Math
+.                → .
+ceil             → ceil
+,                → ,
+                 →  
+3.5              → 3.5
+)                → )
+;                → ;
+\n               → \n    
+}                → }

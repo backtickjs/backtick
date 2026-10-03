@@ -1,21 +1,38 @@
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 div              → div
->{               → >\n      {\n        
-<>{              → <>\n          
+>                → >
+\n               → \n      
+{                → {
+\n               → \n        
+<                → <
+>                → >
+\n               → \n          
 <                → <
 span             → span
->a</             → >a</
+>                → >
+a                → a
+<                → <
+/                → /
 span             → span
 >                → >
-}{               → \n          
+\n               → \n          
 <                → <
 span             → span
->b</             → >b</
+>                → >
+b                → b
+<                → <
+/                → /
 span             → span
 >                → >
-}</>             → \n        </>
-}</              → \n      }\n    </
+\n               → \n        
+<                → <
+/                → /
+>                → >
+\n               → \n      
+}                → }
+\n               → \n    
+<                → <
+/                → /
 div              → div
 >                → >
-)())             → `

@@ -1,128 +1,185 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_said               → said
- =                      →  = 
-cs.splice(              →  [-semantic]
-(createSignal)          → $createSignal
-)                       →  [-semantic]
-(                       → (
-""                      → ""
-)                       → )
-;                       → ;
-\n                      → \n\n      
-return                  → return 
-(                       → (\n        
-<                       → <
-form                    → form
-                        → \n          
-onsubmit                → onsubmit
-={                      → ={
-__cs_event              → event
- => {\n                 → ) => {\n            
-__cs_event              → event
-.                       → .
-preventDefault          → preventDefault
-()                      → ()
-;                       → ;
-\n                      → \n            
-__cs_said               → said
-[                       → [
-1                       → 1
-]                       → ]
-(                       → (
-__cs_event              → event
-.                       → .
-type                    → type
- +                      →  + 
-" "                     → " "
- +                      →  + 
-__cs_event              → event
-.                       → .
-cancelable              → cancelable
-)                       → )
-;                       → ;
-\n    }                 → \n          }
-}                       → }
->{                      → \n        >\n          
-<                       → <
-textarea                → textarea
-                        →  
-oninput                 → oninput
-={                      → ={
-__cs_event              → event
- =>                     → ) => 
-__cs_said               → said
-[                       → [
-1                       → 1
-]                       → ]
-(                       → (
-__cs_event              → event
-.                       → .
-currentTarget           → currentTarget
-.                       → .
-value                   → value
-)                       → )
-}                       → }
-/>                      →  />
-}{                      → \n          
-<                       → <
-input                   → input
-                        →  
-oninput                 → oninput
-={                      → ={
-__cs_event              → event
- =>                     → ) => 
-__cs_said               → said
-[                       → [
-1                       → 1
-]                       → ]
-(                       → (
-__cs_event              → event
-.                       → .
-currentTarget           → currentTarget
-.                       → .
-value                   → value
-)                       → )
-}                       → }
-/>                      →  />
-}{                      → \n          
-<                       → <
-button                  → button
-                        → \n            
-onclick                 → onclick
-={                      → ={
-__cs_event              → event
- =>                     → ) =>\n              
-__cs_said               → said
-[                       → [
-1                       → 1
-]                       → ]
-(                       → (
-__cs_event              → event
-.                       → .
-clientX                 → clientX
- +                      →  + 
-" "                     → " "
- +                      →  + 
-__cs_event              → event
-.                       → .
-currentTarget           → currentTarget
-.                       → .
-tagName                 → tagName
-)                       → )
-}                       → \n            }
->{                      → \n          >\n            {
-__cs_said               → said
-[                       → [
-0                       → 0
-]                       → ]
-()                      → ()
-}</                     → }\n          </
-button                  → button
->                       → >
-}</                     → \n        </
-form                    → form
->                       → >
-)                       → \n      )
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>    →  [-semantic -navigation]
+{                 → {
+\n                → \n      
+const             → const
+                  →  
+__cs_said         → said
+                  →  
+=                 → =
+                  →  
+cs.splice(        →  [-semantic -navigation]
+(createSignal)    → $createSignal
+)                 →  [-semantic -navigation]
+(                 → (
+""                → ""
+)                 → )
+;                 → ;
+\n\n              → \n\n      
+return            → return
+                  →  
+(                 → (
+\n                → \n        
+<                 → <
+form              → form
+\n                → \n          
+onsubmit          → onsubmit
+=                 → =
+{                 → {
+(                 → (
+__cs_event        → event
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n            
+__cs_event        → event
+.                 → .
+preventDefault    → preventDefault
+(                 → (
+)                 → )
+;                 → ;
+\n                → \n            
+__cs_said         → said
+[                 → [
+1                 → 1
+]                 → ]
+(                 → (
+__cs_event        → event
+.                 → .
+type              → type
+                  →  
++                 → +
+                  →  
+" "               → " "
+                  →  
++                 → +
+                  →  
+__cs_event        → event
+.                 → .
+cancelable        → cancelable
+)                 → )
+;                 → ;
+\n                → \n          
+}                 → }
+}                 → }
+\n                → \n        
+>                 → >
+\n                → \n          
+<                 → <
+textarea          → textarea
+                  →  
+oninput           → oninput
+=                 → =
+{                 → {
+(                 → (
+__cs_event        → event
+)                 → )
+                  →  
+=>                → =>
+                  →  
+__cs_said         → said
+[                 → [
+1                 → 1
+]                 → ]
+(                 → (
+__cs_event        → event
+.                 → .
+currentTarget     → currentTarget
+.                 → .
+value             → value
+)                 → )
+}                 → }
+                  →  
+/                 → /
+>                 → >
+\n                → \n          
+<                 → <
+input             → input
+                  →  
+oninput           → oninput
+=                 → =
+{                 → {
+(                 → (
+__cs_event        → event
+)                 → )
+                  →  
+=>                → =>
+                  →  
+__cs_said         → said
+[                 → [
+1                 → 1
+]                 → ]
+(                 → (
+__cs_event        → event
+.                 → .
+currentTarget     → currentTarget
+.                 → .
+value             → value
+)                 → )
+}                 → }
+                  →  
+/                 → /
+>                 → >
+\n                → \n          
+<                 → <
+button            → button
+\n                → \n            
+onclick           → onclick
+=                 → =
+{                 → {
+(                 → (
+__cs_event        → event
+)                 → )
+                  →  
+=>                → =>
+\n                → \n              
+__cs_said         → said
+[                 → [
+1                 → 1
+]                 → ]
+(                 → (
+__cs_event        → event
+.                 → .
+clientX           → clientX
+                  →  
++                 → +
+                  →  
+" "               → " "
+                  →  
++                 → +
+                  →  
+__cs_event        → event
+.                 → .
+currentTarget     → currentTarget
+.                 → .
+tagName           → tagName
+)                 → )
+\n                → \n            
+}                 → }
+\n                → \n          
+>                 → >
+\n                → \n            
+{                 → {
+__cs_said         → said
+[                 → [
+0                 → 0
+]                 → ]
+(                 → (
+)                 → )
+}                 → }
+\n                → \n          
+<                 → <
+/                 → /
+button            → button
+>                 → >
+\n                → \n        
+<                 → <
+/                 → /
+form              → form
+>                 → >
+\n                → \n      
+)                 → )
+;                 → ;
+\n                → \n    
+}                 → }

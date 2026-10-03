@@ -9,12 +9,12 @@ it("capturedCounter", async (t) => {
     t,
     "capturedCounter",
     cs.lift((() => {
-    let __cs_count = 0;
-    const __cs_bump = () => {
+      let __cs_count = 0;
+      const __cs_bump = () => {
         __cs_count = __cs_count + 1;
         return __cs_count;
-    };
-    return __cs_bump() + __cs_bump();
-})()),
+      };
+      return __cs_bump() + __cs_bump();
+    })()),
   );
 });

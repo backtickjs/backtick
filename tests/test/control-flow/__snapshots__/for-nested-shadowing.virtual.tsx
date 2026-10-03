@@ -10,14 +10,14 @@ it("forNestedShadowing", async (t) => {
     t,
     "forNestedShadowing",
     cs.lift((() => {
-    let __cs_out = "";
-    for (let __cs_i = 0; __cs_i < 2; __cs_i = __cs_i + 1) {
+      let __cs_out = "";
+      for (let __cs_i = 0; __cs_i < 2; __cs_i = __cs_i + 1) {
         const __cs_i = "-";
         for (let __cs_j = 0; __cs_j < 2; __cs_j = __cs_j + 1) {
-            __cs_out = __cs_out + __cs_i + __cs_j;
+          __cs_out = __cs_out + __cs_i + __cs_j;
         }
-    }
-    return __cs_out;
-})()),
+      }
+      return __cs_out;
+    })()),
   );
 });

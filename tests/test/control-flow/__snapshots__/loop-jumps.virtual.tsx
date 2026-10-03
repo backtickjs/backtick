@@ -10,20 +10,20 @@ it("loopJumps", async (t) => {
     t,
     "loopJumps",
     cs.lift((() => {
-    let __cs_out = "";
-    for (let __cs_i = 0; __cs_i < 5; __cs_i = __cs_i + 1) {
+      let __cs_out = "";
+      for (let __cs_i = 0; __cs_i < 5; __cs_i = __cs_i + 1) {
         if (__cs_i === 1) {
-            continue;
+          continue;
         }
         while (true) {
-            __cs_out = __cs_out + __cs_i;
-            break;
+          __cs_out = __cs_out + __cs_i;
+          break;
         }
         if (__cs_i === 3) {
-            break;
+          break;
         }
-    }
-    return __cs_out;
-})()),
+      }
+      return __cs_out;
+    })()),
   );
 });

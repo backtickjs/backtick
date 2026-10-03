@@ -1,54 +1,83 @@
-cs.lift((() => {\n                        → cs`{\n  
-const                                     → const 
+cs.lift((() =>                            →  [-semantic -navigation]
+{                                         → {
+\n                                        → \n  
+const                                     → const
+                                          →  
 __cs_Badge                                → Badge
- =                                        →  = 
+                                          →  
+=                                         → =
+                                          →  
 (                                         → (
 __cs_p                                    → p
-:                                         → : 
-{\n                                       → { 
+:                                         → :
+                                          →  
+{                                         → {
+                                          →  
 n                                         → n
-:                                         → : 
+:                                         → :
+                                          →  
 number                                    → number
-;                                         → 
-\n    }                                   →  }
-) =>                                      → ) => 
+                                          →  
+}                                         → }
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
 <                                         → <
 b                                         → b
->{                                        → >{
+>                                         → >
+{                                         → {
 "n "                                      → "n "
- +                                        →  + 
+                                          →  
++                                         → +
+                                          →  
 __cs_p                                    → p
 .                                         → .
 n                                         → n
-}</                                       → }</
+}                                         → }
+<                                         → <
+/                                         → /
 b                                         → b
 >                                         → >
 ;                                         → ;
 \n                                        → \n  
-return                                    → return 
-cs.splice(                                → ${ [-semantic]
-cs.lift((() => {\n                        → cs`{\n    
-const                                     → const 
+return                                    → return
+                                          →  
+cs.splice(                                →  [-semantic -navigation]
+cs.lift((() =>                            →  [-semantic -navigation]
+{                                         → {
+\n                                        → \n    
+const                                     → const
+                                          →  
 __cs_Badge                                → Badge
- =                                        →  = 
+                                          →  
+=                                         → =
+                                          →  
 5                                         → 5
 ;                                         → ;
 \n    // @ts-expect-error: JSX element type 'Badge' does not have any construct or call signatures.\n    → \n    // @ts-expect-error: JSX element type 'Badge' does not have any construct or call signatures.\n    
-return                                    → return 
-cs.splice(                                → ${ [-semantic]
-cs.lift((() =>                            → cs`
+return                                    → return
+                                          →  
+cs.splice(                                →  [-semantic -navigation]
+cs.lift((() =>                            →  [-semantic -navigation]
 <                                         → <
 __cs_Badge                                → Badge
                                           →  
 n                                         → n
-={                                        → ={
+=                                         → =
+{                                         → {
 1                                         → 1
 }                                         → }
-/>                                        →  />
-)())                                      → `
-)                                         → } [-semantic]
+                                          →  
+/                                         → /
+>                                         → >
+)())                                      →  [-semantic -navigation]
+)                                         →  [-semantic -navigation]
 ;                                         → ;
-\n})())                                   → \n  }`
-)                                         → } [-semantic]
+\n                                        → \n  
+}                                         → }
+)())                                      →  [-semantic -navigation]
+)                                         →  [-semantic -navigation]
 ;                                         → ;
-\n})())                                   → \n}`
+\n                                        → \n
+}                                         → }

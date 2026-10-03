@@ -15,10 +15,10 @@ function wrapShadowed(fragment: Client<number>): Client<number> {
   return cs.lift((() => {
     const __cs_total = 1;
     {
-        const __cs_total = 2;
-        return __cs_total + cs.splice((fragment));
+      const __cs_total = 2;
+      return __cs_total + cs.splice((fragment));
     }
-})());
+  })());
 }
 
 it("shadowedHole", async (t) => {

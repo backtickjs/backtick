@@ -10,8 +10,8 @@ it("objectDotsKey", async (t) => {
     t,
     "objectDotsKey",
     cs.lift((() => {
-    const __cs_base = { a: 1 };
-    return { ...__cs_base, "...": 2 };
-})()),
+      const __cs_base = { a: 1 };
+      return { ...__cs_base, "...": 2 };
+    })()),
   );
 });

@@ -1,53 +1,74 @@
-cs.lift((() =>                            → cs`
+cs.lift((() =>                            →  [-semantic -navigation]
 (                                         → (
 __cs_flag                                 → flag
-:                                         → : 
+:                                         → :
+                                          →  
 boolean                                   → boolean
-) => {\n                                  → ) => {\n    
-if (                                      → if (
-__cs_flag                                 → flag
-)                                         → ) 
-{\n                                       → {\n      
-return                                    → return 
-cs.splice(                                →  [-semantic]
-(fragment)                                → $fragment
-)                                         →  [-semantic]
-;                                         → ;
-\n    }                                   → \n    }
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
+{                                         → {
 \n                                        → \n    
-return                                    → return 
+if                                        → if
+                                          →  
+(                                         → (
+__cs_flag                                 → flag
+)                                         → )
+                                          →  
+{                                         → {
+\n                                        → \n      
+return                                    → return
+                                          →  
+cs.splice(                                →  [-semantic -navigation]
+(fragment)                                → $fragment
+)                                         →  [-semantic -navigation]
+;                                         → ;
+\n                                        → \n    
+}                                         → }
+\n                                        → \n    
+return                                    → return
+                                          →  
 "skipped"                                 → "skipped"
 ;                                         → ;
-\n}                                       → \n  }
-)())                                      → `
-cs.lift((() =>                            → cs`
+\n                                        → \n  
+}                                         → }
+cs.lift((() =>                            →  [-semantic -navigation]
 "evaluated"                               → "evaluated"
-)())                                      → `
-cs.lift((() => {\n                        → cs`{\n  
-throw                                     → throw 
+cs.lift((() =>                            →  [-semantic -navigation]
+{                                         → {
+\n                                        → \n  
+throw                                     → throw
+                                          →  
 "the guarded fragment must never evaluate"→ "the guarded fragment must never evaluate"
 ;                                         → ;
-\n})())                                   → \n}`
-cs.lift((() =>                            → cs`
+\n                                        → \n
+}                                         → }
+cs.lift((() =>                            →  [-semantic -navigation]
 (                                         → (
-{                                         → {\n      
+{                                         → {
+\n                                        → \n      
 taken                                     → taken
-:                                         → : 
-cs.splice(                                → ${ [-semantic]
+:                                         → :
+                                          →  
+cs.splice(                                →  [-semantic -navigation]
 guard(ok)                                 → guard(ok)
-)                                         → } [-semantic]
+)                                         →  [-semantic -navigation]
 (                                         → (
 true                                      → true
 )                                         → )
-,                                         → ,\n      
+,                                         → ,
+\n                                        → \n      
 skipped                                   → skipped
-:                                         → : 
-cs.splice(                                → ${ [-semantic]
+:                                         → :
+                                          →  
+cs.splice(                                →  [-semantic -navigation]
 guard(broken)                             → guard(broken)
-)                                         → } [-semantic]
+)                                         →  [-semantic -navigation]
 (                                         → (
 false                                     → false
 )                                         → )
- }                                        → ,\n    }
+,                                         → ,
+\n                                        → \n    
+}                                         → }
 )                                         → )
-)())                                      → `

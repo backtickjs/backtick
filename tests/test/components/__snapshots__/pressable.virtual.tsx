@@ -16,8 +16,17 @@ import { evaluate } from "../evaluate.ts";
 async function Row() {
   return cs.lift((() => {
     const __cs_count = cs.splice((createSignal))(0);
-    return (<button id={"row"} style={"display: flex; gap: 8px"} onclick={() => __cs_count[1](__cs_count[0]() + 1)}>{<span style={"font-weight: 700"}>{__cs_count[0]() > 0 ? "\u2611" : "\u2610"}</span>}{<span>{"pressed " + __cs_count[0]() + " times"}</span>}</button>);
-})());
+    return (
+      <button
+        id="row"
+        style="display: flex; gap: 8px"
+        onclick={() => __cs_count[1](__cs_count[0]() + 1)}
+      >
+        <span style="font-weight: 700">{__cs_count[0]() > 0 ? "☑" : "☐"}</span>
+        <span>{"pressed " + __cs_count[0]() + " times"}</span>
+      </button>
+    );
+  })());
 }
 
 describe("screen", () => {

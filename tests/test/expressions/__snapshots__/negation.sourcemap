@@ -1,38 +1,61 @@
-cs.lift((() =>          → cs`
-(                       → (
-__cs_count              → count
-:                       → : 
-number                  → number
-) => {\n                → ) => {\n      
-const                   → const 
-__cs_floor              → floor
- =                      →  = 
--                       → -
-1                       → 1
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_step               → step
- =                      →  = 
--                       → -
-__cs_count              → count
-;                       → ;
-\n                      → \n      
-return                  → return 
-__cs_floor              → floor
- +                      →  + 
-__cs_step               → step
- +                      →  + 
--                       → -
-2                       → 2
-;                       → ;
-\n}                     → \n    }
-)())                    → `
-cs.lift((() => {\n      → cs`{\n      
-return                  → return 
-1                       → 1
- /                      →  / 
--                       → -
-0                       → 0
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+(                → (
+__cs_count       → count
+:                → :
+                 →  
+number           → number
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_floor       → floor
+                 →  
+=                → =
+                 →  
+-                → -
+1                → 1
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_step        → step
+                 →  
+=                → =
+                 →  
+-                → -
+__cs_count       → count
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+__cs_floor       → floor
+                 →  
++                → +
+                 →  
+__cs_step        → step
+                 →  
++                → +
+                 →  
+-                → -
+2                → 2
+;                → ;
+\n               → \n    
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+return           → return
+                 →  
+1                → 1
+                 →  
+/                → /
+                 →  
+-                → -
+0                → 0
+;                → ;
+\n               → \n    
+}                → }

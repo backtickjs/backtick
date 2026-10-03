@@ -1,19 +1,25 @@
-cs.lift((() =>   → cs`
-<                → <
-hr               → hr
- />              →  />
-)())             → `
-cs.lift((() =>   → cs`
-<                → <
-div              → div
->{               → >\n        
-cs.splice(       →  [-semantic -navigation]
-Rule             → Rule
-)                →  [-semantic -navigation]
-(                →  [-semantic -navigation -verification]
-{}               → Rule
-)                →  /> [-semantic -navigation -verification]
-}</              → \n      </
-div              → div
->                → >
-)())             → `
+cs.lift((() =>                            →  [-semantic -navigation]
+<                                         → <
+hr                                        → hr
+                                          →  
+/                                         → /
+>                                         → >
+cs.lift((() =>                            →  [-semantic -navigation]
+<                                         → <
+div                                       → div
+>                                         → >
+\n                                        → \n        
+{                                         → {
+/* @ts-expect-error: not assignable to parameter of type 'Spliceable'. */→ /* @ts-expect-error: not assignable to parameter of type 'Spliceable'. */
+}                                         → }
+\n                                        → \n        
+cs.splice(                                →  [-semantic -navigation]
+Rule                                      → Rule
+)                                         →  [-semantic -navigation]
+{                                         → Rule
+}                                         → 
+\n                                        → \n      
+<                                         → <
+/                                         → /
+div                                       → div
+>                                         → >

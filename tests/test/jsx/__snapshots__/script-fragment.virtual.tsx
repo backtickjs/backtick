@@ -8,7 +8,14 @@ import { snapshotCase } from "../snapshotCase.ts";
 // And text as JSX reads it, which is not `trim()`. Across lines it is one
 // sentence; on one line its spaces are its own; and the space between two
 // expressions survives, where trimming would take it.
-const listed = cs.lift((() => (__cs_name: string) => (<>{<span>a sentence across lines</span>}{<span>{__cs_name} {__cs_name}</span>}</>))());
+const listed = cs.lift((() => (__cs_name: string) => (
+  <>
+    <span>a sentence across lines</span>
+    <span>
+      {__cs_name} {__cs_name}
+    </span>
+  </>
+))());
 
 it("scriptFragment", async (t) => {
   await snapshotCase(t, "scriptFragment", cs.lift((() => <div>{cs.splice((listed))("x")}</div>)()));

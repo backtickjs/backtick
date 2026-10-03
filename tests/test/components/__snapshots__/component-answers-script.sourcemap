@@ -1,37 +1,50 @@
-cs.lift((() => {\n      → cs`{\n    
-const                   → const 
-__cs_n                  → n
- =                      →  = 
-cs.splice(              →  [-semantic]
-(createSignal)          → $createSignal
-)                       →  [-semantic]
-(                       → (
-2                       → 2
-)                       → )
-;                       → ;
-\n                      → \n    
-return                  → return 
-<                       → <
-em                      → em
->{                      → >{
-__cs_n                  → n
-[                       → [
-0                       → 0
-]                       → ]
-()                      → ()
-}</                     → }</
-em                      → em
->                       → >
-;                       → ;
-\n})())                 → \n  }`
-cs.lift((() =>          → cs`
-<                       → <
-div                     → div
->{                      → >{
-cs.splice(              → ${ [-semantic]
-(<Panel />)             → (<Panel />)
-)                       → } [-semantic]
-}</                     → }</
-div                     → div
->                       → >
-)())                    → `
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n    
+const            → const
+                 →  
+__cs_n           → n
+                 →  
+=                → =
+                 →  
+cs.splice(       →  [-semantic -navigation]
+(createSignal)   → $createSignal
+)                →  [-semantic -navigation]
+(                → (
+2                → 2
+)                → )
+;                → ;
+\n               → \n    
+return           → return
+                 →  
+<                → <
+em               → em
+>                → >
+{                → {
+__cs_n           → n
+[                → [
+0                → 0
+]                → ]
+(                → (
+)                → )
+}                → }
+<                → <
+/                → /
+em               → em
+>                → >
+;                → ;
+\n               → \n  
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
+<                → <
+div              → div
+>                → >
+{                → {
+cs.splice(       →  [-semantic -navigation]
+(<Panel />)      → (<Panel />)
+)                →  [-semantic -navigation]
+}                → }
+<                → <
+/                → /
+div              → div
+>                → >

@@ -1,102 +1,152 @@
-cs.lift((() =>   → cs`
-cs.splice(       →  [-semantic]
+cs.lift((() =>   →  [-semantic -navigation]
+cs.splice(       →  [-semantic -navigation]
 (createRoot)     → $createRoot
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
-() =>            → () => 
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
 null             → null
- ===             →  === 
+                 →  
+===              → ===
+                 →  
 null             → null
 )                → )
-)())             → `
-cs.lift((() =>   → cs`
-cs.splice(       →  [-semantic]
+cs.lift((() =>   →  [-semantic -navigation]
+cs.splice(       →  [-semantic -navigation]
 (createRoot)     → $createRoot
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
-() =>            → () => 
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
 undefined        → undefined
- ===             →  === 
+                 →  
+===              → ===
+                 →  
 undefined        → undefined
 )                → )
-)())             → `
-cs.lift((() =>   → cs`
-cs.splice(       →  [-semantic]
+cs.lift((() =>   →  [-semantic -navigation]
+cs.splice(       →  [-semantic -navigation]
 (createRoot)     → $createRoot
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
-() =>            → () => 
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
 null             → null
- !==             →  !== 
+                 →  
+!==              → !==
+                 →  
 undefined        → undefined
 )                → )
-)())             → `
-cs.lift((() =>   → cs`
-cs.splice(       →  [-semantic]
+cs.lift((() =>   →  [-semantic -navigation]
+cs.splice(       →  [-semantic -navigation]
 (createRoot)     → $createRoot
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
-() =>            → () => 
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
 null             → null
- ===             →  === 
+                 →  
+===              → ===
+                 →  
 undefined        → undefined
 )                → )
-)())             → `
-cs.lift((() =>   → cs`
-cs.splice(       →  [-semantic]
+cs.lift((() =>   →  [-semantic -navigation]
+cs.splice(       →  [-semantic -navigation]
 (createRoot)     → $createRoot
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
-() => {\n        → () => {\n        
-const            → const 
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n        
+const            → const
+                 →  
 __cs_names       → names
- =               →  = 
+                 →  
+=                → =
+                 →  
 [                → [
 "a"              → "a"
 ]                → ]
 ;                → ;
 \n               → \n        
-return           → return 
-[                → [\n          
-cs.splice(       →  [-semantic]
+return           → return
+                 →  
+[                → [
+\n               → \n          
+cs.splice(       →  [-semantic -navigation]
 (nothing)        → $nothing
-)                →  [-semantic]
- ===             →  === 
+)                →  [-semantic -navigation]
+                 →  
+===              → ===
+                 →  
 undefined        → undefined
-,                → ,\n          
-cs.splice(       →  [-semantic]
+,                → ,
+\n               → \n          
+cs.splice(       →  [-semantic -navigation]
 (nothing)        → $nothing
-)                →  [-semantic]
- !==             →  !== 
+)                →  [-semantic -navigation]
+                 →  
+!==              → !==
+                 →  
 null             → null
-,                → ,\n          
-cs.splice(       →  [-semantic]
+,                → ,
+\n               → \n          
+cs.splice(       →  [-semantic -navigation]
 (empty)          → $empty
-)                →  [-semantic]
- ===             →  === 
+)                →  [-semantic -navigation]
+                 →  
+===              → ===
+                 →  
 null             → null
-,                → ,\n          
-cs.splice(       →  [-semantic]
+,                → ,
+\n               → \n          
+cs.splice(       →  [-semantic -navigation]
 (empty)          → $empty
-)                →  [-semantic]
- !==             →  !== 
+)                →  [-semantic -navigation]
+                 →  
+!==              → !==
+                 →  
 undefined        → undefined
-,                → ,\n          
+,                → ,
+\n               → \n          
 __cs_names       → names
 [                → [
 1                → 1
 ]                → ]
- ===             →  === 
+                 →  
+===              → ===
+                 →  
 undefined        → undefined
-,                → ,\n          
+,                → ,
+\n               → \n          
 __cs_names       → names
 [                → [
 1                → 1
 ]                → ]
- !==             →  !== 
+                 →  
+!==              → !==
+                 →  
 null             → null
-]                → ,\n        ]
+,                → ,
+\n               → \n        
+]                → ]
 ;                → ;
-\n}              → \n      }
+\n               → \n      
+}                → }
 )                → )
-)())             → `

@@ -1,221 +1,283 @@
-cs.lift((() =>              → cs`
+cs.lift((() =>              →  [-semantic -navigation]
 (                           → (
 __cs_n                      → n
-:                           → : 
+:                           → :
+                            →  
 number                      → number
-) =>                        → ) => 
+)                           → )
+                            →  
+=>                          → =>
+                            →  
 __cs_n                      → n
- *                          →  * 
+                            →  
+*                           → *
+                            →  
 2                           → 2
-)())                        → `
-cs.lift((() =>              → cs`
+cs.lift((() =>              →  [-semantic -navigation]
 (                           → (
 __cs_n                      → n
-:                           → : 
+:                           → :
+                            →  
 number                      → number
-) =>                        → ) => 
+)                           → )
+                            →  
+=>                          → =>
+                            →  
 (                           → (
 __cs_m                      → m
-:                           → : 
+:                           → :
+                            →  
 number                      → number
-) =>                        → ) => 
+)                           → )
+                            →  
+=>                          → =>
+                            →  
 __cs_n                      → n
- +                          →  + 
+                            →  
++                           → +
+                            →  
 __cs_m                      → m
-)())                        → `
-cs.lift((() =>              → cs`
+cs.lift((() =>              →  [-semantic -navigation]
 <                           → <
 h2                          → h2
->{                          → >{
-cs.splice(                  →  [-semantic]
+>                           → >
+{                           → {
+cs.splice(                  →  [-semantic -navigation]
 (props)                     → $props
-)                           →  [-semantic]
+)                           →  [-semantic -navigation]
 .                           → .
 title                       → title
-}</                         → }</
+}                           → }
+<                           → <
+/                           → /
 h2                          → h2
 >                           → >
-)())                        → `
-cs.lift((() =>              → cs`
+cs.lift((() =>              →  [-semantic -navigation]
 "shared"                    → "shared"
-)())                        → `
-cs.lift((() => {\n          → cs`{\n  
-const                       → const 
+cs.lift((() =>              →  [-semantic -navigation]
+{                           → {
+\n                          → \n  
+const                       → const
+                            →  
 __cs_count                  → count
- =                          →  = 
-cs.splice(                  →  [-semantic]
+                            →  
+=                           → =
+                            →  
+cs.splice(                  →  [-semantic -navigation]
 (createSignal)              → $createSignal
-)                           →  [-semantic]
+)                           →  [-semantic -navigation]
 (                           → (
 1                           → 1
 )                           → )
 ;                           → ;
 \n                          → \n  
-const                       → const 
+const                       → const
+                            →  
 __cs_rows                   → rows
- =                          →  = 
+                            →  
+=                           → =
+                            →  
 [                           → [
 1                           → 1
-,                           → , 
+,                           → ,
+                            →  
 2                           → 2
-,                           → , 
+,                           → ,
+                            →  
 3                           → 3
 ]                           → ]
 ;                           → ;
 \n                          → \n  
-const                       → const 
+const                       → const
+                            →  
 __cs_total                  → total
- =                          →  = 
+                            →  
+=                           → =
+                            →  
 __cs_count                  → count
 [                           → [
 0                           → 0
 ]                           → ]
-()                          → ()
- +                          →  + 
-cs.splice(                  → ${ [-semantic]
-cs.lift((() =>              → cs`
+(                           → (
+)                           → )
+                            →  
++                           → +
+                            →  
+cs.splice(                  →  [-semantic -navigation]
+cs.lift((() =>              →  [-semantic -navigation]
 __cs_rows                   → rows
 .                           → .
 length                      → length
-)())                        → `
-)                           → } [-semantic]
+)())                        →  [-semantic -navigation]
+)                           →  [-semantic -navigation]
 ;                           → ;
 \n                          → \n  
-return                      → return 
-(                           → (\n    
+return                      → return
+                            →  
+(                           → (
+\n                          → \n    
 <                           → <
 section                     → section
->{                          → >\n      {
-cs.splice(                  → ${ [-semantic]
+>                           → >
+\n                          → \n      
+{                           → {
+cs.splice(                  →  [-semantic -navigation]
 (<Card title="element" />)  → (<Card title="element" />)
-)                           → } [-semantic]
-}{                          → }\n      {
-cs.splice(                  → ${ [-semantic]
+)                           →  [-semantic -navigation]
+}                           → }
+\n                          → \n      
+{                           → {
+cs.splice(                  →  [-semantic -navigation]
 (<Card title={shared} />)   → (<Card title={shared} />)
-)                           → } [-semantic]
-}{                          → }\n      
+)                           →  [-semantic -navigation]
+}                           → }
+\n                          → \n      
 <                           → <
 p                           → p
->{                          → >{
-cs.splice(                  →  [-semantic]
+>                           → >
+{                           → {
+cs.splice(                  →  [-semantic -navigation]
 (doubled)                   → $doubled
-)                           →  [-semantic]
+)                           →  [-semantic -navigation]
 (                           → (
 __cs_count                  → count
 [                           → [
 0                           → 0
 ]                           → ]
-()                          → ()
+(                           → (
 )                           → )
-}</                         → }</
+)                           → )
+}                           → }
+<                           → <
+/                           → /
 p                           → p
 >                           → >
-}{                          → \n      
+\n                          → \n      
 <                           → <
 p                           → p
->{                          → >{
-cs.splice(                  →  [-semantic]
+>                           → >
+{                           → {
+cs.splice(                  →  [-semantic -navigation]
 (pair)                      → $pair
-)                           →  [-semantic]
+)                           →  [-semantic -navigation]
 (                           → (
 1                           → 1
 )                           → )
 (                           → (
 2                           → 2
 )                           → )
-}</                         → }</
+}                           → }
+<                           → <
+/                           → /
 p                           → p
 >                           → >
-}{                          → \n      
+\n                          → \n      
 <                           → <
 p                           → p
->{                          → >{
-cs.splice(                  →  [-semantic]
+>                           → >
+{                           → {
+cs.splice(                  →  [-semantic -navigation]
 (shared)                    → $shared
-)                           →  [-semantic]
-}</                         → }</
+)                           →  [-semantic -navigation]
+}                           → }
+<                           → <
+/                           → /
 p                           → p
 >                           → >
-}{                          → \n      
+\n                          → \n      
 <                           → <
 p                           → p
->{                          → >{
+>                           → >
+{                           → {
 __cs_total                  → total
-}</                         → }</
+}                           → }
+<                           → <
+/                           → /
 p                           → p
 >                           → >
-}{                          → \n      
+\n                          → \n      
 <                           → <
 ul                          → ul
->{                          → >\n        
-(void                       → <For each={rows}>{(row: number) => <li>{row + count[0]()}</li>}</ [-semantic -navigation -verification]
+>                           → >
+\n                          → \n        
 For                         → For
-,                           →  [-semantic -navigation -verification]
 cs.splice(                  →  [-semantic -navigation]
 For                         → For
 )                           →  [-semantic -navigation]
-(                           →  [-semantic -navigation -verification]
-{                           → For 
+{                           → For
 each                        → each
-:                           → ={
 __cs_rows                   → rows
-, children:                 → >{
+children                    → {(row: number) => <li>{row + count[0]()}</li>}
 (                           → (
 __cs_row                    → row
-:                           → : 
+:                           → :
+                            →  
 number                      → number
-) =>                        → ) => 
+)                           → )
+                            →  
+=>                          → =>
+                            →  
 <                           → <
 li                          → li
->{                          → >{
+>                           → >
+{                           → {
 __cs_row                    → row
- +                          →  + 
+                            →  
++                           → +
+                            →  
 __cs_count                  → count
 [                           → [
 0                           → 0
 ]                           → ]
-()                          → ()
-}</                         → }</
+(                           → (
+)                           → )
+}                           → }
+<                           → <
+/                           → /
 li                          → li
 >                           → >
- }                          → 
-))                          → > [-semantic -navigation -verification]
-}</                         → \n      </
+}                           → 
+\n                          → \n      
+<                           → <
+/                           → /
 ul                          → ul
 >                           → >
-}</                         → \n    </
+\n                          → \n    
+<                           → <
+/                           → /
 section                     → section
 >                           → >
-)                           → \n  )
+\n                          → \n  
+)                           → )
 ;                           → ;
-\n})())                     → \n}`
-cs.lift((() =>              → cs`
-cs.splice(                  →  [-semantic]
+\n                          → \n
+}                           → }
+cs.lift((() =>              →  [-semantic -navigation]
+cs.splice(                  →  [-semantic -navigation]
 (doubled)                   → $doubled
-)                           →  [-semantic]
+)                           →  [-semantic -navigation]
 (                           → (
 1                           → 1
 )                           → )
-)())                        → `
-cs.lift((() =>              → cs`
-cs.splice(                  →  [-semantic]
+cs.lift((() =>              →  [-semantic -navigation]
+cs.splice(                  →  [-semantic -navigation]
 (pair)                      → $pair
-)                           →  [-semantic]
+)                           →  [-semantic -navigation]
 (                           → (
 1                           → 1
 )                           → )
 (                           → (
 2                           → 2
 )                           → )
- +                          →  + 
-cs.splice(                  →  [-semantic]
+                            →  
++                           → +
+                            →  
+cs.splice(                  →  [-semantic -navigation]
 (shared)                    → $shared
-)                           →  [-semantic]
+)                           →  [-semantic -navigation]
 .                           → .
 length                      → length
-)())                        → `
-cs.lift((() =>              → cs`
-cs.splice(                  → ${ [-semantic]
+cs.lift((() =>              →  [-semantic -navigation]
+cs.splice(                  →  [-semantic -navigation]
 (<Card title="other" />)    → (<Card title="other" />)
-)                           → } [-semantic]
-)())                        → `
+)                           →  [-semantic -navigation]

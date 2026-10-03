@@ -1,0 +1,111 @@
+cs.lift((() =>    →  [-semantic -navigation]
+{                 → {
+\n                → \n          
+const             → const
+                  →  
+__cs_rest         → rest
+                  →  
+=                 → =
+                  →  
+{                 → {
+                  →  
+title             → title
+:                 → :
+                  →  
+"spread"          → "spread"
+,                 → ,
+                  →  
+"data-kind"       → "data-kind"
+:                 → :
+                  →  
+"span"            → "span"
+                  →  
+}                 → }
+;                 → ;
+\n                → \n          
+return            → return
+                  →  
+<                 → <
+span              → span
+                  →  
+{                 → {
+...               → ...
+__cs_rest         → rest
+}                 → }
+>                 → >
+styled            → styled
+<                 → <
+/                 → /
+span              → span
+>                 → >
+;                 → ;
+\n                → \n        
+}                 → }
+cs.lift((() =>    →  [-semantic -navigation]
+{                 → {
+\n                → \n          
+const             → const
+                  →  
+__cs_Text         → Text
+                  →  
+=                 → =
+                  →  
+{                 → {
+\n                → \n            
+Small             → Small
+:                 → :
+                  →  
+(                 → (
+__cs_props        → props
+:                 → :
+                  →  
+{                 → {
+                  →  
+children          → children
+:                 → :
+                  →  
+string            → string
+                  →  
+}                 → }
+)                 → )
+                  →  
+=>                → =>
+                  →  
+(                 → (
+\n                → \n              
+<                 → <
+small             → small
+>                 → >
+{                 → {
+__cs_props        → props
+.                 → .
+children          → children
+}                 → }
+<                 → <
+/                 → /
+small             → small
+>                 → >
+\n                → \n            
+)                 → )
+,                 → ,
+\n                → \n          
+}                 → }
+;                 → ;
+\n                → \n          
+return            → return
+                  →  
+<                 → <
+__cs_Text         → Text
+.                 → .
+Small             → Small
+>                 → >
+fine print        → fine print
+<                 → <
+/                 → /
+__cs_Text         → Text
+.                 → .
+Small             → Small
+>                 → >
+;                 → ;
+\n                → \n        
+}                 → }

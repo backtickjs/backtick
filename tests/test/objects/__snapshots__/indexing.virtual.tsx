@@ -27,9 +27,7 @@ describe("a read by key", () => {
       cs.lift((() => [5, 31, 7][9])()),
       cs.lift((() => [5, 31, 7][1.5])()),
       cs.lift((() => [5, 31, 7][-1])()),
-      cs.lift((() => (({ x: 1 }) as {
-    [key: string]: number;
-})["y"])()),
+      cs.lift((() => (({ x: 1 }) as { [key: string]: number })["y"])()),
       cs.lift((() => "abc"[9])()),
     ];
     for (const value of reads) {

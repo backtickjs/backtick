@@ -1,125 +1,180 @@
-cs.lift((() => {\n      → cs`{\n    
-const                   → const 
-__cs_rows               → rows
- =                      →  = 
-cs.splice(              →  [-semantic]
-(createSignal)          → $createSignal
-)                       →  [-semantic]
-<                       → <
-Row                     → Row
-[]                      → []
->(                      → >(
-[]                      → []
-)                       → )
-;                       → ;
-\n                      → \n    
-const                   → const 
-__cs_add                → add
- =                      →  = 
-(                       → (
-__cs_row                → row
-:                       → : 
-Row                     → Row
-) => {\n                → ) => {\n      
-__cs_rows               → rows
-[                       → [
-1                       → 1
-]                       → ]
-(                       → (
-[                       → [
-__cs_row                → row
-]                       → ]
-)                       → )
-;                       → ;
-\n    }                 → \n    }
-;                       → ;
-\n                      → \n    
-const                   → const 
-__cs_label              → label
- =                      →  = 
-(                       → (
-__cs_row                → row
-:                       → : 
-Row                     → Row
-) => {\n                → ) => {\n      
-return                  → return 
-__cs_row                → row
-.                       → .
-label                   → label
-;                       → ;
-\n    }                 → \n    }
-;                       → ;
-\n                      → \n    
-return                  → return 
-(                       → (\n      
-<                       → <
-div                     → div
->{                      → >\n        
-<                       → <
-span                    → span
-                        →  
-onclick                 → onclick
-={                      → ={
-() =>                   → () => 
-__cs_add                → add
-(                       → (
-{                       → { 
-id                      → id
-:                       → : 
-1                       → 1
-,                       → , 
-label                   → label
-:                       → : 
-"one"                   → "one"
- }                      →  }
-)                       → )
-}                       → }
->add</                  → >add</
-span                    → span
->                       → >
-}{                      → \n        
-<                       → <
-div                     → div
->{                      → >\n          
-(void                   → <For each={rows[0]()}>{(row: Row) => <span>{label(row)}</span>}</ [-semantic -navigation -verification]
-For                     → For
-,                       →  [-semantic -navigation -verification]
-cs.splice(              →  [-semantic -navigation]
-For                     → For
-)                       →  [-semantic -navigation]
-(                       →  [-semantic -navigation -verification]
-{                       → For 
-each                    → each
-:                       → ={
-__cs_rows               → rows
-[                       → [
-0                       → 0
-]                       → ]
-()                      → ()
-, children:             → >{
-(                       → (
-__cs_row                → row
-:                       → : 
-Row                     → Row
-) =>                    → ) => 
-<                       → <
-span                    → span
->{                      → >{
-__cs_label              → label
-(                       → (
-__cs_row                → row
-)                       → )
-}</                     → }</
-span                    → span
->                       → >
- }                      → 
-))                      → > [-semantic -navigation -verification]
-}</                     → \n        </
-div                     → div
->                       → >
-}</                     → \n      </
-div                     → div
->                       → >
-)                       → \n    )
-;                       → ;
-\n})())                 → \n  }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n    
+const            → const
+                 →  
+__cs_rows        → rows
+                 →  
+=                → =
+                 →  
+cs.splice(       →  [-semantic -navigation]
+(createSignal)   → $createSignal
+)                →  [-semantic -navigation]
+<                → <
+Row              → Row
+[                → [
+]                → ]
+>                → >
+(                → (
+[                → [
+]                → ]
+)                → )
+;                → ;
+\n               → \n    
+const            → const
+                 →  
+__cs_add         → add
+                 →  
+=                → =
+                 →  
+(                → (
+__cs_row         → row
+:                → :
+                 →  
+Row              → Row
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n      
+__cs_rows        → rows
+[                → [
+1                → 1
+]                → ]
+(                → (
+[                → [
+__cs_row         → row
+]                → ]
+)                → )
+;                → ;
+\n               → \n    
+}                → }
+;                → ;
+\n               → \n    
+const            → const
+                 →  
+__cs_label       → label
+                 →  
+=                → =
+                 →  
+(                → (
+__cs_row         → row
+:                → :
+                 →  
+Row              → Row
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n      
+return           → return
+                 →  
+__cs_row         → row
+.                → .
+label            → label
+;                → ;
+\n               → \n    
+}                → }
+;                → ;
+\n               → \n    
+return           → return
+                 →  
+(                → (
+\n               → \n      
+<                → <
+div              → div
+>                → >
+\n               → \n        
+<                → <
+span             → span
+                 →  
+onclick          → onclick
+=                → =
+{                → {
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_add         → add
+(                → (
+{                → {
+                 →  
+id               → id
+:                → :
+                 →  
+1                → 1
+,                → ,
+                 →  
+label            → label
+:                → :
+                 →  
+"one"            → "one"
+                 →  
+}                → }
+)                → )
+}                → }
+>                → >
+add              → add
+<                → <
+/                → /
+span             → span
+>                → >
+\n               → \n        
+<                → <
+div              → div
+>                → >
+\n               → \n          
+For              → For
+cs.splice(       →  [-semantic -navigation]
+For              → For
+)                →  [-semantic -navigation]
+{                → For
+each             → each
+__cs_rows        → rows
+[                → [
+0                → 0
+]                → ]
+(                → (
+)                → )
+children         → {(row: Row) => <span>{label(row)}</span>}
+(                → (
+__cs_row         → row
+:                → :
+                 →  
+Row              → Row
+)                → )
+                 →  
+=>               → =>
+                 →  
+<                → <
+span             → span
+>                → >
+{                → {
+__cs_label       → label
+(                → (
+__cs_row         → row
+)                → )
+}                → }
+<                → <
+/                → /
+span             → span
+>                → >
+}                → 
+\n               → \n        
+<                → <
+/                → /
+div              → div
+>                → >
+\n               → \n      
+<                → <
+/                → /
+div              → div
+>                → >
+\n               → \n    
+)                → )
+;                → ;
+\n               → \n  
+}                → }

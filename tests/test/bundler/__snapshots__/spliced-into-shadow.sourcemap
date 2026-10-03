@@ -1,37 +1,56 @@
-cs.lift((() => {\n      → cs`{\n        
-const                   → const 
-__cs_total              → total
- =                      →  = 
-1                       → 1
-;                       → ;
-\n                      → \n        
-const                   → const 
-__cs_first              → first
- =                      →  = 
-cs.splice(              → ${ [-semantic]
-keep(                   → keep(
-cs.lift((() =>          → cs`
-__cs_total              → total
-)())                    → `
-)                       → )
-)                       → } [-semantic]
-;                       → ;
-\n                      → \n        
-{\n                     → {\n          
-const                   → const 
-__cs_total              → total
- =                      →  = 
-2                       → 2
-;                       → ;
-\n                      → \n          
-return                  → return 
-__cs_first              → first
- +                      →  + 
-__cs_total              → total
- +                      →  + 
-cs.splice(              → ${ [-semantic]
-again()                 → again()
-)                       → } [-semantic]
-;                       → ;
-\n    }                 → \n        }
-\n})())                 → \n      }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n        
+const            → const
+                 →  
+__cs_total       → total
+                 →  
+=                → =
+                 →  
+1                → 1
+;                → ;
+\n               → \n        
+const            → const
+                 →  
+__cs_first       → first
+                 →  
+=                → =
+                 →  
+cs.splice(       →  [-semantic -navigation]
+keep(            → keep(
+cs.lift((() =>   →  [-semantic -navigation]
+__cs_total       → total
+)())             →  [-semantic -navigation]
+)                → )
+)                →  [-semantic -navigation]
+;                → ;
+\n               → \n        
+{                → {
+\n               → \n          
+const            → const
+                 →  
+__cs_total       → total
+                 →  
+=                → =
+                 →  
+2                → 2
+;                → ;
+\n               → \n          
+return           → return
+                 →  
+__cs_first       → first
+                 →  
++                → +
+                 →  
+__cs_total       → total
+                 →  
++                → +
+                 →  
+cs.splice(       →  [-semantic -navigation]
+again()          → again()
+)                →  [-semantic -navigation]
+;                → ;
+\n               → \n        
+}                → }
+\n               → \n      
+}                → }

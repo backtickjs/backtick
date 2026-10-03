@@ -6,11 +6,11 @@ import { cs } from "@backtickjs/core";
 const point = { x: 1, y: 2 };
 
 export default cs.lift((() => (__cs_name: string) => {
-    const __cs_coins = [5, 31, 7];
-    const __cs_first = __cs_coins["0"];
-    // @ts-expect-error: Element implicitly has an 'any' type because index expression is not of type 'number'.
-    const __cs_wrong = __cs_coins[__cs_name];
-    // @ts-expect-error: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ x: number; y: number; }'.
-    const __cs_which = cs.splice((point))[__cs_name];
-    return __cs_first + __cs_wrong + __cs_which;
+  const __cs_coins = [5, 31, 7];
+  const __cs_first = __cs_coins["0"];
+  // @ts-expect-error: Element implicitly has an 'any' type because index expression is not of type 'number'.
+  const __cs_wrong = __cs_coins[__cs_name];
+  // @ts-expect-error: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ x: number; y: number; }'.
+  const __cs_which = cs.splice((point))[__cs_name];
+  return __cs_first + __cs_wrong + __cs_which;
 })());

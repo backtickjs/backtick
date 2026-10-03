@@ -1,40 +1,55 @@
-cs.lift((() => {\n      → cs`{\n    
-const                   → const 
-__cs_total              → total
- =                      →  = 
-1                       → 1
-;                       → ;
-\n                      → \n    
-{\n                     → {\n      
-const                   → const 
-__cs_total              → total
- =                      →  = 
-2                       → 2
-;                       → ;
-\n                      → \n      
-return                  → return 
-__cs_total              → total
- +                      →  + 
-cs.splice(              →  [-semantic]
-(fragment)              → $fragment
-)                       →  [-semantic]
-;                       → ;
-\n    }                 → \n    }
-\n})())                 → \n  }`
-cs.lift((() =>          → cs`
-cs.splice(              → ${ [-semantic]
-wrapShadowed(           → wrapShadowed(
-cs.lift((() =>          → cs`
-10                      → 10
-)())                    → `
-)                       → )
-)                       → } [-semantic]
- +                      →  + 
-cs.splice(              → ${ [-semantic]
-wrapShadowed(           → wrapShadowed(
-cs.lift((() =>          → cs`
-20                      → 20
-)())                    → `
-)                       → )
-)                       → } [-semantic]
-)())                    → `
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n    
+const            → const
+                 →  
+__cs_total       → total
+                 →  
+=                → =
+                 →  
+1                → 1
+;                → ;
+\n               → \n    
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_total       → total
+                 →  
+=                → =
+                 →  
+2                → 2
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+__cs_total       → total
+                 →  
++                → +
+                 →  
+cs.splice(       →  [-semantic -navigation]
+(fragment)       → $fragment
+)                →  [-semantic -navigation]
+;                → ;
+\n               → \n    
+}                → }
+\n               → \n  
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
+cs.splice(       →  [-semantic -navigation]
+wrapShadowed(    → wrapShadowed(
+cs.lift((() =>   →  [-semantic -navigation]
+10               → 10
+)())             →  [-semantic -navigation]
+)                → )
+)                →  [-semantic -navigation]
+                 →  
++                → +
+                 →  
+cs.splice(       →  [-semantic -navigation]
+wrapShadowed(    → wrapShadowed(
+cs.lift((() =>   →  [-semantic -navigation]
+20               → 20
+)())             →  [-semantic -navigation]
+)                → )
+)                →  [-semantic -navigation]

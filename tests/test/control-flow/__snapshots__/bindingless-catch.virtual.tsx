@@ -9,12 +9,11 @@ it("bindinglessCatch", async (t) => {
     t,
     "bindinglessCatch",
     cs.lift((() => {
-    try {
+      try {
         throw "boom";
-    }
-    catch {
+      } catch {
         return "caught";
-    }
-})()),
+      }
+    })()),
   );
 });

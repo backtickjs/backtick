@@ -1,120 +1,165 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_coins              → coins
- =                      →  = 
-[                       → [
-1                       → 1
-,                       → , 
-2                       → 2
-,                       → , 
-3                       → 3
-]                       → ]
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_four               → four
- =                      →  = 
-4                       → 4
-;                       → ;
-\n                      → \n      
-return                  → return 
-{                       → {\n        
-count                   → count
-:                       → : 
-__cs_coins              → coins
-.                       → .
-length                  → length
-,                       → ,\n        
-all                     → all
-:                       → : 
-__cs_coins              → coins
-.                       → .
-concat                  → concat
-(                       → (
-[                       → [
-__cs_four               → four
-]                       → ]
-)                       → )
-,                       → ,\n        
-part                    → part
-:                       → : 
-__cs_coins              → coins
-.                       → .
-slice                   → slice
-(                       → (
-0                       → 0
-,                       → , 
-2                       → 2
-)                       → )
-,                       → ,\n        
-where                   → where
-:                       → : 
-__cs_coins              → coins
-.                       → .
-indexOf                 → indexOf
-(                       → (
-2                       → 2
-)                       → )
-,                       → ,\n        
-lastWhere               → lastWhere
-:                       → : 
-__cs_coins              → coins
-.                       → .
-concat                  → concat
-(                       → (
-[                       → [
-2                       → 2
-]                       → ]
-)                       → )
-.                       → .
-lastIndexOf             → lastIndexOf
-(                       → (
-2                       → 2
-)                       → )
-,                       → ,\n        
-has                     → has
-:                       → : 
-__cs_coins              → coins
-.                       → .
-includes                → includes
-(                       → (
-3                       → 3
-)                       → )
-,                       → ,\n        
-text                    → text
-:                       → : 
-__cs_coins              → coins
-.                       → .
-join                    → join
-(                       → (
-"-"                     → "-"
-)                       → )
-,                       → ,\n        
-doubled                 → doubled
-:                       → : 
-__cs_coins              → coins
-.                       → .
-map                     → map
-(                       → (
-__cs_n                  → n
- =>                     → ) => 
-__cs_n                  → n
- *                      →  * 
-2                       → 2
-)                       → )
-,                       → ,\n        
-small                   → small
-:                       → : 
-__cs_coins              → coins
-.                       → .
-filter                  → filter
-(                       → (
-__cs_n                  → n
- =>                     → ) => 
-__cs_n                  → n
- <                      →  < 
-3                       → 3
-)                       → )
- }                      → ,\n      }
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_coins       → coins
+                 →  
+=                → =
+                 →  
+[                → [
+1                → 1
+,                → ,
+                 →  
+2                → 2
+,                → ,
+                 →  
+3                → 3
+]                → ]
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_four        → four
+                 →  
+=                → =
+                 →  
+4                → 4
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+{                → {
+\n               → \n        
+count            → count
+:                → :
+                 →  
+__cs_coins       → coins
+.                → .
+length           → length
+,                → ,
+\n               → \n        
+all              → all
+:                → :
+                 →  
+__cs_coins       → coins
+.                → .
+concat           → concat
+(                → (
+[                → [
+__cs_four        → four
+]                → ]
+)                → )
+,                → ,
+\n               → \n        
+part             → part
+:                → :
+                 →  
+__cs_coins       → coins
+.                → .
+slice            → slice
+(                → (
+0                → 0
+,                → ,
+                 →  
+2                → 2
+)                → )
+,                → ,
+\n               → \n        
+where            → where
+:                → :
+                 →  
+__cs_coins       → coins
+.                → .
+indexOf          → indexOf
+(                → (
+2                → 2
+)                → )
+,                → ,
+\n               → \n        
+lastWhere        → lastWhere
+:                → :
+                 →  
+__cs_coins       → coins
+.                → .
+concat           → concat
+(                → (
+[                → [
+2                → 2
+]                → ]
+)                → )
+.                → .
+lastIndexOf      → lastIndexOf
+(                → (
+2                → 2
+)                → )
+,                → ,
+\n               → \n        
+has              → has
+:                → :
+                 →  
+__cs_coins       → coins
+.                → .
+includes         → includes
+(                → (
+3                → 3
+)                → )
+,                → ,
+\n               → \n        
+text             → text
+:                → :
+                 →  
+__cs_coins       → coins
+.                → .
+join             → join
+(                → (
+"-"              → "-"
+)                → )
+,                → ,
+\n               → \n        
+doubled          → doubled
+:                → :
+                 →  
+__cs_coins       → coins
+.                → .
+map              → map
+(                → (
+(                → (
+__cs_n           → n
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_n           → n
+                 →  
+*                → *
+                 →  
+2                → 2
+)                → )
+,                → ,
+\n               → \n        
+small            → small
+:                → :
+                 →  
+__cs_coins       → coins
+.                → .
+filter           → filter
+(                → (
+(                → (
+__cs_n           → n
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_n           → n
+                 →  
+<                → <
+                 →  
+3                → 3
+)                → )
+,                → ,
+\n               → \n      
+}                → }
+;                → ;
+\n               → \n    
+}                → }

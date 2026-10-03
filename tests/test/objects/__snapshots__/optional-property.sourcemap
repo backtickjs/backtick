@@ -1,96 +1,135 @@
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 (                → (
 __cs_o           → o
-:                → : 
-{\n              → { 
+:                → :
+                 →  
+{                → {
+                 →  
 label            → label
-:                → : 
+:                → :
+                 →  
 string           → string
 ;                → ;
-\n               →  
+                 →  
 inner            → inner
 ?                → ?
-:                → : 
-{\n              → { 
+:                → :
+                 →  
+{                → {
+                 →  
 z                → z
 ?                → ?
-:                → : 
+:                → :
+                 →  
 number           → number
-;                → 
-\n    }          →  }
-;                → 
-\n}              →  }
-) => {\n         → ) => {\n  
-return           → return 
+                 →  
+}                → }
+                 →  
+}                → }
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n  
+return           → return
+                 →  
 [                → [
 __cs_o           → o
 .                → .
 label            → label
-,                → , 
+,                → ,
+                 →  
 __cs_o           → o
 .                → .
 inner            → inner
 ?.               → ?.
 z                → z
- ??              →  ?? 
+                 →  
+??               → ??
+                 →  
 0                → 0
 ]                → ]
 ;                → ;
-\n}              → \n}
-)())             → `
-cs.lift((() =>   → cs`
+\n               → \n
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
 (                → (
-{                → {\n      
+{                → {
+\n               → \n      
 present          → present
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (read)           → $read
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
-{                → { 
+{                → {
+                 →  
 label            → label
-:                → : 
+:                → :
+                 →  
 "a"              → "a"
-,                → , 
+,                → ,
+                 →  
 inner            → inner
-:                → : 
-{                → { 
+:                → :
+                 →  
+{                → {
+                 →  
 z                → z
-:                → : 
+:                → :
+                 →  
 3                → 3
- }               →  }
- }               →  }
+                 →  
+}                → }
+                 →  
+}                → }
 )                → )
-,                → ,\n      
+,                → ,
+\n               → \n      
 partial          → partial
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (read)           → $read
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
-{                → { 
+{                → {
+                 →  
 label            → label
-:                → : 
+:                → :
+                 →  
 "b"              → "b"
-,                → , 
+,                → ,
+                 →  
 inner            → inner
-:                → : 
-{}               → {}
- }               →  }
+:                → :
+                 →  
+{                → {
+}                → }
+                 →  
+}                → }
 )                → )
-,                → ,\n      
+,                → ,
+\n               → \n      
 omitted          → omitted
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (read)           → $read
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
-{                → { 
+{                → {
+                 →  
 label            → label
-:                → : 
+:                → :
+                 →  
 "c"              → "c"
- }               →  }
+                 →  
+}                → }
 )                → )
- }               → ,\n    }
+,                → ,
+\n               → \n    
+}                → }
 )                → )
-)())             → `

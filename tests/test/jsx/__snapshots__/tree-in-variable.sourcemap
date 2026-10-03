@@ -1,58 +1,90 @@
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
-span             → span
->x</             → >x</
 span             → span
 >                → >
-)())             → `
-cs.lift((() =>   → cs`
-() => {\n        → () => {\n  
-const            → const 
+x                → x
+<                → <
+/                → /
+span             → span
+>                → >
+cs.lift((() =>   →  [-semantic -navigation]
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n  
+const            → const
+                 →  
 __cs_tree        → tree
- =               →  = 
-cs.splice(       → ${ [-semantic]
-cs.lift((() =>   → cs`
+                 →  
+=                → =
+                 →  
+cs.splice(       →  [-semantic -navigation]
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 div              → div
- />              →  />
-)())             → `
-)                → } [-semantic]
+                 →  
+/                → /
+>                → >
+)())             →  [-semantic -navigation]
+)                →  [-semantic -navigation]
 ;                → ;
 \n               → \n  
-return           → return 
+return           → return
+                 →  
 __cs_tree        → tree
 ;                → ;
-\n}              → \n}
-)())             → `
-cs.lift((() =>   → cs`
-() => {\n        → () => {\n  
-const            → const 
+\n               → \n
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n  
+const            → const
+                 →  
 __cs_tree        → tree
- =               →  = 
-cs.splice(       → ${ [-semantic]
+                 →  
+=                → =
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (<HeldRow />)    → (<HeldRow />)
-)                → } [-semantic]
+)                →  [-semantic -navigation]
 ;                → ;
 \n               → \n  
-return           → return 
+return           → return
+                 →  
 __cs_tree        → tree
 ;                → ;
-\n}              → \n}
-)())             → `
-cs.lift((() =>   → cs`
+\n               → \n
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 div              → div
->{               → >\n      {
-cs.splice(       →  [-semantic]
+>                → >
+\n               → \n      
+{                → {
+cs.splice(       →  [-semantic -navigation]
 (heldElement)    → $heldElement
-)                →  [-semantic]
-()               → ()
-}{               → }\n      {
-cs.splice(       →  [-semantic]
+)                →  [-semantic -navigation]
+(                → (
+)                → )
+}                → }
+\n               → \n      
+{                → {
+cs.splice(       →  [-semantic -navigation]
 (heldComponent)  → $heldComponent
-)                →  [-semantic]
-()               → ()
-}</              → }\n    </
+)                →  [-semantic -navigation]
+(                → (
+)                → )
+}                → }
+\n               → \n    
+<                → <
+/                → /
 div              → div
 >                → >
-)())             → `

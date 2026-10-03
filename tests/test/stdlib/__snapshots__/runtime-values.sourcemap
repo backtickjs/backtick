@@ -1,17 +1,22 @@
-cs.lift((() =>          → cs`
+cs.lift((() =>          →  [-semantic -navigation]
 (                       → (
-{                       → {\n      
+{                       → {
+\n                      → \n      
 list                    → list
-:                       → : 
-cs.splice(              → ${ [-semantic]
+:                       → :
+                        →  
+cs.splice(              →  [-semantic -navigation]
 [1, "two", true, null]  → [1, "two", true, null]
-)                       → } [-semantic]
-,                       → ,\n      
+)                       →  [-semantic -navigation]
+,                       → ,
+\n                      → \n      
 obj                     → obj
-:                       → : 
-cs.splice(              → ${ [-semantic]
+:                       → :
+                        →  
+cs.splice(              →  [-semantic -navigation]
 { k: 3 }                → { k: 3 }
-)                       → } [-semantic]
- }                      → ,\n    }
+)                       →  [-semantic -navigation]
+,                       → ,
+\n                      → \n    
+}                       → }
 )                       → )
-)())                    → `

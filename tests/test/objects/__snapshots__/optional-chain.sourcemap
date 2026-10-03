@@ -1,61 +1,96 @@
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 (                → (
 __cs_p           → p
-:                → : 
-{\n              → { 
+:                → :
+                 →  
+{                → {
+                 →  
 x                → x
-:                → : 
+:                → :
+                 →  
 number           → number
-;                → 
-\n}              →  }
- |               →  | 
+                 →  
+}                → }
+                 →  
+|                → |
+                 →  
 null             → null
-) => {\n         → ) => {\n  
-return           → return 
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n  
+return           → return
+                 →  
 __cs_p           → p
 ?.               → ?.
 x                → x
 ;                → ;
-\n}              → \n}
-)())             → `
-cs.lift((() =>   → cs`
+\n               → \n
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
 (                → (
 __cs_o           → o
-:                → : 
-{\n              → { 
+:                → :
+                 →  
+{                → {
+                 →  
 inner            → inner
-:                → : 
-{\n              → { 
+:                → :
+                 →  
+{                → {
+                 →  
 z                → z
-:                → : 
+:                → :
+                 →  
 number           → number
-;                → 
-\n    }          →  }
- |               →  | 
+                 →  
+}                → }
+                 →  
+|                → |
+                 →  
 null             → null
-;                → 
-\n}              →  }
- |               →  | 
+                 →  
+}                → }
+                 →  
+|                → |
+                 →  
 null             → null
-) => {\n         → ) => {\n  
-return           → return 
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n  
+return           → return
+                 →  
 __cs_o           → o
 ?.               → ?.
 inner            → inner
 ?.               → ?.
 z                → z
 ;                → ;
-\n}              → \n}
-)())             → `
-cs.lift((() =>   → cs`
+\n               → \n
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
 (                → (
 __cs_s           → s
-:                → : 
+:                → :
+                 →  
 string           → string
- |               →  | 
+                 →  
+|                → |
+                 →  
 null             → null
-) => {\n         → ) => {\n  
-return           → return 
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n  
+return           → return
+                 →  
 __cs_s           → s
 ?.               → ?.
 concat           → concat
@@ -63,89 +98,116 @@ concat           → concat
 "!"              → "!"
 )                → )
 ;                → ;
-\n}              → \n}
-)())             → `
-cs.lift((() =>   → cs`
+\n               → \n
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
 (                → (
-{                → {\n      
+{                → {
+\n               → \n      
 found            → found
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (pick)           → $pick
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
-{                → { 
+{                → {
+                 →  
 x                → x
-:                → : 
+:                → :
+                 →  
 5                → 5
- }               →  }
+                 →  
+}                → }
 )                → )
-,                → ,\n      
+,                → ,
+\n               → \n      
 missing          → missing
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (pick)           → $pick
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
 null             → null
 )                → )
-,                → ,\n      
+,                → ,
+\n               → \n      
 deep             → deep
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (deep)           → $deep
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
-{                → { 
+{                → {
+                 →  
 inner            → inner
-:                → : 
-{                → { 
+:                → :
+                 →  
+{                → {
+                 →  
 z                → z
-:                → : 
+:                → :
+                 →  
 7                → 7
- }               →  }
- }               →  }
+                 →  
+}                → }
+                 →  
+}                → }
 )                → )
-,                → ,\n      
+,                → ,
+\n               → \n      
 cut              → cut
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (deep)           → $deep
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
-{                → { 
+{                → {
+                 →  
 inner            → inner
-:                → : 
+:                → :
+                 →  
 null             → null
- }               →  }
+                 →  
+}                → }
 )                → )
-,                → ,\n      
+,                → ,
+\n               → \n      
 top              → top
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (deep)           → $deep
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
 null             → null
 )                → )
-,                → ,\n      
+,                → ,
+\n               → \n      
 loud             → loud
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (shout)          → $shout
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
 "hi"             → "hi"
 )                → )
-,                → ,\n      
+,                → ,
+\n               → \n      
 silent           → silent
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (shout)          → $shout
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
 null             → null
 )                → )
- }               → ,\n    }
+,                → ,
+\n               → \n    
+}                → }
 )                → )
-)())             → `

@@ -1,56 +1,81 @@
-cs.lift((() =>                            → cs`
+cs.lift((() =>                            →  [-semantic -navigation]
 (                                         → (
 __cs_name                                 → name
-:                                         → : 
+:                                         → :
+                                          →  
 string                                    → string
-) => {\n                                  → ) => {\n  
-const                                     → const 
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
+{                                         → {
+\n                                        → \n  
+const                                     → const
+                                          →  
 __cs_coins                                → coins
- =                                        →  = 
+                                          →  
+=                                         → =
+                                          →  
 [                                         → [
 5                                         → 5
-,                                         → , 
+,                                         → ,
+                                          →  
 31                                        → 31
-,                                         → , 
+,                                         → ,
+                                          →  
 7                                         → 7
 ]                                         → ]
 ;                                         → ;
 \n                                        → \n  
-const                                     → const 
+const                                     → const
+                                          →  
 __cs_first                                → first
- =                                        →  = 
+                                          →  
+=                                         → =
+                                          →  
 __cs_coins                                → coins
 [                                         → [
 "0"                                       → "0"
 ]                                         → ]
 ;                                         → ;
-\n    // @ts-expect-error: Element implicitly has an 'any' type because index expression is not of type 'number'.\n    → \n  // @ts-expect-error: Element implicitly has an 'any' type because index expression is not of type 'number'.\n  
-const                                     → const 
+\n  // @ts-expect-error: Element implicitly has an 'any' type because index expression is not of type 'number'.\n  → \n  // @ts-expect-error: Element implicitly has an 'any' type because index expression is not of type 'number'.\n  
+const                                     → const
+                                          →  
 __cs_wrong                                → wrong
- =                                        →  = 
+                                          →  
+=                                         → =
+                                          →  
 __cs_coins                                → coins
 [                                         → [
 __cs_name                                 → name
 ]                                         → ]
 ;                                         → ;
-\n    // @ts-expect-error: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ x: number; y: number; }'.\n    → \n  // @ts-expect-error: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ x: number; y: number; }'.\n  
-const                                     → const 
+\n  // @ts-expect-error: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ x: number; y: number; }'.\n  → \n  // @ts-expect-error: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ x: number; y: number; }'.\n  
+const                                     → const
+                                          →  
 __cs_which                                → which
- =                                        →  = 
-cs.splice(                                →  [-semantic]
+                                          →  
+=                                         → =
+                                          →  
+cs.splice(                                →  [-semantic -navigation]
 (point)                                   → $point
-)                                         →  [-semantic]
+)                                         →  [-semantic -navigation]
 [                                         → [
 __cs_name                                 → name
 ]                                         → ]
 ;                                         → ;
 \n                                        → \n  
-return                                    → return 
+return                                    → return
+                                          →  
 __cs_first                                → first
- +                                        →  + 
+                                          →  
++                                         → +
+                                          →  
 __cs_wrong                                → wrong
- +                                        →  + 
+                                          →  
++                                         → +
+                                          →  
 __cs_which                                → which
 ;                                         → ;
-\n}                                       → \n}
-)())                                      → `
+\n                                        → \n
+}                                         → }

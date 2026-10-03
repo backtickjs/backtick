@@ -4,7 +4,7 @@ import "../src/index.ts";
 
 test("a file with a script the compiler refuses fails to load", async () => {
   await expect(import("./fixtures/refused.ts")).rejects.toThrow(
-    /refused\.ts\(4,9\): error TS0: Destructuring isn't supported/,
+    /refused\.ts\(4,9\): error TS0: `\$`-prefixed names are reserved/,
   );
 });
 

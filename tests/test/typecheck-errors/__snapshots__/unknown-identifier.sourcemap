@@ -1,23 +1,30 @@
-cs.lift((() => {\n    // @ts-expect-error: Property 'hostValue' does not exist on type 'GlobalThis'.\n    → cs`{\n  // @ts-expect-error: Property 'hostValue' does not exist on type 'GlobalThis'.\n  
-return                                    → return 
-cs.globalThis.                            → 
+cs.lift((() =>                            →  [-semantic -navigation]
+{                                         → {
+\n  // @ts-expect-error: Property 'hostValue' does not exist on type 'GlobalThis'.\n  → \n  // @ts-expect-error: Property 'hostValue' does not exist on type 'GlobalThis'.\n  
+return                                    → return
+                                          →  
 hostValue                                 → hostValue
- +                                        →  + 
+                                          →  
++                                         → +
+                                          →  
 1                                         → 1
 ;                                         → ;
-\n})())                                   → \n}`
-cs.lift((() => {\n    // @ts-expect-error: Property 'count' does not exist on type 'GlobalThis'.\n    → cs`{\n  // @ts-expect-error: Property 'count' does not exist on type 'GlobalThis'.\n  
-cs.globalThis.                            → 
+\n                                        → \n
+}                                         → }
+cs.lift((() =>                            →  [-semantic -navigation]
+{                                         → {
+\n  // @ts-expect-error: Property 'count' does not exist on type 'GlobalThis'.\n  → \n  // @ts-expect-error: Property 'count' does not exist on type 'GlobalThis'.\n  
 count                                     → count
- =                                        →  = 
+                                          →  
+=                                         → =
+                                          →  
 1                                         → 1
 ;                                         → ;
-\n})())                                   → \n}`
-cs.lift((() =>                            → cs`
-cs.globalThis.                            → 
+\n                                        → \n
+}                                         → }
+cs.lift((() =>                            →  [-semantic -navigation]
 window                                    → window
 .                                         → .
 location                                  → location
 .                                         → .
 href                                      → href
-)())                                      → `

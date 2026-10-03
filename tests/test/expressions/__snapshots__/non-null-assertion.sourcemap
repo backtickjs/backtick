@@ -1,35 +1,55 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_rows               → rows
- =                      →  = 
-[                       → [
-1                       → 1
-,                       → , 
-2                       → 2
-,                       → , 
-3                       → 3
-]                       → ]
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_first              → first
- =                      →  = 
-__cs_rows               → rows
-.                       → .
-find                    → find
-(                       → (
-__cs_row                → row
- =>                     → ) => 
-__cs_row                → row
- >                      →  > 
-1                       → 1
-)                       → )
-!                       → !
-;                       → ;
-\n                      → \n\n      
-return                  → return 
-__cs_first              → first
- *                      →  * 
-10                      → 10
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_rows        → rows
+                 →  
+=                → =
+                 →  
+[                → [
+1                → 1
+,                → ,
+                 →  
+2                → 2
+,                → ,
+                 →  
+3                → 3
+]                → ]
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_first       → first
+                 →  
+=                → =
+                 →  
+__cs_rows        → rows
+.                → .
+find             → find
+(                → (
+(                → (
+__cs_row         → row
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_row         → row
+                 →  
+>                → >
+                 →  
+1                → 1
+)                → )
+!                → !
+;                → ;
+\n\n             → \n\n      
+return           → return
+                 →  
+__cs_first       → first
+                 →  
+*                → *
+                 →  
+10               → 10
+;                → ;
+\n               → \n    
+}                → }

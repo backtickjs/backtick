@@ -1,48 +1,59 @@
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 p                → p
->{               → >{
-cs.splice(       →  [-semantic]
+>                → >
+{                → {
+cs.splice(       →  [-semantic -navigation]
 (text)           → $text
-)                →  [-semantic]
-}</              → }</
+)                →  [-semantic -navigation]
+}                → }
+<                → <
+/                → /
 p                → p
 >                → >
-)())             → `
-cs.lift((() =>   → cs`
-cs.splice(       →  [-semantic]
+cs.lift((() =>   →  [-semantic -navigation]
+cs.splice(       →  [-semantic -navigation]
 (render)         → $render
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
-() =>            → () => 
-cs.splice(       →  [-semantic]
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (element)        → $element
-)                →  [-semantic]
-,                → , 
-cs.globalThis.   → 
+)                →  [-semantic -navigation]
+,                → ,
+                 →  
 document         → document
 .                → .
 getElementById   → getElementById
 (                → (
-cs.splice(       →  [-semantic]
+cs.splice(       →  [-semantic -navigation]
 (id)             → $id
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 )                → )
- as              →  as 
+                 →  
+as               → as
+                 →  
 HTMLElement      → HTMLElement
 )                → )
-)())             → `
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 p                → p
->first</         → >first</
+>                → >
+first            → first
+<                → <
+/                → /
 p                → p
 >                → >
-)())             → `
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 p                → p
->second</        → >second</
+>                → >
+second           → second
+<                → <
+/                → /
 p                → p
 >                → >
-)())             → `

@@ -13,12 +13,17 @@ import { drawn, fontSize } from "./dom.ts";
 async function Stepper() {
   return cs.lift((() => {
     const __cs_size = cs.splice((createSignal))(16);
-    return (<span style={"font-size: " + __cs_size[0]() + "px"} onclick={() => {
-        __cs_size[1](__cs_size[0]() + 1);
-    }}>
+    return (
+      <span
+        style={"font-size: " + __cs_size[0]() + "px"}
+        onclick={() => {
+          __cs_size[1](__cs_size[0]() + 1);
+        }}
+      >
         press
-      </span>);
-})());
+      </span>
+    );
+  })());
 }
 
 describe("local state", () => {

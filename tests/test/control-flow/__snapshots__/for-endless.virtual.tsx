@@ -8,14 +8,14 @@ it("forEndless", async (t) => {
     t,
     "forEndless",
     cs.lift((() => {
-    let __cs_i = 0;
-    for (;;) {
+      let __cs_i = 0;
+      for (;;) {
         if (__cs_i === 4) {
-            break;
+          break;
         }
         __cs_i = __cs_i + 1;
-    }
-    return __cs_i;
-})()),
+      }
+      return __cs_i;
+    })()),
   );
 });

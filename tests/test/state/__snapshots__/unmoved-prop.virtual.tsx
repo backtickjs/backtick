@@ -14,8 +14,17 @@ async function SelectableRows() {
   return cs.lift((() => {
     const __cs_selected = cs.splice((createSignal))(0);
     const __cs_isSelected = cs.splice((createSelector))(__cs_selected[0]);
-    return (<div>{<span onclick={() => __cs_selected[1](1)}>select</span>}{<div>{(void For, cs.splice(For)({ each: [0, 1, 2], children: (__cs_id: number) => (<a href={__cs_isSelected(__cs_id) ? "#open" : "#closed"}>{"row " + __cs_id}</a>) }))}</div>}</div>);
-})());
+    return (
+      <div>
+        <span onclick={() => __cs_selected[1](1)}>select</span>
+        <div>
+          {(void For, cs.splice(For)({ each: [0, 1, 2], children: (__cs_id: number) => (
+              <a href={__cs_isSelected(__cs_id) ? "#open" : "#closed"}>{"row " + __cs_id}</a>
+            ) }))}
+        </div>
+      </div>
+    );
+  })());
 }
 
 describe("local state", () => {

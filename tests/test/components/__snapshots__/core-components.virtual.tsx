@@ -6,9 +6,11 @@ it("coreComponents", async (t) => {
   await snapshotCase(
     t,
     "coreComponents",
-    cs.lift((() => <div style={"padding: 8px"}>{<span style={"font-size: 12px"} onclick={() => {
-}}>
+    cs.lift((() => <div style="padding: 8px">
+      <span style="font-size: 12px" onclick={() => {}}>
         hi
-      </span>}{<img src={"https://example.com/a.png"}/>}</div>)()),
+      </span>
+      <img src="https://example.com/a.png" />
+    </div>)()),
   );
 });

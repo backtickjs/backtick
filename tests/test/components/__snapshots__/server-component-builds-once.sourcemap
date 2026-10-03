@@ -1,31 +1,49 @@
-cs.lift((() => {\n                       → cs`{\n    
-const                                    → const 
+cs.lift((() =>                           →  [-semantic -navigation]
+{                                        → {
+\n                                       → \n    
+const                                    → const
+                                         →  
 __cs_shown                               → shown
- =                                       →  = 
-cs.splice(                               →  [-semantic]
+                                         →  
+=                                        → =
+                                         →  
+cs.splice(                               →  [-semantic -navigation]
 (createSignal)                           → $createSignal
-)                                        →  [-semantic]
+)                                        →  [-semantic -navigation]
 (                                        → (
 false                                    → false
 )                                        → )
 ;                                        → ;
-\n                                       → \n\n    
-const                                    → const 
+\n\n                                     → \n\n    
+const                                    → const
+                                         →  
 __cs_started                             → started
- =                                       →  = 
-cs.globalThis.                           → 
+                                         →  
+=                                        → =
+                                         →  
 window                                   → window
 .                                        → .
 setTimeout                               → setTimeout
 (                                        → (
-() => {\n                                → () => {\n      
-if (                                     → if (
-cs.splice(                               →  [-semantic]
+(                                        → (
+)                                        → )
+                                         →  
+=>                                       → =>
+                                         →  
+{                                        → {
+\n                                       → \n      
+if                                       → if
+                                         →  
+(                                        → (
+cs.splice(                               →  [-semantic -navigation]
 (again)                                  → $again
-)                                        →  [-semantic]
-()                                       → ()
-)                                        → ) 
-{\n                                      → {\n        
+)                                        →  [-semantic -navigation]
+(                                        → (
+)                                        → )
+)                                        → )
+                                         →  
+{                                        → {
+\n                                       → \n        
 __cs_shown                               → shown
 [                                        → [
 1                                        → 1
@@ -34,73 +52,109 @@ __cs_shown                               → shown
 true                                     → true
 )                                        → )
 ;                                        → ;
-\n        }                              → \n      }
-\n    }                                  → \n    }
-,                                        → , 
+\n                                       → \n      
+}                                        → }
+\n                                       → \n    
+}                                        → }
+,                                        → ,
+                                         →  
 0                                        → 0
 )                                        → )
 ;                                        → ;
-\n                                       → \n\n    
-const                                    → const 
+\n\n                                     → \n\n    
+const                                    → const
+                                         →  
 __cs_read                                → read
- =                                       →  = 
+                                         →  
+=                                        → =
+                                         →  
 __cs_shown                               → shown
 [                                        → [
 0                                        → 0
 ]                                        → ]
-()                                       → ()
+(                                        → (
+)                                        → )
 ;                                        → ;
 \n                                       → \n    
-return                                   → return 
+return                                   → return
+                                         →  
 <                                        → <
 em                                       → em
->{                                       → >{
+>                                        → >
+{                                        → {
 "read "                                  → "read "
- +                                       →  + 
+                                         →  
++                                        → +
+                                         →  
 __cs_read                                → read
-}</                                      → }</
+}                                        → }
+<                                        → <
+/                                        → /
 em                                       → em
 >                                        → >
 ;                                        → ;
-\n})())                                  → \n  }`
-cs.lift((() => {\n                       → cs`{\n  
-const                                    → const 
+\n                                       → \n  
+}                                        → }
+cs.lift((() =>                           →  [-semantic -navigation]
+{                                        → {
+\n                                       → \n  
+const                                    → const
+                                         →  
 __cs_builds                              → builds
- =                                       →  = 
-cs.splice(                               →  [-semantic]
+                                         →  
+=                                        → =
+                                         →  
+cs.splice(                               →  [-semantic -navigation]
 (createSignal)                           → $createSignal
-)                                        →  [-semantic]
+)                                        →  [-semantic -navigation]
 (                                        → (
 0                                        → 0
 )                                        → )
 ;                                        → ;
 \n                                       → \n  
-return                                   → return 
-(                                        → (\n    
+return                                   → return
+                                         →  
+(                                        → (
+\n                                       → \n    
 <                                        → <
 div                                      → div
->{                                       → >\n      
+>                                        → >
+\n                                       → \n      
 <                                        → <
 span                                     → span
->{                                       → >{
+>                                        → >
+{                                        → {
 "builds "                                → "builds "
- +                                       →  + 
+                                         →  
++                                        → +
+                                         →  
 __cs_builds                              → builds
 [                                        → [
 0                                        → 0
 ]                                        → ]
-()                                       → ()
-}</                                      → }</
+(                                        → (
+)                                        → )
+}                                        → }
+<                                        → <
+/                                        → /
 span                                     → span
 >                                        → >
-}{                                       → \n      
+\n                                       → \n      
 <                                        → <
 section                                  → section
->{                                       → >{\n        
-cs.splice(                               → ${ [-semantic]
+>                                        → >
+{                                        → {
+\n                                       → \n        
+cs.splice(                               →  [-semantic -navigation]
 (\n          <Held\n            again={  → (\n          <Held\n            again={
-cs.lift((() =>                           → cs`
-() => {\n                                → () => {\n              
+cs.lift((() =>                           →  [-semantic -navigation]
+(                                        → (
+)                                        → )
+                                         →  
+=>                                       → =>
+                                         →  
+{                                        → {
+\n                                       → \n              
 __cs_builds                              → builds
 [                                        → [
 1                                        → 1
@@ -110,31 +164,46 @@ __cs_builds                              → builds
 [                                        → [
 0                                        → 0
 ]                                        → ]
-()                                       → ()
- +                                       →  + 
+(                                        → (
+)                                        → )
+                                         →  
++                                        → +
+                                         →  
 1                                        → 1
 )                                        → )
 ;                                        → ;
 \n                                       → \n              
-return                                   → return 
+return                                   → return
+                                         →  
 __cs_builds                              → builds
 [                                        → [
 0                                        → 0
 ]                                        → ]
-()                                       → ()
- <                                       →  < 
+(                                        → (
+)                                        → )
+                                         →  
+<                                        → <
+                                         →  
 5                                        → 5
 ;                                        → ;
-\n}                                      → \n            }
-)())                                     → `
+\n                                       → \n            
+}                                        → }
+)())                                     →  [-semantic -navigation]
 }\n          />\n        )               → }\n          />\n        )
-)                                        → } [-semantic]
-}</                                      → \n      }</
+)                                        →  [-semantic -navigation]
+\n                                       → \n      
+}                                        → }
+<                                        → <
+/                                        → /
 section                                  → section
 >                                        → >
-}</                                      → \n    </
+\n                                       → \n    
+<                                        → <
+/                                        → /
 div                                      → div
 >                                        → >
-)                                        → \n  )
+\n                                       → \n  
+)                                        → )
 ;                                        → ;
-\n})())                                  → \n}`
+\n                                       → \n
+}                                        → }

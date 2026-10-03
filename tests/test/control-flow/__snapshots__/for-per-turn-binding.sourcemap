@@ -1,40 +1,79 @@
-cs.lift((() => {\n      → cs`{\n      
-let                     → let 
-__cs_last               → last
-:                       → : 
-() =>                   → () => 
-number                  → number
- =                      →  = 
-() =>                   → () => 
-0                       → 0
-;                       → ;
-\n                      → \n      
-for (                   → for (
-let                     → let 
-__cs_i                  → i
- =                      →  = 
-0                       → 0
-;                       → ; 
-__cs_i                  → i
- <                      →  < 
-3                       → 3
-;                       → ; 
-__cs_i                  → i
- =                      →  = 
-__cs_i                  → i
- +                      →  + 
-1                       → 1
-)                       → ) 
-{\n                     → {\n        
-__cs_last               → last
- =                      →  = 
-() =>                   → () => 
-__cs_i                  → i
-;                       → ;
-\n    }                 → \n      }
-\n                      → \n      
-return                  → return 
-__cs_last               → last
-()                      → ()
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+let              → let
+                 →  
+__cs_last        → last
+:                → :
+                 →  
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+number           → number
+                 →  
+=                → =
+                 →  
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+0                → 0
+;                → ;
+\n               → \n      
+for              → for
+                 →  
+(                → (
+let              → let
+                 →  
+__cs_i           → i
+                 →  
+=                → =
+                 →  
+0                → 0
+;                → ;
+                 →  
+__cs_i           → i
+                 →  
+<                → <
+                 →  
+3                → 3
+;                → ;
+                 →  
+__cs_i           → i
+                 →  
+=                → =
+                 →  
+__cs_i           → i
+                 →  
++                → +
+                 →  
+1                → 1
+)                → )
+                 →  
+{                → {
+\n               → \n        
+__cs_last        → last
+                 →  
+=                → =
+                 →  
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_i           → i
+;                → ;
+\n               → \n      
+}                → }
+\n               → \n      
+return           → return
+                 →  
+__cs_last        → last
+(                → (
+)                → )
+;                → ;
+\n               → \n    
+}                → }

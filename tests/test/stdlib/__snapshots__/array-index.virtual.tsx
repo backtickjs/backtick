@@ -9,12 +9,12 @@ it("arrayIndex", async (t) => {
     t,
     "arrayIndex",
     cs.lift((() => {
-    const __cs_coins = [5, 31, 7];
-    let __cs_total = 0;
-    for (let __cs_i = 0; __cs_i < __cs_coins.length; __cs_i = __cs_i + 1) {
+      const __cs_coins = [5, 31, 7];
+      let __cs_total = 0;
+      for (let __cs_i = 0; __cs_i < __cs_coins.length; __cs_i = __cs_i + 1) {
         __cs_total = __cs_total + __cs_coins[__cs_i];
-    }
-    return __cs_total;
-})()),
+      }
+      return __cs_total;
+    })()),
   );
 });

@@ -1,35 +1,53 @@
-cs.lift((() => {\n        → cs`{\n    
-return                    → return 
-(                         → (\n      
+cs.lift((() =>            →  [-semantic -navigation]
+{                         → {
+\n                        → \n    
+return                    → return
+                          →  
+(                         → (
+\n                        → \n      
 <                         → <
 span                      → span
->{                        → >\n        {
+>                         → >
+\n                        → \n        
+{                         → {
 "/at?q="                  → "/at?q="
- +                        →  +\n          
-cs.globalThis.            → 
+                          →  
++                         → +
+\n                        → \n          
 encodeURIComponent        → encodeURIComponent
 (                         → (
-"a b+c&d#\\u00E9"         → "a b+c&d#é"
+"a b+c&d#é"               → "a b+c&d#é"
 )                         → )
- +                        →  +\n          
+                          →  
++                         → +
+\n                        → \n          
 "&page="                  → "&page="
- +                        →  +\n          
-cs.globalThis.            → 
+                          →  
++                         → +
+\n                        → \n          
 encodeURIComponent        → encodeURIComponent
 (                         → (
 2.5                       → 2.5
 )                         → )
- +                        →  +\n          
+                          →  
++                         → +
+\n                        → \n          
 " "                       → " "
- +                        →  +\n          
-cs.globalThis.            → 
+                          →  
++                         → +
+\n                        → \n          
 decodeURIComponent        → decodeURIComponent
 (                         → (
 "a%20b%2Bc%26d%23%C3%A9"  → "a%20b%2Bc%26d%23%C3%A9"
 )                         → )
-}</                       → }\n      </
+}                         → }
+\n                        → \n      
+<                         → <
+/                         → /
 span                      → span
 >                         → >
-)                         → \n    )
+\n                        → \n    
+)                         → )
 ;                         → ;
-\n})())                   → \n  }`
+\n                        → \n  
+}                         → }

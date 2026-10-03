@@ -1,43 +1,59 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_page               → page
- =                      →  = 
-cs.globalThis.          → 
-JSON                    → JSON
-.                       → .
-parse                   → parse
-(                       → (
-cs.splice(              →  [-semantic]
-(answered)              → $answered
-)                       →  [-semantic]
-)                       → )
- as                     →  as 
-{\n                     → { 
-rows                    → rows
-:                       → : 
-string                  → string
-[]                      → []
-;                       → ;
-\n                      →  
-count                   → count
-:                       → : 
-number                  → number
-;                       → 
-\n    }                 →  }
-;                       → ;
-\n                      → \n\n      
-return                  → return 
-__cs_page               → page
-.                       → .
-rows                    → rows
-[                       → [
-0                       → 0
-]                       → ]
- +                      →  + 
-" of "                  → " of "
- +                      →  + 
-__cs_page               → page
-.                       → .
-count                   → count
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_page        → page
+                 →  
+=                → =
+                 →  
+JSON             → JSON
+.                → .
+parse            → parse
+(                → (
+cs.splice(       →  [-semantic -navigation]
+(answered)       → $answered
+)                →  [-semantic -navigation]
+)                → )
+                 →  
+as               → as
+                 →  
+{                → {
+                 →  
+rows             → rows
+:                → :
+                 →  
+string           → string
+[                → [
+]                → ]
+;                → ;
+                 →  
+count            → count
+:                → :
+                 →  
+number           → number
+                 →  
+}                → }
+;                → ;
+\n\n             → \n\n      
+return           → return
+                 →  
+__cs_page        → page
+.                → .
+rows             → rows
+[                → [
+0                → 0
+]                → ]
+                 →  
++                → +
+                 →  
+" of "           → " of "
+                 →  
++                → +
+                 →  
+__cs_page        → page
+.                → .
+count            → count
+;                → ;
+\n               → \n    
+}                → }

@@ -1,35 +1,46 @@
-cs.lift((() =>   → cs`
-() =>            → () => 
-cs.splice(       →  [-semantic]
+cs.lift((() =>   →  [-semantic -navigation]
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (n)              → $n
-)                →  [-semantic]
-)())             → `
-cs.lift((() =>   → cs`
+)                →  [-semantic -navigation]
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
-div              → div
->{               → >\n      
-<                → <
-span             → span
-                 →  
-onclick          → onclick
-={               → ={
-cs.splice(       → ${ [-semantic]
-make(1)          → make(1)
-)                → } [-semantic]
-}                → }
-/>               →  />
-}{               → \n      
-<                → <
-span             → span
-                 →  
-onclick          → onclick
-={               → ={
-cs.splice(       → ${ [-semantic]
-make(2)          → make(2)
-)                → } [-semantic]
-}                → }
-/>               →  />
-}</              → \n    </
 div              → div
 >                → >
-)())             → `
+\n               → \n      
+<                → <
+span             → span
+                 →  
+onclick          → onclick
+=                → =
+{                → {
+cs.splice(       →  [-semantic -navigation]
+make(1)          → make(1)
+)                →  [-semantic -navigation]
+}                → }
+                 →  
+/                → /
+>                → >
+\n               → \n      
+<                → <
+span             → span
+                 →  
+onclick          → onclick
+=                → =
+{                → {
+cs.splice(       →  [-semantic -navigation]
+make(2)          → make(2)
+)                →  [-semantic -navigation]
+}                → }
+                 →  
+/                → /
+>                → >
+\n               → \n    
+<                → <
+/                → /
+div              → div
+>                → >

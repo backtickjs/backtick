@@ -19,14 +19,15 @@ const Button = createImport<typeof LibraryButton>({
 // In a script, the library's component as the library types it: a handler, a
 // slot taking script JSX, and children.
 const counter = cs.lift((() => {
-    const __cs_count = cs.splice((createSignal))(0);
-    return ((void Button, cs.splice(Button)({ variant: "primary", icon: <b>+</b>, onClick: () => __cs_count[1](__cs_count[0]() + 1), children: <span>{"Pressed " + __cs_count[0]() + " times"}</span> })));
+  const __cs_count = cs.splice((createSignal))(0);
+  return (
+    (void Button, cs.splice(Button)({ variant: "primary", icon: <b>+</b>, onClick: () => __cs_count[1](__cs_count[0]() + 1), children: <span>{"Pressed " + __cs_count[0]() + " times"}</span> }))
+  );
 })());
 
 // A prop the library doesn't take a value for, caught as Solid would.
 // @ts-expect-error: Type '"large"' is not assignable to type '"primary" | "ghost"'.
-export const wrongVariant = cs.lift((() => (void Button, cs.splice(Button)({ variant: "large", onClick: () => {
-    }, children: "Save" })))());
+export const wrongVariant = cs.lift((() => (void Button, cs.splice(Button)({ variant: "large", onClick: () => {}, children: "Save" })))());
 
 it("libraryComponent", async (t) => {
   await snapshotCase(t, "libraryComponent", counter);

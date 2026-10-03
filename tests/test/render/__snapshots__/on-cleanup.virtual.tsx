@@ -33,9 +33,9 @@ describe("onCleanup", () => {
     const { unmount } = render(
       await evaluate(
         cs.lift((() => () => {
-    cs.splice((onCleanup))(() => cs.globalThis.window.console.log());
-    return <p>drawn</p>;
-})()),
+          cs.splice((onCleanup))(() => cs.globalThis.window.console.log());
+          return <p>drawn</p>;
+        })()),
       ),
     );
     assert.equal(runs, 0);
@@ -47,13 +47,13 @@ describe("onCleanup", () => {
     render(
       await evaluate(
         cs.lift((() => () => {
-    const __cs_n = cs.splice((createSignal))(1);
-    const __cs_doubled = cs.splice((createMemo))(() => {
-        cs.splice((onCleanup))(() => cs.globalThis.window.console.log());
-        return __cs_n[0]() * 2;
-    });
-    return <button onclick={() => __cs_n[1](__cs_n[0]() + 1)}>{__cs_doubled()}</button>;
-})()),
+          const __cs_n = cs.splice((createSignal))(1);
+          const __cs_doubled = cs.splice((createMemo))(() => {
+            cs.splice((onCleanup))(() => cs.globalThis.window.console.log());
+            return __cs_n[0]() * 2;
+          });
+          return <button onclick={() => __cs_n[1](__cs_n[0]() + 1)}>{__cs_doubled()}</button>;
+        })()),
       ),
     );
     assert.equal(runs, 0);
@@ -81,13 +81,13 @@ describe("onCleanup", () => {
     const { unmount } = render(
       await evaluate(
         cs.lift((() => () => {
-    const __cs_timer = cs.splice((createSignal))(0);
-    cs.splice((onMount))(() => {
-        __cs_timer[1](cs.globalThis.window.setInterval(() => cs.globalThis.window.console.log(), 5));
-    });
-    cs.splice((onCleanup))(() => cs.globalThis.window.clearInterval(__cs_timer[0]()));
-    return <p>ticking</p>;
-})()),
+          const __cs_timer = cs.splice((createSignal))(0);
+          cs.splice((onMount))(() => {
+            __cs_timer[1](cs.globalThis.window.setInterval(() => cs.globalThis.window.console.log(), 5));
+          });
+          cs.splice((onCleanup))(() => cs.globalThis.window.clearInterval(__cs_timer[0]()));
+          return <p>ticking</p>;
+        })()),
       ),
     );
     await wait(40);
@@ -103,10 +103,12 @@ describe("onCleanup", () => {
     const { unmount } = render(
       await evaluate(
         cs.lift((() => () => {
-    return (<button onclick={() => cs.splice((onCleanup))(() => cs.globalThis.window.console.log())}>
+          return (
+            <button onclick={() => cs.splice((onCleanup))(() => cs.globalThis.window.console.log())}>
               press
-            </button>);
-})()),
+            </button>
+          );
+        })()),
       ),
     );
     await userEvent.click(screen.getByRole("button"));

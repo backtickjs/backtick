@@ -8,7 +8,7 @@ async function Panel() {
   return cs.lift((() => {
     const __cs_n = cs.splice((createSignal))(2);
     __cs_n[1](3);
-})());
+  })());
 }
 
 // @ts-expect-error: 'Panel' cannot be used as a JSX component.

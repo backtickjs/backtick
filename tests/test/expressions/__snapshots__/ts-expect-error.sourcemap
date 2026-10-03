@@ -1,13 +1,21 @@
-cs.lift((() => {\n    // @ts-expect-error: a string is not a number\n    → cs`{\n      // @ts-expect-error: a string is not a number\n      
-const                                     → const 
+cs.lift((() =>                            →  [-semantic -navigation]
+{                                         → {
+\n      // @ts-expect-error: a string is not a number\n      → \n      // @ts-expect-error: a string is not a number\n      
+const                                     → const
+                                          →  
 __cs_count                                → count
-:                                         → : 
+:                                         → :
+                                          →  
 number                                    → number
- =                                        →  = 
+                                          →  
+=                                         → =
+                                          →  
 "one"                                     → "one"
 ;                                         → ;
 \n                                        → \n      
-return                                    → return 
+return                                    → return
+                                          →  
 __cs_count                                → count
 ;                                         → ;
-\n})())                                   → \n    }`
+\n                                        → \n    
+}                                         → }

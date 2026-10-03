@@ -1,21 +1,29 @@
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 (                → (
 __cs_props       → props
-:                → : 
-{\n              → { 
+:                → :
+                 →  
+{                → {
+                 →  
 n                → n
-:                → : 
+:                → :
+                 →  
 number           → number
-;                → 
-\n}              →  }
-) =>             → ) => 
+                 →  
+}                → }
+)                → )
+                 →  
+=>               → =>
+                 →  
 <                → <
 b                → b
->{               → >{
+>                → >
+{                → {
 __cs_props       → props
 .                → .
 n                → n
-}</              → }</
+}                → }
+<                → <
+/                → /
 b                → b
 >                → >
-)())             → `

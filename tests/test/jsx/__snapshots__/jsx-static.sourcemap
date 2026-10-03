@@ -1,13 +1,18 @@
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 div              → div
->{               → >\n      
+>                → >
+\n               → \n      
 <                → <
 span             → span
->hi</            → >hi</
+>                → >
+hi               → hi
+<                → <
+/                → /
 span             → span
 >                → >
-}</              → \n    </
+\n               → \n    
+<                → <
+/                → /
 div              → div
 >                → >
-)())             → `

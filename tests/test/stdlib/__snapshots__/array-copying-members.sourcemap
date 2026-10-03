@@ -1,115 +1,164 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_rows               → rows
- =                      →  = 
-[                       → [
-3                       → 3
-,                       → , 
-1                       → 1
-,                       → , 
-2                       → 2
-]                       → ]
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_sorted             → sorted
- =                      →  = 
-__cs_rows               → rows
-.                       → .
-toSorted                → toSorted
-(                       → (
-(                       → (
-__cs_a                  → a
-,                       → , 
-__cs_b                  → b
-) =>                    → ) => 
-__cs_a                  → a
- -                      →  - 
-__cs_b                  → b
-)                       → )
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_reversed           → reversed
- =                      →  = 
-__cs_rows               → rows
-.                       → .
-toReversed              → toReversed
-()                      → ()
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_spliced            → spliced
- =                      →  = 
-__cs_rows               → rows
-.                       → .
-toSpliced               → toSpliced
-(                       → (
-1                       → 1
-,                       → , 
-1                       → 1
-)                       → )
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_inserted           → inserted
- =                      →  = 
-__cs_rows               → rows
-.                       → .
-toSpliced               → toSpliced
-(                       → (
-1                       → 1
-,                       → , 
-0                       → 0
-,                       → , 
-9                       → 9
-)                       → )
-;                       → ;
-\n                      → \n      
-return                  → return 
-(                       → (\n        
-__cs_sorted             → sorted
-.                       → .
-join                    → join
-(                       → (
-","                     → ","
-)                       → )
- +                      →  +\n        
-"|"                     → "|"
- +                      →  +\n        
-__cs_reversed           → reversed
-.                       → .
-join                    → join
-(                       → (
-","                     → ","
-)                       → )
- +                      →  +\n        
-"|"                     → "|"
- +                      →  +\n        
-__cs_spliced            → spliced
-.                       → .
-join                    → join
-(                       → (
-","                     → ","
-)                       → )
- +                      →  +\n        
-"|"                     → "|"
- +                      →  +\n        
-__cs_inserted           → inserted
-.                       → .
-join                    → join
-(                       → (
-","                     → ","
-)                       → )
- +                      →  +\n        
-"|"                     → "|"
- +                      →  +\n        
-__cs_rows               → rows
-.                       → .
-join                    → join
-(                       → (
-","                     → ","
-)                       → )
-)                       → \n      )
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_rows        → rows
+                 →  
+=                → =
+                 →  
+[                → [
+3                → 3
+,                → ,
+                 →  
+1                → 1
+,                → ,
+                 →  
+2                → 2
+]                → ]
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_sorted      → sorted
+                 →  
+=                → =
+                 →  
+__cs_rows        → rows
+.                → .
+toSorted         → toSorted
+(                → (
+(                → (
+__cs_a           → a
+,                → ,
+                 →  
+__cs_b           → b
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_a           → a
+                 →  
+-                → -
+                 →  
+__cs_b           → b
+)                → )
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_reversed    → reversed
+                 →  
+=                → =
+                 →  
+__cs_rows        → rows
+.                → .
+toReversed       → toReversed
+(                → (
+)                → )
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_spliced     → spliced
+                 →  
+=                → =
+                 →  
+__cs_rows        → rows
+.                → .
+toSpliced        → toSpliced
+(                → (
+1                → 1
+,                → ,
+                 →  
+1                → 1
+)                → )
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_inserted    → inserted
+                 →  
+=                → =
+                 →  
+__cs_rows        → rows
+.                → .
+toSpliced        → toSpliced
+(                → (
+1                → 1
+,                → ,
+                 →  
+0                → 0
+,                → ,
+                 →  
+9                → 9
+)                → )
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+(                → (
+\n               → \n        
+__cs_sorted      → sorted
+.                → .
+join             → join
+(                → (
+","              → ","
+)                → )
+                 →  
++                → +
+\n               → \n        
+"|"              → "|"
+                 →  
++                → +
+\n               → \n        
+__cs_reversed    → reversed
+.                → .
+join             → join
+(                → (
+","              → ","
+)                → )
+                 →  
++                → +
+\n               → \n        
+"|"              → "|"
+                 →  
++                → +
+\n               → \n        
+__cs_spliced     → spliced
+.                → .
+join             → join
+(                → (
+","              → ","
+)                → )
+                 →  
++                → +
+\n               → \n        
+"|"              → "|"
+                 →  
++                → +
+\n               → \n        
+__cs_inserted    → inserted
+.                → .
+join             → join
+(                → (
+","              → ","
+)                → )
+                 →  
++                → +
+\n               → \n        
+"|"              → "|"
+                 →  
++                → +
+\n               → \n        
+__cs_rows        → rows
+.                → .
+join             → join
+(                → (
+","              → ","
+)                → )
+\n               → \n      
+)                → )
+;                → ;
+\n               → \n    
+}                → }

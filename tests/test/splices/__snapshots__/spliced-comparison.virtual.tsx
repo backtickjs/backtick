@@ -12,6 +12,11 @@ it("splicedComparison", async (t) => {
   await snapshotCase(
     t,
     "splicedComparison",
-    cs.lift((() => ({ under: cs.splice((low)) < cs.splice((high)), atMost: cs.splice((low)) <= cs.splice((high)), over: cs.splice((high)) > cs.splice((low)), between: cs.splice((low)) < cs.splice((high)) && cs.splice((high)) > cs.splice((low)) }))()),
+    cs.lift((() => ({
+      under: cs.splice((low)) < cs.splice((high)),
+      atMost: cs.splice((low)) <= cs.splice((high)),
+      over: cs.splice((high)) > cs.splice((low)),
+      between: cs.splice((low)) < cs.splice((high)) && cs.splice((high)) > cs.splice((low)),
+    }))()),
   );
 });

@@ -12,26 +12,35 @@ import { evaluate } from "../evaluate.ts";
 async function Held({ again }: { again: Client<() => boolean> }) {
   return cs.lift((() => {
     const __cs_shown = cs.splice((createSignal))(false);
+
     const __cs_started = cs.globalThis.window.setTimeout(() => {
-        if (cs.splice((again))()) {
-            __cs_shown[1](true);
-        }
+      if (cs.splice((again))()) {
+        __cs_shown[1](true);
+      }
     }, 0);
+
     const __cs_read = __cs_shown[0]();
     return <em>{"read " + __cs_read}</em>;
-})());
+  })());
 }
 
 const held = cs.lift((() => {
-    const __cs_builds = cs.splice((createSignal))(0);
-    return (<div>{<span>{"builds " + __cs_builds[0]()}</span>}{<section>{cs.splice((
+  const __cs_builds = cs.splice((createSignal))(0);
+  return (
+    <div>
+      <span>{"builds " + __cs_builds[0]()}</span>
+      <section>{
+        cs.splice((
           <Held
             again={cs.lift((() => () => {
-    __cs_builds[1](__cs_builds[0]() + 1);
-    return __cs_builds[0]() < 5;
-})())}
+              __cs_builds[1](__cs_builds[0]() + 1);
+              return __cs_builds[0]() < 5;
+            })())}
           />
-        ))}</section>}</div>);
+        ))
+      }</section>
+    </div>
+  );
 })());
 
 describe("a server component that reads a signal as it sets up", () => {

@@ -1,109 +1,148 @@
-cs.lift((() => {\n      → cs`{\n    
-const                   → const 
-__cs_selected           → selected
- =                      →  = 
-cs.splice(              →  [-semantic]
-(createSignal)          → $createSignal
-)                       →  [-semantic]
-(                       → (
-0                       → 0
-)                       → )
-;                       → ;
-\n                      → \n    
-const                   → const 
-__cs_isSelected         → isSelected
- =                      →  = 
-cs.splice(              →  [-semantic]
-(createSelector)        → $createSelector
-)                       →  [-semantic]
-(                       → (
-__cs_selected           → selected
-[                       → [
-0                       → 0
-]                       → ]
-)                       → )
-;                       → ;
-\n                      → \n    
-return                  → return 
-(                       → (\n      
-<                       → <
-div                     → div
->{                      → >\n        
-<                       → <
-span                    → span
-                        →  
-onclick                 → onclick
-={                      → ={
-() =>                   → () => 
-__cs_selected           → selected
-[                       → [
-1                       → 1
-]                       → ]
-(                       → (
-1                       → 1
-)                       → )
-}                       → }
->select</               → >select</
-span                    → span
->                       → >
-}{                      → \n        
-<                       → <
-div                     → div
->{                      → >\n          
-(void                   → <For each={[0, 1, 2]}>\n            {(id: number) => (\n              <a href={isSelected(id) ? "#open" : "#closed"}>{"row " + id}</a>\n            )}\n          </ [-semantic -navigation -verification]
-For                     → For
-,                       →  [-semantic -navigation -verification]
-cs.splice(              →  [-semantic -navigation]
-For                     → For
-)                       →  [-semantic -navigation]
-(                       →  [-semantic -navigation -verification]
-{                       → For 
-each                    → each
-:                       → ={
-[                       → [
-0                       → 0
-,                       → , 
-1                       → 1
-,                       → , 
-2                       → 2
-]                       → ]
-, children:             → >\n            {
-(                       → (
-__cs_id                 → id
-:                       → : 
-number                  → number
-) =>                    → ) => 
-(                       → (\n              
-<                       → <
-a                       → a
-                        →  
-href                    → href
-={                      → ={
-__cs_isSelected         → isSelected
-(                       → (
-__cs_id                 → id
-)                       → )
- ?                      →  ? 
-"#open"                 → "#open"
- :                      →  : 
-"#closed"               → "#closed"
-}                       → }
->{                      → >{
-"row "                  → "row "
- +                      →  + 
-__cs_id                 → id
-}</                     → }</
-a                       → a
->                       → >
-)                       → \n            )
- }                      → 
-))                      → > [-semantic -navigation -verification]
-}</                     → \n        </
-div                     → div
->                       → >
-}</                     → \n      </
-div                     → div
->                       → >
-)                       → \n    )
-;                       → ;
-\n})())                 → \n  }`
+cs.lift((() =>    →  [-semantic -navigation]
+{                 → {
+\n                → \n    
+const             → const
+                  →  
+__cs_selected     → selected
+                  →  
+=                 → =
+                  →  
+cs.splice(        →  [-semantic -navigation]
+(createSignal)    → $createSignal
+)                 →  [-semantic -navigation]
+(                 → (
+0                 → 0
+)                 → )
+;                 → ;
+\n                → \n    
+const             → const
+                  →  
+__cs_isSelected   → isSelected
+                  →  
+=                 → =
+                  →  
+cs.splice(        →  [-semantic -navigation]
+(createSelector)  → $createSelector
+)                 →  [-semantic -navigation]
+(                 → (
+__cs_selected     → selected
+[                 → [
+0                 → 0
+]                 → ]
+)                 → )
+;                 → ;
+\n                → \n    
+return            → return
+                  →  
+(                 → (
+\n                → \n      
+<                 → <
+div               → div
+>                 → >
+\n                → \n        
+<                 → <
+span              → span
+                  →  
+onclick           → onclick
+=                 → =
+{                 → {
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+__cs_selected     → selected
+[                 → [
+1                 → 1
+]                 → ]
+(                 → (
+1                 → 1
+)                 → )
+}                 → }
+>                 → >
+select            → select
+<                 → <
+/                 → /
+span              → span
+>                 → >
+\n                → \n        
+<                 → <
+div               → div
+>                 → >
+\n                → \n          
+For               → For
+cs.splice(        →  [-semantic -navigation]
+For               → For
+)                 →  [-semantic -navigation]
+{                 → For
+each              → each
+[                 → [
+0                 → 0
+,                 → ,
+                  →  
+1                 → 1
+,                 → ,
+                  →  
+2                 → 2
+]                 → ]
+children          → \n            {(id: number) => (\n              <a href={isSelected(id) ? "#open" : "#closed"}>{"row " + id}</a>\n            )}\n          
+(                 → (
+__cs_id           → id
+:                 → :
+                  →  
+number            → number
+)                 → )
+                  →  
+=>                → =>
+                  →  
+(                 → (
+\n                → \n              
+<                 → <
+a                 → a
+                  →  
+href              → href
+=                 → =
+{                 → {
+__cs_isSelected   → isSelected
+(                 → (
+__cs_id           → id
+)                 → )
+                  →  
+?                 → ?
+                  →  
+"#open"           → "#open"
+                  →  
+:                 → :
+                  →  
+"#closed"         → "#closed"
+}                 → }
+>                 → >
+{                 → {
+"row "            → "row "
+                  →  
++                 → +
+                  →  
+__cs_id           → id
+}                 → }
+<                 → <
+/                 → /
+a                 → a
+>                 → >
+\n                → \n            
+)                 → )
+}                 → 
+\n                → \n        
+<                 → <
+/                 → /
+div               → div
+>                 → >
+\n                → \n      
+<                 → <
+/                 → /
+div               → div
+>                 → >
+\n                → \n    
+)                 → )
+;                 → ;
+\n                → \n  
+}                 → }

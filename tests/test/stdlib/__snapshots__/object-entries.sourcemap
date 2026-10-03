@@ -1,68 +1,92 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_held               → held
- =                      →  = 
-{                       → { 
-n                       → n
-:                       → : 
-1                       → 1
-,                       → , 
-q                       → q
-:                       → : 
-"ada"                   → "ada"
- }                      →  }
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_written            → written
- =                      →  = 
-cs.globalThis.          → 
-Object                  → Object
-.                       → .
-fromEntries             → fromEntries
-(                       → (\n        
-cs.globalThis.          → 
-Object                  → Object
-.                       → .
-entries                 → entries
-(                       → (
-__cs_held               → held
-)                       → )
-.                       → .
-map                     → map
-(                       → (
-__cs_pair               → pair
- =>                     → ) => 
-[                       → [
-__cs_pair               → pair
-[                       → [
-0                       → 0
-]                       → ]
-,                       → , 
-cs.globalThis.          → 
-JSON                    → JSON
-.                       → .
-stringify               → stringify
-(                       → (
-__cs_pair               → pair
-[                       → [
-1                       → 1
-]                       → ]
-)                       → )
-]                       → ]
-)                       → )
-)                       → ,\n      )
-;                       → ;
-\n                      → \n      
-return                  → return 
-__cs_written            → written
-.                       → .
-n                       → n
- +                      →  + 
-" "                     → " "
- +                      →  + 
-__cs_written            → written
-.                       → .
-q                       → q
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_held        → held
+                 →  
+=                → =
+                 →  
+{                → {
+                 →  
+n                → n
+:                → :
+                 →  
+1                → 1
+,                → ,
+                 →  
+q                → q
+:                → :
+                 →  
+"ada"            → "ada"
+                 →  
+}                → }
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_written     → written
+                 →  
+=                → =
+                 →  
+Object           → Object
+.                → .
+fromEntries      → fromEntries
+(                → (
+\n               → \n        
+Object           → Object
+.                → .
+entries          → entries
+(                → (
+__cs_held        → held
+)                → )
+.                → .
+map              → map
+(                → (
+(                → (
+__cs_pair        → pair
+)                → )
+                 →  
+=>               → =>
+                 →  
+[                → [
+__cs_pair        → pair
+[                → [
+0                → 0
+]                → ]
+,                → ,
+                 →  
+JSON             → JSON
+.                → .
+stringify        → stringify
+(                → (
+__cs_pair        → pair
+[                → [
+1                → 1
+]                → ]
+)                → )
+]                → ]
+)                → )
+,                → ,
+\n               → \n      
+)                → )
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+__cs_written     → written
+.                → .
+n                → n
+                 →  
++                → +
+                 →  
+" "              → " "
+                 →  
++                → +
+                 →  
+__cs_written     → written
+.                → .
+q                → q
+;                → ;
+\n               → \n    
+}                → }

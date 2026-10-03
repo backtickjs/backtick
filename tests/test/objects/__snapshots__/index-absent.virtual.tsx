@@ -12,9 +12,9 @@ it("indexAbsent", async (t) => {
     t,
     "indexAbsent",
     cs.lift((() => {
-    const __cs_names = ["zero", "one"];
-    const __cs_missing = cs.splice((answers))["nowhere"] ?? "gone";
-    return __cs_names[1] + "/" + __cs_missing;
-})()),
+      const __cs_names = ["zero", "one"];
+      const __cs_missing = cs.splice((answers))["nowhere"] ?? "gone";
+      return __cs_names[1] + "/" + __cs_missing;
+    })()),
   );
 });

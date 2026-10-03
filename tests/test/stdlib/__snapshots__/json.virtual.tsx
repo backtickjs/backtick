@@ -10,12 +10,24 @@ it("jsonRoundTrip", async (t) => {
     t,
     "jsonRoundTrip",
     cs.lift((() => {
-    const __cs_numbers = cs.globalThis.JSON.stringify([1, 2, 3]);
-    const __cs_text = cs.globalThis.JSON.stringify("hi");
-    const __cs_flag = cs.globalThis.JSON.stringify(true);
-    const __cs_held = cs.globalThis.JSON.stringify({ a: 1, b: "two" });
-    const __cs_back = cs.globalThis.JSON.parse(__cs_numbers);
-    return (__cs_numbers + "|" + __cs_text + "|" + __cs_flag + "|" + __cs_held + "|" + cs.globalThis.JSON.stringify(__cs_back) + "|" + cs.globalThis.JSON.stringify(cs.globalThis.JSON.parse(__cs_held)));
-})()),
+      const __cs_numbers = cs.globalThis.JSON.stringify([1, 2, 3]);
+      const __cs_text = cs.globalThis.JSON.stringify("hi");
+      const __cs_flag = cs.globalThis.JSON.stringify(true);
+      const __cs_held = cs.globalThis.JSON.stringify({ a: 1, b: "two" });
+      const __cs_back = cs.globalThis.JSON.parse(__cs_numbers);
+      return (
+        __cs_numbers +
+        "|" +
+        __cs_text +
+        "|" +
+        __cs_flag +
+        "|" +
+        __cs_held +
+        "|" +
+        cs.globalThis.JSON.stringify(__cs_back) +
+        "|" +
+        cs.globalThis.JSON.stringify(cs.globalThis.JSON.parse(__cs_held))
+      );
+    })()),
   );
 });

@@ -122,6 +122,7 @@ export function virtualScript(
       (ts.isBindingElement(parent) &&
         parent.name === node &&
         parent.propertyName === undefined &&
+        parent.dotDotDotToken === undefined &&
         ts.isObjectBindingPattern(parent.parent));
     if (bindings.has(node)) {
       if (shorthand) {

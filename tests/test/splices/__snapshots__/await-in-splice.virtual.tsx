@@ -19,9 +19,9 @@ it("awaitInStatementsSplice", async (t) => {
     t,
     "awaitInStatementsSplice",
     cs.lift(await (async () => {
-    const __cs_greeting = cs.splice(await fetchGreeting());
-    return __cs_greeting + "!";
-})()),
+      const __cs_greeting = cs.splice(await fetchGreeting());
+      return __cs_greeting + "!";
+    })()),
   );
 });
 

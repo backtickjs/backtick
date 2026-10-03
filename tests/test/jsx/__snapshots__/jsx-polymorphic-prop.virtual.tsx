@@ -13,6 +13,9 @@ it("jsxPolymorphicProp", async (t) => {
   await snapshotCase(
     t,
     "jsxPolymorphicProp",
-    cs.lift((() => <div>{<span onclick={cs.splice(make(1))}/>}{<span onclick={cs.splice(make(2))}/>}</div>)()),
+    cs.lift((() => <div>
+      <span onclick={cs.splice(make(1))} />
+      <span onclick={cs.splice(make(2))} />
+    </div>)()),
   );
 });

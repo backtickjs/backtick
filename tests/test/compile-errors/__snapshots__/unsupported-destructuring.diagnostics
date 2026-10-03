@@ -1,2 +1,0 @@
-4:9-4:15 error TS0: Destructuring isn't supported in a `cs` client script; declare each variable on its own.
-9:9-9:14 error TS0: Destructuring isn't supported in a `cs` client script; declare each variable on its own.

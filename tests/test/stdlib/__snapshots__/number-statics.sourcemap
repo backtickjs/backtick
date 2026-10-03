@@ -1,78 +1,103 @@
-cs.lift((() => {\n                        → cs`{\n    
-const                                     → const 
+cs.lift((() =>                            →  [-semantic -navigation]
+{                                         → {
+\n                                        → \n    
+const                                     → const
+                                          →  
 __cs_positive                             → positive
- =                                        →  = 
-cs.globalThis.                            → 
+                                          →  
+=                                         → =
+                                          →  
 Number                                    → Number
 .                                         → .
 EPSILON                                   → EPSILON
- >                                        →  > 
+                                          →  
+>                                         → >
+                                          →  
 0                                         → 0
 ;                                         → ;
 \n                                        → \n    
-const                                     → const 
+const                                     → const
+                                          →  
 __cs_largest                              → largest
- =                                        →  = 
-cs.globalThis.                            → 
+                                          →  
+=                                         → =
+                                          →  
 Number                                    → Number
 .                                         → .
 MAX_VALUE                                 → MAX_VALUE
- >                                        →  > 
-1e+308                                    → 1e308
+                                          →  
+>                                         → >
+                                          →  
+1e308                                     → 1e308
 ;                                         → ;
 \n                                        → \n    
-const                                     → const 
+const                                     → const
+                                          →  
 __cs_safe                                 → safe
- =                                        →  =\n      
-cs.globalThis.                            → 
+                                          →  
+=                                         → =
+\n                                        → \n      
 Number                                    → Number
 .                                         → .
 MAX_SAFE_INTEGER                          → MAX_SAFE_INTEGER
- ===                                      →  === 
+                                          →  
+===                                       → ===
+                                          →  
 9007199254740991                          → 9007199254740991
- &&                                       →  &&\n      
-cs.globalThis.                            → 
+                                          →  
+&&                                        → &&
+\n                                        → \n      
 Number                                    → Number
 .                                         → .
 MIN_SAFE_INTEGER                          → MIN_SAFE_INTEGER
- ===                                      →  === 
+                                          →  
+===                                       → ===
+                                          →  
 -                                         → -
 9007199254740991                          → 9007199254740991
- &&                                       →  &&\n      
-cs.globalThis.                            → 
+                                          →  
+&&                                        → &&
+\n                                        → \n      
 Number                                    → Number
 .                                         → .
 MIN_VALUE                                 → MIN_VALUE
- >                                        →  > 
+                                          →  
+>                                         → >
+                                          →  
 0                                         → 0
- &&                                       →  &&\n      
-cs.globalThis.                            → 
+                                          →  
+&&                                        → &&
+\n                                        → \n      
 Number                                    → Number
 .                                         → .
 isSafeInteger                             → isSafeInteger
 (                                         → (
 3                                         → 3
 )                                         → )
- &&                                       →  &&\n      
+                                          →  
+&&                                        → &&
+\n                                        → \n      
 !                                         → !
-cs.globalThis.                            → 
 Number                                    → Number
 .                                         → .
 isSafeInteger                             → isSafeInteger
 (                                         → (
-cs.globalThis.                            → 
 Number                                    → Number
 .                                         → .
 MAX_SAFE_INTEGER                          → MAX_SAFE_INTEGER
- +                                        →  + 
+                                          →  
++                                         → +
+                                          →  
 1                                         → 1
 )                                         → )
 ;                                         → ;
 \n                                        → \n    
-const                                     → const 
+const                                     → const
+                                          →  
 __cs_whole                                → whole
- =                                        →  = 
-cs.globalThis.                            → 
+                                          →  
+=                                         → =
+                                          →  
 Number                                    → Number
 .                                         → .
 isInteger                                 → isInteger
@@ -81,10 +106,12 @@ isInteger                                 → isInteger
 )                                         → )
 ;                                         → ;
 \n                                        → \n    
-const                                     → const 
+const                                     → const
+                                          →  
 __cs_fractional                           → fractional
- =                                        →  = 
-cs.globalThis.                            → 
+                                          →  
+=                                         → =
+                                          →  
 Number                                    → Number
 .                                         → .
 isInteger                                 → isInteger
@@ -93,10 +120,12 @@ isInteger                                 → isInteger
 )                                         → )
 ;                                         → ;
 \n    // Unconverted, so a string that reads as a number is still not one.\n    → \n    // Unconverted, so a string that reads as a number is still not one.\n    
-const                                     → const 
+const                                     → const
+                                          →  
 __cs_written                              → written
- =                                        →  = 
-cs.globalThis.                            → 
+                                          →  
+=                                         → =
+                                          →  
 Number                                    → Number
 .                                         → .
 isFinite                                  → isFinite
@@ -105,35 +134,64 @@ isFinite                                  → isFinite
 )                                         → )
 ;                                         → ;
 \n                                        → \n    
-return                                    → return 
-(                                         → (\n      
+return                                    → return
+                                          →  
+(                                         → (
+\n                                        → \n      
 <                                         → <
 span                                      → span
->{                                        → >\n        {
+>                                         → >
+\n                                        → \n        
+{                                         → {
 __cs_whole                                → whole
- +                                        →  +\n          
+                                          →  
++                                         → +
+\n                                        → \n          
 " "                                       → " "
- +                                        →  +\n          
+                                          →  
++                                         → +
+\n                                        → \n          
 __cs_fractional                           → fractional
- +                                        →  +\n          
+                                          →  
++                                         → +
+\n                                        → \n          
 " "                                       → " "
- +                                        →  +\n          
+                                          →  
++                                         → +
+\n                                        → \n          
 __cs_written                              → written
- +                                        →  +\n          
+                                          →  
++                                         → +
+\n                                        → \n          
 " "                                       → " "
- +                                        →  +\n          
+                                          →  
++                                         → +
+\n                                        → \n          
 __cs_positive                             → positive
- +                                        →  +\n          
+                                          →  
++                                         → +
+\n                                        → \n          
 " "                                       → " "
- +                                        →  +\n          
+                                          →  
++                                         → +
+\n                                        → \n          
 __cs_largest                              → largest
- +                                        →  +\n          
+                                          →  
++                                         → +
+\n                                        → \n          
 " "                                       → " "
- +                                        →  +\n          
+                                          →  
++                                         → +
+\n                                        → \n          
 __cs_safe                                 → safe
-}</                                       → }\n      </
+}                                         → }
+\n                                        → \n      
+<                                         → <
+/                                         → /
 span                                      → span
 >                                         → >
-)                                         → \n    )
+\n                                        → \n    
+)                                         → )
 ;                                         → ;
-\n})())                                   → \n  }`
+\n                                        → \n  
+}                                         → }

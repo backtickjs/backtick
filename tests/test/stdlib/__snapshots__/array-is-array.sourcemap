@@ -1,53 +1,64 @@
-cs.lift((() => {\n      → cs`{\n      
-return                  → return 
-[                       → [\n        
-cs.globalThis.          → 
-Array                   → Array
-.                       → .
-isArray                 → isArray
-(                       → (
-[]                      → []
-)                       → )
-,                       → ,\n        
-cs.globalThis.          → 
-Array                   → Array
-.                       → .
-isArray                 → isArray
-(                       → (
-[                       → [
-1                       → 1
-,                       → , 
-2                       → 2
-]                       → ]
-)                       → )
-,                       → ,\n        
-cs.globalThis.          → 
-Array                   → Array
-.                       → .
-isArray                 → isArray
-(                       → (
-"ab"                    → "ab"
-)                       → )
-,                       → ,\n        
-cs.globalThis.          → 
-Array                   → Array
-.                       → .
-isArray                 → isArray
-(                       → (
-{                       → { 
-length                  → length
-:                       → : 
-0                       → 0
- }                      →  }
-)                       → )
-,                       → ,\n        
-cs.globalThis.          → 
-Array                   → Array
-.                       → .
-isArray                 → isArray
-(                       → (
-null                    → null
-)                       → )
-]                       → ,\n      ]
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+return           → return
+                 →  
+[                → [
+\n               → \n        
+Array            → Array
+.                → .
+isArray          → isArray
+(                → (
+[                → [
+]                → ]
+)                → )
+,                → ,
+\n               → \n        
+Array            → Array
+.                → .
+isArray          → isArray
+(                → (
+[                → [
+1                → 1
+,                → ,
+                 →  
+2                → 2
+]                → ]
+)                → )
+,                → ,
+\n               → \n        
+Array            → Array
+.                → .
+isArray          → isArray
+(                → (
+"ab"             → "ab"
+)                → )
+,                → ,
+\n               → \n        
+Array            → Array
+.                → .
+isArray          → isArray
+(                → (
+{                → {
+                 →  
+length           → length
+:                → :
+                 →  
+0                → 0
+                 →  
+}                → }
+)                → )
+,                → ,
+\n               → \n        
+Array            → Array
+.                → .
+isArray          → isArray
+(                → (
+null             → null
+)                → )
+,                → ,
+\n               → \n      
+]                → ]
+;                → ;
+\n               → \n    
+}                → }

@@ -15,8 +15,8 @@ it("dollarName", async (t) => {
     t,
     "dollarName",
     cs.lift((() => {
-    const __cs_foo$ = 1;
-    return cs.splice(add(cs.lift((() => __cs_foo$)())));
-})()),
+      const __cs_foo$ = 1;
+      return cs.splice(add(cs.lift((() => __cs_foo$)())));
+    })()),
   );
 });

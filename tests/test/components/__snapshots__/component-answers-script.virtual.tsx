@@ -14,7 +14,7 @@ async function Panel() {
   return cs.lift((() => {
     const __cs_n = cs.splice((createSignal))(2);
     return <em>{__cs_n[0]()}</em>;
-})());
+  })());
 }
 
 it("componentAnswersScript", async (t) => {

@@ -1,31 +1,44 @@
-cs.lift((() => {\n      → cs`{\n    
-return                  → return 
-(                       → (\n      
-<                       → <
-span                    → span
->{                      → >\n        {
-cs.globalThis.          → 
-String                  → String
-.                       → .
-fromCharCode            → fromCharCode
-(                       → (
-72                      → 72
-,                       → , 
-105                     → 105
-)                       → )
- +                      →  + 
-cs.globalThis.          → 
-String                  → String
-.                       → .
-fromCharCode            → fromCharCode
-(                       → (
-55357                   → 0xd83d
-,                       → , 
-56832                   → 0xde00
-)                       → )
-}</                     → }\n      </
-span                    → span
->                       → >
-)                       → \n    )
-;                       → ;
-\n})())                 → \n  }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n    
+return           → return
+                 →  
+(                → (
+\n               → \n      
+<                → <
+span             → span
+>                → >
+\n               → \n        
+{                → {
+String           → String
+.                → .
+fromCharCode     → fromCharCode
+(                → (
+72               → 72
+,                → ,
+                 →  
+105              → 105
+)                → )
+                 →  
++                → +
+                 →  
+String           → String
+.                → .
+fromCharCode     → fromCharCode
+(                → (
+0xd83d           → 0xd83d
+,                → ,
+                 →  
+0xde00           → 0xde00
+)                → )
+}                → }
+\n               → \n      
+<                → <
+/                → /
+span             → span
+>                → >
+\n               → \n    
+)                → )
+;                → ;
+\n               → \n  
+}                → }

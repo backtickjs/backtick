@@ -1,83 +1,126 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_twice              → twice
- =                      →  = 
-(                       → (
-__cs_Row                → Row
-:                       → : 
-(                       → (
-p                       → p
-:                       → : 
-{\n                     → { 
-n                       → n
-:                       → : 
-number                  → number
-;                       → 
-\n    }                 →  }
-) =>                    → ) => 
-JSX                     → JSX
-.                       → .
-Element                 → Element
-) =>                    → ) => 
-(                       → (\n        
-<                       → <
-ul                      → ul
->{                      → >\n          {
-cs.splice(              → ${ [-semantic]
-cs.lift((() =>          → cs`
-<                       → <
-__cs_Row                → Row
-                        →  
-n                       → n
-={                      → ={
-1                       → 1
-}                       → }
-/>                      →  />
-)())                    → `
-)                       → } [-semantic]
-}{                      → }\n          {
-cs.splice(              → ${ [-semantic]
-cs.lift((() =>          → cs`
-<                       → <
-__cs_Row                → Row
-                        →  
-n                       → n
-={                      → ={
-2                       → 2
-}                       → }
-/>                      →  />
-)())                    → `
-)                       → } [-semantic]
-}</                     → }\n        </
-ul                      → ul
->                       → >
-)                       → \n      )
-;                       → ;
-\n                      → \n      
-return                  → return 
-__cs_twice              → twice
-(                       → (
-(                       → (
-__cs_p                  → p
-:                       → : 
-{\n                     → { 
-n                       → n
-:                       → : 
-number                  → number
-;                       → 
-\n    }                 →  }
-) =>                    → ) => 
-<                       → <
-li                      → li
->{                      → >{
-"row "                  → "row "
- +                      →  + 
-__cs_p                  → p
-.                       → .
-n                       → n
-}</                     → }</
-li                      → li
->                       → >
-)                       → )
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_twice       → twice
+                 →  
+=                → =
+                 →  
+(                → (
+__cs_Row         → Row
+:                → :
+                 →  
+(                → (
+p                → p
+:                → :
+                 →  
+{                → {
+                 →  
+n                → n
+:                → :
+                 →  
+number           → number
+                 →  
+}                → }
+)                → )
+                 →  
+=>               → =>
+                 →  
+JSX              → JSX
+.                → .
+Element          → Element
+)                → )
+                 →  
+=>               → =>
+                 →  
+(                → (
+\n               → \n        
+<                → <
+ul               → ul
+>                → >
+\n               → \n          
+{                → {
+cs.splice(       →  [-semantic -navigation]
+cs.lift((() =>   →  [-semantic -navigation]
+<                → <
+__cs_Row         → Row
+                 →  
+n                → n
+=                → =
+{                → {
+1                → 1
+}                → }
+                 →  
+/                → /
+>                → >
+)())             →  [-semantic -navigation]
+)                →  [-semantic -navigation]
+}                → }
+\n               → \n          
+{                → {
+cs.splice(       →  [-semantic -navigation]
+cs.lift((() =>   →  [-semantic -navigation]
+<                → <
+__cs_Row         → Row
+                 →  
+n                → n
+=                → =
+{                → {
+2                → 2
+}                → }
+                 →  
+/                → /
+>                → >
+)())             →  [-semantic -navigation]
+)                →  [-semantic -navigation]
+}                → }
+\n               → \n        
+<                → <
+/                → /
+ul               → ul
+>                → >
+\n               → \n      
+)                → )
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+__cs_twice       → twice
+(                → (
+(                → (
+__cs_p           → p
+:                → :
+                 →  
+{                → {
+                 →  
+n                → n
+:                → :
+                 →  
+number           → number
+                 →  
+}                → }
+)                → )
+                 →  
+=>               → =>
+                 →  
+<                → <
+li               → li
+>                → >
+{                → {
+"row "           → "row "
+                 →  
++                → +
+                 →  
+__cs_p           → p
+.                → .
+n                → n
+}                → }
+<                → <
+/                → /
+li               → li
+>                → >
+)                → )
+;                → ;
+\n               → \n    
+}                → }

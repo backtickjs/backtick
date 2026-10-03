@@ -1,44 +1,66 @@
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 (                → (
 __cs_n           → n
-:                → : 
+:                → :
+                 →  
 number           → number
- |               →  | 
+                 →  
+|                → |
+                 →  
 null             → null
-) => {\n         → ) => {\n  
-return           → return 
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n  
+return           → return
+                 →  
 __cs_n           → n
- ===             →  === 
+                 →  
+===              → ===
+                 →  
 null             → null
- ?               →  ? 
+                 →  
+?                → ?
+                 →  
 0                → 0
- :               →  : 
+                 →  
+:                → :
+                 →  
 __cs_n           → n
- +               →  + 
+                 →  
++                → +
+                 →  
 1                → 1
 ;                → ;
-\n}              → \n}
-)())             → `
-cs.lift((() =>   → cs`
+\n               → \n
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
 (                → (
-{                → {\n      
+{                → {
+\n               → \n      
 absent           → absent
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (pick)           → $pick
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
 null             → null
 )                → )
-,                → ,\n      
+,                → ,
+\n               → \n      
 present          → present
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (pick)           → $pick
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
 4                → 4
 )                → )
- }               → ,\n    }
+,                → ,
+\n               → \n    
+}                → }
 )                → )
-)())             → `

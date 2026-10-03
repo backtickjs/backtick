@@ -1,18 +1,26 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_names              → names
- =                      →  = 
-[                       → [
-"zero"                  → "zero"
-,                       → , 
-"one"                   → "one"
-]                       → ]
-;                       → ;
-\n                      → \n      
-return                  → return 
-__cs_names              → names
-[                       → [
-9                       → 9
-]                       → ]
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_names       → names
+                 →  
+=                → =
+                 →  
+[                → [
+"zero"           → "zero"
+,                → ,
+                 →  
+"one"            → "one"
+]                → ]
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+__cs_names       → names
+[                → [
+9                → 9
+]                → ]
+;                → ;
+\n               → \n    
+}                → }

@@ -1,24 +1,32 @@
-cs.lift((() =>          → cs`
-cs.splice(              →  [-semantic]
-(lhs)                   → $lhs
-)                       →  [-semantic]
- +                      →  + 
-2                       → 2
-)())                    → `
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_foo$               → foo$
- =                      →  = 
-1                       → 1
-;                       → ;
-\n                      → \n      
-return                  → return 
-cs.splice(              → ${ [-semantic]
-add(                    → add(
-cs.lift((() =>          → cs`
-__cs_foo$               → foo$
-)())                    → `
-)                       → )
-)                       → } [-semantic]
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+cs.splice(       →  [-semantic -navigation]
+(lhs)            → $lhs
+)                →  [-semantic -navigation]
+                 →  
++                → +
+                 →  
+2                → 2
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_foo$        → foo$
+                 →  
+=                → =
+                 →  
+1                → 1
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+cs.splice(       →  [-semantic -navigation]
+add(             → add(
+cs.lift((() =>   →  [-semantic -navigation]
+__cs_foo$        → foo$
+)())             →  [-semantic -navigation]
+)                → )
+)                →  [-semantic -navigation]
+;                → ;
+\n               → \n    
+}                → }

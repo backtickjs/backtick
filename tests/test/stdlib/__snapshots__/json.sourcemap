@@ -1,119 +1,159 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_numbers            → numbers
- =                      →  = 
-cs.globalThis.          → 
-JSON                    → JSON
-.                       → .
-stringify               → stringify
-(                       → (
-[                       → [
-1                       → 1
-,                       → , 
-2                       → 2
-,                       → , 
-3                       → 3
-]                       → ]
-)                       → )
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_text               → text
- =                      →  = 
-cs.globalThis.          → 
-JSON                    → JSON
-.                       → .
-stringify               → stringify
-(                       → (
-"hi"                    → "hi"
-)                       → )
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_flag               → flag
- =                      →  = 
-cs.globalThis.          → 
-JSON                    → JSON
-.                       → .
-stringify               → stringify
-(                       → (
-true                    → true
-)                       → )
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_held               → held
- =                      →  = 
-cs.globalThis.          → 
-JSON                    → JSON
-.                       → .
-stringify               → stringify
-(                       → (
-{                       → { 
-a                       → a
-:                       → : 
-1                       → 1
-,                       → , 
-b                       → b
-:                       → : 
-"two"                   → "two"
- }                      →  }
-)                       → )
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_back               → back
- =                      →  = 
-cs.globalThis.          → 
-JSON                    → JSON
-.                       → .
-parse                   → parse
-(                       → (
-__cs_numbers            → numbers
-)                       → )
-;                       → ;
-\n                      → \n      
-return                  → return 
-(                       → (\n        
-__cs_numbers            → numbers
- +                      →  +\n        
-"|"                     → "|"
- +                      →  +\n        
-__cs_text               → text
- +                      →  +\n        
-"|"                     → "|"
- +                      →  +\n        
-__cs_flag               → flag
- +                      →  +\n        
-"|"                     → "|"
- +                      →  +\n        
-__cs_held               → held
- +                      →  +\n        
-"|"                     → "|"
- +                      →  +\n        
-cs.globalThis.          → 
-JSON                    → JSON
-.                       → .
-stringify               → stringify
-(                       → (
-__cs_back               → back
-)                       → )
- +                      →  +\n        
-"|"                     → "|"
- +                      →  +\n        
-cs.globalThis.          → 
-JSON                    → JSON
-.                       → .
-stringify               → stringify
-(                       → (
-cs.globalThis.          → 
-JSON                    → JSON
-.                       → .
-parse                   → parse
-(                       → (
-__cs_held               → held
-)                       → )
-)                       → )
-)                       → \n      )
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_numbers     → numbers
+                 →  
+=                → =
+                 →  
+JSON             → JSON
+.                → .
+stringify        → stringify
+(                → (
+[                → [
+1                → 1
+,                → ,
+                 →  
+2                → 2
+,                → ,
+                 →  
+3                → 3
+]                → ]
+)                → )
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_text        → text
+                 →  
+=                → =
+                 →  
+JSON             → JSON
+.                → .
+stringify        → stringify
+(                → (
+"hi"             → "hi"
+)                → )
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_flag        → flag
+                 →  
+=                → =
+                 →  
+JSON             → JSON
+.                → .
+stringify        → stringify
+(                → (
+true             → true
+)                → )
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_held        → held
+                 →  
+=                → =
+                 →  
+JSON             → JSON
+.                → .
+stringify        → stringify
+(                → (
+{                → {
+                 →  
+a                → a
+:                → :
+                 →  
+1                → 1
+,                → ,
+                 →  
+b                → b
+:                → :
+                 →  
+"two"            → "two"
+                 →  
+}                → }
+)                → )
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_back        → back
+                 →  
+=                → =
+                 →  
+JSON             → JSON
+.                → .
+parse            → parse
+(                → (
+__cs_numbers     → numbers
+)                → )
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+(                → (
+\n               → \n        
+__cs_numbers     → numbers
+                 →  
++                → +
+\n               → \n        
+"|"              → "|"
+                 →  
++                → +
+\n               → \n        
+__cs_text        → text
+                 →  
++                → +
+\n               → \n        
+"|"              → "|"
+                 →  
++                → +
+\n               → \n        
+__cs_flag        → flag
+                 →  
++                → +
+\n               → \n        
+"|"              → "|"
+                 →  
++                → +
+\n               → \n        
+__cs_held        → held
+                 →  
++                → +
+\n               → \n        
+"|"              → "|"
+                 →  
++                → +
+\n               → \n        
+JSON             → JSON
+.                → .
+stringify        → stringify
+(                → (
+__cs_back        → back
+)                → )
+                 →  
++                → +
+\n               → \n        
+"|"              → "|"
+                 →  
++                → +
+\n               → \n        
+JSON             → JSON
+.                → .
+stringify        → stringify
+(                → (
+JSON             → JSON
+.                → .
+parse            → parse
+(                → (
+__cs_held        → held
+)                → )
+)                → )
+\n               → \n      
+)                → )
+;                → ;
+\n               → \n    
+}                → }

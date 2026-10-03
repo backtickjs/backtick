@@ -8,11 +8,11 @@ it("earlyReturn", async (t) => {
     t,
     "earlyReturn",
     cs.lift((() => {
-    let __cs_n = 0;
-    if (__cs_n === 0) {
+      let __cs_n = 0;
+      if (__cs_n === 0) {
         return;
-    }
-    __cs_n = 1;
-})()),
+      }
+      __cs_n = 1;
+    })()),
   );
 });

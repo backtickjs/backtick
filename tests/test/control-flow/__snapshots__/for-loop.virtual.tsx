@@ -9,11 +9,11 @@ it("forLoop", async (t) => {
     t,
     "forLoop",
     cs.lift((() => {
-    let __cs_total = 0;
-    for (let __cs_i = 0; __cs_i < 5; __cs_i = __cs_i + 1) {
+      let __cs_total = 0;
+      for (let __cs_i = 0; __cs_i < 5; __cs_i = __cs_i + 1) {
         __cs_total = __cs_total + __cs_i;
-    }
-    return __cs_total;
-})()),
+      }
+      return __cs_total;
+    })()),
   );
 });

@@ -10,8 +10,14 @@ it("stringMembersEs2017", async (t) => {
     t,
     "stringMembersEs2017",
     cs.lift((() => {
-    const __cs_word = "ab";
-    return { padded: __cs_word.padStart(4) + "|" + __cs_word.padEnd(5, "-="), trimmed: "  x  ".trimStart() + "|" + "  x  ".trimEnd() + "|", at: [__cs_word.at(0), __cs_word.at(-1), __cs_word.at(5)], replaced: "a.b.c".replaceAll(".", "/"), replacedBy: "a.b".replaceAll(".", (__cs_found, __cs_offset) => "" + __cs_offset) };
-})()),
+      const __cs_word = "ab";
+      return {
+        padded: __cs_word.padStart(4) + "|" + __cs_word.padEnd(5, "-="),
+        trimmed: "  x  ".trimStart() + "|" + "  x  ".trimEnd() + "|",
+        at: [__cs_word.at(0), __cs_word.at(-1), __cs_word.at(5)],
+        replaced: "a.b.c".replaceAll(".", "/"),
+        replacedBy: "a.b".replaceAll(".", (__cs_found, __cs_offset) => "" + __cs_offset),
+      };
+    })()),
   );
 });

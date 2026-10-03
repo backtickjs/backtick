@@ -1,102 +1,144 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_word               → word
- =                      →  = 
-"ab"                    → "ab"
-;                       → ;
-\n                      → \n      
-return                  → return 
-{                       → {\n        
-padded                  → padded
-:                       → : 
-__cs_word               → word
-.                       → .
-padStart                → padStart
-(                       → (
-4                       → 4
-)                       → )
- +                      →  + 
-"|"                     → "|"
- +                      →  + 
-__cs_word               → word
-.                       → .
-padEnd                  → padEnd
-(                       → (
-5                       → 5
-,                       → , 
-"-="                    → "-="
-)                       → )
-,                       → ,\n        
-trimmed                 → trimmed
-:                       → : 
-"  x  "                 → "  x  "
-.                       → .
-trimStart               → trimStart
-()                      → ()
- +                      →  + 
-"|"                     → "|"
- +                      →  + 
-"  x  "                 → "  x  "
-.                       → .
-trimEnd                 → trimEnd
-()                      → ()
- +                      →  + 
-"|"                     → "|"
-,                       → ,\n        
-at                      → at
-:                       → : 
-[                       → [
-__cs_word               → word
-.                       → .
-at                      → at
-(                       → (
-0                       → 0
-)                       → )
-,                       → , 
-__cs_word               → word
-.                       → .
-at                      → at
-(                       → (
--                       → -
-1                       → 1
-)                       → )
-,                       → , 
-__cs_word               → word
-.                       → .
-at                      → at
-(                       → (
-5                       → 5
-)                       → )
-]                       → ]
-,                       → ,\n        
-replaced                → replaced
-:                       → : 
-"a.b.c"                 → "a.b.c"
-.                       → .
-replaceAll              → replaceAll
-(                       → (
-"."                     → "."
-,                       → , 
-"/"                     → "/"
-)                       → )
-,                       → ,\n        
-replacedBy              → replacedBy
-:                       → : 
-"a.b"                   → "a.b"
-.                       → .
-replaceAll              → replaceAll
-(                       → (
-"."                     → "."
-,                       → , 
-(                       → (
-__cs_found              → found
-,                       → , 
-__cs_offset             → offset
-) =>                    → ) => 
-""                      → ""
- +                      →  + 
-__cs_offset             → offset
-)                       → )
- }                      → ,\n      }
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_word        → word
+                 →  
+=                → =
+                 →  
+"ab"             → "ab"
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+{                → {
+\n               → \n        
+padded           → padded
+:                → :
+                 →  
+__cs_word        → word
+.                → .
+padStart         → padStart
+(                → (
+4                → 4
+)                → )
+                 →  
++                → +
+                 →  
+"|"              → "|"
+                 →  
++                → +
+                 →  
+__cs_word        → word
+.                → .
+padEnd           → padEnd
+(                → (
+5                → 5
+,                → ,
+                 →  
+"-="             → "-="
+)                → )
+,                → ,
+\n               → \n        
+trimmed          → trimmed
+:                → :
+                 →  
+"  x  "          → "  x  "
+.                → .
+trimStart        → trimStart
+(                → (
+)                → )
+                 →  
++                → +
+                 →  
+"|"              → "|"
+                 →  
++                → +
+                 →  
+"  x  "          → "  x  "
+.                → .
+trimEnd          → trimEnd
+(                → (
+)                → )
+                 →  
++                → +
+                 →  
+"|"              → "|"
+,                → ,
+\n               → \n        
+at               → at
+:                → :
+                 →  
+[                → [
+__cs_word        → word
+.                → .
+at               → at
+(                → (
+0                → 0
+)                → )
+,                → ,
+                 →  
+__cs_word        → word
+.                → .
+at               → at
+(                → (
+-                → -
+1                → 1
+)                → )
+,                → ,
+                 →  
+__cs_word        → word
+.                → .
+at               → at
+(                → (
+5                → 5
+)                → )
+]                → ]
+,                → ,
+\n               → \n        
+replaced         → replaced
+:                → :
+                 →  
+"a.b.c"          → "a.b.c"
+.                → .
+replaceAll       → replaceAll
+(                → (
+"."              → "."
+,                → ,
+                 →  
+"/"              → "/"
+)                → )
+,                → ,
+\n               → \n        
+replacedBy       → replacedBy
+:                → :
+                 →  
+"a.b"            → "a.b"
+.                → .
+replaceAll       → replaceAll
+(                → (
+"."              → "."
+,                → ,
+                 →  
+(                → (
+__cs_found       → found
+,                → ,
+                 →  
+__cs_offset      → offset
+)                → )
+                 →  
+=>               → =>
+                 →  
+""               → ""
+                 →  
++                → +
+                 →  
+__cs_offset      → offset
+)                → )
+,                → ,
+\n               → \n      
+}                → }
+;                → ;
+\n               → \n    
+}                → }

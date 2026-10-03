@@ -1,49 +1,64 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_stop               → stop
- =                      →  = 
-cs.globalThis.          → 
-window                  → window
-.                       → .
-clearInterval           → clearInterval
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_repeating          → repeating
- =                      →  = 
-cs.globalThis.          → 
-window                  → window
-.                       → .
-setInterval             → setInterval
-(                       → (
-() =>                   → () => 
-0                       → 0
-,                       → , 
-1000                    → 1000
-)                       → )
-;                       → ;
-\n                      → \n      
-__cs_stop               → stop
-(                       → (
-__cs_repeating          → repeating
-)                       → )
-;                       → ;
-\n                      → \n      
-cs.globalThis.          → 
-window                  → window
-.                       → .
-clearTimeout            → clearTimeout
-(                       → (
-cs.globalThis.          → 
-window                  → window
-.                       → .
-setTimeout              → setTimeout
-(                       → (
-() =>                   → () => 
-0                       → 0
-,                       → , 
-1000                    → 1000
-)                       → )
-)                       → )
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_stop        → stop
+                 →  
+=                → =
+                 →  
+window           → window
+.                → .
+clearInterval    → clearInterval
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_repeating   → repeating
+                 →  
+=                → =
+                 →  
+window           → window
+.                → .
+setInterval      → setInterval
+(                → (
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+0                → 0
+,                → ,
+                 →  
+1000             → 1000
+)                → )
+;                → ;
+\n               → \n      
+__cs_stop        → stop
+(                → (
+__cs_repeating   → repeating
+)                → )
+;                → ;
+\n               → \n      
+window           → window
+.                → .
+clearTimeout     → clearTimeout
+(                → (
+window           → window
+.                → .
+setTimeout       → setTimeout
+(                → (
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+0                → 0
+,                → ,
+                 →  
+1000             → 1000
+)                → )
+)                → )
+;                → ;
+\n               → \n    
+}                → }

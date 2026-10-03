@@ -10,6 +10,9 @@ it("spliceSharing", async (t) => {
   await snapshotCase(
     t,
     "spliceSharing",
-    cs.lift((() => ({ x: cs.splice(add(cs.lift((() => 1)()), cs.lift((() => 2)()))), y: cs.splice(add(cs.lift((() => 3)()), cs.lift((() => 4)()))) }))()),
+    cs.lift((() => ({
+      x: cs.splice(add(cs.lift((() => 1)()), cs.lift((() => 2)()))),
+      y: cs.splice(add(cs.lift((() => 3)()), cs.lift((() => 4)()))),
+    }))()),
   );
 });

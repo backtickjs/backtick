@@ -1,0 +1,372 @@
+cs.lift((() =>   →  [-semantic -navigation]
+cs.splice(       →  [-semantic -navigation]
+(createRoot)     → $createRoot
+)                →  [-semantic -navigation]
+(                → (
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n          
+const            → const
+                 →  
+[                → [
+__cs_a           → a
+,                → ,
+                 →  
+,                → ,
+                 →  
+__cs_b           → b
+                 →  
+=                → =
+                 →  
+5                → 5
+,                → ,
+                 →  
+...              → ...
+__cs_others      → others
+]                → ]
+                 →  
+=                → =
+                 →  
+[                → [
+1                → 1
+,                → ,
+                 →  
+2                → 2
+,                → ,
+                 →  
+undefined        → undefined
+,                → ,
+                 →  
+4                → 4
+,                → ,
+                 →  
+6                → 6
+]                → ]
+;                → ;
+\n               → \n          
+const            → const
+                 →  
+{                → {
+\n               → \n            
+x                → x
+__cs_x           → x
+,                → ,
+\n               → \n            
+y                → y
+:                → :
+                 →  
+{                → {
+                 →  
+z                → z
+__cs_z           → z
+                 →  
+}                → }
+,                → ,
+\n               → \n            
+w                → w
+__cs_w           → w
+                 →  
+=                → =
+                 →  
+7                → 7
+,                → ,
+\n               → \n            
+...              → ...
+__cs_more        → more
+\n               → \n          
+}                → }
+                 →  
+=                → =
+                 →  
+{                → {
+                 →  
+x                → x
+:                → :
+                 →  
+1                → 1
+,                → ,
+                 →  
+y                → y
+:                → :
+                 →  
+{                → {
+                 →  
+z                → z
+:                → :
+                 →  
+2                → 2
+                 →  
+}                → }
+,                → ,
+                 →  
+extra            → extra
+:                → :
+                 →  
+3                → 3
+                 →  
+}                → }
+;                → ;
+\n               → \n          
+return           → return
+                 →  
+[                → [
+__cs_a           → a
+,                → ,
+                 →  
+__cs_b           → b
+,                → ,
+                 →  
+__cs_others      → others
+,                → ,
+                 →  
+__cs_x           → x
+,                → ,
+                 →  
+__cs_z           → z
+,                → ,
+                 →  
+__cs_w           → w
+,                → ,
+                 →  
+__cs_more        → more
+]                → ]
+;                → ;
+\n               → \n        
+}                → }
+)                → )
+cs.lift((() =>   →  [-semantic -navigation]
+cs.splice(       →  [-semantic -navigation]
+(createRoot)     → $createRoot
+)                →  [-semantic -navigation]
+(                → (
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n          
+const            → const
+                 →  
+__cs_sum         → sum
+                 →  
+=                → =
+                 →  
+(                → (
+...              → ...
+__cs_values      → values
+:                → :
+                 →  
+number           → number
+[                → [
+]                → ]
+)                → )
+                 →  
+=>               → =>
+\n               → \n            
+__cs_values      → values
+.                → .
+reduce           → reduce
+(                → (
+(                → (
+__cs_t           → t
+,                → ,
+                 →  
+__cs_v           → v
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_t           → t
+                 →  
++                → +
+                 →  
+__cs_v           → v
+,                → ,
+                 →  
+0                → 0
+)                → )
+;                → ;
+\n               → \n          
+const            → const
+                 →  
+__cs_scaled      → scaled
+                 →  
+=                → =
+                 →  
+(                → (
+__cs_n           → n
+:                → :
+                 →  
+number           → number
+,                → ,
+                 →  
+__cs_by          → by
+:                → :
+                 →  
+number           → number
+                 →  
+=                → =
+                 →  
+2                → 2
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_n           → n
+                 →  
+*                → *
+                 →  
+__cs_by          → by
+;                → ;
+\n               → \n          
+const            → const
+                 →  
+__cs_named       → named
+                 →  
+=                → =
+                 →  
+(                → (
+{                → {
+                 →  
+first            → first
+__cs_first       → first
+,                → ,
+                 →  
+last             → last
+__cs_last        → last
+                 →  
+}                → }
+:                → :
+                 →  
+{                → {
+                 →  
+first            → first
+:                → :
+                 →  
+string           → string
+;                → ;
+                 →  
+last             → last
+:                → :
+                 →  
+string           → string
+                 →  
+}                → }
+)                → )
+                 →  
+=>               → =>
+\n               → \n            
+__cs_first       → first
+                 →  
++                → +
+                 →  
+" "              → " "
+                 →  
++                → +
+                 →  
+__cs_last        → last
+;                → ;
+\n               → \n          
+const            → const
+                 →  
+__cs_pair        → pair
+                 →  
+=                → =
+                 →  
+(                → (
+[                → [
+__cs_left        → left
+,                → ,
+                 →  
+__cs_right       → right
+]                → ]
+:                → :
+                 →  
+[                → [
+number           → number
+,                → ,
+                 →  
+number           → number
+]                → ]
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_left        → left
+                 →  
+-                → -
+                 →  
+__cs_right       → right
+;                → ;
+\n               → \n          
+return           → return
+                 →  
+[                → [
+\n               → \n            
+__cs_sum         → sum
+(                → (
+1                → 1
+,                → ,
+                 →  
+2                → 2
+,                → ,
+                 →  
+3                → 3
+)                → )
+,                → ,
+\n               → \n            
+__cs_scaled      → scaled
+(                → (
+4                → 4
+)                → )
+,                → ,
+\n               → \n            
+__cs_scaled      → scaled
+(                → (
+4                → 4
+,                → ,
+                 →  
+3                → 3
+)                → )
+,                → ,
+\n               → \n            
+__cs_named       → named
+(                → (
+{                → {
+                 →  
+first            → first
+:                → :
+                 →  
+"A"              → "A"
+,                → ,
+                 →  
+last             → last
+:                → :
+                 →  
+"B"              → "B"
+                 →  
+}                → }
+)                → )
+,                → ,
+\n               → \n            
+__cs_pair        → pair
+(                → (
+[                → [
+5                → 5
+,                → ,
+                 →  
+2                → 2
+]                → ]
+)                → )
+,                → ,
+\n               → \n          
+]                → ]
+;                → ;
+\n               → \n        
+}                → }
+)                → )

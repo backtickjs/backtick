@@ -1,0 +1,516 @@
+cs.lift((() =>    →  [-semantic -navigation]
+cs.splice(        →  [-semantic -navigation]
+(createRoot)      → $createRoot
+)                 →  [-semantic -navigation]
+(                 → (
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n          
+{                 → {
+\n                → \n            
+var               → var
+                  →  
+__cs_late         → late
+                  →  
+=                 → =
+                  →  
+1                 → 1
+;                 → ;
+\n                → \n          
+}                 → }
+\n                → \n          
+let               → let
+                  →  
+__cs_total        → total
+                  →  
+=                 → =
+                  →  
+0                 → 0
+;                 → ;
+\n                → \n          
+for               → for
+                  →  
+(                 → (
+var               → var
+                  →  
+__cs_i            → i
+                  →  
+=                 → =
+                  →  
+0                 → 0
+;                 → ;
+                  →  
+__cs_i            → i
+                  →  
+<                 → <
+                  →  
+3                 → 3
+;                 → ;
+                  →  
+__cs_i            → i
+                  →  
+=                 → =
+                  →  
+__cs_i            → i
+                  →  
++                 → +
+                  →  
+1                 → 1
+)                 → )
+                  →  
+{                 → {
+\n                → \n            
+__cs_total        → total
+                  →  
+=                 → =
+                  →  
+__cs_total        → total
+                  →  
++                 → +
+                  →  
+__cs_i            → i
+;                 → ;
+\n                → \n          
+}                 → }
+\n                → \n          
+return            → return
+                  →  
+__cs_late         → late
+                  →  
++                 → +
+                  →  
+" "               → " "
+                  →  
++                 → +
+                  →  
+__cs_total        → total
+                  →  
++                 → +
+                  →  
+" "               → " "
+                  →  
++                 → +
+                  →  
+__cs_i            → i
+;                 → ;
+\n                → \n        
+}                 → }
+)                 → )
+cs.lift((() =>    →  [-semantic -navigation]
+cs.splice(        →  [-semantic -navigation]
+(createRoot)      → $createRoot
+)                 →  [-semantic -navigation]
+(                 → (
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n          
+let               → let
+                  →  
+__cs_x            → x
+;                 → ;
+\n                → \n          
+const             → const
+                  →  
+__cs_a            → a
+                  →  
+=                 → =
+                  →  
+1                 → 1
+,                 → ,
+\n                → \n            
+__cs_b            → b
+                  →  
+=                 → =
+                  →  
+2                 → 2
+;                 → ;
+\n                → \n          
+return            → return
+                  →  
+[                 → [
+__cs_x            → x
+,                 → ,
+                  →  
+__cs_a            → a
+                  →  
++                 → +
+                  →  
+__cs_b            → b
+]                 → ]
+;                 → ;
+\n                → \n        
+}                 → }
+)                 → )
+cs.lift((() =>    →  [-semantic -navigation]
+cs.splice(        →  [-semantic -navigation]
+(createRoot)      → $createRoot
+)                 →  [-semantic -navigation]
+(                 → (
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n          
+const             → const
+                  →  
+__cs_seen         → seen
+:                 → :
+                  →  
+string            → string
+[                 → [
+]                 → ]
+                  →  
+=                 → =
+                  →  
+[                 → [
+]                 → ]
+;                 → ;
+\n                → \n          
+outer             → outer
+:                 → :
+                  →  
+for               → for
+                  →  
+(                 → (
+let               → let
+                  →  
+__cs_i            → i
+                  →  
+=                 → =
+                  →  
+0                 → 0
+;                 → ;
+                  →  
+__cs_i            → i
+                  →  
+<                 → <
+                  →  
+3                 → 3
+;                 → ;
+                  →  
+__cs_i            → i
+++                → ++
+)                 → )
+                  →  
+{                 → {
+\n                → \n            
+for               → for
+                  →  
+(                 → (
+let               → let
+                  →  
+__cs_j            → j
+                  →  
+=                 → =
+                  →  
+0                 → 0
+;                 → ;
+                  →  
+__cs_j            → j
+                  →  
+<                 → <
+                  →  
+3                 → 3
+;                 → ;
+                  →  
+__cs_j            → j
+++                → ++
+)                 → )
+                  →  
+{                 → {
+\n                → \n              
+if                → if
+                  →  
+(                 → (
+__cs_j            → j
+                  →  
+===               → ===
+                  →  
+1                 → 1
+)                 → )
+                  →  
+continue          → continue
+                  →  
+outer             → outer
+;                 → ;
+\n                → \n              
+if                → if
+                  →  
+(                 → (
+__cs_i            → i
+                  →  
+===               → ===
+                  →  
+2                 → 2
+)                 → )
+                  →  
+break             → break
+                  →  
+outer             → outer
+;                 → ;
+\n                → \n              
+__cs_seen         → seen
+.                 → .
+push              → push
+(                 → (
+__cs_i            → i
+                  →  
++                 → +
+                  →  
+":"               → ":"
+                  →  
++                 → +
+                  →  
+__cs_j            → j
+)                 → )
+;                 → ;
+\n                → \n            
+}                 → }
+\n                → \n          
+}                 → }
+\n                → \n          
+return            → return
+                  →  
+__cs_seen         → seen
+;                 → ;
+\n                → \n        
+}                 → }
+)                 → )
+cs.lift((() =>    →  [-semantic -navigation]
+cs.splice(        →  [-semantic -navigation]
+(createRoot)      → $createRoot
+)                 →  [-semantic -navigation]
+(                 → (
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n          
+const             → const
+                  →  
+__cs_log          → log
+:                 → :
+                  →  
+string            → string
+[                 → [
+]                 → ]
+                  →  
+=                 → =
+                  →  
+[                 → [
+]                 → ]
+;                 → ;
+\n                → \n          
+const             → const
+                  →  
+__cs_run          → run
+                  →  
+=                 → =
+                  →  
+(                 → (
+__cs_fail         → fail
+:                 → :
+                  →  
+boolean           → boolean
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n            
+try               → try
+                  →  
+{                 → {
+\n                → \n              
+if                → if
+                  →  
+(                 → (
+__cs_fail         → fail
+)                 → )
+                  →  
+throw             → throw
+                  →  
+new               → new
+                  →  
+Error             → Error
+(                 → (
+"no"              → "no"
+)                 → )
+;                 → ;
+\n                → \n              
+__cs_log          → log
+.                 → .
+push              → push
+(                 → (
+"tried"           → "tried"
+)                 → )
+;                 → ;
+\n                → \n            
+}                 → }
+                  →  
+catch             → catch
+                  →  
+(                 → (
+__cs_error        → error
+)                 → )
+                  →  
+{                 → {
+\n                → \n              
+__cs_log          → log
+.                 → .
+push              → push
+(                 → (
+"caught"          → "caught"
+)                 → )
+;                 → ;
+\n                → \n            
+}                 → }
+                  →  
+finally           → finally
+                  →  
+{                 → {
+\n                → \n              
+__cs_log          → log
+.                 → .
+push              → push
+(                 → (
+"finally"         → "finally"
+)                 → )
+;                 → ;
+\n                → \n            
+}                 → }
+\n                → \n          
+}                 → }
+;                 → ;
+\n                → \n          
+__cs_run          → run
+(                 → (
+false             → false
+)                 → )
+;                 → ;
+\n                → \n          
+__cs_run          → run
+(                 → (
+true              → true
+)                 → )
+;                 → ;
+\n                → \n          
+const             → const
+                  →  
+__cs_overridden   → overridden
+                  →  
+=                 → =
+                  →  
+(                 → (
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n            
+try               → try
+                  →  
+{                 → {
+\n                → \n              
+return            → return
+                  →  
+1                 → 1
+;                 → ;
+\n                → \n            
+}                 → }
+                  →  
+finally           → finally
+                  →  
+{                 → {
+\n                → \n              
+return            → return
+                  →  
+2                 → 2
+;                 → ;
+\n                → \n            
+}                 → }
+\n                → \n          
+}                 → }
+)                 → )
+(                 → (
+)                 → )
+;                 → ;
+\n                → \n          
+return            → return
+                  →  
+[                 → [
+__cs_log          → log
+,                 → ,
+                  →  
+__cs_overridden   → overridden
+]                 → ]
+;                 → ;
+\n                → \n        
+}                 → }
+)                 → )
+cs.lift((() =>    →  [-semantic -navigation]
+cs.splice(        →  [-semantic -navigation]
+(createRoot)      → $createRoot
+)                 →  [-semantic -navigation]
+(                 → (
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n          
+try               → try
+                  →  
+{                 → {
+\n                → \n            
+throw             → throw
+                  →  
+new               → new
+                  →  
+Error             → Error
+(                 → (
+"boom"            → "boom"
+)                 → )
+;                 → ;
+\n                → \n          
+}                 → }
+                  →  
+catch             → catch
+                  →  
+(                 → (
+{                 → {
+                  →  
+message           → message
+__cs_message      → message
+                  →  
+}                 → }
+:                 → :
+                  →  
+any               → any
+)                 → )
+                  →  
+{                 → {
+\n                → \n            
+return            → return
+                  →  
+__cs_message      → message
+;                 → ;
+\n                → \n          
+}                 → }
+\n                → \n        
+}                 → }
+)                 → )

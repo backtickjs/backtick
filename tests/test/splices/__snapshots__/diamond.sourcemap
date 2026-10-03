@@ -1,47 +1,70 @@
-cs.lift((() =>          → cs`
-1                       → 1
-)())                    → `
-cs.lift((() => {\n      → cs`{\n  
-return                  → return 
-cs.splice(              →  [-semantic]
-(d0)                    → $d0
-)                       →  [-semantic]
- +                      →  + 
-cs.splice(              →  [-semantic]
-(d0)                    → $d0
-)                       →  [-semantic]
-;                       → ;
-\n})())                 → \n}`
-cs.lift((() => {\n      → cs`{\n  
-return                  → return 
-cs.splice(              →  [-semantic]
-(d1)                    → $d1
-)                       →  [-semantic]
- +                      →  + 
-cs.splice(              →  [-semantic]
-(d1)                    → $d1
-)                       →  [-semantic]
-;                       → ;
-\n})())                 → \n}`
-cs.lift((() => {\n      → cs`{\n  
-return                  → return 
-cs.splice(              →  [-semantic]
-(d2)                    → $d2
-)                       →  [-semantic]
- +                      →  + 
-cs.splice(              →  [-semantic]
-(d2)                    → $d2
-)                       →  [-semantic]
-;                       → ;
-\n})())                 → \n}`
-cs.lift((() => {\n      → cs`{\n  
-return                  → return 
-cs.splice(              →  [-semantic]
-(d3)                    → $d3
-)                       →  [-semantic]
- +                      →  + 
-cs.splice(              →  [-semantic]
-(d3)                    → $d3
-)                       →  [-semantic]
-;                       → ;
-\n})())                 → \n}`
+cs.lift((() =>   →  [-semantic -navigation]
+1                → 1
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n  
+return           → return
+                 →  
+cs.splice(       →  [-semantic -navigation]
+(d0)             → $d0
+)                →  [-semantic -navigation]
+                 →  
++                → +
+                 →  
+cs.splice(       →  [-semantic -navigation]
+(d0)             → $d0
+)                →  [-semantic -navigation]
+;                → ;
+\n               → \n
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n  
+return           → return
+                 →  
+cs.splice(       →  [-semantic -navigation]
+(d1)             → $d1
+)                →  [-semantic -navigation]
+                 →  
++                → +
+                 →  
+cs.splice(       →  [-semantic -navigation]
+(d1)             → $d1
+)                →  [-semantic -navigation]
+;                → ;
+\n               → \n
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n  
+return           → return
+                 →  
+cs.splice(       →  [-semantic -navigation]
+(d2)             → $d2
+)                →  [-semantic -navigation]
+                 →  
++                → +
+                 →  
+cs.splice(       →  [-semantic -navigation]
+(d2)             → $d2
+)                →  [-semantic -navigation]
+;                → ;
+\n               → \n
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n  
+return           → return
+                 →  
+cs.splice(       →  [-semantic -navigation]
+(d3)             → $d3
+)                →  [-semantic -navigation]
+                 →  
++                → +
+                 →  
+cs.splice(       →  [-semantic -navigation]
+(d3)             → $d3
+)                →  [-semantic -navigation]
+;                → ;
+\n               → \n
+}                → }

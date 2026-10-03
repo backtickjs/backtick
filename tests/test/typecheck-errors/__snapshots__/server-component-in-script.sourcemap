@@ -1,59 +1,54 @@
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 li               → li
->{               → >{
-cs.splice(       →  [-semantic]
+>                → >
+{                → {
+cs.splice(       →  [-semantic -navigation]
 (label)          → $label
-)                →  [-semantic]
-}</              → }</
+)                →  [-semantic -navigation]
+}                → }
+<                → <
+/                → /
 li               → li
 >                → >
-)())             → `
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 h1               → h1
->{               → >{
-cs.splice(       →  [-semantic]
+>                → >
+{                → {
+cs.splice(       →  [-semantic -navigation]
 (text)           → $text
-)                →  [-semantic]
-}</              → }</
+)                →  [-semantic -navigation]
+}                → }
+<                → <
+/                → /
 h1               → h1
 >                → >
-)())             → `
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 hr               → hr
- />              →  />
-)())             → `
-cs.lift((() =>   → cs`
+                 →  
+/                → /
+>                → >
+cs.lift((() =>   →  [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 Row              → Row
 )                →  [-semantic -navigation]
-(                →  [-semantic -navigation -verification]
-{                → Row 
+{                → Row
 label            → label
-:                → =
 "a"              → "a"
- }               → 
-)                →  label="a" /> [-semantic -navigation -verification]
-)())             → `
-cs.lift((() =>   → cs`
+}                → 
+cs.lift((() =>   →  [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 Title            → Title
 )                →  [-semantic -navigation]
-(                →  [-semantic -navigation -verification]
-{                → Title 
+{                → Title
 text             → text
-:                → =
 "Week"           → "Week"
- }               → 
-)                →  text="Week" /> [-semantic -navigation -verification]
-)())             → `
-cs.lift((() =>   → cs`
+}                → 
+cs.lift((() =>   →  [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 Rule             → Rule
 )                →  [-semantic -navigation]
-(                →  [-semantic -navigation -verification]
-{}               → Rule
-)                →  /> [-semantic -navigation -verification]
-)())             → `
+{                → Rule
+}                → 

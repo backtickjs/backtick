@@ -1,1 +1,0 @@
-4:19-4:20 error TS0: `.` after `?.` isn't supported in a `cs` client script; use `?.` for each access in the chain.

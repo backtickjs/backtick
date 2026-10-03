@@ -23,10 +23,10 @@ it("timers", async (t) => {
     t,
     "timers",
     cs.lift((() => {
-    const __cs_stop = cs.globalThis.window.clearInterval;
-    const __cs_repeating = cs.globalThis.window.setInterval(() => 0, 1000);
-    __cs_stop(__cs_repeating);
-    cs.globalThis.window.clearTimeout(cs.globalThis.window.setTimeout(() => 0, 1000));
-})()),
+      const __cs_stop = cs.globalThis.window.clearInterval;
+      const __cs_repeating = cs.globalThis.window.setInterval(() => 0, 1000);
+      __cs_stop(__cs_repeating);
+      cs.globalThis.window.clearTimeout(cs.globalThis.window.setTimeout(() => 0, 1000));
+    })()),
   );
 });

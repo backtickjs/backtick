@@ -1,17 +1,28 @@
-cs.lift((() => {\n    // @ts-expect-error: Conversion of type 'number' to type 'void' may be a mistake because neither type sufficiently overlaps with the other.\n    → cs`{\n  // @ts-expect-error: Conversion of type 'number' to type 'void' may be a mistake because neither type sufficiently overlaps with the other.\n  
-const                                     → const 
+cs.lift((() =>                            →  [-semantic -navigation]
+{                                         → {
+\n  // @ts-expect-error: Conversion of type 'number' to type 'void' may be a mistake because neither type sufficiently overlaps with the other.\n  → \n  // @ts-expect-error: Conversion of type 'number' to type 'void' may be a mistake because neither type sufficiently overlaps with the other.\n  
+const                                     → const
+                                          →  
 __cs_a                                    → a
- =                                        →  = 
-cs.splice(                                →  [-semantic]
+                                          →  
+=                                         → =
+                                          →  
+cs.splice(                                →  [-semantic -navigation]
 (one)                                     → $one
-)                                         →  [-semantic]
- as                                       →  as 
+)                                         →  [-semantic -navigation]
+                                          →  
+as                                        → as
+                                          →  
 void                                      → void
 ;                                         → ;
 \n                                        → \n  
-return                                    → return 
+return                                    → return
+                                          →  
 ""                                        → ""
- +                                        →  + 
+                                          →  
++                                         → +
+                                          →  
 __cs_a                                    → a
 ;                                         → ;
-\n})())                                   → \n}`
+\n                                        → \n
+}                                         → }

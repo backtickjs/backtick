@@ -1,41 +1,60 @@
-cs.lift((() =>     → cs`
+cs.lift((() =>     →  [-semantic -navigation]
 (                  → (
 __cs_label         → label
-:                  → : 
+:                  → :
+                   →  
 string             → string
-) => {\n           → ) => {\n    
-return             → return 
-{                  → { 
+)                  → )
+                   →  
+=>                 → =>
+                   →  
+{                  → {
+\n                 → \n    
+return             → return
+                   →  
+{                  → {
+                   →  
 label              → label
-:                  → : 
-cs.splice(         →  [-semantic]
+:                  → :
+                   →  
+cs.splice(         →  [-semantic -navigation]
 (createSignal)     → $createSignal
-)                  →  [-semantic]
+)                  →  [-semantic -navigation]
 (                  → (
 __cs_label         → label
 )                  → )
- }                 →  }
+                   →  
+}                  → }
 ;                  → ;
-\n}                → \n  }
-)())               → `
-cs.lift((() =>     → cs`
+\n                 → \n  
+}                  → }
+cs.lift((() =>     →  [-semantic -navigation]
 <                  → <
 span               → span
-                   → \n    
+\n                 → \n    
 style              → style
-={                 → =
+=                  → =
 "font-size: 16px"  → "font-size: 16px"
-}                  → 
-                   → \n    
+\n                 → \n    
 onclick            → onclick
-={                 → ={
-() => {\n          → () => {\n      
-const              → const 
+=                  → =
+{                  → {
+(                  → (
+)                  → )
+                   →  
+=>                 → =>
+                   →  
+{                  → {
+\n                 → \n      
+const              → const
+                   →  
 __cs_row           → row
- =                 →  = 
-cs.splice(         →  [-semantic]
+                   →  
+=                  → =
+                   →  
+cs.splice(         →  [-semantic -navigation]
 (build)            → $build
-)                  →  [-semantic]
+)                  →  [-semantic -navigation]
 (                  → (
 "one"              → "one"
 )                  → )
@@ -54,17 +73,24 @@ label              → label
 [                  → [
 0                  → 0
 ]                  → ]
-()                 → ()
- +                 →  + 
+(                  → (
+)                  → )
+                   →  
++                  → +
+                   →  
 " !!!"             → " !!!"
 )                  → )
 ;                  → ;
-\n}                → \n    }
+\n                 → \n    
 }                  → }
->{                 → \n  >\n    {
-cs.splice(         →  [-semantic]
+}                  → }
+\n                 → \n  
+>                  → >
+\n                 → \n    
+{                  → {
+cs.splice(         →  [-semantic -navigation]
 (build)            → $build
-)                  →  [-semantic]
+)                  →  [-semantic -navigation]
 (                  → (
 "one"              → "one"
 )                  → )
@@ -73,8 +99,11 @@ label              → label
 [                  → [
 0                  → 0
 ]                  → ]
-()                 → ()
-}</                → }\n  </
+(                  → (
+)                  → )
+}                  → }
+\n                 → \n  
+<                  → <
+/                  → /
 span               → span
 >                  → >
-)())               → `

@@ -1,19 +1,31 @@
-cs.lift((() => {\n      → cs`{\n  
-const                   → const 
-__cs_x                  → x
- =                      →  = 
-1                       → 1
-;                       → ;
-\n})())                 → \n}`
-cs.lift((() => {\n      → cs`{\n  
-cs.splice(              →  [-semantic]
-(effects)               → $effects
-)                       →  [-semantic]
-;                       → ;
-\n})())                 → \n}`
-cs.lift((() => {\n      → cs`{\n      
-cs.splice(              →  [-semantic]
-(composed)              → $composed
-)                       →  [-semantic]
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n  
+const            → const
+                 →  
+__cs_x           → x
+                 →  
+=                → =
+                 →  
+1                → 1
+;                → ;
+\n               → \n
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n  
+cs.splice(       →  [-semantic -navigation]
+(effects)        → $effects
+)                →  [-semantic -navigation]
+;                → ;
+\n               → \n
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+cs.splice(       →  [-semantic -navigation]
+(composed)       → $composed
+)                →  [-semantic -navigation]
+;                → ;
+\n               → \n    
+}                → }

@@ -1,53 +1,71 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_prices             → prices
- =                      →  = 
-{                       → { 
-apple                   → apple
-:                       → : 
-1                       → 1
-,                       → , 
-pear                    → pear
-:                       → : 
-2                       → 2
- }                      →  }
-;                       → ;
-\n                      → \n      
-return                  → return 
-{                       → {\n        
-values                  → values
-:                       → : 
-cs.globalThis.          → 
-Object                  → Object
-.                       → .
-values                  → values
-(                       → (
-__cs_prices             → prices
-)                       → )
-,                       → ,\n        
-holds                   → holds
-:                       → : 
-[                       → [
-cs.globalThis.          → 
-Object                  → Object
-.                       → .
-hasOwn                  → hasOwn
-(                       → (
-__cs_prices             → prices
-,                       → , 
-"pear"                  → "pear"
-)                       → )
-,                       → , 
-cs.globalThis.          → 
-Object                  → Object
-.                       → .
-hasOwn                  → hasOwn
-(                       → (
-__cs_prices             → prices
-,                       → , 
-"plum"                  → "plum"
-)                       → )
-]                       → ]
- }                      → ,\n      }
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_prices      → prices
+                 →  
+=                → =
+                 →  
+{                → {
+                 →  
+apple            → apple
+:                → :
+                 →  
+1                → 1
+,                → ,
+                 →  
+pear             → pear
+:                → :
+                 →  
+2                → 2
+                 →  
+}                → }
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+{                → {
+\n               → \n        
+values           → values
+:                → :
+                 →  
+Object           → Object
+.                → .
+values           → values
+(                → (
+__cs_prices      → prices
+)                → )
+,                → ,
+\n               → \n        
+holds            → holds
+:                → :
+                 →  
+[                → [
+Object           → Object
+.                → .
+hasOwn           → hasOwn
+(                → (
+__cs_prices      → prices
+,                → ,
+                 →  
+"pear"           → "pear"
+)                → )
+,                → ,
+                 →  
+Object           → Object
+.                → .
+hasOwn           → hasOwn
+(                → (
+__cs_prices      → prices
+,                → ,
+                 →  
+"plum"           → "plum"
+)                → )
+]                → ]
+,                → ,
+\n               → \n      
+}                → }
+;                → ;
+\n               → \n    
+}                → }

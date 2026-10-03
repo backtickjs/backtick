@@ -19,13 +19,23 @@ type Row = {
 async function MemberRows() {
   return cs.lift((() => {
     const __cs_build = (__cs_from: number) => {
-        return cs.globalThis.Array.from({ length: 3 }, (__cs__, __cs_at) => {
-            return { id: __cs_from + __cs_at, label: cs.splice((createSignal))("row " + (__cs_from + __cs_at)) };
-        });
+      return cs.globalThis.Array.from({ length: 3 }, (__cs__, __cs_at) => {
+        return { id: __cs_from + __cs_at, label: cs.splice((createSignal))("row " + (__cs_from + __cs_at)) };
+      });
     };
+
     const __cs_held = cs.splice((createSignal))(__cs_build(1));
-    return (<div>{<ul class={"rows"}>{(void For, cs.splice(For)({ each: __cs_held[0](), children: (__cs_row: Row) => (<li onclick={() => __cs_row.label[1]("pressed")}>{__cs_row.label[0]()}</li>) }))}</ul>}</div>);
-})());
+
+    return (
+      <div>
+        <ul class="rows">
+          {(void For, cs.splice(For)({ each: __cs_held[0](), children: (__cs_row: Row) => (
+              <li onclick={() => __cs_row.label[1]("pressed")}>{__cs_row.label[0]()}</li>
+            ) }))}
+        </ul>
+      </div>
+    );
+  })());
 }
 
 it("MemberRows", async (t) => {

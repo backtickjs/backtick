@@ -32,10 +32,15 @@ async function Rows() {
   return cs.lift((() => {
     const __cs_ids = cs.splice((createSignal))<number[]>([1, 2, 3]);
     const __cs_clear = () => {
-        __cs_ids[1]([]);
+      __cs_ids[1]([]);
     };
-    return (<>{<span onclick={__cs_clear}>clear</span>}{(void For, cs.splice(For)({ each: __cs_ids[0](), children: (__cs_id: number) => <span>{"row " + __cs_id}</span> }))}</>);
-})());
+    return (
+      <>
+        <span onclick={__cs_clear}>clear</span>
+        {(void For, cs.splice(For)({ each: __cs_ids[0](), children: (__cs_id: number) => <span>{"row " + __cs_id}</span> }))}
+      </>
+    );
+  })());
 }
 
 it("Rows", async (t) => {
@@ -87,7 +92,7 @@ async function drawAt(
     const __cs_parent = cs.globalThis.document.getElementById(cs.splice((id)))!;
     cs.splice((insert))(__cs_parent, cs.splice((value)), __cs_parent.querySelector(cs.splice((selector))));
     return __cs_dispose;
-}))()));
+  }))()));
   undo.push(unmount);
 }
 

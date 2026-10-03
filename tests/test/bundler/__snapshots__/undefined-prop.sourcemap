@@ -1,32 +1,43 @@
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 button           → button
                  →  
 ref              → ref
-={               → ={
-cs.splice(       →  [-semantic]
+=                → =
+{                → {
+cs.splice(       →  [-semantic -navigation]
 (ref)            → $ref
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 }                → }
->{               → >{
-cs.splice(       →  [-semantic]
+>                → >
+{                → {
+cs.splice(       →  [-semantic -navigation]
 (label)          → $label
-)                →  [-semantic]
-}</              → }</
+)                →  [-semantic -navigation]
+}                → }
+<                → <
+/                → /
 button           → button
 >                → >
-)())             → `
-cs.lift((() =>   → cs`
-__cs_el          → el
- =>              → ) => 
-cs.splice(       →  [-semantic]
-(onMount)        → $onMount
-)                →  [-semantic]
+cs.lift((() =>   →  [-semantic -navigation]
 (                → (
-() =>            → () => 
+__cs_el          → el
+)                → )
+                 →  
+=>               → =>
+                 →  
+cs.splice(       →  [-semantic -navigation]
+(onMount)        → $onMount
+)                →  [-semantic -navigation]
+(                → (
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
 __cs_el          → el
 .                → .
 focus            → focus
-()               → ()
+(                → (
 )                → )
-)())             → `
+)                → )

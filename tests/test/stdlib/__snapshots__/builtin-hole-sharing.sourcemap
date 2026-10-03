@@ -1,40 +1,56 @@
-cs.lift((() => {\n      → cs`{\n    
-return                  → return 
-cs.splice(              →  [-semantic]
-(f)                     → $f
-)                       →  [-semantic]
-(                       → (
-1                       → 1
-)                       → )
-[                       → [
-0                       → 0
-]                       → ]
-()                      → ()
-;                       → ;
-\n})())                 → \n  }`
-cs.lift((() =>          → cs`
-(                       → (
-__cs_n                  → n
-:                       → : 
-number                  → number
-) =>                    → ) => 
-cs.splice(              →  [-semantic]
-(createSignal)          → $createSignal
-)                       →  [-semantic]
-(                       → (
-__cs_n                  → n
- +                      →  + 
-10                      → 10
-)                       → )
-)())                    → `
-cs.lift((() => {\n      → cs`{\n      
-return                  → return 
-cs.splice(              → ${ [-semantic]
-make(createSignal)      → make(createSignal)
-)                       → } [-semantic]
- +                      →  + 
-cs.splice(              → ${ [-semantic]
-make(wrapped)           → make(wrapped)
-)                       → } [-semantic]
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>      →  [-semantic -navigation]
+{                   → {
+\n                  → \n    
+return              → return
+                    →  
+cs.splice(          →  [-semantic -navigation]
+(f)                 → $f
+)                   →  [-semantic -navigation]
+(                   → (
+1                   → 1
+)                   → )
+[                   → [
+0                   → 0
+]                   → ]
+(                   → (
+)                   → )
+;                   → ;
+\n                  → \n  
+}                   → }
+cs.lift((() =>      →  [-semantic -navigation]
+(                   → (
+__cs_n              → n
+:                   → :
+                    →  
+number              → number
+)                   → )
+                    →  
+=>                  → =>
+                    →  
+cs.splice(          →  [-semantic -navigation]
+(createSignal)      → $createSignal
+)                   →  [-semantic -navigation]
+(                   → (
+__cs_n              → n
+                    →  
++                   → +
+                    →  
+10                  → 10
+)                   → )
+cs.lift((() =>      →  [-semantic -navigation]
+{                   → {
+\n                  → \n      
+return              → return
+                    →  
+cs.splice(          →  [-semantic -navigation]
+make(createSignal)  → make(createSignal)
+)                   →  [-semantic -navigation]
+                    →  
++                   → +
+                    →  
+cs.splice(          →  [-semantic -navigation]
+make(wrapped)       → make(wrapped)
+)                   →  [-semantic -navigation]
+;                   → ;
+\n                  → \n    
+}                   → }

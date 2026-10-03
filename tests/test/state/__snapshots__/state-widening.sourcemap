@@ -1,109 +1,167 @@
-cs.lift((() => {\n      → cs`{\n    
-const                   → const 
-__cs_flag               → flag
- =                      →  = 
-cs.splice(              →  [-semantic]
-(createSignal)          → $createSignal
-)                       →  [-semantic]
-(                       → (
-true                    → true
-)                       → )
-;                       → ;
-\n                      → \n    
-const                   → const 
-__cs_tone               → tone
- =                      →  = 
-cs.splice(              →  [-semantic]
-(createSignal)          → $createSignal
-)                       →  [-semantic]
-(                       → (
-cs.splice(              → ${ [-semantic]
-Tone.Warm               → Tone.Warm
-)                       → } [-semantic]
-)                       → )
-;                       → ;
-\n                      → \n    
-const                   → const 
-__cs_step               → step
- =                      →  = 
-cs.splice(              →  [-semantic]
-(createSignal)          → $createSignal
-)                       →  [-semantic]
-<                       → <
-() =>                   → () => 
-number                  → number
->(                      → >(
-() =>                   → () => 
-0                       → 0
-)                       → )
-;                       → ;
-\n                      → \n    
-return                  → return 
-(                       → (\n      
-<                       → <
-span                    → span
-                        → \n        
-onclick                 → onclick
-={                      → ={
-() => {\n               → () => {\n          
-__cs_flag               → flag
-[                       → [
-1                       → 1
-]                       → ]
-(                       → (
-false                   → false
-)                       → )
-;                       → ;
-\n                      → \n          
-__cs_tone               → tone
-[                       → [
-1                       → 1
-]                       → ]
-(                       → (
-cs.splice(              → ${ [-semantic]
-Tone.Cool               → Tone.Cool
-)                       → } [-semantic]
-)                       → )
-;                       → ;
-\n                      → \n          
-__cs_step               → step
-[                       → [
-1                       → 1
-]                       → ]
-(                       → (
-() =>                   → () => 
-() =>                   → () => 
-1                       → 1
-)                       → )
-;                       → ;
-\n    }                 → \n        }
-}                       → }
->{                      → \n      >\n        {
-__cs_flag               → flag
-[                       → [
-0                       → 0
-]                       → ]
-()                      → ()
- +                      →  + 
-" "                     → " "
- +                      →  + 
-__cs_tone               → tone
-[                       → [
-0                       → 0
-]                       → ]
-()                      → ()
- +                      →  + 
-" "                     → " "
- +                      →  + 
-__cs_step               → step
-[                       → [
-0                       → 0
-]                       → ]
-()                      → ()
-()                      → ()
-}</                     → }\n      </
-span                    → span
->                       → >
-)                       → \n    )
-;                       → ;
-\n})())                 → \n  }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n    
+const            → const
+                 →  
+__cs_flag        → flag
+                 →  
+=                → =
+                 →  
+cs.splice(       →  [-semantic -navigation]
+(createSignal)   → $createSignal
+)                →  [-semantic -navigation]
+(                → (
+true             → true
+)                → )
+;                → ;
+\n               → \n    
+const            → const
+                 →  
+__cs_tone        → tone
+                 →  
+=                → =
+                 →  
+cs.splice(       →  [-semantic -navigation]
+(createSignal)   → $createSignal
+)                →  [-semantic -navigation]
+(                → (
+cs.splice(       →  [-semantic -navigation]
+Tone.Warm        → Tone.Warm
+)                →  [-semantic -navigation]
+)                → )
+;                → ;
+\n               → \n    
+const            → const
+                 →  
+__cs_step        → step
+                 →  
+=                → =
+                 →  
+cs.splice(       →  [-semantic -navigation]
+(createSignal)   → $createSignal
+)                →  [-semantic -navigation]
+<                → <
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+number           → number
+>                → >
+(                → (
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+0                → 0
+)                → )
+;                → ;
+\n               → \n    
+return           → return
+                 →  
+(                → (
+\n               → \n      
+<                → <
+span             → span
+\n               → \n        
+onclick          → onclick
+=                → =
+{                → {
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n          
+__cs_flag        → flag
+[                → [
+1                → 1
+]                → ]
+(                → (
+false            → false
+)                → )
+;                → ;
+\n               → \n          
+__cs_tone        → tone
+[                → [
+1                → 1
+]                → ]
+(                → (
+cs.splice(       →  [-semantic -navigation]
+Tone.Cool        → Tone.Cool
+)                →  [-semantic -navigation]
+)                → )
+;                → ;
+\n               → \n          
+__cs_step        → step
+[                → [
+1                → 1
+]                → ]
+(                → (
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+1                → 1
+)                → )
+;                → ;
+\n               → \n        
+}                → }
+}                → }
+\n               → \n      
+>                → >
+\n               → \n        
+{                → {
+__cs_flag        → flag
+[                → [
+0                → 0
+]                → ]
+(                → (
+)                → )
+                 →  
++                → +
+                 →  
+" "              → " "
+                 →  
++                → +
+                 →  
+__cs_tone        → tone
+[                → [
+0                → 0
+]                → ]
+(                → (
+)                → )
+                 →  
++                → +
+                 →  
+" "              → " "
+                 →  
++                → +
+                 →  
+__cs_step        → step
+[                → [
+0                → 0
+]                → ]
+(                → (
+)                → )
+(                → (
+)                → )
+}                → }
+\n               → \n      
+<                → <
+/                → /
+span             → span
+>                → >
+\n               → \n    
+)                → )
+;                → ;
+\n               → \n  
+}                → }

@@ -1,136 +1,204 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_coins              → coins
- =                      →  = 
-[                       → [
-1                       → 1
-,                       → , 
-2                       → 2
-,                       → , 
-3                       → 3
-,                       → , 
-4                       → 4
-]                       → ]
-;                       → ;
-\n                      → \n      
-return                  → return 
-{                       → {\n        
-at                      → at
-:                       → : 
-[                       → [
-__cs_coins              → coins
-.                       → .
-at                      → at
-(                       → (
-0                       → 0
-)                       → )
-,                       → , 
-__cs_coins              → coins
-.                       → .
-at                      → at
-(                       → (
--                       → -
-1                       → 1
-)                       → )
-,                       → , 
-__cs_coins              → coins
-.                       → .
-at                      → at
-(                       → (
-9                       → 9
-)                       → )
-]                       → ]
-,                       → ,\n        
-every                   → every
-:                       → : 
-__cs_coins              → coins
-.                       → .
-every                   → every
-(                       → (
-__cs_n                  → n
- =>                     → ) => 
-__cs_n                  → n
- >                      →  > 
-0                       → 0
-)                       → )
-,                       → ,\n        
-some                    → some
-:                       → : 
-__cs_coins              → coins
-.                       → .
-some                    → some
-(                       → (
-__cs_n                  → n
- =>                     → ) => 
-__cs_n                  → n
- >                      →  > 
-3                       → 3
-)                       → )
-,                       → ,\n        
-findLast                → findLast
-:                       → : 
-__cs_coins              → coins
-.                       → .
-findLast                → findLast
-(                       → (
-__cs_n                  → n
- =>                     → ) => 
-__cs_n                  → n
- <                      →  < 
-3                       → 3
-)                       → )
-,                       → ,\n        
-findLastIndex           → findLastIndex
-:                       → : 
-__cs_coins              → coins
-.                       → .
-findLastIndex           → findLastIndex
-(                       → (
-__cs_n                  → n
- =>                     → ) => 
-__cs_n                  → n
- <                      →  < 
-3                       → 3
-)                       → )
-,                       → ,\n        
-flatMap                 → flatMap
-:                       → : 
-__cs_coins              → coins
-.                       → .
-flatMap                 → flatMap
-(                       → (
-__cs_n                  → n
- =>                     → ) => 
-[                       → [
-__cs_n                  → n
-,                       → , 
-__cs_n                  → n
- *                      →  * 
-10                      → 10
-]                       → ]
-)                       → )
-,                       → ,\n        
-reduceRight             → reduceRight
-:                       → : 
-__cs_coins              → coins
-.                       → .
-reduceRight             → reduceRight
-(                       → (
-(                       → (
-__cs_text               → text
-,                       → , 
-__cs_n                  → n
-) =>                    → ) => 
-__cs_text               → text
- +                      →  + 
-__cs_n                  → n
-,                       → , 
-""                      → ""
-)                       → )
-,                       → ,\n        
-unchanged               → unchanged
-:                       → : 
-__cs_coins              → coins
- }                      → ,\n      }
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_coins       → coins
+                 →  
+=                → =
+                 →  
+[                → [
+1                → 1
+,                → ,
+                 →  
+2                → 2
+,                → ,
+                 →  
+3                → 3
+,                → ,
+                 →  
+4                → 4
+]                → ]
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+{                → {
+\n               → \n        
+at               → at
+:                → :
+                 →  
+[                → [
+__cs_coins       → coins
+.                → .
+at               → at
+(                → (
+0                → 0
+)                → )
+,                → ,
+                 →  
+__cs_coins       → coins
+.                → .
+at               → at
+(                → (
+-                → -
+1                → 1
+)                → )
+,                → ,
+                 →  
+__cs_coins       → coins
+.                → .
+at               → at
+(                → (
+9                → 9
+)                → )
+]                → ]
+,                → ,
+\n               → \n        
+every            → every
+:                → :
+                 →  
+__cs_coins       → coins
+.                → .
+every            → every
+(                → (
+(                → (
+__cs_n           → n
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_n           → n
+                 →  
+>                → >
+                 →  
+0                → 0
+)                → )
+,                → ,
+\n               → \n        
+some             → some
+:                → :
+                 →  
+__cs_coins       → coins
+.                → .
+some             → some
+(                → (
+(                → (
+__cs_n           → n
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_n           → n
+                 →  
+>                → >
+                 →  
+3                → 3
+)                → )
+,                → ,
+\n               → \n        
+findLast         → findLast
+:                → :
+                 →  
+__cs_coins       → coins
+.                → .
+findLast         → findLast
+(                → (
+(                → (
+__cs_n           → n
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_n           → n
+                 →  
+<                → <
+                 →  
+3                → 3
+)                → )
+,                → ,
+\n               → \n        
+findLastIndex    → findLastIndex
+:                → :
+                 →  
+__cs_coins       → coins
+.                → .
+findLastIndex    → findLastIndex
+(                → (
+(                → (
+__cs_n           → n
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_n           → n
+                 →  
+<                → <
+                 →  
+3                → 3
+)                → )
+,                → ,
+\n               → \n        
+flatMap          → flatMap
+:                → :
+                 →  
+__cs_coins       → coins
+.                → .
+flatMap          → flatMap
+(                → (
+(                → (
+__cs_n           → n
+)                → )
+                 →  
+=>               → =>
+                 →  
+[                → [
+__cs_n           → n
+,                → ,
+                 →  
+__cs_n           → n
+                 →  
+*                → *
+                 →  
+10               → 10
+]                → ]
+)                → )
+,                → ,
+\n               → \n        
+reduceRight      → reduceRight
+:                → :
+                 →  
+__cs_coins       → coins
+.                → .
+reduceRight      → reduceRight
+(                → (
+(                → (
+__cs_text        → text
+,                → ,
+                 →  
+__cs_n           → n
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_text        → text
+                 →  
++                → +
+                 →  
+__cs_n           → n
+,                → ,
+                 →  
+""               → ""
+)                → )
+,                → ,
+\n               → \n        
+unchanged        → unchanged
+:                → :
+                 →  
+__cs_coins       → coins
+,                → ,
+\n               → \n      
+}                → }
+;                → ;
+\n               → \n    
+}                → }

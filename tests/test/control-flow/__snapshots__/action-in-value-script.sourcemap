@@ -1,59 +1,94 @@
-cs.lift((() => {\n      → cs`{\n  
-const                   → const 
-__cs_x                  → x
- =                      →  = 
-1                       → 1
-;                       → ;
-\n})())                 → \n}`
-cs.lift((() =>          → cs`
-() => {\n               → () => {\n  
-let                     → let 
-__cs_n                  → n
- =                      →  = 
-0                       → 0
-;                       → ;
-\n                      → \n  
-__cs_n                  → n
- =                      →  = 
-1                       → 1
-;                       → ;
-\n}                     → \n}
-)())                    → `
-cs.lift((() =>          → cs`
-(                       → (
-__cs_b                  → b
-:                       → : 
-boolean                 → boolean
-) => {\n                → ) => {\n      
-let                     → let 
-__cs_n                  → n
- =                      →  = 
-0                       → 0
-;                       → ;
-\n                      → \n      
-cs.splice(              →  [-semantic]
-(valueScriptEffects)    → $valueScriptEffects
-)                       →  [-semantic]
-;                       → ;
-\n                      → \n      
-if (                    → if (
-__cs_b                  → b
-)                       → ) 
-{\n                     → {\n        
-cs.splice(              →  [-semantic]
-(ping)                  → $ping
-)                       →  [-semantic]
-()                      → ()
-;                       → ;
-\n                      → \n        
-__cs_n                  → n
- =                      →  = 
-1                       → 1
-;                       → ;
-\n    }                 → \n      }
-\n                      → \n      
-return                  → return 
-__cs_n                  → n
-;                       → ;
-\n}                     → \n    }
-)())                    → `
+cs.lift((() =>        →  [-semantic -navigation]
+{                     → {
+\n                    → \n  
+const                 → const
+                      →  
+__cs_x                → x
+                      →  
+=                     → =
+                      →  
+1                     → 1
+;                     → ;
+\n                    → \n
+}                     → }
+cs.lift((() =>        →  [-semantic -navigation]
+(                     → (
+)                     → )
+                      →  
+=>                    → =>
+                      →  
+{                     → {
+\n                    → \n  
+let                   → let
+                      →  
+__cs_n                → n
+                      →  
+=                     → =
+                      →  
+0                     → 0
+;                     → ;
+\n                    → \n  
+__cs_n                → n
+                      →  
+=                     → =
+                      →  
+1                     → 1
+;                     → ;
+\n                    → \n
+}                     → }
+cs.lift((() =>        →  [-semantic -navigation]
+(                     → (
+__cs_b                → b
+:                     → :
+                      →  
+boolean               → boolean
+)                     → )
+                      →  
+=>                    → =>
+                      →  
+{                     → {
+\n                    → \n      
+let                   → let
+                      →  
+__cs_n                → n
+                      →  
+=                     → =
+                      →  
+0                     → 0
+;                     → ;
+\n                    → \n      
+cs.splice(            →  [-semantic -navigation]
+(valueScriptEffects)  → $valueScriptEffects
+)                     →  [-semantic -navigation]
+;                     → ;
+\n                    → \n      
+if                    → if
+                      →  
+(                     → (
+__cs_b                → b
+)                     → )
+                      →  
+{                     → {
+\n                    → \n        
+cs.splice(            →  [-semantic -navigation]
+(ping)                → $ping
+)                     →  [-semantic -navigation]
+(                     → (
+)                     → )
+;                     → ;
+\n                    → \n        
+__cs_n                → n
+                      →  
+=                     → =
+                      →  
+1                     → 1
+;                     → ;
+\n                    → \n      
+}                     → }
+\n                    → \n      
+return                → return
+                      →  
+__cs_n                → n
+;                     → ;
+\n                    → \n    
+}                     → }

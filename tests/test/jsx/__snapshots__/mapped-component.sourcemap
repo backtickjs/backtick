@@ -1,42 +1,48 @@
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 div              → div
->{               → >\n      
-(void            → <For each={$rows}>\n        {(row: number) => ${cs`<span>{"row " + row}</span>`}}\n      </ [-semantic -navigation -verification]
+>                → >
+\n               → \n      
 For              → For
-,                →  [-semantic -navigation -verification]
 cs.splice(       →  [-semantic -navigation]
 For              → For
 )                →  [-semantic -navigation]
-(                →  [-semantic -navigation -verification]
-{                → For 
+{                → For
 each             → each
-:                → ={
-cs.splice(       →  [-semantic]
+cs.splice(       →  [-semantic -navigation]
 (rows)           → $rows
-)                →  [-semantic]
-, children:      → >\n        {
+)                →  [-semantic -navigation]
+children         → \n        {(row: number) => ${cs`<span>{"row " + row}</span>`}}\n      
 (                → (
 __cs_row         → row
-:                → : 
+:                → :
+                 →  
 number           → number
-) =>             → ) => 
-cs.splice(       → ${ [-semantic]
-cs.lift((() =>   → cs`
+)                → )
+                 →  
+=>               → =>
+                 →  
+cs.splice(       →  [-semantic -navigation]
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 span             → span
->{               → >{
+>                → >
+{                → {
 "row "           → "row "
- +               →  + 
+                 →  
++                → +
+                 →  
 __cs_row         → row
-}</              → }</
+}                → }
+<                → <
+/                → /
 span             → span
 >                → >
-)())             → `
-)                → } [-semantic]
- }               → 
-))               → > [-semantic -navigation -verification]
-}</              → \n    </
+)())             →  [-semantic -navigation]
+)                →  [-semantic -navigation]
+}                → 
+\n               → \n    
+<                → <
+/                → /
 div              → div
 >                → >
-)())             → `

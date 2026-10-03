@@ -1,9 +1,11 @@
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 (                → (
-{                → { 
+{                → {
+                 →  
 "#"              → "#"
-:                → : 
+:                → :
+                 →  
 "value"          → "value"
- }               →  }
+                 →  
+}                → }
 )                → )
-)())             → `

@@ -16,11 +16,20 @@ async function RotatingRows() {
   return cs.lift((() => {
     const __cs_names = cs.splice((createSignal))<string[]>(["a", "b", "c"]);
     const __cs_rotate = () => {
-        const __cs_held = __cs_names[0]();
-        __cs_names[1]([__cs_held[2], __cs_held[0], __cs_held[1]]);
+      const __cs_held = __cs_names[0]();
+      __cs_names[1]([__cs_held[2], __cs_held[0], __cs_held[1]]);
     };
-    return (<div>{<span onclick={__cs_rotate}>rotate</span>}{<div>{(void For, cs.splice(For)({ each: __cs_names[0](), children: (__cs_name: string, __cs_index: () => number) => (<span>{__cs_name + " at " + __cs_index()}</span>) }))}</div>}</div>);
-})());
+    return (
+      <div>
+        <span onclick={__cs_rotate}>rotate</span>
+        <div>
+          {(void For, cs.splice(For)({ each: __cs_names[0](), children: (__cs_name: string, __cs_index: () => number) => (
+              <span>{__cs_name + " at " + __cs_index()}</span>
+            ) }))}
+        </div>
+      </div>
+    );
+  })());
 }
 
 describe("local state", () => {

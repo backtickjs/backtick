@@ -19,13 +19,20 @@ async function Rows() {
   return cs.lift((() => {
     const __cs_rows = cs.splice((createSignal))<Row[]>([]);
     const __cs_add = (__cs_row: Row) => {
-        __cs_rows[1]([__cs_row]);
+      __cs_rows[1]([__cs_row]);
     };
     const __cs_label = (__cs_row: Row) => {
-        return __cs_row.label;
+      return __cs_row.label;
     };
-    return (<div>{<span onclick={() => __cs_add({ id: 1, label: "one" })}>add</span>}{<div>{(void For, cs.splice(For)({ each: __cs_rows[0](), children: (__cs_row: Row) => <span>{__cs_label(__cs_row)}</span> }))}</div>}</div>);
-})());
+    return (
+      <div>
+        <span onclick={() => __cs_add({ id: 1, label: "one" })}>add</span>
+        <div>
+          {(void For, cs.splice(For)({ each: __cs_rows[0](), children: (__cs_row: Row) => <span>{__cs_label(__cs_row)}</span> }))}
+        </div>
+      </div>
+    );
+  })());
 }
 
 it("Rows", async (t) => {

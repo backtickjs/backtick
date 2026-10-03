@@ -1,103 +1,155 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_doubled            → doubled
- =                      →  = 
-cs.globalThis.          → 
-Array                   → Array
-.                       → .
-from                    → from
-(                       → (
-{                       → { 
-length                  → length
-:                       → : 
-4                       → 4
- }                      →  }
-,                       → , 
-(                       → (
-__cs__                  → _
-,                       → , 
-__cs_index              → index
-) =>                    → ) => 
-__cs_index              → index
- *                      →  * 
-2                       → 2
-)                       → )
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_empty              → empty
- =                      →  = 
-cs.globalThis.          → 
-Array                   → Array
-.                       → .
-from                    → from
-(                       → (
-{                       → { 
-length                  → length
-:                       → : 
-0                       → 0
- }                      →  }
-,                       → , 
-(                       → (
-__cs__                  → _
-,                       → , 
-__cs_index              → index
-) =>                    → ) => 
-__cs_index              → index
-)                       → )
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_absent             → absent
- =                      →  = 
-cs.globalThis.          → 
-Array                   → Array
-.                       → .
-from                    → from
-(                       → (
-{                       → { 
-length                  → length
-:                       → : 
-2                       → 2
- }                      →  }
-,                       → , 
-(                       → (
-__cs_value              → value
-,                       → , 
-__cs_index              → index
-) =>                    → ) =>\n        
-__cs_value              → value
- ===                    →  === 
-undefined               → undefined
- ?                      →  ? 
-__cs_index              → index
- :                      →  : 
--                       → -
-1                       → 1
-)                       → ,\n      )
-;                       → ;
-\n                      → \n      
-return                  → return 
-__cs_doubled            → doubled
-.                       → .
-join                    → join
-(                       → (
-","                     → ","
-)                       → )
- +                      →  + 
-"|"                     → "|"
- +                      →  + 
-__cs_empty              → empty
-.                       → .
-length                  → length
- +                      →  + 
-"|"                     → "|"
- +                      →  + 
-__cs_absent             → absent
-.                       → .
-join                    → join
-(                       → (
-","                     → ","
-)                       → )
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_doubled     → doubled
+                 →  
+=                → =
+                 →  
+Array            → Array
+.                → .
+from             → from
+(                → (
+{                → {
+                 →  
+length           → length
+:                → :
+                 →  
+4                → 4
+                 →  
+}                → }
+,                → ,
+                 →  
+(                → (
+__cs__           → _
+,                → ,
+                 →  
+__cs_index       → index
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_index       → index
+                 →  
+*                → *
+                 →  
+2                → 2
+)                → )
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_empty       → empty
+                 →  
+=                → =
+                 →  
+Array            → Array
+.                → .
+from             → from
+(                → (
+{                → {
+                 →  
+length           → length
+:                → :
+                 →  
+0                → 0
+                 →  
+}                → }
+,                → ,
+                 →  
+(                → (
+__cs__           → _
+,                → ,
+                 →  
+__cs_index       → index
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_index       → index
+)                → )
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_absent      → absent
+                 →  
+=                → =
+                 →  
+Array            → Array
+.                → .
+from             → from
+(                → (
+{                → {
+                 →  
+length           → length
+:                → :
+                 →  
+2                → 2
+                 →  
+}                → }
+,                → ,
+                 →  
+(                → (
+__cs_value       → value
+,                → ,
+                 →  
+__cs_index       → index
+)                → )
+                 →  
+=>               → =>
+\n               → \n        
+__cs_value       → value
+                 →  
+===              → ===
+                 →  
+undefined        → undefined
+                 →  
+?                → ?
+                 →  
+__cs_index       → index
+                 →  
+:                → :
+                 →  
+-                → -
+1                → 1
+,                → ,
+\n               → \n      
+)                → )
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+__cs_doubled     → doubled
+.                → .
+join             → join
+(                → (
+","              → ","
+)                → )
+                 →  
++                → +
+                 →  
+"|"              → "|"
+                 →  
++                → +
+                 →  
+__cs_empty       → empty
+.                → .
+length           → length
+                 →  
++                → +
+                 →  
+"|"              → "|"
+                 →  
++                → +
+                 →  
+__cs_absent      → absent
+.                → .
+join             → join
+(                → (
+","              → ","
+)                → )
+;                → ;
+\n               → \n    
+}                → }

@@ -1,33 +1,53 @@
-cs.lift((() =>   → cs`
-<>counted</>     → <>counted</>
-)())             → `
-cs.lift((() =>   → cs`
-<>{              → <>\n    
+cs.lift((() =>   →  [-semantic -navigation]
+<                → <
+>                → >
+counted          → counted
+<                → <
+/                → /
+>                → >
+cs.lift((() =>   →  [-semantic -navigation]
+<                → <
+>                → >
+\n               → \n    
 <                → <
 em               → em
->one</           → >one</
+>                → >
+one              → one
+<                → <
+/                → /
 em               → em
 >                → >
-}{               → \n    
+\n               → \n    
 <                → <
 em               → em
->two</           → >two</
+>                → >
+two              → two
+<                → <
+/                → /
 em               → em
 >                → >
-}</>             → \n  </>
-)())             → `
-cs.lift((() =>   → cs`
+\n               → \n  
+<                → <
+/                → /
+>                → >
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 div              → div
->{               → >\n      {
-cs.splice(       → ${ [-semantic]
+>                → >
+\n               → \n      
+{                → {
+cs.splice(       →  [-semantic -navigation]
 (<Label />)      → (<Label />)
-)                → } [-semantic]
-}{               → }\n      {
-cs.splice(       → ${ [-semantic]
+)                →  [-semantic -navigation]
+}                → }
+\n               → \n      
+{                → {
+cs.splice(       →  [-semantic -navigation]
 (<Pair />)       → (<Pair />)
-)                → } [-semantic]
-}</              → }\n    </
+)                →  [-semantic -navigation]
+}                → }
+\n               → \n    
+<                → <
+/                → /
 div              → div
 >                → >
-)())             → `

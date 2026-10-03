@@ -9,7 +9,13 @@ it("arrayIsArray", async (t) => {
     t,
     "arrayIsArray",
     cs.lift((() => {
-    return [cs.globalThis.Array.isArray([]), cs.globalThis.Array.isArray([1, 2]), cs.globalThis.Array.isArray("ab"), cs.globalThis.Array.isArray({ length: 0 }), cs.globalThis.Array.isArray(null)];
-})()),
+      return [
+        cs.globalThis.Array.isArray([]),
+        cs.globalThis.Array.isArray([1, 2]),
+        cs.globalThis.Array.isArray("ab"),
+        cs.globalThis.Array.isArray({ length: 0 }),
+        cs.globalThis.Array.isArray(null),
+      ];
+    })()),
   );
 });

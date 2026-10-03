@@ -32,9 +32,16 @@ describe("null and undefined", () => {
     const empty = null;
     assert.deepEqual(
       await evaluate(cs.lift((() => cs.splice((createRoot))(() => {
-    const __cs_names = ["a"];
-    return [cs.splice((nothing)) === undefined, cs.splice((nothing)) !== null, cs.splice((empty)) === null, cs.splice((empty)) !== undefined, __cs_names[1] === undefined, __cs_names[1] !== null];
-}))())),
+        const __cs_names = ["a"];
+        return [
+          cs.splice((nothing)) === undefined,
+          cs.splice((nothing)) !== null,
+          cs.splice((empty)) === null,
+          cs.splice((empty)) !== undefined,
+          __cs_names[1] === undefined,
+          __cs_names[1] !== null,
+        ];
+      }))())),
       [true, true, true, true, true, true],
     );
   });

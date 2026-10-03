@@ -18,7 +18,7 @@ function sandwich(fragment: Client<number>): Client<number> {
     const __cs_spliced = cs.splice((fragment));
     const __cs_after = 2;
     return __cs_before + __cs_spliced + __cs_after;
-})());
+  })());
 }
 
 it("spliceBeforeDeclaration", async (t) => {

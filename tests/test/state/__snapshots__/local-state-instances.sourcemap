@@ -1,70 +1,107 @@
-cs.lift((() => {\n          → cs`{\n    
-const                       → const 
-__cs_size                   → size
- =                          →  = 
-cs.splice(                  →  [-semantic]
-(createSignal)              → $createSignal
-)                           →  [-semantic]
-(                           → (
-16                          → 16
-)                           → )
-;                           → ;
-\n                          → \n    
-return                      → return 
-(                           → (\n      
-<                           → <
-span                        → span
-                            → \n        
-style                       → style
-={                          → ={
-"font-size: "               → "font-size: "
- +                          →  + 
-__cs_size                   → size
-[                           → [
-0                           → 0
-]                           → ]
-()                          → ()
- +                          →  + 
-"px"                        → "px"
-}                           → }
-                            → \n        
-onclick                     → onclick
-={                          → ={
-() => {\n                   → () => {\n          
-__cs_size                   → size
-[                           → [
-1                           → 1
-]                           → ]
-(                           → (
-__cs_size                   → size
-[                           → [
-0                           → 0
-]                           → ]
-()                          → ()
- +                          →  + 
-1                           → 1
-)                           → )
-;                           → ;
-\n    }                     → \n        }
-}                           → }
->\n        press\n      </  → \n      >\n        press\n      </
-span                        → span
->                           → >
-)                           → \n    )
-;                           → ;
-\n})())                     → \n  }`
-cs.lift((() =>              → cs`
-<                           → <
-div                         → div
->{                          → >\n  {
-cs.splice(                  → ${ [-semantic]
-(<OwnCounter />)            → (<OwnCounter />)
-)                           → } [-semantic]
-}{                          → }\n  {
-cs.splice(                  → ${ [-semantic]
-(<OwnCounter />)            → (<OwnCounter />)
-)                           → } [-semantic]
-}</                         → }\n</
-div                         → div
->                           → >
-)())                        → `
+cs.lift((() =>    →  [-semantic -navigation]
+{                 → {
+\n                → \n    
+const             → const
+                  →  
+__cs_size         → size
+                  →  
+=                 → =
+                  →  
+cs.splice(        →  [-semantic -navigation]
+(createSignal)    → $createSignal
+)                 →  [-semantic -navigation]
+(                 → (
+16                → 16
+)                 → )
+;                 → ;
+\n                → \n    
+return            → return
+                  →  
+(                 → (
+\n                → \n      
+<                 → <
+span              → span
+\n                → \n        
+style             → style
+=                 → =
+{                 → {
+"font-size: "     → "font-size: "
+                  →  
++                 → +
+                  →  
+__cs_size         → size
+[                 → [
+0                 → 0
+]                 → ]
+(                 → (
+)                 → )
+                  →  
++                 → +
+                  →  
+"px"              → "px"
+}                 → }
+\n                → \n        
+onclick           → onclick
+=                 → =
+{                 → {
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n          
+__cs_size         → size
+[                 → [
+1                 → 1
+]                 → ]
+(                 → (
+__cs_size         → size
+[                 → [
+0                 → 0
+]                 → ]
+(                 → (
+)                 → )
+                  →  
++                 → +
+                  →  
+1                 → 1
+)                 → )
+;                 → ;
+\n                → \n        
+}                 → }
+}                 → }
+\n                → \n      
+>                 → >
+\n                → \n        
+press\n           → press\n      
+<                 → <
+/                 → /
+span              → span
+>                 → >
+\n                → \n    
+)                 → )
+;                 → ;
+\n                → \n  
+}                 → }
+cs.lift((() =>    →  [-semantic -navigation]
+<                 → <
+div               → div
+>                 → >
+\n                → \n  
+{                 → {
+cs.splice(        →  [-semantic -navigation]
+(<OwnCounter />)  → (<OwnCounter />)
+)                 →  [-semantic -navigation]
+}                 → }
+\n                → \n  
+{                 → {
+cs.splice(        →  [-semantic -navigation]
+(<OwnCounter />)  → (<OwnCounter />)
+)                 →  [-semantic -navigation]
+}                 → }
+\n                → \n
+<                 → <
+/                 → /
+div               → div
+>                 → >

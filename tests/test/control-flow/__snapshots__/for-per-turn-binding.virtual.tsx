@@ -10,11 +10,11 @@ it("forPerTurnBinding", async (t) => {
     t,
     "forPerTurnBinding",
     cs.lift((() => {
-    let __cs_last: () => number = () => 0;
-    for (let __cs_i = 0; __cs_i < 3; __cs_i = __cs_i + 1) {
+      let __cs_last: () => number = () => 0;
+      for (let __cs_i = 0; __cs_i < 3; __cs_i = __cs_i + 1) {
         __cs_last = () => __cs_i;
-    }
-    return __cs_last();
-})()),
+      }
+      return __cs_last();
+    })()),
   );
 });

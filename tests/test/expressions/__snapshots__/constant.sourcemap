@@ -1,3 +1,2 @@
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 1                → 1
-)())             → `

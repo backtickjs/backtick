@@ -1,51 +1,78 @@
-cs.lift((() =>   → cs`
-(                → (\n  
+cs.lift((() =>   →  [-semantic -navigation]
+(                → (
+\n               → \n  
 __cs_value       → value
-:                → : 
+:                → :
+                 →  
 string           → string
- |               →  | 
+                 →  
+|                → |
+                 →  
 null             → null
-) => {\n         → ,\n) => {\n  
-if (             → if (
+,                → ,
+\n               → \n
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n  
+if               → if
+                 →  
+(                → (
 __cs_value       → value
- ===             →  === 
+                 →  
+===              → ===
+                 →  
 null             → null
-)                → ) 
-{\n              → {\n    
-return           → return 
+)                → )
+                 →  
+{                → {
+\n               → \n    
+return           → return
+                 →  
 "-"              → "-"
 ;                → ;
-\n    }          → \n  }
 \n               → \n  
-return           → return 
+}                → }
+\n               → \n  
+return           → return
+                 →  
 __cs_value       → value
 ;                → ;
-\n}              → \n}
-)())             → `
-cs.lift((() =>   → cs`
+\n               → \n
+}                → }
+cs.lift((() =>   →  [-semantic -navigation]
 (                → (
-{                → {\n      
+{                → {
+\n               → \n      
 missing          → missing
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (orDash)         → $orDash
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
 null             → null
 )                → )
-,                → ,\n      
+,                → ,
+\n               → \n      
 present          → present
-:                → : 
-cs.splice(       →  [-semantic]
+:                → :
+                 →  
+cs.splice(       →  [-semantic -navigation]
 (orDash)         → $orDash
-)                →  [-semantic]
+)                →  [-semantic -navigation]
 (                → (
 "hi"             → "hi"
 )                → )
-,                → ,\n      
+,                → ,
+\n               → \n      
 bare             → bare
-:                → : 
+:                → :
+                 →  
 null             → null
- }               → ,\n    }
+,                → ,
+\n               → \n    
+}                → }
 )                → )
-)())             → `

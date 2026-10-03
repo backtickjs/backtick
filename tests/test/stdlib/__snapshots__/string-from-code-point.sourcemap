@@ -1,27 +1,38 @@
-cs.lift((() => {\n      → cs`{\n    
-return                  → return 
-(                       → (\n      
-<                       → <
-span                    → span
->{                      → >{
-cs.globalThis.          → 
-String                  → String
-.                       → .
-fromCodePoint           → fromCodePoint
-(                       → (
-72                      → 72
-,                       → , 
-105                     → 105
-)                       → )
- +                      →  + 
-cs.globalThis.          → 
-String                  → String
-.                       → .
-fromCodePoint           → fromCodePoint
-()                      → ()
-}</                     → }</
-span                    → span
->                       → >
-)                       → \n    )
-;                       → ;
-\n})())                 → \n  }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n    
+return           → return
+                 →  
+(                → (
+\n               → \n      
+<                → <
+span             → span
+>                → >
+{                → {
+String           → String
+.                → .
+fromCodePoint    → fromCodePoint
+(                → (
+72               → 72
+,                → ,
+                 →  
+105              → 105
+)                → )
+                 →  
++                → +
+                 →  
+String           → String
+.                → .
+fromCodePoint    → fromCodePoint
+(                → (
+)                → )
+}                → }
+<                → <
+/                → /
+span             → span
+>                → >
+\n               → \n    
+)                → )
+;                → ;
+\n               → \n  
+}                → }

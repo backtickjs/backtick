@@ -1,39 +1,61 @@
-cs.lift((() =>                            → cs`
+cs.lift((() =>                            →  [-semantic -navigation]
 (                                         → (
 __cs_x                                    → x
-:                                         → : 
+:                                         → :
+                                          →  
 Maybe                                     → Maybe
-) => {\n                                  → ) => {\n  
-const                                     → const 
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
+{                                         → {
+\n                                        → \n  
+const                                     → const
+                                          →  
 __cs_y                                    → y
- =                                        →  = 
+                                          →  
+=                                         → =
+                                          →  
 __cs_x                                    → x
 ;                                         → ;
 \n                                        → \n  
-return                                    → return 
+return                                    → return
+                                          →  
 1                                         → 1
 ;                                         → ;
-\n}                                       → \n}
-)())                                      → `
-cs.lift((() =>                            → cs`
+\n                                        → \n
+}                                         → }
+cs.lift((() =>                            →  [-semantic -navigation]
 (                                         → (
 __cs_x                                    → x
-:                                         → : 
+:                                         → :
+                                          →  
 Maybe                                     → Maybe
-) => {\n                                  → ) => {\n  
-let                                       → let 
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
+{                                         → {
+\n                                        → \n  
+let                                       → let
+                                          →  
 __cs_y                                    → y
- =                                        →  = 
+                                          →  
+=                                         → =
+                                          →  
 ""                                        → ""
 ;                                         → ;
-\n    // @ts-expect-error: Type 'Maybe' is not assignable to type 'string'.\n    → \n  // @ts-expect-error: Type 'Maybe' is not assignable to type 'string'.\n  
+\n  // @ts-expect-error: Type 'Maybe' is not assignable to type 'string'.\n  → \n  // @ts-expect-error: Type 'Maybe' is not assignable to type 'string'.\n  
 __cs_y                                    → y
- =                                        →  = 
+                                          →  
+=                                         → =
+                                          →  
 __cs_x                                    → x
 ;                                         → ;
 \n                                        → \n  
-return                                    → return 
+return                                    → return
+                                          →  
 1                                         → 1
 ;                                         → ;
-\n}                                       → \n}
-)())                                      → `
+\n                                        → \n
+}                                         → }

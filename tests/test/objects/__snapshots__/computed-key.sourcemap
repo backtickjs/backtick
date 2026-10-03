@@ -1,41 +1,72 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_base               → base
- =                      →  = 
-{                       → { 
-a                       → a
-:                       → : 
-1                       → 1
-,                       → , 
-b                       → b
-:                       → : 
-2                       → 2
- }                      →  }
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_name               → name
- =                      →  = 
-"b"                     → "b"
-;                       → ;
-\n                      → \n      
-return                  → return 
-{ ...                   → {\n        ...
-__cs_base               → base
-, [                     → ,\n        [
-__cs_name               → name
-]:                      → ]: 
-9                       → 9
-, [                     → ,\n        [
-"c"                     → "c"
- +                      →  + 
-"d"                     → "d"
-]:                      → ]: 
-3                       → 3
-,                       → ,\n        
-a                       → a
-:                       → : 
-4                       → 4
- }                      → ,\n      }
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_base        → base
+                 →  
+=                → =
+                 →  
+{                → {
+                 →  
+a                → a
+:                → :
+                 →  
+1                → 1
+,                → ,
+                 →  
+b                → b
+:                → :
+                 →  
+2                → 2
+                 →  
+}                → }
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_name        → name
+                 →  
+=                → =
+                 →  
+"b"              → "b"
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+{                → {
+\n               → \n        
+...              → ...
+__cs_base        → base
+,                → ,
+\n               → \n        
+[                → [
+__cs_name        → name
+]                → ]
+:                → :
+                 →  
+9                → 9
+,                → ,
+\n               → \n        
+[                → [
+"c"              → "c"
+                 →  
++                → +
+                 →  
+"d"              → "d"
+]                → ]
+:                → :
+                 →  
+3                → 3
+,                → ,
+\n               → \n        
+a                → a
+:                → :
+                 →  
+4                → 4
+,                → ,
+\n               → \n      
+}                → }
+;                → ;
+\n               → \n    
+}                → }

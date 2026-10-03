@@ -18,10 +18,10 @@ function wrap(start: Client<number>): Client<number> {
   return cs.lift((() => {
     const __cs_outer = cs.splice((start));
     return cs.splice(cs.lift((() => {
-    const __cs_middle = 10;
-    return __cs_middle + cs.splice(cs.lift((() => __cs_outer)()));
-})()));
-})());
+      const __cs_middle = 10;
+      return __cs_middle + cs.splice(cs.lift((() => __cs_outer)()));
+    })()));
+  })());
 }
 
 it("deepCapture", async (t) => {

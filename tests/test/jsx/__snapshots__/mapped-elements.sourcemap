@@ -1,23 +1,28 @@
-cs.lift((() =>                → cs`
+cs.lift((() =>                →  [-semantic -navigation]
 <                             → <
 div                           → div
->{                            → >{
-cs.splice(                    → ${ [-semantic]
+>                             → >
+{                             → {
+cs.splice(                    →  [-semantic -navigation]
 elementLabels.map((item) =>   → elementLabels.map((item) => 
-cs.lift((() =>                → cs`
+cs.lift((() =>                →  [-semantic -navigation]
 <                             → <
 span                          → span
->{                            → >{
-cs.splice(                    →  [-semantic]
+>                             → >
+{                             → {
+cs.splice(                    →  [-semantic -navigation]
 (item)                        → $item
-)                             →  [-semantic]
-}</                           → }</
+)                             →  [-semantic -navigation]
+}                             → }
+<                             → <
+/                             → /
 span                          → span
 >                             → >
-)())                          → `
+)())                          →  [-semantic -navigation]
 )                             → )
-)                             → } [-semantic]
-}</                           → }</
+)                             →  [-semantic -navigation]
+}                             → }
+<                             → <
+/                             → /
 div                           → div
 >                             → >
-)())                          → `

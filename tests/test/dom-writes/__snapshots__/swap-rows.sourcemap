@@ -1,151 +1,208 @@
-cs.lift((() => {\n      → cs`{\n    
-const                   → const 
-__cs_ids                → ids
- =                      →  = 
-cs.splice(              →  [-semantic]
-(createSignal)          → $createSignal
-)                       →  [-semantic]
-<                       → <
-number                  → number
-[]                      → []
->(                      → >(
-[                       → [
-1                       → 1
-,                       → , 
-2                       → 2
-,                       → , 
-3                       → 3
-,                       → , 
-4                       → 4
-,                       → , 
-5                       → 5
-]                       → ]
-)                       → )
-;                       → ;
-\n                      → \n    
-const                   → const 
-__cs_swap               → swap
- =                      →  = 
-() => {\n               → () => {\n      
-const                   → const 
-__cs_held               → held
- =                      →  = 
-__cs_ids                → ids
-[                       → [
-0                       → 0
-]                       → ]
-()                      → ()
-;                       → ;
-\n                      → \n      
-__cs_ids                → ids
-[                       → [
-1                       → 1
-]                       → ]
-(                       → (
-__cs_held               → held
-.                       → .
-with                    → with
-(                       → (
-1                       → 1
-,                       → , 
-__cs_held               → held
-[                       → [
-3                       → 3
-]                       → ]
-)                       → )
-.                       → .
-with                    → with
-(                       → (
-3                       → 3
-,                       → , 
-__cs_held               → held
-[                       → [
-1                       → 1
-]                       → ]
-)                       → )
-)                       → )
-;                       → ;
-\n    }                 → \n    }
-;                       → ;
-\n                      → \n    
-return                  → return 
-(                       → (\n      
-<                       → <
-div                     → div
->{                      → >\n        
-<                       → <
-button                  → button
-                        →  
-onclick                 → onclick
-={                      → ={
-__cs_swap               → swap
-}                       → }
->swap</                 → >swap</
-button                  → button
->                       → >
-}{                      → \n        
-<                       → <
-table                   → table
->{                      → >\n          
-<                       → <
-tbody                   → tbody
->{                      → >\n            
-(void                   → <For each={ids[0]()}>\n              {(id: number) => (\n                <tr id={"row-" + id}>\n                  <td>{"row " + id}</td>\n                </tr>\n              )}\n            </ [-semantic -navigation -verification]
-For                     → For
-,                       →  [-semantic -navigation -verification]
-cs.splice(              →  [-semantic -navigation]
-For                     → For
-)                       →  [-semantic -navigation]
-(                       →  [-semantic -navigation -verification]
-{                       → For 
-each                    → each
-:                       → ={
-__cs_ids                → ids
-[                       → [
-0                       → 0
-]                       → ]
-()                      → ()
-, children:             → >\n              {
-(                       → (
-__cs_id                 → id
-:                       → : 
-number                  → number
-) =>                    → ) => 
-(                       → (\n                
-<                       → <
-tr                      → tr
-                        →  
-id                      → id
-={                      → ={
-"row-"                  → "row-"
- +                      →  + 
-__cs_id                 → id
-}                       → }
->{                      → >\n                  
-<                       → <
-td                      → td
->{                      → >{
-"row "                  → "row "
- +                      →  + 
-__cs_id                 → id
-}</                     → }</
-td                      → td
->                       → >
-}</                     → \n                </
-tr                      → tr
->                       → >
-)                       → \n              )
- }                      → 
-))                      → > [-semantic -navigation -verification]
-}</                     → \n          </
-tbody                   → tbody
->                       → >
-}</                     → \n        </
-table                   → table
->                       → >
-}</                     → \n      </
-div                     → div
->                       → >
-)                       → \n    )
-;                       → ;
-\n})())                 → \n  }`
+cs.lift((() =>        →  [-semantic -navigation]
+{                     → {
+\n                    → \n    
+const                 → const
+                      →  
+__cs_ids              → ids
+                      →  
+=                     → =
+                      →  
+cs.splice(            →  [-semantic -navigation]
+(createSignal)        → $createSignal
+)                     →  [-semantic -navigation]
+<                     → <
+number                → number
+[                     → [
+]                     → ]
+>                     → >
+(                     → (
+[                     → [
+1                     → 1
+,                     → ,
+                      →  
+2                     → 2
+,                     → ,
+                      →  
+3                     → 3
+,                     → ,
+                      →  
+4                     → 4
+,                     → ,
+                      →  
+5                     → 5
+]                     → ]
+)                     → )
+;                     → ;
+\n                    → \n    
+const                 → const
+                      →  
+__cs_swap             → swap
+                      →  
+=                     → =
+                      →  
+(                     → (
+)                     → )
+                      →  
+=>                    → =>
+                      →  
+{                     → {
+\n                    → \n      
+const                 → const
+                      →  
+__cs_held             → held
+                      →  
+=                     → =
+                      →  
+__cs_ids              → ids
+[                     → [
+0                     → 0
+]                     → ]
+(                     → (
+)                     → )
+;                     → ;
+\n                    → \n      
+__cs_ids              → ids
+[                     → [
+1                     → 1
+]                     → ]
+(                     → (
+__cs_held             → held
+.                     → .
+with                  → with
+(                     → (
+1                     → 1
+,                     → ,
+                      →  
+__cs_held             → held
+[                     → [
+3                     → 3
+]                     → ]
+)                     → )
+.                     → .
+with                  → with
+(                     → (
+3                     → 3
+,                     → ,
+                      →  
+__cs_held             → held
+[                     → [
+1                     → 1
+]                     → ]
+)                     → )
+)                     → )
+;                     → ;
+\n                    → \n    
+}                     → }
+;                     → ;
+\n                    → \n    
+return                → return
+                      →  
+(                     → (
+\n                    → \n      
+<                     → <
+div                   → div
+>                     → >
+\n                    → \n        
+<                     → <
+button                → button
+                      →  
+onclick               → onclick
+=                     → =
+{                     → {
+__cs_swap             → swap
+}                     → }
+>                     → >
+swap                  → swap
+<                     → <
+/                     → /
+button                → button
+>                     → >
+\n                    → \n        
+<                     → <
+table                 → table
+>                     → >
+\n                    → \n          
+<                     → <
+tbody                 → tbody
+>                     → >
+\n                    → \n            
+For                   → For
+cs.splice(            →  [-semantic -navigation]
+For                   → For
+)                     →  [-semantic -navigation]
+{                     → For
+each                  → each
+__cs_ids              → ids
+[                     → [
+0                     → 0
+]                     → ]
+(                     → (
+)                     → )
+children              → \n              {(id: number) => (\n                <tr id={"row-" + id}>\n                  <td>{"row " + id}</td>\n                </tr>\n              )}\n            
+(                     → (
+__cs_id               → id
+:                     → :
+                      →  
+number                → number
+)                     → )
+                      →  
+=>                    → =>
+                      →  
+(                     → (
+\n                    → \n                
+<                     → <
+tr                    → tr
+                      →  
+id                    → id
+=                     → =
+{                     → {
+"row-"                → "row-"
+                      →  
++                     → +
+                      →  
+__cs_id               → id
+}                     → }
+>                     → >
+\n                    → \n                  
+<                     → <
+td                    → td
+>                     → >
+{                     → {
+"row "                → "row "
+                      →  
++                     → +
+                      →  
+__cs_id               → id
+}                     → }
+<                     → <
+/                     → /
+td                    → td
+>                     → >
+\n                    → \n                
+<                     → <
+/                     → /
+tr                    → tr
+>                     → >
+\n                    → \n              
+)                     → )
+}                     → 
+\n                    → \n          
+<                     → <
+/                     → /
+tbody                 → tbody
+>                     → >
+\n                    → \n        
+<                     → <
+/                     → /
+table                 → table
+>                     → >
+\n                    → \n      
+<                     → <
+/                     → /
+div                   → div
+>                     → >
+\n                    → \n    
+)                     → )
+;                     → ;
+\n                    → \n  
+}                     → }

@@ -1,27 +1,38 @@
-cs.lift((() =>                            → cs`
-() => {\n                                 → () => {\n      
-const                                     → const 
+cs.lift((() =>                            →  [-semantic -navigation]
+(                                         → (
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
+{                                         → {
+\n                                        → \n      
+const                                     → const
+                                          →  
 __cs_held                                 → held
- =                                        →  = 
-cs.splice(                                →  [-semantic]
+                                          →  
+=                                         → =
+                                          →  
+cs.splice(                                →  [-semantic -navigation]
 (createSignal)                            → $createSignal
-)                                         →  [-semantic]
+)                                         →  [-semantic -navigation]
 (                                         → (
 "waiting"                                 → "waiting"
 )                                         → )
 ;                                         → ;
-\n                                        → \n\n      
-cs.globalThis.                            → 
+\n\n                                      → \n\n      
 window                                    → window
-.                                         → \n        .
+\n                                        → \n        
+.                                         → .
 fetch                                     → fetch
 (                                         → (
 "/cases/built-ins/Math/trunc/Math.trunc_Success"→ "/cases/built-ins/Math/trunc/Math.trunc_Success"
-,                                         → , 
-{                                         → {\n          
+,                                         → ,
+                                          →  
+{                                         → {
+\n                                        → \n          
 signal                                    → signal
-:                                         → : 
-cs.globalThis.                            → 
+:                                         → :
+                                          →  
 window                                    → window
 .                                         → .
 AbortSignal                               → AbortSignal
@@ -30,151 +41,226 @@ timeout                                   → timeout
 (                                         → (
 3000                                      → 3000
 )                                         → )
- }                                        → ,\n        }
+,                                         → ,
+\n                                        → \n        
+}                                         → }
 )                                         → )
-.                                         → \n        .
+\n                                        → \n        
+.                                         → .
 then                                      → then
 (                                         → (
 (                                         → (
 __cs_response                             → response
-:                                         → : 
+:                                         → :
+                                          →  
 Response                                  → Response
-) => {\n                                  → ) => {\n          
-if (                                      → if (
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
+{                                         → {
+\n                                        → \n          
+if                                        → if
+                                          →  
+(                                         → (
 __cs_response                             → response
 .                                         → .
 status                                    → status
- !==                                      →  !== 
+                                          →  
+!==                                       → !==
+                                          →  
 200                                       → 200
-)                                         → ) 
-{\n                                       → {\n            
-throw                                     → throw 
+)                                         → )
+                                          →  
+{                                         → {
+\n                                        → \n            
+throw                                     → throw
+                                          →  
 "answered "                               → "answered "
- +                                        →  + 
+                                          →  
++                                         → +
+                                          →  
 __cs_response                             → response
 .                                         → .
 status                                    → status
 ;                                         → ;
-\n        }                               → \n          }
 \n                                        → \n          
-return                                    → return 
+}                                         → }
+\n                                        → \n          
+return                                    → return
+                                          →  
 __cs_response                             → response
 .                                         → .
 json                                      → json
-()                                        → ()
-;                                         → ;
-\n    }                                   → \n        }
+(                                         → (
 )                                         → )
-.                                         → \n        .
+;                                         → ;
+\n                                        → \n        
+}                                         → }
+)                                         → )
+\n                                        → \n        
+.                                         → .
 then                                      → then
 (                                         → (
 (                                         → (
 __cs_value                                → value
-:                                         → : 
+:                                         → :
+                                          →  
 unknown                                   → unknown
-) => {\n                                  → ) => {\n          
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
+{                                         → {
+\n                                        → \n          
 __cs_held                                 → held
 [                                         → [
 1                                         → 1
 ]                                         → ]
 (                                         → (
 __cs_value                                → value
- ===                                      →  === 
+                                          →  
+===                                       → ===
+                                          →  
 null                                      → null
- ?                                        →  ? 
+                                          →  
+?                                         → ?
+                                          →  
 "null"                                    → "null"
- :                                        →  : 
+                                          →  
+:                                         → :
+                                          →  
 "a value"                                 → "a value"
 )                                         → )
 ;                                         → ;
-\n    }                                   → \n        }
+\n                                        → \n        
+}                                         → }
 )                                         → )
-.                                         → \n        .
+\n                                        → \n        
+.                                         → .
 catch                                     → catch
 (                                         → (
 (                                         → (
 __cs_error                                → error
-:                                         → : 
+:                                         → :
+                                          →  
 unknown                                   → unknown
-) => {\n                                  → ) => {\n          
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
+{                                         → {
+\n                                        → \n          
 __cs_held                                 → held
 [                                         → [
 1                                         → 1
 ]                                         → ]
 (                                         → (
-"failed \\u2014 "                         → "failed — "
- +                                        →  + 
-cs.globalThis.                            → 
+"failed — "                               → "failed — "
+                                          →  
++                                         → +
+                                          →  
 String                                    → String
 (                                         → (
 __cs_error                                → error
 )                                         → )
 )                                         → )
 ;                                         → ;
-\n    }                                   → \n        }
+\n                                        → \n        
+}                                         → }
 )                                         → )
 ;                                         → ;
-\n                                        → \n\n      
-cs.globalThis.                            → 
+\n\n                                      → \n\n      
 window                                    → window
-.                                         → \n        .
+\n                                        → \n        
+.                                         → .
 fetch                                     → fetch
 (                                         → (
 "/cases"                                  → "/cases"
-,                                         → , 
-{                                         → {\n          
+,                                         → ,
+                                          →  
+{                                         → {
+\n                                        → \n          
 method                                    → method
-:                                         → : 
+:                                         → :
+                                          →  
 "POST"                                    → "POST"
-,                                         → ,\n          
+,                                         → ,
+\n                                        → \n          
 headers                                   → headers
-:                                         → : 
-{                                         → { 
+:                                         → :
+                                          →  
+{                                         → {
+                                          →  
 "content-type"                            → "content-type"
-:                                         → : 
+:                                         → :
+                                          →  
 "application/json"                        → "application/json"
- }                                        →  }
-,                                         → ,\n          
+                                          →  
+}                                         → }
+,                                         → ,
+\n                                        → \n          
 body                                      → body
-:                                         → : 
-cs.globalThis.                            → 
+:                                         → :
+                                          →  
 JSON                                      → JSON
 .                                         → .
 stringify                                 → stringify
 (                                         → (
-{                                         → { 
+{                                         → {
+                                          →  
 name                                      → name
-:                                         → : 
+:                                         → :
+                                          →  
 "Math.trunc"                              → "Math.trunc"
-,                                         → , 
+,                                         → ,
+                                          →  
 passed                                    → passed
-:                                         → : 
+:                                         → :
+                                          →  
 true                                      → true
- }                                        →  }
+                                          →  
+}                                         → }
 )                                         → )
- }                                        → ,\n        }
+,                                         → ,
+\n                                        → \n        
+}                                         → }
 )                                         → )
-.                                         → \n        .
+\n                                        → \n        
+.                                         → .
 then                                      → then
 (                                         → (
 (                                         → (
 __cs_response                             → response
-:                                         → : 
+:                                         → :
+                                          →  
 Response                                  → Response
-) =>                                      → ) => 
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
 __cs_response                             → response
 .                                         → .
 text                                      → text
-()                                        → ()
+(                                         → (
 )                                         → )
-.                                         → \n        .
+)                                         → )
+\n                                        → \n        
+.                                         → .
 then                                      → then
-(                                         → (\n          
+(                                         → (
+\n                                        → \n          
 (                                         → (
 __cs_text                                 → text
-:                                         → : 
+:                                         → :
+                                          →  
 string                                    → string
-) => {\n                                  → ) => {\n            
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
+{                                         → {
+\n                                        → \n            
 __cs_held                                 → held
 [                                         → [
 1                                         → 1
@@ -183,35 +269,47 @@ __cs_held                                 → held
 __cs_text                                 → text
 )                                         → )
 ;                                         → ;
-\n    }                                   → \n          }
-,                                         → ,\n          
+\n                                        → \n          
+}                                         → }
+,                                         → ,
+\n                                        → \n          
 (                                         → (
 __cs_error                                → error
-:                                         → : 
+:                                         → :
+                                          →  
 unknown                                   → unknown
-) => {\n                                  → ) => {\n            
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
+{                                         → {
+\n                                        → \n            
 __cs_held                                 → held
 [                                         → [
 1                                         → 1
 ]                                         → ]
 (                                         → (
-cs.globalThis.                            → 
 String                                    → String
 (                                         → (
 __cs_error                                → error
 )                                         → )
 )                                         → )
 ;                                         → ;
-\n    }                                   → \n          }
-)                                         → ,\n        )
+\n                                        → \n          
+}                                         → }
+,                                         → ,
+\n                                        → \n        
+)                                         → )
 ;                                         → ;
-\n                                        → \n\n      
-return                                    → return 
+\n\n                                      → \n\n      
+return                                    → return
+                                          →  
 __cs_held                                 → held
 [                                         → [
 0                                         → 0
 ]                                         → ]
-()                                        → ()
+(                                         → (
+)                                         → )
 ;                                         → ;
-\n}                                       → \n    }
-)())                                      → `
+\n                                        → \n    
+}                                         → }

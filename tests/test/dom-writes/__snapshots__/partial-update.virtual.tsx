@@ -13,18 +13,31 @@ import { evaluate } from "../evaluate.ts";
 // text, and nothing else: no row is rebuilt, and no other row hears of it.
 async function Labels() {
   return cs.lift((() => {
-    const __cs_rows = [1, 2, 3, 4].map((__cs_id: number) => ({ id: __cs_id, label: cs.splice((createSignal))("row " + __cs_id) }));
+    const __cs_rows = [1, 2, 3, 4].map((__cs_id: number) => ({
+      id: __cs_id,
+      label: cs.splice((createSignal))("row " + __cs_id),
+    }));
     const __cs_update = () => {
-        for (let __cs_index = 0; __cs_index < __cs_rows.length; __cs_index = __cs_index + 2) {
-            const __cs_label = __cs_rows[__cs_index].label;
-            __cs_label[1](__cs_label[0]() + " !!!");
-        }
+      for (let __cs_index = 0; __cs_index < __cs_rows.length; __cs_index = __cs_index + 2) {
+        const __cs_label = __cs_rows[__cs_index].label;
+        __cs_label[1](__cs_label[0]() + " !!!");
+      }
     };
-    return (<div>{<button onclick={__cs_update}>update</button>}{<table>{<tbody>{(void For, cs.splice(For)({ each: __cs_rows, children: (__cs_row: {
-            id: number;
-            label: Signal<string>;
-        }) => (<tr id={"row-" + __cs_row.id}>{<td>{__cs_row.label[0]()}</td>}</tr>) }))}</tbody>}</table>}</div>);
-})());
+    return (
+      <div>
+        <button onclick={__cs_update}>update</button>
+        <table>
+          <tbody>
+            {(void For, cs.splice(For)({ each: __cs_rows, children: (__cs_row: { id: number; label: Signal<string> }) => (
+                <tr id={"row-" + __cs_row.id}>
+                  <td>{__cs_row.label[0]()}</td>
+                </tr>
+              ) }))}
+          </tbody>
+        </table>
+      </div>
+    );
+  })());
 }
 
 it("a label written changes that label's text and nothing else", async () => {

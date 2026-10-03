@@ -1,152 +1,229 @@
-cs.lift((() => {\n                       → cs`{\n    
-const                                    → const 
+cs.lift((() =>                           →  [-semantic -navigation]
+{                                        → {
+\n                                       → \n    
+const                                    → const
+                                         →  
 __cs_Badge                               → Badge
- =                                       →  = 
+                                         →  
+=                                        → =
+                                         →  
 (                                        → (
 __cs_p                                   → p
-:                                        → : 
-{\n                                      → { 
+:                                        → :
+                                         →  
+{                                        → {
+                                         →  
 n                                        → n
-:                                        → : 
+:                                        → :
+                                         →  
 number                                   → number
-;                                        → 
-\n    }                                  →  }
-) =>                                     → ) => 
+                                         →  
+}                                        → }
+)                                        → )
+                                         →  
+=>                                       → =>
+                                         →  
 <                                        → <
 i                                        → i
->{                                       → >{
+>                                        → >
+{                                        → {
 "panel "                                 → "panel "
- +                                       →  + 
+                                         →  
++                                        → +
+                                         →  
 __cs_p                                   → p
 .                                        → .
 n                                        → n
-}</                                      → }</
+}                                        → }
+<                                        → <
+/                                        → /
 i                                        → i
 >                                        → >
 ;                                        → ;
 \n                                       → \n    
-return                                   → return 
-(                                        → (\n      
+return                                   → return
+                                         →  
+(                                        → (
+\n                                       → \n      
 <                                        → <
 section                                  → section
->{                                       → >\n        
+>                                        → >
+\n                                       → \n        
 <                                        → <
 __cs_Badge                               → Badge
                                          →  
 n                                        → n
-={                                       → ={
+=                                        → =
+{                                        → {
 0                                        → 0
 }                                        → }
-/>                                       →  />
-}{                                       → \n        {
-cs.splice(                               →  [-semantic]
+                                         →  
+/                                        → /
+>                                        → >
+\n                                       → \n        
+{                                        → {
+cs.splice(                               →  [-semantic -navigation]
 (props)                                  → $props
-)                                        →  [-semantic]
+)                                        →  [-semantic -navigation]
 .                                        → .
 body                                     → body
-}</                                      → }\n      </
+}                                        → }
+\n                                       → \n      
+<                                        → <
+/                                        → /
 section                                  → section
 >                                        → >
-)                                        → \n    )
+\n                                       → \n    
+)                                        → )
 ;                                        → ;
-\n})())                                  → \n  }`
-cs.lift((() => {\n                       → cs`{\n  
-const                                    → const 
+\n                                       → \n  
+}                                        → }
+cs.lift((() =>                           →  [-semantic -navigation]
+{                                        → {
+\n                                       → \n  
+const                                    → const
+                                         →  
 __cs_count                               → count
- =                                       →  = 
-cs.splice(                               →  [-semantic]
+                                         →  
+=                                        → =
+                                         →  
+cs.splice(                               →  [-semantic -navigation]
 (createSignal)                           → $createSignal
-)                                        →  [-semantic]
+)                                        →  [-semantic -navigation]
 (                                        → (
 0                                        → 0
 )                                        → )
 ;                                        → ;
 \n                                       → \n  
-const                                    → const 
+const                                    → const
+                                         →  
 __cs_Badge                               → Badge
- =                                       →  = 
+                                         →  
+=                                        → =
+                                         →  
 (                                        → (
 __cs_p                                   → p
-:                                        → : 
-{\n                                      → { 
+:                                        → :
+                                         →  
+{                                        → {
+                                         →  
 n                                        → n
-:                                        → : 
+:                                        → :
+                                         →  
 number                                   → number
 ;                                        → ;
-\n                                       →  
+                                         →  
 children                                 → children
-:                                        → : 
+:                                        → :
+                                         →  
 JSX                                      → JSX
 .                                        → .
 Element                                  → Element
-;                                        → 
-\n    }                                  →  }
-) =>                                     → ) => 
-(                                        → (\n    
+                                         →  
+}                                        → }
+)                                        → )
+                                         →  
+=>                                       → =>
+                                         →  
+(                                        → (
+\n                                       → \n    
 <                                        → <
 b                                        → b
->{                                       → >\n      {
+>                                        → >
+\n                                       → \n      
+{                                        → {
 "outer "                                 → "outer "
- +                                       →  + 
+                                         →  
++                                        → +
+                                         →  
 __cs_p                                   → p
 .                                        → .
 n                                        → n
-}{                                       → }\n      {
+}                                        → }
+\n                                       → \n      
+{                                        → {
 __cs_p                                   → p
 .                                        → .
 children                                 → children
-}</                                      → }\n    </
+}                                        → }
+\n                                       → \n    
+<                                        → <
+/                                        → /
 b                                        → b
 >                                        → >
-)                                        → \n  )
+\n                                       → \n  
+)                                        → )
 ;                                        → ;
-\n                                       → \n\n  
-return                                   → return 
-(                                        → (\n    
+\n\n                                     → \n\n  
+return                                   → return
+                                         →  
+(                                        → (
+\n                                       → \n    
 <                                        → <
 div                                      → div
->{                                       → >\n      {\n        
-cs.splice(                               → ${ [-semantic]
+>                                        → >
+\n                                       → \n      
+{                                        → {
+\n                                       → \n        
+cs.splice(                               →  [-semantic -navigation]
 (\n          <Panel\n            body={  → (\n          <Panel\n            body={
-cs.lift((() =>                           → cs`
+cs.lift((() =>                           →  [-semantic -navigation]
 <                                        → <
 __cs_Badge                               → Badge
                                          →  
 n                                        → n
-={                                       → ={
+=                                        → =
+{                                        → {
 __cs_count                               → count
 [                                        → [
 0                                        → 0
 ]                                        → ]
-()                                       → ()
+(                                        → (
+)                                        → )
 }                                        → }
->{                                       → >\n              
+>                                        → >
+\n                                       → \n              
 <                                        → <
 u                                        → u
->{                                       → >{
+>                                        → >
+{                                        → {
 "kid "                                   → "kid "
- +                                       →  + 
+                                         →  
++                                        → +
+                                         →  
 __cs_count                               → count
 [                                        → [
 0                                        → 0
 ]                                        → ]
-()                                       → ()
-}</                                      → }</
+(                                        → (
+)                                        → )
+}                                        → }
+<                                        → <
+/                                        → /
 u                                        → u
 >                                        → >
-}</                                      → \n            </
+\n                                       → \n            
+<                                        → <
+/                                        → /
 __cs_Badge                               → Badge
 >                                        → >
-)())                                     → `
+)())                                     →  [-semantic -navigation]
 }\n          />\n        )               → }\n          />\n        )
-)                                        → } [-semantic]
-}{                                       → \n      }\n      
+)                                        →  [-semantic -navigation]
+\n                                       → \n      
+}                                        → }
+\n                                       → \n      
 <                                        → <
 button                                   → button
                                          →  
 onclick                                  → onclick
-={                                       → ={
-() =>                                    → () => 
+=                                        → =
+{                                        → {
+(                                        → (
+)                                        → )
+                                         →  
+=>                                       → =>
+                                         →  
 __cs_count                               → count
 [                                        → [
 1                                        → 1
@@ -156,17 +233,27 @@ __cs_count                               → count
 [                                        → [
 0                                        → 0
 ]                                        → ]
-()                                       → ()
- +                                       →  + 
+(                                        → (
+)                                        → )
+                                         →  
++                                        → +
+                                         →  
 1                                        → 1
 )                                        → )
 }                                        → }
->more</                                  → >more</
+>                                        → >
+more                                     → more
+<                                        → <
+/                                        → /
 button                                   → button
 >                                        → >
-}</                                      → \n    </
+\n                                       → \n    
+<                                        → <
+/                                        → /
 div                                      → div
 >                                        → >
-)                                        → \n  )
+\n                                       → \n  
+)                                        → )
 ;                                        → ;
-\n})())                                  → \n}`
+\n                                       → \n
+}                                        → }

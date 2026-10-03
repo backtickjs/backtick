@@ -12,22 +12,25 @@ import { snapshotCase } from "../snapshotCase.ts";
 function guard(fragment: Client<string>): Client<(flag: boolean) => string> {
   return cs.lift((() => (__cs_flag: boolean) => {
     if (__cs_flag) {
-        return cs.splice((fragment));
+      return cs.splice((fragment));
     }
     return "skipped";
-})());
+  })());
 }
 
 const ok = cs.lift((() => "evaluated")());
 
 const broken = cs.lift((() => {
-    throw "the guarded fragment must never evaluate";
+  throw "the guarded fragment must never evaluate";
 })());
 
 it("spliceLaziness", async (t) => {
   await snapshotCase(
     t,
     "spliceLaziness",
-    cs.lift((() => ({ taken: cs.splice(guard(ok))(true), skipped: cs.splice(guard(broken))(false) }))()),
+    cs.lift((() => ({
+      taken: cs.splice(guard(ok))(true),
+      skipped: cs.splice(guard(broken))(false),
+    }))()),
   );
 });

@@ -1,37 +1,65 @@
-cs.lift((() => {\n                        → cs`{\n    
-const                                     → const 
+cs.lift((() =>                            →  [-semantic -navigation]
+{                                         → {
+\n                                        → \n    
+const                                     → const
+                                          →  
 __cs_label                                → label
- =                                        →  = 
-cs.splice(                                →  [-semantic]
+                                          →  
+=                                         → =
+                                          →  
+cs.splice(                                →  [-semantic -navigation]
 (createSignal)                            → $createSignal
-)                                         →  [-semantic]
+)                                         →  [-semantic -navigation]
 (                                         → (
 "hi"                                      → "hi"
 )                                         → )
 ;                                         → ;
-\n    // A handler written inline and one held under a name: both are client code,\n    // and a handler prop takes a function and nothing else.\n    → \n\n    // A handler written inline and one held under a name: both are client code,\n    // and a handler prop takes a function and nothing else.\n    
-const                                     → const 
+\n\n    // A handler written inline and one held under a name: both are client code,\n    // and a handler prop takes a function and nothing else.\n    → \n\n    // A handler written inline and one held under a name: both are client code,\n    // and a handler prop takes a function and nothing else.\n    
+const                                     → const
+                                          →  
 __cs_row                                  → row
- =                                        →  = 
+                                          →  
+=                                         → =
+                                          →  
 (                                         → (
 __cs_size                                 → size
-:                                         → : 
+:                                         → :
+                                          →  
 number                                    → number
-) => {\n                                  → ) => {\n      
-const                                     → const 
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
+{                                         → {
+\n                                        → \n      
+const                                     → const
+                                          →  
 __cs_css                                  → css
- =                                        →  = 
+                                          →  
+=                                         → =
+                                          →  
 "font-size: "                             → "font-size: "
- +                                        →  + 
+                                          →  
++                                         → +
+                                          →  
 __cs_size                                 → size
- +                                        →  + 
+                                          →  
++                                         → +
+                                          →  
 "px"                                      → "px"
 ;                                         → ;
 \n                                        → \n      
-const                                     → const 
+const                                     → const
+                                          →  
 __cs_press                                → press
- =                                        →  = 
-() =>                                     → () => 
+                                          →  
+=                                         → =
+                                          →  
+(                                         → (
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
 __cs_label                                → label
 [                                         → [
 1                                         → 1
@@ -41,27 +69,37 @@ __cs_label                                → label
 )                                         → )
 ;                                         → ;
 \n                                        → \n      
-return                                    → return 
-(                                         → (\n        
+return                                    → return
+                                          →  
+(                                         → (
+\n                                        → \n        
 <                                         → <
 div                                       → div
                                           →  
 style                                     → style
-={                                        → ={
+=                                         → =
+{                                         → {
 __cs_css                                  → css
 }                                         → }
->{                                        → >\n          
+>                                         → >
+\n                                        → \n          
 <                                         → <
 span                                      → span
                                           →  
 style                                     → style
-={                                        → ={
+=                                         → =
+{                                         → {
 __cs_css                                  → css
 }                                         → }
                                           →  
 onclick                                   → onclick
-={                                        → ={
-() =>                                     → () => 
+=                                         → =
+{                                         → {
+(                                         → (
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
 __cs_label                                → label
 [                                         → [
 1                                         → 1
@@ -70,65 +108,87 @@ __cs_label                                → label
 "pressed"                                 → "pressed"
 )                                         → )
 }                                         → }
->{                                        → >\n            {
+>                                         → >
+\n                                        → \n            
+{                                         → {
 __cs_label                                → label
 [                                         → [
 0                                         → 0
 ]                                         → ]
-()                                        → ()
-}</                                       → }\n          </
+(                                         → (
+)                                         → )
+}                                         → }
+\n                                        → \n          
+<                                         → <
+/                                         → /
 span                                      → span
 >                                         → >
-}{                                        → \n          
+\n                                        → \n          
 <                                         → <
 span                                      → span
                                           →  
 style                                     → style
-={                                        → =
+=                                         → =
 "font-size: 8px"                          → "font-size: 8px"
-}                                         → 
->fixed</                                  → >fixed</
+>                                         → >
+fixed                                     → fixed
+<                                         → <
+/                                         → /
 span                                      → span
 >                                         → >
-}{                                        → \n          
+\n                                        → \n          
 <                                         → <
 span                                      → span
                                           →  
 style                                     → style
-={                                        → ={
+=                                         → =
+{                                         → {
 __cs_css                                  → css
 }                                         → }
                                           →  
 onclick                                   → onclick
-={                                        → ={
+=                                         → =
+{                                         → {
 __cs_press                                → press
 }                                         → }
->\n            held\n          </         → >\n            held\n          </
+>                                         → >
+\n                                        → \n            
+held\n                                    → held\n          
+<                                         → <
+/                                         → /
 span                                      → span
 >                                         → >
-}</                                       → \n        </
+\n                                        → \n        
+<                                         → <
+/                                         → /
 div                                       → div
 >                                         → >
-)                                         → \n      )
+\n                                        → \n      
+)                                         → )
 ;                                         → ;
-\n    }                                   → \n    }
+\n                                        → \n    
+}                                         → }
 ;                                         → ;
-\n                                        → \n\n    
-return                                    → return 
+\n\n                                      → \n\n    
+return                                    → return
+                                          →  
 <                                         → <
 div                                       → div
                                           →  
 style                                     → style
-={                                        → =
+=                                         → =
 "padding: 0"                              → "padding: 0"
-}                                         → 
->{                                        → >{
+>                                         → >
+{                                         → {
 __cs_row                                  → row
 (                                         → (
 12                                        → 12
 )                                         → )
-}</                                       → }</
+}                                         → }
+<                                         → <
+/                                         → /
 div                                       → div
 >                                         → >
 ;                                         → ;
-\n})())                                   → \n  }`
+\n                                        → \n  
+}                                         → }

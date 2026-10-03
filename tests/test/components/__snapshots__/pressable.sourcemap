@@ -1,33 +1,43 @@
-cs.lift((() => {\n         → cs`{\n    
-const                      → const 
+cs.lift((() =>             →  [-semantic -navigation]
+{                          → {
+\n                         → \n    
+const                      → const
+                           →  
 __cs_count                 → count
- =                         →  = 
-cs.splice(                 →  [-semantic]
+                           →  
+=                          → =
+                           →  
+cs.splice(                 →  [-semantic -navigation]
 (createSignal)             → $createSignal
-)                          →  [-semantic]
+)                          →  [-semantic -navigation]
 (                          → (
 0                          → 0
 )                          → )
 ;                          → ;
 \n                         → \n    
-return                     → return 
-(                          → (\n      
+return                     → return
+                           →  
+(                          → (
+\n                         → \n      
 <                          → <
 button                     → button
-                           → \n        
+\n                         → \n        
 id                         → id
-={                         → =
+=                          → =
 "row"                      → "row"
-}                          → 
-                           → \n        
+\n                         → \n        
 style                      → style
-={                         → =
+=                          → =
 "display: flex; gap: 8px"  → "display: flex; gap: 8px"
-}                          → 
-                           → \n        
+\n                         → \n        
 onclick                    → onclick
-={                         → ={
-() =>                      → () => 
+=                          → =
+{                          → {
+(                          → (
+)                          → )
+                           →  
+=>                         → =>
+                           →  
 __cs_count                 → count
 [                          → [
 1                          → 1
@@ -37,53 +47,79 @@ __cs_count                 → count
 [                          → [
 0                          → 0
 ]                          → ]
-()                         → ()
- +                         →  + 
+(                          → (
+)                          → )
+                           →  
++                          → +
+                           →  
 1                          → 1
 )                          → )
 }                          → }
->{                         → \n      >\n        
+\n                         → \n      
+>                          → >
+\n                         → \n        
 <                          → <
 span                       → span
                            →  
 style                      → style
-={                         → =
+=                          → =
 "font-weight: 700"         → "font-weight: 700"
-}                          → 
->{                         → >{
+>                          → >
+{                          → {
 __cs_count                 → count
 [                          → [
 0                          → 0
 ]                          → ]
-()                         → ()
- >                         →  > 
+(                          → (
+)                          → )
+                           →  
+>                          → >
+                           →  
 0                          → 0
- ?                         →  ? 
-"\\u2611"                  → "☑"
- :                         →  : 
-"\\u2610"                  → "☐"
-}</                        → }</
+                           →  
+?                          → ?
+                           →  
+"☑"                        → "☑"
+                           →  
+:                          → :
+                           →  
+"☐"                        → "☐"
+}                          → }
+<                          → <
+/                          → /
 span                       → span
 >                          → >
-}{                         → \n        
+\n                         → \n        
 <                          → <
 span                       → span
->{                         → >{
+>                          → >
+{                          → {
 "pressed "                 → "pressed "
- +                         →  + 
+                           →  
++                          → +
+                           →  
 __cs_count                 → count
 [                          → [
 0                          → 0
 ]                          → ]
-()                         → ()
- +                         →  + 
+(                          → (
+)                          → )
+                           →  
++                          → +
+                           →  
 " times"                   → " times"
-}</                        → }</
+}                          → }
+<                          → <
+/                          → /
 span                       → span
 >                          → >
-}</                        → \n      </
+\n                         → \n      
+<                          → <
+/                          → /
 button                     → button
 >                          → >
-)                          → \n    )
+\n                         → \n    
+)                          → )
 ;                          → ;
-\n})())                    → \n  }`
+\n                         → \n  
+}                          → }

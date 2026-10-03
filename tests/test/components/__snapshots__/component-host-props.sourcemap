@@ -1,29 +1,36 @@
-cs.lift((() =>                            → cs`
+cs.lift((() =>                            →  [-semantic -navigation]
 <                                         → <
 span                                      → span
                                           →  
 class                                     → class
-={                                        → ={
-cs.splice(                                →  [-semantic]
+=                                         → =
+{                                         → {
+cs.splice(                                →  [-semantic -navigation]
 (accent)                                  → $accent
-)                                         →  [-semantic]
+)                                         →  [-semantic -navigation]
 }                                         → }
->{                                        → >{
-cs.splice(                                →  [-semantic]
+>                                         → >
+{                                         → {
+cs.splice(                                →  [-semantic -navigation]
 (label)                                   → $label
-)                                         →  [-semantic]
-}</                                       → }</
+)                                         →  [-semantic -navigation]
+}                                         → }
+<                                         → <
+/                                         → /
 span                                      → span
 >                                         → >
-)())                                      → `
-cs.lift((() =>                            → cs`
+cs.lift((() =>                            →  [-semantic -navigation]
 <                                         → <
 div                                       → div
->{                                        → >\n      {
-cs.splice(                                → ${ [-semantic]
+>                                         → >
+\n                                        → \n      
+{                                         → {
+cs.splice(                                →  [-semantic -navigation]
 (<Swatch palette={new Palette("danger")} label={() => "one"} />)→ (<Swatch palette={new Palette("danger")} label={() => "one"} />)
-)                                         → } [-semantic]
-}</                                       → }\n    </
+)                                         →  [-semantic -navigation]
+}                                         → }
+\n                                        → \n    
+<                                         → <
+/                                         → /
 div                                       → div
 >                                         → >
-)())                                      → `

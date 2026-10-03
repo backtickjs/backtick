@@ -1,74 +1,106 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_front              → front
- =                      →  = 
-[                       → [
-1                       → 1
-,                       → , 
-2                       → 2
-]                       → ]
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_back               → back
- =                      →  = 
-[                       → [
-3                       → 3
-]                       → ]
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_none               → none
-:                       → : 
-number                  → number
-[]                      → []
- =                      →  = 
-[]                      → []
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_all                → all
- =                      →  = 
-[                       → [
-0                       → 0
-,                       → , 
-...                     → ...
-__cs_front              → front
-,                       → , 
-...                     → ...
-__cs_none               → none
-,                       → , 
-...                     → ...
-__cs_back               → back
-,                       → , 
-4                       → 4
-]                       → ]
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_twice              → twice
- =                      →  = 
-[                       → [
-...                     → ...
-__cs_all                → all
-,                       → , 
-...                     → ...
-__cs_all                → all
-]                       → ]
-;                       → ;
-\n                      → \n      
-return                  → return 
-__cs_all                → all
-.                       → .
-join                    → join
-(                       → (
-","                     → ","
-)                       → )
- +                      →  + 
-"|"                     → "|"
- +                      →  + 
-__cs_twice              → twice
-.                       → .
-length                  → length
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_front       → front
+                 →  
+=                → =
+                 →  
+[                → [
+1                → 1
+,                → ,
+                 →  
+2                → 2
+]                → ]
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_back        → back
+                 →  
+=                → =
+                 →  
+[                → [
+3                → 3
+]                → ]
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_none        → none
+:                → :
+                 →  
+number           → number
+[                → [
+]                → ]
+                 →  
+=                → =
+                 →  
+[                → [
+]                → ]
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_all         → all
+                 →  
+=                → =
+                 →  
+[                → [
+0                → 0
+,                → ,
+                 →  
+...              → ...
+__cs_front       → front
+,                → ,
+                 →  
+...              → ...
+__cs_none        → none
+,                → ,
+                 →  
+...              → ...
+__cs_back        → back
+,                → ,
+                 →  
+4                → 4
+]                → ]
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_twice       → twice
+                 →  
+=                → =
+                 →  
+[                → [
+...              → ...
+__cs_all         → all
+,                → ,
+                 →  
+...              → ...
+__cs_all         → all
+]                → ]
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+__cs_all         → all
+.                → .
+join             → join
+(                → (
+","              → ","
+)                → )
+                 →  
++                → +
+                 →  
+"|"              → "|"
+                 →  
++                → +
+                 →  
+__cs_twice       → twice
+.                → .
+length           → length
+;                → ;
+\n               → \n    
+}                → }

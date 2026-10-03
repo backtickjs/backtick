@@ -1,25 +1,42 @@
-cs.lift((() =>   → cs`
-() => {\n        → () => {\n  
-const            → const 
+cs.lift((() =>   →  [-semantic -navigation]
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n  
+const            → const
+                 →  
 __cs_x           → x
- =               →  = 
+                 →  
+=                → =
+                 →  
 1                → 1
 ;                → ;
 \n               → \n  
-return           → return 
-cs.splice(       → ${ [-semantic]
-cs.lift((() =>   → cs`
+return           → return
+                 →  
+cs.splice(       →  [-semantic -navigation]
+cs.lift((() =>   →  [-semantic -navigation]
 <                → <
 span             → span
                  →  
 onclick          → onclick
-={               → ={
-() =>            → () => 
+=                → =
+{                → {
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
 __cs_x           → x
 }                → }
-/>               →  />
-)())             → `
-)                → } [-semantic]
+                 →  
+/                → /
+>                → >
+)())             →  [-semantic -navigation]
+)                →  [-semantic -navigation]
 ;                → ;
-\n}              → \n}
-)())             → `
+\n               → \n
+}                → }

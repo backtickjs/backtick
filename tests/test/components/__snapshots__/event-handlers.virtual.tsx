@@ -14,11 +14,26 @@ it("eventHandlers", async (t) => {
     t,
     "eventHandlers",
     cs.lift((() => {
-    const __cs_said = cs.splice((createSignal))("");
-    return (<form onsubmit={__cs_event => {
-        __cs_event.preventDefault();
-        __cs_said[1](__cs_event.type + " " + __cs_event.cancelable);
-    }}>{<textarea oninput={__cs_event => __cs_said[1](__cs_event.currentTarget.value)}/>}{<input oninput={__cs_event => __cs_said[1](__cs_event.currentTarget.value)}/>}{<button onclick={__cs_event => __cs_said[1](__cs_event.clientX + " " + __cs_event.currentTarget.tagName)}>{__cs_said[0]()}</button>}</form>);
-})()),
+      const __cs_said = cs.splice((createSignal))("");
+
+      return (
+        <form
+          onsubmit={(__cs_event) => {
+            __cs_event.preventDefault();
+            __cs_said[1](__cs_event.type + " " + __cs_event.cancelable);
+          }}
+        >
+          <textarea oninput={(__cs_event) => __cs_said[1](__cs_event.currentTarget.value)} />
+          <input oninput={(__cs_event) => __cs_said[1](__cs_event.currentTarget.value)} />
+          <button
+            onclick={(__cs_event) =>
+              __cs_said[1](__cs_event.clientX + " " + __cs_event.currentTarget.tagName)
+            }
+          >
+            {__cs_said[0]()}
+          </button>
+        </form>
+      );
+    })()),
   );
 });

@@ -1,178 +1,239 @@
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_rounded            → rounded
- =                      →  =\n        
-cs.globalThis.          → 
-Math                    → Math
-.                       → .
-round                   → round
-(                       → (
-2.5                     → 2.5
-)                       → )
- +                      →  + 
-","                     → ","
- +                      →  + 
-cs.globalThis.          → 
-Math                    → Math
-.                       → .
-round                   → round
-(                       → (
--                       → -
-2.5                     → 2.5
-)                       → )
- +                      →  + 
-","                     → ","
- +                      →  + 
-cs.globalThis.          → 
-Math                    → Math
-.                       → .
-round                   → round
-(                       → (
--                       → -
-0.5                     → 0.5
-)                       → )
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_edges              → edges
- =                      →  =\n        
-cs.globalThis.          → 
-Math                    → Math
-.                       → .
-floor                   → floor
-(                       → (
--                       → -
-1.5                     → 1.5
-)                       → )
- +                      →  + 
-","                     → ","
- +                      →  + 
-cs.globalThis.          → 
-Math                    → Math
-.                       → .
-ceil                    → ceil
-(                       → (
--                       → -
-1.5                     → 1.5
-)                       → )
- +                      →  + 
-","                     → ","
- +                      →  + 
-cs.globalThis.          → 
-Math                    → Math
-.                       → .
-trunc                   → trunc
-(                       → (
--                       → -
-1.5                     → 1.5
-)                       → )
-;                       → ;
-\n                      → \n      
-const                   → const 
-__cs_picks              → picks
- =                      →  =\n        
-cs.globalThis.          → 
-Math                    → Math
-.                       → .
-min                     → min
-(                       → (
-3                       → 3
-,                       → , 
-1                       → 1
-,                       → , 
-2                       → 2
-)                       → )
- +                      →  + 
-","                     → ","
- +                      →  + 
-cs.globalThis.          → 
-Math                    → Math
-.                       → .
-max                     → max
-(                       → (
-3                       → 3
-,                       → , 
-1                       → 1
-,                       → , 
-2                       → 2
-)                       → )
- +                      →  + 
-","                     → ","
- +                      →  + 
-cs.globalThis.          → 
-Math                    → Math
-.                       → .
-abs                     → abs
-(                       → (
--                       → -
-4                       → 4
-)                       → )
-;                       → ;
-\n                      → \n      
-return                  → return 
-(                       → (\n        
-__cs_rounded            → rounded
- +                      →  +\n        
-"|"                     → "|"
- +                      →  +\n        
-__cs_edges              → edges
- +                      →  +\n        
-"|"                     → "|"
- +                      →  +\n        
-__cs_picks              → picks
- +                      →  +\n        
-"|"                     → "|"
- +                      →  +\n        
-cs.globalThis.          → 
-Math                    → Math
-.                       → .
-sqrt                    → sqrt
-(                       → (
-9                       → 9
-)                       → )
- +                      →  +\n        
-","                     → ","
- +                      →  +\n        
-cs.globalThis.          → 
-Math                    → Math
-.                       → .
-sign                    → sign
-(                       → (
--                       → -
-8                       → 8
-)                       → )
- +                      →  +\n        
-","                     → ","
- +                      →  +\n        
-cs.globalThis.          → 
-Math                    → Math
-.                       → .
-fround                  → fround
-(                       → (
-1.5                     → 1.5
-)                       → )
- +                      →  +\n        
-"|"                     → "|"
- +                      →  +\n        
-(                       → (
-cs.globalThis.          → 
-Math                    → Math
-.                       → .
-PI                      → PI
- >                      →  > 
-3.14                    → 3.14
-)                       → )
- +                      →  +\n        
-","                     → ","
- +                      →  +\n        
-(                       → (
-cs.globalThis.          → 
-Math                    → Math
-.                       → .
-E                       → E
- >                      →  > 
-2.71                    → 2.71
-)                       → )
-)                       → \n      )
-;                       → ;
-\n})())                 → \n    }`
+cs.lift((() =>   →  [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_rounded     → rounded
+                 →  
+=                → =
+\n               → \n        
+Math             → Math
+.                → .
+round            → round
+(                → (
+2.5              → 2.5
+)                → )
+                 →  
++                → +
+                 →  
+","              → ","
+                 →  
++                → +
+                 →  
+Math             → Math
+.                → .
+round            → round
+(                → (
+-                → -
+2.5              → 2.5
+)                → )
+                 →  
++                → +
+                 →  
+","              → ","
+                 →  
++                → +
+                 →  
+Math             → Math
+.                → .
+round            → round
+(                → (
+-                → -
+0.5              → 0.5
+)                → )
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_edges       → edges
+                 →  
+=                → =
+\n               → \n        
+Math             → Math
+.                → .
+floor            → floor
+(                → (
+-                → -
+1.5              → 1.5
+)                → )
+                 →  
++                → +
+                 →  
+","              → ","
+                 →  
++                → +
+                 →  
+Math             → Math
+.                → .
+ceil             → ceil
+(                → (
+-                → -
+1.5              → 1.5
+)                → )
+                 →  
++                → +
+                 →  
+","              → ","
+                 →  
++                → +
+                 →  
+Math             → Math
+.                → .
+trunc            → trunc
+(                → (
+-                → -
+1.5              → 1.5
+)                → )
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_picks       → picks
+                 →  
+=                → =
+\n               → \n        
+Math             → Math
+.                → .
+min              → min
+(                → (
+3                → 3
+,                → ,
+                 →  
+1                → 1
+,                → ,
+                 →  
+2                → 2
+)                → )
+                 →  
++                → +
+                 →  
+","              → ","
+                 →  
++                → +
+                 →  
+Math             → Math
+.                → .
+max              → max
+(                → (
+3                → 3
+,                → ,
+                 →  
+1                → 1
+,                → ,
+                 →  
+2                → 2
+)                → )
+                 →  
++                → +
+                 →  
+","              → ","
+                 →  
++                → +
+                 →  
+Math             → Math
+.                → .
+abs              → abs
+(                → (
+-                → -
+4                → 4
+)                → )
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+(                → (
+\n               → \n        
+__cs_rounded     → rounded
+                 →  
++                → +
+\n               → \n        
+"|"              → "|"
+                 →  
++                → +
+\n               → \n        
+__cs_edges       → edges
+                 →  
++                → +
+\n               → \n        
+"|"              → "|"
+                 →  
++                → +
+\n               → \n        
+__cs_picks       → picks
+                 →  
++                → +
+\n               → \n        
+"|"              → "|"
+                 →  
++                → +
+\n               → \n        
+Math             → Math
+.                → .
+sqrt             → sqrt
+(                → (
+9                → 9
+)                → )
+                 →  
++                → +
+\n               → \n        
+","              → ","
+                 →  
++                → +
+\n               → \n        
+Math             → Math
+.                → .
+sign             → sign
+(                → (
+-                → -
+8                → 8
+)                → )
+                 →  
++                → +
+\n               → \n        
+","              → ","
+                 →  
++                → +
+\n               → \n        
+Math             → Math
+.                → .
+fround           → fround
+(                → (
+1.5              → 1.5
+)                → )
+                 →  
++                → +
+\n               → \n        
+"|"              → "|"
+                 →  
++                → +
+\n               → \n        
+(                → (
+Math             → Math
+.                → .
+PI               → PI
+                 →  
+>                → >
+                 →  
+3.14             → 3.14
+)                → )
+                 →  
++                → +
+\n               → \n        
+","              → ","
+                 →  
++                → +
+\n               → \n        
+(                → (
+Math             → Math
+.                → .
+E                → E
+                 →  
+>                → >
+                 →  
+2.71             → 2.71
+)                → )
+\n               → \n      
+)                → )
+;                → ;
+\n               → \n    
+}                → }

@@ -9,13 +9,16 @@ import { snapshotCase } from "../snapshotCase.ts";
 
 // A client component defined on the host as a script, and used as a tag in
 // another: typed by its own signature, and drawn by the client.
-const Badge = cs.lift((() => (__cs_props: {
-    n: number;
-}) => <b>{"badge " + __cs_props.n}</b>)());
+const Badge = cs.lift((() => (__cs_props: { n: number }) => <b>{"badge " + __cs_props.n}</b>)());
 
 const badges = cs.lift((() => {
-    const __cs_scale = cs.splice((createSignal))(1);
-    return (<div>{(void For, cs.splice(For)({ each: [1, 2], children: __cs_n => cs.splice(Badge)({ n: __cs_n * __cs_scale[0]() }) }))}{<button onclick={() => __cs_scale[1](__cs_scale[0]() * 2)}>double</button>}</div>);
+  const __cs_scale = cs.splice((createSignal))(1);
+  return (
+    <div>
+      {(void For, cs.splice(For)({ each: [1, 2], children: (__cs_n) => cs.splice(Badge)({ n: __cs_n * __cs_scale[0](), }) }))}
+      <button onclick={() => __cs_scale[1](__cs_scale[0]() * 2)}>double</button>
+    </div>
+  );
 })());
 
 it("clientComponentTag", async (t) => {

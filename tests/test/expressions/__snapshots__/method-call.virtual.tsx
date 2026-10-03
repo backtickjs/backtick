@@ -7,8 +7,8 @@ it("methodCall", async (t) => {
     t,
     "methodCall",
     cs.lift((() => {
-    const __cs_greeting = "Hello";
-    return __cs_greeting.concat(", ", "World").toUpperCase();
-})()),
+      const __cs_greeting = "Hello";
+      return __cs_greeting.concat(", ", "World").toUpperCase();
+    })()),
   );
 });

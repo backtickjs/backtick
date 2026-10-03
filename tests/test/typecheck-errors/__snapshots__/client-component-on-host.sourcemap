@@ -1,53 +1,57 @@
-cs.lift((() =>   → cs`
+cs.lift((() =>   →  [-semantic -navigation]
 (                → (
 __cs_props       → props
-:                → : 
-{\n              → { 
+:                → :
+                 →  
+{                → {
+                 →  
 n                → n
-:                → : 
+:                → :
+                 →  
 number           → number
-;                → 
-\n}              →  }
-) =>             → ) => 
+                 →  
+}                → }
+)                → )
+                 →  
+=>               → =>
+                 →  
 <                → <
 b                → b
->{               → >{
+>                → >
+{                → {
 __cs_props       → props
 .                → .
 n                → n
-}</              → }</
+}                → }
+<                → <
+/                → /
 b                → b
 >                → >
-)())             → `
-cs.lift((() =>   → cs`
-(void            → <For each={[1, 2]}>{(n) => <Badge n={n} />}</ [-semantic -navigation -verification]
+cs.lift((() =>   →  [-semantic -navigation]
 For              → For
-,                →  [-semantic -navigation -verification]
 cs.splice(       →  [-semantic -navigation]
 For              → For
 )                →  [-semantic -navigation]
-(                →  [-semantic -navigation -verification]
-{                → For 
+{                → For
 each             → each
-:                → ={
 [                → [
 1                → 1
-,                → , 
+,                → ,
+                 →  
 2                → 2
 ]                → ]
-, children:      → >{
+children         → {(n) => <Badge n={n} />}
+(                → (
 __cs_n           → n
- =>              → ) => 
+)                → )
+                 →  
+=>               → =>
+                 →  
 cs.splice(       →  [-semantic -navigation]
 Badge            → Badge
 )                →  [-semantic -navigation]
-(                →  [-semantic -navigation -verification]
-{                → Badge 
+{                → Badge
 n                → n
-:                → ={
 __cs_n           → n
- }               → 
-)                →  n={n} /> [-semantic -navigation -verification]
- }               → 
-))               → > [-semantic -navigation -verification]
-)())             → `
+}                → 
+}                → 

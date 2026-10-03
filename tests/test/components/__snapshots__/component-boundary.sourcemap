@@ -1,26 +1,34 @@
-cs.lift((() =>              → cs`
+cs.lift((() =>              →  [-semantic -navigation]
 <                           → <
 span                        → span
->{                          → >{
-cs.splice(                  →  [-semantic]
+>                           → >
+{                           → {
+cs.splice(                  →  [-semantic -navigation]
 (text)                      → $text
-)                           →  [-semantic]
-}</                         → }</
+)                           →  [-semantic -navigation]
+}                           → }
+<                           → <
+/                           → /
 span                        → span
 >                           → >
-)())                        → `
-cs.lift((() =>              → cs`
+cs.lift((() =>              →  [-semantic -navigation]
 <                           → <
 div                         → div
->{                          → >\n      {
-cs.splice(                  → ${ [-semantic]
+>                           → >
+\n                          → \n      
+{                           → {
+cs.splice(                  →  [-semantic -navigation]
 (<TextLabel text="one" />)  → (<TextLabel text="one" />)
-)                           → } [-semantic]
-}{                          → }\n      {
-cs.splice(                  → ${ [-semantic]
+)                           →  [-semantic -navigation]
+}                           → }
+\n                          → \n      
+{                           → {
+cs.splice(                  →  [-semantic -navigation]
 (<TextLabel text="two" />)  → (<TextLabel text="two" />)
-)                           → } [-semantic]
-}</                         → }\n    </
+)                           →  [-semantic -navigation]
+}                           → }
+\n                          → \n    
+<                           → <
+/                           → /
 div                         → div
 >                           → >
-)())                        → `

@@ -1,212 +1,266 @@
-cs.lift((() =>                      → cs`
-<                                   → <
-a                                   → a
-                                    →  
-href                                → href
-={                                  → =
-"/counter"                          → "/counter"
-}                                   → 
-                                    →  
-id                                  → id
-={                                  → =
-"press"                             → "press"
-}                                   → 
->\n      go\n    </                 → >\n      go\n    </
-a                                   → a
->                                   → >
-)())                                → `
-cs.lift((() =>                      → cs`
-<                                   → <
-div                                 → div
->{                                  → >\n      
-<                                   → <
-svg                                 → svg
->{                                  → >\n        
-<                                   → <
-path                                → path
- />                                 →  />
-}</                                 → \n      </
-svg                                 → svg
->                                   → >
-}</                                 → \n    </
-div                                 → div
->                                   → >
-)())                                → `
-cs.lift((() =>                      → cs`
-<                                   → <
-svg                                 → svg
-                                    →  
-viewBox                             → viewBox
-={                                  → =
-"0 0 279 38"                        → "0 0 279 38"
-}                                   → 
-/>                                  →  />
-)())                                → `
-cs.lift((() =>                      → cs`
-<                                   → <
-svg                                 → svg
->{                                  → >\n      
-<                                   → <
-path                                → path
-                                    →  
-stroke-width                        → stroke-width
-={                                  → ={
-2                                   → 2
-}                                   → }
-                                    →  
-fill-rule                           → fill-rule
-={                                  → =
-"evenodd"                           → "evenodd"
-}                                   → 
-/>                                  →  />
-}{                                  → \n      
-<                                   → <
-filter                              → filter
-                                    →  
-color-interpolation-filters         → color-interpolation-filters
-={                                  → =
-"sRGB"                              → "sRGB"
-}                                   → 
-/>                                  →  />
-}</                                 → \n    </
-svg                                 → svg
->                                   → >
-)())                                → `
-cs.lift((() =>                      → cs`
-<                                   → <
-svg                                 → svg
->{                                  → >\n      
-<                                   → <
-linearGradient                      → linearGradient
-                                    →  
-gradientTransform                   → gradientTransform
-={                                  → =
-"rotate(90)"                        → "rotate(90)"
-}                                   → 
-/>                                  →  />
-}{                                  → \n      
-<                                   → <
-feTurbulence                        → feTurbulence
-                                    →  
-numOctaves                          → numOctaves
-={                                  → ={
-3                                   → 3
-}                                   → }
-/>                                  →  />
-}</                                 → \n    </
-svg                                 → svg
->                                   → >
-)())                                → `
-cs.lift((() =>                      → cs`
-<                                   → <
-div                                 → div
-                                    →  
-tabIndex                            → tabIndex
-={                                  → ={
-2                                   → 2
-}                                   → }
-/>                                  →  />
-)())                                → `
-cs.lift((() => {\n                  → cs`{\n      
-const                               → const 
-__cs_text                           → text
- =                                  →  = 
-cs.splice(                          →  [-semantic]
-(createSignal)                      → $createSignal
-)                                   →  [-semantic]
-(                                   → (
-"first"                             → "first"
-)                                   → )
-;                                   → ;
-\n                                  → \n      
-const                               → const 
-__cs_isOn                           → isOn
- =                                  →  = 
-cs.splice(                          →  [-semantic]
-(createSignal)                      → $createSignal
-)                                   →  [-semantic]
-(                                   → (
-false                               → false
-)                                   → )
-;                                   → ;
-\n                                  → \n      
-return                              → return 
-(                                   → (\n        
-<                                   → <
-div                                 → div
->{                                  → >\n          
-<                                   → <
-input                               → input
-                                    →  
-aria-label                          → aria-label
-={                                  → =
-"text"                              → "text"
-}                                   → 
-                                    →  
-value                               → value
-={                                  → ={
-__cs_text                           → text
-[                                   → [
-0                                   → 0
-]                                   → ]
-()                                  → ()
-}                                   → }
-/>                                  →  />
-}{                                  → \n          
-<                                   → <
-input                               → input
-                                    →  
-type                                → type
-={                                  → =
-"checkbox"                          → "checkbox"
-}                                   → 
-                                    →  
-aria-label                          → aria-label
-={                                  → =
-"on"                                → "on"
-}                                   → 
-                                    →  
-checked                             → checked
-={                                  → ={
-__cs_isOn                           → isOn
-[                                   → [
-0                                   → 0
-]                                   → ]
-()                                  → ()
-}                                   → }
-/>                                  →  />
-}{                                  → \n          
-<                                   → <
-button                              → button
-                                    → \n            
-onclick                             → onclick
-={                                  → ={
-() => {\n                           → () => {\n              
-__cs_text                           → text
-[                                   → [
-1                                   → 1
-]                                   → ]
-(                                   → (
-"second"                            → "second"
-)                                   → )
-;                                   → ;
-\n                                  → \n              
-__cs_isOn                           → isOn
-[                                   → [
-1                                   → 1
-]                                   → ]
-(                                   → (
-true                                → true
-)                                   → )
-;                                   → ;
-\n    }                             → \n            }
-}                                   → }
->\n            write\n          </  → \n          >\n            write\n          </
-button                              → button
->                                   → >
-}</                                 → \n        </
-div                                 → div
->                                   → >
-)                                   → \n      )
-;                                   → ;
-\n})())                             → \n    }`
+cs.lift((() =>               →  [-semantic -navigation]
+<                            → <
+a                            → a
+                             →  
+href                         → href
+=                            → =
+"/counter"                   → "/counter"
+                             →  
+id                           → id
+=                            → =
+"press"                      → "press"
+>                            → >
+\n                           → \n      
+go\n                         → go\n    
+<                            → <
+/                            → /
+a                            → a
+>                            → >
+cs.lift((() =>               →  [-semantic -navigation]
+<                            → <
+div                          → div
+>                            → >
+\n                           → \n      
+<                            → <
+svg                          → svg
+>                            → >
+\n                           → \n        
+<                            → <
+path                         → path
+                             →  
+/                            → /
+>                            → >
+\n                           → \n      
+<                            → <
+/                            → /
+svg                          → svg
+>                            → >
+\n                           → \n    
+<                            → <
+/                            → /
+div                          → div
+>                            → >
+cs.lift((() =>               →  [-semantic -navigation]
+<                            → <
+svg                          → svg
+                             →  
+viewBox                      → viewBox
+=                            → =
+"0 0 279 38"                 → "0 0 279 38"
+                             →  
+/                            → /
+>                            → >
+cs.lift((() =>               →  [-semantic -navigation]
+<                            → <
+svg                          → svg
+>                            → >
+\n                           → \n      
+<                            → <
+path                         → path
+                             →  
+stroke-width                 → stroke-width
+=                            → =
+{                            → {
+2                            → 2
+}                            → }
+                             →  
+fill-rule                    → fill-rule
+=                            → =
+"evenodd"                    → "evenodd"
+                             →  
+/                            → /
+>                            → >
+\n                           → \n      
+<                            → <
+filter                       → filter
+                             →  
+color-interpolation-filters  → color-interpolation-filters
+=                            → =
+"sRGB"                       → "sRGB"
+                             →  
+/                            → /
+>                            → >
+\n                           → \n    
+<                            → <
+/                            → /
+svg                          → svg
+>                            → >
+cs.lift((() =>               →  [-semantic -navigation]
+<                            → <
+svg                          → svg
+>                            → >
+\n                           → \n      
+<                            → <
+linearGradient               → linearGradient
+                             →  
+gradientTransform            → gradientTransform
+=                            → =
+"rotate(90)"                 → "rotate(90)"
+                             →  
+/                            → /
+>                            → >
+\n                           → \n      
+<                            → <
+feTurbulence                 → feTurbulence
+                             →  
+numOctaves                   → numOctaves
+=                            → =
+{                            → {
+3                            → 3
+}                            → }
+                             →  
+/                            → /
+>                            → >
+\n                           → \n    
+<                            → <
+/                            → /
+svg                          → svg
+>                            → >
+cs.lift((() =>               →  [-semantic -navigation]
+<                            → <
+div                          → div
+                             →  
+tabIndex                     → tabIndex
+=                            → =
+{                            → {
+2                            → 2
+}                            → }
+                             →  
+/                            → /
+>                            → >
+cs.lift((() =>               →  [-semantic -navigation]
+{                            → {
+\n                           → \n      
+const                        → const
+                             →  
+__cs_text                    → text
+                             →  
+=                            → =
+                             →  
+cs.splice(                   →  [-semantic -navigation]
+(createSignal)               → $createSignal
+)                            →  [-semantic -navigation]
+(                            → (
+"first"                      → "first"
+)                            → )
+;                            → ;
+\n                           → \n      
+const                        → const
+                             →  
+__cs_isOn                    → isOn
+                             →  
+=                            → =
+                             →  
+cs.splice(                   →  [-semantic -navigation]
+(createSignal)               → $createSignal
+)                            →  [-semantic -navigation]
+(                            → (
+false                        → false
+)                            → )
+;                            → ;
+\n                           → \n      
+return                       → return
+                             →  
+(                            → (
+\n                           → \n        
+<                            → <
+div                          → div
+>                            → >
+\n                           → \n          
+<                            → <
+input                        → input
+                             →  
+aria-label                   → aria-label
+=                            → =
+"text"                       → "text"
+                             →  
+value                        → value
+=                            → =
+{                            → {
+__cs_text                    → text
+[                            → [
+0                            → 0
+]                            → ]
+(                            → (
+)                            → )
+}                            → }
+                             →  
+/                            → /
+>                            → >
+\n                           → \n          
+<                            → <
+input                        → input
+                             →  
+type                         → type
+=                            → =
+"checkbox"                   → "checkbox"
+                             →  
+aria-label                   → aria-label
+=                            → =
+"on"                         → "on"
+                             →  
+checked                      → checked
+=                            → =
+{                            → {
+__cs_isOn                    → isOn
+[                            → [
+0                            → 0
+]                            → ]
+(                            → (
+)                            → )
+}                            → }
+                             →  
+/                            → /
+>                            → >
+\n                           → \n          
+<                            → <
+button                       → button
+\n                           → \n            
+onclick                      → onclick
+=                            → =
+{                            → {
+(                            → (
+)                            → )
+                             →  
+=>                           → =>
+                             →  
+{                            → {
+\n                           → \n              
+__cs_text                    → text
+[                            → [
+1                            → 1
+]                            → ]
+(                            → (
+"second"                     → "second"
+)                            → )
+;                            → ;
+\n                           → \n              
+__cs_isOn                    → isOn
+[                            → [
+1                            → 1
+]                            → ]
+(                            → (
+true                         → true
+)                            → )
+;                            → ;
+\n                           → \n            
+}                            → }
+}                            → }
+\n                           → \n          
+>                            → >
+\n                           → \n            
+write\n                      → write\n          
+<                            → <
+/                            → /
+button                       → button
+>                            → >
+\n                           → \n        
+<                            → <
+/                            → /
+div                          → div
+>                            → >
+\n                           → \n      
+)                            → )
+;                            → ;
+\n                           → \n    
+}                            → }

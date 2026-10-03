@@ -10,19 +10,19 @@ it("compoundAssignment", async (t) => {
     t,
     "compoundAssignment",
     cs.lift((() => {
-    let __cs_n = 10;
-    __cs_n += 5;
-    __cs_n -= 3;
-    __cs_n *= 2;
-    __cs_n /= 4;
-    __cs_n %= 4;
-    let __cs_text = "a";
-    __cs_text += "b";
-    let __cs_total = 1;
-    const __cs_answered = (__cs_total += 2);
-    let __cs_x = 1;
-    __cs_x += __cs_x = 5;
-    return [__cs_n, __cs_text, __cs_answered, __cs_total, __cs_x];
-})()),
+      let __cs_n = 10;
+      __cs_n += 5;
+      __cs_n -= 3;
+      __cs_n *= 2;
+      __cs_n /= 4;
+      __cs_n %= 4;
+      let __cs_text = "a";
+      __cs_text += "b";
+      let __cs_total = 1;
+      const __cs_answered = (__cs_total += 2);
+      let __cs_x = 1;
+      __cs_x += __cs_x = 5;
+      return [__cs_n, __cs_text, __cs_answered, __cs_total, __cs_x];
+    })()),
   );
 });

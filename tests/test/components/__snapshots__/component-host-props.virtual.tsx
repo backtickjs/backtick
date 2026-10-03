@@ -26,6 +26,8 @@ it("componentHostProps", async (t) => {
   await snapshotCase(
     t,
     "componentHostProps",
-    cs.lift((() => <div>{cs.splice((<Swatch palette={new Palette("danger")} label={() => "one"} />))}</div>)()),
+    cs.lift((() => <div>
+      {cs.splice((<Swatch palette={new Palette("danger")} label={() => "one"} />))}
+    </div>)()),
   );
 });

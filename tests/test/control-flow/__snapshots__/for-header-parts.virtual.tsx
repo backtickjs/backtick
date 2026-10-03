@@ -9,13 +9,13 @@ it("forHeaderParts", async (t) => {
     t,
     "forHeaderParts",
     cs.lift((() => {
-    let __cs_i = 0;
-    let __cs_seen = "";
-    for (; __cs_i < 3;) {
+      let __cs_i = 0;
+      let __cs_seen = "";
+      for (; __cs_i < 3; ) {
         __cs_seen = __cs_seen + __cs_i;
         __cs_i = __cs_i + 1;
-    }
-    return __cs_seen;
-})()),
+      }
+      return __cs_seen;
+    })()),
   );
 });

@@ -9,7 +9,7 @@ function addOwnTotal(lhs: Client<number>, rhs: number): Client<number> {
     __cs_total = __cs_total + cs.splice((lhs));
     __cs_total = __cs_total + cs.splice((rhs));
     return __cs_total;
-})());
+  })());
 }
 
 it("shadowing", async (t) => {
@@ -17,8 +17,8 @@ it("shadowing", async (t) => {
     t,
     "shadowing",
     cs.lift((() => {
-    const __cs_total = 1;
-    return cs.splice(addOwnTotal(cs.lift((() => __cs_total)()), 100));
-})()),
+      const __cs_total = 1;
+      return cs.splice(addOwnTotal(cs.lift((() => __cs_total)()), 100));
+    })()),
   );
 });
