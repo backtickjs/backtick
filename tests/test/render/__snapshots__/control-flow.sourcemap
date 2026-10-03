@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 ul               → ul
 >                → >
@@ -59,7 +59,8 @@ li               → li
 /                → /
 ul               → ul
 >                → >
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 Switch           → Switch
 cs.splice(       →  [-semantic -navigation]
 Switch           → Switch
@@ -118,7 +119,8 @@ p                → p
 >                → >
 }                → 
 }                → 
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 ErrorBoundary    → ErrorBoundary
 cs.splice(       →  [-semantic -navigation]
 ErrorBoundary    → ErrorBoundary
@@ -135,7 +137,7 @@ p                → p
 >                → >
 children         → {\n  ${cs`{\n    throw "drawn wrong";\n  }`}\n}
 cs.splice(       →  [-semantic -navigation]
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n    
 throw            → throw
@@ -144,10 +146,11 @@ throw            → throw
 ;                → ;
 \n               → \n  
 }                → }
-)())             →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
 )                →  [-semantic -navigation]
 }                → 
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 Suspense         → Suspense
 cs.splice(       →  [-semantic -navigation]
 Suspense         → Suspense
@@ -172,7 +175,8 @@ loaded           → loaded
 p                → p
 >                → >
 }                → 
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 div              → div
 >                → >
@@ -206,3 +210,4 @@ p                → p
 /                → /
 div              → div
 >                → >
+)())             → ` [-semantic -navigation]

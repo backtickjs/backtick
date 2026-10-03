@@ -1,0 +1,180 @@
+cs.lift((() =>    → cs` [-semantic -navigation]
+cs.splice(        →  [-semantic -navigation]
+(createRoot)      → $createRoot
+)                 →  [-semantic -navigation]
+(                 → (
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n          
+const             → const
+                  →  
+__cs_x            → x
+                  →  
+=                 → =
+                  →  
+1                 → 1
+;                 → ;
+\n                → \n          
+const             → const
+                  →  
+__cs_both         → both
+                  →  
+=                 → =
+                  →  
+{                 → {
+                  →  
+x                 → x
+__cs_x            → x
+,                 → ,
+                  →  
+Math              → Math
+Math              → Math
+                  →  
+}                 → }
+;                 → ;
+\n                → \n          
+return            → return
+                  →  
+[                 → [
+__cs_both         → both
+.                 → .
+x                 → x
+,                 → ,
+                  →  
+__cs_both         → both
+.                 → .
+Math              → Math
+.                 → .
+max               → max
+(                 → (
+2                 → 2
+,                 → ,
+                  →  
+3                 → 3
+)                 → )
+]                 → ]
+;                 → ;
+\n                → \n        
+}                 → }
+)                 → )
+)())              → ` [-semantic -navigation]
+cs.lift((() =>    → cs` [-semantic -navigation]
+cs.splice(        →  [-semantic -navigation]
+(createRoot)      → $createRoot
+)                 →  [-semantic -navigation]
+(                 → (
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n          
+const             → const
+                  →  
+__cs_start        → start
+                  →  
+=                 → =
+                  →  
+{                 → {
+                  →  
+n                 → n
+:                 → :
+                  →  
+1                 → 1
+                  →  
+}                 → }
+;                 → ;
+\n                → \n          
+const             → const
+                  →  
+__cs_copy         → copy
+:                 → :
+                  →  
+typeof            → typeof
+                  →  
+__cs_start        → start
+                  →  
+=                 → =
+                  →  
+{                 → {
+                  →  
+n                 → n
+:                 → :
+                  →  
+__cs_start        → start
+.                 → .
+n                 → n
+                  →  
++                 → +
+                  →  
+1                 → 1
+                  →  
+}                 → }
+;                 → ;
+\n                → \n          
+class             → class
+                  →  
+__cs_Base         → Base
+                  →  
+{                 → {
+\n                → \n            
+twice             → twice
+(                 → (
+)                 → )
+                  →  
+{                 → {
+\n                → \n              
+return            → return
+                  →  
+__cs_copy         → copy
+.                 → .
+n                 → n
+                  →  
+*                 → *
+                  →  
+2                 → 2
+;                 → ;
+\n                → \n            
+}                 → }
+\n                → \n          
+}                 → }
+\n                → \n          
+class             → class
+                  →  
+__cs_Child        → Child
+                  →  
+extends           → extends
+                  →  
+__cs_Base         → Base
+                  →  
+{                 → {
+}                 → }
+\n                → \n          
+return            → return
+                  →  
+[                 → [
+__cs_copy         → copy
+.                 → .
+n                 → n
+,                 → ,
+                  →  
+new               → new
+                  →  
+__cs_Child        → Child
+(                 → (
+)                 → )
+.                 → .
+twice             → twice
+(                 → (
+)                 → )
+]                 → ]
+;                 → ;
+\n                → \n        
+}                 → }
+)                 → )
+)())              → ` [-semantic -navigation]

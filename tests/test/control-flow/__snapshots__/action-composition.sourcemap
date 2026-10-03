@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n  
 const            → const
@@ -11,7 +11,8 @@ __cs_x           → x
 ;                → ;
 \n               → \n
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n  
 cs.splice(       →  [-semantic -navigation]
@@ -20,7 +21,8 @@ cs.splice(       →  [-semantic -navigation]
 ;                → ;
 \n               → \n
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n      
 cs.splice(       →  [-semantic -navigation]
@@ -29,3 +31,4 @@ cs.splice(       →  [-semantic -navigation]
 ;                → ;
 \n               → \n    
 }                → }
+)())             → ` [-semantic -navigation]

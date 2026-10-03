@@ -1,0 +1,136 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+__cs_props       → props
+:                → :
+                 →  
+{                → {
+\n               → \n  
+label            → label
+:                → :
+                 →  
+string           → string
+;                → ;
+\n               → \n  
+disabled         → disabled
+?                → ?
+:                → :
+                 →  
+boolean          → boolean
+;                → ;
+\n               → \n  
+"data-id"        → "data-id"
+?                → ?
+:                → :
+                 →  
+string           → string
+;                → ;
+\n               → \n  
+icon             → icon
+?                → ?
+:                → :
+                 →  
+unknown          → unknown
+;                → ;
+\n               → \n
+}                → }
+)                → )
+                 →  
+=>               → =>
+                 →  
+(                → (
+\n               → \n  
+<                → <
+span             → span
+                 →  
+data-id          → data-id
+=                → =
+{                → {
+__cs_props       → props
+[                → [
+"data-id"        → "data-id"
+]                → ]
+}                → }
+                 →  
+title            → title
+=                → =
+{                → {
+__cs_props       → props
+.                → .
+disabled         → disabled
+                 →  
+?                → ?
+                 →  
+"off"            → "off"
+                 →  
+:                → :
+                 →  
+"on"             → "on"
+}                → }
+>                → >
+\n               → \n    
+{                → {
+__cs_props       → props
+.                → .
+icon             → icon
+                 →  
+as               → as
+                 →  
+any              → any
+}                → }
+\n               → \n    
+{                → {
+__cs_props       → props
+.                → .
+label            → label
+}                → }
+\n               → \n  
+<                → <
+/                → /
+span             → span
+>                → >
+\n               → \n
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n          
+const            → const
+                 →  
+__cs_rest        → rest
+                 →  
+=                → =
+                 →  
+{                → {
+                 →  
+label            → label
+:                → :
+                 →  
+"spread"         → "spread"
+                 →  
+}                → }
+;                → ;
+\n               → \n          
+return           → return
+                 →  
+cs.splice(       →  [-semantic -navigation]
+Badge            → Badge
+)                →  [-semantic -navigation]
+{                → Badge
+__cs_rest        → rest
+disabled         → disabled
+"data-id"        → data-id
+"seven"          → "seven"
+icon             → icon
+<                → <
+b                → b
+>                → >
+!                → !
+<                → <
+/                → /
+b                → b
+>                → >
+}                → 
+;                → ;
+\n               → \n        
+}                → }
+)())             → ` [-semantic -navigation]

@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n      
 const            → const
@@ -95,7 +95,8 @@ __cs_count       → count
 ;                → ;
 \n               → \n    
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n      
 const            → const
@@ -157,3 +158,4 @@ __cs_measure     → measure
 ;                → ;
 \n               → \n    
 }                → }
+)())             → ` [-semantic -navigation]

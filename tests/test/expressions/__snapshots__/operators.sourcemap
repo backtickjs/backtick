@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n      
 const            → const
@@ -101,7 +101,8 @@ Array            → Array
 ;                → ;
 \n               → \n    
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n      
 const            → const
@@ -197,7 +198,8 @@ __cs_o           → o
 ;                → ;
 \n               → \n    
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n      
 let              → let
@@ -330,7 +332,8 @@ __cs_c           → c
 ;                → ;
 \n               → \n    
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n      
 const            → const
@@ -418,7 +421,8 @@ __cs_list        → list
 ;                → ;
 \n               → \n    
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n      
 let              → let
@@ -460,3 +464,4 @@ __cs_last        → last
 ;                → ;
 \n               → \n    
 }                → }
+)())             → ` [-semantic -navigation]

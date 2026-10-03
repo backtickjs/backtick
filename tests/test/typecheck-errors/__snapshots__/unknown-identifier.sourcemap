@@ -1,4 +1,4 @@
-cs.lift((() =>                            →  [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 {                                         → {
 \n  // @ts-expect-error: Property 'hostValue' does not exist on type 'GlobalThis'.\n  → \n  // @ts-expect-error: Property 'hostValue' does not exist on type 'GlobalThis'.\n  
 return                                    → return
@@ -11,7 +11,8 @@ hostValue                                 → hostValue
 ;                                         → ;
 \n                                        → \n
 }                                         → }
-cs.lift((() =>                            →  [-semantic -navigation]
+)())                                      → ` [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 {                                         → {
 \n  // @ts-expect-error: Property 'count' does not exist on type 'GlobalThis'.\n  → \n  // @ts-expect-error: Property 'count' does not exist on type 'GlobalThis'.\n  
 count                                     → count
@@ -22,9 +23,11 @@ count                                     → count
 ;                                         → ;
 \n                                        → \n
 }                                         → }
-cs.lift((() =>                            →  [-semantic -navigation]
+)())                                      → ` [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 window                                    → window
 .                                         → .
 location                                  → location
 .                                         → .
 href                                      → href
+)())                                      → ` [-semantic -navigation]

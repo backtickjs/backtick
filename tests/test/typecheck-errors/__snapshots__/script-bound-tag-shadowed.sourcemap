@@ -1,4 +1,4 @@
-cs.lift((() =>                            →  [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 {                                         → {
 \n                                        → \n  
 const                                     → const
@@ -44,7 +44,7 @@ b                                         → b
 return                                    → return
                                           →  
 cs.splice(                                →  [-semantic -navigation]
-cs.lift((() =>                            →  [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 {                                         → {
 \n                                        → \n    
 const                                     → const
@@ -59,7 +59,7 @@ __cs_Badge                                → Badge
 return                                    → return
                                           →  
 cs.splice(                                →  [-semantic -navigation]
-cs.lift((() =>                            →  [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 <                                         → <
 __cs_Badge                                → Badge
                                           →  
@@ -71,13 +71,14 @@ n                                         → n
                                           →  
 /                                         → /
 >                                         → >
-)())                                      →  [-semantic -navigation]
+)())                                      → ` [-semantic -navigation]
 )                                         →  [-semantic -navigation]
 ;                                         → ;
 \n                                        → \n  
 }                                         → }
-)())                                      →  [-semantic -navigation]
+)())                                      → ` [-semantic -navigation]
 )                                         →  [-semantic -navigation]
 ;                                         → ;
 \n                                        → \n
 }                                         → }
+)())                                      → ` [-semantic -navigation]

@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 (createRoot)     → $createRoot
 )                →  [-semantic -navigation]
@@ -12,7 +12,8 @@ cs.splice(       →  [-semantic -navigation]
 (nothing)        → $nothing
 )                →  [-semantic -navigation]
 )                → )
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 (createRoot)     → $createRoot
 )                →  [-semantic -navigation]
@@ -26,7 +27,8 @@ cs.splice(       →  [-semantic -navigation]
 (data)           → $data
 )                →  [-semantic -navigation]
 )                → )
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 (createRoot)     → $createRoot
 )                →  [-semantic -navigation]
@@ -40,3 +42,4 @@ cs.splice(       →  [-semantic -navigation]
 (data)           → $data
 )                →  [-semantic -navigation]
 )                → )
+)())             → ` [-semantic -navigation]

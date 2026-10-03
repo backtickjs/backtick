@@ -1,6 +1,7 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 1                → 1
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n  
 return           → return
@@ -17,7 +18,8 @@ cs.splice(       →  [-semantic -navigation]
 ;                → ;
 \n               → \n
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n  
 return           → return
@@ -34,7 +36,8 @@ cs.splice(       →  [-semantic -navigation]
 ;                → ;
 \n               → \n
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n  
 return           → return
@@ -51,7 +54,8 @@ cs.splice(       →  [-semantic -navigation]
 ;                → ;
 \n               → \n
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n  
 return           → return
@@ -68,3 +72,4 @@ cs.splice(       →  [-semantic -navigation]
 ;                → ;
 \n               → \n
 }                → }
+)())             → ` [-semantic -navigation]

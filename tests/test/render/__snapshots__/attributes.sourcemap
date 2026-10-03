@@ -1,4 +1,4 @@
-cs.lift((() =>               →  [-semantic -navigation]
+cs.lift((() =>               → cs` [-semantic -navigation]
 <                            → <
 a                            → a
                              →  
@@ -16,7 +16,8 @@ go\n                         → go\n
 /                            → /
 a                            → a
 >                            → >
-cs.lift((() =>               →  [-semantic -navigation]
+)())                         → ` [-semantic -navigation]
+cs.lift((() =>               → cs` [-semantic -navigation]
 <                            → <
 div                          → div
 >                            → >
@@ -40,7 +41,8 @@ svg                          → svg
 /                            → /
 div                          → div
 >                            → >
-cs.lift((() =>               →  [-semantic -navigation]
+)())                         → ` [-semantic -navigation]
+cs.lift((() =>               → cs` [-semantic -navigation]
 <                            → <
 svg                          → svg
                              →  
@@ -50,7 +52,8 @@ viewBox                      → viewBox
                              →  
 /                            → /
 >                            → >
-cs.lift((() =>               →  [-semantic -navigation]
+)())                         → ` [-semantic -navigation]
+cs.lift((() =>               → cs` [-semantic -navigation]
 <                            → <
 svg                          → svg
 >                            → >
@@ -85,7 +88,8 @@ color-interpolation-filters  → color-interpolation-filters
 /                            → /
 svg                          → svg
 >                            → >
-cs.lift((() =>               →  [-semantic -navigation]
+)())                         → ` [-semantic -navigation]
+cs.lift((() =>               → cs` [-semantic -navigation]
 <                            → <
 svg                          → svg
 >                            → >
@@ -116,7 +120,8 @@ numOctaves                   → numOctaves
 /                            → /
 svg                          → svg
 >                            → >
-cs.lift((() =>               →  [-semantic -navigation]
+)())                         → ` [-semantic -navigation]
+cs.lift((() =>               → cs` [-semantic -navigation]
 <                            → <
 div                          → div
                              →  
@@ -128,7 +133,8 @@ tabIndex                     → tabIndex
                              →  
 /                            → /
 >                            → >
-cs.lift((() =>               →  [-semantic -navigation]
+)())                         → ` [-semantic -navigation]
+cs.lift((() =>               → cs` [-semantic -navigation]
 {                            → {
 \n                           → \n      
 const                        → const
@@ -262,3 +268,4 @@ div                          → div
 ;                            → ;
 \n                           → \n    
 }                            → }
+)())                         → ` [-semantic -navigation]

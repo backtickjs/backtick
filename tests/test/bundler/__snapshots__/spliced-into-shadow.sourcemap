@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n        
 const            → const
@@ -18,9 +18,9 @@ __cs_first       → first
                  →  
 cs.splice(       →  [-semantic -navigation]
 keep(            → keep(
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 __cs_total       → total
-)())             →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
 )                → )
 )                →  [-semantic -navigation]
 ;                → ;
@@ -54,3 +54,4 @@ again()          → again()
 }                → }
 \n               → \n      
 }                → }
+)())             → ` [-semantic -navigation]

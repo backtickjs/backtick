@@ -1,4 +1,4 @@
-cs.lift((() =>                            →  [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 <                                         → <
 span                                      → span
                                           →  
@@ -19,7 +19,8 @@ cs.splice(                                →  [-semantic -navigation]
 /                                         → /
 span                                      → span
 >                                         → >
-cs.lift((() =>                            →  [-semantic -navigation]
+)())                                      → ` [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 <                                         → <
 div                                       → div
 >                                         → >
@@ -34,3 +35,4 @@ cs.splice(                                →  [-semantic -navigation]
 /                                         → /
 div                                       → div
 >                                         → >
+)())                                      → ` [-semantic -navigation]

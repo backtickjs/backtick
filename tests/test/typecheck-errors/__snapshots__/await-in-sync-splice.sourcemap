@@ -1,4 +1,4 @@
-cs.lift((() =>         →  [-semantic -navigation]
+cs.lift((() =>         → cs` [-semantic -navigation]
 cs.splice(             →  [-semantic -navigation]
 await fetchGreeting()  → await fetchGreeting()
 )                      →  [-semantic -navigation]
@@ -6,3 +6,4 @@ await fetchGreeting()  → await fetchGreeting()
 +                      → +
                        →  
 "!"                    → "!"
+)())                   → ` [-semantic -navigation]

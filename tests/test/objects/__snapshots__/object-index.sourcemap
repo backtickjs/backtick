@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 (                → (
 __cs_currency    → currency
 :                → :
@@ -63,3 +63,4 @@ __cs_usd         → usd
 ;                → ;
 \n               → \n    
 }                → }
+)())             → ` [-semantic -navigation]

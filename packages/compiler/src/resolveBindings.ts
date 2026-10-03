@@ -207,8 +207,18 @@ export function resolveBindings(
   const escaped = new Set<string>();
 
   const visit = (node: ts.Node): void => {
-    if (ts.isTypeNode(node)) {
-      return; // a type's names are never runtime bindings
+    // A type's names are never runtime bindings, but for a `typeof` and a
+    // class's `extends`, which read values.
+    if (
+      ts.isTypeNode(node) &&
+      !ts.isTypeQueryNode(node) &&
+      !(
+        ts.isExpressionWithTypeArguments(node) &&
+        ts.isHeritageClause(node.parent) &&
+        ts.isClassLike(node.parent.parent)
+      )
+    ) {
+      return;
     }
     if (ts.isIdentifier(node)) {
       const script = scriptAt(node.getStart(file));

@@ -1,11 +1,11 @@
-cs.lift((() =>                →  [-semantic -navigation]
+cs.lift((() =>                → cs` [-semantic -navigation]
 <                             → <
 div                           → div
 >                             → >
 {                             → {
 cs.splice(                    →  [-semantic -navigation]
 elementLabels.map((item) =>   → elementLabels.map((item) => 
-cs.lift((() =>                →  [-semantic -navigation]
+cs.lift((() =>                → cs` [-semantic -navigation]
 <                             → <
 span                          → span
 >                             → >
@@ -18,7 +18,7 @@ cs.splice(                    →  [-semantic -navigation]
 /                             → /
 span                          → span
 >                             → >
-)())                          →  [-semantic -navigation]
+)())                          → ` [-semantic -navigation]
 )                             → )
 )                             →  [-semantic -navigation]
 }                             → }
@@ -26,3 +26,4 @@ span                          → span
 /                             → /
 div                           → div
 >                             → >
+)())                          → ` [-semantic -navigation]

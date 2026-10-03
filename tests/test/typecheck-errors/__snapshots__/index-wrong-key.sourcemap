@@ -1,4 +1,4 @@
-cs.lift((() =>                            →  [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 (                                         → (
 __cs_name                                 → name
 :                                         → :
@@ -79,3 +79,4 @@ __cs_which                                → which
 ;                                         → ;
 \n                                        → \n
 }                                         → }
+)())                                      → ` [-semantic -navigation]

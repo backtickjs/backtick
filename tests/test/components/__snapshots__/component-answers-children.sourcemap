@@ -1,11 +1,12 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 >                → >
 counted          → counted
 <                → <
 /                → /
 >                → >
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 >                → >
 \n               → \n    
@@ -30,7 +31,8 @@ em               → em
 <                → <
 /                → /
 >                → >
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 div              → div
 >                → >
@@ -51,3 +53,4 @@ cs.splice(       →  [-semantic -navigation]
 /                → /
 div              → div
 >                → >
+)())             → ` [-semantic -navigation]

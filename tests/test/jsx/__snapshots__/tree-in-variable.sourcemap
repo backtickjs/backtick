@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 span             → span
 >                → >
@@ -7,7 +7,8 @@ x                → x
 /                → /
 span             → span
 >                → >
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 (                → (
 )                → )
                  →  
@@ -22,13 +23,13 @@ __cs_tree        → tree
 =                → =
                  →  
 cs.splice(       →  [-semantic -navigation]
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 div              → div
                  →  
 /                → /
 >                → >
-)())             →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
 )                →  [-semantic -navigation]
 ;                → ;
 \n               → \n  
@@ -38,7 +39,8 @@ __cs_tree        → tree
 ;                → ;
 \n               → \n
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 (                → (
 )                → )
                  →  
@@ -63,7 +65,8 @@ __cs_tree        → tree
 ;                → ;
 \n               → \n
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 div              → div
 >                → >
@@ -88,3 +91,4 @@ cs.splice(       →  [-semantic -navigation]
 /                → /
 div              → div
 >                → >
+)())             → ` [-semantic -navigation]

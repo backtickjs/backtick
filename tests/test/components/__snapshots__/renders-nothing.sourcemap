@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 div              → div
 >                → >
@@ -11,3 +11,4 @@ cs.splice(       →  [-semantic -navigation]
 /                → /
 div              → div
 >                → >
+)())             → ` [-semantic -navigation]

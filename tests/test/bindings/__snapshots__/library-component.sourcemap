@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n  
 const            → const
@@ -83,7 +83,8 @@ span             → span
 ;                → ;
 \n               → \n
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 Button           → Button
 cs.splice(       →  [-semantic -navigation]
 Button           → Button
@@ -102,3 +103,4 @@ onClick          → onClick
 children         → \n  Save\n
 "Save"           → Save\n
 }                → 
+)())             → ` [-semantic -navigation]

@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 li               → li
 >                → >
@@ -11,7 +11,8 @@ cs.splice(       →  [-semantic -navigation]
 /                → /
 li               → li
 >                → >
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 h1               → h1
 >                → >
@@ -24,13 +25,15 @@ cs.splice(       →  [-semantic -navigation]
 /                → /
 h1               → h1
 >                → >
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 hr               → hr
                  →  
 /                → /
 >                → >
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 Row              → Row
 )                →  [-semantic -navigation]
@@ -38,7 +41,8 @@ Row              → Row
 label            → label
 "a"              → "a"
 }                → 
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 Title            → Title
 )                →  [-semantic -navigation]
@@ -46,9 +50,11 @@ Title            → Title
 text             → text
 "Week"           → "Week"
 }                → 
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 Rule             → Rule
 )                →  [-semantic -navigation]
 {                → Rule
 }                → 
+)())             → ` [-semantic -navigation]

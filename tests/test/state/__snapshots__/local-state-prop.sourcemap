@@ -1,4 +1,4 @@
-cs.lift((() =>          →  [-semantic -navigation]
+cs.lift((() =>          → cs` [-semantic -navigation]
 <                       → <
 span                    → span
 \n                      → \n    
@@ -65,7 +65,8 @@ press\n                 → press\n
 /                       → /
 span                    → span
 >                       → >
-cs.lift((() =>          →  [-semantic -navigation]
+)())                    → ` [-semantic -navigation]
+cs.lift((() =>          → cs` [-semantic -navigation]
 {                       → {
 \n                      → \n    
 const                   → const
@@ -93,9 +94,9 @@ div                     → div
 {                       → {
 cs.splice(              →  [-semantic -navigation]
 (<SharedCounter size={  → (<SharedCounter size={
-cs.lift((() =>          →  [-semantic -navigation]
+cs.lift((() =>          → cs` [-semantic -navigation]
 __cs_size               → size
-)())                    →  [-semantic -navigation]
+)())                    → ` [-semantic -navigation]
 } />)                   → } />)
 )                       →  [-semantic -navigation]
 }                       → }
@@ -103,9 +104,9 @@ __cs_size               → size
 {                       → {
 cs.splice(              →  [-semantic -navigation]
 (<SharedCounter size={  → (<SharedCounter size={
-cs.lift((() =>          →  [-semantic -navigation]
+cs.lift((() =>          → cs` [-semantic -navigation]
 __cs_size               → size
-)())                    →  [-semantic -navigation]
+)())                    → ` [-semantic -navigation]
 } />)                   → } />)
 )                       →  [-semantic -navigation]
 }                       → }
@@ -119,3 +120,4 @@ div                     → div
 ;                       → ;
 \n                      → \n  
 }                       → }
+)())                    → ` [-semantic -navigation]

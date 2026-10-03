@@ -1,4 +1,4 @@
-cs.lift((() =>              →  [-semantic -navigation]
+cs.lift((() =>              → cs` [-semantic -navigation]
 (                           → (
 __cs_n                      → n
 :                           → :
@@ -13,7 +13,8 @@ __cs_n                      → n
 *                           → *
                             →  
 2                           → 2
-cs.lift((() =>              →  [-semantic -navigation]
+)())                        → ` [-semantic -navigation]
+cs.lift((() =>              → cs` [-semantic -navigation]
 (                           → (
 __cs_n                      → n
 :                           → :
@@ -37,7 +38,8 @@ __cs_n                      → n
 +                           → +
                             →  
 __cs_m                      → m
-cs.lift((() =>              →  [-semantic -navigation]
+)())                        → ` [-semantic -navigation]
+cs.lift((() =>              → cs` [-semantic -navigation]
 <                           → <
 h2                          → h2
 >                           → >
@@ -52,9 +54,11 @@ title                       → title
 /                           → /
 h2                          → h2
 >                           → >
-cs.lift((() =>              →  [-semantic -navigation]
+)())                        → ` [-semantic -navigation]
+cs.lift((() =>              → cs` [-semantic -navigation]
 "shared"                    → "shared"
-cs.lift((() =>              →  [-semantic -navigation]
+)())                        → ` [-semantic -navigation]
+cs.lift((() =>              → cs` [-semantic -navigation]
 {                           → {
 \n                          → \n  
 const                       → const
@@ -106,11 +110,11 @@ __cs_count                  → count
 +                           → +
                             →  
 cs.splice(                  →  [-semantic -navigation]
-cs.lift((() =>              →  [-semantic -navigation]
+cs.lift((() =>              → cs` [-semantic -navigation]
 __cs_rows                   → rows
 .                           → .
 length                      → length
-)())                        →  [-semantic -navigation]
+)())                        → ` [-semantic -navigation]
 )                           →  [-semantic -navigation]
 ;                           → ;
 \n                          → \n  
@@ -248,14 +252,16 @@ section                     → section
 ;                           → ;
 \n                          → \n
 }                           → }
-cs.lift((() =>              →  [-semantic -navigation]
+)())                        → ` [-semantic -navigation]
+cs.lift((() =>              → cs` [-semantic -navigation]
 cs.splice(                  →  [-semantic -navigation]
 (doubled)                   → $doubled
 )                           →  [-semantic -navigation]
 (                           → (
 1                           → 1
 )                           → )
-cs.lift((() =>              →  [-semantic -navigation]
+)())                        → ` [-semantic -navigation]
+cs.lift((() =>              → cs` [-semantic -navigation]
 cs.splice(                  →  [-semantic -navigation]
 (pair)                      → $pair
 )                           →  [-semantic -navigation]
@@ -273,7 +279,9 @@ cs.splice(                  →  [-semantic -navigation]
 )                           →  [-semantic -navigation]
 .                           → .
 length                      → length
-cs.lift((() =>              →  [-semantic -navigation]
+)())                        → ` [-semantic -navigation]
+cs.lift((() =>              → cs` [-semantic -navigation]
 cs.splice(                  →  [-semantic -navigation]
 (<Card title="other" />)    → (<Card title="other" />)
 )                           →  [-semantic -navigation]
+)())                        → ` [-semantic -navigation]

@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 (                → (
 )                → )
                  →  
@@ -7,7 +7,8 @@ cs.lift((() =>   →  [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 (n)              → $n
 )                →  [-semantic -navigation]
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 div              → div
 >                → >
@@ -44,3 +45,4 @@ make(2)          → make(2)
 /                → /
 div              → div
 >                → >
+)())             → ` [-semantic -navigation]

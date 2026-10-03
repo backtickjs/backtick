@@ -1,4 +1,5 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 (sep)            → $sep
 )                →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]

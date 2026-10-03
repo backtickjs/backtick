@@ -1,4 +1,4 @@
-cs.lift((() =>                            →  [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 {                                         → {
 \n  // @ts-expect-error: Conversion of type 'number' to type 'void' may be a mistake because neither type sufficiently overlaps with the other.\n  → \n  // @ts-expect-error: Conversion of type 'number' to type 'void' may be a mistake because neither type sufficiently overlaps with the other.\n  
 const                                     → const
@@ -26,3 +26,4 @@ __cs_a                                    → a
 ;                                         → ;
 \n                                        → \n
 }                                         → }
+)())                                      → ` [-semantic -navigation]

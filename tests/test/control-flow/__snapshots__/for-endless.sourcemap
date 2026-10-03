@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n      
 let              → let
@@ -55,3 +55,4 @@ __cs_i           → i
 ;                → ;
 \n               → \n    
 }                → }
+)())             → ` [-semantic -navigation]

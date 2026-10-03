@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n    
 const            → const
@@ -44,12 +44,13 @@ __cs_after       → after
 ;                → ;
 \n               → \n  
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 sandwich(        → sandwich(
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 10               → 10
-)())             →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
 )                → )
 )                →  [-semantic -navigation]
                  →  
@@ -57,8 +58,9 @@ cs.lift((() =>   →  [-semantic -navigation]
                  →  
 cs.splice(       →  [-semantic -navigation]
 sandwich(        → sandwich(
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 20               → 20
-)())             →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
 )                → )
 )                →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]

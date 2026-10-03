@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 (                → (
 __cs_props       → props
 :                → :
@@ -122,7 +122,8 @@ i                → i
 ;                → ;
 \n               → \n
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n  
 const            → const
@@ -225,3 +226,4 @@ div              → div
 ;                → ;
 \n               → \n
 }                → }
+)())             → ` [-semantic -navigation]

@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 div              → div
                  →  
@@ -8,19 +8,22 @@ class            → class
                  →  
 /                → /
 >                → >
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 blink            → blink
                  →  
 /                → /
 >                → >
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 NotATag          → NotATag
 )                →  [-semantic -navigation]
 {                → NotATag
 }                → 
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 >                → >
 \n               → \n  
@@ -36,7 +39,8 @@ span             → span
 <                → <
 /                → /
 >                → >
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 For              → For
 cs.splice(       →  [-semantic -navigation]
 For              → For
@@ -69,7 +73,8 @@ __cs_n           → n
 i                → i
 >                → >
 }                → 
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 div              → div
                  →  
@@ -81,7 +86,8 @@ nosuch           → nosuch
                  →  
 /                → /
 >                → >
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 div              → div
                  →  
@@ -93,13 +99,15 @@ class            → class
                  →  
 /                → /
 >                → >
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 Fragment         → Fragment
 )                →  [-semantic -navigation]
 {                → Fragment
 }                → 
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 div              → div
 >                → >
@@ -108,7 +116,8 @@ hello            → hello
 /                → /
 div              → div
 >                → >
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 div              → div
 >                → >
@@ -119,7 +128,8 @@ div              → div
 /                → /
 div              → div
 >                → >
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 div              → div
 >                → >
@@ -137,3 +147,4 @@ span             → span
 /                → /
 div              → div
 >                → >
+)())             → ` [-semantic -navigation]

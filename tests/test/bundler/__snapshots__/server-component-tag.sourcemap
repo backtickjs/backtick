@@ -1,10 +1,11 @@
-cs.lift((() =>                            →  [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 <                                         → <
 hr                                        → hr
                                           →  
 /                                         → /
 >                                         → >
-cs.lift((() =>                            →  [-semantic -navigation]
+)())                                      → ` [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 <                                         → <
 div                                       → div
 >                                         → >
@@ -23,3 +24,4 @@ Rule                                      → Rule
 /                                         → /
 div                                       → div
 >                                         → >
+)())                                      → ` [-semantic -navigation]

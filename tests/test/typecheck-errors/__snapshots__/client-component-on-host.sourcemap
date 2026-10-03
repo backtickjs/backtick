@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 (                → (
 __cs_props       → props
 :                → :
@@ -27,7 +27,8 @@ n                → n
 /                → /
 b                → b
 >                → >
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 For              → For
 cs.splice(       →  [-semantic -navigation]
 For              → For
@@ -55,3 +56,4 @@ n                → n
 __cs_n           → n
 }                → 
 }                → 
+)())             → ` [-semantic -navigation]

@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n      
 const            → const
@@ -35,16 +35,17 @@ return           → return
 __cs_apply       → apply
 (                → (
 cs.splice(       →  [-semantic -navigation]
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 (                → (
 )                → )
                  →  
 =>               → =>
                  →  
 2                → 2
-)())             →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
 )                →  [-semantic -navigation]
 )                → )
 ;                → ;
 \n               → \n    
 }                → }
+)())             → ` [-semantic -navigation]

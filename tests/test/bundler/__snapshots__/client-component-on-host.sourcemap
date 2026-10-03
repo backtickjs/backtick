@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 (                → (
 __cs_props       → props
 :                → :
@@ -27,3 +27,4 @@ n                → n
 /                → /
 b                → b
 >                → >
+)())             → ` [-semantic -navigation]

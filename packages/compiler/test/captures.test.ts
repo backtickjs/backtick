@@ -226,6 +226,16 @@ describe("captures", () => {
       );
     });
 
+    it("a value a `typeof` or a class's `extends` reads, in a type", () => {
+      assert.deepStrictEqual(
+        nested(
+          "const script = cs`{ const a = { n: 1 }; class Base {} " +
+            "${cs`{ const b: typeof a = { n: 2 }; class C extends Base {} return [b, C]; }`}; }`;",
+        ),
+        ["a$hash$0", "Base$hash$1"],
+      );
+    });
+
     it("a name only a type spells binds nothing", () => {
       assert.deepStrictEqual(
         nested(

@@ -1,4 +1,4 @@
-cs.lift((() =>             →  [-semantic -navigation]
+cs.lift((() =>             → cs` [-semantic -navigation]
 {                          → {
 \n                         → \n    
 const                      → const
@@ -116,3 +116,4 @@ button                     → button
 ;                          → ;
 \n                         → \n  
 }                          → }
+)())                       → ` [-semantic -navigation]

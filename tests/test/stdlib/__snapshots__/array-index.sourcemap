@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n      
 const            → const
@@ -83,3 +83,4 @@ __cs_total       → total
 ;                → ;
 \n               → \n    
 }                → }
+)())             → ` [-semantic -navigation]

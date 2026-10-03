@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n      
 const            → const
@@ -28,3 +28,4 @@ toUpperCase      → toUpperCase
 ;                → ;
 \n               → \n    
 }                → }
+)())             → ` [-semantic -navigation]

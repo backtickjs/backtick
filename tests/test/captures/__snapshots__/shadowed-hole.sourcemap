@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n    
 const            → const
@@ -35,12 +35,13 @@ cs.splice(       →  [-semantic -navigation]
 }                → }
 \n               → \n  
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 wrapShadowed(    → wrapShadowed(
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 10               → 10
-)())             →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
 )                → )
 )                →  [-semantic -navigation]
                  →  
@@ -48,8 +49,9 @@ cs.lift((() =>   →  [-semantic -navigation]
                  →  
 cs.splice(       →  [-semantic -navigation]
 wrapShadowed(    → wrapShadowed(
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 20               → 20
-)())             →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
 )                → )
 )                →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]

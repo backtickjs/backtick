@@ -1,4 +1,4 @@
-cs.lift((() =>                            →  [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 {                                         → {
 \n      // @ts-expect-error: a string is not a number\n      → \n      // @ts-expect-error: a string is not a number\n      
 const                                     → const
@@ -19,3 +19,4 @@ __cs_count                                → count
 ;                                         → ;
 \n                                        → \n    
 }                                         → }
+)())                                      → ` [-semantic -navigation]

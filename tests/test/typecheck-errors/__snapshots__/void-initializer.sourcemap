@@ -1,4 +1,4 @@
-cs.lift((() =>                            →  [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 (                                         → (
 )                                         → )
                                           →  
@@ -23,7 +23,8 @@ __cs_n                                    → n
 ;                                         → ;
 \n                                        → \n
 }                                         → }
-cs.lift((() =>                            →  [-semantic -navigation]
+)())                                      → ` [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 {                                         → {
 \n                                        → \n  
 const                                     → const
@@ -45,7 +46,8 @@ return                                    → return
 ;                                         → ;
 \n                                        → \n
 }                                         → }
-cs.lift((() =>                            →  [-semantic -navigation]
+)())                                      → ` [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 {                                         → {
 \n                                        → \n  
 const                                     → const
@@ -62,7 +64,8 @@ cs.splice(                                →  [-semantic -navigation]
 ;                                         → ;
 \n                                        → \n
 }                                         → }
-cs.lift((() =>                            →  [-semantic -navigation]
+)())                                      → ` [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 (                                         → (
 __cs_text                                 → text
 :                                         → :
@@ -80,7 +83,8 @@ __cs_text                                 → text
 ;                                         → ;
 \n                                        → \n
 }                                         → }
-cs.lift((() =>                            →  [-semantic -navigation]
+)())                                      → ` [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 {                                         → {
 \n  // @ts-expect-error: Argument of type 'boolean' is not assignable to parameter of type 'string'.\n  → \n  // @ts-expect-error: Argument of type 'boolean' is not assignable to parameter of type 'string'.\n  
 const                                     → const
@@ -103,3 +107,4 @@ return                                    → return
 ;                                         → ;
 \n                                        → \n
 }                                         → }
+)())                                      → ` [-semantic -navigation]

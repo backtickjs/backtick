@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n    
 let              → let
@@ -42,7 +42,8 @@ __cs_total       → total
 ;                → ;
 \n               → \n  
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n      
 const            → const
@@ -58,11 +59,12 @@ return           → return
                  →  
 cs.splice(       →  [-semantic -navigation]
 addOwnTotal(     → addOwnTotal(
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 __cs_total       → total
-)())             →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
 , 100)           → , 100)
 )                →  [-semantic -navigation]
 ;                → ;
 \n               → \n    
 }                → }
+)())             → ` [-semantic -navigation]

@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 (                → (
 __cs_ready       → ready
 :                → :
@@ -53,3 +53,4 @@ __cs_count       → count
 ;                → ;
 \n               → \n    
 }                → }
+)())             → ` [-semantic -navigation]

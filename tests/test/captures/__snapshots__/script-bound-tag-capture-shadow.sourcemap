@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 (                → (
 __cs_props       → props
 :                → :
@@ -27,7 +27,8 @@ title            → title
 /                → /
 h2               → h2
 >                → >
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n    
 const            → const
@@ -79,7 +80,7 @@ p                → p
 >                → >
 {                → {
 cs.splice(       →  [-semantic -navigation]
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 __cs_Card        → Card
                  →  
@@ -91,7 +92,7 @@ n                → n
                  →  
 /                → /
 >                → >
-)())             →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
 )                →  [-semantic -navigation]
 }                → }
 <                → <
@@ -101,7 +102,8 @@ p                → p
 ;                → ;
 \n               → \n  
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 div              → div
 >                → >
@@ -117,9 +119,9 @@ title            → title
 {                → {
 cs.splice(       →  [-semantic -navigation]
 labelled(        → labelled(
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 "a"              → "a"
-)())             →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
 )                → )
 )                →  [-semantic -navigation]
 }                → }
@@ -127,9 +129,9 @@ cs.lift((() =>   →  [-semantic -navigation]
 {                → {
 cs.splice(       →  [-semantic -navigation]
 labelled(        → labelled(
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 "b"              → "b"
-)())             →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
 )                → )
 )                →  [-semantic -navigation]
 }                → }
@@ -138,7 +140,8 @@ cs.lift((() =>   →  [-semantic -navigation]
 /                → /
 div              → div
 >                → >
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n      
 const            → const
@@ -279,3 +282,4 @@ section          → section
 ;                → ;
 \n               → \n    
 }                → }
+)())             → ` [-semantic -navigation]

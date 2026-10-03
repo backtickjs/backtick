@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 (createRoot)     → $createRoot
 )                →  [-semantic -navigation]
@@ -138,7 +138,8 @@ __cs_more        → more
 \n               → \n        
 }                → }
 )                → )
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 (createRoot)     → $createRoot
 )                →  [-semantic -navigation]
@@ -370,3 +371,4 @@ __cs_pair        → pair
 \n               → \n        
 }                → }
 )                → )
+)())             → ` [-semantic -navigation]

@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 p                → p
 >                → >
@@ -11,7 +11,8 @@ cs.splice(       →  [-semantic -navigation]
 /                → /
 p                → p
 >                → >
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 (render)         → $render
 )                →  [-semantic -navigation]
@@ -39,7 +40,8 @@ as               → as
                  →  
 HTMLElement      → HTMLElement
 )                → )
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 p                → p
 >                → >
@@ -48,7 +50,8 @@ first            → first
 /                → /
 p                → p
 >                → >
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 p                → p
 >                → >
@@ -57,3 +60,4 @@ second           → second
 /                → /
 p                → p
 >                → >
+)())             → ` [-semantic -navigation]

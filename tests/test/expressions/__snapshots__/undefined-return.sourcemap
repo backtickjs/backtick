@@ -1,11 +1,12 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 (                → (
 )                → )
                  →  
 =>               → =>
                  →  
 "hi"             → "hi"
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n      
 const            → const
@@ -38,3 +39,4 @@ return           → return
 ;                → ;
 \n               → \n    
 }                → }
+)())             → ` [-semantic -navigation]

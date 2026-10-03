@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n      
 const            → const
@@ -24,7 +24,7 @@ __cs_bump        → bump
 =                → =
                  →  
 cs.splice(       →  [-semantic -navigation]
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 (                → (
 )                → )
                  →  
@@ -42,7 +42,7 @@ count            → count
 ;                → ;
 \n               → \n      
 }                → }
-)())             →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
 )                →  [-semantic -navigation]
 ;                → ;
 \n               → \n      
@@ -64,3 +64,4 @@ count            → count
 ;                → ;
 \n               → \n    
 }                → }
+)())             → ` [-semantic -navigation]

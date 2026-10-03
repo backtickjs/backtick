@@ -1,4 +1,4 @@
-cs.lift((() =>                            →  [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 (                                         → (
 __cs_flag                                 → flag
 :                                         → :
@@ -33,9 +33,11 @@ return                                    → return
 ;                                         → ;
 \n                                        → \n  
 }                                         → }
-cs.lift((() =>                            →  [-semantic -navigation]
+)())                                      → ` [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 "evaluated"                               → "evaluated"
-cs.lift((() =>                            →  [-semantic -navigation]
+)())                                      → ` [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 {                                         → {
 \n                                        → \n  
 throw                                     → throw
@@ -44,7 +46,8 @@ throw                                     → throw
 ;                                         → ;
 \n                                        → \n
 }                                         → }
-cs.lift((() =>                            →  [-semantic -navigation]
+)())                                      → ` [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 (                                         → (
 {                                         → {
 \n                                        → \n      
@@ -72,3 +75,4 @@ false                                     → false
 \n                                        → \n    
 }                                         → }
 )                                         → )
+)())                                      → ` [-semantic -navigation]

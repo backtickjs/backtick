@@ -1,4 +1,4 @@
-cs.lift((() =>                            →  [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 (                                         → (
 __cs_x                                    → x
 :                                         → :
@@ -25,7 +25,8 @@ return                                    → return
 ;                                         → ;
 \n                                        → \n
 }                                         → }
-cs.lift((() =>                            →  [-semantic -navigation]
+)())                                      → ` [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
 (                                         → (
 __cs_x                                    → x
 :                                         → :
@@ -59,3 +60,4 @@ return                                    → return
 ;                                         → ;
 \n                                        → \n
 }                                         → }
+)())                                      → ` [-semantic -navigation]

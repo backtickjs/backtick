@@ -1,4 +1,4 @@
-cs.lift((() =>   →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n  
 let              → let
@@ -18,7 +18,8 @@ __cs_n           → n
 ;                → ;
 \n               → \n
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 (                → (
 __cs_id          → id
 :                → :
@@ -36,7 +37,8 @@ cs.splice(       →  [-semantic -navigation]
 ;                → ;
 \n               → \n
 }                → }
-cs.lift((() =>   →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n      
 const            → const
@@ -72,3 +74,4 @@ __cs_handlers    → handlers
 ;                → ;
 \n               → \n    
 }                → }
+)())             → ` [-semantic -navigation]

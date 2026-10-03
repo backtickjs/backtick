@@ -273,12 +273,22 @@ export function virtualScript(
     }
   };
 
-  // The wrapper the script is checked in: no editor feature reads through it.
-  const start = script.sourceNode.getStart(script.sourceFile);
-  const end = script.sourceNode.getEnd();
-  added(awaits ? "cs.lift(await (async () => " : "cs.lift((() => ", start);
+  // The wrapper the script is checked in, mapped to what it stands for: its
+  // opening to `cs\``, its close to the closing backtick, so where it meets the
+  // script is where the script starts and ends. No editor feature reads
+  // through it.
+  const tag = script.sourceNode.getStart(script.sourceFile);
+  const opened = script.sourceNode.template.getStart(script.sourceFile) + 1;
+  const closed = script.sourceNode.getEnd() - 1;
+  out.push([
+    awaits ? "cs.lift(await (async () => " : "cs.lift((() => ",
+    undefined,
+    tag,
+    opened - tag,
+    WRAPPER,
+  ]);
   emit(file, 0);
-  added(")())", end);
+  out.push([")())", undefined, closed, 1, WRAPPER]);
   return out;
 }
 

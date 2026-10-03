@@ -1,4 +1,4 @@
-cs.lift((() =>        →  [-semantic -navigation]
+cs.lift((() =>        → cs` [-semantic -navigation]
 (                     → (
 )                     → )
                       →  
@@ -103,7 +103,8 @@ div                   → div
 ;                     → ;
 \n                    → \n        
 }                     → }
-cs.lift((() =>        →  [-semantic -navigation]
+)())                  → ` [-semantic -navigation]
+cs.lift((() =>        → cs` [-semantic -navigation]
 (                     → (
 )                     → )
                       →  
@@ -155,7 +156,8 @@ focus                 → focus
 ;                     → ;
 \n                    → \n        
 }                     → }
-cs.lift((() =>        →  [-semantic -navigation]
+)())                  → ` [-semantic -navigation]
+cs.lift((() =>        → cs` [-semantic -navigation]
 (                     → (
 )                     → )
                       →  
@@ -182,7 +184,8 @@ ref                   → ref
                       →  
 /                     → /
 >                     → >
-cs.lift((() =>        →  [-semantic -navigation]
+)())                  → ` [-semantic -navigation]
+cs.lift((() =>        → cs` [-semantic -navigation]
 (                     → (
 )                     → )
                       →  
@@ -327,3 +330,4 @@ div                   → div
 ;                     → ;
 \n                    → \n          
 }                     → }
+)())                  → ` [-semantic -navigation]
