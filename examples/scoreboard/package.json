@@ -7,7 +7,7 @@
     "format": "prettier --write src",
     "format:check": "prettier --check src",
     "typecheck": "backtick-tsc --noEmit",
-    "start": "bun src/index.tsx",
+    "start": "backtick-bun-watch src/index.tsx",
     "clean": "rm -rf node_modules dist"
   },
   "dependencies": {

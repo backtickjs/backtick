@@ -10,6 +10,9 @@
       "default": "./dist/index.js"
     }
   },
+  "bin": {
+    "backtick-bun-watch": "./dist/watch.js"
+  },
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",

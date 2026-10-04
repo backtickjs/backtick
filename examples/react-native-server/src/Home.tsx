@@ -6,7 +6,7 @@ import { Counter } from "./Counter.js";
 // phone its data and its client components. Change it and reload the app: no
 // new app build.
 export async function Home() {
-  const fruits = ["Apples", "Pears", "Plums", "test"];
+  const fruits = ["Apples", "Pears", "Plums"];
   const drawnAt = new Date().toLocaleTimeString();
   return cs`<$View style={$StyleSheet.create({ screen: { padding: 24, gap: 8 } }).screen}>
     <$Text style={{ fontSize: 28, fontWeight: "700" }}>Hello from Backtick</$Text>
