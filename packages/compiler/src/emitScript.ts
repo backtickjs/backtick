@@ -8,9 +8,10 @@ import type { BindingResolution, ResolvedParam } from "./resolveBindings.js";
 export interface EmittedScript {
   /**
    * The script as an expression, `($splice0, …) => body`, a parameter per
-   * entry of `metadata.params` (see `paramName`). Types are gone and everything else, JSX included, is
-   * as the script wrote it, for the framework's own compiler to read when a
-   * bundle is built. How it is delivered is the bundle's to write.
+   * entry of a script's `params` (see `paramName`). Types are gone and
+   * everything else, JSX included, is as the script wrote it, for the
+   * framework's own compiler to read when a bundle is built. How it is
+   * delivered is the bundle's to write.
    */
   readonly code: string;
   /**
@@ -31,7 +32,7 @@ export interface Edit {
 }
 
 /**
- * A script parameter's name: its kind and its index in `metadata.params`,
+ * A script parameter's name: its kind and its index in a script's `params`,
  * `$splice0`, `$tag1`, `$capture2`. A script cannot bind a name starting with
  * `$`, so none meets one of its own.
  */

@@ -16,23 +16,59 @@ import type { SourceRange } from "./SourceRange.js";
 /** What `cs.create` is handed for a script: which it is, and what it runs. */
 export interface RuntimeScript {
   id: string;
-  metadata: ts.Expression;
+  // the script's `params`, an array literal of host expressions
+  params: ts.Expression;
   emitted: EmittedScript;
 }
 
-/** A script as the client gets it, `cs.create(id, metadata, code, map, dependencies)`. */
+/**
+ * A script's module, declared once at the top of its host file, every run of
+ * the script sharing it: `const $module0 = { id, code, map, dependencies };`.
+ */
+export function moduleDeclaration(
+  ts: typeof import("typescript"),
+  name: string,
+  id: string,
+  { code, map, dependencies }: CompiledScript,
+): ts.VariableStatement {
+  const f = ts.factory;
+  const string = (text: string) => f.createStringLiteral(text);
+  return f.createVariableStatement(
+    undefined,
+    f.createVariableDeclarationList(
+      [
+        f.createVariableDeclaration(
+          name,
+          undefined,
+          undefined,
+          f.createObjectLiteralExpression(
+            [
+              f.createPropertyAssignment("id", string(id)),
+              f.createPropertyAssignment("code", string(code)),
+              f.createPropertyAssignment("map", string(map)),
+              f.createPropertyAssignment(
+                "dependencies",
+                f.createArrayLiteralExpression(dependencies.map(string)),
+              ),
+            ],
+            true,
+          ),
+        ),
+      ],
+      ts.NodeFlags.Const,
+    ),
+  );
+}
+
+/** A script as the client gets it, `cs.create($module0, [...params])`. */
 export function createCall(
   ts: typeof import("typescript"),
-  { id, metadata }: RuntimeScript,
-  { code, map, dependencies }: CompiledScript,
+  moduleName: string,
+  { params }: RuntimeScript,
 ): ts.Expression {
-  const string = (text: string) => ts.factory.createStringLiteral(text);
   return call(ts, "cs", "create", [
-    string(id),
-    metadata,
-    string(code),
-    string(map),
-    ts.factory.createArrayLiteralExpression(dependencies.map(string)),
+    ts.factory.createIdentifier(moduleName),
+    params,
   ]);
 }
 
@@ -119,15 +155,15 @@ export function rewriteScript(
     return leftAsWritten(refused);
   }
 
-  // Which script this is (see `ClientScript.id`): its line from 1, and its
+  // Which script this is (see `ClientModule.id`): its line from 1, and its
   // column from 0.
   const { line, character } = sourceFile.getLineAndCharacterOfPosition(
     scriptRange.start,
   );
   const id = `${fileHash}:${line + 1}:${character}`;
 
-  // The script's parameters, as `Metadata` describes them: a splice is the
-  // host expression written there, and a host tag the host binding it names.
+  // The script's parameters, as `ClientScript.params` describes them: a splice
+  // is the host expression written there, a tag's too.
   const objectLiteral = (properties: Record<string, ts.Expression>) =>
     ts.factory.createObjectLiteralExpression(
       Object.entries(properties).map(([name, value]) =>
@@ -136,34 +172,32 @@ export function rewriteScript(
       false,
     );
   const string = (text: string) => ts.factory.createStringLiteral(text);
-  const metadata = objectLiteral({
-    params: ts.factory.createArrayLiteralExpression(
-      params.map((param) => {
-        switch (param.kind) {
-          case "splice":
-            return objectLiteral({
-              kind: string("splice"),
-              value: clientScript.splices[param.key]!.expression,
-              bindings: ts.factory.createArrayLiteralExpression(
-                param.bindings.map(string),
-                false,
-              ),
-            });
-          case "tag":
-            return objectLiteral({
-              kind: string("tag"),
-              value: clientScript.splices[param.key]!.expression,
-            });
-          case "capture":
-            return objectLiteral({
-              kind: string("capture"),
-              key: string(param.key),
-            });
-        }
-      }),
-      false,
-    ),
-  });
+  const paramsLiteral = ts.factory.createArrayLiteralExpression(
+    params.map((param) => {
+      switch (param.kind) {
+        case "splice":
+          return objectLiteral({
+            kind: string("splice"),
+            value: clientScript.splices[param.key]!.expression,
+            bindings: ts.factory.createArrayLiteralExpression(
+              param.bindings.map(string),
+              false,
+            ),
+          });
+        case "tag":
+          return objectLiteral({
+            kind: string("tag"),
+            value: clientScript.splices[param.key]!.expression,
+          });
+        case "capture":
+          return objectLiteral({
+            kind: string("capture"),
+            key: string(param.key),
+          });
+      }
+    }),
+    false,
+  );
 
   // A splice that awaits is the host's `await`, where the template is: where
   // the host may await, the script's function is async, and awaited there;
@@ -182,7 +216,7 @@ export function rewriteScript(
   );
 
   return {
-    runtime: { id, metadata, emitted },
+    runtime: { id, params: paramsLiteral, emitted },
     awaits,
     leftAsWritten: false,
     diagnostics: [],

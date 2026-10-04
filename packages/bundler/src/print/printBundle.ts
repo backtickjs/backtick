@@ -1,5 +1,5 @@
 import type { BundleTree } from "../bundle/buildBundle.js";
-import type { ClientScript } from "@backtickjs/core";
+import type { ClientModule } from "@backtickjs/core";
 import { importDeclaration, string } from "./code.js";
 
 const MODULE_ID = "bundle.js";
@@ -38,19 +38,17 @@ export function printBundle(tree: BundleTree): { code: string; map: string } {
   // Each script a module table's entry, as webpack's and Metro's are: its body
   // under its id, run once by `$require`. The modules they require are the
   // client's, each imported whole, once.
-  const scripts = new Map(
-    tree.scripts.map(([, script]) => [script.id, script]),
-  );
+  const modules = new Map(tree.modules.map(([, entry]) => [entry.id, entry]));
   const dependencies = [
-    ...new Set([...scripts.values()].flatMap((script) => script.dependencies)),
+    ...new Set([...modules.values()].flatMap((entry) => entry.dependencies)),
   ];
   dependencies.forEach((specifier, index) =>
     module.line(`import * as $module${index} from ${string(specifier)};`),
   );
   module.line("const $modules = {");
-  for (const [id, script] of scripts) {
+  for (const [id, entry] of modules) {
     module.write(`${string(id)}: `);
-    module.script(script);
+    module.script(entry);
     module.line(",");
   }
   module.line("};");
@@ -60,8 +58,8 @@ export function printBundle(tree: BundleTree): { code: string; map: string } {
   );
   module.line("};");
   module.line(RUNTIME);
-  for (const [label, script] of tree.scripts) {
-    module.line(`const ${label} = $require(${string(script.id)}).default;`);
+  for (const [label, entry] of tree.modules) {
+    module.line(`const ${label} = $require(${string(entry.id)}).default;`);
   }
   // Parenthesized, so a root that is a function isn't a declaration.
   module.write(`export default (${tree.root});`);
@@ -92,7 +90,7 @@ class ModuleWriter {
   }
 
   // A script's code, its map a section of the module's where it starts.
-  script({ code, map }: ClientScript): void {
+  script({ code, map }: ClientModule): void {
     this.#sections.push({
       offset: { line: this.#line, column: this.#column },
       map: JSON.parse(map) as object,

@@ -2,7 +2,7 @@ import type ts from "typescript";
 import { compileScript, type Plugin } from "./compileScript.js";
 import { parseSourceFile } from "./parseFile.js";
 import { rewriteFile } from "./rewriteFile.js";
-import { createCall } from "./rewriteScript.js";
+import { createCall, moduleDeclaration } from "./rewriteScript.js";
 
 export interface TransformOptions {
   /**
@@ -46,16 +46,19 @@ export function transform(
       }
     }
 
-    // Each script as the client gets it; one that didn't parse is left as
-    // written.
+    // Each script as the client gets it, its module declared once for every
+    // run of it; one that didn't parse is left as written.
     const name = sourceName(sourceFile.fileName);
+    const modules: ts.Statement[] = [];
     const byStart = new Map<number, ts.Node>();
     for (const [template, { runtime }] of rewrittenFile.scripts) {
       if (runtime !== null) {
         const compiled = compileScript(ts, runtime.emitted, name, plugins);
+        const moduleName = `$module${modules.length}`;
+        modules.push(moduleDeclaration(ts, moduleName, runtime.id, compiled));
         byStart.set(
           template.getStart(rewrittenFile.sourceFile),
-          createCall(ts, runtime, compiled),
+          createCall(ts, moduleName, runtime),
         );
       }
     }
@@ -74,6 +77,20 @@ export function transform(
       }
       return ts.visitEachChild(node, visit, context);
     };
-    return ts.visitNode(sourceFile, visit, ts.isSourceFile) as ts.SourceFile;
+    const visited = ts.visitNode(
+      sourceFile,
+      visit,
+      ts.isSourceFile,
+    ) as ts.SourceFile;
+    // After the imports, before anything that could run a script.
+    const imports = visited.statements.findIndex(
+      (statement) => !ts.isImportDeclaration(statement),
+    );
+    const at = imports === -1 ? visited.statements.length : imports;
+    return context.factory.updateSourceFile(visited, [
+      ...visited.statements.slice(0, at),
+      ...modules,
+      ...visited.statements.slice(at),
+    ]);
   };
 }

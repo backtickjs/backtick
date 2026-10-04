@@ -13,7 +13,7 @@ import { type TransformOptions, transform } from "./transform.js";
  *
  * `verbatimModuleSyntax` is the load-bearing option. Without it TypeScript
  * elides an import the source does not appear to use — `state`, where the
- * source says `$state` inside a template — while the metadata the transform
+ * source says `$state` inside a template — while the `params` the transform
  * writes still names it, and what comes out throws `state is not defined`.
  *
  * What comes back is a module: the imports are still imports, because the

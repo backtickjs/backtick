@@ -1,6 +1,30 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
+const $module0 = {
+  id: "1xi8jyc89buh5:16:9",
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const before = 1;\n    const spliced = $splice0();\n    const after = 2;\n    return before + spliced + after;\n};\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAeYA,QAAA;IACR,MAAMC,MAAM,GAAG,CAAC;IAChB,MAAMC,OAAO,GAAGF,QAAA,EAAS;IACzB,MAAMG,KAAK,GAAG,CAAC;IACf,OAAOF,MAAM,GAAGC,OAAO,GAAGC,KAAK;AACjC,CAAC","names":["$splice0","before","spliced","after"],"ignoreList":[],"sources":["splices/splice-before-declaration.test.tsx"]}',
+  dependencies: [],
+};
+const $module1 = {
+  id: "1xi8jyc89buh5:28:4",
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0() + $splice1();\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2BO,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAmB,GAAGC,QAAA,EAAmB","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/splice-before-declaration.test.tsx"]}',
+  dependencies: [],
+};
+const $module2 = {
+  id: "1xi8jyc89buh5:28:18",
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 10;\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2BqB,QAAE","names":[],"ignoreList":[],"sources":["splices/splice-before-declaration.test.tsx"]}',
+  dependencies: [],
+};
+const $module3 = {
+  id: "1xi8jyc89buh5:28:40",
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 20;\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2B2C,QAAE","names":[],"ignoreList":[],"sources":["splices/splice-before-declaration.test.tsx"]}',
+  dependencies: [],
+};
 // A hole with declarations after it. Two call sites make the script
 // polymorphic, so each splice arrives as a thunk and the entry passes the
 // bindings it declares at the hole (see `passKeys`).
@@ -12,53 +36,25 @@ import { snapshotCase } from "../snapshotCase.ts";
 // in scope. A fragment cannot reference them anyway; it is written out here,
 // where they do not exist.
 function sandwich(fragment) {
-  return cs.create(
-    "1xi8jyc89buh5:16:9",
-    { params: [{ kind: "splice", value: fragment, bindings: [] }] },
-    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const before = 1;\n    const spliced = $splice0();\n    const after = 2;\n    return before + spliced + after;\n};\n}',
-    '{"version":3,"file":"module.jsx","mappings":";;;kBAeYA,QAAA;IACR,MAAMC,MAAM,GAAG,CAAC;IAChB,MAAMC,OAAO,GAAGF,QAAA,EAAS;IACzB,MAAMG,KAAK,GAAG,CAAC;IACf,OAAOF,MAAM,GAAGC,OAAO,GAAGC,KAAK;AACjC,CAAC","names":["$splice0","before","spliced","after"],"ignoreList":[],"sources":["splices/splice-before-declaration.test.tsx"]}',
-    [],
-  );
+  return cs.create($module0, [
+    { kind: "splice", value: fragment, bindings: [] },
+  ]);
 }
 it("spliceBeforeDeclaration", async (t) => {
   await snapshotCase(
     t,
     "spliceBeforeDeclaration",
-    cs.create(
-      "1xi8jyc89buh5:28:4",
+    cs.create($module1, [
       {
-        params: [
-          {
-            kind: "splice",
-            value: sandwich(
-              cs.create(
-                "1xi8jyc89buh5:28:18",
-                { params: [] },
-                '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 10;\n}',
-                '{"version":3,"file":"module.jsx","mappings":";;;kBA2BqB,QAAE","names":[],"ignoreList":[],"sources":["splices/splice-before-declaration.test.tsx"]}',
-                [],
-              ),
-            ),
-            bindings: [],
-          },
-          {
-            kind: "splice",
-            value: sandwich(
-              cs.create(
-                "1xi8jyc89buh5:28:40",
-                { params: [] },
-                '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 20;\n}',
-                '{"version":3,"file":"module.jsx","mappings":";;;kBA2B2C,QAAE","names":[],"ignoreList":[],"sources":["splices/splice-before-declaration.test.tsx"]}',
-                [],
-              ),
-            ),
-            bindings: [],
-          },
-        ],
+        kind: "splice",
+        value: sandwich(cs.create($module2, [])),
+        bindings: [],
       },
-      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0() + $splice1();\n}',
-      '{"version":3,"file":"module.jsx","mappings":";;;kBA2BO,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAmB,GAAGC,QAAA,EAAmB","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/splice-before-declaration.test.tsx"]}',
-      [],
-    ),
+      {
+        kind: "splice",
+        value: sandwich(cs.create($module3, [])),
+        bindings: [],
+      },
+    ]),
   );
 });

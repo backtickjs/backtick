@@ -2,6 +2,12 @@ import { it } from "node:test";
 import { sep } from "node:path";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
+const $module0 = {
+  id: "1vr745dtaiti0:23:47",
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0();\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAsBkDA,QAAA,IAAAA,QAAA,EAAI","names":["$splice0"],"ignoreList":[],"sources":["splices/splice-imported-value.test.tsx"]}',
+  dependencies: [],
+};
 // A host value that is imported and never mentioned outside a script.
 //
 // `sep` appears once, as the `$sep` splice below. That reference is
@@ -22,12 +28,6 @@ it("spliceImportedValue", async (t) => {
   await snapshotCase(
     t,
     "spliceImportedValue",
-    cs.create(
-      "1vr745dtaiti0:23:47",
-      { params: [{ kind: "splice", value: sep, bindings: [] }] },
-      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0();\n}',
-      '{"version":3,"file":"module.jsx","mappings":";;;kBAsBkDA,QAAA,IAAAA,QAAA,EAAI","names":["$splice0"],"ignoreList":[],"sources":["splices/splice-imported-value.test.tsx"]}',
-      [],
-    ),
+    cs.create($module0, [{ kind: "splice", value: sep, bindings: [] }]),
   );
 });

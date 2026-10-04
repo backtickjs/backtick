@@ -1,4 +1,5 @@
 import {
+  type ClientModule,
   type ClientScript,
   isClientScript,
   isJsxElement,
@@ -26,12 +27,12 @@ import {
 import type { Names } from "../print/code.js";
 
 /**
- * A bundle as it is built, before it is printed: each script it declares
- * under its label, in the order rendering first reached it, and the root, as
- * code; and what they import.
+ * A bundle as it is built, before it is printed: each script's module it
+ * declares under its label, in the order rendering first reached it, and the
+ * root, as code; and what they import.
  */
 export interface BundleTree {
-  readonly scripts: readonly (readonly [string, ClientScript])[];
+  readonly modules: readonly (readonly [string, ClientModule])[];
   readonly root: string;
   readonly names: Names;
 }
@@ -81,11 +82,11 @@ export async function buildBundle(
   const numbers = new Map<ClientScript, number>();
   const scriptById = new Map<string, ClientScript>();
   const scriptFor = (script: ClientScript): ClientScript => {
-    const existing = scriptById.get(script.id);
+    const existing = scriptById.get(script.module.id);
     if (existing !== undefined) {
       return existing;
     }
-    scriptById.set(script.id, script);
+    scriptById.set(script.module.id, script);
     numbers.set(script, numbers.size);
     return script;
   };
@@ -135,7 +136,7 @@ export async function buildBundle(
   // decision. A carried fragment arrives with its own captures already bound,
   // so the extra parameters are unused rather than wrong.
   const passKeys = (target: ClientScript, hole: number): readonly string[] =>
-    bindingsOf(target.metadata.params[hole]);
+    bindingsOf(target.params[hole]);
 
   // The scripts the bundle declares: those a reference calls or passes, not
   // every one looked up on the way.
@@ -160,7 +161,7 @@ export async function buildBundle(
   ): string | null => {
     if (
       !isClientScript(value) ||
-      value.metadata.params.some((param) => param.kind !== "capture")
+      value.params.some((param) => param.kind !== "capture")
     ) {
       return null;
     }
@@ -274,7 +275,7 @@ export async function buildBundle(
   ): Promise<string[]> => {
     const target = scriptFor(ref);
     const parts: string[] = [];
-    const splices = ref.metadata.params.flatMap((param) =>
+    const splices = ref.params.flatMap((param) =>
       param.kind === "capture" ? [] : [param],
     );
     for (const [index, { kind, value: arg }] of splices.entries()) {
@@ -352,11 +353,11 @@ export async function buildBundle(
   // Nothing encloses the root, so nothing it holds can capture.
   const root = await render(value as Spliceable);
   // In table order, which is the order rendering first reached each script.
-  const scripts: (readonly [string, ClientScript])[] = [];
+  const modules: (readonly [string, ClientModule])[] = [];
   for (const script of numbers.keys()) {
     if (declared.has(script)) {
-      scripts.push([labelOf(script), script]);
+      modules.push([labelOf(script), script.module]);
     }
   }
-  return { scripts, root, names };
+  return { modules, root, names };
 }

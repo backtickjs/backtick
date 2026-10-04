@@ -1,8 +1,8 @@
 import type { ClientScript, Param } from "@backtickjs/core";
 
 // What a script's parameters say about its shape, which is all its
-// declaration reads: one `ClientScript` stands for every script with its id, so its host
-// values are one call site's and never read here.
+// declaration reads: one `ClientScript` stands for every script with its
+// module's id, so its host values are one call site's and never read here.
 
 // The bindings a hole hands over. A tag hands over none.
 export function bindingsOf(param: Param | undefined): readonly string[] {
@@ -11,7 +11,7 @@ export function bindingsOf(param: Param | undefined): readonly string[] {
 
 // The binding keys a script captures, in parameter order.
 export function capturesOf(script: ClientScript): readonly string[] {
-  return script.metadata.params.flatMap((param) =>
+  return script.params.flatMap((param) =>
     param.kind === "capture" ? [param.key] : [],
   );
 }

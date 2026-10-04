@@ -22,7 +22,7 @@ export interface ClientScript {
 // span — or unbraced, the `$x` shorthand, sugar for splicing the host
 // binding named without the sigil (`$x` reads as `${x}`). Both stand in the
 // placeholder text as an identifier — the spelling that keys the splice
-// dictionary and the runtime metadata (`key`) — and evaluate a host
+// dictionary and the script's `params` (`key`) — and evaluate a host
 // expression (`expression`).
 //
 // What the text spells, and only that. A component tag names a host binding
@@ -34,7 +34,7 @@ export interface BracedSplice {
   kind: "braced";
   // the template span's host expression
   expression: ts.Expression;
-  // the metadata key — the `$0splice<n>` identifier standing in
+  // the param's key — the `$0splice<n>` identifier standing in
   // `textWithPlaceholders`, which also keys the splice dictionary
   key: string;
   // client scripts nested in the host expression
@@ -47,7 +47,7 @@ export interface UnbracedSplice {
   kind: "unbraced";
   // the host binding the shorthand names (synthesized, e.g. `x` for `$x`)
   expression: ts.Identifier;
-  // the metadata key — the `$x` spelling the shorthand stands as in the
+  // the param's key — the `$x` spelling the shorthand stands as in the
   // placeholder text, which also keys the splice dictionary
   key: string;
   // a shorthand names a single binding, so it nests no scripts
@@ -114,7 +114,7 @@ function getDirectScripts(
       true,
     );
     // The dictionary's insertion order is evaluation order: emitted as the
-    // script's metadata object literal, the splices' host expressions run
+    // script's `params` array literal, the splices' host expressions run
     // first to last when the `cs` expression itself evaluates — left to
     // right in source order, like a real template literal's spans.
     const splices = getDirectSplices(

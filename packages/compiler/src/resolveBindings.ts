@@ -62,7 +62,7 @@ export interface ResolvedScopes {
 }
 
 /**
- * One of a script's parameters as the compiler knows it: `Metadata`'s `Param`,
+ * One of a script's parameters as the compiler knows it: `ClientScript`'s `Param`,
  * with the splice's key and where it is read in place of its host value.
  * `refs` are a hole's placeholder, or an unbraced `$name`, a tag's name among
  * them.

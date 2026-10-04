@@ -1,44 +1,35 @@
 import type { Spliceable } from "./Spliceable.js";
 
-// What one of a script's parameters is handed: splices and tags in the order
-// the script first reads them, then captures.
+// A value a script is called with. Splices and tags come first, in the order
+// the script reads them, then captures.
 export type Param =
-  // a host value, called with the bindings its hole hands over
+  // a host value, passed as a function the script calls
   | { kind: "splice"; value: Spliceable; bindings: string[] }
-  // a splice written as a tag, `<$Card>`, handed over as its value: a tag
-  // can't be a call
+  // a host value used as a tag (`<$Card>`), passed as is: a tag can't be a call
   | { kind: "tag"; value: Spliceable }
-  // the binding key of an enclosing script's binding
+  // a variable of the enclosing script
   | { kind: "capture"; key: string };
 
-export interface Metadata {
-  // one per parameter: `params[i]` is `$splice<i>`, `$tag<i>` or
-  // `$capture<i>`, by its kind
-  params: Param[];
+// The compiled code of one `cs`, shared by every script it creates.
+export interface ClientModule {
+  // `<fileHash>:<line>:<column>` of the `cs`. The hash keeps ids from two
+  // files apart: they match only when the files are identical.
+  readonly id: string;
+  // A module-table entry, `(module, exports, require) => { … }`, whose default
+  // export is the script's function.
+  readonly code: string;
+  // Source map into the host file, without its content.
+  readonly map: string;
+  // The modules `code` requires.
+  readonly dependencies: readonly string[];
 }
 
+// One run of a `cs`: its module, and the values that run passes it.
 export interface ClientScript {
   readonly "@backtickjs": "ClientScript";
-  // Which script this is: `<fileHash>:<line>:<column>`, where it was written.
-  // Two scripts with one id are one function-table entry, as a `cs` in a host
-  // function called twice is. The file's hash is part of it because a position
-  // alone recurs across files and codebases: two libraries compiled apart
-  // could both have a script at `1:0`. With the hash, ids collide only when
-  // the files' contents are identical, and then the scripts are the same.
-  readonly id: string;
-  readonly metadata: Metadata;
-  // The script as the client runs it, compiled when the host was: a module
-  // table's entry, `(module, exports, require) => { … }`, as webpack's and
-  // Metro's are, whose default export is `($splice0, …) => body`, its
-  // parameters `metadata.params`; JSX kept unless its framework compiled it
-  // too. The same for every script with its id, where `metadata` is one
-  // call's.
-  readonly code: string;
-  // The code's source map, as JSON, into the host file. It carries no
-  // `sourcesContent`: the host file is the server's.
-  readonly map: string;
-  // The modules its code requires, by specifier, as Metro records a module's.
-  readonly dependencies: readonly string[];
+  readonly module: ClientModule;
+  // `params[i]` is the script's `$splice<i>`, `$tag<i>` or `$capture<i>`
+  readonly params: readonly Param[];
 }
 
 export function isClientScript(value: unknown): value is ClientScript {
@@ -51,18 +42,8 @@ export function isClientScript(value: unknown): value is ClientScript {
 }
 
 export function create(
-  id: string,
-  metadata: Metadata,
-  code: string,
-  map: string,
-  dependencies: readonly string[],
+  module: ClientModule,
+  params: readonly Param[],
 ): ClientScript {
-  return {
-    "@backtickjs": "ClientScript",
-    id,
-    metadata,
-    code,
-    map,
-    dependencies,
-  };
+  return { "@backtickjs": "ClientScript", module, params };
 }

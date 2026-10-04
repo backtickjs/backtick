@@ -30,8 +30,8 @@ export {
 // it, so the shape is neither end's.
 export {
   create,
+  type ClientModule,
   type ClientScript,
   isClientScript,
-  type Metadata,
   type Param,
 } from "./ClientScript.js";

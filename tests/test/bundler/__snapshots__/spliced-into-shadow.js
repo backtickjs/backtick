@@ -2,6 +2,18 @@ import assert from "node:assert/strict";
 import { it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
+const $module0 = {
+  id: "qfjmdn3bl9zp:33:13",
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => {\n    const total = 1;\n    const first = $splice0(total);\n    {\n        const total = 2;\n        return first + total + $splice1();\n    }\n};\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAgCgB,CAAAA,QAAA,EAAAC,QAAA;IACR,MAAMC,KAAK,GAAG,CAAC;IACf,MAAMC,KAAK,GAAGH,QAAA,CAAAE,KAAA,CAAkB;IAChC;QACE,MAAMA,KAAK,GAAG,CAAC;QACf,OAAOC,KAAK,GAAGD,KAAK,GAAGD,QAAA,EAAU;IACnC;AACF,CAAC","names":["$splice0","$splice1","total","first"],"ignoreList":[],"sources":["bundler/spliced-into-shadow.test.tsx"]}',
+  dependencies: [],
+};
+const $module1 = {
+  id: "qfjmdn3bl9zp:35:29",
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $capture0 => $capture0;\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkCgCA,SAAA,IAAAA,SAAK","names":["$capture0"],"ignoreList":[],"sources":["bundler/spliced-into-shadow.test.tsx"]}',
+  dependencies: [],
+};
 // A fragment written under the outer `total`, carried by host code into a hole
 // inside a block that shadows it.
 //
@@ -26,32 +38,18 @@ const again = () => {
 it("refuses a capture spliced where it is shadowed", async () => {
   await assert.rejects(
     bundler.build({
-      input: cs.create(
-        "qfjmdn3bl9zp:33:13",
+      input: cs.create($module0, [
         {
-          params: [
-            {
-              kind: "splice",
-              value: keep(
-                cs.create(
-                  "qfjmdn3bl9zp:35:29",
-                  {
-                    params: [{ kind: "capture", key: "total$qfjmdn3bl9zp$0" }],
-                  },
-                  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $capture0 => $capture0;\n}',
-                  '{"version":3,"file":"module.jsx","mappings":";;;kBAkCgCA,SAAA,IAAAA,SAAK","names":["$capture0"],"ignoreList":[],"sources":["bundler/spliced-into-shadow.test.tsx"]}',
-                  [],
-                ),
-              ),
-              bindings: ["total$qfjmdn3bl9zp$0"],
-            },
-            { kind: "splice", value: again(), bindings: [] },
-          ],
+          kind: "splice",
+          value: keep(
+            cs.create($module1, [
+              { kind: "capture", key: "total$qfjmdn3bl9zp$0" },
+            ]),
+          ),
+          bindings: ["total$qfjmdn3bl9zp$0"],
         },
-        '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => {\n    const total = 1;\n    const first = $splice0(total);\n    {\n        const total = 2;\n        return first + total + $splice1();\n    }\n};\n}',
-        '{"version":3,"file":"module.jsx","mappings":";;;kBAgCgB,CAAAA,QAAA,EAAAC,QAAA;IACR,MAAMC,KAAK,GAAG,CAAC;IACf,MAAMC,KAAK,GAAGH,QAAA,CAAAE,KAAA,CAAkB;IAChC;QACE,MAAMA,KAAK,GAAG,CAAC;QACf,OAAOC,KAAK,GAAGD,KAAK,GAAGD,QAAA,EAAU;IACnC;AACF,CAAC","names":["$splice0","$splice1","total","first"],"ignoreList":[],"sources":["bundler/spliced-into-shadow.test.tsx"]}',
-        [],
-      ),
+        { kind: "splice", value: again(), bindings: [] },
+      ]),
       external: {},
     }),
     {
