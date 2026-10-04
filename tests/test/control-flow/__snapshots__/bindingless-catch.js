@@ -6,6 +6,7 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    try {\n        throw "boom";\n    }\n    catch {\n        return "caught";\n    }\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAUO;IACD,IAAI;QACF,MAAM,MAAM;IACd,CAAC;IAAC,MAAM;QACN,OAAO,QAAQ;IACjB;AACF,CAAC","names":[],"ignoreList":[],"sources":["control-flow/bindingless-catch.test.tsx"]}',
   dependencies: [],
+  params: [],
 };
 // A `catch` without a binding: the try node's `param` is null and the
 // handler runs with no new binding in scope.

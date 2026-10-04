@@ -7,6 +7,7 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>Hi`);\nexports.default = () => {\n    return _tmpl$();\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBASY;IACR,OAAAA,MAAA;AAGF,CAAC","names":["_tmpl$"],"ignoreList":[],"sources":["stdlib/string-from-code-point.test.tsx"]}',
   dependencies: ["solid-js/web"],
+  params: [],
 };
 // A namespace static taking a rest parameter, so the whole of the call crosses
 // as one name and a list of arguments — `String` is the front of the name and

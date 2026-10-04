@@ -7,6 +7,7 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>/at?q=a%20b%2Bc%26d%23%C3%A9&amp;page=2.5 a b+c&amp;d#\u00E9`);\nexports.default = () => {\n    return _tmpl$();\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBASY;IACR,OAAAA,MAAA;AAUF,CAAC","names":["_tmpl$"],"ignoreList":[],"sources":["stdlib/encode-uri-component.test.tsx"]}',
   dependencies: ["solid-js/web"],
+  params: [],
 };
 // A whole name rather than a front, so the call crosses as the one name and
 // its argument. What a query is built from: a reserved character, a space and a

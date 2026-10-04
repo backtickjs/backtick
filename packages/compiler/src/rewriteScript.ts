@@ -16,19 +16,21 @@ import type { SourceRange } from "./SourceRange.js";
 /** What `cs.create` is handed for a script: which it is, and what it runs. */
 export interface RuntimeScript {
   id: string;
-  // the script's `params`, an array literal of host expressions
+  // the module's `params`, an array literal of literals
   params: ts.Expression;
+  // the script's `args`, an array literal of host expressions
+  args: ts.Expression;
   emitted: EmittedScript;
 }
 
 /**
  * A script's module, declared once at the top of its host file, every run of
- * the script sharing it: `const $module0 = { id, code, map, dependencies };`.
+ * the script sharing it: `const $module0 = { id, code, … };`.
  */
 export function moduleDeclaration(
   ts: typeof import("typescript"),
   name: string,
-  id: string,
+  { id, params }: RuntimeScript,
   { code, map, dependencies }: CompiledScript,
 ): ts.VariableStatement {
   const f = ts.factory;
@@ -50,6 +52,7 @@ export function moduleDeclaration(
                 "dependencies",
                 f.createArrayLiteralExpression(dependencies.map(string)),
               ),
+              f.createPropertyAssignment("params", params),
             ],
             true,
           ),
@@ -60,15 +63,15 @@ export function moduleDeclaration(
   );
 }
 
-/** A script as the client gets it, `cs.create($module0, [...params])`. */
+/** A script as the client gets it, `cs.create($module0, [...args])`. */
 export function createCall(
   ts: typeof import("typescript"),
   moduleName: string,
-  { params }: RuntimeScript,
+  { args }: RuntimeScript,
 ): ts.Expression {
   return call(ts, "cs", "create", [
     ts.factory.createIdentifier(moduleName),
-    params,
+    args,
   ]);
 }
 
@@ -162,8 +165,9 @@ export function rewriteScript(
   );
   const id = `${fileHash}:${line + 1}:${character}`;
 
-  // The script's parameters, as `ClientScript.params` describes them: a splice
-  // is the host expression written there, a tag's too.
+  // The function's parameters, as `ClientModule.params` describes them, and
+  // what a run passes: for each splice and tag, the host expression written
+  // there.
   const objectLiteral = (properties: Record<string, ts.Expression>) =>
     ts.factory.createObjectLiteralExpression(
       Object.entries(properties).map(([name, value]) =>
@@ -178,17 +182,13 @@ export function rewriteScript(
         case "splice":
           return objectLiteral({
             kind: string("splice"),
-            value: clientScript.splices[param.key]!.expression,
             bindings: ts.factory.createArrayLiteralExpression(
               param.bindings.map(string),
               false,
             ),
           });
         case "tag":
-          return objectLiteral({
-            kind: string("tag"),
-            value: clientScript.splices[param.key]!.expression,
-          });
+          return objectLiteral({ kind: string("tag") });
         case "capture":
           return objectLiteral({
             kind: string("capture"),
@@ -196,6 +196,14 @@ export function rewriteScript(
           });
       }
     }),
+    false,
+  );
+  const argsLiteral = ts.factory.createArrayLiteralExpression(
+    params.flatMap((param) =>
+      param.kind === "capture"
+        ? []
+        : [clientScript.splices[param.key]!.expression],
+    ),
     false,
   );
 
@@ -216,7 +224,7 @@ export function rewriteScript(
   );
 
   return {
-    runtime: { id, params: paramsLiteral, emitted },
+    runtime: { id, params: paramsLiteral, args: argsLiteral, emitted },
     awaits,
     leftAsWritten: false,
     diagnostics: [],

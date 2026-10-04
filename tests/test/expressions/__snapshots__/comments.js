@@ -6,6 +6,7 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const count = 1;\n    if (count === 1) {\n        return "one";\n    }\n    return "many";\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAUO;IAED,MAAMA,KAAK,GAAG,CAAC;IAEf,IAAIA,KAAK,KAAK,CAAC,EAAE;QAEf,OAAO,KAAK;IACd;IAIA,OAAO,MAAM;AACf,CAAC","names":["count"],"ignoreList":[],"sources":["expressions/comments.test.tsx"]}',
   dependencies: [],
+  params: [],
 };
 // Comments in a client script are trivia: they survive formatting but are
 // dropped from the virtual code and the bundle.

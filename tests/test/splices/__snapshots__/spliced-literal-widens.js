@@ -7,6 +7,12 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2, $splice3) => {\n    const [n, setN] = $splice0()($splice1());\n    setN(6);\n    const [c, setC] = $splice0()($splice2());\n    setC($splice3());\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2BO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA;IACD,MAAM,CAACC,CAAC,EAAEC,IAAI,CAAC,GAAGL,QAAA,EAAa,CAACC,QAAA,EAAK,CAAC;IACtCI,IAAI,CAAC,CAAC,CAAC;IACP,MAAM,CAACC,CAAC,EAAEC,IAAI,CAAC,GAAGP,QAAA,EAAa,CAACE,QAAA,EAAY,CAAC;IAC7CK,IAAI,CAACJ,QAAA,EAAa,CAAC;AACrB,CAAC","names":["$splice0","$splice1","$splice2","$splice3","n","setN","c","setC"],"ignoreList":[],"sources":["splices/spliced-literal-widens.test.tsx"]}',
   dependencies: [],
+  params: [
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+  ],
 };
 // What a splice hands over keeps the width the host gave it.
 //
@@ -29,11 +35,6 @@ it("splicedLiteralWidens", async (t) => {
   await snapshotCase(
     t,
     "splicedLiteralWidens",
-    cs.create($module0, [
-      { kind: "splice", value: createSignal, bindings: [] },
-      { kind: "splice", value: five, bindings: [] },
-      { kind: "splice", value: Color.Red, bindings: [] },
-      { kind: "splice", value: Color.Blue, bindings: [] },
-    ]),
+    cs.create($module0, [createSignal, five, Color.Red, Color.Blue]),
   );
 });

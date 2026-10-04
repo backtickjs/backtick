@@ -6,42 +6,58 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => {\n    const outer = $splice0();\n    return $splice1(outer);\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAgBY,CAAAA,QAAA,EAAAC,QAAA;IACR,MAAMC,KAAK,GAAGF,QAAA,EAAM;IACpB,OAAOC,QAAA,CAAAC,KAAA,CAGH;AACN,CAAC","names":["$splice0","$splice1","outer"],"ignoreList":[],"sources":["splices/host-wrapped-splice.test.tsx"]}',
   dependencies: [],
+  params: [
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: ["outer$zqr0jsdf8ub6$0"] },
+  ],
 };
 const $module1 = {
   id: "zqr0jsdf8ub6:19:17",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $capture1) => {\n    const middle = 10;\n    return middle + $splice0($capture1);\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkBoB,CAAAA,QAAA,EAAAC,SAAA;IACd,MAAMC,MAAM,GAAG,EAAE;IACjB,OAAOA,MAAM,GAAGF,QAAA,CAAAC,SAAA,CAAkB;AACpC,CAAC","names":["$splice0","$capture1","middle"],"ignoreList":[],"sources":["splices/host-wrapped-splice.test.tsx"]}',
   dependencies: [],
+  params: [
+    { kind: "splice", bindings: [] },
+    { kind: "capture", key: "outer$zqr0jsdf8ub6$0" },
+  ],
 };
 const $module2 = {
   id: "zqr0jsdf8ub6:21:29",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $capture0 => $capture0;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAoBgCA,SAAA,IAAAA,SAAK","names":["$capture0"],"ignoreList":[],"sources":["splices/host-wrapped-splice.test.tsx"]}',
   dependencies: [],
+  params: [{ kind: "capture", key: "outer$zqr0jsdf8ub6$0" }],
 };
 const $module3 = {
   id: "zqr0jsdf8ub6:27:9",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + 1;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA0BYA,QAAA,IAAAA,QAAA,EAAM,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["splices/host-wrapped-splice.test.tsx"]}',
   dependencies: [],
+  params: [{ kind: "splice", bindings: [] }],
 };
 const $module4 = {
   id: "zqr0jsdf8ub6:38:4",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0() + $splice1();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAqCO,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAc,GAAGC,QAAA,EAAc","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/host-wrapped-splice.test.tsx"]}',
   dependencies: [],
+  params: [
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+  ],
 };
 const $module5 = {
   id: "zqr0jsdf8ub6:38:14",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 1;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAqCiB,OAAC","names":[],"ignoreList":[],"sources":["splices/host-wrapped-splice.test.tsx"]}',
   dependencies: [],
+  params: [],
 };
 const $module6 = {
   id: "zqr0jsdf8ub6:38:31",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 2;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAqCkC,OAAC","names":[],"ignoreList":[],"sources":["splices/host-wrapped-splice.test.tsx"]}',
   dependencies: [],
+  params: [],
 };
 // Splices that arrive through host code — the case a hole can never be resolved
 // from source, because what the compiler sees at the hole is a call expression
@@ -56,29 +72,12 @@ const $module6 = {
 // wrong.
 function wrap(start) {
   return cs.create($module0, [
-    { kind: "splice", value: start, bindings: [] },
-    {
-      kind: "splice",
-      value: foo(
-        cs.create($module1, [
-          {
-            kind: "splice",
-            value: same(
-              cs.create($module2, [
-                { kind: "capture", key: "outer$zqr0jsdf8ub6$0" },
-              ]),
-            ),
-            bindings: [],
-          },
-          { kind: "capture", key: "outer$zqr0jsdf8ub6$0" },
-        ]),
-      ),
-      bindings: ["outer$zqr0jsdf8ub6$0"],
-    },
+    start,
+    foo(cs.create($module1, [same(cs.create($module2, []))])),
   ]);
 }
 function foo(start) {
-  return cs.create($module3, [{ kind: "splice", value: start, bindings: [] }]);
+  return cs.create($module3, [start]);
 }
 function same(script) {
   return script;
@@ -88,8 +87,8 @@ it("hostWrappedSplice", async (t) => {
     t,
     "hostWrappedSplice",
     cs.create($module4, [
-      { kind: "splice", value: wrap(cs.create($module5, [])), bindings: [] },
-      { kind: "splice", value: wrap(cs.create($module6, [])), bindings: [] },
+      wrap(cs.create($module5, [])),
+      wrap(cs.create($module6, [])),
     ]),
   );
 });

@@ -6,18 +6,21 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 1;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAamB,OAAC","names":[],"ignoreList":[],"sources":["splices/spliced-container.test.tsx"]}',
   dependencies: [],
+  params: [],
 };
 const $module1 = {
   id: "3hhvicr225pmx:16:14",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => "origin";\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAeiB,cAAQ","names":[],"ignoreList":[],"sources":["splices/spliced-container.test.tsx"]}',
   dependencies: [],
+  params: [],
 };
 const $module2 = {
   id: "3hhvicr225pmx:21:44",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0().x + 1;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAoB+CA,QAAA,IAAAA,QAAA,EAAM,CAACC,CAAC,GAAG,CAAC","names":["$splice0","x"],"ignoreList":[],"sources":["splices/spliced-container.test.tsx"]}',
   dependencies: [],
+  params: [{ kind: "splice", bindings: [] }],
 };
 // A container the host built holding scripts, spliced whole.
 //
@@ -32,9 +35,5 @@ const originX = cs.create($module0, []);
 const label = cs.create($module1, []);
 const point = { x: originX, label };
 it("splicedContainer", async (t) => {
-  await snapshotCase(
-    t,
-    "splicedContainer",
-    cs.create($module2, [{ kind: "splice", value: point, bindings: [] }]),
-  );
+  await snapshotCase(t, "splicedContainer", cs.create($module2, [point]));
 });

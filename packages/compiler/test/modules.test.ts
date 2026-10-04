@@ -23,9 +23,7 @@ describe("a script's module", () => {
       declared <
         lines.findIndex((line) => line.startsWith("export function row")),
     );
-    assert.match(
-      code,
-      /return cs\.create\(\$module0, \[\{ kind: "splice", value: label, bindings: \[\] \}\]\);/,
-    );
+    assert.match(code, /params: \[\{ kind: "splice", bindings: \[\] \}\]/);
+    assert.match(code, /return cs\.create\(\$module0, \[label\]\);/);
   });
 });

@@ -6,6 +6,7 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const floor = Math.floor;\n    const apply = (f, n) => f(n);\n    return floor(3.5) + apply(Math.ceil, 3.5);\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAeO;IACD,MAAMA,KAAK,GAAGC,IAAI,CAACD,KAAK;IACxB,MAAME,KAAK,GAAGA,CAACC,CAAwB,EAAEC,CAAS,KAAKD,CAAC,CAACC,CAAC,CAAC;IAC3D,OAAOJ,KAAK,CAAC,GAAG,CAAC,GAAGE,KAAK,CAACD,IAAI,CAACI,IAAI,EAAE,GAAG,CAAC;AAC3C,CAAC","names":["floor","Math","apply","f","n","ceil"],"ignoreList":[],"sources":["stdlib/builtin-as-value.test.tsx"]}',
   dependencies: [],
+  params: [],
 };
 // A builtin is a value, not only a callee. The compiler folds `Math.floor`
 // into one whole name the client answers — there is no `Math` for a read to

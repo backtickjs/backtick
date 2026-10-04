@@ -13,12 +13,20 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nconst web_4 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>clear`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<span>`);\nexports.default = ($splice0, $tag1) => {\n    const [ids, setIds] = $splice0()([1, 2, 3]);\n    const clear = () => {\n        setIds([]);\n    };\n    return [(() => {\n            var _el$ = _tmpl$();\n            _el$.$$click = clear;\n            return _el$;\n        })(), (0, web_4.createComponent)($tag1, {\n            get each() {\n                return ids();\n            },\n            children: id => (() => {\n                var _el$2 = _tmpl$2();\n                (0, web_3.insert)(_el$2, "row " + id);\n                return _el$2;\n            })()\n        })];\n};\n(0, web_2.delegateEvents)(["click"]);\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;;kBA+BY,CAAAA,QAAA,EAAAC,KAAA;IACR,MAAM,CAACC,GAAG,EAAEC,MAAM,CAAC,GAAGH,QAAA,EAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;IACxD,MAAMI,KAAK,GAAGA,GAAA;QACZD,MAAM,CAAC,EAAE,CAAC;IACZ,CAAC;IACD;YAAA,IAAAE,IAAA,GAAAC,MAAA;YAAAD,IAAA,CAAAE,OAAA,GAEmBH,KAAK;YAAA,OAAAC,IAAA;QAAA,MAAAG,yBAAA,EACnBP,KAAI;YAAA,IAACQ,IAAIA;gBAAA,OAAEP,GAAG,EAAE;YAAA;YAAAQ,QAAA,EAAIC,EAAU;gBAAA,IAAAC,KAAA,GAAAC,OAAA;gBAAAC,gBAAA,EAAAF,KAAA,EAAY,MAAM,GAAGD,EAAE;gBAAA,OAAAC,KAAA;YAAA;SAAQ;AAGpE,CAAC","names":["$splice0","$tag1","ids","setIds","clear","_el$","_tmpl$","$$click","_$createComponent","each","children","id","_el$2","_tmpl$2","_$insert"],"ignoreList":[],"sources":["render/anchors.test.tsx"]}',
   dependencies: ["solid-js/web"],
+  params: [{ kind: "splice", bindings: [] }, { kind: "tag" }],
 };
 const $module1 = {
   id: "3vm53m05uwuq:91:33",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2, $splice3, $splice4) => $splice0()(dispose => {\n    const parent = document.getElementById($splice1());\n    $splice2()(parent, $splice3(), parent.querySelector($splice4()));\n    return dispose;\n});\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA0FoC,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,KAAAJ,QAAA,EAAW,CAAEK,OAAmB;IAChE,MAAMC,MAAM,GAAGC,QAAQ,CAACC,cAAc,CAACP,QAAA,EAAG,CAAE;IAC5CC,QAAA,EAAO,CAACI,MAAM,EAAEH,QAAA,EAAM,EAAEG,MAAM,CAACG,aAAa,CAACL,QAAA,EAAS,CAAC,CAAC;IACxD,OAAOC,OAAO;AAChB,CAAC,CAAC","names":["$splice0","$splice1","$splice2","$splice3","$splice4","dispose","parent","document","getElementById","querySelector"],"ignoreList":[],"sources":["render/anchors.test.tsx"]}',
   dependencies: [],
+  params: [
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+  ],
 };
 // Where a render draws, and what it may move.
 //
@@ -39,10 +47,7 @@ const $module1 = {
 // The anchor tests below draw this into a target that is already holding
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
-  return cs.create($module0, [
-    { kind: "splice", value: createSignal, bindings: [] },
-    { kind: "tag", value: For },
-  ]);
+  return cs.create($module0, [createSignal, For]);
 }
 it("Rows", async (t) => {
   await snapshotCase(t, "Rows", _jsx(Rows, {}));
@@ -79,13 +84,7 @@ function target(html) {
 async function drawAt(value, parent, selector) {
   const id = parent.id;
   const unmount = await evaluate(
-    cs.create($module1, [
-      { kind: "splice", value: createRoot, bindings: [] },
-      { kind: "splice", value: id, bindings: [] },
-      { kind: "splice", value: insert, bindings: [] },
-      { kind: "splice", value: value, bindings: [] },
-      { kind: "splice", value: selector, bindings: [] },
-    ]),
+    cs.create($module1, [createRoot, id, insert, value, selector]),
   );
   undo.push(unmount);
 }

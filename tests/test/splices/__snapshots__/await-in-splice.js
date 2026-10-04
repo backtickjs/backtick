@@ -6,18 +6,21 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + "!";\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAa4CA,QAAA,IAAAA,QAAA,EAAwB,GAAG,GAAG","names":["$splice0"],"ignoreList":[],"sources":["splices/await-in-splice.test.tsx"]}',
   dependencies: [],
+  params: [{ kind: "splice", bindings: [] }],
 };
 const $module1 = {
   id: "1vub2b42i0si4:21:4",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const greeting = $splice0();\n    return greeting + "!";\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAoBOA,QAAA;IACD,MAAMC,QAAQ,GAAGD,QAAA,EAAwB;IACzC,OAAOC,QAAQ,GAAG,GAAG;AACvB,CAAC","names":["$splice0","greeting"],"ignoreList":[],"sources":["splices/await-in-splice.test.tsx"]}',
   dependencies: [],
+  params: [{ kind: "splice", bindings: [] }],
 };
 const $module2 = {
   id: "1vub2b42i0si4:32:46",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => fetch("/rows");\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA+BiD,MAAAA,KAAK,CAAC,OAAO,CAAC","names":["fetch"],"ignoreList":[],"sources":["splices/await-in-splice.test.tsx"]}',
   dependencies: [],
+  params: [],
 };
 async function fetchGreeting() {
   return "hello";
@@ -30,18 +33,14 @@ it("awaitInSplice", async (t) => {
   await snapshotCase(
     t,
     "awaitInSplice",
-    cs.create($module0, [
-      { kind: "splice", value: await fetchGreeting(), bindings: [] },
-    ]),
+    cs.create($module0, [await fetchGreeting()]),
   );
 });
 it("awaitInStatementsSplice", async (t) => {
   await snapshotCase(
     t,
     "awaitInStatementsSplice",
-    cs.create($module1, [
-      { kind: "splice", value: await fetchGreeting(), bindings: [] },
-    ]),
+    cs.create($module1, [await fetchGreeting()]),
   );
 });
 // A script whose splices await nothing keeps its own value's type, a promise

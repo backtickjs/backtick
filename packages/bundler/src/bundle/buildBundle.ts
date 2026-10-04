@@ -136,7 +136,7 @@ export async function buildBundle(
   // decision. A carried fragment arrives with its own captures already bound,
   // so the extra parameters are unused rather than wrong.
   const passKeys = (target: ClientScript, hole: number): readonly string[] =>
-    bindingsOf(target.params[hole]);
+    bindingsOf(target.module.params[hole]);
 
   // The scripts the bundle declares: those a reference calls or passes, not
   // every one looked up on the way.
@@ -161,7 +161,7 @@ export async function buildBundle(
   ): string | null => {
     if (
       !isClientScript(value) ||
-      value.params.some((param) => param.kind !== "capture")
+      value.module.params.some((param) => param.kind !== "capture")
     ) {
       return null;
     }
@@ -275,10 +275,9 @@ export async function buildBundle(
   ): Promise<string[]> => {
     const target = scriptFor(ref);
     const parts: string[] = [];
-    const splices = ref.params.flatMap((param) =>
-      param.kind === "capture" ? [] : [param],
-    );
-    for (const [index, { kind, value: arg }] of splices.entries()) {
+    // The splices and tags lead the parameters, one `arg` each.
+    for (const [index, arg] of ref.args.entries()) {
+      const { kind } = ref.module.params[index]!;
       // A tag is handed over as the value it names, as its script reads it: a
       // client component. A server component is host code, used in a splice.
       if (kind === "tag") {

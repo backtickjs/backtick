@@ -6,12 +6,14 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<b>`);\nexports.default = () => props => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, () => props.n);\n    return _el$;\n})();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAMiB,MAACA,KAAoB;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAASD,KAAK,CAACI,CAAC;IAAA,OAAAH,IAAA;AAAA,IAAK","names":["props","_el$","_tmpl$","_$insert","n"],"ignoreList":[],"sources":["typecheck-errors/client-component-on-host.test.tsx"]}',
   dependencies: ["solid-js/web"],
+  params: [],
 };
 const $module1 = {
   id: "e4ehd6s3ebyx:16:24",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = ($tag0, $tag1) => (0, web_1.createComponent)($tag0, {\n    each: [1, 2],\n    children: n => (0, web_1.createComponent)($tag1, {\n        n: n\n    })\n});\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAe2B,CAAAA,KAAA,EAAAC,KAAA,KAAAC,yBAAA,EAACF,KAAI;IAACG,IAAI,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC;IAAAC,QAAA,EACzCC,CAAC,IAAAH,yBAAA,EAAMD,KAAM;QAACI,CAAC,EAAEA;KAAC;CAAI,CACnB","names":["$tag0","$tag1","_$createComponent","each","children","n"],"ignoreList":[],"sources":["typecheck-errors/client-component-on-host.test.tsx"]}',
   dependencies: ["solid-js/web"],
+  params: [{ kind: "tag" }, { kind: "tag" }],
 };
 // A client component is client code, a tag in a script. On the host it isn't
 // callable, so TypeScript refuses it as a tag: a client import, and a script
@@ -22,7 +24,4 @@ export const forOnHost = _jsx(For, { each: [1, 2], children: (n) => n });
 // @ts-expect-error: JSX element type 'Badge' does not have any construct or call signatures.
 export const badgeOnHost = _jsx(Badge, { n: 1 });
 // In a script, both are what they are on the client.
-export const inScript = cs.create($module1, [
-  { kind: "tag", value: For },
-  { kind: "tag", value: Badge },
-]);
+export const inScript = cs.create($module1, [For, Badge]);

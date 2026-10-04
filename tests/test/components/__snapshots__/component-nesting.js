@@ -7,12 +7,14 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>x`);\nexports.default = () => _tmpl$();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAaY,MAAAA,MAAA,EAAc","names":["_tmpl$"],"ignoreList":[],"sources":["components/component-nesting.test.tsx"]}',
   dependencies: ["solid-js/web"],
+  params: [],
 };
 const $module1 = {
   id: "2l5eb0u3jx2g5:22:44",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, $splice0);\n    return _el$;\n})();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAqB+CA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAMD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAqB","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["components/component-nesting.test.tsx"]}',
   dependencies: ["solid-js/web"],
+  params: [{ kind: "splice", bindings: [] }],
 };
 // Invocations nest, and each one is an instance. `Outer` renders `Inner`, which
 // renders the `Text`, so there are three entries — and `Outer`'s content is a
@@ -32,8 +34,6 @@ it("componentNesting", async (t) => {
   await snapshotCase(
     t,
     "componentNesting",
-    cs.create($module1, [
-      { kind: "splice", value: _jsx(Outer, {}), bindings: [] },
-    ]),
+    cs.create($module1, [_jsx(Outer, {})]),
   );
 });

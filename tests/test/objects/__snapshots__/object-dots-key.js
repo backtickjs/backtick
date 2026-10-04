@@ -6,6 +6,7 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const base = {\n        a: 1\n    };\n    return {\n        ...base,\n        "...": 2\n    };\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWO;IACD,MAAMA,IAAI,GAAG;QAAEC,CAAC,EAAE;KAAG;IACrB,OAAO;QAAE,GAAGD,IAAI;QAAE,KAAK,EAAE;KAAG;AAC9B,CAAC","names":["base","a"],"ignoreList":[],"sources":["objects/object-dots-key.test.tsx"]}',
   dependencies: [],
+  params: [],
 };
 // A property literally named `...`, in a literal a spread also runs through —
 // which is the one shape where a spread and a pair holding `...` sit in the

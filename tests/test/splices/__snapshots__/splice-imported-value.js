@@ -7,6 +7,7 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAsBkDA,QAAA,IAAAA,QAAA,EAAI","names":["$splice0"],"ignoreList":[],"sources":["splices/splice-imported-value.test.tsx"]}',
   dependencies: [],
+  params: [{ kind: "splice", bindings: [] }],
 };
 // A host value that is imported and never mentioned outside a script.
 //
@@ -25,9 +26,5 @@ const $module0 = {
 // A value rather than a function, so the `.value` snapshot beside this is the
 // spliced value itself.
 it("spliceImportedValue", async (t) => {
-  await snapshotCase(
-    t,
-    "spliceImportedValue",
-    cs.create($module0, [{ kind: "splice", value: sep, bindings: [] }]),
-  );
+  await snapshotCase(t, "spliceImportedValue", cs.create($module0, [sep]));
 });

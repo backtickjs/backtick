@@ -5,6 +5,10 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => {\n    const [held, setHeld] = $splice0()($splice1());\n    setHeld($splice1());\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAekB,CAAAA,QAAA,EAAAC,QAAA;IAEhB,MAAM,CAACC,IAAI,EAAEC,OAAO,CAAC,GAAGH,QAAA,EAAa,CAACC,QAAA,EAAK,CAAC;IAE5CE,OAAO,CAACF,QAAA,EAAK,CAAC;AAChB,CAAC","names":["$splice0","$splice1","held","setHeld"],"ignoreList":[],"sources":["typecheck-errors/state-holds-host-object.test.tsx"]}',
   dependencies: [],
+  params: [
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+  ],
 };
 // A host object with behaviour reaching a cell, refused where it is written.
 //
@@ -17,7 +21,4 @@ const $module0 = {
 // What says no here is the splice itself: what it answers with is checked
 // against `Spliceable`, which a `Date` is not.
 const host = new Date();
-export default cs.create($module0, [
-  { kind: "splice", value: createSignal, bindings: [] },
-  { kind: "splice", value: host, bindings: [] },
-]);
+export default cs.create($module0, [createSignal, host]);

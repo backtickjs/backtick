@@ -9,6 +9,7 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<b>`);\nexports.default = () => props => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, () => props.n);\n    return _el$;\n})();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAQiB,MAACA,KAAoB;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAASD,KAAK,CAACI,CAAC;IAAA,OAAAH,IAAA;AAAA,IAAK","names":["props","_el$","_tmpl$","_$insert","n"],"ignoreList":[],"sources":["bundler/client-component-on-host.test.tsx"]}',
   dependencies: ["solid-js/web"],
+  params: [],
 };
 // A client component written as a tag on the host, past the typechecker:
 // refused when bundling, as it is a tag in a script.

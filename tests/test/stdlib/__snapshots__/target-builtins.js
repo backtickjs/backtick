@@ -8,12 +8,20 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => $splice1()());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAwBmC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAM,EAAE,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["stdlib/target-builtins.test.tsx"]}',
   dependencies: [],
+  params: [
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+  ],
 };
 const $module1 = {
   id: "24se5744y85zv:32:21",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => $splice1().get("greeting"));\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA+BwB,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAQ,CAACC,GAAG,CAAC,UAAU,CAAC,CAAC","names":["$splice0","$splice1","get"],"ignoreList":[],"sources":["stdlib/target-builtins.test.tsx"]}',
   dependencies: [],
+  params: [
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+  ],
 };
 // What a client provides beside Solid: a module an app adds, and the names it
 // exports, imported the way Solid's own are. `app` is an entry of the import
@@ -33,12 +41,7 @@ describe("a module an app provides", () => {
   // from that specifier.
   it("is what that specifier resolves to", async () => {
     assert.equal(
-      await evaluate(
-        cs.create($module0, [
-          { kind: "splice", value: createRoot, bindings: [] },
-          { kind: "splice", value: greet, bindings: [] },
-        ]),
-      ),
+      await evaluate(cs.create($module0, [createRoot, greet])),
       "hello",
     );
   });
@@ -46,12 +49,7 @@ describe("a module an app provides", () => {
     // Grouping is done by the value a name holds rather than by a dot in the
     // name: `$storage.get(…)` is a member read on a plain object.
     assert.equal(
-      await evaluate(
-        cs.create($module1, [
-          { kind: "splice", value: createRoot, bindings: [] },
-          { kind: "splice", value: storage, bindings: [] },
-        ]),
-      ),
+      await evaluate(cs.create($module1, [createRoot, storage])),
       "hei",
     );
   });

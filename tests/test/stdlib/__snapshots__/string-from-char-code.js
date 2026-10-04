@@ -7,6 +7,7 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>Hi\uD83D\uDE00`);\nexports.default = () => {\n    return _tmpl$();\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAOY;IACR,OAAAA,MAAA;AAKF,CAAC","names":["_tmpl$"],"ignoreList":[],"sources":["stdlib/string-from-char-code.test.tsx"]}',
   dependencies: ["solid-js/web"],
+  params: [],
 };
 // UTF-16 code units rather than code points: a surrogate pair is two
 // arguments, where `String.fromCodePoint` takes the one code point.

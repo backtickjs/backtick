@@ -6,6 +6,7 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const names = ["zero", "one"];\n    return names[9];\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAYO;IACD,MAAMA,KAAK,GAAG,CAAC,MAAM,EAAE,KAAK,CAAC;IAC7B,OAAOA,KAAK,CAAC,CAAC,CAAC;AACjB,CAAC","names":["names"],"ignoreList":[],"sources":["objects/index-past-end.test.tsx"]}',
   dependencies: [],
+  params: [],
 };
 // Where the two rules part company, pinned so a client implementer can see
 // it: `names[9]` types as `string`, because TypeScript's indexed access says

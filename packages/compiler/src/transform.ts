@@ -55,7 +55,7 @@ export function transform(
       if (runtime !== null) {
         const compiled = compileScript(ts, runtime.emitted, name, plugins);
         const moduleName = `$module${modules.length}`;
-        modules.push(moduleDeclaration(ts, moduleName, runtime.id, compiled));
+        modules.push(moduleDeclaration(ts, moduleName, runtime, compiled));
         byStart.set(
           template.getStart(rewrittenFile.sourceFile),
           createCall(ts, moduleName, runtime),

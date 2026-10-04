@@ -6,6 +6,7 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    let i = 0;\n    let seen = "";\n    for (; i < 3;) {\n        seen = seen + i;\n        i = i + 1;\n    }\n    return seen;\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAUO;IACD,IAAIA,CAAC,GAAG,CAAC;IACT,IAAIC,IAAI,GAAG,EAAE;IACb,OAAOD,CAAC,GAAG,CAAC,GAAI;QACdC,IAAI,GAAGA,IAAI,GAAGD,CAAC;QACfA,CAAC,GAAGA,CAAC,GAAG,CAAC;IACX;IACA,OAAOC,IAAI;AACb,CAAC","names":["i","seen"],"ignoreList":[],"sources":["control-flow/for-header-parts.test.tsx"]}',
   dependencies: [],
+  params: [],
 };
 // Every part of the header is optional: this one declares nothing and updates
 // nothing, leaving both to the block around it and the body.

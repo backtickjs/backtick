@@ -6,11 +6,8 @@ const $module0 = {
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAK4CA,QAAA,IAAAA,QAAA,EAAI","names":["$splice0"],"ignoreList":[],"sources":["splices/splice-numeric.test.tsx"]}',
   dependencies: [],
+  params: [{ kind: "splice", bindings: [] }],
 };
 it("spliceNumeric", async (t) => {
-  await snapshotCase(
-    t,
-    "spliceNumeric",
-    cs.create($module0, [{ kind: "splice", value: 1, bindings: [] }]),
-  );
+  await snapshotCase(t, "spliceNumeric", cs.create($module0, [1]));
 });
