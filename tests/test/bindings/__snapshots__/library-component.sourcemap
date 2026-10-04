@@ -56,7 +56,7 @@ __cs_count       → count
                  →  
 1                → 1
 )                → )
-children         → \n      <span>{"Pressed " + count() + " times"}</span>\n    
+children         → \n      <span>{"Pressed " + count() + " times"}</span>\n     [-semantic -navigation]
 <                → <
 span             → span
 >                → >
@@ -100,7 +100,7 @@ onClick          → onClick
                  →  
 {                → {
 }                → }
-children         → \n  Save\n
+children         → \n  Save\n [-semantic -navigation]
 "Save"           → Save\n
 }                → 
 )())             → ` [-semantic -navigation]

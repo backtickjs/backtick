@@ -134,7 +134,7 @@ each                  → each
 __cs_ids              → ids
 (                     → (
 )                     → )
-children              → \n              {(id: number) => (\n                <tr id={"row-" + id}>\n                  <td>{"row " + id}</td>\n                </tr>\n              )}\n            
+children              → \n              {(id: number) => (\n                <tr id={"row-" + id}>\n                  <td>{"row " + id}</td>\n                </tr>\n              )}\n             [-semantic -navigation]
 (                     → (
 __cs_id               → id
 :                     → :

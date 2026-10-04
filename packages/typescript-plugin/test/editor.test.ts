@@ -210,6 +210,18 @@ describe("a host tag in a script, in the editor", () => {
     assert.deepEqual(inComment, []);
   });
 
+  it("hovers and goes to a tag nested in another as its own binding", () => {
+    const inner = inTags("<$Box", 1, 2);
+    const hover = tagsService.getQuickInfoAtPosition(tagsFixture, inner);
+    assert.match(ts.displayPartsToString(hover?.displayParts), /^const Box:/);
+    assert.deepEqual(
+      tagsService
+        .getDefinitionAtPosition(tagsFixture, inner)
+        ?.map(({ textSpan }) => textSpan.start),
+      [inTags("Box =")],
+    );
+  });
+
   it("refuses a server component, under its tag", () => {
     const diagnostics = tagsService.getSemanticDiagnostics(tagsFixture);
     assert.deepEqual(

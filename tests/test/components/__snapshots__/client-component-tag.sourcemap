@@ -74,7 +74,7 @@ each             → each
                  →  
 2                → 2
 ]                → ]
-children         → {(n) => <$Badge n={n * scale()} />}
+children         → {(n) => <$Badge n={n * scale()} />} [-semantic -navigation]
 (                → (
 __cs_n           → n
 )                → )

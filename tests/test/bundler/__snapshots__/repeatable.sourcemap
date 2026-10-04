@@ -210,7 +210,7 @@ cs.splice(                  →  [-semantic -navigation]
 {                           → $For
 each                        → each
 __cs_rows                   → rows
-children                    → {(row: number) => <li>{row + count()}</li>}
+children                    → {(row: number) => <li>{row + count()}</li>} [-semantic -navigation]
 (                           → (
 __cs_row                    → row
 :                           → :

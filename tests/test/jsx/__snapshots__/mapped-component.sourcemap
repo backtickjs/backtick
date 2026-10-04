@@ -12,7 +12,7 @@ each             → each
 cs.splice(       →  [-semantic -navigation]
 (rows)           → $rows
 )                →  [-semantic -navigation]
-children         → \n        {(row: number) => ${cs`<span>{"row " + row}</span>`}}\n      
+children         → \n        {(row: number) => ${cs`<span>{"row " + row}</span>`}}\n       [-semantic -navigation]
 (                → (
 __cs_row         → row
 :                → :

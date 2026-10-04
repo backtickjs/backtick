@@ -138,7 +138,7 @@ each             → each
 __cs_rows        → rows
 (                → (
 )                → )
-children         → {(row: Row) => <span>{label(row)}</span>}
+children         → {(row: Row) => <span>{label(row)}</span>} [-semantic -navigation]
 (                → (
 __cs_row         → row
 :                → :

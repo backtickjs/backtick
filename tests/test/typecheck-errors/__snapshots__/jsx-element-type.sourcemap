@@ -55,7 +55,7 @@ as               → as
 number           → number
 [                → [
 ]                → ]
-children         → {(n) => <i>{n}</i>}
+children         → {(n) => <i>{n}</i>} [-semantic -navigation]
 (                → (
 __cs_n           → n
 )                → )

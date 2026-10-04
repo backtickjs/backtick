@@ -41,7 +41,7 @@ each             → each
                  →  
 2                → 2
 ]                → ]
-children         → \n  {(n) => <$Badge n={n} />}\n
+children         → \n  {(n) => <$Badge n={n} />}\n [-semantic -navigation]
 (                → (
 __cs_n           → n
 )                → )

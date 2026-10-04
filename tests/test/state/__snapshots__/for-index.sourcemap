@@ -119,7 +119,7 @@ each              → each
 __cs_names        → names
 (                 → (
 )                 → )
-children          → \n            {(name: string, index: () => number) => (\n              <span>{name + " at " + index()}</span>\n            )}\n          
+children          → \n            {(name: string, index: () => number) => (\n              <span>{name + " at " + index()}</span>\n            )}\n           [-semantic -navigation]
 (                 → (
 __cs_name         → name
 :                 → :

@@ -16,3 +16,9 @@ async function Server({ title }: { title: string }) {
 }
 
 export const inScript = cs`<$Server title="In a script" />`;
+
+const Box = cs`(props: { children?: unknown }) => <div />`;
+
+export const nested = cs`<$Box>
+  <$Box />
+</$Box>`;

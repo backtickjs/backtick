@@ -136,7 +136,7 @@ each              → each
 __cs_held         → held
 (                 → (
 )                 → )
-children          → \n            {(row: Row) => (\n              <li onclick={() => row.label[1]("pressed")}>{row.label[0]()}</li>\n            )}\n          
+children          → \n            {(row: Row) => (\n              <li onclick={() => row.label[1]("pressed")}>{row.label[0]()}</li>\n            )}\n           [-semantic -navigation]
 (                 → (
 __cs_row          → row
 :                 → :

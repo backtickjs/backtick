@@ -76,7 +76,7 @@ each             → each
 [                → [
 1                → 1
 ]                → ]
-children         → {(n: string) => n}
+children         → {(n: string) => n} [-semantic -navigation]
 (                → (
 __cs_n           → n
 :                → :

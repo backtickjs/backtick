@@ -1,4 +1,6 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  // The debugger's network view crashes the extension host under "Launch Client".
+  "debug.javascript.enableNetworkView": false
 }

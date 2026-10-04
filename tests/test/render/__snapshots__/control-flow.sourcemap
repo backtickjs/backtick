@@ -12,7 +12,7 @@ each             → each
 cs.splice(       →  [-semantic -navigation]
 (rows)           → $rows
 )                →  [-semantic -navigation]
-children         → \n    {(row: () => string, index: number) => <li>{index + ": " + row()}</li>}\n  
+children         → \n    {(row: () => string, index: number) => <li>{index + ": " + row()}</li>}\n   [-semantic -navigation]
 (                → (
 __cs_row         → row
 :                → :
@@ -75,7 +75,7 @@ none             → none
 /                → /
 p                → p
 >                → >
-children         → \n  <$Match when={1 > 2}>\n    <p>wrong</p>\n  </$Match>\n  <$Match when={2 > 1}>\n    <p>right</p>\n  </$Match>\n
+children         → \n  <$Match when={1 > 2}>\n    <p>wrong</p>\n  </$Match>\n  <$Match when={2 > 1}>\n    <p>right</p>\n  </$Match>\n [-semantic -navigation]
 (Match)          → $Match
 cs.splice(       →  [-semantic -navigation]
 (Match)          → $Match
@@ -87,7 +87,7 @@ when             → when
 >                → >
                  →  
 2                → 2
-children         → \n    <p>wrong</p>\n  
+children         → \n    <p>wrong</p>\n   [-semantic -navigation]
 <                → <
 p                → p
 >                → >
@@ -108,7 +108,7 @@ when             → when
 >                → >
                  →  
 1                → 1
-children         → \n    <p>right</p>\n  
+children         → \n    <p>right</p>\n   [-semantic -navigation]
 <                → <
 p                → p
 >                → >
@@ -135,7 +135,7 @@ caught           → caught
 /                → /
 p                → p
 >                → >
-children         → {\n  ${cs`{\n    throw "drawn wrong";\n  }`}\n}
+children         → {\n  ${cs`{\n    throw "drawn wrong";\n  }`}\n} [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
@@ -165,7 +165,7 @@ loading          → loading
 /                → /
 p                → p
 >                → >
-children         → \n  <p>loaded</p>\n
+children         → \n  <p>loaded</p>\n [-semantic -navigation]
 <                → <
 p                → p
 >                → >
@@ -195,7 +195,7 @@ cs.splice(       →  [-semantic -navigation]
 (Portal)         → $Portal
 )                →  [-semantic -navigation]
 {                → $Portal
-children         → \n    <p>elsewhere</p>\n  
+children         → \n    <p>elsewhere</p>\n   [-semantic -navigation]
 <                → <
 p                → p
 >                → >

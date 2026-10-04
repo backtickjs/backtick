@@ -12,7 +12,7 @@ each                        → each
 cs.splice(                  →  [-semantic -navigation]
 (orders)                    → $orders
 )                           →  [-semantic -navigation]
-children                    → \n        {(order: Order) => (\n          <div>\n            <img src={"https://img.example.com/" + order.id + ".png"} alt="" />\n            <span>{order.customer.name}</span>\n            <span>{order.customer.city}</span>\n            <$For each={order.items}>\n              {(item: Item) => <span>{item.sku + " x" + item.qty}</span>}\n            </$For>\n            <span>{"$" + order.total}</span>\n          </div>\n        )}\n      
+children                    → \n        {(order: Order) => (\n          <div>\n            <img src={"https://img.example.com/" + order.id + ".png"} alt="" />\n            <span>{order.customer.name}</span>\n            <span>{order.customer.city}</span>\n            <$For each={order.items}>\n              {(item: Item) => <span>{item.sku + " x" + item.qty}</span>}\n            </$For>\n            <span>{"$" + order.total}</span>\n          </div>\n        )}\n       [-semantic -navigation]
 (                           → (
 __cs_order                  → order
 :                           → :
@@ -93,7 +93,7 @@ each                        → each
 __cs_order                  → order
 .                           → .
 items                       → items
-children                    → \n              {(item: Item) => <span>{item.sku + " x" + item.qty}</span>}\n            
+children                    → \n              {(item: Item) => <span>{item.sku + " x" + item.qty}</span>}\n             [-semantic -navigation]
 (                           → (
 __cs_item                   → item
 :                           → :

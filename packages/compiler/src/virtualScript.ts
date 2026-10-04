@@ -8,6 +8,10 @@ import { mangle } from "./unmangle.js";
 
 // What the editor reads through a wrapper the virtual code adds: nothing.
 const WRAPPER: CodeInformation = { semantic: false, navigation: false };
+// What it reads through a name the virtual code adds over a span of the
+// script: only what is reported there. Hover and navigation stay with the
+// script's own names inside it.
+const REPORTED: CodeInformation = { semantic: false, navigation: false };
 
 /**
  * A script as the typechecker reads it: its own text, as written, wrapped as
@@ -243,6 +247,7 @@ export function virtualScript(
           undefined,
           content.start,
           content.end - content.start,
+          REPORTED,
         ]);
         added(": ");
         if (children.length > 1) {

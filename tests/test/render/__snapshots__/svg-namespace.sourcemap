@@ -150,7 +150,7 @@ each             → each
                  →  
 20               → 20
 ]                → ]
-children         → {(x: number) => <Dot x={x} />}
+children         → {(x: number) => <Dot x={x} />} [-semantic -navigation]
 (                → (
 __cs_x           → x
 :                → :
