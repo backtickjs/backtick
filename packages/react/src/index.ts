@@ -12,11 +12,7 @@ export const PureComponent: Client<typeof React.PureComponent> =
   react("PureComponent");
 export const StrictMode: Client<typeof React.StrictMode> = react("StrictMode");
 export const Suspense: Client<typeof React.Suspense> = react("Suspense");
-export const ViewTransition: Client<typeof React.ViewTransition> =
-  react("ViewTransition");
 export const act: Client<typeof React.act> = react("act");
-export const addTransitionType: Client<typeof React.addTransitionType> =
-  react("addTransitionType");
 export const cache: Client<typeof React.cache> = react("cache");
 export const cacheSignal: Client<typeof React.cacheSignal> =
   react("cacheSignal");
@@ -162,7 +158,6 @@ export type {
   ForwardRefExoticComponent,
   ForwardRefRenderFunction,
   ForwardedRef,
-  FragmentInstance,
   FragmentProps,
   FulfilledReactPromise,
   FunctionComponent,
@@ -283,10 +278,6 @@ export type {
   UntrackedReactPromise,
   Usable,
   VideoHTMLAttributes,
-  ViewTransitionClass,
-  ViewTransitionClassPerType,
-  ViewTransitionInstance,
-  ViewTransitionProps,
   WebViewHTMLAttributes,
   WheelEvent,
   WheelEventHandler,

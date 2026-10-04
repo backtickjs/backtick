@@ -76,7 +76,7 @@ it("keys what a keyed server component draws", async () => {
   const { list } = await import(write("list.host.tmp.mjs", host));
   const built = await bundler.build({
     input: list,
-    external: { react: "19.3.0", "react-dom": "19.3.0" },
+    external: { react: "19.2.3", "react-dom": "19.2.3" },
   });
   const { code } = built.generate({ format: "es" });
   const { default: drawn } = await import(write("list.client.tmp.mjs", code));
@@ -108,7 +108,7 @@ it("draws a page with React, its state React's", async () => {
   const { page } = await import(write("page.host.tmp.mjs", host));
   const built = await bundler.build({
     input: page,
-    external: { react: "19.3.0", "react-dom": "19.3.0" },
+    external: { react: "19.2.3", "react-dom": "19.2.3" },
   });
   const { code } = built.generate({ format: "es" });
   const { default: drawn } = await import(write("page.client.tmp.mjs", code));

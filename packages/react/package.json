@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/react",
-  "version": "19.3.0",
+  "version": "19.2.3",
   "private": true,
   "description": "Backtick's React adapter: scripts written as React code, compiled by React's own JSX transform and run on React",
   "type": "module",
@@ -39,10 +39,10 @@
     "@babel/core": "^7.29.7",
     "@babel/preset-react": "^7.29.7",
     "@backtickjs/core": "workspace:^0.1.0",
-    "@types/react": "19.3.0",
-    "@types/react-dom": "19.3.0",
-    "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.7",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
   },
   "devDependencies": {
     "@backtickjs/bundler": "workspace:^0.1.0",

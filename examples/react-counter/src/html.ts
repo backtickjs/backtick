@@ -9,7 +9,7 @@ const sourcemap = process.env.NODE_ENV === "production" ? undefined : "inline";
 export async function toHtml(element: JSX.Element): Promise<string> {
   const bundle = await bundler.build({
     input: cs`$createRoot(document.getElementById("app")!).render($element)`,
-    external: { react: "19.3.0", "react-dom": "19.3.0" },
+    external: { react: "19.2.3", "react-dom": "19.2.3" },
   });
 
   const { code } = bundle.generate({ format: "es", sourcemap });
@@ -22,9 +22,9 @@ export async function toHtml(element: JSX.Element): Promise<string> {
     <script type="importmap">
       {
         "imports": {
-          "react": "https://esm.sh/react@19.3.0",
-          "react/jsx-runtime": "https://esm.sh/react@19.3.0/jsx-runtime",
-          "react-dom/client": "https://esm.sh/react-dom@19.3.0/client?external=react"
+          "react": "https://esm.sh/react@19.2.3",
+          "react/jsx-runtime": "https://esm.sh/react@19.2.3/jsx-runtime",
+          "react-dom/client": "https://esm.sh/react-dom@19.2.3/client?external=react"
         }
       }
     </script>

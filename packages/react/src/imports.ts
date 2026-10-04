@@ -8,7 +8,7 @@ import type * as ReactDOMClient from "react-dom/client";
 
 // What every name needs: the React it is typed against (the adapter's version,
 // and its `react` dependency), or a later 19.x.
-const range = "^19.3.0";
+const range = "^19.2.3";
 
 export const react = <Name extends keyof typeof React>(name: Name) =>
   createImport<(typeof React)[Name]>({ name, from: "react", version: range });
