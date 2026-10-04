@@ -1,0 +1,26 @@
+{
+  "name": "@backtickjs/example-react-native-app",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write App.tsx index.ts",
+    "format:check": "prettier --check App.tsx index.ts",
+    "clean": "rm -rf node_modules .expo"
+  },
+  "dependencies": {
+    "@backtickjs/react-native-client": "^0.1.0",
+    "expo": "~57.0.26",
+    "expo-constants": "~57.0.20",
+    "expo-status-bar": "~57.0.1",
+    "react": "19.2.3",
+    "react-native": "0.86.3"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.18",
+    "prettier": "^3.6.2",
+    "typescript": "^6.0.3"
+  }
+}
