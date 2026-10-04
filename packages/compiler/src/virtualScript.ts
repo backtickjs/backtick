@@ -207,7 +207,7 @@ export function virtualScript(
     mapped(name, tagName, TAG_NAME);
     added(")", tag.end);
     added("(");
-    out.push(["{ ", undefined, tag.start, tag.end - tag.start]);
+    out.push(["{ ", undefined, tag.start, tag.end - tag.start, REPORTED]);
     for (const attribute of opening.attributes.properties) {
       if (ts.isJsxSpreadAttribute(attribute)) {
         added("...");
@@ -276,7 +276,7 @@ export function virtualScript(
         added(" ");
       }
     }
-    out.push(["}", undefined, tag.end, 0]);
+    out.push(["}", undefined, tag.end, 0, REPORTED]);
     added(ts.isJsxElement(node) ? "))" : ")");
     if (braced) {
       added("}");

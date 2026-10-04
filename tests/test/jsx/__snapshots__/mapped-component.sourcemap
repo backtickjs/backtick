@@ -7,7 +7,7 @@ div              → div
 cs.splice(       →  [-semantic -navigation]
 (For)            → $For [-highlight]
 )                →  [-semantic -navigation]
-{                → $For
+{                → $For [-semantic -navigation]
 each             → each
 cs.splice(       →  [-semantic -navigation]
 (rows)           → $rows
@@ -40,7 +40,7 @@ span             → span
 >                → >
 )())             → ` [-semantic -navigation]
 )                →  [-semantic -navigation]
-}                → 
+}                →  [-semantic -navigation]
 \n               → \n    
 <                → <
 /                → /

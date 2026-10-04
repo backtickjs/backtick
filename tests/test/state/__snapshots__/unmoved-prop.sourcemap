@@ -73,7 +73,7 @@ div               → div
 cs.splice(        →  [-semantic -navigation]
 (For)             → $For [-highlight]
 )                 →  [-semantic -navigation]
-{                 → $For
+{                 → $For [-semantic -navigation]
 each              → each
 [                 → [
 0                 → 0
@@ -129,7 +129,7 @@ a                 → a
 >                 → >
 \n                → \n            
 )                 → )
-}                 → 
+}                 →  [-semantic -navigation]
 \n                → \n        
 <                 → <
 /                 → /

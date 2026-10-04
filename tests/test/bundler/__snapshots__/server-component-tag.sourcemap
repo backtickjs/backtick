@@ -17,8 +17,8 @@ div                                       → div
 cs.splice(                                →  [-semantic -navigation]
 (Rule)                                    → $Rule [-highlight]
 )                                         →  [-semantic -navigation]
-{                                         → $Rule
-}                                         → 
+{                                         → $Rule [-semantic -navigation]
+}                                         →  [-semantic -navigation]
 \n                                        → \n      
 <                                         → <
 /                                         → /

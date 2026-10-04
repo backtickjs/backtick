@@ -7,7 +7,7 @@ div                         → div
 cs.splice(                  →  [-semantic -navigation]
 (For)                       → $For [-highlight]
 )                           →  [-semantic -navigation]
-{                           → $For
+{                           → $For [-semantic -navigation]
 each                        → each
 cs.splice(                  →  [-semantic -navigation]
 (orders)                    → $orders
@@ -88,7 +88,7 @@ span                        → span
 cs.splice(                  →  [-semantic -navigation]
 (For)                       → $For [-highlight]
 )                           →  [-semantic -navigation]
-{                           → $For
+{                           → $For [-semantic -navigation]
 each                        → each
 __cs_order                  → order
 .                           → .
@@ -125,7 +125,7 @@ qty                         → qty
 /                           → /
 span                        → span
 >                           → >
-}                           → 
+}                           →  [-semantic -navigation]
 \n                          → \n            
 <                           → <
 span                        → span
@@ -150,7 +150,7 @@ div                         → div
 >                           → >
 \n                          → \n        
 )                           → )
-}                           → 
+}                           →  [-semantic -navigation]
 \n                          → \n    
 <                           → <
 /                           → /

@@ -179,7 +179,7 @@ tbody                 → tbody
 cs.splice(            →  [-semantic -navigation]
 (For)                 → $For [-highlight]
 )                     →  [-semantic -navigation]
-{                     → $For
+{                     → $For [-semantic -navigation]
 each                  → each
 __cs_rows             → rows
 children              → \n              {(row: { id: number; label: Signal<string> }) => (\n                <tr id={"row-" + row.id}>\n                  <td>{row.label[0]()}</td>\n                </tr>\n              )}\n             [-semantic -navigation]
@@ -250,7 +250,7 @@ tr                    → tr
 >                     → >
 \n                    → \n              
 )                     → )
-}                     → 
+}                     →  [-semantic -navigation]
 \n                    → \n          
 <                     → <
 /                     → /

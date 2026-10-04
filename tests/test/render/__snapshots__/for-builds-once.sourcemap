@@ -99,7 +99,7 @@ return           → return
 cs.splice(       →  [-semantic -navigation]
 (For)            → $For [-highlight]
 )                →  [-semantic -navigation]
-{                → $For
+{                → $For [-semantic -navigation]
 each             → each
 __cs_items       → items
 (                → (
@@ -124,7 +124,7 @@ __cs_item        → item
 /                → /
 em               → em
 >                → >
-}                → 
+}                →  [-semantic -navigation]
 ;                → ;
 \n               → \n
 }                → }
@@ -179,7 +179,7 @@ span             → span
 cs.splice(       →  [-semantic -navigation]
 (WaitingList)    → $WaitingList [-highlight]
 )                →  [-semantic -navigation]
-{                → $WaitingList
+{                → $WaitingList [-semantic -navigation]
 more             → more
 (                → (
 )                → )
@@ -212,7 +212,7 @@ __cs_asked       → asked
 ;                → ;
 \n               → \n        
 }                → }
-}                → 
+}                →  [-semantic -navigation]
 \n               → \n    
 <                → <
 /                → /

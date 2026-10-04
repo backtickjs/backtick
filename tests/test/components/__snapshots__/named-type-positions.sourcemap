@@ -133,7 +133,7 @@ div              → div
 cs.splice(       →  [-semantic -navigation]
 (For)            → $For [-highlight]
 )                →  [-semantic -navigation]
-{                → $For
+{                → $For [-semantic -navigation]
 each             → each
 __cs_rows        → rows
 (                → (
@@ -161,7 +161,7 @@ __cs_row         → row
 /                → /
 span             → span
 >                → >
-}                → 
+}                →  [-semantic -navigation]
 \n               → \n        
 <                → <
 /                → /

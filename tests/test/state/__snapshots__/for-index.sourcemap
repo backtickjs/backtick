@@ -114,7 +114,7 @@ div               → div
 cs.splice(        →  [-semantic -navigation]
 (For)             → $For [-highlight]
 )                 →  [-semantic -navigation]
-{                 → $For
+{                 → $For [-semantic -navigation]
 each              → each
 __cs_names        → names
 (                 → (
@@ -164,7 +164,7 @@ span              → span
 >                 → >
 \n                → \n            
 )                 → )
-}                 → 
+}                 →  [-semantic -navigation]
 \n                → \n        
 <                 → <
 /                 → /

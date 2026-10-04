@@ -173,7 +173,7 @@ div              → div
 cs.splice(       →  [-semantic -navigation]
 (For)            → $For [-highlight]
 )                →  [-semantic -navigation]
-{                → $For
+{                → $For [-semantic -navigation]
 each             → each
 __cs_ids         → ids
 (                → (
@@ -202,7 +202,7 @@ __cs_id          → id
 /                → /
 span             → span
 >                → >
-}                → 
+}                →  [-semantic -navigation]
 \n               → \n        
 <                → <
 /                → /

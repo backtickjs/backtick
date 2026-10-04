@@ -131,7 +131,7 @@ class             → class
 cs.splice(        →  [-semantic -navigation]
 (For)             → $For [-highlight]
 )                 →  [-semantic -navigation]
-{                 → $For
+{                 → $For [-semantic -navigation]
 each              → each
 __cs_held         → held
 (                 → (
@@ -186,7 +186,7 @@ li                → li
 >                 → >
 \n                → \n            
 )                 → )
-}                 → 
+}                 →  [-semantic -navigation]
 \n                → \n        
 <                 → <
 /                 → /

@@ -115,7 +115,7 @@ return           → return
 cs.splice(       →  [-semantic -navigation]
 (Badge)          → $Badge [-highlight]
 )                →  [-semantic -navigation]
-{                → $Badge
+{                → $Badge [-semantic -navigation]
 __cs_rest        → rest
 disabled         → disabled
 "data-id"        → data-id
@@ -129,7 +129,7 @@ b                → b
 /                → /
 b                → b
 >                → >
-}                → 
+}                →  [-semantic -navigation]
 ;                → ;
 \n               → \n        
 }                → }

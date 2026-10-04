@@ -55,7 +55,7 @@ tbody                   → tbody
 cs.splice(              →  [-semantic -navigation]
 (For)                   → $For [-highlight]
 )                       →  [-semantic -navigation]
-{                       → $For
+{                       → $For [-semantic -navigation]
 each                    → each
 __cs_ids                → ids
 (                       → (
@@ -150,7 +150,7 @@ tr                      → tr
 >                       → >
 \n                      → \n            
 )                       → )
-}                       → 
+}                       →  [-semantic -navigation]
 \n                      → \n        
 <                       → <
 /                       → /

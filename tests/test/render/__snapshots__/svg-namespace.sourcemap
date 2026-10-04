@@ -142,7 +142,7 @@ cs.splice(       →  [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 (For)            → $For [-highlight]
 )                →  [-semantic -navigation]
-{                → $For
+{                → $For [-semantic -navigation]
 each             → each
 [                → [
 10               → 10
@@ -171,7 +171,7 @@ __cs_x           → x
                  →  
 /                → /
 >                → >
-}                → 
+}                →  [-semantic -navigation]
 \n               → \n        
 <                → <
 foreignObject    → foreignObject

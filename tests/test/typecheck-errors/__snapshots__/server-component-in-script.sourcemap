@@ -37,24 +37,24 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 (Row)            → $Row [-highlight]
 )                →  [-semantic -navigation]
-{                → $Row
+{                → $Row [-semantic -navigation]
 label            → label
 "a"              → "a"
-}                → 
+}                →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 (Title)          → $Title [-highlight]
 )                →  [-semantic -navigation]
-{                → $Title
+{                → $Title [-semantic -navigation]
 text             → text
 "Week"           → "Week"
-}                → 
+}                →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 (Rule)           → $Rule [-highlight]
 )                →  [-semantic -navigation]
-{                → $Rule
-}                → 
+{                → $Rule [-semantic -navigation]
+}                →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]

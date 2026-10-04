@@ -7,7 +7,7 @@ ul               → ul
 cs.splice(       →  [-semantic -navigation]
 (Index)          → $Index [-highlight]
 )                →  [-semantic -navigation]
-{                → $Index
+{                → $Index [-semantic -navigation]
 each             → each
 cs.splice(       →  [-semantic -navigation]
 (rows)           → $rows
@@ -53,7 +53,7 @@ __cs_row         → row
 /                → /
 li               → li
 >                → >
-}                → 
+}                →  [-semantic -navigation]
 \n               → \n
 <                → <
 /                → /
@@ -65,7 +65,7 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 (Switch)         → $Switch [-highlight]
 )                →  [-semantic -navigation]
-{                → $Switch
+{                → $Switch [-semantic -navigation]
 fallback         → fallback
 <                → <
 p                → p
@@ -80,7 +80,7 @@ children         → \n  <$Match when={1 > 2}>\n    <p>wrong</p>\n  </$Match>\n 
 cs.splice(       →  [-semantic -navigation]
 (Match)          → $Match [-highlight]
 )                →  [-semantic -navigation]
-{                → $Match
+{                → $Match [-semantic -navigation]
 when             → when
 1                → 1
                  →  
@@ -96,12 +96,12 @@ wrong            → wrong
 /                → /
 p                → p
 >                → >
-}                → 
+}                →  [-semantic -navigation]
 (Match)          → $Match [-highlight]
 cs.splice(       →  [-semantic -navigation]
 (Match)          → $Match [-highlight]
 )                →  [-semantic -navigation]
-{                → $Match
+{                → $Match [-semantic -navigation]
 when             → when
 2                → 2
                  →  
@@ -117,15 +117,15 @@ right            → right
 /                → /
 p                → p
 >                → >
-}                → 
-}                → 
+}                →  [-semantic -navigation]
+}                →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 (ErrorBoundary)  → $ErrorBoundary [-highlight]
 cs.splice(       →  [-semantic -navigation]
 (ErrorBoundary)  → $ErrorBoundary [-highlight]
 )                →  [-semantic -navigation]
-{                → $ErrorBoundary
+{                → $ErrorBoundary [-semantic -navigation]
 fallback         → fallback
 <                → <
 p                → p
@@ -148,14 +148,14 @@ throw            → throw
 }                → }
 )())             → ` [-semantic -navigation]
 )                →  [-semantic -navigation]
-}                → 
+}                →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 (Suspense)       → $Suspense [-highlight]
 cs.splice(       →  [-semantic -navigation]
 (Suspense)       → $Suspense [-highlight]
 )                →  [-semantic -navigation]
-{                → $Suspense
+{                → $Suspense [-semantic -navigation]
 fallback         → fallback
 <                → <
 p                → p
@@ -174,7 +174,7 @@ loaded           → loaded
 /                → /
 p                → p
 >                → >
-}                → 
+}                →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
@@ -194,7 +194,7 @@ p                → p
 cs.splice(       →  [-semantic -navigation]
 (Portal)         → $Portal [-highlight]
 )                →  [-semantic -navigation]
-{                → $Portal
+{                → $Portal [-semantic -navigation]
 children         → \n    <p>elsewhere</p>\n   [-semantic -navigation]
 <                → <
 p                → p
@@ -204,7 +204,7 @@ elsewhere        → elsewhere
 /                → /
 p                → p
 >                → >
-}                → 
+}                →  [-semantic -navigation]
 \n               → \n
 <                → <
 /                → /

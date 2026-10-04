@@ -179,7 +179,7 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
 (For)            → $For [-highlight]
 )                →  [-semantic -navigation]
-{                → $For
+{                → $For [-semantic -navigation]
 each             → each
 [                → [
 1                → 1
@@ -214,7 +214,7 @@ __cs_count       → count
                  →  
 /                → /
 >                → >
-}                → 
+}                →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 )                →  [-semantic -navigation]
 \n               → \n      

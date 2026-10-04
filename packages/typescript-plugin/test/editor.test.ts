@@ -222,6 +222,16 @@ describe("a host tag in a script, in the editor", () => {
     assert.deepEqual(inComment, []);
   });
 
+  it("goes only to the host binding from anywhere in a tag's name", () => {
+    const end = inTags("<$Card", 0, "<$Card".length);
+    assert.deepEqual(
+      tagsService
+        .getDefinitionAtPosition(tagsFixture, end)
+        ?.map(({ textSpan }) => textSpan.start),
+      [declaration],
+    );
+  });
+
   it("hovers and goes to a tag nested in another as its own binding", () => {
     const inner = inTags("<$Box", 1, 2);
     const hover = tagsService.getQuickInfoAtPosition(tagsFixture, inner);
