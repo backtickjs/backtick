@@ -4,15 +4,17 @@ div              → div
 >                → >
 \n               → \n      
 (For)            → $For [-highlight]
-cs.splice(       →  [-semantic -navigation]
-(For)            → $For [-highlight]
-)                →  [-semantic -navigation]
-{                → $For [-semantic -navigation]
+$For             → $For [-semantic -navigation]
 each             → each
+=                → =
+{                → {
 cs.splice(       →  [-semantic -navigation]
 (rows)           → $rows
 )                →  [-semantic -navigation]
-children         → \n        {(row: number) => ${cs`<span>{"row " + row}</span>`}}\n       [-semantic -navigation]
+}                → }
+>                → >
+\n               → \n        
+{                → {
 (                → (
 __cs_row         → row
 :                → :
@@ -40,7 +42,12 @@ span             → span
 >                → >
 )())             → ` [-semantic -navigation]
 )                →  [-semantic -navigation]
-}                →  [-semantic -navigation]
+}                → }
+\n               → \n      
+$For             → $For [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
+(For)            → $For [-highlight]
+))               →  [-semantic -navigation]
 \n               → \n    
 <                → <
 /                → /

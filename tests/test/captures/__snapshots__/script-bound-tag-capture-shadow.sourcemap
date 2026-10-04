@@ -108,13 +108,14 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 div              → div
 >                → >
 \n               → \n      
-cs.splice(       →  [-semantic -navigation]
-(Card)           → $Card [-highlight]
-)                →  [-semantic -navigation]
-{                → $Card [-semantic -navigation]
+$Card            → $Card [-semantic -navigation]
 title            → title
+=                → =
 "host"           → "host"
-}                →  [-semantic -navigation]
+ />              →  />
+)(cs.splice(     →  [-semantic -navigation]
+(Card)           → $Card [-highlight]
+))               →  [-semantic -navigation]
 \n               → \n      
 {                → {
 cs.splice(       →  [-semantic -navigation]
@@ -223,13 +224,14 @@ return           → return
 section          → section
 >                → >
 \n               → \n          
-cs.splice(       →  [-semantic -navigation]
-(Card)           → $Card [-highlight]
-)                →  [-semantic -navigation]
-{                → $Card [-semantic -navigation]
+$Card            → $Card [-semantic -navigation]
 title            → title
+=                → =
 "host"           → "host"
-}                →  [-semantic -navigation]
+ />              →  />
+)(cs.splice(     →  [-semantic -navigation]
+(Card)           → $Card [-highlight]
+))               →  [-semantic -navigation]
 \n               → \n          
 {                → {
 __cs_twice       → twice

@@ -52,15 +52,17 @@ tbody                   → tbody
 >                       → >
 \n                      → \n          
 (For)                   → $For [-highlight]
-cs.splice(              →  [-semantic -navigation]
-(For)                   → $For [-highlight]
-)                       →  [-semantic -navigation]
-{                       → $For [-semantic -navigation]
+$For                    → $For [-semantic -navigation]
 each                    → each
+=                       → =
+{                       → {
 __cs_ids                → ids
 (                       → (
 )                       → )
-children                → \n            {(id: number) => (\n              <tr id={"row-" + id}>\n                <td>\n                  <button\n                    onclick={() => setIds(ids().filter((each) => each !== id))}\n                  >\n                    {"remove " + id}\n                  </button>\n                </td>\n              </tr>\n            )}\n           [-semantic -navigation]
+}                       → }
+>                       → >
+\n                      → \n            
+{                       → {
 (                       → (
 __cs_id                 → id
 :                       → :
@@ -150,7 +152,12 @@ tr                      → tr
 >                       → >
 \n                      → \n            
 )                       → )
-}                       →  [-semantic -navigation]
+}                       → }
+\n                      → \n          
+$For                    → $For [-semantic -navigation]
+)(cs.splice(            →  [-semantic -navigation]
+(For)                   → $For [-highlight]
+))                      →  [-semantic -navigation]
 \n                      → \n        
 <                       → <
 /                       → /

@@ -16,7 +16,8 @@ async function RemovableRows() {
     return (
       <table>
         <tbody>
-          {(void <cs.tag>{(For)}</cs.tag>, cs.splice((For))({ each: __cs_ids(), children: (__cs_id: number) => (
+          {(void (For), (($For) => <$For each={__cs_ids()}>
+            {(__cs_id: number) => (
               <tr id={"row-" + __cs_id}>
                 <td>
                   <button
@@ -26,7 +27,8 @@ async function RemovableRows() {
                   </button>
                 </td>
               </tr>
-            ) }))}
+            )}
+          </$For>)(cs.splice((For))))}
         </tbody>
       </table>
     );

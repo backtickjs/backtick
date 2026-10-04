@@ -139,18 +139,19 @@ cs.splice(       →  [-semantic -navigation]
 }                → }
 \n               → \n        
 (For)            → $For [-highlight]
-cs.splice(       →  [-semantic -navigation]
-(For)            → $For [-highlight]
-)                →  [-semantic -navigation]
-{                → $For [-semantic -navigation]
+$For             → $For [-semantic -navigation]
 each             → each
+=                → =
+{                → {
 [                → [
 10               → 10
 ,                → ,
                  →  
 20               → 20
 ]                → ]
-children         → {(x: number) => <Dot x={x} />} [-semantic -navigation]
+}                → }
+>                → >
+{                → {
 (                → (
 __cs_x           → x
 :                → :
@@ -171,7 +172,11 @@ __cs_x           → x
                  →  
 /                → /
 >                → >
-}                →  [-semantic -navigation]
+}                → }
+$For             → $For [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
+(For)            → $For [-highlight]
+))               →  [-semantic -navigation]
 \n               → \n        
 <                → <
 foreignObject    → foreignObject

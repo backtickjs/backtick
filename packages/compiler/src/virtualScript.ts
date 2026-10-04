@@ -1,6 +1,5 @@
 import type ts from "typescript";
 import type { CodeInformation } from "./CodeInformation.js";
-import { jsxText } from "./jsxText.js";
 import type { ClientScript, Splice } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
 import type { Segment } from "./segmentsToString.js";
@@ -28,10 +27,9 @@ const TAG_NAME: CodeInformation = {
  * - a name nothing declares, read as the client's global (`cs.globalThis.x`)
  * - a splice, as the host value the client is handed: `$x` as
  *   `cs.splice((x))`, `${…}` as `cs.splice(…)` around the host code
- * - a splice written as a tag, `<$Card>`, as the call it is checked as:
- *   `(void <cs.tag key={…}>{(Card)}</cs.tag>, cs.splice((Card))({ …props,
- *   children }))`, the closing tag's name the child, the `key` only where
- *   written
+ * - a splice written as a tag, `<$Card>`, as JSX on a name the host value is
+ *   handed to: `(($Card) => <$Card …>…</$Card>)(cs.splice((Card)))`, and
+ *   `(void (Card), …)` where it closes, for the closing tag's name
  *
  * Everything else, types included, is TypeScript's to read as written. Each
  * piece maps back to the text it came from; what the wrapper adds maps to no
@@ -168,143 +166,75 @@ export function virtualScript(
     );
   };
 
-  // A host tag is the call it is checked as: the host value as the client
-  // sees it, given its props as JSX would give them. Each name is mapped to
-  // the one written there, the closing tag's through a `void` read of it, so
-  // definition, rename and references reach the host binding from either.
-  // An attribute's value, as JSX gives it: `true` where none is written.
-  const attributeValue = (attribute: ts.JsxAttribute): void => {
-    const initializer = attribute.initializer;
-    if (initializer === undefined) {
-      added("true");
-    } else if (ts.isJsxExpression(initializer)) {
-      if (initializer.expression === undefined) {
-        added("undefined");
-      } else {
-        emit(initializer.expression);
-      }
-    } else {
-      emit(initializer);
-    }
-  };
-
+  // A host tag is checked as JSX, as a tag is anywhere: on a parameter the
+  // host value is handed to, `(($Card) => <$Card …>…</$Card>)(cs.splice((Card)))`.
+  // JSX then checks it however the component is declared (a class, generic,
+  // overloaded) and allows what the framework allows on any tag (React's
+  // `key`). Its props and children are written as they were. The parameter
+  // takes the tag's written name, which a script can't otherwise bind, so an
+  // error about the tag names it as written, and is reported there; the name
+  // itself is read through `(Card)`, mapped to it, so definition, rename and
+  // references reach the host binding. Where the tag closes, `void (Card)`
+  // beside it does the same for the closing tag's name.
   const hostTag = (node: ts.JsxElement | ts.JsxSelfClosingElement): void => {
     const opening = ts.isJsxElement(node) ? node.openingElement : node;
     const tagName = opening.tagName as ts.Identifier;
     const tag = script.toSourceRange(tagName);
     // The binding's name, parenthesized over its `$` as an unbraced splice is.
     const name = `(${(script.splices[tagName.text]!.expression as ts.Identifier).text})`;
-    // Where JSX stands, a call is written in braces: a child of an element
-    // or fragment written as JSX, or an attribute of one written as an
-    // element. A host tag's own children and props are values already.
+    // Where JSX stands, an expression is written in braces: a child of an
+    // element or fragment, or an attribute's value.
     const parent = node.parent;
-    const owner = ts.isJsxAttribute(parent)
-      ? parent.parent.parent
-      : ts.isJsxElement(parent) || ts.isJsxFragment(parent)
-        ? parent
-        : undefined;
     const braced =
-      owner !== undefined &&
-      !(
-        (ts.isJsxElement(owner) || ts.isJsxSelfClosingElement(owner)) &&
-        isHostTag(owner)
-      ) &&
-      !(ts.isJsxOpeningElement(owner) && isHostTag(owner.parent));
+      ts.isJsxAttribute(parent) ||
+      ts.isJsxElement(parent) ||
+      ts.isJsxFragment(parent);
     if (braced) {
       added("{");
     }
-    // Beside the call, the tag as JSX on `cs.tag`: its `key`, which is JSX's
-    // and not the component's, checked against the file's own
-    // `JSX.IntrinsicAttributes` (React's `Key`; Solid takes none); and the
-    // closing tag's name, read as the host binding, so definition, rename and
-    // references reach it from there too.
-    const key = opening.attributes.properties.find(
-      (attribute): attribute is ts.JsxAttribute =>
-        ts.isJsxAttribute(attribute) && attribute.name.getText(file) === "key",
-    );
-    added("(void <cs.tag");
-    if (key !== undefined) {
-      added(" ");
-      mapped("key", key.name);
-      added("={");
-      attributeValue(key);
-      added("}");
-    }
     if (ts.isJsxElement(node)) {
-      added(">{");
+      added("(void ");
       mapped(name, node.closingElement.tagName, TAG_NAME);
-      added("}</cs.tag>, ");
-    } else {
-      added(" />, ");
+      added(", ");
     }
-    // The tag as a value, reported under its name: what isn't a component is
-    // refused there, as JSX refuses it; so is a missing prop, the props
-    // object's own braces mapped to it.
-    added("cs.splice(", tag.start);
-    mapped(name, tagName, TAG_NAME);
-    added(")", tag.end);
-    added("(");
-    out.push(["{ ", undefined, tag.start, tag.end - tag.start, REPORTED]);
-    for (const attribute of opening.attributes.properties) {
-      if (ts.isJsxSpreadAttribute(attribute)) {
-        added("...");
-        emit(attribute.expression);
-        added(", ");
-      } else if (attribute !== key) {
-        const name = attribute.name.getText(file);
-        mapped(
-          /^[A-Za-z_$][\w$]*$/.test(name) ? name : JSON.stringify(name),
-          attribute.name,
-        );
-        added(": ");
-        attributeValue(attribute);
-        added(", ");
+    added(`((${tagName.text}) => <`);
+    mapped(tagName.text, tagName, REPORTED);
+    // Its attributes and the opening's end, as written. What stands between
+    // the name and the first attribute maps to nothing: the end of the name is
+    // the name's, not the attribute's.
+    let at = tagName.getEnd();
+    for (const [index, attribute] of opening.attributes.properties.entries()) {
+      if (index === 0) {
+        added(text.slice(at, attribute.getStart(file)));
+      } else {
+        verbatim(at, attribute.getStart(file));
       }
+      emit(attribute);
+      at = attribute.getEnd();
+    }
+    if (opening.attributes.properties.length === 0) {
+      added(text.slice(at, opening.getEnd()));
+    } else {
+      verbatim(at, opening.getEnd());
     }
     if (ts.isJsxElement(node)) {
-      const children = node.children.filter(
-        (child) =>
-          !(ts.isJsxText(child) && jsxText(child.text) === null) &&
-          !(ts.isJsxExpression(child) && child.expression === undefined),
-      );
-      if (children.length > 0) {
-        // Named over what it stands for, so what is said of the prop is said
-        // there.
-        const content = {
-          start: script.toSourceOffset(node.openingElement.getEnd()),
-          end: script.toSourceOffset(node.closingElement.getStart(file)),
-        };
-        out.push([
-          "children",
-          undefined,
-          content.start,
-          content.end - content.start,
-          REPORTED,
-        ]);
-        added(": ");
-        if (children.length > 1) {
-          added("[");
-        }
-        children.forEach((child, index) => {
-          if (index > 0) {
-            added(", ");
-          }
-          if (ts.isJsxText(child)) {
-            mapped(JSON.stringify(jsxText(child.text)), child);
-          } else if (ts.isJsxExpression(child)) {
-            emit(child.expression!);
-          } else {
-            emit(child);
-          }
-        });
-        if (children.length > 1) {
-          added("]");
-        }
-        added(" ");
+      at = opening.getEnd();
+      for (const child of node.children) {
+        verbatim(at, child.getStart(file));
+        emit(child);
+        at = child.getEnd();
       }
+      verbatim(at, node.closingElement.getStart(file));
+      added("</");
+      mapped(tagName.text, node.closingElement.tagName, REPORTED);
+      added(">");
     }
-    out.push(["}", undefined, tag.end, 0, REPORTED]);
-    added("))");
+    added(")(cs.splice(", tag.start);
+    mapped(name, tagName, TAG_NAME);
+    added("))", tag.end);
+    if (ts.isJsxElement(node)) {
+      added(")");
+    }
     if (braced) {
       added("}");
     }

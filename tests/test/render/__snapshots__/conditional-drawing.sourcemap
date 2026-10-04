@@ -174,11 +174,10 @@ span             → span
 section          → section
 >                → >
 \n               → \n        
-cs.splice(       →  [-semantic -navigation]
-(Held)           → $Held [-highlight]
-)                →  [-semantic -navigation]
-{                → $Held [-semantic -navigation]
+$Held            → $Held [-semantic -navigation]
 again            → again
+=                → =
+{                → {
 (                → (
 )                → )
                  →  
@@ -210,7 +209,11 @@ __cs_builds      → builds
 ;                → ;
 \n               → \n          
 }                → }
-}                →  [-semantic -navigation]
+}                → }
+\n        />     → \n        />
+)(cs.splice(     →  [-semantic -navigation]
+(Held)           → $Held [-highlight]
+))               →  [-semantic -navigation]
 \n               → \n      
 <                → <
 /                → /

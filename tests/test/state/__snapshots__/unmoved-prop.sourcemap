@@ -70,11 +70,10 @@ div               → div
 >                 → >
 \n                → \n          
 (For)             → $For [-highlight]
-cs.splice(        →  [-semantic -navigation]
-(For)             → $For [-highlight]
-)                 →  [-semantic -navigation]
-{                 → $For [-semantic -navigation]
+$For              → $For [-semantic -navigation]
 each              → each
+=                 → =
+{                 → {
 [                 → [
 0                 → 0
 ,                 → ,
@@ -84,7 +83,10 @@ each              → each
                   →  
 2                 → 2
 ]                 → ]
-children          → \n            {(id: number) => (\n              <a href={isSelected(id) ? "#open" : "#closed"}>{"row " + id}</a>\n            )}\n           [-semantic -navigation]
+}                 → }
+>                 → >
+\n                → \n            
+{                 → {
 (                 → (
 __cs_id           → id
 :                 → :
@@ -129,7 +131,12 @@ a                 → a
 >                 → >
 \n                → \n            
 )                 → )
-}                 →  [-semantic -navigation]
+}                 → }
+\n                → \n          
+$For              → $For [-semantic -navigation]
+)(cs.splice(      →  [-semantic -navigation]
+(For)             → $For [-highlight]
+))                →  [-semantic -navigation]
 \n                → \n        
 <                 → <
 /                 → /

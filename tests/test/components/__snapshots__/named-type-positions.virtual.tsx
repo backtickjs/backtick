@@ -28,7 +28,7 @@ async function Rows() {
       <div>
         <span onclick={() => __cs_add({ id: 1, label: "one" })}>add</span>
         <div>
-          {(void <cs.tag>{(For)}</cs.tag>, cs.splice((For))({ each: __cs_rows(), children: (__cs_row: Row) => <span>{__cs_label(__cs_row)}</span> }))}
+          {(void (For), (($For) => <$For each={__cs_rows()}>{(__cs_row: Row) => <span>{__cs_label(__cs_row)}</span>}</$For>)(cs.splice((For))))}
         </div>
       </div>
     );

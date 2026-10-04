@@ -204,13 +204,14 @@ ul                          → ul
 >                           → >
 \n                          → \n        
 (For)                       → $For [-highlight]
-cs.splice(                  →  [-semantic -navigation]
-(For)                       → $For [-highlight]
-)                           →  [-semantic -navigation]
-{                           → $For [-semantic -navigation]
+$For                        → $For [-semantic -navigation]
 each                        → each
+=                           → =
+{                           → {
 __cs_rows                   → rows
-children                    → {(row: number) => <li>{row + count()}</li>} [-semantic -navigation]
+}                           → }
+>                           → >
+{                           → {
 (                           → (
 __cs_row                    → row
 :                           → :
@@ -236,7 +237,11 @@ __cs_count                  → count
 /                           → /
 li                          → li
 >                           → >
-}                           →  [-semantic -navigation]
+}                           → }
+$For                        → $For [-semantic -navigation]
+)(cs.splice(                →  [-semantic -navigation]
+(For)                       → $For [-highlight]
+))                          →  [-semantic -navigation]
 \n                          → \n      
 <                           → <
 /                           → /

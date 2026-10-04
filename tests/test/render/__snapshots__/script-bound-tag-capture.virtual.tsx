@@ -25,7 +25,9 @@ const scriptBoundTagCapture = cs.lift((() => {
       }
       {cs.splice(cs.lift((() => <section>{cs.splice(cs.lift((() => <__cs_Badge n={__cs_count() + 1000} />)()))}</section>)()))}
       {
-        cs.splice(cs.lift((() => (void <cs.tag>{(For)}</cs.tag>, cs.splice((For))({ each: [1, 2], children: (__cs_m: number) => <__cs_Badge n={__cs_m * __cs_count()} /> })))()))
+        cs.splice(cs.lift((() => (void (For), (($For) => <$For each={[1, 2]}>
+          {(__cs_m: number) => <__cs_Badge n={__cs_m * __cs_count()} />}
+        </$For>)(cs.splice((For)))))()))
       }
       <button onclick={() => __cs_setCount(__cs_count() + 1)}>more</button>
     </div>

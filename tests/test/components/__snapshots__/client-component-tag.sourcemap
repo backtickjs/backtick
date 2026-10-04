@@ -63,29 +63,29 @@ div              → div
 >                → >
 \n               → \n      
 (For)            → $For [-highlight]
-cs.splice(       →  [-semantic -navigation]
-(For)            → $For [-highlight]
-)                →  [-semantic -navigation]
-{                → $For [-semantic -navigation]
+$For             → $For [-semantic -navigation]
 each             → each
+=                → =
+{                → {
 [                → [
 1                → 1
 ,                → ,
                  →  
 2                → 2
 ]                → ]
-children         → {(n) => <$Badge n={n * scale()} />} [-semantic -navigation]
+}                → }
+>                → >
+{                → {
 (                → (
 __cs_n           → n
 )                → )
                  →  
 =>               → =>
                  →  
-cs.splice(       →  [-semantic -navigation]
-(Badge)          → $Badge [-highlight]
-)                →  [-semantic -navigation]
-{                → $Badge [-semantic -navigation]
+$Badge           → $Badge [-semantic -navigation]
 n                → n
+=                → =
+{                → {
 __cs_n           → n
                  →  
 *                → *
@@ -93,8 +93,16 @@ __cs_n           → n
 __cs_scale       → scale
 (                → (
 )                → )
-}                →  [-semantic -navigation]
-}                →  [-semantic -navigation]
+}                → }
+ />              →  />
+)(cs.splice(     →  [-semantic -navigation]
+(Badge)          → $Badge [-highlight]
+))               →  [-semantic -navigation]
+}                → }
+$For             → $For [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
+(For)            → $For [-highlight]
+))               →  [-semantic -navigation]
 \n               → \n      
 <                → <
 button           → button

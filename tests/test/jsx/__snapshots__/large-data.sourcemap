@@ -4,15 +4,17 @@ div                         → div
 >                           → >
 \n                          → \n      
 (For)                       → $For [-highlight]
-cs.splice(                  →  [-semantic -navigation]
-(For)                       → $For [-highlight]
-)                           →  [-semantic -navigation]
-{                           → $For [-semantic -navigation]
+$For                        → $For [-semantic -navigation]
 each                        → each
+=                           → =
+{                           → {
 cs.splice(                  →  [-semantic -navigation]
 (orders)                    → $orders
 )                           →  [-semantic -navigation]
-children                    → \n        {(order: Order) => (\n          <div>\n            <img src={"https://img.example.com/" + order.id + ".png"} alt="" />\n            <span>{order.customer.name}</span>\n            <span>{order.customer.city}</span>\n            <$For each={order.items}>\n              {(item: Item) => <span>{item.sku + " x" + item.qty}</span>}\n            </$For>\n            <span>{"$" + order.total}</span>\n          </div>\n        )}\n       [-semantic -navigation]
+}                           → }
+>                           → >
+\n                          → \n        
+{                           → {
 (                           → (
 __cs_order                  → order
 :                           → :
@@ -85,15 +87,17 @@ span                        → span
 >                           → >
 \n                          → \n            
 (For)                       → $For [-highlight]
-cs.splice(                  →  [-semantic -navigation]
-(For)                       → $For [-highlight]
-)                           →  [-semantic -navigation]
-{                           → $For [-semantic -navigation]
+$For                        → $For [-semantic -navigation]
 each                        → each
+=                           → =
+{                           → {
 __cs_order                  → order
 .                           → .
 items                       → items
-children                    → \n              {(item: Item) => <span>{item.sku + " x" + item.qty}</span>}\n             [-semantic -navigation]
+}                           → }
+>                           → >
+\n                          → \n              
+{                           → {
 (                           → (
 __cs_item                   → item
 :                           → :
@@ -125,7 +129,12 @@ qty                         → qty
 /                           → /
 span                        → span
 >                           → >
-}                           →  [-semantic -navigation]
+}                           → }
+\n                          → \n            
+$For                        → $For [-semantic -navigation]
+)(cs.splice(                →  [-semantic -navigation]
+(For)                       → $For [-highlight]
+))                          →  [-semantic -navigation]
 \n                          → \n            
 <                           → <
 span                        → span
@@ -150,7 +159,12 @@ div                         → div
 >                           → >
 \n                          → \n        
 )                           → )
-}                           →  [-semantic -navigation]
+}                           → }
+\n                          → \n      
+$For                        → $For [-semantic -navigation]
+)(cs.splice(                →  [-semantic -navigation]
+(For)                       → $For [-highlight]
+))                          →  [-semantic -navigation]
 \n                          → \n    
 <                           → <
 /                           → /

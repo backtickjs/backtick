@@ -111,15 +111,17 @@ div               → div
 >                 → >
 \n                → \n          
 (For)             → $For [-highlight]
-cs.splice(        →  [-semantic -navigation]
-(For)             → $For [-highlight]
-)                 →  [-semantic -navigation]
-{                 → $For [-semantic -navigation]
+$For              → $For [-semantic -navigation]
 each              → each
+=                 → =
+{                 → {
 __cs_names        → names
 (                 → (
 )                 → )
-children          → \n            {(name: string, index: () => number) => (\n              <span>{name + " at " + index()}</span>\n            )}\n           [-semantic -navigation]
+}                 → }
+>                 → >
+\n                → \n            
+{                 → {
 (                 → (
 __cs_name         → name
 :                 → :
@@ -164,7 +166,12 @@ span              → span
 >                 → >
 \n                → \n            
 )                 → )
-}                 →  [-semantic -navigation]
+}                 → }
+\n                → \n          
+$For              → $For [-semantic -navigation]
+)(cs.splice(      →  [-semantic -navigation]
+(For)             → $For [-highlight]
+))                →  [-semantic -navigation]
 \n                → \n        
 <                 → <
 /                 → /

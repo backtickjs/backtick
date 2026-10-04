@@ -29,9 +29,11 @@ async function MemberRows() {
     return (
       <div>
         <ul class="rows">
-          {(void <cs.tag>{(For)}</cs.tag>, cs.splice((For))({ each: __cs_held(), children: (__cs_row: Row) => (
+          {(void (For), (($For) => <$For each={__cs_held()}>
+            {(__cs_row: Row) => (
               <li onclick={() => __cs_row.label[1]("pressed")}>{__cs_row.label[0]()}</li>
-            ) }))}
+            )}
+          </$For>)(cs.splice((For))))}
         </ul>
       </div>
     );

@@ -40,43 +40,51 @@ section          → section
 )                → )
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-cs.splice(       →  [-semantic -navigation]
+$Card            → $Card [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
 (Card)           → $Card [-highlight]
-)                →  [-semantic -navigation]
-{                → $Card [-semantic -navigation]
-}                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-cs.splice(       →  [-semantic -navigation]
-(Card)           → $Card [-highlight]
-)                →  [-semantic -navigation]
-{                → $Card [-semantic -navigation]
+$Card            → $Card [-semantic -navigation]
 title            → title
+=                → =
+{                → {
 1                → 1
-}                →  [-semantic -navigation]
+}                → }
+ />              →  />
+)(cs.splice(     →  [-semantic -navigation]
+(Card)           → $Card [-highlight]
+))               →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-cs.splice(       →  [-semantic -navigation]
-(Card)           → $Card [-highlight]
-)                →  [-semantic -navigation]
-{                → $Card [-semantic -navigation]
+$Card            → $Card [-semantic -navigation]
 title            → title
+=                → =
 "x"              → "x"
+                 →  
 nope             → nope
+=                → =
+{                → {
 1                → 1
-}                →  [-semantic -navigation]
+}                → }
+ />              →  />
+)(cs.splice(     →  [-semantic -navigation]
+(Card)           → $Card [-highlight]
+))               →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 (For)            → $For [-highlight]
-cs.splice(       →  [-semantic -navigation]
-(For)            → $For [-highlight]
-)                →  [-semantic -navigation]
-{                → $For [-semantic -navigation]
+$For             → $For [-semantic -navigation]
 each             → each
+=                → =
+{                → {
 [                → [
 1                → 1
 ]                → ]
-children         → {(n: string) => n} [-semantic -navigation]
+}                → }
+>                → >
+{                → {
 (                → (
 __cs_n           → n
 :                → :
@@ -87,16 +95,23 @@ string           → string
 =>               → =>
                  →  
 __cs_n           → n
-}                →  [-semantic -navigation]
+}                → }
+$For             → $For [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
+(For)            → $For [-highlight]
+))               →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
+$Card            → $Card [-semantic -navigation]
 key              → key
+=                → =
 "a"              → "a"
-cs.splice(       →  [-semantic -navigation]
-(Card)           → $Card [-highlight]
-)                →  [-semantic -navigation]
-{                → $Card [-semantic -navigation]
+                 →  
 title            → title
+=                → =
 "x"              → "x"
-}                →  [-semantic -navigation]
+ />              →  />
+)(cs.splice(     →  [-semantic -navigation]
+(Card)           → $Card [-highlight]
+))               →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]

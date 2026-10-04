@@ -31,7 +31,7 @@ const page = () => cs.lift((() => {
       <p>{cs.splice((shared))}</p>
       <p>{__cs_total}</p>
       <ul>
-        {(void <cs.tag>{(For)}</cs.tag>, cs.splice((For))({ each: __cs_rows, children: (__cs_row: number) => <li>{__cs_row + __cs_count()}</li> }))}
+        {(void (For), (($For) => <$For each={__cs_rows}>{(__cs_row: number) => <li>{__cs_row + __cs_count()}</li>}</$For>)(cs.splice((For))))}
       </ul>
     </section>
   );

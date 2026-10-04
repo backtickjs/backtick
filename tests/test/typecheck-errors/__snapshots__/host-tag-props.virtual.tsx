@@ -9,16 +9,16 @@ const Card = cs.lift((() => (__cs_props: { title: string; children?: unknown }) 
 ))());
 
 // @ts-expect-error: Property 'title' is missing.
-export const missing = cs.lift((() => (void <cs.tag />, cs.splice((Card))({ })))());
+export const missing = cs.lift((() => (($Card) => <$Card />)(cs.splice((Card))))());
 
 // @ts-expect-error: Type 'number' is not assignable to type 'string'.
-export const wrong = cs.lift((() => (void <cs.tag />, cs.splice((Card))({ title: 1, })))());
+export const wrong = cs.lift((() => (($Card) => <$Card title={1} />)(cs.splice((Card))))());
 
 // @ts-expect-error: Object literal may only specify known properties.
-export const unknown = cs.lift((() => (void <cs.tag />, cs.splice((Card))({ title: "x", nope: 1, })))());
+export const unknown = cs.lift((() => (($Card) => <$Card title="x" nope={1} />)(cs.splice((Card))))());
 
 // @ts-expect-error: the child reads each item as a string, not a number.
-export const wrongChild = cs.lift((() => (void <cs.tag>{(For)}</cs.tag>, cs.splice((For))({ each: [1], children: (__cs_n: string) => __cs_n })))());
+export const wrongChild = cs.lift((() => (void (For), (($For) => <$For each={[1]}>{(__cs_n: string) => __cs_n}</$For>)(cs.splice((For)))))());
 
 // @ts-expect-error: Solid's JSX takes no `key`, so neither does a host tag.
-export const keyed = cs.lift((() => (void <cs.tag key={"a"} />, cs.splice((Card))({ title: "x", })))());
+export const keyed = cs.lift((() => (($Card) => <$Card key="a" title="x" />)(cs.splice((Card))))());

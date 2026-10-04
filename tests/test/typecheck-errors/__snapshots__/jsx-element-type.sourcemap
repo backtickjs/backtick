@@ -17,11 +17,10 @@ blink            → blink
 >                → >
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-cs.splice(       →  [-semantic -navigation]
+$NotATag         → $NotATag [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
 (NotATag)        → $NotATag [-highlight]
-)                →  [-semantic -navigation]
-{                → $NotATag [-semantic -navigation]
-}                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
@@ -42,11 +41,10 @@ span             → span
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 (For)            → $For [-highlight]
-cs.splice(       →  [-semantic -navigation]
-(For)            → $For [-highlight]
-)                →  [-semantic -navigation]
-{                → $For [-semantic -navigation]
+$For             → $For [-semantic -navigation]
 each             → each
+=                → =
+{                → {
 [                → [
 ]                → ]
                  →  
@@ -55,7 +53,9 @@ as               → as
 number           → number
 [                → [
 ]                → ]
-children         → {(n) => <i>{n}</i>} [-semantic -navigation]
+}                → }
+>                → >
+{                → {
 (                → (
 __cs_n           → n
 )                → )
@@ -72,7 +72,11 @@ __cs_n           → n
 /                → /
 i                → i
 >                → >
-}                →  [-semantic -navigation]
+}                → }
+$For             → $For [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
+(For)            → $For [-highlight]
+))               →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
@@ -101,11 +105,10 @@ class            → class
 >                → >
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-cs.splice(       →  [-semantic -navigation]
+$Fragment        → $Fragment [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
 (Fragment)       → $Fragment [-highlight]
-)                →  [-semantic -navigation]
-{                → $Fragment [-semantic -navigation]
-}                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <

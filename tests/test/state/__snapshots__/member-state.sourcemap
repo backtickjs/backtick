@@ -128,15 +128,17 @@ class             → class
 >                 → >
 \n                → \n          
 (For)             → $For [-highlight]
-cs.splice(        →  [-semantic -navigation]
-(For)             → $For [-highlight]
-)                 →  [-semantic -navigation]
-{                 → $For [-semantic -navigation]
+$For              → $For [-semantic -navigation]
 each              → each
+=                 → =
+{                 → {
 __cs_held         → held
 (                 → (
 )                 → )
-children          → \n            {(row: Row) => (\n              <li onclick={() => row.label[1]("pressed")}>{row.label[0]()}</li>\n            )}\n           [-semantic -navigation]
+}                 → }
+>                 → >
+\n                → \n            
+{                 → {
 (                 → (
 __cs_row          → row
 :                 → :
@@ -186,7 +188,12 @@ li                → li
 >                 → >
 \n                → \n            
 )                 → )
-}                 →  [-semantic -navigation]
+}                 → }
+\n                → \n          
+$For              → $For [-semantic -navigation]
+)(cs.splice(      →  [-semantic -navigation]
+(For)             → $For [-highlight]
+))                →  [-semantic -navigation]
 \n                → \n        
 <                 → <
 /                 → /

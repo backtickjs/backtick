@@ -96,15 +96,16 @@ cs.splice(       →  [-semantic -navigation]
 return           → return
                  →  
 (For)            → $For [-highlight]
-cs.splice(       →  [-semantic -navigation]
-(For)            → $For [-highlight]
-)                →  [-semantic -navigation]
-{                → $For [-semantic -navigation]
+$For             → $For [-semantic -navigation]
 each             → each
+=                → =
+{                → {
 __cs_items       → items
 (                → (
 )                → )
-children         → {(item: string) => <em>{item}</em>} [-semantic -navigation]
+}                → }
+>                → >
+{                → {
 (                → (
 __cs_item        → item
 :                → :
@@ -124,7 +125,11 @@ __cs_item        → item
 /                → /
 em               → em
 >                → >
-}                →  [-semantic -navigation]
+}                → }
+$For             → $For [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
+(For)            → $For [-highlight]
+))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n
 }                → }
@@ -176,11 +181,10 @@ __cs_asked       → asked
 span             → span
 >                → >
 \n               → \n      
-cs.splice(       →  [-semantic -navigation]
-(WaitingList)    → $WaitingList [-highlight]
-)                →  [-semantic -navigation]
-{                → $WaitingList [-semantic -navigation]
+$WaitingList     → $WaitingList [-semantic -navigation]
 more             → more
+=                → =
+{                → {
 (                → (
 )                → )
                  →  
@@ -212,7 +216,11 @@ __cs_asked       → asked
 ;                → ;
 \n               → \n        
 }                → }
-}                →  [-semantic -navigation]
+}                → }
+\n      />       → \n      />
+)(cs.splice(     →  [-semantic -navigation]
+(WaitingList)    → $WaitingList [-highlight]
+))               →  [-semantic -navigation]
 \n               → \n    
 <                → <
 /                → /

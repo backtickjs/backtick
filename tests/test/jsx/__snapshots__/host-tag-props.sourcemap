@@ -112,15 +112,20 @@ label            → label
 \n               → \n          
 return           → return
                  →  
-cs.splice(       →  [-semantic -navigation]
-(Badge)          → $Badge [-highlight]
-)                →  [-semantic -navigation]
-{                → $Badge [-semantic -navigation]
+$Badge           → $Badge [-semantic -navigation]
+{                → {
+...              → ...
 __cs_rest        → rest
+}                → }
+                 →  
 disabled         → disabled
-"data-id"        → data-id
+                 →  
+data-id          → data-id
+=                → =
 "seven"          → "seven"
+                 →  
 icon             → icon
+=                → =
 <                → <
 b                → b
 >                → >
@@ -129,7 +134,10 @@ b                → b
 /                → /
 b                → b
 >                → >
-}                →  [-semantic -navigation]
+ />              →  />
+)(cs.splice(     →  [-semantic -navigation]
+(Badge)          → $Badge [-highlight]
+))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n        
 }                → }

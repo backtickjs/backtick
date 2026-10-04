@@ -46,10 +46,12 @@ const conditionalDrawing = cs.lift((() => {
     <div>
       <span>{"builds " + __cs_builds()}</span>
       <section>
-        {(void <cs.tag />, cs.splice((Held))({ again: () => {
+        {(($Held) => <$Held
+          again={() => {
             __cs_setBuilds(__cs_builds() + 1);
             return __cs_builds() < 5;
-          }, }))}
+          }}
+        />)(cs.splice((Held)))}
       </section>
     </div>
   );

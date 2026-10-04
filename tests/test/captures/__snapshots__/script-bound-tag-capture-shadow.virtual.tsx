@@ -24,7 +24,7 @@ it("scriptBoundTagCaptureShadow", async (t) => {
     t,
     "scriptBoundTagCaptureShadow",
     cs.lift((() => <div>
-      {(void <cs.tag />, cs.splice((Card))({ title: "host", }))}
+      {(($Card) => <$Card title="host" />)(cs.splice((Card)))}
       {cs.splice(labelled(cs.lift((() => "a")())))}
       {cs.splice(labelled(cs.lift((() => "b")())))}
     </div>)()),
@@ -48,7 +48,7 @@ it("scriptBoundTagScope", async (t) => {
 
       return (
         <section>
-          {(void <cs.tag />, cs.splice((Card))({ title: "host", }))}
+          {(($Card) => <$Card title="host" />)(cs.splice((Card)))}
           {__cs_twice((__cs_props: { n: number }) => (
             <i>{"row " + __cs_props.n}</i>
           ))}

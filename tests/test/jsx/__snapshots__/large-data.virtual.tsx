@@ -35,15 +35,19 @@ it("largeData", async (t) => {
     t,
     "largeData",
     cs.lift((() => <div>
-      {(void <cs.tag>{(For)}</cs.tag>, cs.splice((For))({ each: cs.splice((orders)), children: (__cs_order: Order) => (
+      {(void (For), (($For) => <$For each={cs.splice((orders))}>
+        {(__cs_order: Order) => (
           <div>
             <img src={"https://img.example.com/" + __cs_order.id + ".png"} alt="" />
             <span>{__cs_order.customer.name}</span>
             <span>{__cs_order.customer.city}</span>
-            {(void <cs.tag>{(For)}</cs.tag>, cs.splice((For))({ each: __cs_order.items, children: (__cs_item: Item) => <span>{__cs_item.sku + " x" + __cs_item.qty}</span> }))}
+            {(void (For), (($For) => <$For each={__cs_order.items}>
+              {(__cs_item: Item) => <span>{__cs_item.sku + " x" + __cs_item.qty}</span>}
+            </$For>)(cs.splice((For))))}
             <span>{"$" + __cs_order.total}</span>
           </div>
-        ) }))}
+        )}
+      </$For>)(cs.splice((For))))}
     </div>)()),
   );
 });

@@ -37,7 +37,7 @@ async function Rows() {
     return (
       <>
         <span onclick={__cs_clear}>clear</span>
-        {(void <cs.tag>{(For)}</cs.tag>, cs.splice((For))({ each: __cs_ids(), children: (__cs_id: number) => <span>{"row " + __cs_id}</span> }))}
+        {(void (For), (($For) => <$For each={__cs_ids()}>{(__cs_id: number) => <span>{"row " + __cs_id}</span>}</$For>)(cs.splice((For))))}
       </>
     );
   })());
