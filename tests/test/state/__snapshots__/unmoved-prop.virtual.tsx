@@ -18,7 +18,7 @@ async function SelectableRows() {
       <div>
         <span onclick={() => __cs_setSelected(1)}>select</span>
         <div>
-          {(void (For), cs.splice((For))({ each: [0, 1, 2], children: (__cs_id: number) => (
+          {(void <cs.tag>{(For)}</cs.tag>, cs.splice((For))({ each: [0, 1, 2], children: (__cs_id: number) => (
               <a href={__cs_isSelected(__cs_id) ? "#open" : "#closed"}>{"row " + __cs_id}</a>
             ) }))}
         </div>

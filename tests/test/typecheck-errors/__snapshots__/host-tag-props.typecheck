@@ -5,3 +5,5 @@
 21:47 error TS2322: Type '(n: string) => string' is not assignable to type '(item: number, index: Accessor<number>) => string'.
   Types of parameters 'n' and 'item' are incompatible.
     Type 'number' is not assignable to type 'string'.
+24:32 error TS2322: Type '{ key: string; }' is not assignable to type 'IntrinsicAttributes & { children?: unknown; }'.
+  Property 'key' does not exist on type 'IntrinsicAttributes & { children?: unknown; }'.

@@ -29,7 +29,9 @@ const TAG_NAME: CodeInformation = {
  * - a splice, as the host value the client is handed: `$x` as
  *   `cs.splice((x))`, `${…}` as `cs.splice(…)` around the host code
  * - a splice written as a tag, `<$Card>`, as the call it is checked as:
- *   `(void (Card), cs.splice((Card))({ …props, children }))`
+ *   `(void <cs.tag key={…}>{(Card)}</cs.tag>, cs.splice((Card))({ …props,
+ *   children }))`, the closing tag's name the child, the `key` only where
+ *   written
  *
  * Everything else, types included, is TypeScript's to read as written. Each
  * piece maps back to the text it came from; what the wrapper adds maps to no
@@ -170,6 +172,22 @@ export function virtualScript(
   // sees it, given its props as JSX would give them. Each name is mapped to
   // the one written there, the closing tag's through a `void` read of it, so
   // definition, rename and references reach the host binding from either.
+  // An attribute's value, as JSX gives it: `true` where none is written.
+  const attributeValue = (attribute: ts.JsxAttribute): void => {
+    const initializer = attribute.initializer;
+    if (initializer === undefined) {
+      added("true");
+    } else if (ts.isJsxExpression(initializer)) {
+      if (initializer.expression === undefined) {
+        added("undefined");
+      } else {
+        emit(initializer.expression);
+      }
+    } else {
+      emit(initializer);
+    }
+  };
+
   const hostTag = (node: ts.JsxElement | ts.JsxSelfClosingElement): void => {
     const opening = ts.isJsxElement(node) ? node.openingElement : node;
     const tagName = opening.tagName as ts.Identifier;
@@ -195,10 +213,29 @@ export function virtualScript(
     if (braced) {
       added("{");
     }
+    // Beside the call, the tag as JSX on `cs.tag`: its `key`, which is JSX's
+    // and not the component's, checked against the file's own
+    // `JSX.IntrinsicAttributes` (React's `Key`; Solid takes none); and the
+    // closing tag's name, read as the host binding, so definition, rename and
+    // references reach it from there too.
+    const key = opening.attributes.properties.find(
+      (attribute): attribute is ts.JsxAttribute =>
+        ts.isJsxAttribute(attribute) && attribute.name.getText(file) === "key",
+    );
+    added("(void <cs.tag");
+    if (key !== undefined) {
+      added(" ");
+      mapped("key", key.name);
+      added("={");
+      attributeValue(key);
+      added("}");
+    }
     if (ts.isJsxElement(node)) {
-      added("(void ");
+      added(">{");
       mapped(name, node.closingElement.tagName, TAG_NAME);
-      added(", ");
+      added("}</cs.tag>, ");
+    } else {
+      added(" />, ");
     }
     // The tag as a value, reported under its name: what isn't a component is
     // refused there, as JSX refuses it; so is a missing prop, the props
@@ -212,27 +249,17 @@ export function virtualScript(
       if (ts.isJsxSpreadAttribute(attribute)) {
         added("...");
         emit(attribute.expression);
-      } else {
+        added(", ");
+      } else if (attribute !== key) {
         const name = attribute.name.getText(file);
         mapped(
           /^[A-Za-z_$][\w$]*$/.test(name) ? name : JSON.stringify(name),
           attribute.name,
         );
         added(": ");
-        const initializer = attribute.initializer;
-        if (initializer === undefined) {
-          added("true");
-        } else if (ts.isJsxExpression(initializer)) {
-          if (initializer.expression === undefined) {
-            added("undefined");
-          } else {
-            emit(initializer.expression);
-          }
-        } else {
-          emit(initializer);
-        }
+        attributeValue(attribute);
+        added(", ");
       }
-      added(", ");
     }
     if (ts.isJsxElement(node)) {
       const children = node.children.filter(
@@ -277,7 +304,7 @@ export function virtualScript(
       }
     }
     out.push(["}", undefined, tag.end, 0, REPORTED]);
-    added(ts.isJsxElement(node) ? "))" : ")");
+    added("))");
     if (braced) {
       added("}");
     }

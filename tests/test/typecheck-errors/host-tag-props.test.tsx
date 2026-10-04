@@ -19,3 +19,6 @@ export const unknown = cs`<$Card title="x" nope={1} />`;
 
 // @ts-expect-error: the child reads each item as a string, not a number.
 export const wrongChild = cs`<$For each={[1]}>{(n: string) => n}</$For>`;
+
+// @ts-expect-error: Solid's JSX takes no `key`, so neither does a host tag.
+export const keyed = cs`<$Card key="a" title="x" />`;

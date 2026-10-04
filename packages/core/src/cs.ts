@@ -25,11 +25,23 @@ function splice<T extends [T] extends [Spliceable] ? unknown : Spliceable>(
   );
 }
 
+// What a host tag is checked beside: a component taking only what the file's
+// own JSX allows on any tag (its `JSX.IntrinsicAttributes`), so the tag's
+// `key` is checked there, apart from the host component's props; its child, a
+// read of the host binding the closing tag names.
+function tag(_: { children?: unknown }): any {
+  throw new Error(
+    "Don't use `cs.tag` directly; it's used to generate virtual " +
+      "code for the typechecker. Write code using cs`...` instead.",
+  );
+}
+
 // What hangs off the tag.
 const members = {
   create,
   lift,
   splice,
+  tag,
 };
 
 /**

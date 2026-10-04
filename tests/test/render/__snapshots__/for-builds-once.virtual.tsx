@@ -26,7 +26,7 @@ const WaitingList = cs.lift((() => (__cs_props: { more: () => boolean }) => {
     }
   }, 0);
 
-  return (void (For), cs.splice((For))({ each: __cs_items(), children: (__cs_item: string) => <em>{__cs_item}</em> }));
+  return (void <cs.tag>{(For)}</cs.tag>, cs.splice((For))({ each: __cs_items(), children: (__cs_item: string) => <em>{__cs_item}</em> }));
 })());
 
 const forBuildsOnce = cs.lift((() => {
@@ -35,10 +35,10 @@ const forBuildsOnce = cs.lift((() => {
   return (
     <div>
       <span>{"asked " + __cs_asked()}</span>
-      {cs.splice((WaitingList))({ more: () => {
+      {(void <cs.tag />, cs.splice((WaitingList))({ more: () => {
           __cs_setAsked(__cs_asked() + 1);
           return __cs_asked() < 5;
-        }, })}
+        }, }))}
     </div>
   );
 })());

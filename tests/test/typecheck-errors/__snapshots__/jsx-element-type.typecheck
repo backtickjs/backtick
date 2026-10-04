@@ -1,5 +1,5 @@
 18:30 error TS2339: Property 'blink' does not exist on type 'JSX.IntrinsicElements'.
-25:29 error TS2349: This expression is not callable.
+25:30 error TS2349: This expression is not callable.
   Type '{ id: string; }' has no call signatures.
 41:34 error TS2322: Type '{ nosuch: number; }' is not assignable to type 'HTMLAttributes<HTMLDivElement>'.
   Property 'nosuch' does not exist on type 'HTMLAttributes<HTMLDivElement>'.

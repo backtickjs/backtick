@@ -23,7 +23,7 @@ async function RotatingRows() {
       <div>
         <span onclick={__cs_rotate}>rotate</span>
         <div>
-          {(void (For), cs.splice((For))({ each: __cs_names(), children: (__cs_name: string, __cs_index: () => number) => (
+          {(void <cs.tag>{(For)}</cs.tag>, cs.splice((For))({ each: __cs_names(), children: (__cs_name: string, __cs_index: () => number) => (
               <span>{__cs_name + " at " + __cs_index()}</span>
             ) }))}
         </div>

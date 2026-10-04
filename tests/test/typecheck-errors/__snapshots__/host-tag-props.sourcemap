@@ -89,3 +89,14 @@ string           → string
 __cs_n           → n
 }                →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+key              → key
+"a"              → "a"
+cs.splice(       →  [-semantic -navigation]
+(Card)           → $Card [-highlight]
+)                →  [-semantic -navigation]
+{                → $Card [-semantic -navigation]
+title            → title
+"x"              → "x"
+}                →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
