@@ -24,7 +24,7 @@ it("scriptBoundTagCaptureShadow", async (t) => {
     t,
     "scriptBoundTagCaptureShadow",
     cs`<div>
-      <Card title="host" />
+      <$Card title="host" />
       {${labelled(cs`"a"`)}}
       {${labelled(cs`"b"`)}}
     </div>`,
@@ -48,7 +48,7 @@ it("scriptBoundTagScope", async (t) => {
 
       return (
         <section>
-          <Card title="host" />
+          <$Card title="host" />
           {twice((props: { n: number }) => (
             <i>{"row " + props.n}</i>
           ))}

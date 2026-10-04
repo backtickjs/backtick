@@ -15,7 +15,7 @@ const badges = cs.lift((() => {
   const [__cs_scale, __cs_setScale] = cs.splice((createSignal))(1);
   return (
     <div>
-      {(void For, cs.splice(For)({ each: [1, 2], children: (__cs_n) => cs.splice(Badge)({ n: __cs_n * __cs_scale(), }) }))}
+      {(void (For), cs.splice((For))({ each: [1, 2], children: (__cs_n) => cs.splice((Badge))({ n: __cs_n * __cs_scale(), }) }))}
       <button onclick={() => __cs_setScale(__cs_scale() * 2)}>double</button>
     </div>
   );

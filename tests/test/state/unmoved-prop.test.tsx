@@ -18,11 +18,11 @@ async function SelectableRows() {
       <div>
         <span onclick={() => setSelected(1)}>select</span>
         <div>
-          <For each={[0, 1, 2]}>
+          <$For each={[0, 1, 2]}>
             {(id: number) => (
               <a href={isSelected(id) ? "#open" : "#closed"}>{"row " + id}</a>
             )}
-          </For>
+          </$For>
         </div>
       </div>
     );

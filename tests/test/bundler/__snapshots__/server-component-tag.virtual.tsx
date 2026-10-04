@@ -14,7 +14,7 @@ it("refuses a server component as a tag in a script", async () => {
     bundler.build({
       input: cs.lift((() => <div>
         {/* @ts-expect-error: not assignable to parameter of type 'Spliceable'. */}
-        {cs.splice(Rule)({ })}
+        {cs.splice((Rule))({ })}
       </div>)()),
       external: {},
     }),

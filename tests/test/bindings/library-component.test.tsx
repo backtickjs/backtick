@@ -21,21 +21,21 @@ const Button = createImport<typeof LibraryButton>({
 const counter = cs`{
   const [count, setCount] = $createSignal(0);
   return (
-    <Button
+    <$Button
       variant="primary"
       icon={<b>+</b>}
       onClick={() => setCount(count() + 1)}
     >
       <span>{"Pressed " + count() + " times"}</span>
-    </Button>
+    </$Button>
   );
 }`;
 
 // A prop the library doesn't take a value for, caught as Solid would.
 // @ts-expect-error: Type '"large"' is not assignable to type '"primary" | "ghost"'.
-export const wrongVariant = cs`<Button variant="large" onClick={() => {}}>
+export const wrongVariant = cs`<$Button variant="large" onClick={() => {}}>
   Save
-</Button>`;
+</$Button>`;
 
 it("libraryComponent", async (t) => {
   await snapshotCase(t, "libraryComponent", counter);

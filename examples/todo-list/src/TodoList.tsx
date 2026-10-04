@@ -60,7 +60,7 @@ export async function TodoList() {
         </p>
 
         <div style="display: flex; gap: 16px">
-          <For each={["all", "todo", "done"]}>
+          <$For each={["all", "todo", "done"]}>
             {(value: string) => (
               <button
                 id={"filter-" + value}
@@ -78,17 +78,17 @@ export async function TodoList() {
                 {value === "todo" ? "To do" : value === "done" ? "Done" : "All"}
               </button>
             )}
-          </For>
+          </$For>
         </div>
 
         <ul style="margin: 0; padding: 0; list-style: none; align-self: stretch">
-          <For each={showing()}>
+          <$For each={showing()}>
             {(task) =>
               ${(
                 <Task task={cs`task`} onPress={cs`() => onPress(task.label)`} />
               )}
             }
-          </For>
+          </$For>
         </ul>
       </div>
     );

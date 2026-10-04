@@ -24,7 +24,7 @@ async function SwappableRows() {
         <span onclick={swap}>swap</span>
         <span onclick={drop}>drop</span>
         <div>
-          <For each={ids()}>{(id: number) => <span>{"row " + id}</span>}</For>
+          <$For each={ids()}>{(id: number) => <span>{"row " + id}</span>}</$For>
         </div>
       </div>
     );

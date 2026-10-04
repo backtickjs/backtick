@@ -15,7 +15,7 @@ import { render } from "@solidjs/testing-library";
 // it.
 async function Ring() {
   return cs.create(
-    "furzxgjj4bqq:17:9",
+    "14goklyg2ww24:17:9",
     { params: [] },
     '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<svg><circle cx=5 cy=5 r=4 fill=none stroke=currentColor></svg>`, false, true, false);\nexports.default = () => _tmpl$();\n}',
     '{"version":3,"file":"module.jsx","mappings":";;;;;kBAgBY,MAAAA,MAAA,EAAgE","names":["_tmpl$"],"ignoreList":[],"sources":["render/svg-namespace.test.tsx"]}',
@@ -23,7 +23,7 @@ async function Ring() {
   );
 }
 const svgNamespace = cs.create(
-  "furzxgjj4bqq:20:21",
+  "14goklyg2ww24:20:21",
   {
     params: [
       { kind: "splice", value: _jsx(Ring, {}), bindings: [] },
@@ -31,7 +31,7 @@ const svgNamespace = cs.create(
     ],
   },
   '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nconst web_4 = require("solid-js/web");\nconst web_5 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<svg><circle cy=5 r=2><title></svg>`, false, true, false), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<div><a href=/shapes>shapes</a><svg viewBox="0 0 30 10"width=120><foreignObject x=0 y=0 width=10 height=10><p>html again`);\nexports.default = ($splice0, $tag1) => {\n    const Dot = props => (() => {\n        var _el$ = _tmpl$(), _el$2 = _el$.firstChild;\n        (0, web_5.insert)(_el$2, () => "dot " + props.x);\n        (0, web_4.effect)(() => (0, web_3.setAttribute)(_el$, "cx", props.x));\n        return _el$;\n    })();\n    return (() => {\n        var _el$3 = _tmpl$2(), _el$4 = _el$3.firstChild, _el$5 = _el$4.nextSibling, _el$6 = _el$5.firstChild;\n        (0, web_5.insert)(_el$5, $splice0, _el$6);\n        (0, web_5.insert)(_el$5, (0, web_2.createComponent)($tag1, {\n            each: [10, 20],\n            children: x => (0, web_2.createComponent)(Dot, {\n                x: x\n            })\n        }), _el$6);\n        return _el$3;\n    })();\n};\n}',
-  '{"version":3,"file":"module.jsx","mappings":";;;;;;;;;kBAmBwB,CAAAA,QAAA,EAAAC,KAAA;IACtB,MAAMC,GAAG,GAAIC,KAAoB;QAAA,IAAAC,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;QAAAC,gBAAA,EAAAF,KAAA,QAErB,MAAM,GAAGH,KAAK,CAACM,CAAC;QAAAC,gBAAA,QAAAC,sBAAA,EAAAP,IAAA,QADdD,KAAK,CAACM,CAAC;QAAA,OAAAL,IAAA;IAAA,IAGpB;IAED;QAAA,IAAAQ,KAAA,GAAAC,OAAA,IAAAC,KAAA,GAAAF,KAAA,CAAAL,UAAA,EAAAQ,KAAA,GAAAD,KAAA,CAAAE,WAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAR,UAAA;QAAAC,gBAAA,EAAAO,KAAA,EAIOf,QAAA,EAAAiB,KAAA;QAAAT,gBAAA,EAAAO,KAAA,EAAAG,yBAAA,EACAjB,KAAG;YAACkB,IAAI,EAAE,CAAC,EAAE,EAAE,EAAE,CAAC;YAAAC,QAAA,EAAIX,CAAS,IAAAS,yBAAA,EAAMhB,GAAG;gBAACO,CAAC,EAAEA;aAAC;SAAI,GAAAQ,KAAA;QAAA,OAAAL,KAAA;IAAA;AAO1D,CAAC","names":["$splice0","$tag1","Dot","props","_el$","_tmpl$","_el$2","firstChild","_$insert","x","_$effect","_$setAttribute","_el$3","_tmpl$2","_el$4","_el$5","nextSibling","_el$6","_$createComponent","each","children"],"ignoreList":[],"sources":["render/svg-namespace.test.tsx"]}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;;;;;kBAmBwB,CAAAA,QAAA,EAAAC,KAAA;IACtB,MAAMC,GAAG,GAAIC,KAAoB;QAAA,IAAAC,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;QAAAC,gBAAA,EAAAF,KAAA,QAErB,MAAM,GAAGH,KAAK,CAACM,CAAC;QAAAC,gBAAA,QAAAC,sBAAA,EAAAP,IAAA,QADdD,KAAK,CAACM,CAAC;QAAA,OAAAL,IAAA;IAAA,IAGpB;IAED;QAAA,IAAAQ,KAAA,GAAAC,OAAA,IAAAC,KAAA,GAAAF,KAAA,CAAAL,UAAA,EAAAQ,KAAA,GAAAD,KAAA,CAAAE,WAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAR,UAAA;QAAAC,gBAAA,EAAAO,KAAA,EAIOf,QAAA,EAAAiB,KAAA;QAAAT,gBAAA,EAAAO,KAAA,EAAAG,yBAAA,EACAjB,KAAI;YAACkB,IAAI,EAAE,CAAC,EAAE,EAAE,EAAE,CAAC;YAAAC,QAAA,EAAIX,CAAS,IAAAS,yBAAA,EAAMhB,GAAG;gBAACO,CAAC,EAAEA;aAAC;SAAI,GAAAQ,KAAA;QAAA,OAAAL,KAAA;IAAA;AAO3D,CAAC","names":["$splice0","$tag1","Dot","props","_el$","_tmpl$","_el$2","firstChild","_$insert","x","_$effect","_$setAttribute","_el$3","_tmpl$2","_el$4","_el$5","nextSibling","_el$6","_$createComponent","each","children"],"ignoreList":[],"sources":["render/svg-namespace.test.tsx"]}',
   ["solid-js/web"],
 );
 it("svgNamespace", async (t) => {

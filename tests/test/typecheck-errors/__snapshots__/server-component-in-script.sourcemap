@@ -35,26 +35,26 @@ hr               → hr
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
-Row              → Row
+(Row)            → $Row
 )                →  [-semantic -navigation]
-{                → Row
+{                → $Row
 label            → label
 "a"              → "a"
 }                → 
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
-Title            → Title
+(Title)          → $Title
 )                →  [-semantic -navigation]
-{                → Title
+{                → $Title
 text             → text
 "Week"           → "Week"
 }                → 
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
-Rule             → Rule
+(Rule)           → $Rule
 )                →  [-semantic -navigation]
-{                → Rule
+{                → $Rule
 }                → 
 )())             → ` [-semantic -navigation]

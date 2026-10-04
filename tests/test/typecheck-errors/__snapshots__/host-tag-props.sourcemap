@@ -41,25 +41,25 @@ section          → section
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
-Card             → Card
+(Card)           → $Card
 )                →  [-semantic -navigation]
-{                → Card
+{                → $Card
 }                → 
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
-Card             → Card
+(Card)           → $Card
 )                →  [-semantic -navigation]
-{                → Card
+{                → $Card
 title            → title
 1                → 1
 }                → 
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
-Card             → Card
+(Card)           → $Card
 )                →  [-semantic -navigation]
-{                → Card
+{                → $Card
 title            → title
 "x"              → "x"
 nope             → nope
@@ -67,11 +67,11 @@ nope             → nope
 }                → 
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-For              → For
+(For)            → $For
 cs.splice(       →  [-semantic -navigation]
-For              → For
+(For)            → $For
 )                →  [-semantic -navigation]
-{                → For
+{                → $For
 each             → each
 [                → [
 1                → 1

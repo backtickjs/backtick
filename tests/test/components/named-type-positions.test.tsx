@@ -28,7 +28,7 @@ async function Rows() {
       <div>
         <span onclick={() => add({ id: 1, label: "one" })}>add</span>
         <div>
-          <For each={rows()}>{(row: Row) => <span>{label(row)}</span>}</For>
+          <$For each={rows()}>{(row: Row) => <span>{label(row)}</span>}</$For>
         </div>
       </div>
     );

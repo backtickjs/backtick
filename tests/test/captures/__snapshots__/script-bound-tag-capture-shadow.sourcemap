@@ -109,9 +109,9 @@ div              → div
 >                → >
 \n               → \n      
 cs.splice(       →  [-semantic -navigation]
-Card             → Card
+(Card)           → $Card
 )                →  [-semantic -navigation]
-{                → Card
+{                → $Card
 title            → title
 "host"           → "host"
 }                → 
@@ -224,9 +224,9 @@ section          → section
 >                → >
 \n               → \n          
 cs.splice(       →  [-semantic -navigation]
-Card             → Card
+(Card)           → $Card
 )                →  [-semantic -navigation]
-{                → Card
+{                → $Card
 title            → title
 "host"           → "host"
 }                → 

@@ -24,9 +24,9 @@ it("mappedComponent", async (t) => {
     t,
     "mappedComponent",
     cs`<div>
-      <For each={$rows}>
+      <$For each={$rows}>
         {(row: number) => ${cs`<span>{"row " + row}</span>`}}
-      </For>
+      </$For>
     </div>`,
   );
 });

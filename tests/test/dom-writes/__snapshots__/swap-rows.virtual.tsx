@@ -22,7 +22,7 @@ async function SwappableRows() {
         <button onclick={__cs_swap}>swap</button>
         <table>
           <tbody>
-            {(void For, cs.splice(For)({ each: __cs_ids(), children: (__cs_id: number) => (
+            {(void (For), cs.splice((For))({ each: __cs_ids(), children: (__cs_id: number) => (
                 <tr id={"row-" + __cs_id}>
                   <td>{"row " + __cs_id}</td>
                 </tr>

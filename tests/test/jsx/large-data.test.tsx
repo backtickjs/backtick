@@ -35,19 +35,19 @@ it("largeData", async (t) => {
     t,
     "largeData",
     cs`<div>
-      <For each={$orders}>
+      <$For each={$orders}>
         {(order: Order) => (
           <div>
             <img src={"https://img.example.com/" + order.id + ".png"} alt="" />
             <span>{order.customer.name}</span>
             <span>{order.customer.city}</span>
-            <For each={order.items}>
+            <$For each={order.items}>
               {(item: Item) => <span>{item.sku + " x" + item.qty}</span>}
-            </For>
+            </$For>
             <span>{"$" + order.total}</span>
           </div>
         )}
-      </For>
+      </$For>
     </div>`,
   );
 });

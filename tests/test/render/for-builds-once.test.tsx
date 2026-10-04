@@ -26,7 +26,7 @@ const WaitingList = cs`(props: { more: () => boolean }) => {
     }
   }, 0);
 
-  return <For each={items()}>{(item: string) => <em>{item}</em>}</For>;
+  return <$For each={items()}>{(item: string) => <em>{item}</em>}</$For>;
 }`;
 
 const forBuildsOnce = cs`{
@@ -35,7 +35,7 @@ const forBuildsOnce = cs`{
   return (
     <div>
       <span>{"asked " + asked()}</span>
-      <WaitingList
+      <$WaitingList
         more={() => {
           setAsked(asked() + 1);
           return asked() < 5;

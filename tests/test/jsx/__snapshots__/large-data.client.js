@@ -2,17 +2,17 @@
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $tag1) => <div>
-      <$tag1 each={$splice0()}>
+exports.default = (($tag0, $splice1) => <div>
+      <$tag0 each={$splice1()}>
         {(order) => (<div>
             <img src={"https://img.example.com/" + order.id + ".png"} alt=""/>
             <span>{order.customer.name}</span>
             <span>{order.customer.city}</span>
-            <$tag1 each={order.items}>
+            <$tag0 each={order.items}>
               {(item) => <span>{item.sku + " x" + item.qty}</span>}
-            </$tag1>
+            </$tag0>
             <span>{"$" + order.total}</span>
           </div>)}
-      </$tag1>
+      </$tag0>
     </div>);
 }

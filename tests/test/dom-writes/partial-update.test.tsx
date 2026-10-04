@@ -28,13 +28,13 @@ async function Labels() {
         <button onclick={update}>update</button>
         <table>
           <tbody>
-            <For each={rows}>
+            <$For each={rows}>
               {(row: { id: number; label: Signal<string> }) => (
                 <tr id={"row-" + row.id}>
                   <td>{row.label[0]()}</td>
                 </tr>
               )}
-            </For>
+            </$For>
           </tbody>
         </table>
       </div>

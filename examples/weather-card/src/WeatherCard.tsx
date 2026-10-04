@@ -40,7 +40,7 @@ export async function WeatherCard() {
         <p style="margin: 0; font-size: 15px; color: #52525b">{$summary}</p>
 
         <div style="display: flex; gap: 14px">
-          <For each={["C", "F"]}>
+          <$For each={["C", "F"]}>
             {(value: string) => (
               <button
                 id={"unit-" + value}
@@ -56,17 +56,17 @@ export async function WeatherCard() {
                 {"°" + value}
               </button>
             )}
-          </For>
+          </$For>
         </div>
 
         <ul style="margin: 0; padding: 0; list-style: none; align-self: stretch">
           {/* The array the server fetched, drawn directly. The median is a
               number the server worked out, handed to each row as it is. */}
-          <For each={$days}>
+          <$For each={$days}>
             {(day) =>
               ${(<Day day={cs`day`} show={cs`show`} median={median} />)}
             }
-          </For>
+          </$For>
         </ul>
 
         <p style="margin: 0; font-size: 13px; color: #a1a1aa">{$source}</p>

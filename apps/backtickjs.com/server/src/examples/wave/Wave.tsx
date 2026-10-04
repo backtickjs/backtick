@@ -20,11 +20,11 @@ export default async function Wave() {
     };
     return (
       <div style={card} onclick={run}>
-        <For each={[0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5]}>
+        <$For each={[0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5]}>
           {(p: number) => (
             <div style={bar + (65 + 55 * Math.sin(t.get() / 3 + p)) + "px"} />
           )}
-        </For>
+        </$For>
       </div>
     );
   }`;

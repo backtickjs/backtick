@@ -1,11 +1,12 @@
 import type { Spliceable } from "./Spliceable.js";
 
-// What one of a script's parameters is handed: splices, then host tags, then
-// captures.
+// What one of a script's parameters is handed: splices and tags in the order
+// the script first reads them, then captures.
 export type Param =
   // a host value, called with the bindings its hole hands over
   | { kind: "splice"; value: Spliceable; bindings: string[] }
-  // a host tag, handed over as the value it names
+  // a splice written as a tag, `<$Card>`, handed over as its value: a tag
+  // can't be a call
   | { kind: "tag"; value: Spliceable }
   // the binding key of an enclosing script's binding
   | { kind: "capture"; key: string };

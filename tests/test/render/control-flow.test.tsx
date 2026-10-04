@@ -18,35 +18,35 @@ import { snapshotCase } from "../snapshotCase.ts";
 const rows = ["first", "second"];
 
 const indexed = cs`<ul>
-  <Index each={$rows}>
+  <$Index each={$rows}>
     {(row: () => string, index: number) => <li>{index + ": " + row()}</li>}
-  </Index>
+  </$Index>
 </ul>`;
 
-const switched = cs`<Switch fallback={<p>none</p>}>
-  <Match when={1 > 2}>
+const switched = cs`<$Switch fallback={<p>none</p>}>
+  <$Match when={1 > 2}>
     <p>wrong</p>
-  </Match>
-  <Match when={2 > 1}>
+  </$Match>
+  <$Match when={2 > 1}>
     <p>right</p>
-  </Match>
-</Switch>`;
+  </$Match>
+</$Switch>`;
 
-const caught = cs`<ErrorBoundary fallback={<p>caught</p>}>{
+const caught = cs`<$ErrorBoundary fallback={<p>caught</p>}>{
   ${cs`{
     throw "drawn wrong";
   }`}
-}</ErrorBoundary>`;
+}</$ErrorBoundary>`;
 
-const suspended = cs`<Suspense fallback={<p>loading</p>}>
+const suspended = cs`<$Suspense fallback={<p>loading</p>}>
   <p>loaded</p>
-</Suspense>`;
+</$Suspense>`;
 
 const portaled = cs`<div>
   <p>here</p>
-  <Portal>
+  <$Portal>
     <p>elsewhere</p>
-  </Portal>
+  </$Portal>
 </div>`;
 
 describe("control flow in a script", () => {

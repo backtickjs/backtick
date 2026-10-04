@@ -125,11 +125,11 @@ table                 → table
 tbody                 → tbody
 >                     → >
 \n                    → \n            
-For                   → For
+(For)                 → $For
 cs.splice(            →  [-semantic -navigation]
-For                   → For
+(For)                 → $For
 )                     →  [-semantic -navigation]
-{                     → For
+{                     → $For
 each                  → each
 __cs_ids              → ids
 (                     → (

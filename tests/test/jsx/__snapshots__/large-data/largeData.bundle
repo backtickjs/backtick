@@ -1,7 +1,7 @@
 import { For as $i0 } from "solid-js";
 import * as $module0 from "solid-js/web";
 const $modules = {
-  "1qtri6ano7i0b:37:4": (module, exports, require) => {
+  "8jfeo7virdyh:37:4": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -14,14 +14,14 @@ const $modules = {
         `<div><img alt><span></span><span></span><span>`,
       ),
       _tmpl$3 = /*#__PURE__*/ (0, web_1.template)(`<span>`);
-    exports.default = ($splice0, $tag1) =>
+    exports.default = ($tag0, $splice1) =>
       (() => {
         var _el$ = _tmpl$();
         (0, web_4.insert)(
           _el$,
-          (0, web_5.createComponent)($tag1, {
+          (0, web_5.createComponent)($tag0, {
             get each() {
-              return $splice0();
+              return $splice1();
             },
             children: (order) =>
               (() => {
@@ -34,7 +34,7 @@ const $modules = {
                 (0, web_4.insert)(_el$5, () => order.customer.city);
                 (0, web_4.insert)(
                   _el$2,
-                  (0, web_5.createComponent)($tag1, {
+                  (0, web_5.createComponent)($tag0, {
                     get each() {
                       return order.items;
                     },
@@ -78,54 +78,51 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $cs0 = $require("1qtri6ano7i0b:37:4").default;
-export default $cs0(
-  () => [
-    {
-      id: "ord-1000",
-      customer: { name: "Customer 0", city: "Montréal" },
-      items: [
-        { sku: "SKU-0-A", qty: 1 },
-        { sku: "SKU-0-B", qty: 1 },
-      ],
-      total: 45.23,
-    },
-    {
-      id: "ord-1001",
-      customer: { name: "Customer 1", city: "Toronto" },
-      items: [
-        { sku: "SKU-1-A", qty: 2 },
-        { sku: "SKU-1-B", qty: 1 },
-      ],
-      total: 46.23,
-    },
-    {
-      id: "ord-1002",
-      customer: { name: "Customer 2", city: "Montréal" },
-      items: [
-        { sku: "SKU-2-A", qty: 3 },
-        { sku: "SKU-2-B", qty: 1 },
-      ],
-      total: 47.23,
-    },
-    {
-      id: "ord-1003",
-      customer: { name: "Customer 3", city: "Toronto" },
-      items: [
-        { sku: "SKU-3-A", qty: 1 },
-        { sku: "SKU-3-B", qty: 1 },
-      ],
-      total: 48.23,
-    },
-    {
-      id: "ord-1004",
-      customer: { name: "Customer 4", city: "Montréal" },
-      items: [
-        { sku: "SKU-4-A", qty: 2 },
-        { sku: "SKU-4-B", qty: 1 },
-      ],
-      total: 49.23,
-    },
-  ],
-  $i0,
-);
+const $cs0 = $require("8jfeo7virdyh:37:4").default;
+export default $cs0($i0, () => [
+  {
+    id: "ord-1000",
+    customer: { name: "Customer 0", city: "Montréal" },
+    items: [
+      { sku: "SKU-0-A", qty: 1 },
+      { sku: "SKU-0-B", qty: 1 },
+    ],
+    total: 45.23,
+  },
+  {
+    id: "ord-1001",
+    customer: { name: "Customer 1", city: "Toronto" },
+    items: [
+      { sku: "SKU-1-A", qty: 2 },
+      { sku: "SKU-1-B", qty: 1 },
+    ],
+    total: 46.23,
+  },
+  {
+    id: "ord-1002",
+    customer: { name: "Customer 2", city: "Montréal" },
+    items: [
+      { sku: "SKU-2-A", qty: 3 },
+      { sku: "SKU-2-B", qty: 1 },
+    ],
+    total: 47.23,
+  },
+  {
+    id: "ord-1003",
+    customer: { name: "Customer 3", city: "Toronto" },
+    items: [
+      { sku: "SKU-3-A", qty: 1 },
+      { sku: "SKU-3-B", qty: 1 },
+    ],
+    total: 48.23,
+  },
+  {
+    id: "ord-1004",
+    customer: { name: "Customer 4", city: "Montréal" },
+    items: [
+      { sku: "SKU-4-A", qty: 2 },
+      { sku: "SKU-4-B", qty: 1 },
+    ],
+    total: 49.23,
+  },
+]);

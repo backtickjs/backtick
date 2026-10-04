@@ -18,9 +18,9 @@ blink            → blink
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
-NotATag          → NotATag
+(NotATag)        → $NotATag
 )                →  [-semantic -navigation]
-{                → NotATag
+{                → $NotATag
 }                → 
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
@@ -41,11 +41,11 @@ span             → span
 >                → >
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-For              → For
+(For)            → $For
 cs.splice(       →  [-semantic -navigation]
-For              → For
+(For)            → $For
 )                →  [-semantic -navigation]
-{                → For
+{                → $For
 each             → each
 [                → [
 ]                → ]
@@ -102,9 +102,9 @@ class            → class
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
-Fragment         → Fragment
+(Fragment)       → $Fragment
 )                →  [-semantic -navigation]
-{                → Fragment
+{                → $Fragment
 }                → 
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]

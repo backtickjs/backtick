@@ -1,6 +1,5 @@
 import type ts from "typescript";
 import type { CodeInformation } from "./CodeInformation.js";
-import { isComponentTag } from "./isComponentTag.js";
 import { jsxText } from "./jsxText.js";
 import type { ClientScript, Splice } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
@@ -20,8 +19,8 @@ const WRAPPER: CodeInformation = { semantic: false, navigation: false };
  * - a name nothing declares, read as the client's global (`cs.globalThis.x`)
  * - a splice, as the host value the client is handed: `$x` as
  *   `cs.splice((x))`, `${…}` as `cs.splice(…)` around the host code
- * - a host tag, as the call it is checked as:
- *   `(void Card, cs.splice(Card)({ …props, children }))`
+ * - a splice written as a tag, `<$Card>`, as the call it is checked as:
+ *   `(void (Card), cs.splice((Card))({ …props, children }))`
  *
  * Everything else, types included, is TypeScript's to read as written. Each
  * piece maps back to the text it came from; what the wrapper adds maps to no
@@ -144,8 +143,8 @@ export function virtualScript(
     verbatim(node.getStart(file), node.getEnd());
   };
 
-  // A component tag no scope binds: the host binding, which the client is
-  // handed as a component.
+  // A tag that splices a host value, `<$Card>`, which the client is handed
+  // as a component.
   const isHostTag = (
     node: ts.JsxElement | ts.JsxSelfClosingElement,
   ): boolean => {
@@ -154,8 +153,7 @@ export function virtualScript(
       : node.tagName;
     return (
       ts.isIdentifier(tagName) &&
-      isComponentTag(tagName.text) &&
-      !bindings.has(tagName)
+      script.splices[tagName.text]?.refs.includes(tagName) === true
     );
   };
 
@@ -167,6 +165,8 @@ export function virtualScript(
     const opening = ts.isJsxElement(node) ? node.openingElement : node;
     const tagName = opening.tagName as ts.Identifier;
     const tag = script.toSourceRange(tagName);
+    // The binding's name, parenthesized over its `$` as an unbraced splice is.
+    const name = `(${(script.splices[tagName.text]!.expression as ts.Identifier).text})`;
     // Where JSX stands, a call is written in braces: a child of an element
     // or fragment written as JSX, or an attribute of one written as an
     // element. A host tag's own children and props are values already.
@@ -188,14 +188,14 @@ export function virtualScript(
     }
     if (ts.isJsxElement(node)) {
       added("(void ");
-      mapped(tagName.text, node.closingElement.tagName);
+      mapped(name, node.closingElement.tagName);
       added(", ");
     }
     // The tag as a value, reported under its name: what isn't a component is
     // refused there, as JSX refuses it; so is a missing prop, the props
     // object's own braces mapped to it.
     added("cs.splice(", tag.start);
-    mapped(tagName.text, tagName);
+    mapped(name, tagName);
     added(")", tag.end);
     added("(");
     out.push(["{ ", undefined, tag.start, tag.end - tag.start]);

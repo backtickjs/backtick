@@ -3,11 +3,11 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 ul               → ul
 >                → >
 \n               → \n  
-Index            → Index
+(Index)          → $Index
 cs.splice(       →  [-semantic -navigation]
-Index            → Index
+(Index)          → $Index
 )                →  [-semantic -navigation]
-{                → Index
+{                → $Index
 each             → each
 cs.splice(       →  [-semantic -navigation]
 (rows)           → $rows
@@ -61,11 +61,11 @@ ul               → ul
 >                → >
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-Switch           → Switch
+(Switch)         → $Switch
 cs.splice(       →  [-semantic -navigation]
-Switch           → Switch
+(Switch)         → $Switch
 )                →  [-semantic -navigation]
-{                → Switch
+{                → $Switch
 fallback         → fallback
 <                → <
 p                → p
@@ -75,12 +75,12 @@ none             → none
 /                → /
 p                → p
 >                → >
-children         → \n  <Match when={1 > 2}>\n    <p>wrong</p>\n  </Match>\n  <Match when={2 > 1}>\n    <p>right</p>\n  </Match>\n
-Match            → Match
+children         → \n  <$Match when={1 > 2}>\n    <p>wrong</p>\n  </$Match>\n  <$Match when={2 > 1}>\n    <p>right</p>\n  </$Match>\n
+(Match)          → $Match
 cs.splice(       →  [-semantic -navigation]
-Match            → Match
+(Match)          → $Match
 )                →  [-semantic -navigation]
-{                → Match
+{                → $Match
 when             → when
 1                → 1
                  →  
@@ -97,11 +97,11 @@ wrong            → wrong
 p                → p
 >                → >
 }                → 
-Match            → Match
+(Match)          → $Match
 cs.splice(       →  [-semantic -navigation]
-Match            → Match
+(Match)          → $Match
 )                →  [-semantic -navigation]
-{                → Match
+{                → $Match
 when             → when
 2                → 2
                  →  
@@ -121,11 +121,11 @@ p                → p
 }                → 
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-ErrorBoundary    → ErrorBoundary
+(ErrorBoundary)  → $ErrorBoundary
 cs.splice(       →  [-semantic -navigation]
-ErrorBoundary    → ErrorBoundary
+(ErrorBoundary)  → $ErrorBoundary
 )                →  [-semantic -navigation]
-{                → ErrorBoundary
+{                → $ErrorBoundary
 fallback         → fallback
 <                → <
 p                → p
@@ -151,11 +151,11 @@ throw            → throw
 }                → 
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-Suspense         → Suspense
+(Suspense)       → $Suspense
 cs.splice(       →  [-semantic -navigation]
-Suspense         → Suspense
+(Suspense)       → $Suspense
 )                →  [-semantic -navigation]
-{                → Suspense
+{                → $Suspense
 fallback         → fallback
 <                → <
 p                → p
@@ -190,11 +190,11 @@ here             → here
 p                → p
 >                → >
 \n               → \n  
-Portal           → Portal
+(Portal)         → $Portal
 cs.splice(       →  [-semantic -navigation]
-Portal           → Portal
+(Portal)         → $Portal
 )                →  [-semantic -navigation]
-{                → Portal
+{                → $Portal
 children         → \n    <p>elsewhere</p>\n  
 <                → <
 p                → p

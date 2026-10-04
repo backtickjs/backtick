@@ -23,11 +23,11 @@ async function RotatingRows() {
       <div>
         <span onclick={rotate}>rotate</span>
         <div>
-          <For each={names()}>
+          <$For each={names()}>
             {(name: string, index: () => number) => (
               <span>{name + " at " + index()}</span>
             )}
-          </For>
+          </$For>
         </div>
       </div>
     );

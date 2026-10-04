@@ -202,7 +202,7 @@ export async function Main(): Promise<Client<JSX.Element>> {
         </div>
         <table class="table table-hover table-striped test-data">
           <tbody>
-            <For each={data()}>
+            <$For each={data()}>
               {(row: Row) => (
                 <tr class={selected() === row.id ? "danger" : ""}>
                   <td class="col-md-1">{row.id}</td>
@@ -220,7 +220,7 @@ export async function Main(): Promise<Client<JSX.Element>> {
                   <td class="col-md-6"></td>
                 </tr>
               )}
-            </For>
+            </$For>
           </tbody>
         </table>
         <span

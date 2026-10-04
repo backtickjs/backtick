@@ -113,9 +113,9 @@ label            → label
 return           → return
                  →  
 cs.splice(       →  [-semantic -navigation]
-Badge            → Badge
+(Badge)          → $Badge
 )                →  [-semantic -navigation]
-{                → Badge
+{                → $Badge
 __cs_rest        → rest
 disabled         → disabled
 "data-id"        → data-id

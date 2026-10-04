@@ -31,7 +31,7 @@ const page = () => cs`{
       <p>{$shared}</p>
       <p>{total}</p>
       <ul>
-        <For each={rows}>{(row: number) => <li>{row + count()}</li>}</For>
+        <$For each={rows}>{(row: number) => <li>{row + count()}</li>}</$For>
       </ul>
     </section>
   );

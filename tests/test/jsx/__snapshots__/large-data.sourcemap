@@ -3,16 +3,16 @@ cs.lift((() =>              → cs` [-semantic -navigation]
 div                         → div
 >                           → >
 \n                          → \n      
-For                         → For
+(For)                       → $For
 cs.splice(                  →  [-semantic -navigation]
-For                         → For
+(For)                       → $For
 )                           →  [-semantic -navigation]
-{                           → For
+{                           → $For
 each                        → each
 cs.splice(                  →  [-semantic -navigation]
 (orders)                    → $orders
 )                           →  [-semantic -navigation]
-children                    → \n        {(order: Order) => (\n          <div>\n            <img src={"https://img.example.com/" + order.id + ".png"} alt="" />\n            <span>{order.customer.name}</span>\n            <span>{order.customer.city}</span>\n            <For each={order.items}>\n              {(item: Item) => <span>{item.sku + " x" + item.qty}</span>}\n            </For>\n            <span>{"$" + order.total}</span>\n          </div>\n        )}\n      
+children                    → \n        {(order: Order) => (\n          <div>\n            <img src={"https://img.example.com/" + order.id + ".png"} alt="" />\n            <span>{order.customer.name}</span>\n            <span>{order.customer.city}</span>\n            <$For each={order.items}>\n              {(item: Item) => <span>{item.sku + " x" + item.qty}</span>}\n            </$For>\n            <span>{"$" + order.total}</span>\n          </div>\n        )}\n      
 (                           → (
 __cs_order                  → order
 :                           → :
@@ -84,11 +84,11 @@ city                        → city
 span                        → span
 >                           → >
 \n                          → \n            
-For                         → For
+(For)                       → $For
 cs.splice(                  →  [-semantic -navigation]
-For                         → For
+(For)                       → $For
 )                           →  [-semantic -navigation]
-{                           → For
+{                           → $For
 each                        → each
 __cs_order                  → order
 .                           → .

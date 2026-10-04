@@ -37,7 +37,7 @@ async function Rows() {
     return (
       <>
         <span onclick={clear}>clear</span>
-        <For each={ids()}>{(id: number) => <span>{"row " + id}</span>}</For>
+        <$For each={ids()}>{(id: number) => <span>{"row " + id}</span>}</$For>
       </>
     );
   }`;

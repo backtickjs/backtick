@@ -22,13 +22,13 @@ async function SwappableRows() {
         <button onclick={swap}>swap</button>
         <table>
           <tbody>
-            <For each={ids()}>
+            <$For each={ids()}>
               {(id: number) => (
                 <tr id={"row-" + id}>
                   <td>{"row " + id}</td>
                 </tr>
               )}
-            </For>
+            </$For>
           </tbody>
         </table>
       </div>

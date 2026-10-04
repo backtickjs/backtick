@@ -29,11 +29,11 @@ async function MemberRows() {
     return (
       <div>
         <ul class="rows">
-          <For each={held()}>
+          <$For each={held()}>
             {(row: Row) => (
               <li onclick={() => row.label[1]("pressed")}>{row.label[0]()}</li>
             )}
-          </For>
+          </$For>
         </ul>
       </div>
     );

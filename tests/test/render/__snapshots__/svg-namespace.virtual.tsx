@@ -29,7 +29,7 @@ const svgNamespace = cs.lift((() => {
       <a href="/shapes">{"shapes"}</a>
       <svg viewBox="0 0 30 10" width="120">
         {cs.splice((<Ring />))}
-        {(void For, cs.splice(For)({ each: [10, 20], children: (__cs_x: number) => <__cs_Dot x={__cs_x} /> }))}
+        {(void (For), cs.splice((For))({ each: [10, 20], children: (__cs_x: number) => <__cs_Dot x={__cs_x} /> }))}
         <foreignObject x="0" y="0" width="10" height="10">
           <p>{"html again"}</p>
         </foreignObject>

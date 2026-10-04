@@ -10,40 +10,40 @@ import { evaluate } from "../evaluate.ts";
 // it the way it captures any binding, and calls it as a component: once, with
 // its props read on access.
 const scriptBoundTagCapture = cs.create(
-  "3dnmz2nwnczai:13:30",
+  "sn9bkvkvsing:13:30",
   {
     params: [
       { kind: "splice", value: createSignal, bindings: [] },
       {
         kind: "splice",
         value: cs.create(
-          "3dnmz2nwnczai:19:9",
+          "sn9bkvkvsing:19:9",
           {
             params: [
-              { kind: "capture", key: "Badge$3dnmz2nwnczai$2" },
-              { kind: "capture", key: "count$3dnmz2nwnczai$0" },
+              { kind: "capture", key: "Badge$sn9bkvkvsing$2" },
+              { kind: "capture", key: "count$sn9bkvkvsing$0" },
             ],
           },
           '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = ($capture0, $capture1) => (0, web_1.createComponent)($capture0, {\n    get n() {\n        return $capture1();\n    }\n});\n}',
           '{"version":3,"file":"module.jsx","mappings":";;;;kBAkBY,CAAAA,SAAA,EAAAC,SAAA,KAAAC,yBAAA,EAACF,SAAK;IAAA,IAACG,CAACA;QAAA,OAAEF,SAAK,EAAE;IAAA;CAAA,CAAI","names":["$capture0","$capture1","_$createComponent","n"],"ignoreList":[],"sources":["render/script-bound-tag-capture.test.tsx"]}',
           ["solid-js/web"],
         ),
-        bindings: ["count$3dnmz2nwnczai$0", "Badge$3dnmz2nwnczai$2"],
+        bindings: ["count$sn9bkvkvsing$0", "Badge$sn9bkvkvsing$2"],
       },
       {
         kind: "splice",
         value: cs.create(
-          "3dnmz2nwnczai:21:10",
+          "sn9bkvkvsing:21:10",
           {
             params: [
               {
                 kind: "splice",
                 value: cs.create(
-                  "3dnmz2nwnczai:23:19",
+                  "sn9bkvkvsing:23:19",
                   {
                     params: [
-                      { kind: "capture", key: "Badge$3dnmz2nwnczai$2" },
-                      { kind: "capture", key: "count$3dnmz2nwnczai$0" },
+                      { kind: "capture", key: "Badge$sn9bkvkvsing$2" },
+                      { kind: "capture", key: "count$sn9bkvkvsing$0" },
                     ],
                   },
                   '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = ($capture0, $capture1) => (0, web_1.createComponent)($capture0, {\n    get n() {\n        return $capture1() + 100;\n    }\n});\n}',
@@ -52,30 +52,30 @@ const scriptBoundTagCapture = cs.create(
                 ),
                 bindings: [],
               },
-              { kind: "capture", key: "Badge$3dnmz2nwnczai$2" },
-              { kind: "capture", key: "count$3dnmz2nwnczai$0" },
+              { kind: "capture", key: "Badge$sn9bkvkvsing$2" },
+              { kind: "capture", key: "count$sn9bkvkvsing$0" },
             ],
           },
           '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $capture1, $capture2) => {\n    const skipped = 10;\n    return $splice0($capture1, $capture2);\n};\n}',
           '{"version":3,"file":"module.jsx","mappings":";;;kBAoBa,CAAAA,QAAA,EAAAC,SAAA,EAAAC,SAAA;IACH,MAAMC,OAAO,GAAG,EAAE;IAClB,OAAOH,QAAA,CAAAC,SAAA,EAAAC,SAAA,CAAkC;AAC3C,CAAC","names":["$splice0","$capture1","$capture2","skipped"],"ignoreList":[],"sources":["render/script-bound-tag-capture.test.tsx"]}',
           [],
         ),
-        bindings: ["count$3dnmz2nwnczai$0", "Badge$3dnmz2nwnczai$2"],
+        bindings: ["count$sn9bkvkvsing$0", "Badge$sn9bkvkvsing$2"],
       },
       {
         kind: "splice",
         value: cs.create(
-          "3dnmz2nwnczai:26:9",
+          "sn9bkvkvsing:26:9",
           {
             params: [
               {
                 kind: "splice",
                 value: cs.create(
-                  "3dnmz2nwnczai:26:24",
+                  "sn9bkvkvsing:26:24",
                   {
                     params: [
-                      { kind: "capture", key: "Badge$3dnmz2nwnczai$2" },
-                      { kind: "capture", key: "count$3dnmz2nwnczai$0" },
+                      { kind: "capture", key: "Badge$sn9bkvkvsing$2" },
+                      { kind: "capture", key: "count$sn9bkvkvsing$0" },
                     ],
                   },
                   '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = ($capture0, $capture1) => (0, web_1.createComponent)($capture0, {\n    get n() {\n        return $capture1() + 1000;\n    }\n});\n}',
@@ -84,32 +84,32 @@ const scriptBoundTagCapture = cs.create(
                 ),
                 bindings: [],
               },
-              { kind: "capture", key: "Badge$3dnmz2nwnczai$2" },
-              { kind: "capture", key: "count$3dnmz2nwnczai$0" },
+              { kind: "capture", key: "Badge$sn9bkvkvsing$2" },
+              { kind: "capture", key: "count$sn9bkvkvsing$0" },
             ],
           },
           '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<section>`);\nexports.default = ($splice0, $capture1, $capture2) => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, () => $splice0($capture1, $capture2));\n    return _el$;\n})();\n}',
           '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAyBY,CAAAA,QAAA,EAAAC,SAAA,EAAAC,SAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAAUH,QAAA,CAAAC,SAAA,EAAAC,SAAA,CAAmC;IAAA,OAAAC,IAAA;AAAA,IAAW","names":["$splice0","$capture1","$capture2","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["render/script-bound-tag-capture.test.tsx"]}',
           ["solid-js/web"],
         ),
-        bindings: ["count$3dnmz2nwnczai$0", "Badge$3dnmz2nwnczai$2"],
+        bindings: ["count$sn9bkvkvsing$0", "Badge$sn9bkvkvsing$2"],
       },
       {
         kind: "splice",
         value: cs.create(
-          "3dnmz2nwnczai:28:10",
+          "sn9bkvkvsing:28:10",
           {
             params: [
               { kind: "tag", value: For },
-              { kind: "capture", key: "Badge$3dnmz2nwnczai$2" },
-              { kind: "capture", key: "count$3dnmz2nwnczai$0" },
+              { kind: "capture", key: "Badge$sn9bkvkvsing$2" },
+              { kind: "capture", key: "count$sn9bkvkvsing$0" },
             ],
           },
           '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = ($tag0, $capture1, $capture2) => (0, web_1.createComponent)($tag0, {\n    each: [1, 2],\n    children: m => (0, web_1.createComponent)($capture1, {\n        get n() {\n            return m * $capture2();\n        }\n    })\n});\n}',
-          '{"version":3,"file":"module.jsx","mappings":";;;;kBA2Ba,CAAAA,KAAA,EAAAC,SAAA,EAAAC,SAAA,KAAAC,yBAAA,EAACH,KAAG;IAACI,IAAI,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC;IAAAC,QAAA,EAClBC,CAAS,IAAAH,yBAAA,EAAMF,SAAK;QAAA,IAACM,CAACA;YAAA,OAAED,CAAC,GAAGJ,SAAK,EAAE;QAAA;KAAA;CAAI,CACrC","names":["$tag0","$capture1","$capture2","_$createComponent","each","children","m","n"],"ignoreList":[],"sources":["render/script-bound-tag-capture.test.tsx"]}',
+          '{"version":3,"file":"module.jsx","mappings":";;;;kBA2Ba,CAAAA,KAAA,EAAAC,SAAA,EAAAC,SAAA,KAAAC,yBAAA,EAACH,KAAI;IAACI,IAAI,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC;IAAAC,QAAA,EACnBC,CAAS,IAAAH,yBAAA,EAAMF,SAAK;QAAA,IAACM,CAACA;YAAA,OAAED,CAAC,GAAGJ,SAAK,EAAE;QAAA;KAAA;CAAI,CACpC","names":["$tag0","$capture1","$capture2","_$createComponent","each","children","m","n"],"ignoreList":[],"sources":["render/script-bound-tag-capture.test.tsx"]}',
           ["solid-js/web"],
         ),
-        bindings: ["count$3dnmz2nwnczai$0", "Badge$3dnmz2nwnczai$2"],
+        bindings: ["count$sn9bkvkvsing$0", "Badge$sn9bkvkvsing$2"],
       },
     ],
   },

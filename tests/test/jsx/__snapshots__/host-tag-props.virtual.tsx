@@ -24,7 +24,7 @@ describe("a host tag's props", () => {
       await evaluate(
         () => cs.lift((() => {
           const __cs_rest = { label: "spread" };
-          return cs.splice(Badge)({ ...__cs_rest, disabled: true, "data-id": "seven", icon: <b>!</b>, });
+          return cs.splice((Badge))({ ...__cs_rest, disabled: true, "data-id": "seven", icon: <b>!</b>, });
         })()),
       ),
     );

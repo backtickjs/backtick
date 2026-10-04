@@ -46,7 +46,7 @@ const conditionalDrawing = cs`{
     <div>
       <span>{"builds " + builds()}</span>
       <section>
-        <Held
+        <$Held
           again={() => {
             setBuilds(builds() + 1);
             return builds() < 5;

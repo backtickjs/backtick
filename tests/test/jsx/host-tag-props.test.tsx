@@ -24,7 +24,7 @@ describe("a host tag's props", () => {
       await evaluate(
         () => cs`{
           const rest = { label: "spread" };
-          return <Badge {...rest} disabled data-id="seven" icon=<b>!</b> />;
+          return <$Badge {...rest} disabled data-id="seven" icon=<b>!</b> />;
         }`,
       ),
     );

@@ -149,16 +149,16 @@ const texts = (spans: readonly { textSpan: ts.TextSpan }[] | undefined) =>
     tagsSource.slice(textSpan.start, textSpan.start + textSpan.length),
   );
 
-// A client component held on the host, used as a tag inside a script, is the
-// host's binding to an editor: what it reaches, renames and colors as, whatever
-// the virtual code writes the tag as (`cs.splice(Card)({ … })`, each tag's own
-// name mapped to it).
+// A client component held on the host, spliced as a tag inside a script
+// (`<$Card>`), is the host's binding to an editor: what it reaches, renames and
+// colors as, whatever the virtual code writes the tag as
+// (`cs.splice((Card))({ … })`, each tag's own name mapped to it).
 describe("a host tag in a script, in the editor", () => {
   const declaration = inTags("Card =");
   const cardTags = [
-    inTags("<Card", 0, 1),
-    inTags("<Card", 1, 1),
-    inTags("</Card", 0, 2),
+    inTags("<$Card", 0, 2),
+    inTags("<$Card", 1, 2),
+    inTags("</$Card", 0, 3),
   ];
 
   it("goes to the host binding's declaration", () => {
@@ -176,7 +176,7 @@ describe("a host tag in a script, in the editor", () => {
   });
 
   it("renames the host binding and every tag naming it together", () => {
-    for (const from of [declaration, inTags("</Card", 0, 2)]) {
+    for (const from of [declaration, inTags("</$Card", 0, 3)]) {
       const locations = tagsService.findRenameLocations(
         tagsFixture,
         from,
@@ -218,7 +218,7 @@ describe("a host tag in a script, in the editor", () => {
       ),
       ["Server"],
     );
-    assert.equal(diagnostics[0]!.start, inTags("<Server", 0, 1));
+    assert.equal(diagnostics[0]!.start, inTags("<$Server", 0, 2));
   });
 });
 

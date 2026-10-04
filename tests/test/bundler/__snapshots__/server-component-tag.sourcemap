@@ -15,9 +15,9 @@ div                                       → div
 }                                         → }
 \n                                        → \n        
 cs.splice(                                →  [-semantic -navigation]
-Rule                                      → Rule
+(Rule)                                    → $Rule
 )                                         →  [-semantic -navigation]
-{                                         → Rule
+{                                         → $Rule
 }                                         → 
 \n                                        → \n      
 <                                         → <

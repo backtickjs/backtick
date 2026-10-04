@@ -24,7 +24,7 @@ it("mappedComponent", async (t) => {
     t,
     "mappedComponent",
     cs.lift((() => <div>
-      {(void For, cs.splice(For)({ each: cs.splice((rows)), children: (__cs_row: number) => cs.splice(cs.lift((() => <span>{"row " + __cs_row}</span>)())) }))}
+      {(void (For), cs.splice((For))({ each: cs.splice((rows)), children: (__cs_row: number) => cs.splice(cs.lift((() => <span>{"row " + __cs_row}</span>)())) }))}
     </div>)()),
   );
 });

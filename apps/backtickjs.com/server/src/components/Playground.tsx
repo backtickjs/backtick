@@ -530,11 +530,11 @@ export async function Playground({
               aria-hidden="true"
             >
               <code>
-                <For each={tokensOf(source.get())}>
+                <$For each={tokensOf(source.get())}>
                   {(t: { text: string; colour: string }) => (
                     <span style={"color: " + t.colour}>{t.text}</span>
                   )}
-                </For>
+                </$For>
                 {"\n"}
               </code>
             </pre>
@@ -598,9 +598,9 @@ export async function Playground({
           </div>
 
           <div style={$COMPLAINTS}>
-            <For each={diagnostics.get()}>
+            <$For each={diagnostics.get()}>
               {(said: Said) => <p style={$COMPLAINT}>{said.message}</p>}
-            </For>
+            </$For>
           </div>
         </div>
 

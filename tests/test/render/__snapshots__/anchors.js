@@ -28,7 +28,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs.create(
-    "2pl9zp0ip7s1i:32:9",
+    "3vm53m05uwuq:32:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -36,7 +36,7 @@ async function Rows() {
       ],
     },
     '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nconst web_4 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>clear`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<span>`);\nexports.default = ($splice0, $tag1) => {\n    const [ids, setIds] = $splice0()([1, 2, 3]);\n    const clear = () => {\n        setIds([]);\n    };\n    return [(() => {\n            var _el$ = _tmpl$();\n            _el$.$$click = clear;\n            return _el$;\n        })(), (0, web_4.createComponent)($tag1, {\n            get each() {\n                return ids();\n            },\n            children: id => (() => {\n                var _el$2 = _tmpl$2();\n                (0, web_3.insert)(_el$2, "row " + id);\n                return _el$2;\n            })()\n        })];\n};\n(0, web_2.delegateEvents)(["click"]);\n}',
-    '{"version":3,"file":"module.jsx","mappings":";;;;;;;;kBA+BY,CAAAA,QAAA,EAAAC,KAAA;IACR,MAAM,CAACC,GAAG,EAAEC,MAAM,CAAC,GAAGH,QAAA,EAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;IACxD,MAAMI,KAAK,GAAGA,GAAA;QACZD,MAAM,CAAC,EAAE,CAAC;IACZ,CAAC;IACD;YAAA,IAAAE,IAAA,GAAAC,MAAA;YAAAD,IAAA,CAAAE,OAAA,GAEmBH,KAAK;YAAA,OAAAC,IAAA;QAAA,MAAAG,yBAAA,EACnBP,KAAG;YAAA,IAACQ,IAAIA;gBAAA,OAAEP,GAAG,EAAE;YAAA;YAAAQ,QAAA,EAAIC,EAAU;gBAAA,IAAAC,KAAA,GAAAC,OAAA;gBAAAC,gBAAA,EAAAF,KAAA,EAAY,MAAM,GAAGD,EAAE;gBAAA,OAAAC,KAAA;YAAA;SAAQ;AAGnE,CAAC","names":["$splice0","$tag1","ids","setIds","clear","_el$","_tmpl$","$$click","_$createComponent","each","children","id","_el$2","_tmpl$2","_$insert"],"ignoreList":[],"sources":["render/anchors.test.tsx"]}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;;;kBA+BY,CAAAA,QAAA,EAAAC,KAAA;IACR,MAAM,CAACC,GAAG,EAAEC,MAAM,CAAC,GAAGH,QAAA,EAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;IACxD,MAAMI,KAAK,GAAGA,GAAA;QACZD,MAAM,CAAC,EAAE,CAAC;IACZ,CAAC;IACD;YAAA,IAAAE,IAAA,GAAAC,MAAA;YAAAD,IAAA,CAAAE,OAAA,GAEmBH,KAAK;YAAA,OAAAC,IAAA;QAAA,MAAAG,yBAAA,EACnBP,KAAI;YAAA,IAACQ,IAAIA;gBAAA,OAAEP,GAAG,EAAE;YAAA;YAAAQ,QAAA,EAAIC,EAAU;gBAAA,IAAAC,KAAA,GAAAC,OAAA;gBAAAC,gBAAA,EAAAF,KAAA,EAAY,MAAM,GAAGD,EAAE;gBAAA,OAAAC,KAAA;YAAA;SAAQ;AAGpE,CAAC","names":["$splice0","$tag1","ids","setIds","clear","_el$","_tmpl$","$$click","_$createComponent","each","children","id","_el$2","_tmpl$2","_$insert"],"ignoreList":[],"sources":["render/anchors.test.tsx"]}',
     ["solid-js/web"],
   );
 }
@@ -76,7 +76,7 @@ async function drawAt(value, parent, selector) {
   const id = parent.id;
   const unmount = await evaluate(
     cs.create(
-      "2pl9zp0ip7s1i:91:33",
+      "3vm53m05uwuq:91:33",
       {
         params: [
           { kind: "splice", value: createRoot, bindings: [] },

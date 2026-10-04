@@ -22,14 +22,14 @@ export const undeclared = cs.lift((() => <blink />)());
 const NotATag = { id: "View" };
 // a plain object is not a component, a fragment or a list
 // @ts-expect-error: JSX element type 'NotATag' does not have any construct or call signatures.
-export const wrongKind = cs.lift((() => cs.splice(NotATag)({ }))());
+export const wrongKind = cs.lift((() => cs.splice((NotATag))({ }))());
 
 // ─── what arranges rather than draws ──────────────────────────────────
 export const shorthand = cs.lift((() => <>
   <span>a</span>
 </>)());
 
-export const list = cs.lift((() => (void For, cs.splice(For)({ each: [] as number[], children: (__cs_n) => <i>{__cs_n}</i> })))());
+export const list = cs.lift((() => (void (For), cs.splice((For))({ each: [] as number[], children: (__cs_n) => <i>{__cs_n}</i> })))());
 
 // ─── what the app wrote: a server component, on the host ──────────────
 const Panel = async () => null;
@@ -47,7 +47,7 @@ export const wrongType = cs.lift((() => <div class={1} />)());
 // `<>` is the fragment, and `<Fragment>` a tag like any other: here it names
 // nothing
 // @ts-expect-error: Cannot find name 'Fragment'.
-export const named = cs.lift((() => cs.splice(Fragment)({ }))());
+export const named = cs.lift((() => cs.splice((Fragment))({ }))());
 
 // ─── children, which are structure ────────────────────────────────────
 export const text = cs.lift((() => <div>hello</div>)());

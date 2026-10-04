@@ -9,13 +9,13 @@ const Card = cs`(props: { title: string; children?: unknown }) => (
 )`;
 
 // @ts-expect-error: Property 'title' is missing.
-export const missing = cs`<Card />`;
+export const missing = cs`<$Card />`;
 
 // @ts-expect-error: Type 'number' is not assignable to type 'string'.
-export const wrong = cs`<Card title={1} />`;
+export const wrong = cs`<$Card title={1} />`;
 
 // @ts-expect-error: Object literal may only specify known properties.
-export const unknown = cs`<Card title="x" nope={1} />`;
+export const unknown = cs`<$Card title="x" nope={1} />`;
 
 // @ts-expect-error: the child reads each item as a string, not a number.
-export const wrongChild = cs`<For each={[1]}>{(n: string) => n}</For>`;
+export const wrongChild = cs`<$For each={[1]}>{(n: string) => n}</$For>`;

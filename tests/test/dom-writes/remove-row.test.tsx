@@ -16,7 +16,7 @@ async function RemovableRows() {
     return (
       <table>
         <tbody>
-          <For each={ids()}>
+          <$For each={ids()}>
             {(id: number) => (
               <tr id={"row-" + id}>
                 <td>
@@ -28,7 +28,7 @@ async function RemovableRows() {
                 </td>
               </tr>
             )}
-          </For>
+          </$For>
         </tbody>
       </table>
     );

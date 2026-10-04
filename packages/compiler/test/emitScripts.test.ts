@@ -40,6 +40,20 @@ describe("emitScripts", () => {
   });
 });
 
+describe("a tag spliced, `<$Card>`", () => {
+  it("is numbered where the script first reads it, among the splices", () => {
+    const [script] = emitScripts(
+      ts,
+      "host.tsx",
+      "const script = cs`<p>{$a}<$Card />{$b}</p>`;",
+    );
+    assert.match(
+      script!.code,
+      /\(\$splice0, \$tag1, \$splice2\) => <p>\{\$splice0\(\)\}<\$tag1 \/>\{\$splice2\(\)\}<\/p>/,
+    );
+  });
+});
+
 // A framework's compile step, as Solid's is: an import and a declaration of
 // its own above the module it was given, which it maps column for column.
 const plugin: Plugin = (code, id) => {

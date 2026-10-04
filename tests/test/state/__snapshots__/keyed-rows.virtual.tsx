@@ -24,7 +24,7 @@ async function SwappableRows() {
         <span onclick={__cs_swap}>swap</span>
         <span onclick={__cs_drop}>drop</span>
         <div>
-          {(void For, cs.splice(For)({ each: __cs_ids(), children: (__cs_id: number) => <span>{"row " + __cs_id}</span> }))}
+          {(void (For), cs.splice((For))({ each: __cs_ids(), children: (__cs_id: number) => <span>{"row " + __cs_id}</span> }))}
         </div>
       </div>
     );

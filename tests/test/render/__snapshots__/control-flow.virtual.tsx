@@ -18,20 +18,20 @@ import { snapshotCase } from "../snapshotCase.ts";
 const rows = ["first", "second"];
 
 const indexed = cs.lift((() => <ul>
-  {(void Index, cs.splice(Index)({ each: cs.splice((rows)), children: (__cs_row: () => string, __cs_index: number) => <li>{__cs_index + ": " + __cs_row()}</li> }))}
+  {(void (Index), cs.splice((Index))({ each: cs.splice((rows)), children: (__cs_row: () => string, __cs_index: number) => <li>{__cs_index + ": " + __cs_row()}</li> }))}
 </ul>)());
 
-const switched = cs.lift((() => (void Switch, cs.splice(Switch)({ fallback: <p>none</p>, children: [(void Match, cs.splice(Match)({ when: 1 > 2, children: <p>wrong</p> })), (void Match, cs.splice(Match)({ when: 2 > 1, children: <p>right</p> }))] })))());
+const switched = cs.lift((() => (void (Switch), cs.splice((Switch))({ fallback: <p>none</p>, children: [(void (Match), cs.splice((Match))({ when: 1 > 2, children: <p>wrong</p> })), (void (Match), cs.splice((Match))({ when: 2 > 1, children: <p>right</p> }))] })))());
 
-const caught = cs.lift((() => (void ErrorBoundary, cs.splice(ErrorBoundary)({ fallback: <p>caught</p>, children: cs.splice(cs.lift((() => {
+const caught = cs.lift((() => (void (ErrorBoundary), cs.splice((ErrorBoundary))({ fallback: <p>caught</p>, children: cs.splice(cs.lift((() => {
     throw "drawn wrong";
   })())) })))());
 
-const suspended = cs.lift((() => (void Suspense, cs.splice(Suspense)({ fallback: <p>loading</p>, children: <p>loaded</p> })))());
+const suspended = cs.lift((() => (void (Suspense), cs.splice((Suspense))({ fallback: <p>loading</p>, children: <p>loaded</p> })))());
 
 const portaled = cs.lift((() => <div>
   <p>here</p>
-  {(void Portal, cs.splice(Portal)({ children: <p>elsewhere</p> }))}
+  {(void (Portal), cs.splice((Portal))({ children: <p>elsewhere</p> }))}
 </div>)());
 
 describe("control flow in a script", () => {

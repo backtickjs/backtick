@@ -6,7 +6,7 @@ import { evaluate } from "../evaluate.ts";
 // A client component the host holds, written as a tag in a script, given its
 // props in every form JSX writes them: spread, valueless, dashed, an element.
 const Badge = cs.create(
-  "is93rf4fmo6n:9:14",
+  "irncup0pbj6d:9:14",
   { params: [] },
   '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nconst web_4 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>`);\nexports.default = () => props => (() => {\n    var _el$ = _tmpl$();\n    (0, web_4.insert)(_el$, () => props.icon, null);\n    (0, web_4.insert)(_el$, () => props.label, null);\n    (0, web_3.effect)(_p$ => {\n        var _v$ = props["data-id"], _v$2 = props.disabled ? "off" : "on";\n        _v$ !== _p$.e && (0, web_2.setAttribute)(_el$, "data-id", _p$.e = _v$);\n        _v$2 !== _p$.t && (0, web_2.setAttribute)(_el$, "title", _p$.t = _v$2);\n        return _p$;\n    }, {\n        e: undefined,\n        t: undefined\n    });\n    return _el$;\n})();\n}',
   '{"version":3,"file":"module.jsx","mappings":";;;;;;;;kBAQiB,MAACA,KAKjB;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAEID,KAAK,CAACI,IAAW;IAAAD,gBAAA,EAAAF,IAAA,QACjBD,KAAK,CAACK,KAAK;IAAAC,gBAAA,EAAAC,GAAA;QAAA,IAAAC,GAAA,GAFCR,KAAK,CAAC,SAAS,CAAC,EAAAS,IAAA,GAAST,KAAK,CAACU,QAAQ,GAAG,KAAK,GAAG,IAAI;QAAAF,GAAA,KAAAD,GAAA,CAAAI,CAAA,IAAAC,sBAAA,EAAAX,IAAA,aAAAM,GAAA,CAAAI,CAAA,GAAAH,GAAA;QAAAC,IAAA,KAAAF,GAAA,CAAAM,CAAA,IAAAD,sBAAA,EAAAX,IAAA,WAAAM,GAAA,CAAAM,CAAA,GAAAJ,IAAA;QAAA,OAAAF,GAAA;IAAA;QAAAI,CAAA,EAAAG,SAAA;QAAAD,CAAA,EAAAC;KAAA;IAAA,OAAAb,IAAA;AAAA,IAItE","names":["props","_el$","_tmpl$","_$insert","icon","label","_$effect","_p$","_v$","_v$2","disabled","e","_$setAttribute","t","undefined"],"ignoreList":[],"sources":["jsx/host-tag-props.test.tsx"]}',
@@ -17,10 +17,10 @@ describe("a host tag's props", () => {
     render(
       await evaluate(() =>
         cs.create(
-          "is93rf4fmo6n:25:14",
+          "irncup0pbj6d:25:14",
           { params: [{ kind: "tag", value: Badge }] },
           '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<b>!`);\nexports.default = $tag0 => {\n    const rest = {\n        label: "spread"\n    };\n    return (0, web_2.createComponent)($tag0, (0, web_3.mergeProps)(rest, {\n        disabled: true,\n        "data-id": "seven",\n        icon: _tmpl$()\n    }));\n};\n}',
-          '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAwBiBA,KAAA;IACP,MAAMC,IAAI,GAAG;QAAEC,KAAK,EAAE;KAAU;IAChC,OAAAC,yBAAA,EAAQH,KAAK,EAAAI,oBAAA,EAAKH,IAAI;QAAEI,QAAQ;QAAA;QAAiBC,IAAI,EAAAC,MAAA;KAAA;AACvD,CAAC","names":["$tag0","rest","label","_$createComponent","_$mergeProps","disabled","icon","_tmpl$"],"ignoreList":[],"sources":["jsx/host-tag-props.test.tsx"]}',
+          '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAwBiBA,KAAA;IACP,MAAMC,IAAI,GAAG;QAAEC,KAAK,EAAE;KAAU;IAChC,OAAAC,yBAAA,EAAQH,KAAM,EAAAI,oBAAA,EAAKH,IAAI;QAAEI,QAAQ;QAAA;QAAiBC,IAAI,EAAAC,MAAA;KAAA;AACxD,CAAC","names":["$tag0","rest","label","_$createComponent","_$mergeProps","disabled","icon","_tmpl$"],"ignoreList":[],"sources":["jsx/host-tag-props.test.tsx"]}',
           ["solid-js/web"],
         ),
       ),

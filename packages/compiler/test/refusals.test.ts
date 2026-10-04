@@ -8,7 +8,7 @@ function refusals(body: string): string[] {
   const messages: string[] = [];
   transpile(
     ts,
-    "test.ts",
+    "test.tsx",
     `import { cs } from "@backtickjs/core";\nexport default cs\`${body}\`;`,
     "@backtickjs/core",
     (diagnostic) => messages.push(String(diagnostic.messageText)),
@@ -59,6 +59,24 @@ describe("refusals", () => {
 
   it("a script that doesn't parse is refused as TypeScript reads it", () => {
     assert.deepStrictEqual(refusals("a("), ["')' expected."]);
+  });
+
+  it("a tag naming what the script doesn't declare is refused", () => {
+    assert.deepStrictEqual(refusals("<Card />"), [
+      "`<Card>` names nothing this script declares. A host value used as a " +
+        "tag is spliced: `<$Card>`.",
+    ]);
+    assert.deepStrictEqual(
+      refusals("{ const Card = () => 1; return <Card />; }"),
+      [],
+    );
+    assert.deepStrictEqual(refusals("<div />"), []);
+  });
+
+  it("a tag spliced with `${…}` is refused", () => {
+    assert.deepStrictEqual(refusals("<${Card} />"), [
+      "A tag splices a host value by its name, e.g. `<$Card>`, not with `${…}`.",
+    ]);
   });
 
   it("a name strict mode forbids is refused", () => {

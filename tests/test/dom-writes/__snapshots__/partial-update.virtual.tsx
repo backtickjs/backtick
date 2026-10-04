@@ -28,7 +28,7 @@ async function Labels() {
         <button onclick={__cs_update}>update</button>
         <table>
           <tbody>
-            {(void For, cs.splice(For)({ each: __cs_rows, children: (__cs_row: { id: number; label: Signal<string> }) => (
+            {(void (For), cs.splice((For))({ each: __cs_rows, children: (__cs_row: { id: number; label: Signal<string> }) => (
                 <tr id={"row-" + __cs_row.id}>
                   <td>{__cs_row.label[0]()}</td>
                 </tr>

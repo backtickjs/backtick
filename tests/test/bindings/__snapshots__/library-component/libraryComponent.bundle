@@ -2,7 +2,7 @@ import { createSignal as $i0 } from "solid-js";
 import { Button as $i1 } from "acme-ui";
 import * as $module0 from "solid-js/web";
 const $modules = {
-  "fufh4v30ruds:21:16": (module, exports, require) => {
+  "nn06jiixw3jm:21:16": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -39,5 +39,5 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $cs0 = $require("fufh4v30ruds:21:16").default;
+const $cs0 = $require("nn06jiixw3jm:21:16").default;
 export default $cs0(() => $i0, $i1);

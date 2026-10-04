@@ -26,10 +26,10 @@ exports.default = (($capture0) => <$capture0 n={1}/>);
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $splice1, $tag2) => <div>
-      <$tag2 title="host"/>
-      {$splice0()}
+exports.default = (($tag0, $splice1, $splice2) => <div>
+      <$tag0 title="host"/>
       {$splice1()}
+      {$splice2()}
     </div>);
 }
 

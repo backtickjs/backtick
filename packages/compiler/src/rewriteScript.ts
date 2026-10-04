@@ -7,6 +7,7 @@ import {
   paramName,
   scriptEdits,
 } from "./emitScript.js";
+import { isComponentTag } from "./isComponentTag.js";
 import { call } from "./nodeFactory.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution, ResolvedParam } from "./resolveBindings.js";
@@ -113,7 +114,7 @@ export function rewriteScript(
 
   // Nor is a script that writes what it can't: emitting it may not be
   // possible, as a declared `$` name is a splice, not a name.
-  const refused = refusals(ts, clientScript);
+  const refused = refusals(ts, clientScript, bindings);
   if (refused.length > 0) {
     return leftAsWritten(refused);
   }
@@ -151,7 +152,7 @@ export function rewriteScript(
           case "tag":
             return objectLiteral({
               kind: string("tag"),
-              value: ts.factory.createIdentifier(param.key),
+              value: clientScript.splices[param.key]!.expression,
             });
           case "capture":
             return objectLiteral({
@@ -241,10 +242,12 @@ function unsplicedSpans(
 }
 
 // What a script may not write though TypeScript would read it: a name it
-// declares where it can't, and a splice it can't spell unbraced.
+// declares where it can't, a tag naming what it doesn't declare, and a splice
+// it can't spell unbraced.
 function refusals(
   ts: typeof import("typescript"),
   script: ClientScript,
+  bindings: BindingResolution,
 ): Diagnostic[] {
   const diagnostics: Diagnostic[] = [];
   const refuse = (node: ts.Node, message: string): void => {
@@ -288,6 +291,32 @@ function refusals(
             } name: ${reason}.`,
           );
         }
+      }
+    }
+    // A component tag is the script's own or a host value spliced, `<$Card>`:
+    // the virtual code is checked in the host file, where an unmarked `<Card>`
+    // would quietly read the host's.
+    if (
+      (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) &&
+      ts.isIdentifier(node.tagName)
+    ) {
+      const tag = node.tagName.text;
+      if (tag.startsWith("$0splice")) {
+        refuse(
+          node.tagName,
+          "A tag splices a host value by its name, e.g. `<$Card>`, not " +
+            "with `${…}`.",
+        );
+      } else if (
+        !tag.startsWith("$") &&
+        isComponentTag(tag) &&
+        !bindings.has(node.tagName)
+      ) {
+        refuse(
+          node.tagName,
+          `\`<${tag}>\` names nothing this script declares. A host value ` +
+            `used as a tag is spliced: \`<$${tag}>\`.`,
+        );
       }
     }
     node.forEachChild(visit);

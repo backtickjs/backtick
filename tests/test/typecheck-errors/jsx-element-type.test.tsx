@@ -22,14 +22,14 @@ export const undeclared = cs`<blink />`;
 const NotATag = { id: "View" };
 // a plain object is not a component, a fragment or a list
 // @ts-expect-error: JSX element type 'NotATag' does not have any construct or call signatures.
-export const wrongKind = cs`<NotATag />`;
+export const wrongKind = cs`<$NotATag />`;
 
 // ─── what arranges rather than draws ──────────────────────────────────
 export const shorthand = cs`<>
   <span>a</span>
 </>`;
 
-export const list = cs`<For each={[] as number[]}>{(n) => <i>{n}</i>}</For>`;
+export const list = cs`<$For each={[] as number[]}>{(n) => <i>{n}</i>}</$For>`;
 
 // ─── what the app wrote: a server component, on the host ──────────────
 const Panel = async () => null;
@@ -47,7 +47,7 @@ export const wrongType = cs`<div class={1} />`;
 // `<>` is the fragment, and `<Fragment>` a tag like any other: here it names
 // nothing
 // @ts-expect-error: Cannot find name 'Fragment'.
-export const named = cs`<Fragment />`;
+export const named = cs`<$Fragment />`;
 
 // ─── children, which are structure ────────────────────────────────────
 export const text = cs`<div>hello</div>`;

@@ -15,7 +15,7 @@ const badges = cs`{
   const [scale, setScale] = $createSignal(1);
   return (
     <div>
-      <For each={[1, 2]}>{(n) => <Badge n={n * scale()} />}</For>
+      <$For each={[1, 2]}>{(n) => <$Badge n={n * scale()} />}</$For>
       <button onclick={() => setScale(scale() * 2)}>double</button>
     </div>
   );

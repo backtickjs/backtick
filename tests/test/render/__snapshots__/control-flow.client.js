@@ -2,10 +2,10 @@
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $tag1) => <ul>
-  <$tag1 each={$splice0()}>
+exports.default = (($tag0, $splice1) => <ul>
+  <$tag0 each={$splice1()}>
     {(row, index) => <li>{index + ": " + row()}</li>}
-  </$tag1>
+  </$tag0>
 </ul>);
 }
 
@@ -27,7 +27,7 @@ exports.default = (($tag0, $tag1) => <$tag0 fallback={<p>none</p>}>
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $tag1) => <$tag1 fallback={<p>caught</p>}>{$splice0()}</$tag1>);
+exports.default = (($tag0, $splice1) => <$tag0 fallback={<p>caught</p>}>{$splice1()}</$tag0>);
 }
 
 // 36:5

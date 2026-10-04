@@ -95,11 +95,11 @@ cs.splice(       →  [-semantic -navigation]
 \n\n             → \n\n  
 return           → return
                  →  
-For              → For
+(For)            → $For
 cs.splice(       →  [-semantic -navigation]
-For              → For
+(For)            → $For
 )                →  [-semantic -navigation]
-{                → For
+{                → $For
 each             → each
 __cs_items       → items
 (                → (
@@ -177,9 +177,9 @@ span             → span
 >                → >
 \n               → \n      
 cs.splice(       →  [-semantic -navigation]
-WaitingList      → WaitingList
+(WaitingList)    → $WaitingList
 )                →  [-semantic -navigation]
-{                → WaitingList
+{                → $WaitingList
 more             → more
 (                → (
 )                → )

@@ -1,6 +1,5 @@
 import type ts from "typescript";
 import type { ClientScript } from "./parseFile.js";
-import { isComponentTag } from "./isComponentTag.js";
 
 /**
  * Every client script in a file, its scopes resolved by TypeScript's checker,
@@ -18,7 +17,7 @@ import { isComponentTag } from "./isComponentTag.js";
  *      script's own bindings a fragment landing at that hole can reach, what
  *      the hole must hand whatever arrives. Unlike counting what actually
  *      reached a hole in one bundle, it is a fact about the script alone.
- *    - each host tag it writes, with where.
+ *    - each splice written as a tag (`<$Card>`), handed over as its value.
  *    - each capture: a free variable it references but does not itself
  *      declare, which it must capture from the enclosing scope, as a binding
  *      key. Captures are ordered by first use, which falls out of the
@@ -57,15 +56,16 @@ export type BindingResolution = Map<ts.Identifier, string>;
 export interface ResolvedScopes {
   bindings: BindingResolution;
   // `params.get(script)[i]` is the script's parameter `i` (`$splice<i>`,
-  // `$tag<i>`, `$capture<i>`): splices, then host tags, then captures
+  // `$tag<i>`, `$capture<i>`): splices and tags in the order the script first
+  // reads them, then captures
   params: Map<ClientScript, ResolvedParam[]>;
 }
 
 /**
  * One of a script's parameters as the compiler knows it: `Metadata`'s `Param`,
  * with the splice's key and where it is read in place of its host value.
- * `refs` are a hole's placeholder, an unbraced `$name`, or a host tag's name,
- * opening and closing.
+ * `refs` are a hole's placeholder, or an unbraced `$name`, a tag's name among
+ * them.
  */
 export type ResolvedParam = ResolvedSplice | ResolvedTag | ResolvedCapture;
 
@@ -76,8 +76,8 @@ interface ResolvedSplice {
   refs: ts.Identifier[];
 }
 
-// a component tag no scope binds, which names a host binding; its key is the
-// binding's name
+// a splice written as a tag, `<$Card>`: a tag can't be a call, so it is
+// handed over as its value, as everywhere the script reads it
 interface ResolvedTag {
   kind: "tag";
   key: string;
@@ -91,8 +91,8 @@ interface ResolvedCapture {
 
 // A script's parameters as the pass finds them, by key.
 interface ScriptParams {
-  splices: Map<string, ResolvedSplice>;
-  tags: Map<string, ResolvedTag>;
+  // in first-use order, tags among them
+  splices: (ResolvedSplice | ResolvedTag)[];
   // in first-use order
   captures: Map<string, ResolvedCapture>;
 }
@@ -158,13 +158,13 @@ export function resolveBindings(
   const scriptParams = new Map<ClientScript, ScriptParams>();
   for (const script of combined.parents.keys()) {
     scriptParams.set(script, {
-      splices: new Map(
-        Object.keys(script.splices).map((key) => [
-          key,
-          { kind: "splice", key, bindings: [], refs: [] },
-        ]),
+      // A splice written as a tag is handed over as its value: it has no
+      // bindings to hand a hole.
+      splices: Object.values(script.splices).map(({ key, refs }) =>
+        refs.some((ref) => isTagName(ts, ref))
+          ? { kind: "tag", key, refs }
+          : { kind: "splice", key, bindings: [], refs },
       ),
-      tags: new Map(),
       captures: new Map(),
     });
   }
@@ -227,23 +227,6 @@ export function resolveBindings(
         return;
       }
       if (declaration === undefined) {
-        // A component tag no scope binds names a host binding, handed over
-        // as its value: its own parameter, even where the script also splices
-        // the binding as `$Name`, which is called.
-        const tag = identifierAt(node.getStart(file));
-        if (
-          tag !== undefined &&
-          isTagName(ts, node) &&
-          isComponentTag(node.text)
-        ) {
-          const tags = scriptParams.get(script)!.tags;
-          let resolved = tags.get(node.text);
-          if (resolved === undefined) {
-            resolved = { kind: "tag", key: node.text, refs: [] };
-            tags.set(node.text, resolved);
-          }
-          resolved.refs.push(tag);
-        }
         return;
       }
       const key = keyOf(declaration);
@@ -275,48 +258,47 @@ export function resolveBindings(
   // may be handed: the script's own bindings in scope, by a name nothing
   // shadows, whose declaration the source has passed.
   for (const [script, { splices }] of scriptParams) {
-    for (const ref of Object.values(script.splices).flatMap(
-      (splice) => splice.refs,
-    )) {
-      const splice = splices.get(ref.text)!;
-      splice.refs.push(ref);
-      const position = combined.positions.get(ref)!;
-      const location = nodeAt(file, position);
-      splice.bindings = checker
-        .getSymbolsInScope(location, binding)
-        .flatMap((symbol) => {
-          const declaration = symbol.declarations?.find(
-            (each) => each.getSourceFile() === file,
+    for (const splice of splices) {
+      if (splice.kind === "tag") {
+        continue;
+      }
+      for (const ref of splice.refs) {
+        const position = combined.positions.get(ref)!;
+        const location = nodeAt(file, position);
+        splice.bindings = checker
+          .getSymbolsInScope(location, binding)
+          .flatMap((symbol) => {
+            const declaration = symbol.declarations?.find(
+              (each) => each.getSourceFile() === file,
+            );
+            if (
+              declaration === undefined ||
+              declared(ts, declaration).getEnd() > position
+            ) {
+              return [];
+            }
+            const key = keyOf(declaration);
+            return owner.get(key) === script ? [key] : [];
+          })
+          .sort(
+            (a, b) =>
+              declaredAt.get(a)!.getStart(file) -
+              declaredAt.get(b)!.getStart(file),
           );
-          if (
-            declaration === undefined ||
-            declared(ts, declaration).getEnd() > position
-          ) {
-            return [];
-          }
-          const key = keyOf(declaration);
-          return owner.get(key) === script ? [key] : [];
-        })
-        .sort(
-          (a, b) =>
-            declaredAt.get(a)!.getStart(file) -
-            declaredAt.get(b)!.getStart(file),
-        );
+      }
     }
   }
 
   const params = new Map<ClientScript, ResolvedParam[]>();
-  for (const [script, { splices, tags, captures }] of scriptParams) {
-    for (const splice of splices.values()) {
+  for (const [script, { splices, captures }] of scriptParams) {
+    for (const splice of splices) {
       // Narrowed only now: whether anything captures a binding is not known
       // until every script that could has been read.
-      splice.bindings = splice.bindings.filter((key) => escaped.has(key));
+      if (splice.kind === "splice") {
+        splice.bindings = splice.bindings.filter((key) => escaped.has(key));
+      }
     }
-    params.set(script, [
-      ...splices.values(),
-      ...tags.values(),
-      ...captures.values(),
-    ]);
+    params.set(script, [...splices, ...captures.values()]);
   }
 
   return { bindings, params };

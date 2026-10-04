@@ -106,7 +106,7 @@ span                    → 47:37 span
 section                 → 48:8 section
 >                       → 48:15 >
 <                       → 49:9 <
-$tag1                   → 49:10 Held…
+$tag1                   → 49:10 $Held…
 again                   → 50:11 again
 =                       → 50:16 =
 {                       → 50:17 {

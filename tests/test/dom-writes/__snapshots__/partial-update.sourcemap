@@ -175,11 +175,11 @@ table                 → table
 tbody                 → tbody
 >                     → >
 \n                    → \n            
-For                   → For
+(For)                 → $For
 cs.splice(            →  [-semantic -navigation]
-For                   → For
+(For)                 → $For
 )                     →  [-semantic -navigation]
-{                     → For
+{                     → $For
 each                  → each
 __cs_rows             → rows
 children              → \n              {(row: { id: number; label: Signal<string> }) => (\n                <tr id={"row-" + row.id}>\n                  <td>{row.label[0]()}</td>\n                </tr>\n              )}\n            
