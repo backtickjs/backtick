@@ -80,7 +80,7 @@ plugin({
       }
 
       return {
-        contents: outputText,
+        contents: ascii(outputText),
         loader: args.path.endsWith(".tsx") ? "jsx" : "js",
       };
     });
@@ -129,6 +129,18 @@ function loadCompilerOptions(): ts.CompilerOptions {
     inlineSourceMap: true,
     inlineSources: true,
   };
+}
+
+// Code with every character past ASCII escaped, `\uXXXX`: Bun reads a file
+// stamped `// @bun` (below) as Latin-1, as its own transpiler writes them, so
+// "🏡" would arrive as "ð\u009f\u008f¡". Escaped, a string, identifier or
+// regular expression means what it did. (JSX text doesn't read escapes, but
+// what reaches here is JSX compiled to calls unless a project preserves it.)
+function ascii(code: string): string {
+  return code.replace(
+    /[^\x00-\x7f]/g,
+    (unit) => `\\u${unit.charCodeAt(0).toString(16).padStart(4, "0")}`,
+  );
 }
 
 // HACK: stamp a `// @bun` pragma at the top of the output to trick Bun into

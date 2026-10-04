@@ -12,3 +12,8 @@ test("a file whose scripts compile loads", async () => {
   const { script } = await import("./fixtures/accepted.ts");
   expect(script).toBeDefined();
 });
+
+test("a compiled file's text past ASCII loads as written", async () => {
+  const { icon } = await import("./fixtures/unicode.ts");
+  expect(icon).toBe("🏡 café");
+});
