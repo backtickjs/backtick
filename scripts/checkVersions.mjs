@@ -27,6 +27,7 @@ function manifests(dir) {
 const ADAPTERS = {
   "@backtickjs/solid-js": "solid-js",
   "@backtickjs/react": "react",
+  "@backtickjs/react-native": "react-native",
 };
 
 const packages = manifests("packages");

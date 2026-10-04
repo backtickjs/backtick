@@ -1,0 +1,41 @@
+{
+  "name": "@backtickjs/react-native",
+  "version": "0.86.3",
+  "private": true,
+  "description": "Backtick's React Native adapter: scripts written as React Native code, run on React Native by the app the server drives",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "typecheck": "backtick-tsc -p tsconfig.build.json --noEmit",
+    "build": "tspc -b --noCheck --force",
+    "dev": "tspc -b --noCheck --watch",
+    "test": "node --test \"test/**/*.test.ts\"",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown .",
+    "clean": "rm -rf node_modules dist .turbo"
+  },
+  "dependencies": {
+    "@backtickjs/core": "workspace:^0.1.0",
+    "@backtickjs/react": "workspace:^19.2.3",
+    "react-native": "0.86.3"
+  },
+  "devDependencies": {
+    "@backtickjs/compiler": "workspace:^0.1.0",
+    "@backtickjs/prettier-plugin": "workspace:*",
+    "@backtickjs/tsc": "workspace:^0.1.0",
+    "@backtickjs/tspatch-plugin": "workspace:^0.1.0",
+    "prettier": "^3.6.2",
+    "ts-patch": "^4.0.1",
+    "typescript": "^6.0.3"
+  },
+  "prettier": {
+    "plugins": [
+      "@backtickjs/prettier-plugin"
+    ]
+  }
+}
