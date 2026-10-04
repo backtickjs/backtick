@@ -118,3 +118,13 @@ export function importDeclaration(
   const exported = IDENTIFIER.test(name) ? name : string(name);
   return `import { ${exported} as ${local} } from ${string(from)};`;
 }
+
+// The same import as CommonJS writes it: `const { name: local } = require(…);`.
+export function requireDeclaration(
+  from: string,
+  name: string,
+  local: string,
+): string {
+  const exported = IDENTIFIER.test(name) ? name : string(name);
+  return `const { ${exported}: ${local} } = require(${string(from)});`;
+}

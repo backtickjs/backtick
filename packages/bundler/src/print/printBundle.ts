@@ -1,6 +1,6 @@
 import type { BundleTree } from "../bundle/buildBundle.js";
 import type { ClientModule } from "@backtickjs/core";
-import { importDeclaration, string } from "./code.js";
+import { importDeclaration, requireDeclaration, string } from "./code.js";
 
 const MODULE_ID = "bundle.js";
 
@@ -18,22 +18,31 @@ const RUNTIME = `const $require = (id) => {
 
 /**
  * A bundle tree as a module whose default export is the tree's root: the value
- * bundled, as its scripts wrote it; what a caller gets is `generate`'s, in the
- * format they asked for.
+ * bundled, as its scripts wrote it.
  *
  * The module is its imports, a module table of its scripts, each compiled for
  * its framework when its host was built, and the root. Its imports are the
- * client's to resolve, through an import map in a page.
+ * client's to resolve. As an ES module (`"es"`), a page resolves them through
+ * an import map; as CommonJS (`"cjs"`), whatever runs it hands it `require`,
+ * as a React Native app does for the packages it was built with.
  *
  * Its map leads into the host files its scripts were written in: an index
  * map, each script's own map a section where the script stands. What the
  * bundler wrote around the scripts maps to nothing, since no source wrote it.
  */
-export function printBundle(tree: BundleTree): { code: string; map: string } {
+export function printBundle(
+  tree: BundleTree,
+  format: "es" | "cjs",
+): { code: string; map: string } {
   const { names } = tree;
   const module = new ModuleWriter();
+  if (format === "cjs") {
+    // An ES module is strict code, and so are the scripts; CommonJS isn't.
+    module.line('"use strict";');
+  }
+  const declaration = format === "es" ? importDeclaration : requireDeclaration;
   for (const { from, name, local } of names.imports.values()) {
-    module.line(importDeclaration(from, name, local));
+    module.line(declaration(from, name, local));
   }
   // Each script a module table's entry, as webpack's and Metro's are: its body
   // under its id, run once by `$require`. The modules they require are the
@@ -43,7 +52,11 @@ export function printBundle(tree: BundleTree): { code: string; map: string } {
     ...new Set([...modules.values()].flatMap((entry) => entry.dependencies)),
   ];
   dependencies.forEach((specifier, index) =>
-    module.line(`import * as $module${index} from ${string(specifier)};`),
+    module.line(
+      format === "es"
+        ? `import * as $module${index} from ${string(specifier)};`
+        : `const $module${index} = require(${string(specifier)});`,
+    ),
   );
   module.line("const $modules = {");
   for (const [id, entry] of modules) {
@@ -62,7 +75,11 @@ export function printBundle(tree: BundleTree): { code: string; map: string } {
     module.line(`const ${label} = $require(${string(entry.id)}).default;`);
   }
   // Parenthesized, so a root that is a function isn't a declaration.
-  module.write(`export default (${tree.root});`);
+  module.write(
+    format === "es"
+      ? `export default (${tree.root});`
+      : `module.exports = (${tree.root});`,
+  );
 
   return { code: module.code, map: module.map() };
 }

@@ -11,7 +11,9 @@ export interface BuildOptions {
 }
 
 export interface OutputOptions {
-  readonly format: "es";
+  // `"es"`, an ES module, for a page; `"cjs"`, CommonJS, for a client that
+  // hands the bundle `require` itself, as a React Native app does.
+  readonly format: "es" | "cjs";
   // A map into the host files, as Rollup's: `"inline"` appends the map to the
   // code as a `data:` URL, and `"hidden"` answers it alone. None by default.
   // It carries host files' names and lines, not their content, which stays
@@ -37,16 +39,18 @@ export interface Bundle {
  *     const bundle = await bundler.build({ input: <Home />, external });
  *     const { code, map } = bundle.generate({ format: "es", sourcemap: "hidden" });
  *
- * The module's default export is the value. A namespace rather than a bare
- * function, so `bundle` stays a name a caller can give what comes back.
+ * The module's default export is the value (CommonJS: `module.exports`). A
+ * namespace rather than a bare function, so `bundle` stays a name a caller can
+ * give what comes back.
  */
 export const bundler = {
   async build({ input, external }: BuildOptions): Promise<Bundle> {
     // Scripts come compiled for their framework when their host was built, so
     // the bundle is only put together: nothing is compiled or parsed here.
-    const { code, map } = printBundle(await buildBundle(input, external));
+    const tree = await buildBundle(input, external);
     return {
-      generate: ({ sourcemap = false }) => {
+      generate: ({ format, sourcemap = false }) => {
+        const { code, map } = printBundle(tree, format);
         if (sourcemap === false) {
           return { code, map: null };
         }
