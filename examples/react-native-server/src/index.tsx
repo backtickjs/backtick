@@ -5,6 +5,10 @@ import { Home } from "./Home.js";
 // versions in `examples/react-native-app/package.json`.
 const external = { react: "19.2.3", "react-native": "0.86.3" };
 
+// This run of the server. The watcher starts a new one for every change, so
+// an app that sees a new one has a screen to reload.
+const run = crypto.randomUUID();
+
 const server = Bun.serve({
   // On every interface, so a phone on the same network can reach it.
   hostname: "0.0.0.0",
@@ -20,6 +24,17 @@ const server = Bun.serve({
         },
       });
     },
+    // In development, where the app hears which run it is talking to.
+    "/live": (request, server) =>
+      server.upgrade(request)
+        ? undefined
+        : new Response("Expected a WebSocket.", { status: 426 }),
+  },
+  websocket: {
+    open: (socket) => {
+      socket.send(run);
+    },
+    message: () => {},
   },
 });
 

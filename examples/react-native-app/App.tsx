@@ -2,16 +2,10 @@ import { Backtick } from "@backtickjs/react-native-client";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
-import { Component, type ReactNode, useState } from "react";
+import { Component, type ReactNode, useEffect, useState } from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNative from "react-native";
-import {
-  ActivityIndicator,
-  Button,
-  ScrollView,
-  Text,
-  View,
-} from "react-native";
+import { ActivityIndicator, ScrollView, Text, View } from "react-native";
 
 // What a screen's bundle may require: the packages this app was built with.
 // The server bundles for these versions (examples/react-native-server).
@@ -27,9 +21,14 @@ const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = process.env.EXPO_PUBLIC_BACKTICK_SERVER ?? `http://${host}:5179`;
 
 export default function App() {
-  // Each reload asks the server for the screen again: change the server's
-  // code, press it, and the change shows without a new app.
+  // Each reload asks the server for the screen again: in development, every
+  // time the server restarts, so a change to its code shows without a new app.
   const [reload, setReload] = useState(0);
+  useEffect(() => {
+    if (__DEV__) {
+      return onServerRestart(server, () => setReload((count) => count + 1));
+    }
+  }, []);
   return (
     <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
       <ScrollView>
@@ -40,14 +39,40 @@ export default function App() {
             fallback={<ActivityIndicator style={{ marginTop: 48 }} />}
           />
         </Boundary>
-        <Button
-          title="Reload from the server"
-          onPress={() => setReload(reload + 1)}
-        />
       </ScrollView>
       <StatusBar style="auto" />
     </View>
   );
+}
+
+// Calls `restarted` each time the server starts again, as its watcher does on
+// every change: the server names each of its runs on `/live`, and a new name
+// is a new run. Retries while the server is down. Returns how to stop.
+function onServerRestart(server: string, restarted: () => void): () => void {
+  let run: string | undefined;
+  let socket: WebSocket | undefined;
+  let retry: ReturnType<typeof setTimeout> | undefined;
+  let stopped = false;
+  const connect = () => {
+    socket = new WebSocket(`${server.replace(/^http/, "ws")}/live`);
+    socket.onmessage = (event) => {
+      if (run !== undefined && run !== event.data) {
+        restarted();
+      }
+      run = String(event.data);
+    };
+    socket.onclose = () => {
+      if (!stopped) {
+        retry = setTimeout(connect, 500);
+      }
+    };
+  };
+  connect();
+  return () => {
+    stopped = true;
+    clearTimeout(retry);
+    socket?.close();
+  };
 }
 
 // Why a screen couldn't be drawn: the server unreachable, or a bundle the app
