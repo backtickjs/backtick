@@ -2,8 +2,8 @@
 // mappings; the language plugin layers the remaining feature flags on top.
 export interface CodeInformation {
   // gates hover and the other semantic features for positions resolving
-  // through the mapping
-  semantic: boolean;
+  // through the mapping; as an object, all of them but highlighting
+  semantic: boolean | { shouldHighlight(): boolean };
   // gates completions for positions resolving through the mapping
   completion?: boolean;
   // gates go-to-definition, references, and rename for positions resolving

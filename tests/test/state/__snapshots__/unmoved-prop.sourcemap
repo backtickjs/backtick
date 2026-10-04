@@ -69,9 +69,9 @@ span              → span
 div               → div
 >                 → >
 \n                → \n          
-(For)             → $For
+(For)             → $For [-highlight]
 cs.splice(        →  [-semantic -navigation]
-(For)             → $For
+(For)             → $For [-highlight]
 )                 →  [-semantic -navigation]
 {                 → $For
 each              → each

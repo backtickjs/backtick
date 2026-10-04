@@ -109,7 +109,7 @@ div              → div
 >                → >
 \n               → \n      
 cs.splice(       →  [-semantic -navigation]
-(Card)           → $Card
+(Card)           → $Card [-highlight]
 )                →  [-semantic -navigation]
 {                → $Card
 title            → title
@@ -224,7 +224,7 @@ section          → section
 >                → >
 \n               → \n          
 cs.splice(       →  [-semantic -navigation]
-(Card)           → $Card
+(Card)           → $Card [-highlight]
 )                →  [-semantic -navigation]
 {                → $Card
 title            → title

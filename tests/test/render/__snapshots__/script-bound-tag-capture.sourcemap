@@ -175,9 +175,9 @@ section          → section
 \n               → \n        
 cs.splice(       →  [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-(For)            → $For
+(For)            → $For [-highlight]
 cs.splice(       →  [-semantic -navigation]
-(For)            → $For
+(For)            → $For [-highlight]
 )                →  [-semantic -navigation]
 {                → $For
 each             → each

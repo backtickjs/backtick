@@ -12,6 +12,11 @@ const WRAPPER: CodeInformation = { semantic: false, navigation: false };
 // script: only what is reported there. Hover and navigation stay with the
 // script's own names inside it.
 const REPORTED: CodeInformation = { semantic: false, navigation: false };
+// A host tag's name, written as a value: everything but its color, which stays
+// the tag's, as JSX colors it.
+const TAG_NAME: CodeInformation = {
+  semantic: { shouldHighlight: () => false },
+};
 
 /**
  * A script as the typechecker reads it: its own text, as written, wrapped as
@@ -192,14 +197,14 @@ export function virtualScript(
     }
     if (ts.isJsxElement(node)) {
       added("(void ");
-      mapped(name, node.closingElement.tagName);
+      mapped(name, node.closingElement.tagName, TAG_NAME);
       added(", ");
     }
     // The tag as a value, reported under its name: what isn't a component is
     // refused there, as JSX refuses it; so is a missing prop, the props
     // object's own braces mapped to it.
     added("cs.splice(", tag.start);
-    mapped(name, tagName);
+    mapped(name, tagName, TAG_NAME);
     added(")", tag.end);
     added("(");
     out.push(["{ ", undefined, tag.start, tag.end - tag.start]);

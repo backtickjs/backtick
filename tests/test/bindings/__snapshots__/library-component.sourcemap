@@ -24,9 +24,9 @@ return           → return
                  →  
 (                → (
 \n               → \n    
-(Button)         → $Button
+(Button)         → $Button [-highlight]
 cs.splice(       →  [-semantic -navigation]
-(Button)         → $Button
+(Button)         → $Button [-highlight]
 )                →  [-semantic -navigation]
 {                → $Button
 variant          → variant
@@ -85,9 +85,9 @@ span             → span
 }                → }
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-(Button)         → $Button
+(Button)         → $Button [-highlight]
 cs.splice(       →  [-semantic -navigation]
-(Button)         → $Button
+(Button)         → $Button [-highlight]
 )                →  [-semantic -navigation]
 {                → $Button
 variant          → variant

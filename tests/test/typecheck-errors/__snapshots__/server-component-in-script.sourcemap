@@ -35,7 +35,7 @@ hr               → hr
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
-(Row)            → $Row
+(Row)            → $Row [-highlight]
 )                →  [-semantic -navigation]
 {                → $Row
 label            → label
@@ -44,7 +44,7 @@ label            → label
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
-(Title)          → $Title
+(Title)          → $Title [-highlight]
 )                →  [-semantic -navigation]
 {                → $Title
 text             → text
@@ -53,7 +53,7 @@ text             → text
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 cs.splice(       →  [-semantic -navigation]
-(Rule)           → $Rule
+(Rule)           → $Rule [-highlight]
 )                →  [-semantic -navigation]
 {                → $Rule
 }                → 

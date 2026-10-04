@@ -193,6 +193,18 @@ describe("a host tag in a script, in the editor", () => {
     }
   });
 
+  it("leaves a tag's name to be colored as JSX colors a tag", () => {
+    const { spans } = tagsService.getEncodedSemanticClassifications(
+      tagsFixture,
+      { start: 0, length: tagsSource.length },
+      ts.SemanticClassificationFormat.TwentyTwenty,
+    );
+    const starts = new Set(spans.filter((_, index) => index % 3 === 0));
+    for (const position of cardTags) {
+      assert.ok(!starts.has(position), `colored at ${position}`);
+    }
+  });
+
   it("colors nothing in a comment above the tag", () => {
     const start = inTags("// a comment above the tag");
     const end = tagsSource.indexOf("\n", start);

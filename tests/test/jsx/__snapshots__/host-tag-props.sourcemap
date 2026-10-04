@@ -113,7 +113,7 @@ label            → label
 return           → return
                  →  
 cs.splice(       →  [-semantic -navigation]
-(Badge)          → $Badge
+(Badge)          → $Badge [-highlight]
 )                →  [-semantic -navigation]
 {                → $Badge
 __cs_rest        → rest

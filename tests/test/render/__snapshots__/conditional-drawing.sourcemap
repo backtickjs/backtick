@@ -175,7 +175,7 @@ section          → section
 >                → >
 \n               → \n        
 cs.splice(       →  [-semantic -navigation]
-(Held)           → $Held
+(Held)           → $Held [-highlight]
 )                →  [-semantic -navigation]
 {                → $Held
 again            → again

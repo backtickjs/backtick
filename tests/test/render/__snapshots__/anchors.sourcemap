@@ -78,9 +78,9 @@ clear            → clear
 span             → span
 >                → >
 \n               → \n        
-(For)            → $For
+(For)            → $For [-highlight]
 cs.splice(       →  [-semantic -navigation]
-(For)            → $For
+(For)            → $For [-highlight]
 )                →  [-semantic -navigation]
 {                → $For
 each             → each

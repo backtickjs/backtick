@@ -18,14 +18,19 @@ function scriptRanges(
 
 // A mapping's non-default editor behavior, rendered as `[-flag …]`: `-` is
 // the flag off, `+` on. A `cs.splice(...)` wrapper hides hover
-// (`[-semantic]`).
+// (`[-semantic]`); a host tag's name keeps hover but not its color
+// (`[-highlight]`).
 // Rows without data carry the defaults (everything on) and render bare.
 function renderData(data: SourceMapping["data"]): string {
   if (!data) {
     return "";
   }
   const flags = Object.entries(data)
-    .map(([flag, value]) => `${value ? "+" : "-"}${flag}`)
+    .map(([flag, value]) =>
+      typeof value === "object"
+        ? `${value.shouldHighlight() ? "+" : "-"}highlight`
+        : `${value ? "+" : "-"}${flag}`,
+    )
     .join(" ");
   return ` [${flags}]`;
 }
