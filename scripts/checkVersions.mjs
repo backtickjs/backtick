@@ -24,7 +24,10 @@ function manifests(dir) {
 }
 
 // Each adapter, and the framework whose version it takes.
-const ADAPTERS = { "@backtickjs/solid-js": "solid-js" };
+const ADAPTERS = {
+  "@backtickjs/solid-js": "solid-js",
+  "@backtickjs/react": "react",
+};
 
 const packages = manifests("packages");
 const released = packages.filter(({ json }) => !(json.name in ADAPTERS));

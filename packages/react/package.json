@@ -1,0 +1,65 @@
+{
+  "name": "@backtickjs/react",
+  "version": "19.3.0",
+  "private": true,
+  "description": "Backtick's React adapter: scripts written as React code, compiled by React's own JSX transform and run on React",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "default": "./dist/client.js"
+    },
+    "./jsx-runtime": {
+      "types": "./dist/jsx-runtime.d.ts",
+      "default": "./dist/jsx-runtime.js"
+    },
+    "./jsx-dev-runtime": {
+      "types": "./dist/jsx-runtime.d.ts",
+      "default": "./dist/jsx-runtime.js"
+    },
+    "./plugin": {
+      "types": "./dist/plugin.d.ts",
+      "default": "./dist/plugin.js"
+    }
+  },
+  "scripts": {
+    "typecheck": "backtick-tsc -p tsconfig.build.json --noEmit",
+    "build": "tspc -b --noCheck --force",
+    "dev": "tspc -b --noCheck --watch",
+    "test": "node --test \"test/**/*.test.ts\"",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown .",
+    "clean": "rm -rf node_modules dist .turbo"
+  },
+  "dependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/preset-react": "^7.29.7",
+    "@backtickjs/core": "workspace:^0.1.0",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@backtickjs/bundler": "workspace:^0.1.0",
+    "@backtickjs/compiler": "workspace:^0.1.0",
+    "@backtickjs/prettier-plugin": "workspace:*",
+    "@backtickjs/tsc": "workspace:^0.1.0",
+    "@backtickjs/tspatch-plugin": "workspace:^0.1.0",
+    "@types/babel__core": "^7.20.5",
+    "global-jsdom": "^30.0.0",
+    "jsdom": "^30.0.1",
+    "prettier": "^3.6.2",
+    "ts-patch": "^4.0.1",
+    "typescript": "^6.0.3"
+  },
+  "prettier": {
+    "plugins": [
+      "@backtickjs/prettier-plugin"
+    ]
+  }
+}
