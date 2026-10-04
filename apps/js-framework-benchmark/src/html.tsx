@@ -27,7 +27,7 @@ export const html = `<!doctype html>
     </script>
   </head>
   <body>
-    <div id="main" class="container"></div>
+    <div id="main"></div>
     <script type="module" src="data:text/javascript,${encodeURIComponent(code)}"></script>
   </body>
 </html>

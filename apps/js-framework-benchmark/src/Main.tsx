@@ -1,134 +1,137 @@
 import { cs, type Client } from "@backtickjs/core";
-import { createSignal, For, type Signal } from "@backtickjs/solid-js";
+import {
+  batch,
+  createSelector,
+  createSignal,
+  For,
+  type Accessor,
+  type Setter,
+} from "@backtickjs/solid-js";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 
 type Row = {
-  readonly id: number;
-  readonly label: Signal<string>;
+  id: number;
+  label: Accessor<string>;
+  setLabel: Setter<string>;
 };
 
-const ADJECTIVES = [
-  "pretty",
-  "large",
-  "big",
-  "small",
-  "tall",
-  "short",
-  "long",
-  "handsome",
-  "plain",
-  "quaint",
-  "clean",
-  "elegant",
-  "easy",
-  "angry",
-  "crazy",
-  "helpful",
-  "mushy",
-  "odd",
-  "unsightly",
-  "adorable",
-  "important",
-  "inexpensive",
-  "cheap",
-  "expensive",
-  "fancy",
-];
-
-const COLOURS = [
-  "red",
-  "yellow",
-  "blue",
-  "green",
-  "pink",
-  "brown",
-  "purple",
-  "brown",
-  "white",
-  "black",
-  "orange",
-];
-
-const NOUNS = [
-  "table",
-  "chair",
-  "house",
-  "bbq",
-  "desk",
-  "car",
-  "pony",
-  "cookie",
-  "sandwich",
-  "burger",
-  "pizza",
-  "mouse",
-  "keyboard",
-];
-
+// Solid's implementation, frameworks/keyed/solid/src/main.jsx, line for line:
+// a script holds no template literal, so a label is joined with `+`, and a
+// button's `id` is its attribute, as `prop:id` is typed only once declared.
 export async function Main(): Promise<Client<JSX.Element>> {
   return cs`{
-    const [data, setData] = $createSignal<Row[]>([]);
-    const [selected, setSelected] = $createSignal(0);
-    const [rowId, setRowId] = $createSignal(1);
+    const adjectives = [
+      "pretty",
+      "large",
+      "big",
+      "small",
+      "tall",
+      "short",
+      "long",
+      "handsome",
+      "plain",
+      "quaint",
+      "clean",
+      "elegant",
+      "easy",
+      "angry",
+      "crazy",
+      "helpful",
+      "mushy",
+      "odd",
+      "unsightly",
+      "adorable",
+      "important",
+      "inexpensive",
+      "cheap",
+      "expensive",
+      "fancy",
+    ];
+    const colors = [
+      "red",
+      "yellow",
+      "blue",
+      "green",
+      "pink",
+      "brown",
+      "purple",
+      "brown",
+      "white",
+      "black",
+      "orange",
+    ];
+    const nouns = [
+      "table",
+      "chair",
+      "house",
+      "bbq",
+      "desk",
+      "car",
+      "pony",
+      "cookie",
+      "sandwich",
+      "burger",
+      "pizza",
+      "mouse",
+      "keyboard",
+    ];
 
-    const word = (list: string[]) => {
-      return list[Math.round(Math.random() * 1000) % list.length];
-    };
+    const random = (max: number) => Math.round(Math.random() * 1000) % max;
+
+    let nextId = 1;
 
     const buildData = (count: number) => {
-      const from = rowId();
-      setRowId(from + count);
-      return Array.from({ length: count }, (_, index) => {
-        return {
-          id: from + index,
-          label: $createSignal(
-            word($ADJECTIVES) + " " + word($COLOURS) + " " + word($NOUNS),
-          ),
-        };
+      let data: Row[] = new Array(count);
+      for (let i = 0; i < count; i++) {
+        const [label, setLabel] = $createSignal(
+          adjectives[random(adjectives.length)] +
+            " " +
+            colors[random(colors.length)] +
+            " " +
+            nouns[random(nouns.length)],
+        );
+        data[i] = { id: nextId++, label, setLabel };
+      }
+      return data;
+    };
+
+    const Button = ([id, text, fn]: [string, string, () => void]) => (
+      <div class="col-sm-6 smallpad">
+        <button
+          id={id}
+          class="btn btn-primary btn-block"
+          type="button"
+          onClick={fn}
+        >
+          {text}
+        </button>
+      </div>
+    );
+
+    const [data, setData] = $createSignal<Row[]>([]);
+    const [selected, setSelected] = $createSignal<number | null>(null);
+    const run = () => setData(buildData(1_000));
+    const runLots = () => setData(buildData(10_000));
+    const add = () => setData((d) => [...d, ...buildData(1_000)]);
+    const update = () =>
+      $batch(() => {
+        for (let i = 0, d = data(), len = d.length; i < len; i += 10)
+          d[i].setLabel((l) => l + " !!!");
       });
-    };
-
-    const run = () => {
-      setData(buildData(1000));
-    };
-
-    const runLots = () => {
-      setData(buildData(10000));
-    };
-
-    const add = () => {
-      setData([...data(), ...buildData(1000)]);
-    };
-
-    const partialUpdate = () => {
-      const rows = data();
-      for (let index = 0; index < rows.length; index = index + 10) {
-        const label = rows[index].label;
-        label[1](label[0]() + " !!!");
-      }
-    };
-
-    const clear = () => {
-      setData([]);
-    };
-
+    const clear = () => setData([]);
     const swapRows = () => {
-      const rows = data();
-      if (rows.length > 998) {
-        setData(rows.with(1, rows[998]).with(998, rows[1]));
+      const list = data().slice();
+      if (list.length > 998) {
+        let item = list[1];
+        list[1] = list[998];
+        list[998] = item;
+        setData(list);
       }
     };
-
-    const select = (id: number) => {
-      setSelected(id);
-    };
-
-    const remove = (id: number) => {
-      setData(data().filter((row) => row.id !== id));
-    };
+    const isSelected = $createSelector(selected);
 
     return (
-      <>
+      <div class="container">
         <div class="jumbotron">
           <div class="row">
             <div class="col-md-6">
@@ -136,66 +139,12 @@ export async function Main(): Promise<Client<JSX.Element>> {
             </div>
             <div class="col-md-6">
               <div class="row">
-                <div class="col-sm-6 smallpad">
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-block"
-                    id="run"
-                    onclick={run}
-                  >
-                    Create 1,000 rows
-                  </button>
-                </div>
-                <div class="col-sm-6 smallpad">
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-block"
-                    id="runlots"
-                    onclick={runLots}
-                  >
-                    Create 10,000 rows
-                  </button>
-                </div>
-                <div class="col-sm-6 smallpad">
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-block"
-                    id="add"
-                    onclick={add}
-                  >
-                    Append 1,000 rows
-                  </button>
-                </div>
-                <div class="col-sm-6 smallpad">
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-block"
-                    id="update"
-                    onclick={partialUpdate}
-                  >
-                    Update every 10th row
-                  </button>
-                </div>
-                <div class="col-sm-6 smallpad">
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-block"
-                    id="clear"
-                    onclick={clear}
-                  >
-                    Clear
-                  </button>
-                </div>
-                <div class="col-sm-6 smallpad">
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-block"
-                    id="swaprows"
-                    onclick={swapRows}
-                  >
-                    Swap Rows
-                  </button>
-                </div>
+                <Button {...["run", "Create 1,000 rows", run]} />
+                <Button {...["runlots", "Create 10,000 rows", runLots]} />
+                <Button {...["add", "Append 1,000 rows", add]} />
+                <Button {...["update", "Update every 10th row", update]} />
+                <Button {...["clear", "Clear", clear]} />
+                <Button {...["swaprows", "Swap Rows", swapRows]} />
               </div>
             </div>
           </div>
@@ -203,31 +152,46 @@ export async function Main(): Promise<Client<JSX.Element>> {
         <table class="table table-hover table-striped test-data">
           <tbody>
             <$For each={data()}>
-              {(row: Row) => (
-                <tr class={selected() === row.id ? "danger" : ""}>
-                  <td class="col-md-1">{row.id}</td>
-                  <td class="col-md-4">
-                    <a onclick={() => select(row.id)}>{row.label[0]()}</a>
-                  </td>
-                  <td class="col-md-1">
-                    <a onclick={() => remove(row.id)}>
-                      <span
-                        class="glyphicon glyphicon-remove"
-                        aria-hidden="true"
-                      ></span>
-                    </a>
-                  </td>
-                  <td class="col-md-6"></td>
-                </tr>
-              )}
+              {(row) => {
+                let rowId = row.id;
+                return (
+                  <tr class={isSelected(rowId) ? "danger" : ""}>
+                    <td class="col-md-1" textContent={rowId} />
+                    <td class="col-md-4">
+                      <a
+                        onClick={() => setSelected(rowId)}
+                        textContent={row.label()}
+                      />
+                    </td>
+                    <td class="col-md-1">
+                      <a
+                        onClick={() =>
+                          setData((d) =>
+                            d.toSpliced(
+                              d.findIndex((d) => d.id === rowId),
+                              1,
+                            ),
+                          )
+                        }
+                      >
+                        <span
+                          class="glyphicon glyphicon-remove"
+                          aria-hidden="true"
+                        />
+                      </a>
+                    </td>
+                    <td class="col-md-6" />
+                  </tr>
+                );
+              }}
             </$For>
           </tbody>
         </table>
         <span
           class="preloadicon glyphicon glyphicon-remove"
           aria-hidden="true"
-        ></span>
-      </>
+        />
+      </div>
     );
   }`;
 }
