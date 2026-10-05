@@ -1,7 +1,6 @@
 import { cs } from "@backtickjs/core";
 import { InlineCode } from "../components/Code.js";
 import { Comparison } from "../components/Comparison.js";
-import { Cta } from "../components/Cta.js";
 import { DeployDemo } from "../components/DeployDemo.js";
 import { Hero } from "../components/Hero.js";
 import { HowItWorks } from "../components/HowItWorks.js";
@@ -53,8 +52,6 @@ export async function Home() {
       >
         <Setup />
       </Section>
-
-      <Cta />
     </Layout>
   );
 }

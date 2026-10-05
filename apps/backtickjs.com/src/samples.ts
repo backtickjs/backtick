@@ -134,13 +134,6 @@ export default function App() {
 }
 `;
 
-export const RUN = `
-git clone https://github.com/backtickjs/backtick && cd backtick
-pnpm install && pnpm build
-pnpm --filter @backtickjs/example-react-native-server start
-pnpm --filter @backtickjs/example-react-native-app start
-`;
-
 // One screen as written, in parts coloured by what they are, and as the phone
 // receives it. Simplified: a real bundle keeps each compiled script in a
 // module table, passes values as thunks, and compiles the JSX.
