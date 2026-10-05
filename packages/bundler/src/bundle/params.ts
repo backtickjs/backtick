@@ -2,7 +2,7 @@ import type { ClientScript, Param } from "@backtickjs/core";
 
 // What a script's module says about its parameters, the same for every run.
 
-// The bindings a hole hands over. A tag hands over none.
+// The bindings a hole hands over. A capture hands over none.
 export function bindingsOf(param: Param | undefined): readonly string[] {
   return param?.kind === "splice" ? param.bindings : [];
 }

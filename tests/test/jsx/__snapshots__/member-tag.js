@@ -13,10 +13,10 @@ const $module0 = {
 };
 const $module1 = {
   id: "37pby5o43brgu:14:13",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>`);\nexports.default = $tag0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, (0, web_3.createComponent)($tag0.Badge, {\n        n: 1\n    }), null);\n    (0, web_2.insert)(_el$, (0, web_3.createComponent)($tag0.Badge, {\n        n: 2\n    }), null);\n    return _el$;\n})();\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAagBA,KAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAAG,yBAAA,EACbJ,KAAG,CAACK,KAAK;QAACC,CAAC,EAAE;KAAC;IAAAH,gBAAA,EAAAF,IAAA,EAAAG,yBAAA,EACdJ,KAAG,CAACK,KAAK;QAACC,CAAC,EAAE;KAAC;IAAA,OAAAL,IAAA;AAAA,IACb","names":["$tag0","_el$","_tmpl$","_$insert","_$createComponent","Badge","n"],"ignoreList":[],"sources":["jsx/member-tag.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_3.insert)(_el$, () => ($ui => (0, web_2.createComponent)($ui.Badge, {\n        n: 1\n    }))($splice0()), null);\n    (0, web_3.insert)(_el$, () => ($ui => (0, web_2.createComponent)($ui.Badge, {\n        n: 2\n    }))($splice0()), null);\n    return _el$;\n})();\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAagBA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QACd,CAAAG,GAAA,IAAAC,yBAAA,EAACD,GAAG,CAACE,KAAK;QAACC,CAAC,EAAE;KAAC,CAAI,EAAlBP,QAAA,EAAG,CACJ;IAAAG,gBAAA,EAAAF,IAAA,SAAAG,GAAA,IAAAC,yBAAA,EAACD,GAAG,CAACE,KAAK;QAACC,CAAC,EAAE;KAAC,CAAc,EAA5BP,QAAA,EAAG,CACN;IAAA,OAAAC,IAAA;AAAA,IAAI","names":["$splice0","_el$","_tmpl$","_$insert","$ui","_$createComponent","Badge","n"],"ignoreList":[],"sources":["jsx/member-tag.test.tsx"]}',
   dependencies: ["solid-js/web"],
-  params: [{ kind: "tag" }],
+  params: [{ kind: "splice", bindings: [] }],
 };
 // A member of a host value as a tag: the value handed over whole, and the tag
 // read off it on the client.

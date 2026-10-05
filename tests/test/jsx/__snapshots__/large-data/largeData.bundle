@@ -14,53 +14,55 @@ const $modules = {
         `<div><img alt><span></span><span></span><span>`,
       ),
       _tmpl$3 = /*#__PURE__*/ (0, web_1.template)(`<span>`);
-    exports.default = ($tag0, $splice1) =>
+    exports.default = ($splice0, $splice1) =>
       (() => {
         var _el$ = _tmpl$();
-        (0, web_4.insert)(
-          _el$,
-          (0, web_5.createComponent)($tag0, {
-            get each() {
-              return $splice1();
-            },
-            children: (order) =>
-              (() => {
-                var _el$2 = _tmpl$2(),
-                  _el$3 = _el$2.firstChild,
-                  _el$4 = _el$3.nextSibling,
-                  _el$5 = _el$4.nextSibling,
-                  _el$6 = _el$5.nextSibling;
-                (0, web_4.insert)(_el$4, () => order.customer.name);
-                (0, web_4.insert)(_el$5, () => order.customer.city);
-                (0, web_4.insert)(
-                  _el$2,
-                  (0, web_5.createComponent)($tag0, {
-                    get each() {
-                      return order.items;
-                    },
-                    children: (item) =>
-                      (() => {
-                        var _el$7 = _tmpl$3();
-                        (0, web_4.insert)(
-                          _el$7,
-                          () => item.sku + " x" + item.qty,
-                        );
-                        return _el$7;
-                      })(),
-                  }),
-                  _el$6,
-                );
-                (0, web_4.insert)(_el$6, () => "$" + order.total);
-                (0, web_3.effect)(() =>
-                  (0, web_2.setAttribute)(
-                    _el$3,
-                    "src",
-                    "https://img.example.com/" + order.id + ".png",
-                  ),
-                );
-                return _el$2;
-              })(),
-          }),
+        (0, web_5.insert)(_el$, () =>
+          (($For) =>
+            (0, web_4.createComponent)($For, {
+              get each() {
+                return $splice1();
+              },
+              children: (order) =>
+                (() => {
+                  var _el$2 = _tmpl$2(),
+                    _el$3 = _el$2.firstChild,
+                    _el$4 = _el$3.nextSibling,
+                    _el$5 = _el$4.nextSibling,
+                    _el$6 = _el$5.nextSibling;
+                  (0, web_5.insert)(_el$4, () => order.customer.name);
+                  (0, web_5.insert)(_el$5, () => order.customer.city);
+                  (0, web_5.insert)(
+                    _el$2,
+                    () =>
+                      (($For) =>
+                        (0, web_4.createComponent)($For, {
+                          get each() {
+                            return order.items;
+                          },
+                          children: (item) =>
+                            (() => {
+                              var _el$7 = _tmpl$3();
+                              (0, web_5.insert)(
+                                _el$7,
+                                () => item.sku + " x" + item.qty,
+                              );
+                              return _el$7;
+                            })(),
+                        }))($splice0()),
+                    _el$6,
+                  );
+                  (0, web_5.insert)(_el$6, () => "$" + order.total);
+                  (0, web_3.effect)(() =>
+                    (0, web_2.setAttribute)(
+                      _el$3,
+                      "src",
+                      "https://img.example.com/" + order.id + ".png",
+                    ),
+                  );
+                  return _el$2;
+                })(),
+            }))($splice0()),
         );
         return _el$;
       })();
@@ -79,50 +81,53 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("8jfeo7virdyh:37:4").default;
-export default $cs0($i0, () => [
-  {
-    id: "ord-1000",
-    customer: { name: "Customer 0", city: "Montréal" },
-    items: [
-      { sku: "SKU-0-A", qty: 1 },
-      { sku: "SKU-0-B", qty: 1 },
-    ],
-    total: 45.23,
-  },
-  {
-    id: "ord-1001",
-    customer: { name: "Customer 1", city: "Toronto" },
-    items: [
-      { sku: "SKU-1-A", qty: 2 },
-      { sku: "SKU-1-B", qty: 1 },
-    ],
-    total: 46.23,
-  },
-  {
-    id: "ord-1002",
-    customer: { name: "Customer 2", city: "Montréal" },
-    items: [
-      { sku: "SKU-2-A", qty: 3 },
-      { sku: "SKU-2-B", qty: 1 },
-    ],
-    total: 47.23,
-  },
-  {
-    id: "ord-1003",
-    customer: { name: "Customer 3", city: "Toronto" },
-    items: [
-      { sku: "SKU-3-A", qty: 1 },
-      { sku: "SKU-3-B", qty: 1 },
-    ],
-    total: 48.23,
-  },
-  {
-    id: "ord-1004",
-    customer: { name: "Customer 4", city: "Montréal" },
-    items: [
-      { sku: "SKU-4-A", qty: 2 },
-      { sku: "SKU-4-B", qty: 1 },
-    ],
-    total: 49.23,
-  },
-]);
+export default $cs0(
+  () => $i0,
+  () => [
+    {
+      id: "ord-1000",
+      customer: { name: "Customer 0", city: "Montréal" },
+      items: [
+        { sku: "SKU-0-A", qty: 1 },
+        { sku: "SKU-0-B", qty: 1 },
+      ],
+      total: 45.23,
+    },
+    {
+      id: "ord-1001",
+      customer: { name: "Customer 1", city: "Toronto" },
+      items: [
+        { sku: "SKU-1-A", qty: 2 },
+        { sku: "SKU-1-B", qty: 1 },
+      ],
+      total: 46.23,
+    },
+    {
+      id: "ord-1002",
+      customer: { name: "Customer 2", city: "Montréal" },
+      items: [
+        { sku: "SKU-2-A", qty: 3 },
+        { sku: "SKU-2-B", qty: 1 },
+      ],
+      total: 47.23,
+    },
+    {
+      id: "ord-1003",
+      customer: { name: "Customer 3", city: "Toronto" },
+      items: [
+        { sku: "SKU-3-A", qty: 1 },
+        { sku: "SKU-3-B", qty: 1 },
+      ],
+      total: 48.23,
+    },
+    {
+      id: "ord-1004",
+      customer: { name: "Customer 4", city: "Montréal" },
+      items: [
+        { sku: "SKU-4-A", qty: 2 },
+        { sku: "SKU-4-B", qty: 1 },
+      ],
+      total: 49.23,
+    },
+  ],
+);

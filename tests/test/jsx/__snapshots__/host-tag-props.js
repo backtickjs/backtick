@@ -12,10 +12,10 @@ const $module0 = {
 };
 const $module1 = {
   id: "irncup0pbj6d:25:14",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<b>!`);\nexports.default = $tag0 => {\n    const rest = {\n        label: "spread"\n    };\n    return (0, web_2.createComponent)($tag0, (0, web_3.mergeProps)(rest, {\n        disabled: true,\n        "data-id": "seven",\n        icon: _tmpl$()\n    }));\n};\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAwBiBA,KAAA;IACP,MAAMC,IAAI,GAAG;QAAEC,KAAK,EAAE;KAAU;IAChC,OAAAC,yBAAA,EAAQH,KAAM,EAAAI,oBAAA,EAAKH,IAAI;QAAEI,QAAQ;QAAA;QAAiBC,IAAI,EAAAC,MAAA;KAAA;AACxD,CAAC","names":["$tag0","rest","label","_$createComponent","_$mergeProps","disabled","icon","_tmpl$"],"ignoreList":[],"sources":["jsx/host-tag-props.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<b>!`);\nexports.default = $splice0 => {\n    const rest = {\n        label: "spread"\n    };\n    return ($Badge => (0, web_2.createComponent)($Badge, (0, web_3.mergeProps)(rest, {\n        disabled: true,\n        "data-id": "seven",\n        icon: _tmpl$()\n    })))($splice0());\n};\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAwBiBA,QAAA;IACP,MAAMC,IAAI,GAAG;QAAEC,KAAK,EAAE;KAAU;IAChC,OAAO,CAAAC,MAAA,IAAAC,yBAAA,EAACD,MAAM,EAAAE,oBAAA,EAAKJ,IAAI;QAAEK,QAAQ;QAAA;QAAiBC,IAAI,EAAAC,MAAA;KAAA,EAAY,EAA1DR,QAAA,EAAM,CAAoD;AACpE,CAAC","names":["$splice0","rest","label","$Badge","_$createComponent","_$mergeProps","disabled","icon","_tmpl$"],"ignoreList":[],"sources":["jsx/host-tag-props.test.tsx"]}',
   dependencies: ["solid-js/web"],
-  params: [{ kind: "tag" }],
+  params: [{ kind: "splice", bindings: [] }],
 };
 // A client component the host holds, written as a tag in a script, given its
 // props in every form JSX writes them: spread, valueless, dashed, an element.

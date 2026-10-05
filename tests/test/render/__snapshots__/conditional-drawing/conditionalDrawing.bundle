@@ -10,21 +10,21 @@ const $modules = {
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(
       `<div><span></span><section>`,
     );
-    exports.default = ($splice0, $tag1) => {
+    exports.default = ($splice0, $splice1) => {
       const [builds, setBuilds] = $splice0()(0);
       return (() => {
         var _el$ = _tmpl$(),
           _el$2 = _el$.firstChild,
           _el$3 = _el$2.nextSibling;
         (0, web_3.insert)(_el$2, () => "builds " + builds());
-        (0, web_3.insert)(
-          _el$3,
-          (0, web_2.createComponent)($tag1, {
-            again: () => {
-              setBuilds(builds() + 1);
-              return builds() < 5;
-            },
-          }),
+        (0, web_3.insert)(_el$3, () =>
+          (($Held) =>
+            (0, web_2.createComponent)($Held, {
+              again: () => {
+                setBuilds(builds() + 1);
+                return builds() < 5;
+              },
+            }))($splice1()),
         );
         return _el$;
       })();
@@ -66,5 +66,5 @@ const $cs0 = $require("36xfcxts3aoah:42:27").default;
 const $cs1 = $require("36xfcxts3aoah:30:13").default;
 export default $cs0(
   () => $i0,
-  $cs1(() => $i0),
+  () => $cs1(() => $i0),
 );

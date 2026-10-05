@@ -2,7 +2,7 @@
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $tag1) => {
+exports.default = (($splice0, $splice1) => {
     const [names, setNames] = $splice0()(["a", "b", "c"]);
     const rotate = () => {
         const held = names();
@@ -11,9 +11,9 @@ exports.default = (($splice0, $tag1) => {
     return (<div>
         <span onclick={rotate}>rotate</span>
         <div>
-          <$tag1 each={names()}>
+          {($For => <$For each={names()}>
             {(name, index) => (<span>{name + " at " + index()}</span>)}
-          </$tag1>
+          </$For>)($splice1())}
         </div>
       </div>);
 });

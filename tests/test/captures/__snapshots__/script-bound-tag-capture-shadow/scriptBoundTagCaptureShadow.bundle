@@ -7,18 +7,20 @@ const $modules = {
     const web_2 = require("solid-js/web");
     const web_3 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);
-    exports.default = ($tag0, $splice1, $splice2) =>
+    exports.default = ($splice0, $splice1, $splice2) =>
       (() => {
         var _el$ = _tmpl$();
-        (0, web_2.insert)(
+        (0, web_3.insert)(
           _el$,
-          (0, web_3.createComponent)($tag0, {
-            title: "host",
-          }),
+          () =>
+            (($Card) =>
+              (0, web_2.createComponent)($Card, {
+                title: "host",
+              }))($splice0()),
           null,
         );
-        (0, web_2.insert)(_el$, $splice1, null);
-        (0, web_2.insert)(_el$, $splice2, null);
+        (0, web_3.insert)(_el$, $splice1, null);
+        (0, web_3.insert)(_el$, $splice2, null);
         return _el$;
       })();
   },
@@ -95,7 +97,7 @@ const $cs3 = $require("2x5zzf1r35g00:28:18").default;
 const $cs4 = $require("2x5zzf1r35g00:18:17").default;
 const $cs5 = $require("2x5zzf1r35g00:29:18").default;
 export default $cs0(
-  $cs1(),
+  $cs1,
   () => $cs2($cs3, $cs4),
   () => $cs2($cs5, $cs4),
 );

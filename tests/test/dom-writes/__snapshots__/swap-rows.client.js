@@ -2,7 +2,7 @@
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $tag1) => {
+exports.default = (($splice0, $splice1) => {
     const [ids, setIds] = $splice0()([1, 2, 3, 4, 5]);
     const swap = () => {
         const held = ids();
@@ -12,11 +12,11 @@ exports.default = (($splice0, $tag1) => {
         <button onclick={swap}>swap</button>
         <table>
           <tbody>
-            <$tag1 each={ids()}>
+            {($For => <$For each={ids()}>
               {(id) => (<tr id={"row-" + id}>
                   <td>{"row " + id}</td>
                 </tr>)}
-            </$tag1>
+            </$For>)($splice1())}
           </tbody>
         </table>
       </div>);

@@ -89,16 +89,17 @@ const $modules = {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
-    exports.default = ($tag0, $capture1, $capture2) =>
-      (0, web_1.createComponent)($tag0, {
-        each: [1, 2],
-        children: (m) =>
-          (0, web_1.createComponent)($capture1, {
-            get n() {
-              return m * $capture2();
-            },
-          }),
-      });
+    exports.default = ($splice0, $capture1, $capture2) =>
+      (($For) =>
+        (0, web_1.createComponent)($For, {
+          each: [1, 2],
+          children: (m) =>
+            (0, web_1.createComponent)($capture1, {
+              get n() {
+                return m * $capture2();
+              },
+            }),
+        }))($splice0($capture1, $capture2));
   },
 };
 const $exports = {
@@ -125,5 +126,5 @@ export default $cs0(
   (count, Badge) => $cs1(Badge, count),
   (count, Badge) => $cs2($cs3, Badge, count),
   (count, Badge) => $cs4($cs5, Badge, count),
-  (count, Badge) => $cs6($i1, Badge, count),
+  (count, Badge) => $cs6((Badge, count) => $i1, Badge, count),
 );

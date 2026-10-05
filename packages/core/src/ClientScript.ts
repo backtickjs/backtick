@@ -1,12 +1,11 @@
 import type { Spliceable } from "./Spliceable.js";
 
-// One parameter of a script's function. Splices and tags come first, in the
-// order the script reads them, then captures.
+// One parameter of a script's function. Splices come first, in the order the
+// script reads them, then captures.
 export type Param =
   // a host value, passed as a function the script calls with `bindings`
+  // wherever it reads it, a tag (`<$Card>`) among them
   | { kind: "splice"; bindings: readonly string[] }
-  // a host value used as a tag (`<$Card>`), passed as is: a tag can't be a call
-  | { kind: "tag" }
   // a variable of the enclosing script
   | { kind: "capture"; key: string };
 
@@ -22,7 +21,7 @@ export interface ClientModule {
   readonly map: string;
   // The modules `code` requires.
   readonly dependencies: readonly string[];
-  // `params[i]` is the function's `$splice<i>`, `$tag<i>` or `$capture<i>`
+  // `params[i]` is the function's `$splice<i>` or `$capture<i>`
   readonly params: readonly Param[];
 }
 
@@ -30,7 +29,7 @@ export interface ClientModule {
 export interface ClientScript {
   readonly "@backtickjs": "ClientScript";
   readonly module: ClientModule;
-  // one per splice and tag, in parameter order
+  // one per splice, in parameter order
   readonly args: readonly Spliceable[];
 }
 

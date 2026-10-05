@@ -17,15 +17,15 @@ exports.default = (($splice0) => (props) => {
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $tag1) => {
+exports.default = (($splice0, $splice1) => {
     const [builds, setBuilds] = $splice0()(0);
     return (<div>
       <span>{"builds " + builds()}</span>
       <section>
-        <$tag1 again={() => {
-            setBuilds(builds() + 1);
-            return builds() < 5;
-        }}/>
+        {($Held => <$Held again={() => {
+                setBuilds(builds() + 1);
+                return builds() < 5;
+            }}/>)($splice1())}
       </section>
     </div>);
 });

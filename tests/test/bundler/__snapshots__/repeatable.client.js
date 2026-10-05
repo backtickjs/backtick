@@ -30,7 +30,7 @@ exports.default = (() => "shared");
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $splice1, $splice2, $splice3, $splice4, $splice5, $splice6, $tag7) => {
+exports.default = (($splice0, $splice1, $splice2, $splice3, $splice4, $splice5, $splice6, $splice7) => {
     const [count, setCount] = $splice0()(1);
     const rows = [1, 2, 3];
     const total = count() + $splice1(rows);
@@ -42,7 +42,7 @@ exports.default = (($splice0, $splice1, $splice2, $splice3, $splice4, $splice5, 
       <p>{$splice6(rows)}</p>
       <p>{total}</p>
       <ul>
-        <$tag7 each={rows}>{(row) => <li>{row + count()}</li>}</$tag7>
+        {($For => <$For each={rows}>{(row) => <li>{row + count()}</li>}</$For>)($splice7(rows))}
       </ul>
     </section>);
 });

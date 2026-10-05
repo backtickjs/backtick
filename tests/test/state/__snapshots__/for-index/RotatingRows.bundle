@@ -19,7 +19,7 @@ const $modules = {
         `<div><span>rotate</span><div>`,
       ),
       _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<span>`);
-    exports.default = ($splice0, $tag1) => {
+    exports.default = ($splice0, $splice1) => {
       const [names, setNames] = $splice0()(["a", "b", "c"]);
       const rotate = () => {
         const held = names();
@@ -30,19 +30,19 @@ const $modules = {
           _el$2 = _el$.firstChild,
           _el$3 = _el$2.nextSibling;
         _el$2.$$click = rotate;
-        (0, web_3.insert)(
-          _el$3,
-          (0, web_4.createComponent)($tag1, {
-            get each() {
-              return names();
-            },
-            children: (name, index) =>
-              (() => {
-                var _el$4 = _tmpl$2();
-                (0, web_3.insert)(_el$4, () => name + " at " + index());
-                return _el$4;
-              })(),
-          }),
+        (0, web_4.insert)(_el$3, () =>
+          (($For) =>
+            (0, web_3.createComponent)($For, {
+              get each() {
+                return names();
+              },
+              children: (name, index) =>
+                (() => {
+                  var _el$4 = _tmpl$2();
+                  (0, web_4.insert)(_el$4, () => name + " at " + index());
+                  return _el$4;
+                })(),
+            }))($splice1()),
         );
         return _el$;
       })();
@@ -66,5 +66,9 @@ const $cs0 = $require("1uptcsn9236u2:352:9").default;
 const $cs1 = $require("1pr4tznq24wkc:16:9").default;
 export default $cs0(
   () => $i0,
-  () => $cs1(() => $i1, $i2),
+  () =>
+    $cs1(
+      () => $i1,
+      () => $i2,
+    ),
 );

@@ -41,7 +41,7 @@ describe("emitScripts", () => {
 });
 
 describe("a tag spliced, `<$Card>`", () => {
-  it("is numbered where the script first reads it, among the splices", () => {
+  it("is a splice, read where the element stands", () => {
     const [script] = emitScripts(
       ts,
       "host.tsx",
@@ -49,7 +49,7 @@ describe("a tag spliced, `<$Card>`", () => {
     );
     assert.match(
       script!.code,
-      /\(\$splice0, \$tag1, \$splice2\) => <p>\{\$splice0\(\)\}<\$tag1 \/>\{\$splice2\(\)\}<\/p>/,
+      /\(\$splice0, \$splice1, \$splice2\) => <p>\{\$splice0\(\)\}\{\(\$Card => <\$Card \/>\)\(\$splice1\(\)\)\}\{\$splice2\(\)\}<\/p>/,
     );
   });
 });

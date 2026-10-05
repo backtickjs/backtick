@@ -10,22 +10,25 @@ const $modules = {
     const web_3 = require("solid-js/web");
     const web_4 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><button>double`);
-    exports.default = ($splice0, $tag1, $tag2) => {
+    exports.default = ($splice0, $splice1, $splice2) => {
       const [scale, setScale] = $splice0()(1);
       return (() => {
         var _el$ = _tmpl$(),
           _el$2 = _el$.firstChild;
-        (0, web_3.insert)(
+        (0, web_4.insert)(
           _el$,
-          (0, web_4.createComponent)($tag1, {
-            each: [1, 2],
-            children: (n) =>
-              (0, web_4.createComponent)($tag2, {
-                get n() {
-                  return n * scale();
-                },
-              }),
-          }),
+          () =>
+            (($For) =>
+              (0, web_3.createComponent)($For, {
+                each: [1, 2],
+                children: (n) =>
+                  (($Badge) =>
+                    (0, web_3.createComponent)($Badge, {
+                      get n() {
+                        return n * scale();
+                      },
+                    }))($splice2()),
+              }))($splice1()),
           _el$2,
         );
         _el$2.$$click = () => setScale(scale() * 2);
@@ -62,4 +65,8 @@ const $require = (id) => {
 };
 const $cs0 = $require("161a7f5q1feqz:14:15").default;
 const $cs1 = $require("161a7f5q1feqz:12:14").default;
-export default $cs0(() => $i0, $i1, $cs1());
+export default $cs0(
+  () => $i0,
+  () => $i1,
+  $cs1,
+);

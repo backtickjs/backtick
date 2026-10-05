@@ -1,0 +1,77 @@
+import * as $module0 from "solid-js/web";
+const $modules = {
+  "rnjvglc6ichd:21:18": (module, exports, require) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    const web_1 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>ok`);
+    exports.default = ($splice0) => _tmpl$();
+  },
+  "rnjvglc6ichd:10:13": (module, exports, require) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    const web_1 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<b>never`);
+    exports.default = () => {
+      throw new Error("boom");
+      return (props) => _tmpl$();
+    };
+  },
+  "rnjvglc6ichd:22:14": (module, exports, require) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    const web_3 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>`);
+    exports.default = ($splice0) =>
+      (() => {
+        var _el$ = _tmpl$();
+        (0, web_3.insert)(
+          _el$,
+          () =>
+            (($Counted) => (0, web_2.createComponent)($Counted, {}))(
+              $splice0(),
+            ),
+          null,
+        );
+        (0, web_3.insert)(
+          _el$,
+          () =>
+            (($Counted) => (0, web_2.createComponent)($Counted, {}))(
+              $splice0(),
+            ),
+          null,
+        );
+        return _el$;
+      })();
+  },
+  "rnjvglc6ichd:15:16": (module, exports, require) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    const web_1 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<b>counted`);
+    exports.default = () => {
+      const counter = globalThis;
+      counter.evaluations = (counter.evaluations ?? 0) + 1;
+      return (props) => _tmpl$();
+    };
+  },
+};
+const $exports = {
+  "solid-js/web": $module0,
+};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = { exports: {} };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("rnjvglc6ichd:21:18").default;
+const $cs1 = $require("rnjvglc6ichd:10:13").default;
+const $cs2 = $require("rnjvglc6ichd:22:14").default;
+const $cs3 = $require("rnjvglc6ichd:15:16").default;
+export default { unreached: $cs0($cs1), twice: $cs2($cs3) };

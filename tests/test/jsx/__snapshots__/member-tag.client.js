@@ -9,8 +9,8 @@ exports.default = (() => (props) => <b>{"badge " + props.n}</b>);
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($tag0) => <p>
-  <$tag0.Badge n={1}/>
-  <$tag0.Badge n={2}></$tag0.Badge>
+exports.default = (($splice0) => <p>
+  {($ui => <$ui.Badge n={1}/>)($splice0())}
+  {($ui => <$ui.Badge n={2}></$ui.Badge>)($splice0())}
 </p>);
 }

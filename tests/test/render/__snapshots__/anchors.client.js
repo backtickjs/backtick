@@ -2,14 +2,14 @@
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $tag1) => {
+exports.default = (($splice0, $splice1) => {
     const [ids, setIds] = $splice0()([1, 2, 3]);
     const clear = () => {
         setIds([]);
     };
     return (<>
         <span onclick={clear}>clear</span>
-        <$tag1 each={ids()}>{(id) => <span>{"row " + id}</span>}</$tag1>
+        {($For => <$For each={ids()}>{(id) => <span>{"row " + id}</span>}</$For>)($splice1())}
       </>);
 });
 }

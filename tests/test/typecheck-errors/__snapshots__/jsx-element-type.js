@@ -17,10 +17,10 @@ const $module1 = {
 };
 const $module2 = {
   id: "3o318ga2fv91z:25:25",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $tag0 => (0, web_1.createComponent)($tag0, {});\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAwB4BA,KAAA,IAAAC,yBAAA,EAACD,KAAQ,KAAG","names":["$tag0","_$createComponent"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $splice0 => ($NotATag => (0, web_1.createComponent)($NotATag, {}))($splice0());\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAwB4BA,QAAA,KAAAC,QAAA,IAAAC,yBAAA,EAACD,QAAQ,KAAG,EAAXD,QAAA,EAAQ,CAAG","names":["$splice0","$NotATag","_$createComponent"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
-  params: [{ kind: "tag" }],
+  params: [{ kind: "splice", bindings: [] }],
 };
 const $module3 = {
   id: "3o318ga2fv91z:28:25",
@@ -31,10 +31,10 @@ const $module3 = {
 };
 const $module4 = {
   id: "3o318ga2fv91z:32:20",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<i>`);\nexports.default = $tag0 => (0, web_3.createComponent)($tag0, {\n    each: [],\n    children: n => (() => {\n        var _el$ = _tmpl$();\n        (0, web_2.insert)(_el$, n);\n        return _el$;\n    })()\n});\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBA+BuBA,KAAA,IAAAC,yBAAA,EAACD,KAAI;IAACE,IAAI,EAAE,EAAc;IAAAC,QAAA,EAAIC,CAAC;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,EAASD,CAAC;QAAA,OAAAC,IAAA;IAAA;CAAK,CAAQ","names":["$tag0","_$createComponent","each","children","n","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<i>`);\nexports.default = $splice0 => ($For => (0, web_3.createComponent)($For, {\n    each: [],\n    children: n => (() => {\n        var _el$ = _tmpl$();\n        (0, web_2.insert)(_el$, n);\n        return _el$;\n    })()\n}))($splice0());\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBA+BuBA,QAAA,KAAAC,IAAA,IAAAC,yBAAA,EAACD,IAAI;IAACE,IAAI,EAAE,EAAc;IAAAC,QAAA,EAAIC,CAAC;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,EAASD,CAAC;QAAA,OAAAC,IAAA;IAAA;CAAK,CAAQ,EAArDN,QAAA,EAAI,CAAiD","names":["$splice0","$For","_$createComponent","each","children","n","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
-  params: [{ kind: "tag" }],
+  params: [{ kind: "splice", bindings: [] }],
 };
 const $module5 = {
   id: "3o318ga2fv91z:41:25",
@@ -52,10 +52,10 @@ const $module6 = {
 };
 const $module7 = {
   id: "3o318ga2fv91z:50:21",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $tag0 => (0, web_1.createComponent)($tag0, {});\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAiDwBA,KAAA,IAAAC,yBAAA,EAACD,KAAS,KAAG","names":["$tag0","_$createComponent"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $splice0 => ($Fragment => (0, web_1.createComponent)($Fragment, {}))($splice0());\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAiDwBA,QAAA,KAAAC,SAAA,IAAAC,yBAAA,EAACD,SAAS,KAAG,EAAZD,QAAA,EAAS,CAAG","names":["$splice0","$Fragment","_$createComponent"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
-  params: [{ kind: "tag" }],
+  params: [{ kind: "splice", bindings: [] }],
 };
 const $module8 = {
   id: "3o318ga2fv91z:53:20",

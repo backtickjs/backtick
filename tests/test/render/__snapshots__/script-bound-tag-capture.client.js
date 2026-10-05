@@ -57,7 +57,7 @@ exports.default = (($capture0, $capture1) => <$capture0 n={$capture1() + 1000}/>
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($tag0, $capture1, $capture2) => <$tag0 each={[1, 2]}>
+exports.default = (($splice0, $capture1, $capture2) => ($For => <$For each={[1, 2]}>
           {(m) => <$capture1 n={m * $capture2()}/>}
-        </$tag0>);
+        </$For>)($splice0($capture1, $capture2)));
 }

@@ -9,7 +9,7 @@ const $modules = {
     const web_2 = require("solid-js/web");
     const web_3 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span>`);
-    exports.default = ($splice0, $tag1) => {
+    exports.default = ($splice0, $splice1) => {
       const [asked, setAsked] = $splice0()(0);
       return (() => {
         var _el$ = _tmpl$(),
@@ -17,12 +17,14 @@ const $modules = {
         (0, web_3.insert)(_el$2, () => "asked " + asked());
         (0, web_3.insert)(
           _el$,
-          (0, web_2.createComponent)($tag1, {
-            more: () => {
-              setAsked(asked() + 1);
-              return asked() < 5;
-            },
-          }),
+          () =>
+            (($WaitingList) =>
+              (0, web_2.createComponent)($WaitingList, {
+                more: () => {
+                  setAsked(asked() + 1);
+                  return asked() < 5;
+                },
+              }))($splice1()),
           null,
         );
         return _el$;
@@ -36,24 +38,25 @@ const $modules = {
     const web_2 = require("solid-js/web");
     const web_3 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<em>`);
-    exports.default = ($splice0, $splice1, $tag2) => (props) => {
+    exports.default = ($splice0, $splice1, $splice2) => (props) => {
       const [items, setItems] = $splice0()([]);
       const started = window.setTimeout(() => {
         if (props.more()) {
           setItems($splice1());
         }
       }, 0);
-      return (0, web_3.createComponent)($tag2, {
-        get each() {
-          return items();
-        },
-        children: (item) =>
-          (() => {
-            var _el$ = _tmpl$();
-            (0, web_2.insert)(_el$, item);
-            return _el$;
-          })(),
-      });
+      return (($For) =>
+        (0, web_3.createComponent)($For, {
+          get each() {
+            return items();
+          },
+          children: (item) =>
+            (() => {
+              var _el$ = _tmpl$();
+              (0, web_2.insert)(_el$, item);
+              return _el$;
+            })(),
+        }))($splice2());
     };
   },
 };
@@ -73,9 +76,10 @@ const $cs0 = $require("17esee640arqb:32:22").default;
 const $cs1 = $require("17esee640arqb:20:20").default;
 export default $cs0(
   () => $i0,
-  $cs1(
-    () => $i0,
-    () => ["one", "two"],
-    $i1,
-  ),
+  () =>
+    $cs1(
+      () => $i0,
+      () => ["one", "two"],
+      () => $i1,
+    ),
 );

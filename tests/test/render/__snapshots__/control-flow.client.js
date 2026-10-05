@@ -2,10 +2,10 @@
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($tag0, $splice1) => <ul>
-  <$tag0 each={$splice1()}>
+exports.default = (($splice0, $splice1) => <ul>
+  {($Index => <$Index each={$splice1()}>
     {(row, index) => <li>{index + ": " + row()}</li>}
-  </$tag0>
+  </$Index>)($splice0())}
 </ul>);
 }
 
@@ -13,21 +13,21 @@ exports.default = (($tag0, $splice1) => <ul>
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($tag0, $tag1) => <$tag0 fallback={<p>none</p>}>
-  <$tag1 when={1 > 2}>
+exports.default = (($splice0, $splice1) => ($Switch => <$Switch fallback={<p>none</p>}>
+  {($Match => <$Match when={1 > 2}>
     <p>wrong</p>
-  </$tag1>
-  <$tag1 when={2 > 1}>
+  </$Match>)($splice1())}
+  {($Match => <$Match when={2 > 1}>
     <p>right</p>
-  </$tag1>
-</$tag0>);
+  </$Match>)($splice1())}
+</$Switch>)($splice0()));
 }
 
 // 35:16
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($tag0, $splice1) => <$tag0 fallback={<p>caught</p>}>{$splice1()}</$tag0>);
+exports.default = (($splice0, $splice1) => ($ErrorBoundary => <$ErrorBoundary fallback={<p>caught</p>}>{$splice1()}</$ErrorBoundary>)($splice0()));
 }
 
 // 36:5
@@ -43,19 +43,19 @@ exports.default = (() => {
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($tag0) => <$tag0 fallback={<p>loading</p>}>
+exports.default = (($splice0) => ($Suspense => <$Suspense fallback={<p>loading</p>}>
   <p>loaded</p>
-</$tag0>);
+</$Suspense>)($splice0()));
 }
 
 // 45:18
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($tag0) => <div>
+exports.default = (($splice0) => <div>
   <p>here</p>
-  <$tag0>
+  {($Portal => <$Portal>
     <p>elsewhere</p>
-  </$tag0>
+  </$Portal>)($splice0())}
 </div>);
 }

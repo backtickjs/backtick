@@ -85,11 +85,11 @@ const $module5 = {
 };
 const $module6 = {
   id: "sn9bkvkvsing:28:10",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = ($tag0, $capture1, $capture2) => (0, web_1.createComponent)($tag0, {\n    each: [1, 2],\n    children: m => (0, web_1.createComponent)($capture1, {\n        get n() {\n            return m * $capture2();\n        }\n    })\n});\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;kBA2Ba,CAAAA,KAAA,EAAAC,SAAA,EAAAC,SAAA,KAAAC,yBAAA,EAACH,KAAI;IAACI,IAAI,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC;IAAAC,QAAA,EACnBC,CAAS,IAAAH,yBAAA,EAAMF,SAAK;QAAA,IAACM,CAACA;YAAA,OAAED,CAAC,GAAGJ,SAAK,EAAE;QAAA;KAAA;CAAI,CACpC","names":["$tag0","$capture1","$capture2","_$createComponent","each","children","m","n"],"ignoreList":[],"sources":["render/script-bound-tag-capture.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = ($splice0, $capture1, $capture2) => ($For => (0, web_1.createComponent)($For, {\n    each: [1, 2],\n    children: m => (0, web_1.createComponent)($capture1, {\n        get n() {\n            return m * $capture2();\n        }\n    })\n}))($splice0($capture1, $capture2));\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;kBA2Ba,CAAAA,QAAA,EAAAC,SAAA,EAAAC,SAAA,MAAAC,IAAA,IAAAC,yBAAA,EAACD,IAAI;IAACE,IAAI,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC;IAAAC,QAAA,EACnBC,CAAS,IAAAH,yBAAA,EAAMH,SAAK;QAAA,IAACO,CAACA;YAAA,OAAED,CAAC,GAAGL,SAAK,EAAE;QAAA;KAAA;CAAI,CACpC,EAFDF,QAAA,CAAAC,SAAA,EAAAC,SAAA,CAAI,CAEH","names":["$splice0","$capture1","$capture2","$For","_$createComponent","each","children","m","n"],"ignoreList":[],"sources":["render/script-bound-tag-capture.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [
-    { kind: "tag" },
+    { kind: "splice", bindings: [] },
     { kind: "capture", key: "Badge$sn9bkvkvsing$2" },
     { kind: "capture", key: "count$sn9bkvkvsing$0" },
   ],

@@ -2,7 +2,7 @@
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $tag1) => {
+exports.default = (($splice0, $splice1) => {
     const rows = [1, 2, 3, 4].map((id) => ({
         id: id,
         label: $splice0()("row " + id),
@@ -17,11 +17,11 @@ exports.default = (($splice0, $tag1) => {
         <button onclick={update}>update</button>
         <table>
           <tbody>
-            <$tag1 each={rows}>
+            {($For => <$For each={rows}>
               {(row) => (<tr id={"row-" + row.id}>
                   <td>{row.label[0]()}</td>
                 </tr>)}
-            </$tag1>
+            </$For>)($splice1())}
           </tbody>
         </table>
       </div>);

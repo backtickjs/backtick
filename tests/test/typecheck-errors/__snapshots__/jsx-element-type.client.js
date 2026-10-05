@@ -16,7 +16,7 @@ exports.default = (() => <blink />);
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($tag0) => <$tag0 />);
+exports.default = (($splice0) => ($NotATag => <$NotATag />)($splice0()));
 }
 
 // 28:26
@@ -32,7 +32,7 @@ exports.default = (() => <>
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($tag0) => <$tag0 each={[]}>{(n) => <i>{n}</i>}</$tag0>);
+exports.default = (($splice0) => ($For => <$For each={[]}>{(n) => <i>{n}</i>}</$For>)($splice0()));
 }
 
 // 41:26
@@ -53,7 +53,7 @@ exports.default = (() => <div class={1}/>);
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($tag0) => <$tag0 />);
+exports.default = (($splice0) => ($Fragment => <$Fragment />)($splice0()));
 }
 
 // 53:21

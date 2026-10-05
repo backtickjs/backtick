@@ -15,9 +15,10 @@ const $modules = {
     const web_2 = require("solid-js/web");
     const web_3 = require("solid-js/web");
     const web_4 = require("solid-js/web");
+    const web_5 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>clear`),
       _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<span>`);
-    exports.default = ($splice0, $tag1) => {
+    exports.default = ($splice0, $splice1) => {
       const [ids, setIds] = $splice0()([1, 2, 3]);
       const clear = () => {
         setIds([]);
@@ -28,17 +29,20 @@ const $modules = {
           _el$.$$click = clear;
           return _el$;
         })(),
-        (0, web_4.createComponent)($tag1, {
-          get each() {
-            return ids();
-          },
-          children: (id) =>
-            (() => {
-              var _el$2 = _tmpl$2();
-              (0, web_3.insert)(_el$2, "row " + id);
-              return _el$2;
-            })(),
-        }),
+        (0, web_5.memo)(() =>
+          (($For) =>
+            (0, web_4.createComponent)($For, {
+              get each() {
+                return ids();
+              },
+              children: (id) =>
+                (() => {
+                  var _el$2 = _tmpl$2();
+                  (0, web_3.insert)(_el$2, "row " + id);
+                  return _el$2;
+                })(),
+            }))($splice1()),
+        ),
       ];
     };
     (0, web_2.delegateEvents)(["click"]);
@@ -60,5 +64,9 @@ const $cs0 = $require("1uptcsn9236u2:352:9").default;
 const $cs1 = $require("3vm53m05uwuq:32:9").default;
 export default $cs0(
   () => $i0,
-  () => $cs1(() => $i1, $i2),
+  () =>
+    $cs1(
+      () => $i1,
+      () => $i2,
+    ),
 );

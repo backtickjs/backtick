@@ -220,11 +220,16 @@ export async function buildBundle(
     }
     // A host function is host code, which never reaches the client: client
     // code is written in a script, and reaches another as one.
+    // A server component among them, written as a tag: `<$Rule />`.
     if (typeof value === "function") {
+      const { name } = value as (...args: never) => unknown;
       throw new Error(
-        "Can't splice a host function: it's host code, and only runs on the " +
-          "host. Write a client function as a script instead: " +
-          "cs`(n: number) => ...`.",
+        (name === ""
+          ? "Can't splice a host function"
+          : `Can't splice the host function \`${name}\``) +
+          ": it's host code, and only runs on the host. Write a client " +
+          "function as a script instead: cs`(n: number) => ...`; a server " +
+          `component is drawn in a braced splice: \`{\${<${name || "Name"} />}}\`.`,
       );
     }
     // Only plain objects cross structurally. A class instance would land here
@@ -275,23 +280,8 @@ export async function buildBundle(
   ): Promise<string[]> => {
     const target = scriptFor(ref);
     const parts: string[] = [];
-    // The splices and tags lead the parameters, one `arg` each.
+    // The splices lead the parameters, one `arg` each.
     for (const [index, arg] of ref.args.entries()) {
-      const { kind } = ref.module.params[index]!;
-      // A tag is handed over as the value it names, as its script reads it: a
-      // client component. A server component is host code, used in a splice.
-      if (kind === "tag") {
-        if (typeof arg === "function") {
-          const { name } = arg as (...args: never) => unknown;
-          throw new Error(
-            `\`<${name}>\` is a server component, so it can't be a tag in a ` +
-              "script, whose tags are client components. Use it in a splice: " +
-              `\`{\${<${name} />}}\`.`,
-          );
-        }
-        parts.push(await render(arg, scope));
-        continue;
-      }
       // What the hole hands over, in the order the script fixes: the bindings
       // bound there, then the captures it forwards on behalf of whatever is
       // nested inside it.

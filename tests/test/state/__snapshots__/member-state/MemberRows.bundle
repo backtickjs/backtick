@@ -17,7 +17,7 @@ const $modules = {
     const web_4 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><ul class=rows>`),
       _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<li>`);
-    exports.default = ($splice0, $tag1) => {
+    exports.default = ($splice0, $splice1) => {
       const build = (from) => {
         return Array.from(
           {
@@ -35,20 +35,20 @@ const $modules = {
       return (() => {
         var _el$ = _tmpl$(),
           _el$2 = _el$.firstChild;
-        (0, web_3.insert)(
-          _el$2,
-          (0, web_4.createComponent)($tag1, {
-            get each() {
-              return held();
-            },
-            children: (row) =>
-              (() => {
-                var _el$3 = _tmpl$2();
-                _el$3.$$click = () => row.label[1]("pressed");
-                (0, web_3.insert)(_el$3, () => row.label[0]());
-                return _el$3;
-              })(),
-          }),
+        (0, web_4.insert)(_el$2, () =>
+          (($For) =>
+            (0, web_3.createComponent)($For, {
+              get each() {
+                return held();
+              },
+              children: (row) =>
+                (() => {
+                  var _el$3 = _tmpl$2();
+                  _el$3.$$click = () => row.label[1]("pressed");
+                  (0, web_4.insert)(_el$3, () => row.label[0]());
+                  return _el$3;
+                })(),
+            }))($splice1()),
         );
         return _el$;
       })();
@@ -72,5 +72,9 @@ const $cs0 = $require("1uptcsn9236u2:352:9").default;
 const $cs1 = $require("2n9yrqajtgjuu:20:9").default;
 export default $cs0(
   () => $i0,
-  () => $cs1(() => $i1, $i2),
+  () =>
+    $cs1(
+      () => $i1,
+      () => $i2,
+    ),
 );

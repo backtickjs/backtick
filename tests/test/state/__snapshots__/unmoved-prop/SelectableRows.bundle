@@ -22,7 +22,7 @@ const $modules = {
         `<div><span>select</span><div>`,
       ),
       _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<a>`);
-    exports.default = ($splice0, $splice1, $tag2) => {
+    exports.default = ($splice0, $splice1, $splice2) => {
       const [selected, setSelected] = $splice0()(0);
       const isSelected = $splice1()(selected);
       return (() => {
@@ -30,24 +30,24 @@ const $modules = {
           _el$2 = _el$.firstChild,
           _el$3 = _el$2.nextSibling;
         _el$2.$$click = () => setSelected(1);
-        (0, web_5.insert)(
-          _el$3,
-          (0, web_6.createComponent)($tag2, {
-            each: [0, 1, 2],
-            children: (id) =>
-              (() => {
-                var _el$4 = _tmpl$2();
-                (0, web_5.insert)(_el$4, "row " + id);
-                (0, web_4.effect)(() =>
-                  (0, web_3.setAttribute)(
-                    _el$4,
-                    "href",
-                    isSelected(id) ? "#open" : "#closed",
-                  ),
-                );
-                return _el$4;
-              })(),
-          }),
+        (0, web_6.insert)(_el$3, () =>
+          (($For) =>
+            (0, web_5.createComponent)($For, {
+              each: [0, 1, 2],
+              children: (id) =>
+                (() => {
+                  var _el$4 = _tmpl$2();
+                  (0, web_6.insert)(_el$4, "row " + id);
+                  (0, web_4.effect)(() =>
+                    (0, web_3.setAttribute)(
+                      _el$4,
+                      "href",
+                      isSelected(id) ? "#open" : "#closed",
+                    ),
+                  );
+                  return _el$4;
+                })(),
+            }))($splice2()),
         );
         return _el$;
       })();
@@ -75,6 +75,6 @@ export default $cs0(
     $cs1(
       () => $i1,
       () => $i2,
-      $i3,
+      () => $i3,
     ),
 );

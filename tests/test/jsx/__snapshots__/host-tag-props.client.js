@@ -12,8 +12,8 @@ exports.default = (() => (props) => (<span data-id={props["data-id"]} title={pro
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($tag0) => {
+exports.default = (($splice0) => {
     const rest = { label: "spread" };
-    return <$tag0 {...rest} disabled data-id="seven" icon=<b>!</b>/>;
+    return ($Badge => <$Badge {...rest} disabled data-id="seven" icon=<b>!</b>/>)($splice0());
 });
 }

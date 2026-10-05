@@ -10,10 +10,13 @@ const $module0 = {
 };
 const $module1 = {
   id: "e4ehd6s3ebyx:16:24",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = ($tag0, $tag1) => (0, web_1.createComponent)($tag0, {\n    each: [1, 2],\n    children: n => (0, web_1.createComponent)($tag1, {\n        n: n\n    })\n});\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAe2B,CAAAA,KAAA,EAAAC,KAAA,KAAAC,yBAAA,EAACF,KAAI;IAACG,IAAI,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC;IAAAC,QAAA,EACzCC,CAAC,IAAAH,yBAAA,EAAMD,KAAM;QAACI,CAAC,EAAEA;KAAC;CAAI,CACnB","names":["$tag0","$tag1","_$createComponent","each","children","n"],"ignoreList":[],"sources":["typecheck-errors/client-component-on-host.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = ($splice0, $splice1) => ($For => (0, web_1.createComponent)($For, {\n    each: [1, 2],\n    children: n => ($Badge => (0, web_1.createComponent)($Badge, {\n        n: n\n    }))($splice1())\n}))($splice0());\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAe2B,CAAAA,QAAA,EAAAC,QAAA,MAAAC,IAAA,IAAAC,yBAAA,EAACD,IAAI;IAACE,IAAI,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC;IAAAC,QAAA,EACzCC,CAAC,IAAK,CAAAC,MAAA,IAAAJ,yBAAA,EAACI,MAAM;QAACD,CAAC,EAAEA;KAAC,CAAI,EAAfL,QAAA,EAAM;CAAS,CACnB,EAFqBD,QAAA,EAAI,CAEzB","names":["$splice0","$splice1","$For","_$createComponent","each","children","n","$Badge"],"ignoreList":[],"sources":["typecheck-errors/client-component-on-host.test.tsx"]}',
   dependencies: ["solid-js/web"],
-  params: [{ kind: "tag" }, { kind: "tag" }],
+  params: [
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+  ],
 };
 // A client component is client code, a tag in a script. On the host it isn't
 // callable, so TypeScript refuses it as a tag: a client import, and a script

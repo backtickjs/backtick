@@ -20,7 +20,7 @@ it("refuses a server component as a tag in a script", async () => {
     }),
     {
       message:
-        "`<Rule>` is a server component, so it can't be a tag in a script, whose tags are client components. Use it in a splice: `{${<Rule />}}`.",
+        "Can't splice the host function `Rule`: it's host code, and only runs on the host. Write a client function as a script instead: cs`(n: number) => ...`; a server component is drawn in a braced splice: `{${<Rule />}}`.",
     },
   );
 });

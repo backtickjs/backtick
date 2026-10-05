@@ -188,8 +188,6 @@ export function rewriteScript(
               false,
             ),
           });
-        case "tag":
-          return objectLiteral({ kind: string("tag") });
         case "capture":
           return objectLiteral({
             kind: string("capture"),

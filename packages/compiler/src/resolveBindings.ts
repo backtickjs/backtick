@@ -1,6 +1,5 @@
 import type ts from "typescript";
 import type { ClientScript } from "./parseFile.js";
-import { isTagRoot } from "./tagRoot.js";
 
 /**
  * Every client script in a file, its scopes resolved by TypeScript's checker,
@@ -14,11 +13,11 @@ import { isTagRoot } from "./tagRoot.js";
  *
  *  - `params`: for each script, its parameters in order (see `ResolvedParam`):
  *
- *    - each splice it reads, with where it reads it and `bindings`: the
- *      script's own bindings a fragment landing at that hole can reach, what
- *      the hole must hand whatever arrives. Unlike counting what actually
- *      reached a hole in one bundle, it is a fact about the script alone.
- *    - each splice written as a tag (`<$Card>`), handed over as its value.
+ *    - each splice it reads, a tag's (`<$Card>`) among them, with where it
+ *      reads it and `bindings`: the script's own bindings a fragment landing
+ *      at that hole can reach, what the hole must hand whatever arrives.
+ *      Unlike counting what actually reached a hole in one bundle, it is a
+ *      fact about the script alone.
  *    - each capture: a free variable it references but does not itself
  *      declare, which it must capture from the enclosing scope, as a binding
  *      key. Captures are ordered by first use, which falls out of the
@@ -57,8 +56,8 @@ export type BindingResolution = Map<ts.Identifier, string>;
 export interface ResolvedScopes {
   bindings: BindingResolution;
   // `params.get(script)[i]` is the script's parameter `i` (`$splice<i>`,
-  // `$tag<i>`, `$capture<i>`): splices and tags in the order the script first
-  // reads them, then captures
+  // `$capture<i>`): splices in the order the script first reads them, then
+  // captures
   params: Map<ClientScript, ResolvedParam[]>;
 }
 
@@ -68,20 +67,12 @@ export interface ResolvedScopes {
  * `refs` are a hole's placeholder, or an unbraced `$name`, a tag's name among
  * them.
  */
-export type ResolvedParam = ResolvedSplice | ResolvedTag | ResolvedCapture;
+export type ResolvedParam = ResolvedSplice | ResolvedCapture;
 
 interface ResolvedSplice {
   kind: "splice";
   key: string;
   bindings: string[];
-  refs: ts.Identifier[];
-}
-
-// a splice written as a tag, `<$Card>`: a tag can't be a call, so it is
-// handed over as its value, as everywhere the script reads it
-interface ResolvedTag {
-  kind: "tag";
-  key: string;
   refs: ts.Identifier[];
 }
 
@@ -93,7 +84,7 @@ interface ResolvedCapture {
 // A script's parameters as the pass finds them, by key.
 interface ScriptParams {
   // in first-use order, tags among them
-  splices: (ResolvedSplice | ResolvedTag)[];
+  splices: ResolvedSplice[];
   // in first-use order
   captures: Map<string, ResolvedCapture>;
 }
@@ -159,13 +150,12 @@ export function resolveBindings(
   const scriptParams = new Map<ClientScript, ScriptParams>();
   for (const script of combined.parents.keys()) {
     scriptParams.set(script, {
-      // A splice written as a tag is handed over as its value: it has no
-      // bindings to hand a hole.
-      splices: Object.values(script.splices).map(({ key, refs }) =>
-        refs.some((ref) => isTagRoot(ts, ref))
-          ? { kind: "tag", key, refs }
-          : { kind: "splice", key, bindings: [], refs },
-      ),
+      splices: Object.values(script.splices).map(({ key, refs }) => ({
+        kind: "splice",
+        key,
+        bindings: [],
+        refs,
+      })),
       captures: new Map(),
     });
   }
@@ -260,9 +250,6 @@ export function resolveBindings(
   // shadows, whose declaration the source has passed.
   for (const [script, { splices }] of scriptParams) {
     for (const splice of splices) {
-      if (splice.kind === "tag") {
-        continue;
-      }
       for (const ref of splice.refs) {
         const position = combined.positions.get(ref)!;
         const location = nodeAt(file, position);
@@ -295,9 +282,7 @@ export function resolveBindings(
     for (const splice of splices) {
       // Narrowed only now: whether anything captures a binding is not known
       // until every script that could has been read.
-      if (splice.kind === "splice") {
-        splice.bindings = splice.bindings.filter((key) => escaped.has(key));
-      }
+      splice.bindings = splice.bindings.filter((key) => escaped.has(key));
     }
     params.set(script, [...splices, ...captures.values()]);
   }

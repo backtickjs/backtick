@@ -1,0 +1,153 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n  
+throw            → throw
+                 →  
+new              → new
+                 →  
+Error            → Error
+(                → (
+"boom"           → "boom"
+)                → )
+;                → ;
+\n               → \n  
+return           → return
+                 →  
+(                → (
+__cs_props       → props
+:                → :
+                 →  
+{                → {
+}                → }
+)                → )
+                 →  
+=>               → =>
+                 →  
+<                → <
+b                → b
+>                → >
+never            → never
+<                → <
+/                → /
+b                → b
+>                → >
+;                → ;
+\n               → \n
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n  
+const            → const
+                 →  
+__cs_counter     → counter
+                 →  
+=                → =
+                 →  
+globalThis       → globalThis
+                 →  
+as               → as
+                 →  
+unknown          → unknown
+                 →  
+as               → as
+                 →  
+{                → {
+                 →  
+evaluations      → evaluations
+?                → ?
+:                → :
+                 →  
+number           → number
+                 →  
+}                → }
+;                → ;
+\n               → \n  
+__cs_counter     → counter
+.                → .
+evaluations      → evaluations
+                 →  
+=                → =
+                 →  
+(                → (
+__cs_counter     → counter
+.                → .
+evaluations      → evaluations
+                 →  
+??               → ??
+                 →  
+0                → 0
+)                → )
+                 →  
++                → +
+                 →  
+1                → 1
+;                → ;
+\n               → \n  
+return           → return
+                 →  
+(                → (
+__cs_props       → props
+:                → :
+                 →  
+{                → {
+}                → }
+)                → )
+                 →  
+=>               → =>
+                 →  
+<                → <
+b                → b
+>                → >
+counted          → counted
+<                → <
+/                → /
+b                → b
+>                → >
+;                → ;
+\n               → \n
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+<                → <
+p                → p
+>                → >
+{                → {
+false            → false
+                 →  
+?                → ?
+                 →  
+$Boom            → $Boom [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
+(Boom)           → $Boom [-highlight]
+))               →  [-semantic -navigation]
+                 →  
+:                → :
+                 →  
+"ok"             → "ok"
+}                → }
+<                → <
+/                → /
+p                → p
+>                → >
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+<                → <
+p                → p
+>                → >
+\n               → \n  
+$Counted         → $Counted [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
+(Counted)        → $Counted [-highlight]
+))               →  [-semantic -navigation]
+\n               → \n  
+$Counted         → $Counted [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
+(Counted)        → $Counted [-highlight]
+))               →  [-semantic -navigation]
+\n               → \n
+<                → <
+/                → /
+p                → p
+>                → >
+)())             → ` [-semantic -navigation]

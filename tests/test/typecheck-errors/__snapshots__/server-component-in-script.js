@@ -22,24 +22,24 @@ const $module2 = {
 };
 const $module3 = {
   id: "2exh6id0qbirq:20:26",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $tag0 => (0, web_1.createComponent)($tag0, {\n    label: "a"\n});\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAmB6BA,KAAA,IAAAC,yBAAA,EAACD,KAAI;IAACE,KAAK;CAAA,CAAO","names":["$tag0","_$createComponent","label"],"ignoreList":[],"sources":["typecheck-errors/server-component-in-script.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $splice0 => ($Row => (0, web_1.createComponent)($Row, {\n    label: "a"\n}))($splice0());\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAmB6BA,QAAA,KAAAC,IAAA,IAAAC,yBAAA,EAACD,IAAI;IAACE,KAAK;CAAA,CAAO,EAAjBH,QAAA,EAAI,CAAa","names":["$splice0","$Row","_$createComponent","label"],"ignoreList":[],"sources":["typecheck-errors/server-component-in-script.test.tsx"]}',
   dependencies: ["solid-js/web"],
-  params: [{ kind: "tag" }],
+  params: [{ kind: "splice", bindings: [] }],
 };
 const $module4 = {
   id: "2exh6id0qbirq:23:22",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $tag0 => (0, web_1.createComponent)($tag0, {\n    text: "Week"\n});\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAsByBA,KAAA,IAAAC,yBAAA,EAACD,KAAM;IAACE,IAAI;CAAA,CAAU","names":["$tag0","_$createComponent","text"],"ignoreList":[],"sources":["typecheck-errors/server-component-in-script.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $splice0 => ($Title => (0, web_1.createComponent)($Title, {\n    text: "Week"\n}))($splice0());\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAsByBA,QAAA,KAAAC,MAAA,IAAAC,yBAAA,EAACD,MAAM;IAACE,IAAI;CAAA,CAAU,EAArBH,QAAA,EAAM,CAAe","names":["$splice0","$Title","_$createComponent","text"],"ignoreList":[],"sources":["typecheck-errors/server-component-in-script.test.tsx"]}',
   dependencies: ["solid-js/web"],
-  params: [{ kind: "tag" }],
+  params: [{ kind: "splice", bindings: [] }],
 };
 const $module5 = {
   id: "2exh6id0qbirq:26:23",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $tag0 => (0, web_1.createComponent)($tag0, {});\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAyB0BA,KAAA,IAAAC,yBAAA,EAACD,KAAK,KAAG","names":["$tag0","_$createComponent"],"ignoreList":[],"sources":["typecheck-errors/server-component-in-script.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $splice0 => ($Rule => (0, web_1.createComponent)($Rule, {}))($splice0());\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAyB0BA,QAAA,KAAAC,KAAA,IAAAC,yBAAA,EAACD,KAAK,KAAG,EAARD,QAAA,EAAK,CAAG","names":["$splice0","$Rule","_$createComponent"],"ignoreList":[],"sources":["typecheck-errors/server-component-in-script.test.tsx"]}',
   dependencies: ["solid-js/web"],
-  params: [{ kind: "tag" }],
+  params: [{ kind: "splice", bindings: [] }],
 };
 // A script's tags are client components. A server component is host code, used
 // in a splice (`{${<Row label={cs`"a"`} />}}`), and refused as a tag in a

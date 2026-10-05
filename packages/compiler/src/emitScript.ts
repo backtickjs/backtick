@@ -3,6 +3,7 @@ import { eachMapping, TraceMap } from "@jridgewell/trace-mapping";
 import type ts from "typescript";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution, ResolvedParam } from "./resolveBindings.js";
+import { tagRoot } from "./tagRoot.js";
 
 /** A script as the client runs it, and where its code came from. */
 export interface EmittedScript {
@@ -33,7 +34,7 @@ export interface Edit {
 
 /**
  * A script parameter's name: its kind and its index in a script's `params`,
- * `$splice0`, `$tag1`, `$capture2`. A script cannot bind a name starting with
+ * `$splice0`, `$capture1`. A script cannot bind a name starting with
  * `$`, so none meets one of its own.
  */
 export function paramName(param: ResolvedParam, index: number): string {
@@ -75,13 +76,10 @@ export function scriptEdits(
     if (param.kind === "capture") {
       return;
     }
-    // A tag is handed over as the value it names: it has no bindings to hand
-    // its hole, and JSX cannot write a call where a tag goes.
-    const name = paramName(param, index);
-    const edit: Edit =
-      param.kind === "tag"
-        ? { param: name }
-        : { param: name, args: [...param.bindings, ...captures].map(read) };
+    const edit: Edit = {
+      param: paramName(param, index),
+      args: [...param.bindings, ...captures].map(read),
+    };
     for (const ref of param.refs) {
       edits.set(at(ref), edit);
     }
@@ -120,6 +118,8 @@ export function emitScript(
   const transformer: ts.TransformerFactory<ts.SourceFile> =
     (context) => (file) => {
       const f = context.factory;
+      const editAt = (node: ts.Node) =>
+        edits.get(script.toSourceOffset(node.getStart(file)));
       const edited = (edit: Edit, from: ts.Node): ts.Expression => {
         const param = f.createIdentifier(edit.param);
         const node =
@@ -132,20 +132,67 @@ export function emitScript(
               );
         return ts.setOriginalNode(ts.setTextRange(node, from), from);
       };
+      // A tag's names where the tag reads a splice: they stay as written, the
+      // parameter of the arrow below.
+      const asWritten = new Set<ts.Node>();
+      // A tag that names a splice, `<$Card>`: JSX can't call where a tag goes,
+      // so the element is the body of an arrow its tag is a parameter of, called
+      // with the splice where the element stands, as any splice is read:
+      // `(($Card) => <$Card …/>)($splice0())`. A capture is its value, read as
+      // a tag as it is anywhere.
+      const hostTag = (
+        node: ts.JsxElement | ts.JsxSelfClosingElement,
+      ): ts.Node | undefined => {
+        const opening = ts.isJsxElement(node) ? node.openingElement : node;
+        const root = tagRoot(ts, opening.tagName);
+        const edit = root && editAt(root);
+        if (root === undefined || edit?.args === undefined) {
+          return undefined;
+        }
+        asWritten.add(opening.tagName);
+        if (ts.isJsxElement(node)) {
+          asWritten.add(node.closingElement.tagName);
+        }
+        const call = ts.setTextRange(
+          f.createCallExpression(
+            f.createParenthesizedExpression(
+              f.createArrowFunction(
+                undefined,
+                undefined,
+                [f.createParameterDeclaration(undefined, undefined, root.text)],
+                undefined,
+                f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
+                ts.visitEachChild(node, visit, context),
+              ),
+            ),
+            undefined,
+            [edited(edit, root)],
+          ),
+          node,
+        );
+        // Among an element's children, an expression is written in braces.
+        return ts.isJsxElement(node.parent) || ts.isJsxFragment(node.parent)
+          ? f.createJsxExpression(undefined, call)
+          : call;
+      };
       const visit = (node: ts.Node): ts.Node => {
         // Types are TypeScript's to strip, after this.
-        if (ts.isTypeNode(node)) {
+        if (ts.isTypeNode(node) || asWritten.has(node)) {
           return node;
         }
+        if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
+          const tagged = hostTag(node);
+          if (tagged !== undefined) {
+            return tagged;
+          }
+        }
         if (ts.isIdentifier(node)) {
-          const edit = edits.get(script.toSourceOffset(node.getStart(file)));
+          const edit = editAt(node);
           return edit === undefined ? node : edited(edit, node);
         }
         // `{ count }` names a key as well as a value.
         if (ts.isShorthandPropertyAssignment(node)) {
-          const edit = edits.get(
-            script.toSourceOffset(node.name.getStart(file)),
-          );
+          const edit = editAt(node.name);
           if (edit !== undefined) {
             return f.createPropertyAssignment(
               node.name.text,

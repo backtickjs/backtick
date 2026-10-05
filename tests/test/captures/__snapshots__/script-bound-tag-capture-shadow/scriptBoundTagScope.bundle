@@ -9,7 +9,7 @@ const $modules = {
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`),
       _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<section>`),
       _tmpl$3 = /*#__PURE__*/ (0, web_1.template)(`<i>`);
-    exports.default = ($tag0) => {
+    exports.default = ($splice0) => {
       const twice = (Card) =>
         (() => {
           var _el$ = _tmpl$();
@@ -33,9 +33,11 @@ const $modules = {
         var _el$2 = _tmpl$2();
         (0, web_2.insert)(
           _el$2,
-          (0, web_3.createComponent)($tag0, {
-            title: "host",
-          }),
+          () =>
+            (($Card) =>
+              (0, web_3.createComponent)($Card, {
+                title: "host",
+              }))($splice0()),
           null,
         );
         (0, web_2.insert)(
@@ -82,4 +84,4 @@ const $require = (id) => {
 };
 const $cs0 = $require("2x5zzf1r35g00:41:4").default;
 const $cs1 = $require("2x5zzf1r35g00:11:13").default;
-export default $cs0($cs1());
+export default $cs0($cs1);

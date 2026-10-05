@@ -2,11 +2,11 @@
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $tag1) => {
+exports.default = (($splice0, $splice1) => {
     const [count, setCount] = $splice0()(0);
-    return (<$tag1 variant="primary" icon={<b>+</b>} onClick={() => setCount(count() + 1)}>
+    return (($Button => <$Button variant="primary" icon={<b>+</b>} onClick={() => setCount(count() + 1)}>
       <span>{"Pressed " + count() + " times"}</span>
-    </$tag1>);
+    </$Button>)($splice1()));
 });
 }
 
@@ -14,7 +14,7 @@ exports.default = (($splice0, $tag1) => {
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($tag0) => <$tag0 variant="large" onClick={() => { }}>
+exports.default = (($splice0) => ($Button => <$Button variant="large" onClick={() => { }}>
   Save
-</$tag0>);
+</$Button>)($splice0()));
 }

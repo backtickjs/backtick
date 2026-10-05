@@ -26,8 +26,8 @@ exports.default = (($capture0) => <$capture0 n={1}/>);
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($tag0, $splice1, $splice2) => <div>
-      <$tag0 title="host"/>
+exports.default = (($splice0, $splice1, $splice2) => <div>
+      {($Card => <$Card title="host"/>)($splice0())}
       {$splice1()}
       {$splice2()}
     </div>);
@@ -51,13 +51,13 @@ exports.default = (() => "b");
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($tag0) => {
+exports.default = (($splice0) => {
     const twice = (Card) => (<div>
           <Card n={1}/>
           <Card n={2}/>
         </div>);
     return (<section>
-          <$tag0 title="host"/>
+          {($Card => <$Card title="host"/>)($splice0())}
           {twice((props) => (<i>{"row " + props.n}</i>))}
         </section>);
 });

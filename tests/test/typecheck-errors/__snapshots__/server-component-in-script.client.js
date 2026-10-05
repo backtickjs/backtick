@@ -23,19 +23,19 @@ exports.default = (() => <hr />);
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($tag0) => <$tag0 label="a"/>);
+exports.default = (($splice0) => ($Row => <$Row label="a"/>)($splice0()));
 }
 
 // 23:23
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($tag0) => <$tag0 text="Week"/>);
+exports.default = (($splice0) => ($Title => <$Title text="Week"/>)($splice0()));
 }
 
 // 26:24
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($tag0) => <$tag0 />);
+exports.default = (($splice0) => ($Rule => <$Rule />)($splice0()));
 }

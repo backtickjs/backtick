@@ -9,7 +9,7 @@ exports.default = (() => <circle cx="5" cy="5" r="4" fill="none" stroke="current
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $tag1) => {
+exports.default = (($splice0, $splice1) => {
     const Dot = (props) => (<circle cx={props.x} cy="5" r="2">
       <title>{"dot " + props.x}</title>
     </circle>);
@@ -17,7 +17,7 @@ exports.default = (($splice0, $tag1) => {
       <a href="/shapes">{"shapes"}</a>
       <svg viewBox="0 0 30 10" width="120">
         {$splice0()}
-        <$tag1 each={[10, 20]}>{(x) => <Dot x={x}/>}</$tag1>
+        {($For => <$For each={[10, 20]}>{(x) => <Dot x={x}/>}</$For>)($splice1())}
         <foreignObject x="0" y="0" width="10" height="10">
           <p>{"html again"}</p>
         </foreignObject>

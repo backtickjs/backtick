@@ -2,10 +2,10 @@
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($tag0, $splice1, $splice2) => <div>
-      <$tag0 each={$splice1()}>
+exports.default = (($splice0, $splice1, $splice2) => <div>
+      {($For => <$For each={$splice1()}>
         {(row) => $splice2(row)}
-      </$tag0>
+      </$For>)($splice0())}
     </div>);
 }
 

@@ -8,17 +8,17 @@ const $modules = {
     const web_2 = require("solid-js/web");
     const web_3 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);
-    exports.default = ($tag0, $splice1, $splice2) =>
+    exports.default = ($splice0, $splice1, $splice2) =>
       (() => {
         var _el$ = _tmpl$();
-        (0, web_2.insert)(
-          _el$,
-          (0, web_3.createComponent)($tag0, {
-            get each() {
-              return $splice1();
-            },
-            children: (row) => $splice2(row),
-          }),
+        (0, web_3.insert)(_el$, () =>
+          (($For) =>
+            (0, web_2.createComponent)($For, {
+              get each() {
+                return $splice1();
+              },
+              children: (row) => $splice2(row),
+            }))($splice0()),
         );
         return _el$;
       })();
@@ -51,4 +51,8 @@ const $require = (id) => {
 };
 const $cs0 = $require("vmu74mwm42ey:26:4").default;
 const $cs1 = $require("vmu74mwm42ey:28:28").default;
-export default $cs0($i0, () => [1, 2, 3], $cs1);
+export default $cs0(
+  () => $i0,
+  () => [1, 2, 3],
+  $cs1,
+);

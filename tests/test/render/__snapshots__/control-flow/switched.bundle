@@ -7,31 +7,39 @@ const $modules = {
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
     const web_2 = require("solid-js/web");
-    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>wrong`),
-      _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<p>right`),
-      _tmpl$3 = /*#__PURE__*/ (0, web_1.template)(`<p>none`);
-    exports.default = ($tag0, $tag1) =>
-      (0, web_2.createComponent)($tag0, {
-        get fallback() {
-          return _tmpl$3();
-        },
-        get children() {
-          return [
-            (0, web_2.createComponent)($tag1, {
-              when: 1 > 2,
-              get children() {
-                return _tmpl$();
-              },
-            }),
-            (0, web_2.createComponent)($tag1, {
-              when: 2 > 1,
-              get children() {
-                return _tmpl$2();
-              },
-            }),
-          ];
-        },
-      });
+    const web_3 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>none`),
+      _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<p>wrong`),
+      _tmpl$3 = /*#__PURE__*/ (0, web_1.template)(`<p>right`);
+    exports.default = ($splice0, $splice1) =>
+      (($Switch) =>
+        (0, web_2.createComponent)($Switch, {
+          get fallback() {
+            return _tmpl$();
+          },
+          get children() {
+            return [
+              (0, web_3.memo)(() =>
+                (($Match) =>
+                  (0, web_2.createComponent)($Match, {
+                    when: 1 > 2,
+                    get children() {
+                      return _tmpl$2();
+                    },
+                  }))($splice1()),
+              ),
+              (0, web_3.memo)(() =>
+                (($Match) =>
+                  (0, web_2.createComponent)($Match, {
+                    when: 2 > 1,
+                    get children() {
+                      return _tmpl$3();
+                    },
+                  }))($splice1()),
+              ),
+            ];
+          },
+        }))($splice0());
   },
 };
 const $exports = {
@@ -47,4 +55,7 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("1jcbbk251ep80:26:17").default;
-export default $cs0($i0, $i1);
+export default $cs0(
+  () => $i0,
+  () => $i1,
+);
