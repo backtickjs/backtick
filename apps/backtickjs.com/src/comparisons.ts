@@ -1,9 +1,16 @@
-import type { Cell, Row } from "./components/Comparison.js";
+import type { Cell, Column, Row } from "./components/Comparison.js";
 
 // What the page says about the tools Backtick is mistaken for. Claims about
 // Expo follow its docs: docs.expo.dev/guides/server-components.
 
-export const COLUMNS = ["EAS Update", "Expo Router RSC", "Backtick"];
+export const COLUMNS: Column[] = [
+  { name: "EAS Update", summary: "Ships the app's whole JS bundle" },
+  { name: "Expo Router RSC", summary: "Ships server-rendered output" },
+  {
+    name: "Backtick",
+    summary: "Ships one screen, client code and data included",
+  },
+];
 
 // How a cell reads for someone choosing: what they'd want, a trade-off, or
 // something missing. A verdict first, then the detail behind it, if any.
@@ -22,18 +29,8 @@ const bad = (verdict: string, detail = ""): Cell => ({
   detail,
   tone: "bad",
 });
-// A description, with no verdict to give.
-const plain = (detail: string): Cell => ({ verdict: "", detail, tone: "none" });
 
 export const ROWS: Row[] = [
-  {
-    label: "What changes",
-    values: [
-      plain("The app's entire JS bundle and assets"),
-      plain("Server-rendered output only"),
-      plain("One screen: its client components and data"),
-    ],
-  },
   {
     label: "Can differ per user?",
     values: [
