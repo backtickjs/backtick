@@ -1,0 +1,4 @@
+# What running the template here leaves behind. The template's own ignore file
+# is `template/gitignore`, renamed as it's copied: npm drops a `.gitignore`
+# from a published package.
+template/.expo/

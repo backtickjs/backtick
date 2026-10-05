@@ -500,6 +500,73 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
+  packages/create-backtick-app:
+    devDependencies:
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/create-backtick-app/template:
+    dependencies:
+      '@backtickjs/bundler':
+        specifier: ^0.1.0
+        version: link:../../bundler
+      '@backtickjs/core':
+        specifier: ^0.1.0
+        version: link:../../core
+      '@backtickjs/node-plugin':
+        specifier: ^0.1.0
+        version: link:../../node-plugin
+      '@backtickjs/react':
+        specifier: ^19.2.3
+        version: link:../../react
+      '@backtickjs/react-native':
+        specifier: ^0.86.3
+        version: link:../../react-native
+      '@backtickjs/react-native-client':
+        specifier: ^0.1.0
+        version: link:../../react-native-client
+      expo:
+        specifier: ~57.0.26
+        version: 57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)
+      expo-constants:
+        specifier: ~57.0.20
+        version: 57.0.20(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))
+      expo-status-bar:
+        specifier: ~57.0.1
+        version: 57.0.1(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
+      react:
+        specifier: 19.2.3
+        version: 19.2.3
+      react-dom:
+        specifier: 19.2.3
+        version: 19.2.3(react@19.2.3)
+      react-native:
+        specifier: 0.86.3
+        version: 0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3)
+      react-native-web:
+        specifier: ^0.21.0
+        version: 0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+    devDependencies:
+      '@backtickjs/tsc':
+        specifier: ^0.1.0
+        version: link:../../tsc
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
+      '@types/react':
+        specifier: 19.2.18
+        version: 19.2.18
+
   packages/language-plugin:
     dependencies:
       '@backtickjs/compiler':
@@ -547,6 +614,25 @@ importers:
         specifier: ^2.4.28
         version: 2.4.28
     devDependencies:
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/node-plugin:
+    dependencies:
+      '@backtickjs/compiler':
+        specifier: workspace:*
+        version: link:../compiler
+    devDependencies:
+      '@backtickjs/core':
+        specifier: workspace:*
+        version: link:../core
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
       prettier:
         specifier: ^3.6.2
         version: 3.8.4

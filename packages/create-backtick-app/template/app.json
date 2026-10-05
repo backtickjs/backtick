@@ -1,0 +1,9 @@
+{
+  "expo": {
+    "name": "backtick-app",
+    "slug": "backtick-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light"
+  }
+}

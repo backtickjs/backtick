@@ -1,0 +1,40 @@
+{
+  "name": "backtick-app",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "start": "node scripts/start.mjs",
+    "android": "node scripts/start.mjs --android",
+    "ios": "node scripts/start.mjs --ios",
+    "web": "node scripts/start.mjs --web",
+    "server": "node --watch --enable-source-maps --import @backtickjs/node-plugin server/index.tsx",
+    "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit"
+  },
+  "dependencies": {
+    "@backtickjs/bundler": "^0.1.0",
+    "@backtickjs/core": "^0.1.0",
+    "@backtickjs/node-plugin": "^0.1.0",
+    "@backtickjs/react": "^19.2.3",
+    "@backtickjs/react-native": "^0.86.3",
+    "@backtickjs/react-native-client": "^0.1.0",
+    "expo": "~57.0.26",
+    "expo-constants": "~57.0.20",
+    "expo-status-bar": "~57.0.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.86.3",
+    "react-native-web": "^0.21.0",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "@backtickjs/tsc": "^0.1.0",
+    "@types/node": "^25.9.1",
+    "@types/react": "19.2.18"
+  },
+  "backtick": {
+    "plugins": [
+      "@backtickjs/react/plugin"
+    ]
+  }
+}
