@@ -1,4 +1,4 @@
-import { cs } from "@backtickjs/core";
+import { type Client, cs } from "@backtickjs/core";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 
 // One heading style for every section below the hero, so they read as a set.
@@ -12,7 +12,8 @@ export async function Section({
   id?: string;
   eyebrow: string;
   title: string;
-  lede: string;
+  // Text, or a script when it holds code to set apart.
+  lede: string | Client<JSX.Element>;
   children: JSX.Element;
 }) {
   return cs`(

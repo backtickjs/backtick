@@ -1,9 +1,11 @@
+import { cs } from "@backtickjs/core";
+import { InlineCode } from "../components/Code.js";
 import { Comparison } from "../components/Comparison.js";
 import { Cta } from "../components/Cta.js";
 import { DeployDemo } from "../components/DeployDemo.js";
 import { Features } from "../components/Features.js";
-import { Flow } from "../components/Flow.js";
 import { Hero } from "../components/Hero.js";
+import { HowItWorks } from "../components/HowItWorks.js";
 import { Layout } from "../components/Layout.js";
 import { Section } from "../components/Section.js";
 import { Setup } from "../components/Setup.js";
@@ -18,10 +20,17 @@ export async function Home() {
       <Section
         id="how"
         eyebrow="How it works"
-        title="Your server writes the screen. The phone runs it."
-        lede="Backtick splits a screen where React Server Components do: what needs your data runs on the server, what needs the user's finger runs on the device. One file, one language, both sides typed."
+        title="Compiled once. Linked per request."
+        lede={cs`(
+          <>
+            Your client scripts {${(<InlineCode source="cs`…`" />)}} are
+            compiled at build time. Each request runs your server components,
+            then links the compiled client scripts and the user's data into one
+            JavaScript file.
+          </>
+        )`}
       >
-        <Flow />
+        <HowItWorks />
       </Section>
 
       <Section
@@ -51,7 +60,7 @@ export async function Home() {
       <Section
         eyebrow="Setup"
         title="One route on the server. One component in the app."
-        lede="Your existing app keeps its navigation, auth and native modules. Backtick draws the screens you choose, with the React Native the app already ships."
+        lede="Your existing app keeps its navigation, auth and native modules. Backtick draws the screens you choose, with the React Native the app already ships. Works with Expo SDK 57, React Native 0.86 and React 19.2."
       >
         <Setup />
       </Section>

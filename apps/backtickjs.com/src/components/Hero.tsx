@@ -9,9 +9,9 @@ export async function Hero() {
         <span class="text-shine">without shipping the app.</span>
       </h1>
       <p class="mt-[26px] max-w-[36em] text-xl leading-[1.55] text-muted">
-        Backtick brings server components to React Native. Each screen is built
-        on your server per request, with the user's data inlined, then renders
-        natively. No API or GraphQL round trip.
+        Backtick brings server components to React Native. Each screen, client
+        components included, is assembled on your server per request and renders
+        natively.
       </p>
       <div class="mt-[34px] flex flex-wrap gap-3">
         {
@@ -25,9 +25,6 @@ export async function Hero() {
         }
         {${(<Button href="#how" label="See how it works" />)}}
       </div>
-      <p class="mt-[26px] font-mono text-[12.5px] text-muted">
-        Expo SDK 57 · React Native 0.86 · React 19.2 · TypeScript
-      </p>
     </div>
   )`;
 }

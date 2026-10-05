@@ -34,3 +34,15 @@ export async function Code({
     </div>
   )`;
 }
+
+// A few characters of code inside prose, coloured as the panels colour it.
+export async function InlineCode({ source }: { source: string }) {
+  const [line] = await highlight(source, "tsx");
+  return cs`(
+    <code class="rounded-md bg-code px-1.5 py-0.5 font-mono text-[0.85em]">
+      {$line!.tokens.map((token) => (
+        <span style={{ color: token.color }}>{token.text}</span>
+      ))}
+    </code>
+  )`;
+}
