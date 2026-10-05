@@ -7,7 +7,7 @@
       "request": "launch",
       "runtimeExecutable": "${execPath}",
       "args": [
-        "${workspaceRoot}/tests",
+        "${workspaceRoot}/examples/react-native-server",
         "--extensionDevelopmentPath=${workspaceRoot}/apps/vscode-extension"
       ],
       "outFiles": ["${workspaceRoot}/*/*/dist/**/*.js"]
