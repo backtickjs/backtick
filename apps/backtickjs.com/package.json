@@ -14,7 +14,8 @@
     "@backtickjs/bun-plugin": "^0.1.0",
     "@backtickjs/bundler": "^0.1.0",
     "@backtickjs/core": "^0.1.0",
-    "@backtickjs/solid-js": "^1.9.14"
+    "@backtickjs/solid-js": "^1.9.14",
+    "shiki": "^4.5.0"
   },
   "devDependencies": {
     "@backtickjs/prettier-plugin": "^0.1.0",

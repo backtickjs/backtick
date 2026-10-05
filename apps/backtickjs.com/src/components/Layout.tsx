@@ -3,7 +3,7 @@ import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 import { Badge } from "./Badge.js";
 import { GitHubMark } from "./GitHubMark.js";
 import { Logo } from "./Logo.js";
-import { ink, sans } from "./theme.js";
+import { ink, line, muted, sans } from "./theme.js";
 
 // The outermost thing the bundle draws, so type and ink inherit from here to
 // everything on the page.
@@ -29,12 +29,17 @@ const BRAND = "display: flex; align-items: center; gap: 10px";
 // beside a 700 headline it reads as switched off however black it is.
 const NAV =
   `display: flex; align-items: center; gap: 20px; font-size: 15px;` +
-  ` font-weight: 500; color: ${ink}`;
+  ` font-weight: 500; color: ${ink}; white-space: nowrap`;
 
 const HOME = `display: flex; color: ${ink}`;
 
+const FOOT =
+  "display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px;" +
+  ` margin-top: 96px; padding: 28px 0 40px; border-top: 1px solid ${line};` +
+  ` font-size: 14px; color: ${muted}`;
+
 // The chrome every page is drawn in.
-export async function Layout({ children }: { children: JSX.Element }) {
+export async function Layout({ children }: { children: JSX.Element[] }) {
   return cs`(
     <div style={$SHELL}>
       <header style={$TOP}>
@@ -47,8 +52,18 @@ export async function Layout({ children }: { children: JSX.Element }) {
           {${(<Badge label="ALPHA" />)}}
         </div>
         <nav style={$NAV}>
-          <a href="/docs" style="color: inherit">
-            Docs
+          <a
+            class="bt-wide"
+            href="#how"
+            style="color: inherit; text-decoration: none"
+          >
+            How it works
+          </a>
+          <a
+            href="https://github.com/backtickjs/backtick/tree/main/examples"
+            style="color: inherit; text-decoration: none"
+          >
+            Examples
           </a>
           {/* The mark carries no text, so the link says what it is for anyone
               not looking at it. */}
@@ -63,6 +78,13 @@ export async function Layout({ children }: { children: JSX.Element }) {
       </header>
 
       <main>{$children}</main>
+
+      <footer style={$FOOT}>
+        <span>Backtick · MIT licensed</span>
+        <a href="https://github.com/backtickjs/backtick" style="color: inherit">
+          github.com/backtickjs/backtick
+        </a>
+      </footer>
     </div>
   )`;
 }

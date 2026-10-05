@@ -7,27 +7,30 @@
 // written here cannot do on its own. It needs `color-scheme`, which the page's
 // head sets once and everything inherits.
 export const ink = "light-dark(#0e0e10, #fafafa)";
-export const paper = "light-dark(#ffffff, #0e0e10)";
-export const muted = "light-dark(#71717a, #a1a1aa)";
-export const line = "light-dark(#e4e4e7, #27272a)";
-export const wash = "light-dark(#fafafa, #161618)";
+export const paper = "light-dark(#ffffff, #0a0a0c)";
+export const muted = "light-dark(#6b6b76, #a1a1aa)";
+export const line = "light-dark(#e4e4e7, #26262b)";
+export const wash = "light-dark(#f7f7f8, #121215)";
 
-export const sans = "'Helvetica Neue', Helvetica, Inter, system-ui, sans-serif";
+export const sans =
+  "'Inter', 'Helvetica Neue', Helvetica, system-ui, sans-serif";
 export const mono = "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace";
 
-// The one colour on the page.
-//
-// The text needs `light-dark()`: the light end is unreadable on a dark canvas,
-// so which end is legible is a thing only the theme knows.
+// Violet is the brand; cyan is React's. The gradient between them is the one
+// place the two meet.
 export const accent = "light-dark(#7c3aed, #a78bfa)";
+export const cyan = "light-dark(#0891b2, #61dafb)";
+export const gradient = `linear-gradient(90deg, ${cyan}, ${accent})`;
 
-// The fill and its edge do not, and that is the whole reason they are alphas
-// rather than the two mixed hexes each would otherwise need. A translucent
-// violet composites to a pale tint over white and a dim one over near-black on
-// its own, so one value is right in both themes and there is no second value
-// to drift away from it.
-//
-// The hue sits between the two ends of `accent`, so neither theme is the one
-// paying for it.
+// The fill and its edge are alphas rather than `light-dark()` pairs: a
+// translucent violet composites to a pale tint over white and a dim one over
+// near-black on its own, so one value is right in both themes.
 export const accentFill = "rgba(139, 92, 246, 0.11)";
 export const accentEdge = "rgba(139, 92, 246, 0.26)";
+
+// Code is dark in both themes, so the highlighter needs one palette.
+export const codeBg = "#0d1117";
+export const codeLine = "#21262d";
+export const codeMuted = "#7d8590";
+
+export const radius = "20px";
