@@ -1,66 +1,76 @@
-import type { Row } from "./components/Comparison.js";
+import type { Cell, Row } from "./components/Comparison.js";
 
 // What the page says about the tools Backtick is mistaken for. Claims about
 // Expo follow its docs: docs.expo.dev/guides/server-components.
 
-export const EAS_UPDATE: Row[] = [
-  {
-    label: "What ships",
-    other: "The whole app's JavaScript bundle",
-    backtick: "One screen at a time",
-  },
-  {
-    label: "Who gets what",
-    other: "Everyone on a channel gets the same bundle",
-    backtick: "Each request can get its own screen: per user, region or flag",
-  },
-  {
-    label: "When it's built",
-    other: "Once, at publish time, by Metro",
-    backtick: "At request time, by your server components",
-  },
-  {
-    label: "Data",
-    other: "Fetched by the app after it loads",
-    backtick: "Already in the screen when it arrives",
-  },
-  {
-    label: "When it's live",
-    other: "Usually on the next launch",
-    backtick: "On the next fetch of that screen, no restart",
-  },
-  {
-    label: "Offline",
-    other: "The cached bundle runs offline",
-    backtick: "Needs your server to load a screen",
-  },
-];
+export const COLUMNS = ["EAS Update", "Expo Router RSC", "Backtick"];
 
-export const EXPO_RSC: Row[] = [
+// How a cell reads for someone choosing: what they'd want, a trade-off, or
+// something missing. A verdict first, then the detail behind it, if any.
+const good = (verdict: string, detail = ""): Cell => ({
+  verdict,
+  detail,
+  tone: "good",
+});
+const partial = (verdict: string, detail = ""): Cell => ({
+  verdict,
+  detail,
+  tone: "partial",
+});
+const bad = (verdict: string, detail = ""): Cell => ({
+  verdict,
+  detail,
+  tone: "bad",
+});
+// A description, with no verdict to give.
+const plain = (detail: string): Cell => ({ verdict: "", detail, tone: "none" });
+
+export const ROWS: Row[] = [
   {
-    label: "Client components",
-    other: "Compiled into the app binary at build time",
-    backtick:
-      "Ship with the screen, so new interactive code needs no app update",
+    label: "What changes",
+    values: [
+      plain("The app's entire JS bundle and assets"),
+      plain("Server-rendered output only"),
+      plain("One screen: its client components and data"),
+    ],
   },
   {
-    label: "What the server sends",
-    other: "An RSC payload: a serialized tree of elements",
-    backtick: "A JavaScript bundle, with the data inlined",
+    label: "Can differ per user?",
+    values: [
+      bad("No", "Same update for everyone on a channel"),
+      good("Yes", "Rendered per request"),
+      good("Yes", "Assembled per request"),
+    ],
   },
   {
-    label: "Where it works",
-    other: "Expo Router apps, behind an experimental flag",
-    backtick: "Any React Native app, through one component",
+    label: "Can add new client components?",
+    values: [
+      good("Yes", "In the next update"),
+      bad("No", "They must already be in the installed bundle"),
+      good("Yes", "They ship with the screen"),
+    ],
   },
   {
-    label: "Status",
-    other: "Experimental; production use not recommended yet",
-    backtick: "Alpha",
+    label: "When changes take effect",
+    values: [
+      partial("Next app launch"),
+      good("Next request or navigation"),
+      good("Next request or navigation"),
+    ],
   },
   {
-    label: "Offline",
-    other: "Client components start without a network",
-    backtick: "Needs your server to load a screen",
+    label: "Works offline?",
+    values: [
+      good("Yes", "Once downloaded"),
+      partial(
+        "Partly",
+        "Client components yes; server content needs a network",
+      ),
+      bad("No", "Screens need a network"),
+    ],
+  },
+  {
+    label: "Needs a server?",
+    values: [good("No"), partial("Yes"), partial("Yes")],
   },
 ];
