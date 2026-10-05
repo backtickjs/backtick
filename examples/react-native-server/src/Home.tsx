@@ -8,13 +8,19 @@ import { Counter } from "./Counter.js";
 export async function Home() {
   const fruits = ["Apples", "Pears", "Plums"];
   const drawnAt = new Date().toLocaleTimeString();
-  return cs`<$View style={$StyleSheet.create({ screen: { padding: 24, gap: 8 } }).screen}>
-    <$Text style={{ fontSize: 28, fontWeight: "700" }}>Hello from Backtick</$Text>
-    <$Text style={{ fontSize: 15, color: "#71717a" }}>
-      Drawn by the server at {$drawnAt}
-    </$Text>
-    {$fruits.map((label) => (
-      <$Counter key={label} label={label} />
-    ))}
-  </$View>`;
+  return cs`(
+    <$View
+      style={$StyleSheet.create({ screen: { padding: 24, gap: 8 } }).screen}
+    >
+      <$Text style={{ fontSize: 28, fontWeight: "700" }}>
+        Hello from Backtick
+      </$Text>
+      <$Text style={{ fontSize: 15, color: "#71717a" }}>
+        Drawn by the server at {$drawnAt}
+      </$Text>
+      {$fruits.map((label) => (
+        <$Counter key={label} label={label} />
+      ))}
+    </$View>
+  )`;
 }

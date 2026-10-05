@@ -5,10 +5,12 @@ import { Counter } from "./Counter.js";
 // its client components.
 export async function App() {
   const counters = ["Apples", "Pears", "Plums"];
-  return cs`<main>
-    <h1>Hello from Backtick and React</h1>
-    {$counters.map((label) => (
-      <$Counter key={label} label={label} />
-    ))}
-  </main>`;
+  return cs`(
+    <main>
+      <h1>Hello from Backtick and React</h1>
+      {$counters.map((label) => (
+        <$Counter key={label} label={label} />
+      ))}
+    </main>
+  )`;
 }
