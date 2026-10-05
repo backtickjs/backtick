@@ -9,21 +9,21 @@ export async function Hero() {
         <span class="text-shine">from your server.</span>
       </h1>
       <p class="mt-[26px] max-w-[36em] text-xl leading-[1.55] text-muted">
-        Backtick brings server components to React Native. Each screen, client
-        components included, is assembled on your server per request and renders
-        natively.
+        Backtick brings server components to React Native. Each screen,
+        including client components, is assembled on your server per request and
+        rendered natively in your app.
       </p>
       <div class="mt-[34px] flex flex-wrap gap-3">
+        {${(<Button href="/docs" solid label="Get started →" />)}}
         {
           ${(
             <Button
-              href="https://github.com/backtickjs/backtick/tree/main/examples/react-native-server"
-              solid
-              label="Run the example →"
+              href="https://github.com/backtickjs/backtick"
+              github
+              label="GitHub"
             />
           )}
         }
-        {${(<Button href="#how" label="See how it works" />)}}
       </div>
     </div>
   )`;

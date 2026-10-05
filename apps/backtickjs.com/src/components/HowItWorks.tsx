@@ -124,10 +124,10 @@ export async function HowItWorks() {
 
       <div class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-3.5">
         {$BENEFITS.map((benefit) => (
-          <div class="group grid content-start gap-1.5 rounded-[20px] border border-line bg-linear-to-b from-wash to-paper p-6 transition hover:-translate-y-0.5 hover:border-react/40 hover:shadow-[0_12px_32px_-16px_rgb(97_218_251/0.45)]">
-            <span class="mb-3 grid size-11 place-items-center rounded-xl border border-react/25 bg-linear-135 from-react/15 to-brand/15 text-react transition group-hover:scale-105">
+          <div class="grid content-start gap-1.5 rounded-[20px] border border-line bg-paper p-6 transition hover:-translate-y-0.5 hover:border-react/40">
+            <span class="mb-3 text-react">
               <svg
-                class="size-5"
+                class="size-6"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"

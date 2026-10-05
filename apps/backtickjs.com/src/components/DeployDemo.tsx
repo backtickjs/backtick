@@ -88,7 +88,7 @@ export async function DeployDemo() {
         <p class="mb-3.5 font-mono text-xs tracking-[0.12em] text-react uppercase">
           Demo · three server deploys, one app build
         </p>
-        <div class="relative rounded-[28px] border border-code-line bg-[#141414] p-5 text-code-ink shadow-[0_40px_120px_-40px_rgb(97_218_251/0.35),0_30px_80px_-50px_rgb(167_139_250/0.6)]">
+        <div class="relative rounded-[28px] border border-code-line bg-[#141414] p-3 text-code-ink sm:p-5 shadow-[0_40px_120px_-40px_rgb(97_218_251/0.35),0_30px_80px_-50px_rgb(167_139_250/0.6)]">
           <div class="flex flex-wrap items-stretch gap-5">
             <div class="grid min-w-0 flex-[1_1_520px] content-start gap-3.5">
               <div class="grid grid-cols-3 gap-2">
@@ -156,7 +156,7 @@ export async function DeployDemo() {
               </div>
             </div>
 
-            <div class="mx-auto grid max-w-full flex-[0_0_364px] content-center justify-items-center px-6">
+            <div class="mx-auto grid max-w-full min-w-0 flex-[0_1_364px] grid-cols-1 content-center justify-items-center sm:px-6">
               {/* The device. 316 by 660 with the bezel taken off both sides is
                 a screen close to an iPhone's 19.5:9. */}
               <div class="relative box-border h-[660px] w-[316px] max-w-full rounded-[52px] bg-[#1c1c1f] p-[11px] shadow-[inset_0_0_0_1px_#3f3f46,inset_0_0_0_5px_#0b0b0d,0_30px_60px_-20px_rgb(0_0_0/0.7)]">
@@ -278,14 +278,14 @@ export async function DeployDemo() {
           </div>
 
           <div class="mt-[18px] flex flex-wrap items-center gap-x-[22px] gap-y-2.5 border-t border-code-line px-1.5 pt-3.5 pb-0.5 font-mono text-xs text-code-muted">
-            <span class="inline-flex items-center gap-2 whitespace-nowrap">
+            <span class="inline-flex items-center gap-2 sm:whitespace-nowrap">
               <span class="size-2 rounded-full bg-code-muted" />
               {"App Store build "}
               <span class="text-code-ink">2.4.0 (112)</span>
               {" · "}
               <span class="text-code-ink">unchanged</span>
             </span>
-            <span class="inline-flex items-center gap-2 whitespace-nowrap">
+            <span class="inline-flex items-center gap-2 sm:whitespace-nowrap">
               <span class="size-2 animate-live rounded-full bg-added" />
               {"Screen "}
               <span class="text-code-ink">{$deploys[step()].id}</span>

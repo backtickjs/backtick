@@ -42,7 +42,7 @@ export async function Comparison({
       <div class="grid gap-3 border-b border-line bg-wash py-4 md:grid-cols-[190px_1fr_1fr_1fr] md:gap-0 md:py-0">
         <span class="max-md:hidden" />
         {$columns.map((column, index) => (
-          <span class="grid content-start gap-0.5 px-5 md:py-4">
+          <span class="grid content-start gap-0.5 px-5 md:border-l md:border-line md:py-4">
             <span
               class={
                 "text-[15px] font-semibold " +
@@ -61,7 +61,7 @@ export async function Comparison({
           {row.values.map((value, index) => (
             <span
               class={
-                "grid content-start gap-0.5 px-5 py-2.5 md:py-4 " +
+                "grid content-start gap-0.5 px-5 py-2.5 md:border-l md:border-line md:py-4 " +
                 $TINTS[value.tone]
               }
             >

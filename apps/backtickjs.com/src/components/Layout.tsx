@@ -15,12 +15,6 @@ export async function Layout({ children }: { children: JSX.Element[] }) {
           <a href="/docs" class="no-underline">
             Docs
           </a>
-          <a
-            href="https://github.com/backtickjs/backtick/tree/main/examples"
-            class="no-underline max-sm:hidden"
-          >
-            Examples
-          </a>
           {/* The mark carries no text, so the link says what it is for anyone
               not looking at it. */}
           <a

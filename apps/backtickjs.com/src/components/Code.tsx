@@ -19,14 +19,9 @@ export async function Code({
   const size = compact ? "text-[14px]" : "text-[15px]";
   return cs`(
     <div class="h-full min-w-0 overflow-hidden rounded-[20px] border border-code-line bg-code">
-      <div class="flex items-center gap-3 border-b border-code-line px-4 py-3">
-        <div class="flex gap-1.5">
-          <span class="size-2.5 rounded-full bg-[#3c3c3c]" />
-          <span class="size-2.5 rounded-full bg-[#3c3c3c]" />
-          <span class="size-2.5 rounded-full bg-[#3c3c3c]" />
-        </div>
-        <span class="font-mono text-xs text-code-muted">{$file}</span>
-      </div>
+      <p class="border-b border-code-line px-5 py-3 font-mono text-xs text-code-muted">
+        {$file}
+      </p>
       <pre class={"m-0 overflow-x-auto py-4 font-mono leading-[1.6] " + $size}>
         {$lines.map((line) => (
           <div class={line.added ? "code-line code-added" : "code-line"}>
