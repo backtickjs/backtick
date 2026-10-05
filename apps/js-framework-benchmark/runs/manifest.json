@@ -588,6 +588,14 @@
       "keyed": true,
       "dir": "84325cfb",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "843bf57b",
+      "label": "tags as splices",
+      "date": "2026-10-04",
+      "keyed": true,
+      "dir": "tags-as-splices",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
