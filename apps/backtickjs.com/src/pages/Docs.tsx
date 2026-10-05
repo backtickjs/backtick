@@ -1,6 +1,7 @@
 import { Button } from "../components/Button.js";
 import { Code } from "../components/Code.js";
 import { Layout } from "../components/Layout.js";
+import { QuickStart } from "../components/QuickStart.js";
 import { Section } from "../components/Section.js";
 import { APP, SERVER, WRITTEN } from "../samples.js";
 
@@ -11,7 +12,15 @@ export async function Docs() {
   return (
     <Layout>
       <Section
-        eyebrow="Docs · 1 · Write a screen"
+        eyebrow="Docs · Quick start"
+        title="One command to a running app."
+        lede="It creates an Expo app with a Backtick server beside it. Then run npm run ios, android or web, and edit server/Home.tsx to change the screen. The steps below are what it sets up."
+      >
+        <QuickStart />
+      </Section>
+
+      <Section
+        eyebrow="1 · Write a screen"
         title="Three files to a server-driven screen."
         lede="A server component on your server, a route that bundles it per request, and one component in your app that draws it."
       >

@@ -1,5 +1,6 @@
 import { cs } from "@backtickjs/core";
 import { Button } from "./Button.js";
+import { QuickStart } from "./QuickStart.js";
 
 export async function Hero() {
   return cs`(
@@ -25,6 +26,7 @@ export async function Hero() {
           )}
         }
       </div>
+      <div class="mt-5">{${(<QuickStart />)}}</div>
     </div>
   )`;
 }
