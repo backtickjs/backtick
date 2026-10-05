@@ -9,10 +9,9 @@ export async function Hero() {
         <span class="text-shine">without shipping the app.</span>
       </h1>
       <p class="mt-[26px] max-w-[36em] text-xl leading-[1.55] text-muted">
-        Write screens with View, Text, Pressable and useState — on your server.
-        Your app fetches them at runtime and React Native draws them, natively.
-        Change a screen and users see it the next time they open it, with no
-        store release to wait on.
+        Backtick brings server components to React Native. Each screen is built
+        on your server per request, with the user's data inlined, then renders
+        natively. No API or GraphQL round trip.
       </p>
       <div class="mt-[34px] flex flex-wrap gap-3">
         {

@@ -28,7 +28,7 @@ export async function toHtml(element: JSX.Element): Promise<string> {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <title>Backtick · Server-driven React Native</title>
-    <meta name="description" content="Write React Native screens on your server. Your app fetches them at runtime and draws them natively, without a store release.">
+    <meta name="description" content="Backtick brings server components to React Native. Each screen is built on your server per request, with the user's data inlined, then renders natively. No API or GraphQL round trip.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
