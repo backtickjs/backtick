@@ -1,9 +1,9 @@
 packages:
   # What is published.
   - "packages/*"
-  # The project `create-backtick-app` copies, installed here so it's checked
-  # against the packages beside it.
-  - "packages/create-backtick-app/template"
+  # The projects `create-backtick-app` copies, installed here so they're
+  # checked against the packages beside them.
+  - "packages/create-backtick-app/templates/*"
   # Built here and never published to npm: an editor extension and the
   # benchmark app.
   - "apps/*"

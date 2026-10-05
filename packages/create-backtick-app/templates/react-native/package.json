@@ -1,5 +1,5 @@
 {
-  "name": "backtick-app",
+  "name": "backtick-app-react-native",
   "version": "1.0.0",
   "private": true,
   "main": "index.ts",
@@ -8,7 +8,6 @@
     "android": "node scripts/start.mjs --android",
     "ios": "node scripts/start.mjs --ios",
     "web": "node scripts/start.mjs --web",
-    "server": "node --watch --enable-source-maps --import @backtickjs/node-plugin server/index.tsx",
     "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit",
     "reset-project": "node scripts/reset-project.mjs"
   },

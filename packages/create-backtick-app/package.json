@@ -10,7 +10,7 @@
   },
   "files": [
     "dist",
-    "template"
+    "templates"
   ],
   "engines": {
     "node": ">=22.15"
@@ -25,7 +25,11 @@
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
+    "@types/prompts": "^2.4.9",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "prompts": "^2.4.2"
   }
 }

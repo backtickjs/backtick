@@ -433,10 +433,17 @@ importers:
         version: 6.0.3
 
   packages/create-backtick-app:
+    dependencies:
+      prompts:
+        specifier: ^2.4.2
+        version: 2.4.2
     devDependencies:
       '@types/node':
         specifier: ^25.9.1
         version: 25.9.1
+      '@types/prompts':
+        specifier: ^2.4.9
+        version: 2.4.9
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
@@ -444,26 +451,51 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/create-backtick-app/template:
+  packages/create-backtick-app/templates/react:
     dependencies:
       '@backtickjs/bundler':
         specifier: ^0.1.0
-        version: link:../../bundler
+        version: link:../../../bundler
       '@backtickjs/core':
         specifier: ^0.1.0
-        version: link:../../core
+        version: link:../../../core
       '@backtickjs/node-plugin':
         specifier: ^0.1.0
-        version: link:../../node-plugin
+        version: link:../../../node-plugin
       '@backtickjs/react':
         specifier: ^19.2.3
-        version: link:../../react
+        version: link:../../../react
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+    devDependencies:
+      '@backtickjs/tsc':
+        specifier: ^0.1.0
+        version: link:../../../tsc
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
+
+  packages/create-backtick-app/templates/react-native:
+    dependencies:
+      '@backtickjs/bundler':
+        specifier: ^0.1.0
+        version: link:../../../bundler
+      '@backtickjs/core':
+        specifier: ^0.1.0
+        version: link:../../../core
+      '@backtickjs/node-plugin':
+        specifier: ^0.1.0
+        version: link:../../../node-plugin
+      '@backtickjs/react':
+        specifier: ^19.2.3
+        version: link:../../../react
       '@backtickjs/react-native':
         specifier: ^0.86.3
-        version: link:../../react-native
+        version: link:../../../react-native
       '@backtickjs/react-native-client':
         specifier: ^0.1.0
-        version: link:../../react-native-client
+        version: link:../../../react-native-client
       expo:
         specifier: ~57.0.26
         version: 57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)
@@ -491,13 +523,38 @@ importers:
     devDependencies:
       '@backtickjs/tsc':
         specifier: ^0.1.0
-        version: link:../../tsc
+        version: link:../../../tsc
       '@types/node':
         specifier: ^25.9.1
         version: 25.9.1
       '@types/react':
         specifier: 19.2.18
         version: 19.2.18
+
+  packages/create-backtick-app/templates/solid-js:
+    dependencies:
+      '@backtickjs/bundler':
+        specifier: ^0.1.0
+        version: link:../../../bundler
+      '@backtickjs/core':
+        specifier: ^0.1.0
+        version: link:../../../core
+      '@backtickjs/node-plugin':
+        specifier: ^0.1.0
+        version: link:../../../node-plugin
+      '@backtickjs/solid-js':
+        specifier: ^1.9.14
+        version: link:../../../solid-js
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+    devDependencies:
+      '@backtickjs/tsc':
+        specifier: ^0.1.0
+        version: link:../../../tsc
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
 
   packages/language-plugin:
     dependencies:
@@ -1927,6 +1984,9 @@ packages:
 
   '@types/node@25.9.1':
     resolution: {integrity: sha512-xfrlY7UD5rMJk3ZVJP8BNzS28J36YJg+xp+LPXV1TdWxr8uMH5A860QNxYDGQe/ylDSgjxE52Q9VnO7p75tJxg==}
+
+  '@types/prompts@2.4.9':
+    resolution: {integrity: sha512-qTxFi6Buiu8+50/+3DGIWLHM6QuWsEKugJnnP6iv2Mc4ncxE4A/OJkjuVOA+5X0X1S/nq5VJRa8Lu+nwcvbrKA==}
 
   '@types/react-dom@19.2.7':
     resolution: {integrity: sha512-I8bPpDLcHBv1qiIiXDCy71Rt8eQDKJP0sMSWJphDdAcdqiJ1sGpZamavoEIRZmYzjia9LuEb2HlYdDpmoENpvQ==}
@@ -5363,6 +5423,11 @@ snapshots:
   '@types/node@25.9.1':
     dependencies:
       undici-types: 7.24.6
+
+  '@types/prompts@2.4.9':
+    dependencies:
+      '@types/node': 25.9.1
+      kleur: 3.0.3
 
   '@types/react-dom@19.2.7(@types/react@19.2.18)':
     dependencies:

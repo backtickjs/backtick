@@ -1,0 +1,27 @@
+{
+  "name": "backtick-app-solid-js",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/start.mjs",
+    "reset-project": "node scripts/reset-project.mjs",
+    "typecheck": "backtick-tsc --noEmit"
+  },
+  "dependencies": {
+    "@backtickjs/bundler": "^0.1.0",
+    "@backtickjs/core": "^0.1.0",
+    "@backtickjs/node-plugin": "^0.1.0",
+    "@backtickjs/solid-js": "^1.9.14",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "@backtickjs/tsc": "^0.1.0",
+    "@types/node": "^25.9.1"
+  },
+  "backtick": {
+    "plugins": [
+      "@backtickjs/solid-js/plugin"
+    ]
+  }
+}

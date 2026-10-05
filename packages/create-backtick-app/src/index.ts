@@ -9,21 +9,87 @@ import {
   writeFileSync,
 } from "node:fs";
 import path from "node:path";
-import { createInterface } from "node:readline/promises";
 import { parseArgs } from "node:util";
+import prompts from "prompts";
 
 // `create-expo-app`, for an app whose screens come from your server: the same
-// question, the same install, the same next steps, and a Backtick server
-// beside the app.
+// questions, the same install, the same next steps, with the framework yours
+// to pick and a Backtick server beside it.
+
+interface Template {
+  title: string;
+  description: string;
+  // What to run once installed, after `cd`, as `<manager> run <script>`.
+  scripts: string[];
+  // What to say after the scripts.
+  then: string;
+}
+
+const TEMPLATES: Record<string, Template> = {
+  "react-native": {
+    title: "React Native",
+    description: "An Expo app, its screens from your server",
+    scripts: ["android", "ios", "web"],
+    then: "Each starts your Backtick server alongside Expo. Edit server/Home.tsx and save to see the screen change.",
+  },
+  react: {
+    title: "React",
+    description: "A web page, rendered by React",
+    scripts: ["start"],
+    then: "Then open http://localhost:3000. Edit server/Home.tsx and save to see the page change.",
+  },
+  "solid-js": {
+    title: "solid-js",
+    description: "A web page, rendered by Solid",
+    scripts: ["start"],
+    then: "Then open http://localhost:3000. Edit server/Home.tsx and save to see the page change.",
+  },
+};
+
 const { values, positionals } = parseArgs({
   allowPositionals: true,
   options: {
+    template: { type: "string", short: "t" },
     yes: { type: "boolean", short: "y" },
     "no-install": { type: "boolean" },
   },
 });
 
-const name = positionals[0] ?? (values.yes ? "my-app" : await askName());
+if (values.template !== undefined && !(values.template in TEMPLATES)) {
+  console.error(
+    `There's no template named ${values.template}. Pick one of: ${Object.keys(TEMPLATES).join(", ")}.`,
+  );
+  process.exit(1);
+}
+
+// Asked only what the command line didn't say, as `create-expo-app` asks.
+const answers = await prompts(
+  [
+    {
+      type: positionals[0] !== undefined || values.yes ? null : "text",
+      name: "name",
+      message: "What is your app named?",
+      initial: "my-app",
+    },
+    {
+      type: values.template !== undefined || values.yes ? null : "select",
+      name: "template",
+      message: "Which framework?",
+      choices: Object.entries(TEMPLATES).map(([value, template]) => ({
+        title: template.title,
+        description: template.description,
+        value,
+      })),
+    },
+  ],
+  { onCancel: () => process.exit(1) },
+);
+
+const name: string = positionals[0] ?? answers.name ?? "my-app";
+const templateName: string =
+  values.template ?? answers.template ?? "react-native";
+const template = TEMPLATES[templateName]!;
+
 const target = path.resolve(name);
 const slug = path.basename(target);
 
@@ -34,11 +100,10 @@ if (existsSync(target) && readdirSync(target).length > 0) {
   process.exit(1);
 }
 
-// The template beside this file once built: `dist/../template`.
-const template = new URL("../template/", import.meta.url);
-cpSync(template, target, {
+// The templates beside this file once built: `dist/../templates`.
+cpSync(new URL(`../templates/${templateName}/`, import.meta.url), target, {
   recursive: true,
-  // What running the template inside the Backtick repository leaves behind.
+  // What running a template inside the Backtick repository leaves behind.
   filter: (source) => !/[\\/](node_modules|\.expo)([\\/]|$)/.test(source),
 });
 // npm drops a `.gitignore` from a published package, so it ships unnamed.
@@ -46,10 +111,12 @@ renameSync(path.join(target, "gitignore"), path.join(target, ".gitignore"));
 rewriteJson(path.join(target, "package.json"), (json) => {
   json.name = slug;
 });
-rewriteJson(path.join(target, "app.json"), (json) => {
-  json.expo.name = slug;
-  json.expo.slug = slug;
-});
+if (existsSync(path.join(target, "app.json"))) {
+  rewriteJson(path.join(target, "app.json"), (json) => {
+    json.expo.name = slug;
+    json.expo.slug = slug;
+  });
+}
 console.log("✔ Created project files.");
 
 // The package manager this was run with, as `npm create` and its peers say.
@@ -75,22 +142,10 @@ console.log(`
 To run your project, navigate to the directory and run one of the following ${run} commands.
 
 - cd ${slug}
-- ${run} run android
-- ${run} run ios
-- ${run} run web
+${template.scripts.map((script) => `- ${run} run ${script}`).join("\n")}
 
-Each starts your Backtick server alongside Expo. Edit server/Home.tsx and save to see the screen change.
+${template.then}
 `);
-
-async function askName(): Promise<string> {
-  const prompt = createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-  const answer = await prompt.question("? What is your app named? › (my-app) ");
-  prompt.close();
-  return answer.trim() || "my-app";
-}
 
 function rewriteJson(file: string, change: (json: any) => void): void {
   const json = JSON.parse(readFileSync(file, "utf8"));

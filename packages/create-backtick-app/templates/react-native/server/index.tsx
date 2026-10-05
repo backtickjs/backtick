@@ -2,8 +2,11 @@ import { createServer } from "node:http";
 import { bundler } from "@backtickjs/bundler";
 import { Home } from "./Home.js";
 
-// This run of the server. `--watch` starts a new one whenever you save, and
-// the app, seeing a new one at `/live`, draws its screen again.
+// Development is only what `npm start` runs, which sets NODE_ENV: any other
+// run, a deploy included, is production. In development, this run of the
+// server: `--watch` starts a new one whenever you save, and the app, seeing a
+// new one at `/live`, draws its screen again.
+const development = process.env.NODE_ENV === "development";
 const run = crypto.randomUUID();
 
 const server = createServer(async (request, response) => {
@@ -17,7 +20,7 @@ const server = createServer(async (request, response) => {
     response.end();
     return;
   }
-  if (request.url === "/live") {
+  if (development && request.url === "/live") {
     response.end(run);
     return;
   }
