@@ -60,7 +60,7 @@ export async function Layout({
           {/* The mark carries no text, so the link says what it is for anyone
               not looking at it. */}
           <a
-            href="https://github.com/trybacktick/backtick"
+            href="https://github.com/backtickjs/backtick"
             aria-label="GitHub"
             style="display: flex; color: inherit"
           >

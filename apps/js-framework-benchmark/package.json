@@ -27,10 +27,10 @@
   "keywords": [
     "backtick"
   ],
-  "homepage": "https://github.com/trybacktick/backtick",
+  "homepage": "https://github.com/backtickjs/backtick",
   "repository": {
     "type": "git",
-    "url": "https://github.com/trybacktick/backtick.git"
+    "url": "https://github.com/backtickjs/backtick.git"
   },
   "dependencies": {
     "@backtickjs/bundler": "^0.1.0",
