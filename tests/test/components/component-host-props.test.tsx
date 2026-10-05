@@ -26,8 +26,10 @@ it("componentHostProps", async (t) => {
   await snapshotCase(
     t,
     "componentHostProps",
-    cs`<div>
-      {${(<Swatch palette={new Palette("danger")} label={() => "one"} />)}}
-    </div>`,
+    cs`(
+      <div>
+        {${(<Swatch palette={new Palette("danger")} label={() => "one"} />)}}
+      </div>
+    )`,
   );
 });

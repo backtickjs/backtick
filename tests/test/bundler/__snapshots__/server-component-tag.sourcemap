@@ -6,21 +6,25 @@ hr                                        → hr
 >                                         → >
 )())                                      → ` [-semantic -navigation]
 cs.lift((() =>                            → cs` [-semantic -navigation]
+(                                         → (
+\n                                        → \n        
 <                                         → <
 div                                       → div
 >                                         → >
-\n                                        → \n        
+\n                                        → \n          
 {                                         → {
 /* @ts-expect-error: not assignable to parameter of type 'Spliceable'. */→ /* @ts-expect-error: not assignable to parameter of type 'Spliceable'. */
 }                                         → }
-\n                                        → \n        
+\n                                        → \n          
 $Rule                                     → $Rule [-semantic -navigation]
 )(cs.splice(                              →  [-semantic -navigation]
 (Rule)                                    → $Rule [-highlight]
 ))                                        →  [-semantic -navigation]
-\n                                        → \n      
+\n                                        → \n        
 <                                         → <
 /                                         → /
 div                                       → div
 >                                         → >
+\n                                        → \n      
+)                                         → )
 )())                                      → ` [-semantic -navigation]

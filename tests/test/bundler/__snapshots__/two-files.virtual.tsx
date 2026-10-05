@@ -9,9 +9,11 @@ it("twoFiles", async (t) => {
   await snapshotCase(
     t,
     "twoFiles",
-    cs.lift((() => <p>
-      {"in "}
-      {(cs.splice((<Badge />)))}
-    </p>)()),
+    cs.lift((() => (
+      <p>
+        {"in "}
+        {(cs.splice((<Badge />)))}
+      </p>
+    ))()),
   );
 });

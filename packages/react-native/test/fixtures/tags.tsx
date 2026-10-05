@@ -24,11 +24,13 @@ export const Counter = cs`(props: { label: string }) => {
   );
 }`;
 
-export const list = cs`<$FlatList
-  data={["a", "b"]}
-  keyExtractor={(item) => item}
-  renderItem={({ item }) => <$Text>{item.toUpperCase()}</$Text>}
-/>`;
+export const list = cs`(
+  <$FlatList
+    data={["a", "b"]}
+    keyExtractor={(item) => item}
+    renderItem={({ item }) => <$Text>{item.toUpperCase()}</$Text>}
+  />
+)`;
 
 // A member of a host value as a tag, and constructed: `Animated`'s.
 export const fading = cs`{

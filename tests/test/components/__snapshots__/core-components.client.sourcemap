@@ -1,34 +1,36 @@
 // 9:5
-() => <                      → 9:8 <div…
-div                          → 9:9 div
-style                        → 9:13 style
-=                            → 9:18 =
-"padding: 8px"               → 9:19 "padding: 8px"
->                            → 9:33 >
+() => (                      → 9:8 (…
 <                            → 10:7 <
-span                         → 10:8 span
-style                        → 10:13 style
-=                            → 10:18 =
-"font-size: 12px"            → 10:19 "font-size: 12px"
-onclick                      → 10:37 onclick
-=                            → 10:44 =
-{                            → 10:45 {
-()                           → 10:46 () 
-=>                           → 10:49 =>
- {                           → 10:51  {}}>…
-}                            → 10:53 }
-}                            → 10:54 }
->                            → 10:55 >
-</                           → 12:7 </
-span                         → 12:9 span
->                            → 12:13 >
-<                            → 13:7 <
-img                          → 13:8 img
-src                          → 13:12 src
-=                            → 13:15 =
-"https://example.com/a.png"  → 13:16 "https://example.com/a.png"
-/>                           → 13:43  />…
-</                           → 14:5 </
-div                          → 14:7 div
->                            → 14:10 >
-);                           → 14:11 `,…
+div                          → 10:8 div
+style                        → 10:12 style
+=                            → 10:17 =
+"padding: 8px"               → 10:18 "padding: 8px"
+>                            → 10:32 >
+<                            → 11:9 <
+span                         → 11:10 span
+style                        → 11:15 style
+=                            → 11:20 =
+"font-size: 12px"            → 11:21 "font-size: 12px"
+onclick                      → 11:39 onclick
+=                            → 11:46 =
+{                            → 11:47 {
+()                           → 11:48 () 
+=>                           → 11:51 =>
+ {                           → 11:53  {}}>…
+}                            → 11:55 }
+}                            → 11:56 }
+>                            → 11:57 >
+</                           → 13:9 </
+span                         → 13:11 span
+>                            → 13:15 >
+<                            → 14:9 <
+img                          → 14:10 img
+src                          → 14:14 src
+=                            → 14:17 =
+"https://example.com/a.png"  → 14:18 "https://example.com/a.png"
+/>                           → 14:45  />…
+</                           → 15:7 </
+div                          → 15:9 div
+>                            → 15:12 >
+)                            → 15:13 …
+);                           → 16:6 `,…

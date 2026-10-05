@@ -2,57 +2,57 @@
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (() => <a href="/counter" id="press">
-      go
-    </a>);
+exports.default = (() => (<a href="/counter" id="press">
+        go
+      </a>));
 }
 
-// 44:30
+// 46:30
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (() => <div>
-      <svg>
-        <path />
-      </svg>
-    </div>);
+exports.default = (() => (<div>
+        <svg>
+          <path />
+        </svg>
+      </div>));
 }
 
-// 61:29
+// 65:29
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (() => <svg viewBox="0 0 279 38"/>);
 }
 
-// 69:29
+// 73:29
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (() => <svg>
-      <path stroke-width={2} fill-rule="evenodd"/>
-      <filter color-interpolation-filters="sRGB"/>
-    </svg>);
+exports.default = (() => (<svg>
+        <path stroke-width={2} fill-rule="evenodd"/>
+        <filter color-interpolation-filters="sRGB"/>
+      </svg>));
 }
 
-// 84:29
+// 90:29
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (() => <svg>
-      <linearGradient gradientTransform="rotate(90)"/>
-      <feTurbulence numOctaves={3}/>
-    </svg>);
+exports.default = (() => (<svg>
+        <linearGradient gradientTransform="rotate(90)"/>
+        <feTurbulence numOctaves={3}/>
+      </svg>));
 }
 
-// 95:29
+// 103:29
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (() => <div tabIndex={2}/>);
 }
 
-// 104:12
+// 112:12
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });

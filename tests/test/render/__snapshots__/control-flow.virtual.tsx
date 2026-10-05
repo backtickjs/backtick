@@ -17,37 +17,45 @@ import { snapshotCase } from "../snapshotCase.ts";
 
 const rows = ["first", "second"];
 
-const indexed = cs.lift((() => <ul>
-  {(void (Index), (($Index) => <$Index each={(cs.splice((rows)))}>
-    {(__cs_row: () => string, __cs_index: number) => <li>{__cs_index + ": " + __cs_row()}</li>}
-  </$Index>)(cs.splice((Index))))}
-</ul>)());
+const indexed = cs.lift((() => (
+  <ul>
+    {(void (Index), (($Index) => <$Index each={(cs.splice((rows)))}>
+      {(__cs_row: () => string, __cs_index: number) => <li>{__cs_index + ": " + __cs_row()}</li>}
+    </$Index>)(cs.splice((Index))))}
+  </ul>
+))());
 
-const switched = cs.lift((() => (void (Switch), (($Switch) => <$Switch fallback={<p>none</p>}>
-  {(void (Match), (($Match) => <$Match when={1 > 2}>
-    <p>wrong</p>
-  </$Match>)(cs.splice((Match))))}
-  {(void (Match), (($Match) => <$Match when={2 > 1}>
-    <p>right</p>
-  </$Match>)(cs.splice((Match))))}
-</$Switch>)(cs.splice((Switch)))))());
+const switched = cs.lift((() => (
+  (void (Switch), (($Switch) => <$Switch fallback={<p>none</p>}>
+    {(void (Match), (($Match) => <$Match when={1 > 2}>
+      <p>wrong</p>
+    </$Match>)(cs.splice((Match))))}
+    {(void (Match), (($Match) => <$Match when={2 > 1}>
+      <p>right</p>
+    </$Match>)(cs.splice((Match))))}
+  </$Switch>)(cs.splice((Switch))))
+))());
 
 const caught = cs.lift((() => (void (ErrorBoundary), (($ErrorBoundary) => <$ErrorBoundary fallback={<p>caught</p>}>{
-  (cs.splice(cs.lift((() => {
-    throw "drawn wrong";
-  })())))
-}</$ErrorBoundary>)(cs.splice((ErrorBoundary)))))());
+    (cs.splice(cs.lift((() => {
+      throw "drawn wrong";
+    })())))
+  }</$ErrorBoundary>)(cs.splice((ErrorBoundary)))))());
 
-const suspended = cs.lift((() => (void (Suspense), (($Suspense) => <$Suspense fallback={<p>loading</p>}>
-  <p>loaded</p>
-</$Suspense>)(cs.splice((Suspense)))))());
+const suspended = cs.lift((() => (
+  (void (Suspense), (($Suspense) => <$Suspense fallback={<p>loading</p>}>
+    <p>loaded</p>
+  </$Suspense>)(cs.splice((Suspense))))
+))());
 
-const portaled = cs.lift((() => <div>
-  <p>here</p>
-  {(void (Portal), (($Portal) => <$Portal>
-    <p>elsewhere</p>
-  </$Portal>)(cs.splice((Portal))))}
-</div>)());
+const portaled = cs.lift((() => (
+  <div>
+    <p>here</p>
+    {(void (Portal), (($Portal) => <$Portal>
+      <p>elsewhere</p>
+    </$Portal>)(cs.splice((Portal))))}
+  </div>
+))());
 
 describe("control flow in a script", () => {
   it("draws each position with Index", async () => {

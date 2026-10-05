@@ -18,9 +18,11 @@ it("componentBoundary", async (t) => {
   await snapshotCase(
     t,
     "componentBoundary",
-    cs`<div>
-      {${(<TextLabel text="one" />)}}
-      {${(<TextLabel text="two" />)}}
-    </div>`,
+    cs`(
+      <div>
+        {${(<TextLabel text="one" />)}}
+        {${(<TextLabel text="two" />)}}
+      </div>
+    )`,
   );
 });

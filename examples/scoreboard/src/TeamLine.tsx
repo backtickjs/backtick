@@ -23,19 +23,21 @@ export async function TeamLine({
   hasBall: Client<boolean>;
   isTrailing: Client<boolean>;
 }) {
-  return cs`<div style={$line}>
-    <span style={$rankStyle}>{$rank === 0 ? "" : "" + $rank}</span>
+  return cs`(
+    <div style={$line}>
+      <span style={$rankStyle}>{$rank === 0 ? "" : "" + $rank}</span>
 
-    <span style="font-size: 15px">{$name + ($hasBall ? " 🏈" : "")}</span>
+      <span style="font-size: 15px">{$name + ($hasBall ? " 🏈" : "")}</span>
 
-    <span
-      style={
-        "font-size: 17px; font-weight: 600;" +
-        " font-variant-numeric: tabular-nums; color: " +
-        ($isTrailing ? "#a1a1aa" : "#18181b")
-      }
-    >
-      {$score}
-    </span>
-  </div>`;
+      <span
+        style={
+          "font-size: 17px; font-weight: 600;" +
+          " font-variant-numeric: tabular-nums; color: " +
+          ($isTrailing ? "#a1a1aa" : "#18181b")
+        }
+      >
+        {$score}
+      </span>
+    </div>
+  )`;
 }

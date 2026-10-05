@@ -25,9 +25,9 @@ const scriptBoundTagCapture = cs`{
       }
       {${cs`<section>{${cs`<Badge n={count() + 1000} />`}}</section>`}}
       {
-        ${cs`<$For each={[1, 2]}>
-          {(m: number) => <Badge n={m * count()} />}
-        </$For>`}
+        ${cs`(
+          <$For each={[1, 2]}>{(m: number) => <Badge n={m * count()} />}</$For>
+        )`}
       }
       <button onclick={() => setCount(count() + 1)}>more</button>
     </div>

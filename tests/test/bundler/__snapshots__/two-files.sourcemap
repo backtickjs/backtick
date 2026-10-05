@@ -1,20 +1,24 @@
 cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+\n               → \n      
 <                → <
 p                → p
 >                → >
-\n               → \n      
+\n               → \n        
 {                → {
 "in "            → "in "
 }                → }
-\n               → \n      
+\n               → \n        
 {                → {
 (cs.splice(      →  [-semantic -navigation]
 (<Badge />)      → (<Badge />)
 ))               →  [-semantic -navigation]
 }                → }
-\n               → \n    
+\n               → \n      
 <                → <
 /                → /
 p                → p
 >                → >
+\n               → \n    
+)                → )
 )())             → ` [-semantic -navigation]

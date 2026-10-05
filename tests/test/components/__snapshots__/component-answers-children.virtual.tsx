@@ -12,19 +12,23 @@ async function Label() {
 }
 
 async function Pair() {
-  return cs.lift((() => <>
-    <em>one</em>
-    <em>two</em>
-  </>)());
+  return cs.lift((() => (
+    <>
+      <em>one</em>
+      <em>two</em>
+    </>
+  ))());
 }
 
 it("componentAnswersChildren", async (t) => {
   await snapshotCase(
     t,
     "componentAnswersChildren",
-    cs.lift((() => <div>
-      {(cs.splice((<Label />)))}
-      {(cs.splice((<Pair />)))}
-    </div>)()),
+    cs.lift((() => (
+      <div>
+        {(cs.splice((<Label />)))}
+        {(cs.splice((<Pair />)))}
+      </div>
+    ))()),
   );
 });

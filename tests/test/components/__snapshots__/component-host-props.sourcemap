@@ -21,18 +21,22 @@ span                                      → span
 >                                         → >
 )())                                      → ` [-semantic -navigation]
 cs.lift((() =>                            → cs` [-semantic -navigation]
+(                                         → (
+\n                                        → \n      
 <                                         → <
 div                                       → div
 >                                         → >
-\n                                        → \n      
+\n                                        → \n        
 {                                         → {
 (cs.splice(                               →  [-semantic -navigation]
 (<Swatch palette={new Palette("danger")} label={() => "one"} />)→ (<Swatch palette={new Palette("danger")} label={() => "one"} />)
 ))                                        →  [-semantic -navigation]
 }                                         → }
-\n                                        → \n    
+\n                                        → \n      
 <                                         → <
 /                                         → /
 div                                       → div
 >                                         → >
+\n                                        → \n    
+)                                         → )
 )())                                      → ` [-semantic -navigation]

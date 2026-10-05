@@ -2,14 +2,14 @@
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0) => <span style={"font-size: " + $splice0()[0]() + "px"} onclick={() => {
+exports.default = (($splice0) => (<span style={"font-size: " + $splice0()[0]() + "px"} onclick={() => {
         $splice0()[1]($splice0()[0]() + 1);
     }}>
-    press
-  </span>);
+      press
+    </span>));
 }
 
-// 26:10
+// 28:10
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -22,14 +22,14 @@ exports.default = (($splice0, $splice1, $splice2) => {
 });
 }
 
-// 30:34
+// 32:34
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($capture0) => $capture0);
 }
 
-// 31:34
+// 33:34
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });

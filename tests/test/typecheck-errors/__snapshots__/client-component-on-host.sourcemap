@@ -29,6 +29,8 @@ b                → b
 >                → >
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+\n               → \n  
 (For)            → $For [-highlight]
 $For             → $For [-semantic -navigation]
 each             → each
@@ -42,7 +44,6 @@ each             → each
 ]                → ]
 }                → }
 >                → >
-\n               → \n  
 {                → {
 (                → (
 __cs_n           → n
@@ -61,9 +62,10 @@ __cs_n           → n
 (Badge)          → $Badge [-highlight]
 ))               →  [-semantic -navigation]
 }                → }
-\n               → \n
 $For             → $For [-semantic -navigation]
 )(cs.splice(     →  [-semantic -navigation]
 (For)            → $For [-highlight]
 ))               →  [-semantic -navigation]
+\n               → \n
+)                → )
 )())             → ` [-semantic -navigation]

@@ -12,19 +12,23 @@ async function Label() {
 }
 
 async function Pair() {
-  return cs`<>
-    <em>one</em>
-    <em>two</em>
-  </>`;
+  return cs`(
+    <>
+      <em>one</em>
+      <em>two</em>
+    </>
+  )`;
 }
 
 it("componentAnswersChildren", async (t) => {
   await snapshotCase(
     t,
     "componentAnswersChildren",
-    cs`<div>
-      {${(<Label />)}}
-      {${(<Pair />)}}
-    </div>`,
+    cs`(
+      <div>
+        {${(<Label />)}}
+        {${(<Pair />)}}
+      </div>
+    )`,
   );
 });

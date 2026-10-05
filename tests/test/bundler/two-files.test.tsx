@@ -9,9 +9,11 @@ it("twoFiles", async (t) => {
   await snapshotCase(
     t,
     "twoFiles",
-    cs`<p>
-      {"in "}
-      {${(<Badge />)}}
-    </p>`,
+    cs`(
+      <p>
+        {"in "}
+        {${(<Badge />)}}
+      </p>
+    )`,
   );
 });

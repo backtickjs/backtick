@@ -41,9 +41,11 @@ const scriptBoundTagCarried = cs.lift((() => {
       {
         (cs.splice((
           <Panel
-            body={cs.lift((() => <__cs_Badge n={__cs_count()}>
-              <u>{"kid " + __cs_count()}</u>
-            </__cs_Badge>)())}
+            body={cs.lift((() => (
+              <__cs_Badge n={__cs_count()}>
+                <u>{"kid " + __cs_count()}</u>
+              </__cs_Badge>
+            ))())}
           />
         )))
       }

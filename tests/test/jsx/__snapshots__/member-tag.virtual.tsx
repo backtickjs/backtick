@@ -11,10 +11,12 @@ const ui = {
   Badge: cs.lift((() => (__cs_props: { n: number }) => <b>{"badge " + __cs_props.n}</b>)()),
 };
 
-const page = cs.lift((() => <p>
-  {(($ui) => <$ui.Badge n={1} />)(cs.splice((ui)))}
-  {(void (ui), (($ui) => <$ui.Badge n={2}></$ui.Badge>)(cs.splice((ui))))}
-</p>)());
+const page = cs.lift((() => (
+  <p>
+    {(($ui) => <$ui.Badge n={1} />)(cs.splice((ui)))}
+    {(void (ui), (($ui) => <$ui.Badge n={2}></$ui.Badge>)(cs.splice((ui))))}
+  </p>
+))());
 
 it("memberTag", async (t) => {
   await snapshotCase(t, "memberTag", page);

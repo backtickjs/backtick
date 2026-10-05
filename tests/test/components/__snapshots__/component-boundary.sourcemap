@@ -13,24 +13,28 @@ span                        → span
 >                           → >
 )())                        → ` [-semantic -navigation]
 cs.lift((() =>              → cs` [-semantic -navigation]
+(                           → (
+\n                          → \n      
 <                           → <
 div                         → div
 >                           → >
-\n                          → \n      
+\n                          → \n        
 {                           → {
 (cs.splice(                 →  [-semantic -navigation]
 (<TextLabel text="one" />)  → (<TextLabel text="one" />)
 ))                          →  [-semantic -navigation]
 }                           → }
-\n                          → \n      
+\n                          → \n        
 {                           → {
 (cs.splice(                 →  [-semantic -navigation]
 (<TextLabel text="two" />)  → (<TextLabel text="two" />)
 ))                          →  [-semantic -navigation]
 }                           → }
-\n                          → \n    
+\n                          → \n      
 <                           → <
 /                           → /
 div                         → div
 >                           → >
+\n                          → \n    
+)                           → )
 )())                        → ` [-semantic -navigation]

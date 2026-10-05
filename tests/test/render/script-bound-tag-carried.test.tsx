@@ -41,9 +41,11 @@ const scriptBoundTagCarried = cs`{
       {
         ${(
           <Panel
-            body={cs`<Badge n={count()}>
-              <u>{"kid " + count()}</u>
-            </Badge>`}
+            body={cs`(
+              <Badge n={count()}>
+                <u>{"kid " + count()}</u>
+              </Badge>
+            )`}
           />
         )}
       }

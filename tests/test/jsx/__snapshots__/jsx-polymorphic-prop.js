@@ -2,16 +2,16 @@ import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 const $module0 = {
-  id: "365uagjo5wofp:9:9",
+  id: "113w7b2u3u7m6:9:9",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => () => $splice0();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAQYA,QAAA,UAAMA,QAAA,EAAE","names":["$splice0"],"ignoreList":[],"sources":["jsx/jsx-polymorphic-prop.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
 };
 const $module1 = {
-  id: "365uagjo5wofp:16:4",
+  id: "113w7b2u3u7m6:16:4",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span></span><span>`);\nexports.default = ($splice0, $splice1) => (() => {\n    var _el$ = _tmpl$(), _el$2 = _el$.firstChild, _el$3 = _el$2.nextSibling;\n    (0, web_3.addEventListener)(_el$2, "click", $splice0(), true);\n    (0, web_3.addEventListener)(_el$3, "click", $splice1(), true);\n    return _el$;\n})();\n(0, web_2.delegateEvents)(["click"]);\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAeO,CAAAA,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;IAAAC,0BAAA,EAAAJ,KAAA,WACcJ,QAAA,EAAU;IAAAQ,0BAAA,EAAAF,KAAA,WACVL,QAAA,EAAU;IAAA,OAAAC,IAAA;AAAA,IACrB","names":["$splice0","$splice1","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","_$addEventListener"],"ignoreList":[],"sources":["jsx/jsx-polymorphic-prop.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAeO,CAAAA,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;IAAAC,0BAAA,EAAAJ,KAAA,WAEgBJ,QAAA,EAAU;IAAAQ,0BAAA,EAAAF,KAAA,WACVL,QAAA,EAAU;IAAA,OAAAC,IAAA;AAAA,IAE5B","names":["$splice0","$splice1","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","_$addEventListener"],"ignoreList":[],"sources":["jsx/jsx-polymorphic-prop.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [
     { kind: "splice", bindings: [] },

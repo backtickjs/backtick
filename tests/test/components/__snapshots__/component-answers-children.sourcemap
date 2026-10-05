@@ -7,9 +7,11 @@ counted          → counted
 >                → >
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+\n               → \n    
 <                → <
 >                → >
-\n               → \n    
+\n               → \n      
 <                → <
 em               → em
 >                → >
@@ -18,7 +20,7 @@ one              → one
 /                → /
 em               → em
 >                → >
-\n               → \n    
+\n               → \n      
 <                → <
 em               → em
 >                → >
@@ -27,30 +29,36 @@ two              → two
 /                → /
 em               → em
 >                → >
-\n               → \n  
+\n               → \n    
 <                → <
 /                → /
 >                → >
+\n               → \n  
+)                → )
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+\n               → \n      
 <                → <
 div              → div
 >                → >
-\n               → \n      
+\n               → \n        
 {                → {
 (cs.splice(      →  [-semantic -navigation]
 (<Label />)      → (<Label />)
 ))               →  [-semantic -navigation]
 }                → }
-\n               → \n      
+\n               → \n        
 {                → {
 (cs.splice(      →  [-semantic -navigation]
 (<Pair />)       → (<Pair />)
 ))               →  [-semantic -navigation]
 }                → }
-\n               → \n    
+\n               → \n      
 <                → <
 /                → /
 div              → div
 >                → >
+\n               → \n    
+)                → )
 )())             → ` [-semantic -navigation]

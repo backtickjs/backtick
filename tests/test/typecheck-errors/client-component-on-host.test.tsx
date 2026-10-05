@@ -13,6 +13,6 @@ export const forOnHost = <For each={[1, 2]}>{(n: number) => n}</For>;
 export const badgeOnHost = <Badge n={1} />;
 
 // In a script, both are what they are on the client.
-export const inScript = cs`<$For each={[1, 2]}>
-  {(n) => <$Badge n={n} />}
-</$For>`;
+export const inScript = cs`(
+  <$For each={[1, 2]}>{(n) => <$Badge n={n} />}</$For>
+)`;

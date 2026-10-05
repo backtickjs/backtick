@@ -17,37 +17,45 @@ import { snapshotCase } from "../snapshotCase.ts";
 
 const rows = ["first", "second"];
 
-const indexed = cs`<ul>
-  <$Index each={$rows}>
-    {(row: () => string, index: number) => <li>{index + ": " + row()}</li>}
-  </$Index>
-</ul>`;
+const indexed = cs`(
+  <ul>
+    <$Index each={$rows}>
+      {(row: () => string, index: number) => <li>{index + ": " + row()}</li>}
+    </$Index>
+  </ul>
+)`;
 
-const switched = cs`<$Switch fallback={<p>none</p>}>
-  <$Match when={1 > 2}>
-    <p>wrong</p>
-  </$Match>
-  <$Match when={2 > 1}>
-    <p>right</p>
-  </$Match>
-</$Switch>`;
+const switched = cs`(
+  <$Switch fallback={<p>none</p>}>
+    <$Match when={1 > 2}>
+      <p>wrong</p>
+    </$Match>
+    <$Match when={2 > 1}>
+      <p>right</p>
+    </$Match>
+  </$Switch>
+)`;
 
 const caught = cs`<$ErrorBoundary fallback={<p>caught</p>}>{
-  ${cs`{
-    throw "drawn wrong";
-  }`}
-}</$ErrorBoundary>`;
+    ${cs`{
+      throw "drawn wrong";
+    }`}
+  }</$ErrorBoundary>`;
 
-const suspended = cs`<$Suspense fallback={<p>loading</p>}>
-  <p>loaded</p>
-</$Suspense>`;
+const suspended = cs`(
+  <$Suspense fallback={<p>loading</p>}>
+    <p>loaded</p>
+  </$Suspense>
+)`;
 
-const portaled = cs`<div>
-  <p>here</p>
-  <$Portal>
-    <p>elsewhere</p>
-  </$Portal>
-</div>`;
+const portaled = cs`(
+  <div>
+    <p>here</p>
+    <$Portal>
+      <p>elsewhere</p>
+    </$Portal>
+  </div>
+)`;
 
 describe("control flow in a script", () => {
   it("draws each position with Index", async () => {

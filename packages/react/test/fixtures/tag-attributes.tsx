@@ -16,10 +16,9 @@ const List = cs`<T,>(props: {
 export const keyed = cs`<$Counter key="a" label="Apples" />`;
 
 // a generic component stays generic: `row` is typed from `each`
-export const generic = cs`<$List
-  each={[{ name: "a" }]}
-  render={(row) => row.name}
-/>`;
+export const generic = cs`(
+  <$List each={[{ name: "a" }]} render={(row) => row.name} />
+)`;
 
 // @ts-expect-error: a key is a string or a number
 export const badKey = cs`<$Counter key={{}} label="Apples" />`;

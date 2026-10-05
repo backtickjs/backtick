@@ -12,15 +12,17 @@ async function ScriptRows() {
     return { label: $createSignal(label) };
   }`;
 
-  return cs`<span
-    style="font-size: 16px"
-    onclick={() => {
-      const row = $build("one");
-      row.label[1](row.label[0]() + " !!!");
-    }}
-  >
-    {$build("one").label[0]()}
-  </span>`;
+  return cs`(
+    <span
+      style="font-size: 16px"
+      onclick={() => {
+        const row = $build("one");
+        row.label[1](row.label[0]() + " !!!");
+      }}
+    >
+      {$build("one").label[0]()}
+    </span>
+  )`;
 }
 
 it("ScriptRows", async (t) => {

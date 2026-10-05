@@ -132,22 +132,26 @@ p                → p
 >                → >
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+\n               → \n  
 <                → <
 p                → p
 >                → >
-\n               → \n  
+\n               → \n    
+$Counted         → $Counted [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
+(Counted)        → $Counted [-highlight]
+))               →  [-semantic -navigation]
+\n               → \n    
 $Counted         → $Counted [-semantic -navigation]
 )(cs.splice(     →  [-semantic -navigation]
 (Counted)        → $Counted [-highlight]
 ))               →  [-semantic -navigation]
 \n               → \n  
-$Counted         → $Counted [-semantic -navigation]
-)(cs.splice(     →  [-semantic -navigation]
-(Counted)        → $Counted [-highlight]
-))               →  [-semantic -navigation]
-\n               → \n
 <                → <
 /                → /
 p                → p
 >                → >
+\n               → \n
+)                → )
 )())             → ` [-semantic -navigation]

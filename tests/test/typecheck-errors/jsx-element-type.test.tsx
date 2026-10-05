@@ -25,9 +25,11 @@ const NotATag = { id: "View" };
 export const wrongKind = cs`<$NotATag />`;
 
 // ─── what arranges rather than draws ──────────────────────────────────
-export const shorthand = cs`<>
-  <span>a</span>
-</>`;
+export const shorthand = cs`(
+  <>
+    <span>a</span>
+  </>
+)`;
 
 export const list = cs`<$For each={[] as number[]}>{(n) => <i>{n}</i>}</$For>`;
 
@@ -52,6 +54,8 @@ export const named = cs`<$Fragment />`;
 // ─── children, which are structure ────────────────────────────────────
 export const text = cs`<div>hello</div>`;
 export const number = cs`<div>{1}</div>`;
-export const nested = cs`<div>
-  <span>a</span>
-</div>`;
+export const nested = cs`(
+  <div>
+    <span>a</span>
+  </div>
+)`;

@@ -1,7 +1,9 @@
 cs.lift((() =>          → cs` [-semantic -navigation]
+(                       → (
+\n                      → \n    
 <                       → <
 span                    → span
-\n                      → \n    
+\n                      → \n      
 style                   → style
 =                       → =
 {                       → {
@@ -22,7 +24,7 @@ style                   → style
                         →  
 "px"                    → "px"
 }                       → }
-\n                      → \n    
+\n                      → \n      
 onclick                 → onclick
 =                       → =
 {                       → {
@@ -32,7 +34,7 @@ onclick                 → onclick
 =>                      → =>
                         →  
 {                       → {
-\n                      → \n      
+\n                      → \n        
 (cs.splice(             →  [-semantic -navigation]
 (size)                  → $size
 ))                      →  [-semantic -navigation]
@@ -54,17 +56,19 @@ onclick                 → onclick
 1                       → 1
 )                       → )
 ;                       → ;
+\n                      → \n      
+}                       → }
+}                       → }
 \n                      → \n    
-}                       → }
-}                       → }
-\n                      → \n  
 >                       → >
-\n                      → \n    
-press\n                 → press\n  
+\n                      → \n      
+press\n                 → press\n    
 <                       → <
 /                       → /
 span                    → span
 >                       → >
+\n                      → \n  
+)                       → )
 )())                    → ` [-semantic -navigation]
 cs.lift((() =>          → cs` [-semantic -navigation]
 {                       → {

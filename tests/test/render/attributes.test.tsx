@@ -29,9 +29,11 @@ function attributes(element: Element): Record<string, string> {
 
 describe("a prop", () => {
   it("is written as an attribute", async () => {
-    const link = await drawn(cs`<a href="/counter" id="press">
-      go
-    </a>`);
+    const link = await drawn(cs`(
+      <a href="/counter" id="press">
+        go
+      </a>
+    )`);
     assert.deepEqual(attributes(link), { href: "/counter", id: "press" });
   });
 });
@@ -41,11 +43,13 @@ describe("an svg tag", () => {
   // inserts, and it draws nothing. The prefix, which the runtime adds to a
   // tag drawn inside an `svg`, is what says which namespace it is from.
   it("is made in the SVG namespace, without its prefix", async () => {
-    const root = await drawn(cs`<div>
-      <svg>
-        <path />
-      </svg>
-    </div>`);
+    const root = await drawn(cs`(
+      <div>
+        <svg>
+          <path />
+        </svg>
+      </div>
+    )`);
     const path = root.querySelector("path")!;
     assert.equal(path.namespaceURI, SVG);
     assert.equal(path.localName, "path");
@@ -66,10 +70,12 @@ describe("an attribute's case", () => {
   // and the string handed to `setAttribute` are one name — nothing here has a
   // table to get from one to another.
   it("writes a hyphenated presentation name straight through", async () => {
-    const svg = await drawn(cs`<svg>
-      <path stroke-width={2} fill-rule="evenodd" />
-      <filter color-interpolation-filters="sRGB" />
-    </svg>`);
+    const svg = await drawn(cs`(
+      <svg>
+        <path stroke-width={2} fill-rule="evenodd" />
+        <filter color-interpolation-filters="sRGB" />
+      </svg>
+    )`);
     assert.deepEqual(attributes(svg.querySelector("path")!), {
       "stroke-width": "2",
       "fill-rule": "evenodd",
@@ -81,10 +87,12 @@ describe("an attribute's case", () => {
 
   // And the ones SVG spells camel itself, which lowercasing would lose.
   it("leaves an attribute SVG spells camel alone", async () => {
-    const svg = await drawn(cs`<svg>
-      <linearGradient gradientTransform="rotate(90)" />
-      <feTurbulence numOctaves={3} />
-    </svg>`);
+    const svg = await drawn(cs`(
+      <svg>
+        <linearGradient gradientTransform="rotate(90)" />
+        <feTurbulence numOctaves={3} />
+      </svg>
+    )`);
     assert.deepEqual(attributes(svg.children[0]!), {
       gradientTransform: "rotate(90)",
     });

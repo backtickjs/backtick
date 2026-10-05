@@ -3,23 +3,23 @@ import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 const $module0 = {
-  id: "25fkbgn23t8ej:11:9",
+  id: "jnagv17juckt:11:9",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => "counted";\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAUY,eAAY","names":[],"ignoreList":[],"sources":["components/component-answers-children.test.tsx"]}',
   dependencies: [],
   params: [],
 };
 const $module1 = {
-  id: "25fkbgn23t8ej:15:9",
+  id: "jnagv17juckt:15:9",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<em>one`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<em>two`);\nexports.default = () => [_tmpl$(), _tmpl$2()];\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAcY,OAAAA,MAAA,IAAAC,OAAA,GAGP","names":["_tmpl$","_tmpl$2"],"ignoreList":[],"sources":["components/component-answers-children.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAcY,OAAAA,MAAA,IAAAC,OAAA,GAKT","names":["_tmpl$","_tmpl$2"],"ignoreList":[],"sources":["components/component-answers-children.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
 };
 const $module2 = {
-  id: "25fkbgn23t8ej:25:4",
+  id: "jnagv17juckt:27:4",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = ($splice0, $splice1) => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, $splice0, null);\n    (0, web_2.insert)(_el$, $splice1, null);\n    return _el$;\n})();\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAwBO,CAAAA,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EACAF,QAAA;IAAAI,gBAAA,EAAAF,IAAA,EACAD,QAAA;IAAA,OAAAC,IAAA;AAAA,IACG","names":["$splice0","$splice1","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["components/component-answers-children.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBA0BO,CAAAA,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAEEF,QAAA;IAAAI,gBAAA,EAAAF,IAAA,EACAD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAEJ","names":["$splice0","$splice1","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["components/component-answers-children.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [
     { kind: "splice", bindings: [] },

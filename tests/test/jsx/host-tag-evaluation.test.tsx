@@ -19,10 +19,12 @@ const Counted = cs`{
 }`;
 
 const unreached = cs`<p>{false ? <$Boom /> : "ok"}</p>`;
-const twice = cs`<p>
-  <$Counted />
-  <$Counted />
-</p>`;
+const twice = cs`(
+  <p>
+    <$Counted />
+    <$Counted />
+  </p>
+)`;
 
 it("hostTagEvaluation", async (t) => {
   await snapshotCase(t, "hostTagEvaluation", { unreached, twice });

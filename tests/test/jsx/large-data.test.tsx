@@ -34,20 +34,25 @@ it("largeData", async (t) => {
   await snapshotCase(
     t,
     "largeData",
-    cs`<div>
-      <$For each={$orders}>
-        {(order: Order) => (
-          <div>
-            <img src={"https://img.example.com/" + order.id + ".png"} alt="" />
-            <span>{order.customer.name}</span>
-            <span>{order.customer.city}</span>
-            <$For each={order.items}>
-              {(item: Item) => <span>{item.sku + " x" + item.qty}</span>}
-            </$For>
-            <span>{"$" + order.total}</span>
-          </div>
-        )}
-      </$For>
-    </div>`,
+    cs`(
+      <div>
+        <$For each={$orders}>
+          {(order: Order) => (
+            <div>
+              <img
+                src={"https://img.example.com/" + order.id + ".png"}
+                alt=""
+              />
+              <span>{order.customer.name}</span>
+              <span>{order.customer.city}</span>
+              <$For each={order.items}>
+                {(item: Item) => <span>{item.sku + " x" + item.qty}</span>}
+              </$For>
+              <span>{"$" + order.total}</span>
+            </div>
+          )}
+        </$For>
+      </div>
+    )`,
   );
 });

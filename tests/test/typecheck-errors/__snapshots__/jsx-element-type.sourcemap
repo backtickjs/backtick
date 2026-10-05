@@ -23,9 +23,11 @@ $NotATag         → $NotATag [-semantic -navigation]
 ))               →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+\n               → \n  
 <                → <
 >                → >
-\n               → \n  
+\n               → \n    
 <                → <
 span             → span
 >                → >
@@ -34,10 +36,12 @@ a                → a
 /                → /
 span             → span
 >                → >
-\n               → \n
+\n               → \n  
 <                → <
 /                → /
 >                → >
+\n               → \n
+)                → )
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 (For)            → $For [-highlight]
@@ -133,10 +137,12 @@ div              → div
 >                → >
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+\n               → \n  
 <                → <
 div              → div
 >                → >
-\n               → \n  
+\n               → \n    
 <                → <
 span             → span
 >                → >
@@ -145,9 +151,11 @@ a                → a
 /                → /
 span             → span
 >                → >
-\n               → \n
+\n               → \n  
 <                → <
 /                → /
 div              → div
 >                → >
+\n               → \n
+)                → )
 )())             → ` [-semantic -navigation]

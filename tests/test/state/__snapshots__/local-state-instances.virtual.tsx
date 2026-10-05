@@ -25,10 +25,12 @@ async function OwnCounter() {
   })());
 }
 
-const instances = cs.lift((() => <div>
-  {(cs.splice((<OwnCounter />)))}
-  {(cs.splice((<OwnCounter />)))}
-</div>)());
+const instances = cs.lift((() => (
+  <div>
+    {(cs.splice((<OwnCounter />)))}
+    {(cs.splice((<OwnCounter />)))}
+  </div>
+))());
 
 describe("local state", () => {
   it("two invocations of one component hold independent signals", async () => {

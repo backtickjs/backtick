@@ -3,22 +3,22 @@ import { cs } from "@backtickjs/core";
 import { For } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 const $module0 = {
-  id: "vmu74mwm42ey:26:4",
+  id: "5vl2m1vo5mat:26:4",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = ($splice0, $splice1, $splice2) => (() => {\n    var _el$ = _tmpl$();\n    (0, web_3.insert)(_el$, () => ($For => (0, web_2.createComponent)($For, {\n        get each() {\n            return $splice1();\n        },\n        children: row => $splice2(row)\n    }))($splice0()));\n    return _el$;\n})();\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAyBO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QACD,CAAAG,IAAA,IAAAC,yBAAA,EAACD,IAAI;QAAA,IAACE,IAAIA;YAAA,OAAEP,QAAA,EAAK;QAAA;QAAAQ,QAAA,EACbC,GAAW,IAAKR,QAAA,CAAAQ,GAAA;KAAkC,CAC/C,EAFNV,QAAA,EAAI,CAGP;IAAA,OAAAG,IAAA;AAAA,IAAM","names":["$splice0","$splice1","$splice2","_el$","_tmpl$","_$insert","$For","_$createComponent","each","children","row"],"ignoreList":[],"sources":["jsx/mapped-component.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAyBO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAEC,CAAAG,IAAA,IAAAC,yBAAA,EAACD,IAAI;QAAA,IAACE,IAAIA;YAAA,OAAEP,QAAA,EAAK;QAAA;QAAAQ,QAAA,EACbC,GAAW,IAAKR,QAAA,CAAAQ,GAAA;KAAkC,CAC/C,EAFNV,QAAA,EAAI,CAGP;IAAA,OAAAG,IAAA;AAAA,IACD","names":["$splice0","$splice1","$splice2","_el$","_tmpl$","_$insert","$For","_$createComponent","each","children","row"],"ignoreList":[],"sources":["jsx/mapped-component.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
-    { kind: "splice", bindings: ["row$vmu74mwm42ey$0"] },
+    { kind: "splice", bindings: ["row$5vl2m1vo5mat$0"] },
   ],
 };
 const $module1 = {
-  id: "vmu74mwm42ey:28:28",
+  id: "5vl2m1vo5mat:29:30",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>`);\nexports.default = $capture0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, "row " + $capture0);\n    return _el$;\n})();\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBA2B+BA,SAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAO,MAAM,GAAGD,SAAG;IAAA,OAAAC,IAAA;AAAA,IAAQ","names":["$capture0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["jsx/mapped-component.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBA4BiCA,SAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAO,MAAM,GAAGD,SAAG;IAAA,OAAAC,IAAA;AAAA,IAAQ","names":["$capture0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["jsx/mapped-component.test.tsx"]}',
   dependencies: ["solid-js/web"],
-  params: [{ kind: "capture", key: "row$vmu74mwm42ey$0" }],
+  params: [{ kind: "capture", key: "row$5vl2m1vo5mat$0" }],
 };
 // One element template, expanded once per row on the client: the splice hole
 // sits inside a `.map` callback, so it is reached once per iteration and each

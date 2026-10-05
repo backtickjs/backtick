@@ -23,11 +23,13 @@ it("scriptBoundTagCaptureShadow", async (t) => {
   await snapshotCase(
     t,
     "scriptBoundTagCaptureShadow",
-    cs`<div>
-      <$Card title="host" />
-      {${labelled(cs`"a"`)}}
-      {${labelled(cs`"b"`)}}
-    </div>`,
+    cs`(
+      <div>
+        <$Card title="host" />
+        {${labelled(cs`"a"`)}}
+        {${labelled(cs`"b"`)}}
+      </div>
+    )`,
   );
 });
 

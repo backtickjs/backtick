@@ -18,9 +18,11 @@ it("componentBoundary", async (t) => {
   await snapshotCase(
     t,
     "componentBoundary",
-    cs.lift((() => <div>
-      {(cs.splice((<TextLabel text="one" />)))}
-      {(cs.splice((<TextLabel text="two" />)))}
-    </div>)()),
+    cs.lift((() => (
+      <div>
+        {(cs.splice((<TextLabel text="one" />)))}
+        {(cs.splice((<TextLabel text="two" />)))}
+      </div>
+    ))()),
   );
 });

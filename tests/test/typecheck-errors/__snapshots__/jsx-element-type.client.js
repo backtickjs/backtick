@@ -23,58 +23,58 @@ exports.default = (($splice0) => ($NotATag => <$NotATag />)($splice0()));
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (() => <>
-  <span>a</span>
-</>);
+exports.default = (() => (<>
+    <span>a</span>
+  </>));
 }
 
-// 32:21
+// 34:21
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0) => ($For => <$For each={[]}>{(n) => <i>{n}</i>}</$For>)($splice0()));
 }
 
-// 41:26
+// 43:26
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (() => <div nosuch={1}/>);
 }
 
-// 45:26
+// 47:26
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (() => <div class={1}/>);
 }
 
-// 50:22
+// 52:22
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0) => ($Fragment => <$Fragment />)($splice0()));
 }
 
-// 53:21
+// 55:21
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (() => <div>hello</div>);
 }
 
-// 54:23
+// 56:23
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (() => <div>{1}</div>);
 }
 
-// 55:23
+// 57:23
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (() => <div>
-  <span>a</span>
-</div>);
+exports.default = (() => (<div>
+    <span>a</span>
+  </div>));
 }

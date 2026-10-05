@@ -7,7 +7,7 @@ const $modules = {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
   },
-  "26efeom523wsc:15:9": (module, exports, require) => {
+  "3uqa0syxkzh5h:15:9": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -28,7 +28,7 @@ const $modules = {
       })();
     (0, web_2.delegateEvents)(["click"]);
   },
-  "26efeom523wsc:11:16": (module, exports, require) => {
+  "3uqa0syxkzh5h:11:16": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0) => (label) => {
@@ -51,8 +51,8 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("1uptcsn9236u2:352:9").default;
-const $cs1 = $require("26efeom523wsc:15:9").default;
-const $cs2 = $require("26efeom523wsc:11:16").default;
+const $cs1 = $require("3uqa0syxkzh5h:15:9").default;
+const $cs2 = $require("3uqa0syxkzh5h:11:16").default;
 export default $cs0(
   () => $i0,
   () => $cs1(() => $cs2(() => $i1)),

@@ -2,79 +2,79 @@ import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import { cs } from "@backtickjs/core";
 import { For } from "@backtickjs/solid-js";
 const $module0 = {
-  id: "3o318ga2fv91z:14:19",
+  id: "346p48wj9kqyv:14:19",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div class=a>`);\nexports.default = () => _tmpl$();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAasB,MAAAA,MAAA,EAAiB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
 };
 const $module1 = {
-  id: "3o318ga2fv91z:18:26",
+  id: "346p48wj9kqyv:18:26",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<blink>`);\nexports.default = () => _tmpl$();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAiB6B,MAAAA,MAAA,EAAS","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
 };
 const $module2 = {
-  id: "3o318ga2fv91z:25:25",
+  id: "346p48wj9kqyv:25:25",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $splice0 => ($NotATag => (0, web_1.createComponent)($NotATag, {}))($splice0());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAwB4BA,QAAA,KAAAC,QAAA,IAAAC,yBAAA,EAACD,QAAQ,KAAG,EAAXD,QAAA,EAAQ,CAAG","names":["$splice0","$NotATag","_$createComponent"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
 };
 const $module3 = {
-  id: "3o318ga2fv91z:28:25",
+  id: "346p48wj9kqyv:28:25",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>a`);\nexports.default = () => _tmpl$();\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBA2B4B,MAAAA,MAAA,EAEzB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBA2B4B,MAAAA,MAAA,EAI3B","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
 };
 const $module4 = {
-  id: "3o318ga2fv91z:32:20",
+  id: "346p48wj9kqyv:34:20",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<i>`);\nexports.default = $splice0 => ($For => (0, web_3.createComponent)($For, {\n    each: [],\n    children: n => (() => {\n        var _el$ = _tmpl$();\n        (0, web_2.insert)(_el$, n);\n        return _el$;\n    })()\n}))($splice0());\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBA+BuBA,QAAA,KAAAC,IAAA,IAAAC,yBAAA,EAACD,IAAI;IAACE,IAAI,EAAE,EAAc;IAAAC,QAAA,EAAIC,CAAC;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,EAASD,CAAC;QAAA,OAAAC,IAAA;IAAA;CAAK,CAAQ,EAArDN,QAAA,EAAI,CAAiD","names":["$splice0","$For","_$createComponent","each","children","n","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAiCuBA,QAAA,KAAAC,IAAA,IAAAC,yBAAA,EAACD,IAAI;IAACE,IAAI,EAAE,EAAc;IAAAC,QAAA,EAAIC,CAAC;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,EAASD,CAAC;QAAA,OAAAC,IAAA;IAAA;CAAK,CAAQ,EAArDN,QAAA,EAAI,CAAiD","names":["$splice0","$For","_$createComponent","each","children","n","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
 };
 const $module5 = {
-  id: "3o318ga2fv91z:41:25",
+  id: "346p48wj9kqyv:43:25",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div nosuch=1>`);\nexports.default = () => _tmpl$();\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAwC4B,MAAAA,MAAA,EAAkB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBA0C4B,MAAAA,MAAA,EAAkB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
 };
 const $module6 = {
-  id: "3o318ga2fv91z:45:25",
+  id: "346p48wj9kqyv:47:25",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div class=1>`);\nexports.default = () => _tmpl$();\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBA4C4B,MAAAA,MAAA,EAAiB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBA8C4B,MAAAA,MAAA,EAAiB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
 };
 const $module7 = {
-  id: "3o318ga2fv91z:50:21",
+  id: "346p48wj9kqyv:52:21",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $splice0 => ($Fragment => (0, web_1.createComponent)($Fragment, {}))($splice0());\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAiDwBA,QAAA,KAAAC,SAAA,IAAAC,yBAAA,EAACD,SAAS,KAAG,EAAZD,QAAA,EAAS,CAAG","names":["$splice0","$Fragment","_$createComponent"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAmDwBA,QAAA,KAAAC,SAAA,IAAAC,yBAAA,EAACD,SAAS,KAAG,EAAZD,QAAA,EAAS,CAAG","names":["$splice0","$Fragment","_$createComponent"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
 };
 const $module8 = {
-  id: "3o318ga2fv91z:53:20",
+  id: "346p48wj9kqyv:55:20",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>hello`);\nexports.default = () => _tmpl$();\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAoDuB,MAAAA,MAAA,EAAgB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAsDuB,MAAAA,MAAA,EAAgB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
 };
 const $module9 = {
-  id: "3o318ga2fv91z:54:22",
+  id: "346p48wj9kqyv:56:22",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>1`);\nexports.default = () => _tmpl$();\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAqDyB,MAAAA,MAAA,EAAc","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAuDyB,MAAAA,MAAA,EAAc","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
 };
 const $module10 = {
-  id: "3o318ga2fv91z:55:22",
+  id: "346p48wj9kqyv:57:22",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span>a`);\nexports.default = () => _tmpl$();\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAsDyB,MAAAA,MAAA,EAEnB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAwDyB,MAAAA,MAAA,EAIxB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
 };

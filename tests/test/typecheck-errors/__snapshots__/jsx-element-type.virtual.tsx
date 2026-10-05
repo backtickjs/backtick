@@ -25,9 +25,11 @@ const NotATag = { id: "View" };
 export const wrongKind = cs.lift((() => (($NotATag) => <$NotATag />)(cs.splice((NotATag))))());
 
 // ─── what arranges rather than draws ──────────────────────────────────
-export const shorthand = cs.lift((() => <>
-  <span>a</span>
-</>)());
+export const shorthand = cs.lift((() => (
+  <>
+    <span>a</span>
+  </>
+))());
 
 export const list = cs.lift((() => (void (For), (($For) => <$For each={[] as number[]}>{(__cs_n) => <i>{__cs_n}</i>}</$For>)(cs.splice((For)))))());
 
@@ -52,6 +54,8 @@ export const named = cs.lift((() => (($Fragment) => <$Fragment />)(cs.splice((Fr
 // ─── children, which are structure ────────────────────────────────────
 export const text = cs.lift((() => <div>hello</div>)());
 export const number = cs.lift((() => <div>{1}</div>)());
-export const nested = cs.lift((() => <div>
-  <span>a</span>
-</div>)());
+export const nested = cs.lift((() => (
+  <div>
+    <span>a</span>
+  </div>
+))());

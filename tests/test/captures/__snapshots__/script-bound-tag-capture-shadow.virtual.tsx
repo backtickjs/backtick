@@ -23,11 +23,13 @@ it("scriptBoundTagCaptureShadow", async (t) => {
   await snapshotCase(
     t,
     "scriptBoundTagCaptureShadow",
-    cs.lift((() => <div>
-      {(($Card) => <$Card title="host" />)(cs.splice((Card)))}
-      {(cs.splice(labelled(cs.lift((() => "a")()))))}
-      {(cs.splice(labelled(cs.lift((() => "b")()))))}
-    </div>)()),
+    cs.lift((() => (
+      <div>
+        {(($Card) => <$Card title="host" />)(cs.splice((Card)))}
+        {(cs.splice(labelled(cs.lift((() => "a")()))))}
+        {(cs.splice(labelled(cs.lift((() => "b")()))))}
+      </div>
+    ))()),
   );
 });
 

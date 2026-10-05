@@ -1,6 +1,6 @@
 import * as $module0 from "solid-js/web";
 const $modules = {
-  "37pby5o43brgu:14:13": (module, exports, require) => {
+  "7k5q0iuij35f:14:13": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -31,7 +31,7 @@ const $modules = {
         return _el$;
       })();
   },
-  "37pby5o43brgu:11:9": (module, exports, require) => {
+  "7k5q0iuij35f:11:9": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -57,6 +57,6 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $cs0 = $require("37pby5o43brgu:14:13").default;
-const $cs1 = $require("37pby5o43brgu:11:9").default;
+const $cs0 = $require("7k5q0iuij35f:14:13").default;
+const $cs1 = $require("7k5q0iuij35f:11:9").default;
 export default $cs0(() => ({ Badge: $cs1() }));

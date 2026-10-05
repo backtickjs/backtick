@@ -3,37 +3,37 @@ import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 const $module0 = {
-  id: "3cjyucql1m4dw:13:28",
+  id: "2xjp8x9bcyeyr:13:28",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>x`);\nexports.default = () => _tmpl$();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAY+B,MAAAA,MAAA,EAAc","names":["_tmpl$"],"ignoreList":[],"sources":["jsx/tree-in-variable.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
 };
 const $module1 = {
-  id: "3cjyucql1m4dw:15:20",
+  id: "2xjp8x9bcyeyr:15:20",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => () => {\n    const tree = $splice0();\n    return tree;\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAcuBA,QAAA;IACrB,MAAMC,IAAI,GAAGD,QAAA,EAAc;IAC3B,OAAOC,IAAI;AACb,CAAC","names":["$splice0","tree"],"ignoreList":[],"sources":["jsx/tree-in-variable.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
 };
 const $module2 = {
-  id: "3cjyucql1m4dw:16:17",
+  id: "2xjp8x9bcyeyr:16:17",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = () => _tmpl$();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAeoB,MAAAA,MAAA,EAAO","names":["_tmpl$"],"ignoreList":[],"sources":["jsx/tree-in-variable.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
 };
 const $module3 = {
-  id: "3cjyucql1m4dw:20:22",
+  id: "2xjp8x9bcyeyr:20:22",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => () => {\n    const tree = $splice0();\n    return tree;\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAmByBA,QAAA;IACvB,MAAMC,IAAI,GAAGD,QAAA,EAAgB;IAC7B,OAAOC,IAAI;AACb,CAAC","names":["$splice0","tree"],"ignoreList":[],"sources":["jsx/tree-in-variable.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
 };
 const $module4 = {
-  id: "3cjyucql1m4dw:29:4",
+  id: "2xjp8x9bcyeyr:29:4",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = ($splice0, $splice1) => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, () => $splice0()(), null);\n    (0, web_2.insert)(_el$, () => $splice1()(), null);\n    return _el$;\n})();\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBA4BO,CAAAA,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QACAF,QAAA,EAAY,EAAE;IAAAI,gBAAA,EAAAF,IAAA,QACdD,QAAA,EAAc,EAAE;IAAA,OAAAC,IAAA;AAAA,IACb","names":["$splice0","$splice1","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["jsx/tree-in-variable.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBA4BO,CAAAA,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAEEF,QAAA,EAAY,EAAE;IAAAI,gBAAA,EAAAF,IAAA,QACdD,QAAA,EAAc,EAAE;IAAA,OAAAC,IAAA;AAAA,IAEpB","names":["$splice0","$splice1","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["jsx/tree-in-variable.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [
     { kind: "splice", bindings: [] },

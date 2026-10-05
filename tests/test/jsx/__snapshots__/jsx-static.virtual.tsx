@@ -8,8 +8,10 @@ it("jsxStatic", async (t) => {
   await snapshotCase(
     t,
     "jsxStatic",
-    cs.lift((() => <div>
-      <span>hi</span>
-    </div>)()),
+    cs.lift((() => (
+      <div>
+        <span>hi</span>
+      </div>
+    ))()),
   );
 });

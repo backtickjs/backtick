@@ -16,6 +16,7 @@ import ts from "typescript";
 
 const estree: Printer = builtinPrinters.estree;
 const { mapDoc } = prettierDoc.utils;
+const { group, ifBreak, indent, softline } = prettierDoc.builders;
 
 type Print = (selector: Array<string | number>) => Doc;
 type TextToDoc = (text: string, options: Options) => Promise<Doc>;
@@ -51,17 +52,39 @@ async function printScript(
   const docWithPlaceholders = await textToDoc(script.textWithPlaceholders, {
     parser,
   });
-  return [
-    "cs",
-    "`",
-    reinjectSplices(
-      stripTrailingSemicolon(docWithPlaceholders),
-      script,
-      expressions,
-      print,
-    ),
-    "`",
-  ];
+  const body = reinjectSplices(
+    stripTrailingSemicolon(docWithPlaceholders),
+    script,
+    expressions,
+    print,
+  );
+  return ["cs", "`", isJsxRoot(script) ? wrapInParens(body) : body, "`"];
+}
+
+// A script that is one JSX element, parenthesized or not.
+function isJsxRoot(script: ClientScript): boolean {
+  const [statement, ...rest] = script.fileWithPlaceholders.statements;
+  if (
+    statement === undefined ||
+    rest.length > 0 ||
+    !ts.isExpressionStatement(statement)
+  ) {
+    return false;
+  }
+  let root = statement.expression;
+  while (ts.isParenthesizedExpression(root)) {
+    root = root.expression;
+  }
+  return (
+    ts.isJsxElement(root) ||
+    ts.isJsxFragment(root) ||
+    ts.isJsxSelfClosingElement(root)
+  );
+}
+
+// As Prettier wraps JSX in a `return`: parens only when it breaks.
+function wrapInParens(doc: Doc): Doc {
+  return group([ifBreak("("), indent([softline, doc]), softline, ifBreak(")")]);
 }
 
 function reinjectSplices(

@@ -23,10 +23,12 @@ it("mappedComponent", async (t) => {
   await snapshotCase(
     t,
     "mappedComponent",
-    cs`<div>
-      <$For each={$rows}>
-        {(row: number) => ${cs`<span>{"row " + row}</span>`}}
-      </$For>
-    </div>`,
+    cs`(
+      <div>
+        <$For each={$rows}>
+          {(row: number) => ${cs`<span>{"row " + row}</span>`}}
+        </$For>
+      </div>
+    )`,
   );
 });

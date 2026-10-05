@@ -23,12 +23,14 @@ const ReadingRow = async ({
 }: {
   id: Client<number>;
   selected: Client<Signal<number>>;
-}) => cs.lift((() => <div>
-  <span style={"font-size: " + ((cs.splice((selected)))[0]() === (cs.splice((id))) ? 20 : 16) + "px"}>
-    {"row " + (cs.splice((id))) + " of " + (cs.splice((selected)))[0]()}
-  </span>
-  {(cs.splice((selected)))[0]() === (cs.splice((id))) ? <span>marker</span> : null}
-</div>)());
+}) => cs.lift((() => (
+  <div>
+    <span style={"font-size: " + ((cs.splice((selected)))[0]() === (cs.splice((id))) ? 20 : 16) + "px"}>
+      {"row " + (cs.splice((id))) + " of " + (cs.splice((selected)))[0]()}
+    </span>
+    {(cs.splice((selected)))[0]() === (cs.splice((id))) ? <span>marker</span> : null}
+  </div>
+))());
 
 async function ReadingPanel() {
   return cs.lift((() => {

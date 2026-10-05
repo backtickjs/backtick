@@ -26,9 +26,11 @@ it("treeInVariable", async (t) => {
   await snapshotCase(
     t,
     "treeInVariable",
-    cs.lift((() => <div>
-      {(cs.splice((heldElement)))()}
-      {(cs.splice((heldComponent)))()}
-    </div>)()),
+    cs.lift((() => (
+      <div>
+        {(cs.splice((heldElement)))()}
+        {(cs.splice((heldComponent)))()}
+      </div>
+    ))()),
   );
 });

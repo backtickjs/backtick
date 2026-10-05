@@ -26,9 +26,11 @@ it("treeInVariable", async (t) => {
   await snapshotCase(
     t,
     "treeInVariable",
-    cs`<div>
-      {$heldElement()}
-      {$heldComponent()}
-    </div>`,
+    cs`(
+      <div>
+        {$heldElement()}
+        {$heldComponent()}
+      </div>
+    )`,
   );
 });

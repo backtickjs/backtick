@@ -82,24 +82,28 @@ span              → span
 }                 → }
 )())              → ` [-semantic -navigation]
 cs.lift((() =>    → cs` [-semantic -navigation]
+(                 → (
+\n                → \n  
 <                 → <
 div               → div
 >                 → >
-\n                → \n  
+\n                → \n    
+{                 → {
+(cs.splice(       →  [-semantic -navigation]
+(<OwnCounter />)  → (<OwnCounter />)
+))                →  [-semantic -navigation]
+}                 → }
+\n                → \n    
 {                 → {
 (cs.splice(       →  [-semantic -navigation]
 (<OwnCounter />)  → (<OwnCounter />)
 ))                →  [-semantic -navigation]
 }                 → }
 \n                → \n  
-{                 → {
-(cs.splice(       →  [-semantic -navigation]
-(<OwnCounter />)  → (<OwnCounter />)
-))                →  [-semantic -navigation]
-}                 → }
-\n                → \n
 <                 → <
 /                 → /
 div               → div
 >                 → >
+\n                → \n
+)                 → )
 )())              → ` [-semantic -navigation]

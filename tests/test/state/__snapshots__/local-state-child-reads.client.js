@@ -2,15 +2,15 @@
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $splice1) => <div>
-  <span style={"font-size: " + ($splice0()[0]() === $splice1() ? 20 : 16) + "px"}>
-    {"row " + $splice1() + " of " + $splice0()[0]()}
-  </span>
-  {$splice0()[0]() === $splice1() ? <span>marker</span> : null}
-</div>);
+exports.default = (($splice0, $splice1) => (<div>
+    <span style={"font-size: " + ($splice0()[0]() === $splice1() ? 20 : 16) + "px"}>
+      {"row " + $splice1() + " of " + $splice0()[0]()}
+    </span>
+    {$splice0()[0]() === $splice1() ? <span>marker</span> : null}
+  </div>));
 }
 
-// 34:10
+// 36:10
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -24,28 +24,28 @@ exports.default = (($splice0, $splice1, $splice2) => {
 });
 }
 
-// 39:29
+// 41:29
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (() => 0);
 }
 
-// 39:46
+// 41:46
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($capture0) => $capture0);
 }
 
-// 40:29
+// 42:29
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (() => 1);
 }
 
-// 40:46
+// 42:46
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });

@@ -30,13 +30,15 @@ __cs_label         → label
 }                  → }
 )())               → ` [-semantic -navigation]
 cs.lift((() =>     → cs` [-semantic -navigation]
+(                  → (
+\n                 → \n    
 <                  → <
 span               → span
-\n                 → \n    
+\n                 → \n      
 style              → style
 =                  → =
 "font-size: 16px"  → "font-size: 16px"
-\n                 → \n    
+\n                 → \n      
 onclick            → onclick
 =                  → =
 {                  → {
@@ -46,7 +48,7 @@ onclick            → onclick
 =>                 → =>
                    →  
 {                  → {
-\n                 → \n      
+\n                 → \n        
 const              → const
                    →  
 __cs_row           → row
@@ -60,7 +62,7 @@ __cs_row           → row
 "one"              → "one"
 )                  → )
 ;                  → ;
-\n                 → \n      
+\n                 → \n        
 __cs_row           → row
 .                  → .
 label              → label
@@ -82,12 +84,12 @@ label              → label
 " !!!"             → " !!!"
 )                  → )
 ;                  → ;
+\n                 → \n      
+}                  → }
+}                  → }
 \n                 → \n    
-}                  → }
-}                  → }
-\n                 → \n  
 >                  → >
-\n                 → \n    
+\n                 → \n      
 {                  → {
 (cs.splice(        →  [-semantic -navigation]
 (build)            → $build
@@ -103,9 +105,11 @@ label              → label
 (                  → (
 )                  → )
 }                  → }
-\n                 → \n  
+\n                 → \n    
 <                  → <
 /                  → /
 span               → span
 >                  → >
+\n                 → \n  
+)                  → )
 )())               → ` [-semantic -navigation]

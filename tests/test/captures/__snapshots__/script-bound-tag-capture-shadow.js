@@ -2,33 +2,33 @@ import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 const $module0 = {
-  id: "2x5zzf1r35g00:11:13",
+  id: "21m2csdludqmv:11:13",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<h2>`);\nexports.default = () => props => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, () => props.title);\n    return _el$;\n})();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAUgB,MAACA,KAAwB;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAAUD,KAAK,CAACI,KAAK;IAAA,OAAAH,IAAA;AAAA,IAAM","names":["props","_el$","_tmpl$","_$insert","title"],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
 };
 const $module1 = {
-  id: "2x5zzf1r35g00:16:9",
+  id: "21m2csdludqmv:16:9",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<i>`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<p>`);\nexports.default = ($splice0, $splice1) => {\n    const Card = props => (() => {\n        var _el$ = _tmpl$();\n        (0, web_2.insert)(_el$, () => $splice0() + props.n);\n        return _el$;\n    })();\n    return (() => {\n        var _el$2 = _tmpl$2();\n        (0, web_2.insert)(_el$2, () => $splice1(Card));\n        return _el$2;\n    })();\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAeY,CAAAA,QAAA,EAAAC,QAAA;IACR,MAAMC,IAAI,GAAIC,KAAoB;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,QAASJ,QAAA,EAAM,GAAGG,KAAK,CAACI,CAAC;QAAA,OAAAH,IAAA;IAAA,IAAK;IAChE;QAAA,IAAAI,KAAA,GAAAC,OAAA;QAAAH,gBAAA,EAAAE,KAAA,QAAWP,QAAA,CAAAC,IAAA,CAAqB;QAAA,OAAAM,KAAA;IAAA;AAClC,CAAC","names":["$splice0","$splice1","Card","props","_el$","_tmpl$","_$insert","n","_el$2","_tmpl$2"],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [
     { kind: "splice", bindings: [] },
-    { kind: "splice", bindings: ["Card$2x5zzf1r35g00$1"] },
+    { kind: "splice", bindings: ["Card$21m2csdludqmv$1"] },
   ],
 };
 const $module2 = {
-  id: "2x5zzf1r35g00:18:17",
+  id: "21m2csdludqmv:18:17",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $capture0 => (0, web_1.createComponent)($capture0, {\n    n: 1\n});\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAiBoBA,SAAA,IAAAC,yBAAA,EAACD,SAAI;IAACE,CAAC,EAAE;CAAC,CAAI","names":["$capture0","_$createComponent","n"],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
   dependencies: ["solid-js/web"],
-  params: [{ kind: "capture", key: "Card$2x5zzf1r35g00$1" }],
+  params: [{ kind: "capture", key: "Card$21m2csdludqmv$1" }],
 };
 const $module3 = {
-  id: "2x5zzf1r35g00:26:4",
+  id: "21m2csdludqmv:26:4",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = ($splice0, $splice1, $splice2) => (() => {\n    var _el$ = _tmpl$();\n    (0, web_3.insert)(_el$, () => ($Card => (0, web_2.createComponent)($Card, {\n        title: "host"\n    }))($splice0()), null);\n    (0, web_3.insert)(_el$, $splice1, null);\n    (0, web_3.insert)(_el$, $splice2, null);\n    return _el$;\n})();\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAyBO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QACD,CAAAG,KAAA,IAAAC,yBAAA,EAACD,KAAK;QAACE,KAAK;KAAA,CAAU,EAArBR,QAAA,EAAK,CACN;IAAAK,gBAAA,EAAAF,IAAA,EAACF,QAAA;IAAAI,gBAAA,EAAAF,IAAA,EACAD,QAAA;IAAA,OAAAC,IAAA;AAAA,IACG","names":["$splice0","$splice1","$splice2","_el$","_tmpl$","_$insert","$Card","_$createComponent","title"],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAyBO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAEC,CAAAG,KAAA,IAAAC,yBAAA,EAACD,KAAK;QAACE,KAAK;KAAA,CAAU,EAArBR,QAAA,EAAK,CACN;IAAAK,gBAAA,EAAAF,IAAA,EAACF,QAAA;IAAAI,gBAAA,EAAAF,IAAA,EACAD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAEJ","names":["$splice0","$splice1","$splice2","_el$","_tmpl$","_$insert","$Card","_$createComponent","title"],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [
     { kind: "splice", bindings: [] },
@@ -37,23 +37,23 @@ const $module3 = {
   ],
 };
 const $module4 = {
-  id: "2x5zzf1r35g00:28:18",
+  id: "21m2csdludqmv:29:20",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => "a";\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2BqB,SAAG","names":[],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA4BuB,SAAG","names":[],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
   dependencies: [],
   params: [],
 };
 const $module5 = {
-  id: "2x5zzf1r35g00:29:18",
+  id: "21m2csdludqmv:30:20",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => "b";\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA4BqB,SAAG","names":[],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA6BuB,SAAG","names":[],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
   dependencies: [],
   params: [],
 };
 const $module6 = {
-  id: "2x5zzf1r35g00:41:4",
+  id: "21m2csdludqmv:43:4",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<section>`), _tmpl$3 = /*#__PURE__*/ (0, web_1.template)(`<i>`);\nexports.default = $splice0 => {\n    const twice = Card => (() => {\n        var _el$ = _tmpl$();\n        (0, web_2.insert)(_el$, (0, web_3.createComponent)(Card, {\n            n: 1\n        }), null);\n        (0, web_2.insert)(_el$, (0, web_3.createComponent)(Card, {\n            n: 2\n        }), null);\n        return _el$;\n    })();\n    return (() => {\n        var _el$2 = _tmpl$2();\n        (0, web_2.insert)(_el$2, () => ($Card => (0, web_3.createComponent)($Card, {\n            title: "host"\n        }))($splice0()), null);\n        (0, web_2.insert)(_el$2, () => twice(props => (() => {\n            var _el$3 = _tmpl$3();\n            (0, web_2.insert)(_el$3, () => "row " + props.n);\n            return _el$3;\n        })()), null);\n        return _el$2;\n    })();\n};\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAwCOA,QAAA;IACD,MAAMC,KAAK,GAAIC,IAA2C;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,EAAAG,yBAAA,EAErDJ,IAAI;YAACK,CAAC,EAAE;SAAC;QAAAF,gBAAA,EAAAF,IAAA,EAAAG,yBAAA,EACTJ,IAAI;YAACK,CAAC,EAAE;SAAC;QAAA,OAAAJ,IAAA;IAAA,IAEb;IAED;QAAA,IAAAK,KAAA,GAAAC,OAAA;QAAAJ,gBAAA,EAAAG,KAAA,QAEI,CAAAE,KAAA,IAAAJ,yBAAA,EAACI,KAAK;YAACC,KAAK;SAAA,CAAU,EAArBX,QAAA,EAAK,CACN;QAAAK,gBAAA,EAAAG,KAAA,QAACP,KAAK,CAAEW,KAAoB;YAAA,IAAAC,KAAA,GAAAC,OAAA;YAAAT,gBAAA,EAAAQ,KAAA,QACtB,MAAM,GAAGD,KAAK,CAACL,CAAC;YAAA,OAAAM,KAAA;QAAA,IACrB,CAAC;QAAA,OAAAL,KAAA;IAAA;AAGR,CAAC","names":["$splice0","twice","Card","_el$","_tmpl$","_$insert","_$createComponent","n","_el$2","_tmpl$2","$Card","title","props","_el$3","_tmpl$3"],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBA0COA,QAAA;IACD,MAAMC,KAAK,GAAIC,IAA2C;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,EAAAG,yBAAA,EAErDJ,IAAI;YAACK,CAAC,EAAE;SAAC;QAAAF,gBAAA,EAAAF,IAAA,EAAAG,yBAAA,EACTJ,IAAI;YAACK,CAAC,EAAE;SAAC;QAAA,OAAAJ,IAAA;IAAA,IAEb;IAED;QAAA,IAAAK,KAAA,GAAAC,OAAA;QAAAJ,gBAAA,EAAAG,KAAA,QAEI,CAAAE,KAAA,IAAAJ,yBAAA,EAACI,KAAK;YAACC,KAAK;SAAA,CAAU,EAArBX,QAAA,EAAK,CACN;QAAAK,gBAAA,EAAAG,KAAA,QAACP,KAAK,CAAEW,KAAoB;YAAA,IAAAC,KAAA,GAAAC,OAAA;YAAAT,gBAAA,EAAAQ,KAAA,QACtB,MAAM,GAAGD,KAAK,CAACL,CAAC;YAAA,OAAAM,KAAA;QAAA,IACrB,CAAC;QAAA,OAAAL,KAAA;IAAA;AAGR,CAAC","names":["$splice0","twice","Card","_el$","_tmpl$","_$insert","_$createComponent","n","_el$2","_tmpl$2","$Card","title","props","_el$3","_tmpl$3"],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
 };

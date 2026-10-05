@@ -33,10 +33,12 @@ b                → b
 >                → >
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+\n               → \n  
 <                → <
 p                → p
 >                → >
-\n               → \n  
+\n               → \n    
 $ui              → $ui [-semantic -navigation]
 .Badge           → .Badge
 n                → n
@@ -48,7 +50,7 @@ n                → n
 )(cs.splice(     →  [-semantic -navigation]
 (ui)             → $ui.Badge [-highlight]
 ))               →  [-semantic -navigation]
-\n               → \n  
+\n               → \n    
 (ui)             → $ui [-highlight]
 $ui              → $ui [-semantic -navigation]
 .Badge           → .Badge
@@ -63,9 +65,11 @@ $ui              → $ui [-semantic -navigation]
 )(cs.splice(     →  [-semantic -navigation]
 (ui)             → $ui.Badge [-highlight]
 ))               →  [-semantic -navigation]
-\n               → \n
+\n               → \n  
 <                → <
 /                → /
 p                → p
 >                → >
+\n               → \n
+)                → )
 )())             → ` [-semantic -navigation]

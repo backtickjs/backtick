@@ -32,7 +32,7 @@ exports.default = (($splice0, $splice1) => {
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($capture0, $capture1) => <$capture0 n={$capture1()}>
-              <u>{"kid " + $capture1()}</u>
-            </$capture0>);
+exports.default = (($capture0, $capture1) => (<$capture0 n={$capture1()}>
+                <u>{"kid " + $capture1()}</u>
+              </$capture0>));
 }

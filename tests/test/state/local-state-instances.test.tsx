@@ -25,10 +25,12 @@ async function OwnCounter() {
   }`;
 }
 
-const instances = cs`<div>
-  {${(<OwnCounter />)}}
-  {${(<OwnCounter />)}}
-</div>`;
+const instances = cs`(
+  <div>
+    {${(<OwnCounter />)}}
+    {${(<OwnCounter />)}}
+  </div>
+)`;
 
 describe("local state", () => {
   it("two invocations of one component hold independent signals", async () => {

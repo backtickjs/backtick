@@ -11,10 +11,12 @@ const ui = {
   Badge: cs`(props: { n: number }) => <b>{"badge " + props.n}</b>`,
 };
 
-const page = cs`<p>
-  <$ui.Badge n={1} />
-  <$ui.Badge n={2}></$ui.Badge>
-</p>`;
+const page = cs`(
+  <p>
+    <$ui.Badge n={1} />
+    <$ui.Badge n={2}></$ui.Badge>
+  </p>
+)`;
 
 it("memberTag", async (t) => {
   await snapshotCase(t, "memberTag", page);

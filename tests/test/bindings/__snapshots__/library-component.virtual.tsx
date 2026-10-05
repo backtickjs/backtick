@@ -32,10 +32,12 @@ const counter = cs.lift((() => {
 })());
 
 // A prop the library doesn't take a value for, caught as Solid would.
-// @ts-expect-error: Type '"large"' is not assignable to type '"primary" | "ghost"'.
-export const wrongVariant = cs.lift((() => (void (Button), (($Button) => <$Button variant="large" onClick={() => {}}>
-  Save
-</$Button>)(cs.splice((Button)))))());
+export const wrongVariant = cs.lift((() => (
+  // @ts-expect-error: Type '"large"' is not assignable to type '"primary" | "ghost"'.
+  (void (Button), (($Button) => <$Button variant="large" onClick={() => {}}>
+    Save
+  </$Button>)(cs.splice((Button))))
+))());
 
 it("libraryComponent", async (t) => {
   await snapshotCase(t, "libraryComponent", counter);

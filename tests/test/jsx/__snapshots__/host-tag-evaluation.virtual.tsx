@@ -19,10 +19,12 @@ const Counted = cs.lift((() => {
 })());
 
 const unreached = cs.lift((() => <p>{false ? (($Boom) => <$Boom />)(cs.splice((Boom))) : "ok"}</p>)());
-const twice = cs.lift((() => <p>
-  {(($Counted) => <$Counted />)(cs.splice((Counted)))}
-  {(($Counted) => <$Counted />)(cs.splice((Counted)))}
-</p>)());
+const twice = cs.lift((() => (
+  <p>
+    {(($Counted) => <$Counted />)(cs.splice((Counted)))}
+    {(($Counted) => <$Counted />)(cs.splice((Counted)))}
+  </p>
+))());
 
 it("hostTagEvaluation", async (t) => {
   await snapshotCase(t, "hostTagEvaluation", { unreached, twice });

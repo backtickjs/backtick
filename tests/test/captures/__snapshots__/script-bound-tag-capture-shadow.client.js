@@ -26,28 +26,28 @@ exports.default = (($capture0) => <$capture0 n={1}/>);
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $splice1, $splice2) => <div>
-      {($Card => <$Card title="host"/>)($splice0())}
-      {$splice1()}
-      {$splice2()}
-    </div>);
+exports.default = (($splice0, $splice1, $splice2) => (<div>
+        {($Card => <$Card title="host"/>)($splice0())}
+        {$splice1()}
+        {$splice2()}
+      </div>));
 }
 
-// 28:19
+// 29:21
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (() => "a");
 }
 
-// 29:19
+// 30:21
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (() => "b");
 }
 
-// 41:5
+// 43:5
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });

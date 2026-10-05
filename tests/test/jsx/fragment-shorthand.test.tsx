@@ -9,13 +9,15 @@ it("fragmentShorthand", async (t) => {
   await snapshotCase(
     t,
     "fragmentShorthand",
-    cs`<div>
-      {
-        <>
-          <span>a</span>
-          <span>b</span>
-        </>
-      }
-    </div>`,
+    cs`(
+      <div>
+        {
+          <>
+            <span>a</span>
+            <span>b</span>
+          </>
+        }
+      </div>
+    )`,
   );
 });
