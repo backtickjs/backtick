@@ -667,45 +667,15 @@ importers:
 
   packages/react-native-client:
     devDependencies:
-      '@backtickjs/bundler':
-        specifier: workspace:^0.1.0
-        version: link:../bundler
-      '@backtickjs/compiler':
-        specifier: workspace:^0.1.0
-        version: link:../compiler
-      '@backtickjs/core':
-        specifier: workspace:^0.1.0
-        version: link:../core
-      '@backtickjs/react':
-        specifier: workspace:^19.2.3
-        version: link:../react
-      '@backtickjs/react-native':
-        specifier: workspace:^0.86.3
-        version: link:../react-native
       '@types/react':
         specifier: 19.2.18
         version: 19.2.18
-      '@types/react-dom':
-        specifier: 19.2.7
-        version: 19.2.7(@types/react@19.2.18)
-      global-jsdom:
-        specifier: ^30.0.0
-        version: 30.0.0(jsdom@30.0.1)
-      jsdom:
-        specifier: ^30.0.1
-        version: 30.0.1
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
       react:
         specifier: 19.2.3
         version: 19.2.3
-      react-dom:
-        specifier: 19.2.3
-        version: 19.2.3(react@19.2.3)
-      react-native-web:
-        specifier: 0.21.3
-        version: 0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -827,6 +797,15 @@ importers:
       '@backtickjs/prettier-plugin':
         specifier: workspace:*
         version: link:../packages/prettier-plugin
+      '@backtickjs/react':
+        specifier: workspace:*
+        version: link:../packages/react
+      '@backtickjs/react-native':
+        specifier: workspace:*
+        version: link:../packages/react-native
+      '@backtickjs/react-native-client':
+        specifier: workspace:*
+        version: link:../packages/react-native-client
       '@backtickjs/solid-js':
         specifier: workspace:^0.1.0
         version: link:../packages/solid-js
@@ -842,6 +821,12 @@ importers:
       '@testing-library/user-event':
         specifier: ^14.6.7
         version: 14.6.7(@testing-library/dom@10.4.2)
+      '@types/react':
+        specifier: 19.2.18
+        version: 19.2.18
+      '@types/react-dom':
+        specifier: 19.2.7
+        version: 19.2.7(@types/react@19.2.18)
       acme-ui:
         specifier: workspace:*
         version: link:fixtures/acme-ui
@@ -854,6 +839,15 @@ importers:
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
+      react:
+        specifier: 19.2.3
+        version: 19.2.3
+      react-dom:
+        specifier: 19.2.3
+        version: 19.2.3(react@19.2.3)
+      react-native-web:
+        specifier: 0.21.3
+        version: 0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       typescript:
         specifier: ^6.0.3
         version: 6.0.3

@@ -14,7 +14,6 @@
   "scripts": {
     "build": "tsc -b tsconfig.build.json",
     "typecheck": "tsc -p tsconfig.build.json --noEmit",
-    "test": "node --test \"test/**/*.test.ts\"",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "clean": "rm -rf node_modules dist .turbo",
@@ -24,19 +23,9 @@
     "react": "^19.2.3"
   },
   "devDependencies": {
-    "@backtickjs/bundler": "workspace:^0.1.0",
-    "@backtickjs/compiler": "workspace:^0.1.0",
-    "@backtickjs/core": "workspace:^0.1.0",
-    "@backtickjs/react": "workspace:^19.2.3",
-    "@backtickjs/react-native": "workspace:^0.86.3",
     "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.7",
-    "global-jsdom": "^30.0.0",
-    "jsdom": "^30.0.1",
     "prettier": "^3.6.2",
     "react": "19.2.3",
-    "react-dom": "19.2.3",
-    "react-native-web": "0.21.3",
     "typescript": "^6.0.3"
   }
 }

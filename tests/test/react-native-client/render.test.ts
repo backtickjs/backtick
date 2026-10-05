@@ -1,4 +1,3 @@
-import "global-jsdom/register";
 import assert from "node:assert/strict";
 import { rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -12,7 +11,7 @@ import * as JSXRuntime from "react/jsx-runtime";
 import { createRoot } from "react-dom/client";
 import * as ReactNativeWeb from "react-native-web";
 import ts from "typescript";
-import { Backtick, invalidate, preload } from "../dist/index.js";
+import { Backtick, invalidate, preload } from "@backtickjs/react-native-client";
 
 // A server's screen: a client component of React Native's components, its
 // state React's, drawn by a server component.
@@ -39,6 +38,13 @@ export const screen = <Home labels={["Apples", "Pears"]} />;
 
 const written: string[] = [];
 after(() => written.forEach((file) => rmSync(file)));
+
+// Every test file shares one process, so the `fetch` each test stands in is
+// put back once these are done.
+const fetch = globalThis.fetch;
+after(() => {
+  globalThis.fetch = fetch;
+});
 
 (
   globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }
@@ -217,4 +223,52 @@ it("loads a screen once until it's invalidated, failed or not", async () => {
   preload(props);
   assert.equal(await draw(), "drawn");
   assert.equal(requests, 3);
+});
+
+it("preloads a screen before it's drawn, and never rejects on its own", async () => {
+  const props = {
+    url: "https://example.com/preloaded",
+    modules: { react: React },
+    packageVersions: { react: "19.2.3" },
+  };
+  let requests = 0;
+  let status = 200;
+  globalThis.fetch = async () => {
+    requests += 1;
+    return new Response('module.exports = "drawn";', { status });
+  };
+
+  // The request starts with the preload, and the screen drawn later reuses it.
+  preload(props);
+  assert.equal(requests, 1);
+  const container = document.createElement("div");
+  const root = createRoot(container);
+  await act(async () =>
+    root.render(
+      createElement(
+        Suspense,
+        { fallback: "loading" },
+        createElement(Backtick, props),
+      ),
+    ),
+  );
+  assert.equal(container.textContent, "drawn");
+  assert.equal(requests, 1);
+  await act(() => root.unmount());
+
+  // A preload that fails reports nothing itself: the `<Backtick>` that draws
+  // the screen throws it.
+  const rejections: unknown[] = [];
+  const onRejection = (reason: unknown) => rejections.push(reason);
+  process.on("unhandledRejection", onRejection);
+  try {
+    invalidate(props.url);
+    status = 500;
+    preload(props);
+    await new Promise((resolve) => setTimeout(resolve, 10));
+  } finally {
+    process.off("unhandledRejection", onRejection);
+  }
+  assert.equal(requests, 2);
+  assert.deepEqual(rejections, []);
 });
