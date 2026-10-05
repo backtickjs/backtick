@@ -1,7 +1,7 @@
 cs.lift((() =>    → cs` [-semantic -navigation]
-cs.splice(        →  [-semantic -navigation]
+(cs.splice(       →  [-semantic -navigation]
 (createRoot)      → $createRoot
-)                 →  [-semantic -navigation]
+))                →  [-semantic -navigation]
 (                 → (
 (                 → (
 )                 → )
@@ -102,9 +102,9 @@ __cs_i            → i
 )                 → )
 )())              → ` [-semantic -navigation]
 cs.lift((() =>    → cs` [-semantic -navigation]
-cs.splice(        →  [-semantic -navigation]
+(cs.splice(       →  [-semantic -navigation]
 (createRoot)      → $createRoot
-)                 →  [-semantic -navigation]
+))                →  [-semantic -navigation]
 (                 → (
 (                 → (
 )                 → )
@@ -152,9 +152,9 @@ __cs_b            → b
 )                 → )
 )())              → ` [-semantic -navigation]
 cs.lift((() =>    → cs` [-semantic -navigation]
-cs.splice(        →  [-semantic -navigation]
+(cs.splice(       →  [-semantic -navigation]
 (createRoot)      → $createRoot
-)                 →  [-semantic -navigation]
+))                →  [-semantic -navigation]
 (                 → (
 (                 → (
 )                 → )
@@ -290,9 +290,9 @@ __cs_seen         → seen
 )                 → )
 )())              → ` [-semantic -navigation]
 cs.lift((() =>    → cs` [-semantic -navigation]
-cs.splice(        →  [-semantic -navigation]
+(cs.splice(       →  [-semantic -navigation]
 (createRoot)      → $createRoot
-)                 →  [-semantic -navigation]
+))                →  [-semantic -navigation]
 (                 → (
 (                 → (
 )                 → )
@@ -466,9 +466,9 @@ __cs_overridden   → overridden
 )                 → )
 )())              → ` [-semantic -navigation]
 cs.lift((() =>    → cs` [-semantic -navigation]
-cs.splice(        →  [-semantic -navigation]
+(cs.splice(       →  [-semantic -navigation]
 (createRoot)      → $createRoot
-)                 →  [-semantic -navigation]
+))                →  [-semantic -navigation]
 (                 → (
 (                 → (
 )                 → )

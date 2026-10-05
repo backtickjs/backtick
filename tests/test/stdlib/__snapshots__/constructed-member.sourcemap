@@ -1,0 +1,24 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+(createRoot)     → $createRoot
+))               →  [-semantic -navigation]
+(                → (
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+new              → new
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(geometry)       → $geometry
+))               →  [-semantic -navigation]
+.                → .
+Circle           → Circle
+(                → (
+2                → 2
+)                → )
+.                → .
+diameter         → diameter
+)                → )
+)())             → ` [-semantic -navigation]

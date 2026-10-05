@@ -3,9 +3,9 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 li               → li
 >                → >
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (label)          → $label
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
 <                → <
 /                → /
@@ -17,9 +17,9 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 h1               → h1
 >                → >
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (text)           → $text
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
 <                → <
 /                → /

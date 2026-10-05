@@ -17,9 +17,9 @@ return             → return
 label              → label
 :                  → :
                    →  
-cs.splice(         →  [-semantic -navigation]
+(cs.splice(        →  [-semantic -navigation]
 (createSignal)     → $createSignal
-)                  →  [-semantic -navigation]
+))                 →  [-semantic -navigation]
 (                  → (
 __cs_label         → label
 )                  → )
@@ -53,9 +53,9 @@ __cs_row           → row
                    →  
 =                  → =
                    →  
-cs.splice(         →  [-semantic -navigation]
+(cs.splice(        →  [-semantic -navigation]
 (build)            → $build
-)                  →  [-semantic -navigation]
+))                 →  [-semantic -navigation]
 (                  → (
 "one"              → "one"
 )                  → )
@@ -89,9 +89,9 @@ label              → label
 >                  → >
 \n                 → \n    
 {                  → {
-cs.splice(         →  [-semantic -navigation]
+(cs.splice(        →  [-semantic -navigation]
 (build)            → $build
-)                  →  [-semantic -navigation]
+))                 →  [-semantic -navigation]
 (                  → (
 "one"              → "one"
 )                  → )

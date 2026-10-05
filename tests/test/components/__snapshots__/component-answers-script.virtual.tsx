@@ -12,7 +12,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // draw nothing.
 async function Panel() {
   return cs.lift((() => {
-    const [__cs_n, __cs_setN] = cs.splice((createSignal))(2);
+    const [__cs_n, __cs_setN] = (cs.splice((createSignal)))(2);
     return <em>{__cs_n()}</em>;
   })());
 }
@@ -21,6 +21,6 @@ it("componentAnswersScript", async (t) => {
   await snapshotCase(
     t,
     "componentAnswersScript",
-    cs.lift((() => <div>{cs.splice((<Panel />))}</div>)()),
+    cs.lift((() => <div>{(cs.splice((<Panel />)))}</div>)()),
   );
 });

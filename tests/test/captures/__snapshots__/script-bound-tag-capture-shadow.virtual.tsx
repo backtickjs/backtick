@@ -14,8 +14,8 @@ const Card = cs.lift((() => (__cs_props: { title: string }) => <h2>{__cs_props.t
 // polymorphic and its nested script's captures arrive through a thunk.
 function labelled(label: Client<string>) {
   return cs.lift((() => {
-    const __cs_Card = (__cs_props: { n: number }) => <i>{cs.splice((label)) + __cs_props.n}</i>;
-    return <p>{cs.splice(cs.lift((() => <__cs_Card n={1} />)()))}</p>;
+    const __cs_Card = (__cs_props: { n: number }) => <i>{(cs.splice((label))) + __cs_props.n}</i>;
+    return <p>{(cs.splice(cs.lift((() => <__cs_Card n={1} />)())))}</p>;
   })());
 }
 
@@ -25,8 +25,8 @@ it("scriptBoundTagCaptureShadow", async (t) => {
     "scriptBoundTagCaptureShadow",
     cs.lift((() => <div>
       {(($Card) => <$Card title="host" />)(cs.splice((Card)))}
-      {cs.splice(labelled(cs.lift((() => "a")())))}
-      {cs.splice(labelled(cs.lift((() => "b")())))}
+      {(cs.splice(labelled(cs.lift((() => "a")()))))}
+      {(cs.splice(labelled(cs.lift((() => "b")()))))}
     </div>)()),
   );
 });

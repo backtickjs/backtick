@@ -33,9 +33,9 @@ __cs_x                                    → x
                                           →  
 =                                         → =
                                           →  
-cs.splice(                                →  [-semantic -navigation]
+(cs.splice(                               →  [-semantic -navigation]
 (ping)                                    → $ping
-)                                         →  [-semantic -navigation]
+))                                        →  [-semantic -navigation]
 (                                         → (
 )                                         → )
 ;                                         → ;
@@ -56,9 +56,9 @@ __cs_x                                    → x
                                           →  
 =                                         → =
                                           →  
-cs.splice(                                →  [-semantic -navigation]
+(cs.splice(                               →  [-semantic -navigation]
 (ping)                                    → $ping
-)                                         →  [-semantic -navigation]
+))                                        →  [-semantic -navigation]
 (                                         → (
 )                                         → )
 ;                                         → ;
@@ -93,9 +93,9 @@ __cs_x                                    → x
                                           →  
 =                                         → =
                                           →  
-cs.splice(                                →  [-semantic -navigation]
+(cs.splice(                               →  [-semantic -navigation]
 (label)                                   → $label
-)                                         →  [-semantic -navigation]
+))                                        →  [-semantic -navigation]
 (                                         → (
 true                                      → true
 )                                         → )

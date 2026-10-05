@@ -7,5 +7,5 @@ import { snapshotCase } from "../snapshotCase.ts";
 const leaf = cs.lift((() => 7)());
 
 it("deduplicatedScripts", async (t) => {
-  await snapshotCase(t, "deduplicatedScripts", cs.lift((() => ({ a: cs.splice((leaf)), b: cs.splice((leaf)) }))()));
+  await snapshotCase(t, "deduplicatedScripts", cs.lift((() => ({ a: (cs.splice((leaf))), b: (cs.splice((leaf))) }))()));
 });

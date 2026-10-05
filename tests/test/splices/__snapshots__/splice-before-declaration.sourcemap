@@ -16,9 +16,9 @@ __cs_spliced     → spliced
                  →  
 =                → =
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (fragment)       → $fragment
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n    
 const            → const
@@ -46,21 +46,21 @@ __cs_after       → after
 }                → }
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 sandwich(        → sandwich(
 cs.lift((() =>   → cs` [-semantic -navigation]
 10               → 10
 )())             → ` [-semantic -navigation]
 )                → )
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
                  →  
 +                → +
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 sandwich(        → sandwich(
 cs.lift((() =>   → cs` [-semantic -navigation]
 20               → 20
 )())             → ` [-semantic -navigation]
 )                → )
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]

@@ -12,9 +12,9 @@ __cs_setCount    → setCount
                  →  
 =                → =
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (createSignal)   → $createSignal
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 0                → 0
 )                → )
@@ -69,7 +69,7 @@ div              → div
 >                → >
 \n               → \n      
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 __cs_Badge       → Badge
@@ -85,12 +85,12 @@ __cs_count       → count
 /                → /
 >                → >
 )())             → ` [-semantic -navigation]
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
 \n               → \n      
 {                → {
 \n               → \n        
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n          
@@ -105,7 +105,7 @@ __cs_skipped     → skipped
 \n               → \n          
 return           → return
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 __cs_Badge       → Badge
@@ -125,23 +125,23 @@ __cs_count       → count
 /                → /
 >                → >
 )())             → ` [-semantic -navigation]
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n        
 }                → }
 )())             → ` [-semantic -navigation]
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 \n               → \n      
 }                → }
 \n               → \n      
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 section          → section
 >                → >
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 __cs_Badge       → Badge
@@ -161,19 +161,19 @@ __cs_count       → count
 /                → /
 >                → >
 )())             → ` [-semantic -navigation]
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
 <                → <
 /                → /
 section          → section
 >                → >
 )())             → ` [-semantic -navigation]
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
 \n               → \n      
 {                → {
 \n               → \n        
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 (For)            → $For [-highlight]
 $For             → $For [-semantic -navigation]
@@ -223,7 +223,7 @@ $For             → $For [-semantic -navigation]
 (For)            → $For [-highlight]
 ))               →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 \n               → \n      
 }                → }
 \n               → \n      

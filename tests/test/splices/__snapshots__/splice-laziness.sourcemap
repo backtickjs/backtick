@@ -20,9 +20,9 @@ __cs_flag                                 → flag
 \n                                        → \n      
 return                                    → return
                                           →  
-cs.splice(                                →  [-semantic -navigation]
+(cs.splice(                               →  [-semantic -navigation]
 (fragment)                                → $fragment
-)                                         →  [-semantic -navigation]
+))                                        →  [-semantic -navigation]
 ;                                         → ;
 \n                                        → \n    
 }                                         → }
@@ -54,9 +54,9 @@ cs.lift((() =>                            → cs` [-semantic -navigation]
 taken                                     → taken
 :                                         → :
                                           →  
-cs.splice(                                →  [-semantic -navigation]
+(cs.splice(                               →  [-semantic -navigation]
 guard(ok)                                 → guard(ok)
-)                                         →  [-semantic -navigation]
+))                                        →  [-semantic -navigation]
 (                                         → (
 true                                      → true
 )                                         → )
@@ -65,9 +65,9 @@ true                                      → true
 skipped                                   → skipped
 :                                         → :
                                           →  
-cs.splice(                                →  [-semantic -navigation]
+(cs.splice(                               →  [-semantic -navigation]
 guard(broken)                             → guard(broken)
-)                                         →  [-semantic -navigation]
+))                                        →  [-semantic -navigation]
 (                                         → (
 false                                     → false
 )                                         → )

@@ -16,13 +16,13 @@ __cs_first       → first
                  →  
 =                → =
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 keep(            → keep(
 cs.lift((() =>   → cs` [-semantic -navigation]
 __cs_total       → total
 )())             → ` [-semantic -navigation]
 )                → )
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n        
 {                → {
@@ -46,9 +46,9 @@ __cs_total       → total
                  →  
 +                → +
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 again()          → again()
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n        
 }                → }

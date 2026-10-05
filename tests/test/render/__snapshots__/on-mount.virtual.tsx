@@ -26,8 +26,8 @@ describe("onMount", () => {
   it("runs once, after the drawing is in the page", async () => {
     const drawing = await evaluate(
       cs.lift((() => () => {
-        const [__cs_count, __cs_setCount] = cs.splice((createSignal))(0);
-        cs.splice((onMount))(() => {
+        const [__cs_count, __cs_setCount] = (cs.splice((createSignal)))(0);
+        (cs.splice((onMount)))(() => {
           cs.globalThis.window.console.log();
           __cs_setCount(__cs_count() + 1);
         });
@@ -43,9 +43,9 @@ describe("onMount", () => {
     render(
       await evaluate(
         cs.lift((() => () => {
-          const [__cs_said, __cs_setSaid] = cs.splice((createSignal))("not yet");
+          const [__cs_said, __cs_setSaid] = (cs.splice((createSignal)))("not yet");
           return (
-            <button onclick={() => cs.splice((onMount))(() => __cs_setSaid("ran"))}>
+            <button onclick={() => (cs.splice((onMount)))(() => __cs_setSaid("ran"))}>
               {__cs_said()}
             </button>
           );

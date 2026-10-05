@@ -73,6 +73,17 @@ describe("refusals", () => {
     assert.deepStrictEqual(refusals("<div />"), []);
   });
 
+  it("a member tag naming what the script doesn't declare is refused", () => {
+    assert.deepStrictEqual(refusals("<ui.Card />"), [
+      "`<ui.Card>` names nothing this script declares. A host value used " +
+        "as a tag is spliced: `<$ui.Card>`.",
+    ]);
+    assert.deepStrictEqual(
+      refusals("{ const ui = { Card: () => 1 }; return <ui.Card />; }"),
+      [],
+    );
+  });
+
   it("a tag spliced with `${…}` is refused", () => {
     assert.deepStrictEqual(refusals("<${Card} />"), [
       "A tag splices a host value by its name, e.g. `<$Card>`, not with `${…}`.",

@@ -18,5 +18,5 @@ const listed = cs.lift((() => (__cs_name: string) => (
 ))());
 
 it("scriptFragment", async (t) => {
-  await snapshotCase(t, "scriptFragment", cs.lift((() => <div>{cs.splice((listed))("x")}</div>)()));
+  await snapshotCase(t, "scriptFragment", cs.lift((() => <div>{(cs.splice((listed)))("x")}</div>)()));
 });

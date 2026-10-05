@@ -7,17 +7,17 @@ import { snapshotCase } from "../snapshotCase.ts";
 
 const make = (f: Client<(n: number) => Signal<number>>) =>
   cs.lift((() => {
-    return cs.splice((f))(1)[0]();
+    return (cs.splice((f)))(1)[0]();
   })());
 
-const wrapped = cs.lift((() => (__cs_n: number) => cs.splice((createSignal))(__cs_n + 10))());
+const wrapped = cs.lift((() => (__cs_n: number) => (cs.splice((createSignal)))(__cs_n + 10))());
 
 it("builtinHoleSharing", async (t) => {
   await snapshotCase(
     t,
     "builtinHoleSharing",
     cs.lift((() => {
-      return cs.splice(make(createSignal)) + cs.splice(make(wrapped));
+      return (cs.splice(make(createSignal))) + (cs.splice(make(wrapped)));
     })()),
   );
 });

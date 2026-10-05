@@ -12,7 +12,7 @@ describe("ref", () => {
     render(
       await evaluate(
         cs.lift((() => () => {
-          const [__cs_field, __cs_setField] = cs.splice((createSignal))<HTMLInputElement | null>(
+          const [__cs_field, __cs_setField] = (cs.splice((createSignal)))<HTMLInputElement | null>(
             null,
           );
           return (
@@ -35,7 +35,7 @@ describe("ref", () => {
           return (
             <input
               aria-label="name"
-              ref={(__cs_element) => cs.splice((onMount))(() => __cs_element.focus())}
+              ref={(__cs_element) => (cs.splice((onMount)))(() => __cs_element.focus())}
             />
           );
         })()),
@@ -71,8 +71,8 @@ describe("ref", () => {
       render(
         await evaluate(
           cs.lift((() => () => {
-            const [__cs_shown, __cs_setShown] = cs.splice((createSignal))(true);
-            const [__cs_n, __cs_setN] = cs.splice((createSignal))(0);
+            const [__cs_shown, __cs_setShown] = (cs.splice((createSignal)))(true);
+            const [__cs_n, __cs_setN] = (cs.splice((createSignal)))(0);
             return (
               <div>
                 <button onclick={() => __cs_setN(__cs_n() + 1)}>{"n " + __cs_n()}</button>

@@ -7,9 +7,9 @@ __cs_a                                    → a
                                           →  
 =                                         → =
                                           →  
-cs.splice(                                →  [-semantic -navigation]
+(cs.splice(                               →  [-semantic -navigation]
 (one)                                     → $one
-)                                         →  [-semantic -navigation]
+))                                        →  [-semantic -navigation]
                                           →  
 as                                        → as
                                           →  

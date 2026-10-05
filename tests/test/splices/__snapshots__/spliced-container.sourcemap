@@ -5,9 +5,9 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 "origin"         → "origin"
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (point)          → $point
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 .                → .
 x                → x
                  →  

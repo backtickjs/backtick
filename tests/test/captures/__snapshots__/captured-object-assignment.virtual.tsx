@@ -11,9 +11,9 @@ it("capturedObjectAssignment", async (t) => {
     "capturedObjectAssignment",
     cs.lift((() => {
       const __cs_counter = { count: 0 };
-      const __cs_bump = cs.splice(cs.lift((() => () => {
+      const __cs_bump = (cs.splice(cs.lift((() => () => {
         __cs_counter.count += 1;
-      })()));
+      })())));
       __cs_bump();
       __cs_bump();
       return __cs_counter.count;

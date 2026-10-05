@@ -6,6 +6,6 @@ const one = 1;
 // assert a value to `void`.
 const asserted = cs.lift((() => {
   // @ts-expect-error: Conversion of type 'number' to type 'void' may be a mistake because neither type sufficiently overlaps with the other.
-  const __cs_a = cs.splice((one)) as void;
+  const __cs_a = (cs.splice((one))) as void;
   return "" + __cs_a;
 })());

@@ -28,7 +28,7 @@ import { evaluate } from "../evaluate.ts";
 // ends one: once it stops saying yes, nothing is written and nothing runs
 // again. Without that, this case does not stop.
 const Held = cs.lift((() => (__cs_props: { again: () => boolean }) => {
-  const [__cs_shown, __cs_setShown] = cs.splice((createSignal))(false);
+  const [__cs_shown, __cs_setShown] = (cs.splice((createSignal)))(false);
 
   const __cs_started = cs.globalThis.window.setTimeout(() => {
     if (__cs_props.again()) {
@@ -40,7 +40,7 @@ const Held = cs.lift((() => (__cs_props: { again: () => boolean }) => {
 })());
 
 const conditionalDrawing = cs.lift((() => {
-  const [__cs_builds, __cs_setBuilds] = cs.splice((createSignal))(0);
+  const [__cs_builds, __cs_setBuilds] = (cs.splice((createSignal)))(0);
 
   return (
     <div>

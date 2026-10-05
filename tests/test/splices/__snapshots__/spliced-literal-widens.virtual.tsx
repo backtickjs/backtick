@@ -26,10 +26,10 @@ it("splicedLiteralWidens", async (t) => {
     t,
     "splicedLiteralWidens",
     cs.lift((() => {
-      const [__cs_n, __cs_setN] = cs.splice((createSignal))(cs.splice((five)));
+      const [__cs_n, __cs_setN] = (cs.splice((createSignal)))((cs.splice((five))));
       __cs_setN(6);
-      const [__cs_c, __cs_setC] = cs.splice((createSignal))(cs.splice(Color.Red));
-      __cs_setC(cs.splice(Color.Blue));
+      const [__cs_c, __cs_setC] = (cs.splice((createSignal)))((cs.splice(Color.Red)));
+      __cs_setC((cs.splice(Color.Blue)));
     })()),
   );
 });

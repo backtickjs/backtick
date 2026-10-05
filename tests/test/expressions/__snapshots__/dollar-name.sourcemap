@@ -1,7 +1,7 @@
 cs.lift((() =>   → cs` [-semantic -navigation]
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (lhs)            → $lhs
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
                  →  
 +                → +
                  →  
@@ -21,13 +21,13 @@ __cs_foo$        → foo$
 \n               → \n      
 return           → return
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 add(             → add(
 cs.lift((() =>   → cs` [-semantic -navigation]
 __cs_foo$        → foo$
 )())             → ` [-semantic -navigation]
 )                → )
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n    
 }                → }

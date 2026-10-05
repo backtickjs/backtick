@@ -8,9 +8,9 @@ p                → p
 }                → }
 \n               → \n      
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (<Badge />)      → (<Badge />)
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
 \n               → \n    
 <                → <

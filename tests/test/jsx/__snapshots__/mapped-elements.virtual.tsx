@@ -12,6 +12,6 @@ it("mappedElements", async (t) => {
   await snapshotCase(
     t,
     "mappedElements",
-    cs.lift((() => <div>{cs.splice(elementLabels.map((item) => cs.lift((() => <span>{cs.splice((item))}</span>)())))}</div>)()),
+    cs.lift((() => <div>{(cs.splice(elementLabels.map((item) => cs.lift((() => <span>{(cs.splice((item)))}</span>)()))))}</div>)()),
   );
 });

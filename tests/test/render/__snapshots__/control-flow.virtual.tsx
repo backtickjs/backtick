@@ -18,7 +18,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 const rows = ["first", "second"];
 
 const indexed = cs.lift((() => <ul>
-  {(void (Index), (($Index) => <$Index each={cs.splice((rows))}>
+  {(void (Index), (($Index) => <$Index each={(cs.splice((rows)))}>
     {(__cs_row: () => string, __cs_index: number) => <li>{__cs_index + ": " + __cs_row()}</li>}
   </$Index>)(cs.splice((Index))))}
 </ul>)());
@@ -33,9 +33,9 @@ const switched = cs.lift((() => (void (Switch), (($Switch) => <$Switch fallback=
 </$Switch>)(cs.splice((Switch)))))());
 
 const caught = cs.lift((() => (void (ErrorBoundary), (($ErrorBoundary) => <$ErrorBoundary fallback={<p>caught</p>}>{
-  cs.splice(cs.lift((() => {
+  (cs.splice(cs.lift((() => {
     throw "drawn wrong";
-  })()))
+  })())))
 }</$ErrorBoundary>)(cs.splice((ErrorBoundary)))))());
 
 const suspended = cs.lift((() => (void (Suspense), (($Suspense) => <$Suspense fallback={<p>loading</p>}>

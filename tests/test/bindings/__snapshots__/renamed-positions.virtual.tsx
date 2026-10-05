@@ -11,7 +11,7 @@ describe("a script's names, wherever they stand", () => {
   it("as a shorthand, its own and a global's", async () => {
     assert.deepEqual(
       await evaluate(
-        cs.lift((() => cs.splice((createRoot))(() => {
+        cs.lift((() => (cs.splice((createRoot)))(() => {
           const __cs_x = 1;
           const __cs_both = { x: __cs_x, Math: cs.globalThis.Math };
           return [__cs_both.x, __cs_both.Math.max(2, 3)];
@@ -24,7 +24,7 @@ describe("a script's names, wherever they stand", () => {
   it("in a type's `typeof`, and a class's `extends`", async () => {
     assert.deepEqual(
       await evaluate(
-        cs.lift((() => cs.splice((createRoot))(() => {
+        cs.lift((() => (cs.splice((createRoot)))(() => {
           const __cs_start = { n: 1 };
           const __cs_copy: typeof __cs_start = { n: __cs_start.n + 1 };
           class __cs_Base {

@@ -57,9 +57,9 @@ number           → number
 i                → i
 >                → >
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (label)          → $label
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
                  →  
 +                → +
                  →  
@@ -79,7 +79,7 @@ return           → return
 p                → p
 >                → >
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 __cs_Card        → Card
@@ -93,7 +93,7 @@ n                → n
 /                → /
 >                → >
 )())             → ` [-semantic -navigation]
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
 <                → <
 /                → /
@@ -118,23 +118,23 @@ title            → title
 ))               →  [-semantic -navigation]
 \n               → \n      
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 labelled(        → labelled(
 cs.lift((() =>   → cs` [-semantic -navigation]
 "a"              → "a"
 )())             → ` [-semantic -navigation]
 )                → )
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
 \n               → \n      
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 labelled(        → labelled(
 cs.lift((() =>   → cs` [-semantic -navigation]
 "b"              → "b"
 )())             → ` [-semantic -navigation]
 )                → )
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
 \n               → \n    
 <                → <

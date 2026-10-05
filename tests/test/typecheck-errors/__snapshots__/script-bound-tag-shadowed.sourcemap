@@ -43,7 +43,7 @@ b                                         → b
 \n                                        → \n  
 return                                    → return
                                           →  
-cs.splice(                                →  [-semantic -navigation]
+(cs.splice(                               →  [-semantic -navigation]
 cs.lift((() =>                            → cs` [-semantic -navigation]
 {                                         → {
 \n                                        → \n    
@@ -58,7 +58,7 @@ __cs_Badge                                → Badge
 \n    // @ts-expect-error: JSX element type 'Badge' does not have any construct or call signatures.\n    → \n    // @ts-expect-error: JSX element type 'Badge' does not have any construct or call signatures.\n    
 return                                    → return
                                           →  
-cs.splice(                                →  [-semantic -navigation]
+(cs.splice(                               →  [-semantic -navigation]
 cs.lift((() =>                            → cs` [-semantic -navigation]
 <                                         → <
 __cs_Badge                                → Badge
@@ -72,12 +72,12 @@ n                                         → n
 /                                         → /
 >                                         → >
 )())                                      → ` [-semantic -navigation]
-)                                         →  [-semantic -navigation]
+))                                        →  [-semantic -navigation]
 ;                                         → ;
 \n                                        → \n  
 }                                         → }
 )())                                      → ` [-semantic -navigation]
-)                                         →  [-semantic -navigation]
+))                                        →  [-semantic -navigation]
 ;                                         → ;
 \n                                        → \n
 }                                         → }

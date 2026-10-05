@@ -8,17 +8,17 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 a                → a
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (leaf)           → $leaf
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ,                → ,
                  →  
 b                → b
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (leaf)           → $leaf
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
                  →  
 }                → }
 )                → )

@@ -15,8 +15,8 @@ it("undefinedReturn", async (t) => {
     t,
     "undefinedReturn",
     cs.lift((() => {
-      const __cs_stored = cs.splice((lying));
-      const __cs_caught = cs.splice((lying))();
+      const __cs_stored = (cs.splice((lying)));
+      const __cs_caught = (cs.splice((lying)))();
       return 1;
     })()),
   );

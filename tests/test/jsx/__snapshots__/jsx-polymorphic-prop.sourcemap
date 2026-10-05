@@ -4,9 +4,9 @@ cs.lift((() =>   → cs` [-semantic -navigation]
                  →  
 =>               → =>
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (n)              → $n
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
@@ -19,9 +19,9 @@ span             → span
 onclick          → onclick
 =                → =
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 make(1)          → make(1)
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
                  →  
 /                → /
@@ -33,9 +33,9 @@ span             → span
 onclick          → onclick
 =                → =
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 make(2)          → make(2)
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
                  →  
 /                → /

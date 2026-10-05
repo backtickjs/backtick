@@ -1,7 +1,7 @@
 cs.lift(await (async () =>   → cs` [-semantic -navigation]
-cs.splice(                   →  [-semantic -navigation]
+(cs.splice(                  →  [-semantic -navigation]
 await fetchGreeting()        → await fetchGreeting()
-)                            →  [-semantic -navigation]
+))                           →  [-semantic -navigation]
                              →  
 +                            → +
                              →  
@@ -16,9 +16,9 @@ __cs_greeting                → greeting
                              →  
 =                            → =
                              →  
-cs.splice(                   →  [-semantic -navigation]
+(cs.splice(                  →  [-semantic -navigation]
 await fetchGreeting()        → await fetchGreeting()
-)                            →  [-semantic -navigation]
+))                           →  [-semantic -navigation]
 ;                            → ;
 \n                           → \n      
 return                       → return

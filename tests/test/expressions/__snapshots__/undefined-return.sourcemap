@@ -15,9 +15,9 @@ __cs_stored      → stored
                  →  
 =                → =
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (lying)          → $lying
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n      
 const            → const
@@ -26,9 +26,9 @@ __cs_caught      → caught
                  →  
 =                → =
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (lying)          → $lying
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 )                → )
 ;                → ;

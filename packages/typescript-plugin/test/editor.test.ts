@@ -244,6 +244,24 @@ describe("a host tag in a script, in the editor", () => {
     );
   });
 
+  it("goes to the host value and its member from a member tag", () => {
+    const definitionsAt = (position: number) =>
+      tagsService
+        .getDefinitionAtPosition(tagsFixture, position)
+        ?.map(({ textSpan }) => textSpan.start);
+    for (const tag of [
+      inTags("<$ui.Badge", 0, 2),
+      inTags("</$ui.Badge", 0, 3),
+    ]) {
+      assert.deepEqual(definitionsAt(tag), [inTags("ui =")], `$ui at ${tag}`);
+      // The member, and, as TSX answers for a component, its function.
+      assert.ok(
+        definitionsAt(tag + "ui.".length)?.includes(inTags("Badge:")),
+        `Badge at ${tag}`,
+      );
+    }
+  });
+
   it("refuses a server component, under its tag", () => {
     const diagnostics = tagsService.getSemanticDiagnostics(tagsFixture);
     assert.deepEqual(

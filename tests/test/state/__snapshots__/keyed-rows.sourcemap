@@ -12,9 +12,9 @@ __cs_setIds      → setIds
                  →  
 =                → =
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (createSignal)   → $createSignal
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 <                → <
 number           → number
 [                → [

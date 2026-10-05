@@ -1,5 +1,6 @@
 import type ts from "typescript";
 import type { ClientScript } from "./parseFile.js";
+import { isTagRoot } from "./tagRoot.js";
 
 /**
  * Every client script in a file, its scopes resolved by TypeScript's checker,
@@ -161,7 +162,7 @@ export function resolveBindings(
       // A splice written as a tag is handed over as its value: it has no
       // bindings to hand a hole.
       splices: Object.values(script.splices).map(({ key, refs }) =>
-        refs.some((ref) => isTagName(ts, ref))
+        refs.some((ref) => isTagRoot(ts, ref))
           ? { kind: "tag", key, refs }
           : { kind: "splice", key, bindings: [], refs },
       ),
@@ -398,20 +399,6 @@ function identifiersOf(
   };
   visit(file);
   return identifiers;
-}
-
-// Whether an identifier is a JSX element's tag name.
-function isTagName(
-  ts: typeof import("typescript"),
-  node: ts.Identifier,
-): boolean {
-  const parent = node.parent;
-  return (
-    (ts.isJsxOpeningElement(parent) ||
-      ts.isJsxSelfClosingElement(parent) ||
-      ts.isJsxClosingElement(parent)) &&
-    parent.tagName === node
-  );
 }
 
 // The innermost node starting at a position.

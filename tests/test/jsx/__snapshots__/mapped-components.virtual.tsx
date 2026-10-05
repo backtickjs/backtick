@@ -5,7 +5,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 const componentLabels = ["alpha", "beta", "gamma"];
 
 async function Row({ label }: { label: string }) {
-  return cs.lift((() => <span>{cs.splice((label))}</span>)());
+  return cs.lift((() => <span>{(cs.splice((label)))}</span>)());
 }
 
 // The same list, but each item is a component invocation rather than an
@@ -16,6 +16,6 @@ it("mappedComponents", async (t) => {
   await snapshotCase(
     t,
     "mappedComponents",
-    cs.lift((() => <div>{cs.splice(componentLabels.map((item) => <Row label={item} />))}</div>)()),
+    cs.lift((() => <div>{(cs.splice(componentLabels.map((item) => <Row label={item} />)))}</div>)()),
   );
 });

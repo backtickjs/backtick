@@ -1,7 +1,7 @@
 cs.lift((() =>   → cs` [-semantic -navigation]
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (createRoot)     → $createRoot
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 (                → (
 )                → )
@@ -16,9 +16,9 @@ null             → null
 )                → )
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (createRoot)     → $createRoot
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 (                → (
 )                → )
@@ -33,9 +33,9 @@ undefined        → undefined
 )                → )
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (createRoot)     → $createRoot
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 (                → (
 )                → )
@@ -50,9 +50,9 @@ undefined        → undefined
 )                → )
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (createRoot)     → $createRoot
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 (                → (
 )                → )
@@ -67,9 +67,9 @@ undefined        → undefined
 )                → )
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (createRoot)     → $createRoot
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 (                → (
 )                → )
@@ -93,36 +93,36 @@ return           → return
                  →  
 [                → [
 \n               → \n          
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (nothing)        → $nothing
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
                  →  
 ===              → ===
                  →  
 undefined        → undefined
 ,                → ,
 \n               → \n          
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (nothing)        → $nothing
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
                  →  
 !==              → !==
                  →  
 null             → null
 ,                → ,
 \n               → \n          
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (empty)          → $empty
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
                  →  
 ===              → ===
                  →  
 null             → null
 ,                → ,
 \n               → \n          
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (empty)          → $empty
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
                  →  
 !==              → !==
                  →  

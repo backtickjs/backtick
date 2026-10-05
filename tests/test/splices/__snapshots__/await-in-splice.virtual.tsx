@@ -11,7 +11,7 @@ async function fetchGreeting() {
 // template itself may await, here in an async test, whether the script is an
 // expression or has statements.
 it("awaitInSplice", async (t) => {
-  await snapshotCase(t, "awaitInSplice", cs.lift(await (async () => cs.splice(await fetchGreeting()) + "!")()));
+  await snapshotCase(t, "awaitInSplice", cs.lift(await (async () => (cs.splice(await fetchGreeting())) + "!")()));
 });
 
 it("awaitInStatementsSplice", async (t) => {
@@ -19,7 +19,7 @@ it("awaitInStatementsSplice", async (t) => {
     t,
     "awaitInStatementsSplice",
     cs.lift(await (async () => {
-      const __cs_greeting = cs.splice(await fetchGreeting());
+      const __cs_greeting = (cs.splice(await fetchGreeting()));
       return __cs_greeting + "!";
     })()),
   );

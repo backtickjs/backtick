@@ -19,7 +19,7 @@ const Button = createImport<typeof LibraryButton>({
 // In a script, the library's component as the library types it: a handler, a
 // slot taking script JSX, and children.
 const counter = cs.lift((() => {
-  const [__cs_count, __cs_setCount] = cs.splice((createSignal))(0);
+  const [__cs_count, __cs_setCount] = (cs.splice((createSignal)))(0);
   return (
     (void (Button), (($Button) => <$Button
       variant="primary"

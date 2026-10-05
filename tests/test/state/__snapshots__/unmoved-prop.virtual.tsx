@@ -12,8 +12,8 @@ import { children, drawn } from "./dom.ts";
 // the host hears nothing about it.
 async function SelectableRows() {
   return cs.lift((() => {
-    const [__cs_selected, __cs_setSelected] = cs.splice((createSignal))(0);
-    const __cs_isSelected = cs.splice((createSelector))(__cs_selected);
+    const [__cs_selected, __cs_setSelected] = (cs.splice((createSignal)))(0);
+    const __cs_isSelected = (cs.splice((createSelector)))(__cs_selected);
     return (
       <div>
         <span onclick={() => __cs_setSelected(1)}>select</span>

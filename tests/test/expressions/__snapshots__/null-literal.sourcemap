@@ -50,9 +50,9 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 missing          → missing
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (orDash)         → $orDash
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 null             → null
 )                → )
@@ -61,9 +61,9 @@ null             → null
 present          → present
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (orDash)         → $orDash
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 "hi"             → "hi"
 )                → )

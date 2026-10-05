@@ -8,7 +8,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 
 // Text a page's markup would end early on, were the bundle written into it.
 const text = `& < > " ' </script> <!-- -->`;
-const scriptCloseText = cs.lift((() => <p>{cs.splice((text))}</p>)());
+const scriptCloseText = cs.lift((() => <p>{(cs.splice((text)))}</p>)());
 
 const drawn: Element[] = [];
 afterEach(() => drawn.splice(0).forEach((container) => container.remove()));
@@ -22,7 +22,7 @@ async function draw(element: Client<JSXElement>): Promise<Element> {
   document.body.append(container);
   drawn.push(container);
   await evaluate(
-    cs.lift((() => cs.splice((render))(() => cs.splice((element)), cs.globalThis.document.getElementById(cs.splice((id))) as HTMLElement))()),
+    cs.lift((() => (cs.splice((render)))(() => (cs.splice((element))), cs.globalThis.document.getElementById((cs.splice((id)))) as HTMLElement))()),
   );
   return container;
 }

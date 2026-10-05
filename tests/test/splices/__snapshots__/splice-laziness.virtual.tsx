@@ -12,7 +12,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 function guard(fragment: Client<string>): Client<(flag: boolean) => string> {
   return cs.lift((() => (__cs_flag: boolean) => {
     if (__cs_flag) {
-      return cs.splice((fragment));
+      return (cs.splice((fragment)));
     }
     return "skipped";
   })());
@@ -29,8 +29,8 @@ it("spliceLaziness", async (t) => {
     t,
     "spliceLaziness",
     cs.lift((() => ({
-      taken: cs.splice(guard(ok))(true),
-      skipped: cs.splice(guard(broken))(false),
+      taken: (cs.splice(guard(ok)))(true),
+      skipped: (cs.splice(guard(broken)))(false),
     }))()),
   );
 });

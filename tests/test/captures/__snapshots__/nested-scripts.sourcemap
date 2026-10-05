@@ -12,11 +12,11 @@ __cs_x           → x
 \n               → \n      
 return           → return
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 __cs_x           → x
 )())             → ` [-semantic -navigation]
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n    
 }                → }

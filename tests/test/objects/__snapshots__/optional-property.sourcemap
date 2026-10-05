@@ -61,9 +61,9 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 present          → present
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (read)           → $read
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 {                → {
                  →  
@@ -92,9 +92,9 @@ z                → z
 partial          → partial
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (read)           → $read
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 {                → {
                  →  
@@ -117,9 +117,9 @@ inner            → inner
 omitted          → omitted
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (read)           → $read
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 {                → {
                  →  

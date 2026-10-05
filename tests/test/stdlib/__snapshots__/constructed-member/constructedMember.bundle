@@ -1,0 +1,25 @@
+import { createRoot as $i0 } from "solid-js";
+import { geometry as $i1 } from "app";
+const $modules = {
+  "34amrub3e2oyr:14:17": (module, exports, require) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = ($splice0, $splice1) =>
+      $splice0()(() => new ($splice1().Circle)(2).diameter);
+  },
+};
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = { exports: {} };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("34amrub3e2oyr:14:17").default;
+export default $cs0(
+  () => $i0,
+  () => $i1,
+);

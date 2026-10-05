@@ -50,9 +50,9 @@ cs.lift((() =>           → cs` [-semantic -navigation]
 div                      → div
 >                        → >
 {                        → {
-cs.splice(               →  [-semantic -navigation]
+(cs.splice(              →  [-semantic -navigation]
 (listed)                 → $listed
-)                        →  [-semantic -navigation]
+))                       →  [-semantic -navigation]
 (                        → (
 "x"                      → "x"
 )                        → )

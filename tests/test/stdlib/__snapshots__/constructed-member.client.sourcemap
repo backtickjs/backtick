@@ -1,0 +1,16 @@
+// 14:18
+($splice0, $splice1) => $splice0()  → 14:21 $createRoot(()…
+(                                   → 14:32 (
+()                                  → 14:33 () 
+=>                                  → 14:36 =>
+new (                               → 14:39 new…
+$splice1()                          → 14:43 $geometry.Circle(2).diameter)`;…
+.                                   → 14:52 .
+Circle                              → 14:53 Circle
+)(                                  → 14:59 (2).diameter)`;…
+2                                   → 14:60 2
+)                                   → 14:61 )
+.                                   → 14:62 .
+diameter                            → 14:63 diameter
+)                                   → 14:71 )
+);                                  → 14:72 `;…

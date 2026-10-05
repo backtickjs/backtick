@@ -41,7 +41,7 @@ ul               → ul
 >                → >
 \n               → \n          
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 __cs_Row         → Row
@@ -55,11 +55,11 @@ n                → n
 /                → /
 >                → >
 )())             → ` [-semantic -navigation]
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
 \n               → \n          
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 __cs_Row         → Row
@@ -73,7 +73,7 @@ n                → n
 /                → /
 >                → >
 )())             → ` [-semantic -navigation]
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
 \n               → \n        
 <                → <

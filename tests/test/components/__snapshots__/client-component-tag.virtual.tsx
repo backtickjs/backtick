@@ -12,7 +12,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 const Badge = cs.lift((() => (__cs_props: { n: number }) => <b>{"badge " + __cs_props.n}</b>)());
 
 const badges = cs.lift((() => {
-  const [__cs_scale, __cs_setScale] = cs.splice((createSignal))(1);
+  const [__cs_scale, __cs_setScale] = (cs.splice((createSignal)))(1);
   return (
     <div>
       {(void (For), (($For) => <$For each={[1, 2]}>{(__cs_n) => (($Badge) => <$Badge n={__cs_n * __cs_scale()} />)(cs.splice((Badge)))}</$For>)(cs.splice((For))))}

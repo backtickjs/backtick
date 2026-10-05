@@ -12,6 +12,7 @@ import { call } from "./nodeFactory.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution, ResolvedParam } from "./resolveBindings.js";
 import type { SourceRange } from "./SourceRange.js";
+import { tagRoot } from "./tagRoot.js";
 
 /** What `cs.create` is handed for a script: which it is, and what it runs. */
 export interface RuntimeScript {
@@ -338,26 +339,28 @@ function refusals(
     // A component tag is the script's own or a host value spliced, `<$Card>`:
     // the virtual code is checked in the host file, where an unmarked `<Card>`
     // would quietly read the host's.
-    if (
-      (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) &&
-      ts.isIdentifier(node.tagName)
-    ) {
-      const tag = node.tagName.text;
-      if (tag.startsWith("$0splice")) {
+    if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
+      // What the tag starts with: `Card`, or `ui` in `<ui.Card>`.
+      const root = tagRoot(ts, node.tagName);
+      const written = node.tagName.getText(script.fileWithPlaceholders);
+      if (root?.text.startsWith("$0splice")) {
         refuse(
-          node.tagName,
+          root,
           "A tag splices a host value by its name, e.g. `<$Card>`, not " +
             "with `${…}`.",
         );
       } else if (
-        !tag.startsWith("$") &&
-        isComponentTag(tag) &&
-        !bindings.has(node.tagName)
+        root !== undefined &&
+        !root.text.startsWith("$") &&
+        // a name alone is a component's where it starts uppercase; a member
+        // of anything is one
+        (root !== node.tagName || isComponentTag(root.text)) &&
+        !bindings.has(root)
       ) {
         refuse(
-          node.tagName,
-          `\`<${tag}>\` names nothing this script declares. A host value ` +
-            `used as a tag is spliced: \`<$${tag}>\`.`,
+          root,
+          `\`<${written}>\` names nothing this script declares. A host value ` +
+            `used as a tag is spliced: \`<$${written}>\`.`,
         );
       }
     }

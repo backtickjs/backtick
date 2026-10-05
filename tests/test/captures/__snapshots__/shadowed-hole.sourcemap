@@ -27,9 +27,9 @@ __cs_total       → total
                  →  
 +                → +
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (fragment)       → $fragment
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n    
 }                → }
@@ -37,21 +37,21 @@ cs.splice(       →  [-semantic -navigation]
 }                → }
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 wrapShadowed(    → wrapShadowed(
 cs.lift((() =>   → cs` [-semantic -navigation]
 10               → 10
 )())             → ` [-semantic -navigation]
 )                → )
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
                  →  
 +                → +
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 wrapShadowed(    → wrapShadowed(
 cs.lift((() =>   → cs` [-semantic -navigation]
 20               → 20
 )())             → ` [-semantic -navigation]
 )                → )
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]

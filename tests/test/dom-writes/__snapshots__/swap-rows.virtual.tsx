@@ -12,7 +12,7 @@ import { evaluate } from "../evaluate.ts";
 // the two rows and nothing else.
 async function SwappableRows() {
   return cs.lift((() => {
-    const [__cs_ids, __cs_setIds] = cs.splice((createSignal))<number[]>([1, 2, 3, 4, 5]);
+    const [__cs_ids, __cs_setIds] = (cs.splice((createSignal)))<number[]>([1, 2, 3, 4, 5]);
     const __cs_swap = () => {
       const __cs_held = __cs_ids();
       __cs_setIds(__cs_held.with(1, __cs_held[3]).with(3, __cs_held[1]));

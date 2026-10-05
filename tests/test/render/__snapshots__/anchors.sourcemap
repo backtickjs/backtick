@@ -12,9 +12,9 @@ __cs_setIds      → setIds
                  →  
 =                → =
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (createSignal)   → $createSignal
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 <                → <
 number           → number
 [                → [
@@ -128,9 +128,9 @@ $For             → $For [-semantic -navigation]
 }                → }
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (createRoot)     → $createRoot
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 (                → (
 __cs_dispose     → dispose
@@ -158,32 +158,32 @@ document         → document
 .                → .
 getElementById   → getElementById
 (                → (
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (id)             → $id
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 )                → )
 !                → !
 ;                → ;
 \n               → \n    
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (insert)         → $insert
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 __cs_parent      → parent
 ,                → ,
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (value)          → $value
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ,                → ,
                  →  
 __cs_parent      → parent
 .                → .
 querySelector    → querySelector
 (                → (
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (selector)       → $selector
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 )                → )
 )                → )
 ;                → ;

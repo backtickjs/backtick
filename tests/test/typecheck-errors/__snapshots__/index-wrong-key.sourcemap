@@ -57,9 +57,9 @@ __cs_which                                → which
                                           →  
 =                                         → =
                                           →  
-cs.splice(                                →  [-semantic -navigation]
+(cs.splice(                               →  [-semantic -navigation]
 (point)                                   → $point
-)                                         →  [-semantic -navigation]
+))                                        →  [-semantic -navigation]
 [                                         → [
 __cs_name                                 → name
 ]                                         → ]

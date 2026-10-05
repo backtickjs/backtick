@@ -13,9 +13,9 @@ cs.lift((() =>    → cs` [-semantic -navigation]
 div               → div
 >                 → >
 {                 → {
-cs.splice(        →  [-semantic -navigation]
+(cs.splice(       →  [-semantic -navigation]
 [shared, shared]  → [shared, shared]
-)                 →  [-semantic -navigation]
+))                →  [-semantic -navigation]
 }                 → }
 <                 → <
 /                 → /

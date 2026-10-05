@@ -11,7 +11,7 @@ it("twoFiles", async (t) => {
     "twoFiles",
     cs.lift((() => <p>
       {"in "}
-      {cs.splice((<Badge />))}
+      {(cs.splice((<Badge />)))}
     </p>)()),
   );
 });

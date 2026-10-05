@@ -11,7 +11,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // `TextLabel`.
 async function TextLabel(props: { text: string }) {
   const text = props.text;
-  return cs.lift((() => <span>{cs.splice((text))}</span>)());
+  return cs.lift((() => <span>{(cs.splice((text)))}</span>)());
 }
 
 it("componentBoundary", async (t) => {
@@ -19,8 +19,8 @@ it("componentBoundary", async (t) => {
     t,
     "componentBoundary",
     cs.lift((() => <div>
-      {cs.splice((<TextLabel text="one" />))}
-      {cs.splice((<TextLabel text="two" />))}
+      {(cs.splice((<TextLabel text="one" />)))}
+      {(cs.splice((<TextLabel text="two" />)))}
     </div>)()),
   );
 });

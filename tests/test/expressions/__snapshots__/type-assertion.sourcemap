@@ -11,9 +11,9 @@ JSON             → JSON
 .                → .
 parse            → parse
 (                → (
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (answered)       → $answered
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 )                → )
                  →  
 as               → as

@@ -133,9 +133,9 @@ width            → width
 >                → >
 \n               → \n        
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (<Ring />)       → (<Ring />)
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
 \n               → \n        
 (For)            → $For [-highlight]

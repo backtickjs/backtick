@@ -30,7 +30,7 @@ import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs.lift((() => {
-    const [__cs_ids, __cs_setIds] = cs.splice((createSignal))<number[]>([1, 2, 3]);
+    const [__cs_ids, __cs_setIds] = (cs.splice((createSignal)))<number[]>([1, 2, 3]);
     const __cs_clear = () => {
       __cs_setIds([]);
     };
@@ -88,9 +88,9 @@ async function drawAt(
   selector: string,
 ): Promise<void> {
   const id = parent.id;
-  const unmount = await evaluate(cs.lift((() => cs.splice((createRoot))((__cs_dispose: () => void) => {
-    const __cs_parent = cs.globalThis.document.getElementById(cs.splice((id)))!;
-    cs.splice((insert))(__cs_parent, cs.splice((value)), __cs_parent.querySelector(cs.splice((selector))));
+  const unmount = await evaluate(cs.lift((() => (cs.splice((createRoot)))((__cs_dispose: () => void) => {
+    const __cs_parent = cs.globalThis.document.getElementById((cs.splice((id))))!;
+    (cs.splice((insert)))(__cs_parent, (cs.splice((value))), __cs_parent.querySelector((cs.splice((selector)))));
     return __cs_dispose;
   }))()));
   undo.push(unmount);

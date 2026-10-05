@@ -35,7 +35,7 @@ it("largeData", async (t) => {
     t,
     "largeData",
     cs.lift((() => <div>
-      {(void (For), (($For) => <$For each={cs.splice((orders))}>
+      {(void (For), (($For) => <$For each={(cs.splice((orders)))}>
         {(__cs_order: Order) => (
           <div>
             <img src={"https://img.example.com/" + __cs_order.id + ".png"} alt="" />

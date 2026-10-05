@@ -3,9 +3,9 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 p                → p
 >                → >
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (text)           → $text
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
 <                → <
 /                → /
@@ -13,27 +13,27 @@ p                → p
 >                → >
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (render)         → $render
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 (                → (
 )                → )
                  →  
 =>               → =>
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (element)        → $element
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ,                → ,
                  →  
 document         → document
 .                → .
 getElementById   → getElementById
 (                → (
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (id)             → $id
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 )                → )
                  →  
 as               → as

@@ -14,9 +14,9 @@ style              → style
 +                  → +
                    →  
 (                  → (
-cs.splice(         →  [-semantic -navigation]
+(cs.splice(        →  [-semantic -navigation]
 (selected)         → $selected
-)                  →  [-semantic -navigation]
+))                 →  [-semantic -navigation]
 [                  → [
 0                  → 0
 ]                  → ]
@@ -25,9 +25,9 @@ cs.splice(         →  [-semantic -navigation]
                    →  
 ===                → ===
                    →  
-cs.splice(         →  [-semantic -navigation]
+(cs.splice(        →  [-semantic -navigation]
 (id)               → $id
-)                  →  [-semantic -navigation]
+))                 →  [-semantic -navigation]
                    →  
 ?                  → ?
                    →  
@@ -49,9 +49,9 @@ cs.splice(         →  [-semantic -navigation]
                    →  
 +                  → +
                    →  
-cs.splice(         →  [-semantic -navigation]
+(cs.splice(        →  [-semantic -navigation]
 (id)               → $id
-)                  →  [-semantic -navigation]
+))                 →  [-semantic -navigation]
                    →  
 +                  → +
                    →  
@@ -59,9 +59,9 @@ cs.splice(         →  [-semantic -navigation]
                    →  
 +                  → +
                    →  
-cs.splice(         →  [-semantic -navigation]
+(cs.splice(        →  [-semantic -navigation]
 (selected)         → $selected
-)                  →  [-semantic -navigation]
+))                 →  [-semantic -navigation]
 [                  → [
 0                  → 0
 ]                  → ]
@@ -75,9 +75,9 @@ span               → span
 >                  → >
 \n                 → \n  
 {                  → {
-cs.splice(         →  [-semantic -navigation]
+(cs.splice(        →  [-semantic -navigation]
 (selected)         → $selected
-)                  →  [-semantic -navigation]
+))                 →  [-semantic -navigation]
 [                  → [
 0                  → 0
 ]                  → ]
@@ -86,9 +86,9 @@ cs.splice(         →  [-semantic -navigation]
                    →  
 ===                → ===
                    →  
-cs.splice(         →  [-semantic -navigation]
+(cs.splice(        →  [-semantic -navigation]
 (id)               → $id
-)                  →  [-semantic -navigation]
+))                 →  [-semantic -navigation]
                    →  
 ?                  → ?
                    →  
@@ -120,9 +120,9 @@ __cs_selected      → selected
                    →  
 =                  → =
                    →  
-cs.splice(         →  [-semantic -navigation]
+(cs.splice(        →  [-semantic -navigation]
 (createSignal)     → $createSignal
-)                  →  [-semantic -navigation]
+))                 →  [-semantic -navigation]
 (                  → (
 0                  → 0
 )                  → )
@@ -163,7 +163,7 @@ span               → span
 >                  → >
 \n                 → \n        
 {                  → {
-cs.splice(         →  [-semantic -navigation]
+(cs.splice(        →  [-semantic -navigation]
 (<ReadingRow id={  → (<ReadingRow id={
 cs.lift((() =>     → cs` [-semantic -navigation]
 0                  → 0
@@ -173,11 +173,11 @@ cs.lift((() =>     → cs` [-semantic -navigation]
 __cs_selected      → selected
 )())               → ` [-semantic -navigation]
 } />)              → } />)
-)                  →  [-semantic -navigation]
+))                 →  [-semantic -navigation]
 }                  → }
 \n                 → \n        
 {                  → {
-cs.splice(         →  [-semantic -navigation]
+(cs.splice(        →  [-semantic -navigation]
 (<ReadingRow id={  → (<ReadingRow id={
 cs.lift((() =>     → cs` [-semantic -navigation]
 1                  → 1
@@ -187,7 +187,7 @@ cs.lift((() =>     → cs` [-semantic -navigation]
 __cs_selected      → selected
 )())               → ` [-semantic -navigation]
 } />)              → } />)
-)                  →  [-semantic -navigation]
+))                 →  [-semantic -navigation]
 }                  → }
 \n                 → \n      
 <                  → <

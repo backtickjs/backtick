@@ -18,9 +18,9 @@ __cs_total       → total
                  →  
 +                → +
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (lhs)            → $lhs
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n    
 __cs_total       → total
@@ -31,9 +31,9 @@ __cs_total       → total
                  →  
 +                → +
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (rhs)            → $rhs
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n    
 return           → return
@@ -57,13 +57,13 @@ __cs_total       → total
 \n               → \n      
 return           → return
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 addOwnTotal(     → addOwnTotal(
 cs.lift((() =>   → cs` [-semantic -navigation]
 __cs_total       → total
 )())             → ` [-semantic -navigation]
 , 100)           → , 100)
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n    
 }                → }

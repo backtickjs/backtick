@@ -16,9 +16,9 @@ __cs_base          → base
                    →  
 +                  → +
                    →  
-cs.splice(         →  [-semantic -navigation]
+(cs.splice(        →  [-semantic -navigation]
 middleBase(inner)  → middleBase(inner)
-)                  →  [-semantic -navigation]
+))                 →  [-semantic -navigation]
 ;                  → ;
 \n                 → \n  
 }                  → }
@@ -41,9 +41,9 @@ __cs_base          → base
                    →  
 *                  → *
                    →  
-cs.splice(         →  [-semantic -navigation]
+(cs.splice(        →  [-semantic -navigation]
 (inner)            → $inner
-)                  →  [-semantic -navigation]
+))                 →  [-semantic -navigation]
 ;                  → ;
 \n                 → \n  
 }                  → }
@@ -62,13 +62,13 @@ __cs_base          → base
 \n                 → \n      
 return             → return
                    →  
-cs.splice(         →  [-semantic -navigation]
+(cs.splice(        →  [-semantic -navigation]
 outerBase(         → outerBase(
 cs.lift((() =>     → cs` [-semantic -navigation]
 __cs_base          → base
 )())               → ` [-semantic -navigation]
 )                  → )
-)                  →  [-semantic -navigation]
+))                 →  [-semantic -navigation]
 ;                  → ;
 \n                 → \n    
 }                  → }

@@ -59,9 +59,9 @@ __cs_n                → n
 0                     → 0
 ;                     → ;
 \n                    → \n      
-cs.splice(            →  [-semantic -navigation]
+(cs.splice(           →  [-semantic -navigation]
 (valueScriptEffects)  → $valueScriptEffects
-)                     →  [-semantic -navigation]
+))                    →  [-semantic -navigation]
 ;                     → ;
 \n                    → \n      
 if                    → if
@@ -72,9 +72,9 @@ __cs_b                → b
                       →  
 {                     → {
 \n                    → \n        
-cs.splice(            →  [-semantic -navigation]
+(cs.splice(           →  [-semantic -navigation]
 (ping)                → $ping
-)                     →  [-semantic -navigation]
+))                    →  [-semantic -navigation]
 (                     → (
 )                     → )
 ;                     → ;

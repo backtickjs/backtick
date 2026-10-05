@@ -8,9 +8,9 @@ $For             → $For [-semantic -navigation]
 each             → each
 =                → =
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (rows)           → $rows
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
 >                → >
 \n               → \n        
@@ -24,7 +24,7 @@ number           → number
                  →  
 =>               → =>
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 span             → span
@@ -41,7 +41,7 @@ __cs_row         → row
 span             → span
 >                → >
 )())             → ` [-semantic -navigation]
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
 \n               → \n      
 $For             → $For [-semantic -navigation]

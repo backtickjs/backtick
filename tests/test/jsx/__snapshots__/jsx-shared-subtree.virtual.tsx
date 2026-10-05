@@ -10,6 +10,6 @@ it("jsxSharedSubtree", async (t) => {
   await snapshotCase(
     t,
     "jsxSharedSubtree",
-    cs.lift((() => <div>{cs.splice([shared, shared])}</div>)()),
+    cs.lift((() => <div>{(cs.splice([shared, shared]))}</div>)()),
   );
 });

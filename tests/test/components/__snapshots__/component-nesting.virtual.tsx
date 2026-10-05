@@ -19,5 +19,5 @@ async function Outer() {
 }
 
 it("componentNesting", async (t) => {
-  await snapshotCase(t, "componentNesting", cs.lift((() => <div>{cs.splice((<Outer />))}</div>)()));
+  await snapshotCase(t, "componentNesting", cs.lift((() => <div>{(cs.splice((<Outer />)))}</div>)()));
 });

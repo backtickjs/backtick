@@ -3,6 +3,7 @@ import type { CodeInformation } from "./CodeInformation.js";
 import type { ClientScript, Splice } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
 import type { Segment } from "./segmentsToString.js";
+import { tagRoot } from "./tagRoot.js";
 import { mangle } from "./unmangle.js";
 
 // What the editor reads through a wrapper the virtual code adds: nothing.
@@ -109,18 +110,20 @@ export function virtualScript(
     }
     const splice = script.splices[node.text];
     if (splice !== undefined && splice.refs.includes(node)) {
+      // Parenthesized whole, so what it stands in reads it as one value: in
+      // `new $Animated.Value(0)`, `new` takes `$Animated.Value`, not the call.
       const range = script.toSourceRange(node);
       if (splice.kind === "braced") {
-        added("cs.splice(", splice.expression.getStart(script.sourceFile));
+        added("(cs.splice(", splice.expression.getStart(script.sourceFile));
         out.push(...renderSplice(splice));
-        added(")", splice.expression.getEnd());
+        added("))", splice.expression.getEnd());
       } else {
-        // Parenthesized, as 1-char padding: `(count)` against `$count` starts
-        // the name where it follows the sigil, so a completion's replacement
-        // span round-trips to the bare name.
-        added("cs.splice(", range.start);
+        // The name parenthesized too, as 1-char padding: `(count)` against
+        // `$count` starts the name where it follows the sigil, so a
+        // completion's replacement span round-trips to the bare name.
+        added("(cs.splice(", range.start);
         mapped(`(${splice.expression.text})`, node);
-        added(")", range.end);
+        added("))", range.end);
       }
       return;
     }
@@ -157,12 +160,13 @@ export function virtualScript(
   const isHostTag = (
     node: ts.JsxElement | ts.JsxSelfClosingElement,
   ): boolean => {
-    const tagName = ts.isJsxElement(node)
-      ? node.openingElement.tagName
-      : node.tagName;
+    const root = tagRoot(
+      ts,
+      ts.isJsxElement(node) ? node.openingElement.tagName : node.tagName,
+    );
     return (
-      ts.isIdentifier(tagName) &&
-      script.splices[tagName.text]?.refs.includes(tagName) === true
+      root !== undefined &&
+      script.splices[root.text]?.refs.includes(root) === true
     );
   };
 
@@ -178,10 +182,13 @@ export function virtualScript(
   // beside it does the same for the closing tag's name.
   const hostTag = (node: ts.JsxElement | ts.JsxSelfClosingElement): void => {
     const opening = ts.isJsxElement(node) ? node.openingElement : node;
-    const tagName = opening.tagName as ts.Identifier;
-    const tag = script.toSourceRange(tagName);
+    const tagName = opening.tagName;
+    // What the tag starts with, `$Card`, or `$Animated` in `<$Animated.View>`:
+    // the splice. The rest, `.View`, is written as it was.
+    const root = tagRoot(ts, tagName)!;
+    const tag = script.toSourceRange(root);
     // The binding's name, parenthesized over its `$` as an unbraced splice is.
-    const name = `(${(script.splices[tagName.text]!.expression as ts.Identifier).text})`;
+    const name = `(${(script.splices[root.text]!.expression as ts.Identifier).text})`;
     // Where JSX stands, an expression is written in braces: a child of an
     // element or fragment, or an attribute's value.
     const parent = node.parent;
@@ -192,13 +199,17 @@ export function virtualScript(
     if (braced) {
       added("{");
     }
-    if (ts.isJsxElement(node)) {
+    const closing = ts.isJsxElement(node)
+      ? tagRoot(ts, node.closingElement.tagName)!
+      : undefined;
+    if (closing !== undefined) {
       added("(void ");
-      mapped(name, node.closingElement.tagName, TAG_NAME);
+      mapped(name, closing, TAG_NAME);
       added(", ");
     }
-    added(`((${tagName.text}) => <`);
-    mapped(tagName.text, tagName, REPORTED);
+    added(`((${root.text}) => <`);
+    mapped(root.text, root, REPORTED);
+    verbatim(root.getEnd(), tagName.getEnd());
     // Its attributes and the opening's end, as written. What stands between
     // the name and the first attribute maps to nothing: the end of the name is
     // the name's, not the attribute's.
@@ -226,7 +237,8 @@ export function virtualScript(
       }
       verbatim(at, node.closingElement.getStart(file));
       added("</");
-      mapped(tagName.text, node.closingElement.tagName, REPORTED);
+      mapped(root.text, closing!, REPORTED);
+      verbatim(closing!.getEnd(), node.closingElement.tagName.getEnd());
       added(">");
     }
     added(")(cs.splice(", tag.start);

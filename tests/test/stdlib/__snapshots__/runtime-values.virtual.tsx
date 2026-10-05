@@ -7,8 +7,8 @@ it("runtimeValues", async (t) => {
     t,
     "runtimeValues",
     cs.lift((() => ({
-      list: cs.splice([1, "two", true, null]),
-      obj: cs.splice({ k: 3 }),
+      list: (cs.splice([1, "two", true, null])),
+      obj: (cs.splice({ k: 3 })),
     }))()),
   );
 });

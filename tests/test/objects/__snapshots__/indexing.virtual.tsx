@@ -8,15 +8,15 @@ import { createRoot } from "@backtickjs/solid-js";
 // What `a[k]` does with a key of another type: what JavaScript does.
 describe("a read by key", () => {
   it("reads a key of another type as JavaScript does", async () => {
-    assert.equal(await evaluate(cs.lift((() => cs.splice((createRoot))(() => [5, 31, 7]["0"]))())), 5);
-    assert.equal(await evaluate(cs.lift((() => cs.splice((createRoot))(() => "abc"["0"]))())), "a");
+    assert.equal(await evaluate(cs.lift((() => (cs.splice((createRoot)))(() => [5, 31, 7]["0"]))())), 5);
+    assert.equal(await evaluate(cs.lift((() => (cs.splice((createRoot)))(() => "abc"["0"]))())), "a");
     assert.equal(
       // @ts-expect-error: an object's type names its keys
-      await evaluate(cs.lift((() => cs.splice((createRoot))(() => ({ x: 1 })[0]))())),
+      await evaluate(cs.lift((() => (cs.splice((createRoot)))(() => ({ x: 1 })[0]))())),
       undefined,
     );
     assert.equal(
-      await evaluate(cs.lift((() => cs.splice((createRoot))(() => (7 as unknown as number[])[0]))())),
+      await evaluate(cs.lift((() => (cs.splice((createRoot)))(() => (7 as unknown as number[])[0]))())),
       undefined,
     );
   });
@@ -31,7 +31,7 @@ describe("a read by key", () => {
       cs.lift((() => "abc"[9])()),
     ];
     for (const value of reads) {
-      assert.equal(await evaluate(cs.lift((() => cs.splice((createRoot))(() => cs.splice((value))))())), undefined);
+      assert.equal(await evaluate(cs.lift((() => (cs.splice((createRoot)))(() => (cs.splice((value)))))())), undefined);
     }
   });
 });

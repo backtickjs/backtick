@@ -18,11 +18,11 @@ import { evaluate } from "../evaluate.ts";
 const answerItems = ["one", "two"];
 
 const WaitingList = cs.lift((() => (__cs_props: { more: () => boolean }) => {
-  const [__cs_items, __cs_setItems] = cs.splice((createSignal))<string[]>([]);
+  const [__cs_items, __cs_setItems] = (cs.splice((createSignal)))<string[]>([]);
 
   const __cs_started = cs.globalThis.window.setTimeout(() => {
     if (__cs_props.more()) {
-      __cs_setItems(cs.splice((answerItems)));
+      __cs_setItems((cs.splice((answerItems))));
     }
   }, 0);
 
@@ -30,7 +30,7 @@ const WaitingList = cs.lift((() => (__cs_props: { more: () => boolean }) => {
 })());
 
 const forBuildsOnce = cs.lift((() => {
-  const [__cs_asked, __cs_setAsked] = cs.splice((createSignal))(0);
+  const [__cs_asked, __cs_setAsked] = (cs.splice((createSignal)))(0);
 
   return (
     <div>

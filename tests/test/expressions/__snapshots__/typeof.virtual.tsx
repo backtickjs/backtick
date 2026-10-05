@@ -10,7 +10,7 @@ it("typeofTable", async (t) => {
     t,
     "typeofTable",
     cs.lift((() => {
-      const __cs_count = cs.splice((createSignal))(0);
+      const __cs_count = (cs.splice((createSignal)))(0);
       return [
         typeof undefined,
         typeof null,

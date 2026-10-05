@@ -22,7 +22,7 @@ __cs_tree        → tree
                  →  
 =                → =
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 <                → <
 div              → div
@@ -30,7 +30,7 @@ div              → div
 /                → /
 >                → >
 )())             → ` [-semantic -navigation]
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n  
 return           → return
@@ -54,9 +54,9 @@ __cs_tree        → tree
                  →  
 =                → =
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (<HeldRow />)    → (<HeldRow />)
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n  
 return           → return
@@ -72,17 +72,17 @@ div              → div
 >                → >
 \n               → \n      
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (heldElement)    → $heldElement
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 )                → )
 }                → }
 \n               → \n      
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (heldComponent)  → $heldComponent
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 )                → )
 }                → }

@@ -18,5 +18,5 @@ const label = cs.lift((() => "origin")());
 const point = { x: originX, label };
 
 it("splicedContainer", async (t) => {
-  await snapshotCase(t, "splicedContainer", cs.lift((() => cs.splice((point)).x + 1)()));
+  await snapshotCase(t, "splicedContainer", cs.lift((() => (cs.splice((point))).x + 1)()));
 });

@@ -22,3 +22,9 @@ const Box = cs`(props: { children?: unknown }) => <div />`;
 export const nested = cs`<$Box>
   <$Box />
 </$Box>`;
+
+const ui = {
+  Badge: cs`(props: { n: number; children?: unknown }) => <b>{props.n}</b>`,
+};
+
+export const member = cs`<$ui.Badge n={1}>{2}</$ui.Badge>`;

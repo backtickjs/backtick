@@ -5,15 +5,15 @@ button           → button
 ref              → ref
 =                → =
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (ref)            → $ref
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
 >                → >
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (label)          → $label
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
 <                → <
 /                → /
@@ -27,9 +27,9 @@ __cs_el          → el
                  →  
 =>               → =>
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (onMount)        → $onMount
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 (                → (
 )                → )

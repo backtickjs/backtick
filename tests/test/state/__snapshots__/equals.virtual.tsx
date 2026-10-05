@@ -28,8 +28,8 @@ describe("equals", () => {
     render(
       await evaluate(
         cs.lift((() => () => {
-          const [__cs_n, __cs_setN] = cs.splice((createSignal))(1);
-          const __cs_size = cs.splice((createMemo))(
+          const [__cs_n, __cs_setN] = (cs.splice((createSignal)))(1);
+          const __cs_size = (cs.splice((createMemo)))(
             () => ({ isBig: __cs_n() > 2, n: __cs_n() }),
             undefined,
             { equals: (__cs_previous, __cs_next) => __cs_previous.isBig === __cs_next.isBig },
@@ -62,7 +62,7 @@ describe("equals", () => {
     render(
       await evaluate(
         cs.lift((() => () => {
-          const [__cs_point, __cs_setPoint] = cs.splice((createSignal))(
+          const [__cs_point, __cs_setPoint] = (cs.splice((createSignal)))(
             { x: 1 },
             { equals: (__cs_previous, __cs_next) => __cs_previous.x === __cs_next.x },
           );
@@ -87,7 +87,7 @@ describe("equals", () => {
     render(
       await evaluate(
         cs.lift((() => () => {
-          const [__cs_n, __cs_setN] = cs.splice((createSignal))(1, {
+          const [__cs_n, __cs_setN] = (cs.splice((createSignal)))(1, {
             equals: (__cs_previous, __cs_next) => {
               cs.globalThis.window.console.log(__cs_previous, __cs_next);
               return __cs_previous === __cs_next;
@@ -106,7 +106,7 @@ describe("equals", () => {
     render(
       await evaluate(
         cs.lift((() => () => {
-          const [__cs_n, __cs_setN] = cs.splice((createSignal))(1);
+          const [__cs_n, __cs_setN] = (cs.splice((createSignal)))(1);
           const __cs_label = () => {
             cs.globalThis.window.console.log();
             return "n " + __cs_n();
@@ -128,7 +128,7 @@ describe("equals", () => {
     render(
       await evaluate(
         cs.lift((() => () => {
-          const [__cs_point, __cs_setPoint] = cs.splice((createSignal))({ x: 1 });
+          const [__cs_point, __cs_setPoint] = (cs.splice((createSignal)))({ x: 1 });
           const __cs_label = () => {
             cs.globalThis.window.console.log();
             return "x " + __cs_point().x;

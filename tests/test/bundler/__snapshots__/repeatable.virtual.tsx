@@ -13,22 +13,22 @@ const doubled = cs.lift((() => (__cs_n: number) => __cs_n * 2)());
 const pair = cs.lift((() => (__cs_n: number) => (__cs_m: number) => __cs_n + __cs_m)());
 
 function Card(props: { readonly title: string | Client<string> }) {
-  return cs.lift((() => <h2>{cs.splice((props)).title}</h2>)());
+  return cs.lift((() => <h2>{(cs.splice((props))).title}</h2>)());
 }
 
 const shared = cs.lift((() => "shared")());
 
 const page = () => cs.lift((() => {
-  const [__cs_count, __cs_setCount] = cs.splice((createSignal))(1);
+  const [__cs_count, __cs_setCount] = (cs.splice((createSignal)))(1);
   const __cs_rows = [1, 2, 3];
-  const __cs_total = __cs_count() + cs.splice(cs.lift((() => __cs_rows.length)()));
+  const __cs_total = __cs_count() + (cs.splice(cs.lift((() => __cs_rows.length)())));
   return (
     <section>
-      {cs.splice((<Card title="element" />))}
-      {cs.splice((<Card title={shared} />))}
-      <p>{cs.splice((doubled))(__cs_count())}</p>
-      <p>{cs.splice((pair))(1)(2)}</p>
-      <p>{cs.splice((shared))}</p>
+      {(cs.splice((<Card title="element" />)))}
+      {(cs.splice((<Card title={shared} />)))}
+      <p>{(cs.splice((doubled)))(__cs_count())}</p>
+      <p>{(cs.splice((pair)))(1)(2)}</p>
+      <p>{(cs.splice((shared)))}</p>
       <p>{__cs_total}</p>
       <ul>
         {(void (For), (($For) => <$For each={__cs_rows}>{(__cs_row: number) => <li>{__cs_row + __cs_count()}</li>}</$For>)(cs.splice((For))))}
@@ -43,8 +43,8 @@ it("bundles the same every time, with scripts in it", async () => {
   const first = await code(page());
   assert.equal(await code(page()), first);
   // Other bundles in between, sharing its scripts and components.
-  await code(cs.lift((() => cs.splice((doubled))(1))()));
-  await code(cs.lift((() => cs.splice((pair))(1)(2) + cs.splice((shared)).length)()));
-  await code(cs.lift((() => cs.splice((<Card title="other" />)))()));
+  await code(cs.lift((() => (cs.splice((doubled)))(1))()));
+  await code(cs.lift((() => (cs.splice((pair)))(1)(2) + (cs.splice((shared))).length)()));
+  await code(cs.lift((() => (cs.splice((<Card title="other" />))))()));
   assert.equal(await code(page()), first);
 });

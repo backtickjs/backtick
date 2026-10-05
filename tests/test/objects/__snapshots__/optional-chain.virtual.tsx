@@ -22,13 +22,13 @@ it("optionalChain", async (t) => {
     t,
     "optionalChain",
     cs.lift((() => ({
-      found: cs.splice((pick))({ x: 5 }),
-      missing: cs.splice((pick))(null),
-      deep: cs.splice((deep))({ inner: { z: 7 } }),
-      cut: cs.splice((deep))({ inner: null }),
-      top: cs.splice((deep))(null),
-      loud: cs.splice((shout))("hi"),
-      silent: cs.splice((shout))(null),
+      found: (cs.splice((pick)))({ x: 5 }),
+      missing: (cs.splice((pick)))(null),
+      deep: (cs.splice((deep)))({ inner: { z: 7 } }),
+      cut: (cs.splice((deep)))({ inner: null }),
+      top: (cs.splice((deep)))(null),
+      loud: (cs.splice((shout)))("hi"),
+      silent: (cs.splice((shout)))(null),
     }))()),
   );
 });

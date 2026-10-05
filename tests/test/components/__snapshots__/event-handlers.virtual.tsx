@@ -14,7 +14,7 @@ it("eventHandlers", async (t) => {
     t,
     "eventHandlers",
     cs.lift((() => {
-      const [__cs_said, __cs_setSaid] = cs.splice((createSignal))("");
+      const [__cs_said, __cs_setSaid] = (cs.splice((createSignal)))("");
 
       return (
         <form

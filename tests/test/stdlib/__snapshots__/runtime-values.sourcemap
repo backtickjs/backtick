@@ -5,17 +5,17 @@ cs.lift((() =>          → cs` [-semantic -navigation]
 list                    → list
 :                       → :
                         →  
-cs.splice(              →  [-semantic -navigation]
+(cs.splice(             →  [-semantic -navigation]
 [1, "two", true, null]  → [1, "two", true, null]
-)                       →  [-semantic -navigation]
+))                      →  [-semantic -navigation]
 ,                       → ,
 \n                      → \n      
 obj                     → obj
 :                       → :
                         →  
-cs.splice(              →  [-semantic -navigation]
+(cs.splice(             →  [-semantic -navigation]
 { k: 3 }                → { k: 3 }
-)                       →  [-semantic -navigation]
+))                      →  [-semantic -navigation]
 ,                       → ,
 \n                      → \n    
 }                       → }

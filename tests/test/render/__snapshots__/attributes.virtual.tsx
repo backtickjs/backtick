@@ -102,8 +102,8 @@ describe("a field's value", () => {
   // defaults, so a write that reaches the attribute changes nothing shown.
   async function Field() {
     return cs.lift((() => {
-      const [__cs_text, __cs_setText] = cs.splice((createSignal))("first");
-      const [__cs_isOn, __cs_setIsOn] = cs.splice((createSignal))(false);
+      const [__cs_text, __cs_setText] = (cs.splice((createSignal)))("first");
+      const [__cs_isOn, __cs_setIsOn] = (cs.splice((createSignal)))(false);
       return (
         <div>
           <input aria-label="text" value={__cs_text()} />

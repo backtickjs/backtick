@@ -5,17 +5,17 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 a                → a
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (count)          → $count
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ,                → ,
                  →  
 b                → b
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 ++count          → ++count
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
                  →  
 }                → }
 )                → )

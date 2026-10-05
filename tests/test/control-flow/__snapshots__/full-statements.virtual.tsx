@@ -10,7 +10,7 @@ describe("statements", () => {
   it("`var`, scoped to the function, and in a `for` header", async () => {
     assert.equal(
       await evaluate(
-        cs.lift((() => cs.splice((createRoot))(() => {
+        cs.lift((() => (cs.splice((createRoot)))(() => {
           {
             var __cs_late = 1;
           }
@@ -28,7 +28,7 @@ describe("statements", () => {
   it("`let` without an initializer, and several declarators", async () => {
     assert.deepEqual(
       await evaluate(
-        cs.lift((() => cs.splice((createRoot))(() => {
+        cs.lift((() => (cs.splice((createRoot)))(() => {
           let __cs_x;
           const __cs_a = 1,
             __cs_b = 2;
@@ -42,7 +42,7 @@ describe("statements", () => {
   it("a labeled `break` and `continue`", async () => {
     assert.deepEqual(
       await evaluate(
-        cs.lift((() => cs.splice((createRoot))(() => {
+        cs.lift((() => (cs.splice((createRoot)))(() => {
           const __cs_seen: string[] = [];
           outer: for (let __cs_i = 0; __cs_i < 3; __cs_i++) {
             for (let __cs_j = 0; __cs_j < 3; __cs_j++) {
@@ -61,7 +61,7 @@ describe("statements", () => {
   it("`finally`, which runs however the block ends", async () => {
     assert.deepEqual(
       await evaluate(
-        cs.lift((() => cs.splice((createRoot))(() => {
+        cs.lift((() => (cs.splice((createRoot)))(() => {
           const __cs_log: string[] = [];
           const __cs_run = (__cs_fail: boolean) => {
             try {
@@ -92,7 +92,7 @@ describe("statements", () => {
   it("a destructured `catch` binding", async () => {
     assert.equal(
       await evaluate(
-        cs.lift((() => cs.splice((createRoot))(() => {
+        cs.lift((() => (cs.splice((createRoot)))(() => {
           try {
             throw new cs.globalThis.Error("boom");
           } catch ({ message: __cs_message }: any) {

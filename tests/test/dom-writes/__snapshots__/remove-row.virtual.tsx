@@ -12,7 +12,7 @@ import { evaluate } from "../evaluate.ts";
 // removal.
 async function RemovableRows() {
   return cs.lift((() => {
-    const [__cs_ids, __cs_setIds] = cs.splice((createSignal))<number[]>([1, 2, 3, 4, 5]);
+    const [__cs_ids, __cs_setIds] = (cs.splice((createSignal)))<number[]>([1, 2, 3, 4, 5]);
     return (
       <table>
         <tbody>

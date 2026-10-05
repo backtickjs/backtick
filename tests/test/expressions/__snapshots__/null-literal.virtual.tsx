@@ -18,8 +18,8 @@ it("nullLiteral", async (t) => {
     t,
     "nullLiteral",
     cs.lift((() => ({
-      missing: cs.splice((orDash))(null),
-      present: cs.splice((orDash))("hi"),
+      missing: (cs.splice((orDash)))(null),
+      present: (cs.splice((orDash)))("hi"),
       bare: null,
     }))()),
   );

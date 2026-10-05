@@ -11,23 +11,23 @@ import { evaluate } from "../evaluate.ts";
 // it the way it captures any binding, and calls it as a component: once, with
 // its props read on access.
 const scriptBoundTagCapture = cs.lift((() => {
-  const [__cs_count, __cs_setCount] = cs.splice((createSignal))(0);
+  const [__cs_count, __cs_setCount] = (cs.splice((createSignal)))(0);
   const __cs_Badge = (__cs_props: { n: number }) => <b>{"n " + __cs_props.n}</b>;
 
   return (
     <div>
-      {cs.splice(cs.lift((() => <__cs_Badge n={__cs_count()} />)()))}
+      {(cs.splice(cs.lift((() => <__cs_Badge n={__cs_count()} />)())))}
       {
-        cs.splice(cs.lift((() => {
+        (cs.splice(cs.lift((() => {
           const __cs_skipped = 10;
-          return cs.splice(cs.lift((() => <__cs_Badge n={__cs_count() + 100} />)()));
-        })()))
+          return (cs.splice(cs.lift((() => <__cs_Badge n={__cs_count() + 100} />)())));
+        })())))
       }
-      {cs.splice(cs.lift((() => <section>{cs.splice(cs.lift((() => <__cs_Badge n={__cs_count() + 1000} />)()))}</section>)()))}
+      {(cs.splice(cs.lift((() => <section>{(cs.splice(cs.lift((() => <__cs_Badge n={__cs_count() + 1000} />)())))}</section>)())))}
       {
-        cs.splice(cs.lift((() => (void (For), (($For) => <$For each={[1, 2]}>
+        (cs.splice(cs.lift((() => (void (For), (($For) => <$For each={[1, 2]}>
           {(__cs_m: number) => <__cs_Badge n={__cs_m * __cs_count()} />}
-        </$For>)(cs.splice((For)))))()))
+        </$For>)(cs.splice((For)))))())))
       }
       <button onclick={() => __cs_setCount(__cs_count() + 1)}>more</button>
     </div>

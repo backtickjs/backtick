@@ -21,9 +21,9 @@ __cs_list          → list
                    →  
 =                  → =
                    →  
-cs.splice(         →  [-semantic -navigation]
+(cs.splice(        →  [-semantic -navigation]
 [action]           → [action]
-)                  →  [-semantic -navigation]
+))                 →  [-semantic -navigation]
 ;                  → ;
 \n                 → \n      
 const              → const
@@ -32,9 +32,9 @@ __cs_map           → map
                    →  
 =                  → =
                    →  
-cs.splice(         →  [-semantic -navigation]
+(cs.splice(        →  [-semantic -navigation]
 { press: action }  → { press: action }
-)                  →  [-semantic -navigation]
+))                 →  [-semantic -navigation]
 ;                  → ;
 \n                 → \n      
 return             → return

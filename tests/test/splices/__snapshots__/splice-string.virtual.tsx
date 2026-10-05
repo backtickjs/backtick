@@ -7,5 +7,5 @@ import { snapshotCase } from "../snapshotCase.ts";
 const value = 'say "hi"\n\\done';
 
 it("spliceString", async (t) => {
-  await snapshotCase(t, "spliceString", cs.lift((() => cs.splice((value)))()));
+  await snapshotCase(t, "spliceString", cs.lift((() => (cs.splice((value))))()));
 });

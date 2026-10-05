@@ -15,7 +15,7 @@ import { evaluate } from "../evaluate.ts";
 // one tap target while staying separately styled.
 async function Row() {
   return cs.lift((() => {
-    const [__cs_count, __cs_setCount] = cs.splice((createSignal))(0);
+    const [__cs_count, __cs_setCount] = (cs.splice((createSignal)))(0);
     return (
       <button
         id="row"

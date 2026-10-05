@@ -11,10 +11,10 @@ import { evaluate } from "../evaluate.ts";
 // build it again, with a signal never written and a timer never fired.
 async function Held({ again }: { again: Client<() => boolean> }) {
   return cs.lift((() => {
-    const [__cs_shown, __cs_setShown] = cs.splice((createSignal))(false);
+    const [__cs_shown, __cs_setShown] = (cs.splice((createSignal)))(false);
 
     const __cs_started = cs.globalThis.window.setTimeout(() => {
-      if (cs.splice((again))()) {
+      if ((cs.splice((again)))()) {
         __cs_setShown(true);
       }
     }, 0);
@@ -25,19 +25,19 @@ async function Held({ again }: { again: Client<() => boolean> }) {
 }
 
 const held = cs.lift((() => {
-  const [__cs_builds, __cs_setBuilds] = cs.splice((createSignal))(0);
+  const [__cs_builds, __cs_setBuilds] = (cs.splice((createSignal)))(0);
   return (
     <div>
       <span>{"builds " + __cs_builds()}</span>
       <section>{
-        cs.splice((
+        (cs.splice((
           <Held
             again={cs.lift((() => () => {
               __cs_setBuilds(__cs_builds() + 1);
               return __cs_builds() < 5;
             })())}
           />
-        ))
+        )))
       }</section>
     </div>
   );

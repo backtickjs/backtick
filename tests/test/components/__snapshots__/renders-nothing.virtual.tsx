@@ -10,5 +10,5 @@ async function Absent() {
 }
 
 it("rendersNothing", async (t) => {
-  await snapshotCase(t, "rendersNothing", cs.lift((() => <div>{cs.splice((<Absent />))}</div>)()));
+  await snapshotCase(t, "rendersNothing", cs.lift((() => <div>{(cs.splice((<Absent />)))}</div>)()));
 });

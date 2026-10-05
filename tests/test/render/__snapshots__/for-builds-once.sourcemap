@@ -33,9 +33,9 @@ __cs_setItems    → setItems
                  →  
 =                → =
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (createSignal)   → $createSignal
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 <                → <
 string           → string
 [                → [
@@ -78,9 +78,9 @@ more             → more
 \n               → \n      
 __cs_setItems    → setItems
 (                → (
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (answerItems)    → $answerItems
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 )                → )
 ;                → ;
 \n               → \n    
@@ -148,9 +148,9 @@ __cs_setAsked    → setAsked
                  →  
 =                → =
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (createSignal)   → $createSignal
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 0                → 0
 )                → )

@@ -33,7 +33,7 @@ describe("onCleanup", () => {
     const { unmount } = render(
       await evaluate(
         cs.lift((() => () => {
-          cs.splice((onCleanup))(() => cs.globalThis.window.console.log());
+          (cs.splice((onCleanup)))(() => cs.globalThis.window.console.log());
           return <p>drawn</p>;
         })()),
       ),
@@ -47,9 +47,9 @@ describe("onCleanup", () => {
     render(
       await evaluate(
         cs.lift((() => () => {
-          const [__cs_n, __cs_setN] = cs.splice((createSignal))(1);
-          const __cs_doubled = cs.splice((createMemo))(() => {
-            cs.splice((onCleanup))(() => cs.globalThis.window.console.log());
+          const [__cs_n, __cs_setN] = (cs.splice((createSignal)))(1);
+          const __cs_doubled = (cs.splice((createMemo)))(() => {
+            (cs.splice((onCleanup)))(() => cs.globalThis.window.console.log());
             return __cs_n() * 2;
           });
           return <button onclick={() => __cs_setN(__cs_n() + 1)}>{__cs_doubled()}</button>;
@@ -81,11 +81,11 @@ describe("onCleanup", () => {
     const { unmount } = render(
       await evaluate(
         cs.lift((() => () => {
-          const [__cs_timer, __cs_setTimer] = cs.splice((createSignal))(0);
-          cs.splice((onMount))(() => {
+          const [__cs_timer, __cs_setTimer] = (cs.splice((createSignal)))(0);
+          (cs.splice((onMount)))(() => {
             __cs_setTimer(cs.globalThis.window.setInterval(() => cs.globalThis.window.console.log(), 5));
           });
-          cs.splice((onCleanup))(() => cs.globalThis.window.clearInterval(__cs_timer()));
+          (cs.splice((onCleanup)))(() => cs.globalThis.window.clearInterval(__cs_timer()));
           return <p>ticking</p>;
         })()),
       ),
@@ -104,7 +104,7 @@ describe("onCleanup", () => {
       await evaluate(
         cs.lift((() => () => {
           return (
-            <button onclick={() => cs.splice((onCleanup))(() => cs.globalThis.window.console.log())}>
+            <button onclick={() => (cs.splice((onCleanup)))(() => cs.globalThis.window.console.log())}>
               press
             </button>
           );

@@ -22,12 +22,12 @@ it("optionalParameter", async (t) => {
     t,
     "optionalParameter",
     cs.lift((() => ({
-      named: cs.splice((greet))("hi"),
-      explicit: cs.splice((greet))(undefined),
-      omitted: cs.splice((greet))(),
-      supplied: cs.splice((callIfGiven))(cs.splice((double))),
-      fallback: cs.splice((callIfGiven))(undefined),
-      omittedCallback: cs.splice((callIfGiven))(),
+      named: (cs.splice((greet)))("hi"),
+      explicit: (cs.splice((greet)))(undefined),
+      omitted: (cs.splice((greet)))(),
+      supplied: (cs.splice((callIfGiven)))((cs.splice((double)))),
+      fallback: (cs.splice((callIfGiven)))(undefined),
+      omittedCallback: (cs.splice((callIfGiven)))(),
     }))()),
   );
 });

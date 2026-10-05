@@ -5,69 +5,69 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 under            → under
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (low)            → $low
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
                  →  
 <                → <
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (high)           → $high
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ,                → ,
 \n               → \n      
 atMost           → atMost
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (low)            → $low
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
                  →  
 <=               → <=
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (high)           → $high
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ,                → ,
 \n               → \n      
 over             → over
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (high)           → $high
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
                  →  
 >                → >
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (low)            → $low
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ,                → ,
 \n               → \n      
 between          → between
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (low)            → $low
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
                  →  
 <                → <
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (high)           → $high
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
                  →  
 &&               → &&
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (high)           → $high
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
                  →  
 >                → >
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (low)            → $low
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ,                → ,
 \n               → \n    
 }                → }

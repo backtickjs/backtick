@@ -10,7 +10,7 @@ describe("object literals", () => {
   it("shorthand, methods, accessors, computed keys and `this`", async () => {
     assert.deepEqual(
       await evaluate(
-        cs.lift((() => cs.splice((createRoot))(() => {
+        cs.lift((() => (cs.splice((createRoot)))(() => {
           const __cs_a = 1;
           const __cs_key = "dyn";
           const __cs_counter = {
@@ -40,7 +40,7 @@ describe("object literals", () => {
   it("`?.[` and a chain mixing `?.` and `.`", async () => {
     assert.deepEqual(
       await evaluate(
-        cs.lift((() => cs.splice((createRoot))(() => {
+        cs.lift((() => (cs.splice((createRoot)))(() => {
           const __cs_names = ["a"] as readonly string[] | null;
           const __cs_none = null as readonly string[] | null;
           const __cs_o = { inner: { z: 3 } } as { inner: { z: number } } | null;

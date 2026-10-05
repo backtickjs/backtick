@@ -6,7 +6,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // into it: the spliced script is handed `x` where it is called.
 const script = cs.lift((() => () => {
   const __cs_x = 1;
-  return cs.splice(cs.lift((() => <span onclick={() => __cs_x} />)()));
+  return (cs.splice(cs.lift((() => <span onclick={() => __cs_x} />)())));
 })());
 
 it("jsxCapture", async (t) => {

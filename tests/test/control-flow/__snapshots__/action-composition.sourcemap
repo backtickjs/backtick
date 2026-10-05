@@ -15,9 +15,9 @@ __cs_x           → x
 cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (effects)        → $effects
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n
 }                → }
@@ -25,9 +25,9 @@ cs.splice(       →  [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n      
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (composed)       → $composed
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n    
 }                → }

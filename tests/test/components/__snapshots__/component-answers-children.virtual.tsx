@@ -23,8 +23,8 @@ it("componentAnswersChildren", async (t) => {
     t,
     "componentAnswersChildren",
     cs.lift((() => <div>
-      {cs.splice((<Label />))}
-      {cs.splice((<Pair />))}
+      {(cs.splice((<Label />)))}
+      {(cs.splice((<Pair />)))}
     </div>)()),
   );
 });

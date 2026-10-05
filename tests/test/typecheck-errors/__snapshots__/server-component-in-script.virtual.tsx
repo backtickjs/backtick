@@ -5,11 +5,11 @@ import { type Client, cs } from "@backtickjs/core";
 // script whatever its props take: even where they'd take the script's values.
 // A host function isn't `Spliceable`, which is what the tag is checked as.
 async function Row({ label }: { label: Client<string> }) {
-  return cs.lift((() => <li>{cs.splice((label))}</li>)());
+  return cs.lift((() => <li>{(cs.splice((label)))}</li>)());
 }
 
 function Title({ text }: { text: string | Client<string> }) {
-  return cs.lift((() => <h1>{cs.splice((text))}</h1>)());
+  return cs.lift((() => <h1>{(cs.splice((text)))}</h1>)());
 }
 
 function Rule() {

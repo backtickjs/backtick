@@ -56,9 +56,9 @@ toUpperCase      → toUpperCase
 if               → if
                  →  
 (                → (
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 flags.strict     → flags.strict
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
                  →  
 &&               → &&
                  →  
@@ -110,9 +110,9 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 missing          → missing
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (label)          → $label
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 null             → null
 ,                → ,
@@ -124,9 +124,9 @@ true             → true
 loud             → loud
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (label)          → $label
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 "!hi"            → "!hi"
 ,                → ,
@@ -138,9 +138,9 @@ true             → true
 quiet            → quiet
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (label)          → $label
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 "!hi"            → "!hi"
 ,                → ,
@@ -152,9 +152,9 @@ false            → false
 plain            → plain
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (label)          → $label
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 "zz"             → "zz"
 ,                → ,

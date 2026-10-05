@@ -1,0 +1,71 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+__cs_props       → props
+:                → :
+                 →  
+{                → {
+                 →  
+n                → n
+:                → :
+                 →  
+number           → number
+                 →  
+}                → }
+)                → )
+                 →  
+=>               → =>
+                 →  
+<                → <
+b                → b
+>                → >
+{                → {
+"badge "         → "badge "
+                 →  
++                → +
+                 →  
+__cs_props       → props
+.                → .
+n                → n
+}                → }
+<                → <
+/                → /
+b                → b
+>                → >
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+<                → <
+p                → p
+>                → >
+\n               → \n  
+$ui              → $ui [-semantic -navigation]
+.Badge           → .Badge
+n                → n
+=                → =
+{                → {
+1                → 1
+}                → }
+ />              →  />
+)(cs.splice(     →  [-semantic -navigation]
+(ui)             → $ui.Badge [-highlight]
+))               →  [-semantic -navigation]
+\n               → \n  
+(ui)             → $ui [-highlight]
+$ui              → $ui [-semantic -navigation]
+.Badge           → .Badge
+n                → n
+=                → =
+{                → {
+2                → 2
+}                → }
+>                → >
+$ui              → $ui [-semantic -navigation]
+.Badge           → .Badge
+)(cs.splice(     →  [-semantic -navigation]
+(ui)             → $ui.Badge [-highlight]
+))               →  [-semantic -navigation]
+\n               → \n
+<                → <
+/                → /
+p                → p
+>                → >
+)())             → ` [-semantic -navigation]

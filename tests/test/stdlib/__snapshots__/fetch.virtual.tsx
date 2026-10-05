@@ -13,7 +13,7 @@ it("fetchRequests", async (t) => {
     t,
     "fetchRequests",
     cs.lift((() => () => {
-      const [__cs_held, __cs_setHeld] = cs.splice((createSignal))("waiting");
+      const [__cs_held, __cs_setHeld] = (cs.splice((createSignal)))("waiting");
 
       cs.globalThis.window
         .fetch("/cases/built-ins/Math/trunc/Math.trunc_Success", {

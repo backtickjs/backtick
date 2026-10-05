@@ -70,9 +70,9 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 named            → named
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (greet)          → $greet
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 "hi"             → "hi"
 )                → )
@@ -81,9 +81,9 @@ cs.splice(       →  [-semantic -navigation]
 explicit         → explicit
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (greet)          → $greet
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 undefined        → undefined
 )                → )
@@ -92,9 +92,9 @@ undefined        → undefined
 omitted          → omitted
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (greet)          → $greet
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 )                → )
 ,                → ,
@@ -102,22 +102,22 @@ cs.splice(       →  [-semantic -navigation]
 supplied         → supplied
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (callIfGiven)    → $callIfGiven
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (double)         → $double
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 )                → )
 ,                → ,
 \n               → \n      
 fallback         → fallback
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (callIfGiven)    → $callIfGiven
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 undefined        → undefined
 )                → )
@@ -126,9 +126,9 @@ undefined        → undefined
 omittedCallback  → omittedCallback
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (callIfGiven)    → $callIfGiven
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 )                → )
 ,                → ,

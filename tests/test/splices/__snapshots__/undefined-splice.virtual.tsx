@@ -10,19 +10,19 @@ import { createRoot } from "@backtickjs/solid-js";
 describe("a spliced undefined", () => {
   it("arrives as undefined", async () => {
     const nothing: number | undefined = undefined;
-    assert.equal(await evaluate(cs.lift((() => cs.splice((createRoot))(() => cs.splice((nothing))))())), undefined);
+    assert.equal(await evaluate(cs.lift((() => (cs.splice((createRoot)))(() => (cs.splice((nothing)))))())), undefined);
   });
 
   it("keeps its key in an object", async () => {
     const data = { missing: undefined, kept: 1 };
-    const arrived = await evaluate(cs.lift((() => cs.splice((createRoot))(() => cs.splice((data))))()));
+    const arrived = await evaluate(cs.lift((() => (cs.splice((createRoot)))(() => (cs.splice((data)))))()));
     assert.deepEqual(arrived, { missing: undefined, kept: 1 });
     assert.ok("missing" in (arrived as object));
   });
 
   it("stays undefined in an array", async () => {
     const data = [1, undefined, 3];
-    assert.deepEqual(await evaluate(cs.lift((() => cs.splice((createRoot))(() => cs.splice((data))))())), [
+    assert.deepEqual(await evaluate(cs.lift((() => (cs.splice((createRoot)))(() => (cs.splice((data)))))())), [
       1,
       undefined,
       3,

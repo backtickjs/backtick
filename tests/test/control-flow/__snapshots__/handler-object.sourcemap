@@ -31,9 +31,9 @@ number           → number
                  →  
 {                → {
 \n               → \n  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (beep)           → $beep
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n
 }                → }
@@ -52,17 +52,17 @@ __cs_handlers    → handlers
 tap              → tap
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (onTap)          → $onTap
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ,                → ,
 \n               → \n        
 hold             → hold
 :                → :
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (onTap)          → $onTap
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 ,                → ,
 \n               → \n      
 }                → }

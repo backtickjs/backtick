@@ -17,9 +17,9 @@ __cs_setN         → setN
                   →  
 =                 → =
                   →  
-cs.splice(        →  [-semantic -navigation]
+(cs.splice(       →  [-semantic -navigation]
 (createSignal)    → $createSignal
-)                 →  [-semantic -navigation]
+))                →  [-semantic -navigation]
 (                 → (
 1                 → 1
 )                 → )
@@ -31,9 +31,9 @@ __cs_doubled      → doubled
                   →  
 =                 → =
                   →  
-cs.splice(        →  [-semantic -navigation]
+(cs.splice(       →  [-semantic -navigation]
 (createMemo)      → $createMemo
-)                 →  [-semantic -navigation]
+))                →  [-semantic -navigation]
 (                 → (
 (                 → (
 )                 → )
@@ -183,9 +183,9 @@ __cs_setN         → setN
                   →  
 =                 → =
                   →  
-cs.splice(        →  [-semantic -navigation]
+(cs.splice(       →  [-semantic -navigation]
 (createSignal)    → $createSignal
-)                 →  [-semantic -navigation]
+))                →  [-semantic -navigation]
 (                 → (
 1                 → 1
 )                 → )
@@ -197,9 +197,9 @@ __cs_isBig        → isBig
                   →  
 =                 → =
                   →  
-cs.splice(        →  [-semantic -navigation]
+(cs.splice(       →  [-semantic -navigation]
 (createMemo)      → $createMemo
-)                 →  [-semantic -navigation]
+))                →  [-semantic -navigation]
 (                 → (
 (                 → (
 )                 → )

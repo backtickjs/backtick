@@ -13,8 +13,8 @@ it("ternary", async (t) => {
     t,
     "ternary",
     cs.lift((() => ({
-      absent: cs.splice((pick))(null),
-      present: cs.splice((pick))(4),
+      absent: (cs.splice((pick)))(null),
+      present: (cs.splice((pick)))(4),
     }))()),
   );
 });

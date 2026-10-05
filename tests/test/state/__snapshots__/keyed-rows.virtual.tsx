@@ -11,7 +11,7 @@ import { children, drawn, text } from "./dom.ts";
 // thing saying which row is which.
 async function SwappableRows() {
   return cs.lift((() => {
-    const [__cs_ids, __cs_setIds] = cs.splice((createSignal))<number[]>([1, 2, 3]);
+    const [__cs_ids, __cs_setIds] = (cs.splice((createSignal)))<number[]>([1, 2, 3]);
     const __cs_swap = () => {
       const __cs_held = __cs_ids();
       __cs_setIds(__cs_held.with(0, __cs_held[2]).with(2, __cs_held[0]));

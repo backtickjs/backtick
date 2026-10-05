@@ -15,7 +15,7 @@ const host = new Date();
 
 export default cs.lift((() => {
   // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.
-  const [__cs_held, __cs_setHeld] = cs.splice((createSignal))(cs.splice((host)));
+  const [__cs_held, __cs_setHeld] = (cs.splice((createSignal)))((cs.splice((host))));
   // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.
-  __cs_setHeld(cs.splice((host)));
+  __cs_setHeld((cs.splice((host))));
 })());

@@ -19,9 +19,9 @@ it("actionInValueScript", async (t) => {
     "actionInValueScript",
     cs.lift((() => (__cs_b: boolean) => {
       let __cs_n = 0;
-      cs.splice((valueScriptEffects));
+      (cs.splice((valueScriptEffects)));
       if (__cs_b) {
-        cs.splice((ping))();
+        (cs.splice((ping)))();
         __cs_n = 1;
       }
       return __cs_n;

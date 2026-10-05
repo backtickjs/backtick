@@ -17,17 +17,17 @@ __cs_setCount     → setCount
                   →  
 =                 → =
                   →  
-cs.splice(        →  [-semantic -navigation]
+(cs.splice(       →  [-semantic -navigation]
 (createSignal)    → $createSignal
-)                 →  [-semantic -navigation]
+))                →  [-semantic -navigation]
 (                 → (
 0                 → 0
 )                 → )
 ;                 → ;
 \n                → \n        
-cs.splice(        →  [-semantic -navigation]
+(cs.splice(       →  [-semantic -navigation]
 (onMount)         → $onMount
-)                 →  [-semantic -navigation]
+))                →  [-semantic -navigation]
 (                 → (
 (                 → (
 )                 → )
@@ -102,9 +102,9 @@ __cs_setSaid      → setSaid
                   →  
 =                 → =
                   →  
-cs.splice(        →  [-semantic -navigation]
+(cs.splice(       →  [-semantic -navigation]
 (createSignal)    → $createSignal
-)                 →  [-semantic -navigation]
+))                →  [-semantic -navigation]
 (                 → (
 "not yet"         → "not yet"
 )                 → )
@@ -125,9 +125,9 @@ onclick           → onclick
                   →  
 =>                → =>
                   →  
-cs.splice(        →  [-semantic -navigation]
+(cs.splice(       →  [-semantic -navigation]
 (onMount)         → $onMount
-)                 →  [-semantic -navigation]
+))                →  [-semantic -navigation]
 (                 → (
 (                 → (
 )                 → )

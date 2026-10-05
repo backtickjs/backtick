@@ -14,9 +14,9 @@ import { children, drawn, fontSize } from "./dom.ts";
 // which is what makes a write through either child reach the same storage.
 const SharedCounter = async ({ size }: { size: Client<Signal<number>> }) =>
   cs.lift((() => <span
-    style={"font-size: " + cs.splice((size))[0]() + "px"}
+    style={"font-size: " + (cs.splice((size)))[0]() + "px"}
     onclick={() => {
-      cs.splice((size))[1](cs.splice((size))[0]() + 1);
+      (cs.splice((size)))[1]((cs.splice((size)))[0]() + 1);
     }}
   >
     press
@@ -24,11 +24,11 @@ const SharedCounter = async ({ size }: { size: Client<Signal<number>> }) =>
 
 async function SharingPanel() {
   return cs.lift((() => {
-    const __cs_size = cs.splice((createSignal))(16);
+    const __cs_size = (cs.splice((createSignal)))(16);
     return (
       <div>
-        {cs.splice((<SharedCounter size={cs.lift((() => __cs_size)())} />))}
-        {cs.splice((<SharedCounter size={cs.lift((() => __cs_size)())} />))}
+        {(cs.splice((<SharedCounter size={cs.lift((() => __cs_size)())} />)))}
+        {(cs.splice((<SharedCounter size={cs.lift((() => __cs_size)())} />)))}
       </div>
     );
   })());

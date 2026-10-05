@@ -14,9 +14,9 @@ it("optionalProperty", async (t) => {
     t,
     "optionalProperty",
     cs.lift((() => ({
-      present: cs.splice((read))({ label: "a", inner: { z: 3 } }),
-      partial: cs.splice((read))({ label: "b", inner: {} }),
-      omitted: cs.splice((read))({ label: "c" }),
+      present: (cs.splice((read)))({ label: "a", inner: { z: 3 } }),
+      partial: (cs.splice((read)))({ label: "b", inner: {} }),
+      omitted: (cs.splice((read)))({ label: "c" }),
     }))()),
   );
 });

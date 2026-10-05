@@ -10,7 +10,7 @@ describe("a script's own `undefined`", () => {
   it("is what it was bound to, in its scope", async () => {
     assert.equal(
       await evaluate(
-        cs.lift((() => cs.splice((createRoot))(() => {
+        cs.lift((() => (cs.splice((createRoot)))(() => {
           const __cs_undefined = 1;
           return __cs_undefined;
         }))()),
@@ -19,7 +19,7 @@ describe("a script's own `undefined`", () => {
     );
     assert.equal(
       await evaluate(
-        cs.lift((() => cs.splice((createRoot))(() => ((__cs_undefined: number) => __cs_undefined + 1)(2)))()),
+        cs.lift((() => (cs.splice((createRoot)))(() => ((__cs_undefined: number) => __cs_undefined + 1)(2)))()),
       ),
       3,
     );
@@ -28,7 +28,7 @@ describe("a script's own `undefined`", () => {
   it("leaves `undefined` the value outside it", async () => {
     assert.equal(
       await evaluate(
-        cs.lift((() => cs.splice((createRoot))(() => {
+        cs.lift((() => (cs.splice((createRoot)))(() => {
           {
             const __cs_undefined = 1;
           }

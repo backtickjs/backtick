@@ -8,9 +8,9 @@ $Index           → $Index [-semantic -navigation]
 each             → each
 =                → =
 {                → {
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (rows)           → $rows
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 }                → }
 >                → >
 \n               → \n    
@@ -161,7 +161,7 @@ p                → p
 >                → >
 {                → {
 \n               → \n  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n    
@@ -172,7 +172,7 @@ throw            → throw
 \n               → \n  
 }                → }
 )())             → ` [-semantic -navigation]
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 \n               → \n
 }                → }
 $ErrorBoundary   → $ErrorBoundary [-semantic -navigation]

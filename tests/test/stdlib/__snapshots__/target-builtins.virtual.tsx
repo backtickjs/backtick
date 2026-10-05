@@ -22,14 +22,14 @@ describe("a module an app provides", () => {
   // Reached by splicing the value `createImport` made, which a bundle imports
   // from that specifier.
   it("is what that specifier resolves to", async () => {
-    assert.equal(await evaluate(cs.lift((() => cs.splice((createRoot))(() => cs.splice((greet))()))())), "hello");
+    assert.equal(await evaluate(cs.lift((() => (cs.splice((createRoot)))(() => (cs.splice((greet)))()))())), "hello");
   });
 
   it("holds what the module exports, whatever kind of value that is", async () => {
     // Grouping is done by the value a name holds rather than by a dot in the
     // name: `$storage.get(…)` is a member read on a plain object.
     assert.equal(
-      await evaluate(cs.lift((() => cs.splice((createRoot))(() => cs.splice((storage)).get("greeting")))())),
+      await evaluate(cs.lift((() => (cs.splice((createRoot)))(() => (cs.splice((storage))).get("greeting")))())),
       "hei",
     );
   });

@@ -1,0 +1,58 @@
+import * as $module0 from "solid-js/web";
+const $modules = {
+  "37pby5o43brgu:14:13": (module, exports, require) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    const web_3 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>`);
+    exports.default = ($tag0) =>
+      (() => {
+        var _el$ = _tmpl$();
+        (0, web_2.insert)(
+          _el$,
+          (0, web_3.createComponent)($tag0.Badge, {
+            n: 1,
+          }),
+          null,
+        );
+        (0, web_2.insert)(
+          _el$,
+          (0, web_3.createComponent)($tag0.Badge, {
+            n: 2,
+          }),
+          null,
+        );
+        return _el$;
+      })();
+  },
+  "37pby5o43brgu:11:9": (module, exports, require) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<b>`);
+    exports.default = () => (props) =>
+      (() => {
+        var _el$ = _tmpl$();
+        (0, web_2.insert)(_el$, () => "badge " + props.n);
+        return _el$;
+      })();
+  },
+};
+const $exports = {
+  "solid-js/web": $module0,
+};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = { exports: {} };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("37pby5o43brgu:14:13").default;
+const $cs1 = $require("37pby5o43brgu:11:9").default;
+export default $cs0({ Badge: $cs1() });

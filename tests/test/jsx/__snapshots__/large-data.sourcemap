@@ -8,9 +8,9 @@ $For                        → $For [-semantic -navigation]
 each                        → each
 =                           → =
 {                           → {
-cs.splice(                  →  [-semantic -navigation]
+(cs.splice(                 →  [-semantic -navigation]
 (orders)                    → $orders
-)                           →  [-semantic -navigation]
+))                          →  [-semantic -navigation]
 }                           → }
 >                           → >
 \n                          → \n        

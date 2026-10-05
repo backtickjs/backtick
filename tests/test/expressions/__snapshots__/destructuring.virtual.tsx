@@ -9,7 +9,7 @@ describe("destructuring", () => {
   it("arrays and objects, nested, with defaults and rest", async () => {
     assert.deepEqual(
       await evaluate(
-        cs.lift((() => cs.splice((createRoot))(() => {
+        cs.lift((() => (cs.splice((createRoot)))(() => {
           const [__cs_a, , __cs_b = 5, ...__cs_others] = [1, 2, undefined, 4, 6];
           const {
             x: __cs_x,
@@ -27,7 +27,7 @@ describe("destructuring", () => {
   it("parameters: rest, defaults and patterns", async () => {
     assert.deepEqual(
       await evaluate(
-        cs.lift((() => cs.splice((createRoot))(() => {
+        cs.lift((() => (cs.splice((createRoot)))(() => {
           const __cs_sum = (...__cs_values: number[]) =>
             __cs_values.reduce((__cs_t, __cs_v) => __cs_t + __cs_v, 0);
           const __cs_scaled = (__cs_n: number, __cs_by: number = 2) => __cs_n * __cs_by;

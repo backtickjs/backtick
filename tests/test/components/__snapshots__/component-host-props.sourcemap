@@ -5,15 +5,15 @@ span                                      → span
 class                                     → class
 =                                         → =
 {                                         → {
-cs.splice(                                →  [-semantic -navigation]
+(cs.splice(                               →  [-semantic -navigation]
 (accent)                                  → $accent
-)                                         →  [-semantic -navigation]
+))                                        →  [-semantic -navigation]
 }                                         → }
 >                                         → >
 {                                         → {
-cs.splice(                                →  [-semantic -navigation]
+(cs.splice(                               →  [-semantic -navigation]
 (label)                                   → $label
-)                                         →  [-semantic -navigation]
+))                                        →  [-semantic -navigation]
 }                                         → }
 <                                         → <
 /                                         → /
@@ -26,9 +26,9 @@ div                                       → div
 >                                         → >
 \n                                        → \n      
 {                                         → {
-cs.splice(                                →  [-semantic -navigation]
+(cs.splice(                               →  [-semantic -navigation]
 (<Swatch palette={new Palette("danger")} label={() => "one"} />)→ (<Swatch palette={new Palette("danger")} label={() => "one"} />)
-)                                         →  [-semantic -navigation]
+))                                        →  [-semantic -navigation]
 }                                         → }
 \n                                        → \n    
 <                                         → <

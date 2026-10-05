@@ -12,9 +12,9 @@ __cs_setFlag     → setFlag
                  →  
 =                → =
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (createSignal)   → $createSignal
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
 true             → true
 )                → )
@@ -31,13 +31,13 @@ __cs_setTone     → setTone
                  →  
 =                → =
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (createSignal)   → $createSignal
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 (                → (
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 Tone.Warm        → Tone.Warm
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 )                → )
 ;                → ;
 \n               → \n    
@@ -52,9 +52,9 @@ __cs_setStep     → setStep
                  →  
 =                → =
                  →  
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (createSignal)   → $createSignal
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 <                → <
 (                → (
 )                → )
@@ -98,9 +98,9 @@ false            → false
 \n               → \n          
 __cs_setTone     → setTone
 (                → (
-cs.splice(       →  [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 Tone.Cool        → Tone.Cool
-)                →  [-semantic -navigation]
+))               →  [-semantic -navigation]
 )                → )
 ;                → ;
 \n               → \n          

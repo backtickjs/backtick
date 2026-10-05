@@ -19,7 +19,7 @@ class Palette {
 async function Swatch(props: { palette: Palette; label: () => string }) {
   const accent = props.palette.accent;
   const label = props.label();
-  return cs.lift((() => <span class={cs.splice((accent))}>{cs.splice((label))}</span>)());
+  return cs.lift((() => <span class={(cs.splice((accent)))}>{(cs.splice((label)))}</span>)());
 }
 
 it("componentHostProps", async (t) => {
@@ -27,7 +27,7 @@ it("componentHostProps", async (t) => {
     t,
     "componentHostProps",
     cs.lift((() => <div>
-      {cs.splice((<Swatch palette={new Palette("danger")} label={() => "one"} />))}
+      {(cs.splice((<Swatch palette={new Palette("danger")} label={() => "one"} />)))}
     </div>)()),
   );
 });

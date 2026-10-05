@@ -9,9 +9,9 @@ style                   → style
                         →  
 +                       → +
                         →  
-cs.splice(              →  [-semantic -navigation]
+(cs.splice(             →  [-semantic -navigation]
 (size)                  → $size
-)                       →  [-semantic -navigation]
+))                      →  [-semantic -navigation]
 [                       → [
 0                       → 0
 ]                       → ]
@@ -33,16 +33,16 @@ onclick                 → onclick
                         →  
 {                       → {
 \n                      → \n      
-cs.splice(              →  [-semantic -navigation]
+(cs.splice(             →  [-semantic -navigation]
 (size)                  → $size
-)                       →  [-semantic -navigation]
+))                      →  [-semantic -navigation]
 [                       → [
 1                       → 1
 ]                       → ]
 (                       → (
-cs.splice(              →  [-semantic -navigation]
+(cs.splice(             →  [-semantic -navigation]
 (size)                  → $size
-)                       →  [-semantic -navigation]
+))                      →  [-semantic -navigation]
 [                       → [
 0                       → 0
 ]                       → ]
@@ -75,9 +75,9 @@ __cs_size               → size
                         →  
 =                       → =
                         →  
-cs.splice(              →  [-semantic -navigation]
+(cs.splice(             →  [-semantic -navigation]
 (createSignal)          → $createSignal
-)                       →  [-semantic -navigation]
+))                      →  [-semantic -navigation]
 (                       → (
 16                      → 16
 )                       → )
@@ -92,23 +92,23 @@ div                     → div
 >                       → >
 \n                      → \n        
 {                       → {
-cs.splice(              →  [-semantic -navigation]
+(cs.splice(             →  [-semantic -navigation]
 (<SharedCounter size={  → (<SharedCounter size={
 cs.lift((() =>          → cs` [-semantic -navigation]
 __cs_size               → size
 )())                    → ` [-semantic -navigation]
 } />)                   → } />)
-)                       →  [-semantic -navigation]
+))                      →  [-semantic -navigation]
 }                       → }
 \n                      → \n        
 {                       → {
-cs.splice(              →  [-semantic -navigation]
+(cs.splice(             →  [-semantic -navigation]
 (<SharedCounter size={  → (<SharedCounter size={
 cs.lift((() =>          → cs` [-semantic -navigation]
 __cs_size               → size
 )())                    → ` [-semantic -navigation]
 } />)                   → } />)
-)                       →  [-semantic -navigation]
+))                      →  [-semantic -navigation]
 }                       → }
 \n                      → \n      
 <                       → <

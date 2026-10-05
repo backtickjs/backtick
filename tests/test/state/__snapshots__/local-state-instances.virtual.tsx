@@ -11,7 +11,7 @@ import { children, drawn, fontSize } from "./dom.ts";
 // of one script, and each declares a signal of its own.
 async function OwnCounter() {
   return cs.lift((() => {
-    const [__cs_size, __cs_setSize] = cs.splice((createSignal))(16);
+    const [__cs_size, __cs_setSize] = (cs.splice((createSignal)))(16);
     return (
       <span
         style={"font-size: " + __cs_size() + "px"}
@@ -26,8 +26,8 @@ async function OwnCounter() {
 }
 
 const instances = cs.lift((() => <div>
-  {cs.splice((<OwnCounter />))}
-  {cs.splice((<OwnCounter />))}
+  {(cs.splice((<OwnCounter />)))}
+  {(cs.splice((<OwnCounter />)))}
 </div>)());
 
 describe("local state", () => {
