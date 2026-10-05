@@ -1,22 +1,9 @@
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
-import { type Plugin, transform } from "@backtickjs/compiler";
+import { pluginsFrom, transform } from "@backtickjs/compiler";
 import type { PluginConfig, TransformerExtras } from "ts-patch";
 import type ts from "typescript";
-
-// The project's `package.json`, as far as a build reads it: its name, and its
-// `backtick` key, naming the modules that make its framework's compile steps.
-interface PackageJson {
-  readonly name: string;
-  readonly backtick?: { readonly plugins?: readonly string[] };
-}
-
-// A compile step's module, as Babel's presets are: named in a config, resolved
-// from the project, its default export making the step.
-interface PluginModule {
-  default: () => Plugin;
-}
 
 /**
  * Use it from a `tsconfig.json`:
@@ -48,13 +35,12 @@ export default function transformer(
   const root = path.posix.dirname(
     program.getCompilerOptions().configFilePath as string,
   );
-  const { name, backtick } = JSON.parse(
-    readFileSync(path.join(root, "package.json"), "utf8"),
-  ) as PackageJson;
+  const packageJson = readFileSync(path.join(root, "package.json"), "utf8");
+  const { name } = JSON.parse(packageJson) as { name: string };
   // Loaded as the project resolves them, at once, as a transformer is.
-  const require = createRequire(path.resolve(root, "package.json"));
-  const plugins = (backtick?.plugins ?? []).map((specifier) =>
-    (require(specifier) as PluginModule).default(),
+  const plugins = pluginsFrom(
+    packageJson,
+    createRequire(path.resolve(root, "package.json")),
   );
   return transform(
     ts,

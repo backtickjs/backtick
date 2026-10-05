@@ -50,6 +50,7 @@ const { values, positionals } = parseArgs({
   allowPositionals: true,
   options: {
     template: { type: "string", short: "t" },
+    runtime: { type: "string", short: "r" },
     yes: { type: "boolean", short: "y" },
     "no-install": { type: "boolean" },
   },
@@ -61,6 +62,26 @@ if (values.template !== undefined && !(values.template in TEMPLATES)) {
   );
   process.exit(1);
 }
+
+// What runs your Backtick server, and the loader that compiles it for that
+// runtime.
+const RUNTIMES: Record<string, { title: string; loader: string }> = {
+  node: { title: "Node", loader: "@backtickjs/node-plugin" },
+  bun: { title: "Bun", loader: "@backtickjs/bun-plugin" },
+};
+
+if (values.runtime !== undefined && !(values.runtime in RUNTIMES)) {
+  console.error(
+    `There's no runtime named ${values.runtime}. Pick one of: ${Object.keys(RUNTIMES).join(", ")}.`,
+  );
+  process.exit(1);
+}
+
+// The package manager this was run with, as `npm create` and its peers say,
+// which is also the runtime to suggest: `bun create` suggests Bun.
+const manager = (process.env.npm_config_user_agent ?? "npm").split("/")[0];
+const run = ["npm", "pnpm", "yarn", "bun"].includes(manager) ? manager : "npm";
+const suggestedRuntime = run === "bun" ? "bun" : "node";
 
 // Asked only what the command line didn't say, as `create-expo-app` asks.
 const answers = await prompts(
@@ -81,6 +102,16 @@ const answers = await prompts(
         value,
       })),
     },
+    {
+      type: values.runtime !== undefined || values.yes ? null : "select",
+      name: "runtime",
+      message: "Which runtime?",
+      choices: Object.entries(RUNTIMES).map(([value, runtime]) => ({
+        title: runtime.title,
+        value,
+      })),
+      initial: Object.keys(RUNTIMES).indexOf(suggestedRuntime),
+    },
   ],
   { onCancel: () => process.exit(1) },
 );
@@ -89,6 +120,8 @@ const name: string = positionals[0] ?? answers.name ?? "my-app";
 const templateName: string =
   values.template ?? answers.template ?? "react-native";
 const template = TEMPLATES[templateName]!;
+const runtimeName: string =
+  values.runtime ?? answers.runtime ?? suggestedRuntime;
 
 const target = path.resolve(name);
 const slug = path.basename(target);
@@ -110,6 +143,16 @@ cpSync(new URL(`../templates/${templateName}/`, import.meta.url), target, {
 renameSync(path.join(target, "gitignore"), path.join(target, ".gitignore"));
 rewriteJson(path.join(target, "package.json"), (json) => {
   json.name = slug;
+  // The templates ship Node's loader; another runtime gets its own, which is
+  // how `scripts/start.mjs` knows what to run.
+  const loader = RUNTIMES[runtimeName]!.loader;
+  if (!(loader in json.dependencies)) {
+    const version = json.dependencies["@backtickjs/node-plugin"];
+    delete json.dependencies["@backtickjs/node-plugin"];
+    json.dependencies = Object.fromEntries(
+      Object.entries({ ...json.dependencies, [loader]: version }).sort(),
+    );
+  }
 });
 if (existsSync(path.join(target, "app.json"))) {
   rewriteJson(path.join(target, "app.json"), (json) => {
@@ -118,10 +161,6 @@ if (existsSync(path.join(target, "app.json"))) {
   });
 }
 console.log("✔ Created project files.");
-
-// The package manager this was run with, as `npm create` and its peers say.
-const manager = (process.env.npm_config_user_agent ?? "npm").split("/")[0];
-const run = ["npm", "pnpm", "yarn", "bun"].includes(manager) ? manager : "npm";
 
 if (!values["no-install"]) {
   console.log(`> ${run} install`);

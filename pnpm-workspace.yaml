@@ -10,7 +10,6 @@ packages:
   - "tests"
   # A stand-in third-party library the tests bind to.
   - "tests/fixtures/*"
-  - "examples/*"
 
 linkWorkspacePackages: true
 preferWorkspacePackages: true
@@ -22,7 +21,8 @@ allowBuilds:
   esbuild: true
 # `bun-types` imports `undici-types` in its declarations without depending on
 # it, so it resolved only while pnpm happened to hoist a copy. Declared here so
-# the Bun example typechecks whatever else the workspace installs.
+# what uses Bun's types (the site, the Bun plugin) typechecks whatever else the
+# workspace installs.
 packageExtensions:
   bun-types:
     dependencies:

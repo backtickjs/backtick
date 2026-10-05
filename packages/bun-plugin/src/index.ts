@@ -1,12 +1,15 @@
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
-import { type Plugin, transform } from "@backtickjs/compiler";
+import { compileModule, pluginsFrom } from "@backtickjs/compiler";
 import { plugin } from "bun";
 import ts from "typescript";
 
-const compilerOptions = loadCompilerOptions();
-const plugins = loadPlugins();
+const packageJson = path.join(process.cwd(), "package.json");
+const plugins = pluginsFrom(
+  readFileSync(packageJson, "utf8"),
+  createRequire(packageJson),
+);
 
 /**
  * Use it from a `bunfig.toml`:
@@ -34,102 +37,34 @@ plugin({
     build.onLoad({ filter: /\.tsx?$/ }, (args) => {
       const source = readFileSync(args.path, "utf8");
 
-      // Only first-party files that actually use `cs`...`` need rewriting;
-      // everything else is passed through untouched. Returning `undefined` here
+      // What the project installed is left to Bun. Returning `undefined` here
       // throws on Bun >= 1.3 ("onLoad() expects an object returned"), so hand
       // back the original source with a plain TS/TSX loader instead.
-      if (args.path.includes("node_modules") || !source.includes("cs`")) {
+      if (args.path.includes("node_modules")) {
         return {
           contents: source,
           loader: args.path.endsWith(".tsx") ? "tsx" : "ts",
         };
       }
 
+      // The project's own files are all compiled here, not only those with a
+      // script: Bun reads only the root `tsconfig.json`, and a server beside an
+      // app has its own, nearer one.
       const fileName =
         path.relative(process.cwd(), args.path).split(path.sep).join("/") ||
         args.path;
-
-      const diagnostics: ts.Diagnostic[] = [];
-      const { outputText } = ts.transpileModule(source, {
-        fileName,
-        compilerOptions,
-        transformers: {
-          before: [
-            transform(ts, (diagnostic) => diagnostics.push(diagnostic), {
-              plugins,
-            }),
-            addBunPragma(ts),
-          ],
-        },
+      const code = compileModule(ts, fileName, source, {
+        plugins,
+        before: [addBunPragma(ts)],
       });
 
-      // A script the compiler refused is emitted with `null` where the refused
-      // code was, so it must not load.
-      const errors = diagnostics.filter(
-        (diagnostic) => diagnostic.category === ts.DiagnosticCategory.Error,
-      );
-
-      if (errors.length > 0) {
-        throw new Error(
-          ts.formatDiagnostics(errors, {
-            getCanonicalFileName: (name) => name,
-            getCurrentDirectory: () => process.cwd(),
-            getNewLine: () => "\n",
-          }),
-        );
-      }
-
       return {
-        contents: ascii(outputText),
+        contents: ascii(code),
         loader: args.path.endsWith(".tsx") ? "jsx" : "js",
       };
     });
   },
 });
-
-// A compile step's module, as Babel's presets are: named in a config, resolved
-// from the project, its default export making the step.
-interface PluginModule {
-  default: () => Plugin;
-}
-
-// The compile steps the project's `package.json` names under `backtick`.
-function loadPlugins(): Plugin[] {
-  const file = path.join(process.cwd(), "package.json");
-  const { backtick } = JSON.parse(readFileSync(file, "utf8")) as {
-    backtick?: { plugins?: readonly string[] };
-  };
-  const require = createRequire(file);
-  return (backtick?.plugins ?? []).map((specifier) =>
-    (require(specifier) as PluginModule).default(),
-  );
-}
-
-function loadCompilerOptions(): ts.CompilerOptions {
-  const configPath = ts.findConfigFile(
-    process.cwd(),
-    ts.sys.fileExists,
-    "tsconfig.json",
-  );
-
-  let compilerOptions: ts.CompilerOptions = {};
-  if (configPath) {
-    const { config } = ts.readConfigFile(configPath, ts.sys.readFile);
-    ({ options: compilerOptions } = ts.convertCompilerOptionsFromJson(
-      config?.compilerOptions,
-      path.dirname(configPath),
-    ));
-  }
-
-  // The `// @bun` pragma trick (see addBunPragma) only works with an inline
-  // source map, so force it on regardless of the project's configuration.
-  return {
-    ...compilerOptions,
-    sourceMap: false,
-    inlineSourceMap: true,
-    inlineSources: true,
-  };
-}
 
 // Code with every character past ASCII escaped, `\uXXXX`: Bun reads a file
 // stamped `// @bun` (below) as Latin-1, as its own transpiler writes them, so
