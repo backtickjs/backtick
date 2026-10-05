@@ -38,7 +38,7 @@ it("refuses a capture spliced where it is shadowed", async () => {
           return first + total + ${again()};
         }
       }`,
-      external: {},
+      packageVersions: {},
     }),
     {
       message:

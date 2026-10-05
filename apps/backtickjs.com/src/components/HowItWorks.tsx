@@ -48,7 +48,7 @@ const BENEFITS: Benefit[] = [
     name: "Under 1 KB in your app",
     text:
       "The client is one component, with no dependencies. Screens run on the" +
-      " React Native the app already ships.",
+      " React Native your app already ships.",
   },
   {
     icon: ICONS.map,

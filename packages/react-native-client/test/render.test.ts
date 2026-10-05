@@ -60,11 +60,15 @@ it("draws a server's screen with the app's React Native", async () => {
   const { screen } = await import(file);
   const built = await bundler.build({
     input: screen,
-    external: { react: "19.2.3", "react-native": "0.86.3" },
+    packageVersions: { react: "19.2.3", "react-native": "0.86.3" },
   });
   const { code } = built.generate({ format: "cjs" });
-  globalThis.fetch = async (url) => {
+  globalThis.fetch = async (url, init) => {
     assert.equal(url, "https://example.com/home");
+    assert.equal(
+      new Headers(init?.headers).get("backtick-package-versions"),
+      '{"react":"19.2.3","react-native":"0.86.3"}',
+    );
     return new Response(code);
   };
 
@@ -85,6 +89,7 @@ it("draws a server's screen with the app's React Native", async () => {
             "react/jsx-runtime": JSXRuntime,
             "react-native": ReactNativeWeb,
           },
+          packageVersions: { react: "19.2.3", "react-native": "0.86.3" },
           fallback: "loading",
         }),
       ),
@@ -133,6 +138,7 @@ it("throws, for an error boundary, a bundle the app can't run", async () => {
           createElement(Backtick, {
             url: "https://example.com/map",
             modules: { react: React },
+            packageVersions: { react: "19.2.3" },
           }),
         ),
       ),

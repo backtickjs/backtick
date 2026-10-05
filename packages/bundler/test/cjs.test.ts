@@ -12,7 +12,7 @@ const greet = createImport<(name: string) => string>({
 test("as CommonJS, the value is `module.exports`, its imports `require` calls", async () => {
   const bundle = await bundler.build({
     input: greet,
-    external: { app: "1.0.0" },
+    packageVersions: { app: "1.0.0" },
   });
   const { code } = bundle.generate({ format: "cjs" });
   assert.match(
@@ -26,7 +26,7 @@ test("as CommonJS, the value is `module.exports`, its imports `require` calls", 
 test("a bundle is the same in either format but for its imports and export", async () => {
   const bundle = await bundler.build({
     input: greet,
-    external: { app: "1.0.0" },
+    packageVersions: { app: "1.0.0" },
   });
   const body = (code: string) =>
     code
@@ -48,7 +48,7 @@ test("a bundle is the same in either format but for its imports and export", asy
 test("a CommonJS bundle runs with the `require` its client hands it", async () => {
   const bundle = await bundler.build({
     input: { greet, name: "world" },
-    external: { app: "1.0.0" },
+    packageVersions: { app: "1.0.0" },
   });
   const { code } = bundle.generate({ format: "cjs" });
   const module = { exports: {} as unknown };

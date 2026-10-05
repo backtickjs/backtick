@@ -44,6 +44,12 @@ export interface BacktickProps {
   readonly url: string;
   /** What the bundle may require. Read once a bundle arrives. */
   readonly modules: Modules;
+  /**
+   * The packages `modules` come from, each at its exact version:
+   * `{ react: "19.2.3", "react-native": "0.86.3" }`. Sent with the request,
+   * as the `backtick-package-versions` header, for the server to bundle for.
+   */
+  readonly packageVersions: Readonly<Record<string, string>>;
   /** The request's options: headers, credentials. */
   readonly init?: RequestInit;
   /** Drawn while the bundle loads. */
@@ -64,6 +70,7 @@ type Loaded =
 export function Backtick({
   url,
   modules,
+  packageVersions,
   init,
   fallback = null,
 }: BacktickProps): ReactNode {
@@ -71,7 +78,9 @@ export function Backtick({
   useEffect(() => {
     let current = true;
     setLoaded({ status: "loading" });
-    fetch(url, init)
+    const headers = new Headers(init?.headers);
+    headers.set("backtick-package-versions", JSON.stringify(packageVersions));
+    fetch(url, { ...init, headers })
       .then(async (response) => {
         if (!response.ok) {
           throw new Error(`${url} answered ${response.status}.`);
@@ -85,8 +94,8 @@ export function Backtick({
     return () => {
       current = false;
     };
-    // A new address is a new screen; the modules and options are the app's,
-    // fixed for its life.
+    // A new address is a new screen; the modules, versions and options are the
+    // app's, fixed for its life.
   }, [url]);
   if (loaded.status === "failed") {
     throw loaded.error;

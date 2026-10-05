@@ -13,11 +13,13 @@ const IDENTIFIER = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
  */
 export interface Names {
   readonly imports: Map<string, { from: string; name: string; local: string }>;
-  readonly external: Readonly<Record<string, string>>;
+  readonly packageVersions: Readonly<Record<string, string>>;
 }
 
-export function createNames(external: Readonly<Record<string, string>>): Names {
-  return { imports: new Map(), external };
+export function createNames(
+  packageVersions: Readonly<Record<string, string>>,
+): Names {
+  return { imports: new Map(), packageVersions };
 }
 
 // A string, as a literal: `<` escaped, so no `</script>` or `<!--` appears
@@ -84,10 +86,10 @@ export function imported(
   // Where a script's import is written: a plugin's own (a framework's compile
   // step) are the plugin's, trusted as it is.
   const pkg = packageOf(from);
-  const provided = names.external[pkg];
+  const provided = names.packageVersions[pkg];
   if (provided === undefined) {
-    const packages = Object.entries(names.external).map(
-      ([external, at]) => `${external}@${at}`,
+    const packages = Object.entries(names.packageVersions).map(
+      ([provided, at]) => `${provided}@${at}`,
     );
     throw new Error(
       `Can't import \`${name}\` from "${from}": the client provides ` +

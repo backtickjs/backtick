@@ -9,7 +9,7 @@ const sourcemap = process.env.NODE_ENV === "production" ? undefined : "inline";
 export async function toHtml(element: JSX.Element): Promise<string> {
   const bundle = await bundler.build({
     input: cs`$createRoot(document.getElementById("app")!).render($element)`,
-    external: { react: "19.2.3", "react-dom": "19.2.3" },
+    packageVersions: { react: "19.2.3", "react-dom": "19.2.3" },
   });
 
   const { code } = bundle.generate({ format: "es", sourcemap });

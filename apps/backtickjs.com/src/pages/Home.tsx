@@ -59,8 +59,14 @@ export async function Home() {
 
       <Section
         eyebrow="Setup"
-        title="One route on the server. One component in the app."
-        lede="Your existing app keeps its navigation, auth and native modules. Backtick draws the screens you choose, with the React Native the app already ships. Works with Expo SDK 57, React Native 0.86 and React 19.2."
+        title={cs`(
+          <>
+            One route on the server.
+            <br />
+            One component in your app.
+          </>
+        )`}
+        lede="Your existing app keeps its navigation, auth and native modules. Backtick draws the screens you choose, with the React Native your app already ships. Works with Expo SDK 57, React Native 0.86 and React 19.2."
       >
         <Setup />
       </Section>

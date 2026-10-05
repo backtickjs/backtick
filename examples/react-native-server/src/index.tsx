@@ -1,10 +1,6 @@
 import { bundler } from "@backtickjs/bundler";
 import { Home } from "./Home.js";
 
-// What the app was built with, and so what a bundle may require: the
-// versions in `examples/react-native-app/package.json`.
-const external = { react: "19.2.3", "react-native": "0.86.3" };
-
 // This run of the server. The watcher starts a new one for every change, so
 // an app that sees a new one has a screen to reload.
 const run = crypto.randomUUID();
@@ -14,8 +10,13 @@ const server = Bun.serve({
   hostname: "0.0.0.0",
   port: 5179,
   routes: {
-    "/home": async () => {
-      const bundle = await bundler.build({ input: <Home />, external });
+    "/home": async (request) => {
+      // What the requesting app was built with, as it says, and so what its
+      // bundle may require.
+      const packageVersions = JSON.parse(
+        request.headers.get("backtick-package-versions")!,
+      );
+      const bundle = await bundler.build({ input: <Home />, packageVersions });
       const { code } = bundle.generate({ format: "cjs" });
       return new Response(code, {
         headers: {

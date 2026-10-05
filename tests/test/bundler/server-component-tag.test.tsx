@@ -18,7 +18,7 @@ it("refuses a server component as a tag in a script", async () => {
           <$Rule />
         </div>
       )`,
-      external: {},
+      packageVersions: {},
     }),
     {
       message:

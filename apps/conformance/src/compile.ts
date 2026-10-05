@@ -60,7 +60,7 @@ export async function compile(test: Test): Promise<Compiled> {
 
   const built = await bundler.build({
     input: script,
-    external: { test262: "1.0.0" },
+    packageVersions: { test262: "1.0.0" },
   });
   return { bundle: built.generate({ format: "es" }).code, imports };
 }

@@ -8,12 +8,15 @@ import * as ReactNative from "react-native";
 import { ActivityIndicator, ScrollView, Text, View } from "react-native";
 
 // What a screen's bundle may require: the packages this app was built with.
-// The server bundles for these versions (examples/react-native-server).
 const modules = {
   react: React,
   "react/jsx-runtime": JSXRuntime,
   "react-native": ReactNative,
 };
+
+// The versions those packages are at, in `package.json`: what the server
+// bundles for.
+const packageVersions = { react: "19.2.3", "react-native": "0.86.3" };
 
 // The example server runs where Expo's dev server does, the computer this app
 // was started from, unless told otherwise.
@@ -36,6 +39,7 @@ export default function App() {
           <Backtick
             url={`${server}/home?reload=${reload}`}
             modules={modules}
+            packageVersions={packageVersions}
             fallback={<ActivityIndicator style={{ marginTop: 48 }} />}
           />
         </Boundary>

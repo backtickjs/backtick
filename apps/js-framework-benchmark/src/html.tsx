@@ -5,7 +5,7 @@ import { Main } from "./Main.js";
 
 const bundle = await bundler.build({
   input: cs`$render(() => ${(<Main />)}, document.getElementById("main")!)`,
-  external: { "solid-js": "1.9.14" },
+  packageVersions: { "solid-js": "1.9.14" },
 });
 
 const { code } = bundle.generate({ format: "es" });

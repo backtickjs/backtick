@@ -3,21 +3,21 @@ import { it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
 const $module0 = {
-  id: "qfjmdn3bl9zp:33:13",
+  id: "3foflagpnhi6b:33:13",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => {\n    const total = 1;\n    const first = $splice0(total);\n    {\n        const total = 2;\n        return first + total + $splice1();\n    }\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAgCgB,CAAAA,QAAA,EAAAC,QAAA;IACR,MAAMC,KAAK,GAAG,CAAC;IACf,MAAMC,KAAK,GAAGH,QAAA,CAAAE,KAAA,CAAkB;IAChC;QACE,MAAMA,KAAK,GAAG,CAAC;QACf,OAAOC,KAAK,GAAGD,KAAK,GAAGD,QAAA,EAAU;IACnC;AACF,CAAC","names":["$splice0","$splice1","total","first"],"ignoreList":[],"sources":["bundler/spliced-into-shadow.test.tsx"]}',
   dependencies: [],
   params: [
-    { kind: "splice", bindings: ["total$qfjmdn3bl9zp$0"] },
+    { kind: "splice", bindings: ["total$3foflagpnhi6b$0"] },
     { kind: "splice", bindings: [] },
   ],
 };
 const $module1 = {
-  id: "qfjmdn3bl9zp:35:29",
+  id: "3foflagpnhi6b:35:29",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $capture0 => $capture0;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkCgCA,SAAA,IAAAA,SAAK","names":["$capture0"],"ignoreList":[],"sources":["bundler/spliced-into-shadow.test.tsx"]}',
   dependencies: [],
-  params: [{ kind: "capture", key: "total$qfjmdn3bl9zp$0" }],
+  params: [{ kind: "capture", key: "total$3foflagpnhi6b$0" }],
 };
 // A fragment written under the outer `total`, carried by host code into a hole
 // inside a block that shadows it.
@@ -44,7 +44,7 @@ it("refuses a capture spliced where it is shadowed", async () => {
   await assert.rejects(
     bundler.build({
       input: cs.create($module0, [keep(cs.create($module1, [])), again()]),
-      external: {},
+      packageVersions: {},
     }),
     {
       message:

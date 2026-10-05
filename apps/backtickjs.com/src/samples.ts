@@ -88,16 +88,15 @@ export const SERVER = `
 import { bundler } from "@backtickjs/bundler";
 import { Home } from "./Home.js";
 
-// The versions your app was built with. A bundle
-// never asks the phone for anything else.
-const external = { react: "19.2.3", "react-native": "0.86.3" };
-
 Bun.serve({
   routes: {
-    "/screens/home": async () => {
+    "/screens/home": async (request) => {
+      const packageVersions = JSON.parse(
+        request.headers.get("backtick-package-versions"),
+      );
       const bundle = await bundler.build({
         input: <Home />,
-        external,
+        packageVersions,
       });
       const { code } = bundle.generate({ format: "cjs" });
       return new Response(code);
@@ -113,9 +112,14 @@ import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNative from "react-native";
 
 const modules = {
-  react: React,
+  "react": React,
   "react/jsx-runtime": JSXRuntime,
   "react-native": ReactNative,
+};
+
+const packageVersions = {
+  "react": "19.2.3",
+  "react-native": "0.86.3",
 };
 
 export default function App() {
@@ -123,6 +127,7 @@ export default function App() {
     <Backtick
       url="https://api.example.com/screens/home"
       modules={modules}
+      packageVersions={packageVersions}
       fallback={<ReactNative.ActivityIndicator />}
     />
   );

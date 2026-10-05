@@ -38,7 +38,7 @@ it("refuses a capture spliced where it is shadowed", async () => {
           return __cs_first + __cs_total + (cs.splice(again()));
         }
       })()),
-      external: {},
+      packageVersions: {},
     }),
     {
       message:

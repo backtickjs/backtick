@@ -16,7 +16,7 @@ const STYLE = await tailwind();
 export async function toHtml(element: JSX.Element): Promise<string> {
   const bundle = await bundler.build({
     input: cs`$render(() => $element, document.getElementById("app")!)`,
-    external: { "solid-js": "1.9.14" },
+    packageVersions: { "solid-js": "1.9.14" },
   });
 
   const { code } = bundle.generate({ format: "es", sourcemap });

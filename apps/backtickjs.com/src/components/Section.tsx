@@ -11,7 +11,8 @@ export async function Section({
 }: {
   id?: string;
   eyebrow: string;
-  title: string;
+  // Text, or a script when it breaks where the text alone wouldn't.
+  title: string | Client<JSX.Element>;
   // Text, or a script when it holds code to set apart.
   lede: string | Client<JSX.Element>;
   children: JSX.Element;

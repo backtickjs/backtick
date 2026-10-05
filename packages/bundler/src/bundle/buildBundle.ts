@@ -69,9 +69,9 @@ const rootScope: Scope = { bindings: new Set() };
 // unique name, so there is nothing to disambiguate and nothing to rename.
 export async function buildBundle(
   value: Spliceable,
-  external: Readonly<Record<string, string>>,
+  packageVersions: Readonly<Record<string, string>>,
 ): Promise<BundleTree> {
-  const names = createNames(external);
+  const names = createNames(packageVersions);
   const elementExpansions: ElementExpansions = new WeakMap();
   // Each script's number, in the order rendering first reaches it. Two
   // scripts written at one source location are one declaration, so the first
