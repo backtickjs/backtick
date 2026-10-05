@@ -101,8 +101,19 @@ function compilerOptionsFor(
         directoryOf(configPath),
       ).options;
     }
+    // Where `tsc` would write its output says nothing about a file compiled
+    // where it loads, but a source map written with it names the file relative
+    // to that output, and a runtime resolves the name relative to the file.
+    const {
+      outDir: _outDir,
+      outFile: _outFile,
+      rootDir: _rootDir,
+      sourceRoot: _sourceRoot,
+      mapRoot: _mapRoot,
+      ...compiling
+    } = fromConfig;
     options = {
-      ...fromConfig,
+      ...compiling,
       module: ts.ModuleKind.ESNext,
       target: ts.ScriptTarget.ESNext,
       sourceMap: false,

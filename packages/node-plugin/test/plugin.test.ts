@@ -38,3 +38,26 @@ test("a .tsx entry starts in a package that isn't an ES module one", () => {
   assert.equal(status, 0);
   assert.equal(stdout, "42\n");
 });
+
+test("a stack trace points at the line written, in the file written", async () => {
+  const { throwsOnLine6, throwsOnLine7 } = await import("./fixtures/stack.ts");
+  for (const [fail, line] of [
+    [throwsOnLine6, 6],
+    [throwsOnLine7, 7],
+  ] as const) {
+    const stack = stackOf(fail);
+    assert.ok(
+      stack.includes(`${import.meta.dirname}/fixtures/stack.ts:${line}:`),
+      stack,
+    );
+  }
+});
+
+function stackOf(fail: () => void): string {
+  try {
+    fail();
+  } catch (error) {
+    return (error as Error).stack ?? "";
+  }
+  return "";
+}

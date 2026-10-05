@@ -53,13 +53,10 @@ plugin({
       const fileName =
         path.relative(process.cwd(), args.path).split(path.sep).join("/") ||
         args.path;
-      const code = compileModule(ts, fileName, source, {
-        plugins,
-        before: [addBunPragma(ts)],
-      });
+      const code = compileModule(ts, fileName, source, { plugins });
 
       return {
-        contents: ascii(code),
+        contents: ascii(stampBun(code)),
         loader: args.path.endsWith(".tsx") ? "jsx" : "js",
       };
     });
@@ -85,19 +82,21 @@ function ascii(code: string): string {
 //
 // This relies on undocumented Bun internals and could break on any Bun upgrade.
 // The proper fix would be a real Bun plugin API for handing back a source map.
-function addBunPragma(
-  ts: typeof import("typescript"),
-): ts.TransformerFactory<ts.SourceFile> {
-  return (_context) => (sourceFile) => {
-    const [first] = sourceFile.statements;
-    if (first) {
-      ts.addSyntheticLeadingComment(
-        first,
-        ts.SyntaxKind.SingleLineCommentTrivia,
-        " @bun",
-        true,
-      );
-    }
-    return sourceFile;
-  };
+//
+// Bun reads the pragma only on the very first line, so it's written into the
+// text rather than onto the first statement, where a leading comment would push
+// it down. The map gains an empty first line to match.
+const MAP = "//# sourceMappingURL=data:application/json;base64,";
+
+function stampBun(code: string): string {
+  const at = code.lastIndexOf(MAP);
+  if (at === -1) {
+    return `// @bun\n${code}`;
+  }
+  const map = JSON.parse(
+    Buffer.from(code.slice(at + MAP.length).trim(), "base64").toString("utf8"),
+  ) as { mappings: string };
+  map.mappings = `;${map.mappings}`;
+  const encoded = Buffer.from(JSON.stringify(map)).toString("base64");
+  return `// @bun\n${code.slice(0, at)}${MAP}${encoded}\n`;
 }

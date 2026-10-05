@@ -14,7 +14,7 @@
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",
-    "test": "node --import ./dist/index.js --test \"test/**/*.test.ts\"",
+    "test": "node --enable-source-maps --import ./dist/index.js --test \"test/**/*.test.ts\"",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "clean": "rm -rf node_modules dist .turbo",

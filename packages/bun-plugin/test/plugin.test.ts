@@ -17,3 +17,24 @@ test("a compiled file's text past ASCII loads as written", async () => {
   const { icon } = await import("./fixtures/unicode.ts");
   expect(icon).toBe("🏡 café");
 });
+
+test("a stack trace points at the line written, in the file written", async () => {
+  const { throwsOnLine6, throwsOnLine7 } = await import("./fixtures/stack.ts");
+  for (const [fail, line] of [
+    [throwsOnLine6, 6],
+    [throwsOnLine7, 7],
+  ] as const) {
+    expect(stackOf(fail)).toContain(
+      `${import.meta.dir}/fixtures/stack.ts:${line}:`,
+    );
+  }
+});
+
+function stackOf(fail: () => void): string {
+  try {
+    fail();
+  } catch (error) {
+    return (error as Error).stack ?? "";
+  }
+  return "";
+}

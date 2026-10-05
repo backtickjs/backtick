@@ -1,1 +1,4 @@
 dist/
+# One-line functions on consecutive lines, so a map a line off is wrong for
+# both: kept as written.
+test/fixtures/stack.ts
