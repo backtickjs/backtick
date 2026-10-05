@@ -97,7 +97,7 @@
 
 /* One line of highlighted code, and one marked added. */
 @utility code-line {
-  min-height: 1.7em;
+  min-height: 1lh;
   padding-inline: 20px;
   white-space: pre;
 }

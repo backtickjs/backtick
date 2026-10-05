@@ -52,6 +52,11 @@ export async function DeployDemo() {
     })),
   );
 
+  // As tall as the longest version, in lines plus the padding, so no version
+  // scrolls and switching between them moves nothing.
+  const tallest = Math.max(...deploys.map((deploy) => deploy.lines.length));
+  const height = `calc(${tallest}lh + 2rem)`;
+
   return cs`{
     const [step, setStep] = $createSignal(0);
     // How many deploys have landed. Each one remounts the toast and the
@@ -122,7 +127,10 @@ export async function DeployDemo() {
                   {"● deployed " + $deploys[step()].id}
                 </span>
               </div>
-              <pre class="m-0 box-border h-[460px] overflow-auto py-4 font-mono text-[13px] leading-[1.7]">
+              <pre
+                class="m-0 box-border overflow-x-auto py-4 font-mono text-[15px] leading-[1.6]"
+                style={{ height: $height }}
+              >
                 <$For each={$deploys[step()].lines}>
                   {(line) => (
                     <div
@@ -142,20 +150,19 @@ export async function DeployDemo() {
             </div>
           </div>
 
-          <div class="grid flex-[1_1_316px] content-center justify-items-center">
+          <div class="mx-auto grid max-w-full flex-[0_0_364px] content-center justify-items-center px-6">
             {/* The device. 316 by 660 with the bezel taken off both sides is
                 a screen close to an iPhone's 19.5:9. */}
             <div class="relative box-border h-[660px] w-[316px] max-w-full rounded-[52px] bg-[#1c1c1f] p-[11px] shadow-[inset_0_0_0_1px_#3f3f46,inset_0_0_0_5px_#0b0b0d,0_30px_60px_-20px_rgb(0_0_0/0.7)]">
               <div class="absolute top-[22px] left-1/2 z-[3] h-[26px] w-[92px] -translate-x-1/2 rounded-full bg-black" />
               <div class="relative h-full overflow-hidden rounded-[41px] bg-[#f6f5f2] font-ios text-[#111]">
-                <div class="flex h-8 items-center justify-between px-7 pt-4 text-sm font-semibold">
+                <div class="flex h-8 items-center px-7 pt-4 text-sm font-semibold">
                   <span>9:41</span>
-                  <span>●●● ▮</span>
                 </div>
 
                 <$For each={pushes() > 0 ? [pushes()] : []}>
                   {() => (
-                    <div class="absolute top-[58px] left-1/2 z-[2] -ml-24 w-48 animate-toast rounded-full bg-[#111]/90 px-3 py-2 text-center text-xs font-semibold text-white shadow-lg">
+                    <div class="absolute top-[58px] left-1/2 z-[2] -translate-x-1/2 animate-toast whitespace-nowrap rounded-full bg-[#111]/90 px-3 py-2 text-center text-xs font-semibold text-white shadow-lg">
                       {"↓ New screen from server · " + $deploys[step()].id}
                     </div>
                   )}

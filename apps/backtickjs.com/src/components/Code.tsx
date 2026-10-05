@@ -22,7 +22,7 @@ export async function Code({
         </div>
         <span class="font-mono text-xs text-code-muted">{$file}</span>
       </div>
-      <pre class="m-0 overflow-x-auto py-4 font-mono text-[13px] leading-[1.7]">
+      <pre class="m-0 overflow-x-auto py-4 font-mono text-[15px] leading-[1.6]">
         {$lines.map((line) => (
           <div class={line.added ? "code-line code-added" : "code-line"}>
             {line.tokens.map((token) => (
