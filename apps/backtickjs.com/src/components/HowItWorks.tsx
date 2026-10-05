@@ -42,8 +42,8 @@ const BENEFITS: Benefit[] = [
       " screen.",
   },
   {
-    // `@backtickjs/react-native-client`'s dist/index.js, gzipped: re-measure
-    // before the client grows past it.
+    // `@backtickjs/react-native-client`'s dist/index.js, minified as an app's
+    // release build is, then gzipped. Re-measure as the client grows.
     icon: ICONS.package,
     name: "Under 1 KB in your app",
     text:

@@ -108,6 +108,7 @@ Bun.serve({
 export const APP = `
 import { Backtick } from "@backtickjs/react-native-client";
 import * as React from "react";
+import { Suspense } from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNative from "react-native";
 
@@ -124,12 +125,13 @@ const packageVersions = {
 
 export default function App() {
   return (
-    <Backtick
-      url="https://api.example.com/screens/home"
-      modules={modules}
-      packageVersions={packageVersions}
-      fallback={<ReactNative.ActivityIndicator />}
-    />
+    <Suspense fallback={<ReactNative.ActivityIndicator />}>
+      <Backtick
+        url="https://api.example.com/screens/home"
+        modules={modules}
+        packageVersions={packageVersions}
+      />
+    </Suspense>
   );
 }
 `;

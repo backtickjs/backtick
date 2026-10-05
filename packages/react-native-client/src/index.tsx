@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useState } from "react";
+import { type ReactNode, use } from "react";
 
 /**
  * What a bundle may require, by specifier: the packages the app was built
@@ -10,7 +10,7 @@ import { type ReactNode, useEffect, useState } from "react";
  *     import * as ReactNative from "react-native";
  *
  *     const modules = {
- *       react: React,
+ *       "react": React,
  *       "react/jsx-runtime": JSXRuntime,
  *       "react-native": ReactNative,
  *     };
@@ -52,53 +52,57 @@ export interface BacktickProps {
   readonly packageVersions: Readonly<Record<string, string>>;
   /** The request's options: headers, credentials. */
   readonly init?: RequestInit;
-  /** Drawn while the bundle loads. */
-  readonly fallback?: ReactNode;
 }
 
-type Loaded =
-  | { readonly status: "loading" }
-  | { readonly status: "drawn"; readonly node: ReactNode }
-  | { readonly status: "failed"; readonly error: unknown };
+// One request per address, shared by every render and `preload` that asks
+// for it. It lives outside the component because one that suspends keeps no
+// state of its own.
+const screens = new Map<string, Promise<ReactNode>>();
 
-/**
- * A server's screen: the bundle at `url`, fetched, run with the app's
- * modules, and drawn where this stands. A new `url` loads again. A bundle that
- * can't be loaded or run throws where this is drawn, for an error boundary
- * above it to catch, as any component's error is.
- */
-export function Backtick({
+// The screen at `url`: fetched once per `url` until `invalidate`. A failure is
+// kept too, so the render that suspended on it sees it and throws it; to
+// retry, `invalidate` first, as an error boundary's reset does.
+function load({
   url,
   modules,
   packageVersions,
   init,
-  fallback = null,
-}: BacktickProps): ReactNode {
-  const [loaded, setLoaded] = useState<Loaded>({ status: "loading" });
-  useEffect(() => {
-    let current = true;
-    setLoaded({ status: "loading" });
+}: BacktickProps): Promise<ReactNode> {
+  let screen = screens.get(url);
+  if (screen === undefined) {
     const headers = new Headers(init?.headers);
     headers.set("backtick-package-versions", JSON.stringify(packageVersions));
-    fetch(url, { ...init, headers })
-      .then(async (response) => {
-        if (!response.ok) {
-          throw new Error(`${url} answered ${response.status}.`);
-        }
-        return evaluate(await response.text(), modules) as ReactNode;
-      })
-      .then(
-        (node) => current && setLoaded({ status: "drawn", node }),
-        (error: unknown) => current && setLoaded({ status: "failed", error }),
-      );
-    return () => {
-      current = false;
-    };
-    // A new address is a new screen; the modules, versions and options are the
-    // app's, fixed for its life.
-  }, [url]);
-  if (loaded.status === "failed") {
-    throw loaded.error;
+    screen = fetch(url, { ...init, headers }).then(async (response) => {
+      if (!response.ok) {
+        throw new Error(`${url} answered ${response.status}.`);
+      }
+      return evaluate(await response.text(), modules) as ReactNode;
+    });
+    screens.set(url, screen);
   }
-  return loaded.status === "drawn" ? loaded.node : fallback;
+  return screen;
+}
+
+/**
+ * Starts loading the screen at `url`, so a `<Backtick>` drawn later with the
+ * same props finds it under way or done. A failure isn't reported here: the
+ * `<Backtick>` that draws the screen throws it.
+ */
+export function preload(props: BacktickProps): void {
+  load(props).catch(() => {});
+}
+
+/** Forgets the screen at `url`, so the next `<Backtick>` or `preload` refetches it. */
+export function invalidate(url: string): void {
+  screens.delete(url);
+}
+
+/**
+ * A server's screen: the bundle at `url`, fetched, run with the app's modules,
+ * and drawn where this stands. It suspends while the screen loads, for a
+ * `<Suspense>` above it to show a fallback, and throws a screen that can't be
+ * loaded or run, for an error boundary above it to catch.
+ */
+export function Backtick(props: BacktickProps): ReactNode {
+  return use(load(props));
 }

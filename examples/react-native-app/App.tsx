@@ -1,8 +1,14 @@
-import { Backtick } from "@backtickjs/react-native-client";
+import { Backtick, invalidate } from "@backtickjs/react-native-client";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
-import { Component, type ReactNode, useEffect, useState } from "react";
+import {
+  Component,
+  type ReactNode,
+  Suspense,
+  useEffect,
+  useState,
+} from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNative from "react-native";
 import { ActivityIndicator, ScrollView, Text, View } from "react-native";
@@ -22,26 +28,32 @@ const packageVersions = { react: "19.2.3", "react-native": "0.86.3" };
 // was started from, unless told otherwise.
 const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = process.env.EXPO_PUBLIC_BACKTICK_SERVER ?? `http://${host}:5179`;
+const url = `${server}/home`;
 
 export default function App() {
-  // Each reload asks the server for the screen again: in development, every
-  // time the server restarts, so a change to its code shows without a new app.
+  // Each reload forgets the screen and draws it again, so it's asked for anew:
+  // in development, every time the server restarts, so a change to its code
+  // shows without a new app.
   const [reload, setReload] = useState(0);
   useEffect(() => {
     if (__DEV__) {
-      return onServerRestart(server, () => setReload((count) => count + 1));
+      return onServerRestart(server, () => {
+        invalidate(url);
+        setReload((count) => count + 1);
+      });
     }
   }, []);
   return (
     <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
       <ScrollView>
         <Boundary key={reload}>
-          <Backtick
-            url={`${server}/home?reload=${reload}`}
-            modules={modules}
-            packageVersions={packageVersions}
-            fallback={<ActivityIndicator style={{ marginTop: 48 }} />}
-          />
+          <Suspense fallback={<ActivityIndicator style={{ marginTop: 48 }} />}>
+            <Backtick
+              url={url}
+              modules={modules}
+              packageVersions={packageVersions}
+            />
+          </Suspense>
         </Boundary>
       </ScrollView>
       <StatusBar style="auto" />

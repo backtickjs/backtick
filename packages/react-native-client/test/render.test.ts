@@ -7,12 +7,12 @@ import { bundler } from "@backtickjs/bundler";
 import { transpile } from "@backtickjs/compiler";
 import { react } from "@backtickjs/react/plugin";
 import * as React from "react";
-import { act, createElement } from "react";
+import { act, createElement, Suspense } from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import { createRoot } from "react-dom/client";
 import * as ReactNativeWeb from "react-native-web";
 import ts from "typescript";
-import { Backtick } from "../dist/index.js";
+import { Backtick, invalidate, preload } from "../dist/index.js";
 
 // A server's screen: a client component of React Native's components, its
 // state React's, drawn by a server component.
@@ -82,16 +82,19 @@ it("draws a server's screen with the app's React Native", async () => {
     const root = createRoot(container);
     await act(async () =>
       root.render(
-        createElement(Backtick, {
-          url: "https://example.com/home",
-          modules: {
-            react: React,
-            "react/jsx-runtime": JSXRuntime,
-            "react-native": ReactNativeWeb,
-          },
-          packageVersions: { react: "19.2.3", "react-native": "0.86.3" },
-          fallback: "loading",
-        }),
+        createElement(
+          Suspense,
+          { fallback: "loading" },
+          createElement(Backtick, {
+            url: "https://example.com/home",
+            modules: {
+              react: React,
+              "react/jsx-runtime": JSXRuntime,
+              "react-native": ReactNativeWeb,
+            },
+            packageVersions: { react: "19.2.3", "react-native": "0.86.3" },
+          }),
+        ),
       ),
     );
     assert.equal(container.textContent, "Apples: 0Pears: 0");
@@ -135,11 +138,15 @@ it("throws, for an error boundary, a bundle the app can't run", async () => {
         createElement(
           Boundary,
           null,
-          createElement(Backtick, {
-            url: "https://example.com/map",
-            modules: { react: React },
-            packageVersions: { react: "19.2.3" },
-          }),
+          createElement(
+            Suspense,
+            { fallback: "loading" },
+            createElement(Backtick, {
+              url: "https://example.com/map",
+              modules: { react: React },
+              packageVersions: { react: "19.2.3" },
+            }),
+          ),
         ),
       ),
     );
@@ -151,4 +158,63 @@ it("throws, for an error boundary, a bundle the app can't run", async () => {
     'The bundle requires "react-native-maps", which this app doesn\'t provide.',
   );
   await act(() => root.unmount());
+});
+
+it("loads a screen once until it's invalidated, failed or not", async () => {
+  const props = {
+    url: "https://example.com/once",
+    modules: { react: React },
+    packageVersions: { react: "19.2.3" },
+  };
+  let requests = 0;
+  let status = 500;
+  globalThis.fetch = async () => {
+    requests += 1;
+    return new Response('module.exports = "drawn";', { status });
+  };
+  const draw = async () => {
+    const container = document.createElement("div");
+    const root = createRoot(container);
+    const error = console.error;
+    console.error = () => {};
+    try {
+      await act(async () =>
+        root.render(
+          createElement(
+            Boundary,
+            null,
+            createElement(
+              Suspense,
+              { fallback: "loading" },
+              createElement(Backtick, props),
+            ),
+          ),
+        ),
+      );
+    } finally {
+      console.error = error;
+    }
+    const text = container.textContent;
+    await act(() => root.unmount());
+    return text;
+  };
+
+  // A failure is kept until it's invalidated, as an error boundary's reset
+  // would, and the next screen drawn retries.
+  assert.equal(await draw(), "https://example.com/once answered 500.");
+  status = 200;
+  assert.equal(await draw(), "https://example.com/once answered 500.");
+  invalidate(props.url);
+  assert.equal(await draw(), "drawn");
+  assert.equal(requests, 2);
+
+  // A preload and the screens drawn after it share one request.
+  preload(props);
+  assert.equal(await draw(), "drawn");
+  assert.equal(requests, 2);
+
+  invalidate(props.url);
+  preload(props);
+  assert.equal(await draw(), "drawn");
+  assert.equal(requests, 3);
 });

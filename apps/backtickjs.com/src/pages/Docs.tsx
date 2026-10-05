@@ -29,7 +29,7 @@ export async function Docs() {
       <Section
         eyebrow="3 · Draw it"
         title="One component in your app."
-        lede="It fetches the screen and runs it with your app's own React and React Native. Wrap it in an error boundary, as you would any component that can fail."
+        lede="It fetches the screen and runs it with your app's own React and React Native. It suspends while the screen loads, so a Suspense boundary shows your fallback, and an error boundary catches a screen that can't load."
       >
         <Code file="app/App.tsx" source={APP} />
       </Section>
