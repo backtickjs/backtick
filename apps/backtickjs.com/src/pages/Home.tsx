@@ -34,7 +34,7 @@ export async function Home() {
       <Section
         eyebrow="Compared"
         title="Isn't this EAS Update, or Expo's server components?"
-        lede="All three get code to the phone without a store release. Only Backtick ships each screen per user, client components included."
+        lede="All three get code to the phone without a store release. Only Backtick ships each screen per request, client components included."
       >
         <Comparison columns={COLUMNS} rows={ROWS} />
       </Section>

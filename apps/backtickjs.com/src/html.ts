@@ -13,7 +13,10 @@ const sourcemap = process.env.NODE_ENV === "production" ? undefined : "inline";
 // The page's CSS, generated once at startup from the classes the source uses.
 const STYLE = await tailwind();
 
-export async function toHtml(element: JSX.Element): Promise<string> {
+export async function toHtml(
+  element: JSX.Element,
+  title: string,
+): Promise<string> {
   const bundle = await bundler.build({
     input: cs`$render(() => $element, document.getElementById("app")!)`,
     packageVersions: { "solid-js": "1.9.14" },
@@ -27,7 +30,7 @@ export async function toHtml(element: JSX.Element): Promise<string> {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <title>Backtick · Server-driven React Native</title>
+    <title>${title}</title>
     <meta name="description" content="Backtick brings server components to React Native. Each screen, client components included, is assembled on your server per request and renders natively.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
