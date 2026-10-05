@@ -136,6 +136,8 @@ function loadCompilerOptions(): ts.CompilerOptions {
 // "🏡" would arrive as "ð\u009f\u008f¡". Escaped, a string, identifier or
 // regular expression means what it did. (JSX text doesn't read escapes, but
 // what reaches here is JSX compiled to calls unless a project preserves it.)
+// The source map isn't shifted to match, so columns after an escape on its
+// line are off; lines stay right, which is worth it for text that reads right.
 function ascii(code: string): string {
   return code.replace(
     /[^\x00-\x7f]/g,
