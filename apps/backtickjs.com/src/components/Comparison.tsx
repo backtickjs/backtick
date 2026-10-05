@@ -37,9 +37,20 @@ export async function Comparison({
   rows: Row[];
 }) {
   const last = columns.length - 1;
+  // The grid for the label and each column, written out whole so the
+  // stylesheet generator finds both.
+  const grid =
+    columns.length === 2
+      ? "md:grid-cols-[190px_1fr_1fr]"
+      : "md:grid-cols-[190px_1fr_1fr_1fr]";
   return cs`(
     <div class="overflow-hidden rounded-[20px] border border-line">
-      <div class="grid gap-3 border-b border-line bg-wash py-4 md:grid-cols-[190px_1fr_1fr_1fr] md:gap-0 md:py-0">
+      <div
+        class={
+          "grid gap-3 border-b border-line bg-wash py-4 md:gap-0 md:py-0 " +
+          $grid
+        }
+      >
         <span class="max-md:hidden" />
         {$columns.map((column, index) => (
           <span class="grid content-start gap-0.5 px-5 md:border-l md:border-line md:py-4">
@@ -56,7 +67,11 @@ export async function Comparison({
         ))}
       </div>
       {$rows.map((row) => (
-        <div class="grid border-b border-line text-[15px] last:border-b-0 md:grid-cols-[190px_1fr_1fr_1fr]">
+        <div
+          class={
+            "grid border-b border-line text-[15px] last:border-b-0 " + $grid
+          }
+        >
           <span class="px-5 pt-4 pb-2 font-semibold md:py-4">{row.label}</span>
           {row.values.map((value, index) => (
             <span

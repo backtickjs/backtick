@@ -1,9 +1,10 @@
 import type { Cell, Column, Row } from "./components/Comparison.js";
 
 // What the page says about the tools Backtick is mistaken for. Claims about
-// Expo follow its docs: docs.expo.dev/guides/server-components.
+// Expo follow its docs: docs.expo.dev/guides/server-components. Claims about
+// Next.js follow its App Router docs: nextjs.org/docs/app.
 
-export const COLUMNS: Column[] = [
+export const EXPO_COLUMNS: Column[] = [
   { name: "EAS Update", summary: "Ships the app's whole JS bundle" },
   { name: "Expo Router RSC", summary: "Ships server-rendered output" },
   {
@@ -36,7 +37,7 @@ const none = (verdict: string, detail = ""): Cell => ({
   tone: "none",
 });
 
-export const ROWS: Row[] = [
+export const EXPO_ROWS: Row[] = [
   {
     label: "Can differ per user?",
     values: [
@@ -83,5 +84,71 @@ export const ROWS: Row[] = [
   {
     label: "Needs a server?",
     values: [good("No"), partial("Yes"), partial("Yes")],
+  },
+];
+
+export const NEXT_COLUMNS: Column[] = [
+  {
+    name: "Next.js (App Router)",
+    summary: "Server components for the web, on Next's router",
+  },
+  {
+    name: "Backtick",
+    summary: "Server components for any framework",
+  },
+];
+
+export const NEXT_ROWS: Row[] = [
+  {
+    label: "Framework",
+    values: [
+      partial("Next.js", "On its router and its server"),
+      good("Any", "React, React Native or Solid, on Node or Bun"),
+    ],
+  },
+  {
+    label: "Client code in a server component?",
+    values: [
+      bad("No", 'State, effects and browser APIs go in a "use client" file'),
+      good("Yes", "In the script it returns"),
+    ],
+  },
+  {
+    label: "The server/client boundary",
+    values: [
+      partial("Per file", '"use client" reaches everything the file imports'),
+      good(
+        "Per expression",
+        "cs`…` marks client code and each $ a value crossing, type-checked",
+      ),
+    ],
+  },
+  {
+    label: "What crosses to the client",
+    values: [
+      good("Data and server functions", "Server actions cross as references"),
+      partial("Plain data", "No class instances or server functions"),
+    ],
+  },
+  {
+    label: "Streaming",
+    values: [
+      good("Yes", "Suspense streams slow parts in"),
+      bad("No", "A screen arrives whole"),
+    ],
+  },
+  {
+    label: "Caching",
+    values: [
+      good("Built in", "Static rendering and a data cache"),
+      partial("Yours", "Put a cache in front of the route"),
+    ],
+  },
+  {
+    label: "Native apps",
+    values: [
+      bad("No", "The web only"),
+      good("Yes", "React Native, with client code shipped per request"),
+    ],
   },
 ];

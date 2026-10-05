@@ -7,7 +7,12 @@ import { HowItWorks } from "../components/HowItWorks.js";
 import { Layout } from "../components/Layout.js";
 import { Section } from "../components/Section.js";
 import { Setup } from "../components/Setup.js";
-import { COLUMNS, ROWS } from "../comparisons.js";
+import {
+  EXPO_COLUMNS,
+  EXPO_ROWS,
+  NEXT_COLUMNS,
+  NEXT_ROWS,
+} from "../comparisons.js";
 
 export async function Home() {
   return (
@@ -18,7 +23,7 @@ export async function Home() {
       <Section
         id="how"
         eyebrow="How it works"
-        title="Compiled once. Linked per request."
+        title="Compiled once. Dynamically linked per request."
         lede={cs`(
           <>
             Your client scripts {${(<InlineCode source="cs`…`" />)}} are
@@ -32,11 +37,19 @@ export async function Home() {
       </Section>
 
       <Section
+        eyebrow="Server components"
+        title="Server components, without the framework."
+        lede="The reasons to use them hold: data fetched where it lives, secrets kept on your server, less code on the client. Here is Backtick beside Next.js, where most developers meet them."
+      >
+        <Comparison columns={NEXT_COLUMNS} rows={NEXT_ROWS} />
+      </Section>
+
+      <Section
         eyebrow="Compared"
         title="Isn't this EAS Update, or Expo's server components?"
         lede="All three get code to the phone without a store release. Only Backtick ships each screen per request, client components included."
       >
-        <Comparison columns={COLUMNS} rows={ROWS} />
+        <Comparison columns={EXPO_COLUMNS} rows={EXPO_ROWS} />
       </Section>
 
       <Section
