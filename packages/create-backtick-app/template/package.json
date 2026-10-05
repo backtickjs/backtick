@@ -9,7 +9,8 @@
     "ios": "node scripts/start.mjs --ios",
     "web": "node scripts/start.mjs --web",
     "server": "node --watch --enable-source-maps --import @backtickjs/node-plugin server/index.tsx",
-    "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit"
+    "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit",
+    "reset-project": "node scripts/reset-project.mjs"
   },
   "dependencies": {
     "@backtickjs/bundler": "^0.1.0",
