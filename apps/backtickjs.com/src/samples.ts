@@ -84,41 +84,6 @@ export async function Home({ user }: { user: User }) {
   },
 ];
 
-// What server-driven UI usually means: a schema, and a renderer per platform.
-export const SCHEMA = `
-{
-  "type": "button",
-  "props": { "label": "Reorder" },
-  "action": {
-    "type": "http",
-    "method": "POST",
-    "url": "/cart",
-    "body": { "$ref": "order.id" },
-    "onSuccess": {
-      "type": "setProp",
-      "target": "self",
-      "prop": "label",
-      "value": "Added to cart ✓"
-    }
-  }
-}
-`;
-
-export const COMPONENT = `
-const [added, setAdded] = $useState(false);
-
-return (
-  <$Pressable
-    onPress={async () => {
-      await fetch($CART, { method: "POST", body: order.id });
-      setAdded(true);
-    }}
-  >
-    <$Text>{added ? "Added to cart ✓" : "Reorder"}</$Text>
-  </$Pressable>
-);
-`;
-
 export const SERVER = `
 import { bundler } from "@backtickjs/bundler";
 import { Home } from "./Home.js";

@@ -1,6 +1,6 @@
-import { Compare } from "../components/Compare.js";
 import { Cta } from "../components/Cta.js";
 import { DeployDemo } from "../components/DeployDemo.js";
+import { EasUpdate } from "../components/EasUpdate.js";
 import { Features } from "../components/Features.js";
 import { Flow } from "../components/Flow.js";
 import { Hero } from "../components/Hero.js";
@@ -24,19 +24,19 @@ export async function Home() {
       </Section>
 
       <Section
-        eyebrow="It's just React Native"
-        title="Everything you already know, delivered at runtime."
-        lede="Not a lookalike and not a schema. The same components, hooks and styles, checked by the same types."
+        eyebrow="Isn't this EAS Update?"
+        title="EAS Update ships your app. Backtick renders your screens."
+        lede="Both get JavaScript to the phone without a store release. They work well together: EAS Update for the shell (navigation, auth, native modules), Backtick for the screens that change often or differ per user."
       >
-        <Features />
+        <EasUpdate />
       </Section>
 
       <Section
-        eyebrow="No JSON"
-        title="Logic is code, not configuration."
-        lede="Most server-driven UI starts with a schema and ends with a programming language nobody meant to write. Backtick starts with the one you already use."
+        eyebrow="It's just React Native"
+        title="Everything you already know, delivered at runtime."
+        lede="Not a lookalike widget set. The same components, hooks and styles, checked by the same types."
       >
-        <Compare />
+        <Features />
       </Section>
 
       <Section
