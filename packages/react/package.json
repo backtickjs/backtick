@@ -3,6 +3,7 @@
   "version": "19.2.3",
   "private": true,
   "description": "Backtick's React adapter: scripts written as React code, compiled by React's own JSX transform and run on React",
+  "license": "MIT",
   "type": "module",
   "exports": {
     ".": {
@@ -33,7 +34,8 @@
     "test": "node --test \"test/**/*.test.ts\"",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
-    "clean": "rm -rf node_modules dist .turbo"
+    "clean": "rm -rf node_modules dist .turbo",
+    "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
     "@babel/core": "^7.29.7",

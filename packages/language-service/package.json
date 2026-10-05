@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "Internal: used by `@backtickjs/tsc` and the TypeScript plugin. Backtick's diagnostics and completions on top of TypeScript's",
+  "license": "MIT",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -16,7 +17,8 @@
     "dev": "tsc -b --watch",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
-    "clean": "rm -rf node_modules dist .turbo"
+    "clean": "rm -rf node_modules dist .turbo",
+    "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
     "@backtickjs/compiler": "workspace:*",

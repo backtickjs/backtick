@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "Internal: used by `@backtickjs/tsc` and the build plugins. Compiles `cs` scripts: the transform, transpiling and the virtual code an editor checks",
+  "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
   "exports": {
@@ -17,7 +18,8 @@
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "test": "node --test \"test/**/*.test.ts\"",
-    "clean": "rm -rf node_modules dist .turbo"
+    "clean": "rm -rf node_modules dist .turbo",
+    "prepack": "cp ../../LICENSE ."
   },
   "peerDependencies": {
     "typescript": "^6.0.3"

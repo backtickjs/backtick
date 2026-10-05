@@ -1,6 +1,7 @@
 {
   "name": "@backtickjs/prettier-plugin",
   "version": "0.1.0",
+  "license": "MIT",
   "private": true,
   "type": "module",
   "main": "./dist/index.js",
@@ -11,7 +12,8 @@
     "format:check": "prettier --check --ignore-unknown .",
     "test": "node --import tsx --test \"test/**/*.test.ts\"",
     "test:update": "UPDATE_SNAPSHOTS=1 node --import tsx --test \"test/**/*.test.ts\"",
-    "clean": "rm -rf node_modules dist .turbo"
+    "clean": "rm -rf node_modules dist .turbo",
+    "prepack": "cp ../../LICENSE ."
   },
   "devDependencies": {
     "@types/estree": "^1.0.9",

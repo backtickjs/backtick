@@ -4,3 +4,5 @@ docs/
 .turbo/
 .cache/
 .DS_Store
+packages/*/LICENSE
+apps/vscode-extension/LICENSE

@@ -1,6 +1,7 @@
 {
   "name": "@backtickjs/bundler",
   "version": "0.1.0",
+  "license": "MIT",
   "private": true,
   "type": "module",
   "main": "./dist/index.js",
@@ -16,7 +17,8 @@
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "test": "node --test \"test/**/*.test.ts\"",
-    "clean": "rm -rf node_modules dist .turbo"
+    "clean": "rm -rf node_modules dist .turbo",
+    "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
     "@backtickjs/core": "workspace:*",

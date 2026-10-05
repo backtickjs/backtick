@@ -1,6 +1,7 @@
 {
   "name": "@backtickjs/vscode-extension",
   "version": "0.1.0",
+  "license": "MIT",
   "private": true,
   "main": "./dist/node/client.js",
   "engines": {
@@ -56,7 +57,8 @@
     "test": "pnpm test:grammar",
     "test:update": "node ./test/grammar/test.mjs --updateSnapshot",
     "test:grammar": "node ./test/grammar/test.mjs",
-    "clean": "rm -rf node_modules dist .turbo"
+    "clean": "rm -rf node_modules dist .turbo",
+    "vscode:prepublish": "cp ../../LICENSE ."
   },
   "dependencies": {
     "@backtickjs/typescript-plugin": "workspace:*"

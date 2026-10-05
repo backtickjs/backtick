@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "description": "Internal: used by the VS Code extension. The language server for `cs` scripts",
+  "license": "MIT",
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
-    "clean": "rm -rf node_modules dist .turbo"
+    "clean": "rm -rf node_modules dist .turbo",
+    "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
     "@backtickjs/language-plugin": "workspace:*",

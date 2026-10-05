@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "What a React Native app draws a Backtick server's screens with: a bundle fetched, run with the app's own packages, and drawn",
+  "license": "MIT",
   "type": "module",
   "exports": {
     ".": {
@@ -16,7 +17,8 @@
     "test": "node --test \"test/**/*.test.ts\"",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
-    "clean": "rm -rf node_modules dist .turbo"
+    "clean": "rm -rf node_modules dist .turbo",
+    "prepack": "cp ../../LICENSE ."
   },
   "peerDependencies": {
     "react": "^19.2.3"
