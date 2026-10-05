@@ -36,6 +36,66 @@
           "name": "meta.embedded.splice.tsx variable.other.readwrite.tsx"
         }
       }
+    },
+    {
+      "comment": "A host tag, `<$Card>` or `<$ui.Card>`: TSX's own tag rule, but with its `$` scoped as an unbraced splice's, so it colors alike. Claimed before TSX's rule, which reads `$Card` as one name; a comparison is `a < $b`, never `<$` unspaced.",
+      "name": "meta.tag.tsx",
+      "begin": "(<)(\\$)([_$[:alpha:]][-$._[:alnum:]]*(?<![-.]))(?=((<\\s*)|(\\s+))(?!\\?)|/?>)",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.tsx"
+        },
+        "2": {
+          "name": "punctuation.definition.template-expression.begin.tsx"
+        },
+        "3": {
+          "name": "entity.name.tag.tsx support.class.component.tsx"
+        }
+      },
+      "end": "(/>)|(</)(\\$)([_$[:alpha:]][-$._[:alnum:]]*(?<![-.]))\\s*(>)",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.end.tsx"
+        },
+        "2": {
+          "name": "punctuation.definition.tag.begin.tsx"
+        },
+        "3": {
+          "name": "punctuation.definition.template-expression.begin.tsx"
+        },
+        "4": {
+          "name": "entity.name.tag.tsx support.class.component.tsx"
+        },
+        "5": {
+          "name": "punctuation.definition.tag.end.tsx"
+        }
+      },
+      "patterns": [
+        {
+          "begin": "(>)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.tag.end.tsx"
+            }
+          },
+          "contentName": "meta.jsx.children.tsx",
+          "end": "(?=</)",
+          "patterns": [
+            {
+              "include": "source.tsx#jsx-children"
+            }
+          ]
+        },
+        {
+          "include": "source.tsx#comment"
+        },
+        {
+          "include": "source.tsx#type-arguments"
+        },
+        {
+          "include": "source.tsx#jsx-tag-attributes"
+        }
+      ]
     }
   ]
 }

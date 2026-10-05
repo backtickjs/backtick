@@ -1,0 +1,34 @@
+>const host = <$Card title="x">y</$Card>;
+#^^^^^ source.tsx meta.var.expr.tsx storage.type.tsx
+#     ^ source.tsx meta.var.expr.tsx
+#      ^^^^ source.tsx meta.var.expr.tsx meta.var-single-variable.expr.tsx meta.definition.variable.tsx variable.other.constant.tsx
+#          ^ source.tsx meta.var.expr.tsx meta.var-single-variable.expr.tsx
+#           ^ source.tsx meta.var.expr.tsx keyword.operator.assignment.tsx
+#            ^ source.tsx meta.var.expr.tsx
+#             ^ source.tsx meta.var.expr.tsx meta.tag.tsx punctuation.definition.tag.begin.tsx
+#              ^^^^^ source.tsx meta.var.expr.tsx meta.tag.tsx entity.name.tag.tsx support.class.component.tsx
+#                   ^ source.tsx meta.var.expr.tsx meta.tag.tsx meta.tag.attributes.tsx
+#                    ^^^^^ source.tsx meta.var.expr.tsx meta.tag.tsx meta.tag.attributes.tsx entity.other.attribute-name.tsx
+#                         ^ source.tsx meta.var.expr.tsx meta.tag.tsx meta.tag.attributes.tsx keyword.operator.assignment.tsx
+#                          ^ source.tsx meta.var.expr.tsx meta.tag.tsx meta.tag.attributes.tsx string.quoted.double.tsx punctuation.definition.string.begin.tsx
+#                           ^ source.tsx meta.var.expr.tsx meta.tag.tsx meta.tag.attributes.tsx string.quoted.double.tsx
+#                            ^ source.tsx meta.var.expr.tsx meta.tag.tsx meta.tag.attributes.tsx string.quoted.double.tsx punctuation.definition.string.end.tsx
+#                             ^ source.tsx meta.var.expr.tsx meta.tag.tsx punctuation.definition.tag.end.tsx
+#                              ^ source.tsx meta.var.expr.tsx meta.tag.tsx meta.jsx.children.tsx
+#                               ^^ source.tsx meta.var.expr.tsx meta.tag.tsx punctuation.definition.tag.begin.tsx
+#                                 ^^^^^ source.tsx meta.var.expr.tsx meta.tag.tsx entity.name.tag.tsx support.class.component.tsx
+#                                      ^ source.tsx meta.var.expr.tsx meta.tag.tsx punctuation.definition.tag.end.tsx
+#                                       ^ source.tsx punctuation.terminator.statement.tsx
+>const plain = html`<$Card />`;
+#^^^^^ source.tsx meta.var.expr.tsx storage.type.tsx
+#     ^ source.tsx meta.var.expr.tsx
+#      ^^^^^ source.tsx meta.var.expr.tsx meta.var-single-variable.expr.tsx meta.definition.variable.tsx variable.other.constant.tsx
+#           ^ source.tsx meta.var.expr.tsx meta.var-single-variable.expr.tsx
+#            ^ source.tsx meta.var.expr.tsx keyword.operator.assignment.tsx
+#             ^ source.tsx meta.var.expr.tsx
+#              ^^^^ source.tsx meta.var.expr.tsx entity.name.function.tagged-template.tsx
+#                  ^ source.tsx meta.var.expr.tsx string.template.tsx punctuation.definition.string.template.begin.tsx
+#                   ^^^^^^^^^ source.tsx meta.var.expr.tsx string.template.tsx
+#                            ^ source.tsx meta.var.expr.tsx string.template.tsx punctuation.definition.string.template.end.tsx
+#                             ^ source.tsx punctuation.terminator.statement.tsx
+>
