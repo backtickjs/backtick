@@ -1,22 +1,4 @@
 import { cs } from "@backtickjs/core";
-import { cyan, line, mono, muted, radius, wash } from "./theme.js";
-
-const ROW = "display: flex; flex-wrap: wrap; gap: 14px; align-items: stretch";
-
-const CARD =
-  `flex: 1 1 260px; padding: 26px; border-radius: ${radius};` +
-  ` background: ${wash}; border: 1px solid ${line}`;
-
-const STEP = `margin: 0; font-family: ${mono}; font-size: 12px; color: ${cyan}`;
-const NAME =
-  "margin: 10px 0 8px; font-size: 21px; font-weight: 700; letter-spacing: -0.02em";
-const TEXT = `margin: 0; font-size: 15.5px; color: ${muted}`;
-
-const CHIP =
-  "display: inline-block; margin-top: 18px; padding: 5px 10px; border-radius: 8px;" +
-  ` font-family: ${mono}; font-size: 12.5px; background: #0d1117; color: #e6edf3`;
-
-const ARROW = `align-self: center; font-size: 22px; color: ${muted}`;
 
 type Stage = { step: string; name: string; text: string; chip: string };
 
@@ -49,19 +31,23 @@ const STAGES: Stage[] = [
 
 export async function Flow() {
   return cs`(
-    <div style={$ROW}>
+    <div class="flex flex-wrap items-stretch gap-3.5">
       {$STAGES.map((stage, index) => (
         <>
           {index > 0 && (
-            <span class="bt-arrow" style={$ARROW}>
+            <span class="self-center text-[22px] text-muted max-[860px]:hidden">
               →
             </span>
           )}
-          <div style={$CARD}>
-            <p style={$STEP}>{stage.step}</p>
-            <p style={$NAME}>{stage.name}</p>
-            <p style={$TEXT}>{stage.text}</p>
-            <code style={$CHIP}>{stage.chip}</code>
+          <div class="flex-[1_1_260px] rounded-[20px] border border-line bg-wash p-[26px]">
+            <p class="font-mono text-xs text-react">{stage.step}</p>
+            <p class="mt-2.5 mb-2 text-[21px] font-bold tracking-[-0.02em]">
+              {stage.name}
+            </p>
+            <p class="text-[15.5px] text-muted">{stage.text}</p>
+            <code class="mt-[18px] inline-block rounded-lg bg-code px-2.5 py-1 font-mono text-[12.5px] text-code-ink">
+              {stage.chip}
+            </code>
           </div>
         </>
       ))}

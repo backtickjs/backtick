@@ -3,13 +3,13 @@ import { cs } from "@backtickjs/core";
 // The mark is square, so a caller gives one number and both sides follow.
 export async function GitHubMark({ size = 24 }: { size?: number }) {
   // `currentColor`, so it takes the ink of whatever holds it and dark mode
-  // needs no second copy of the art. `width`/`height` as attributes as well
-  // as style, which is what reserves the space while the page is drawing.
+  // needs no second copy of the art. `width`/`height` as attributes, which
+  // is what reserves the space while the page is drawing.
   return cs`(
     <svg
       width={$size}
       height={$size}
-      style={"display: block; width: " + $size + "px; height: " + $size + "px"}
+      class="block"
       viewBox="0 0 16 16"
       fill="currentColor"
       aria-hidden="true"

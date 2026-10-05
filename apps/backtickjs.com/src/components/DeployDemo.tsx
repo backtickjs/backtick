@@ -8,156 +8,10 @@ import {
 } from "@backtickjs/solid-js";
 import { highlight } from "../highlight.js";
 import { DEPLOYS } from "../samples.js";
-import { ADDED, LINE, PRE } from "./Code.js";
-import { codeBg, codeLine, codeMuted, mono } from "./theme.js";
 
-// How long each deploy stays up while the demo plays itself.
+// How long each deploy stays up while the demo plays itself. As long as
+// `--animate-progress` in styles.css.
 const DWELL_MS = 4500;
-
-const PANEL =
-  "position: relative; border-radius: 28px; padding: 20px;" +
-  ` background: #0a0c10; border: 1px solid ${codeLine}; color: #e6edf3;` +
-  " box-shadow: 0 40px 120px -40px rgba(97, 218, 251, 0.35)," +
-  " 0 30px 80px -50px rgba(167, 139, 250, 0.6)";
-
-const SPLIT = "display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch";
-const LEFT =
-  "flex: 1 1 520px; min-width: 0; display: grid; gap: 14px; align-content: start";
-const RIGHT =
-  "flex: 1 1 316px; display: grid; justify-items: center; align-content: center";
-
-const COMMITS =
-  "display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px";
-
-const COMMIT =
-  "position: relative; overflow: hidden; text-align: left; cursor: pointer;" +
-  " padding: 10px 12px; border-radius: 12px; font: inherit; color: inherit;" +
-  ` border: 1px solid ${codeLine}; background: transparent;` +
-  " transition: background .2s, border-color .2s";
-
-const COMMIT_ON = `${COMMIT}; background: #161b22; border-color: #3d444d`;
-
-const COMMIT_ID = `display: block; font-family: ${mono}; font-size: 11px; color: ${codeMuted}`;
-const COMMIT_MESSAGE =
-  "display: block; font-size: 13.5px; font-weight: 500; margin-top: 2px";
-
-const PROGRESS =
-  "position: absolute; left: 0; bottom: 0; height: 2px; width: 100%;" +
-  " background: linear-gradient(90deg, #61dafb, #a78bfa);" +
-  ` transform-origin: left; animation: bt-progress ${DWELL_MS}ms linear both`;
-
-const EDITOR = `background: ${codeBg}; border: 1px solid ${codeLine}; border-radius: 16px; overflow: hidden`;
-
-const EDITOR_BAR =
-  "display: flex; align-items: center; justify-content: space-between;" +
-  ` gap: 12px; padding: 10px 16px; border-bottom: 1px solid ${codeLine};` +
-  ` font-family: ${mono}; font-size: 12px; color: ${codeMuted}`;
-
-const EDITOR_CODE = `${PRE}; height: 460px; box-sizing: border-box; overflow: auto`;
-
-const SAVED =
-  "display: inline-flex; align-items: center; gap: 6px; color: #3fb950";
-
-// The device. 316 by 660 with the bezel taken off both sides is a screen
-// close to an iPhone's 19.5:9.
-const PHONE =
-  "position: relative; width: 316px; max-width: 100%; height: 660px;" +
-  " box-sizing: border-box; padding: 11px; border-radius: 52px;" +
-  " background: #1c1c1f; box-shadow: inset 0 0 0 1px #3f3f46," +
-  " inset 0 0 0 5px #0b0b0d, 0 30px 60px -20px rgba(0,0,0,.7)";
-
-const ISLAND =
-  "position: absolute; top: 22px; left: 50%; width: 92px; height: 26px;" +
-  " margin-left: -46px; border-radius: 999px; background: #000; z-index: 3";
-
-const SCREEN =
-  "position: relative; height: 100%; border-radius: 41px; overflow: hidden;" +
-  " background: #f6f5f2; color: #111;" +
-  " font-family: -apple-system, 'SF Pro Text', 'Inter', system-ui, sans-serif";
-
-const STATUS_BAR =
-  "display: flex; justify-content: space-between; align-items: center;" +
-  " padding: 16px 28px 0; height: 32px; font-size: 14px; font-weight: 600";
-
-const TOAST =
-  "position: absolute; top: 58px; left: 50%; margin-left: -96px; width: 192px;" +
-  " z-index: 2; padding: 8px 12px; border-radius: 999px; text-align: center;" +
-  " background: rgba(17,17,17,.88); color: #fff; font-size: 12px; font-weight: 600;" +
-  " box-shadow: 0 8px 24px rgba(0,0,0,.25)";
-
-const CONTENT = "padding: 18px 18px 0; display: grid; gap: 12px";
-
-const HELLO = "margin: 0; font-size: 13px; color: #8a8a8e; font-weight: 500";
-const NAME =
-  "margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -0.02em";
-
-const PROMO =
-  "border-radius: 18px; padding: 14px 16px; color: #fff;" +
-  " background: linear-gradient(135deg, #ff7a18, #af002d 75%)";
-
-const PROMO_EYEBROW =
-  "margin: 0; font-size: 10.5px; font-weight: 700; letter-spacing: .12em; opacity: .85";
-const PROMO_TITLE =
-  "margin: 4px 0 2px; font-size: 18px; font-weight: 700; line-height: 1.2";
-const PROMO_DETAIL = "margin: 0; font-size: 12.5px; opacity: .9";
-
-const USUAL =
-  "border-radius: 18px; padding: 14px; background: #fff;" +
-  " box-shadow: 0 1px 2px rgba(0,0,0,.06); display: grid; gap: 10px";
-
-const USUAL_ROW = "display: flex; align-items: center; gap: 12px";
-
-const REORDER =
-  "border: 0; border-radius: 12px; padding: 11px; font: inherit;" +
-  " font-size: 14px; font-weight: 600; cursor: pointer; color: #fff;" +
-  " transition: background .25s, transform .1s";
-
-const REORDER_IDLE = `${REORDER}; background: #111`;
-const REORDER_DONE = `${REORDER}; background: #16a34a`;
-
-const LABEL = "margin: 6px 0 0; font-size: 15px; font-weight: 700";
-
-const PRODUCT =
-  "display: flex; align-items: center; gap: 12px; padding: 10px;" +
-  " border-radius: 16px; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.06)";
-
-const SWATCH =
-  "flex: none; width: 42px; height: 42px; border-radius: 12px; background: ";
-const PRODUCT_TEXT = "flex: 1; min-width: 0";
-const PRODUCT_NAME = "margin: 0; font-size: 14.5px; font-weight: 600";
-const PRODUCT_NOTES = "margin: 1px 0 0; font-size: 12px; color: #8a8a8e";
-const PRICE = "font-size: 14.5px; font-weight: 600";
-
-const TABS =
-  "position: absolute; left: 0; right: 0; bottom: 0; display: flex;" +
-  " justify-content: space-around; padding: 10px 12px 26px;" +
-  " background: rgba(246,245,242,.92); border-top: 1px solid #e7e5e0;" +
-  " font-size: 10.5px; font-weight: 600; color: #a1a1a6";
-
-const TAB = "display: grid; justify-items: center; gap: 4px";
-const TAB_ICON =
-  "width: 20px; height: 20px; border-radius: 6px; background: #d4d4d8";
-const TAB_ICON_ON =
-  "width: 20px; height: 20px; border-radius: 6px; background: #111";
-
-const STRIP =
-  "display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px;" +
-  ` margin-top: 18px; padding: 14px 6px 2px; border-top: 1px solid ${codeLine};` +
-  ` font-family: ${mono}; font-size: 12px; color: ${codeMuted}`;
-
-const CHIP =
-  "display: inline-flex; align-items: center; gap: 8px; white-space: nowrap";
-const DOT_IDLE =
-  "width: 8px; height: 8px; border-radius: 50%; background: #6e7681";
-const DOT_LIVE =
-  "width: 8px; height: 8px; border-radius: 50%; background: #3fb950;" +
-  " animation: bt-pulse 2s ease-out infinite";
-const STRONG = "color: #e6edf3";
-
-const PLAY =
-  "margin-left: auto; padding: 6px 12px; border-radius: 999px; cursor: pointer;" +
-  ` border: 1px solid ${codeLine}; background: transparent; color: #e6edf3;` +
-  ` font-family: ${mono}; font-size: 11.5px`;
 
 // A type alias rather than an interface: what is spliced into a script has to
 // answer as a plain record of client values, and an interface does not.
@@ -225,26 +79,35 @@ export async function DeployDemo() {
     $onCleanup(() => window.clearInterval(timer()));
 
     return (
-      <div style={$PANEL}>
-        <div style={$SPLIT}>
-          <div style={$LEFT}>
-            <div style={$COMMITS}>
+      <div class="relative rounded-[28px] border border-code-line bg-[#0a0c10] p-5 text-code-ink shadow-[0_40px_120px_-40px_rgb(97_218_251/0.35),0_30px_80px_-50px_rgb(167_139_250/0.6)]">
+        <div class="flex flex-wrap items-stretch gap-5">
+          <div class="grid min-w-0 flex-[1_1_520px] content-start gap-3.5">
+            <div class="grid grid-cols-3 gap-2">
               <$For each={$deploys}>
                 {(commit, index) => (
                   <button
-                    style={step() === index() ? $COMMIT_ON : $COMMIT}
+                    class={
+                      "relative cursor-pointer overflow-hidden rounded-xl border px-3 py-2.5 text-left transition-colors " +
+                      (step() === index()
+                        ? "border-[#3d444d] bg-[#161b22]"
+                        : "border-code-line")
+                    }
                     onclick={() => {
                       setPlaying(false);
                       deploy(index());
                     }}
                   >
-                    <span style={$COMMIT_ID}>
+                    <span class="block font-mono text-[11px] text-code-muted">
                       {commit.id + " · " + commit.file}
                     </span>
-                    <span style={$COMMIT_MESSAGE}>{commit.message}</span>
+                    <span class="mt-0.5 block text-[13.5px] font-medium">
+                      {commit.message}
+                    </span>
                     <$Show when={playing() && step() === index()}>
                       <$For each={[pushes()]}>
-                        {() => <span style={$PROGRESS} />}
+                        {() => (
+                          <span class="absolute bottom-0 left-0 h-0.5 w-full origin-left animate-progress bg-linear-to-r from-[#61dafb] to-[#a78bfa]" />
+                        )}
                       </$For>
                     </$Show>
                   </button>
@@ -252,24 +115,25 @@ export async function DeployDemo() {
               </$For>
             </div>
 
-            <div style={$EDITOR}>
-              <div style={$EDITOR_BAR}>
+            <div class="overflow-hidden rounded-2xl border border-code-line bg-code">
+              <div class="flex items-center justify-between gap-3 border-b border-code-line px-4 py-2.5 font-mono text-xs text-code-muted">
                 <span>{"server/" + $deploys[step()].file}</span>
-                <span style={$SAVED}>
+                <span class="text-added">
                   {"● deployed " + $deploys[step()].id}
                 </span>
               </div>
-              <pre style={$EDITOR_CODE}>
+              <pre class="m-0 box-border h-[460px] overflow-auto py-4 font-mono text-[13px] leading-[1.7]">
                 <$For each={$deploys[step()].lines}>
                   {(line) => (
                     <div
-                      class={line.added ? "bt-flash" : ""}
-                      style={line.added ? $ADDED : $LINE}
+                      class={
+                        line.added
+                          ? "code-line code-added animate-flash"
+                          : "code-line"
+                      }
                     >
                       {line.tokens.map((token) => (
-                        <span style={"color: " + token.color}>
-                          {token.text}
-                        </span>
+                        <span style={{ color: token.color }}>{token.text}</span>
                       ))}
                     </div>
                   )}
@@ -278,52 +142,66 @@ export async function DeployDemo() {
             </div>
           </div>
 
-          <div style={$RIGHT}>
-            <div style={$PHONE}>
-              <div style={$ISLAND} />
-              <div style={$SCREEN}>
-                <div style={$STATUS_BAR}>
+          <div class="grid flex-[1_1_316px] content-center justify-items-center">
+            {/* The device. 316 by 660 with the bezel taken off both sides is
+                a screen close to an iPhone's 19.5:9. */}
+            <div class="relative box-border h-[660px] w-[316px] max-w-full rounded-[52px] bg-[#1c1c1f] p-[11px] shadow-[inset_0_0_0_1px_#3f3f46,inset_0_0_0_5px_#0b0b0d,0_30px_60px_-20px_rgb(0_0_0/0.7)]">
+              <div class="absolute top-[22px] left-1/2 z-[3] h-[26px] w-[92px] -translate-x-1/2 rounded-full bg-black" />
+              <div class="relative h-full overflow-hidden rounded-[41px] bg-[#f6f5f2] font-ios text-[#111]">
+                <div class="flex h-8 items-center justify-between px-7 pt-4 text-sm font-semibold">
                   <span>9:41</span>
                   <span>●●● ▮</span>
                 </div>
 
                 <$For each={pushes() > 0 ? [pushes()] : []}>
                   {() => (
-                    <div class="bt-toast" style={$TOAST}>
+                    <div class="absolute top-[58px] left-1/2 z-[2] -ml-24 w-48 animate-toast rounded-full bg-[#111]/90 px-3 py-2 text-center text-xs font-semibold text-white shadow-lg">
                       {"↓ New screen from server · " + $deploys[step()].id}
                     </div>
                   )}
                 </$For>
 
-                <div style={$CONTENT}>
+                <div class="grid gap-3 px-[18px] pt-[18px]">
                   <div>
-                    <p style={$HELLO}>Good morning,</p>
-                    <p style={$NAME}>Sam</p>
+                    <p class="text-[13px] font-medium text-[#8a8a8e]">
+                      Good morning,
+                    </p>
+                    <p class="text-[28px] font-bold tracking-[-0.02em]">Sam</p>
                   </div>
 
                   <$Show when={step() >= 1}>
-                    <div class="bt-enter" style={$PROMO}>
-                      <p style={$PROMO_EYEBROW}>AUTUMN SALE</p>
-                      <p style={$PROMO_TITLE}>20% off every single origin</p>
-                      <p style={$PROMO_DETAIL}>
+                    <div class="animate-enter rounded-[18px] bg-linear-135 from-[#ff7a18] to-[#af002d] to-75% px-4 py-3.5 text-white">
+                      <p class="text-[10.5px] font-bold tracking-[0.12em] opacity-85">
+                        AUTUMN SALE
+                      </p>
+                      <p class="mt-1 mb-0.5 text-lg leading-tight font-bold">
+                        20% off every single origin
+                      </p>
+                      <p class="text-[12.5px] opacity-90">
                         Ends Sunday · applied at checkout
                       </p>
                     </div>
                   </$Show>
 
                   <$Show when={step() >= 2}>
-                    <div class="bt-enter" style={$USUAL}>
-                      <div style={$USUAL_ROW}>
-                        <span style={$SWATCH + $PRODUCTS[0].swatch} />
-                        <div style={$PRODUCT_TEXT}>
-                          <p style={$PRODUCT_NAME}>Your usual</p>
-                          <p style={$PRODUCT_NOTES}>
+                    <div class="grid animate-enter gap-2.5 rounded-[18px] bg-white p-3.5 shadow-sm">
+                      <div class="flex items-center gap-3">
+                        <span
+                          class="size-[42px] flex-none rounded-xl"
+                          style={{ background: $PRODUCTS[0].swatch }}
+                        />
+                        <div class="min-w-0 flex-1">
+                          <p class="text-[14.5px] font-semibold">Your usual</p>
+                          <p class="mt-px text-xs text-[#8a8a8e]">
                             Ethiopia Guji · 250 g · whole bean
                           </p>
                         </div>
                       </div>
                       <button
-                        style={added() ? $REORDER_DONE : $REORDER_IDLE}
+                        class={
+                          "cursor-pointer rounded-xl p-[11px] text-sm font-semibold text-white transition active:scale-[0.98] " +
+                          (added() ? "bg-green-600" : "bg-[#111]")
+                        }
                         onclick={() => {
                           setPlaying(false);
                           setAdded(true);
@@ -334,29 +212,41 @@ export async function DeployDemo() {
                     </div>
                   </$Show>
 
-                  <p style={$LABEL}>Picked for you</p>
+                  <p class="mt-1.5 text-[15px] font-bold">Picked for you</p>
                   <$For each={$PRODUCTS}>
                     {(product) => (
-                      <div style={$PRODUCT}>
-                        <span style={$SWATCH + product.swatch} />
-                        <div style={$PRODUCT_TEXT}>
-                          <p style={$PRODUCT_NAME}>{product.name}</p>
-                          <p style={$PRODUCT_NOTES}>{product.notes}</p>
+                      <div class="flex items-center gap-3 rounded-2xl bg-white p-2.5 shadow-sm">
+                        <span
+                          class="size-[42px] flex-none rounded-xl"
+                          style={{ background: product.swatch }}
+                        />
+                        <div class="min-w-0 flex-1">
+                          <p class="text-[14.5px] font-semibold">
+                            {product.name}
+                          </p>
+                          <p class="mt-px text-xs text-[#8a8a8e]">
+                            {product.notes}
+                          </p>
                         </div>
-                        <span style={$PRICE}>{product.price}</span>
+                        <span class="text-[14.5px] font-semibold">
+                          {product.price}
+                        </span>
                       </div>
                     )}
                   </$For>
                 </div>
 
-                <div style={$TABS}>
+                <div class="absolute inset-x-0 bottom-0 flex justify-around border-t border-[#e7e5e0] bg-[#f6f5f2]/90 px-3 pt-2.5 pb-[26px] text-[10.5px] font-semibold text-[#a1a1a6]">
                   <$For each={$TAB_NAMES}>
                     {(name, index) => (
-                      <div style={$TAB}>
+                      <div class="grid justify-items-center gap-1">
                         <span
-                          style={index() === 0 ? $TAB_ICON_ON : $TAB_ICON}
+                          class={
+                            "size-5 rounded-md " +
+                            (index() === 0 ? "bg-[#111]" : "bg-[#d4d4d8]")
+                          }
                         />
-                        <span style={index() === 0 ? "color: #111" : ""}>
+                        <span class={index() === 0 ? "text-[#111]" : ""}>
                           {name}
                         </span>
                       </div>
@@ -368,20 +258,23 @@ export async function DeployDemo() {
           </div>
         </div>
 
-        <div style={$STRIP}>
-          <span style={$CHIP}>
-            <span style={$DOT_IDLE} />
+        <div class="mt-[18px] flex flex-wrap items-center gap-x-[22px] gap-y-2.5 border-t border-code-line px-1.5 pt-3.5 pb-0.5 font-mono text-xs text-code-muted">
+          <span class="inline-flex items-center gap-2 whitespace-nowrap">
+            <span class="size-2 rounded-full bg-[#6e7681]" />
             {"App Store build "}
-            <span style={$STRONG}>2.4.0 (112)</span>
+            <span class="text-code-ink">2.4.0 (112)</span>
             {" · unchanged"}
           </span>
-          <span style={$CHIP}>
-            <span style={$DOT_LIVE} />
+          <span class="inline-flex items-center gap-2 whitespace-nowrap">
+            <span class="size-2 animate-live rounded-full bg-added" />
             {"Screen "}
-            <span style={$STRONG}>{$deploys[step()].id}</span>
+            <span class="text-code-ink">{$deploys[step()].id}</span>
             {" · live on next open"}
           </span>
-          <button style={$PLAY} onclick={() => setPlaying(!playing())}>
+          <button
+            class="ml-auto cursor-pointer rounded-full border border-code-line px-3 py-1.5 font-mono text-[11.5px] text-code-ink"
+            onclick={() => setPlaying(!playing())}
+          >
             {playing() ? "❚❚ Pause" : "▶ Play"}
           </button>
         </div>

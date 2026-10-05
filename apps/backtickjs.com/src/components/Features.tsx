@@ -1,19 +1,4 @@
 import { cs } from "@backtickjs/core";
-import { line, mono, muted, radius } from "./theme.js";
-
-const GRID =
-  "display: grid; gap: 14px;" +
-  " grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))";
-
-const CARD = `padding: 24px; border-radius: ${radius}; border: 1px solid ${line}`;
-
-const TAG =
-  "display: inline-block; padding: 3px 8px; border-radius: 6px;" +
-  ` font-family: ${mono}; font-size: 12px; background: #0d1117; color: #79c0ff`;
-
-const NAME =
-  "margin: 14px 0 6px; font-size: 18px; font-weight: 700; letter-spacing: -0.01em";
-const TEXT = `margin: 0; font-size: 15px; color: ${muted}`;
 
 type Feature = { tag: string; name: string; text: string };
 
@@ -64,12 +49,16 @@ const FEATURES: Feature[] = [
 
 export async function Features() {
   return cs`(
-    <div style={$GRID}>
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-3.5">
       {$FEATURES.map((feature) => (
-        <div style={$CARD}>
-          <code style={$TAG}>{feature.tag}</code>
-          <p style={$NAME}>{feature.name}</p>
-          <p style={$TEXT}>{feature.text}</p>
+        <div class="rounded-[20px] border border-line p-6">
+          <code class="inline-block rounded-md bg-code px-2 py-0.5 font-mono text-xs text-[#79c0ff]">
+            {feature.tag}
+          </code>
+          <p class="mt-3.5 mb-1.5 text-lg font-bold tracking-[-0.01em]">
+            {feature.name}
+          </p>
+          <p class="text-[15px] text-muted">{feature.text}</p>
         </div>
       ))}
     </div>

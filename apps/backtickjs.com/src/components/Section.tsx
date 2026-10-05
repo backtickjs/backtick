@@ -1,20 +1,5 @@
 import { cs } from "@backtickjs/core";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
-import { cyan, mono, muted } from "./theme.js";
-
-const SECTION = "padding: 96px 0 0";
-
-const EYEBROW =
-  `margin: 0 0 14px; font-family: ${mono}; font-size: 12px;` +
-  ` letter-spacing: 0.12em; text-transform: uppercase; color: ${cyan}`;
-
-const TITLE =
-  "margin: 0; max-width: 18em; font-size: clamp(30px, 4.6vw, 44px);" +
-  " line-height: 1.1; letter-spacing: -0.03em; font-weight: 700";
-
-const LEDE = `margin: 18px 0 0; max-width: 36em; font-size: 18px; color: ${muted}`;
-
-const BODY = "margin-top: 40px";
 
 // One heading style for every section below the hero, so they read as a set.
 export async function Section({
@@ -31,11 +16,15 @@ export async function Section({
   children: JSX.Element;
 }) {
   return cs`(
-    <section id={$id} style={$SECTION}>
-      <p style={$EYEBROW}>{$eyebrow}</p>
-      <h2 style={$TITLE}>{$title}</h2>
-      <p style={$LEDE}>{$lede}</p>
-      <div style={$BODY}>{$children}</div>
+    <section id={$id} class="pt-24">
+      <p class="mb-3.5 font-mono text-xs tracking-[0.12em] text-react uppercase">
+        {$eyebrow}
+      </p>
+      <h2 class="max-w-[18em] text-[clamp(30px,4.6vw,44px)] leading-[1.1] font-bold tracking-[-0.03em]">
+        {$title}
+      </h2>
+      <p class="mt-[18px] max-w-[36em] text-lg text-muted">{$lede}</p>
+      <div class="mt-10">{$children}</div>
     </section>
   )`;
 }

@@ -5,6 +5,9 @@
     "target": "ESNext",
     "moduleResolution": "Bundler",
     "noEmit": true,
+    // `@tailwindcss/node` 4.3.3 publishes declarations that import files it
+    // does not ship.
+    "skipLibCheck": true,
     "types": [
       "bun"
     ],

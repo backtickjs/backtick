@@ -10,13 +10,13 @@ export async function Logo({ width = 172 }: { width?: number }) {
   // `currentColor`, so the mark takes the ink of whatever holds it and dark
   // mode needs no second copy of the art.
   //
-  // `width`/`height` as well as the style: the attributes are what reserves
-  // the space while the page is still drawing.
+  // `width`/`height` as attributes, which is what reserves the space while the
+  // page is still drawing.
   return cs`(
     <svg
       width={$width}
       height={$height}
-      style={"display: block; width: " + $width + "px; height: auto"}
+      class="block h-auto max-sm:w-[136px]"
       viewBox="0 0 279 38"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"

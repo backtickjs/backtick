@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+/* Colours pick their theme with `light-dark()`, which reads `color-scheme`
+   from the page's head, so a class like `text-muted` needs no `dark:` twin. */
+@theme {
+  --font-sans: "Inter", "Helvetica Neue", Helvetica, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  /* The phone in the demo, set the way iOS sets it. */
+  --font-ios: -apple-system, "SF Pro Text", "Inter", system-ui, sans-serif;
+
+  --color-ink: light-dark(#0e0e10, #fafafa);
+  --color-paper: light-dark(#ffffff, #0a0a0c);
+  --color-muted: light-dark(#6b6b76, #a1a1aa);
+  --color-line: light-dark(#e4e4e7, #26262b);
+  --color-wash: light-dark(#f7f7f8, #121215);
+
+  /* Violet is the brand; cyan is React's. */
+  --color-brand: light-dark(#7c3aed, #a78bfa);
+  --color-react: light-dark(#0891b2, #61dafb);
+
+  /* Code is dark in both themes, so the highlighter needs one palette. */
+  --color-code: #0d1117;
+  --color-code-line: #21262d;
+  --color-code-muted: #7d8590;
+  --color-code-ink: #e6edf3;
+  --color-added: #3fb950;
+
+  --animate-enter: enter 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-toast: toast 2.4s ease both;
+  --animate-flash: flash 1.2s ease both;
+  /* As long as `DWELL_MS` in DeployDemo.tsx. */
+  --animate-progress: progress 4.5s linear both;
+  --animate-live: live 2s ease-out infinite;
+
+  @keyframes enter {
+    from {
+      opacity: 0;
+      transform: translateY(-10px) scale(0.97);
+    }
+  }
+  @keyframes toast {
+    0% {
+      opacity: 0;
+      transform: translateY(-14px);
+    }
+    12%,
+    78% {
+      opacity: 1;
+      transform: none;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+  }
+  @keyframes flash {
+    from {
+      background: rgb(46 160 67 / 0.4);
+    }
+  }
+  @keyframes progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  @keyframes live {
+    0% {
+      box-shadow: 0 0 0 0 rgb(63 185 80 / 0.6);
+    }
+    100% {
+      box-shadow: 0 0 0 8px rgb(63 185 80 / 0);
+    }
+  }
+}
+
+/* Text filled with the React-to-brand gradient. */
+@utility text-shine {
+  background: linear-gradient(90deg, var(--color-react), var(--color-brand));
+  background-clip: text;
+  color: transparent;
+}
+
+/* One line of highlighted code, and one marked added. */
+@utility code-line {
+  min-height: 1.7em;
+  padding-inline: 20px;
+  white-space: pre;
+}
+@utility code-added {
+  background: rgb(46 160 67 / 0.14);
+  box-shadow: inset 3px 0 0 var(--color-added);
+}
+
+@layer base {
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+  }
+  ::selection {
+    background: rgb(97 218 251 / 0.35);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

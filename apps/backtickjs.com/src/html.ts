@@ -2,36 +2,16 @@ import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
 import { render } from "@backtickjs/solid-js/web";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
+import { compile, optimize } from "@tailwindcss/node";
+import { Scanner } from "@tailwindcss/oxide";
+import { readFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 
 // In development, a map into the host files in each bundle, for devtools.
 const sourcemap = process.env.NODE_ENV === "production" ? undefined : "inline";
 
-// What inline styles cannot say: animations, hover, and the page itself.
-const STYLE = `
-  body { margin: 0; background: light-dark(#ffffff, #0a0a0c); }
-  ::selection { background: rgba(97, 218, 251, .35); }
-  .bt-lift:hover { transform: translateY(-1px); box-shadow: 0 8px 24px -10px rgba(0,0,0,.35); }
-  .bt-enter { animation: bt-enter .6s cubic-bezier(.2,.8,.2,1) both; }
-  .bt-toast { animation: bt-toast 2.4s ease both; }
-  .bt-flash { animation: bt-flash 1.2s ease both; }
-  @keyframes bt-enter { from { opacity: 0; transform: translateY(-10px) scale(.97); } }
-  @keyframes bt-toast {
-    0% { opacity: 0; transform: translateY(-14px); }
-    12%, 78% { opacity: 1; transform: none; }
-    100% { opacity: 0; transform: translateY(-8px); }
-  }
-  @keyframes bt-flash { from { background: rgba(46, 160, 67, .4); } }
-  @keyframes bt-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-  @keyframes bt-pulse {
-    0% { box-shadow: 0 0 0 0 rgba(63, 185, 80, .6); }
-    100% { box-shadow: 0 0 0 8px rgba(63, 185, 80, 0); }
-  }
-  @media (max-width: 860px) { .bt-arrow { display: none; } }
-  @media (max-width: 560px) { .bt-wide { display: none; } }
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation: none !important; transition: none !important; }
-  }
-`;
+// The page's CSS, generated once at startup from the classes the source uses.
+const STYLE = await tailwind();
 
 export async function toHtml(element: JSX.Element): Promise<string> {
   const bundle = await bundler.build({
@@ -68,4 +48,14 @@ export async function toHtml(element: JSX.Element): Promise<string> {
     <script type="module" src="data:text/javascript,${encodeURIComponent(code)}"></script>
   </body>
 </html>`;
+}
+
+async function tailwind(): Promise<string> {
+  const src = fileURLToPath(new URL(".", import.meta.url));
+  const input = await readFile(new URL("styles.css", import.meta.url), "utf8");
+  const compiler = await compile(input, { base: src, onDependency: () => {} });
+  const scanner = new Scanner({
+    sources: [{ base: src, pattern: "**/*", negated: false }],
+  });
+  return optimize(compiler.build(scanner.scan()), { minify: true }).code;
 }
