@@ -7,7 +7,7 @@
       "request": "launch",
       "runtimeExecutable": "${execPath}",
       "args": [
-        "${workspaceRoot}/examples/react-native-server",
+        "${workspaceRoot}/packages/create-backtick-app/template",
         "--extensionDevelopmentPath=${workspaceRoot}/apps/vscode-extension"
       ],
       "outFiles": ["${workspaceRoot}/*/*/dist/**/*.js"]
