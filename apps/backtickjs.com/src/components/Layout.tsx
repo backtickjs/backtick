@@ -12,9 +12,6 @@ export async function Layout({ children }: { children: JSX.Element[] }) {
           {${(<Logo />)}}
         </a>
         <nav class="flex items-center gap-5 whitespace-nowrap text-[15px] font-medium">
-          <a href="/#how" class="no-underline max-sm:hidden">
-            How it works
-          </a>
           <a href="/docs" class="no-underline">
             Docs
           </a>

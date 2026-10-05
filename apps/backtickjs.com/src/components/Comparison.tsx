@@ -6,7 +6,7 @@ export type Column = { name: string; summary: string };
 export type Cell = {
   verdict: string;
   detail: string;
-  tone: "good" | "partial" | "bad";
+  tone: "good" | "partial" | "bad" | "none";
 };
 export type Row = { label: string; values: Cell[] };
 
@@ -17,11 +17,13 @@ const TINTS: Record<Cell["tone"], string> = {
   good: "bg-green-500/10",
   partial: "bg-amber-500/12",
   bad: "bg-red-500/10",
+  none: "",
 };
 const VERDICTS: Record<Cell["tone"], string> = {
   good: "text-green-700 dark:text-green-400",
   partial: "text-amber-700 dark:text-amber-400",
   bad: "text-red-700 dark:text-red-400",
+  none: "text-muted",
 };
 
 // Backtick beside the tools a React Native developer already compares it to,

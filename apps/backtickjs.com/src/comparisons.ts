@@ -29,6 +29,12 @@ const bad = (verdict: string, detail = ""): Cell => ({
   detail,
   tone: "bad",
 });
+// A question that doesn't apply to that tool.
+const none = (verdict: string, detail = ""): Cell => ({
+  verdict,
+  detail,
+  tone: "none",
+});
 
 export const ROWS: Row[] = [
   {
@@ -45,6 +51,14 @@ export const ROWS: Row[] = [
       good("Yes", "In the next update"),
       bad("No", "They must already be in the installed bundle"),
       good("Yes", "They ship with the screen"),
+    ],
+  },
+  {
+    label: "Server and client code ship together?",
+    values: [
+      none("—", "It ships client code only"),
+      bad("No", "Two deploys to keep in sync"),
+      good("Yes", "In one request"),
     ],
   },
   {
