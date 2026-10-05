@@ -4,10 +4,7 @@ import { Button } from "./Button.js";
 export async function Hero() {
   return cs`(
     <div class="pt-12 pb-14">
-      <span class="inline-flex items-center gap-2 rounded-full border border-violet-500/25 bg-violet-500/10 px-3 py-1.5 font-mono text-xs tracking-wide">
-        {"⚛ Server-driven React Native"}
-      </span>
-      <h1 class="mt-[22px] max-w-[12em] text-[clamp(40px,7.4vw,76px)] leading-[1.02] font-extrabold tracking-[-0.045em]">
+      <h1 class="max-w-[12em] text-[clamp(40px,7.4vw,76px)] leading-[1.02] font-extrabold tracking-[-0.045em]">
         {"Ship React Native screens "}
         <span class="text-shine">without shipping the app.</span>
       </h1>

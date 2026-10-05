@@ -15,6 +15,8 @@
     "@backtickjs/bundler": "^0.1.0",
     "@backtickjs/core": "^0.1.0",
     "@backtickjs/solid-js": "^1.9.14",
+    "@backtickjs/vscode-extension": "^0.1.0",
+    "@shikijs/colorized-brackets": "^4.5.0",
     "@tailwindcss/node": "^4.3.3",
     "@tailwindcss/oxide": "^4.3.3",
     "shiki": "^4.5.0",

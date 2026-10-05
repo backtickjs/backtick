@@ -45,9 +45,7 @@ export async function Flow() {
               {stage.name}
             </p>
             <p class="text-[15.5px] text-muted">{stage.text}</p>
-            <code class="mt-[18px] inline-block rounded-lg bg-code px-2.5 py-1 font-mono text-[12.5px] text-code-ink">
-              {stage.chip}
-            </code>
+            <code class="code-chip mt-[18px] bg-paper">{stage.chip}</code>
           </div>
         </>
       ))}

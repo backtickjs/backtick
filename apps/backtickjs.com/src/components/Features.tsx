@@ -52,9 +52,7 @@ export async function Features() {
     <div class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-3.5">
       {$FEATURES.map((feature) => (
         <div class="rounded-[20px] border border-line p-6">
-          <code class="inline-block rounded-md bg-code px-2 py-0.5 font-mono text-xs text-[#79c0ff]">
-            {feature.tag}
-          </code>
+          <code class="code-chip bg-wash">{feature.tag}</code>
           <p class="mt-3.5 mb-1.5 text-lg font-bold tracking-[-0.01em]">
             {feature.name}
           </p>

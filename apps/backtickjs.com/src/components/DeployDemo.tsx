@@ -79,7 +79,7 @@ export async function DeployDemo() {
     $onCleanup(() => window.clearInterval(timer()));
 
     return (
-      <div class="relative rounded-[28px] border border-code-line bg-[#0a0c10] p-5 text-code-ink shadow-[0_40px_120px_-40px_rgb(97_218_251/0.35),0_30px_80px_-50px_rgb(167_139_250/0.6)]">
+      <div class="relative rounded-[28px] border border-code-line bg-[#141414] p-5 text-code-ink shadow-[0_40px_120px_-40px_rgb(97_218_251/0.35),0_30px_80px_-50px_rgb(167_139_250/0.6)]">
         <div class="flex flex-wrap items-stretch gap-5">
           <div class="grid min-w-0 flex-[1_1_520px] content-start gap-3.5">
             <div class="grid grid-cols-3 gap-2">
@@ -89,7 +89,7 @@ export async function DeployDemo() {
                     class={
                       "relative cursor-pointer overflow-hidden rounded-xl border px-3 py-2.5 text-left transition-colors " +
                       (step() === index()
-                        ? "border-[#3d444d] bg-[#161b22]"
+                        ? "border-[#454545] bg-[#2a2a2a]"
                         : "border-code-line")
                     }
                     onclick={() => {
@@ -260,7 +260,7 @@ export async function DeployDemo() {
 
         <div class="mt-[18px] flex flex-wrap items-center gap-x-[22px] gap-y-2.5 border-t border-code-line px-1.5 pt-3.5 pb-0.5 font-mono text-xs text-code-muted">
           <span class="inline-flex items-center gap-2 whitespace-nowrap">
-            <span class="size-2 rounded-full bg-[#6e7681]" />
+            <span class="size-2 rounded-full bg-code-muted" />
             {"App Store build "}
             <span class="text-code-ink">2.4.0 (112)</span>
             {" · unchanged"}

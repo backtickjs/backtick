@@ -16,7 +16,7 @@ export async function Logo({ width = 172 }: { width?: number }) {
     <svg
       width={$width}
       height={$height}
-      class="block h-auto max-sm:w-[136px]"
+      class="block h-auto"
       viewBox="0 0 279 38"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"

@@ -37,6 +37,12 @@ importers:
       '@backtickjs/solid-js':
         specifier: ^1.9.14
         version: link:../../packages/solid-js
+      '@backtickjs/vscode-extension':
+        specifier: ^0.1.0
+        version: link:../vscode-extension
+      '@shikijs/colorized-brackets':
+        specifier: ^4.5.0
+        version: 4.5.0
       '@tailwindcss/node':
         specifier: ^4.3.3
         version: 4.3.3
@@ -1693,6 +1699,10 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
+
+  '@shikijs/colorized-brackets@4.5.0':
+    resolution: {integrity: sha512-CI3XYkXaFvAE2wkMK+7ERrCRmhioMvxehLHgsS0Cu/cUJ/8j5fYfut4yhbBTlLSoe2UjkT6wcov89XkaEmaboQ==}
+    engines: {node: '>=20'}
 
   '@shikijs/core@4.5.0':
     resolution: {integrity: sha512-6CIgwq+bt2JZ3OSjb/nBkkwEf/CfpHcbam+Mg5Pllco7HAGRQ2/EFhZrrJtbyNTgKwknfVS+llsXGygiDGwJWw==}
@@ -5145,6 +5155,10 @@ snapshots:
       react-native: 0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3)
     optionalDependencies:
       '@types/react': 19.2.18
+
+  '@shikijs/colorized-brackets@4.5.0':
+    dependencies:
+      shiki: 4.5.0
 
   '@shikijs/core@4.5.0':
     dependencies:

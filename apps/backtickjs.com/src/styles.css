@@ -18,11 +18,12 @@
   --color-brand: light-dark(#7c3aed, #a78bfa);
   --color-react: light-dark(#0891b2, #61dafb);
 
-  /* Code is dark in both themes, so the highlighter needs one palette. */
-  --color-code: #0d1117;
-  --color-code-line: #21262d;
-  --color-code-muted: #7d8590;
-  --color-code-ink: #e6edf3;
+  /* Code is dark in both themes, in VS Code's Dark+ greys, which the
+     highlighter's colours are made for. */
+  --color-code: #1e1e1e;
+  --color-code-line: #2d2d2d;
+  --color-code-muted: #858585;
+  --color-code-ink: #d4d4d4;
   --color-added: #3fb950;
 
   --animate-enter: enter 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
@@ -81,6 +82,17 @@
   background: linear-gradient(90deg, var(--color-react), var(--color-brand));
   background-clip: text;
   color: transparent;
+}
+
+/* A short piece of code inline with prose, in the page's own colours. */
+@utility code-chip {
+  display: inline-block;
+  padding: 3px 9px;
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  color: var(--color-ink);
 }
 
 /* One line of highlighted code, and one marked added. */

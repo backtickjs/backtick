@@ -16,9 +16,9 @@ export async function Code({
     <div class="min-w-0 overflow-hidden rounded-[20px] border border-code-line bg-code">
       <div class="flex items-center gap-3 border-b border-code-line px-4 py-3">
         <div class="flex gap-1.5">
-          <span class="size-2.5 rounded-full bg-[#30363d]" />
-          <span class="size-2.5 rounded-full bg-[#30363d]" />
-          <span class="size-2.5 rounded-full bg-[#30363d]" />
+          <span class="size-2.5 rounded-full bg-[#3c3c3c]" />
+          <span class="size-2.5 rounded-full bg-[#3c3c3c]" />
+          <span class="size-2.5 rounded-full bg-[#3c3c3c]" />
         </div>
         <span class="font-mono text-xs text-code-muted">{$file}</span>
       </div>
