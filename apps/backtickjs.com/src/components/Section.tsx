@@ -29,7 +29,7 @@ export async function Section({
         {$title}
       </h2>
       {$ledeOrNull === null ? null : (
-        <p class="mt-[18px] max-w-[36em] text-lg text-muted">{$ledeOrNull}</p>
+        <p class="mt-[18px] max-w-[720px] text-lg text-muted">{$ledeOrNull}</p>
       )}
       {$childrenOrNull === null ? null : (
         <div class="mt-10">{$childrenOrNull}</div>

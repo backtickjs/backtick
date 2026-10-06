@@ -1,6 +1,7 @@
 import { cs } from "@backtickjs/core";
 import { highlight } from "../highlight.js";
 import { type Part, RECEIVED, WRITTEN } from "../samples.js";
+import { InlineCode } from "./Code.js";
 
 // How a screen gets from your server to the phone: the file as written,
 // coloured by what each part is, beside what the phone receives.
@@ -56,11 +57,11 @@ export async function HowItWorks() {
         ))}
       </div>
 
-      <p class="max-w-[44em] text-[15.5px] text-muted">
-        Each $ in the script becomes a parameter of the compiled component. The
-        call at the end of the file passes the values: View and Text from the
-        app, and the user's data from your server. That call is the only place
-        the data lives.
+      <p class="max-w-[720px] text-[15.5px] text-muted">
+        Each client script {${(<InlineCode source="cs`…`" />)}} becomes a
+        function, with every splice <code class="font-mono">$</code> a
+        parameter. The call at the end of the file passes the values: View and
+        Text from the app, and the user's data from your server.
       </p>
     </div>
   )`;

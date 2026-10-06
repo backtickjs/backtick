@@ -11,7 +11,7 @@ export async function Hero() {
         {" programming model for "}
         <span class="text-shine">{"React\u00a0Native."}</span>
       </h1>
-      <p class="mt-[26px] max-w-[36em] text-xl leading-[1.55] text-muted">
+      <p class="mt-[26px] max-w-[720px] text-xl leading-[1.55] text-muted">
         Build your entire app in React and TypeScript, with your data, logic,
         and UI living together in one place. Everything is type-checked end to
         end, and your server and client ship as one.

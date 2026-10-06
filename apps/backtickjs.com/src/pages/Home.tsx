@@ -21,9 +21,10 @@ export async function Home() {
         lede={cs`(
           <>
             Your client scripts {${(<InlineCode source="cs`…`" />)}} are
-            compiled at build time. Each request runs your server components,
-            then bundles the compiled scripts with the user's data into one
-            JavaScript file.
+            type-checked and formatted like the rest of your code, then compiled
+            at build time. On each request, your server components run and
+            decide what the screen shows, and the bundler combines that data
+            with the compiled scripts into one JavaScript file.
           </>
         )`}
       >
