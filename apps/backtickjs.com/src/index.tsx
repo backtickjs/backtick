@@ -12,6 +12,15 @@ const server = Bun.serve({
         }),
     ]),
   ),
+  // Anything else is a file in `public/`, as the build copies it.
+  async fetch(request) {
+    const file = Bun.file(
+      new URL(`../public${new URL(request.url).pathname}`, import.meta.url),
+    );
+    return (await file.exists())
+      ? new Response(file)
+      : new Response("Not found", { status: 404 });
+  },
 });
 
 console.log(`Preview on ${server.url}`);
