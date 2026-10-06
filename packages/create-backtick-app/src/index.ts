@@ -9,6 +9,7 @@ import {
   writeFileSync,
 } from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 import prompts from "prompts";
 
@@ -134,10 +135,18 @@ if (existsSync(target) && readdirSync(target).length > 0) {
 }
 
 // The templates beside this file once built: `dist/../templates`.
-cpSync(new URL(`../templates/${templateName}/`, import.meta.url), target, {
+const templateFolder = fileURLToPath(
+  new URL(`../templates/${templateName}/`, import.meta.url),
+);
+cpSync(templateFolder, target, {
   recursive: true,
-  // What running a template inside the Backtick repository leaves behind.
-  filter: (source) => !/[\\/](node_modules|\.expo)([\\/]|$)/.test(source),
+  // What running a template inside the Backtick repository leaves behind,
+  // matched within the template: the CLI itself runs from a `node_modules`
+  // when installed, and a path from the root would match every file.
+  filter: (source) =>
+    !/(^|[\\/])(node_modules|\.expo|\.turbo)([\\/]|$)/.test(
+      path.relative(templateFolder, source),
+    ),
 });
 // npm drops a `.gitignore` from a published package, so it ships unnamed.
 renameSync(path.join(target, "gitignore"), path.join(target, ".gitignore"));
