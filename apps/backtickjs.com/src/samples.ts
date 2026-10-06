@@ -104,16 +104,13 @@ export const SERVER = `
 import { bundler } from "@backtickjs/bundler";
 import { Home } from "./Home.js";
 
+// The versions of React and React Native your app ships.
+const packageVersions = { react: "19.2.3", "react-native": "0.86.3" };
+
 Bun.serve({
   routes: {
-    "/screens/home": async (request) => {
-      const packageVersions = JSON.parse(
-        String(request.headers.get("backtick-package-versions")),
-      );
-      const bundle = await bundler.build({
-        input: <Home />,
-        packageVersions,
-      });
+    "/screens/home": async () => {
+      const bundle = await bundler.build({ input: <Home />, packageVersions });
       const { code } = bundle.generate({ format: "cjs" });
       return new Response(code);
     },
@@ -122,9 +119,9 @@ Bun.serve({
 `;
 
 export const APP = `
-import { Backtick } from "@backtickjs/react-native-client";
+import { evaluate } from "@backtickjs/react-native-client";
 import * as React from "react";
-import { Suspense } from "react";
+import { Suspense, use, useState } from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNative from "react-native";
 
@@ -134,21 +131,24 @@ const modules = {
   "react-native": ReactNative,
 };
 
-const packageVersions = {
-  "react": "19.2.3",
-  "react-native": "0.86.3",
-};
+async function fetchScreen(url: string) {
+  const response = await fetch(url);
+  return evaluate(await response.text(), modules) as React.ReactNode;
+}
 
 export default function App() {
+  const [screen] = useState(() =>
+    fetchScreen("https://api.example.com/screens/home"),
+  );
   return (
     <Suspense fallback={<ReactNative.ActivityIndicator />}>
-      <Backtick
-        url="https://api.example.com/screens/home"
-        modules={modules}
-        packageVersions={packageVersions}
-      />
+      <Screen screen={screen} />
     </Suspense>
   );
+}
+
+function Screen({ screen }: { screen: Promise<React.ReactNode> }) {
+  return use(screen);
 }
 `;
 

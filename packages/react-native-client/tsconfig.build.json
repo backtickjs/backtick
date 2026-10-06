@@ -3,9 +3,6 @@
   "compilerOptions": {
     "emitDeclarationOnly": false,
     "sourceMap": true,
-    "jsx": "react-jsx",
-    // `fetch` and `Response`, which React Native provides as the web does.
-    "lib": ["esnext", "dom"],
     "types": []
   }
 }

@@ -568,15 +568,9 @@ importers:
 
   packages/react-native-client:
     devDependencies:
-      '@types/react':
-        specifier: 19.2.18
-        version: 19.2.18
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
-      react:
-        specifier: 19.2.3
-        version: 19.2.3
       typescript:
         specifier: ^6.0.3
         version: 6.0.3

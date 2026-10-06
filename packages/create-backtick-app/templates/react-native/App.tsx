@@ -1,4 +1,4 @@
-import { Backtick, invalidate } from "@backtickjs/react-native-client";
+import { evaluate } from "@backtickjs/react-native-client";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
@@ -6,6 +6,7 @@ import {
   Component,
   type ReactNode,
   Suspense,
+  use,
   useEffect,
   useState,
 } from "react";
@@ -20,43 +21,58 @@ const modules = {
   "react-native": ReactNative,
 };
 
-// The versions of those packages, as in package.json: what the server
-// bundles each screen for.
-const packageVersions = { react: "19.2.3", "react-native": "0.86.3" };
-
 // Your Backtick server runs on the computer Expo was started from.
 const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
-const url = `${server}/home`;
+
+// The screen at `path` on your server: its bundle, fetched and run with the
+// app's packages. Your fetch to shape: headers, auth, caching.
+async function fetchScreen(path: string): Promise<ReactNode> {
+  const response = await fetch(`${server}${path}`);
+  if (!response.ok) {
+    throw new Error(`${path} answered ${response.status}.`);
+  }
+  return evaluate(await response.text(), modules) as ReactNode;
+}
 
 export default function App() {
-  // In development, the screen is drawn again each time the server restarts,
-  // so a change to server/ shows as soon as you save.
-  const [reload, setReload] = useState(0);
+  // Held here, which doesn't suspend, so the request outlives the render
+  // that waits for it. Each request is numbered, so a new one also clears an
+  // error the last one showed.
+  const [request, setRequest] = useState(() => ({
+    number: 0,
+    screen: fetchScreen("/home"),
+  }));
   useEffect(() => {
+    // In development, the screen is fetched again each time the server
+    // restarts, so a change to server/ shows as soon as you save.
     if (__DEV__) {
-      return onServerRestart(() => {
-        invalidate(url);
-        setReload((count) => count + 1);
-      });
+      return onServerRestart(() =>
+        setRequest(({ number }) => ({
+          number: number + 1,
+          screen: fetchScreen("/home"),
+        })),
+      );
     }
   }, []);
   // The whole screen, its layout included, comes from the server: see
   // server/Home.tsx.
   return (
     <>
-      <Boundary key={reload}>
+      <Boundary key={request.number}>
         <Suspense fallback={<ActivityIndicator style={{ flex: 1 }} />}>
-          <Backtick
-            url={url}
-            modules={modules}
-            packageVersions={packageVersions}
-          />
+          <Screen screen={request.screen} />
         </Suspense>
       </Boundary>
       <StatusBar style="auto" />
     </>
   );
+}
+
+// What the server sent, once it has: suspending until then, and throwing,
+// for the boundary, a screen that couldn't be fetched or run.
+function Screen({ screen }: { screen: Promise<ReactNode> }) {
+  return use(screen);
 }
 
 // Calls `restarted` when the server starts a new run: it names each run at

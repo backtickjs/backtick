@@ -37,7 +37,7 @@ export const Docs = cs`() => (
     <$Section
       eyebrow="1 · Write a screen"
       title="Three files to a server-driven screen."
-      lede="A server component on your server, a route that bundles it per request, and one component in your app that draws it."
+      lede="A server component on your server, a route that bundles it per request, and a few lines in your app that fetch it and draw it."
     >
       <$Code file="server/Home.tsx" lines={$HOME_LINES} />
     </$Section>
@@ -45,15 +45,15 @@ export const Docs = cs`() => (
     <$Section
       eyebrow="2 · Serve it"
       title="One route bundles the screen per request."
-      lede="The app sends the versions of React and React Native it was built with. The bundler builds a screen those versions can run."
+      lede="It bundles for the versions of React and React Native your app ships, so the screen requires nothing the app doesn't have. Serving apps of several versions? Tell them apart however you like, by user agent for one, and bundle each for its own."
     >
       <$Code file="server/index.tsx" lines={$SERVER_LINES} />
     </$Section>
 
     <$Section
       eyebrow="3 · Draw it"
-      title="One component in your app."
-      lede="It fetches the screen and runs it with your app's own React and React Native. It suspends while the screen loads, so a Suspense boundary shows your fallback, and an error boundary catches a screen that can't load."
+      title="A few lines in your app."
+      lede="Your app fetches the screen like any other request, with its own headers, auth and caching. evaluate runs it with your app's own React and React Native, and React's use draws it under Suspense, which shows your fallback while it loads."
     >
       <$Code file="app/App.tsx" lines={$APP_LINES} />
     </$Section>

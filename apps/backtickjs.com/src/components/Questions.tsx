@@ -21,9 +21,9 @@ const QUESTIONS = [
   {
     question: "Do I have to rewrite my app?",
     answer:
-      "No. <Backtick> is one component, under 1 KB: put it where you want a" +
-      " server screen or an embedded component. Your navigation, auth and" +
-      " native modules stay as they are.",
+      "No. Draw a server screen or an embedded component wherever you want" +
+      " one, with a few lines that fetch it. Your navigation, auth and native" +
+      " modules stay as they are.",
   },
   {
     question: "Does it work offline?",
