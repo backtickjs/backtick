@@ -5,6 +5,7 @@ import { DeployDemo } from "../components/DeployDemo.js";
 import { Hero } from "../components/Hero.js";
 import { HowItWorks } from "../components/HowItWorks.js";
 import { Layout } from "../components/Layout.js";
+import { Questions } from "../components/Questions.js";
 import { Section } from "../components/Section.js";
 import { Setup } from "../components/Setup.js";
 import {
@@ -44,12 +45,12 @@ export async function Home() {
       <Section
         id="how"
         eyebrow="How it works"
-        title="Compiled once. Dynamically linked per request."
+        title="Compiled once. Bundled per request."
         lede={cs`(
           <>
             Your client scripts {${(<InlineCode source="cs`…`" />)}} are
             compiled at build time. Each request runs your server components,
-            then links the compiled client scripts and the user's data into one
+            then bundles the compiled scripts with the user's data into one
             JavaScript file.
           </>
         )`}
@@ -71,6 +72,10 @@ export async function Home() {
         lede="All three get code to the phone without a store release. Only Backtick ships each screen per request, client components included."
       >
         <Comparison columns={EXPO_COLUMNS} rows={EXPO_ROWS} />
+      </Section>
+
+      <Section eyebrow="Questions" title="What you're probably wondering.">
+        <Questions />
       </Section>
 
       <Section
