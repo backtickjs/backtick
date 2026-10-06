@@ -7,6 +7,7 @@
 
 <br />
 
+[![npm](https://img.shields.io/npm/v/create-backtick-app)](https://www.npmjs.com/package/create-backtick-app)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![VS Code extension](https://img.shields.io/badge/VS_Code-extension-007ACC)](https://marketplace.visualstudio.com/items?itemName=backtickjs.backtick-vscode)
 
