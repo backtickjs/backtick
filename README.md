@@ -127,7 +127,8 @@ at Meta before leaving to work on Backtick full time.
 
 I love building things and moving fast, and Backtick is my attempt to make that
 easier for others too. If you're trying Backtick, thinking about server-driven
-UI, or just want to chat, I'd love to hear from you. You can find me on
+UI, or just want to chat, I'd love to hear from you. Email me at
+[jf@backtickjs.com](mailto:jf@backtickjs.com), or find me on
 [LinkedIn](https://www.linkedin.com/in/jfbisson/).
 
 ## License
