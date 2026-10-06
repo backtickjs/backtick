@@ -66,10 +66,7 @@ export const Docs = cs`() => (
           On the web, you deploy and users have the change the next time they
           load the page. A native app carries its screens in the binary, so
           every change waits for a store release. Backtick serves screens from
-          your server, the way the web does.{" "}
-          <a href="/why" class="font-medium text-react">
-            Where the idea comes from →
-          </a>
+          your server, the way the web does.
         </>
       }
     >

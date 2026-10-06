@@ -2,7 +2,6 @@ import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 import type { Client } from "@backtickjs/core";
 import { Docs } from "./pages/Docs.js";
 import { Home } from "./pages/Home.js";
-import { Why } from "./pages/Why.js";
 
 // A page: where it lives, what draws it, and what search results and link
 // previews show for it.
@@ -32,14 +31,5 @@ export const PAGES: Page[] = [
     description:
       "Create a React Native app with a Backtick server in one command, then" +
       " write a screen, serve it per request and draw it in your app.",
-  },
-  {
-    path: "/why",
-    Page: Why,
-    title: "Backtick · Why Backtick",
-    description:
-      "XHP had the right model and the wrong scripting story. Backtick keeps" +
-      " the server-rendered model, with client code written inline and" +
-      " type-checked.",
   },
 ];
