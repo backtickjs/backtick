@@ -27,9 +27,9 @@ export const Home = cs`() => (
         <>
           Your client scripts <$InlineCode line={$CLIENT_SCRIPT_SYNTAX} /> are
           type-checked and formatted like the rest of your code, then compiled
-          at build time. On each request, your server components run and decide
-          what the screen shows, and the bundler combines that data with the
-          compiled scripts into one JavaScript file.
+          at build time. On each request, the bundler runs your server
+          components and combines their data with the compiled scripts into one
+          JavaScript file.
         </>
       }
     >
