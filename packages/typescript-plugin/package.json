@@ -2,7 +2,7 @@
   "name": "@backtickjs/typescript-plugin",
   "version": "0.1.0",
   "private": true,
-  "description": "Internal: used by the VS Code extension. The tsserver plugin for `cs` scripts",
+  "description": "Internal: the tsserver plugin that type-checks Backtick client scripts in your editor",
   "license": "MIT",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

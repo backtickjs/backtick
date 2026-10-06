@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "private": true,
+  "description": "Compiles Backtick client scripts when you build your server ahead of time with ts-patch's tspc",
   "type": "module",
   "main": "./dist/index.js",
   "exports": {

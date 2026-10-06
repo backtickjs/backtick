@@ -2,7 +2,7 @@
   "name": "@backtickjs/solid-js",
   "version": "1.9.14",
   "private": true,
-  "description": "Backtick's Solid adapter: scripts written as Solid code, compiled by Solid's own compiler and run on Solid",
+  "description": "The Solid adapter for Backtick: Solid's API as client values your scripts splice, and a JSX runtime for server components",
   "license": "MIT",
   "type": "module",
   "exports": {

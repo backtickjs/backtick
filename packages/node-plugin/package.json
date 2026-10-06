@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "private": true,
+  "description": "Runs a Backtick server on Node without a build step, compiling its files and client scripts as they load",
   "type": "module",
   "main": "./dist/index.js",
   "exports": {

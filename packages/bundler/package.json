@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "private": true,
+  "description": "Runs Backtick server components and bundles a screen per request: one JavaScript file for the client",
   "type": "module",
   "main": "./dist/index.js",
   "exports": {

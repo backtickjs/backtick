@@ -2,7 +2,7 @@
   "name": "@backtickjs/language-plugin",
   "version": "0.1.0",
   "private": true,
-  "description": "Internal: used by `@backtickjs/tsc` and the editor tooling. The Volar plugin that shows TypeScript what a `cs` script means",
+  "description": "Internal: the Volar language plugin that shows TypeScript what a Backtick client script means",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",

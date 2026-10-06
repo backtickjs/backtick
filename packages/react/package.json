@@ -2,7 +2,7 @@
   "name": "@backtickjs/react",
   "version": "19.2.3",
   "private": true,
-  "description": "Backtick's React adapter: scripts written as React code, compiled by React's own JSX transform and run on React",
+  "description": "The React adapter for Backtick: React's API as client values your scripts splice, and a JSX runtime for server components",
   "license": "MIT",
   "type": "module",
   "exports": {

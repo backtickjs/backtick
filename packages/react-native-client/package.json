@@ -2,7 +2,7 @@
   "name": "@backtickjs/react-native-client",
   "version": "0.1.0",
   "private": true,
-  "description": "What a React Native app runs a Backtick server's screens with: a bundle, run with the app's own packages",
+  "description": "Runs a Backtick server's screens in a React Native app, with the app's own packages",
   "license": "MIT",
   "type": "module",
   "exports": {

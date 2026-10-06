@@ -2,7 +2,7 @@
   "name": "@backtickjs/language-server",
   "version": "0.1.0",
   "private": true,
-  "description": "Internal: used by the VS Code extension. The language server for `cs` scripts",
+  "description": "Internal: a Volar language server for Backtick client scripts, used by the VS Code extension in development",
   "license": "MIT",
   "scripts": {
     "build": "tsc -b",

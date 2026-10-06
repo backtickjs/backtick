@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "private": true,
+  "description": "A Prettier plugin that formats the code inside Backtick client scripts",
   "type": "module",
   "main": "./dist/index.js",
   "scripts": {

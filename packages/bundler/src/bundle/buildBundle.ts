@@ -233,9 +233,10 @@ export async function buildBundle(
       );
     }
     // Only plain objects cross structurally. A class instance would land here
-    // and half-work — own fields reflect, getters and methods silently vanish —
-    // so fail loudly instead. An object with behaviour is built by a client
-    // function: `state` for what it holds, arrows for what may be done to it.
+    // and half-work — own fields would cross, getters and methods silently
+    // vanish — so fail loudly instead. An object with behaviour is built by a
+    // client function: `state` for what it holds, arrows for what may be done
+    // to it.
     const prototype = Object.getPrototypeOf(value);
     if (prototype !== Object.prototype && prototype !== null) {
       const name = value.constructor?.name ?? "an unknown class";

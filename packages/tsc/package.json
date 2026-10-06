@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "private": true,
+  "description": "backtick-tsc: tsc that type-checks Backtick client scripts and every splice crossing into them",
   "type": "module",
   "bin": {
     "backtick-tsc": "./bin/backtick-tsc.js"

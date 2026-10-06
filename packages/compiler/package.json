@@ -2,7 +2,7 @@
   "name": "@backtickjs/compiler",
   "version": "0.1.0",
   "private": true,
-  "description": "Internal: used by `@backtickjs/tsc` and the build plugins. Compiles `cs` scripts: the transform, transpiling and the virtual code an editor checks",
+  "description": "Internal: the compiler for Backtick client scripts, used by the build plugins, backtick-tsc and the editor tooling",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",

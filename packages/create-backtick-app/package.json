@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "private": true,
-  "description": "Creates a React Native app whose screens come from your server, with Backtick",
+  "description": "Creates a Backtick app: React Native, React or Solid, with screens from your server on Node or Bun",
   "type": "module",
   "bin": {
     "create-backtick-app": "./dist/index.js"

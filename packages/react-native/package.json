@@ -2,7 +2,7 @@
   "name": "@backtickjs/react-native",
   "version": "0.86.3",
   "private": true,
-  "description": "Backtick's React Native adapter: scripts written as React Native code, run on React Native by the app the server drives",
+  "description": "The React Native adapter for Backtick: React Native's API as client values your scripts splice",
   "license": "MIT",
   "type": "module",
   "exports": {
