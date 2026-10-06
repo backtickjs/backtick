@@ -10,7 +10,7 @@ export async function Code({
 }: {
   file: string;
   source: string;
-  lang?: "tsx" | "json" | "bash";
+  lang?: "tsx" | "json" | "bash" | "hack";
   // A size smaller, for two files side by side.
   compact?: boolean;
 }) {

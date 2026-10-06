@@ -10,6 +10,8 @@ import { Setup } from "../components/Setup.js";
 import {
   EXPO_COLUMNS,
   EXPO_ROWS,
+  MODEL_COLUMNS,
+  MODEL_ROWS,
   NEXT_COLUMNS,
   NEXT_ROWS,
 } from "../comparisons.js";
@@ -18,6 +20,25 @@ export async function Home() {
   return (
     <Layout>
       <Hero />
+
+      <Section
+        eyebrow="The idea"
+        title="React Native, with the web's deploy model."
+        lede={cs`(
+          <>
+            On the web, you deploy and users have the change the next time they
+            load the page. A native app carries its screens in the binary, so
+            every change waits for a store release. Backtick serves screens from
+            your server, the way the web does.{" "}
+            <a href="/why" class="font-medium text-react">
+              Where the idea comes from →
+            </a>
+          </>
+        )`}
+      >
+        <Comparison columns={MODEL_COLUMNS} rows={MODEL_ROWS} />
+      </Section>
+
       <DeployDemo />
 
       <Section
@@ -38,8 +59,8 @@ export async function Home() {
 
       <Section
         eyebrow="Server components"
-        title="Server components, without the framework."
-        lede="The reasons to use them hold: data fetched where it lives, secrets kept on your server, less code on the client. Here is Backtick beside Next.js, where most developers meet them."
+        title="No API layer. No split files."
+        lede="The server renders each screen where its data lives, so there's no endpoint to build, nothing overfetched and no client cache to keep in sync. Unlike Next.js, the client code sits in the same file, and every $ that crosses is type-checked."
       >
         <Comparison columns={NEXT_COLUMNS} rows={NEXT_ROWS} />
       </Section>

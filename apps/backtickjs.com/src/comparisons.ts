@@ -67,7 +67,7 @@ export const EXPO_ROWS: Row[] = [
     values: [
       partial("Next app launch"),
       good("Next request or navigation"),
-      good("Next request or navigation"),
+      good("Each time a screen is drawn"),
     ],
   },
   {
@@ -78,7 +78,10 @@ export const EXPO_ROWS: Row[] = [
         "Partly",
         "Client components yes; server content needs a network",
       ),
-      bad("No", "Screens need a network"),
+      partial(
+        "Per screen",
+        "Server screens need a network. Keep offline-critical screens in React Native, or fall back to one when the server can't be reached",
+      ),
     ],
   },
   {
@@ -149,6 +152,98 @@ export const NEXT_ROWS: Row[] = [
     values: [
       bad("No", "The web only"),
       good("Yes", "React Native, with client code shipped per request"),
+    ],
+  },
+];
+
+// The idea in one table: the web's deploy model, which native apps lack.
+export const MODEL_COLUMNS: Column[] = [
+  { name: "The web", summary: "Pages served by your server" },
+  { name: "A native app", summary: "Screens built into the binary" },
+  {
+    name: "React Native with Backtick",
+    summary: "Screens served by your server",
+  },
+];
+
+export const MODEL_ROWS: Row[] = [
+  {
+    label: "Where a screen's code lives",
+    values: [
+      good("Your server"),
+      bad("The app binary", "On every phone, as it was built"),
+      good("Your server"),
+    ],
+  },
+  {
+    label: "An API for each screen?",
+    values: [
+      good("No", "The server renders with the data"),
+      bad("Yes", "An endpoint or query, and a client cache"),
+      good("No", "The server renders with the data"),
+    ],
+  },
+  {
+    label: "A change reaches users",
+    values: [
+      good("The next time they load it"),
+      bad("After review, as they update", "Over days or weeks"),
+      good("The next time they open it"),
+    ],
+  },
+  {
+    label: "Can differ per user?",
+    values: [
+      good("Yes", "Built per request"),
+      bad("No", "One build for everyone"),
+      good("Yes", "Built per request"),
+    ],
+  },
+  {
+    label: "Shipping a new button",
+    values: [good("A deploy"), bad("A store release"), good("A deploy")],
+  },
+];
+
+export const XHP_COLUMNS: Column[] = [
+  { name: "XHP and Javelin", summary: "Facebook's server-rendered UI" },
+  { name: "Backtick", summary: "Server components with inline scripts" },
+];
+
+export const XHP_ROWS: Row[] = [
+  {
+    label: "An API for each screen?",
+    values: [
+      good("No", "The server renders with the data"),
+      good("No", "The server renders with the data"),
+    ],
+  },
+  {
+    label: "Where client code lives",
+    values: [
+      bad("A separate JavaScript file"),
+      good("Inline", "In the server component that uses it"),
+    ],
+  },
+  {
+    label: "How the two sides are joined",
+    values: [
+      bad("A string name", "A typo is found at runtime"),
+      good("The script itself", "There's no name to keep in sync"),
+    ],
+  },
+  {
+    label: "What crosses",
+    values: [
+      bad("Untyped JSON config"),
+      good("$ splices", "Type-checked on both sides"),
+    ],
+  },
+  {
+    label: "Shipping new client code",
+    values: [
+      partial("A JavaScript release", "Kept in step with the server"),
+      good("With the screen", "Per request, from the same deploy"),
     ],
   },
 ];

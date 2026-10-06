@@ -166,14 +166,14 @@ it("throws, for an error boundary, a bundle the app can't run", async () => {
   await act(() => root.unmount());
 });
 
-it("loads a screen once until it's invalidated, failed or not", async () => {
+it("fetches every screen drawn, and keeps a failure until it's invalidated", async () => {
   const props = {
-    url: "https://example.com/once",
+    url: "https://example.com/each",
     modules: { react: React },
     packageVersions: { react: "19.2.3" },
   };
   let requests = 0;
-  let status = 500;
+  let status = 200;
   globalThis.fetch = async () => {
     requests += 1;
     return new Response('module.exports = "drawn";', { status });
@@ -205,24 +205,53 @@ it("loads a screen once until it's invalidated, failed or not", async () => {
     return text;
   };
 
+  // Nothing is cached: each screen drawn fetches its own.
+  assert.equal(await draw(), "drawn");
+  assert.equal(await draw(), "drawn");
+  assert.equal(requests, 2);
+
   // A failure is kept until it's invalidated, as an error boundary's reset
   // would, and the next screen drawn retries.
-  assert.equal(await draw(), "https://example.com/once answered 500.");
+  status = 500;
+  assert.equal(await draw(), "https://example.com/each answered 500.");
   status = 200;
-  assert.equal(await draw(), "https://example.com/once answered 500.");
+  assert.equal(await draw(), "https://example.com/each answered 500.");
   invalidate(props.url);
   assert.equal(await draw(), "drawn");
-  assert.equal(requests, 2);
+  assert.equal(requests, 4);
 
-  // A preload and the screens drawn after it share one request.
+  // A preload and the screen drawn after it share one request.
   preload(props);
   assert.equal(await draw(), "drawn");
-  assert.equal(requests, 2);
+  assert.equal(requests, 5);
+});
 
-  invalidate(props.url);
-  preload(props);
-  assert.equal(await draw(), "drawn");
-  assert.equal(requests, 3);
+it("keeps a screen while it's shown, and fetches when its url changes", async () => {
+  let requests = 0;
+  globalThis.fetch = async (url) => {
+    requests += 1;
+    return new Response(`module.exports = ${JSON.stringify(String(url))};`);
+  };
+  const screen = (url: string) =>
+    createElement(
+      Suspense,
+      { fallback: "loading" },
+      createElement(Backtick, {
+        url,
+        modules: { react: React },
+        packageVersions: { react: "19.2.3" },
+      }),
+    );
+  const container = document.createElement("div");
+  const root = createRoot(container);
+  await act(async () => root.render(screen("https://example.com/a")));
+  await act(async () => root.render(screen("https://example.com/a")));
+  assert.equal(container.textContent, "https://example.com/a");
+  assert.equal(requests, 1);
+  await act(async () => root.render(screen("https://example.com/b")));
+  assert.equal(container.textContent, "https://example.com/b");
+  assert.equal(requests, 2);
+  await act(() => root.unmount());
 });
 
 it("preloads a screen before it's drawn, and never rejects on its own", async () => {
@@ -262,7 +291,6 @@ it("preloads a screen before it's drawn, and never rejects on its own", async ()
   const onRejection = (reason: unknown) => rejections.push(reason);
   process.on("unhandledRejection", onRejection);
   try {
-    invalidate(props.url);
     status = 500;
     preload(props);
     await new Promise((resolve) => setTimeout(resolve, 10));

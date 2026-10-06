@@ -55,28 +55,44 @@ export async function Home({ user }: { user: User }) {
 `,
   },
   {
-    file: "ReorderButton.tsx",
+    file: "Home.tsx",
     message: "One-tap reorder",
     source: `
-+import { cs } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
 +import { useState } from "@backtickjs/react";
-+import { Pressable, Text } from "@backtickjs/react-native";
++import { Pressable, ScrollView, Text } from "@backtickjs/react-native";
+import { ProductCard } from "./ProductCard.js";
+import { PromoBanner } from "./PromoBanner.js";
+
+// A server component: it runs on your server, for every request.
+export async function Home({ user }: { user: User }) {
+  const picks = await db.picksFor(user.id);
+  const promo = await cms.activePromo(user.region);
++  const usual = await db.usualOrder(user.id);
+
+  return cs\`(
+    <$ScrollView contentContainerStyle={$screen}>
+      <$Text style={$greeting}>Good morning, {$user.name}</$Text>
+      {$promo && <$PromoBanner promo={$promo} />}
++      <$ReorderButton order={$usual} />
+
+      {$picks.map((pick) => (
+        <$ProductCard key={pick.id} product={pick} />
+      ))}
+    </$ScrollView>
+  )\`;
+}
 +
-+// A client component: it runs on the phone, and its state stays there.
-+export const ReorderButton = cs\`(props: { order: Order }) => {
++// A client component, in the same file: it runs on the phone.
++const ReorderButton = cs\`(props: { order: Order }) => {
 +  const [added, setAdded] = $useState(false);
-+
++  const reorder = async () => {
++    await fetch($CART, { method: "POST", body: props.order.id });
++    setAdded(true);
++  };
 +  return (
-+    <$Pressable
-+      style={added ? $done : $button}
-+      onPress={async () => {
-+        await fetch($CART, { method: "POST", body: props.order.id });
-+        setAdded(true);
-+      }}
-+    >
-+      <$Text style={$label}>
-+        {added ? "Added to cart ✓" : "Reorder " + props.order.name}
-+      </$Text>
++    <$Pressable style={$button} onPress={reorder}>
++      <$Text>{added ? "Added ✓" : "Reorder " + props.order.name}</$Text>
 +    </$Pressable>
 +  );
 +}\`;
@@ -185,4 +201,58 @@ module.exports = Home(
     { id: 2, name: "Colombia Huila" },
   ],
 );
+`;
+
+// The same button three ways, for the page on where Backtick comes from. The
+// XHP and Javelin pair is illustrative: Facebook's own code isn't public.
+export const XHP_SERVER = `
+// Rendered on the server, with the user's data.
+function reorder_button(User $user): \\XHPRoot {
+  $usual = Orders::usualFor($user);
+  $id = Javelin::generateUniqueNodeID();
+  Javelin::initBehavior('reorder-button', dict[
+    'id' => $id,
+    'orderId' => $usual->id,
+  ]);
+  return <button id={$id}>Reorder {$usual->name}</button>;
+}
+`;
+
+export const XHP_CLIENT = `
+// Shipped on its own, and found by name.
+JX.behavior("reorder-button", function (config) {
+  JX.DOM.listen(JX.$(config.id), "click", null, function () {
+    new JX.Request("/cart")
+      .setData({ order: config.orderId })
+      .send();
+  });
+});
+`;
+
+export const BACKTICK_REORDER = `
+import { cs } from "@backtickjs/core";
+import { useState } from "@backtickjs/react";
+import { Pressable, Text } from "@backtickjs/react-native";
+
+// A server component: it reads the user's data where it lives.
+export async function Reorder({ user }: { user: User }) {
+  const usual = await orders.usualFor(user);
+  return cs\`(<$ReorderButton order={$usual} />)\`;
+}
+
+// A client component, in the same file: no name to match, and TypeScript
+// checks what crosses.
+const ReorderButton = cs\`(props: { order: Order }) => {
+  const [added, setAdded] = $useState(false);
+  return (
+    <$Pressable
+      onPress={async () => {
+        await fetch($CART, { method: "POST", body: props.order.id });
+        setAdded(true);
+      }}
+    >
+      <$Text>{added ? "Added ✓" : "Reorder " + props.order.name}</$Text>
+    </$Pressable>
+  );
+}\`;
 `;

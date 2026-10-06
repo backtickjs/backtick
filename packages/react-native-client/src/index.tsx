@@ -1,4 +1,4 @@
-import { type ReactNode, use } from "react";
+import { type ReactNode, use, useEffect, useRef } from "react";
 
 /**
  * What a bundle may require, by specifier: the packages the app was built
@@ -54,37 +54,36 @@ export interface BacktickProps {
   readonly init?: RequestInit;
 }
 
-// One request per address, shared by every render and `preload` that asks
-// for it. It lives outside the component because one that suspends keeps no
-// state of its own.
-const screens = new Map<string, Promise<ReactNode>>();
+// The requests under way, by address, until a `<Backtick>` shows what one
+// fetched: a component that suspends before it first shows keeps no state, so
+// the render that resumes finds its request here. A failure stays, so that
+// render sees it and throws it; to retry, `invalidate` first, as an error
+// boundary's reset does.
+const requests = new Map<string, Promise<ReactNode>>();
 
-// The screen at `url`: fetched once per `url` until `invalidate`. A failure is
-// kept too, so the render that suspended on it sees it and throws it; to
-// retry, `invalidate` first, as an error boundary's reset does.
 function load({
   url,
   modules,
   packageVersions,
   init,
 }: BacktickProps): Promise<ReactNode> {
-  let screen = screens.get(url);
-  if (screen === undefined) {
+  let request = requests.get(url);
+  if (request === undefined) {
     const headers = new Headers(init?.headers);
     headers.set("backtick-package-versions", JSON.stringify(packageVersions));
-    screen = fetch(url, { ...init, headers }).then(async (response) => {
+    request = fetch(url, { ...init, headers }).then(async (response) => {
       if (!response.ok) {
         throw new Error(`${url} answered ${response.status}.`);
       }
       return evaluate(await response.text(), modules) as ReactNode;
     });
-    screens.set(url, screen);
+    requests.set(url, request);
   }
-  return screen;
+  return request;
 }
 
 /**
- * Starts loading the screen at `url`, so a `<Backtick>` drawn later with the
+ * Starts loading the screen at `url`, so the next `<Backtick>` drawn with the
  * same props finds it under way or done. A failure isn't reported here: the
  * `<Backtick>` that draws the screen throws it.
  */
@@ -92,17 +91,32 @@ export function preload(props: BacktickProps): void {
   load(props).catch(() => {});
 }
 
-/** Forgets the screen at `url`, so the next `<Backtick>` or `preload` refetches it. */
+/**
+ * Forgets the request for `url`, under way or failed, so the next
+ * `<Backtick>` or `preload` fetches it again: what an error boundary's reset
+ * calls to retry.
+ */
 export function invalidate(url: string): void {
-  screens.delete(url);
+  requests.delete(url);
 }
 
 /**
  * A server's screen: the bundle at `url`, fetched, run with the app's modules,
- * and drawn where this stands. It suspends while the screen loads, for a
+ * and drawn where this stands. Each `<Backtick>` fetches its own, nothing is
+ * cached: the screen is kept while it's shown, and fetched again when a new
+ * one is drawn or `url` changes. It suspends while the screen loads, for a
  * `<Suspense>` above it to show a fallback, and throws a screen that can't be
  * loaded or run, for an error boundary above it to catch.
  */
 export function Backtick(props: BacktickProps): ReactNode {
-  return use(load(props));
+  const shown = useRef<{ url: string; screen: Promise<ReactNode> }>(null);
+  const screen =
+    shown.current?.url === props.url ? shown.current.screen : load(props);
+  useEffect(() => {
+    shown.current = { url: props.url, screen };
+    if (requests.get(props.url) === screen) {
+      requests.delete(props.url);
+    }
+  }, [props.url, screen]);
+  return use(screen);
 }

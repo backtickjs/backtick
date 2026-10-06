@@ -14,9 +14,12 @@ export async function Section({
   // Text, or a script when it breaks where the text alone wouldn't.
   title: string | Client<JSX.Element>;
   // Text, or a script when it holds code to set apart.
-  lede: string | Client<JSX.Element>;
-  children: JSX.Element;
+  lede?: string | Client<JSX.Element>;
+  // What the section shows below its heading, if anything.
+  children?: JSX.Element;
 }) {
+  const ledeOrNull = lede ?? null;
+  const childrenOrNull = children ?? null;
   return cs`(
     <section id={$id} class="pt-24">
       <p class="mb-3.5 font-mono text-xs tracking-[0.12em] text-react uppercase">
@@ -25,8 +28,12 @@ export async function Section({
       <h2 class="max-w-[18em] text-[clamp(30px,4.6vw,44px)] leading-[1.1] font-bold tracking-[-0.03em]">
         {$title}
       </h2>
-      <p class="mt-[18px] max-w-[36em] text-lg text-muted">{$lede}</p>
-      <div class="mt-10">{$children}</div>
+      {$ledeOrNull === null ? null : (
+        <p class="mt-[18px] max-w-[36em] text-lg text-muted">{$ledeOrNull}</p>
+      )}
+      {$childrenOrNull === null ? null : (
+        <div class="mt-10">{$childrenOrNull}</div>
+      )}
     </section>
   )`;
 }

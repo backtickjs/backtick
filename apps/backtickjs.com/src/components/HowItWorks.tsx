@@ -12,14 +12,6 @@ const BENEFITS: Card[] = [
       " components and links code that's already compiled.",
   },
   {
-    icon: ICONS.database,
-    name: "No API round trip",
-    text:
-      "Your server components read the database directly, so the app needs" +
-      " no fetching hooks, no client cache and no endpoint built just for the" +
-      " screen.",
-  },
-  {
     // `@backtickjs/react-native-client`'s dist/index.js, minified as an app's
     // release build is, then gzipped. Re-measure as the client grows.
     icon: ICONS.package,

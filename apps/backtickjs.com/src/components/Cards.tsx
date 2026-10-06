@@ -7,10 +7,6 @@ export type Card = { icon: string; name: string; text: string };
 // Feather's icons (MIT), as the markup inside a 24 by 24 stroked `<svg>`.
 export const ICONS = {
   zap: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
-  database:
-    '<ellipse cx="12" cy="5" rx="9" ry="3"/>' +
-    '<path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>' +
-    '<path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>',
   package:
     '<line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/>' +
     '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3' +

@@ -1,5 +1,6 @@
 import { cs } from "@backtickjs/core";
 import {
+  createEffect,
   createSignal,
   For,
   onCleanup,
@@ -52,10 +53,9 @@ export async function DeployDemo() {
     })),
   );
 
-  // As tall as the longest version, in lines plus the padding, so no version
-  // scrolls and switching between them moves nothing.
-  const tallest = Math.max(...deploys.map((deploy) => deploy.lines.length));
-  const height = `calc(${tallest}lh + 2rem)`;
+  // As tall as the phone beside it. A longer version scrolls, to its newest
+  // lines on each deploy.
+  const height = "calc(21lh + 2rem)";
 
   return cs`{
     const [step, setStep] = $createSignal(0);
@@ -83,8 +83,25 @@ export async function DeployDemo() {
     );
     $onCleanup(() => window.clearInterval(timer()));
 
+    let code!: HTMLPreElement;
+    // Brings the last added line into view, or the top when nothing was added.
+    $createEffect(() => {
+      step();
+      requestAnimationFrame(() => {
+        const added = code.querySelectorAll<HTMLElement>(".code-added");
+        const last = added[added.length - 1];
+        code.scrollTo({
+          top:
+            last === undefined
+              ? 0
+              : last.offsetTop + last.offsetHeight + 16 - code.clientHeight,
+          behavior: "smooth",
+        });
+      });
+    });
+
     return (
-      <>
+      <div class="pt-24">
         <p class="mb-3.5 font-mono text-xs tracking-[0.12em] text-react uppercase">
           Demo · three server deploys, one app build
         </p>
@@ -132,7 +149,8 @@ export async function DeployDemo() {
                   </span>
                 </div>
                 <pre
-                  class="m-0 box-border overflow-x-auto py-4 font-mono text-[15px] leading-[1.6]"
+                  ref={code}
+                  class="relative m-0 box-border overflow-auto py-4 font-mono text-[15px] leading-[1.6]"
                   style={{ height: $height }}
                 >
                   <$For each={$deploys[step()].lines}>
@@ -224,9 +242,7 @@ export async function DeployDemo() {
                             setAdded(true);
                           }}
                         >
-                          {added()
-                            ? "Added to cart ✓"
-                            : "Reorder Ethiopia Guji"}
+                          {added() ? "Added ✓" : "Reorder Ethiopia Guji"}
                         </button>
                       </div>
                     </$Show>
@@ -299,7 +315,7 @@ export async function DeployDemo() {
             </button>
           </div>
         </div>
-      </>
+      </div>
     );
   }`;
 }

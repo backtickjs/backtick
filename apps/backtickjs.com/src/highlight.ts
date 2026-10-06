@@ -24,6 +24,7 @@ const highlighter = await createHighlighter({
     "tsx",
     "json",
     "bash",
+    "hack",
     {
       ...clientScript,
       name: "client-script",
@@ -41,7 +42,7 @@ const highlighter = await createHighlighter({
 // A line written with a leading `+` is marked added, and loses the `+`.
 export async function highlight(
   source: string,
-  lang: "tsx" | "json" | "bash",
+  lang: "tsx" | "json" | "bash" | "hack",
 ): Promise<Line[]> {
   const written = source.replace(/^\n/, "").replace(/\n$/, "").split("\n");
   const code = written.map((line) => line.replace(/^\+/, "")).join("\n");
