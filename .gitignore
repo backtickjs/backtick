@@ -5,4 +5,5 @@ docs/
 .cache/
 .DS_Store
 packages/*/LICENSE
-apps/vscode-extension/LICENSE
+.vsix/
+*.vsix

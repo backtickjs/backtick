@@ -1,6 +1,30 @@
 {
   "name": "@backtickjs/vscode-extension",
   "version": "0.1.0",
+  "displayName": "Backtick",
+  "description": "Syntax highlighting and type-checking for Backtick client scripts: cs`…` templates and their $ splices.",
+  "publisher": "backtickjs",
+  "icon": "images/icon.png",
+  "homepage": "https://backtickjs.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/backtickjs/backtick",
+    "directory": "apps/vscode-extension"
+  },
+  "bugs": {
+    "url": "https://github.com/backtickjs/backtick/issues"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "backtick",
+    "react native",
+    "server components",
+    "server-driven ui",
+    "jsx",
+    "typescript"
+  ],
   "license": "MIT",
   "private": true,
   "main": "./dist/node/client.js",
@@ -58,7 +82,7 @@
     "test:update": "node ./test/grammar/test.mjs --updateSnapshot",
     "test:grammar": "node ./test/grammar/test.mjs",
     "clean": "rm -rf node_modules dist .turbo",
-    "vscode:prepublish": "cp ../../LICENSE ."
+    "package": "node scripts/package.mjs"
   },
   "dependencies": {
     "@backtickjs/typescript-plugin": "workspace:*"
@@ -68,9 +92,11 @@
     "@types/vscode": "^1.120.0",
     "@volar/language-server": "^2.4.28",
     "@volar/vscode": "^2.4.28",
+    "@vscode/vsce": "^4.0.0",
     "esbuild": "^0.28.0",
     "esbuild-plugin-copy": "^2.1.1",
     "kleur": "^4.1.5",
+    "ovsx": "^1.2.0",
     "prettier": "^3.6.2",
     "vscode-tmgrammar-test": "^0.1.3"
   }

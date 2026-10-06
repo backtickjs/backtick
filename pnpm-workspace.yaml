@@ -18,7 +18,12 @@ saveWorkspaceProtocol: false # `pnpm add` writes "^2.16.9", not "workspace:^"
 # package's install re-links the others while they are being deleted.
 verifyDepsBeforeRun: false
 allowBuilds:
+  # Signs the VS Code extension when it's published to the Marketplace.
+  "@vscode/vsce-sign": true
   esbuild: true
+  # Stores Marketplace logins in the system keychain; publishing uses tokens
+  # from the environment instead.
+  keytar: false
 # `bun-types` imports `undici-types` in its declarations without depending on
 # it, so it resolved only while pnpm happened to hoist a copy. Declared here so
 # what uses Bun's types (the site, the Bun plugin) typechecks whatever else the
