@@ -1,6 +1,6 @@
 {
   "name": "create-backtick-app",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Creates a Backtick app: React Native, React or Solid, with screens from your server on Node or Bun",
   "keywords": [
     "backtick",
@@ -31,7 +31,10 @@
   },
   "files": [
     "dist",
-    "templates"
+    "templates",
+    "!templates/*/node_modules",
+    "!templates/*/.expo",
+    "!templates/*/.turbo"
   ],
   "engines": {
     "node": ">=22.15"
@@ -41,6 +44,7 @@
     "dev": "tsc -b --watch",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
+    "test": "node --test \"test/**/*.test.ts\"",
     "clean": "rm -rf node_modules dist .turbo",
     "prepack": "cp ../../LICENSE ."
   },

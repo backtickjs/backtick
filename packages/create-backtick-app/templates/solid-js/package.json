@@ -11,15 +11,15 @@
     "format:check": "prettier --check --ignore-unknown ."
   },
   "dependencies": {
-    "@backtickjs/bundler": "^0.1.0",
-    "@backtickjs/core": "^0.1.0",
-    "@backtickjs/node-plugin": "^0.1.0",
+    "@backtickjs/bundler": "^0.1.1",
+    "@backtickjs/core": "^0.1.1",
+    "@backtickjs/node-plugin": "^0.1.1",
     "@backtickjs/solid-js": "^1.9.14",
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@backtickjs/prettier-plugin": "^0.1.0",
-    "@backtickjs/tsc": "^0.1.0",
+    "@backtickjs/prettier-plugin": "^0.1.1",
+    "@backtickjs/tsc": "^0.1.1",
     "@types/node": "^25.9.1",
     "prettier": "^3.6.2"
   },
