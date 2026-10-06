@@ -4,10 +4,10 @@ import { PAGES } from "./pages.js";
 const server = Bun.serve({
   port: 4321,
   routes: Object.fromEntries(
-    PAGES.map(({ path, Page, title }) => [
-      path,
+    PAGES.map((page) => [
+      page.path,
       async () =>
-        new Response(await toHtml(Page, title), {
+        new Response(await toHtml(page), {
           headers: { "content-type": "text/html" },
         }),
     ]),
