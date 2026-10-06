@@ -9,6 +9,23 @@ test("a plain object crosses member by member", async () => {
   );
 });
 
+test("a `__proto__` key crosses as a member, not as a prototype", async () => {
+  // As `JSON.parse` makes one from a user's input: an own key, which a bare or
+  // quoted `__proto__:` in an object literal would turn into the prototype.
+  const value = JSON.parse('{"__proto__": {"admin": true}}');
+  const code = await es(value);
+  assert.match(
+    code,
+    /^export default \(\{ \["__proto__"\]: \{ admin: true \} \}\);$/m,
+  );
+  const { default: crossed } = await import(
+    `data:text/javascript,${encodeURIComponent(code)}`
+  );
+  assert.equal(Object.getPrototypeOf(crossed), Object.prototype);
+  assert.deepEqual(Object.keys(crossed), ["__proto__"]);
+  assert.equal(crossed.admin, undefined);
+});
+
 test("a class instance does not", async () => {
   // Own fields would cross and everything else — getters, methods — would
   // silently vanish, so it fails loudly instead. An object with behaviour is

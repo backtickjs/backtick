@@ -65,10 +65,18 @@ export function array(elements: readonly string[]): string {
 export function object(
   entries: readonly (readonly [string, string])[],
 ): string {
-  const members = entries.map(
-    ([key, value]) => `${IDENTIFIER.test(key) ? key : string(key)}: ${value}`,
-  );
+  const members = entries.map(([key, value]) => `${member(key)}: ${value}`);
   return `{ ${members.join(", ")} }`;
+}
+
+// A key as an object literal writes it. `__proto__`, bare or quoted, would set
+// the object's prototype instead, so a key a user may have chosen is computed,
+// which makes it the object's own.
+function member(key: string): string {
+  if (key === "__proto__") {
+    return `[${string(key)}]`;
+  }
+  return IDENTIFIER.test(key) ? key : string(key);
 }
 
 // The package a module is in: its specifier's first segment, or first two
