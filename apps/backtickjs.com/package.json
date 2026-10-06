@@ -7,6 +7,7 @@
     "format": "prettier --write src",
     "format:check": "prettier --check src",
     "typecheck": "backtick-tsc --noEmit",
+    "build": "NODE_ENV=production bun src/build.ts",
     "start": "nodemon --ext ts,tsx,json,css --exec bun src/index.tsx",
     "clean": "rm -rf node_modules"
   },
