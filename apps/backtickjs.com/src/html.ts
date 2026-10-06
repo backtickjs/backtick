@@ -5,17 +5,13 @@ import { compile, optimize } from "@tailwindcss/node";
 import { Scanner } from "@tailwindcss/oxide";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import type { Page } from "./pages.js";
+import { ORIGIN, type Page, urlOf } from "./pages.js";
 
 // In development, a map into the host files in each bundle, for devtools.
 const sourcemap = process.env.NODE_ENV === "production" ? undefined : "inline";
 
 // The page's CSS, generated once at startup from the classes the source uses.
 const STYLE = await tailwind();
-
-// Where the site is served, for the addresses search engines and link previews
-// need whole.
-const ORIGIN = "https://backtickjs.com";
 
 // A page's document: its component, drawn into it by Solid, and what search
 // results and link previews show for it.
@@ -25,8 +21,6 @@ export async function toHtml({
   title,
   description,
 }: Page): Promise<string> {
-  // As GitHub Pages serves it: every page but the root ends in a slash.
-  const url = ORIGIN + (path === "/" ? "/" : `${path}/`);
   const titleText = Bun.escapeHTML(title);
   const descriptionText = Bun.escapeHTML(description);
 
@@ -45,10 +39,13 @@ export async function toHtml({
     <meta name="color-scheme" content="light dark">
     <title>${titleText}</title>
     <meta name="description" content="${descriptionText}">
-    <link rel="canonical" href="${url}">
+    ${
+      path === null
+        ? `<meta name="robots" content="noindex">`
+        : `<link rel="canonical" href="${urlOf(path)}">`
+    }
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Backtick">
-    <meta property="og:url" content="${url}">
     <meta property="og:title" content="${titleText}">
     <meta property="og:description" content="${descriptionText}">
     <meta property="og:image" content="${ORIGIN}/og.png">

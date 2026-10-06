@@ -1,5 +1,5 @@
 import { toHtml } from "./html.js";
-import { PAGES } from "./pages.js";
+import { NOT_FOUND, PAGES } from "./pages.js";
 
 const server = Bun.serve({
   port: 4321,
@@ -12,14 +12,18 @@ const server = Bun.serve({
         }),
     ]),
   ),
-  // Anything else is a file in `public/`, as the build copies it.
+  // Anything else is a file in `public/`, as the build copies it, or the page
+  // for addresses that don't exist.
   async fetch(request) {
     const file = Bun.file(
       new URL(`../public${new URL(request.url).pathname}`, import.meta.url),
     );
     return (await file.exists())
       ? new Response(file)
-      : new Response("Not found", { status: 404 });
+      : new Response(await toHtml(NOT_FOUND), {
+          status: 404,
+          headers: { "content-type": "text/html" },
+        });
   },
 });
 
