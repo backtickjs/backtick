@@ -37,6 +37,11 @@ this one. The server component reads its data where it lives, and the client
 code sits inline, in a client script, `` cs`…` ``. Each splice, `$name`, is
 a value crossing from your server to the client, type-checked on both sides.
 
+<img src="assets/example.png" width="760" alt="A server component, Home, that reads the user's usual order and returns a client script drawing a ScrollView with a greeting and, when there is one, a ReorderButton: a client component in the same file, with its own state." />
+
+<details>
+<summary>The code, to copy</summary>
+
 ```tsx
 import { cs } from "@backtickjs/core";
 import { useState } from "@backtickjs/react";
@@ -64,6 +69,8 @@ const ReorderButton = cs`(props: { order: Order }) => {
   );
 }`;
 ```
+
+</details>
 
 ## How it works
 
