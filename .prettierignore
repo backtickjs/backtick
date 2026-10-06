@@ -1,5 +1,7 @@
-packages/
-apps/
-tests/
 pnpm-lock.yaml
-
+# Kept exactly as written; their packages' own ignore files list them too. The
+# editor reads only this file, so they're here for format-on-save.
+packages/bun-plugin/test/fixtures/stack.ts
+packages/node-plugin/test/fixtures/stack.ts
+packages/prettier-plugin/test/fixtures/
+tests/**/__snapshots__/

@@ -12,8 +12,8 @@
     "typecheck": "turbo run typecheck",
     "test": "pnpm check:versions && turbo run test",
     "test:update": "turbo run test:update",
-    "format": "turbo run format && prettier --write --ignore-unknown .",
-    "format:check": "turbo run format:check && prettier --check --ignore-unknown .",
+    "format": "turbo run format && prettier --write --ignore-unknown . '!packages/**' '!apps/**' '!tests/**'",
+    "format:check": "turbo run format:check && prettier --check --ignore-unknown . '!packages/**' '!apps/**' '!tests/**'",
     "clean": "turbo run clean && rm -rf node_modules .turbo"
   },
   "devDependencies": {
