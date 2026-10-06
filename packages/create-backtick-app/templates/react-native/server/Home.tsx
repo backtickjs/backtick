@@ -58,8 +58,8 @@ export async function Home() {
           <$Text style={styles.subtitle}>Step 2: Server and client</$Text>
           <$Text style={styles.body}>
             Your server assembled this screen with Node {$node} at{" "}
-            {$assembledAt}. The waving hand is a client component: its
-            animation runs on your phone. Tap it.
+            {$assembledAt}. The waving hand is a client component: its animation
+            runs on your phone. Tap it.
           </$Text>
         </$View>
 

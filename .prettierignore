@@ -5,3 +5,5 @@ packages/bun-plugin/test/fixtures/stack.ts
 packages/node-plugin/test/fixtures/stack.ts
 packages/prettier-plugin/test/fixtures/
 tests/**/__snapshots__/
+# Written the way VS Code writes them, one entry per line.
+**/.vscode/extensions.json

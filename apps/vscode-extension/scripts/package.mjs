@@ -46,7 +46,7 @@ writeFileSync(
   new URL("package.json", stage),
   `${JSON.stringify(
     {
-      name: "backtick",
+      name: "backtick-vscode",
       ...published,
       files,
       // The bundled plugin below, so `vsce` packs it as the one dependency.
@@ -88,7 +88,7 @@ writeFileSync(
   )}\n`,
 );
 
-const vsix = `backtick-${manifest.version}.vsix`;
+const vsix = `backtick-vscode-${manifest.version}.vsix`;
 execFileSync(
   require.resolve("@vscode/vsce/vsce"),
   ["package", "--out", `../${vsix}`],

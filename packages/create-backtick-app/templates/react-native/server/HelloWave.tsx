@@ -7,13 +7,23 @@ import { Animated, Pressable } from "@backtickjs/react-native";
 export const HelloWave = cs`() => {
   const rotation = $useRef(new $Animated.Value(0)).current;
   const wave = () =>
-    $Animated.loop(
-      $Animated.sequence([
-        $Animated.timing(rotation, { toValue: 1, duration: 150, useNativeDriver: true }),
-        $Animated.timing(rotation, { toValue: 0, duration: 150, useNativeDriver: true }),
-      ]),
-      { iterations: 4 },
-    ).start();
+    $Animated
+      .loop(
+        $Animated.sequence([
+          $Animated.timing(rotation, {
+            toValue: 1,
+            duration: 150,
+            useNativeDriver: true,
+          }),
+          $Animated.timing(rotation, {
+            toValue: 0,
+            duration: 150,
+            useNativeDriver: true,
+          }),
+        ]),
+        { iterations: 4 },
+      )
+      .start();
 
   $useEffect(wave, []);
 

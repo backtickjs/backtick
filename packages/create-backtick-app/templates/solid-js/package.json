@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node scripts/start.mjs",
     "reset-project": "node scripts/reset-project.mjs",
-    "typecheck": "backtick-tsc --noEmit"
+    "typecheck": "backtick-tsc --noEmit",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown ."
   },
   "dependencies": {
     "@backtickjs/bundler": "^0.1.0",
@@ -16,8 +18,10 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
+    "@backtickjs/prettier-plugin": "^0.1.0",
     "@backtickjs/tsc": "^0.1.0",
-    "@types/node": "^25.9.1"
+    "@types/node": "^25.9.1",
+    "prettier": "^3.6.2"
   },
   "backtick": {
     "plugins": [

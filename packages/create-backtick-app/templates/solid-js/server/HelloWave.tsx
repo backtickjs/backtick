@@ -22,7 +22,11 @@ export const HelloWave = cs`() => {
     <span
       ref={hand}
       onClick={wave}
-      style={{ display: "inline-block", cursor: "pointer", "font-size": "28px" }}
+      style={{
+        display: "inline-block",
+        cursor: "pointer",
+        "font-size": "28px",
+      }}
     >
       👋
     </span>

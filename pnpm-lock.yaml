@@ -277,12 +277,18 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
     devDependencies:
+      '@backtickjs/prettier-plugin':
+        specifier: ^0.1.0
+        version: link:../../../prettier-plugin
       '@backtickjs/tsc':
         specifier: ^0.1.0
         version: link:../../../tsc
       '@types/node':
         specifier: ^25.9.1
         version: 25.9.1
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
 
   packages/create-backtick-app/templates/react-native:
     dependencies:
@@ -329,6 +335,9 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
     devDependencies:
+      '@backtickjs/prettier-plugin':
+        specifier: ^0.1.0
+        version: link:../../../prettier-plugin
       '@backtickjs/tsc':
         specifier: ^0.1.0
         version: link:../../../tsc
@@ -338,6 +347,9 @@ importers:
       '@types/react':
         specifier: 19.2.18
         version: 19.2.18
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
 
   packages/create-backtick-app/templates/solid-js:
     dependencies:
@@ -357,12 +369,18 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
     devDependencies:
+      '@backtickjs/prettier-plugin':
+        specifier: ^0.1.0
+        version: link:../../../prettier-plugin
       '@backtickjs/tsc':
         specifier: ^0.1.0
         version: link:../../../tsc
       '@types/node':
         specifier: ^25.9.1
         version: 25.9.1
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
 
   packages/language-plugin:
     dependencies:

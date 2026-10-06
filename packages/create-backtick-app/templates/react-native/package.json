@@ -9,7 +9,9 @@
     "ios": "node scripts/start.mjs --ios",
     "web": "node scripts/start.mjs --web",
     "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit",
-    "reset-project": "node scripts/reset-project.mjs"
+    "reset-project": "node scripts/reset-project.mjs",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown ."
   },
   "dependencies": {
     "@backtickjs/bundler": "^0.1.0",
@@ -28,9 +30,11 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
+    "@backtickjs/prettier-plugin": "^0.1.0",
     "@backtickjs/tsc": "^0.1.0",
     "@types/node": "^25.9.1",
-    "@types/react": "19.2.18"
+    "@types/react": "19.2.18",
+    "prettier": "^3.6.2"
   },
   "backtick": {
     "plugins": [
