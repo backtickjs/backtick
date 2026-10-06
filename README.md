@@ -120,6 +120,16 @@ Internal packages, used by the ones above: [`compiler`](packages/compiler),
 Backtick is early. Today it supports Expo SDK 57 (React Native 0.86 and
 React 19.2) and Solid 1.9, with servers on Node 22.15 or later, or Bun.
 
+## Who's behind it
+
+I'm Jean-François Bisson. I spent a few years building mobile infrastructure
+at Meta before leaving to work on Backtick full time.
+
+I love building things and moving fast, and Backtick is my attempt to make that
+easier for others too. If you're trying Backtick, thinking about server-driven
+UI, or just want to chat, I'd love to hear from you. You can find me on
+[LinkedIn](https://www.linkedin.com/in/jfbisson/).
+
 ## License
 
 [MIT](LICENSE)
