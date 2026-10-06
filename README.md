@@ -17,7 +17,10 @@ data, logic and UI living together in one place. Everything is type-checked
 end to end, and your server and client ship as one.
 
 [Website](https://backtickjs.com) · [Docs](https://backtickjs.com/docs) ·
-[VS Code extension](https://marketplace.visualstudio.com/items?itemName=backtickjs.backtick-vscode)
+[VS Code extension](https://marketplace.visualstudio.com/items?itemName=backtickjs.backtick-vscode) ·
+[Discussions](https://github.com/backtickjs/backtick/discussions) ·
+[X](https://x.com/backtickjs) ·
+[Bluesky](https://bsky.app/profile/backtickjs.com)
 
 ## Quick start
 

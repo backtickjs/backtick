@@ -30,9 +30,15 @@ export const Layout = cs`(props: { children: JSX.Element }) => (
 
     <footer class="mt-24 flex flex-wrap justify-between gap-4 border-t border-line pt-7 pb-10 text-sm text-muted">
       <span>Backtick · MIT licensed</span>
-      <a href="https://github.com/backtickjs/backtick">
-        github.com/backtickjs/backtick
-      </a>
+      <nav class="flex flex-wrap gap-x-5 gap-y-2">
+        <a href="https://github.com/backtickjs/backtick">GitHub</a>
+        <a href="https://github.com/backtickjs/backtick/discussions">
+          Discussions
+        </a>
+        <a href="https://x.com/backtickjs">X</a>
+        <a href="https://bsky.app/profile/backtickjs.com">Bluesky</a>
+        <a href="mailto:hello@backtickjs.com">hello@backtickjs.com</a>
+      </nav>
     </footer>
   </div>
 )`;

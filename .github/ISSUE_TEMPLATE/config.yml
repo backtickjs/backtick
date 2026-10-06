@@ -1,5 +1,8 @@
 blank_issues_enabled: true
 contact_links:
+  - name: Questions and ideas
+    url: https://github.com/backtickjs/backtick/discussions
+    about: Ask and share in GitHub Discussions.
   - name: Documentation
     url: https://backtickjs.com/docs
     about: How to set up Backtick and write screens.
