@@ -26,6 +26,18 @@ test("a `__proto__` key crosses as a member, not as a prototype", async () => {
   assert.equal(crossed.admin, undefined);
 });
 
+test("a string with line or paragraph separators crosses escaped", async () => {
+  // Both are legal in a string since ES2019, but not to every engine that may
+  // run a bundle, which would refuse the whole screen over a user's text.
+  const value = "line\u2028paragraph\u2029end";
+  const code = await es(value);
+  assert.match(code, /^export default \("line\\u2028paragraph\\u2029end"\);$/m);
+  const { default: crossed } = await import(
+    `data:text/javascript,${encodeURIComponent(code)}`
+  );
+  assert.equal(crossed, value);
+});
+
 test("a class instance does not", async () => {
   // Own fields would cross and everything else — getters, methods — would
   // silently vanish, so it fails loudly instead. An object with behaviour is

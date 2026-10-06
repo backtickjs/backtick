@@ -23,9 +23,13 @@ export function createNames(
 }
 
 // A string, as a literal: `<` escaped, so no `</script>` or `<!--` appears
-// when the bundle is inlined in a page.
+// when the bundle is inlined in a page, and the line and paragraph separators,
+// which JSON leaves bare and not every engine reads inside a string.
 export function string(value: string): string {
-  return JSON.stringify(value).replace(/</g, "\\u003c");
+  return JSON.stringify(value).replace(
+    /[<\u2028\u2029]/g,
+    (unit) => `\\u${unit.charCodeAt(0).toString(16).padStart(4, "0")}`,
+  );
 }
 
 export function literal(value: string | number | boolean | null): string {
