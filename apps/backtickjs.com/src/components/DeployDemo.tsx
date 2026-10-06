@@ -44,7 +44,7 @@ const TAB_NAMES = ["Home", "Shop", "Orders", "You"];
 // Each deploy, its code coloured once, when the server starts.
 const deploys = await Promise.all(
   DEPLOYS.map(async (deploy, index) => ({
-    id: "v" + (index + 1),
+    name: "deploy " + (index + 1),
     file: deploy.file,
     message: deploy.message,
     lines: await highlight(deploy.source, "tsx"),
@@ -102,9 +102,6 @@ export const DeployDemo = cs`() => {
 
   return (
     <>
-      <p class="mb-3.5 font-mono text-xs tracking-[0.12em] text-react uppercase">
-        Demo · three server deploys, one app build
-      </p>
       <div class="relative rounded-[28px] border border-code-line bg-[#141414] p-3 text-code-ink sm:p-5 shadow-[0_40px_120px_-40px_rgb(97_218_251/0.35),0_30px_80px_-50px_rgb(167_139_250/0.6)]">
         <div class="flex flex-wrap items-stretch gap-5">
           <div class="grid min-w-0 flex-[1_1_520px] content-start gap-3.5">
@@ -124,7 +121,7 @@ export const DeployDemo = cs`() => {
                     }}
                   >
                     <span class="block font-mono text-[11px] text-code-muted">
-                      {commit.id + " · " + commit.file}
+                      {"Deploy " + (index() + 1) + " · " + commit.file}
                     </span>
                     <span class="mt-0.5 block text-[13.5px] font-medium">
                       {commit.message}
@@ -145,7 +142,7 @@ export const DeployDemo = cs`() => {
               <div class="flex items-center justify-between gap-3 border-b border-code-line px-4 py-2.5 font-mono text-xs text-code-muted">
                 <span>{"server/" + $deploys[step()].file}</span>
                 <span class="text-added">
-                  {"● deployed " + $deploys[step()].id}
+                  {"● " + $deploys[step()].name + " live"}
                 </span>
               </div>
               <pre
@@ -185,7 +182,7 @@ export const DeployDemo = cs`() => {
                 <$For each={pushes() > 0 ? [pushes()] : []}>
                   {() => (
                     <div class="absolute top-[58px] left-1/2 z-[2] -translate-x-1/2 animate-toast whitespace-nowrap rounded-full bg-[#111]/90 px-3 py-2 text-center text-xs font-semibold text-white shadow-lg">
-                      {"↓ New screen from server · " + $deploys[step()].id}
+                      {"↓ New screen from " + $deploys[step()].name}
                     </div>
                   )}
                 </$For>
@@ -297,8 +294,8 @@ export const DeployDemo = cs`() => {
           </span>
           <span class="inline-flex items-center gap-2 sm:whitespace-nowrap">
             <span class="size-2 animate-live rounded-full bg-added" />
-            {"Screen "}
-            <span class="text-code-ink">{$deploys[step()].id}</span>
+            {"Screen from "}
+            <span class="text-code-ink">{$deploys[step()].name}</span>
           </span>
           <button
             class="ml-auto cursor-pointer rounded-full border border-code-line px-3 py-1.5 font-mono text-[11.5px] text-code-ink"

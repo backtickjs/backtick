@@ -11,7 +11,13 @@ export const Home = cs`() => (
   <$Layout>
     <$Hero />
 
-    <$DeployDemo />
+    <$Section
+      eyebrow="Demo"
+      title="Your server deploy is the release."
+      lede="Like a web page, users get your changes the next time they open the screen, client components included. Rolling back is another deploy."
+    >
+      <$DeployDemo />
+    </$Section>
 
     <$Section
       id="how"

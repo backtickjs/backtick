@@ -3,7 +3,7 @@ import { Button } from "./Button.js";
 import { QuickStart } from "./QuickStart.js";
 
 export const Hero = cs`() => (
-  <div class="pt-12 pb-20">
+  <div class="pt-12">
     <h1 class="max-w-[12.5em] text-[clamp(40px,7.4vw,76px)] leading-[1.02] font-extrabold tracking-[-0.045em]">
       {"A "}
       <span class="text-shine">delightful</span>

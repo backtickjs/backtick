@@ -6,8 +6,8 @@ const QUESTIONS = [
   {
     question: "Isn't this EAS Update?",
     answer:
-      "EAS Update ships your whole JavaScript bundle to everyone on a" +
-      " channel. Backtick ships one screen per request, built for that user" +
+      "EAS Update ships your whole JavaScript bundle, built once for all your" +
+      " users. Backtick ships one screen per request, built for that user" +
       " with their data. They work together: EAS Update for the app," +
       " Backtick for its screens.",
   },

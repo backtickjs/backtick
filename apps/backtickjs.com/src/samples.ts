@@ -83,7 +83,7 @@ export async function Home({ user }: { user: User }) {
   )\`;
 }
 +
-+// A client component, in the same file: it runs on the phone.
++// A client component, in the same file.
 +const ReorderButton = cs\`(props: { order: Order }) => {
 +  const [added, setAdded] = $useState(false);
 +  const reorder = async () => {
