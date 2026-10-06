@@ -1,0 +1,30 @@
+name: Bug report
+description: Something doesn't work as documented.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: The smallest code that shows it. A link to a repository is best.
+      render: tsx
+    validations:
+      required: true
+  - type: textarea
+    id: versions
+    attributes:
+      label: Versions
+      description: Backtick packages, your framework (React Native, React or Solid), Node or Bun, and your OS.
+      placeholder: |
+        @backtickjs/core 0.1.0
+        react-native 0.86.3 (Expo SDK 57)
+        Node 24.1.0, macOS 26
+    validations:
+      required: true
