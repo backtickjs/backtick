@@ -1,15 +1,40 @@
 {
   "name": "@backtickjs/react-native-client",
   "version": "0.1.0",
-  "private": true,
   "description": "Runs a Backtick server's screens in a React Native app, with the app's own packages",
+  "keywords": [
+    "backtick",
+    "react-native",
+    "server-driven-ui",
+    "server-components",
+    "client",
+    "evaluate"
+  ],
+  "homepage": "https://backtickjs.com",
+  "bugs": {
+    "url": "https://github.com/backtickjs/backtick/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/backtickjs/backtick.git",
+    "directory": "packages/react-native-client"
+  },
   "license": "MIT",
+  "author": "Jean-François Bisson <jf@backtickjs.com>",
   "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     }
+  },
+  "files": [
+    "dist",
+    "!dist/._cache",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "tsc -b tsconfig.build.json",

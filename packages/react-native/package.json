@@ -1,15 +1,40 @@
 {
   "name": "@backtickjs/react-native",
   "version": "0.86.3",
-  "private": true,
   "description": "The React Native adapter for Backtick: React Native's API as client values your scripts splice",
+  "keywords": [
+    "backtick",
+    "react-native",
+    "server-driven-ui",
+    "server-components",
+    "adapter",
+    "expo"
+  ],
+  "homepage": "https://backtickjs.com",
+  "bugs": {
+    "url": "https://github.com/backtickjs/backtick/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/backtickjs/backtick.git",
+    "directory": "packages/react-native"
+  },
   "license": "MIT",
+  "author": "Jean-François Bisson <jf@backtickjs.com>",
   "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     }
+  },
+  "files": [
+    "dist",
+    "!dist/._cache",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "typecheck": "backtick-tsc -p tsconfig.build.json --noEmit",

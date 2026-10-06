@@ -1,0 +1,44 @@
+name: Release
+
+# Pushing a tag like `v0.1.0` publishes every public package at that version.
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # For npm provenance: each package links to the commit and build that
+      # made it.
+      id-token: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+      - run: pnpm install --frozen-lockfile
+      # The tag names the version the packages already have, so a release
+      # can't publish something other than what was tagged.
+      - name: Check the tag matches the packages
+        run: |
+          version=$(node -p 'require("./packages/core/package.json").version')
+          if [ "v$version" != "$GITHUB_REF_NAME" ]; then
+            echo "Tag $GITHUB_REF_NAME doesn't match the packages' version $version."
+            exit 1
+          fi
+      - run: pnpm build
+      - run: pnpm test
+      # pnpm, not npm: it turns `workspace:*` into real versions. Private
+      # packages and versions already on npm are skipped.
+      - run: pnpm -r publish --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: "true"

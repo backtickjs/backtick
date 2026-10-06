@@ -1,9 +1,28 @@
 {
   "name": "@backtickjs/solid-js",
   "version": "1.9.14",
-  "private": true,
   "description": "The Solid adapter for Backtick: Solid's API as client values your scripts splice, and a JSX runtime for server components",
+  "keywords": [
+    "backtick",
+    "react-native",
+    "server-driven-ui",
+    "server-components",
+    "solid",
+    "solid-js",
+    "adapter",
+    "jsx-runtime"
+  ],
+  "homepage": "https://backtickjs.com",
+  "bugs": {
+    "url": "https://github.com/backtickjs/backtick/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/backtickjs/backtick.git",
+    "directory": "packages/solid-js"
+  },
   "license": "MIT",
+  "author": "Jean-François Bisson <jf@backtickjs.com>",
   "type": "module",
   "exports": {
     ".": {
@@ -30,6 +49,14 @@
       "types": "./dist/plugin.d.ts",
       "default": "./dist/plugin.js"
     }
+  },
+  "files": [
+    "dist",
+    "!dist/._cache",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "typecheck": "backtick-tsc -p tsconfig.build.json --noEmit",

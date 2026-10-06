@@ -1,8 +1,27 @@
 {
   "name": "@backtickjs/core",
   "version": "0.1.0",
-  "private": true,
   "description": "The cs tag for Backtick client scripts, and the types for the values that cross from server to client",
+  "keywords": [
+    "backtick",
+    "react-native",
+    "server-driven-ui",
+    "server-components",
+    "jsx",
+    "typescript",
+    "tagged-template"
+  ],
+  "homepage": "https://backtickjs.com",
+  "bugs": {
+    "url": "https://github.com/backtickjs/backtick/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/backtickjs/backtick.git",
+    "directory": "packages/core"
+  },
+  "license": "MIT",
+  "author": "Jean-François Bisson <jf@backtickjs.com>",
   "type": "module",
   "main": "./dist/index.js",
   "exports": {
@@ -10,6 +29,14 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     }
+  },
+  "files": [
+    "dist",
+    "!dist/._cache",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "tsc -b",
@@ -26,6 +53,5 @@
   "devDependencies": {
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
-  },
-  "license": "MIT"
+  }
 }

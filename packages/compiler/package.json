@@ -1,9 +1,26 @@
 {
   "name": "@backtickjs/compiler",
   "version": "0.1.0",
-  "private": true,
   "description": "Internal: the compiler for Backtick client scripts, used by the build plugins, backtick-tsc and the editor tooling",
+  "keywords": [
+    "backtick",
+    "react-native",
+    "server-driven-ui",
+    "server-components",
+    "compiler",
+    "typescript"
+  ],
+  "homepage": "https://backtickjs.com",
+  "bugs": {
+    "url": "https://github.com/backtickjs/backtick/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/backtickjs/backtick.git",
+    "directory": "packages/compiler"
+  },
   "license": "MIT",
+  "author": "Jean-François Bisson <jf@backtickjs.com>",
   "type": "module",
   "main": "./dist/index.js",
   "exports": {
@@ -11,6 +28,14 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     }
+  },
+  "files": [
+    "dist",
+    "!dist/._cache",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "tsc -b",

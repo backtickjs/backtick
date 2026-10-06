@@ -1,12 +1,40 @@
 {
   "name": "@backtickjs/tsc",
   "version": "0.1.0",
-  "license": "MIT",
-  "private": true,
   "description": "backtick-tsc: tsc that type-checks Backtick client scripts and every splice crossing into them",
+  "keywords": [
+    "backtick",
+    "react-native",
+    "server-driven-ui",
+    "server-components",
+    "tsc",
+    "typescript",
+    "typecheck",
+    "cli"
+  ],
+  "homepage": "https://backtickjs.com",
+  "bugs": {
+    "url": "https://github.com/backtickjs/backtick/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/backtickjs/backtick.git",
+    "directory": "packages/tsc"
+  },
+  "license": "MIT",
+  "author": "Jean-François Bisson <jf@backtickjs.com>",
   "type": "module",
   "bin": {
     "backtick-tsc": "./bin/backtick-tsc.js"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "!dist/._cache",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "tsc -b",

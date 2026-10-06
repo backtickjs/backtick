@@ -1,9 +1,30 @@
 {
   "name": "create-backtick-app",
   "version": "0.1.0",
-  "license": "MIT",
-  "private": true,
   "description": "Creates a Backtick app: React Native, React or Solid, with screens from your server on Node or Bun",
+  "keywords": [
+    "backtick",
+    "react-native",
+    "server-driven-ui",
+    "server-components",
+    "create",
+    "starter",
+    "template",
+    "expo",
+    "react",
+    "solid"
+  ],
+  "homepage": "https://backtickjs.com",
+  "bugs": {
+    "url": "https://github.com/backtickjs/backtick/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/backtickjs/backtick.git",
+    "directory": "packages/create-backtick-app"
+  },
+  "license": "MIT",
+  "author": "Jean-François Bisson <jf@backtickjs.com>",
   "type": "module",
   "bin": {
     "create-backtick-app": "./dist/index.js"

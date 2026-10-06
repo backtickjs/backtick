@@ -1,9 +1,27 @@
 {
   "name": "@backtickjs/react",
   "version": "19.2.3",
-  "private": true,
   "description": "The React adapter for Backtick: React's API as client values your scripts splice, and a JSX runtime for server components",
+  "keywords": [
+    "backtick",
+    "react-native",
+    "server-driven-ui",
+    "server-components",
+    "react",
+    "adapter",
+    "jsx-runtime"
+  ],
+  "homepage": "https://backtickjs.com",
+  "bugs": {
+    "url": "https://github.com/backtickjs/backtick/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/backtickjs/backtick.git",
+    "directory": "packages/react"
+  },
   "license": "MIT",
+  "author": "Jean-François Bisson <jf@backtickjs.com>",
   "type": "module",
   "exports": {
     ".": {
@@ -26,6 +44,14 @@
       "types": "./dist/plugin.d.ts",
       "default": "./dist/plugin.js"
     }
+  },
+  "files": [
+    "dist",
+    "!dist/._cache",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "typecheck": "backtick-tsc -p tsconfig.build.json --noEmit",

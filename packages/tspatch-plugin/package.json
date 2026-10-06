@@ -1,9 +1,28 @@
 {
   "name": "@backtickjs/tspatch-plugin",
   "version": "0.1.0",
-  "license": "MIT",
-  "private": true,
   "description": "Compiles Backtick client scripts when you build your server ahead of time with ts-patch's tspc",
+  "keywords": [
+    "backtick",
+    "react-native",
+    "server-driven-ui",
+    "server-components",
+    "ts-patch",
+    "tspc",
+    "typescript",
+    "transformer"
+  ],
+  "homepage": "https://backtickjs.com",
+  "bugs": {
+    "url": "https://github.com/backtickjs/backtick/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/backtickjs/backtick.git",
+    "directory": "packages/tspatch-plugin"
+  },
+  "license": "MIT",
+  "author": "Jean-François Bisson <jf@backtickjs.com>",
   "type": "module",
   "main": "./dist/index.js",
   "exports": {
@@ -11,6 +30,14 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     }
+  },
+  "files": [
+    "dist",
+    "!dist/._cache",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "tsc -b",

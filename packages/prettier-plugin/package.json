@@ -1,11 +1,37 @@
 {
   "name": "@backtickjs/prettier-plugin",
   "version": "0.1.0",
-  "license": "MIT",
-  "private": true,
   "description": "A Prettier plugin that formats the code inside Backtick client scripts",
+  "keywords": [
+    "backtick",
+    "react-native",
+    "server-driven-ui",
+    "server-components",
+    "prettier",
+    "prettier-plugin",
+    "formatter"
+  ],
+  "homepage": "https://backtickjs.com",
+  "bugs": {
+    "url": "https://github.com/backtickjs/backtick/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/backtickjs/backtick.git",
+    "directory": "packages/prettier-plugin"
+  },
+  "license": "MIT",
+  "author": "Jean-François Bisson <jf@backtickjs.com>",
   "type": "module",
   "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "!dist/._cache",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",

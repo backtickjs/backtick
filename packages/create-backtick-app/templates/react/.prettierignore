@@ -1,2 +1,8 @@
+# Written by the package manager.
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+bun.lock
+
 # Written the way VS Code writes them, one entry per line.
 .vscode/extensions.json
