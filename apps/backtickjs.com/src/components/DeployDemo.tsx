@@ -305,7 +305,6 @@ export async function DeployDemo() {
               <span class="size-2 animate-live rounded-full bg-added" />
               {"Screen "}
               <span class="text-code-ink">{$deploys[step()].id}</span>
-              {" · live on next open"}
             </span>
             <button
               class="ml-auto cursor-pointer rounded-full border border-code-line px-3 py-1.5 font-mono text-[11.5px] text-code-ink"

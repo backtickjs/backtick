@@ -15,13 +15,13 @@ export async function QuickStart() {
     };
 
     return (
-      <div class="inline-flex max-w-full items-center gap-3 rounded-xl border border-line bg-wash py-2 pr-2 pl-4 font-mono text-[15px]">
+      <div class="inline-flex max-w-full items-center gap-3 rounded-full border border-line bg-wash py-1.5 pr-1.5 pl-5 font-mono text-[15px]">
         <span class="overflow-x-auto whitespace-nowrap">
           <span class="text-muted select-none">{"$ "}</span>
           {$COMMAND}
         </span>
         <button
-          class="flex-none cursor-pointer rounded-lg border border-line bg-paper px-3 py-1.5 font-sans text-sm font-medium transition hover:border-react/40"
+          class="flex-none cursor-pointer rounded-full border border-line bg-paper px-4 py-2 font-sans text-sm font-medium transition hover:border-react/40"
           onclick={copy}
         >
           {copied() ? "Copied" : "Copy"}

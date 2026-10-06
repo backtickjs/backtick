@@ -17,7 +17,7 @@ export async function Hero() {
         end, and your server and client ship as one.
       </p>
       <div class="mt-[34px] flex flex-wrap gap-3">
-        {${(<Button href="/docs" solid label="Get started →" />)}}
+        {${(<Button href="/docs" solid label="Read the docs" />)}}
         {
           ${(
             <Button
@@ -27,8 +27,8 @@ export async function Hero() {
             />
           )}
         }
+        {${(<QuickStart />)}}
       </div>
-      <div class="mt-5">{${(<QuickStart />)}}</div>
     </div>
   )`;
 }
