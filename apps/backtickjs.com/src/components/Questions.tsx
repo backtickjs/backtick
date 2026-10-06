@@ -6,10 +6,10 @@ const QUESTIONS = [
   {
     question: "Isn't this EAS Update?",
     answer:
-      "EAS Update ships your app's whole JavaScript bundle, the same for" +
-      " everyone on a channel, by default on the next launch. Backtick ships" +
-      " one screen per request, built for that user with their data. They" +
-      " work together: EAS Update for the app, Backtick for its screens.",
+      "EAS Update ships your whole JavaScript bundle to everyone on a" +
+      " channel. Backtick ships one screen per request, built for that user" +
+      " with their data. They work together: EAS Update for the app," +
+      " Backtick for its screens.",
   },
   {
     question: "Doesn't Expo Router have server components?",
@@ -22,8 +22,8 @@ const QUESTIONS = [
     question: "Do I have to rewrite my app?",
     answer:
       "No. <Backtick> is one component, under 1 KB: put it where you want a" +
-      " server screen. Your navigation, auth and native modules stay as they" +
-      " are.",
+      " server screen or an embedded component. Your navigation, auth and" +
+      " native modules stay as they are.",
   },
   {
     question: "Does it work offline?",
@@ -49,8 +49,7 @@ const QUESTIONS = [
     question: "What doesn't it do yet?",
     answer:
       "Screens arrive whole, without streaming. Only plain data crosses to" +
-      " the client, not server functions. Bundles aren't signed. It supports" +
-      " Expo SDK 57 today.",
+      " the client, not server functions. Bundles aren't signed.",
   },
 ];
 
