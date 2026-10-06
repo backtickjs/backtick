@@ -4,15 +4,17 @@ import { QuickStart } from "./QuickStart.js";
 
 export async function Hero() {
   return cs`(
-    <div class="pt-12 pb-14">
+    <div class="pt-12 pb-20">
       <h1 class="max-w-[12.5em] text-[clamp(40px,7.4vw,76px)] leading-[1.02] font-extrabold tracking-[-0.045em]">
-        {"Ship React\u00a0Native screens "}
-        <span class="text-shine">from your server.</span>
+        {"A "}
+        <span class="text-shine">delightful</span>
+        {" programming model for "}
+        <span class="text-shine">{"React\u00a0Native."}</span>
       </h1>
       <p class="mt-[26px] max-w-[36em] text-xl leading-[1.55] text-muted">
-        Backtick brings server components to React Native. Each screen,
-        including client components, is assembled on your server per request and
-        rendered natively in your app.
+        Build your entire app in React and TypeScript, with your data, logic,
+        and UI living together in one place. Everything is type-checked end to
+        end, and your server and client ship as one.
       </p>
       <div class="mt-[34px] flex flex-wrap gap-3">
         {${(<Button href="/docs" solid label="Get started →" />)}}

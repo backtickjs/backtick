@@ -74,7 +74,7 @@ export async function Home({ user }: { user: User }) {
     <$ScrollView contentContainerStyle={$screen}>
       <$Text style={$greeting}>Good morning, {$user.name}</$Text>
       {$promo && <$PromoBanner promo={$promo} />}
-+      <$ReorderButton order={$usual} />
++      {$usual && <$ReorderButton order={$usual} />}
 
       {$picks.map((pick) => (
         <$ProductCard key={pick.id} product={pick} />

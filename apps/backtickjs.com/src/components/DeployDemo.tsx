@@ -101,7 +101,7 @@ export async function DeployDemo() {
     });
 
     return (
-      <div class="pt-24">
+      <>
         <p class="mb-3.5 font-mono text-xs tracking-[0.12em] text-react uppercase">
           Demo · three server deploys, one app build
         </p>
@@ -315,7 +315,7 @@ export async function DeployDemo() {
             </button>
           </div>
         </div>
-      </div>
+      </>
     );
   }`;
 }

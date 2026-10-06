@@ -39,6 +39,13 @@ const QUESTIONS = [
       " store release, as it does with any over-the-air update.",
   },
   {
+    question: "Does it work on the web?",
+    answer:
+      "Yes. Backtick also has adapters for React and Solid, with the same" +
+      " server components and inline client code. This site is built with" +
+      " the Solid one.",
+  },
+  {
     question: "What doesn't it do yet?",
     answer:
       "Screens arrive whole, without streaming. Only plain data crosses to" +

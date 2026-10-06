@@ -21,7 +21,7 @@ export async function Section({
   const ledeOrNull = lede ?? null;
   const childrenOrNull = children ?? null;
   return cs`(
-    <section id={$id} class="pt-24">
+    <section id={$id} class="pt-20">
       <p class="mb-3.5 font-mono text-xs tracking-[0.12em] text-react uppercase">
         {$eyebrow}
       </p>
