@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/tspatch-plugin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Compiles Backtick client scripts when you build your server ahead of time with ts-patch's tspc",
   "keywords": [
     "backtick",

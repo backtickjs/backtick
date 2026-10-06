@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/node-plugin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Runs a Backtick server on Node without a build step, compiling its files and client scripts as they load",
   "keywords": [
     "backtick",

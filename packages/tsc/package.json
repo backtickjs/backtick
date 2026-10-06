@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/tsc",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "backtick-tsc: tsc that type-checks Backtick client scripts and every splice crossing into them",
   "keywords": [
     "backtick",

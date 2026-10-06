@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/typescript-plugin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Internal: the tsserver plugin that type-checks Backtick client scripts in your editor",
   "keywords": [
     "backtick",

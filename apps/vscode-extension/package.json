@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/vscode-extension",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "displayName": "Backtick for VS Code",
   "description": "Syntax highlighting and type-checking for Backtick.",
   "publisher": "backtickjs",

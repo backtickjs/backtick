@@ -14,12 +14,12 @@
     "format:check": "prettier --check --ignore-unknown ."
   },
   "dependencies": {
-    "@backtickjs/bundler": "^0.1.1",
-    "@backtickjs/core": "^0.1.1",
-    "@backtickjs/node-plugin": "^0.1.1",
+    "@backtickjs/bundler": "^0.1.2",
+    "@backtickjs/core": "^0.1.2",
+    "@backtickjs/node-plugin": "^0.1.2",
     "@backtickjs/react": "^19.2.3",
     "@backtickjs/react-native": "^0.86.3",
-    "@backtickjs/react-native-client": "^0.1.1",
+    "@backtickjs/react-native-client": "^0.1.2",
     "expo": "~57.0.26",
     "expo-constants": "~57.0.20",
     "expo-status-bar": "~57.0.1",
@@ -30,8 +30,8 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@backtickjs/prettier-plugin": "^0.1.1",
-    "@backtickjs/tsc": "^0.1.1",
+    "@backtickjs/prettier-plugin": "^0.1.2",
+    "@backtickjs/tsc": "^0.1.2",
     "@types/node": "^25.9.1",
     "@types/react": "19.2.18",
     "prettier": "^3.6.2"
