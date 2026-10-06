@@ -37,6 +37,7 @@ export async function toHtml(
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
     <style>${STYLE}</style>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="f960d84e-859f-4ec7-bbbb-752b6ec084cb" data-domains="backtickjs.com"></script>
     <script type="importmap">
       {
         "imports": {

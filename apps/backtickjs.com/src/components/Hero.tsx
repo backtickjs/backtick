@@ -16,11 +16,12 @@ export const Hero = cs`() => (
       and your server and client ship as one.
     </p>
     <div class="mt-[34px] flex flex-wrap gap-3">
-      <$Button href="/docs" solid label="Read the docs" />
+      <$Button href="/docs" solid label="Read the docs" event="read-docs" />
       <$Button
         href="https://github.com/backtickjs/backtick"
         github
         label="GitHub"
+        event="github"
       />
       <$QuickStart />
     </div>
