@@ -108,7 +108,7 @@ Bun.serve({
   routes: {
     "/screens/home": async (request) => {
       const packageVersions = JSON.parse(
-        request.headers.get("backtick-package-versions"),
+        String(request.headers.get("backtick-package-versions")),
       );
       const bundle = await bundler.build({
         input: <Home />,

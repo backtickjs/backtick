@@ -29,35 +29,29 @@ const VERDICTS: Record<Cell["tone"], string> = {
 // Backtick beside the tools a React Native developer already compares it to,
 // Backtick last: what each ships under its name, then a verdict per row. On a
 // phone each row stacks, and each cell names its column.
-export async function Comparison({
-  columns,
-  rows,
-}: {
-  columns: Column[];
-  rows: Row[];
-}) {
-  const last = columns.length - 1;
+export const Comparison = cs`(props: { columns: Column[]; rows: Row[] }) => {
+  const last = props.columns.length - 1;
   // The grid for the label and each column, written out whole so the
   // stylesheet generator finds both.
   const grid =
-    columns.length === 2
+    props.columns.length === 2
       ? "md:grid-cols-[190px_1fr_1fr]"
       : "md:grid-cols-[190px_1fr_1fr_1fr]";
-  return cs`(
+  return (
     <div class="overflow-hidden rounded-[20px] border border-line">
       <div
         class={
           "grid gap-3 border-b border-line bg-wash py-4 md:gap-0 md:py-0 " +
-          $grid
+          grid
         }
       >
         <span class="max-md:hidden" />
-        {$columns.map((column, index) => (
+        {props.columns.map((column, index) => (
           <span class="grid content-start gap-0.5 px-5 md:border-l md:border-line md:py-4">
             <span
               class={
                 "text-[15px] font-semibold " +
-                (index === $last ? "text-react" : "")
+                (index === last ? "text-react" : "")
               }
             >
               {column.name}
@@ -66,10 +60,10 @@ export async function Comparison({
           </span>
         ))}
       </div>
-      {$rows.map((row) => (
+      {props.rows.map((row) => (
         <div
           class={
-            "grid border-b border-line text-[15px] last:border-b-0 " + $grid
+            "grid border-b border-line text-[15px] last:border-b-0 " + grid
           }
         >
           <span class="px-5 pt-4 pb-2 font-semibold md:py-4">{row.label}</span>
@@ -81,7 +75,7 @@ export async function Comparison({
               }
             >
               <span class="font-medium text-muted md:hidden">
-                {$columns[index].name}
+                {props.columns[index].name}
               </span>
               <span class={"font-semibold " + $VERDICTS[value.tone]}>
                 {value.verdict}
@@ -94,5 +88,5 @@ export async function Comparison({
         </div>
       ))}
     </div>
-  )`;
-}
+  );
+}`;

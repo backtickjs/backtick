@@ -1,5 +1,5 @@
 import { bundler } from "@backtickjs/bundler";
-import { cs } from "@backtickjs/core";
+import { type Client, cs } from "@backtickjs/core";
 import { render } from "@backtickjs/solid-js/web";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 import { compile, optimize } from "@tailwindcss/node";
@@ -13,12 +13,13 @@ const sourcemap = process.env.NODE_ENV === "production" ? undefined : "inline";
 // The page's CSS, generated once at startup from the classes the source uses.
 const STYLE = await tailwind();
 
+// A page: a client component, drawn into the document by Solid.
 export async function toHtml(
-  element: JSX.Element,
+  Page: Client<() => JSX.Element>,
   title: string,
 ): Promise<string> {
   const bundle = await bundler.build({
-    input: cs`$render(() => $element, document.getElementById("app")!)`,
+    input: cs`$render($Page, document.getElementById("app")!)`,
     packageVersions: { "solid-js": "1.9.14" },
   });
 
@@ -31,7 +32,7 @@ export async function toHtml(
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <title>${title}</title>
-    <meta name="description" content="Backtick brings server components to React Native. Each screen, including client components, is assembled on your server per request and rendered natively in your app.">
+    <meta name="description" content="A delightful programming model for React Native. Build your app in React and TypeScript, with your data, logic and UI in one place, type-checked end to end.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">

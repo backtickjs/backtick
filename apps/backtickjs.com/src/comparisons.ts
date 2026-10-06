@@ -43,7 +43,7 @@ export const EXPO_ROWS: Row[] = [
     values: [
       bad("No", "Same update for everyone on a channel"),
       good("Yes", "Rendered per request"),
-      good("Yes", "Assembled per request"),
+      good("Yes", "Bundled per request"),
     ],
   },
   {
@@ -179,7 +179,7 @@ export const MODEL_ROWS: Row[] = [
     label: "An API for each screen?",
     values: [
       good("No", "The server renders with the data"),
-      bad("Yes", "An endpoint or query, and a client cache"),
+      bad("Yes", "An endpoint or query, and a query cache"),
       good("No", "The server renders with the data"),
     ],
   },

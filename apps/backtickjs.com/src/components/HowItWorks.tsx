@@ -1,71 +1,7 @@
 import { cs } from "@backtickjs/core";
 import { highlight } from "../highlight.js";
 import { type Part, RECEIVED, WRITTEN } from "../samples.js";
-import { InlineCode } from "./Code.js";
-
-// How a screen gets from your server to the phone: the file as written,
-// coloured by what each part is, beside what the phone receives.
-export async function HowItWorks() {
-  const written = await banded(WRITTEN);
-  const received = (await highlight(RECEIVED, "tsx")).map((line) => ({
-    tokens: line.tokens,
-    edge: EDGES.blank,
-  }));
-
-  return cs`(
-    <div class="grid gap-5">
-      <div class="flex flex-wrap gap-x-6 gap-y-2 text-[14.5px]">
-        <span class="inline-flex items-center gap-2">
-          <span class="size-2.5 rounded-full bg-code-muted" />
-          <span class="font-semibold">Imports</span>
-          <span class="text-muted">React Native, from the app</span>
-        </span>
-        <span class="inline-flex items-center gap-2">
-          <span class="size-2.5 rounded-full bg-[#a78bfa]" />
-          <span class="font-semibold">Server code</span>
-          <span class="text-muted">runs per request</span>
-        </span>
-        <span class="inline-flex items-center gap-2">
-          <span class="size-2.5 rounded-full bg-[#61dafb]" />
-          <span class="font-semibold">Client script</span>
-          <span class="text-muted">compiled at build time</span>
-        </span>
-      </div>
-
-      <div class="grid gap-4 lg:grid-cols-2">
-        {[
-          { file: "What you write · Home.tsx", lines: $written },
-          {
-            file: "What the phone receives (simplified)",
-            lines: $received,
-          },
-        ].map((panel) => (
-          <div class="min-w-0 overflow-hidden rounded-[20px] border border-code-line bg-code">
-            <p class="border-b border-code-line px-5 py-3 font-mono text-xs text-code-muted">
-              {panel.file}
-            </p>
-            <pre class="m-0 overflow-x-auto py-4 font-mono text-[13.5px] leading-[1.6]">
-              {panel.lines.map((line) => (
-                <div class={"code-line border-l-4 " + line.edge}>
-                  {line.tokens.map((token) => (
-                    <span style={{ color: token.color }}>{token.text}</span>
-                  ))}
-                </div>
-              ))}
-            </pre>
-          </div>
-        ))}
-      </div>
-
-      <p class="max-w-[720px] text-[15.5px] text-muted">
-        Each client script {${(<InlineCode source="cs`…`" />)}} becomes a
-        function, with every splice <code class="font-mono">$</code> a
-        parameter. The call at the end of the file passes the values: View and
-        Text from the app, and the user's data from your server.
-      </p>
-    </div>
-  )`;
-}
+import { CLIENT_SCRIPT_SYNTAX, InlineCode } from "./Code.js";
 
 // The left edge each kind of line is drawn with, written out whole so the
 // stylesheet generator finds the classes.
@@ -89,3 +25,66 @@ async function banded(parts: Part[]) {
     edge: EDGES[kinds[index] ?? "blank"],
   }));
 }
+
+// Coloured once, when the server starts.
+const WRITTEN_LINES = await banded(WRITTEN);
+const RECEIVED_LINES = (await highlight(RECEIVED, "tsx")).map((line) => ({
+  tokens: line.tokens,
+  edge: EDGES.blank,
+}));
+
+// How a screen gets from your server to the phone: the file as written,
+// coloured by what each part is, beside what the phone receives.
+export const HowItWorks = cs`() => (
+  <div class="grid gap-5">
+    <div class="flex flex-wrap gap-x-6 gap-y-2 text-[14.5px]">
+      <span class="inline-flex items-center gap-2">
+        <span class="size-2.5 rounded-full bg-code-muted" />
+        <span class="font-semibold">Imports</span>
+        <span class="text-muted">React Native, from the app</span>
+      </span>
+      <span class="inline-flex items-center gap-2">
+        <span class="size-2.5 rounded-full bg-[#a78bfa]" />
+        <span class="font-semibold">Server code</span>
+        <span class="text-muted">runs per request</span>
+      </span>
+      <span class="inline-flex items-center gap-2">
+        <span class="size-2.5 rounded-full bg-[#61dafb]" />
+        <span class="font-semibold">Client script</span>
+        <span class="text-muted">compiled at build time</span>
+      </span>
+    </div>
+
+    <div class="grid gap-4 lg:grid-cols-2">
+      {[
+        { file: "What you write · Home.tsx", lines: $WRITTEN_LINES },
+        {
+          file: "What the phone receives (simplified)",
+          lines: $RECEIVED_LINES,
+        },
+      ].map((panel) => (
+        <div class="min-w-0 overflow-hidden rounded-[20px] border border-code-line bg-code">
+          <p class="border-b border-code-line px-5 py-3 font-mono text-xs text-code-muted">
+            {panel.file}
+          </p>
+          <pre class="m-0 overflow-x-auto py-4 font-mono text-[13.5px] leading-[1.6]">
+            {panel.lines.map((line) => (
+              <div class={"code-line border-l-4 " + line.edge}>
+                {line.tokens.map((token) => (
+                  <span style={{ color: token.color }}>{token.text}</span>
+                ))}
+              </div>
+            ))}
+          </pre>
+        </div>
+      ))}
+    </div>
+
+    <p class="max-w-[720px] text-[15.5px] text-muted">
+      Each client script <$InlineCode line={$CLIENT_SCRIPT_SYNTAX} /> becomes a
+      function, with every splice <code class="font-mono">$</code> a parameter.
+      The call at the end of the file passes the values: View and Text from the
+      app, and the user's data from your server.
+    </p>
+  </div>
+)`;

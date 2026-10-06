@@ -8,17 +8,17 @@ const server = Bun.serve({
   routes: {
     "/": async () => {
       const html = await toHtml(
-        <Home />,
-        "Backtick · Server-driven React Native",
+        Home,
+        "Backtick · A delightful programming model for React Native",
       );
       return new Response(html, { headers: { "content-type": "text/html" } });
     },
     "/why": async () => {
-      const html = await toHtml(<Why />, "Backtick · Why Backtick");
+      const html = await toHtml(Why, "Backtick · Why Backtick");
       return new Response(html, { headers: { "content-type": "text/html" } });
     },
     "/docs": async () => {
-      const html = await toHtml(<Docs />, "Backtick · Docs");
+      const html = await toHtml(Docs, "Backtick · Docs");
       return new Response(html, { headers: { "content-type": "text/html" } });
     },
   },

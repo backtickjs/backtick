@@ -53,15 +53,13 @@ const QUESTIONS = [
   },
 ];
 
-export async function Questions() {
-  return cs`(
-    <dl class="grid gap-x-12 gap-y-8 md:grid-cols-2">
-      {$QUESTIONS.map((item) => (
-        <div class="grid content-start gap-1.5">
-          <dt class="text-lg font-bold tracking-[-0.01em]">{item.question}</dt>
-          <dd class="m-0 text-[15.5px] text-muted">{item.answer}</dd>
-        </div>
-      ))}
-    </dl>
-  )`;
-}
+export const Questions = cs`() => (
+  <dl class="grid gap-x-12 gap-y-8 md:grid-cols-2">
+    {$QUESTIONS.map((item) => (
+      <div class="grid content-start gap-1.5">
+        <dt class="text-lg font-bold tracking-[-0.01em]">{item.question}</dt>
+        <dd class="m-0 text-[15.5px] text-muted">{item.answer}</dd>
+      </div>
+    ))}
+  </dl>
+)`;
