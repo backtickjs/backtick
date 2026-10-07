@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/bundler",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Runs Backtick server components and bundles a screen per request: one JavaScript file for the client",
   "keywords": [
     "backtick",

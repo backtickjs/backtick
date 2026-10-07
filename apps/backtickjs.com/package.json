@@ -14,11 +14,11 @@
     "clean": "rm -rf node_modules"
   },
   "dependencies": {
-    "@backtickjs/bun-plugin": "^0.1.2",
-    "@backtickjs/bundler": "^0.1.2",
-    "@backtickjs/core": "^0.1.2",
+    "@backtickjs/bun-plugin": "^0.1.3",
+    "@backtickjs/bundler": "^0.1.3",
+    "@backtickjs/core": "^0.1.3",
     "@backtickjs/solid-js": "^1.9.14",
-    "@backtickjs/vscode-extension": "^0.1.2",
+    "@backtickjs/vscode-extension": "^0.1.3",
     "@shikijs/colorized-brackets": "^4.5.0",
     "@tailwindcss/node": "^4.3.3",
     "@tailwindcss/oxide": "^4.3.3",
@@ -30,12 +30,12 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@backtickjs/node-plugin": "^0.1.2",
-    "@backtickjs/prettier-plugin": "^0.1.2",
+    "@backtickjs/node-plugin": "^0.1.3",
+    "@backtickjs/prettier-plugin": "^0.1.3",
     "@backtickjs/react": "^19.2.3",
     "@backtickjs/react-native": "^0.86.3",
-    "@backtickjs/react-native-client": "^0.1.2",
-    "@backtickjs/tsc": "^0.1.2",
+    "@backtickjs/react-native-client": "^0.1.3",
+    "@backtickjs/tsc": "^0.1.3",
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.7",
     "@types/bun": "^1.3.14",

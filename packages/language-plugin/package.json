@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/language-plugin",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Internal: the Volar language plugin that shows TypeScript what a Backtick client script means",
   "keywords": [
     "backtick",
