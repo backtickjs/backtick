@@ -24,4 +24,6 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("chpeziv4ml4:8:9").default;
-module.exports = ($cs0(() => ($i0), () => ({ id: "u1", name: "Ada", email: "ada@example.com" })));
+const $thunk0 = () => ($i0);
+const $thunk1 = () => ({ id: "u1", name: "Ada", email: "ada@example.com" });
+module.exports = ($cs0($thunk0, $thunk1));

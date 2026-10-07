@@ -48,63 +48,8 @@ const $cs1 = $require("1v7gwc56n71e7:19:11").default;
 const $cs2 = $require("1v7gwc56n71e7:15:11").default;
 const $cs3 = $require("1v7gwc56n71e7:11:11").default;
 const $cs4 = $require("1v7gwc56n71e7:9:11").default;
-export default $cs0(
-  () =>
-    $cs1(
-      () =>
-        $cs2(
-          () =>
-            $cs3(
-              () => $cs4(),
-              () => $cs4(),
-            ),
-          () =>
-            $cs3(
-              () => $cs4(),
-              () => $cs4(),
-            ),
-        ),
-      () =>
-        $cs2(
-          () =>
-            $cs3(
-              () => $cs4(),
-              () => $cs4(),
-            ),
-          () =>
-            $cs3(
-              () => $cs4(),
-              () => $cs4(),
-            ),
-        ),
-    ),
-  () =>
-    $cs1(
-      () =>
-        $cs2(
-          () =>
-            $cs3(
-              () => $cs4(),
-              () => $cs4(),
-            ),
-          () =>
-            $cs3(
-              () => $cs4(),
-              () => $cs4(),
-            ),
-        ),
-      () =>
-        $cs2(
-          () =>
-            $cs3(
-              () => $cs4(),
-              () => $cs4(),
-            ),
-          () =>
-            $cs3(
-              () => $cs4(),
-              () => $cs4(),
-            ),
-        ),
-    ),
-);
+const $thunk0 = () => $cs4();
+const $thunk1 = () => $cs3($thunk0, $thunk0);
+const $thunk2 = () => $cs2($thunk1, $thunk1);
+const $thunk3 = () => $cs1($thunk2, $thunk2);
+export default $cs0($thunk3, $thunk3);

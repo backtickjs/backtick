@@ -19,7 +19,6 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("1eany0mypxz6m:9:4").default;
-export default $cs0(
-  () => [1, "two", true, null],
-  () => ({ k: 3 }),
-);
+const $thunk0 = () => [1, "two", true, null];
+const $thunk1 = () => ({ k: 3 });
+export default $cs0($thunk0, $thunk1);

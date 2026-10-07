@@ -37,4 +37,8 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("1qlemy4wvzr85:23:9").default;
-module.exports = ($cs0(() => ($i0), () => ($i1), () => ("Ceramic dripper"), () => ($i1), () => (true)));
+const $thunk0 = () => ($i0);
+const $thunk1 = () => ($i1);
+const $thunk2 = () => ("Ceramic dripper");
+const $thunk3 = () => (true);
+module.exports = ($cs0($thunk0, $thunk1, $thunk2, $thunk1, $thunk3));

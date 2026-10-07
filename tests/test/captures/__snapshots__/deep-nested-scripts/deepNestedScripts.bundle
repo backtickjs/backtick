@@ -34,9 +34,7 @@ const $cs0 = $require("2rqwzcdfi281b:11:45").default;
 const $cs1 = $require("2rqwzcdfi281b:7:9").default;
 const $cs2 = $require("2rqwzcdfi281b:11:54").default;
 const $cs3 = $require("2rqwzcdfi281b:11:61").default;
-export default $cs0(() =>
-  $cs1(
-    () => $cs2(),
-    () => $cs3(),
-  ),
-);
+const $thunk0 = () => $cs2();
+const $thunk1 = () => $cs3();
+const $thunk2 = () => $cs1($thunk0, $thunk1);
+export default $cs0($thunk2);

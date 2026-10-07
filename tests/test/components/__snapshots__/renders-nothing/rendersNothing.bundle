@@ -34,9 +34,7 @@ const $require = (id) => {
 };
 const $cs0 = $require("10057hli8r1op:13:42").default;
 const $cs1 = $require("1uptcsn9236u2:352:9").default;
-export default $cs0(() =>
-  $cs1(
-    () => $i0,
-    () => null,
-  ),
-);
+const $thunk0 = () => $i0;
+const $thunk1 = () => null;
+const $thunk2 = () => $cs1($thunk0, $thunk1);
+export default $cs0($thunk2);

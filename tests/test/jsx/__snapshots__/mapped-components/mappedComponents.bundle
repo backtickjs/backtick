@@ -48,17 +48,16 @@ const $require = (id) => {
 const $cs0 = $require("3muqirg3sfmdb:19:4").default;
 const $cs1 = $require("1uptcsn9236u2:352:9").default;
 const $cs2 = $require("3muqirg3sfmdb:8:9").default;
-export default $cs0(() => [
-  $cs1(
-    () => $i0,
-    () => $cs2(() => "alpha"),
-  ),
-  $cs1(
-    () => $i0,
-    () => $cs2(() => "beta"),
-  ),
-  $cs1(
-    () => $i0,
-    () => $cs2(() => "gamma"),
-  ),
-]);
+const $thunk0 = () => $i0;
+const $thunk1 = () => "alpha";
+const $thunk2 = () => $cs2($thunk1);
+const $thunk3 = () => "beta";
+const $thunk4 = () => $cs2($thunk3);
+const $thunk5 = () => "gamma";
+const $thunk6 = () => $cs2($thunk5);
+const $thunk7 = () => [
+  $cs1($thunk0, $thunk2),
+  $cs1($thunk0, $thunk4),
+  $cs1($thunk0, $thunk6),
+];
+export default $cs0($thunk7);

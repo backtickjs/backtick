@@ -49,5 +49,7 @@ const $require = (id) => {
 };
 const $cs0 = $require("3niob7u7a1w55:24:4").default;
 const $cs1 = $require("3niob7u7a1w55:10:16").default;
-const $function0 = $cs1(() => $i0);
-export default $cs0(() => $function0);
+const $thunk0 = () => $i0;
+const $function1 = $cs1($thunk0);
+const $thunk2 = () => $function1;
+export default $cs0($thunk2);

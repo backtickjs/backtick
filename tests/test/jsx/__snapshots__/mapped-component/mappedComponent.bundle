@@ -51,8 +51,7 @@ const $require = (id) => {
 };
 const $cs0 = $require("5vl2m1vo5mat:26:4").default;
 const $cs1 = $require("5vl2m1vo5mat:29:30").default;
-export default $cs0(
-  () => $i0,
-  () => [1, 2, 3],
-  (row) => $cs1(row),
-);
+const $thunk0 = () => $i0;
+const $thunk1 = () => [1, 2, 3];
+const $thunk2 = (row) => $cs1(row);
+export default $cs0($thunk0, $thunk1, $thunk2);

@@ -121,10 +121,12 @@ const $cs3 = $require("1durge4hv8o7p:23:19").default;
 const $cs4 = $require("1durge4hv8o7p:26:9").default;
 const $cs5 = $require("1durge4hv8o7p:26:24").default;
 const $cs6 = $require("1durge4hv8o7p:28:10").default;
-export default $cs0(
-  () => $i0,
-  (count, Badge) => $cs1(Badge, count),
-  (count, Badge) => $cs2((Badge, count) => $cs3(Badge, count), Badge, count),
-  (count, Badge) => $cs4((Badge, count) => $cs5(Badge, count), Badge, count),
-  (count, Badge) => $cs6((Badge, count) => $i1, Badge, count),
-);
+const $thunk0 = () => $i0;
+const $thunk1 = (count, Badge) => $cs1(Badge, count);
+const $thunk2 = (Badge, count) => $cs3(Badge, count);
+const $thunk3 = (count, Badge) => $cs2($thunk2, Badge, count);
+const $thunk4 = (Badge, count) => $cs5(Badge, count);
+const $thunk5 = (count, Badge) => $cs4($thunk4, Badge, count);
+const $thunk6 = (Badge, count) => $i1;
+const $thunk7 = (count, Badge) => $cs6($thunk6, Badge, count);
+export default $cs0($thunk0, $thunk1, $thunk3, $thunk5, $thunk7);

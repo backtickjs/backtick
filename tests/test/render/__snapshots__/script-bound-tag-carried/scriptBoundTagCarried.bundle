@@ -99,11 +99,8 @@ const $cs0 = $require("1m0g5lfnje26m:30:30").default;
 const $cs1 = $require("1uptcsn9236u2:352:9").default;
 const $cs2 = $require("1m0g5lfnje26m:15:9").default;
 const $cs3 = $require("1m0g5lfnje26m:44:18").default;
-export default $cs0(
-  () => $i0,
-  (count, Badge) =>
-    $cs1(
-      () => $i1,
-      () => $cs2(() => ({ body: $cs3(Badge, count) })),
-    ),
-);
+const $thunk0 = () => $i0;
+const $thunk1 = () => $i1;
+const $thunk2 = (count, Badge) =>
+  $cs1($thunk1, () => $cs2(() => ({ body: $cs3(Badge, count) })));
+export default $cs0($thunk0, $thunk2);

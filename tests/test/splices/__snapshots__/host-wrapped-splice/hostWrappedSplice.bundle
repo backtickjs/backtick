@@ -58,15 +58,10 @@ const $cs3 = $require("zqr0jsdf8ub6:27:9").default;
 const $cs4 = $require("zqr0jsdf8ub6:19:17").default;
 const $cs5 = $require("zqr0jsdf8ub6:21:29").default;
 const $cs6 = $require("zqr0jsdf8ub6:38:31").default;
-export default $cs0(
-  () =>
-    $cs1(
-      () => $cs2(),
-      (outer) => $cs3(() => $cs4((outer) => $cs5(outer), outer)),
-    ),
-  () =>
-    $cs1(
-      () => $cs6(),
-      (outer) => $cs3(() => $cs4((outer) => $cs5(outer), outer)),
-    ),
-);
+const $thunk0 = () => $cs2();
+const $thunk1 = (outer) => $cs5(outer);
+const $thunk2 = (outer) => $cs3(() => $cs4($thunk1, outer));
+const $thunk3 = () => $cs1($thunk0, $thunk2);
+const $thunk4 = () => $cs6();
+const $thunk5 = () => $cs1($thunk4, $thunk2);
+export default $cs0($thunk3, $thunk5);

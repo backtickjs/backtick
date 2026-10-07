@@ -31,4 +31,5 @@ const $require = (id) => {
 const $cs0 = $require("sl458m2swc6c:17:4").default;
 const $cs1 = $require("sl458m2swc6c:10:9").default;
 const $cs2 = $require("sl458m2swc6c:19:19").default;
-export default $cs0((foo$) => $cs1(() => $cs2(foo$)));
+const $thunk0 = (foo$) => $cs1(() => $cs2(foo$));
+export default $cs0($thunk0);

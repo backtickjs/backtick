@@ -49,15 +49,10 @@ const $cs2 = $require("3cex0hh0qp6qz:14:15").default;
 const $cs3 = $require("3cex0hh0qp6qz:14:22").default;
 const $cs4 = $require("3cex0hh0qp6qz:15:15").default;
 const $cs5 = $require("3cex0hh0qp6qz:15:22").default;
-export default $cs0(
-  () =>
-    $cs1(
-      () => $cs2(),
-      () => $cs3(),
-    ),
-  () =>
-    $cs1(
-      () => $cs4(),
-      () => $cs5(),
-    ),
-);
+const $thunk0 = () => $cs2();
+const $thunk1 = () => $cs3();
+const $thunk2 = () => $cs1($thunk0, $thunk1);
+const $thunk3 = () => $cs4();
+const $thunk4 = () => $cs5();
+const $thunk5 = () => $cs1($thunk3, $thunk4);
+export default $cs0($thunk2, $thunk5);

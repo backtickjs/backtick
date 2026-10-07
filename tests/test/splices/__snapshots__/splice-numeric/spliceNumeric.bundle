@@ -16,4 +16,5 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("pyy2xapmkswv:6:41").default;
-export default $cs0(() => 1);
+const $thunk0 = () => 1;
+export default $cs0($thunk0);

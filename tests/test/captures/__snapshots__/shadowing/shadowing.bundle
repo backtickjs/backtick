@@ -36,9 +36,6 @@ const $require = (id) => {
 const $cs0 = $require("3ujapqmnmm2ra:19:4").default;
 const $cs1 = $require("3ujapqmnmm2ra:7:9").default;
 const $cs2 = $require("3ujapqmnmm2ra:21:27").default;
-export default $cs0((total) =>
-  $cs1(
-    () => $cs2(total),
-    () => 100,
-  ),
-);
+const $thunk0 = () => 100;
+const $thunk1 = (total) => $cs1(() => $cs2(total), $thunk0);
+export default $cs0($thunk1);

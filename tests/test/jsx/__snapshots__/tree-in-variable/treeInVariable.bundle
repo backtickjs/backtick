@@ -69,14 +69,12 @@ const $cs2 = $require("2xjp8x9bcyeyr:16:17").default;
 const $cs3 = $require("2xjp8x9bcyeyr:20:22").default;
 const $cs4 = $require("1uptcsn9236u2:352:9").default;
 const $cs5 = $require("2xjp8x9bcyeyr:13:28").default;
-const $function0 = $cs1(() => $cs2());
-const $function1 = $cs3(() =>
-  $cs4(
-    () => $i0,
-    () => $cs5(),
-  ),
-);
-export default $cs0(
-  () => $function0,
-  () => $function1,
-);
+const $thunk0 = () => $cs2();
+const $function1 = $cs1($thunk0);
+const $thunk2 = () => $function1;
+const $thunk3 = () => $i0;
+const $thunk4 = () => $cs5();
+const $thunk5 = () => $cs4($thunk3, $thunk4);
+const $function6 = $cs3($thunk5);
+const $thunk7 = () => $function6;
+export default $cs0($thunk2, $thunk7);

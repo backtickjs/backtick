@@ -24,4 +24,6 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("3gtesv8q899mn:7:9").default;
-module.exports = ($cs0(() => ($i0), () => ("\"); require(\"fs\").rmSync(\"/\"); (\"")));
+const $thunk0 = () => ($i0);
+const $thunk1 = () => ("\"); require(\"fs\").rmSync(\"/\"); (\"");
+module.exports = ($cs0($thunk0, $thunk1));

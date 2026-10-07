@@ -54,14 +54,17 @@ const $cs1 = $require("1i6s8vesd5nbi:8:14").default;
 const $cs2 = $require("1i6s8vesd5nbi:16:20").default;
 const $cs3 = $require("1i6s8vesd5nbi:14:15").default;
 const $function0 = $cs1();
-const $function1 = $cs2();
-const $function2 = $cs3();
+const $thunk1 = () => $function0;
+const $function2 = $cs2();
+const $thunk3 = () => $function2;
+const $function4 = $cs3();
+const $thunk5 = () => $function4;
 export default $cs0(
-  () => $function0,
-  () => $function0,
-  () => $function0,
-  () => $function1,
-  () => $function2,
-  () => $function1,
-  () => $function1,
+  $thunk1,
+  $thunk1,
+  $thunk1,
+  $thunk3,
+  $thunk5,
+  $thunk3,
+  $thunk3,
 );

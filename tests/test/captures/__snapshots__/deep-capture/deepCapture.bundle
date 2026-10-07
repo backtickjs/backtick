@@ -52,15 +52,10 @@ const $cs2 = $require("22sufdxid1i7s:28:49").default;
 const $cs3 = $require("22sufdxid1i7s:20:13").default;
 const $cs4 = $require("22sufdxid1i7s:22:24").default;
 const $cs5 = $require("22sufdxid1i7s:28:66").default;
-export default $cs0(
-  () =>
-    $cs1(
-      () => $cs2(),
-      (outer) => $cs3((outer) => $cs4(outer), outer),
-    ),
-  () =>
-    $cs1(
-      () => $cs5(),
-      (outer) => $cs3((outer) => $cs4(outer), outer),
-    ),
-);
+const $thunk0 = () => $cs2();
+const $thunk1 = (outer) => $cs4(outer);
+const $thunk2 = (outer) => $cs3($thunk1, outer);
+const $thunk3 = () => $cs1($thunk0, $thunk2);
+const $thunk4 = () => $cs5();
+const $thunk5 = () => $cs1($thunk4, $thunk2);
+export default $cs0($thunk3, $thunk5);

@@ -32,15 +32,17 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("3jdm2y7f9tpf:15:4").default;
+const $thunk0 = () => 3;
+const $thunk1 = () => 9;
 export default $cs0(
-  () => 3,
-  () => 9,
-  () => 3,
-  () => 9,
-  () => 9,
-  () => 3,
-  () => 3,
-  () => 9,
-  () => 9,
-  () => 3,
+  $thunk0,
+  $thunk1,
+  $thunk0,
+  $thunk1,
+  $thunk1,
+  $thunk0,
+  $thunk0,
+  $thunk1,
+  $thunk1,
+  $thunk0,
 );

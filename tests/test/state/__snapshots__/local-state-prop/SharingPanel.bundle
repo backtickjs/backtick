@@ -72,30 +72,23 @@ const $cs1 = $require("1t9uf2rmx1hr4:28:9").default;
 const $cs2 = $require("1t9uf2rmx1hr4:16:2").default;
 const $cs3 = $require("1t9uf2rmx1hr4:32:33").default;
 const $cs4 = $require("1t9uf2rmx1hr4:33:33").default;
-export default $cs0(
-  () => $i0,
-  () =>
-    $cs1(
-      () => $i1,
-      (size) =>
-        $cs0(
-          () => $i0,
-          () =>
-            $cs2(
-              () => $cs3(size),
-              () => $cs3(size),
-              () => $cs3(size),
-            ),
-        ),
-      (size) =>
-        $cs0(
-          () => $i0,
-          () =>
-            $cs2(
-              () => $cs4(size),
-              () => $cs4(size),
-              () => $cs4(size),
-            ),
-        ),
+const $thunk0 = () => $i0;
+const $thunk1 = () => $i1;
+const $thunk2 = (size) =>
+  $cs0($thunk0, () =>
+    $cs2(
+      () => $cs3(size),
+      () => $cs3(size),
+      () => $cs3(size),
     ),
-);
+  );
+const $thunk3 = (size) =>
+  $cs0($thunk0, () =>
+    $cs2(
+      () => $cs4(size),
+      () => $cs4(size),
+      () => $cs4(size),
+    ),
+  );
+const $thunk4 = () => $cs1($thunk1, $thunk2, $thunk3);
+export default $cs0($thunk0, $thunk4);

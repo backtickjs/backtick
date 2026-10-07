@@ -41,9 +41,8 @@ const $require = (id) => {
 const $cs0 = $require("1zk77nyjrl50d:20:4").default;
 const $cs1 = $require("1zk77nyjrl50d:7:41").default;
 const $cs2 = $require("1zk77nyjrl50d:11:33").default;
-const $function0 = $cs2();
-const $function1 = $cs0(
-  () => $cs1(),
-  () => $function0,
-);
-export default $function1;
+const $thunk0 = () => $cs1();
+const $function1 = $cs2();
+const $thunk2 = () => $function1;
+const $function3 = $cs0($thunk0, $thunk2);
+export default $function3;

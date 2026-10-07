@@ -16,5 +16,6 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("m50lyvn0wkye:8:39").default;
-const $function0 = $cs0(() => ({ "#call": "#f0" }));
-export default $function0;
+const $thunk0 = () => ({ "#call": "#f0" });
+const $function1 = $cs0($thunk0);
+export default $function1;

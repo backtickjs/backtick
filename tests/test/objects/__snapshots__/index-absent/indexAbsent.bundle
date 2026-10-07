@@ -20,4 +20,5 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("26sqkhggd8j15:14:4").default;
-export default $cs0(() => ({ here: "yes" }));
+const $thunk0 = () => ({ here: "yes" });
+export default $cs0($thunk0);

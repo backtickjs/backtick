@@ -29,9 +29,9 @@ import type { Names } from "../print/code.js";
  */
 export interface BundleTree {
   readonly modules: readonly (readonly [string, ClientModule])[];
-  // The functions the bundle makes once, each under its label, after what
-  // they read.
-  readonly functions: readonly (readonly [string, string])[];
+  // The functions the bundle makes once, each under its label, in the order
+  // they're finished: after what they read.
+  readonly constants: readonly (readonly [string, string])[];
   readonly root: string;
   readonly names: Names;
 }
@@ -150,7 +150,15 @@ export async function buildBundle(
   // renders. Making a function runs nothing, so when it's made isn't
   // observable.
   const functions = new Map<ClientScript, string>();
-  const functionCode: (readonly [string, string])[] = [];
+  const constants: (readonly [string, string])[] = [];
+
+  // A splice's thunk whose code reads nothing of the scope it's written in,
+  // beyond its own parameters, is the same function wherever it's written. So
+  // a thunk with the same code as one already made is that one, and a value
+  // spliced at every level of a deep composition is written once per level,
+  // not once per path. Making a function runs nothing, so sharing one isn't
+  // observable; each splice is still rendered where it stands.
+  const thunks = new Map<string, string>();
 
   // Writes a value as the code it becomes: composition as data, which is what
   // a bundle is. A script reference is a call naming which script and
@@ -179,9 +187,9 @@ export async function buildBundle(
         read.forEach((key) => scope.read.add(key));
         return code;
       }
-      const label = `$function${functionCode.length}`;
+      const label = `$function${constants.length}`;
       functions.set(value, label);
-      functionCode.push([label, code]);
+      constants.push([label, code]);
       return label;
     }
     if (isJsxElement(value)) {
@@ -280,11 +288,29 @@ export async function buildBundle(
       // nested inside it.
       const passed = [...passKeys(target, index), ...capturesOf(target)];
       // A thunk taking them, the splice rendered inside it.
-      const inner = {
-        bindings: new Set([...scope.bindings, ...passed]),
-        read: scope.read,
-      };
-      parts.push(arrow(passed.map(displayName), await render(arg, inner)));
+      const read = new Set<string>();
+      const code = arrow(
+        passed.map(displayName),
+        await render(arg, {
+          bindings: new Set([...scope.bindings, ...passed]),
+          read,
+        }),
+      );
+      const outside = [...read].filter(
+        (key) => !passed.includes(key) && scope.bindings.has(key),
+      );
+      if (outside.length > 0) {
+        outside.forEach((key) => scope.read.add(key));
+        parts.push(code);
+        continue;
+      }
+      let label = thunks.get(code);
+      if (label === undefined) {
+        label = `$thunk${constants.length}`;
+        thunks.set(code, label);
+        constants.push([label, code]);
+      }
+      parts.push(label);
     }
     for (const key of capturesOf(target)) {
       parts.push(capExpr(key, scope));
@@ -326,5 +352,5 @@ export async function buildBundle(
   const modules = [...numbers.keys()].map(
     (script) => [labelOf(script), script.module] as const,
   );
-  return { modules, functions: functionCode, root, names };
+  return { modules, constants, root, names };
 }

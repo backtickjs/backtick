@@ -19,4 +19,5 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("3amzui83z49rq:19:4").default;
-export default $cs0(() => '{"rows":["one","two"],"count":2}');
+const $thunk0 = () => '{"rows":["one","two"],"count":2}';
+export default $cs0($thunk0);

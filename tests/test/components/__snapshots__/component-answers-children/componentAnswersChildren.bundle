@@ -50,15 +50,9 @@ const $cs0 = $require("jnagv17juckt:27:4").default;
 const $cs1 = $require("1uptcsn9236u2:352:9").default;
 const $cs2 = $require("jnagv17juckt:11:9").default;
 const $cs3 = $require("jnagv17juckt:15:9").default;
-export default $cs0(
-  () =>
-    $cs1(
-      () => $i0,
-      () => $cs2(),
-    ),
-  () =>
-    $cs1(
-      () => $i0,
-      () => $cs3(),
-    ),
-);
+const $thunk0 = () => $i0;
+const $thunk1 = () => $cs2();
+const $thunk2 = () => $cs1($thunk0, $thunk1);
+const $thunk3 = () => $cs3();
+const $thunk4 = () => $cs1($thunk0, $thunk3);
+export default $cs0($thunk2, $thunk4);

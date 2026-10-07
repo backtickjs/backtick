@@ -41,8 +41,8 @@ const $require = (id) => {
 };
 const $cs0 = $require("rkwygfa87yuf:15:4").default;
 const $cs1 = $require("rkwygfa87yuf:15:43").default;
-export default $cs0(() => [
-  $cs1(() => "alpha"),
-  $cs1(() => "beta"),
-  $cs1(() => "gamma"),
-]);
+const $thunk0 = () => "alpha";
+const $thunk1 = () => "beta";
+const $thunk2 = () => "gamma";
+const $thunk3 = () => [$cs1($thunk0), $cs1($thunk1), $cs1($thunk2)];
+export default $cs0($thunk3);

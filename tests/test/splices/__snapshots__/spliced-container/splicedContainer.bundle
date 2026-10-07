@@ -28,4 +28,5 @@ const $require = (id) => {
 const $cs0 = $require("3hhvicr225pmx:21:44").default;
 const $cs1 = $require("3hhvicr225pmx:14:16").default;
 const $cs2 = $require("3hhvicr225pmx:16:14").default;
-export default $cs0(() => ({ x: $cs1(), label: $cs2() }));
+const $thunk0 = () => ({ x: $cs1(), label: $cs2() });
+export default $cs0($thunk0);

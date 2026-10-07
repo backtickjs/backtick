@@ -58,7 +58,6 @@ const $require = (id) => {
 const $cs0 = $require("2vonkhcq0yva8:13:4").default;
 const $cs1 = $require("2vonkhcq0yva8:16:13").default;
 const $cs2 = $require("2vonkhcq0yva8:17:13").default;
-export default $cs0(
-  (Row) => $cs1(Row),
-  (Row) => $cs2(Row),
-);
+const $thunk0 = (Row) => $cs1(Row);
+const $thunk1 = (Row) => $cs2(Row);
+export default $cs0($thunk0, $thunk1);
