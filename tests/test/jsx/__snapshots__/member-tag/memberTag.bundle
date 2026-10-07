@@ -59,4 +59,5 @@ const $require = (id) => {
 };
 const $cs0 = $require("7k5q0iuij35f:14:13").default;
 const $cs1 = $require("7k5q0iuij35f:11:9").default;
-export default $cs0(() => ({ Badge: $cs1() }));
+const $function0 = $cs1();
+export default $cs0(() => ({ Badge: $function0 }));

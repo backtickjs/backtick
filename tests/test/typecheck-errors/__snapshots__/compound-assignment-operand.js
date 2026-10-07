@@ -5,6 +5,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAI2B;IACzB,MAAMA,CAAC,GAAG,CAAC;IAEXA,CAAC,IAAI,CAAC;IACN,OAAOA,CAAC;AACV,CAAC","names":["n"],"ignoreList":[],"sources":["typecheck-errors/compound-assignment-operand.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 const $module1 = {
   id: "3586xtu4la89h:12:21",
@@ -12,6 +13,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWwB;IACtB,IAAIA,CAAC,GAAG,CAAC;IAETA,CAAC,IAAI,GAAG;IACR,OAAOA,CAAC;AACV,CAAC","names":["n"],"ignoreList":[],"sources":["typecheck-errors/compound-assignment-operand.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // Checked as TypeScript checks one: a variable that isn't `const`, and operands
 // the operator takes.

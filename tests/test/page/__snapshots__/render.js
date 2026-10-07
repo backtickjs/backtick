@@ -10,6 +10,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAU2BA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAID,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAU","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["page/render.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module1 = {
   id: "3ilsptqylvqsp:25:4",
@@ -21,6 +22,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const $module2 = {
   id: "3ilsptqylvqsp:37:29",
@@ -28,6 +30,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAoCgC,MAAAA,MAAA,EAAY","names":["_tmpl$"],"ignoreList":[],"sources":["page/render.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module3 = {
   id: "3ilsptqylvqsp:38:30",
@@ -35,6 +38,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAqCiC,MAAAA,MAAA,EAAa","names":["_tmpl$"],"ignoreList":[],"sources":["page/render.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 // Text a page's markup would end early on, were the bundle written into it.
 const text = `& < > " ' </script> <!-- -->`;

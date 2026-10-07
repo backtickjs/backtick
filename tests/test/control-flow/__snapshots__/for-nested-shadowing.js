@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWO;IACD,IAAIA,GAAG,GAAG,EAAE;IACZ,KAAK,IAAIC,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAGA,CAAC,GAAG,CAAC,EAAE;QAChC,MAAMA,CAAC,GAAG,GAAG;QACb,KAAK,IAAIC,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAGA,CAAC,GAAG,CAAC,EAAE;YAChCF,GAAG,GAAGA,GAAG,GAAGC,CAAC,GAAGC,CAAC;QACnB;IACF;IACA,OAAOF,GAAG;AACZ,CAAC","names":["out","i","j"],"ignoreList":[],"sources":["control-flow/for-nested-shadowing.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // Nested headers reusing a name, and a body that shadows the header's own:
 // the update still means the header's binding, because names resolve to their

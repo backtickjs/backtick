@@ -12,6 +12,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;;kBAYYA,QAAA;IACR,MAAM,CAACC,IAAI,EAAEC,OAAO,CAAC,GAAGF,QAAA,EAAa,CAAC,EAAE,CAAC;IACzC;QAAA,IAAAG,IAAA,GAAAC,MAAA;QAAAD,IAAA,CAAAE,OAAA,GAGa;YACPH,OAAO,CAACD,IAAI,EAAE,GAAG,CAAC,CAAC;QACrB,CAAC;QAAAK,gBAAA,EAAAC,GAAA,IAAAC,eAAA,EAAAL,IAAA,EAHM,aAAa,GAAGF,IAAI,EAAE,GAAG,IAAI,EAAAM,GAAA;QAAA,OAAAJ,IAAA;IAAA;AAQ1C,CAAC","names":["$splice0","size","setSize","_el$","_tmpl$","$$click","_$effect","_$p","_$style"],"ignoreList":[],"sources":["state/local-state-instances.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 const $module1 = {
   id: "391q6iw51031c:28:18",
@@ -22,6 +23,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 // State belongs to the script that declares it, and a declared script is called
 // once per place that reaches it — so two `<OwnCounter />` splices are two calls

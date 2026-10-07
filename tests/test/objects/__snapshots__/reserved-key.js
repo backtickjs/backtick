@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAO0CA,QAAA,UAAMA,QAAA,EAAmB","names":["$splice0"],"ignoreList":[],"sources":["objects/reserved-key.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 // `#` is the bundle's one reserved key — the discriminant of every node — so
 // a plain data object can't carry it.

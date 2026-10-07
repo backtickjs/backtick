@@ -14,6 +14,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "function",
 };
 const $module1 = {
   id: "i0wfqcpgxkdo:45:8",
@@ -24,6 +25,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "function",
 };
 // What the page held each time a script logged, read through the console
 // `onMount` reaches from a script.

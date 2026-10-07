@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAQO;IACD,MAAMA,IAAI,GAAG,EAAE;IACf,OAAO,CAACC,GAAW,EAAEC,GAAW,KAAKD,GAAG,GAAGC,GAAG,GAAGF,IAAI;AACvD,CAAC","names":["base","one","two"],"ignoreList":[],"sources":["expressions/arrow.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 it("arrow", async (t) => {
   await snapshotCase(t, "arrow", cs.create($module0, []));

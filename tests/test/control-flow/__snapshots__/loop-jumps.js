@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWO;IACD,IAAIA,GAAG,GAAG,EAAE;IACZ,KAAK,IAAIC,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAGA,CAAC,GAAG,CAAC,EAAE;QAChC,IAAIA,CAAC,KAAK,CAAC,EAAE;YACX;QACF;QACA,OAAO,IAAI,EAAE;YACXD,GAAG,GAAGA,GAAG,GAAGC,CAAC;YACb;QACF;QACA,IAAIA,CAAC,KAAK,CAAC,EAAE;YACX;QACF;IACF;IACA,OAAOD,GAAG;AACZ,CAAC","names":["out","i"],"ignoreList":[],"sources":["control-flow/loop-jumps.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // `continue` runs the update before the next turn — a loop that skipped it
 // would never end — and each jump means the loop it is written in, the inner

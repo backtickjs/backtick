@@ -6,6 +6,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAMgB,MAACA,KAA4C;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QACjDD,KAAK,CAACI,KAAK;IAAA,OAAAH,IAAA;AAAA,IACtB","names":["props","_el$","_tmpl$","_$insert","title"],"ignoreList":[],"sources":["typecheck-errors/host-tag-props.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "function",
 };
 const $module1 = {
   id: "2fhvbeuunldpw:12:23",
@@ -13,6 +14,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAW0BA,QAAA,KAAAC,KAAA,IAAAC,yBAAA,EAACD,KAAK,KAAG,EAARD,QAAA,EAAK,CAAG","names":["$splice0","$Card","_$createComponent"],"ignoreList":[],"sources":["typecheck-errors/host-tag-props.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module2 = {
   id: "2fhvbeuunldpw:15:21",
@@ -20,6 +22,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAcwBA,QAAA,KAAAC,KAAA,IAAAC,yBAAA,EAACD,KAAK;IAACE,KAAK,EAAE;CAAC,CAAI,EAAlBH,QAAA,EAAK,CAAa","names":["$splice0","$Card","_$createComponent","title"],"ignoreList":[],"sources":["typecheck-errors/host-tag-props.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module3 = {
   id: "2fhvbeuunldpw:18:23",
@@ -27,6 +30,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAiB0BA,QAAA,KAAAC,KAAA,IAAAC,yBAAA,EAACD,KAAK;IAACE,KAAK;IAAKC,IAAI,EAAE;CAAC,CAAI,EAA3BJ,QAAA,EAAK,CAAsB","names":["$splice0","$Card","_$createComponent","title","nope"],"ignoreList":[],"sources":["typecheck-errors/host-tag-props.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module4 = {
   id: "2fhvbeuunldpw:21:26",
@@ -34,6 +38,7 @@ const $module4 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAoB6BA,QAAA,KAAAC,IAAA,IAAAC,yBAAA,EAACD,IAAI;IAACE,IAAI,EAAE,CAAC,CAAC,CAAC;IAAAC,QAAA,EAAIC,CAAS,IAAKA;CAAC,CAAQ,EAAzCL,QAAA,EAAI,CAAqC","names":["$splice0","$For","_$createComponent","each","children","n"],"ignoreList":[],"sources":["typecheck-errors/host-tag-props.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module5 = {
   id: "2fhvbeuunldpw:24:21",
@@ -41,6 +46,7 @@ const $module5 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAuBwBA,QAAA,KAAAC,KAAA,IAAAC,yBAAA,EAACD,KAAK;IAACE,GAAG;IAAKC,KAAK;CAAA,CAAO,EAA1BJ,QAAA,EAAK,CAAqB","names":["$splice0","$Card","_$createComponent","key","title"],"ignoreList":[],"sources":["typecheck-errors/host-tag-props.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // A host tag is checked as a call, and each of its errors is reported where the
 // JSX that made it is written: a prop's under the prop, a missing one and an

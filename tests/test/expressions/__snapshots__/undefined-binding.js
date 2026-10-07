@@ -9,6 +9,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAYWA,QAAA,IAAAA,QAAA,EAAW,CAAC;IACb,MAAMC,SAAS,GAAG,CAAC;IACnB,OAAOA,SAAS;AAClB,CAAC,CAAC","names":["$splice0","undefined"],"ignoreList":[],"sources":["expressions/undefined-binding.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module1 = {
   id: "39pisanvrmq3l:22:8",
@@ -16,6 +17,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAqBWA,QAAA,IAAAA,QAAA,EAAW,CAAC,MAAM,CAAEC,SAAiB,IAAKA,SAAS,GAAG,CAAC,EAAE,CAAC,CAAC,CAAC","names":["$splice0","undefined"],"ignoreList":[],"sources":["expressions/undefined-binding.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module2 = {
   id: "39pisanvrmq3l:31:8",
@@ -23,6 +25,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA8BWA,QAAA,IAAAA,QAAA,EAAW,CAAC;IACb;QACE,MAAMC,SAAS,GAAG,CAAC;IACrB;IACA,OAAOA,SAAS;AAClB,CAAC,CAAC","names":["$splice0","undefined"],"ignoreList":[],"sources":["expressions/undefined-binding.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // A script may bind `undefined`, as a JavaScript function may: in its scope the
 // name is that binding, and outside it `undefined` is the value it always is.

@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAeO;IACD,MAAMA,KAAK,GAAGC,IAAI,CAACD,KAAK;IACxB,MAAME,KAAK,GAAGA,CAACC,CAAwB,EAAEC,CAAS,KAAKD,CAAC,CAACC,CAAC,CAAC;IAC3D,OAAOJ,KAAK,CAAC,GAAG,CAAC,GAAGE,KAAK,CAACD,IAAI,CAACI,IAAI,EAAE,GAAG,CAAC;AAC3C,CAAC","names":["floor","Math","apply","f","n","ceil"],"ignoreList":[],"sources":["stdlib/builtin-as-value.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // A builtin is a value, not only a callee. The compiler folds `Math.floor`
 // into one whole name the client answers — there is no `Math` for a read to

@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWO;IACD,MAAMA,IAAI,GAAG,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC;IACtB,MAAMC,KAAK,GAAGD,IAAI,CAACE,IAAI,CAAEC,GAAG,IAAKA,GAAG,GAAG,CAAC,CAAE;IAE1C,OAAOF,KAAK,GAAG,EAAE;AACnB,CAAC","names":["rows","first","find","row"],"ignoreList":[],"sources":["expressions/non-null-assertion.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // A non-null assertion is the checker's alone, as `as` is: erased on the way
 // to a bundle. `find` answers `number | undefined`; the script knows a row

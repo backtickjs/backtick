@@ -12,6 +12,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAWiB,MAACA,KAAoB;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAAS,QAAQ,GAAGD,KAAK,CAACI,CAAC;IAAA,OAAAH,IAAA;AAAA,IAAK","names":["props","_el$","_tmpl$","_$insert","n"],"ignoreList":[],"sources":["components/client-component-tag.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "function",
 };
 const $module1 = {
   id: "161a7f5q1feqz:14:15",
@@ -23,6 +24,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "block",
 };
 // A client component defined on the host as a script, and used as a tag in
 // another: typed by its own signature, and drawn by the client.

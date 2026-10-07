@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAUO;IACD,MAAMA,MAAM,GAAG;QAAEC,KAAK,EAAE,CAAC;QAAEC,IAAI,EAAE;KAAG;IACpC,OAAO;QACLC,MAAM,EAAEC,MAAM,CAACD,MAAM,CAACH,MAAM,CAAC;QAC7BK,KAAK,EAAE,CAACD,MAAM,CAACE,MAAM,CAACN,MAAM,EAAE,MAAM,CAAC,EAAEI,MAAM,CAACE,MAAM,CAACN,MAAM,EAAE,MAAM,CAAC;KACrE;AACH,CAAC","names":["prices","apple","pear","values","Object","holds","hasOwn"],"ignoreList":[],"sources":["stdlib/object-values.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // An object's values in key order, and whether it holds a key: the check a
 // script would otherwise write as `Object.keys(o).includes(k)`.

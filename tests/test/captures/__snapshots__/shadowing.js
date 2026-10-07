@@ -10,6 +10,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "block",
 };
 const $module1 = {
   id: "3ujapqmnmm2ra:19:4",
@@ -17,6 +18,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkBOA,QAAA;IACD,MAAMC,KAAK,GAAG,CAAC;IACf,OAAOD,QAAA,CAAAC,KAAA,CAA8B;AACvC,CAAC","names":["$splice0","total"],"ignoreList":[],"sources":["captures/shadowing.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: ["total$3ujapqmnmm2ra$1"] }],
+  kind: "block",
 };
 const $module2 = {
   id: "3ujapqmnmm2ra:21:27",
@@ -24,6 +26,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAoB8BA,SAAA,IAAAA,SAAK","names":["$capture0"],"ignoreList":[],"sources":["captures/shadowing.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "capture", key: "total$3ujapqmnmm2ra$1" }],
+  kind: "expression",
 };
 function addOwnTotal(lhs, rhs) {
   return cs.create($module0, [lhs, rhs]);

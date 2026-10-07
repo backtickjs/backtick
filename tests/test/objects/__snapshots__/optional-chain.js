@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAOgB,MAACA,CAAuB;IACtC,OAAOA,CAAC,EAAEC,CAAC;AACb,CAAC","names":["p","x"],"ignoreList":[],"sources":["objects/optional-chain.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "function",
 };
 const $module1 = {
   id: "2dtorvijco8u0:12:13",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWgB,MAACA,CAAyC;IACxD,OAAOA,CAAC,EAAEC,KAAK,EAAEC,CAAC;AACpB,CAAC","names":["o","inner","z"],"ignoreList":[],"sources":["objects/optional-chain.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "function",
 };
 const $module2 = {
   id: "2dtorvijco8u0:16:14",
@@ -21,6 +23,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAeiB,MAACA,CAAgB;IAChC,OAAOA,CAAC,EAAEC,MAAM,CAAC,GAAG,CAAC;AACvB,CAAC","names":["s","concat"],"ignoreList":[],"sources":["objects/optional-chain.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "function",
 };
 const $module3 = {
   id: "2dtorvijco8u0:24:4",
@@ -32,6 +35,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 // `?.` propagates null one step: a null receiver reads as null — the
 // language's absent value; `undefined` never arises. A chain spells `?.` at

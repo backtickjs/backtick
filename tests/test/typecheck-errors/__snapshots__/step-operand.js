@@ -5,6 +5,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAI2B;IACzB,MAAMA,CAAC,GAAG,CAAC;IAEXA,CAAC,EAAE;IACH,OAAOA,CAAC;AACV,CAAC","names":["i"],"ignoreList":[],"sources":["typecheck-errors/step-operand.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 const $module1 = {
   id: "3iw6lzhko8e0n:12:20",
@@ -12,6 +13,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWuB;IACrB,IAAIA,CAAC,GAAG,GAAG;IAEXA,CAAC,EAAE;IACH,OAAOA,CAAC;AACV,CAAC","names":["s"],"ignoreList":[],"sources":["typecheck-errors/step-operand.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // A step is checked as TypeScript checks one: a number, in a variable that
 // isn't `const`.

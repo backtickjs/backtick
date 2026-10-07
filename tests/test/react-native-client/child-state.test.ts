@@ -34,21 +34,14 @@ const Parent = cs\`() => {
 export const screen = cs\`<$Parent />\`;
 `;
 
-// A known bug: each render reads the child's splice anew, which makes its
-// component anew, and React remounts it. A todo until it's fixed, when the
-// runner reports it passing.
-it(
-  "keeps a client component's state when its parent re-renders",
-  { todo: "remounted on every render of its parent" },
-  async () => {
-    const { container, press, unmount } = await drawReactNative(
-      "child-state",
-      source,
-    );
-    await press("child");
-    assert.equal(container.textContent, "parent 0child 1");
-    await press("parent");
-    assert.equal(container.textContent, "parent 1child 1");
-    await unmount();
-  },
-);
+it("keeps a client component's state when its parent re-renders", async () => {
+  const { container, press, unmount } = await drawReactNative(
+    "child-state",
+    source,
+  );
+  await press("child");
+  assert.equal(container.textContent, "parent 0child 1");
+  await press("parent");
+  assert.equal(container.textContent, "parent 1child 1");
+  await unmount();
+});

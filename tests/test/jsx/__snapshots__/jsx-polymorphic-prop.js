@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAQYA,QAAA,UAAMA,QAAA,EAAE","names":["$splice0"],"ignoreList":[],"sources":["jsx/jsx-polymorphic-prop.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 const $module1 = {
   id: "113w7b2u3u7m6:16:4",
@@ -17,6 +18,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 // One script body (one source location) instantiated with different splices —
 // the JSX analogue of the `splice-sharing` fixture. The entry takes a thunk

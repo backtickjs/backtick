@@ -9,6 +9,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAUmBA,QAAA,IAACC,KAAa;IAC7B,OAAO;QAAEA,KAAK,EAAED,QAAA,EAAa,CAACC,KAAK;KAAG;AACxC,CAAC","names":["$splice0","label"],"ignoreList":[],"sources":["state/script-state.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 const $module1 = {
   id: "3uqa0syxkzh5h:15:9",
@@ -16,6 +17,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAcYA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAD,IAAA,CAAAE,OAAA,GAGG;QACP,MAAMC,GAAG,GAAGJ,QAAA,EAAM,CAAC,KAAK,CAAC;QACzBI,GAAG,CAACC,KAAK,CAAC,CAAC,CAAC,CAACD,GAAG,CAACC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,MAAM,CAAC;IACvC,CAAC;IAAAC,gBAAA,EAAAL,IAAA,QAEAD,QAAA,EAAM,CAAC,KAAK,CAAC,CAACK,KAAK,CAAC,CAAC,CAAC,EAAE;IAAA,OAAAJ,IAAA;AAAA,IAE5B","names":["$splice0","_el$","_tmpl$","$$click","row","label","_$insert"],"ignoreList":[],"sources":["state/script-state.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // Storage a script declares for itself, rather than one a component owns and
 // splices in. `$createSignal(...)` is an ordinary call of an imported value, and

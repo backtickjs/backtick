@@ -5,6 +5,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWYA,QAAA,IAAAA,QAAA,EAAwB,GAAG,GAAG","names":["$splice0"],"ignoreList":[],"sources":["typecheck-errors/await-in-sync-splice.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 async function fetchGreeting() {
   return "hello";

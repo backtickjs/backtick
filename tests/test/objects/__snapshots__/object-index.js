@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAcOA,QAAA,IAACC,QAAgB;IAClB,MAAMC,KAAK,GAAGF,QAAA,EAAM;IACpB,MAAMG,KAAK,GAAGD,KAAK,CAACD,QAAQ,CAAC,IAAI,CAAC;IAClC,MAAMG,GAAG,GAAGF,KAAK,CAAC,KAAK,CAAC,IAAI,CAAC;IAC7B,OAAOC,KAAK,GAAGC,GAAG;AACpB,CAAC","names":["$splice0","currency","table","asked","usd"],"ignoreList":[],"sources":["objects/object-index.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 // An object is reached by a string key, and the type has to admit one: this
 // record says any string names a number, so a key computed at runtime is a read

@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAOYA,QAAA;IACR,MAAM,CAACC,CAAC,EAAEC,IAAI,CAAC,GAAGF,QAAA,EAAa,CAAC,CAAC,CAAC;IAClCE,IAAI,CAAC,CAAC,CAAC;AACT,CAAC","names":["$splice0","n","setN"],"ignoreList":[],"sources":["typecheck-errors/component-answers-action.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 // A component may answer with a script, but the answer stands where a drawing
 // would — so it is expanded in value position, and an action, which completes

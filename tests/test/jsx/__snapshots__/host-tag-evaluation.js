@@ -10,6 +10,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBASgB;IACd,MAAM,IAAIA,KAAK,CAAC,MAAM,CAAC;IACvB,OAAQC,KAAS,IAAAC,MAAA,EAAiB;AACpC,CAAC","names":["Error","props","_tmpl$"],"ignoreList":[],"sources":["jsx/host-tag-evaluation.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "block",
 };
 const $module1 = {
   id: "oeocksjd9384:15:16",
@@ -17,6 +18,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAcmB;IACjB,MAAMA,OAAO,GAAGC,UAAiD;IACjED,OAAO,CAACE,WAAW,GAAG,CAACF,OAAO,CAACE,WAAW,IAAI,CAAC,IAAI,CAAC;IACpD,OAAQC,KAAS,IAAAC,MAAA,EAAmB;AACtC,CAAC","names":["counter","globalThis","evaluations","props","_tmpl$"],"ignoreList":[],"sources":["jsx/host-tag-evaluation.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "block",
 };
 const $module2 = {
   id: "oeocksjd9384:21:18",
@@ -24,6 +26,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAoBqBA,QAAA,IAAAC,MAAA,EAAiC","names":["$splice0","_tmpl$"],"ignoreList":[],"sources":["jsx/host-tag-evaluation.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module3 = {
   id: "oeocksjd9384:22:14",
@@ -31,6 +34,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAqBiBA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAEb,CAAAG,QAAA,IAAAC,yBAAA,EAACD,QAAQ,KAAG,EAAXJ,QAAA,EAAQ,CACT;IAAAG,gBAAA,EAAAF,IAAA,SAAAG,QAAA,IAAAC,yBAAA,EAACD,QAAQ,KAAG,EAAXJ,QAAA,EAAQ,CACX;IAAA,OAAAC,IAAA;AAAA,IACD","names":["$splice0","_el$","_tmpl$","_$insert","$Counted","_$createComponent"],"ignoreList":[],"sources":["jsx/host-tag-evaluation.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // A host tag is a splice: its script is evaluated where the tag stands, each
 // time it is reached, as a value splice is.

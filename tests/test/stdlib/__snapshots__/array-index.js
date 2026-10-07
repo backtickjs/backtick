@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAUO;IACD,MAAMA,KAAK,GAAG,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC;IACxB,IAAIC,KAAK,GAAG,CAAC;IACb,KAAK,IAAIC,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAGF,KAAK,CAACG,MAAM,EAAED,CAAC,GAAGA,CAAC,GAAG,CAAC,EAAE;QAC3CD,KAAK,GAAGA,KAAK,GAAGD,KAAK,CAACE,CAAC,CAAC;IAC1B;IACA,OAAOD,KAAK;AACd,CAAC","names":["coins","total","i","length"],"ignoreList":[],"sources":["stdlib/array-index.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // The key is an expression, which is the point: a loop reaches every element
 // without one script per position.

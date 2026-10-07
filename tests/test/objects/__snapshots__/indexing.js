@@ -9,6 +9,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAUmCA,QAAA,IAAAA,QAAA,EAAW,CAAC,MAAM,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC","names":["$splice0"],"ignoreList":[],"sources":["objects/indexing.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module1 = {
   id: "mwyhvf4weui7:12:32",
@@ -16,6 +17,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWmCA,QAAA,IAAAA,QAAA,EAAW,CAAC,MAAM,KAAK,CAAC,GAAG,CAAC,CAAC","names":["$splice0"],"ignoreList":[],"sources":["objects/indexing.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module2 = {
   id: "mwyhvf4weui7:15:21",
@@ -23,6 +25,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAcwBA,QAAA,IAAAA,QAAA,EAAW,CAAC,MAAM,CAAC;IAAEC,CAAC,EAAE;CAAG,EAAE,CAAC,CAAC,CAAC","names":["$splice0","x"],"ignoreList":[],"sources":["objects/indexing.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module3 = {
   id: "mwyhvf4weui7:19:21",
@@ -30,6 +33,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkBwBA,QAAA,IAAAA,QAAA,EAAW,CAAC,MAAO,CAAyB,CAAC,CAAC,CAAC,CAAC","names":["$splice0"],"ignoreList":[],"sources":["objects/indexing.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module4 = {
   id: "mwyhvf4weui7:27:6",
@@ -37,6 +41,7 @@ const $module4 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA0BS,OAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC","names":[],"ignoreList":[],"sources":["objects/indexing.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module5 = {
   id: "mwyhvf4weui7:28:6",
@@ -44,6 +49,7 @@ const $module5 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2BS,OAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC","names":[],"ignoreList":[],"sources":["objects/indexing.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module6 = {
   id: "mwyhvf4weui7:29:6",
@@ -51,6 +57,7 @@ const $module6 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA4BS,OAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC","names":[],"ignoreList":[],"sources":["objects/indexing.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module7 = {
   id: "mwyhvf4weui7:30:6",
@@ -58,6 +65,7 @@ const $module7 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA6BS,MAAC,CAAC;IAAEA,CAAC,EAAE;CAAG,EAAgC,GAAG,CAAC","names":["x"],"ignoreList":[],"sources":["objects/indexing.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module8 = {
   id: "mwyhvf4weui7:31:6",
@@ -65,6 +73,7 @@ const $module8 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA8BS,WAAK,CAAC,CAAC,CAAC","names":[],"ignoreList":[],"sources":["objects/indexing.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module9 = {
   id: "mwyhvf4weui7:34:34",
@@ -75,6 +84,7 @@ const $module9 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 // What `a[k]` does with a key of another type: what JavaScript does.
 describe("a read by key", () => {

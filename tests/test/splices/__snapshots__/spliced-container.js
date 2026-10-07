@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAamB,OAAC","names":[],"ignoreList":[],"sources":["splices/spliced-container.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module1 = {
   id: "3hhvicr225pmx:16:14",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAeiB,cAAQ","names":[],"ignoreList":[],"sources":["splices/spliced-container.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module2 = {
   id: "3hhvicr225pmx:21:44",
@@ -21,6 +23,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAoB+CA,QAAA,IAAAA,QAAA,EAAM,CAACC,CAAC,GAAG,CAAC","names":["$splice0","x"],"ignoreList":[],"sources":["splices/spliced-container.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // A container the host built holding scripts, spliced whole.
 //

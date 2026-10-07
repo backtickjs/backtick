@@ -33,6 +33,9 @@ import type { Names } from "../print/code.js";
  */
 export interface BundleTree {
   readonly modules: readonly (readonly [string, ClientModule])[];
+  // The functions the bundle makes once, each under its label, after what
+  // they read.
+  readonly functions: readonly (readonly [string, string])[];
   readonly root: string;
   readonly names: Names;
 }
@@ -150,6 +153,52 @@ export async function buildBundle(
     declared.add(script);
   };
 
+  // The client locals a value reads: those its scripts capture, and those a
+  // value they splice reads that its hole doesn't bind.
+  const locals = new Map<object, ReadonlySet<string>>();
+  const localsOf = async (value: Spliceable): Promise<ReadonlySet<string>> => {
+    if (typeof value !== "object" || value === null) {
+      return new Set();
+    }
+    const known = locals.get(value);
+    if (known !== undefined) {
+      return known;
+    }
+    const read = new Set<string>();
+    if (isClientScript(value)) {
+      const target = scriptFor(value);
+      capturesOf(target).forEach((key) => read.add(key));
+      for (const [hole, arg] of value.args.entries()) {
+        const bound = new Set(passKeys(target, hole));
+        for (const key of await localsOf(arg)) {
+          if (!bound.has(key)) {
+            read.add(key);
+          }
+        }
+      }
+    } else if (isJsxElement(value)) {
+      const type = value.type;
+      if (typeof type === "function" && !isClientImport(type)) {
+        const drawn = await expandJsxElement(value, type, elementExpansions);
+        (await localsOf(drawn)).forEach((key) => read.add(key));
+      }
+    } else if (!isClientImport(value)) {
+      for (const entry of Object.values(value)) {
+        (await localsOf(entry as Spliceable)).forEach((key) => read.add(key));
+      }
+    }
+    locals.set(value, read);
+    return read;
+  };
+
+  // A function script is a closure: one function until the client locals it
+  // reads change, as an arrow is in JavaScript. One that reads none is made
+  // once, for the bundle, and every read of it is that function, so a client
+  // component keeps its identity across renders. Making a function runs
+  // nothing, so when it's made isn't observable.
+  const functions = new Map<ClientScript, string>();
+  const functionCode: (readonly [string, string])[] = [];
+
   // A fragment that is one script whose parameters are exactly what this hole
   // passes, so calling it is what a thunk around it would have done. The lists
   // are compared rather than assumed: a hole hands over what its own script has,
@@ -189,7 +238,23 @@ export async function buildBundle(
     if (isClientScript(value)) {
       const target = scriptFor(value);
       declare(target);
-      return call(labelOf(target), await exprCallArgs(value, scope));
+      if (
+        target.module.kind !== "function" ||
+        (await localsOf(value)).size > 0
+      ) {
+        return call(labelOf(target), await exprCallArgs(value, scope));
+      }
+      let label = functions.get(value);
+      if (label === undefined) {
+        const code = call(
+          labelOf(target),
+          await exprCallArgs(value, rootScope),
+        );
+        label = `$function${functionCode.length}`;
+        functions.set(value, label);
+        functionCode.push([label, code]);
+      }
+      return label;
     }
     if (isJsxElement(value)) {
       return renderJsx(value, scope);
@@ -290,7 +355,14 @@ export async function buildBundle(
       // A fragment whose own parameters are exactly that list reads the hole's
       // arguments as they arrive, so it is passed as it is rather than wrapped
       // in a thunk that would only pass them along.
-      const forwarded = forwarding(arg, passed);
+      // A function made once is read as itself, never forwarded to be made
+      // again.
+      const forwarded =
+        isClientScript(arg) &&
+        arg.module.kind === "function" &&
+        (await localsOf(arg)).size === 0
+          ? null
+          : forwarding(arg, passed);
       if (forwarded !== null) {
         parts.push(forwarded);
         continue;
@@ -349,5 +421,5 @@ export async function buildBundle(
       modules.push([labelOf(script), script.module]);
     }
   }
-  return { modules, root, names };
+  return { modules, functions: functionCode, root, names };
 }

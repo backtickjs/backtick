@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWO;IAED,MAAMA,KAAK,GAAW,KAAK;IAC3B,OAAOA,KAAK;AACd,CAAC","names":["count"],"ignoreList":[],"sources":["expressions/ts-expect-error.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // A checker directive written in a script covers the statement below it, as it
 // does in TypeScript. The typecheck of this file is the assertion: it passes

@@ -44,23 +44,16 @@ const Parent = cs\`() => {
 export const screen = cs\`<$Parent />\`;
 `;
 
-// A known bug: each render reads the fixed counter's splice anew, which makes
-// it anew, and React remounts it. A todo until it's fixed, when the runner
-// reports it passing.
-it(
-  "a component made from a server value keeps its state",
-  { todo: "remounted on every render of its parent" },
-  async () => {
-    const { container, press, unmount } = await drawReactNative(
-      "made-component-fixed",
-      source,
-    );
-    await press("fixed");
-    await press("parent");
-    assert.equal(container.textContent, "parent 1;fixed 1;live 1 0;");
-    await unmount();
-  },
-);
+it("a component made from a server value keeps its state", async () => {
+  const { container, press, unmount } = await drawReactNative(
+    "made-component-fixed",
+    source,
+  );
+  await press("fixed");
+  await press("parent");
+  assert.equal(container.textContent, "parent 1;fixed 1;live 1 0;");
+  await unmount();
+});
 
 it("a component made from a client local is made again", async () => {
   const { container, press, unmount } = await drawReactNative(

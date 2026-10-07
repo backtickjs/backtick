@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAMiB,MAACA,KAAoB;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAASD,KAAK,CAACI,CAAC;IAAA,OAAAH,IAAA;AAAA,IAAK","names":["props","_el$","_tmpl$","_$insert","n"],"ignoreList":[],"sources":["typecheck-errors/client-component-on-host.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "function",
 };
 const $module1 = {
   id: "1cc0hds9szb8e:16:24",
@@ -17,6 +18,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 // A client component is client code, a tag in a script. On the host it isn't
 // callable, so TypeScript refuses it as a tag: a client import, and a script

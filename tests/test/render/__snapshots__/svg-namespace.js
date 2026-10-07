@@ -13,6 +13,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAgBY,MAAAA,MAAA,EAAgE","names":["_tmpl$"],"ignoreList":[],"sources":["render/svg-namespace.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module1 = {
   id: "14goklyg2ww24:20:21",
@@ -23,6 +24,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "block",
 };
 // SVG written the way it is pasted: no tag says which language it is from.
 // Where an element is drawn does — inside an `svg` it is SVG's, and a

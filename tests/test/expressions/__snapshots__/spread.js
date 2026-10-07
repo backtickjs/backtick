@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWO;IACD,MAAMA,KAAK,GAAG,CAAC,CAAC,EAAE,CAAC,CAAC;IACpB,MAAMC,IAAI,GAAG,CAAC,CAAC,CAAC;IAChB,MAAMC,IAAI,GAAa,EAAE;IACzB,MAAMC,GAAG,GAAG,CAAC,CAAC,EAAE,GAAGH,KAAK,EAAE,GAAGE,IAAI,EAAE,GAAGD,IAAI,EAAE,CAAC,CAAC;IAC9C,MAAMG,KAAK,GAAG,CAAC,GAAGD,GAAG,EAAE,GAAGA,GAAG,CAAC;IAC9B,OAAOA,GAAG,CAACE,IAAI,CAAC,GAAG,CAAC,GAAG,GAAG,GAAGD,KAAK,CAACE,MAAM;AAC3C,CAAC","names":["front","back","none","all","twice","join","length"],"ignoreList":[],"sources":["expressions/spread.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // `...xs` where an element goes: it has no value of its own, it contributes
 // however many the array it spreads has. An empty one contributes nothing, a

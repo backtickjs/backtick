@@ -23,6 +23,9 @@ export interface ClientModule {
   readonly dependencies: readonly string[];
   // `params[i]` is the function's `$splice<i>` or `$capture<i>`
   readonly params: readonly Param[];
+  // What the script is written as: a function, `(props) => …`, which a splice
+  // reads as that function; or an expression or a block, which a splice runs.
+  readonly kind: "function" | "expression" | "block";
 }
 
 // One run of a `cs`: its module, and the values that run passes it.

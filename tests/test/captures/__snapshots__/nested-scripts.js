@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAQOA,QAAA;IACD,MAAMC,CAAC,GAAG,CAAC;IACX,OAAOD,QAAA,CAAAC,CAAA,CAAQ;AACjB,CAAC","names":["$splice0","x"],"ignoreList":[],"sources":["captures/nested-scripts.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: ["x$2jjdjdr7m395y$0"] }],
+  kind: "block",
 };
 const $module1 = {
   id: "2jjdjdr7m395y:11:15",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAUkBA,SAAA,IAAAA,SAAC","names":["$capture0"],"ignoreList":[],"sources":["captures/nested-scripts.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "capture", key: "x$2jjdjdr7m395y$0" }],
+  kind: "expression",
 };
 it("nestedScripts", async (t) => {
   await snapshotCase(

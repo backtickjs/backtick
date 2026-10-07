@@ -8,6 +8,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAY+B,MAAAA,MAAA,EAAc","names":["_tmpl$"],"ignoreList":[],"sources":["jsx/tree-in-variable.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module1 = {
   id: "2xjp8x9bcyeyr:15:20",
@@ -15,6 +16,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAcuBA,QAAA;IACrB,MAAMC,IAAI,GAAGD,QAAA,EAAc;IAC3B,OAAOC,IAAI;AACb,CAAC","names":["$splice0","tree"],"ignoreList":[],"sources":["jsx/tree-in-variable.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 const $module2 = {
   id: "2xjp8x9bcyeyr:16:17",
@@ -22,6 +24,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAeoB,MAAAA,MAAA,EAAO","names":["_tmpl$"],"ignoreList":[],"sources":["jsx/tree-in-variable.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module3 = {
   id: "2xjp8x9bcyeyr:20:22",
@@ -29,6 +32,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAmByBA,QAAA;IACvB,MAAMC,IAAI,GAAGD,QAAA,EAAgB;IAC7B,OAAOC,IAAI;AACb,CAAC","names":["$splice0","tree"],"ignoreList":[],"sources":["jsx/tree-in-variable.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 const $module4 = {
   id: "2xjp8x9bcyeyr:29:4",
@@ -39,6 +43,7 @@ const $module4 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 // A tree spliced into a body and bound to a name before it is used. Nothing
 // applies it at the hole and nothing draws it there — it is a value, held and

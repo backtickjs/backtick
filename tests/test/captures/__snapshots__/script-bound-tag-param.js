@@ -10,6 +10,7 @@ const $module0 = {
     { kind: "splice", bindings: ["Row$2vonkhcq0yva8$1"] },
     { kind: "splice", bindings: ["Row$2vonkhcq0yva8$1"] },
   ],
+  kind: "block",
 };
 const $module1 = {
   id: "2vonkhcq0yva8:16:13",
@@ -17,6 +18,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAegBA,SAAA,IAAAC,yBAAA,EAACD,SAAG;IAACE,CAAC,EAAE;CAAC,CAAI","names":["$capture0","_$createComponent","n"],"ignoreList":[],"sources":["captures/script-bound-tag-param.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "capture", key: "Row$2vonkhcq0yva8$1" }],
+  kind: "expression",
 };
 const $module2 = {
   id: "2vonkhcq0yva8:17:13",
@@ -24,6 +26,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAgBgBA,SAAA,IAAAC,yBAAA,EAACD,SAAG;IAACE,CAAC,EAAE;CAAC,CAAI","names":["$capture0","_$createComponent","n"],"ignoreList":[],"sources":["captures/script-bound-tag-param.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "capture", key: "Row$2vonkhcq0yva8$1" }],
+  kind: "expression",
 };
 // A tag naming a parameter of an arrow in the enclosing script. The nested
 // scripts sit inside the arrow's body, so the parameter reaches them through

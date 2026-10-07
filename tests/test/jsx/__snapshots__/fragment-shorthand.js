@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAWO;IAAA,IAAAA,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,GAAAG,OAAA,IAAAC,OAAA;IAAA,OAAAJ,IAAA;AAAA,IASF","names":["_el$","_tmpl$","_$insert","_tmpl$2","_tmpl$3"],"ignoreList":[],"sources":["jsx/fragment-shorthand.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 // `<>…</>` in a script is Solid's fragment: its children where it stands, and no
 // node of its own. Solid takes one only at the top of an expression, so a child

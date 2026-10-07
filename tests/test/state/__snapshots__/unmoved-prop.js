@@ -16,6 +16,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "block",
 };
 // A list whose rows ask a selector whether they are the one selected. A write
 // re-runs the `href` of only the two rows whose answer changed — the row

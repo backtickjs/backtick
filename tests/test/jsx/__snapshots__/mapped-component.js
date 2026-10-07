@@ -12,6 +12,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: ["row$5vl2m1vo5mat$0"] },
   ],
+  kind: "expression",
 };
 const $module1 = {
   id: "5vl2m1vo5mat:29:30",
@@ -19,6 +20,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBA4BiCA,SAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAO,MAAM,GAAGD,SAAG;IAAA,OAAAC,IAAA;AAAA,IAAQ","names":["$capture0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["jsx/mapped-component.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "capture", key: "row$5vl2m1vo5mat$0" }],
+  kind: "expression",
 };
 // One element template, expanded once per row on the client: the splice hole
 // sits inside a `.map` callback, so it is reached once per iteration and each

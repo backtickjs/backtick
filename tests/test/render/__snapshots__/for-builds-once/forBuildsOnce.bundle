@@ -74,12 +74,12 @@ const $require = (id) => {
 };
 const $cs0 = $require("17esee640arqb:32:22").default;
 const $cs1 = $require("17esee640arqb:20:20").default;
+const $function0 = $cs1(
+  () => $i0,
+  () => ["one", "two"],
+  () => $i1,
+);
 export default $cs0(
   () => $i0,
-  () =>
-    $cs1(
-      () => $i0,
-      () => ["one", "two"],
-      () => $i1,
-    ),
+  () => $function0,
 );

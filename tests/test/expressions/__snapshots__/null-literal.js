@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAM4D,MAC1DA,KAAoB;IAEpB,IAAIA,KAAK,KAAK,IAAI,EAAE;QAClB,OAAO,GAAG;IACZ;IACA,OAAOA,KAAK;AACd,CAAC","names":["value"],"ignoreList":[],"sources":["expressions/null-literal.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "function",
 };
 const $module1 = {
   id: "2nnj6ebvkk8vj:20:4",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAmBOA,QAAA,KAAC;IACFC,OAAO,EAAED,QAAA,EAAO,CAAC,IAAI,CAAC;IACtBE,OAAO,EAAEF,QAAA,EAAO,CAAC,IAAI,CAAC;IACtBG,IAAI,EAAE;CACP,CAAC","names":["$splice0","missing","present","bare"],"ignoreList":[],"sources":["expressions/null-literal.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // `null` written in the script itself — bare, compared against, and as an
 // argument — as opposed to a spliced host `null` (see `runtime-values.ts`).

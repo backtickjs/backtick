@@ -11,6 +11,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBA6BgBA,QAAA,IAACC,KAA+B;IAC9C,MAAM,CAACC,KAAK,EAAEC,QAAQ,CAAC,GAAGH,QAAA,EAAa,CAAC,KAAK,CAAC;IAE9C,MAAMI,OAAO,GAAGC,MAAM,CAACC,UAAU,CAAC;QAChC,IAAIL,KAAK,CAACM,KAAK,EAAE,EAAE;YACjBJ,QAAQ,CAAC,IAAI,CAAC;QAChB;IACF,CAAC,EAAE,CAAC,CAAC;IAEL,OAAAK,cAAA,QAAUA,cAAA,UAAAN,KAAK,EAAE,MAAAO,MAAA,KAAAC,OAAA,EAAkC;AACrD,CAAC","names":["$splice0","props","shown","setShown","started","window","setTimeout","again","_$memo","_tmpl$","_tmpl$2"],"ignoreList":[],"sources":["render/conditional-drawing.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 const $module1 = {
   id: "36xfcxts3aoah:42:27",
@@ -21,6 +22,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "block",
 };
 // A block whose drawing is a conditional, and a write that answers it.
 //

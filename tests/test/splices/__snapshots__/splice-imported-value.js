@@ -8,6 +8,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAsBkDA,QAAA,IAAAA,QAAA,EAAI","names":["$splice0"],"ignoreList":[],"sources":["splices/splice-imported-value.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // A host value that is imported and never mentioned outside a script.
 //

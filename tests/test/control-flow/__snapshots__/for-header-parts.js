@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAUO;IACD,IAAIA,CAAC,GAAG,CAAC;IACT,IAAIC,IAAI,GAAG,EAAE;IACb,OAAOD,CAAC,GAAG,CAAC,GAAI;QACdC,IAAI,GAAGA,IAAI,GAAGD,CAAC;QACfA,CAAC,GAAGA,CAAC,GAAG,CAAC;IACX;IACA,OAAOC,IAAI;AACb,CAAC","names":["i","seen"],"ignoreList":[],"sources":["control-flow/for-header-parts.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // Every part of the header is optional: this one declares nothing and updates
 // nothing, leaving both to the block around it and the body.

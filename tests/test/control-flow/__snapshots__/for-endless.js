@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBASO;IACD,IAAIA,CAAC,GAAG,CAAC;IACT,SAAS;QACP,IAAIA,CAAC,KAAK,CAAC,EAAE;YACX;QACF;QACAA,CAAC,GAAGA,CAAC,GAAG,CAAC;IACX;IACA,OAAOA,CAAC;AACV,CAAC","names":["i"],"ignoreList":[],"sources":["control-flow/for-endless.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // `for (;;)` has no condition, so `break` is the only way out.
 it("forEndless", async (t) => {

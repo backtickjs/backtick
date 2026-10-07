@@ -10,6 +10,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 // Splices evaluate when the `cs` expression does, left to right in source
 // order, like a real template literal's spans — braced and unbraced alike:

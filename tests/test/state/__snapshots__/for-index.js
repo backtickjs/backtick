@@ -15,6 +15,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "block",
 };
 // A list whose drawing reads where a member sits as well as what it is.
 //

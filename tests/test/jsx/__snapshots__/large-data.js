@@ -11,6 +11,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const orders = Array.from({ length: 5 }, (_, i) => ({
   id: `ord-${1000 + i}`,

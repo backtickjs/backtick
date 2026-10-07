@@ -15,6 +15,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "block",
 };
 const $module1 = {
   id: "2xfknjgryo62l:35:28",
@@ -22,6 +23,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAkC+BA,QAAA,IAE7B,CAAAC,OAAA,IAAAC,yBAAA,EAACD,OAAO;IAACE,OAAO;IAASC,OAAO,EAAEA,GAAA,KAAO,CAAC;IAAAC,QAAA;CAAA,CAEhC,EAFTL,QAAA,EAAO,CAGT","names":["$splice0","$Button","_$createComponent","variant","onClick","children"],"ignoreList":[],"sources":["bindings/library-component.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // A third-party Solid library's whole Backtick binding: one `createImport` per
 // component, typed with the library's own declaration.

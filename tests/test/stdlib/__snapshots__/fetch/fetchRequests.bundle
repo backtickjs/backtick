@@ -56,4 +56,5 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("2gt79jmb8630e:15:4").default;
-export default $cs0(() => $i0);
+const $function0 = $cs0(() => $i0);
+export default $function0;

@@ -11,6 +11,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAaYA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAAID,QAAA,EAAM,KAAKA,QAAA,EAAM,GAAG,MAAM,GAAG,WAAW;IAAA,OAAAC,IAAA;AAAA,IAAK","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["state/prop-read-twice.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module1 = {
   id: "qxhjl19zgsnv:17:15",
@@ -21,6 +22,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: ["count$qxhjl19zgsnv$0"] },
   ],
+  kind: "block",
 };
 const $module2 = {
   id: "qxhjl19zgsnv:19:34",
@@ -28,6 +30,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkBqCA,SAAA,KAAC;IAAEC,KAAK,EAAED,SAAK;CAAI,CAAC","names":["$capture0","count"],"ignoreList":[],"sources":["state/prop-read-twice.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "capture", key: "count$qxhjl19zgsnv$0" }],
+  kind: "expression",
 };
 // A prop built from the parent's signal, read twice by the server component
 // it's handed to. In Solid, a prop is a getter, so each read runs its

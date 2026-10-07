@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAYOA,QAAA;IACD,MAAMC,KAAK,GAAIC,CAAe,IAAKA,CAAC,EAAE,GAAG,CAAC;IAC1C,OAAOD,KAAK,CAACD,QAAA,EAAc,CAAC;AAC9B,CAAC","names":["$splice0","apply","f"],"ignoreList":[],"sources":["splices/spliced-function-param.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 const $module1 = {
   id: "yz0kiroonaez:15:21",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAcwB,YAAM,CAAC","names":[],"ignoreList":[],"sources":["splices/spliced-function-param.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "function",
 };
 // A function is never spliceable — it can't cross the host/client boundary
 // as data — but an annotation can still name a function type: the parameter

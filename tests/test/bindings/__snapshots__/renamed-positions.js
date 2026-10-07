@@ -9,6 +9,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAaWA,QAAA,IAAAA,QAAA,EAAW,CAAC;IACb,MAAMC,CAAC,GAAG,CAAC;IACX,MAAMC,IAAI,GAAG;QAAED,CAAC;QAAEE;KAAM;IACxB,OAAO,CAACD,IAAI,CAACD,CAAC,EAAEC,IAAI,CAACC,IAAI,CAACC,GAAG,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;AACtC,CAAC,CAAC","names":["$splice0","x","both","Math","max"],"ignoreList":[],"sources":["bindings/renamed-positions.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module1 = {
   id: "1zxbxktkrvb3o:27:8",
@@ -16,6 +17,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA0BWA,QAAA,IAAAA,QAAA,EAAW,CAAC;IACb,MAAMC,KAAK,GAAG;QAAEC,CAAC,EAAE;KAAG;IACtB,MAAMC,IAAI,GAAiB;QAAED,CAAC,EAAED,KAAK,CAACC,CAAC,GAAG;KAAG;IAC7C,MAAME,IAAI;QACRC,KAAKA;YACH,OAAOF,IAAI,CAACD,CAAC,GAAG,CAAC;QACnB;;IAEF,MAAMI,KAAM,SAAQF,IAAI;KAAA;IACxB,OAAO,CAACD,IAAI,CAACD,CAAC,EAAE,IAAII,KAAK,EAAE,CAACD,KAAK,EAAE,CAAC;AACtC,CAAC,CAAC","names":["$splice0","start","n","copy","Base","twice","Child"],"ignoreList":[],"sources":["bindings/renamed-positions.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // A script's own names and the client's globals, read where the checker sees
 // them written another way: a shorthand, a type's `typeof`, a class's

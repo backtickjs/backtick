@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAUO;IACD,OAAO,CACLA,KAAK,CAACC,OAAO,CAAC,EAAE,CAAC,EACjBD,KAAK,CAACC,OAAO,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,EACrBD,KAAK,CAACC,OAAO,CAAC,IAAI,CAAC,EACnBD,KAAK,CAACC,OAAO,CAAC;YAAEC,MAAM,EAAE;SAAG,CAAC,EAC5BF,KAAK,CAACC,OAAO,CAAC,IAAI,CAAC,CACpB;AACH,CAAC","names":["Array","isArray","length"],"ignoreList":[],"sources":["stdlib/array-is-array.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // Any value may be asked about, and only an array answers true: a string has
 // a length and indexes, and is still not one.

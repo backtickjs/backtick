@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWO;IACD,IAAIA,CAAC,GAAG,EAAE;IACVA,CAAC,IAAI,CAAC;IACNA,CAAC,IAAI,CAAC;IACNA,CAAC,IAAI,CAAC;IACNA,CAAC,IAAI,CAAC;IACNA,CAAC,IAAI,CAAC;IACN,IAAIC,IAAI,GAAG,GAAG;IACdA,IAAI,IAAI,GAAG;IACX,IAAIC,KAAK,GAAG,CAAC;IACb,MAAMC,QAAQ,GAAID,KAAK,IAAI,CAAE;IAC7B,IAAIE,CAAC,GAAG,CAAC;IACTA,CAAC,IAAIA,CAAC,GAAG,CAAC;IACV,OAAO,CAACJ,CAAC,EAAEC,IAAI,EAAEE,QAAQ,EAAED,KAAK,EAAEE,CAAC,CAAC;AACtC,CAAC","names":["n","text","total","answered","x"],"ignoreList":[],"sources":["expressions/compound-assignment.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // `x += y` assigns what `x + y` answers and answers it: a string concatenates
 // as `+` does. The variable is read before the value is evaluated, so an

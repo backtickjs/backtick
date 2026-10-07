@@ -9,6 +9,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAWOA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;IAAAC,gBAAA,EAAAJ,IAAA,EAGED,QAAA;IAAA,OAAAC,IAAA;AAAA,IAEJ","names":["$splice0","_el$","_tmpl$","_el$2","firstChild","_$insert"],"ignoreList":[],"sources":["bundler/two-files.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // Scripts written in two host files, in one bundle: its map leads into each
 // file by its own path.

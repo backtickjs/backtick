@@ -11,6 +11,7 @@ const $module0 = {
     { kind: "splice", bindings: ["total$3foflagpnhi6b$0"] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "block",
 };
 const $module1 = {
   id: "3foflagpnhi6b:35:29",
@@ -18,6 +19,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkCgCA,SAAA,IAAAA,SAAK","names":["$capture0"],"ignoreList":[],"sources":["bundler/spliced-into-shadow.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "capture", key: "total$3foflagpnhi6b$0" }],
+  kind: "expression",
 };
 // A fragment written under the outer `total`, carried by host code into a hole
 // inside a block that shadows it.

@@ -10,6 +10,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: ["outer$zqr0jsdf8ub6$0"] },
   ],
+  kind: "block",
 };
 const $module1 = {
   id: "zqr0jsdf8ub6:19:17",
@@ -20,6 +21,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "capture", key: "outer$zqr0jsdf8ub6$0" },
   ],
+  kind: "block",
 };
 const $module2 = {
   id: "zqr0jsdf8ub6:21:29",
@@ -27,6 +29,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAoBgCA,SAAA,IAAAA,SAAK","names":["$capture0"],"ignoreList":[],"sources":["splices/host-wrapped-splice.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "capture", key: "outer$zqr0jsdf8ub6$0" }],
+  kind: "expression",
 };
 const $module3 = {
   id: "zqr0jsdf8ub6:27:9",
@@ -34,6 +37,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA0BYA,QAAA,IAAAA,QAAA,EAAM,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["splices/host-wrapped-splice.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module4 = {
   id: "zqr0jsdf8ub6:38:4",
@@ -44,6 +48,7 @@ const $module4 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const $module5 = {
   id: "zqr0jsdf8ub6:38:14",
@@ -51,6 +56,7 @@ const $module5 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAqCiB,OAAC","names":[],"ignoreList":[],"sources":["splices/host-wrapped-splice.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module6 = {
   id: "zqr0jsdf8ub6:38:31",
@@ -58,6 +64,7 @@ const $module6 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAqCkC,OAAC","names":[],"ignoreList":[],"sources":["splices/host-wrapped-splice.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 // Splices that arrive through host code — the case a hole can never be resolved
 // from source, because what the compiler sees at the hole is a call expression

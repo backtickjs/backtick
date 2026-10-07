@@ -8,6 +8,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAQY;IACR,MAAMA,QAAQ,GAAGC,MAAM,CAACC,OAAO,GAAG,CAAC;IACnC,MAAMC,OAAO,GAAGF,MAAM,CAACG,SAAS,GAAG,KAAK;IACxC,MAAMC,IAAI,GACRJ,MAAM,CAACK,gBAAgB,KAAK,gBAAgB,IAC5CL,MAAM,CAACM,gBAAgB,KAAK,CAAC,gBAAgB,IAC7CN,MAAM,CAACO,SAAS,GAAG,CAAC,IACpBP,MAAM,CAACQ,aAAa,CAAC,CAAC,CAAC,IACvB,CAACR,MAAM,CAACQ,aAAa,CAACR,MAAM,CAACK,gBAAgB,GAAG,CAAC,CAAC;IACpD,MAAMI,KAAK,GAAGT,MAAM,CAACU,SAAS,CAAC,CAAC,CAAC;IACjC,MAAMC,UAAU,GAAGX,MAAM,CAACU,SAAS,CAAC,GAAG,CAAC;IAExC,MAAME,OAAO,GAAGZ,MAAM,CAACa,QAAQ,CAAC,GAAG,CAAC;IACpC;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,EAEKL,KAAK,GACJ,GAAG,GACHE,UAAU,GACV,GAAG,GACHC,OAAO,GACP,GAAG,GACHb,QAAQ,GACR,GAAG,GACHG,OAAO,GACP,GAAG,GACHE,IAAI;QAAA,OAAAU,IAAA;IAAA;AAGZ,CAAC","names":["positive","Number","EPSILON","largest","MAX_VALUE","safe","MAX_SAFE_INTEGER","MIN_SAFE_INTEGER","MIN_VALUE","isSafeInteger","whole","isInteger","fractional","written","isFinite","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["stdlib/number-statics.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "block",
 };
 // A namespace holding a value beside its functions: `Number.EPSILON` is read
 // where `Number.isInteger` is called, and both are whole names the client

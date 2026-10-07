@@ -21,6 +21,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const $module1 = {
   id: "2r57qmcp53te6:28:17",
@@ -31,6 +32,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const $module2 = {
   id: "2r57qmcp53te6:39:15",
@@ -41,6 +43,7 @@ const $module2 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const $module3 = {
   id: "2r57qmcp53te6:40:6",
@@ -48,6 +51,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAuCS;IACH,MAAM,aAAa;AACrB,CAAC","names":[],"ignoreList":[],"sources":["render/control-flow.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 const $module4 = {
   id: "2r57qmcp53te6:45:18",
@@ -55,6 +59,7 @@ const $module4 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBA4CqBA,QAAA,IACnB,CAAAC,SAAA,IAAAC,yBAAA,EAACD,SAAS;IAAA,IAACE,QAAQA;QAAA,OAAAC,OAAA;IAAA;IAAA,IAAAC;QAAA,OAAAC,MAAA;IAAA;CAAA,CAEP,EAFXN,QAAA,EAAS,CAGX","names":["$splice0","$Suspense","_$createComponent","fallback","_tmpl$2","children","_tmpl$"],"ignoreList":[],"sources":["render/control-flow.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module5 = {
   id: "2r57qmcp53te6:51:17",
@@ -62,6 +67,7 @@ const $module5 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAkDoBA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;IAAAC,gBAAA,EAAAJ,IAAA,QAGhB,CAAAK,OAAA,IAAAC,yBAAA,EAACD,OAAO;QAAA,IAAAE;YAAA,OAAAC,OAAA;QAAA;KAAA,CAEE,EAFTT,QAAA,EAAO,CAGV;IAAA,OAAAC,IAAA;AAAA,IACD","names":["$splice0","_el$","_tmpl$","_el$2","firstChild","_$insert","$Portal","_$createComponent","children","_tmpl$2"],"ignoreList":[],"sources":["render/control-flow.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // Solid's control flow in a script, as Solid types and draws it.
 const rows = ["first", "second"];

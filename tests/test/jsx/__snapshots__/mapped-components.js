@@ -8,6 +8,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAOYA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAOD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAc","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["jsx/mapped-components.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module1 = {
   id: "3muqirg3sfmdb:19:4",
@@ -15,6 +16,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAkBOA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAMD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAA6D","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["jsx/mapped-components.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const componentLabels = ["alpha", "beta", "gamma"];
 async function Row({ label }) {

@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBASO;IACD,IAAIA,CAAC,GAAG,CAAC;IACT,IAAIA,CAAC,KAAK,CAAC,EAAE;QACX;IACF;IACAA,CAAC,GAAG,CAAC;AACP,CAAC","names":["n"],"ignoreList":[],"sources":["control-flow/early-return.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // A bare `return` exits an action early; the completion is null either way.
 it("earlyReturn", async (t) => {

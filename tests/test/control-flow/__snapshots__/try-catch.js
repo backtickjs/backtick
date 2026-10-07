@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAQO;IACD,MAAMA,OAAO,GAAG,MAAM;IACtB,IAAI;QACF,MAAMA,OAAO;IACf,CAAC;IAAC,OAAOC,KAAK,EAAE;QACd,IAAIA,KAAK,KAAKD,OAAO,EAAE;YACrB,OAAO,aAAa;QACtB;QACA,OAAO,uBAAuB;IAChC;AACF,CAAC","names":["message","error"],"ignoreList":[],"sources":["control-flow/try-catch.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 it("tryCatch", async (t) => {
   await snapshotCase(t, "tryCatch", cs.create($module0, []));

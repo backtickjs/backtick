@@ -17,6 +17,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "block",
 };
 const $module1 = {
   id: "3vm53m05uwuq:91:33",
@@ -30,6 +31,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 // Where a render draws, and what it may move.
 //

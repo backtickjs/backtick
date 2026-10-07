@@ -46,4 +46,5 @@ const $require = (id) => {
 };
 const $cs0 = $require("25wlsdb7ez0q4:20:9").default;
 const $cs1 = $require("25wlsdb7ez0q4:7:22").default;
-module.exports = ($cs0(() => ($i0), () => ($i1), () => ({ id: "u-7", name: "Sam" }), () => ($cs1(() => ($i2), () => ($i3), () => ($i1))), () => ({ id: "o-1042", name: "Flat white" })));
+const $function0 = $cs1(() => ($i2), () => ($i3), () => ($i1));
+module.exports = ($cs0(() => ($i0), () => ($i1), () => ({ id: "u-7", name: "Sam" }), () => ($function0), () => ({ id: "o-1042", name: "Flat white" })));

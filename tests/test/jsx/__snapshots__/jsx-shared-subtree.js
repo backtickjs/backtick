@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAIkB,MAAAA,MAAA,EAAe","names":["_tmpl$"],"ignoreList":[],"sources":["jsx/jsx-shared-subtree.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module1 = {
   id: "3f0us4dfufikl:13:4",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAYOA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAMD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAA0B","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["jsx/jsx-shared-subtree.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const shared = cs.create($module0, []);
 // The same script spliced twice is declared once in the bundle, and called

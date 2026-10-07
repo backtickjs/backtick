@@ -10,6 +10,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWmB,MAACA,CAAS,IAAKA,CAAC,GAAG,CAAC","names":["n"],"ignoreList":[],"sources":["bundler/repeatable.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "function",
 };
 const $module1 = {
   id: "617sil125iw3:13:13",
@@ -17,6 +18,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAYgB,MAACA,CAAS,IAAMC,CAAS,IAAKD,CAAC,GAAGC,CAAC","names":["n","m"],"ignoreList":[],"sources":["bundler/repeatable.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "function",
 };
 const $module2 = {
   id: "617sil125iw3:16:9",
@@ -24,6 +26,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAeYA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAAKD,QAAA,EAAM,CAACI,KAAK;IAAA,OAAAH,IAAA;AAAA,IAAM","names":["$splice0","_el$","_tmpl$","_$insert","title"],"ignoreList":[],"sources":["bundler/repeatable.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module3 = {
   id: "617sil125iw3:19:15",
@@ -31,6 +34,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkBkB,cAAQ","names":[],"ignoreList":[],"sources":["bundler/repeatable.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module4 = {
   id: "617sil125iw3:21:19",
@@ -47,6 +51,7 @@ const $module4 = {
     { kind: "splice", bindings: ["rows$617sil125iw3$5"] },
     { kind: "splice", bindings: ["rows$617sil125iw3$5"] },
   ],
+  kind: "block",
 };
 const $module5 = {
   id: "617sil125iw3:24:28",
@@ -54,6 +59,7 @@ const $module5 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAuB+BA,SAAA,IAAAA,SAAI,CAACC,MAAM","names":["$capture0","length"],"ignoreList":[],"sources":["bundler/repeatable.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "capture", key: "rows$617sil125iw3$5" }],
+  kind: "expression",
 };
 const $module6 = {
   id: "617sil125iw3:46:13",
@@ -61,6 +67,7 @@ const $module6 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA6CgBA,QAAA,IAAAA,QAAA,EAAQ,CAAC,CAAC,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/repeatable.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module7 = {
   id: "617sil125iw3:47:13",
@@ -71,6 +78,7 @@ const $module7 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const $module8 = {
   id: "617sil125iw3:48:13",
@@ -78,6 +86,7 @@ const $module8 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA+CgBA,QAAA,IAAAA,QAAA,EAA2B","names":["$splice0"],"ignoreList":[],"sources":["bundler/repeatable.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // A bundle is a function of what was spliced alone: bundling it again, or after
 // other bundles, writes the same code. Scripts are where most of the bundler's

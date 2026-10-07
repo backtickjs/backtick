@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAYO;IACD,MAAMA,MAAM,GAAG,CAAC,GAAG,EAAE,IAAI,EAAE,CAAC,CAAC;IAC7B,MAAMC,KAAK,GAAGD,MAAM,CAACE,MAAM,CAAC,CAACC,GAAG,EAAEC,KAAK,KAAKD,GAAG,GAAGC,KAAK,EAAE,CAAC,CAAC;IAC3D,MAAMC,KAAK,GAAG,CAAC,GAAG,EAAE,GAAG,EAAE,GAAG,CAAC;IAC7B,MAAMC,MAAM,GAAGD,KAAK,CAACH,MAAM,CAAC,CAACK,GAAG,EAAEC,GAAG,EAAEC,KAAK,KAAKF,GAAG,GAAGE,KAAK,GAAGD,GAAG,EAAE,EAAE,CAAC;IACvE,MAAME,KAAK,GAAa,EAAE;IAC1B,OACET,KAAK,CAACU,OAAO,CAAC,CAAC,CAAC,GAChB,GAAG,GACHL,MAAM,GACN,GAAG,GACHI,KAAK,CAACR,MAAM,CAAC,CAACC,GAAG,EAAEK,GAAG,KAAKL,GAAG,GAAGK,GAAG,EAAE,CAAC,CAAC;AAE5C,CAAC","names":["prices","total","reduce","sum","price","names","joined","all","one","index","empty","toFixed"],"ignoreList":[],"sources":["stdlib/array-reduce.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // `reduce` takes its initial value, where the standard library lets it be
 // left out: without one the first call is handed an element rather than an

@@ -5,6 +5,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAIgB;IACd,IAAIA,CAAC,GAAG,CAAC;IACTA,CAAC,GAAG,CAAC;AACP,CAAC","names":["n"],"ignoreList":[],"sources":["typecheck-errors/void-initializer.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "function",
 };
 const $module1 = {
   id: "3ch7rgcn8bjeq:10:15",
@@ -12,6 +13,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBASkBA,QAAA;IAChB,MAAMC,CAAC,GAAGD,QAAA,EAAK,EAAE;IACjB,OAAO,CAAC;AACV,CAAC","names":["$splice0","x"],"ignoreList":[],"sources":["typecheck-errors/void-initializer.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 const $module2 = {
   id: "3ch7rgcn8bjeq:15:15",
@@ -19,6 +21,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAckBA,QAAA;IAChB,MAAMC,CAAC,GAAGD,QAAA,EAAK,EAAE;AACnB,CAAC","names":["$splice0","x"],"ignoreList":[],"sources":["typecheck-errors/void-initializer.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 const $module3 = {
   id: "3ch7rgcn8bjeq:21:14",
@@ -26,6 +29,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAoBiB,MAACA,IAAY;IAC5B,OAAOA,IAAI;AACb,CAAC","names":["text"],"ignoreList":[],"sources":["typecheck-errors/void-initializer.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "function",
 };
 const $module4 = {
   id: "3ch7rgcn8bjeq:25:22",
@@ -33,6 +37,7 @@ const $module4 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAwByBA,QAAA;IAEvB,MAAMC,CAAC,GAAGD,QAAA,EAAM,CAAC,IAAI,CAAC;IACtB,OAAO,CAAC;AACV,CAAC","names":["$splice0","x"],"ignoreList":[],"sources":["typecheck-errors/void-initializer.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 // An action call produces no value: its `void` result can't initialize a
 // variable — in a value script or an action.

@@ -8,6 +8,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAY6CA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAMD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAsB","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["components/renders-nothing.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // A server component can render nothing. The invocation is still an instance —
 // it owns the cells the component declared, and a re-render can give it a child

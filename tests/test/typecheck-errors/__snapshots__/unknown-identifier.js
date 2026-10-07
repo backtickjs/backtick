@@ -5,6 +5,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAQuB;IAErB,OAAOA,SAAS,GAAG,CAAC;AACtB,CAAC","names":["hostValue"],"ignoreList":[],"sources":["typecheck-errors/unknown-identifier.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 const $module1 = {
   id: "2t0yx6qaqtfpp:14:24",
@@ -12,6 +13,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAa2B;IAEzBA,KAAK,GAAG,CAAC;AACX,CAAC","names":["count"],"ignoreList":[],"sources":["typecheck-errors/unknown-identifier.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 const $module2 = {
   id: "2t0yx6qaqtfpp:19:22",
@@ -19,6 +21,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkByB,MAAAA,MAAM,CAACC,QAAQ,CAACC,IAAI","names":["window","location","href"],"ignoreList":[],"sources":["typecheck-errors/unknown-identifier.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 // A name a script didn't bind is the client's global, read off `globalThis`:
 // one the project declares — `window`, from the DOM's lib — reads as it is. A

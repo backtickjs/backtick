@@ -5,6 +5,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAYkB,MAACA,CAAQ;IACzB,MAAMC,CAAC,GAAGD,CAAC;IACX,OAAO,CAAC;AACV,CAAC","names":["x","y"],"ignoreList":[],"sources":["typecheck-errors/undefined-annotation.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "function",
 };
 const $module1 = {
   id: "2ybl4zwhlhjta:18:16",
@@ -12,6 +13,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAiBmB,MAACA,CAAQ;IAC1B,IAAIC,CAAC,GAAG,EAAE;IAEVA,CAAC,GAAGD,CAAC;IACL,OAAO,CAAC;AACV,CAAC","names":["x","y"],"ignoreList":[],"sources":["typecheck-errors/undefined-annotation.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "function",
 };
 const stored = cs.create($module0, []);
 const written = cs.create($module1, []);

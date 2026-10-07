@@ -10,6 +10,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 // A splice prints as an expression ending in a type, and a `<` after a type is
 // where type arguments start — so a spliced value to the left of `<` is the

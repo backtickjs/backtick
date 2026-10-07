@@ -5,6 +5,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAMoBA,QAAA;IAElB,MAAMC,CAAC,GAAGD,QAAA,EAAY;IACtB,OAAO,EAAE,GAAGC,CAAC;AACf,CAAC","names":["$splice0","a"],"ignoreList":[],"sources":["typecheck-errors/void-assertion.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 const one = 1;
 // An assertion needs no check of its own: TypeScript already refuses to

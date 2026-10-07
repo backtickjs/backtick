@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAUgB,MAACA,KAAwB;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAAUD,KAAK,CAACI,KAAK;IAAA,OAAAH,IAAA;AAAA,IAAM","names":["props","_el$","_tmpl$","_$insert","title"],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "function",
 };
 const $module1 = {
   id: "21m2csdludqmv:16:9",
@@ -17,6 +18,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: ["Card$21m2csdludqmv$1"] },
   ],
+  kind: "block",
 };
 const $module2 = {
   id: "21m2csdludqmv:18:17",
@@ -24,6 +26,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAiBoBA,SAAA,IAAAC,yBAAA,EAACD,SAAI;IAACE,CAAC,EAAE;CAAC,CAAI","names":["$capture0","_$createComponent","n"],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "capture", key: "Card$21m2csdludqmv$1" }],
+  kind: "expression",
 };
 const $module3 = {
   id: "21m2csdludqmv:26:4",
@@ -35,6 +38,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const $module4 = {
   id: "21m2csdludqmv:29:20",
@@ -42,6 +46,7 @@ const $module4 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA4BuB,SAAG","names":[],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module5 = {
   id: "21m2csdludqmv:30:20",
@@ -49,6 +54,7 @@ const $module5 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA6BuB,SAAG","names":[],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module6 = {
   id: "21m2csdludqmv:43:4",
@@ -56,6 +62,7 @@ const $module6 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBA0COA,QAAA;IACD,MAAMC,KAAK,GAAIC,IAA2C;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,EAAAG,yBAAA,EAErDJ,IAAI;YAACK,CAAC,EAAE;SAAC;QAAAF,gBAAA,EAAAF,IAAA,EAAAG,yBAAA,EACTJ,IAAI;YAACK,CAAC,EAAE;SAAC;QAAA,OAAAJ,IAAA;IAAA,IAEb;IAED;QAAA,IAAAK,KAAA,GAAAC,OAAA;QAAAJ,gBAAA,EAAAG,KAAA,QAEI,CAAAE,KAAA,IAAAJ,yBAAA,EAACI,KAAK;YAACC,KAAK;SAAA,CAAU,EAArBX,QAAA,EAAK,CACN;QAAAK,gBAAA,EAAAG,KAAA,QAACP,KAAK,CAAEW,KAAoB;YAAA,IAAAC,KAAA,GAAAC,OAAA;YAAAT,gBAAA,EAAAQ,KAAA,QACtB,MAAM,GAAGD,KAAK,CAACL,CAAC;YAAA,OAAAM,KAAA;QAAA,IACrB,CAAC;QAAA,OAAAL,KAAA;IAAA;AAGR,CAAC","names":["$splice0","twice","Card","_el$","_tmpl$","_$insert","_$createComponent","n","_el$2","_tmpl$2","$Card","title","props","_el$3","_tmpl$3"],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 // A client component the host holds, and a binding of the same name an
 // enclosing script holds. Scope decides: the nested script's `<Card>` is the

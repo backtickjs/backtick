@@ -14,6 +14,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "block",
 };
 const $module1 = {
   id: "3ap7ff2kahflh:27:13",
@@ -27,6 +28,7 @@ const $module1 = {
       bindings: ["builds$3ap7ff2kahflh$4", "setBuilds$3ap7ff2kahflh$5"],
     },
   ],
+  kind: "block",
 };
 const $module2 = {
   id: "3ap7ff2kahflh:35:19",
@@ -37,6 +39,7 @@ const $module2 = {
     { kind: "capture", key: "setBuilds$3ap7ff2kahflh$5" },
     { kind: "capture", key: "builds$3ap7ff2kahflh$4" },
   ],
+  kind: "function",
 };
 // A server component's script, run where its splice stands, as Solid runs a
 // component: untracked. It reads a signal of its own while it sets up, which a

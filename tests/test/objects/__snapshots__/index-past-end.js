@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAYO;IACD,MAAMA,KAAK,GAAG,CAAC,MAAM,EAAE,KAAK,CAAC;IAC7B,OAAOA,KAAK,CAAC,CAAC,CAAC;AACjB,CAAC","names":["names"],"ignoreList":[],"sources":["objects/index-past-end.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // Where the two rules part company, pinned so a client implementer can see
 // it: `names[9]` types as `string`, because TypeScript's indexed access says

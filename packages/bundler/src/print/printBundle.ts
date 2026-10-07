@@ -74,6 +74,9 @@ export function printBundle(
   for (const [label, entry] of tree.modules) {
     module.line(`const ${label} = $require(${string(entry.id)}).default;`);
   }
+  for (const [label, code] of tree.functions) {
+    module.line(`const ${label} = ${code};`);
+  }
   // Parenthesized, so a root that is a function isn't a declaration.
   module.write(
     format === "es"

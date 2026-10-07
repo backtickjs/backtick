@@ -8,6 +8,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAQY;IACR,MAAMA,KAAK,GAAGC,MAAM,CAACC,QAAQ,CAAC,MAAM,CAAC;IACrC,MAAMC,KAAK,GAAGF,MAAM,CAACC,QAAQ,CAAC,IAAI,EAAE,EAAE,CAAC;IACvC,MAAME,UAAU,GAAGH,MAAM,CAACI,UAAU,CAAC,KAAK,CAAC;IAC3C,OAAAC,MAAA;AACF,CAAC","names":["whole","Number","parseInt","based","fractional","parseFloat","_tmpl$"],"ignoreList":[],"sources":["stdlib/number-parsing.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "block",
 };
 // A namespace static, reached the way `Math.floor` and `Array.from` are: the
 // whole of `Number.parseInt` is one name the client answers, so `Number` is a

@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAMgB,OAAC","names":[],"ignoreList":[],"sources":["splices/deduplicated-scripts.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module1 = {
   id: "2g4us6n03x6jl:10:47",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBASkDA,QAAA,KAAC;IAAEC,CAAC,EAAED,QAAA,EAAK;IAAEE,CAAC,EAAEF,QAAA;CAAO,CAAC","names":["$splice0","a","b"],"ignoreList":[],"sources":["splices/deduplicated-scripts.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // The same `cs\`7\`` literal spliced twice is one client script, so it
 // collapses into a single function-table entry referenced twice.

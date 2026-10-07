@@ -8,6 +8,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAOY;IACR,OAAAA,MAAA;AAKF,CAAC","names":["_tmpl$"],"ignoreList":[],"sources":["stdlib/string-from-char-code.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "block",
 };
 // UTF-16 code units rather than code points: a surrogate pair is two
 // arguments, where `String.fromCodePoint` takes the one code point.

@@ -12,6 +12,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "block",
 };
 // A list whose members carry storage of their own: `build` declares a signal per
 // row, and the signal the list reads holds those signals along with the rows.

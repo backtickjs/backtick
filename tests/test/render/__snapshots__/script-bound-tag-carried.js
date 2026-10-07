@@ -13,6 +13,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAcYA,QAAA;IACR,MAAMC,KAAK,GAAIC,CAAgB;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,QAAS,QAAQ,GAAGD,CAAC,CAACI,CAAC;QAAA,OAAAH,IAAA;IAAA,IAAK;IAC3D;QAAA,IAAAI,KAAA,GAAAC,OAAA;QAAAH,gBAAA,EAAAE,KAAA,EAAAE,yBAAA,EAEKR,KAAK;YAACK,CAAC,EAAE;SAAC;QAAAD,gBAAA,EAAAE,KAAA,QACVP,QAAA,EAAM,CAACU,IAAI;QAAA,OAAAH,KAAA;IAAA;AAGlB,CAAC","names":["$splice0","Badge","p","_el$","_tmpl$","_$insert","n","_el$2","_tmpl$2","_$createComponent","body"],"ignoreList":[],"sources":["render/script-bound-tag-carried.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 const $module1 = {
   id: "1m0g5lfnje26m:30:30",
@@ -26,6 +27,7 @@ const $module1 = {
       bindings: ["count$1m0g5lfnje26m$2", "Badge$1m0g5lfnje26m$4"],
     },
   ],
+  kind: "block",
 };
 const $module2 = {
   id: "1m0g5lfnje26m:44:18",
@@ -36,6 +38,7 @@ const $module2 = {
     { kind: "capture", key: "Badge$1m0g5lfnje26m$4" },
     { kind: "capture", key: "count$1m0g5lfnje26m$2" },
   ],
+  kind: "expression",
 };
 // A host component whose script declares its own `Badge`, and draws what it was
 // handed beside it.

@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAM4C;IAC1C,MAAMA,CAAC,GAAG,CAAC;AACb,CAAC","names":["x"],"ignoreList":[],"sources":["control-flow/action-in-value-script.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 const $module1 = {
   id: "1zk77nyjrl50d:11:33",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAUoC;IAClC,IAAIA,CAAC,GAAG,CAAC;IACTA,CAAC,GAAG,CAAC;AACP,CAAC","names":["n"],"ignoreList":[],"sources":["control-flow/action-in-value-script.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "function",
 };
 const $module2 = {
   id: "1zk77nyjrl50d:20:4",
@@ -24,6 +26,7 @@ const $module2 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "function",
 };
 // A script that returns a value may still run an action.
 const valueScriptEffects = cs.create($module0, []);

@@ -14,6 +14,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const $module1 = {
   id: "10qn40vm7q8r9:30:35",
@@ -21,6 +22,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA6BsCA,QAAA,IAACC,EAAE,IAAKD,QAAA,EAAQ,CAAC,MAAMC,EAAE,CAACC,KAAK,EAAE,CAAC","names":["$splice0","el","focus"],"ignoreList":[],"sources":["bundler/undefined-prop.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 // A component forwarding an optional prop it wasn't given: `undefined` reaches
 // the script, where the element takes it as JSX and TypeScript read an absent

@@ -8,6 +8,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAaYA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAOD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAa","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["components/component-boundary.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module1 = {
   id: "2fakqwmh96yfj:21:4",
@@ -18,6 +19,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 // A server component's invocation is an instance boundary, so it hoists into a
 // tree entry of its own even though each `<TextLabel />` is referenced once and

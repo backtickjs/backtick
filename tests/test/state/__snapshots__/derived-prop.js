@@ -12,6 +12,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAUYA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAOD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAa","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["state/derived-prop.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module1 = {
   id: "6co403gp36pa:17:16",
@@ -22,6 +23,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: ["count$6co403gp36pa$0"] },
   ],
+  kind: "block",
 };
 const $module2 = {
   id: "6co403gp36pa:22:23",
@@ -29,6 +31,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAqB0BA,SAAA,aAAS,GAAGA,SAAK,EAAE","names":["$capture0"],"ignoreList":[],"sources":["state/derived-prop.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "capture", key: "count$6co403gp36pa$0" }],
+  kind: "expression",
 };
 // A server component drawing what it's handed.
 async function Label({ text }) {

@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAc4CA,QAAA,IAAAA,QAAA,EAAwB,GAAG,GAAG","names":["$splice0"],"ignoreList":[],"sources":["splices/await-in-splice.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module1 = {
   id: "2y4si690gyts2:22:4",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAqBOA,QAAA;IACD,MAAMC,QAAQ,GAAGD,QAAA,EAAwB;IACzC,OAAOC,QAAQ,GAAG,GAAG;AACvB,CAAC","names":["$splice0","greeting"],"ignoreList":[],"sources":["splices/await-in-splice.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 const $module2 = {
   id: "2y4si690gyts2:31:14",
@@ -21,6 +23,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBA8BiB,MAACA,KAAgC;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAASD,KAAK,CAACI,QAAQ;IAAA,OAAAH,IAAA;AAAA,IAAK","names":["props","_el$","_tmpl$","_$insert","children"],"ignoreList":[],"sources":["splices/await-in-splice.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "function",
 };
 const $module3 = {
   id: "2y4si690gyts2:37:4",
@@ -31,6 +34,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const $module4 = {
   id: "2y4si690gyts2:47:4",
@@ -41,6 +45,7 @@ const $module4 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const $module5 = {
   id: "2y4si690gyts2:62:46",
@@ -48,6 +53,7 @@ const $module5 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA6DiD,MAAAA,KAAK,CAAC,OAAO,CAAC","names":["fetch"],"ignoreList":[],"sources":["splices/await-in-splice.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 async function fetchGreeting() {
   return "hello";

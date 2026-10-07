@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAQO;IACD,MAAMA,QAAQ,GAAG,OAAO;IACxB,OAAOA,QAAQ,CAACC,MAAM,CAAC,IAAI,EAAE,OAAO,CAAC,CAACC,WAAW,EAAE;AACrD,CAAC","names":["greeting","concat","toUpperCase"],"ignoreList":[],"sources":["expressions/method-call.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 it("methodCall", async (t) => {
   await snapshotCase(t, "methodCall", cs.create($module0, []));

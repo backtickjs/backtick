@@ -10,6 +10,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 it("runtimeValues", async (t) => {
   await snapshotCase(

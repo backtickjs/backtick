@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAMYA,QAAA;IACR,MAAMC,IAAI,GAAG,CAAC;IACd,OAAOA,IAAI,GAAGD,QAAA,EAAoB;AACpC,CAAC","names":["$splice0","base"],"ignoreList":[],"sources":["captures/deep-shadowing.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 const $module1 = {
   id: "8up2nb5o0inm:14:9",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAaYA,QAAA;IACR,MAAMC,IAAI,GAAG,CAAC;IACd,OAAOA,IAAI,GAAGD,QAAA,EAAM;AACtB,CAAC","names":["$splice0","base"],"ignoreList":[],"sources":["captures/deep-shadowing.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 const $module2 = {
   id: "8up2nb5o0inm:28:4",
@@ -21,6 +23,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2BOA,QAAA;IACD,MAAMC,IAAI,GAAG,EAAE;IACf,OAAOD,QAAA,CAAAC,IAAA,CAAsB;AAC/B,CAAC","names":["$splice0","base"],"ignoreList":[],"sources":["captures/deep-shadowing.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: ["base$8up2nb5o0inm$2"] }],
+  kind: "block",
 };
 const $module3 = {
   id: "8up2nb5o0inm:30:25",
@@ -28,6 +31,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA6B4BA,SAAA,IAAAA,SAAI","names":["$capture0"],"ignoreList":[],"sources":["captures/deep-shadowing.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "capture", key: "base$8up2nb5o0inm$2" }],
+  kind: "expression",
 };
 function outerBase(inner) {
   return cs.create($module0, [middleBase(inner)]);

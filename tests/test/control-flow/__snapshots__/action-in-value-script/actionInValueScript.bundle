@@ -41,4 +41,6 @@ const $require = (id) => {
 const $cs0 = $require("1zk77nyjrl50d:20:4").default;
 const $cs1 = $require("1zk77nyjrl50d:7:41").default;
 const $cs2 = $require("1zk77nyjrl50d:11:33").default;
-export default $cs0($cs1, $cs2);
+const $function0 = $cs2();
+const $function1 = $cs0($cs1, () => $function0);
+export default $function1;

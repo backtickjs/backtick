@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAMkBA,QAAA;IAChB,MAAMC,CAAC,GAAG,CAAC;IACX,OAAOD,QAAA,CAAAC,CAAA,CAAiC;AAC1C,CAAC","names":["$splice0","x"],"ignoreList":[],"sources":["captures/jsx-capture.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: ["x$njvzopgmpqpe$0"] }],
+  kind: "function",
 };
 const $module1 = {
   id: "njvzopgmpqpe:9:11",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAQcA,SAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAD,IAAA,CAAAE,OAAA,GAAe,MAAMH,SAAC;IAAA,OAAAC,IAAA;AAAA,IAAI","names":["$capture0","_el$","_tmpl$","$$click"],"ignoreList":[],"sources":["captures/jsx-capture.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "capture", key: "x$njvzopgmpqpe$0" }],
+  kind: "expression",
 };
 // A binding declared in an enclosing script and captured by a script spliced
 // into it: the spliced script is handed `x` where it is called.

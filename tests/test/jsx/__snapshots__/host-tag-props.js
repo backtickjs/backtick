@@ -9,6 +9,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;;kBAQiB,MAACA,KAKjB;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAEID,KAAK,CAACI,IAAW;IAAAD,gBAAA,EAAAF,IAAA,QACjBD,KAAK,CAACK,KAAK;IAAAC,gBAAA,EAAAC,GAAA;QAAA,IAAAC,GAAA,GAFCR,KAAK,CAAC,SAAS,CAAC,EAAAS,IAAA,GAAST,KAAK,CAACU,QAAQ,GAAG,KAAK,GAAG,IAAI;QAAAF,GAAA,KAAAD,GAAA,CAAAI,CAAA,IAAAC,sBAAA,EAAAX,IAAA,aAAAM,GAAA,CAAAI,CAAA,GAAAH,GAAA;QAAAC,IAAA,KAAAF,GAAA,CAAAM,CAAA,IAAAD,sBAAA,EAAAX,IAAA,WAAAM,GAAA,CAAAM,CAAA,GAAAJ,IAAA;QAAA,OAAAF,GAAA;IAAA;QAAAI,CAAA,EAAAG,SAAA;QAAAD,CAAA,EAAAC;KAAA;IAAA,OAAAb,IAAA;AAAA,IAItE","names":["props","_el$","_tmpl$","_$insert","icon","label","_$effect","_p$","_v$","_v$2","disabled","e","_$setAttribute","t","undefined"],"ignoreList":[],"sources":["jsx/host-tag-props.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "function",
 };
 const $module1 = {
   id: "irncup0pbj6d:25:14",
@@ -16,6 +17,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAwBiBA,QAAA;IACP,MAAMC,IAAI,GAAG;QAAEC,KAAK,EAAE;KAAU;IAChC,OAAO,CAAAC,MAAA,IAAAC,yBAAA,EAACD,MAAM,EAAAE,oBAAA,EAAKJ,IAAI;QAAEK,QAAQ;QAAA;QAAiBC,IAAI,EAAAC,MAAA;KAAA,EAAY,EAA1DR,QAAA,EAAM,CAAoD;AACpE,CAAC","names":["$splice0","rest","label","$Badge","_$createComponent","_$mergeProps","disabled","icon","_tmpl$"],"ignoreList":[],"sources":["jsx/host-tag-props.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 // A client component the host holds, written as a tag in a script, given its
 // props in every form JSX writes them: spread, valueless, dashed, an element.

@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWO;IACD,MAAMA,OAAO,GAAGC,IAAI,CAACC,SAAS,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;IACzC,MAAMC,IAAI,GAAGF,IAAI,CAACC,SAAS,CAAC,IAAI,CAAC;IACjC,MAAME,IAAI,GAAGH,IAAI,CAACC,SAAS,CAAC,IAAI,CAAC;IACjC,MAAMG,IAAI,GAAGJ,IAAI,CAACC,SAAS,CAAC;QAAEI,CAAC,EAAE,CAAC;QAAEC,CAAC,EAAE;KAAO,CAAC;IAC/C,MAAMC,IAAI,GAAGP,IAAI,CAACQ,KAAK,CAACT,OAAO,CAAC;IAChC,OACEA,OAAO,GACP,GAAG,GACHG,IAAI,GACJ,GAAG,GACHC,IAAI,GACJ,GAAG,GACHC,IAAI,GACJ,GAAG,GACHJ,IAAI,CAACC,SAAS,CAACM,IAAI,CAAC,GACpB,GAAG,GACHP,IAAI,CAACC,SAAS,CAACD,IAAI,CAACQ,KAAK,CAACJ,IAAI,CAAC,CAAC;AAEpC,CAAC","names":["numbers","JSON","stringify","text","flag","held","a","b","back","parse"],"ignoreList":[],"sources":["stdlib/json.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // Text in, value out, and back again. What round-trips is the format's to say
 // — so what is here is what every host spells the same way, and a value a

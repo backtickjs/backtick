@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAUO,MAAAA,MAAA,EAIF","names":["_tmpl$"],"ignoreList":[],"sources":["jsx/jsx-static.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 // A tree with only static props: one script, nothing spliced into it, and the
 // nested element written in place.

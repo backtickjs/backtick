@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAUkB,MAACA,IAAY,KAAAC,MAAA;QAAA,IAAAC,KAAA,GAAAC,OAAA,IAAAC,KAAA,GAAAF,KAAA,CAAAG,UAAA;QAAAC,gBAAA,EAAAJ,KAAA,EAIxBF,IAAI,EAAAI,KAAA;QAAAE,gBAAA,EAAAJ,KAAA,EAAGF,IAAI;QAAA,OAAAE,KAAA;IAAA,KAGjB","names":["name","_tmpl$","_el$2","_tmpl$2","_el$3","firstChild","_$insert"],"ignoreList":[],"sources":["jsx/script-fragment.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "function",
 };
 const $module1 = {
   id: "1byndzbo89yv8:21:42",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAoB6CA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAAMD,QAAA,EAAO,CAAC,GAAG,CAAC;IAAA,OAAAC,IAAA;AAAA,IAAO","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["jsx/script-fragment.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // A fragment a script writes: its children where it stands, and no node of its
 // own — the same `Fragment` element the tree path writes for `<>`.

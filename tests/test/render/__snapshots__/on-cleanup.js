@@ -16,6 +16,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAkCWA,QAAA;IACDA,QAAA,EAAU,CAAC,MAAMC,MAAM,CAACC,OAAO,CAACC,GAAG,EAAE,CAAC;IACtC,OAAAC,MAAA;AACF,CAAC","names":["$splice0","window","console","log","_tmpl$"],"ignoreList":[],"sources":["render/on-cleanup.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 const $module1 = {
   id: "yzfx7ua2d0v4:49:8",
@@ -27,6 +28,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "function",
 };
 const $module2 = {
   id: "yzfx7ua2d0v4:83:8",
@@ -38,6 +40,7 @@ const $module2 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "function",
 };
 const $module3 = {
   id: "yzfx7ua2d0v4:105:8",
@@ -45,6 +48,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAwGWA,QAAA;IACD;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAD,IAAA,CAAAE,OAAA,GACmB,MAAMH,QAAA,EAAU,CAAC,MAAMI,MAAM,CAACC,OAAO,CAACC,GAAG,EAAE,CAAC;QAAA,OAAAL,IAAA;IAAA;AAIjE,CAAC","names":["$splice0","_el$","_tmpl$","$$click","window","console","log"],"ignoreList":[],"sources":["render/on-cleanup.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 // Each script logs where it runs, so a test counts the runs by counting the
 // logs.

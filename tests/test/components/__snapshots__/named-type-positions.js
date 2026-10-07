@@ -12,6 +12,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "block",
 };
 async function Rows() {
   return cs.create($module0, [createSignal, For]);

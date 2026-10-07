@@ -8,6 +8,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWOA,QAAA;IACD,MAAMC,KAAK,GAAGD,QAAA,EAAa,CAAC,CAAC,CAAC;IAC9B,OAAO,CACL,OAAOE,SAAS,EAChB,OAAO,IAAI,EACX,OAAO,IAAI,EACX,OAAO,CAAC,EACR,OAAO,GAAG,EACV,OAAO,CAAC,CAAC,CAAC,EACV,OAAO;YAAEC,CAAC,EAAE;SAAG,EACf,QAASC,CAAS,IAAKA,CAAC,CAAC,EACzB,OAAOC,IAAI,CAACC,KAAK,EACjB,OAAOL,KAAK,CACb;AACH,CAAC","names":["$splice0","count","undefined","a","n","Math","floor"],"ignoreList":[],"sources":["expressions/typeof.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 const $module1 = {
   id: "3liitb76d9d7p:35:4",
@@ -15,6 +16,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkCO;IACD,MAAMA,OAAO,GAAIC,CAAkB,IACjC,OAAOA,CAAC,KAAK,QAAQ,GAAGA,CAAC,CAACC,MAAM,GAAGD,CAAC,GAAG,CAAC;IAC1C,OAAO,CAACD,OAAO,CAAC,KAAK,CAAC,EAAEA,OAAO,CAAC,CAAC,CAAC,CAAC;AACrC,CAAC","names":["measure","v","length"],"ignoreList":[],"sources":["expressions/typeof.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // `typeof` answers JavaScript's names, since TypeScript narrows by them: every
 // kind of value a script can hold, a host's own value among them.

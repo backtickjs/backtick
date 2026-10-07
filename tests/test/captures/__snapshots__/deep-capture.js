@@ -10,6 +10,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: ["outer$22sufdxid1i7s$0"] },
   ],
+  kind: "block",
 };
 const $module1 = {
   id: "22sufdxid1i7s:20:13",
@@ -20,6 +21,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "capture", key: "outer$22sufdxid1i7s$0" },
   ],
+  kind: "block",
 };
 const $module2 = {
   id: "22sufdxid1i7s:22:24",
@@ -27,6 +29,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAqB2BA,SAAA,IAAAA,SAAK","names":["$capture0"],"ignoreList":[],"sources":["captures/deep-capture.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "capture", key: "outer$22sufdxid1i7s$0" }],
+  kind: "expression",
 };
 const $module3 = {
   id: "22sufdxid1i7s:28:39",
@@ -37,6 +40,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const $module4 = {
   id: "22sufdxid1i7s:28:49",
@@ -44,6 +48,7 @@ const $module4 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2BoD,OAAC","names":[],"ignoreList":[],"sources":["captures/deep-capture.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module5 = {
   id: "22sufdxid1i7s:28:66",
@@ -51,6 +56,7 @@ const $module5 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2BqE,OAAC","names":[],"ignoreList":[],"sources":["captures/deep-capture.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 // Three scripts, and the binding skips the middle one.
 //

@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAUO;IACD,MAAMA,KAAK,GAAG,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC;IACvB,MAAMC,IAAI,GAAG,CAAC;IACd,OAAO;QACLC,KAAK,EAAEF,KAAK,CAACG,MAAM;QACnBC,GAAG,EAAEJ,KAAK,CAACK,MAAM,CAAC,CAACJ,IAAI,CAAC,CAAC;QACzBK,IAAI,EAAEN,KAAK,CAACO,KAAK,CAAC,CAAC,EAAE,CAAC,CAAC;QACvBC,KAAK,EAAER,KAAK,CAACS,OAAO,CAAC,CAAC,CAAC;QACvBC,SAAS,EAAEV,KAAK,CAACK,MAAM,CAAC,CAAC,CAAC,CAAC,CAAC,CAACM,WAAW,CAAC,CAAC,CAAC;QAC3CC,GAAG,EAAEZ,KAAK,CAACa,QAAQ,CAAC,CAAC,CAAC;QACtBC,IAAI,EAAEd,KAAK,CAACe,IAAI,CAAC,GAAG,CAAC;QACrBC,OAAO,EAAEhB,KAAK,CAACiB,GAAG,CAAEC,CAAC,IAAKA,CAAC,GAAG,CAAC,CAAC;QAChCC,KAAK,EAAEnB,KAAK,CAACoB,MAAM,CAAEF,CAAC,IAAKA,CAAC,GAAG,CAAC;KACjC;AACH,CAAC","names":["coins","four","count","length","all","concat","part","slice","where","indexOf","lastWhere","lastIndexOf","has","includes","text","join","doubled","map","n","small","filter"],"ignoreList":[],"sources":["stdlib/array-members.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // Arrays expose the curated `ClientArray` API: pure members only, none
 // producing `undefined`. Callback parameters are contextually typed.

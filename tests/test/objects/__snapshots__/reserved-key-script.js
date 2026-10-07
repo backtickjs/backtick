@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAOgD,OAAC;IAAE,GAAG,EAAE;CAAS,CAAC","names":[],"ignoreList":[],"sources":["objects/reserved-key-script.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 // `#` stays reserved inside a script body: an object literal serializes as
 // the plain object it spells, so it can't carry the discriminant key.

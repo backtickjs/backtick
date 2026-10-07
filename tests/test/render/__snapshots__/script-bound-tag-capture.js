@@ -30,6 +30,7 @@ const $module0 = {
       bindings: ["count$1durge4hv8o7p$0", "Badge$1durge4hv8o7p$2"],
     },
   ],
+  kind: "block",
 };
 const $module1 = {
   id: "1durge4hv8o7p:19:9",
@@ -40,6 +41,7 @@ const $module1 = {
     { kind: "capture", key: "Badge$1durge4hv8o7p$2" },
     { kind: "capture", key: "count$1durge4hv8o7p$0" },
   ],
+  kind: "expression",
 };
 const $module2 = {
   id: "1durge4hv8o7p:21:10",
@@ -51,6 +53,7 @@ const $module2 = {
     { kind: "capture", key: "Badge$1durge4hv8o7p$2" },
     { kind: "capture", key: "count$1durge4hv8o7p$0" },
   ],
+  kind: "block",
 };
 const $module3 = {
   id: "1durge4hv8o7p:23:19",
@@ -61,6 +64,7 @@ const $module3 = {
     { kind: "capture", key: "Badge$1durge4hv8o7p$2" },
     { kind: "capture", key: "count$1durge4hv8o7p$0" },
   ],
+  kind: "expression",
 };
 const $module4 = {
   id: "1durge4hv8o7p:26:9",
@@ -72,6 +76,7 @@ const $module4 = {
     { kind: "capture", key: "Badge$1durge4hv8o7p$2" },
     { kind: "capture", key: "count$1durge4hv8o7p$0" },
   ],
+  kind: "expression",
 };
 const $module5 = {
   id: "1durge4hv8o7p:26:24",
@@ -82,6 +87,7 @@ const $module5 = {
     { kind: "capture", key: "Badge$1durge4hv8o7p$2" },
     { kind: "capture", key: "count$1durge4hv8o7p$0" },
   ],
+  kind: "expression",
 };
 const $module6 = {
   id: "1durge4hv8o7p:28:10",
@@ -93,6 +99,7 @@ const $module6 = {
     { kind: "capture", key: "Badge$1durge4hv8o7p$2" },
     { kind: "capture", key: "count$1durge4hv8o7p$0" },
   ],
+  kind: "expression",
 };
 // A tag naming a function an enclosing script holds. The nested script captures
 // it the way it captures any binding, and calls it as a component: once, with

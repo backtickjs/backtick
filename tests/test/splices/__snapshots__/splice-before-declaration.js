@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAeYA,QAAA;IACR,MAAMC,MAAM,GAAG,CAAC;IAChB,MAAMC,OAAO,GAAGF,QAAA,EAAS;IACzB,MAAMG,KAAK,GAAG,CAAC;IACf,OAAOF,MAAM,GAAGC,OAAO,GAAGC,KAAK;AACjC,CAAC","names":["$splice0","before","spliced","after"],"ignoreList":[],"sources":["splices/splice-before-declaration.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 const $module1 = {
   id: "1xi8jyc89buh5:28:4",
@@ -17,6 +18,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const $module2 = {
   id: "1xi8jyc89buh5:28:18",
@@ -24,6 +26,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2BqB,QAAE","names":[],"ignoreList":[],"sources":["splices/splice-before-declaration.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module3 = {
   id: "1xi8jyc89buh5:28:40",
@@ -31,6 +34,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2B2C,QAAE","names":[],"ignoreList":[],"sources":["splices/splice-before-declaration.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 // A hole with declarations after it. Two call sites make the script
 // polymorphic, so each splice arrives as a thunk and the entry passes the

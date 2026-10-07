@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAMgB,MAACA,CAAgB;IAC/B,OAAOA,CAAC,KAAK,IAAI,GAAG,CAAC,GAAGA,CAAC,GAAG,CAAC;AAC/B,CAAC","names":["n"],"ignoreList":[],"sources":["expressions/ternary.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "function",
 };
 const $module1 = {
   id: "uekyc2sf8mzc:15:4",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAcOA,QAAA,KAAC;IACFC,MAAM,EAAED,QAAA,EAAK,CAAC,IAAI,CAAC;IACnBE,OAAO,EAAEF,QAAA,EAAK,CAAC,CAAC;CACjB,CAAC","names":["$splice0","absent","present"],"ignoreList":[],"sources":["expressions/ternary.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // `?:` evaluates only the taken branch, and its condition narrows like an
 // `if`'s.

@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWO;IACD,MAAMA,IAAI,GAAG,IAAI;IACjB,OAAO;QACLC,MAAM,EAAED,IAAI,CAACE,QAAQ,CAAC,CAAC,CAAC,GAAG,GAAG,GAAGF,IAAI,CAACG,MAAM,CAAC,CAAC,EAAE,IAAI,CAAC;QACrDC,OAAO,EAAE,OAAO,CAACC,SAAS,EAAE,GAAG,GAAG,GAAG,OAAO,CAACC,OAAO,EAAE,GAAG,GAAG;QAC5DC,EAAE,EAAE,CAACP,IAAI,CAACO,EAAE,CAAC,CAAC,CAAC,EAAEP,IAAI,CAACO,EAAE,CAAC,CAAC,CAAC,CAAC,EAAEP,IAAI,CAACO,EAAE,CAAC,CAAC,CAAC,CAAC;QACzCC,QAAQ,EAAE,OAAO,CAACC,UAAU,CAAC,GAAG,EAAE,GAAG,CAAC;QACtCC,UAAU,EAAE,KAAK,CAACD,UAAU,CAAC,GAAG,EAAE,CAACE,KAAK,EAAEC,MAAM,KAAK,EAAE,GAAGA,MAAM;KACjE;AACH,CAAC","names":["word","padded","padStart","padEnd","trimmed","trimStart","trimEnd","at","replaced","replaceAll","replacedBy","found","offset"],"ignoreList":[],"sources":["stdlib/string-members-es2017.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // The string members after ES2015 that read a string without changing
 // anything: padding, trimming one end, reading by position, and replacing

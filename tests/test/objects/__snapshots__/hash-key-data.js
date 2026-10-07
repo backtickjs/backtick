@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAO0CA,QAAA,UAAMA,QAAA,EAAqB","names":["$splice0"],"ignoreList":[],"sources":["objects/hash-key-data.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 // Only the bare `#` key is reserved: a plain data object is free to use keys
 // that merely start with `#`, even ones spelled like the tagged forms.

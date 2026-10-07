@@ -8,6 +8,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAUY,eAAY","names":[],"ignoreList":[],"sources":["components/component-answers-children.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module1 = {
   id: "jnagv17juckt:15:9",
@@ -15,6 +16,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAcY,OAAAA,MAAA,IAAAC,OAAA,GAKT","names":["_tmpl$","_tmpl$2"],"ignoreList":[],"sources":["components/component-answers-children.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module2 = {
   id: "jnagv17juckt:27:4",
@@ -25,6 +27,7 @@ const $module2 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 // A component stands exactly where its tag did, so what it may answer with is
 // what may stand there: one drawing, or nothing at all. Text and a list are

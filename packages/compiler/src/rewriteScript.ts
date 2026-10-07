@@ -17,6 +17,8 @@ import { tagRoot } from "./tagRoot.js";
 /** What `cs.create` is handed for a script: which it is, and what it runs. */
 export interface RuntimeScript {
   id: string;
+  // the module's `kind`
+  kind: "function" | "expression" | "block";
   // the module's `params`, an array literal of literals
   params: ts.Expression;
   // the script's `args`, an array literal of host expressions
@@ -31,7 +33,7 @@ export interface RuntimeScript {
 export function moduleDeclaration(
   ts: typeof import("typescript"),
   name: string,
-  { id, params }: RuntimeScript,
+  { id, kind, params }: RuntimeScript,
   { code, map, dependencies }: CompiledScript,
 ): ts.VariableStatement {
   const f = ts.factory;
@@ -54,6 +56,7 @@ export function moduleDeclaration(
                 f.createArrayLiteralExpression(dependencies.map(string)),
               ),
               f.createPropertyAssignment("params", params),
+              f.createPropertyAssignment("kind", string(kind)),
             ],
             true,
           ),
@@ -146,6 +149,13 @@ export function rewriteScript(
     ]);
   }
 
+  const kind = ts.isBlock(statement!)
+    ? "block"
+    : ts.isArrowFunction(skipParentheses(ts, statement.expression)) ||
+        ts.isFunctionExpression(skipParentheses(ts, statement.expression))
+      ? "function"
+      : "expression";
+
   // A `${…}` written where the script has text rather than code is no splice.
   const unspliced = unsplicedSpans(ts, clientScript);
   if (unspliced.length > 0) {
@@ -223,7 +233,7 @@ export function rewriteScript(
   );
 
   return {
-    runtime: { id, params: paramsLiteral, args: argsLiteral, emitted },
+    runtime: { id, kind, params: paramsLiteral, args: argsLiteral, emitted },
     awaits,
     leftAsWritten: false,
     diagnostics: [],
@@ -410,4 +420,14 @@ function strictReason(name: string): string | null {
 function parseDiagnostics(file: ts.SourceFile): readonly ts.Diagnostic[] {
   return (file as unknown as { parseDiagnostics: ts.Diagnostic[] })
     .parseDiagnostics;
+}
+
+function skipParentheses(
+  ts: typeof import("typescript"),
+  node: ts.Expression,
+): ts.Expression {
+  while (ts.isParenthesizedExpression(node)) {
+    node = node.expression;
+  }
+  return node;
 }

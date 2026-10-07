@@ -11,6 +11,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const $module1 = {
   id: "29br3dsi9vwc9:29:4",
@@ -18,6 +19,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBA4BOA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAEED,QAAA;IAAA,OAAAC,IAAA;AAAA,IAEJ","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["components/component-host-props.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // A component's props are the host's own. It runs while bundling and consumes
 // them there, so they never cross and need not be able to: a class instance and

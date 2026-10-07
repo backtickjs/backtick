@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAOgDA,QAAA,IAAAA,QAAA,EAAmB","names":["$splice0"],"ignoreList":[],"sources":["objects/reserved-key-splice.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // A runtime object spliced into a script inlines as the plain data it is, so
 // it can't carry `#` — the bundle's one reserved key — either.

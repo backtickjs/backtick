@@ -8,6 +8,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAcOA,QAAA;IACD,MAAM,CAACC,IAAI,EAAEC,OAAO,CAAC,GAAGF,QAAA,EAAa,CAAC,SAAS,CAAC;IAEhDG,MAAM,CACHC,KAAK,CAAC,gDAAgD,EAAE;QACvDC,MAAM,EAAEF,MAAM,CAACG,WAAW,CAACC,OAAO,CAAC,IAAI;KACxC,CAAC,CACDC,IAAI,CAAEC,QAAkB;QACvB,IAAIA,QAAQ,CAACC,MAAM,KAAK,GAAG,EAAE;YAC3B,MAAM,WAAW,GAAGD,QAAQ,CAACC,MAAM;QACrC;QACA,OAAOD,QAAQ,CAACE,IAAI,EAAE;IACxB,CAAC,CAAC,CACDH,IAAI,CAAEI,KAAc;QACnBV,OAAO,CAACU,KAAK,KAAK,IAAI,GAAG,MAAM,GAAG,SAAS,CAAC;IAC9C,CAAC,CAAC,CACDC,KAAK,CAAEC,KAAc;QACpBZ,OAAO,CAAC,WAAW,GAAGa,MAAM,CAACD,KAAK,CAAC,CAAC;IACtC,CAAC,CAAC;IAEJX,MAAM,CACHC,KAAK,CAAC,QAAQ,EAAE;QACfY,MAAM,EAAE,MAAM;QACdC,OAAO,EAAE;YAAE,cAAc,EAAE;SAAoB;QAC/CC,IAAI,EAAEC,IAAI,CAACC,SAAS,CAAC;YAAEC,IAAI,EAAE,YAAY;YAAEC,MAAM,EAAE;SAAM;KAC1D,CAAC,CACDd,IAAI,CAAEC,QAAkB,IAAKA,QAAQ,CAACc,IAAI,EAAE,CAAC,CAC7Cf,IAAI,CACFe,IAAY;QACXrB,OAAO,CAACqB,IAAI,CAAC;IACf,CAAC,EACAT,KAAc;QACbZ,OAAO,CAACa,MAAM,CAACD,KAAK,CAAC,CAAC;IACxB,CAAC,CACF;IAEH,OAAOb,IAAI,EAAE;AACf,CAAC","names":["$splice0","held","setHeld","window","fetch","signal","AbortSignal","timeout","then","response","status","json","value","catch","error","String","method","headers","body","JSON","stringify","name","passed","text"],"ignoreList":[],"sources":["stdlib/fetch.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 // The platform's own `fetch`: a status is failed on by throwing, and so is a
 // body that is not JSON, and either reaches the `catch`.

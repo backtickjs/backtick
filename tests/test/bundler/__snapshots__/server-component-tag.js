@@ -8,6 +8,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAQY,MAAAA,MAAA,EAAM","names":["_tmpl$"],"ignoreList":[],"sources":["bundler/server-component-tag.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module1 = {
   id: "1ffrf3pln049q:15:13",
@@ -15,6 +16,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAcgBA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAGN,CAAAG,KAAA,IAAAC,yBAAA,EAACD,KAAK,KAAG,EAARJ,QAAA,EAAK,CACR;IAAA,OAAAC,IAAA;AAAA,IACD","names":["$splice0","_el$","_tmpl$","_$insert","$Rule","_$createComponent"],"ignoreList":[],"sources":["bundler/server-component-tag.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // A server component written as a tag in a script, past the typechecker:
 // refused when bundling, pointing at the splice it belongs in.

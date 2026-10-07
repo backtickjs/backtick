@@ -5,6 +5,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAOkBA,QAAA,IAACC,IAAY;IAC7B,MAAMC,KAAK,GAAG,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC;IACxB,MAAMC,KAAK,GAAGD,KAAK,CAAC,GAAG,CAAC;IAExB,MAAME,KAAK,GAAGF,KAAK,CAACD,IAAI,CAAC;IAEzB,MAAMI,KAAK,GAAGL,QAAA,EAAM,CAACC,IAAI,CAAC;IAC1B,OAAOE,KAAK,GAAGC,KAAK,GAAGC,KAAK;AAC9B,CAAC","names":["$splice0","name","coins","first","wrong","which"],"ignoreList":[],"sources":["typecheck-errors/index-wrong-key.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 // TypeScript decides what may index a value: an array takes a number, and a
 // plain object takes only a key its type names. `coins["0"]` passes, because

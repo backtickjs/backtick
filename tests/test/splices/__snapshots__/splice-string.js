@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAS2CA,QAAA,IAAAA,QAAA,EAAM","names":["$splice0"],"ignoreList":[],"sources":["splices/splice-string.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // A runtime string splice inlines as itself — quotes, newlines, and
 // backslashes intact.

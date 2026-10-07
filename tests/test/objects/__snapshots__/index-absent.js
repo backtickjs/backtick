@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAaOA,QAAA;IACD,MAAMC,KAAK,GAAG,CAAC,MAAM,EAAE,KAAK,CAAC;IAC7B,MAAMC,OAAO,GAAGF,QAAA,EAAQ,CAAC,SAAS,CAAC,IAAI,MAAM;IAC7C,OAAOC,KAAK,CAAC,CAAC,CAAC,GAAG,GAAG,GAAGC,OAAO;AACjC,CAAC","names":["$splice0","names","missing"],"ignoreList":[],"sources":["objects/index-absent.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 // A key an object hasn't got reads as the language's one absent value. A
 // record's member reads as `string | null` — a record says nothing about which

@@ -10,6 +10,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const $module1 = {
   id: "2rqwzcdfi281b:11:45",
@@ -17,6 +18,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAUgDA,QAAA,IAAAA,QAAA,EAAoB","names":["$splice0"],"ignoreList":[],"sources":["captures/deep-nested-scripts.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module2 = {
   id: "2rqwzcdfi281b:11:54",
@@ -24,6 +26,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAUyD,OAAC","names":[],"ignoreList":[],"sources":["captures/deep-nested-scripts.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module3 = {
   id: "2rqwzcdfi281b:11:61",
@@ -31,6 +34,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAUgE,OAAC","names":[],"ignoreList":[],"sources":["captures/deep-nested-scripts.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 function add(lhs, rhs) {
   return cs.create($module0, [lhs, rhs]);

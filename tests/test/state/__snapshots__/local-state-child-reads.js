@@ -15,6 +15,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const $module1 = {
   id: "25832gpx7dr61:36:9",
@@ -26,6 +27,7 @@ const $module1 = {
     { kind: "splice", bindings: ["selected$25832gpx7dr61$0"] },
     { kind: "splice", bindings: ["selected$25832gpx7dr61$0"] },
   ],
+  kind: "block",
 };
 const $module2 = {
   id: "25832gpx7dr61:41:28",
@@ -33,6 +35,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAwC+B,OAAC","names":[],"ignoreList":[],"sources":["state/local-state-child-reads.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module3 = {
   id: "25832gpx7dr61:41:45",
@@ -40,6 +43,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAwCgDA,SAAA,IAAAA,SAAQ","names":["$capture0"],"ignoreList":[],"sources":["state/local-state-child-reads.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "capture", key: "selected$25832gpx7dr61$0" }],
+  kind: "expression",
 };
 const $module4 = {
   id: "25832gpx7dr61:42:28",
@@ -47,6 +51,7 @@ const $module4 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAyC+B,OAAC","names":[],"ignoreList":[],"sources":["state/local-state-child-reads.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module5 = {
   id: "25832gpx7dr61:42:45",
@@ -54,6 +59,7 @@ const $module5 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAyCgDA,SAAA,IAAAA,SAAQ","names":["$capture0"],"ignoreList":[],"sources":["state/local-state-child-reads.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "capture", key: "selected$25832gpx7dr61$0" }],
+  kind: "expression",
 };
 // A child reading a signal it was handed, in all three positions at once: a prop,
 // a text child, and a branch deciding which elements exist. The script that

@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAQO;IACD,IAAIA,CAAC,GAAG,CAAC;IACT,IAAIC,KAAK,GAAG,CAAC;IACb,OAAOD,CAAC,GAAG,CAAC,EAAE;QACZC,KAAK,GAAGA,KAAK,GAAGD,CAAC;QACjB,IAAIA,CAAC,KAAK,CAAC,EAAE;YACX,OAAOC,KAAK;QACd;QACAD,CAAC,GAAGA,CAAC,GAAG,CAAC;IACX;IACA,OAAOC,KAAK;AACd,CAAC","names":["i","total"],"ignoreList":[],"sources":["control-flow/while-loop.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 it("whileLoop", async (t) => {
   await snapshotCase(t, "whileLoop", cs.create($module0, []));

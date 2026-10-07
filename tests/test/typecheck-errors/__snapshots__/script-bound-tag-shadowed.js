@@ -5,6 +5,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAIkBA,QAAA;IAChB,MAAMC,KAAK,GAAIC,CAAgB;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,QAAS,IAAI,GAAGD,CAAC,CAACI,CAAC;QAAA,OAAAH,IAAA;IAAA,IAAK;IACvD,OAAOH,QAAA,EAIJ;AACL,CAAC","names":["$splice0","Badge","p","_el$","_tmpl$","_$insert","n"],"ignoreList":[],"sources":["typecheck-errors/script-bound-tag-shadowed.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 const $module1 = {
   id: "83k1lytjebk3:7:11",
@@ -12,6 +13,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAMcA,QAAA;IACV,MAAMC,KAAK,GAAG,CAAC;IAEf,OAAOD,QAAA,CAAAC,KAAA,CAAsB;AAC/B,CAAC","names":["$splice0","Badge"],"ignoreList":[],"sources":["typecheck-errors/script-bound-tag-shadowed.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: ["Badge$83k1lytjebk3$2"] }],
+  kind: "block",
 };
 const $module2 = {
   id: "83k1lytjebk3:10:13",
@@ -19,6 +21,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBASgBA,SAAA,IAAAC,yBAAA,EAACD,SAAK;IAACE,CAAC,EAAE;CAAC,CAAI","names":["$capture0","_$createComponent","n"],"ignoreList":[],"sources":["typecheck-errors/script-bound-tag-shadowed.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "capture", key: "Badge$83k1lytjebk3$2" }],
+  kind: "expression",
 };
 // The script between them binds `Badge` to a number, and the nearest binding is
 // the one a tag names: the innermost `<Badge />` calls a number.

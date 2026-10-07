@@ -65,8 +65,9 @@ const $require = (id) => {
 };
 const $cs0 = $require("161a7f5q1feqz:14:15").default;
 const $cs1 = $require("161a7f5q1feqz:12:14").default;
+const $function0 = $cs1();
 export default $cs0(
   () => $i0,
   () => $i1,
-  $cs1,
+  () => $function0,
 );

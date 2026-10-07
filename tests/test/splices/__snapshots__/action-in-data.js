@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAMkB;IAChB,MAAMA,CAAC,GAAG,CAAC;AACb,CAAC","names":["x"],"ignoreList":[],"sources":["splices/action-in-data.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 const $module1 = {
   id: "1es21es7404j7:15:4",
@@ -17,6 +18,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "block",
 };
 // An action may sit in data like any script: it runs where the container is
 // built, and its slot holds what it evaluated to, which is nothing.

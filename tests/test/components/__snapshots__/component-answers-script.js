@@ -9,6 +9,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAaYA,QAAA;IACR,MAAM,CAACC,CAAC,EAAEC,IAAI,CAAC,GAAGF,QAAA,EAAa,CAAC,CAAC,CAAC;IAClC;QAAA,IAAAG,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,EAAYF,CAAC;QAAA,OAAAE,IAAA;IAAA;AACf,CAAC","names":["$splice0","n","setN","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["components/component-answers-script.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 const $module1 = {
   id: "4mst6ui5kdcm:24:4",
@@ -16,6 +17,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAuBOA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAMD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAqB","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["components/component-answers-script.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // A component whose whole body is client code answers with the script rather
 // than a drawing the host made: it declares its own storage and draws from it,

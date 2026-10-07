@@ -8,6 +8,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAeOA,QAAA;IACD,MAAM,CAACC,IAAI,EAAEC,OAAO,CAAC,GAAGF,QAAA,EAAa,CAAC,EAAE,CAAC;IAEzC;QAAA,IAAAG,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAC,WAAA;QAAAL,IAAA,CAAAO,gBAAA,WAEeC,KAAK;YACdA,KAAK,CAACC,cAAc,EAAE;YACtBV,OAAO,CAACS,KAAK,CAACE,IAAI,GAAG,GAAG,GAAGF,KAAK,CAACG,UAAU,CAAC;QAC9C,CAAC;QAAAT,KAAA,CAAAU,OAAA,GAEmBJ,KAAK,IAAKT,OAAO,CAACS,KAAK,CAACK,aAAa,CAACC,KAAK,CAAC;QAAAV,KAAA,CAAAQ,OAAA,GAC/CJ,KAAK,IAAKT,OAAO,CAACS,KAAK,CAACK,aAAa,CAACC,KAAK,CAAC;QAAAR,KAAA,CAAAS,OAAA,GAEjDP,KAAK,IACbT,OAAO,CAACS,KAAK,CAACQ,OAAO,GAAG,GAAG,GAAGR,KAAK,CAACK,aAAa,CAACI,OAAO,CAC3D;QAAAC,gBAAA,EAAAZ,KAAA,EAECR,IAAI;QAAA,OAAAE,IAAA;IAAA;AAIb,CAAC","names":["$splice0","said","setSaid","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","_el$4","addEventListener","event","preventDefault","type","cancelable","$$input","currentTarget","value","$$click","clientX","tagName","_$insert"],"ignoreList":[],"sources":["components/event-handlers.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 // A handler is handed what the DOM hands it, and which event that is comes
 // from the DOM: `click` is a `PointerEvent`, `input` an `InputEvent`.

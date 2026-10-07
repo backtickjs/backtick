@@ -5,6 +5,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAOYA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAKD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAY","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["typecheck-errors/server-component-in-script.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module1 = {
   id: "2exh6id0qbirq:12:9",
@@ -12,6 +13,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAWYA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAKD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAW","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["typecheck-errors/server-component-in-script.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module2 = {
   id: "2exh6id0qbirq:16:9",
@@ -19,6 +21,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAeY,MAAAA,MAAA,EAAM","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/server-component-in-script.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module3 = {
   id: "2exh6id0qbirq:20:26",
@@ -26,6 +29,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAmB6BA,QAAA,KAAAC,IAAA,IAAAC,yBAAA,EAACD,IAAI;IAACE,KAAK;CAAA,CAAO,EAAjBH,QAAA,EAAI,CAAa","names":["$splice0","$Row","_$createComponent","label"],"ignoreList":[],"sources":["typecheck-errors/server-component-in-script.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module4 = {
   id: "2exh6id0qbirq:23:22",
@@ -33,6 +37,7 @@ const $module4 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAsByBA,QAAA,KAAAC,MAAA,IAAAC,yBAAA,EAACD,MAAM;IAACE,IAAI;CAAA,CAAU,EAArBH,QAAA,EAAM,CAAe","names":["$splice0","$Title","_$createComponent","text"],"ignoreList":[],"sources":["typecheck-errors/server-component-in-script.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module5 = {
   id: "2exh6id0qbirq:26:23",
@@ -40,6 +45,7 @@ const $module5 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAyB0BA,QAAA,KAAAC,KAAA,IAAAC,yBAAA,EAACD,KAAK,KAAG,EAARD,QAAA,EAAK,CAAG","names":["$splice0","$Rule","_$createComponent"],"ignoreList":[],"sources":["typecheck-errors/server-component-in-script.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // A script's tags are client components. A server component is host code, used
 // in a splice (`{${<Row label={cs`"a"`} />}}`), and refused as a tag in a

@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWO;IACD,IAAIA,IAAI,GAAiBA,GAAA,GAAM,CAAC;IAChC,KAAK,IAAIC,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAGA,CAAC,GAAG,CAAC,EAAE;QAChCD,IAAI,GAAGA,GAAA,GAAMC,CAAC;IAChB;IACA,OAAOD,IAAI,EAAE;AACf,CAAC","names":["last","i"],"ignoreList":[],"sources":["control-flow/for-per-turn-binding.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // Each turn of a `for` gets its own copy of the header binding, so the arrow
 // built on the last turn reads 2 — the value that turn had — and not the 3

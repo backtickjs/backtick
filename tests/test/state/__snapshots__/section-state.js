@@ -12,6 +12,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAYyBA,QAAA;IACvB,MAAM,CAACC,KAAK,EAAEC,QAAQ,CAAC,GAAGF,QAAA,EAAa,CAAC,CAAC,CAAC;IAC1C;QAAA,IAAAG,IAAA,GAAAC,MAAA;QAAAD,IAAA,CAAAE,OAAA,GACmB,MAAMH,QAAQ,CAACD,KAAK,EAAE,GAAG,CAAC,CAAC;QAAAK,gBAAA,EAAAH,IAAA,QAAG,QAAQ,GAAGF,KAAK,EAAE;QAAA,OAAAE,IAAA;IAAA;AAErE,CAAC","names":["$splice0","count","setCount","_el$","_tmpl$","$$click","_$insert"],"ignoreList":[],"sources":["state/section-state.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 const $module1 = {
   id: "o3pj0r23dyym:21:9",
@@ -22,6 +23,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const $module2 = {
   id: "o3pj0r23dyym:29:15",
@@ -32,6 +34,7 @@ const $module2 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: ["count$o3pj0r23dyym$2"] },
   ],
+  kind: "block",
 };
 const $module3 = {
   id: "o3pj0r23dyym:36:26",
@@ -39,6 +42,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAmC6BA,SAAA,cAAU,GAAGA,SAAK,EAAE","names":["$capture0"],"ignoreList":[],"sources":["state/section-state.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "capture", key: "count$o3pj0r23dyym$2" }],
+  kind: "expression",
 };
 // A server component handed its parent's state, drawing a client component
 // with state of its own: the title follows the parent, and the child keeps

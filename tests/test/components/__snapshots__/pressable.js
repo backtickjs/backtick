@@ -13,6 +13,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;;kBAgBYA,QAAA;IACR,MAAM,CAACC,KAAK,EAAEC,QAAQ,CAAC,GAAGF,QAAA,EAAa,CAAC,CAAC,CAAC;IAC1C;QAAA,IAAAG,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;QAAAL,IAAA,CAAAM,OAAA,GAIa,MAAMP,QAAQ,CAACD,KAAK,EAAE,GAAG,CAAC,CAAC;QAAAS,gBAAA,EAAAL,KAAA,QAEJJ,KAAK,EAAE,GAAG,CAAC,GAAG,GAAG,GAAG,GAAG;QAAAS,gBAAA,EAAAH,KAAA,QAChD,UAAU,GAAGN,KAAK,EAAE,GAAG,QAAQ;QAAA,OAAAE,IAAA;IAAA;AAG5C,CAAC","names":["$splice0","count","setCount","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","$$click","_$insert"],"ignoreList":[],"sources":["components/pressable.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 // A drawing read the way Testing Library reads one: by role and by text, with
 // a click a user would make.

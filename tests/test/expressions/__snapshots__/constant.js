@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAKuC,OAAC","names":[],"ignoreList":[],"sources":["expressions/constant.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 it("constant", async (t) => {
   await snapshotCase(t, "constant", cs.create($module0, []));

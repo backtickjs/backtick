@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBASYA,QAAA,IAAAA,QAAA,EAAI,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["expressions/dollar-name.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module1 = {
   id: "sl458m2swc6c:17:4",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAgBOA,QAAA;IACD,MAAMC,IAAI,GAAG,CAAC;IACd,OAAOD,QAAA,CAAAC,IAAA,CAAgB;AACzB,CAAC","names":["$splice0","foo$"],"ignoreList":[],"sources":["expressions/dollar-name.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: ["foo$$sl458m2swc6c$0"] }],
+  kind: "block",
 };
 const $module2 = {
   id: "sl458m2swc6c:19:19",
@@ -21,6 +23,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkBsBA,SAAA,IAAAA,SAAI","names":["$capture0"],"ignoreList":[],"sources":["expressions/dollar-name.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "capture", key: "foo$$sl458m2swc6c$0" }],
+  kind: "expression",
 };
 // A `$` inside a name is ordinary JavaScript — only the leading sigil is
 // reserved for splices — so a `$`-bearing binding survives mangling, its

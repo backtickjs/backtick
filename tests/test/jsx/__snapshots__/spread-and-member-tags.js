@@ -9,6 +9,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAYiB;IACP,MAAMA,IAAI,GAAG;QAAEC,KAAK,EAAE,QAAQ;QAAE,WAAW,EAAE;KAAQ;IACrD;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,EAAiBF,IAAI;QAAA,OAAAE,IAAA;IAAA;AACvB,CAAC","names":["rest","title","_el$","_tmpl$","_$spread"],"ignoreList":[],"sources":["jsx/spread-and-member-tags.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "block",
 };
 const $module1 = {
   id: "2iu7bt1cywglp:27:14",
@@ -16,6 +17,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBA0BiB;IACP,MAAMA,IAAI,GAAG;QACXC,KAAK,EAAGC,KAA2B;YAAA,IAAAC,IAAA,GAAAC,MAAA;YAAAC,gBAAA,EAAAF,IAAA,QACzBD,KAAK,CAACI,QAAQ;YAAA,OAAAH,IAAA;QAAA;KAEzB;IACD,OAAAI,yBAAA,EAAQP,IAAI,CAACC,KAAK;QAAAK,QAAA;KAAA;AACpB,CAAC","names":["Text","Small","props","_el$","_tmpl$","_$insert","children","_$createComponent"],"ignoreList":[],"sources":["jsx/spread-and-member-tags.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "block",
 };
 // JSX a script writes as Solid code: attributes spread onto an element, and a
 // tag naming a component its own object holds.

@@ -8,6 +8,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBASY;IACR,OAAAA,MAAA;AAGF,CAAC","names":["_tmpl$"],"ignoreList":[],"sources":["stdlib/string-from-code-point.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "block",
 };
 // A namespace static taking a rest parameter, so the whole of the call crosses
 // as one name and a list of arguments — `String` is the front of the name and

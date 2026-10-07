@@ -8,6 +8,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAOe;IACbA,MAAM,CAACC,OAAO,CAACC,GAAG,CAAC,QAAQ,CAAC;AAC9B,CAAC","names":["window","console","log"],"ignoreList":[],"sources":["splices/action-spliced-twice.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 const $module1 = {
   id: "277pr9nok10br:19:19",
@@ -15,6 +16,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkBsBA,QAAA;IAChBA,QAAA,EAAI;IACJA,QAAA,EAAI;AACN,CAAC","names":["$splice0"],"ignoreList":[],"sources":["splices/action-spliced-twice.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 // An action spliced twice as a statement runs twice: each `$log;` is the
 // action's code, run where it stands.

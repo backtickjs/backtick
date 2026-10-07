@@ -9,6 +9,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBASmCA,QAAA,IAAAA,QAAA,EAAW,CAAC,MAAM,IAAI,KAAK,IAAI,CAAC","names":["$splice0"],"ignoreList":[],"sources":["expressions/null-undefined-equality.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module1 = {
   id: "dggvpbrq8knn:12:21",
@@ -16,6 +17,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWwBA,QAAA,IAAAA,QAAA,EAAW,CAAC,MAAMC,SAAS,KAAKA,SAAS,CAAC","names":["$splice0","undefined"],"ignoreList":[],"sources":["expressions/null-undefined-equality.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module2 = {
   id: "dggvpbrq8knn:19:21",
@@ -23,6 +25,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkBwBA,QAAA,IAAAA,QAAA,EAAW,CAAC,MAAM,IAAI,KAAKC,SAAS,CAAC","names":["$splice0","undefined"],"ignoreList":[],"sources":["expressions/null-undefined-equality.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module3 = {
   id: "dggvpbrq8knn:23:21",
@@ -30,6 +33,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAsBwBA,QAAA,IAAAA,QAAA,EAAW,CAAC,MAAM,IAAI,KAAKC,SAAS,CAAC","names":["$splice0","undefined"],"ignoreList":[],"sources":["expressions/null-undefined-equality.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module4 = {
   id: "dggvpbrq8knn:34:21",
@@ -41,6 +45,7 @@ const $module4 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 // `null` and `undefined` are two values, each equal only to itself.
 describe("null and undefined", () => {

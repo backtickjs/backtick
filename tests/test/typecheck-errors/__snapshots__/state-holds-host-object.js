@@ -9,6 +9,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "block",
 };
 // A host object with behaviour reaching a cell, refused where it is written.
 //

@@ -8,6 +8,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBASY;IACR,OAAAA,MAAA;AAUF,CAAC","names":["_tmpl$"],"ignoreList":[],"sources":["stdlib/encode-uri-component.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "block",
 };
 // A whole name rather than a front, so the call crosses as the one name and
 // its argument. What a query is built from: a reserved character, a space and a

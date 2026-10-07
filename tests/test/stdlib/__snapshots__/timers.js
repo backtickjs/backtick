@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAwBO;IACD,MAAMA,IAAI,GAAGC,MAAM,CAACC,aAAa;IACjC,MAAMC,SAAS,GAAGF,MAAM,CAACG,WAAW,CAAC,MAAM,CAAC,EAAE,IAAI,CAAC;IACnDJ,IAAI,CAACG,SAAS,CAAC;IACfF,MAAM,CAACI,YAAY,CAACJ,MAAM,CAACK,UAAU,CAAC,MAAM,CAAC,EAAE,IAAI,CAAC,CAAC;AACvD,CAAC","names":["stop","window","clearInterval","repeating","setInterval","clearTimeout","setTimeout"],"ignoreList":[],"sources":["stdlib/timers.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // A clock, which is the platform's rather than the language's: a script reaches
 // one by splicing the browser's `window`, the same as anything else a platform

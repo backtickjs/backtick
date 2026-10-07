@@ -10,6 +10,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const $module1 = {
   id: "3cex0hh0qp6qz:13:4",
@@ -20,6 +21,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const $module2 = {
   id: "3cex0hh0qp6qz:14:15",
@@ -27,6 +29,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAakB,OAAC","names":[],"ignoreList":[],"sources":["splices/splice-sharing.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module3 = {
   id: "3cex0hh0qp6qz:14:22",
@@ -34,6 +37,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAayB,OAAC","names":[],"ignoreList":[],"sources":["splices/splice-sharing.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module4 = {
   id: "3cex0hh0qp6qz:15:15",
@@ -41,6 +45,7 @@ const $module4 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAckB,OAAC","names":[],"ignoreList":[],"sources":["splices/splice-sharing.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module5 = {
   id: "3cex0hh0qp6qz:15:22",
@@ -48,6 +53,7 @@ const $module5 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAcyB,OAAC","names":[],"ignoreList":[],"sources":["splices/splice-sharing.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 function add(lhs, rhs) {
   return cs.create($module0, [lhs, rhs]);

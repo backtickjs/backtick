@@ -11,6 +11,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAaWA,QAAA;IACD,MAAM,CAACC,KAAK,EAAEC,QAAQ,CAAC,GAAGF,QAAA,EAAa,CACrC,IAAI,CACL;IACD;QAAA,IAAAG,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;QAAAC,aAAA,EAEmCC,OAAO,IAAKR,QAAQ,CAACQ,OAAO,CAAC,EAAAL,KAAA;QAAAE,KAAA,CAAAI,OAAA,GAC3C,MAAMV,KAAK,EAAE,EAAEW,KAAK,EAAE;QAAA,OAAAT,IAAA;IAAA;AAG7C,CAAC","names":["$splice0","field","setField","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","_$use","element","$$click","focus"],"ignoreList":[],"sources":["render/ref.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 const $module1 = {
   id: "3c9dsoj0gi4d6:34:8",
@@ -18,6 +19,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAiCWA,QAAA;IACD;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,aAAA,EAGUC,OAAO,IAAKJ,QAAA,EAAQ,CAAC,MAAMI,OAAO,CAACC,KAAK,EAAE,CAAC,EAAAJ,IAAA;QAAA,OAAAA,IAAA;IAAA;AAGvD,CAAC","names":["$splice0","_el$","_tmpl$","_$use","element","focus"],"ignoreList":[],"sources":["render/ref.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 const $module2 = {
   id: "3c9dsoj0gi4d6:49:21",
@@ -25,6 +27,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAgDwB;IAAA,IAAAA,IAAA,GAAAC,MAAA;IAAAC,aAAA,EAAoC,QAAO,CAAC,EAAAF,IAAA;IAAA,OAAAA,IAAA;AAAA,IAAI","names":["_el$","_tmpl$","_$use"],"ignoreList":[],"sources":["render/ref.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "function",
 };
 const $module3 = {
   id: "3c9dsoj0gi4d6:73:10",
@@ -32,6 +35,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;;;kBAwEaA,QAAA;IACD,MAAM,CAACC,KAAK,EAAEC,QAAQ,CAAC,GAAGF,QAAA,EAAa,CAAC,IAAI,CAAC;IAC7C,MAAM,CAACG,CAAC,EAAEC,IAAI,CAAC,GAAGJ,QAAA,EAAa,CAAC,CAAC,CAAC;IAClC;QAAA,IAAAK,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;QAAAD,KAAA,CAAAE,OAAA,GAEqB,MAAML,IAAI,CAACD,CAAC,EAAE,GAAG,CAAC,CAAC;QAAAO,gBAAA,EAAAH,KAAA,QAAG,IAAI,GAAGJ,CAAC,EAAE;QAAAO,gBAAA,EAAAL,IAAA;YAAA,IAAAM,GAAA,GAAAC,cAAA,UAChDX,KAAK,EAAE;YAAA,aAAPU,GAAA;gBAAA,IAAAE,KAAA,GAAAC,OAAA;gBAAAC,aAAA,EACS,MAAMC,MAAM,CAACC,OAAO,CAACC,GAAG,CAACf,CAAC,EAAE,CAAC,EAAAU,KAAA;gBAAA,OAAAA,KAAA;YAAA,OACnC,IAAI;QAAA;QAAA,OAAAR,IAAA;IAAA;AAGd,CAAC","names":["$splice0","shown","setShown","n","setN","_el$","_tmpl$","_el$2","firstChild","$$click","_$insert","_c$","_$memo","_el$3","_tmpl$2","_$use","window","console","log"],"ignoreList":[],"sources":["render/ref.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 // `ref` hands a script the element it is written on.
 describe("ref", () => {

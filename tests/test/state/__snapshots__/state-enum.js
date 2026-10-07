@@ -9,6 +9,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkBmDA,QAAA,IAACC,CAAQ;IAC1D,OAAOA,CAAC,KAAKD,QAAA,EAAa,GAAG,MAAM,GAAG,KAAK;AAC7C,CAAC","names":["$splice0","c"],"ignoreList":[],"sources":["state/state-enum.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 const $module1 = {
   id: "3ekonqoxkrl1q:24:9",
@@ -21,6 +22,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "block",
 };
 // A signal holding an enum, handed to a function whose parameter is that enum.
 //

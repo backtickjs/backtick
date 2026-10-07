@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAO8B;IAC5B,IAAIA,CAAC,GAAG,CAAC;IACTA,CAAC,GAAG,CAAC;AACP,CAAC","names":["n"],"ignoreList":[],"sources":["control-flow/handler-object.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 const $module1 = {
   id: "1dqhax1do6u08:13:44",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAY+CA,QAAA,IAACC,EAAU;IACxDD,QAAA,EAAK;AACP,CAAC","names":["$splice0","id"],"ignoreList":[],"sources":["control-flow/handler-object.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 const $module2 = {
   id: "1dqhax1do6u08:21:4",
@@ -21,6 +23,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAoBOA,QAAA;IACD,MAAMC,QAAQ,GAAG;QACfC,GAAG,EAAEF,QAAA,EAAM;QACXG,IAAI,EAAEH,QAAA;KACP;IACD,OAAOC,QAAQ;AACjB,CAAC","names":["$splice0","handlers","tap","hold"],"ignoreList":[],"sources":["control-flow/handler-object.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 // Handlers — action arrows — are values: an object carries them, and
 // storing one is not calling it.

@@ -16,6 +16,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "function",
 };
 const $module1 = {
   id: "17esee640arqb:32:22",
@@ -26,6 +27,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "block",
 };
 // The same claim as `evaluateBuildsOnce`, with no bundle in it.
 //

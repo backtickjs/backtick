@@ -12,6 +12,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;;kBAaYA,QAAA;IACR,MAAM,CAACC,IAAI,EAAEC,OAAO,CAAC,GAAGF,QAAA,EAAa,CAAC,EAAE,CAAC;IACzC;QAAA,IAAAG,IAAA,GAAAC,MAAA;QAAAD,IAAA,CAAAE,OAAA,GAGa;YACPH,OAAO,CAACD,IAAI,EAAE,GAAG,CAAC,CAAC;QACrB,CAAC;QAAAK,gBAAA,EAAAC,GAAA,IAAAC,eAAA,EAAAL,IAAA,EAHM,aAAa,GAAGF,IAAI,EAAE,GAAG,IAAI,EAAAM,GAAA;QAAA,OAAAJ,IAAA;IAAA;AAQ1C,CAAC","names":["$splice0","size","setSize","_el$","_tmpl$","$$click","_$effect","_$p","_$style"],"ignoreList":[],"sources":["state/local-state.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 // A signal a script declares, read and written by what it draws. The script
 // owns the storage, so the display and the handler are two readers of one

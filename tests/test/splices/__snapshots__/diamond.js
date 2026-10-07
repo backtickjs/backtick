@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBASc,OAAC","names":[],"ignoreList":[],"sources":["splices/diamond.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module1 = {
   id: "23y608t6y2wp3:12:11",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWcA,QAAA;IACZ,OAAOA,QAAA,EAAG,GAAGA,QAAA,EAAG;AAClB,CAAC","names":["$splice0"],"ignoreList":[],"sources":["splices/diamond.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 const $module2 = {
   id: "23y608t6y2wp3:16:11",
@@ -21,6 +23,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAecA,QAAA;IACZ,OAAOA,QAAA,EAAG,GAAGA,QAAA,EAAG;AAClB,CAAC","names":["$splice0"],"ignoreList":[],"sources":["splices/diamond.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 const $module3 = {
   id: "23y608t6y2wp3:20:11",
@@ -28,6 +31,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAmBcA,QAAA;IACZ,OAAOA,QAAA,EAAG,GAAGA,QAAA,EAAG;AAClB,CAAC","names":["$splice0"],"ignoreList":[],"sources":["splices/diamond.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 const $module4 = {
   id: "23y608t6y2wp3:24:11",
@@ -35,6 +39,7 @@ const $module4 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAuBcA,QAAA;IACZ,OAAOA,QAAA,EAAG,GAAGA,QAAA,EAAG;AAClB,CAAC","names":["$splice0"],"ignoreList":[],"sources":["splices/diamond.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 // Each level splices the level below it twice, so the composition graph is a
 // diamond lattice with exponentially many root-to-leaf paths. The bundler

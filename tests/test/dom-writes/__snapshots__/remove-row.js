@@ -16,6 +16,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "block",
 };
 // js-framework-benchmark's "remove row": one row in the middle goes. The rows
 // after it close up by staying where they are, so what is written is the one

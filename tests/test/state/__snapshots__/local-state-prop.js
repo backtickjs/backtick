@@ -12,6 +12,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;;kBAeKA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAD,IAAA,CAAAE,OAAA,GAGU;QACPH,QAAA,EAAK,CAAC,CAAC,CAAC,CAACA,QAAA,EAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAC1B,CAAC;IAAAI,gBAAA,EAAAC,GAAA,IAAAC,eAAA,EAAAL,IAAA,EAHM,aAAa,GAAGD,QAAA,EAAK,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI,EAAAK,GAAA;IAAA,OAAAJ,IAAA;AAAA,IAO3C","names":["$splice0","_el$","_tmpl$","$$click","_$effect","_$p","_$style"],"ignoreList":[],"sources":["state/local-state-prop.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module1 = {
   id: "1t9uf2rmx1hr4:28:9",
@@ -23,6 +24,7 @@ const $module1 = {
     { kind: "splice", bindings: ["size$1t9uf2rmx1hr4$0"] },
     { kind: "splice", bindings: ["size$1t9uf2rmx1hr4$0"] },
   ],
+  kind: "block",
 };
 const $module2 = {
   id: "1t9uf2rmx1hr4:32:33",
@@ -30,6 +32,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA+BoCA,SAAA,IAAAA,SAAI","names":["$capture0"],"ignoreList":[],"sources":["state/local-state-prop.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "capture", key: "size$1t9uf2rmx1hr4$0" }],
+  kind: "expression",
 };
 const $module3 = {
   id: "1t9uf2rmx1hr4:33:33",
@@ -37,6 +40,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAgCoCA,SAAA,IAAAA,SAAI","names":["$capture0"],"ignoreList":[],"sources":["state/local-state-prop.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "capture", key: "size$1t9uf2rmx1hr4$0" }],
+  kind: "expression",
 };
 // A signal crossing a component boundary: declared once by the script that
 // draws the pair, handed to each child as a prop, so both read one storage. The

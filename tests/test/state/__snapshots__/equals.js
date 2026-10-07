@@ -14,6 +14,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "function",
 };
 const $module1 = {
   id: "39ydzywohgsvn:64:8",
@@ -21,6 +22,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBA+DWA,QAAA;IACD,MAAM,CAACC,KAAK,EAAEC,QAAQ,CAAC,GAAGF,QAAA,EAAa,CACrC;QAAEG,CAAC,EAAE;KAAG,EACR;QAAEC,MAAM,EAAEA,CAACC,QAAQ,EAAEC,IAAI,KAAKD,QAAQ,CAACF,CAAC,KAAKG,IAAI,CAACH;KAAG,CACtD;IACD,MAAMI,KAAK,GAAGA,GAAA;QACZC,MAAM,CAACC,OAAO,CAACC,GAAG,EAAE;QACpB,OAAO,IAAI,GAAGT,KAAK,EAAE,CAACE,CAAC;IACzB,CAAC;IACD;QAAA,IAAAQ,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;QAAAH,KAAA,CAAAI,OAAA,GAEqB,MAAMf,QAAQ,CAAC;YAAEC,CAAC,EAAEF,KAAK,EAAE,CAACE;SAAG,CAAC;QAAAe,gBAAA,EAAAH,KAAA,EAC7CR,KAAK;QAAA,OAAAI,IAAA;IAAA;AAGf,CAAC","names":["$splice0","point","setPoint","x","equals","previous","next","label","window","console","log","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","$$click","_$insert"],"ignoreList":[],"sources":["state/equals.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 const $module2 = {
   id: "39ydzywohgsvn:89:8",
@@ -28,6 +30,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAwFWA,QAAA;IACD,MAAM,CAACC,CAAC,EAAEC,IAAI,CAAC,GAAGF,QAAA,EAAa,CAAC,CAAC,EAAE;QACjCG,MAAM,EAAEA,CAACC,QAAQ,EAAEC,IAAI;YACrBC,MAAM,CAACC,OAAO,CAACC,GAAG,CAACJ,QAAQ,EAAEC,IAAI,CAAC;YAClC,OAAOD,QAAQ,KAAKC,IAAI;QAC1B;KACD,CAAC;IACF;QAAA,IAAAI,IAAA,GAAAC,MAAA;QAAAD,IAAA,CAAAE,OAAA,GAAwB,MAAMT,IAAI,CAAC,CAAC,CAAC;QAAAU,gBAAA,EAAAH,IAAA,QAAG,IAAI,GAAGR,CAAC,EAAE;QAAA,OAAAQ,IAAA;IAAA;AACpD,CAAC","names":["$splice0","n","setN","equals","previous","next","window","console","log","_el$","_tmpl$","$$click","_$insert"],"ignoreList":[],"sources":["state/equals.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 const $module3 = {
   id: "39ydzywohgsvn:108:8",
@@ -35,6 +38,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBA2GWA,QAAA;IACD,MAAM,CAACC,CAAC,EAAEC,IAAI,CAAC,GAAGF,QAAA,EAAa,CAAC,CAAC,CAAC;IAClC,MAAMG,KAAK,GAAGA,GAAA;QACZC,MAAM,CAACC,OAAO,CAACC,GAAG,EAAE;QACpB,OAAO,IAAI,GAAGL,CAAC,EAAE;IACnB,CAAC;IACD;QAAA,IAAAM,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;QAAAH,KAAA,CAAAI,OAAA,GAEqB,MAAMX,IAAI,CAAC,CAAC,CAAC;QAAAY,gBAAA,EAAAH,KAAA,EAC1BR,KAAK;QAAA,OAAAI,IAAA;IAAA;AAGf,CAAC","names":["$splice0","n","setN","label","window","console","log","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","$$click","_$insert"],"ignoreList":[],"sources":["state/equals.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 const $module4 = {
   id: "39ydzywohgsvn:130:8",
@@ -42,6 +46,7 @@ const $module4 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAiIWA,QAAA;IACD,MAAM,CAACC,KAAK,EAAEC,QAAQ,CAAC,GAAGF,QAAA,EAAa,CAAC;QAAEG,CAAC,EAAE;KAAG,CAAC;IACjD,MAAMC,KAAK,GAAGA,GAAA;QACZC,MAAM,CAACC,OAAO,CAACC,GAAG,EAAE;QACpB,OAAO,IAAI,GAAGN,KAAK,EAAE,CAACE,CAAC;IACzB,CAAC;IACD;QAAA,IAAAK,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;QAAAH,KAAA,CAAAI,OAAA,GAEqB,MAAMZ,QAAQ,CAAC;YAAEC,CAAC,EAAEF,KAAK,EAAE,CAACE;SAAG,CAAC;QAAAY,gBAAA,EAAAH,KAAA,EAC7CR,KAAK;QAAA,OAAAI,IAAA;IAAA;AAGf,CAAC","names":["$splice0","point","setPoint","x","label","window","console","log","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","$$click","_$insert"],"ignoreList":[],"sources":["state/equals.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 // Each reader logs when it runs, so a test counts the runs by counting the
 // logs, and reads what was logged.

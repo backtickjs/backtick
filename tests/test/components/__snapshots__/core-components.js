@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAQO;IAAA,IAAAA,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;IAAAD,KAAA,CAAAE,OAAA,GAEwC,QAAO,CAAC;IAAA,OAAAJ,IAAA;AAAA,IAKlD","names":["_el$","_tmpl$","_el$2","firstChild","$$click"],"ignoreList":[],"sources":["components/core-components.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 it("coreComponents", async (t) => {
   await snapshotCase(t, "coreComponents", cs.create($module0, []));

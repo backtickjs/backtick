@@ -12,6 +12,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBA+BgC,MAAAA,MAAA,EAI3B","names":["_tmpl$"],"ignoreList":[],"sources":["render/attributes.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module1 = {
   id: "3g78mueuhurnr:46:29",
@@ -19,6 +20,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBA6CgC,MAAAA,MAAA,EAM3B","names":["_tmpl$"],"ignoreList":[],"sources":["render/attributes.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module2 = {
   id: "3g78mueuhurnr:65:28",
@@ -26,6 +28,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAgE+B,MAAAA,MAAA,EAA4B","names":["_tmpl$"],"ignoreList":[],"sources":["render/attributes.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module3 = {
   id: "3g78mueuhurnr:73:28",
@@ -33,6 +36,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAwE+B,MAAAA,MAAA,EAK1B","names":["_tmpl$"],"ignoreList":[],"sources":["render/attributes.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module4 = {
   id: "3g78mueuhurnr:90:28",
@@ -40,6 +44,7 @@ const $module4 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAyF+B,MAAAA,MAAA,EAK1B","names":["_tmpl$"],"ignoreList":[],"sources":["render/attributes.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module5 = {
   id: "3g78mueuhurnr:103:28",
@@ -47,6 +52,7 @@ const $module5 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAsG+B,MAAAA,MAAA,EAAoB","names":["_tmpl$"],"ignoreList":[],"sources":["render/attributes.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module6 = {
   id: "3g78mueuhurnr:112:11",
@@ -54,6 +60,7 @@ const $module6 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBA+GcA,QAAA;IACR,MAAM,CAACC,IAAI,EAAEC,OAAO,CAAC,GAAGF,QAAA,EAAa,CAAC,OAAO,CAAC;IAC9C,MAAM,CAACG,IAAI,EAAEC,OAAO,CAAC,GAAGJ,QAAA,EAAa,CAAC,KAAK,CAAC;IAC5C;QAAA,IAAAK,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAC,WAAA;QAAAC,KAAA,CAAAC,OAAA,GAKe;YACPV,OAAO,CAAC,QAAQ,CAAC;YACjBE,OAAO,CAAC,IAAI,CAAC;QACf,CAAC;QAAAS,gBAAA,QAAAN,KAAA,CAAAO,KAAA,GAN6Bb,IAAI,EAAE;QAAAY,gBAAA,QAAAJ,KAAA,CAAAM,OAAA,GACUZ,IAAI,EAAE;QAAA,OAAAE,IAAA;IAAA;AAW5D,CAAC","names":["$splice0","text","setText","isOn","setIsOn","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","_el$4","$$click","_$effect","value","checked"],"ignoreList":[],"sources":["render/attributes.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 // How a prop lands on the element it was drawn on: as the attribute a page's
 // own markup would have written.

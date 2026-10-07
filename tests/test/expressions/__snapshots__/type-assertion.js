@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkBOA,QAAA;IACD,MAAMC,IAAI,GAAGC,IAAI,CAACC,KAAK,CAACH,QAAA,EAAS,CAAsC;IAEvE,OAAOC,IAAI,CAACG,IAAI,CAAC,CAAC,CAAC,GAAG,MAAM,GAAGH,IAAI,CAACI,KAAK;AAC3C,CAAC","names":["$splice0","page","JSON","parse","rows","count"],"ignoreList":[],"sources":["expressions/type-assertion.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 const answered = '{"rows":["one","two"],"count":2}';
 // An assertion is the checker's alone. It is erased on the way to a bundle —

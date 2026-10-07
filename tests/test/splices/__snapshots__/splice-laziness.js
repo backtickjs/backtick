@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAYYA,QAAA,IAACC,IAAa;IACtB,IAAIA,IAAI,EAAE;QACR,OAAOD,QAAA,EAAS;IAClB;IACA,OAAO,SAAS;AAClB,CAAC","names":["$splice0","flag"],"ignoreList":[],"sources":["splices/splice-laziness.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 const $module1 = {
   id: "3jzoitmu8iit8:21:11",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAoBc,iBAAW","names":[],"ignoreList":[],"sources":["splices/splice-laziness.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module2 = {
   id: "3jzoitmu8iit8:23:15",
@@ -21,6 +23,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAsBkB;IAChB,MAAM,0CAA0C;AAClD,CAAC","names":[],"ignoreList":[],"sources":["splices/splice-laziness.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 const $module3 = {
   id: "3jzoitmu8iit8:31:4",
@@ -31,6 +34,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 // A host helper reused with different splices makes its script polymorphic:
 // the holes can't be inlined, so every call site passes its splice as a

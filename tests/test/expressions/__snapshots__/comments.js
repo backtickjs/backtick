@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAUO;IAED,MAAMA,KAAK,GAAG,CAAC;IAEf,IAAIA,KAAK,KAAK,CAAC,EAAE;QAEf,OAAO,KAAK;IACd;IAIA,OAAO,MAAM;AACf,CAAC","names":["count"],"ignoreList":[],"sources":["expressions/comments.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // Comments in a client script are trivia: they survive formatting but are
 // dropped from the virtual code and the bundle.

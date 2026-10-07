@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAasB,MAAAA,MAAA,EAAiB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module1 = {
   id: "346p48wj9kqyv:18:26",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAiB6B,MAAAA,MAAA,EAAS","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module2 = {
   id: "346p48wj9kqyv:25:25",
@@ -21,6 +23,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAwB4BA,QAAA,KAAAC,QAAA,IAAAC,yBAAA,EAACD,QAAQ,KAAG,EAAXD,QAAA,EAAQ,CAAG","names":["$splice0","$NotATag","_$createComponent"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module3 = {
   id: "346p48wj9kqyv:28:25",
@@ -28,6 +31,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBA2B4B,MAAAA,MAAA,EAI3B","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module4 = {
   id: "346p48wj9kqyv:34:20",
@@ -35,6 +39,7 @@ const $module4 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAiCuBA,QAAA,KAAAC,IAAA,IAAAC,yBAAA,EAACD,IAAI;IAACE,IAAI,EAAE,EAAc;IAAAC,QAAA,EAAIC,CAAC;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,EAASD,CAAC;QAAA,OAAAC,IAAA;IAAA;CAAK,CAAQ,EAArDN,QAAA,EAAI,CAAiD","names":["$splice0","$For","_$createComponent","each","children","n","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module5 = {
   id: "346p48wj9kqyv:43:25",
@@ -42,6 +47,7 @@ const $module5 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBA0C4B,MAAAA,MAAA,EAAkB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module6 = {
   id: "346p48wj9kqyv:47:25",
@@ -49,6 +55,7 @@ const $module6 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBA8C4B,MAAAA,MAAA,EAAiB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module7 = {
   id: "346p48wj9kqyv:52:21",
@@ -56,6 +63,7 @@ const $module7 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAmDwBA,QAAA,KAAAC,SAAA,IAAAC,yBAAA,EAACD,SAAS,KAAG,EAAZD,QAAA,EAAS,CAAG","names":["$splice0","$Fragment","_$createComponent"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 const $module8 = {
   id: "346p48wj9kqyv:55:20",
@@ -63,6 +71,7 @@ const $module8 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAsDuB,MAAAA,MAAA,EAAgB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module9 = {
   id: "346p48wj9kqyv:56:22",
@@ -70,6 +79,7 @@ const $module9 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAuDyB,MAAAA,MAAA,EAAc","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 const $module10 = {
   id: "346p48wj9kqyv:57:22",
@@ -77,6 +87,7 @@ const $module10 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAwDyB,MAAAA,MAAA,EAIxB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "expression",
 };
 // What the JSX namespace admits, and what it refuses, in a script.
 //

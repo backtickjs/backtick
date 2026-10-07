@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAcYA,QAAA;IACR,MAAMC,KAAK,GAAG,CAAC;IACf;QACE,MAAMA,KAAK,GAAG,CAAC;QACf,OAAOA,KAAK,GAAGD,QAAA,EAAS;IAC1B;AACF,CAAC","names":["$splice0","total"],"ignoreList":[],"sources":["captures/shadowed-hole.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 const $module1 = {
   id: "1wiy7dknp0llv:28:4",
@@ -17,6 +18,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
 };
 const $module2 = {
   id: "1wiy7dknp0llv:28:22",
@@ -24,6 +26,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2ByB,QAAE","names":[],"ignoreList":[],"sources":["captures/shadowed-hole.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module3 = {
   id: "1wiy7dknp0llv:28:48",
@@ -31,6 +34,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2BmD,QAAE","names":[],"ignoreList":[],"sources":["captures/shadowed-hole.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 // A hole inside a block that shadows an outer name. Two call sites make the
 // script polymorphic, so the splice arrives as a thunk rather than inlined.

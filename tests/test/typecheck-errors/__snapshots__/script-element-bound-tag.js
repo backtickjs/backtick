@@ -5,6 +5,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAKgB,MAACA,GAAW,IAAAC,yBAAA,EAAMD,GAAG,KAAG","names":["Tag","_$createComponent"],"ignoreList":[],"sources":["typecheck-errors/script-element-bound-tag.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
+  kind: "function",
 };
 // A component tag naming a binding the script holds calls it, so what the
 // binding holds has to be a function: `Tag` here is a number.

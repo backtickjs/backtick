@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWO;IACD,MAAMA,IAAI,GAAG;QAAEC,CAAC,EAAE;KAAG;IACrB,OAAO;QAAE,GAAGD,IAAI;QAAE,KAAK,EAAE;KAAG;AAC9B,CAAC","names":["base","a"],"ignoreList":[],"sources":["objects/object-dots-key.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // A property literally named `...`, in a literal a spread also runs through —
 // which is the one shape where a spread and a pair holding `...` sit in the

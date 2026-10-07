@@ -3,8 +3,10 @@ import { it } from "node:test";
 import { drawReactNative } from "./drawReactNative.ts";
 
 // A component made by an expression, `memo(…)`, with state of its own, drawn
-// by a parent that re-renders. As `const Row = memo(…)` at module level is one
-// component, the row keeps its count.
+// by a parent that re-renders. A splice of an expression runs it at each
+// read, so each render makes a new `memo` component, as `memo(…)` written
+// inside a render function would, and React remounts it: a component that
+// keeps its state across renders is written as a function, `cs\`() => …\``.
 const source = `
 import { cs } from "@backtickjs/core";
 import { memo, useState } from "@backtickjs/react";
@@ -34,20 +36,14 @@ const Parent = cs\`() => {
 export const screen = cs\`<$Parent />\`;
 `;
 
-// A known bug: each render reads the row's splice anew, which makes a new
-// `memo` component, and React remounts it. A todo until it's fixed, when the
-// runner reports it passing.
-it(
-  "a memo component keeps its state when its parent re-renders",
-  { todo: "remounted on every render of its parent" },
-  async () => {
-    const { container, press, unmount } = await drawReactNative(
-      "memo-state",
-      source,
-    );
-    await press("row");
-    await press("parent");
-    assert.equal(container.textContent, "parent 1row 1");
-    await unmount();
-  },
-);
+it("a memo component is made again when its parent re-renders", async () => {
+  const { container, press, unmount } = await drawReactNative(
+    "memo-state",
+    source,
+  );
+  await press("row");
+  assert.equal(container.textContent, "parent 0row 1");
+  await press("parent");
+  assert.equal(container.textContent, "parent 1row 0");
+  await unmount();
+});

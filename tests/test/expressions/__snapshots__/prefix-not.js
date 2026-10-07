@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBASO,OAACA,KAAc,EAAEC,KAAa;IAC/B,IAAI,CAACD,KAAK,EAAE;QACV,OAAO,SAAS;IAClB;IACA,OAAO,EAAEC,KAAK,GAAG,CAAC,CAAC,GAAG,WAAW,GAAG,MAAM;AAC5C,CAAC","names":["ready","count"],"ignoreList":[],"sources":["expressions/prefix-not.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "function",
 };
 // `!` negates its operand.
 it("prefixNot", async (t) => {

@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAOiC;IAC/B,MAAMA,CAAC,GAAG,CAAC;AACb,CAAC","names":["x"],"ignoreList":[],"sources":["control-flow/action-composition.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 const $module1 = {
   id: "3q2gz79xhvvfp:12:31",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWkCA,QAAA;IAChCA,QAAA,EAAQ;AACV,CAAC","names":["$splice0"],"ignoreList":[],"sources":["control-flow/action-composition.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 const $module2 = {
   id: "3q2gz79xhvvfp:20:4",
@@ -21,6 +23,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAmBOA,QAAA;IACDA,QAAA,EAAS;AACX,CAAC","names":["$splice0"],"ignoreList":[],"sources":["control-flow/action-composition.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "block",
 };
 // An action — a block with no `return` — types `Client<void>` natively and
 // composes as a block running it in statement position.

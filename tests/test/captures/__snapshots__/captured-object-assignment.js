@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAWOA,QAAA;IACD,MAAMC,OAAO,GAAG;QAAEC,KAAK,EAAE;KAAG;IAC5B,MAAMC,IAAI,GAAGH,QAAA,CAAAC,OAAA,CAEV;IACHE,IAAI,EAAE;IACNA,IAAI,EAAE;IACN,OAAOF,OAAO,CAACC,KAAK;AACtB,CAAC","names":["$splice0","counter","count","bump"],"ignoreList":[],"sources":["captures/captured-object-assignment.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: ["counter$385xpgt8q0ek2$0"] }],
+  kind: "block",
 };
 const $module1 = {
   id: "385xpgt8q0ek2:14:21",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAawBA,SAAA;IAChBA,SAAO,CAACC,KAAK,IAAI,CAAC;AACpB,CAAC","names":["$capture0","count"],"ignoreList":[],"sources":["captures/captured-object-assignment.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "capture", key: "counter$385xpgt8q0ek2$0" }],
+  kind: "function",
 };
 // A nested script captures a variable's value, and an object's value is a
 // reference: assigning to a member of a captured object writes the one object

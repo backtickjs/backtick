@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAO2B,UAAI","names":[],"ignoreList":[],"sources":["expressions/condition-narrowing.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "expression",
 };
 const $module1 = {
   id: "g29mnwu0pbnr:10:71",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAS0EA,QAAA,KACxEC,IAAmB,EACnBC,KAAc;IAEd,IAAIA,KAAK,IAAID,IAAI,KAAK,IAAI,EAAE;QAC1B,OAAOA,IAAI,CAACE,WAAW,EAAE;IAC3B;IACA,IAAIH,QAAA,EAAe,IAAIC,IAAI,KAAK,IAAI,IAAIA,IAAI,CAACG,MAAM,CAAC,CAAC,CAAC,KAAK,GAAG,EAAE;QAC9D,OAAOH,IAAI,CAACI,MAAM,CAAC,GAAG,CAAC;IACzB;IACA,OAAO,MAAM;AACf,CAAC","names":["$splice0","text","upper","toUpperCase","charAt","concat"],"ignoreList":[],"sources":["expressions/condition-narrowing.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "function",
 };
 const $module2 = {
   id: "g29mnwu0pbnr:27:4",
@@ -21,6 +23,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA0BOA,QAAA,KAAC;IACFC,OAAO,EAAED,QAAA,EAAM,CAAC,IAAI,EAAE,IAAI,CAAC;IAC3BE,IAAI,EAAEF,QAAA,EAAM,CAAC,KAAK,EAAE,IAAI,CAAC;IACzBG,KAAK,EAAEH,QAAA,EAAM,CAAC,KAAK,EAAE,KAAK,CAAC;IAC3BI,KAAK,EAAEJ,QAAA,EAAM,CAAC,IAAI,EAAE,KAAK;CAC1B,CAAC","names":["$splice0","missing","loud","quiet","plain"],"ignoreList":[],"sources":["expressions/condition-narrowing.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
 };
 // A condition narrows in the virtual code: `text !== null` narrows `text` in
 // the branch it guards and from a `&&` left operand into the right, a braced

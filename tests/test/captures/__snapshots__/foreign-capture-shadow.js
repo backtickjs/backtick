@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAiBYA,QAAA;IACR,MAAMC,IAAI,GAAG,GAAG;IAChB,OAAOD,QAAA,CAAAC,IAAA,CAAsB;AAC/B,CAAC","names":["$splice0","base"],"ignoreList":[],"sources":["captures/foreign-capture-shadow.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: ["base$bphb1svo1jv3$0"] }],
+  kind: "block",
 };
 const $module1 = {
   id: "bphb1svo1jv3:20:13",
@@ -17,6 +18,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
     { kind: "capture", key: "base$bphb1svo1jv3$0" },
   ],
+  kind: "expression",
 };
 const $module2 = {
   id: "bphb1svo1jv3:28:4",
@@ -24,6 +26,7 @@ const $module2 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2BOA,QAAA;IACD,MAAMC,IAAI,GAAG,CAAC;IACd,OAAOD,QAAA,CAAAC,IAAA,CAAsB;AAC/B,CAAC","names":["$splice0","base"],"ignoreList":[],"sources":["captures/foreign-capture-shadow.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: ["base$bphb1svo1jv3$1"] }],
+  kind: "block",
 };
 const $module3 = {
   id: "bphb1svo1jv3:30:25",
@@ -31,6 +34,7 @@ const $module3 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA6B4BA,SAAA,IAAAA,SAAI","names":["$capture0"],"ignoreList":[],"sources":["captures/foreign-capture-shadow.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "capture", key: "base$bphb1svo1jv3$1" }],
+  kind: "expression",
 };
 // Two distinct captures of one entry that want the same name.
 //

@@ -7,6 +7,7 @@ const $module0 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBASO;IACD,IAAIA,CAAC,GAAG,CAAC;IACT,IAAIA,CAAC,KAAK,CAAC,EAAE;QACX,OAAO,MAAM;IACf;AACF,CAAC","names":["n"],"ignoreList":[],"sources":["control-flow/partial-return.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 const $module1 = {
   id: "x79h35ggz599:23:4",
@@ -14,6 +15,7 @@ const $module1 = {
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAsBO;IACD,MAAMA,IAAI,GAAIC,CAAU;QACtB,IAAIA,CAAC,EAAE;YACL,OAAO,OAAO;QAChB;IACF,CAAC;IACD,OAAO,CAACD,IAAI,CAAC,IAAI,CAAC,EAAEA,IAAI,CAAC,KAAK,CAAC,CAAC;AAClC,CAAC","names":["pick","b"],"ignoreList":[],"sources":["control-flow/partial-return.test.tsx"]}',
   dependencies: [],
   params: [],
+  kind: "block",
 };
 // A value body that falls off the end completes with `undefined`.
 it("partialReturnScript", async (t) => {
