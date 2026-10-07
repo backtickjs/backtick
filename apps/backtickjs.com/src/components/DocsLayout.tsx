@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { createSignal, type JSX } from "@backtickjs/solid-js";
+import { createSignal } from "@backtickjs/solid-js";
 import type { DocsLink, DocsSection, Heading } from "../docs.js";
 import { Layout } from "./Layout.js";
 
@@ -55,8 +55,7 @@ const CopyMarkdown = cs`(props: { path: string }) => {
 
 // A docs page: the sections beside it, its headings after it on wide
 // screens, and the pages before and after it below. Its body is Markdown
-// rendered to HTML on the server, or, for a page drawn by components, its
-// children.
+// rendered to HTML on the server.
 export const DocsLayout = cs`(props: {
   sections: DocsSection[];
   path: string;
@@ -65,8 +64,7 @@ export const DocsLayout = cs`(props: {
   headings: Heading[];
   previous: DocsLink | null;
   next: DocsLink | null;
-  html?: string;
-  children?: JSX.Element;
+  html: string;
 }) => (
   <$Layout>
     <div class="grid grid-cols-[minmax(0,1fr)] gap-10 pt-4 lg:grid-cols-[210px_minmax(0,1fr)] xl:grid-cols-[210px_minmax(0,1fr)_190px]">
@@ -87,11 +85,7 @@ export const DocsLayout = cs`(props: {
           {props.title}
         </h1>
         <p class="mt-4 text-lg text-muted">{props.description}</p>
-        {props.html === undefined ? (
-          <div class="docs-prose">{props.children}</div>
-        ) : (
-          <div class="docs-prose" innerHTML={props.html} />
-        )}
+        <div class="docs-prose" innerHTML={props.html} />
 
         <nav class="mt-16 grid gap-4 border-t border-line pt-8 sm:grid-cols-2">
           {props.previous === null ? (
