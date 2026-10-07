@@ -1,0 +1,30 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n  
+window           → window
+.                → .
+console          → console
+.                → .
+log              → log
+(                → (
+"logged"         → "logged"
+)                → )
+;                → ;
+\n               → \n
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n      
+(cs.splice(      →  [-semantic -navigation]
+(log)            → $log
+))               →  [-semantic -navigation]
+;                → ;
+\n               → \n      
+(cs.splice(      →  [-semantic -navigation]
+(log)            → $log
+))               →  [-semantic -navigation]
+;                → ;
+\n               → \n    
+}                → }
+)())             → ` [-semantic -navigation]
