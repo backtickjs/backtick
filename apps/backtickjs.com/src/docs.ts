@@ -21,23 +21,28 @@ const CONTENT = new URL("../content/", import.meta.url);
 // `content/examples/`, shown under its name within the example:
 // `server/Home.tsx`. The examples are type-checked and tested, so what a page
 // shows works. With `diff=` naming another file, as the tutorial's previous
-// step, the lines that differ from it are marked.
-const INCLUDE = /^```(\w+) file=(\S+)(?: diff=(\S+))?\n\s*```$/gm;
+// step, the lines that differ from it are marked. With `details="…"`, the file
+// is folded away under that summary, as a bundle is under its example.
+const INCLUDE =
+  /^```(\w+) file=(\S+)(?: diff=(\S+))?(?: (details="[^"]*"))?\n\s*```$/gm;
 
 // A page's Markdown with every example written out, as the site renders it
 // and as agents read it.
 export async function readPage(file: string): Promise<string> {
   const source = await readFile(new URL(file, CONTENT), "utf8");
   const includes = await Promise.all(
-    [...source.matchAll(INCLUDE)].map(async ([, lang, path, before]) => {
-      const code = (await readExample(path!)).trimEnd();
-      const title = path!.split("/").slice(1).join("/");
-      const added =
-        before === undefined
-          ? ""
-          : ` added="${addedLines((await readExample(before)).trimEnd(), code)}"`;
-      return `\`\`\`${lang} title="${title}"${added}\n${code}\n\`\`\``;
-    }),
+    [...source.matchAll(INCLUDE)].map(
+      async ([, lang, path, before, details]) => {
+        const code = (await readExample(path!)).trimEnd();
+        const title = path!.split("/").slice(1).join("/");
+        const added =
+          before === undefined
+            ? ""
+            : ` added="${addedLines((await readExample(before)).trimEnd(), code)}"`;
+        const folded = details === undefined ? "" : ` ${details}`;
+        return `\`\`\`${lang} title="${title}"${added}${folded}\n${code}\n\`\`\``;
+      },
+    ),
   );
   let index = 0;
   return source.replace(INCLUDE, () => includes[index++]!);
@@ -153,7 +158,11 @@ async function renderFence(info: string, content: string): Promise<string> {
     title === undefined
       ? ""
       : `<div class="border-b border-code-line px-5 py-3 font-mono text-xs text-code-muted">${escape(title)}</div>`;
-  return `<div class="my-6 overflow-hidden rounded-2xl border border-code-line bg-code text-code-ink">${name}<pre class="m-0 overflow-x-auto py-4 font-mono text-[14px] leading-[1.6]">${lines}</pre></div>`;
+  const panel = `<div class="my-6 overflow-hidden rounded-2xl border border-code-line bg-code text-code-ink">${name}<pre class="m-0 overflow-x-auto py-4 font-mono text-[14px] leading-[1.6]">${lines}</pre></div>`;
+  const details = /details="([^"]*)"/.exec(info)?.[1];
+  return details === undefined
+    ? panel
+    : `<details class="my-6"><summary class="cursor-pointer font-medium text-react">${escape(details)}</summary>${panel}</details>`;
 }
 
 function escape(text: string): string {

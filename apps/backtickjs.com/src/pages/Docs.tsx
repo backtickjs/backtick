@@ -40,6 +40,32 @@ const ENTRIES: { name: string; pages: Entry[] }[] = [
       },
     ],
   },
+  {
+    name: "Learn",
+    pages: [
+      {
+        path: "/docs/server-components",
+        title: "Server components",
+        description:
+          "Functions your server runs for every request: they read your data and return the screen.",
+        file: "server-components.md",
+      },
+      {
+        path: "/docs/client-scripts",
+        title: "Client scripts",
+        description:
+          "Code inside cs`…`, written in your server's files and run on the phone.",
+        file: "client-scripts.md",
+      },
+      {
+        path: "/docs/splices",
+        title: "Splices",
+        description:
+          "How a value crosses from your server into a client script, and what can cross.",
+        file: "splices.md",
+      },
+    ],
+  },
 ];
 
 const SECTIONS: DocsSection[] = ENTRIES.map((section) => ({

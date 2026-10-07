@@ -30,7 +30,7 @@ it("thinking: the bundle shown is the bundle built", async () => {
   const { code } = await bundleScreen(
     <ThinkingHome user={{ id: "u-7", name: "Sam" }} />,
   );
-  const file = new URL("../thinking/bundle.js", import.meta.url);
+  const file = new URL("../thinking/server/Home.bundle.js", import.meta.url);
   if (process.env.UPDATE) {
     writeFileSync(file, code);
   }

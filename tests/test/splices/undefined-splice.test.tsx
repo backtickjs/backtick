@@ -5,8 +5,8 @@ import { bundler } from "@backtickjs/bundler";
 import { evaluate } from "../evaluate.ts";
 import { createRoot } from "@backtickjs/solid-js";
 
-// A spliced `undefined` crosses as the bundle's `undef` node, since JSON has
-// no form for it: dropped from an object and turned into `null` in an array.
+// A spliced `undefined` crosses as itself, written `void 0`: alone, as an
+// object's member, its key kept, and as an array's element.
 describe("a spliced undefined", () => {
   it("arrives as undefined", async () => {
     const nothing: number | undefined = undefined;

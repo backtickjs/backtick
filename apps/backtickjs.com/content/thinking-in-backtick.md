@@ -27,7 +27,7 @@ Read it by where each part runs:
 For a request from Sam, the server sends this bundle. It's generated from the
 screen above by the docs' tests, so it's exactly what the bundler writes:
 
-```js file=thinking/bundle.js
+```js file=thinking/server/Home.bundle.js
 
 ```
 

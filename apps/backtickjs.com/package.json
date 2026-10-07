@@ -43,6 +43,8 @@
     "@types/node": "^25.9.1",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.7",
+    "expo-haptics": "~57.0.3",
+    "expo-linear-gradient": "~57.0.2",
     "global-jsdom": "^30.0.0",
     "jsdom": "^30.0.1",
     "nodemon": "^3.1.14",
