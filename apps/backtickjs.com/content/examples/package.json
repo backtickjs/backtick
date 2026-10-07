@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "type": "module",
+  "backtick": {
+    "plugins": [
+      "@backtickjs/react/plugin"
+    ]
+  }
+}

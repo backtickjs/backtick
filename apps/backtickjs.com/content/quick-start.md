@@ -1,40 +1,68 @@
 ```sh
-npx create-backtick-app@latest
+npx create-backtick-app@latest my-app
 ```
 
-It asks for a name, a framework and a runtime. Pick React Native, and it
-creates an Expo app with a Backtick server beside it. Then run `npm run ios`,
-`android` or `web`, and edit `server/Home.tsx` to change the screen.
+It asks for a framework and a runtime. Pick React Native, and it creates an
+Expo app with a Backtick server beside it, then installs its packages.
 
-The steps below are what it sets up.
+## Run it
 
-## Write a screen
+```sh
+cd my-app
+npm run ios
+```
 
-A server component runs on your server, for every request. It reads its data
-where it lives and returns a client script, `` cs`…` ``: the screen, drawn on
-the device. Each `$name` is a splice, a value crossing from your server to the
-client, type-checked on both sides.
+`npm run ios` starts your Backtick server and Expo together, then opens the
+app in the iOS Simulator. Use `npm run android` for an Android emulator, or
+`npm run web` for a browser.
+
+The app shows a welcome screen. It isn't in the app: your server sent it.
+
+## Change the screen
+
+The screen is `server/Home.tsx`. Replace it with this, and save:
 
 ```tsx file=quick-start/server/Home.tsx
 
 ```
 
-## Serve it
+The app redraws with the new screen, without rebuilding. Tap the counter, then
+save again: the time changes, because the server ran `Home` again.
 
-One route bundles the screen per request, for the versions of React and React
-Native your app ships, so the screen requires nothing the app doesn't have.
+What you just wrote:
 
-```tsx file=quick-start/server/index.tsx
+- **`Home` is a server component.** It runs on your server, for every
+  request. Read from a database here, call an API, use any npm package: none of
+  it reaches the phone.
+- **`` cs`…` `` is a client script.** The code inside the backticks runs on the
+  phone. Here, it's the screen's JSX.
+- **`$time` is a splice.** It's a value from your server, written into the
+  screen as data. TypeScript checks it on both sides.
+- **`Counter` is a client component.** It's a script that takes props, used as
+  `<$Counter />`. Its state lives on the phone.
+- **`$View` and `$useState` are React Native and React,** with the same names
+  and types, spliced from `@backtickjs/react-native` and `@backtickjs/react`.
 
+## What's in your project
+
+```text
+my-app/
+├── App.tsx          The app: fetches each screen from your server and draws it
+├── server/
+│   ├── index.tsx    Your server: bundles a screen per request
+│   └── Home.tsx     The screen you just changed
+└── package.json
 ```
 
-## Draw it
+Everything in `server/` reaches users without an app release: deploy your
+server, and users get the change the next time they open the screen.
 
-Your app fetches the screen like any other request, with its own headers, auth
-and caching. `evaluate` runs it with your app's own React and React Native,
-and React's `use` draws it under `Suspense`, which shows your fallback while it
-loads.
+`npm run reset-project` replaces `server/Home.tsx` with a blank screen when
+you're ready to start your own.
 
-```tsx file=quick-start/App.tsx
+## Next steps
 
-```
+- **[Tutorial](/docs/tutorial):** build a coffee-ordering screen, step by step,
+  in the project you just created.
+- **[Thinking in Backtick](/docs/thinking-in-backtick):** what runs where, and
+  what crosses between your server and the phone.

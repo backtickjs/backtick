@@ -5,6 +5,7 @@ import {
   type DocsSection,
   readPage,
   renderPage,
+  staticArticle,
 } from "../docs.js";
 import type { Page } from "../pages.js";
 
@@ -22,6 +23,20 @@ const ENTRIES: { name: string; pages: Entry[] }[] = [
         description:
           "Create a React Native app with a Backtick server in one command, then write a screen, serve it per request and draw it in your app.",
         file: "quick-start.md",
+      },
+      {
+        path: "/docs/tutorial",
+        title: "Tutorial",
+        description:
+          "Build a coffee-ordering screen in five steps: a menu from your server, an order kept on the phone, sent back, and remembered for next time.",
+        file: "tutorial.md",
+      },
+      {
+        path: "/docs/thinking-in-backtick",
+        title: "Thinking in Backtick",
+        description:
+          "What runs on your server, what runs on the phone, and what crosses between them.",
+        file: "thinking-in-backtick.md",
       },
     ],
   },
@@ -46,6 +61,7 @@ export const DOCS_PAGES: (Page & { path: string })[] = await Promise.all(
       title: `Backtick · ${title}`,
       description,
       markdown: `# ${title}\n\n${description}\n\n${source}`,
+      staticHtml: staticArticle(title, description, html),
       Page: cs`() => (
         <$DocsLayout
           sections={$SECTIONS}

@@ -17,13 +17,15 @@ export function urlOf(path: string): string {
 // A page: where it lives, what draws it, and what search results and link
 // previews show for it. A page with no path has no address of its own, as the
 // one answering for addresses that don't exist. A page with Markdown is also
-// served as that, at its path and `.md`, for agents.
+// served as that, at its path and `.md`, for agents. A page with static HTML
+// has it in its document until it's drawn.
 export type Page = {
   path: string | null;
   Page: Client<() => JSX.Element>;
   title: string;
   description: string;
   markdown?: string;
+  staticHtml?: string;
 };
 
 // Every page on the site: what the dev server serves and what the build writes

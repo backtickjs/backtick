@@ -1,0 +1,3 @@
+# Bundles as the bundler writes them, shown in the docs and checked by the
+# tests.
+content/examples/**/bundle.js

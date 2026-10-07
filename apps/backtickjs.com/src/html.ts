@@ -14,18 +14,27 @@ const sourcemap = process.env.NODE_ENV === "production" ? undefined : "inline";
 const STYLE = await tailwind();
 
 // A page's document: its component, drawn into it by Solid, and what search
-// results and link previews show for it.
+// results and link previews show for it. A page with Markdown links to it, and
+// its static HTML stands in the document until Solid draws the page, for
+// readers that don't run scripts: agents' fetches and search engines.
 export async function toHtml({
   path,
   Page,
   title,
   description,
+  markdown,
+  staticHtml,
 }: Page): Promise<string> {
   const titleText = Bun.escapeHTML(title);
   const descriptionText = Bun.escapeHTML(description);
 
   const bundle = await bundler.build({
-    input: cs`$render($Page, document.getElementById("app")!)`,
+    // Cleared first: `render` adds to what's there, and draws the same page.
+    input: cs`{
+      const app = document.getElementById("app")!;
+      app.textContent = "";
+      $render($Page, app);
+    }`,
     packageVersions: { "solid-js": "1.9.14" },
   });
 
@@ -43,6 +52,11 @@ export async function toHtml({
       path === null
         ? `<meta name="robots" content="noindex">`
         : `<link rel="canonical" href="${urlOf(path)}">`
+    }
+    ${
+      markdown === undefined || path === null
+        ? ""
+        : `<link rel="alternate" type="text/markdown" href="${path}.md">`
     }
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Backtick">
@@ -72,7 +86,7 @@ export async function toHtml({
     </script>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">${staticHtml ?? ""}</div>
     <script type="module" src="data:text/javascript,${encodeURIComponent(code)}"></script>
   </body>
 </html>`;

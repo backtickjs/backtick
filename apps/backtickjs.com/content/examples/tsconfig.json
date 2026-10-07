@@ -1,5 +1,6 @@
 // The docs' examples: React Native screens and the servers and apps around
-// them, type-checked as a reader's project would be.
+// them, type-checked as a reader's project would be, and the tests that draw
+// them.
 {
   "compilerOptions": {
     "verbatimModuleSyntax": true,
@@ -12,7 +13,8 @@
     "skipLibCheck": true,
     "types": ["node"],
     "jsx": "react-jsx",
-    "jsxImportSource": "@backtickjs/react"
+    "jsxImportSource": "@backtickjs/react",
+    "allowImportingTsExtensions": true
   },
   "include": ["**/*"]
 }
