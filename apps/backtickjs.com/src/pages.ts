@@ -1,6 +1,6 @@
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 import type { Client } from "@backtickjs/core";
-import { Docs } from "./pages/Docs.js";
+import { DOCS_PAGES } from "./pages/Docs.js";
 import { Home } from "./pages/Home.js";
 import { NotFound } from "./pages/NotFound.js";
 
@@ -16,12 +16,14 @@ export function urlOf(path: string): string {
 
 // A page: where it lives, what draws it, and what search results and link
 // previews show for it. A page with no path has no address of its own, as the
-// one answering for addresses that don't exist.
+// one answering for addresses that don't exist. A page with Markdown is also
+// served as that, at its path and `.md`, for agents.
 export type Page = {
   path: string | null;
   Page: Client<() => JSX.Element>;
   title: string;
   description: string;
+  markdown?: string;
 };
 
 // Every page on the site: what the dev server serves and what the build writes
@@ -36,14 +38,7 @@ export const PAGES: (Page & { path: string })[] = [
       " React and TypeScript, with your data, logic and UI in one place," +
       " type-checked end to end.",
   },
-  {
-    path: "/docs",
-    Page: Docs,
-    title: "Backtick · Docs",
-    description:
-      "Create a React Native app with a Backtick server in one command, then" +
-      " write a screen, serve it per request and draw it in your app.",
-  },
+  ...DOCS_PAGES,
 ];
 
 // What GitHub Pages serves for any address that isn't a page, and what search

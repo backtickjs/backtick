@@ -1,92 +1,101 @@
 import { cs } from "@backtickjs/core";
-import { Code } from "../components/Code.js";
-import { Comparison } from "../components/Comparison.js";
-import { Layout } from "../components/Layout.js";
-import { QuickStart } from "../components/QuickStart.js";
-import { Section } from "../components/Section.js";
+import { DocsLayout } from "../components/DocsLayout.js";
 import {
-  EXPO_COLUMNS,
-  EXPO_ROWS,
-  MODEL_COLUMNS,
-  MODEL_ROWS,
-  NEXT_COLUMNS,
-  NEXT_ROWS,
-} from "../comparisons.js";
-import { highlight } from "../highlight.js";
-import { APP, SERVER, WRITTEN } from "../samples.js";
+  type DocsLink,
+  type DocsSection,
+  type Heading,
+  readPage,
+  renderPage,
+} from "../docs.js";
+import type { Page } from "../pages.js";
+import { Why, WHY_HEADINGS, WHY_MARKDOWN } from "./Why.js";
 
-// The screen from the home page, whole, as a file, and the setup beside it,
-// coloured once, when the server starts.
-const HOME_LINES = await highlight(
-  WRITTEN.map((part) => part.code).join("\n"),
-  "tsx",
+// A docs page: its body Markdown in `content/`, or drawn by a component with
+// Markdown of its own for agents.
+type Entry = DocsLink & { description: string } & (
+    | { file: string }
+    | { body: "why" }
+  );
+
+// The sidebar, in reading order.
+const ENTRIES: { name: string; pages: Entry[] }[] = [
+  {
+    name: "Get started",
+    pages: [
+      {
+        path: "/docs",
+        title: "Quick start",
+        description:
+          "Create a React Native app with a Backtick server in one command, then write a screen, serve it per request and draw it in your app.",
+        file: "quick-start.md",
+      },
+      {
+        path: "/docs/why",
+        title: "Why Backtick",
+        description:
+          "How Backtick compares to shipping screens in the app binary, to Next.js, and to Expo's over-the-air updates and server components.",
+        body: "why",
+      },
+    ],
+  },
+];
+
+const SECTIONS: DocsSection[] = ENTRIES.map((section) => ({
+  name: section.name,
+  pages: section.pages.map(({ path, title }) => ({ path, title })),
+}));
+
+const ORDER = SECTIONS.flatMap((section) => section.pages);
+
+export const DOCS_PAGES: (Page & { path: string })[] = await Promise.all(
+  ENTRIES.flatMap((section) => section.pages).map(async (entry, index) => {
+    const { path, title, description } = entry;
+    const previous = ORDER[index - 1] ?? null;
+    const next = ORDER[index + 1] ?? null;
+    const markdownHeader = `# ${title}\n\n${description}\n\n`;
+
+    if ("file" in entry) {
+      const source = await readPage(entry.file);
+      const { html, headings } = await renderPage(source);
+      return {
+        path,
+        title: `Backtick · ${title}`,
+        description,
+        markdown: markdownHeader + source,
+        Page: cs`() => (
+          <$DocsLayout
+            sections={$SECTIONS}
+            path={$path}
+            title={$title}
+            description={$description}
+            headings={$headings}
+            previous={$previous}
+            next={$next}
+            html={$html}
+          />
+        )`,
+      };
+    }
+
+    const headings: Heading[] = WHY_HEADINGS;
+    return {
+      path,
+      title: `Backtick · ${title}`,
+      description,
+      markdown: markdownHeader + WHY_MARKDOWN,
+      Page: cs`() => (
+        <$DocsLayout
+          sections={$SECTIONS}
+          path={$path}
+          title={$title}
+          description={$description}
+          headings={$headings}
+          previous={$previous}
+          next={$next}
+        >
+          <$Why />
+        </$DocsLayout>
+      )`,
+    };
+  }),
 );
-const SERVER_LINES = await highlight(SERVER, "tsx");
-const APP_LINES = await highlight(APP, "tsx");
-
-export const Docs = cs`() => (
-  <$Layout>
-    <$Section
-      eyebrow="Docs · Quick start"
-      title="One command to a running app."
-      lede="Pick React Native, and it creates an Expo app with a Backtick server beside it. Then run npm run ios, android or web, and edit server/Home.tsx to change the screen. The steps below are what it sets up."
-    >
-      <$QuickStart />
-    </$Section>
-
-    <$Section
-      eyebrow="1 · Write a screen"
-      title="Three files to a server-driven screen."
-      lede="A server component on your server, a route that bundles it per request, and a few lines in your app that fetch it and draw it."
-    >
-      <$Code file="server/Home.tsx" lines={$HOME_LINES} />
-    </$Section>
-
-    <$Section
-      eyebrow="2 · Serve it"
-      title="One route bundles the screen per request."
-      lede="It bundles for the versions of React and React Native your app ships, so the screen requires nothing the app doesn't have. Serving apps of several versions? Tell them apart however you like, by user agent for one, and bundle each for its own."
-    >
-      <$Code file="server/index.tsx" lines={$SERVER_LINES} />
-    </$Section>
-
-    <$Section
-      eyebrow="3 · Draw it"
-      title="A few lines in your app."
-      lede="Your app fetches the screen like any other request, with its own headers, auth and caching. evaluate runs it with your app's own React and React Native, and React's use draws it under Suspense, which shows your fallback while it loads."
-    >
-      <$Code file="app/App.tsx" lines={$APP_LINES} />
-    </$Section>
-
-    <$Section
-      eyebrow="The idea"
-      title="React Native, with the web's deploy model."
-      lede={
-        <>
-          On the web, you deploy and users have the change the next time they
-          load the page. A native app carries its screens in the binary, so
-          every change waits for a store release. Backtick serves screens from
-          your server, the way the web does.
-        </>
-      }
-    >
-      <$Comparison columns={$MODEL_COLUMNS} rows={$MODEL_ROWS} />
-    </$Section>
-
-    <$Section
-      eyebrow="Server components"
-      title="No API layer. No split files."
-      lede="The server renders each screen where its data lives, so there's no endpoint to build, nothing overfetched and no query cache to keep in sync. Unlike Next.js, the client code sits in the same file, and every $ that crosses is type-checked."
-    >
-      <$Comparison columns={$NEXT_COLUMNS} rows={$NEXT_ROWS} />
-    </$Section>
-
-    <$Section
-      eyebrow="Compared"
-      title="Isn't this EAS Update, or Expo's server components?"
-      lede="All three get code to the phone without a store release. Only Backtick ships each screen per request, client components included."
-    >
-      <$Comparison columns={$EXPO_COLUMNS} rows={$EXPO_ROWS} />
-    </$Section>
-  </$Layout>
-)`;

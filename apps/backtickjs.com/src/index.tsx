@@ -1,17 +1,25 @@
 import { toHtml } from "./html.js";
+import { TEXT_FILES } from "./llms.js";
 import { NOT_FOUND, PAGES } from "./pages.js";
 
 const server = Bun.serve({
   port: 4321,
-  routes: Object.fromEntries(
-    PAGES.map((page) => [
+  routes: Object.fromEntries([
+    ...PAGES.map((page) => [
       page.path,
       async () =>
         new Response(await toHtml(page), {
           headers: { "content-type": "text/html" },
         }),
     ]),
-  ),
+    ...TEXT_FILES.map((file) => [
+      file.path,
+      () =>
+        new Response(file.text, {
+          headers: { "content-type": "text/plain; charset=utf-8" },
+        }),
+    ]),
+  ]),
   // Anything else is a file in `public/`, as the build copies it, or the page
   // for addresses that don't exist.
   async fetch(request) {

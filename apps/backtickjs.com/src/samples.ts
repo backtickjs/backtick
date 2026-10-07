@@ -100,58 +100,6 @@ export async function Home({ user }: { user: User }) {
   },
 ];
 
-export const SERVER = `
-import { bundler } from "@backtickjs/bundler";
-import { Home } from "./Home.js";
-
-// The versions of React and React Native your app ships.
-const packageVersions = { react: "19.2.3", "react-native": "0.86.3" };
-
-Bun.serve({
-  routes: {
-    "/screens/home": async () => {
-      const bundle = await bundler.build({ input: <Home />, packageVersions });
-      const { code } = bundle.generate({ format: "cjs" });
-      return new Response(code);
-    },
-  },
-});
-`;
-
-export const APP = `
-import { evaluate } from "@backtickjs/react-native-client";
-import * as React from "react";
-import { Suspense, use, useState } from "react";
-import * as JSXRuntime from "react/jsx-runtime";
-import * as ReactNative from "react-native";
-
-const modules = {
-  "react": React,
-  "react/jsx-runtime": JSXRuntime,
-  "react-native": ReactNative,
-};
-
-async function fetchScreen(url: string) {
-  const response = await fetch(url);
-  return evaluate(await response.text(), modules) as React.ReactNode;
-}
-
-export default function App() {
-  const [screen] = useState(() =>
-    fetchScreen("https://api.example.com/screens/home"),
-  );
-  return (
-    <Suspense fallback={<ReactNative.ActivityIndicator />}>
-      <Screen screen={screen} />
-    </Suspense>
-  );
-}
-
-function Screen({ screen }: { screen: Promise<React.ReactNode> }) {
-  return use(screen);
-}
-`;
-
 // One screen as written, in parts coloured by what they are, and as the phone
 // receives it. Simplified: a real bundle keeps each compiled script in a
 // module table, passes values as thunks, and compiles the JSX.

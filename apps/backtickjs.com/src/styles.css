@@ -106,6 +106,87 @@
   box-shadow: inset 3px 0 0 var(--color-added);
 }
 
+/* Docs prose: Markdown rendered to HTML, which carries no classes of its own.
+   Code fences arrive styled as the site's code panels. */
+@layer components {
+  .docs-prose {
+    margin-top: 40px;
+  }
+  .docs-prose > :first-child {
+    margin-top: 0;
+  }
+  .docs-prose h2 {
+    margin-top: 56px;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    scroll-margin-top: 24px;
+  }
+  .docs-prose h3 {
+    margin-top: 36px;
+    font-size: 20px;
+    font-weight: 600;
+    scroll-margin-top: 24px;
+  }
+  .docs-prose p,
+  .docs-prose ul,
+  .docs-prose ol,
+  .docs-prose table,
+  .docs-prose blockquote {
+    margin-top: 16px;
+  }
+  .docs-prose ul {
+    padding-left: 1.4em;
+    list-style: disc;
+  }
+  .docs-prose ol {
+    padding-left: 1.4em;
+    list-style: decimal;
+  }
+  .docs-prose li + li {
+    margin-top: 6px;
+  }
+  .docs-prose a {
+    color: var(--color-react);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .docs-prose :not(pre) > code {
+    padding: 1px 6px;
+    border: 1px solid var(--color-line);
+    border-radius: 6px;
+    background: var(--color-wash);
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+  }
+  .docs-prose strong {
+    font-weight: 600;
+  }
+  .docs-prose blockquote {
+    padding-left: 16px;
+    border-left: 3px solid var(--color-line);
+    color: var(--color-muted);
+  }
+  .docs-prose table {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+  .docs-prose th,
+  .docs-prose td {
+    padding: 8px 12px;
+    border: 1px solid var(--color-line);
+    text-align: left;
+    vertical-align: top;
+  }
+  .docs-prose th {
+    background: var(--color-wash);
+    font-weight: 600;
+  }
+}
+
 @layer base {
   body {
     @apply bg-paper font-sans text-ink antialiased;
