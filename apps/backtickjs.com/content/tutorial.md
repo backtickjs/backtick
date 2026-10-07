@@ -60,8 +60,8 @@ up, in a client component that holds every count and draws the rows.
 Tap a price to add a coffee; the total updates below.
 
 - **`styles` and `formatPrice` are scripts too,** a value and a function rather
-  than components. Each component splices the ones it uses, and the phone gets
-  each once.
+  than components. Each component splices the ones it uses, and the bundle
+  carries each script once.
 - **`Order` holds the state; `CoffeeRow` gets it as props,** a count and an
   `onAdd` callback, as in any React app. Inside client code, props can be
   anything: functions included.

@@ -13,9 +13,9 @@ import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 import prompts from "prompts";
 
-// `create-expo-app`, for an app whose screens come from your server: the same
-// questions, the same install, the same next steps, with the framework yours
-// to pick and a Backtick server beside it.
+// Creates an app whose screens come from your server: a few questions, the
+// install, then the next steps, with the framework yours to pick and a
+// Backtick server beside it.
 
 interface Template {
   title: string;
@@ -47,15 +47,50 @@ const TEMPLATES: Record<string, Template> = {
   },
 };
 
-const { values, positionals } = parseArgs({
-  allowPositionals: true,
-  options: {
-    template: { type: "string", short: "t" },
-    runtime: { type: "string", short: "r" },
-    yes: { type: "boolean", short: "y" },
-    "no-install": { type: "boolean" },
-  },
-});
+// What runs your Backtick server, and the loader that compiles it for that
+// runtime.
+const RUNTIMES: Record<string, { title: string; loader: string }> = {
+  node: { title: "Node", loader: "@backtickjs/node-plugin" },
+  bun: { title: "Bun", loader: "@backtickjs/bun-plugin" },
+};
+
+const USAGE = `Usage: create-backtick-app [name] [options]
+
+Options:
+  -t, --template <name>  The framework: ${Object.keys(TEMPLATES).join(", ")}
+  -r, --runtime <name>   The server's runtime: ${Object.keys(RUNTIMES).join(", ")}
+  -y, --yes              Use the defaults for anything not given
+  --no-install           Skip installing packages
+  -h, --help             Show this help
+
+Asks for what isn't given, in a terminal; elsewhere, uses the defaults:
+my-app, react-native, and node (bun when run with bun).`;
+
+let parsed;
+try {
+  parsed = parseArgs({
+    allowPositionals: true,
+    options: {
+      template: { type: "string", short: "t" },
+      runtime: { type: "string", short: "r" },
+      yes: { type: "boolean", short: "y" },
+      "no-install": { type: "boolean" },
+      help: { type: "boolean", short: "h" },
+    },
+  });
+} catch (error) {
+  // Node's first sentence, as "Unknown option '--framework'.", without its
+  // advice on positional arguments.
+  const [problem] = (error as Error).message.split(". ");
+  console.error(`${problem!.replace(/\.?$/, ".")}\n\n${USAGE}`);
+  process.exit(1);
+}
+const { values, positionals } = parsed;
+
+if (values.help) {
+  console.log(USAGE);
+  process.exit(0);
+}
 
 if (values.template !== undefined && !(values.template in TEMPLATES)) {
   console.error(
@@ -63,13 +98,6 @@ if (values.template !== undefined && !(values.template in TEMPLATES)) {
   );
   process.exit(1);
 }
-
-// What runs your Backtick server, and the loader that compiles it for that
-// runtime.
-const RUNTIMES: Record<string, { title: string; loader: string }> = {
-  node: { title: "Node", loader: "@backtickjs/node-plugin" },
-  bun: { title: "Bun", loader: "@backtickjs/bun-plugin" },
-};
 
 if (values.runtime !== undefined && !(values.runtime in RUNTIMES)) {
   console.error(
@@ -84,17 +112,19 @@ const manager = (process.env.npm_config_user_agent ?? "npm").split("/")[0];
 const run = ["npm", "pnpm", "yarn", "bun"].includes(manager) ? manager : "npm";
 const suggestedRuntime = run === "bun" ? "bun" : "node";
 
-// Asked only what the command line didn't say, as `create-expo-app` asks.
+// Asked only what the command line didn't say, and only in a terminal: an
+// agent or a CI script can't answer, so it gets the defaults, as `--yes` does.
+const ask = process.stdin.isTTY === true && !values.yes;
 const answers = await prompts(
   [
     {
-      type: positionals[0] !== undefined || values.yes ? null : "text",
+      type: positionals[0] !== undefined || !ask ? null : "text",
       name: "name",
       message: "What is your app named?",
       initial: "my-app",
     },
     {
-      type: values.template !== undefined || values.yes ? null : "select",
+      type: values.template !== undefined || !ask ? null : "select",
       name: "template",
       message: "Which framework?",
       choices: Object.entries(TEMPLATES).map(([value, template]) => ({
@@ -104,7 +134,7 @@ const answers = await prompts(
       })),
     },
     {
-      type: values.runtime !== undefined || values.yes ? null : "select",
+      type: values.runtime !== undefined || !ask ? null : "select",
       name: "runtime",
       message: "Which runtime?",
       choices: Object.entries(RUNTIMES).map(([value, runtime]) => ({

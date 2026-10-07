@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawn } from "node:child_process";
 import {
   existsSync,
   mkdirSync,
@@ -88,3 +88,47 @@ for (const template of ["react-native", "react", "solid-js"]) {
     assert.equal(manifest.name, name);
   });
 }
+
+// As an agent or a CI script runs it: input from a pipe that stays open, and
+// no flags. It can't answer questions, so it gets the defaults and finishes.
+// Stopped if it doesn't, which once kept it waiting for an answer forever.
+test("creates the default project when its input isn't a terminal", async () => {
+  const child = spawn(process.execPath, [cli, "piped-app", "--no-install"], {
+    cwd: work,
+    stdio: ["pipe", "ignore", "ignore"],
+  });
+  const stop = setTimeout(() => child.kill(), 10_000);
+  const code = await new Promise((exited) => child.on("exit", exited));
+  clearTimeout(stop);
+  child.stdin.destroy();
+
+  assert.equal(code, 0);
+  const manifest = JSON.parse(
+    readFileSync(path.join(work, "piped-app", "package.json"), "utf8"),
+  ) as { dependencies: Record<string, string> };
+  assert.ok("@backtickjs/react-native" in manifest.dependencies);
+  assert.ok("@backtickjs/node-plugin" in manifest.dependencies);
+});
+
+test("--help lists the options, and an unknown one shows them too", () => {
+  const help = execFileSync(process.execPath, [cli, "--help"], {
+    encoding: "utf8",
+  });
+  assert.match(
+    help,
+    /--template <name>  The framework: react-native, react, solid-js/,
+  );
+  assert.match(help, /--runtime <name>   The server's runtime: node, bun/);
+
+  assert.throws(
+    () =>
+      execFileSync(process.execPath, [cli, "--framework", "react"], {
+        stdio: "pipe",
+      }),
+    (error: { status: number; stderr: Buffer }) =>
+      error.status === 1 &&
+      error.stderr
+        .toString()
+        .startsWith("Unknown option '--framework'.\n\nUsage:"),
+  );
+});
