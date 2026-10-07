@@ -47,11 +47,14 @@ const RESERVED = ["arguments", "await", "eval", "yield"];
 
 // What encloses a value being rendered: the bindings the thunks around it were
 // handed.
+// And the bindings read through it, as `capExpr` resolves them, which the
+// scopes a hole opens inside it share.
 interface Scope {
   readonly bindings: ReadonlySet<string>;
+  readonly read: Set<string>;
 }
 
-const rootScope: Scope = { bindings: new Set() };
+const rootScope = (): Scope => ({ bindings: new Set(), read: new Set() });
 
 // Builds the bundle `{ scripts, root }` as code, and documents how it is
 // derived.
@@ -153,49 +156,12 @@ export async function buildBundle(
     declared.add(script);
   };
 
-  // The client locals a value reads: those its scripts capture, and those a
-  // value they splice reads that its hole doesn't bind.
-  const locals = new Map<object, ReadonlySet<string>>();
-  const localsOf = async (value: Spliceable): Promise<ReadonlySet<string>> => {
-    if (typeof value !== "object" || value === null) {
-      return new Set();
-    }
-    const known = locals.get(value);
-    if (known !== undefined) {
-      return known;
-    }
-    const read = new Set<string>();
-    if (isClientScript(value)) {
-      const target = scriptFor(value);
-      capturesOf(target).forEach((key) => read.add(key));
-      for (const [hole, arg] of value.args.entries()) {
-        const bound = new Set(passKeys(target, hole));
-        for (const key of await localsOf(arg)) {
-          if (!bound.has(key)) {
-            read.add(key);
-          }
-        }
-      }
-    } else if (isJsxElement(value)) {
-      const type = value.type;
-      if (typeof type === "function" && !isClientImport(type)) {
-        const drawn = await expandJsxElement(value, type, elementExpansions);
-        (await localsOf(drawn)).forEach((key) => read.add(key));
-      }
-    } else if (!isClientImport(value)) {
-      for (const entry of Object.values(value)) {
-        (await localsOf(entry as Spliceable)).forEach((key) => read.add(key));
-      }
-    }
-    locals.set(value, read);
-    return read;
-  };
-
   // A function script is a closure: one function until the client locals it
-  // reads change, as an arrow is in JavaScript. One that reads none is made
-  // once, for the bundle, and every read of it is that function, so a client
-  // component keeps its identity across renders. Making a function runs
-  // nothing, so when it's made isn't observable.
+  // reads change, as an arrow is in JavaScript. One whose rendering read none
+  // of the scope it's read in is made once, for the bundle, and every read of
+  // it is that function, so a client component keeps its identity across
+  // renders. Making a function runs nothing, so when it's made isn't
+  // observable.
   const functions = new Map<ClientScript, string>();
   const functionCode: (readonly [string, string])[] = [];
 
@@ -233,27 +199,30 @@ export async function buildBundle(
   // reached each script.
   const render = async (
     value: Spliceable,
-    scope: Scope = rootScope,
+    scope: Scope = rootScope(),
   ): Promise<string> => {
     if (isClientScript(value)) {
       const target = scriptFor(value);
       declare(target);
-      if (
-        target.module.kind !== "function" ||
-        (await localsOf(value)).size > 0
-      ) {
+      if (target.module.kind !== "function") {
         return call(labelOf(target), await exprCallArgs(value, scope));
       }
-      let label = functions.get(value);
-      if (label === undefined) {
-        const code = call(
-          labelOf(target),
-          await exprCallArgs(value, rootScope),
-        );
-        label = `$function${functionCode.length}`;
-        functions.set(value, label);
-        functionCode.push([label, code]);
+      const made = functions.get(value);
+      if (made !== undefined) {
+        return made;
       }
+      const read = new Set<string>();
+      const code = call(
+        labelOf(target),
+        await exprCallArgs(value, { bindings: scope.bindings, read }),
+      );
+      if ([...read].some((key) => scope.bindings.has(key))) {
+        read.forEach((key) => scope.read.add(key));
+        return code;
+      }
+      const label = `$function${functionCode.length}`;
+      functions.set(value, label);
+      functionCode.push([label, code]);
       return label;
     }
     if (isJsxElement(value)) {
@@ -324,6 +293,7 @@ export async function buildBundle(
   // can't be threaded from anywhere.
   const capExpr = (key: string, scope: Scope): string => {
     if (scope.bindings.has(key)) {
+      scope.read.add(key);
       return displayName(key);
     }
     throw new Error(
@@ -355,12 +325,10 @@ export async function buildBundle(
       // A fragment whose own parameters are exactly that list reads the hole's
       // arguments as they arrive, so it is passed as it is rather than wrapped
       // in a thunk that would only pass them along.
-      // A function made once is read as itself, never forwarded to be made
-      // again.
+      // A function script is rendered, never forwarded: `render` decides
+      // whether it's made once.
       const forwarded =
-        isClientScript(arg) &&
-        arg.module.kind === "function" &&
-        (await localsOf(arg)).size === 0
+        isClientScript(arg) && arg.module.kind === "function"
           ? null
           : forwarding(arg, passed);
       if (forwarded !== null) {
@@ -372,7 +340,10 @@ export async function buildBundle(
         continue;
       }
       // Otherwise a thunk names them and calls the fragment with what it wants.
-      const inner = { bindings: new Set([...scope.bindings, ...passed]) };
+      const inner = {
+        bindings: new Set([...scope.bindings, ...passed]),
+        read: scope.read,
+      };
       parts.push(arrow(passed.map(displayName), await render(arg, inner)));
     }
     for (const key of capturesOf(target)) {
