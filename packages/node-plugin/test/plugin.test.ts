@@ -29,10 +29,13 @@ test("a .tsx entry starts in a package that isn't an ES module one", () => {
   const main = fileURLToPath(
     new URL("./fixtures/commonjs/main.tsx", import.meta.url),
   );
+  // Its output plain, whatever colours the terminal running the tests asks
+  // for.
+  const { FORCE_COLOR, ...env } = process.env;
   const { status, stdout, stderr } = spawnSync(
     process.execPath,
     ["--import", plugin, main],
-    { encoding: "utf8" },
+    { encoding: "utf8", env: { ...env, NO_COLOR: "1" } },
   );
   assert.equal(stderr, "");
   assert.equal(status, 0);
