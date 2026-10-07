@@ -1,5 +1,6 @@
 import { it } from "node:test";
 import { type Client, cs } from "@backtickjs/core";
+import type { JSX } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 
 async function fetchGreeting() {
@@ -22,6 +23,35 @@ it("awaitInStatementsSplice", async (t) => {
       const greeting = ${await fetchGreeting()};
       return greeting + "!";
     }`,
+  );
+});
+
+// The same `await`, in a splice that is a child of a component tag, which
+// the typechecker reads as JSX in a function of its own: awaited there too.
+const Badge = cs`(props: { children: JSX.Element }) => <b>{props.children}</b>`;
+
+it("awaitInTagChildSplice", async (t) => {
+  await snapshotCase(
+    t,
+    "awaitInTagChildSplice",
+    cs`<$Badge>{${await fetchGreeting()}}</$Badge>`,
+  );
+});
+
+// A tag in a function the script writes, in a script that awaits: that
+// function isn't async, so the tag's isn't awaited there.
+it("awaitBesideMappedTag", async (t) => {
+  await snapshotCase(
+    t,
+    "awaitBesideMappedTag",
+    cs`(
+      <p>
+        {${await fetchGreeting()}}
+        {[1, 2].map((n: number) => (
+          <$Badge>{n}</$Badge>
+        ))}
+      </p>
+    )`,
   );
 });
 

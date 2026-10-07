@@ -180,7 +180,14 @@ export function virtualScript(
   // itself is read through `(Card)`, mapped to it, so definition, rename and
   // references reach the host binding. Where the tag closes, `void (Card)`
   // beside it does the same for the closing tag's name.
+  //
+  // In a script that awaits, the function is async and awaited, so a splice's
+  // `await` among the tag's children is the host's, as it is anywhere else in
+  // the script: `(await (async ($Card) => <$Card …>…</$Card>)(…))`. Not inside
+  // a function the script writes, which isn't async, so an `await` there
+  // would be an error of its own.
   const hostTag = (node: ts.JsxElement | ts.JsxSelfClosingElement): void => {
+    const awaited = awaits && !inFunction(ts, node, file);
     const opening = ts.isJsxElement(node) ? node.openingElement : node;
     const tagName = opening.tagName;
     // What the tag starts with, `$Card`, or `$Animated` in `<$Animated.View>`:
@@ -207,7 +214,9 @@ export function virtualScript(
       mapped(name, closing, TAG_NAME);
       added(", ");
     }
-    added(`((${root.text}) => <`);
+    added(
+      awaited ? `(await (async (${root.text}) => <` : `((${root.text}) => <`,
+    );
     mapped(root.text, root, REPORTED);
     verbatim(root.getEnd(), tagName.getEnd());
     // Its attributes and the opening's end, as written. What stands between
@@ -244,6 +253,9 @@ export function virtualScript(
     added(")(cs.splice(", tag.start);
     mapped(name, tagName, TAG_NAME);
     added("))", tag.end);
+    if (awaited) {
+      added(")");
+    }
     if (ts.isJsxElement(node)) {
       added(")");
     }
@@ -348,6 +360,21 @@ function inTypePosition(
       return false;
     }
     if (ts.isTypeNode(parent)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// Whether `node` is inside a function the script writes, rather than directly
+// in the script's own body.
+function inFunction(
+  ts: typeof import("typescript"),
+  node: ts.Node,
+  file: ts.SourceFile,
+): boolean {
+  for (let parent = node.parent; parent !== file; parent = parent.parent) {
+    if (ts.isFunctionLike(parent)) {
       return true;
     }
   }
