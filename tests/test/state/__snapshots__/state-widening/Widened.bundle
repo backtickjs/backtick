@@ -14,15 +14,15 @@ const $modules = {
     const web_2 = require("solid-js/web");
     const web_3 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>`);
-    exports.default = ($splice0, $splice1, $splice2) => {
+    exports.default = ($splice0, $splice1, $splice2, $splice3, $splice4) => {
       const [flag, setFlag] = $splice0()(true);
-      const [tone, setTone] = $splice0()($splice1());
-      const [step, setStep] = $splice0()(() => 0);
+      const [tone, setTone] = $splice1()($splice2());
+      const [step, setStep] = $splice3()(() => 0);
       return (() => {
         var _el$ = _tmpl$();
         _el$.$$click = () => {
           setFlag(false);
-          setTone($splice2());
+          setTone($splice4());
           setStep(() => () => 1);
         };
         (0, web_3.insert)(_el$, () => flag() + " " + tone() + " " + step()());
@@ -51,7 +51,9 @@ export default $cs0(
   () =>
     $cs1(
       () => $i1,
+      () => $i1,
       () => "warm",
+      () => $i1,
       () => "cool",
     ),
 );

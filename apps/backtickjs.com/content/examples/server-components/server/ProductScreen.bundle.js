@@ -7,7 +7,7 @@ const $modules = {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsx_runtime_1 = require("react/jsx-runtime");
-exports.default = ($splice0, $splice1, $splice2, $splice3) => ($View => /*#__PURE__*/ (0, jsx_runtime_1.jsxs)($View, {
+exports.default = ($splice0, $splice1, $splice2, $splice3, $splice4) => ($View => /*#__PURE__*/ (0, jsx_runtime_1.jsxs)($View, {
     style: {
         padding: 24,
         gap: 8
@@ -19,8 +19,8 @@ exports.default = ($splice0, $splice1, $splice2, $splice3) => ($View => /*#__PUR
             },
             children: $splice2()
         }))($splice1()), ($Text => /*#__PURE__*/ (0, jsx_runtime_1.jsx)($Text, {
-            children: $splice3() ? "In stock" : "Sold out"
-        }))($splice1())]
+            children: $splice4() ? "In stock" : "Sold out"
+        }))($splice3())]
 }))($splice0());
 },
 };
@@ -37,4 +37,4 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("1qlemy4wvzr85:23:9").default;
-module.exports = ($cs0(() => ($i0), () => ($i1), () => ("Ceramic dripper"), () => (true)));
+module.exports = ($cs0(() => ($i0), () => ($i1), () => ("Ceramic dripper"), () => ($i1), () => (true)));

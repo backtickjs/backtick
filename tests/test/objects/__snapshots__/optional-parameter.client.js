@@ -27,12 +27,12 @@ exports.default = (() => (cb) => {
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $splice1, $splice2) => ({
+exports.default = (($splice0, $splice1, $splice2, $splice3, $splice4, $splice5, $splice6) => ({
     named: $splice0()("hi"),
-    explicit: $splice0()(undefined),
-    omitted: $splice0()(),
-    supplied: $splice1()($splice2()),
-    fallback: $splice1()(undefined),
-    omittedCallback: $splice1()(),
+    explicit: $splice1()(undefined),
+    omitted: $splice2()(),
+    supplied: $splice3()($splice4()),
+    fallback: $splice5()(undefined),
+    omittedCallback: $splice6()(),
 }));
 }

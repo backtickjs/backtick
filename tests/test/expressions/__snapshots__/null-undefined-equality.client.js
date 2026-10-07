@@ -30,13 +30,13 @@ exports.default = (($splice0) => $splice0()(() => null === undefined));
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $splice1, $splice2) => $splice0()(() => {
+exports.default = (($splice0, $splice1, $splice2, $splice3, $splice4) => $splice0()(() => {
     const names = ["a"];
     return [
         $splice1() === undefined,
-        $splice1() !== null,
-        $splice2() === null,
-        $splice2() !== undefined,
+        $splice2() !== null,
+        $splice3() === null,
+        $splice4() !== undefined,
         names[1] === undefined,
         names[1] !== null,
     ];

@@ -17,7 +17,7 @@ const $modules = {
     const web_4 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><ul class=rows>`),
       _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<li>`);
-    exports.default = ($splice0, $splice1) => {
+    exports.default = ($splice0, $splice1, $splice2) => {
       const build = (from) => {
         return Array.from(
           {
@@ -31,7 +31,7 @@ const $modules = {
           },
         );
       };
-      const [held, setHeld] = $splice0()(build(1));
+      const [held, setHeld] = $splice1()(build(1));
       return (() => {
         var _el$ = _tmpl$(),
           _el$2 = _el$.firstChild;
@@ -48,7 +48,7 @@ const $modules = {
                   (0, web_4.insert)(_el$3, () => row.label[0]());
                   return _el$3;
                 })(),
-            }))($splice1()),
+            }))($splice2()),
         );
         return _el$;
       })();
@@ -74,6 +74,7 @@ export default $cs0(
   () => $i0,
   () =>
     $cs1(
+      () => $i1,
       () => $i1,
       () => $i2,
     ),

@@ -7,7 +7,7 @@ const $modules = {
     const web_2 = require("solid-js/web");
     const web_3 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>`);
-    exports.default = ($splice0) =>
+    exports.default = ($splice0, $splice1) =>
       (() => {
         var _el$ = _tmpl$();
         (0, web_3.insert)(
@@ -25,7 +25,7 @@ const $modules = {
             (($ui) =>
               (0, web_2.createComponent)($ui.Badge, {
                 n: 2,
-              }))($splice0()),
+              }))($splice1()),
           null,
         );
         return _el$;
@@ -60,4 +60,7 @@ const $require = (id) => {
 const $cs0 = $require("7k5q0iuij35f:14:13").default;
 const $cs1 = $require("7k5q0iuij35f:11:9").default;
 const $function0 = $cs1();
-export default $cs0(() => ({ Badge: $function0 }));
+export default $cs0(
+  () => ({ Badge: $function0 }),
+  () => ({ Badge: $function0 }),
+);

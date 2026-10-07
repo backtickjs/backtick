@@ -47,8 +47,8 @@ export interface UnbracedSplice {
   kind: "unbraced";
   // the host binding the shorthand names (synthesized, e.g. `x` for `$x`)
   expression: ts.Identifier;
-  // the param's key — the `$x` spelling the shorthand stands as in the
-  // placeholder text, which also keys the splice dictionary
+  // the param's key, which also keys the splice dictionary: the `$x` spelling
+  // the shorthand stands as in the placeholder text, and where it stands
   key: string;
   // a shorthand names a single binding, so it nests no scripts
   scripts: [];
@@ -141,13 +141,14 @@ function getDirectScripts(
   return scripts;
 }
 
-// A splice per first reference in the placeholder text, in source order, and
-// every reference to it: a `$0splice<n>` placeholder resolves to its template
-// span's braced splice, and any other `$x` identifier mints an unbraced
-// splice, deduplicated by spelling. Property, attribute and declaration names
-// are not references (a `$`-prefixed declaration is rejected at rewrite time),
-// and nested scripts are already placeholders in this text, so the walk scans
-// only the script's own body.
+// A splice per reference in the placeholder text, in source order: a
+// `$0splice<n>` placeholder resolves to its template span's braced splice, and
+// any other `$x` identifier mints an unbraced splice of its own, as each
+// `${x}` is its own splice, so the two spellings mean the same. Property,
+// attribute, closing-tag and declaration names are not references (a
+// `$`-prefixed declaration is rejected at rewrite time), and nested scripts
+// are already placeholders in this text, so the walk scans only the script's
+// own body.
 function getDirectSplices(
   ts: typeof import("typescript"),
   taggedTemplate: ts.TaggedTemplateExpression,
@@ -192,9 +193,8 @@ function getDirectSplices(
       visit(node.block); // the catch binding is not a reference
       return;
     }
-    if (ts.isIdentifier(node) && splices[node.text] != null) {
-      splices[node.text]!.refs.push(node);
-      return;
+    if (ts.isJsxClosingElement(node)) {
+      return; // it names the element its opening tag did
     }
     if (
       ts.isIdentifier(node) &&
@@ -221,10 +221,12 @@ function getDirectSplices(
           splice.scripts = getDirectScripts(ts, splice, sourceFile);
         }
       } else {
-        splices[key] = {
+        // Keyed by where it stands, as the spelling repeats.
+        const at = `${key}@${node.getStart(fileWithPlaceholders)}`;
+        splices[at] = {
           kind: "unbraced",
           expression: ts.factory.createIdentifier(key.slice(1)),
-          key,
+          key: at,
           scripts: [],
           refs: [node],
         };

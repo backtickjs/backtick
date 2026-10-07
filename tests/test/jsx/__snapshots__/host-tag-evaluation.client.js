@@ -30,8 +30,8 @@ exports.default = (($splice0) => <p>{false ? ($Boom => <$Boom />)($splice0()) : 
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0) => (<p>
+exports.default = (($splice0, $splice1) => (<p>
     {($Counted => <$Counted />)($splice0())}
-    {($Counted => <$Counted />)($splice0())}
+    {($Counted => <$Counted />)($splice1())}
   </p>));
 }

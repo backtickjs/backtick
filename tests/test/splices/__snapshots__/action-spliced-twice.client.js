@@ -11,8 +11,8 @@ exports.default = (() => {
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0) => {
+exports.default = (($splice0, $splice1) => {
     $splice0();
-    $splice0();
+    $splice1();
 });
 }

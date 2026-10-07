@@ -27,10 +27,14 @@ const $module2 = {
 };
 const $module3 = {
   id: "1i6s8vesd5nbi:24:4",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2) => ({\n    named: $splice0()("hi"),\n    explicit: $splice0()(undefined),\n    omitted: $splice0()(),\n    supplied: $splice1()($splice2()),\n    fallback: $splice1()(undefined),\n    omittedCallback: $splice1()()\n});\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAuBO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,MAAC;IACFC,KAAK,EAAEH,QAAA,EAAM,CAAC,IAAI,CAAC;IACnBI,QAAQ,EAAEJ,QAAA,EAAM,CAACK,SAAS,CAAC;IAC3BC,OAAO,EAAEN,QAAA,EAAM,EAAE;IACjBO,QAAQ,EAAEN,QAAA,EAAY,CAACC,QAAA,EAAO,CAAC;IAC/BM,QAAQ,EAAEP,QAAA,EAAY,CAACI,SAAS,CAAC;IACjCI,eAAe,EAAER,QAAA,EAAY;CAC9B,CAAC","names":["$splice0","$splice1","$splice2","named","explicit","undefined","omitted","supplied","fallback","omittedCallback"],"ignoreList":[],"sources":["objects/optional-parameter.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2, $splice3, $splice4, $splice5, $splice6) => ({\n    named: $splice0()("hi"),\n    explicit: $splice1()(undefined),\n    omitted: $splice2()(),\n    supplied: $splice3()($splice4()),\n    fallback: $splice5()(undefined),\n    omittedCallback: $splice6()()\n});\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAuBO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,MAAC;IACFC,KAAK,EAAEP,QAAA,EAAM,CAAC,IAAI,CAAC;IACnBQ,QAAQ,EAAEP,QAAA,EAAM,CAACQ,SAAS,CAAC;IAC3BC,OAAO,EAAER,QAAA,EAAM,EAAE;IACjBS,QAAQ,EAAER,QAAA,EAAY,CAACC,QAAA,EAAO,CAAC;IAC/BQ,QAAQ,EAAEP,QAAA,EAAY,CAACI,SAAS,CAAC;IACjCI,eAAe,EAAEP,QAAA,EAAY;CAC9B,CAAC","names":["$splice0","$splice1","$splice2","$splice3","$splice4","$splice5","$splice6","named","explicit","undefined","omitted","supplied","fallback","omittedCallback"],"ignoreList":[],"sources":["objects/optional-parameter.test.tsx"]}',
   dependencies: [],
   params: [
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
@@ -49,6 +53,14 @@ it("optionalParameter", async (t) => {
   await snapshotCase(
     t,
     "optionalParameter",
-    cs.create($module3, [greet, callIfGiven, double]),
+    cs.create($module3, [
+      greet,
+      greet,
+      greet,
+      callIfGiven,
+      double,
+      callIfGiven,
+      callIfGiven,
+    ]),
   );
 });

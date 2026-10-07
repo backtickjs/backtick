@@ -37,18 +37,25 @@ const $modules = {
     const web_5 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span>`),
       _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<span>marker`);
-    exports.default = ($splice0, $splice1) =>
+    exports.default = (
+      $splice0,
+      $splice1,
+      $splice2,
+      $splice3,
+      $splice4,
+      $splice5,
+    ) =>
       (() => {
         var _el$ = _tmpl$(),
           _el$2 = _el$.firstChild;
         (0, web_5.insert)(
           _el$2,
-          () => "row " + $splice1() + " of " + $splice0()[0](),
+          () => "row " + $splice2() + " of " + $splice3()[0](),
         );
         (0, web_5.insert)(
           _el$,
           (() => {
-            var _c$ = (0, web_4.memo)(() => $splice0()[0]() === $splice1());
+            var _c$ = (0, web_4.memo)(() => $splice4()[0]() === $splice5());
             return () => (_c$() ? _tmpl$2() : null);
           })(),
           null,
@@ -115,6 +122,10 @@ export default $cs0(
             $cs2(
               () => $cs3(selected),
               () => $cs4(),
+              () => $cs4(),
+              () => $cs3(selected),
+              () => $cs3(selected),
+              () => $cs4(),
             ),
         ),
       (selected) =>
@@ -122,6 +133,10 @@ export default $cs0(
           () => $i0,
           () =>
             $cs2(
+              () => $cs5(selected),
+              () => $cs6(),
+              () => $cs6(),
+              () => $cs5(selected),
               () => $cs5(selected),
               () => $cs6(),
             ),

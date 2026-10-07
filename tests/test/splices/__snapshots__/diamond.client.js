@@ -1,42 +1,42 @@
-// 10:12
+// 9:12
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (() => 1);
 }
 
-// 12:12
+// 11:12
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0) => {
-    return $splice0() + $splice0();
+exports.default = (($splice0, $splice1) => {
+    return $splice0() + $splice1();
 });
 }
 
-// 16:12
+// 15:12
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0) => {
-    return $splice0() + $splice0();
+exports.default = (($splice0, $splice1) => {
+    return $splice0() + $splice1();
 });
 }
 
-// 20:12
+// 19:12
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0) => {
-    return $splice0() + $splice0();
+exports.default = (($splice0, $splice1) => {
+    return $splice0() + $splice1();
 });
 }
 
-// 24:12
+// 23:12
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0) => {
-    return $splice0() + $splice0();
+exports.default = (($splice0, $splice1) => {
+    return $splice0() + $splice1();
 });
 }

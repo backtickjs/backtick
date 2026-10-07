@@ -2,7 +2,7 @@
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0) => <p>{$splice0() === $splice0() ? "same" : "different"}</p>);
+exports.default = (($splice0, $splice1) => <p>{$splice0() === $splice1() ? "same" : "different"}</p>);
 }
 
 // 17:16

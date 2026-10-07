@@ -14,7 +14,7 @@ const $modules = {
         `<div><img alt><span></span><span></span><span>`,
       ),
       _tmpl$3 = /*#__PURE__*/ (0, web_1.template)(`<span>`);
-    exports.default = ($splice0, $splice1) =>
+    exports.default = ($splice0, $splice1, $splice2) =>
       (() => {
         var _el$ = _tmpl$();
         (0, web_5.insert)(_el$, () =>
@@ -49,7 +49,7 @@ const $modules = {
                               );
                               return _el$7;
                             })(),
-                        }))($splice0()),
+                        }))($splice2()),
                     _el$6,
                   );
                   (0, web_5.insert)(_el$6, () => "$" + order.total);
@@ -130,4 +130,5 @@ export default $cs0(
       total: 49.23,
     },
   ],
+  () => $i0,
 );

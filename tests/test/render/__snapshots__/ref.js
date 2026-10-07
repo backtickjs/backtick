@@ -31,10 +31,13 @@ const $module2 = {
 };
 const $module3 = {
   id: "3c9dsoj0gi4d6:73:10",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nconst web_4 = require("solid-js/web");\nconst web_5 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><button>`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<p>shown`);\nexports.default = $splice0 => () => {\n    const [shown, setShown] = $splice0()(true);\n    const [n, setN] = $splice0()(0);\n    return (() => {\n        var _el$ = _tmpl$(), _el$2 = _el$.firstChild;\n        _el$2.$$click = () => setN(n() + 1);\n        (0, web_5.insert)(_el$2, () => "n " + n());\n        (0, web_5.insert)(_el$, (() => {\n            var _c$ = (0, web_4.memo)(() => !!shown());\n            return () => _c$() ? (() => {\n                var _el$3 = _tmpl$2();\n                (0, web_3.use)(() => window.console.log(n()), _el$3);\n                return _el$3;\n            })() : null;\n        })(), null);\n        return _el$;\n    })();\n};\n(0, web_2.delegateEvents)(["click"]);\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;;;kBAwEaA,QAAA;IACD,MAAM,CAACC,KAAK,EAAEC,QAAQ,CAAC,GAAGF,QAAA,EAAa,CAAC,IAAI,CAAC;IAC7C,MAAM,CAACG,CAAC,EAAEC,IAAI,CAAC,GAAGJ,QAAA,EAAa,CAAC,CAAC,CAAC;IAClC;QAAA,IAAAK,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;QAAAD,KAAA,CAAAE,OAAA,GAEqB,MAAML,IAAI,CAACD,CAAC,EAAE,GAAG,CAAC,CAAC;QAAAO,gBAAA,EAAAH,KAAA,QAAG,IAAI,GAAGJ,CAAC,EAAE;QAAAO,gBAAA,EAAAL,IAAA;YAAA,IAAAM,GAAA,GAAAC,cAAA,UAChDX,KAAK,EAAE;YAAA,aAAPU,GAAA;gBAAA,IAAAE,KAAA,GAAAC,OAAA;gBAAAC,aAAA,EACS,MAAMC,MAAM,CAACC,OAAO,CAACC,GAAG,CAACf,CAAC,EAAE,CAAC,EAAAU,KAAA;gBAAA,OAAAA,KAAA;YAAA,OACnC,IAAI;QAAA;QAAA,OAAAR,IAAA;IAAA;AAGd,CAAC","names":["$splice0","shown","setShown","n","setN","_el$","_tmpl$","_el$2","firstChild","$$click","_$insert","_c$","_$memo","_el$3","_tmpl$2","_$use","window","console","log"],"ignoreList":[],"sources":["render/ref.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nconst web_4 = require("solid-js/web");\nconst web_5 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><button>`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<p>shown`);\nexports.default = ($splice0, $splice1) => () => {\n    const [shown, setShown] = $splice0()(true);\n    const [n, setN] = $splice1()(0);\n    return (() => {\n        var _el$ = _tmpl$(), _el$2 = _el$.firstChild;\n        _el$2.$$click = () => setN(n() + 1);\n        (0, web_5.insert)(_el$2, () => "n " + n());\n        (0, web_5.insert)(_el$, (() => {\n            var _c$ = (0, web_4.memo)(() => !!shown());\n            return () => _c$() ? (() => {\n                var _el$3 = _tmpl$2();\n                (0, web_3.use)(() => window.console.log(n()), _el$3);\n                return _el$3;\n            })() : null;\n        })(), null);\n        return _el$;\n    })();\n};\n(0, web_2.delegateEvents)(["click"]);\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;;;kBAwEa,CAAAA,QAAA,EAAAC,QAAA;IACD,MAAM,CAACC,KAAK,EAAEC,QAAQ,CAAC,GAAGH,QAAA,EAAa,CAAC,IAAI,CAAC;IAC7C,MAAM,CAACI,CAAC,EAAEC,IAAI,CAAC,GAAGJ,QAAA,EAAa,CAAC,CAAC,CAAC;IAClC;QAAA,IAAAK,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;QAAAD,KAAA,CAAAE,OAAA,GAEqB,MAAML,IAAI,CAACD,CAAC,EAAE,GAAG,CAAC,CAAC;QAAAO,gBAAA,EAAAH,KAAA,QAAG,IAAI,GAAGJ,CAAC,EAAE;QAAAO,gBAAA,EAAAL,IAAA;YAAA,IAAAM,GAAA,GAAAC,cAAA,UAChDX,KAAK,EAAE;YAAA,aAAPU,GAAA;gBAAA,IAAAE,KAAA,GAAAC,OAAA;gBAAAC,aAAA,EACS,MAAMC,MAAM,CAACC,OAAO,CAACC,GAAG,CAACf,CAAC,EAAE,CAAC,EAAAU,KAAA;gBAAA,OAAAA,KAAA;YAAA,OACnC,IAAI;QAAA;QAAA,OAAAR,IAAA;IAAA;AAGd,CAAC","names":["$splice0","$splice1","shown","setShown","n","setN","_el$","_tmpl$","_el$2","firstChild","$$click","_$insert","_c$","_$memo","_el$3","_tmpl$2","_$use","window","console","log"],"ignoreList":[],"sources":["render/ref.test.tsx"]}',
   dependencies: ["solid-js/web"],
-  params: [{ kind: "splice", bindings: [] }],
+  params: [
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+  ],
   kind: "function",
 };
 // `ref` hands a script the element it is written on.
@@ -68,7 +71,7 @@ describe("ref", () => {
     // something that changes, so a tracked read in `ref` would draw the
     // element again.
     it("even when a signal it read changes", async () => {
-      render(await evaluate(cs.create($module3, [createSignal])));
+      render(await evaluate(cs.create($module3, [createSignal, createSignal])));
       const shownText = screen.getByText("shown");
       await userEvent.click(screen.getByRole("button"));
       assert.equal(screen.getByRole("button").textContent, "n 1");

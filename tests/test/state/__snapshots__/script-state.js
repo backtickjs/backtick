@@ -13,10 +13,13 @@ const $module0 = {
 };
 const $module1 = {
   id: "3uqa0syxkzh5h:15:9",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span style=font-size:16px>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    _el$.$$click = () => {\n        const row = $splice0()("one");\n        row.label[1](row.label[0]() + " !!!");\n    };\n    (0, web_3.insert)(_el$, () => $splice0()("one").label[0]());\n    return _el$;\n})();\n(0, web_2.delegateEvents)(["click"]);\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAcYA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAD,IAAA,CAAAE,OAAA,GAGG;QACP,MAAMC,GAAG,GAAGJ,QAAA,EAAM,CAAC,KAAK,CAAC;QACzBI,GAAG,CAACC,KAAK,CAAC,CAAC,CAAC,CAACD,GAAG,CAACC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,MAAM,CAAC;IACvC,CAAC;IAAAC,gBAAA,EAAAL,IAAA,QAEAD,QAAA,EAAM,CAAC,KAAK,CAAC,CAACK,KAAK,CAAC,CAAC,CAAC,EAAE;IAAA,OAAAJ,IAAA;AAAA,IAE5B","names":["$splice0","_el$","_tmpl$","$$click","row","label","_$insert"],"ignoreList":[],"sources":["state/script-state.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span style=font-size:16px>`);\nexports.default = ($splice0, $splice1) => (() => {\n    var _el$ = _tmpl$();\n    _el$.$$click = () => {\n        const row = $splice0()("one");\n        row.label[1](row.label[0]() + " !!!");\n    };\n    (0, web_3.insert)(_el$, () => $splice1()("one").label[0]());\n    return _el$;\n})();\n(0, web_2.delegateEvents)(["click"]);\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAcY,CAAAA,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAD,IAAA,CAAAE,OAAA,GAGG;QACP,MAAMC,GAAG,GAAGL,QAAA,EAAM,CAAC,KAAK,CAAC;QACzBK,GAAG,CAACC,KAAK,CAAC,CAAC,CAAC,CAACD,GAAG,CAACC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,MAAM,CAAC;IACvC,CAAC;IAAAC,gBAAA,EAAAL,IAAA,QAEAD,QAAA,EAAM,CAAC,KAAK,CAAC,CAACK,KAAK,CAAC,CAAC,CAAC,EAAE;IAAA,OAAAJ,IAAA;AAAA,IAE5B","names":["$splice0","$splice1","_el$","_tmpl$","$$click","row","label","_$insert"],"ignoreList":[],"sources":["state/script-state.test.tsx"]}',
   dependencies: ["solid-js/web"],
-  params: [{ kind: "splice", bindings: [] }],
+  params: [
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+  ],
   kind: "expression",
 };
 // Storage a script declares for itself, rather than one a component owns and
@@ -25,7 +28,7 @@ const $module1 = {
 // another signal, which is what lets a script build a row that carries its own.
 async function ScriptRows() {
   const build = cs.create($module0, [createSignal]);
-  return cs.create($module1, [build]);
+  return cs.create($module1, [build, build]);
 }
 it("ScriptRows", async (t) => {
   await snapshotCase(t, "ScriptRows", _jsx(ScriptRows, {}));

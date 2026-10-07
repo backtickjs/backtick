@@ -11,15 +11,18 @@ const $module0 = {
 };
 const $module1 = {
   id: "uekyc2sf8mzc:15:4",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => ({\n    absent: $splice0()(null),\n    present: $splice0()(4)\n});\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAcOA,QAAA,KAAC;IACFC,MAAM,EAAED,QAAA,EAAK,CAAC,IAAI,CAAC;IACnBE,OAAO,EAAEF,QAAA,EAAK,CAAC,CAAC;CACjB,CAAC","names":["$splice0","absent","present"],"ignoreList":[],"sources":["expressions/ternary.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => ({\n    absent: $splice0()(null),\n    present: $splice1()(4)\n});\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAcO,CAAAA,QAAA,EAAAC,QAAA,MAAC;IACFC,MAAM,EAAEF,QAAA,EAAK,CAAC,IAAI,CAAC;IACnBG,OAAO,EAAEF,QAAA,EAAK,CAAC,CAAC;CACjB,CAAC","names":["$splice0","$splice1","absent","present"],"ignoreList":[],"sources":["expressions/ternary.test.tsx"]}',
   dependencies: [],
-  params: [{ kind: "splice", bindings: [] }],
+  params: [
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+  ],
   kind: "expression",
 };
 // `?:` evaluates only the taken branch, and its condition narrows like an
 // `if`'s.
 const pick = cs.create($module0, []);
 it("ternary", async (t) => {
-  await snapshotCase(t, "ternary", cs.create($module1, [pick]));
+  await snapshotCase(t, "ternary", cs.create($module1, [pick, pick]));
 });

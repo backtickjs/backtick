@@ -9,8 +9,8 @@ exports.default = (($splice0) => <b>{$splice0()}</b>);
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0) => (<p>
+exports.default = (($splice0, $splice1) => (<p>
     {$splice0()}
-    {$splice0()}
+    {$splice1()}
   </p>));
 }

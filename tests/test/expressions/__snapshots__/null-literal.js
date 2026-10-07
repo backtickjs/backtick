@@ -11,15 +11,18 @@ const $module0 = {
 };
 const $module1 = {
   id: "2nnj6ebvkk8vj:20:4",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => ({\n    missing: $splice0()(null),\n    present: $splice0()("hi"),\n    bare: null\n});\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAmBOA,QAAA,KAAC;IACFC,OAAO,EAAED,QAAA,EAAO,CAAC,IAAI,CAAC;IACtBE,OAAO,EAAEF,QAAA,EAAO,CAAC,IAAI,CAAC;IACtBG,IAAI,EAAE;CACP,CAAC","names":["$splice0","missing","present","bare"],"ignoreList":[],"sources":["expressions/null-literal.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => ({\n    missing: $splice0()(null),\n    present: $splice1()("hi"),\n    bare: null\n});\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAmBO,CAAAA,QAAA,EAAAC,QAAA,MAAC;IACFC,OAAO,EAAEF,QAAA,EAAO,CAAC,IAAI,CAAC;IACtBG,OAAO,EAAEF,QAAA,EAAO,CAAC,IAAI,CAAC;IACtBG,IAAI,EAAE;CACP,CAAC","names":["$splice0","$splice1","missing","present","bare"],"ignoreList":[],"sources":["expressions/null-literal.test.tsx"]}',
   dependencies: [],
-  params: [{ kind: "splice", bindings: [] }],
+  params: [
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+  ],
   kind: "expression",
 };
 // `null` written in the script itself — bare, compared against, and as an
 // argument — as opposed to a spliced host `null` (see `runtime-values.ts`).
 const orDash = cs.create($module0, []);
 it("nullLiteral", async (t) => {
-  await snapshotCase(t, "nullLiteral", cs.create($module1, [orDash]));
+  await snapshotCase(t, "nullLiteral", cs.create($module1, [orDash, orDash]));
 });

@@ -19,10 +19,15 @@ const $module1 = {
 };
 const $module2 = {
   id: "g29mnwu0pbnr:27:4",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => ({\n    missing: $splice0()(null, true),\n    loud: $splice0()("!hi", true),\n    quiet: $splice0()("!hi", false),\n    plain: $splice0()("zz", false)\n});\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA0BOA,QAAA,KAAC;IACFC,OAAO,EAAED,QAAA,EAAM,CAAC,IAAI,EAAE,IAAI,CAAC;IAC3BE,IAAI,EAAEF,QAAA,EAAM,CAAC,KAAK,EAAE,IAAI,CAAC;IACzBG,KAAK,EAAEH,QAAA,EAAM,CAAC,KAAK,EAAE,KAAK,CAAC;IAC3BI,KAAK,EAAEJ,QAAA,EAAM,CAAC,IAAI,EAAE,KAAK;CAC1B,CAAC","names":["$splice0","missing","loud","quiet","plain"],"ignoreList":[],"sources":["expressions/condition-narrowing.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2, $splice3) => ({\n    missing: $splice0()(null, true),\n    loud: $splice1()("!hi", true),\n    quiet: $splice2()("!hi", false),\n    plain: $splice3()("zz", false)\n});\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA0BO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,MAAC;IACFC,OAAO,EAAEJ,QAAA,EAAM,CAAC,IAAI,EAAE,IAAI,CAAC;IAC3BK,IAAI,EAAEJ,QAAA,EAAM,CAAC,KAAK,EAAE,IAAI,CAAC;IACzBK,KAAK,EAAEJ,QAAA,EAAM,CAAC,KAAK,EAAE,KAAK,CAAC;IAC3BK,KAAK,EAAEJ,QAAA,EAAM,CAAC,IAAI,EAAE,KAAK;CAC1B,CAAC","names":["$splice0","$splice1","$splice2","$splice3","missing","loud","quiet","plain"],"ignoreList":[],"sources":["expressions/condition-narrowing.test.tsx"]}',
   dependencies: [],
-  params: [{ kind: "splice", bindings: [] }],
+  params: [
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+  ],
   kind: "expression",
 };
 // A condition narrows in the virtual code: `text !== null` narrows `text` in
@@ -31,5 +36,9 @@ const $module2 = {
 const flags = { strict: cs.create($module0, []) };
 const label = cs.create($module1, [flags.strict]);
 it("conditionNarrowing", async (t) => {
-  await snapshotCase(t, "conditionNarrowing", cs.create($module2, [label]));
+  await snapshotCase(
+    t,
+    "conditionNarrowing",
+    cs.create($module2, [label, label, label, label]),
+  );
 });

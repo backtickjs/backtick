@@ -2,11 +2,11 @@
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $splice1) => (<div>
+exports.default = (($splice0, $splice1, $splice2, $splice3, $splice4, $splice5) => (<div>
     <span style={"font-size: " + ($splice0()[0]() === $splice1() ? 20 : 16) + "px"}>
-      {"row " + $splice1() + " of " + $splice0()[0]()}
+      {"row " + $splice2() + " of " + $splice3()[0]()}
     </span>
-    {$splice0()[0]() === $splice1() ? <span>marker</span> : null}
+    {$splice4()[0]() === $splice5() ? <span>marker</span> : null}
   </div>));
 }
 

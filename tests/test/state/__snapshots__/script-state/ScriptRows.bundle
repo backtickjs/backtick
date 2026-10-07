@@ -16,14 +16,14 @@ const $modules = {
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(
       `<span style=font-size:16px>`,
     );
-    exports.default = ($splice0) =>
+    exports.default = ($splice0, $splice1) =>
       (() => {
         var _el$ = _tmpl$();
         _el$.$$click = () => {
           const row = $splice0()("one");
           row.label[1](row.label[0]() + " !!!");
         };
-        (0, web_3.insert)(_el$, () => $splice0()("one").label[0]());
+        (0, web_3.insert)(_el$, () => $splice1()("one").label[0]());
         return _el$;
       })();
     (0, web_2.delegateEvents)(["click"]);
@@ -56,5 +56,9 @@ const $cs2 = $require("3uqa0syxkzh5h:11:16").default;
 const $function0 = $cs2(() => $i1);
 export default $cs0(
   () => $i0,
-  () => $cs1(() => $function0),
+  () =>
+    $cs1(
+      () => $function0,
+      () => $function0,
+    ),
 );

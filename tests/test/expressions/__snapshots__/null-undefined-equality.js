@@ -37,10 +37,12 @@ const $module3 = {
 };
 const $module4 = {
   id: "dggvpbrq8knn:34:21",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2) => $splice0()(() => {\n    const names = ["a"];\n    return [$splice1() === undefined, $splice1() !== null, $splice2() === null, $splice2() !== undefined, names[1] === undefined, names[1] !== null];\n});\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAiCwB,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,KAAAF,QAAA,EAAW,CAAC;IAC5B,MAAMG,KAAK,GAAG,CAAC,GAAG,CAAC;IACnB,OAAO,CACLF,QAAA,EAAQ,KAAKG,SAAS,EACtBH,QAAA,EAAQ,KAAK,IAAI,EACjBC,QAAA,EAAM,KAAK,IAAI,EACfA,QAAA,EAAM,KAAKE,SAAS,EACpBD,KAAK,CAAC,CAAC,CAAC,KAAKC,SAAS,EACtBD,KAAK,CAAC,CAAC,CAAC,KAAK,IAAI,CAClB;AACH,CAAC,CAAC","names":["$splice0","$splice1","$splice2","names","undefined"],"ignoreList":[],"sources":["expressions/null-undefined-equality.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2, $splice3, $splice4) => $splice0()(() => {\n    const names = ["a"];\n    return [$splice1() === undefined, $splice2() !== null, $splice3() === null, $splice4() !== undefined, names[1] === undefined, names[1] !== null];\n});\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAiCwB,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,KAAAJ,QAAA,EAAW,CAAC;IAC5B,MAAMK,KAAK,GAAG,CAAC,GAAG,CAAC;IACnB,OAAO,CACLJ,QAAA,EAAQ,KAAKK,SAAS,EACtBJ,QAAA,EAAQ,KAAK,IAAI,EACjBC,QAAA,EAAM,KAAK,IAAI,EACfC,QAAA,EAAM,KAAKE,SAAS,EACpBD,KAAK,CAAC,CAAC,CAAC,KAAKC,SAAS,EACtBD,KAAK,CAAC,CAAC,CAAC,KAAK,IAAI,CAClB;AACH,CAAC,CAAC","names":["$splice0","$splice1","$splice2","$splice3","$splice4","names","undefined"],"ignoreList":[],"sources":["expressions/null-undefined-equality.test.tsx"]}',
   dependencies: [],
   params: [
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
@@ -63,7 +65,9 @@ describe("null and undefined", () => {
     const nothing = undefined;
     const empty = null;
     assert.deepEqual(
-      await evaluate(cs.create($module4, [createRoot, nothing, empty])),
+      await evaluate(
+        cs.create($module4, [createRoot, nothing, nothing, empty, empty]),
+      ),
       [true, true, true, true, true, true],
     );
   });

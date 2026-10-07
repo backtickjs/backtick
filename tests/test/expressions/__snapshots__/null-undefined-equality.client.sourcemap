@@ -43,51 +43,51 @@ undefined                 → 23:52 undefined
 );                        → 23:62 `),…
 
 // 34:22
-($splice0, $splice1, $splice2) => $splice0()  → 34:25 $createRoot(()…
-(                                             → 34:36 (
-()                                            → 34:37 () 
-=>                                            → 34:40 =>
- {                                            → 34:42  {
-const                                         → 35:9 const 
-names                                         → 35:15 names
- =                                            → 35:20  = 
-[                                             → 35:23 [
-"a"                                           → 35:24 "a"
-]                                             → 35:27 ]
-;                                             → 35:28 ;
-return                                        → 36:9 return 
-[                                             → 36:16 [
-$splice1()                                    → 37:11 $nothing…
- ===                                          → 37:19  === 
-undefined                                     → 37:24 undefined
-,                                             → 37:33 ,
-$splice1()                                    → 38:11 $nothing…
- !==                                          → 38:19  !== 
-null                                          → 38:24 null
-,                                             → 38:28 ,
-$splice2()                                    → 39:11 $empty…
- ===                                          → 39:17  === 
-null                                          → 39:22 null
-,                                             → 39:26 ,
-$splice2()                                    → 40:11 $empty…
- !==                                          → 40:17  !== 
-undefined                                     → 40:22 undefined
-,                                             → 40:31 ,
-names                                         → 41:11 names
-[                                             → 41:16 [
-1                                             → 41:17 1
-]                                             → 41:18 ]
- ===                                          → 41:19  === 
-undefined                                     → 41:24 undefined
-,                                             → 41:33 ,
-names                                         → 42:11 names
-[                                             → 42:16 [
-1                                             → 42:17 1
-]                                             → 42:18 ]
- !==                                          → 42:19  !== 
-null                                          → 42:24 null
-,                                             → 42:28 ,
-;                                             → 43:10 ;
-}                                             → 44:7 }
-)                                             → 44:8 )
-);                                            → 44:9 `),…
+($splice0, $splice1, $splice2, $splice3, $splice4) => $splice0()  → 34:25 $createRoot(()…
+(                                                                 → 34:36 (
+()                                                                → 34:37 () 
+=>                                                                → 34:40 =>
+ {                                                                → 34:42  {
+const                                                             → 35:9 const 
+names                                                             → 35:15 names
+ =                                                                → 35:20  = 
+[                                                                 → 35:23 [
+"a"                                                               → 35:24 "a"
+]                                                                 → 35:27 ]
+;                                                                 → 35:28 ;
+return                                                            → 36:9 return 
+[                                                                 → 36:16 [
+$splice1()                                                        → 37:11 $nothing…
+ ===                                                              → 37:19  === 
+undefined                                                         → 37:24 undefined
+,                                                                 → 37:33 ,
+$splice2()                                                        → 38:11 $nothing…
+ !==                                                              → 38:19  !== 
+null                                                              → 38:24 null
+,                                                                 → 38:28 ,
+$splice3()                                                        → 39:11 $empty…
+ ===                                                              → 39:17  === 
+null                                                              → 39:22 null
+,                                                                 → 39:26 ,
+$splice4()                                                        → 40:11 $empty…
+ !==                                                              → 40:17  !== 
+undefined                                                         → 40:22 undefined
+,                                                                 → 40:31 ,
+names                                                             → 41:11 names
+[                                                                 → 41:16 [
+1                                                                 → 41:17 1
+]                                                                 → 41:18 ]
+ ===                                                              → 41:19  === 
+undefined                                                         → 41:24 undefined
+,                                                                 → 41:33 ,
+names                                                             → 42:11 names
+[                                                                 → 42:16 [
+1                                                                 → 42:17 1
+]                                                                 → 42:18 ]
+ !==                                                              → 42:19  !== 
+null                                                              → 42:24 null
+,                                                                 → 42:28 ,
+;                                                                 → 43:10 ;
+}                                                                 → 44:7 }
+)                                                                 → 44:8 )
+);                                                                → 44:9 `),…

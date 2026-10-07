@@ -8,10 +8,14 @@ import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn, fontSize } from "./dom.ts";
 const $module0 = {
   id: "25832gpx7dr61:26:6",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nconst web_4 = require("solid-js/web");\nconst web_5 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span>`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<span>marker`);\nexports.default = ($splice0, $splice1) => (() => {\n    var _el$ = _tmpl$(), _el$2 = _el$.firstChild;\n    (0, web_5.insert)(_el$2, () => "row " + $splice1() + " of " + $splice0()[0]());\n    (0, web_5.insert)(_el$, (() => {\n        var _c$ = (0, web_4.memo)(() => $splice0()[0]() === $splice1());\n        return () => _c$() ? _tmpl$2() : null;\n    })(), null);\n    (0, web_3.effect)(_$p => (0, web_2.style)(_el$2, "font-size: " + ($splice0()[0]() === $splice1() ? 20 : 16) + "px", _$p));\n    return _el$;\n})();\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;;;kBAyBS,CAAAA,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;IAAAC,gBAAA,EAAAF,KAAA,QAGF,MAAM,GAAGH,QAAA,EAAG,GAAG,MAAM,GAAGD,QAAA,EAAS,CAAC,CAAC,CAAC,EAAE;IAAAM,gBAAA,EAAAJ,IAAA;QAAA,IAAAK,GAAA,GAAAC,cAAA,QAExCR,QAAA,EAAS,CAAC,CAAC,CAAC,EAAE,KAAKC,QAAA,EAAG;QAAA,aAAtBM,GAAA,KAAAE,OAAA,KAA+C,IAAI;IAAA;IAAAC,gBAAA,EAAAC,GAAA,IAAAC,eAAA,EAAAR,KAAA,EAHvC,aAAa,IAAIJ,QAAA,EAAS,CAAC,CAAC,CAAC,EAAE,KAAKC,QAAA,EAAG,GAAG,EAAE,GAAG,EAAE,CAAC,GAAG,IAAI,EAAAU,GAAA;IAAA,OAAAT,IAAA;AAAA,IAKzE","names":["$splice0","$splice1","_el$","_tmpl$","_el$2","firstChild","_$insert","_c$","_$memo","_tmpl$2","_$effect","_$p","_$style"],"ignoreList":[],"sources":["state/local-state-child-reads.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nconst web_4 = require("solid-js/web");\nconst web_5 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span>`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<span>marker`);\nexports.default = ($splice0, $splice1, $splice2, $splice3, $splice4, $splice5) => (() => {\n    var _el$ = _tmpl$(), _el$2 = _el$.firstChild;\n    (0, web_5.insert)(_el$2, () => "row " + $splice2() + " of " + $splice3()[0]());\n    (0, web_5.insert)(_el$, (() => {\n        var _c$ = (0, web_4.memo)(() => $splice4()[0]() === $splice5());\n        return () => _c$() ? _tmpl$2() : null;\n    })(), null);\n    (0, web_3.effect)(_$p => (0, web_2.style)(_el$2, "font-size: " + ($splice0()[0]() === $splice1() ? 20 : 16) + "px", _$p));\n    return _el$;\n})();\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;;;kBAyBS,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;IAAAC,gBAAA,EAAAF,KAAA,QAGF,MAAM,GAAGN,QAAA,EAAG,GAAG,MAAM,GAAGC,QAAA,EAAS,CAAC,CAAC,CAAC,EAAE;IAAAO,gBAAA,EAAAJ,IAAA;QAAA,IAAAK,GAAA,GAAAC,cAAA,QAExCR,QAAA,EAAS,CAAC,CAAC,CAAC,EAAE,KAAKC,QAAA,EAAG;QAAA,aAAtBM,GAAA,KAAAE,OAAA,KAA+C,IAAI;IAAA;IAAAC,gBAAA,EAAAC,GAAA,IAAAC,eAAA,EAAAR,KAAA,EAHvC,aAAa,IAAIR,QAAA,EAAS,CAAC,CAAC,CAAC,EAAE,KAAKC,QAAA,EAAG,GAAG,EAAE,GAAG,EAAE,CAAC,GAAG,IAAI,EAAAc,GAAA;IAAA,OAAAT,IAAA;AAAA,IAKzE","names":["$splice0","$splice1","$splice2","$splice3","$splice4","$splice5","_el$","_tmpl$","_el$2","firstChild","_$insert","_c$","_$memo","_tmpl$2","_$effect","_$p","_$style"],"ignoreList":[],"sources":["state/local-state-child-reads.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
@@ -71,7 +75,7 @@ const $module5 = {
 // whatever its signal holds. The branch is the half no amount of recomputing a
 // prop can answer for.
 const ReadingRow = async ({ id, selected }) =>
-  cs.create($module0, [selected, id]);
+  cs.create($module0, [selected, id, id, selected, selected, id]);
 async function ReadingPanel() {
   return cs.create($module1, [
     createSignal,

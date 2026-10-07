@@ -56,10 +56,13 @@ const $module5 = {
 };
 const $module6 = {
   id: "3g78mueuhurnr:112:11",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><input aria-label=text><input type=checkbox aria-label=on><button>write`);\nexports.default = $splice0 => {\n    const [text, setText] = $splice0()("first");\n    const [isOn, setIsOn] = $splice0()(false);\n    return (() => {\n        var _el$ = _tmpl$(), _el$2 = _el$.firstChild, _el$3 = _el$2.nextSibling, _el$4 = _el$3.nextSibling;\n        _el$4.$$click = () => {\n            setText("second");\n            setIsOn(true);\n        };\n        (0, web_3.effect)(() => _el$2.value = text());\n        (0, web_3.effect)(() => _el$3.checked = isOn());\n        return _el$;\n    })();\n};\n(0, web_2.delegateEvents)(["click"]);\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBA+GcA,QAAA;IACR,MAAM,CAACC,IAAI,EAAEC,OAAO,CAAC,GAAGF,QAAA,EAAa,CAAC,OAAO,CAAC;IAC9C,MAAM,CAACG,IAAI,EAAEC,OAAO,CAAC,GAAGJ,QAAA,EAAa,CAAC,KAAK,CAAC;IAC5C;QAAA,IAAAK,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAC,WAAA;QAAAC,KAAA,CAAAC,OAAA,GAKe;YACPV,OAAO,CAAC,QAAQ,CAAC;YACjBE,OAAO,CAAC,IAAI,CAAC;QACf,CAAC;QAAAS,gBAAA,QAAAN,KAAA,CAAAO,KAAA,GAN6Bb,IAAI,EAAE;QAAAY,gBAAA,QAAAJ,KAAA,CAAAM,OAAA,GACUZ,IAAI,EAAE;QAAA,OAAAE,IAAA;IAAA;AAW5D,CAAC","names":["$splice0","text","setText","isOn","setIsOn","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","_el$4","$$click","_$effect","value","checked"],"ignoreList":[],"sources":["render/attributes.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><input aria-label=text><input type=checkbox aria-label=on><button>write`);\nexports.default = ($splice0, $splice1) => {\n    const [text, setText] = $splice0()("first");\n    const [isOn, setIsOn] = $splice1()(false);\n    return (() => {\n        var _el$ = _tmpl$(), _el$2 = _el$.firstChild, _el$3 = _el$2.nextSibling, _el$4 = _el$3.nextSibling;\n        _el$4.$$click = () => {\n            setText("second");\n            setIsOn(true);\n        };\n        (0, web_3.effect)(() => _el$2.value = text());\n        (0, web_3.effect)(() => _el$3.checked = isOn());\n        return _el$;\n    })();\n};\n(0, web_2.delegateEvents)(["click"]);\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBA+Gc,CAAAA,QAAA,EAAAC,QAAA;IACR,MAAM,CAACC,IAAI,EAAEC,OAAO,CAAC,GAAGH,QAAA,EAAa,CAAC,OAAO,CAAC;IAC9C,MAAM,CAACI,IAAI,EAAEC,OAAO,CAAC,GAAGJ,QAAA,EAAa,CAAC,KAAK,CAAC;IAC5C;QAAA,IAAAK,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAC,WAAA;QAAAC,KAAA,CAAAC,OAAA,GAKe;YACPV,OAAO,CAAC,QAAQ,CAAC;YACjBE,OAAO,CAAC,IAAI,CAAC;QACf,CAAC;QAAAS,gBAAA,QAAAN,KAAA,CAAAO,KAAA,GAN6Bb,IAAI,EAAE;QAAAY,gBAAA,QAAAJ,KAAA,CAAAM,OAAA,GACUZ,IAAI,EAAE;QAAA,OAAAE,IAAA;IAAA;AAW5D,CAAC","names":["$splice0","$splice1","text","setText","isOn","setIsOn","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","_el$4","$$click","_$effect","value","checked"],"ignoreList":[],"sources":["render/attributes.test.tsx"]}',
   dependencies: ["solid-js/web"],
-  params: [{ kind: "splice", bindings: [] }],
+  params: [
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+  ],
   kind: "block",
 };
 // How a prop lands on the element it was drawn on: as the attribute a page's
@@ -135,7 +138,7 @@ describe("a field's value", () => {
   // Once a field is edited, its `value` and `checked` attributes are only its
   // defaults, so a write that reaches the attribute changes nothing shown.
   async function Field() {
-    return cs.create($module6, [createSignal]);
+    return cs.create($module6, [createSignal, createSignal]);
   }
   it("follows a write after the field was edited", async () => {
     render(await evaluate(() => _jsx(Field, {})));

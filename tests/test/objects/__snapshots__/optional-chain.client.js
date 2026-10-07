@@ -29,13 +29,13 @@ exports.default = (() => (s) => {
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $splice1, $splice2) => ({
+exports.default = (($splice0, $splice1, $splice2, $splice3, $splice4, $splice5, $splice6) => ({
     found: $splice0()({ x: 5 }),
-    missing: $splice0()(null),
-    deep: $splice1()({ inner: { z: 7 } }),
-    cut: $splice1()({ inner: null }),
-    top: $splice1()(null),
-    loud: $splice2()("hi"),
-    silent: $splice2()(null),
+    missing: $splice1()(null),
+    deep: $splice2()({ inner: { z: 7 } }),
+    cut: $splice3()({ inner: null }),
+    top: $splice4()(null),
+    loud: $splice5()("hi"),
+    silent: $splice6()(null),
 }));
 }

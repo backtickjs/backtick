@@ -30,10 +30,13 @@ const $module2 = {
 };
 const $module3 = {
   id: "oeocksjd9384:22:14",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_3.insert)(_el$, () => ($Counted => (0, web_2.createComponent)($Counted, {}))($splice0()), null);\n    (0, web_3.insert)(_el$, () => ($Counted => (0, web_2.createComponent)($Counted, {}))($splice0()), null);\n    return _el$;\n})();\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAqBiBA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAEb,CAAAG,QAAA,IAAAC,yBAAA,EAACD,QAAQ,KAAG,EAAXJ,QAAA,EAAQ,CACT;IAAAG,gBAAA,EAAAF,IAAA,SAAAG,QAAA,IAAAC,yBAAA,EAACD,QAAQ,KAAG,EAAXJ,QAAA,EAAQ,CACX;IAAA,OAAAC,IAAA;AAAA,IACD","names":["$splice0","_el$","_tmpl$","_$insert","$Counted","_$createComponent"],"ignoreList":[],"sources":["jsx/host-tag-evaluation.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>`);\nexports.default = ($splice0, $splice1) => (() => {\n    var _el$ = _tmpl$();\n    (0, web_3.insert)(_el$, () => ($Counted => (0, web_2.createComponent)($Counted, {}))($splice0()), null);\n    (0, web_3.insert)(_el$, () => ($Counted => (0, web_2.createComponent)($Counted, {}))($splice1()), null);\n    return _el$;\n})();\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAqBiB,CAAAA,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAEb,CAAAG,QAAA,IAAAC,yBAAA,EAACD,QAAQ,KAAG,EAAXL,QAAA,EAAQ,CACT;IAAAI,gBAAA,EAAAF,IAAA,SAAAG,QAAA,IAAAC,yBAAA,EAACD,QAAQ,KAAG,EAAXJ,QAAA,EAAQ,CACX;IAAA,OAAAC,IAAA;AAAA,IACD","names":["$splice0","$splice1","_el$","_tmpl$","_$insert","$Counted","_$createComponent"],"ignoreList":[],"sources":["jsx/host-tag-evaluation.test.tsx"]}',
   dependencies: ["solid-js/web"],
-  params: [{ kind: "splice", bindings: [] }],
+  params: [
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+  ],
   kind: "expression",
 };
 // A host tag is a splice: its script is evaluated where the tag stands, each
@@ -41,7 +44,7 @@ const $module3 = {
 const Boom = cs.create($module0, []);
 const Counted = cs.create($module1, []);
 const unreached = cs.create($module2, [Boom]);
-const twice = cs.create($module3, [Counted]);
+const twice = cs.create($module3, [Counted, Counted]);
 it("hostTagEvaluation", async (t) => {
   await snapshotCase(t, "hostTagEvaluation", { unreached, twice });
 });

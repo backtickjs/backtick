@@ -31,9 +31,9 @@ exports.default = (() => () => <input aria-label="name" ref={() => { }}/>);
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0) => () => {
+exports.default = (($splice0, $splice1) => () => {
     const [shown, setShown] = $splice0()(true);
-    const [n, setN] = $splice0()(0);
+    const [n, setN] = $splice1()(0);
     return (<div>
                 <button onclick={() => setN(n() + 1)}>{"n " + n()}</button>
                 {shown() ? (<p ref={() => window.console.log(n())}>shown</p>) : null}

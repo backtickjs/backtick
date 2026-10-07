@@ -24,10 +24,10 @@ exports.default = (($splice0) => (text, upper) => {
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0) => ({
+exports.default = (($splice0, $splice1, $splice2, $splice3) => ({
     missing: $splice0()(null, true),
-    loud: $splice0()("!hi", true),
-    quiet: $splice0()("!hi", false),
-    plain: $splice0()("zz", false),
+    loud: $splice1()("!hi", true),
+    quiet: $splice2()("!hi", false),
+    plain: $splice3()("zz", false),
 }));
 }

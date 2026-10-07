@@ -2,8 +2,8 @@
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0) => (<span style={"font-size: " + $splice0()[0]() + "px"} onclick={() => {
-        $splice0()[1]($splice0()[0]() + 1);
+exports.default = (($splice0, $splice1, $splice2) => (<span style={"font-size: " + $splice0()[0]() + "px"} onclick={() => {
+        $splice1()[1]($splice2()[0]() + 1);
     }}>
       press
     </span>));

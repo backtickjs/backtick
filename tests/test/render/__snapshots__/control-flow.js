@@ -25,10 +25,11 @@ const $module0 = {
 };
 const $module1 = {
   id: "2r57qmcp53te6:28:17",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>none`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<p>wrong`), _tmpl$3 = /*#__PURE__*/ (0, web_1.template)(`<p>right`);\nexports.default = ($splice0, $splice1) => ($Switch => (0, web_2.createComponent)($Switch, {\n    get fallback() {\n        return _tmpl$();\n    },\n    get children() {\n        return [(0, web_3.memo)(() => ($Match => (0, web_2.createComponent)($Match, {\n                when: 1 > 2,\n                get children() {\n                    return _tmpl$2();\n                }\n            }))($splice1())), (0, web_3.memo)(() => ($Match => (0, web_2.createComponent)($Match, {\n                when: 2 > 1,\n                get children() {\n                    return _tmpl$3();\n                }\n            }))($splice1()))];\n    }\n}))($splice0());\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBA2BoB,CAAAA,QAAA,EAAAC,QAAA,KAClB,CAAAC,OAAA,IAAAC,yBAAA,EAACD,OAAO;IAAA,IAACE,QAAQA;QAAA,OAAAC,MAAA;IAAA;IAAA,IAAAC;QAAA,QAAAC,cAAA,QACf,CAAAC,MAAA,IAAAL,yBAAA,EAACK,MAAM;gBAACC,IAAI,EAAE,CAAC,GAAG,CAAC;gBAAA,IAAAH;oBAAA,OAAAI,OAAA;gBAAA;aAAA,CAEV,EAFRT,QAAA,EAAM,CAGP,GAAAM,cAAA,SAAAC,MAAA,IAAAL,yBAAA,EAACK,MAAM;gBAACC,IAAI,EAAE,CAAC,GAAG,CAAC;gBAAA,IAAAH;oBAAA,OAAAK,OAAA;gBAAA;aAAA,CAEV,EAFRV,QAAA,EAAM,CAGT;IAAA;CAAA,CAAU,EAPTD,QAAA,EAAO,CAQT","names":["$splice0","$splice1","$Switch","_$createComponent","fallback","_tmpl$","children","_$memo","$Match","when","_tmpl$2","_tmpl$3"],"ignoreList":[],"sources":["render/control-flow.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>none`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<p>wrong`), _tmpl$3 = /*#__PURE__*/ (0, web_1.template)(`<p>right`);\nexports.default = ($splice0, $splice1, $splice2) => ($Switch => (0, web_2.createComponent)($Switch, {\n    get fallback() {\n        return _tmpl$();\n    },\n    get children() {\n        return [(0, web_3.memo)(() => ($Match => (0, web_2.createComponent)($Match, {\n                when: 1 > 2,\n                get children() {\n                    return _tmpl$2();\n                }\n            }))($splice1())), (0, web_3.memo)(() => ($Match => (0, web_2.createComponent)($Match, {\n                when: 2 > 1,\n                get children() {\n                    return _tmpl$3();\n                }\n            }))($splice2()))];\n    }\n}))($splice0());\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBA2BoB,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,KAClB,CAAAC,OAAA,IAAAC,yBAAA,EAACD,OAAO;IAAA,IAACE,QAAQA;QAAA,OAAAC,MAAA;IAAA;IAAA,IAAAC;QAAA,QAAAC,cAAA,QACf,CAAAC,MAAA,IAAAL,yBAAA,EAACK,MAAM;gBAACC,IAAI,EAAE,CAAC,GAAG,CAAC;gBAAA,IAAAH;oBAAA,OAAAI,OAAA;gBAAA;aAAA,CAEV,EAFRV,QAAA,EAAM,CAGP,GAAAO,cAAA,SAAAC,MAAA,IAAAL,yBAAA,EAACK,MAAM;gBAACC,IAAI,EAAE,CAAC,GAAG,CAAC;gBAAA,IAAAH;oBAAA,OAAAK,OAAA;gBAAA;aAAA,CAEV,EAFRV,QAAA,EAAM,CAGT;IAAA;CAAA,CAAU,EAPTF,QAAA,EAAO,CAQT","names":["$splice0","$splice1","$splice2","$Switch","_$createComponent","fallback","_tmpl$","children","_$memo","$Match","when","_tmpl$2","_tmpl$3"],"ignoreList":[],"sources":["render/control-flow.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [
+    { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
@@ -72,7 +73,7 @@ const $module5 = {
 // Solid's control flow in a script, as Solid types and draws it.
 const rows = ["first", "second"];
 const indexed = cs.create($module0, [Index, rows]);
-const switched = cs.create($module1, [Switch, Match]);
+const switched = cs.create($module1, [Switch, Match, Match]);
 const caught = cs.create($module2, [ErrorBoundary, cs.create($module3, [])]);
 const suspended = cs.create($module4, [Suspense]);
 const portaled = cs.create($module5, [Portal]);

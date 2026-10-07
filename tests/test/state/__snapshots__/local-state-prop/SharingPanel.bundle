@@ -31,11 +31,11 @@ const $modules = {
     const web_3 = require("solid-js/web");
     const web_4 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>press`);
-    exports.default = ($splice0) =>
+    exports.default = ($splice0, $splice1, $splice2) =>
       (() => {
         var _el$ = _tmpl$();
         _el$.$$click = () => {
-          $splice0()[1]($splice0()[0]() + 1);
+          $splice1()[1]($splice2()[0]() + 1);
         };
         (0, web_4.effect)((_$p) =>
           (0, web_3.style)(_el$, "font-size: " + $splice0()[0]() + "px", _$p),
@@ -80,12 +80,22 @@ export default $cs0(
       (size) =>
         $cs0(
           () => $i0,
-          () => $cs2(() => $cs3(size)),
+          () =>
+            $cs2(
+              () => $cs3(size),
+              () => $cs3(size),
+              () => $cs3(size),
+            ),
         ),
       (size) =>
         $cs0(
           () => $i0,
-          () => $cs2(() => $cs4(size)),
+          () =>
+            $cs2(
+              () => $cs4(size),
+              () => $cs4(size),
+              () => $cs4(size),
+            ),
         ),
     ),
 );

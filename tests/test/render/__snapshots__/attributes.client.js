@@ -56,9 +56,9 @@ exports.default = (() => <div tabIndex={2}/>);
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0) => {
+exports.default = (($splice0, $splice1) => {
     const [text, setText] = $splice0()("first");
-    const [isOn, setIsOn] = $splice0()(false);
+    const [isOn, setIsOn] = $splice1()(false);
     return (<div>
           <input aria-label="text" value={text()}/>
           <input type="checkbox" aria-label="on" checked={isOn()}/>

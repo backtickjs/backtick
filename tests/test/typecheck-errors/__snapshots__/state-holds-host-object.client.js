@@ -2,8 +2,8 @@
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $splice1) => {
+exports.default = (($splice0, $splice1, $splice2) => {
     const [held, setHeld] = $splice0()($splice1());
-    setHeld($splice1());
+    setHeld($splice2());
 });
 }

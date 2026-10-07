@@ -13,13 +13,13 @@ exports.default = (($splice0, $splice1) => (<ul>
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $splice1) => (($Switch => <$Switch fallback={<p>none</p>}>
+exports.default = (($splice0, $splice1, $splice2) => (($Switch => <$Switch fallback={<p>none</p>}>
     {($Match => <$Match when={1 > 2}>
       <p>wrong</p>
     </$Match>)($splice1())}
     {($Match => <$Match when={2 > 1}>
       <p>right</p>
-    </$Match>)($splice1())}
+    </$Match>)($splice2())}
   </$Switch>)($splice0())));
 }
 

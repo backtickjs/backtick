@@ -103,13 +103,17 @@ export function virtualScript(
     verbatim(at, node.getEnd());
   };
 
+  // The splice an identifier is, if it's one.
+  const spliceAt = (node: ts.Identifier): Splice | undefined =>
+    Object.values(script.splices).find((splice) => splice.refs.includes(node));
+
   const identifier = (node: ts.Identifier): void => {
     if (inTypePosition(ts, node)) {
       verbatim(node.getStart(file), node.getEnd());
       return;
     }
-    const splice = script.splices[node.text];
-    if (splice !== undefined && splice.refs.includes(node)) {
+    const splice = spliceAt(node);
+    if (splice !== undefined) {
       // Parenthesized whole, so what it stands in reads it as one value: in
       // `new $Animated.Value(0)`, `new` takes `$Animated.Value`, not the call.
       const range = script.toSourceRange(node);
@@ -164,10 +168,7 @@ export function virtualScript(
       ts,
       ts.isJsxElement(node) ? node.openingElement.tagName : node.tagName,
     );
-    return (
-      root !== undefined &&
-      script.splices[root.text]?.refs.includes(root) === true
-    );
+    return root !== undefined && spliceAt(root) !== undefined;
   };
 
   // A host tag is checked as JSX, as a tag is anywhere: on a parameter the
@@ -195,7 +196,7 @@ export function virtualScript(
     const root = tagRoot(ts, tagName)!;
     const tag = script.toSourceRange(root);
     // The binding's name, parenthesized over its `$` as an unbraced splice is.
-    const name = `(${(script.splices[root.text]!.expression as ts.Identifier).text})`;
+    const name = `(${(spliceAt(root)!.expression as ts.Identifier).text})`;
     // Where JSX stands, an expression is written in braces: a child of an
     // element or fragment, or an attribute's value.
     const parent = node.parent;

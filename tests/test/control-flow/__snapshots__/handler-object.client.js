@@ -21,10 +21,10 @@ exports.default = (($splice0) => (id) => {
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0) => {
+exports.default = (($splice0, $splice1) => {
     const handlers = {
         tap: $splice0(),
-        hold: $splice0(),
+        hold: $splice1(),
     };
     return handlers;
 });

@@ -2,22 +2,30 @@ const $modules = {
   "2dtorvijco8u0:24:4": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = ($splice0, $splice1, $splice2) => ({
+    exports.default = (
+      $splice0,
+      $splice1,
+      $splice2,
+      $splice3,
+      $splice4,
+      $splice5,
+      $splice6,
+    ) => ({
       found: $splice0()({
         x: 5,
       }),
-      missing: $splice0()(null),
-      deep: $splice1()({
+      missing: $splice1()(null),
+      deep: $splice2()({
         inner: {
           z: 7,
         },
       }),
-      cut: $splice1()({
+      cut: $splice3()({
         inner: null,
       }),
-      top: $splice1()(null),
-      loud: $splice2()("hi"),
-      silent: $splice2()(null),
+      top: $splice4()(null),
+      loud: $splice5()("hi"),
+      silent: $splice6()(null),
     });
   },
   "2dtorvijco8u0:8:13": (module, exports, require) => {
@@ -61,6 +69,10 @@ const $function1 = $cs2();
 const $function2 = $cs3();
 export default $cs0(
   () => $function0,
+  () => $function0,
   () => $function1,
+  () => $function1,
+  () => $function1,
+  () => $function2,
   () => $function2,
 );

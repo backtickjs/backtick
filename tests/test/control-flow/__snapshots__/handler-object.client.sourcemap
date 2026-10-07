@@ -24,22 +24,22 @@ $splice0()       → 14:3 $beep;…
 );               → 15:2 `;…
 
 // 21:5
-($splice0) => {  → 21:8 {…
-const            → 22:7 const 
-handlers         → 22:13 handlers
- =               → 22:21  = 
-{                → 22:24 {
-tap              → 23:9 tap
-:                → 23:12 : 
-$splice0()       → 23:14 $onTap,…
-,                → 23:20 ,
-hold             → 24:9 hold
-:                → 24:13 : 
-$splice0()       → 24:15 $onTap,…
-,                → 24:21 ,
-;                → 25:8 ;
-return           → 26:7 return 
-handlers         → 26:14 handlers
-;                → 26:22 ;
-}                → 27:5 }
-);               → 27:6 `,…
+($splice0, $splice1) => {  → 21:8 {…
+const                      → 22:7 const 
+handlers                   → 22:13 handlers
+ =                         → 22:21  = 
+{                          → 22:24 {
+tap                        → 23:9 tap
+:                          → 23:12 : 
+$splice0()                 → 23:14 $onTap,…
+,                          → 23:20 ,
+hold                       → 24:9 hold
+:                          → 24:13 : 
+$splice1()                 → 24:15 $onTap,…
+,                          → 24:21 ,
+;                          → 25:8 ;
+return                     → 26:7 return 
+handlers                   → 26:14 handlers
+;                          → 26:22 ;
+}                          → 27:5 }
+);                         → 27:6 `,…

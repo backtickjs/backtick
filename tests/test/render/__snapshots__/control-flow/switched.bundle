@@ -11,7 +11,7 @@ const $modules = {
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>none`),
       _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<p>wrong`),
       _tmpl$3 = /*#__PURE__*/ (0, web_1.template)(`<p>right`);
-    exports.default = ($splice0, $splice1) =>
+    exports.default = ($splice0, $splice1, $splice2) =>
       (($Switch) =>
         (0, web_2.createComponent)($Switch, {
           get fallback() {
@@ -35,7 +35,7 @@ const $modules = {
                     get children() {
                       return _tmpl$3();
                     },
-                  }))($splice1()),
+                  }))($splice2()),
               ),
             ];
           },
@@ -57,5 +57,6 @@ const $require = (id) => {
 const $cs0 = $require("2r57qmcp53te6:28:17").default;
 export default $cs0(
   () => $i0,
+  () => $i1,
   () => $i1,
 );

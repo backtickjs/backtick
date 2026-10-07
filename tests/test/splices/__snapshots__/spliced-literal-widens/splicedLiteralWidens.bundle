@@ -3,11 +3,11 @@ const $modules = {
   "2z8p56bmxvsx1:28:4": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = ($splice0, $splice1, $splice2, $splice3) => {
+    exports.default = ($splice0, $splice1, $splice2, $splice3, $splice4) => {
       const [n, setN] = $splice0()($splice1());
       setN(6);
-      const [c, setC] = $splice0()($splice2());
-      setC($splice3());
+      const [c, setC] = $splice2()($splice3());
+      setC($splice4());
     };
   },
 };
@@ -25,6 +25,7 @@ const $cs0 = $require("2z8p56bmxvsx1:28:4").default;
 export default $cs0(
   () => $i0,
   () => 5,
+  () => $i0,
   () => 0,
   () => 1,
 );

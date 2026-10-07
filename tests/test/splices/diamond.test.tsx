@@ -3,10 +3,9 @@ import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // Each level splices the level below it twice, so the composition graph is a
-// diamond lattice with exponentially many root-to-leaf paths. The bundler
-// shares each script rather than re-expanding it per path, so the payload has
-// one entry per level (linear) — not one per path, which would blow up as
-// 2^depth.
+// diamond lattice with exponentially many root-to-leaf paths. Each splice is
+// rendered where it stands, so the bundle's calls follow every path: 2^depth
+// calls to the bottom level. Each script's module is still declared once.
 const d0 = cs`1`;
 
 const d1 = cs`{

@@ -8,10 +8,14 @@ import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn, fontSize } from "./dom.ts";
 const $module0 = {
   id: "1t9uf2rmx1hr4:16:2",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nconst web_4 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>press`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    _el$.$$click = () => {\n        $splice0()[1]($splice0()[0]() + 1);\n    };\n    (0, web_4.effect)(_$p => (0, web_3.style)(_el$, "font-size: " + $splice0()[0]() + "px", _$p));\n    return _el$;\n})();\n(0, web_2.delegateEvents)(["click"]);\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;;kBAeKA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAD,IAAA,CAAAE,OAAA,GAGU;QACPH,QAAA,EAAK,CAAC,CAAC,CAAC,CAACA,QAAA,EAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAC1B,CAAC;IAAAI,gBAAA,EAAAC,GAAA,IAAAC,eAAA,EAAAL,IAAA,EAHM,aAAa,GAAGD,QAAA,EAAK,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI,EAAAK,GAAA;IAAA,OAAAJ,IAAA;AAAA,IAO3C","names":["$splice0","_el$","_tmpl$","$$click","_$effect","_$p","_$style"],"ignoreList":[],"sources":["state/local-state-prop.test.tsx"]}',
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nconst web_4 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>press`);\nexports.default = ($splice0, $splice1, $splice2) => (() => {\n    var _el$ = _tmpl$();\n    _el$.$$click = () => {\n        $splice1()[1]($splice2()[0]() + 1);\n    };\n    (0, web_4.effect)(_$p => (0, web_3.style)(_el$, "font-size: " + $splice0()[0]() + "px", _$p));\n    return _el$;\n})();\n(0, web_2.delegateEvents)(["click"]);\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;;kBAeK,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAD,IAAA,CAAAE,OAAA,GAGU;QACPJ,QAAA,EAAK,CAAC,CAAC,CAAC,CAACC,QAAA,EAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAC1B,CAAC;IAAAI,gBAAA,EAAAC,GAAA,IAAAC,eAAA,EAAAL,IAAA,EAHM,aAAa,GAAGH,QAAA,EAAK,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI,EAAAO,GAAA;IAAA,OAAAJ,IAAA;AAAA,IAO3C","names":["$splice0","$splice1","$splice2","_el$","_tmpl$","$$click","_$effect","_$p","_$style"],"ignoreList":[],"sources":["state/local-state-prop.test.tsx"]}',
   dependencies: ["solid-js/web"],
-  params: [{ kind: "splice", bindings: [] }],
+  params: [
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+    { kind: "splice", bindings: [] },
+  ],
   kind: "expression",
 };
 const $module1 = {
@@ -46,7 +50,8 @@ const $module3 = {
 // draws the pair, handed to each child as a prop, so both read one storage. The
 // signal is an ordinary client value — the prop takes it the way it takes any other —
 // which is what makes a write through either child reach the same storage.
-const SharedCounter = async ({ size }) => cs.create($module0, [size]);
+const SharedCounter = async ({ size }) =>
+  cs.create($module0, [size, size, size]);
 async function SharingPanel() {
   return cs.create($module1, [
     createSignal,

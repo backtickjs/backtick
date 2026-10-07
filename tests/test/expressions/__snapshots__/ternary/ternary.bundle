@@ -2,9 +2,9 @@ const $modules = {
   "uekyc2sf8mzc:15:4": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = ($splice0) => ({
+    exports.default = ($splice0, $splice1) => ({
       absent: $splice0()(null),
-      present: $splice0()(4),
+      present: $splice1()(4),
     });
   },
   "uekyc2sf8mzc:7:13": (module, exports, require) => {
@@ -28,4 +28,7 @@ const $require = (id) => {
 const $cs0 = $require("uekyc2sf8mzc:15:4").default;
 const $cs1 = $require("uekyc2sf8mzc:7:13").default;
 const $function0 = $cs1();
-export default $cs0(() => $function0);
+export default $cs0(
+  () => $function0,
+  () => $function0,
+);

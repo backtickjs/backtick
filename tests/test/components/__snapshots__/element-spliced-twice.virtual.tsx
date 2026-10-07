@@ -22,16 +22,9 @@ const twice = cs.lift((() => (
   </p>
 ))());
 
-// A known bug: the bundler caches each element's expansion, so the component
-// runs once and both places draw its one result. A todo until it's fixed,
-// when the runner reports it passing.
-it(
-  "an element drawn twice runs its component twice",
-  { todo: "runs once, both places drawing its result" },
-  async () => {
-    runs = 0;
-    const { container } = render(await evaluate(() => twice));
-    assert.equal(runs, 2);
-    assert.equal(container.textContent, "12");
-  },
-);
+it("an element drawn twice runs its component twice", async () => {
+  runs = 0;
+  const { container } = render(await evaluate(() => twice));
+  assert.equal(runs, 2);
+  assert.equal(container.textContent, "12");
+});

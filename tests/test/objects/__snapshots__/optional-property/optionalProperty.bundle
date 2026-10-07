@@ -2,18 +2,18 @@ const $modules = {
   "1pn78z89zmc5d:16:4": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = ($splice0) => ({
+    exports.default = ($splice0, $splice1, $splice2) => ({
       present: $splice0()({
         label: "a",
         inner: {
           z: 3,
         },
       }),
-      partial: $splice0()({
+      partial: $splice1()({
         label: "b",
         inner: {},
       }),
-      omitted: $splice0()({
+      omitted: $splice2()({
         label: "c",
       }),
     });
@@ -39,4 +39,8 @@ const $require = (id) => {
 const $cs0 = $require("1pn78z89zmc5d:16:4").default;
 const $cs1 = $require("1pn78z89zmc5d:8:13").default;
 const $function0 = $cs1();
-export default $cs0(() => $function0);
+export default $cs0(
+  () => $function0,
+  () => $function0,
+  () => $function0,
+);
