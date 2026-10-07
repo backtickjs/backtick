@@ -57,10 +57,6 @@ export function arrow(params: readonly string[], body: string): string {
   return `(${params.join(", ")}) => (${body})`;
 }
 
-export function thunk(body: string): string {
-  return arrow([], body);
-}
-
 export function array(elements: readonly string[]): string {
   return `[${elements.join(", ")}]`;
 }

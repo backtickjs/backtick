@@ -40,6 +40,6 @@ const $cs1 = $require("1xi8jyc89buh5:16:9").default;
 const $cs2 = $require("1xi8jyc89buh5:28:18").default;
 const $cs3 = $require("1xi8jyc89buh5:28:40").default;
 export default $cs0(
-  () => $cs1($cs2),
-  () => $cs1($cs3),
+  () => $cs1(() => $cs2()),
+  () => $cs1(() => $cs3()),
 );

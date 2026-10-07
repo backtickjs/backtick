@@ -124,7 +124,7 @@ const $cs6 = $require("1durge4hv8o7p:28:10").default;
 export default $cs0(
   () => $i0,
   (count, Badge) => $cs1(Badge, count),
-  (count, Badge) => $cs2($cs3, Badge, count),
-  (count, Badge) => $cs4($cs5, Badge, count),
+  (count, Badge) => $cs2((Badge, count) => $cs3(Badge, count), Badge, count),
+  (count, Badge) => $cs4((Badge, count) => $cs5(Badge, count), Badge, count),
   (count, Badge) => $cs6((Badge, count) => $i1, Badge, count),
 );

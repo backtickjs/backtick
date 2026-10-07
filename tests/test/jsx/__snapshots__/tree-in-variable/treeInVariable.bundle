@@ -69,7 +69,7 @@ const $cs2 = $require("2xjp8x9bcyeyr:16:17").default;
 const $cs3 = $require("2xjp8x9bcyeyr:20:22").default;
 const $cs4 = $require("1uptcsn9236u2:352:9").default;
 const $cs5 = $require("2xjp8x9bcyeyr:13:28").default;
-const $function0 = $cs1($cs2);
+const $function0 = $cs1(() => $cs2());
 const $function1 = $cs3(() =>
   $cs4(
     () => $i0,

@@ -111,12 +111,20 @@ export default $cs0(
       (selected) =>
         $cs0(
           () => $i0,
-          () => $cs2(() => $cs3(selected), $cs4),
+          () =>
+            $cs2(
+              () => $cs3(selected),
+              () => $cs4(),
+            ),
         ),
       (selected) =>
         $cs0(
           () => $i0,
-          () => $cs2(() => $cs5(selected), $cs6),
+          () =>
+            $cs2(
+              () => $cs5(selected),
+              () => $cs6(),
+            ),
         ),
     ),
 );

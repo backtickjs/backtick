@@ -48,4 +48,4 @@ const $cs1 = $require("23y608t6y2wp3:20:11").default;
 const $cs2 = $require("23y608t6y2wp3:16:11").default;
 const $cs3 = $require("23y608t6y2wp3:12:11").default;
 const $cs4 = $require("23y608t6y2wp3:10:11").default;
-export default $cs0(() => $cs1(() => $cs2(() => $cs3($cs4))));
+export default $cs0(() => $cs1(() => $cs2(() => $cs3(() => $cs4()))));

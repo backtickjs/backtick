@@ -44,8 +44,8 @@ const $cs0 = $require("3jzoitmu8iit8:31:4").default;
 const $cs1 = $require("3jzoitmu8iit8:13:9").default;
 const $cs2 = $require("3jzoitmu8iit8:21:11").default;
 const $cs3 = $require("3jzoitmu8iit8:23:15").default;
-const $function0 = $cs1($cs2);
-const $function1 = $cs1($cs3);
+const $function0 = $cs1(() => $cs2());
+const $function1 = $cs1(() => $cs3());
 export default $cs0(
   () => $function0,
   () => $function1,

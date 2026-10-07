@@ -99,6 +99,14 @@ const $cs5 = $require("21m2csdludqmv:30:20").default;
 const $function0 = $cs1();
 export default $cs0(
   () => $function0,
-  () => $cs2($cs3, $cs4),
-  () => $cs2($cs5, $cs4),
+  () =>
+    $cs2(
+      () => $cs3(),
+      (Card) => $cs4(Card),
+    ),
+  () =>
+    $cs2(
+      () => $cs5(),
+      (Card) => $cs4(Card),
+    ),
 );

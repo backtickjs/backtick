@@ -34,4 +34,4 @@ const $require = (id) => {
 const $cs0 = $require("3q2gz79xhvvfp:20:4").default;
 const $cs1 = $require("3q2gz79xhvvfp:12:31").default;
 const $cs2 = $require("3q2gz79xhvvfp:8:30").default;
-export default $cs0(() => $cs1($cs2));
+export default $cs0(() => $cs1(() => $cs2()));

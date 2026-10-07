@@ -74,4 +74,4 @@ const $cs0 = $require("oeocksjd9384:21:18").default;
 const $cs1 = $require("oeocksjd9384:10:13").default;
 const $cs2 = $require("oeocksjd9384:22:14").default;
 const $cs3 = $require("oeocksjd9384:15:16").default;
-export default { unreached: $cs0($cs1), twice: $cs2($cs3) };
+export default { unreached: $cs0(() => $cs1()), twice: $cs2(() => $cs3()) };

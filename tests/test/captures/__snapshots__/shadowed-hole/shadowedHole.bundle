@@ -41,6 +41,6 @@ const $cs1 = $require("1wiy7dknp0llv:15:9").default;
 const $cs2 = $require("1wiy7dknp0llv:28:22").default;
 const $cs3 = $require("1wiy7dknp0llv:28:48").default;
 export default $cs0(
-  () => $cs1($cs2),
-  () => $cs1($cs3),
+  () => $cs1(() => $cs2()),
+  () => $cs1(() => $cs3()),
 );
