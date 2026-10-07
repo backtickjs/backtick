@@ -1,11 +1,12 @@
 import {
   type ClientModule,
   type ClientScript,
+  isClientImport,
   isClientScript,
   isJsxElement,
   type JsxElement,
+  type Spliceable,
 } from "@backtickjs/core";
-import { isClientImport, type Spliceable } from "@backtickjs/core";
 
 import { expandJsxElement } from "./expandJsxElement.js";
 import { bindingsOf, capturesOf } from "./params.js";
@@ -51,8 +52,7 @@ interface Scope {
 
 const rootScope = (): Scope => ({ bindings: new Set(), read: new Set() });
 
-// Builds the bundle `{ scripts, root }` as code, and documents how it is
-// derived.
+// Builds the bundle, its modules, constants and root, as code.
 //
 // Each script is declared once, as its compiled code under a label `$cs<n>`,
 // and called wherever it is used. Its code takes a parameter per splice — a
@@ -97,13 +97,8 @@ export async function buildBundle(
   // Disambiguated at all because these become identifiers, and identifiers nest:
   // a hole inside a thunk puts one thunk's parameters inside another's, so two
   // bindings sharing a source name can land in one chain and the inner would
-  // shadow what the outer was handed (`shadowing` nests three).
-  //
-  // One scope, which is the bundle root: what a drawing is written into now
-  // that structure goes where it stands. A declared script's names are the
-  // compiler's, from its own source — nothing out here reads those names,
-  // because a call hands a script its arguments positionally, and its
-  // captures arrive as numbered parameters rather than under a name.
+  // shadow what the outer was handed (`shadowing` nests three). A script's own
+  // names are the compiler's: a call hands it its arguments by position.
   const displayed = new Map<string, string>();
   const used = new Set<string>(RESERVED);
   const displayName = (key: string): string => {
@@ -143,22 +138,46 @@ export async function buildBundle(
   const labelOf = (target: ClientScript): string =>
     `$cs${numbers.get(target)!}`;
 
-  // A function script is a closure: one function until the client locals it
-  // reads change, as an arrow is in JavaScript. One whose rendering read none
-  // of the scope it's read in is made once, for the bundle, and every read of
-  // it is that function, so a client component keeps its identity across
-  // renders. Making a function runs nothing, so when it's made isn't
-  // observable.
-  const functions = new Map<ClientScript, string>();
+  // Every function the bundle writes is a closure: a function script, and the
+  // thunk a splice is handed over as. One whose code reads nothing of the
+  // scope it's written in, beyond its own parameters, is the same function
+  // wherever it's written, so the bundle makes it once, as a constant, and
+  // the same code anywhere else is that constant: a client component keeps
+  // its identity across renders, and a value spliced at every level of a deep
+  // composition is written once per level, not once per path. Making a
+  // function runs nothing, so sharing one isn't observable; everything is
+  // still rendered where it stands.
   const constants: (readonly [string, string])[] = [];
-
-  // A splice's thunk whose code reads nothing of the scope it's written in,
-  // beyond its own parameters, is the same function wherever it's written. So
-  // a thunk with the same code as one already made is that one, and a value
-  // spliced at every level of a deep composition is written once per level,
-  // not once per path. Making a function runs nothing, so sharing one isn't
-  // observable; each splice is still rendered where it stands.
-  const thunks = new Map<string, string>();
+  const byCode = new Map<string, string>();
+  // `write` renders a closure's code in a scope that records what it reads:
+  // a constant's label if it read nothing of `scope` beyond `own`, its
+  // parameters, or else the code, written where it's used.
+  const closure = async (
+    scope: Scope,
+    own: readonly string[],
+    write: (inner: Scope) => Promise<string>,
+    name: string,
+  ): Promise<string> => {
+    const read = new Set<string>();
+    const code = await write({
+      bindings: new Set([...scope.bindings, ...own]),
+      read,
+    });
+    const outside = [...read].filter(
+      (key) => !own.includes(key) && scope.bindings.has(key),
+    );
+    if (outside.length > 0) {
+      outside.forEach((key) => scope.read.add(key));
+      return code;
+    }
+    let label = byCode.get(code);
+    if (label === undefined) {
+      label = `${name}${constants.length}`;
+      byCode.set(code, label);
+      constants.push([label, code]);
+    }
+    return label;
+  };
 
   // Writes a value as the code it becomes: composition as data, which is what
   // a bundle is. A script reference is a call naming which script and
@@ -174,23 +193,13 @@ export async function buildBundle(
       if (target.module.kind !== "function") {
         return call(labelOf(target), await exprCallArgs(value, scope));
       }
-      const made = functions.get(value);
-      if (made !== undefined) {
-        return made;
-      }
-      const read = new Set<string>();
-      const code = call(
-        labelOf(target),
-        await exprCallArgs(value, { bindings: scope.bindings, read }),
+      return closure(
+        scope,
+        [],
+        async (inner) =>
+          call(labelOf(target), await exprCallArgs(value, inner)),
+        "$function",
       );
-      if ([...read].some((key) => scope.bindings.has(key))) {
-        read.forEach((key) => scope.read.add(key));
-        return code;
-      }
-      const label = `$function${constants.length}`;
-      functions.set(value, label);
-      constants.push([label, code]);
-      return label;
     }
     if (isJsxElement(value)) {
       return renderJsx(value, scope);
@@ -288,29 +297,15 @@ export async function buildBundle(
       // nested inside it.
       const passed = [...passKeys(target, index), ...capturesOf(target)];
       // A thunk taking them, the splice rendered inside it.
-      const read = new Set<string>();
-      const code = arrow(
-        passed.map(displayName),
-        await render(arg, {
-          bindings: new Set([...scope.bindings, ...passed]),
-          read,
-        }),
+      parts.push(
+        await closure(
+          scope,
+          passed,
+          async (inner) =>
+            arrow(passed.map(displayName), await render(arg, inner)),
+          "$thunk",
+        ),
       );
-      const outside = [...read].filter(
-        (key) => !passed.includes(key) && scope.bindings.has(key),
-      );
-      if (outside.length > 0) {
-        outside.forEach((key) => scope.read.add(key));
-        parts.push(code);
-        continue;
-      }
-      let label = thunks.get(code);
-      if (label === undefined) {
-        label = `$thunk${constants.length}`;
-        thunks.set(code, label);
-        constants.push([label, code]);
-      }
-      parts.push(label);
     }
     for (const key of capturesOf(target)) {
       parts.push(capExpr(key, scope));
