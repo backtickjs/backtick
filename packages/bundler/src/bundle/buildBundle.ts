@@ -7,10 +7,7 @@ import {
 } from "@backtickjs/core";
 import { isClientImport, type Spliceable } from "@backtickjs/core";
 
-import {
-  type ElementExpansions,
-  expandJsxElement,
-} from "./expandJsxElement.js";
+import { expandJsxElement } from "./expandJsxElement.js";
 import { bindingsOf, capturesOf } from "./params.js";
 import { sourceName } from "./bindingKey.js";
 import {
@@ -77,7 +74,6 @@ export async function buildBundle(
   packageVersions: Readonly<Record<string, string>>,
 ): Promise<BundleTree> {
   const names = createNames(packageVersions);
-  const elementExpansions: ElementExpansions = new WeakMap();
   // Each script's number, in the order rendering first reaches it. Two
   // scripts written at one source location are one declaration, so the first
   // script with an id stands for all of them, and a reference to a shared
@@ -306,10 +302,7 @@ export async function buildBundle(
   const renderJsx = async (jsx: JsxElement, scope: Scope): Promise<string> => {
     const type = jsx.type;
     if (typeof type === "function" && !isClientImport(type)) {
-      return render(
-        await expandJsxElement(jsx, type, elementExpansions),
-        scope,
-      );
+      return render(await expandJsxElement(jsx, type), scope);
     }
     // An element and a client component (an import, or a script answering
     // one) are client code, so on the host they can't be tags: they are tags

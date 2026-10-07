@@ -1,0 +1,40 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+<                → <
+b                → b
+>                → >
+{                → {
+(cs.splice(      →  [-semantic -navigation]
+(runs)           → $runs
+))               →  [-semantic -navigation]
+}                → }
+<                → <
+/                → /
+b                → b
+>                → >
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+\n               → \n  
+<                → <
+p                → p
+>                → >
+\n               → \n    
+{                → {
+(cs.splice(      →  [-semantic -navigation]
+(stamp)          → $stamp
+))               →  [-semantic -navigation]
+}                → }
+\n               → \n    
+{                → {
+(cs.splice(      →  [-semantic -navigation]
+(stamp)          → $stamp
+))               →  [-semantic -navigation]
+}                → }
+\n               → \n  
+<                → <
+/                → /
+p                → p
+>                → >
+\n               → \n
+)                → )
+)())             → ` [-semantic -navigation]
