@@ -132,3 +132,43 @@ test("--help lists the options, and an unknown one shows them too", () => {
         .startsWith("Unknown option '--framework'.\n\nUsage:"),
   );
 });
+
+test("created where it's run, it doesn't say to cd anywhere", () => {
+  const here = path.join(work, "here-app");
+  mkdirSync(here);
+  const said = execFileSync(
+    process.execPath,
+    [
+      cli,
+      ".",
+      "--template",
+      "react-native",
+      "--runtime",
+      "node",
+      "--no-install",
+    ],
+    { cwd: here, encoding: "utf8" },
+  );
+  assert.ok(existsSync(path.join(here, "package.json")));
+  assert.doesNotMatch(said, /- cd /);
+  assert.match(said, /To run your project, run one of the following/);
+  assert.match(said, /- \w+ run ios/);
+});
+
+test("created elsewhere, it says to cd there first", () => {
+  const said = execFileSync(
+    process.execPath,
+    [
+      cli,
+      "there-app",
+      "--template",
+      "react",
+      "--runtime",
+      "node",
+      "--no-install",
+    ],
+    { cwd: work, encoding: "utf8" },
+  );
+  assert.match(said, /navigate to the directory and run/);
+  assert.match(said, /- cd there-app\n- \w+ run start/);
+});

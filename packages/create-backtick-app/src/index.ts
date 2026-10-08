@@ -12,6 +12,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 import prompts from "prompts";
+import { isSupportedNode } from "./nodeVersion.js";
 
 // Creates an app whose screens come from your server: a few questions, the
 // install, then the next steps, with the framework yours to pick and a
@@ -90,6 +91,16 @@ const { values, positionals } = parsed;
 if (values.help) {
   console.log(USAGE);
   process.exit(0);
+}
+
+// Said, not refused: what fails on another version is the app's toolchain,
+// later, and only some of it.
+if (!isSupportedNode(process.versions.node)) {
+  console.warn(
+    `Backtick and React Native support Node 22 (22.15 or later) and 24 (24.3 or ` +
+      `later), and you're on Node ${process.versions.node}. If something fails, ` +
+      `switch to Node 22 or 24.\n`,
+  );
 }
 
 if (values.template !== undefined && !(values.template in TEMPLATES)) {
@@ -214,13 +225,18 @@ if (!values["no-install"]) {
   }
 }
 
+// Created where it was run, there's nowhere to go first.
+const here = target === process.cwd();
+const steps = [
+  ...(here ? [] : [`cd ${slug}`]),
+  ...template.scripts.map((script) => `${run} run ${script}`),
+];
 console.log(`
 ✅ Your project is ready!
 
-To run your project, navigate to the directory and run one of the following ${run} commands.
+To run your project, ${here ? "" : "navigate to the directory and "}run one of the following ${run} commands.
 
-- cd ${slug}
-${template.scripts.map((script) => `- ${run} run ${script}`).join("\n")}
+${steps.map((step) => `- ${step}`).join("\n")}
 
 ${template.then}
 `);

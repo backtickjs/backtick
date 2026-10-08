@@ -122,7 +122,7 @@ Internal packages, used by the ones above: [`compiler`](packages/compiler),
 ## Requirements
 
 Backtick is early. Today it supports Expo SDK 57 (React Native 0.86 and
-React 19.2) and Solid 1.9, with servers on Node 22.15 or later, or Bun.
+React 19.2) and Solid 1.9, with servers on Node 22 (22.15 or later) or 24 (24.3 or later), or Bun.
 
 ## Who's behind it
 
