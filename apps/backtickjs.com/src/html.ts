@@ -58,6 +58,8 @@ export async function toHtml({
         ? ""
         : `<link rel="alternate" type="text/markdown" href="${path}.md">`
     }
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+    <link rel="alternate" type="text/plain" href="/llms-full.txt" title="llms-full.txt">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Backtick">
     <meta property="og:title" content="${titleText}">
