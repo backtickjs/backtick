@@ -110,15 +110,25 @@ export function rewriteScript(
     end: sourceNode.getEnd(),
   };
 
-  // A script can't hold a template literal: the host's template reads `\``
-  // as an escape, but the script's text is taken as written, where it's a
-  // backslash and a stray backtick. Refused here, where the escape stands,
-  // rather than as the parse errors that would follow.
-  const [escapedBacktick] = escapedBackticksIn(sourceFile.text, sourceNode);
+  // A script that doesn't parse is reported as TypeScript's parser read it,
+  // except for a `\`` in its code: the host's template reads it as an escape,
+  // but the script's text is taken as written, where it's a backslash and a
+  // stray backtick. In a string or a comment it is a backtick, and parses.
+  const parseErrors = parseDiagnostics(fileWithPlaceholders);
+  const escapedBacktick = parseErrors.find(
+    (diagnostic) =>
+      clientScript.textWithPlaceholders.slice(
+        diagnostic.start!,
+        diagnostic.start! + 2,
+      ) === "\\`",
+  );
   if (escapedBacktick !== undefined) {
     return leftAsWritten([
       {
-        range: { start: escapedBacktick, end: escapedBacktick + 2 },
+        range: {
+          start: clientScript.toSourceOffset(escapedBacktick.start!),
+          end: clientScript.toSourceOffset(escapedBacktick.start! + 2),
+        },
         message:
           "A `cs` client script can't hold a template literal, which `\\`` " +
           'would start. Build the string with `+`, e.g. n + "%".',
@@ -127,9 +137,6 @@ export function rewriteScript(
       },
     ]);
   }
-
-  // A script that doesn't parse is reported as TypeScript's parser read it.
-  const parseErrors = parseDiagnostics(fileWithPlaceholders);
   if (parseErrors.length > 0) {
     return leftAsWritten(
       parseErrors.map((diagnostic) => ({
@@ -435,25 +442,4 @@ function skipParentheses(
     node = node.expression;
   }
   return node;
-}
-
-// Where each `\`` stands in a script's template, as source offsets; the
-// first is reported. A `\\` is skipped as a pair, so the backslash it escapes
-// can't start one.
-function escapedBackticksIn(
-  sourceText: string,
-  sourceNode: ts.TaggedTemplateExpression,
-): number[] {
-  const found: number[] = [];
-  const end = sourceNode.template.getEnd() - 1;
-  for (let i = sourceNode.template.getStart() + 1; i < end; i++) {
-    if (sourceText[i] !== "\\") {
-      continue;
-    }
-    if (sourceText[i + 1] === "`") {
-      found.push(i);
-    }
-    i++;
-  }
-  return found;
 }

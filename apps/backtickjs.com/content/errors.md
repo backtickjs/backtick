@@ -52,7 +52,8 @@ element's child, write it in braces: `{${…}}`.
 ### A `cs` client script can't hold a template literal
 
 A script is a template literal itself, so `` \` `` can't start one inside it.
-Build the string with `+`: `n + "%"`, not `` `${n}%` ``.
+Build the string with `+`: `n + "%"`, not `` `${n}%` ``. In a string or a
+comment, `` \` `` is a backtick, and fine.
 
 ### `$`-prefixed names are reserved for unbraced splices in a `cs` client script
 

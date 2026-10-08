@@ -52,9 +52,11 @@ make it, in `useMemo`:
 
 ## No template literals inside a script
 
-A script is a template literal itself, so it can't hold one: a backtick
-inside it is refused, with "A `cs` client script can't hold a template
+A script is a template literal itself, so it can't hold one: a backtick in
+its code is refused, with "A `cs` client script can't hold a template
 literal". Build the string with `+` instead: `n + "%"`, not `` `${n}%` ``.
+In a string or a comment, write a backtick as `` \` ``, as anywhere in a
+template literal.
 
 ## A script in data
 

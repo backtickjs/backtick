@@ -22,8 +22,16 @@ describe("refusals", () => {
       "A `cs` client script can't hold a template literal, which `\\`` " +
         'would start. Build the string with `+`, e.g. n + "%".',
     ]);
-    // A `\\` is the script's own, and no backtick.
-    assert.deepStrictEqual(refusals('"a\\\\b"'), []);
+    // In a string or a comment, `\\`` is a backtick, as it is anywhere else
+    // in the host's template; a `\\\\` is the script's own.
+    for (const body of [
+      '"a\\\\b"',
+      '"use \\`cs\\`"',
+      "{ // a \\`cs\\` script\n return 1; }",
+      "{ /* \\` */ return 1; }",
+    ]) {
+      assert.deepStrictEqual(refusals(body), [], body);
+    }
   });
 
   it("a declared `$` name is refused, not emitted", () => {
