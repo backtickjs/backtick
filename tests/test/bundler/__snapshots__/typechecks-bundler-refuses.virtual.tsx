@@ -77,12 +77,12 @@ it("a host function typed as any", async () => {
   });
 });
 
-// By design, as above: a bigint or a symbol has no place in a bundle.
-it("a bigint typed as any", async () => {
-  const big: any = 1n;
-  await assert.rejects(bundle(cs.lift((() => (cs.splice((big))))())), {
+// By design, as above: a symbol is the same symbol only where it was made.
+it("a symbol typed as any", async () => {
+  const key: any = Symbol("key");
+  await assert.rejects(bundle(cs.lift((() => (cs.splice((key))))())), {
     message:
-      "Can't splice a bigint: only strings, numbers, booleans, null, undefined, scripts, and arrays and plain objects of those cross into a client script.",
+      "Can't splice a symbol: a bundle can't write one that is the same symbol on the client. Splice a string, and make the symbol from it in a script: cs`Symbol.for($key)`.",
   });
 });
 

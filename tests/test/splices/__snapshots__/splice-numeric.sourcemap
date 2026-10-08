@@ -20,6 +20,21 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 (cs.splice(      →  [-semantic -navigation]
+(createRoot)     → $createRoot
+))               →  [-semantic -navigation]
+(                → (
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(bigints)        → $bigints
+))               →  [-semantic -navigation]
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
 (numbers)        → $numbers
 ))               →  [-semantic -navigation]
 )())             → ` [-semantic -navigation]

@@ -1,5 +1,5 @@
 const $modules = {
-  "woqewhbpnx6k:24:44": (module, exports, require) => {
+  "17gesq3jbfgu2:27:44": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0) => $splice0();
@@ -15,6 +15,13 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $cs0 = $require("woqewhbpnx6k:24:44").default;
-const $thunk0 = () => [NaN, Infinity, -Infinity, -0];
+const $cs0 = $require("17gesq3jbfgu2:27:44").default;
+const $thunk0 = () => [
+  NaN,
+  Infinity,
+  -Infinity,
+  -0,
+  12345678901234567890n,
+  -1n,
+];
 export default $cs0($thunk0);

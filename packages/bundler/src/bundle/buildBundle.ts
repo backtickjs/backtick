@@ -231,6 +231,7 @@ export async function buildBundle(
       value === null ||
       value === undefined ||
       typeof value === "number" ||
+      typeof value === "bigint" ||
       typeof value === "string" ||
       typeof value === "boolean"
     ) {
@@ -260,9 +261,9 @@ export async function buildBundle(
     }
     if (typeof value !== "object") {
       throw new Error(
-        `Can't splice a ${typeof value}: only strings, numbers, booleans, ` +
-          "null, undefined, scripts, and arrays and plain objects of those " +
-          "cross into a client script.",
+        "Can't splice a symbol: a bundle can't write one that is the same " +
+          "symbol on the client. Splice a string, and make the symbol from it " +
+          "in a script: cs`Symbol.for($key)`.",
       );
     }
     // Only plain objects cross structurally. A class instance would land here

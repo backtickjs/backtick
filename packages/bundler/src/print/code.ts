@@ -33,7 +33,7 @@ export function string(value: string): string {
 }
 
 export function literal(
-  value: string | number | boolean | null | undefined,
+  value: string | number | bigint | boolean | null | undefined,
 ): string {
   if (typeof value === "string") {
     return string(value);
@@ -41,6 +41,9 @@ export function literal(
   if (typeof value === "number") {
     // `String` writes NaN and the infinities by name, but -0 as "0".
     return Object.is(value, -0) ? "-0" : String(value);
+  }
+  if (typeof value === "bigint") {
+    return `${value}n`;
   }
   return String(value);
 }

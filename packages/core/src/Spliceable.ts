@@ -12,6 +12,7 @@ export type Spliceable =
   | null
   | undefined
   | number
+  | bigint
   | boolean
   | string
   | readonly Spliceable[]

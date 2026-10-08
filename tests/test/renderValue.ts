@@ -22,6 +22,13 @@ function render(value: unknown, indent: string, seen: Set<object>): string {
   if (typeof value === "function") {
     return "[function]";
   }
+  // As written in source, which `String` doesn't keep for either.
+  if (Object.is(value, -0)) {
+    return "-0";
+  }
+  if (typeof value === "bigint") {
+    return `${value}n`;
+  }
   if (isNode(value)) {
     return renderMarkup(value, indent);
   }
