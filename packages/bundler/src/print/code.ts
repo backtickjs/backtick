@@ -37,8 +37,12 @@ export function literal(value: string | number | boolean | null): string {
     return string(value);
   }
   if (typeof value === "number") {
+    // What has no literal is written as what computes it, reading no global.
+    if (Number.isNaN(value)) {
+      return "0 / 0";
+    }
     if (!Number.isFinite(value)) {
-      throw new Error(`${value} has no literal`);
+      return value > 0 ? "1 / 0" : "-1 / 0";
     }
     return Object.is(value, -0) ? "-0" : String(value);
   }

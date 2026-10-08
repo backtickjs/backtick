@@ -36,19 +36,6 @@ it("a class instance typed as an interface", async () => {
   });
 });
 
-// A gap in the types: `Spliceable` takes any `number`, and a bundle has no
-// literal for one that isn't finite.
-it("NaN and Infinity", async () => {
-  const notANumber = NaN;
-  const infinite = Infinity;
-  await assert.rejects(bundle(cs`$notANumber + 1`), {
-    message: "NaN has no literal",
-  });
-  await assert.rejects(bundle(cs`$infinite + 1`), {
-    message: "Infinity has no literal",
-  });
-});
-
 // A gap in the types: a value that contains itself type-checks as any
 // recursive type does. The bundler writes each value out in full, so it
 // refuses one it's already inside of, rather than render it forever. A value

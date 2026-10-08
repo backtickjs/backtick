@@ -14,24 +14,6 @@ title            → title
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 (cs.splice(      →  [-semantic -navigation]
-(notANumber)     → $notANumber
-))               →  [-semantic -navigation]
-                 →  
-+                → +
-                 →  
-1                → 1
-)())             → ` [-semantic -navigation]
-cs.lift((() =>   → cs` [-semantic -navigation]
-(cs.splice(      →  [-semantic -navigation]
-(infinite)       → $infinite
-))               →  [-semantic -navigation]
-                 →  
-+                → +
-                 →  
-1                → 1
-)())             → ` [-semantic -navigation]
-cs.lift((() =>   → cs` [-semantic -navigation]
-(cs.splice(      →  [-semantic -navigation]
 (link)           → $link
 ))               →  [-semantic -navigation]
 .                → .
