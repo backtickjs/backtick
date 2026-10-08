@@ -99,7 +99,8 @@ The server knows your last order, so the screen can start with it.
 
 ```
 
-Place an order, then reload the app: press `r` in the terminal running it.
+Your server keeps orders in memory, and it restarted when you saved, so place
+an order now, then reload the app: press `r` in the terminal running it.
 "Your usual" appears, and the order starts with it.
 
 - **`Usual` is a server component drawn inside a script,** with a braced

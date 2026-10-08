@@ -27,14 +27,8 @@ Here's the screen the test above draws. `Order` is a server component, and each
 
 ## Tapping
 
-`userEvent.click` taps what it's given, as a finger would. Install it beside
-Testing Library:
-
-```sh
-npm install --save-dev @testing-library/user-event
-```
-
-A `Pressable` answers it as it answers a tap, and the client component's state
+`userEvent.click` taps what it's given, as a finger would. A `Pressable`
+answers it as it answers a tap, and the client component's state
 changes as it would on the phone. Each check reads what the screen shows, so
 the test passes or fails on what a user would see.
 

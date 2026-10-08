@@ -4,8 +4,8 @@ npx create-backtick-app@latest
 
 It asks for a name, then creates an Expo app with a Backtick server beside
 it, on Node, and installs its packages. Give the name on the command line,
-`npx create-backtick-app@latest my-app`, and it asks nothing. It needs Node
-22.15 or later, or 24.3 or later. For a web page instead, pass
+`npx create-backtick-app@latest my-app`, and it asks nothing. It needs Node 22
+(22.15 or later) or 24 (24.3 or later), not 23. For a web page instead, pass
 `--template react` or `--template solid-js`; for a server on Bun,
 `--runtime bun`.
 

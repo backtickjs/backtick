@@ -224,7 +224,9 @@ if (!values["no-install"]) {
 
 // Created where it was run, there's nowhere to go first.
 const here = target === process.cwd();
-const script = (name: string) => `${run} run ${name}`;
+// `npm start` and its peers take no `run`; every other script does.
+const script = (name: string) =>
+  name === "start" ? `${run} start` : `${run} run ${name}`;
 const start = [...(here ? [] : [`cd ${slug}`]), script("start")]
   .map((command) => `   ${command}`)
   .join("\n");

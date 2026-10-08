@@ -28,7 +28,7 @@ const ENTRIES: { name: string; pages: Entry[] }[] = [
         path: "/docs/tutorial",
         title: "Tutorial",
         description:
-          "Build a coffee-ordering screen in five steps: a menu from your server, an order kept on the phone, sent back, and remembered for next time.",
+          "Build a coffee-ordering screen in six steps: a menu from your server, an order kept on the phone, sent back, and remembered for next time.",
         file: "tutorial.md",
       },
     ],

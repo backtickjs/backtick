@@ -167,7 +167,7 @@ test("created where it's run, it doesn't say to cd anywhere", () => {
   );
   assert.ok(existsSync(path.join(here, "package.json")));
   assert.doesNotMatch(said, /cd /);
-  assert.match(said, /\n\n {3}\w+ run start\n\n/);
+  assert.match(said, /\n\n {3}\w+ start\n\n/);
 });
 
 test("created elsewhere, it says to cd there first", () => {
@@ -184,7 +184,7 @@ test("created elsewhere, it says to cd there first", () => {
     ],
     { cwd: work, encoding: "utf8" },
   );
-  assert.match(said, /\n\n {3}cd there-app\n {3}\w+ run start\n\n/);
+  assert.match(said, /\n\n {3}cd there-app\n {3}\w+ start\n\n/);
 });
 
 test("a React Native project is opened on a phone, with Expo Go", () => {

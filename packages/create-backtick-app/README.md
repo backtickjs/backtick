@@ -65,7 +65,7 @@ Each starts your Backtick server alongside Expo, in one terminal. Edit `server/H
 A web page: the server bundles `server/Home.tsx` into an HTML page at `/`, with the framework loaded from a CDN by an import map.
 
 ```sh
-npm run start
+npm start
 ```
 
 Then open http://localhost:3000. Edit `server/Home.tsx` and save to see the page change.
