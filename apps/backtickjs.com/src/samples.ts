@@ -44,7 +44,7 @@ export async function Home({ user }: { user: User }) {
   return cs\`(
     <$ScrollView contentContainerStyle={$screen}>
       <$Text style={$greeting}>Good morning, {$user.name}</$Text>
-+      {$promo && <$PromoBanner promo={$promo} />}
++      <$PromoBanner promo={$promo} />
 
       {$picks.map((pick) => (
         <$ProductCard key={pick.id} product={pick} />
@@ -73,8 +73,8 @@ export async function Home({ user }: { user: User }) {
   return cs\`(
     <$ScrollView contentContainerStyle={$screen}>
       <$Text style={$greeting}>Good morning, {$user.name}</$Text>
-      {$promo && <$PromoBanner promo={$promo} />}
-+      {$usual && <$ReorderButton order={$usual} />}
+      <$PromoBanner promo={$promo} />
++      <$ReorderButton order={$usual} />
 
       {$picks.map((pick) => (
         <$ProductCard key={pick.id} product={pick} />

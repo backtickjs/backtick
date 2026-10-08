@@ -59,7 +59,7 @@ export async function Home({ user }: { user: User }) {
   return cs`(
     <$ScrollView>
       <$Text>Good morning, {$user.name}</$Text>
-      {$usual && <$ReorderButton order={$usual} />}
+      <$ReorderButton order={$usual} />
     </$ScrollView>
   )`;
 }
