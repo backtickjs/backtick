@@ -1,0 +1,75 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+(createRoot)     → $createRoot
+))               →  [-semantic -navigation]
+(                → (
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(todo)           → $todo
+))               →  [-semantic -navigation]
+.                → .
+title            → title
+                 →  
++                → +
+                 →  
+" "              → " "
+                 →  
++                → +
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(todo)           → $todo
+))               →  [-semantic -navigation]
+.                → .
+done             → done
+                 →  
++                → +
+                 →  
+" "              → " "
+                 →  
++                → +
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(todo)           → $todo
+))               →  [-semantic -navigation]
+.                → .
+tags             → tags
+[                → [
+0                → 0
+]                → ]
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+"computed"       → "computed"
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+(createRoot)     → $createRoot
+))               →  [-semantic -navigation]
+(                → (
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(labelled)       → $labelled
+))               →  [-semantic -navigation]
+.                → .
+label            → label
+.                → .
+toUpperCase      → toUpperCase
+(                → (
+)                → )
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+(withMethod)     → $withMethod
+))               →  [-semantic -navigation]
+.                → .
+title            → title
+)())             → ` [-semantic -navigation]

@@ -1,0 +1,49 @@
+// 21:5
+($splice0, $splice1, $splice2, $splice3) => $splice0()  → 21:8 $createRoot(()…
+(                                                       → 21:19 (
+()                                                      → 21:20 () 
+=>                                                      → 21:23 =>
+$splice1()                                              → 21:26 $todo.title…
+.                                                       → 21:31 .
+title                                                   → 21:32 title
+ +                                                      → 21:37  + 
+" "                                                     → 21:40 " "
+ +                                                      → 21:43  + 
+$splice2()                                              → 21:46 $todo.done…
+.                                                       → 21:51 .
+done                                                    → 21:52 done
+ +                                                      → 21:56  + 
+" "                                                     → 21:59 " "
+ +                                                      → 21:62  + 
+$splice3()                                              → 21:65 $todo.tags[0])`,…
+.                                                       → 21:70 .
+tags                                                    → 21:71 tags
+[                                                       → 21:75 [
+0                                                       → 21:76 0
+]                                                       → 21:77 ]
+)                                                       → 21:78 )
+);                                                      → 21:79 `,…
+
+// 30:37
+() => "computed"  → 30:40 "computed"`…
+);                → 30:50 `…
+
+// 36:5
+($splice0, $splice1) => $splice0()  → 36:8 $createRoot(()…
+(                                   → 36:19 (
+()                                  → 36:20 () 
+=>                                  → 36:23 =>
+$splice1()                          → 36:26 $labelled.label.toUpperCase())`,…
+.                                   → 36:35 .
+label                               → 36:36 label
+.                                   → 36:41 .
+toUpperCase                         → 36:42 toUpperCase
+()                                  → 36:53 ()
+)                                   → 36:55 )
+);                                  → 36:56 `,…
+
+// 50:24
+($splice0) => $splice0()  → 50:27 $withMethod.title`;…
+.                         → 50:38 .
+title                     → 50:39 title
+);                        → 50:44 `;…

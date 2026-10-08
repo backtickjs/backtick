@@ -1,0 +1,26 @@
+import { createRoot as $i0 } from "solid-js";
+const $modules = {
+  "2gnb8oih8cuiw:21:4": (module, exports, require) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = ($splice0, $splice1, $splice2, $splice3) =>
+      $splice0()(
+        () =>
+          $splice1().title + " " + $splice2().done + " " + $splice3().tags[0],
+      );
+  },
+};
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = { exports: {} };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("2gnb8oih8cuiw:21:4").default;
+const $thunk0 = () => $i0;
+const $thunk1 = () => ({ title: "Ship 0.1.5", done: false, tags: ["release"] });
+export default $cs0($thunk0, $thunk1, $thunk1, $thunk1);

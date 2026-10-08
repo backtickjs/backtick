@@ -16,6 +16,18 @@ export type Spliceable =
   | readonly Spliceable[]
   | { readonly [key: string]: Spliceable };
 
+/**
+ * `T` as a splice checks it, member by member, so an interface splices as a
+ * type alias does: only a type alias has the index signature `Spliceable`
+ * names. What already is `Spliceable` is as it is; a function, which can't
+ * cross, is checked against `Spliceable`, and fails.
+ */
+export type SplicesAs<T> = [T] extends [Spliceable]
+  ? T
+  : T extends (...args: never) => unknown
+    ? Spliceable
+    : { readonly [K in keyof T]: SplicesAs<T[K]> };
+
 // What a spliceable becomes on the client:
 //   Client<U>                 -> U
 //   T[]                       -> Spliced<T>[]
@@ -26,6 +38,6 @@ export type Spliced<T> =
     ? U
     : T extends readonly (infer Item extends Spliceable)[]
       ? Spliced<Item>[]
-      : T extends { readonly [key: string]: Spliceable }
+      : T extends object
         ? { -readonly [K in keyof T]: Spliced<T[K]> }
         : T;

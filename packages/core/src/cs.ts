@@ -1,7 +1,6 @@
 import type { Client } from "./Client.js";
 import { create } from "./ClientScript.js";
-import type { Spliceable } from "./Spliceable.js";
-import type { Spliced } from "./Spliceable.js";
+import type { Spliceable, SplicesAs, Spliced } from "./Spliceable.js";
 
 // The root of a script
 function lift<T>(_: T): Client<T> {
@@ -13,10 +12,11 @@ function lift<T>(_: T): Client<T> {
 
 // A constraint that is `unknown` for a value that splices, rather than
 // `Spliceable` itself or an intersection with it: either of those keeps a
-// literal a literal instead of widening it. What can't be spliced is refused
-// once, where it is written, and is `any` after: refused, `T` falls back to
-// `Spliceable`, which splices to `unknown`.
-function splice<T extends [T] extends [Spliceable] ? unknown : Spliceable>(
+// literal a literal instead of widening it. Checked member by member, as
+// `SplicesAs`, so an interface splices too. What can't be spliced is refused
+// once, where it is written, as not `Spliceable`, and is `any` after:
+// refused, `T` falls back to `Spliceable`, which splices to `unknown`.
+function splice<T extends [T] extends [SplicesAs<T>] ? unknown : Spliceable>(
   _: T,
 ): unknown extends Spliced<T> ? any : Spliced<T> {
   throw new Error(
