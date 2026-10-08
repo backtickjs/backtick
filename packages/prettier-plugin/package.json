@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/prettier-plugin",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "A Prettier plugin that formats the code inside Backtick client scripts",
   "keywords": [
     "backtick",

@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/react-native-client",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Runs a Backtick server's screens in a React Native app, with the app's own packages",
   "keywords": [
     "backtick",
