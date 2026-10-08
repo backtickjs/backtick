@@ -5,7 +5,6 @@ import {
   isClientScript,
   isJsxElement,
   type JsxElement,
-  type Spliceable,
 } from "@backtickjs/core";
 
 import { expandJsxElement } from "./expandJsxElement.js";
@@ -69,7 +68,7 @@ const rootScope = (): Scope => ({ bindings: new Set(), read: new Set() });
 // intermediate script that binds a same-looking variable has a different
 // unique name, so there is nothing to disambiguate and nothing to rename.
 export async function buildBundle(
-  value: Spliceable,
+  value: unknown,
   packageVersions: Readonly<Record<string, string>>,
 ): Promise<BundleTree> {
   const names = createNames(packageVersions);
@@ -188,7 +187,7 @@ export async function buildBundle(
   // isn't one: it's left before it's met again.
   const path = new Set<object>();
   const render = async (
-    value: Spliceable,
+    value: unknown,
     scope: Scope = rootScope(),
   ): Promise<string> => {
     if (typeof value !== "object" || value === null) {
@@ -208,10 +207,7 @@ export async function buildBundle(
       path.delete(value);
     }
   };
-  const renderValue = async (
-    value: Spliceable,
-    scope: Scope,
-  ): Promise<string> => {
+  const renderValue = async (value: unknown, scope: Scope): Promise<string> => {
     if (isClientScript(value)) {
       const target = scriptFor(value);
       if (target.module.kind !== "function") {
@@ -251,14 +247,22 @@ export async function buildBundle(
     // code is written in a script, and reaches another as one.
     // A server component among them, written as a tag: `<$Rule />`.
     if (typeof value === "function") {
-      const { name } = value as (...args: never) => unknown;
+      const { name } = value;
       throw new Error(
         (name === ""
           ? "Can't splice a host function"
           : `Can't splice the host function \`${name}\``) +
           ": it's host code, and only runs on the host. Write a client " +
-          "function as a script instead: cs`(n: number) => ...`; a server " +
-          `component is drawn in a braced splice: \`{\${<${name || "Name"} />}}\`.`,
+          "function as a script instead: cs`(n: number) => ...`. If it's a " +
+          "server component, draw it with a tag in a braced splice: " +
+          `\`{\${<${/^[A-Z]/.test(name) ? name : "Name"} />}}\`.`,
+      );
+    }
+    if (typeof value !== "object") {
+      throw new Error(
+        `Can't splice a ${typeof value}: only strings, numbers, booleans, ` +
+          "null, undefined, scripts, and arrays and plain objects of those " +
+          "cross into a client script.",
       );
     }
     // Only plain objects cross structurally. A class instance would land here
@@ -361,7 +365,7 @@ export async function buildBundle(
   };
 
   // Nothing encloses the root, so nothing it holds can capture.
-  const root = await render(value as Spliceable);
+  const root = await render(value);
   // In table order, which is the order rendering first reached each script.
   const modules = [...numbers.keys()].map(
     (script) => [labelOf(script), script.module] as const,

@@ -1,4 +1,4 @@
-import type { JsxElement, Spliceable } from "@backtickjs/core";
+import type { JsxElement } from "@backtickjs/core";
 
 // Runs a host component and answers with what it drew, each time an element
 // is drawn, as React renders an element each place it stands. The component
@@ -7,6 +7,6 @@ import type { JsxElement, Spliceable } from "@backtickjs/core";
 export async function expandJsxElement(
   jsx: JsxElement,
   component: (props: never) => unknown,
-): Promise<Spliceable> {
-  return (await component(jsx.props as never)) as Spliceable;
+): Promise<unknown> {
+  return component(jsx.props as never);
 }

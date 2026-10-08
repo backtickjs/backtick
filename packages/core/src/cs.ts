@@ -13,7 +13,7 @@ function lift<T>(_: T): Client<T> {
 // A constraint that is `unknown` for a value that splices, rather than
 // `Spliceable` itself or an intersection with it: either of those keeps a
 // literal a literal instead of widening it. Checked member by member, as
-// `SplicesAs`, so an interface splices too. What can't be spliced is refused
+// `SplicesAs<T>`, so an interface splices too. What can't be spliced is refused
 // once, where it is written, as not `Spliceable`, and is `any` after:
 // refused, `T` falls back to `Spliceable`, which splices to `unknown`.
 function splice<T extends [T] extends [SplicesAs<T>] ? unknown : Spliceable>(

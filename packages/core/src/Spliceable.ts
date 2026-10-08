@@ -3,8 +3,9 @@ import type { Client } from "./Client.js";
 /**
  * What the host may splice: the value written out, a script standing in for
  * it, or a container mixing the two. Not a host function, which is host code:
- * a client function is a script, cs`(n: number) => …`. An index signature rather than a mapped
- * type, so it can be named in a `satisfies` without a type to walk.
+ * a client function is a script, cs`(n: number) => …`. Matches an object
+ * through an index signature, which TypeScript gives a type alias but never an
+ * interface: `SplicesAs` checks either.
  */
 export type Spliceable =
   | Client<unknown>
@@ -17,10 +18,10 @@ export type Spliceable =
   | { readonly [key: string]: Spliceable };
 
 /**
- * `T` as a splice checks it, member by member, so an interface splices as a
- * type alias does: only a type alias has the index signature `Spliceable`
- * names. What already is `Spliceable` is as it is; a function, which can't
- * cross, is checked against `Spliceable`, and fails.
+ * `T` as a splice checks it, member by member, so it takes an interface as a
+ * type alias: `product satisfies SplicesAs<Product>`. What already is
+ * `Spliceable` is as it is; a function, which can't cross, is checked against
+ * `Spliceable`, and fails.
  */
 export type SplicesAs<T> = [T] extends [Spliceable]
   ? T

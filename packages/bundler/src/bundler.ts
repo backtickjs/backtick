@@ -1,10 +1,10 @@
-import type { Spliceable } from "@backtickjs/core";
+import type { Spliceable, SplicesAs } from "@backtickjs/core";
 import { buildBundle } from "./bundle/buildBundle.js";
 import { printBundle } from "./print/printBundle.js";
 
-export interface BuildOptions {
-  // What to bundle.
-  readonly input: Spliceable;
+export interface BuildOptions<T = Spliceable> {
+  // What to bundle: what a splice could carry, checked as a splice checks it.
+  readonly input: T;
   // The packages the client provides, each at its exact version: left out of
   // the bundle, which requires them. A script's import from any other, or
   // needing a version it doesn't have, throws.
@@ -45,7 +45,10 @@ export interface Bundle {
  * give what comes back.
  */
 export const bundler = {
-  async build({ input, packageVersions }: BuildOptions): Promise<Bundle> {
+  async build<T extends [T] extends [SplicesAs<T>] ? unknown : Spliceable>({
+    input,
+    packageVersions,
+  }: BuildOptions<T>): Promise<Bundle> {
     // Scripts come compiled for their framework when their host was built, so
     // the bundle is only put together: nothing is compiled or parsed here.
     const tree = await buildBundle(input, packageVersions);

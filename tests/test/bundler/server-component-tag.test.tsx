@@ -22,7 +22,7 @@ it("refuses a server component as a tag in a script", async () => {
     }),
     {
       message:
-        "Can't splice the host function `Rule`: it's host code, and only runs on the host. Write a client function as a script instead: cs`(n: number) => ...`; a server component is drawn in a braced splice: `{${<Rule />}}`.",
+        "Can't splice the host function `Rule`: it's host code, and only runs on the host. Write a client function as a script instead: cs`(n: number) => ...`. If it's a server component, draw it with a tag in a braced splice: `{${<Rule />}}`.",
     },
   );
 });

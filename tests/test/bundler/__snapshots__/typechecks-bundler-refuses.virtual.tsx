@@ -67,11 +67,22 @@ it("a value used in two places is no cycle", async () => {
 });
 
 // By design: `any` opts out of the typechecker, so a host function it hides
-// is refused where the bundler meets it.
+// is refused where the bundler meets it. Its name isn't a component's, so the
+// message doesn't suggest drawing `<hidden />`, which would be a client tag.
 it("a host function typed as any", async () => {
   const hidden: any = () => 1;
   await assert.rejects(bundle(cs.lift((() => (cs.splice((hidden)))())())), {
-    message: /^Can't splice the host function `hidden`/,
+    message:
+      "Can't splice the host function `hidden`: it's host code, and only runs on the host. Write a client function as a script instead: cs`(n: number) => ...`. If it's a server component, draw it with a tag in a braced splice: `{${<Name />}}`.",
+  });
+});
+
+// By design, as above: a bigint or a symbol has no place in a bundle.
+it("a bigint typed as any", async () => {
+  const big: any = 1n;
+  await assert.rejects(bundle(cs.lift((() => (cs.splice((big))))())), {
+    message:
+      "Can't splice a bigint: only strings, numbers, booleans, null, undefined, scripts, and arrays and plain objects of those cross into a client script.",
   });
 });
 

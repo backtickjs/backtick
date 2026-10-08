@@ -9,7 +9,7 @@ export type { Client } from "./Client.js";
 
 // What a host may hand a client: data, a script, or an export of a module the
 // client provides.
-export type { Spliceable, Spliced } from "./Spliceable.js";
+export type { Spliceable, SplicesAs, Spliced } from "./Spliceable.js";
 export {
   createImport,
   isClientImport,
