@@ -12,7 +12,9 @@ phone, as data.
 - **`${expression}`** splices any expression: `${user.name}`,
   `${orders.length}`.
 
-Both are evaluated on your server, in order, when the `` cs`…` `` is.
+Both are evaluated on your server, in order, when the `` cs`…` `` is. They
+mean the same: each one written is its own splice, so `$x` written twice is two
+splices, as `${x}` written twice is.
 
 ## What can cross
 

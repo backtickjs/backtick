@@ -33,9 +33,12 @@ screen above by the docs' tests, so it's exactly what the bundler writes:
 
 - **The scripts are compiled to plain JavaScript,** one module each. Their JSX
   is React's `jsx` calls.
-- **The splices are the last line:** Sam's name and order, as data. Nothing of
+- **Each splice is a small function, `$thunk<n>`,** that the script calls when
+  it reads the splice. Sam's name and order are there, as data. Nothing of
   `Home` is there, and `db` isn't either: the phone gets results, never the
   code that produced them.
+- **`ReorderButton` is `$function5`,** made once for the whole bundle. A client
+  component is one function, so React keeps its state across renders.
 - **React and React Native come from the app** through `require`. The
   app's `evaluate` provides its own copies, so a screen needs nothing the app
   doesn't ship.

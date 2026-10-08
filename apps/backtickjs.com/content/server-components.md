@@ -41,8 +41,8 @@ that crosses:
 
 ```
 
-The last line is everything the phone learns about the product: its name, and
-whether it's in stock. [Splices](/docs/splices) explains what crosses, and how
+Its splices, the `$thunk` constants, are everything the phone learns about the
+product: its name, and whether it's in stock. [Splices](/docs/splices) explains what crosses, and how
 to keep a value from crossing by accident.
 
 ## State belongs on the phone

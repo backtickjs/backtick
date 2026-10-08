@@ -64,6 +64,48 @@ const ENTRIES: { name: string; pages: Entry[] }[] = [
           "How a value crosses from your server into a client script, and what can cross.",
         file: "splices.md",
       },
+      {
+        path: "/docs/client-components",
+        title: "Client components",
+        description:
+          "Scripts written as functions that take props: drawn as tags, with state of their own on the phone.",
+        file: "client-components.md",
+      },
+      {
+        path: "/docs/composing",
+        title: "Composing",
+        description:
+          "Server components inside client scripts, client components inside server components, and the phone's state handed to your server's layout.",
+        file: "composing.md",
+      },
+      {
+        path: "/docs/react-native-apis",
+        title: "React Native's APIs",
+        description:
+          "Every component, API and hook of React Native and React, spliced into scripts with their own names and types.",
+        file: "react-native-apis.md",
+      },
+      {
+        path: "/docs/other-packages",
+        title: "Using other packages",
+        description:
+          "Any package your app ships, in a screen: createImport, versions, and the three places a package goes.",
+        file: "other-packages.md",
+      },
+      {
+        path: "/docs/type-checking",
+        title: "Type checking",
+        description:
+          "backtick-tsc and the editor check the code inside every script, and every value crossing into it.",
+        file: "type-checking.md",
+      },
+      {
+        path: "/docs/how-it-works",
+        title: "How it works",
+        description:
+          "Compiled when your server loads, bundled for each request, run by your app: what each step does.",
+        file: "how-it-works.md",
+      },
     ],
   },
 ];

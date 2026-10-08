@@ -23,6 +23,25 @@ A script is an expression, a block of statements, or a function:
 TypeScript infers each type, as `Client<string>` here; the annotations in the
 example only show them.
 
+## Reading a script
+
+How a splice of a script behaves follows from its shape, as the same code
+written by hand in TypeScript would:
+
+- **A function is one function.** `$formatPrice` is the same function at every
+  read, and its body runs each time it's called. So a client component keeps
+  its state across renders.
+- **An expression or a block is code, run each time it's read.** Reading
+  `$greeting` twice computes it twice.
+
+```tsx file=client-scripts/server/Log.tsx
+
+```
+
+`$logVisit;` written twice logs twice, and `$logTap("a")` and `$logTap("b")`
+each log once, when called. To run code more than once, either read a block
+where it should run, or write a function and call it.
+
 ## Full JavaScript
 
 A script is ordinary modern JavaScript and TypeScript: loops, `try`/`catch`,
