@@ -36,7 +36,9 @@ __cs_setTone     → setTone
 ))               →  [-semantic -navigation]
 (                → (
 (cs.splice(      →  [-semantic -navigation]
-Tone.Warm        → Tone.Warm
+Tone             → Tone
+.                → .
+Warm             → Warm
 ))               →  [-semantic -navigation]
 )                → )
 ;                → ;
@@ -99,7 +101,9 @@ false            → false
 __cs_setTone     → setTone
 (                → (
 (cs.splice(      →  [-semantic -navigation]
-Tone.Cool        → Tone.Cool
+Tone             → Tone
+.                → .
+Cool             → Cool
 ))               →  [-semantic -navigation]
 )                → )
 ;                → ;

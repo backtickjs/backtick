@@ -1,10 +1,10 @@
 const $modules = {
-  "3fgcy8plgrr5s:97:17": (module, exports, require) => {
+  "gh22ttmmbc28:86:17": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0) => $splice0() + "?";
   },
-  "3fgcy8plgrr5s:97:22": (module, exports, require) => {
+  "gh22ttmmbc28:86:22": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0) => $splice0() + "!";
@@ -20,8 +20,8 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $cs0 = $require("3fgcy8plgrr5s:97:17").default;
-const $cs1 = $require("3fgcy8plgrr5s:97:22").default;
+const $cs0 = $require("gh22ttmmbc28:86:17").default;
+const $cs1 = $require("gh22ttmmbc28:86:22").default;
 const $thunk0 = () => "hello";
 const $thunk1 = () => $cs1($thunk0);
 export default $cs0($thunk1);

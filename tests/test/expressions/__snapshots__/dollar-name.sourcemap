@@ -22,7 +22,8 @@ __cs_foo$        → foo$
 return           → return
                  →  
 (cs.splice(      →  [-semantic -navigation]
-add(             → add(
+add              → add
+(                → (
 cs.lift((() =>   → cs` [-semantic -navigation]
 __cs_foo$        → foo$
 )())             → ` [-semantic -navigation]

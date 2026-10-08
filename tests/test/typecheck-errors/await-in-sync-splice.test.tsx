@@ -11,3 +11,25 @@ export function greeting() {
   // @ts-expect-error: 'await' expressions are only allowed within async functions and at the top levels of modules.
   return cs`${await fetchGreeting()} + "!"`;
 }
+
+// Nor in a class field's initializer, a static block, or a parameter's
+// default, where JavaScript refuses `await` even at a module's top level or
+// in an async function.
+export class Greeter {
+  // @ts-expect-error: 'await' expressions are only allowed within async functions and at the top levels of modules.
+  static greeting = cs`${await fetchGreeting()} + "!"`;
+}
+
+export class Logged {
+  static {
+    // @ts-expect-error: 'await' expressions are only allowed within async functions and at the top levels of modules.
+    console.log(cs`${await fetchGreeting()} + "!"`);
+  }
+}
+
+export async function greet(
+  // @ts-expect-error: 'await' expressions are only allowed within async functions and at the top levels of modules.
+  greeting = cs`${await fetchGreeting()} + "!"`,
+) {
+  return greeting;
+}

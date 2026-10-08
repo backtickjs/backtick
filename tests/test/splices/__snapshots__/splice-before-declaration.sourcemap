@@ -47,7 +47,8 @@ __cs_after       → after
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 (cs.splice(      →  [-semantic -navigation]
-sandwich(        → sandwich(
+sandwich         → sandwich
+(                → (
 cs.lift((() =>   → cs` [-semantic -navigation]
 10               → 10
 )())             → ` [-semantic -navigation]
@@ -57,7 +58,8 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 +                → +
                  →  
 (cs.splice(      →  [-semantic -navigation]
-sandwich(        → sandwich(
+sandwich         → sandwich
+(                → (
 cs.lift((() =>   → cs` [-semantic -navigation]
 20               → 20
 )())             → ` [-semantic -navigation]

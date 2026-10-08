@@ -55,7 +55,11 @@ __cs_tree        → tree
 =                → =
                  →  
 (cs.splice(      →  [-semantic -navigation]
-(<HeldRow />)    → (<HeldRow />)
+(                → (
+<                → <
+HeldRow          → HeldRow
+ />              →  />
+)                → )
 ))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n  

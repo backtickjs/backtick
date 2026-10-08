@@ -55,7 +55,10 @@ taken                                     → taken
 :                                         → :
                                           →  
 (cs.splice(                               →  [-semantic -navigation]
-guard(ok)                                 → guard(ok)
+guard                                     → guard
+(                                         → (
+ok                                        → ok
+)                                         → )
 ))                                        →  [-semantic -navigation]
 (                                         → (
 true                                      → true
@@ -66,7 +69,10 @@ skipped                                   → skipped
 :                                         → :
                                           →  
 (cs.splice(                               →  [-semantic -navigation]
-guard(broken)                             → guard(broken)
+guard                                     → guard
+(                                         → (
+broken                                    → broken
+)                                         → )
 ))                                        →  [-semantic -navigation]
 (                                         → (
 false                                     → false

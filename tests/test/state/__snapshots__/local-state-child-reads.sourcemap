@@ -1,206 +1,230 @@
-cs.lift((() =>     → cs` [-semantic -navigation]
-(                  → (
-\n                 → \n  
-<                  → <
-div                → div
->                  → >
-\n                 → \n    
-<                  → <
-span               → span
-                   →  
-style              → style
-=                  → =
-{                  → {
-"font-size: "      → "font-size: "
-                   →  
-+                  → +
-                   →  
-(                  → (
-(cs.splice(        →  [-semantic -navigation]
-(selected)         → $selected
-))                 →  [-semantic -navigation]
-[                  → [
-0                  → 0
-]                  → ]
-(                  → (
-)                  → )
-                   →  
-===                → ===
-                   →  
-(cs.splice(        →  [-semantic -navigation]
-(id)               → $id
-))                 →  [-semantic -navigation]
-                   →  
-?                  → ?
-                   →  
-20                 → 20
-                   →  
-:                  → :
-                   →  
-16                 → 16
-)                  → )
-                   →  
-+                  → +
-                   →  
-"px"               → "px"
-}                  → }
->                  → >
-\n                 → \n      
-{                  → {
-"row "             → "row "
-                   →  
-+                  → +
-                   →  
-(cs.splice(        →  [-semantic -navigation]
-(id)               → $id
-))                 →  [-semantic -navigation]
-                   →  
-+                  → +
-                   →  
-" of "             → " of "
-                   →  
-+                  → +
-                   →  
-(cs.splice(        →  [-semantic -navigation]
-(selected)         → $selected
-))                 →  [-semantic -navigation]
-[                  → [
-0                  → 0
-]                  → ]
-(                  → (
-)                  → )
-}                  → }
-\n                 → \n    
-<                  → <
-/                  → /
-span               → span
->                  → >
-\n                 → \n    
-{                  → {
-(cs.splice(        →  [-semantic -navigation]
-(selected)         → $selected
-))                 →  [-semantic -navigation]
-[                  → [
-0                  → 0
-]                  → ]
-(                  → (
-)                  → )
-                   →  
-===                → ===
-                   →  
-(cs.splice(        →  [-semantic -navigation]
-(id)               → $id
-))                 →  [-semantic -navigation]
-                   →  
-?                  → ?
-                   →  
-<                  → <
-span               → span
->                  → >
-marker             → marker
-<                  → <
-/                  → /
-span               → span
->                  → >
-                   →  
-:                  → :
-                   →  
-null               → null
-}                  → }
-\n                 → \n  
-<                  → <
-/                  → /
-div                → div
->                  → >
-\n                 → \n
-)                  → )
-)())               → ` [-semantic -navigation]
-cs.lift((() =>     → cs` [-semantic -navigation]
-{                  → {
-\n                 → \n    
-const              → const
-                   →  
-__cs_selected      → selected
-                   →  
-=                  → =
-                   →  
-(cs.splice(        →  [-semantic -navigation]
-(createSignal)     → $createSignal
-))                 →  [-semantic -navigation]
-(                  → (
-0                  → 0
-)                  → )
-;                  → ;
-\n                 → \n    
-return             → return
-                   →  
-(                  → (
-\n                 → \n      
-<                  → <
-div                → div
->                  → >
-\n                 → \n        
-<                  → <
-span               → span
-                   →  
-onclick            → onclick
-=                  → =
-{                  → {
-(                  → (
-)                  → )
-                   →  
-=>                 → =>
-                   →  
-__cs_selected      → selected
-[                  → [
-1                  → 1
-]                  → ]
-(                  → (
-1                  → 1
-)                  → )
-}                  → }
->                  → >
-select             → select
-<                  → <
-/                  → /
-span               → span
->                  → >
-\n                 → \n        
-{                  → {
-(cs.splice(        →  [-semantic -navigation]
-(<ReadingRow id={  → (<ReadingRow id={
-cs.lift((() =>     → cs` [-semantic -navigation]
-0                  → 0
-)())               → ` [-semantic -navigation]
-} selected={       → } selected={
-cs.lift((() =>     → cs` [-semantic -navigation]
-__cs_selected      → selected
-)())               → ` [-semantic -navigation]
-} />)              → } />)
-))                 →  [-semantic -navigation]
-}                  → }
-\n                 → \n        
-{                  → {
-(cs.splice(        →  [-semantic -navigation]
-(<ReadingRow id={  → (<ReadingRow id={
-cs.lift((() =>     → cs` [-semantic -navigation]
-1                  → 1
-)())               → ` [-semantic -navigation]
-} selected={       → } selected={
-cs.lift((() =>     → cs` [-semantic -navigation]
-__cs_selected      → selected
-)())               → ` [-semantic -navigation]
-} />)              → } />)
-))                 →  [-semantic -navigation]
-}                  → }
-\n                 → \n      
-<                  → <
-/                  → /
-div                → div
->                  → >
-\n                 → \n    
-)                  → )
-;                  → ;
-\n                 → \n  
-}                  → }
-)())               → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+\n               → \n  
+<                → <
+div              → div
+>                → >
+\n               → \n    
+<                → <
+span             → span
+                 →  
+style            → style
+=                → =
+{                → {
+"font-size: "    → "font-size: "
+                 →  
++                → +
+                 →  
+(                → (
+(cs.splice(      →  [-semantic -navigation]
+(selected)       → $selected
+))               →  [-semantic -navigation]
+[                → [
+0                → 0
+]                → ]
+(                → (
+)                → )
+                 →  
+===              → ===
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(id)             → $id
+))               →  [-semantic -navigation]
+                 →  
+?                → ?
+                 →  
+20               → 20
+                 →  
+:                → :
+                 →  
+16               → 16
+)                → )
+                 →  
++                → +
+                 →  
+"px"             → "px"
+}                → }
+>                → >
+\n               → \n      
+{                → {
+"row "           → "row "
+                 →  
++                → +
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(id)             → $id
+))               →  [-semantic -navigation]
+                 →  
++                → +
+                 →  
+" of "           → " of "
+                 →  
++                → +
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(selected)       → $selected
+))               →  [-semantic -navigation]
+[                → [
+0                → 0
+]                → ]
+(                → (
+)                → )
+}                → }
+\n               → \n    
+<                → <
+/                → /
+span             → span
+>                → >
+\n               → \n    
+{                → {
+(cs.splice(      →  [-semantic -navigation]
+(selected)       → $selected
+))               →  [-semantic -navigation]
+[                → [
+0                → 0
+]                → ]
+(                → (
+)                → )
+                 →  
+===              → ===
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(id)             → $id
+))               →  [-semantic -navigation]
+                 →  
+?                → ?
+                 →  
+<                → <
+span             → span
+>                → >
+marker           → marker
+<                → <
+/                → /
+span             → span
+>                → >
+                 →  
+:                → :
+                 →  
+null             → null
+}                → }
+\n               → \n  
+<                → <
+/                → /
+div              → div
+>                → >
+\n               → \n
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n    
+const            → const
+                 →  
+__cs_selected    → selected
+                 →  
+=                → =
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(createSignal)   → $createSignal
+))               →  [-semantic -navigation]
+(                → (
+0                → 0
+)                → )
+;                → ;
+\n               → \n    
+return           → return
+                 →  
+(                → (
+\n               → \n      
+<                → <
+div              → div
+>                → >
+\n               → \n        
+<                → <
+span             → span
+                 →  
+onclick          → onclick
+=                → =
+{                → {
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_selected    → selected
+[                → [
+1                → 1
+]                → ]
+(                → (
+1                → 1
+)                → )
+}                → }
+>                → >
+select           → select
+<                → <
+/                → /
+span             → span
+>                → >
+\n               → \n        
+{                → {
+(cs.splice(      →  [-semantic -navigation]
+(                → (
+<                → <
+ReadingRow       → ReadingRow
+                 →  
+id               → id
+=                → =
+{                → {
+cs.lift((() =>   → cs` [-semantic -navigation]
+0                → 0
+)())             → ` [-semantic -navigation]
+}                → }
+                 →  
+selected         → selected
+=                → =
+{                → {
+cs.lift((() =>   → cs` [-semantic -navigation]
+__cs_selected    → selected
+)())             → ` [-semantic -navigation]
+}                → }
+ />              →  />
+)                → )
+))               →  [-semantic -navigation]
+}                → }
+\n               → \n        
+{                → {
+(cs.splice(      →  [-semantic -navigation]
+(                → (
+<                → <
+ReadingRow       → ReadingRow
+                 →  
+id               → id
+=                → =
+{                → {
+cs.lift((() =>   → cs` [-semantic -navigation]
+1                → 1
+)())             → ` [-semantic -navigation]
+}                → }
+                 →  
+selected         → selected
+=                → =
+{                → {
+cs.lift((() =>   → cs` [-semantic -navigation]
+__cs_selected    → selected
+)())             → ` [-semantic -navigation]
+}                → }
+ />              →  />
+)                → )
+))               →  [-semantic -navigation]
+}                → }
+\n               → \n      
+<                → <
+/                → /
+div              → div
+>                → >
+\n               → \n    
+)                → )
+;                → ;
+\n               → \n  
+}                → }
+)())             → ` [-semantic -navigation]

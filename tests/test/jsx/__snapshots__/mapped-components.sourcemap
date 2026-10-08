@@ -1,28 +1,46 @@
-cs.lift((() =>                            → cs` [-semantic -navigation]
-<                                         → <
-span                                      → span
->                                         → >
-{                                         → {
-(cs.splice(                               →  [-semantic -navigation]
-(label)                                   → $label
-))                                        →  [-semantic -navigation]
-}                                         → }
-<                                         → <
-/                                         → /
-span                                      → span
->                                         → >
-)())                                      → ` [-semantic -navigation]
-cs.lift((() =>                            → cs` [-semantic -navigation]
-<                                         → <
-div                                       → div
->                                         → >
-{                                         → {
-(cs.splice(                               →  [-semantic -navigation]
-componentLabels.map((item) => <Row label={item} />)→ componentLabels.map((item) => <Row label={item} />)
-))                                        →  [-semantic -navigation]
-}                                         → }
-<                                         → <
-/                                         → /
-div                                       → div
->                                         → >
-)())                                      → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+<                → <
+span             → span
+>                → >
+{                → {
+(cs.splice(      →  [-semantic -navigation]
+(label)          → $label
+))               →  [-semantic -navigation]
+}                → }
+<                → <
+/                → /
+span             → span
+>                → >
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+<                → <
+div              → div
+>                → >
+{                → {
+(cs.splice(      →  [-semantic -navigation]
+componentLabels  → componentLabels
+.                → .
+map              → map
+(                → (
+(                → (
+item             → item
+)                → ) 
+=>               → =>
+                 →  
+<                → <
+Row              → Row
+                 →  
+label            → label
+=                → =
+{                → {
+item             → item
+}                → }
+ />              →  />
+)                → )
+))               →  [-semantic -navigation]
+}                → }
+<                → <
+/                → /
+div              → div
+>                → >
+)())             → ` [-semantic -navigation]

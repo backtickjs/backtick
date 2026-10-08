@@ -121,7 +121,8 @@ title            → title
 \n               → \n        
 {                → {
 (cs.splice(      →  [-semantic -navigation]
-labelled(        → labelled(
+labelled         → labelled
+(                → (
 cs.lift((() =>   → cs` [-semantic -navigation]
 "a"              → "a"
 )())             → ` [-semantic -navigation]
@@ -131,7 +132,8 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 \n               → \n        
 {                → {
 (cs.splice(      →  [-semantic -navigation]
-labelled(        → labelled(
+labelled         → labelled
+(                → (
 cs.lift((() =>   → cs` [-semantic -navigation]
 "b"              → "b"
 )())             → ` [-semantic -navigation]

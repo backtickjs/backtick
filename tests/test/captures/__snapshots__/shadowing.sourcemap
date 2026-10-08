@@ -58,11 +58,14 @@ __cs_total       → total
 return           → return
                  →  
 (cs.splice(      →  [-semantic -navigation]
-addOwnTotal(     → addOwnTotal(
+addOwnTotal      → addOwnTotal
+(                → (
 cs.lift((() =>   → cs` [-semantic -navigation]
 __cs_total       → total
 )())             → ` [-semantic -navigation]
-, 100)           → , 100)
+,                → , 
+100              → 100
+)                → )
 ))               →  [-semantic -navigation]
 ;                → ;
 \n               → \n    

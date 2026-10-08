@@ -1,1 +1,4 @@
 12:15 error TS1308: 'await' expressions are only allowed within async functions and at the top levels of modules.
+20:26 error TS1308: 'await' expressions are only allowed within async functions and at the top levels of modules.
+26:22 error TS1308: 'await' expressions are only allowed within async functions and at the top levels of modules.
+32:19 error TS1308: 'await' expressions are only allowed within async functions and at the top levels of modules.

@@ -14,7 +14,8 @@ b                → b
 :                → :
                  →  
 (cs.splice(      →  [-semantic -navigation]
-++count          → ++count
+++               → ++
+count            → count
 ))               →  [-semantic -navigation]
                  →  
 }                → }

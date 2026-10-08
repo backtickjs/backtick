@@ -49,7 +49,8 @@ __cs_outer       → outer
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 (cs.splice(      →  [-semantic -navigation]
-wrap(            → wrap(
+wrap             → wrap
+(                → (
 cs.lift((() =>   → cs` [-semantic -navigation]
 1                → 1
 )())             → ` [-semantic -navigation]
@@ -59,7 +60,8 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 +                → +
                  →  
 (cs.splice(      →  [-semantic -navigation]
-wrap(            → wrap(
+wrap             → wrap
+(                → (
 cs.lift((() =>   → cs` [-semantic -navigation]
 2                → 2
 )())             → ` [-semantic -navigation]

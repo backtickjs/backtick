@@ -44,7 +44,9 @@ __cs_setC        → setC
 ))               →  [-semantic -navigation]
 (                → (
 (cs.splice(      →  [-semantic -navigation]
-Color.Red        → Color.Red
+Color            → Color
+.                → .
+Red              → Red
 ))               →  [-semantic -navigation]
 )                → )
 ;                → ;
@@ -52,7 +54,9 @@ Color.Red        → Color.Red
 __cs_setC        → setC
 (                → (
 (cs.splice(      →  [-semantic -navigation]
-Color.Blue       → Color.Blue
+Color            → Color
+.                → .
+Blue             → Blue
 ))               →  [-semantic -navigation]
 )                → )
 ;                → ;

@@ -42,7 +42,8 @@ __cs_base        → base
 return           → return
                  →  
 (cs.splice(      →  [-semantic -navigation]
-innerBase(       → innerBase(
+innerBase        → innerBase
+(                → (
 cs.lift((() =>   → cs` [-semantic -navigation]
 __cs_base        → base
 )())             → ` [-semantic -navigation]

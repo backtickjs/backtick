@@ -11,7 +11,11 @@ p                → p
 \n               → \n        
 {                → {
 (cs.splice(      →  [-semantic -navigation]
-(<Badge />)      → (<Badge />)
+(                → (
+<                → <
+Badge            → Badge
+ />              →  />
+)                → )
 ))               →  [-semantic -navigation]
 }                → }
 \n               → \n      

@@ -22,7 +22,10 @@ onclick          → onclick
 =                → =
 {                → {
 (cs.splice(      →  [-semantic -navigation]
-make(1)          → make(1)
+make             → make
+(                → (
+1                → 1
+)                → )
 ))               →  [-semantic -navigation]
 }                → }
                  →  
@@ -36,7 +39,10 @@ onclick          → onclick
 =                → =
 {                → {
 (cs.splice(      →  [-semantic -navigation]
-make(2)          → make(2)
+make             → make
+(                → (
+2                → 2
+)                → )
 ))               →  [-semantic -navigation]
 }                → }
                  →  

@@ -45,13 +45,21 @@ div              → div
 \n               → \n        
 {                → {
 (cs.splice(      →  [-semantic -navigation]
-(<Label />)      → (<Label />)
+(                → (
+<                → <
+Label            → Label
+ />              →  />
+)                → )
 ))               →  [-semantic -navigation]
 }                → }
 \n               → \n        
 {                → {
 (cs.splice(      →  [-semantic -navigation]
-(<Pair />)       → (<Pair />)
+(                → (
+<                → <
+Pair             → Pair
+ />              →  />
+)                → )
 ))               →  [-semantic -navigation]
 }                → }
 \n               → \n      

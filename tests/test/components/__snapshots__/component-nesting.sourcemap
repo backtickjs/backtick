@@ -14,7 +14,11 @@ div              → div
 >                → >
 {                → {
 (cs.splice(      →  [-semantic -navigation]
-(<Outer />)      → (<Outer />)
+(                → (
+<                → <
+Outer            → Outer
+ />              →  />
+)                → )
 ))               →  [-semantic -navigation]
 }                → }
 <                → <

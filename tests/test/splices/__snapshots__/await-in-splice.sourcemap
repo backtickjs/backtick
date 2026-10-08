@@ -1,228 +1,233 @@
-cs.lift(await (async () =>                → cs` [-semantic -navigation]
-(cs.splice(                               →  [-semantic -navigation]
-await fetchGreeting()                     → await fetchGreeting()
-))                                        →  [-semantic -navigation]
-                                          →  
-+                                         → +
-                                          →  
-"!"                                       → "!"
-)())                                      → ` [-semantic -navigation]
-cs.lift(await (async () =>                → cs` [-semantic -navigation]
-{                                         → {
-\n                                        → \n      
-const                                     → const
-                                          →  
-__cs_greeting                             → greeting
-                                          →  
-=                                         → =
-                                          →  
-(cs.splice(                               →  [-semantic -navigation]
-await fetchGreeting()                     → await fetchGreeting()
-))                                        →  [-semantic -navigation]
-;                                         → ;
-\n                                        → \n      
-return                                    → return
-                                          →  
-__cs_greeting                             → greeting
-                                          →  
-+                                         → +
-                                          →  
-"!"                                       → "!"
-;                                         → ;
-\n                                        → \n    
-}                                         → }
-)())                                      → ` [-semantic -navigation]
-cs.lift((() =>                            → cs` [-semantic -navigation]
-(                                         → (
-__cs_props                                → props
-:                                         → :
-                                          →  
-{                                         → {
-                                          →  
-children                                  → children
-:                                         → :
-                                          →  
-JSX                                       → JSX
-.                                         → .
-Element                                   → Element
-                                          →  
-}                                         → }
-)                                         → )
-                                          →  
-=>                                        → =>
-                                          →  
-<                                         → <
-b                                         → b
->                                         → >
-{                                         → {
-__cs_props                                → props
-.                                         → .
-children                                  → children
-}                                         → }
-<                                         → <
-/                                         → /
-b                                         → b
->                                         → >
-)())                                      → ` [-semantic -navigation]
-cs.lift(await (async () =>                → cs` [-semantic -navigation]
-(Badge)                                   → $Badge [-highlight]
-$Badge                                    → $Badge [-semantic -navigation]
-{                                         → {
-(cs.splice(                               →  [-semantic -navigation]
-await fetchGreeting()                     → await fetchGreeting()
-))                                        →  [-semantic -navigation]
-}                                         → }
-$Badge                                    → $Badge [-semantic -navigation]
-)(cs.splice(                              →  [-semantic -navigation]
-(Badge)                                   → $Badge [-highlight]
-))                                        →  [-semantic -navigation]
-)())                                      → ` [-semantic -navigation]
-cs.lift(await (async () =>                → cs` [-semantic -navigation]
-(                                         → (
-\n                                        → \n      
-<                                         → <
-p                                         → p
->                                         → >
-\n                                        → \n        
-{                                         → {
-(cs.splice(                               →  [-semantic -navigation]
-await fetchGreeting()                     → await fetchGreeting()
-))                                        →  [-semantic -navigation]
-}                                         → }
-\n                                        → \n        
-{                                         → {
-[                                         → [
-1                                         → 1
-,                                         → ,
-                                          →  
-2                                         → 2
-]                                         → ]
-.                                         → .
-map                                       → map
-(                                         → (
-(                                         → (
-__cs_n                                    → n
-:                                         → :
-                                          →  
-number                                    → number
-)                                         → )
-                                          →  
-=>                                        → =>
-                                          →  
-(                                         → (
-\n                                        → \n          
-(Badge)                                   → $Badge [-highlight]
-$Badge                                    → $Badge [-semantic -navigation]
-{                                         → {
-__cs_n                                    → n
-}                                         → }
-$Badge                                    → $Badge [-semantic -navigation]
-)(cs.splice(                              →  [-semantic -navigation]
-(Badge)                                   → $Badge [-highlight]
-))                                        →  [-semantic -navigation]
-\n                                        → \n        
-)                                         → )
-)                                         → )
-}                                         → }
-\n                                        → \n      
-<                                         → <
-/                                         → /
-p                                         → p
->                                         → >
-\n                                        → \n    
-)                                         → )
-)())                                      → ` [-semantic -navigation]
-cs.lift(await (async () =>                → cs` [-semantic -navigation]
-(                                         → (
-(                                         → (
-)                                         → )
-                                          →  
-=>                                        → =>
-\n      // @ts-expect-error: 'await' expressions are only allowed within async functions and at the top levels of modules.\n      → \n      // @ts-expect-error: 'await' expressions are only allowed within async functions and at the top levels of modules.\n      
-(cs.splice(                               →  [-semantic -navigation]
-await fetchGreeting()                     → await fetchGreeting()
-))                                        →  [-semantic -navigation]
-                                          →  
-+                                         → +
-                                          →  
-"!"                                       → "!"
-)                                         → )
-(                                         → (
-)                                         → )
-)())                                      → ` [-semantic -navigation]
-cs.lift(await (async () =>                → cs` [-semantic -navigation]
-(                                         → (
-__cs_name                                 → name
-:                                         → :
-                                          →  
-string                                    → string
-)                                         → )
-                                          →  
-=>                                        → =>
-\n      // @ts-expect-error: 'await' expressions are only allowed within async functions and at the top levels of modules.\n      → \n      // @ts-expect-error: 'await' expressions are only allowed within async functions and at the top levels of modules.\n      
-(cs.splice(                               →  [-semantic -navigation]
-await fetchGreeting()                     → await fetchGreeting()
-))                                        →  [-semantic -navigation]
-                                          →  
-+                                         → +
-                                          →  
-", "                                      → ", "
-                                          →  
-+                                         → +
-                                          →  
-__cs_name                                 → name
-)())                                      → ` [-semantic -navigation]
-cs.lift(await (async () =>                → cs` [-semantic -navigation]
-[                                         → [
-1                                         → 1
-,                                         → ,
-                                          →  
-2                                         → 2
-]                                         → ]
-.                                         → .
-map                                       → map
-(                                         → (
-\n                                        → \n      
-(                                         → (
-__cs_n                                    → n
-:                                         → :
-                                          →  
-number                                    → number
-)                                         → )
-                                          →  
-=>                                        → =>
-\n        // @ts-expect-error: 'await' expressions are only allowed within async functions and at the top levels of modules.\n        → \n        // @ts-expect-error: 'await' expressions are only allowed within async functions and at the top levels of modules.\n        
-(cs.splice(                               →  [-semantic -navigation]
-await fetchGreeting()                     → await fetchGreeting()
-))                                        →  [-semantic -navigation]
-                                          →  
-+                                         → +
-                                          →  
-__cs_n                                    → n
-,                                         → ,
-\n                                        → \n    
-)                                         → )
-)())                                      → ` [-semantic -navigation]
-cs.lift((() =>                            → cs` [-semantic -navigation]
-(cs.splice(                               →  [-semantic -navigation]
-cs.lift(await (async () =>                → cs` [-semantic -navigation]
-(cs.splice(                               →  [-semantic -navigation]
-await fetchGreeting()                     → await fetchGreeting()
-))                                        →  [-semantic -navigation]
-                                          →  
-+                                         → +
-                                          →  
-"!"                                       → "!"
-)())                                      → ` [-semantic -navigation]
-))                                        →  [-semantic -navigation]
-                                          →  
-+                                         → +
-                                          →  
-"?"                                       → "?"
-)())                                      → ` [-semantic -navigation]
-cs.lift((() =>                            → cs` [-semantic -navigation]
-fetch                                     → fetch
-(                                         → (
-"/rows"                                   → "/rows"
-)                                         → )
-)())                                      → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+fetchGreeting    → fetchGreeting
+()               → ()
+))               →  [-semantic -navigation]
+                 →  
++                → +
+                 →  
+"!"              → "!"
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_greeting    → greeting
+                 →  
+=                → =
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+fetchGreeting    → fetchGreeting
+()               → ()
+))               →  [-semantic -navigation]
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+__cs_greeting    → greeting
+                 →  
++                → +
+                 →  
+"!"              → "!"
+;                → ;
+\n               → \n    
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+__cs_props       → props
+:                → :
+                 →  
+{                → {
+                 →  
+children         → children
+:                → :
+                 →  
+JSX              → JSX
+.                → .
+Element          → Element
+                 →  
+}                → }
+)                → )
+                 →  
+=>               → =>
+                 →  
+<                → <
+b                → b
+>                → >
+{                → {
+__cs_props       → props
+.                → .
+children         → children
+}                → }
+<                → <
+/                → /
+b                → b
+>                → >
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(Badge)          → $Badge [-highlight]
+$Badge           → $Badge [-semantic -navigation]
+{                → {
+(cs.splice(      →  [-semantic -navigation]
+fetchGreeting    → fetchGreeting
+()               → ()
+))               →  [-semantic -navigation]
+}                → }
+$Badge           → $Badge [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
+(Badge)          → $Badge [-highlight]
+))               →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+\n               → \n      
+<                → <
+p                → p
+>                → >
+\n               → \n        
+{                → {
+(cs.splice(      →  [-semantic -navigation]
+fetchGreeting    → fetchGreeting
+()               → ()
+))               →  [-semantic -navigation]
+}                → }
+\n               → \n        
+{                → {
+[                → [
+1                → 1
+,                → ,
+                 →  
+2                → 2
+]                → ]
+.                → .
+map              → map
+(                → (
+(                → (
+__cs_n           → n
+:                → :
+                 →  
+number           → number
+)                → )
+                 →  
+=>               → =>
+                 →  
+(                → (
+\n               → \n          
+(Badge)          → $Badge [-highlight]
+$Badge           → $Badge [-semantic -navigation]
+{                → {
+__cs_n           → n
+}                → }
+$Badge           → $Badge [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
+(Badge)          → $Badge [-highlight]
+))               →  [-semantic -navigation]
+\n               → \n        
+)                → )
+)                → )
+}                → }
+\n               → \n      
+<                → <
+/                → /
+p                → p
+>                → >
+\n               → \n    
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+fetchGreeting    → fetchGreeting
+()               → ()
+))               →  [-semantic -navigation]
+                 →  
++                → +
+                 →  
+"!"              → "!"
+)                → )
+(                → (
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+__cs_name        → name
+:                → :
+                 →  
+string           → string
+)                → )
+                 →  
+=>               → =>
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+fetchGreeting    → fetchGreeting
+()               → ()
+))               →  [-semantic -navigation]
+                 →  
++                → +
+                 →  
+", "             → ", "
+                 →  
++                → +
+                 →  
+__cs_name        → name
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+[                → [
+1                → 1
+,                → ,
+                 →  
+2                → 2
+]                → ]
+.                → .
+map              → map
+(                → (
+(                → (
+__cs_n           → n
+:                → :
+                 →  
+number           → number
+)                → )
+                 →  
+=>               → =>
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+fetchGreeting    → fetchGreeting
+()               → ()
+))               →  [-semantic -navigation]
+                 →  
++                → +
+                 →  
+__cs_n           → n
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+fetchGreeting    → fetchGreeting
+()               → ()
+))               →  [-semantic -navigation]
+                 →  
++                → +
+                 →  
+"!"              → "!"
+)())             → ` [-semantic -navigation]
+))               →  [-semantic -navigation]
+                 →  
++                → +
+                 →  
+"?"              → "?"
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+fetch            → fetch
+(                → (
+"/rows"          → "/rows"
+)                → )
+)())             → ` [-semantic -navigation]

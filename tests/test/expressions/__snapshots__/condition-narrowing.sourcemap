@@ -57,7 +57,9 @@ if               → if
                  →  
 (                → (
 (cs.splice(      →  [-semantic -navigation]
-flags.strict     → flags.strict
+flags            → flags
+.                → .
+strict           → strict
 ))               →  [-semantic -navigation]
                  →  
 &&               → &&

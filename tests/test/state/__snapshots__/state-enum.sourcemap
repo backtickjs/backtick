@@ -17,7 +17,9 @@ __cs_c           → c
 ===              → ===
                  →  
 (cs.splice(      →  [-semantic -navigation]
-Color.Blue       → Color.Blue
+Color            → Color
+.                → .
+Blue             → Blue
 ))               →  [-semantic -navigation]
                  →  
 ?                → ?
@@ -50,7 +52,9 @@ __cs_setHeld     → setHeld
 ))               →  [-semantic -navigation]
 (                → (
 (cs.splice(      →  [-semantic -navigation]
-Color.Red        → Color.Red
+Color            → Color
+.                → .
+Red              → Red
 ))               →  [-semantic -navigation]
 )                → )
 ;                → ;
@@ -73,7 +77,9 @@ onclick          → onclick
 __cs_setHeld     → setHeld
 (                → (
 (cs.splice(      →  [-semantic -navigation]
-Color.Blue       → Color.Blue
+Color            → Color
+.                → .
+Blue             → Blue
 ))               →  [-semantic -navigation]
 )                → )
 }                → }

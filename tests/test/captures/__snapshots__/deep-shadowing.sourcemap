@@ -1,75 +1,79 @@
-cs.lift((() =>     → cs` [-semantic -navigation]
-{                  → {
-\n                 → \n    
-const              → const
-                   →  
-__cs_base          → base
-                   →  
-=                  → =
-                   →  
-1                  → 1
-;                  → ;
-\n                 → \n    
-return             → return
-                   →  
-__cs_base          → base
-                   →  
-+                  → +
-                   →  
-(cs.splice(        →  [-semantic -navigation]
-middleBase(inner)  → middleBase(inner)
-))                 →  [-semantic -navigation]
-;                  → ;
-\n                 → \n  
-}                  → }
-)())               → ` [-semantic -navigation]
-cs.lift((() =>     → cs` [-semantic -navigation]
-{                  → {
-\n                 → \n    
-const              → const
-                   →  
-__cs_base          → base
-                   →  
-=                  → =
-                   →  
-2                  → 2
-;                  → ;
-\n                 → \n    
-return             → return
-                   →  
-__cs_base          → base
-                   →  
-*                  → *
-                   →  
-(cs.splice(        →  [-semantic -navigation]
-(inner)            → $inner
-))                 →  [-semantic -navigation]
-;                  → ;
-\n                 → \n  
-}                  → }
-)())               → ` [-semantic -navigation]
-cs.lift((() =>     → cs` [-semantic -navigation]
-{                  → {
-\n                 → \n      
-const              → const
-                   →  
-__cs_base          → base
-                   →  
-=                  → =
-                   →  
-10                 → 10
-;                  → ;
-\n                 → \n      
-return             → return
-                   →  
-(cs.splice(        →  [-semantic -navigation]
-outerBase(         → outerBase(
-cs.lift((() =>     → cs` [-semantic -navigation]
-__cs_base          → base
-)())               → ` [-semantic -navigation]
-)                  → )
-))                 →  [-semantic -navigation]
-;                  → ;
-\n                 → \n    
-}                  → }
-)())               → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n    
+const            → const
+                 →  
+__cs_base        → base
+                 →  
+=                → =
+                 →  
+1                → 1
+;                → ;
+\n               → \n    
+return           → return
+                 →  
+__cs_base        → base
+                 →  
++                → +
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+middleBase       → middleBase
+(                → (
+inner            → inner
+)                → )
+))               →  [-semantic -navigation]
+;                → ;
+\n               → \n  
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n    
+const            → const
+                 →  
+__cs_base        → base
+                 →  
+=                → =
+                 →  
+2                → 2
+;                → ;
+\n               → \n    
+return           → return
+                 →  
+__cs_base        → base
+                 →  
+*                → *
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(inner)          → $inner
+))               →  [-semantic -navigation]
+;                → ;
+\n               → \n  
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_base        → base
+                 →  
+=                → =
+                 →  
+10               → 10
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+outerBase        → outerBase
+(                → (
+cs.lift((() =>   → cs` [-semantic -navigation]
+__cs_base        → base
+)())             → ` [-semantic -navigation]
+)                → )
+))               →  [-semantic -navigation]
+;                → ;
+\n               → \n    
+}                → }
+)())             → ` [-semantic -navigation]

@@ -4,7 +4,11 @@ div              → div
 >                → >
 {                → {
 (cs.splice(      →  [-semantic -navigation]
-(<Absent />)     → (<Absent />)
+(                → (
+<                → <
+Absent           → Absent
+ />              →  />
+)                → )
 ))               →  [-semantic -navigation]
 }                → }
 <                → <

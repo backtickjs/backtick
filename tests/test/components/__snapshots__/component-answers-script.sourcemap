@@ -44,7 +44,11 @@ div              → div
 >                → >
 {                → {
 (cs.splice(      →  [-semantic -navigation]
-(<Panel />)      → (<Panel />)
+(                → (
+<                → <
+Panel            → Panel
+ />              →  />
+)                → )
 ))               →  [-semantic -navigation]
 }                → }
 <                → <

@@ -11,7 +11,8 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 (cs.splice(      →  [-semantic -navigation]
-add(             → add(
+add              → add
+(                → (
 cs.lift((() =>   → cs` [-semantic -navigation]
 1                → 1
 )())             → ` [-semantic -navigation]

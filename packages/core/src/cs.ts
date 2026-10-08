@@ -25,8 +25,18 @@ function splice<T extends [T] extends [Spliceable] ? unknown : Spliceable>(
   );
 }
 
+// `await`, in a splice the host may await in: what the host's `await` gives,
+// wherever in the script the splice is written.
+function awaited<T>(_: T): Awaited<T> {
+  throw new Error(
+    "Don't call `cs.awaited` directly; it's used to generate virtual " +
+      "code for the typechecker. Write code using cs`...` instead.",
+  );
+}
+
 // What hangs off the tag.
 const members = {
+  awaited,
   create,
   lift,
   splice,

@@ -58,15 +58,11 @@ it("awaitBesideMappedTag", async (t) => {
 // A splice is evaluated on the host when its script is, whatever client code
 // it's written inside, so an `await` in it is the host's `await` there too:
 // inside a function the script writes, and inside a script nested in a splice.
-// They compile and run, but the typechecker refuses them: a known bug, under
-// `@ts-expect-error` until it's fixed, when each directive fails as unused.
 it("awaitInClientArrowSplice", async (t) => {
   await snapshotCase(
     t,
     "awaitInClientArrowSplice",
-    cs`(() =>
-      // @ts-expect-error: 'await' expressions are only allowed within async functions and at the top levels of modules.
-      ${await fetchGreeting()} + "!")()`,
+    cs`(() => ${await fetchGreeting()} + "!")()`,
   );
 });
 
@@ -74,9 +70,7 @@ it("awaitInFunctionScriptSplice", async (t) => {
   await snapshotCase(
     t,
     "awaitInFunctionScriptSplice",
-    cs`(name: string) =>
-      // @ts-expect-error: 'await' expressions are only allowed within async functions and at the top levels of modules.
-      ${await fetchGreeting()} + ", " + name`,
+    cs`(name: string) => ${await fetchGreeting()} + ", " + name`,
   );
 });
 
@@ -84,16 +78,11 @@ it("awaitInCallbackSplice", async (t) => {
   await snapshotCase(
     t,
     "awaitInCallbackSplice",
-    cs`[1, 2].map(
-      (n: number) =>
-        // @ts-expect-error: 'await' expressions are only allowed within async functions and at the top levels of modules.
-        ${await fetchGreeting()} + n,
-    )`,
+    cs`[1, 2].map((n: number) => ${await fetchGreeting()} + n)`,
   );
 });
 
 it("awaitInNestedScriptSplice", async (t) => {
-  // @ts-expect-error: Cannot find name 'await'.
   const nested = cs`${cs`${await fetchGreeting()} + "!"`} + "?"`;
   await snapshotCase(t, "awaitInNestedScriptSplice", nested);
 });

@@ -134,7 +134,11 @@ width            → width
 \n               → \n        
 {                → {
 (cs.splice(      →  [-semantic -navigation]
-(<Ring />)       → (<Ring />)
+(                → (
+<                → <
+Ring             → Ring
+ />              →  />
+)                → )
 ))               →  [-semantic -navigation]
 }                → }
 \n               → \n        

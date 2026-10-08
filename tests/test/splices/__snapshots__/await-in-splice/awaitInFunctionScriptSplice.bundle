@@ -1,5 +1,5 @@
 const $modules = {
-  "3fgcy8plgrr5s:77:4": (module, exports, require) => {
+  "gh22ttmmbc28:73:4": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0) => (name) => $splice0() + ", " + name;
@@ -15,7 +15,7 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $cs0 = $require("3fgcy8plgrr5s:77:4").default;
+const $cs0 = $require("gh22ttmmbc28:73:4").default;
 const $thunk0 = () => "hello";
 const $function1 = $cs0($thunk0);
 export default $function1;

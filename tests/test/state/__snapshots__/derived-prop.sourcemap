@@ -73,7 +73,13 @@ button           → button
 \n               → \n      
 {                → {
 (cs.splice(      →  [-semantic -navigation]
-(<Label text={   → (<Label text={
+(                → (
+<                → <
+Label            → Label
+                 →  
+text             → text
+=                → =
+{                → {
 cs.lift((() =>   → cs` [-semantic -navigation]
 "Count: "        → "Count: "
                  →  
@@ -83,7 +89,9 @@ __cs_count       → count
 (                → (
 )                → )
 )())             → ` [-semantic -navigation]
-} />)            → } />)
+}                → }
+ />              →  />
+)                → )
 ))               →  [-semantic -navigation]
 }                → }
 \n               → \n    

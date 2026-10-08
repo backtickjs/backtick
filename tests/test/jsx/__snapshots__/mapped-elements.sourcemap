@@ -1,29 +1,37 @@
-cs.lift((() =>                → cs` [-semantic -navigation]
-<                             → <
-div                           → div
->                             → >
-{                             → {
-(cs.splice(                   →  [-semantic -navigation]
-elementLabels.map((item) =>   → elementLabels.map((item) => 
-cs.lift((() =>                → cs` [-semantic -navigation]
-<                             → <
-span                          → span
->                             → >
-{                             → {
-(cs.splice(                   →  [-semantic -navigation]
-(item)                        → $item
-))                            →  [-semantic -navigation]
-}                             → }
-<                             → <
-/                             → /
-span                          → span
->                             → >
-)())                          → ` [-semantic -navigation]
-)                             → )
-))                            →  [-semantic -navigation]
-}                             → }
-<                             → <
-/                             → /
-div                           → div
->                             → >
-)())                          → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+<                → <
+div              → div
+>                → >
+{                → {
+(cs.splice(      →  [-semantic -navigation]
+elementLabels    → elementLabels
+.                → .
+map              → map
+(                → (
+(                → (
+item             → item
+)                → ) 
+=>               → =>
+                 →  
+cs.lift((() =>   → cs` [-semantic -navigation]
+<                → <
+span             → span
+>                → >
+{                → {
+(cs.splice(      →  [-semantic -navigation]
+(item)           → $item
+))               →  [-semantic -navigation]
+}                → }
+<                → <
+/                → /
+span             → span
+>                → >
+)())             → ` [-semantic -navigation]
+)                → )
+))               →  [-semantic -navigation]
+}                → }
+<                → <
+/                → /
+div              → div
+>                → >
+)())             → ` [-semantic -navigation]

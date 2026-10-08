@@ -15,7 +15,8 @@ __cs_outer       → outer
 return           → return
                  →  
 (cs.splice(      →  [-semantic -navigation]
-foo(             → foo(
+foo              → foo
+(                → (
 cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
 \n               → \n      
@@ -35,7 +36,8 @@ __cs_middle      → middle
 +                → +
                  →  
 (cs.splice(      →  [-semantic -navigation]
-same(            → same(
+same             → same
+(                → (
 cs.lift((() =>   → cs` [-semantic -navigation]
 __cs_outer       → outer
 )())             → ` [-semantic -navigation]
@@ -62,7 +64,8 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 (cs.splice(      →  [-semantic -navigation]
-wrap(            → wrap(
+wrap             → wrap
+(                → (
 cs.lift((() =>   → cs` [-semantic -navigation]
 1                → 1
 )())             → ` [-semantic -navigation]
@@ -72,7 +75,8 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 +                → +
                  →  
 (cs.splice(      →  [-semantic -navigation]
-wrap(            → wrap(
+wrap             → wrap
+(                → (
 cs.lift((() =>   → cs` [-semantic -navigation]
 2                → 2
 )())             → ` [-semantic -navigation]

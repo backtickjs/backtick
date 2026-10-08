@@ -12,15 +12,15 @@ async function fetchGreeting() {
 // template itself may await, here in an async test, whether the script is an
 // expression or has statements.
 it("awaitInSplice", async (t) => {
-  await snapshotCase(t, "awaitInSplice", cs.lift(await (async () => (cs.splice(await fetchGreeting())) + "!")()));
+  await snapshotCase(t, "awaitInSplice", cs.lift((() => (cs.splice(cs.awaited(fetchGreeting()))) + "!")()));
 });
 
 it("awaitInStatementsSplice", async (t) => {
   await snapshotCase(
     t,
     "awaitInStatementsSplice",
-    cs.lift(await (async () => {
-      const __cs_greeting = (cs.splice(await fetchGreeting()));
+    cs.lift((() => {
+      const __cs_greeting = (cs.splice(cs.awaited(fetchGreeting())));
       return __cs_greeting + "!";
     })()),
   );
@@ -34,7 +34,7 @@ it("awaitInTagChildSplice", async (t) => {
   await snapshotCase(
     t,
     "awaitInTagChildSplice",
-    cs.lift(await (async () => (void (Badge), (await (async ($Badge) => <$Badge>{(cs.splice(await fetchGreeting()))}</$Badge>)(cs.splice((Badge))))))()),
+    cs.lift((() => (void (Badge), (($Badge) => <$Badge>{(cs.splice(cs.awaited(fetchGreeting())))}</$Badge>)(cs.splice((Badge)))))()),
   );
 });
 
@@ -44,9 +44,9 @@ it("awaitBesideMappedTag", async (t) => {
   await snapshotCase(
     t,
     "awaitBesideMappedTag",
-    cs.lift(await (async () => (
+    cs.lift((() => (
       <p>
-        {(cs.splice(await fetchGreeting()))}
+        {(cs.splice(cs.awaited(fetchGreeting())))}
         {[1, 2].map((__cs_n: number) => (
           (void (Badge), (($Badge) => <$Badge>{__cs_n}</$Badge>)(cs.splice((Badge))))
         ))}
@@ -58,15 +58,11 @@ it("awaitBesideMappedTag", async (t) => {
 // A splice is evaluated on the host when its script is, whatever client code
 // it's written inside, so an `await` in it is the host's `await` there too:
 // inside a function the script writes, and inside a script nested in a splice.
-// They compile and run, but the typechecker refuses them: a known bug, under
-// `@ts-expect-error` until it's fixed, when each directive fails as unused.
 it("awaitInClientArrowSplice", async (t) => {
   await snapshotCase(
     t,
     "awaitInClientArrowSplice",
-    cs.lift(await (async () => (() =>
-      // @ts-expect-error: 'await' expressions are only allowed within async functions and at the top levels of modules.
-      (cs.splice(await fetchGreeting())) + "!")())()),
+    cs.lift((() => (() => (cs.splice(cs.awaited(fetchGreeting()))) + "!")())()),
   );
 });
 
@@ -74,9 +70,7 @@ it("awaitInFunctionScriptSplice", async (t) => {
   await snapshotCase(
     t,
     "awaitInFunctionScriptSplice",
-    cs.lift(await (async () => (__cs_name: string) =>
-      // @ts-expect-error: 'await' expressions are only allowed within async functions and at the top levels of modules.
-      (cs.splice(await fetchGreeting())) + ", " + __cs_name)()),
+    cs.lift((() => (__cs_name: string) => (cs.splice(cs.awaited(fetchGreeting()))) + ", " + __cs_name)()),
   );
 });
 
@@ -84,17 +78,12 @@ it("awaitInCallbackSplice", async (t) => {
   await snapshotCase(
     t,
     "awaitInCallbackSplice",
-    cs.lift(await (async () => [1, 2].map(
-      (__cs_n: number) =>
-        // @ts-expect-error: 'await' expressions are only allowed within async functions and at the top levels of modules.
-        (cs.splice(await fetchGreeting())) + __cs_n,
-    ))()),
+    cs.lift((() => [1, 2].map((__cs_n: number) => (cs.splice(cs.awaited(fetchGreeting()))) + __cs_n))()),
   );
 });
 
 it("awaitInNestedScriptSplice", async (t) => {
-  // @ts-expect-error: Cannot find name 'await'.
-  const nested = cs.lift((() => (cs.splice(cs.lift(await (async () => (cs.splice(await fetchGreeting())) + "!")()))) + "?")());
+  const nested = cs.lift((() => (cs.splice(cs.lift((() => (cs.splice(cs.awaited(fetchGreeting()))) + "!")()))) + "?")());
   await snapshotCase(t, "awaitInNestedScriptSplice", nested);
 });
 

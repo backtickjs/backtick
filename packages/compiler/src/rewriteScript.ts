@@ -83,8 +83,6 @@ export interface RewrittenScript {
   // what the client runs (null where the script did not parse, which is left
   // as written)
   runtime: RuntimeScript | null;
-  // whether its splices `await`, so the wrapper it is checked in does too
-  awaits: boolean;
   // left as written: checked as nothing, its errors already said
   leftAsWritten: boolean;
   diagnostics: Diagnostic[];
@@ -103,7 +101,6 @@ export function rewriteScript(
   // checked as nothing, so nothing else is reported for it.
   const leftAsWritten = (diagnostics: Diagnostic[]): RewrittenScript => ({
     runtime: null,
-    awaits: false,
     leftAsWritten: true,
     diagnostics,
   });
@@ -216,15 +213,6 @@ export function rewriteScript(
     false,
   );
 
-  // A splice that awaits is the host's `await`, where the template is: where
-  // the host may await, the script's function is async, and awaited there;
-  // elsewhere it isn't, so the splice's own `await` is refused where written.
-  const awaits =
-    mayAwait(ts, sourceNode) &&
-    Object.values(clientScript.splices).some(
-      (splice) => splice.kind === "braced" && hasAwait(ts, splice.expression),
-    );
-
   const emitted = emitScript(
     ts,
     clientScript,
@@ -234,16 +222,25 @@ export function rewriteScript(
 
   return {
     runtime: { id, kind, params: paramsLiteral, args: argsLiteral, emitted },
-    awaits,
     leftAsWritten: false,
     diagnostics: [],
   };
 }
 
-// Whether host code at `node` may `await`: in an async function, or at a
-// module's top level.
-function mayAwait(ts: typeof import("typescript"), node: ts.Node): boolean {
-  for (let parent = node.parent; parent; parent = parent.parent) {
+// Whether host code at `node` may `await`: in an async function's body, or at
+// a module's top level, but not in a parameter's default, a class field's
+// initializer or a static block, where JavaScript refuses it.
+export function mayAwait(
+  ts: typeof import("typescript"),
+  node: ts.Node,
+): boolean {
+  for (let child = node, parent = node.parent; parent; ) {
+    if (ts.isParameter(child) || ts.isClassStaticBlockDeclaration(child)) {
+      return false;
+    }
+    if (ts.isPropertyDeclaration(parent) && parent.initializer === child) {
+      return false;
+    }
     if (ts.isFunctionLike(parent)) {
       return (
         ts
@@ -252,20 +249,10 @@ function mayAwait(ts: typeof import("typescript"), node: ts.Node): boolean {
         false
       );
     }
+    child = parent;
+    parent = parent.parent;
   }
   return true;
-}
-
-// An `await` in host code, but not one inside a function it holds, which is
-// that function's own, nor in a nested script, which is checked as its own.
-function hasAwait(ts: typeof import("typescript"), node: ts.Node): boolean {
-  if (ts.isAwaitExpression(node)) {
-    return true;
-  }
-  if (ts.isFunctionLike(node) || ts.isTaggedTemplateExpression(node)) {
-    return false;
-  }
-  return ts.forEachChild(node, (child) => hasAwait(ts, child)) ?? false;
 }
 
 // Each `${…}` that isn't a splice: written in text (JSX text, a string, a

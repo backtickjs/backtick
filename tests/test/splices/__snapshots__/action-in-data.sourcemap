@@ -1,59 +1,65 @@
-cs.lift((() =>     → cs` [-semantic -navigation]
-{                  → {
-\n                 → \n  
-const              → const
-                   →  
-__cs_x             → x
-                   →  
-=                  → =
-                   →  
-1                  → 1
-;                  → ;
-\n                 → \n
-}                  → }
-)())               → ` [-semantic -navigation]
-cs.lift((() =>     → cs` [-semantic -navigation]
-{                  → {
-\n                 → \n      
-const              → const
-                   →  
-__cs_list          → list
-                   →  
-=                  → =
-                   →  
-(cs.splice(        →  [-semantic -navigation]
-[action]           → [action]
-))                 →  [-semantic -navigation]
-;                  → ;
-\n                 → \n      
-const              → const
-                   →  
-__cs_map           → map
-                   →  
-=                  → =
-                   →  
-(cs.splice(        →  [-semantic -navigation]
-{ press: action }  → { press: action }
-))                 →  [-semantic -navigation]
-;                  → ;
-\n                 → \n      
-return             → return
-                   →  
-__cs_list          → list
-.                  → .
-length             → length
-                   →  
-+                  → +
-                   →  
-Object             → Object
-.                  → .
-keys               → keys
-(                  → (
-__cs_map           → map
-)                  → )
-.                  → .
-length             → length
-;                  → ;
-\n                 → \n    
-}                  → }
-)())               → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n  
+const            → const
+                 →  
+__cs_x           → x
+                 →  
+=                → =
+                 →  
+1                → 1
+;                → ;
+\n               → \n
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_list        → list
+                 →  
+=                → =
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+[                → [
+action           → action
+]                → ]
+))               →  [-semantic -navigation]
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_map         → map
+                 →  
+=                → =
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+{                → { 
+press            → press
+:                → : 
+action           → action
+ }               →  }
+))               →  [-semantic -navigation]
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+__cs_list        → list
+.                → .
+length           → length
+                 →  
++                → +
+                 →  
+Object           → Object
+.                → .
+keys             → keys
+(                → (
+__cs_map         → map
+)                → )
+.                → .
+length           → length
+;                → ;
+\n               → \n    
+}                → }
+)())             → ` [-semantic -navigation]

@@ -17,7 +17,8 @@ x                → x
 :                → :
                  →  
 (cs.splice(      →  [-semantic -navigation]
-add(             → add(
+add              → add
+(                → (
 cs.lift((() =>   → cs` [-semantic -navigation]
 1                → 1
 )())             → ` [-semantic -navigation]
@@ -33,7 +34,8 @@ y                → y
 :                → :
                  →  
 (cs.splice(      →  [-semantic -navigation]
-add(             → add(
+add              → add
+(                → (
 cs.lift((() =>   → cs` [-semantic -navigation]
 3                → 3
 )())             → ` [-semantic -navigation]

@@ -2,6 +2,7 @@ import type ts from "typescript";
 import { buildMappings, type SourceMapping } from "./buildMappings.js";
 import type { ClientScript, ParsedFile, Splice } from "./parseFile.js";
 import type { RewrittenFile } from "./rewriteFile.js";
+import { mayAwait } from "./rewriteScript.js";
 import { type Segment, segmentsToString } from "./segmentsToString.js";
 import { virtualScript } from "./virtualScript.js";
 
@@ -50,35 +51,54 @@ function renderScript(
   if (rewritten.leftAsWritten) {
     return ["cs.lift(undefined as never)"];
   }
-  return virtualScript(
-    ts,
-    script,
-    rewrittenFile.bindings,
-    rewritten.awaits,
-    (splice) => renderSplice(ts, sourceFile, rewrittenFile, splice),
+  return virtualScript(ts, script, rewrittenFile.bindings, (splice) =>
+    renderSplice(
+      ts,
+      sourceFile,
+      rewrittenFile,
+      splice,
+      mayAwait(ts, script.sourceNode),
+    ),
   );
 }
 
+// A splice's host code, each nested script rendered as a script wherever it's
+// written. Where the host may await, an `await x` of its own is
+// `cs.awaited(x)`: what the host's `await` gives, legal wherever in the script
+// the splice stands. Elsewhere it's left as written, for the typechecker to
+// refuse. An `await` in a function the splice holds is that function's own.
 function renderSplice(
   ts: typeof import("typescript"),
   sourceFile: ts.SourceFile,
   rewrittenFile: RewrittenFile,
   splice: Splice,
+  awaitable: boolean,
 ): Segment[] {
-  const segments: Segment[] = [];
-  const expression = splice.expression;
-  const end = expression.getEnd();
-
-  let cursor = expression.getStart(sourceFile);
-  for (const nested of splice.scripts) {
-    const start = nested.sourceNode.getStart(sourceFile);
-    segments.push(...renderVerbatim(sourceFile.text, cursor, start - cursor));
-    segments.push(...renderScript(ts, sourceFile, rewrittenFile, nested));
-    cursor = nested.sourceNode.getEnd();
-  }
-  segments.push(...renderVerbatim(sourceFile.text, cursor, end - cursor));
-
-  return segments;
+  const nested = new Map<ts.Node, ClientScript>(
+    splice.scripts.map((script) => [script.sourceNode, script]),
+  );
+  const render = (node: ts.Node, own: boolean): Segment[] => {
+    const script = nested.get(node);
+    if (script !== undefined) {
+      return renderScript(ts, sourceFile, rewrittenFile, script);
+    }
+    if (own && awaitable && ts.isAwaitExpression(node)) {
+      return ["cs.awaited(", ...render(node.expression, own), ")"];
+    }
+    // As written, each child rendered in place.
+    const inner = own && !ts.isFunctionLike(node);
+    const segments: Segment[] = [];
+    let at = node.getStart(sourceFile);
+    ts.forEachChild(node, (child) => {
+      const start = child.getStart(sourceFile);
+      segments.push(...renderVerbatim(sourceFile.text, at, start - at));
+      segments.push(...render(child, inner));
+      at = child.getEnd();
+    });
+    segments.push(...renderVerbatim(sourceFile.text, at, node.getEnd() - at));
+    return segments;
+  };
+  return render(splice.expression, true);
 }
 
 function renderVerbatim(
