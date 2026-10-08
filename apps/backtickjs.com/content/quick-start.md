@@ -3,7 +3,9 @@ npx create-backtick-app@latest
 ```
 
 It asks for a name, then creates an Expo app with a Backtick server beside
-it, on Node, and installs its packages. For a web page instead, pass
+it, on Node, and installs its packages. Give the name on the command line,
+`npx create-backtick-app@latest my-app`, and it asks nothing. It needs Node
+22.15 or later, or 24.3 or later. For a web page instead, pass
 `--template react` or `--template solid-js`; for a server on Bun,
 `--runtime bun`.
 
@@ -61,7 +63,10 @@ my-app/
 ├── server/
 │   ├── index.tsx      Your server: bundles a screen per request
 │   ├── Home.tsx       The screen you just changed
-│   └── HelloWave.tsx  The welcome screen's waving hand, safe to delete
+│   ├── Home.test.tsx  A test that draws the welcome screen, run by npm test
+│   ├── HelloWave.tsx  The welcome screen's waving hand, safe to delete
+│   └── test/          What the test draws the screen with
+├── scripts/           What npm start runs: your server and Expo together
 └── package.json
 ```
 
@@ -69,8 +74,11 @@ Everything in `server/` reaches users without an app release: deploy your
 server, and users get the change the next time they open the screen.
 
 `npm run typecheck` checks the app and your server, the code inside every
-`` cs`…` `` included. `npm run reset-project` replaces `server/Home.tsx` with a
-blank screen, and deletes `HelloWave.tsx`, when you're ready to start your own.
+`` cs`…` `` included. `npm test` draws the welcome screen and checks what it
+shows, so it fails now that you've changed the screen; the tutorial writes a
+test for yours. `npm run reset-project` replaces `server/Home.tsx` with a
+blank screen, rewrites the test to match, and deletes `HelloWave.tsx`, when
+you're ready to start your own.
 
 ## Next steps
 

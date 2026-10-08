@@ -1,4 +1,4 @@
-Each step is the whole file, with what changed highlighted.
+Each step shows `server/Home.tsx`, with what changed marked.
 
 Start from the project the [Quick start](/docs) creates, with the app running,
 and clear the welcome screen:
@@ -6,6 +6,9 @@ and clear the welcome screen:
 ```sh
 npm run reset-project
 ```
+
+It also rewrites `server/Home.test.tsx` to test the blank screen. Delete that
+file: the last step writes one for the screen you're about to build.
 
 ## 1. Show the menu
 
@@ -104,6 +107,20 @@ Place an order, then reload the app: press `r` in the terminal running it.
   and the phone gets only what it returns.
 - **`${usual ?? {}}` is a splice of an expression,** for when a name isn't
   enough. It's the order's starting state.
+
+## 6. Test it
+
+A test draws the screen as your app does, taps it, and checks what it shows.
+Create `server/Home.test.tsx`:
+
+```tsx file=tutorial-5/server/Home.test.tsx
+
+```
+
+`npm test` runs it. The phone's `fetch` is answered in the test, so placing an
+order doesn't need your server; the usual does, through `saveOrder`.
+[Testing screens](/docs/testing) explains `drawScreen`, and what a test
+doesn't cover.
 
 ## What you learned
 
