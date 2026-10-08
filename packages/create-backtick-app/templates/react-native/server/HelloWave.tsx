@@ -1,11 +1,13 @@
 import { cs } from "@backtickjs/core";
 import { useEffect, useRef } from "@backtickjs/react";
-import { Animated, Pressable } from "@backtickjs/react-native";
+import { Animated, Platform, Pressable } from "@backtickjs/react-native";
 
 // A client component: it runs on the phone, so its animation does too. It
 // waves when it appears, and again when you tap it.
 export const HelloWave = cs`() => {
   const rotation = $useRef(new $Animated.Value(0)).current;
+  // The web has no native animation driver.
+  const nativeDriver = $Platform.OS !== "web";
   const wave = () =>
     $Animated
       .loop(
@@ -13,12 +15,12 @@ export const HelloWave = cs`() => {
           $Animated.timing(rotation, {
             toValue: 1,
             duration: 150,
-            useNativeDriver: true,
+            useNativeDriver: nativeDriver,
           }),
           $Animated.timing(rotation, {
             toValue: 0,
             duration: 150,
-            useNativeDriver: true,
+            useNativeDriver: nativeDriver,
           }),
         ]),
         { iterations: 4 },
