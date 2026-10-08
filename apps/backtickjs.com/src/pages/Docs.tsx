@@ -108,6 +108,31 @@ const ENTRIES: { name: string; pages: Entry[] }[] = [
       },
     ],
   },
+  {
+    name: "Reference",
+    pages: [
+      {
+        path: "/docs/reference/core",
+        title: "@backtickjs/core",
+        description:
+          "The cs tag, and the types for what crosses from your server to the phone.",
+        file: "reference-core.md",
+      },
+      {
+        path: "/docs/reference/bundler",
+        title: "@backtickjs/bundler",
+        description:
+          "Runs your server components and writes the bundle your app draws.",
+        file: "reference-bundler.md",
+      },
+      {
+        path: "/docs/reference/react-native-client",
+        title: "@backtickjs/react-native-client",
+        description: "Runs a bundle in your React Native app.",
+        file: "reference-react-native-client.md",
+      },
+    ],
+  },
 ];
 
 const SECTIONS: DocsSection[] = ENTRIES.map((section) => ({

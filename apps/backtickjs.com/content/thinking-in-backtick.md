@@ -47,7 +47,7 @@ screen above by the docs' tests, so it's exactly what the bundler writes:
 
 A splice can carry what can be written as data, and scripts:
 
-- Strings, finite numbers, booleans, `null` and `undefined`
+- Strings, numbers, bigints, booleans, `null` and `undefined`
 - Plain objects and arrays of those
 - Scripts: `` cs`…` `` values, client components and client functions
 - What the adapters export: `$View`, `$useState` and the rest

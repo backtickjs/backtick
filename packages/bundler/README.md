@@ -47,7 +47,7 @@ The packages the client provides, each at its exact version. The server decides 
 
 ### What crosses into a script
 
-Spliced values are written into the bundle as data: strings, finite numbers, booleans, `null`, `undefined`, plain objects and arrays. They are never written as code. A host function or a class instance can't be spliced, and `build` rejects one: write a client function as a script, `` cs`(n: number) => …` ``, and draw a server component through a splice, `{${<Footer />}}`.
+Spliced values are written into the bundle as data: strings, numbers, bigints, booleans, `null`, `undefined`, plain objects and arrays. They are never written as code. A host function, a class instance, a symbol or a value that contains itself can't be spliced, and `build` rejects one: write a client function as a script, `` cs`(n: number) => …` ``, and draw a server component through a splice, `{${<Footer />}}`.
 
 ### Formats
 

@@ -20,8 +20,8 @@ splices, as `${x}` written twice is.
 
 A splice can carry what can be written as data, and scripts:
 
-- Strings, finite numbers, booleans, `null` and `undefined`
-- Plain objects and arrays of those
+- Strings, numbers, bigints, booleans, `null` and `undefined`
+- Plain objects and arrays of those, typed with an interface or a type alias
 - Scripts: values, functions and client components made with `` cs`…` ``
 - What the adapters export, as `$View` or `$useState`
 
@@ -66,7 +66,9 @@ needs, not what holds it.
 
 Functions and class instances stay on your server: they're code, and state
 the phone can't have. TypeScript stops them at the splice, with
-`… is not assignable to parameter of type 'Spliceable'`. Cross what each one
+`… is not assignable to parameter of type 'Spliceable'`. A class whose members
+are all data looks like a plain object to TypeScript, so the bundler is what
+stops it, when it builds the screen. Cross what each one
 is for instead: a `Date` as a string, a function as a client function,
 `` cs`(n: number) => …` ``. [Thinking in Backtick](/docs/thinking-in-backtick#what-can-cross)
 has the fix in full.

@@ -14,8 +14,6 @@ import { DEPLOYS } from "../samples.js";
 // `--animate-progress` in styles.css.
 const DWELL_MS = 4500;
 
-// A type alias rather than an interface: what is spliced into a script has to
-// answer as a plain record of client values, and an interface does not.
 type Product = { name: string; notes: string; price: string; swatch: string };
 
 const PRODUCTS: Product[] = [

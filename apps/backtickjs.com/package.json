@@ -23,6 +23,7 @@
     "@tailwindcss/node": "^4.3.3",
     "@tailwindcss/oxide": "^4.3.3",
     "diff": "^9.0.0",
+    "github-slugger": "^2.0.0",
     "markdown-it": "^15.0.2",
     "markdown-it-anchor": "^10.0.0",
     "shiki": "^4.5.0",

@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { diffLines } from "diff";
 import MarkdownIt from "markdown-it";
+import GithubSlugger from "github-slugger";
 import anchor from "markdown-it-anchor";
 import { highlight } from "./highlight.js";
 
@@ -102,8 +103,12 @@ export async function renderPage(
   source: string,
 ): Promise<{ html: string; headings: Heading[] }> {
   const headings: Heading[] = [];
+  // Ids as GitHub makes them, `splicesast` for `SplicesAs<T>`, rather than
+  // percent-encoded.
+  const slugger = new GithubSlugger();
   const md = new MarkdownIt().use(anchor, {
     level: [2, 3],
+    slugify: (title) => slugger.slug(title),
     callback: (token, { slug, title }) => {
       if (token.tag === "h2") {
         headings.push({ id: slug, text: title });

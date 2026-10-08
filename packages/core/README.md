@@ -38,7 +38,7 @@ export async function Home() {
 
 `$node` and `$Counter` are splices: `node` is a server variable, written into the bundle as data; `Counter` is a script. `$useState` is a splice too, of an export the client provides. A server component is drawn inside a script through a splice: `{${<Footer />}}`.
 
-What can be spliced is `Spliceable`: strings, numbers, booleans, `null`, `undefined`, plain arrays and objects of those, and scripts. Host functions and class instances can't be spliced; a function the client calls is written as a script, `` cs`(n: number) => …` ``.
+What can be spliced is `Spliceable`: strings, numbers, bigints, booleans, `null`, `undefined`, plain arrays and objects of those, and scripts. An object's type may be an interface or a type alias. Host functions and class instances can't be spliced; a function the client calls is written as a script, `` cs`(n: number) => …` ``.
 
 To use a package the client provides beyond what an adapter covers, describe its export with `createImport`. `from` is the specifier the bundle imports, and `version` the semver range of its package that the export works with:
 
@@ -63,6 +63,7 @@ The client must provide that package, and the server must list it in the bundler
 - `Spliced<T>`: what a spliceable value becomes on the client (`Client<U>` becomes `U`; arrays and objects map member by member).
 - `createImport<T>({ name, from, version })`: an export of a module the client provides, as a value a script can splice.
 - `isClientImport`, `ClientImport`: its check and type.
+- `SplicesAs<T>`: `T` as a splice checks it, member by member. Used by the bundler to check its input.
 - `createJsxElement`, `isJsxElement`, `JsxElement`, `JsxElementOf`, `JsxElementTypeOf`: what a server-side JSX tag evaluates to before bundling. Used by adapters' JSX runtimes.
 - `create`, `isClientScript`, `ClientScript`, `ClientModule`, `Param`: the compiled form of a script, written by the compiler and read by the bundler. Not for application code.
 

@@ -5,7 +5,7 @@ import type { Client } from "./Client.js";
  * it, or a container mixing the two. Not a host function, which is host code:
  * a client function is a script, cs`(n: number) => …`. Matches an object
  * through an index signature, which TypeScript gives a type alias but never an
- * interface: `SplicesAs` checks either.
+ * interface: a splice checks with `SplicesAs`, which takes either.
  */
 export type Spliceable =
   | Client<unknown>
@@ -20,7 +20,7 @@ export type Spliceable =
 
 /**
  * `T` as a splice checks it, member by member, so it takes an interface as a
- * type alias: `product satisfies SplicesAs<Product>`. What already is
+ * type alias. What already is
  * `Spliceable` is as it is; a function, which can't cross, is checked against
  * `Spliceable`, and fails.
  */
