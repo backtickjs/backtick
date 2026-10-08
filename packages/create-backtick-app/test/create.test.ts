@@ -150,9 +150,8 @@ test("created where it's run, it doesn't say to cd anywhere", () => {
     { cwd: here, encoding: "utf8" },
   );
   assert.ok(existsSync(path.join(here, "package.json")));
-  assert.doesNotMatch(said, /- cd /);
-  assert.match(said, /To run your project, run one of the following/);
-  assert.match(said, /- \w+ run ios/);
+  assert.doesNotMatch(said, /cd /);
+  assert.match(said, /\n\n {3}\w+ run start\n\n/);
 });
 
 test("created elsewhere, it says to cd there first", () => {
@@ -169,6 +168,32 @@ test("created elsewhere, it says to cd there first", () => {
     ],
     { cwd: work, encoding: "utf8" },
   );
-  assert.match(said, /navigate to the directory and run/);
-  assert.match(said, /- cd there-app\n- \w+ run start/);
+  assert.match(said, /\n\n {3}cd there-app\n {3}\w+ run start\n\n/);
+});
+
+test("a React Native project is opened on a phone, with Expo Go", () => {
+  const said = execFileSync(
+    process.execPath,
+    [
+      cli,
+      "phone-app",
+      "--template",
+      "react-native",
+      "--runtime",
+      "node",
+      "--no-install",
+    ],
+    { cwd: work, encoding: "utf8" },
+  );
+  assert.match(said, /To open it on your phone:/);
+  assert.match(
+    said,
+    /Install Expo Go on your phone, from the App Store or Google Play/,
+  );
+  assert.match(said, /same Wi-Fi network as this computer/);
+  assert.match(said, /Scan the QR code it shows/);
+  assert.match(
+    said,
+    /No phone at hand\? \w+ run ios, \w+ run android or \w+ run web/,
+  );
 });

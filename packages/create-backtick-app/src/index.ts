@@ -21,30 +21,45 @@ import { isSupportedNode } from "./nodeVersion.js";
 interface Template {
   title: string;
   description: string;
-  // What to run once installed, after `cd`, as `<manager> run <script>`.
-  scripts: string[];
-  // What to say after the scripts.
-  then: string;
+  // What to do once installed: `start` is the commands that start the project,
+  // a `cd` first where it was created elsewhere, and `run` how to run a script.
+  next(start: string, run: (script: string) => string): string;
 }
+
+// The web templates' next steps.
+const webNext = (start: string) => `To run your project:
+
+${start}
+
+Then open http://localhost:3000. Edit server/Home.tsx and save to see the page change.`;
 
 const TEMPLATES: Record<string, Template> = {
   "react-native": {
     title: "React Native",
     description: "An Expo app, its screens from your server",
-    scripts: ["android", "ios", "web"],
-    then: "Each starts your Backtick server alongside Expo. Edit server/Home.tsx and save to see the screen change.",
+    next: (start, run) => `To open it on your phone:
+
+1. Install Expo Go on your phone, from the App Store or Google Play.
+2. Connect your phone to the same Wi-Fi network as this computer.
+3. Start your project, which starts your Backtick server alongside Expo:
+
+${start}
+
+4. Scan the QR code it shows: with the Camera app on iPhone, or with Expo Go on Android.
+
+Then edit server/Home.tsx and save to see the screen change on your phone.
+
+No phone at hand? ${run("ios")}, ${run("android")} or ${run("web")} opens it in the iOS Simulator, an Android emulator or a browser instead.`,
   },
   react: {
     title: "React",
     description: "A web page, rendered by React",
-    scripts: ["start"],
-    then: "Then open http://localhost:3000. Edit server/Home.tsx and save to see the page change.",
+    next: webNext,
   },
   "solid-js": {
     title: "solid-js",
     description: "A web page, rendered by Solid",
-    scripts: ["start"],
-    then: "Then open http://localhost:3000. Edit server/Home.tsx and save to see the page change.",
+    next: webNext,
   },
 };
 
@@ -227,18 +242,14 @@ if (!values["no-install"]) {
 
 // Created where it was run, there's nowhere to go first.
 const here = target === process.cwd();
-const steps = [
-  ...(here ? [] : [`cd ${slug}`]),
-  ...template.scripts.map((script) => `${run} run ${script}`),
-];
+const script = (name: string) => `${run} run ${name}`;
+const start = [...(here ? [] : [`cd ${slug}`]), script("start")]
+  .map((command) => `   ${command}`)
+  .join("\n");
 console.log(`
 ✅ Your project is ready!
 
-To run your project, ${here ? "" : "navigate to the directory and "}run one of the following ${run} commands.
-
-${steps.map((step) => `- ${step}`).join("\n")}
-
-${template.then}
+${template.next(start, script)}
 `);
 
 function rewriteJson(file: string, change: (json: any) => void): void {

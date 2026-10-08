@@ -11,16 +11,24 @@ To skip the questions, as an agent or a script would, pass the answers:
 npx create-backtick-app@latest my-app --template react-native --runtime node
 ```
 
-## Run it
+## Open it on your phone
 
-```sh
-cd my-app
-npm run ios
-```
+1. Install Expo Go on your phone, from the App Store or Google Play.
+2. Connect your phone to the same Wi-Fi network as your computer.
+3. Start your project:
 
-`npm run ios` starts your Backtick server and Expo together, then opens the
-app in the iOS Simulator. Use `npm run android` for an Android emulator, or
-`npm run web` for a browser.
+   ```sh
+   cd my-app
+   npm start
+   ```
+
+   It starts your Backtick server and Expo together, and shows a QR code.
+
+4. Scan the QR code: with the Camera app on iPhone, or with Expo Go on
+   Android.
+
+No phone at hand? `npm run ios` opens the app in the iOS Simulator,
+`npm run android` in an Android emulator, and `npm run web` in a browser.
 
 The app shows a welcome screen. It isn't in the app: your server sent it.
 

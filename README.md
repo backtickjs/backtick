@@ -31,8 +31,8 @@ npx create-backtick-app@latest
 
 It asks for a name, a framework (React Native, React or Solid) and a runtime
 (Node or Bun), then creates a project with a Backtick server beside it. For
-React Native, that's an Expo app: run `npm run ios`, `android` or `web`, and
-edit `server/Home.tsx` to change the screen.
+React Native, that's an Expo app: run `npm start`, scan the QR code with your
+phone, and edit `server/Home.tsx` to change the screen.
 
 ## What it looks like
 

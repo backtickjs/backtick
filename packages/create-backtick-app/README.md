@@ -58,10 +58,13 @@ Every template has:
 An Expo app (SDK 57) with the Backtick server beside it in `server/`. `App.tsx` fetches the screen at `/home` and runs it with [`@backtickjs/react-native-client`](https://github.com/backtickjs/backtick/tree/main/packages/react-native-client). The app and the server share a `package.json`, so the server bundles for the React and React Native versions installed there.
 
 ```sh
-npm run ios      # or android, or web
+npm start        # then scan the QR code with your phone, in Expo Go
+npm run ios      # or android, or web: a simulator, an emulator or a browser
 ```
 
-Each starts your Backtick server alongside Expo, in one terminal. Edit `server/Home.tsx` and save: the app fetches the screen again, without rebuilding.
+Each starts your Backtick server alongside Expo, in one terminal. Edit `server/Home.tsx` and save: the app fetches the screen again, without rebuilding. Where Expo can't show its QR code, as when an agent runs it, `npm start` prints the `exp://` address to open in Expo Go instead.
+
+`npm test` draws `server/Home.tsx` with React Native's web build, as `server/Home.test.tsx` does, through `server/test/drawScreen.ts`. `npm run reset-project` rewrites the test to match the blank screen.
 
 ### `react` and `solid-js`
 

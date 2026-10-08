@@ -4,6 +4,8 @@
 // `--ios`.
 import { spawn } from "node:child_process";
 import { readFileSync } from "node:fs";
+import { networkInterfaces } from "node:os";
+import { setTimeout as sleep } from "node:timers/promises";
 
 // The runtime is the one package.json has a Backtick loader for: Bun's, or
 // else Node's.
@@ -29,3 +31,27 @@ expo.on("exit", (code) => {
   server.kill();
   process.exit(code ?? 0);
 });
+
+// Expo shows how to open the app, its QR code, only in an interactive
+// terminal. Run elsewhere, as an agent runs it, this prints the address once
+// Metro is up.
+if (!process.stdout.isTTY) {
+  const args = process.argv.slice(2);
+  const flag = args.findIndex((arg) => arg === "--port" || arg === "-p");
+  const port = flag === -1 ? 8081 : Number(args[flag + 1]);
+  const address = Object.values(networkInterfaces())
+    .flat()
+    .find(
+      (network) => network?.family === "IPv4" && !network.internal,
+    )?.address;
+  while (address !== undefined && expo.exitCode === null) {
+    const status = await fetch(`http://localhost:${port}/status`)
+      .then((response) => response.text())
+      .catch(() => "");
+    if (status === "packager-status:running") {
+      console.log(`\nOpen exp://${address}:${port} in Expo Go.\n`);
+      break;
+    }
+    await sleep(500);
+  }
+}
