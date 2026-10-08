@@ -15,6 +15,20 @@ export async function Home() {
 }
 `,
 );
+writeFileSync(
+  "server/Home.test.tsx",
+  `import assert from "node:assert/strict";
+import { it } from "node:test";
+import { render, screen } from "@testing-library/react";
+import { Home } from "./Home.js";
+import { drawScreen } from "./test/drawScreen.js";
+
+it("asks to be edited", async () => {
+  render(await drawScreen(<Home />));
+  assert.ok(screen.getByText("Edit server/Home.tsx to edit this screen."));
+});
+`,
+);
 rmSync("server/HelloWave.tsx", { force: true });
 
 console.log(

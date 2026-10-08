@@ -9,6 +9,7 @@
     "ios": "node scripts/start.mjs --ios",
     "web": "node scripts/start.mjs --web",
     "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit",
+    "test": "node --import ./server/test/setup.mjs --import @backtickjs/node-plugin --test \"server/**/*.test.tsx\"",
     "reset-project": "node scripts/reset-project.mjs",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown ."
@@ -32,8 +33,11 @@
   "devDependencies": {
     "@backtickjs/prettier-plugin": "^0.1.4",
     "@backtickjs/tsc": "^0.1.4",
+    "@testing-library/react": "^16.3.3",
     "@types/node": "^25.9.1",
     "@types/react": "19.2.18",
+    "global-jsdom": "^30.0.0",
+    "jsdom": "^30.0.1",
     "prettier": "^3.6.2"
   },
   "backtick": {
