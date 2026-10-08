@@ -38,6 +38,41 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 name             → name
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
+String           → String
+(                → (
+(cs.splice(      →  [-semantic -navigation]
+(holder)         → $holder
+))               →  [-semantic -navigation]
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+String           → String
+(                → (
+(cs.splice(      →  [-semantic -navigation]
+(holder)         → $holder
+))               →  [-semantic -navigation]
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+(pair)           → $pair
+))               →  [-semantic -navigation]
+.                → .
+first            → first
+.                → .
+name             → name
+                 →  
++                → +
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(pair)           → $pair
+))               →  [-semantic -navigation]
+.                → .
+second           → second
+.                → .
+name             → name
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 (cs.splice(      →  [-semantic -navigation]
 (hidden)         → $hidden
 ))               →  [-semantic -navigation]

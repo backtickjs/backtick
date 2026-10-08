@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
-import { cs, createImport } from "@backtickjs/core";
+import { type Client, cs, createImport } from "@backtickjs/core";
 import { bundle } from "../evaluate.ts";
 
 // What the typechecker accepts and the bundler refuses: each splice below
@@ -49,24 +49,35 @@ it("NaN and Infinity", async () => {
   });
 });
 
-// A gap, and a hang: a value that contains itself type-checks as any
-// recursive type does, and the bundler renders it forever, so a server bundling
-// it never answers. Skipped, as it would stall the suite, until the bundler
-// refuses a cycle.
+// A gap in the types: a value that contains itself type-checks as any
+// recursive type does. The bundler writes each value out in full, so it
+// refuses one it's already inside of, rather than render it forever. A value
+// used in two places isn't refused: it's left before it's met again.
 interface Link {
   name: string;
   next: Link | null;
 }
 
-it(
-  "an object that contains itself",
-  { skip: "the bundler renders it forever" },
-  async () => {
-    const link: Link = { name: "a", next: null };
-    link.next = link;
-    await assert.rejects(bundle(cs.lift((() => (cs.splice((link))).name)())));
-  },
-);
+const message =
+  "Can't splice a value that contains itself: a bundle writes each value out in full, so a cycle never ends. Break the cycle before splicing it.";
+
+it("an object that contains itself", async () => {
+  const link: Link = { name: "a", next: null };
+  link.next = link;
+  await assert.rejects(bundle(cs.lift((() => (cs.splice((link))).name)())), { message });
+});
+
+it("a cycle through a script's splice", async () => {
+  const holder: { script: Client<string> | null } = { script: null };
+  holder.script = cs.lift((() => cs.globalThis.String((cs.splice((holder)))))());
+  await assert.rejects(bundle(cs.lift((() => cs.globalThis.String((cs.splice((holder)))))())), { message });
+});
+
+it("a value used in two places is no cycle", async () => {
+  const shared = { name: "shared" };
+  const pair = { first: shared, second: shared };
+  await bundle(cs.lift((() => (cs.splice((pair))).first.name + (cs.splice((pair))).second.name)()));
+});
 
 // By design: `any` opts out of the typechecker, so a host function it hides
 // is refused where the bundler meets it.

@@ -184,9 +184,34 @@ export async function buildBundle(
   // what to hand it; everything else is its literal form. Rendered in order,
   // one value after the other, so the table follows the order rendering first
   // reached each script.
+  // The objects rendering is inside of now. One it meets again contains
+  // itself, which written out would never end. A value used in two places
+  // isn't one: it's left before it's met again.
+  const path = new Set<object>();
   const render = async (
     value: Spliceable,
     scope: Scope = rootScope(),
+  ): Promise<string> => {
+    if (typeof value !== "object" || value === null) {
+      return renderValue(value, scope);
+    }
+    if (path.has(value)) {
+      throw new Error(
+        "Can't splice a value that contains itself: a bundle writes each " +
+          "value out in full, so a cycle never ends. Break the cycle before " +
+          "splicing it.",
+      );
+    }
+    path.add(value);
+    try {
+      return await renderValue(value, scope);
+    } finally {
+      path.delete(value);
+    }
+  };
+  const renderValue = async (
+    value: Spliceable,
+    scope: Scope,
   ): Promise<string> => {
     if (isClientScript(value)) {
       const target = scriptFor(value);
