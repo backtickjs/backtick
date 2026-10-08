@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/core",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "The cs tag for Backtick client scripts, and the types for the values that cross from server to client",
   "keywords": [
     "backtick",
