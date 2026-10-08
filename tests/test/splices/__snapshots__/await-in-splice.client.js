@@ -39,7 +39,42 @@ exports.default = (($splice0, $splice1) => (<p>
       </p>));
 }
 
-// 62:47
+// 67:5
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => (() => $splice0() + "!")());
+}
+
+// 77:5
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => (name) => $splice0() + ", " + name);
+}
+
+// 87:5
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => [1, 2].map((n) => $splice0() + n));
+}
+
+// 97:18
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => $splice0() + "?");
+}
+
+// 97:23
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => $splice0() + "!");
+}
+
+// 105:47
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
