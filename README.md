@@ -13,9 +13,8 @@
 
 ## What is Backtick?
 
-Backtick lets you build your entire app in React and TypeScript, with your
-data, logic and UI living together in one place. Everything is type-checked
-end to end, and your server and client ship as one.
+A delightful programming model for React Native. Write screens on your
+server, type-checked end to end, and ship them without an app release.
 
 [Website](https://backtickjs.com) · [Docs](https://backtickjs.com/docs) ·
 [VS Code extension](https://marketplace.visualstudio.com/items?itemName=backtickjs.backtick-vscode) ·

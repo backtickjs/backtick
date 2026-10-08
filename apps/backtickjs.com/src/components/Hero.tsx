@@ -11,9 +11,8 @@ export const Hero = cs`() => (
       <span class="text-shine">{"React\u00a0Native."}</span>
     </h1>
     <p class="mt-[26px] max-w-[720px] text-xl leading-[1.55] text-muted">
-      Build your entire app in React and TypeScript, with your data, logic, and
-      UI living together in one place. Everything is type-checked end to end,
-      and your server and client ship as one.
+      Write screens on your server, type-checked end to end, and ship them
+      without an app release.
     </p>
     <div class="mt-[34px] flex flex-wrap gap-3">
       <$Button href="/docs" solid label="Read the docs" event="read-docs" />

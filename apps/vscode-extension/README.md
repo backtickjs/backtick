@@ -1,8 +1,8 @@
 # Backtick for VS Code
 
-Editor support for [Backtick](https://backtickjs.com), a programming model for
-React Native where a screen's data, logic and client components live together,
-type-checked end to end.
+Editor support for [Backtick](https://backtickjs.com), a delightful programming
+model for React Native: write screens on your server, type-checked end to
+end, and ship them without an app release.
 
 ## Features
 

@@ -36,9 +36,9 @@ export const PAGES: (Page & { path: string })[] = [
     Page: Home,
     title: "Backtick · A delightful programming model for React Native",
     description:
-      "A delightful programming model for React Native. Build your app in" +
-      " React and TypeScript, with your data, logic and UI in one place," +
-      " type-checked end to end.",
+      "A delightful programming model for React Native. Write screens on" +
+      " your server, type-checked end to end, and" +
+      " ship them without an app release.",
   },
   ...DOCS_PAGES,
 ];

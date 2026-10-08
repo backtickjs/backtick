@@ -11,7 +11,7 @@ export const TEXT_FILES: { path: string; text: string }[] = [
     path: "/llms.txt",
     text: `# Backtick
 
-> Server-driven UI for React Native: screens written as React server components with inline client code, bundled per request on your server and run by your app. Type-checked end to end.
+> A delightful programming model for React Native. Write screens on your server, type-checked end to end, and ship them without an app release.
 
 ## Docs
 
