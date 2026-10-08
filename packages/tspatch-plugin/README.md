@@ -31,7 +31,7 @@ Source maps name a script's file as `<package name>/<path from the tsconfig dire
 ## Related
 
 - [`@backtickjs/tsc`](https://github.com/backtickjs/backtick/tree/main/packages/tsc): type-checks scripts and writes their declarations
-- [Documentation](https://backtickjs.com/docs)
+- [How it works](https://backtickjs.com/docs/how-it-works)
 
 ## License
 

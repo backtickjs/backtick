@@ -16,7 +16,7 @@ For the command line, [`@backtickjs/tsc`](https://github.com/backtickjs/backtick
 
 - [`@backtickjs/language-service`](https://github.com/backtickjs/backtick/tree/main/packages/language-service)
 - [Backtick for VS Code](https://marketplace.visualstudio.com/items?itemName=backtickjs.backtick-vscode)
-- [Documentation](https://backtickjs.com/docs)
+- [How it works](https://backtickjs.com/docs/how-it-works)
 
 ## License
 

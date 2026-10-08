@@ -2,8 +2,6 @@
 
 The Solid adapter for [Backtick](https://backtickjs.com): Solid's API as client values your scripts splice (`$createSignal`, `<$Show>`), a JSX runtime that type-checks the JSX in your server components against Solid's own types, and a compile plugin that runs Solid's compiler on each script at build time. Its version tracks the Solid it supports: `1.9.14` works with Solid `^1.9.14`.
 
-A server component is an async function that runs on your server per request; client components are written as `` cs`(props) => …` `` and run in the browser.
-
 ## Install
 
 ```sh
@@ -11,7 +9,7 @@ npm install @backtickjs/solid-js @backtickjs/core @backtickjs/bundler @backtickj
 npm install -D @backtickjs/tsc
 ```
 
-`@backtickjs/core` has the `cs` tag, `@backtickjs/bundler` bundles per request, `@backtickjs/node-plugin` compiles scripts as Node loads your server (`@backtickjs/bun-plugin` on Bun), and `@backtickjs/tsc` type-checks scripts and their splices.
+The [repository's README](https://github.com/backtickjs/backtick#packages) says what each package is.
 
 ## Setup
 
@@ -100,7 +98,8 @@ const { code } = bundle.generate({ format: "es" });
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): builds bundles
 - [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/packages/react): the React adapter
 - [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/packages/react-native): the React Native adapter
-- [Documentation](https://backtickjs.com/docs)
+- [Thinking in Backtick](https://backtickjs.com/docs/thinking-in-backtick)
+- [How it works](https://backtickjs.com/docs/how-it-works)
 
 ## License
 

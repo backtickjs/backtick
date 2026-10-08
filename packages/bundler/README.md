@@ -47,7 +47,7 @@ The packages the client provides, each at its exact version. The server decides 
 
 ### What crosses into a script
 
-Spliced values are written into the bundle as data: strings, numbers, bigints, booleans, `null`, `undefined`, plain objects and arrays. They are never written as code. A host function, a class instance, a symbol or a value that contains itself can't be spliced, and `build` rejects one: write a client function as a script, `` cs`(n: number) => …` ``, and draw a server component through a splice, `{${<Footer />}}`.
+Spliced values are written into the bundle as data, never as code. What can't cross, `build` rejects before anything reaches the client; [Errors](https://backtickjs.com/docs/errors#from-the-bundler) has each message and its fix.
 
 ### Formats
 
@@ -69,7 +69,8 @@ Spliced values are written into the bundle as data: strings, numbers, bigints, b
 - [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): the `cs` tag
 - [`@backtickjs/react-native-client`](https://github.com/backtickjs/backtick/tree/main/packages/react-native-client): runs a `cjs` bundle in a React Native app
 - [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/packages/react), [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/packages/react-native), [`@backtickjs/solid-js`](https://github.com/backtickjs/backtick/tree/main/packages/solid-js): framework adapters
-- [Documentation](https://backtickjs.com/docs)
+- [How it works](https://backtickjs.com/docs/how-it-works)
+- [Errors](https://backtickjs.com/docs/errors)
 
 ## License
 

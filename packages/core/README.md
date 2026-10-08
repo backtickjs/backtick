@@ -36,9 +36,7 @@ export async function Home() {
 }
 ```
 
-`$node` and `$Counter` are splices: `node` is a server variable, written into the bundle as data; `Counter` is a script. `$useState` is a splice too, of an export the client provides. A server component is drawn inside a script through a splice: `{${<Footer />}}`.
-
-What can be spliced is `Spliceable`: strings, numbers, bigints, booleans, `null`, `undefined`, plain arrays and objects of those, and scripts. An object's type may be an interface or a type alias. Host functions and class instances can't be spliced; a function the client calls is written as a script, `` cs`(n: number) => …` ``.
+`$node` and `$Counter` are splices: `node` is a server variable, written into the bundle as data; `Counter` is a script. `$useState` is a splice too, of an export the client provides. What can be spliced is `Spliceable`: data, and scripts. [Thinking in Backtick](https://backtickjs.com/docs/thinking-in-backtick) has what can cross, what can't, and how server and client components compose.
 
 To use a package the client provides beyond what an adapter covers, describe its export with `createImport`. `from` is the specifier the bundle imports, and `version` the semver range of its package that the export works with:
 
@@ -73,7 +71,7 @@ The client must provide that package, and the server must list it in the bundler
 - [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/packages/react), [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/packages/react-native), [`@backtickjs/solid-js`](https://github.com/backtickjs/backtick/tree/main/packages/solid-js): framework adapters
 - [`@backtickjs/node-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/node-plugin), [`@backtickjs/bun-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/bun-plugin): compile scripts as your server loads them
 - [`@backtickjs/tsc`](https://github.com/backtickjs/backtick/tree/main/packages/tsc): type-checks scripts and their splices
-- [Documentation](https://backtickjs.com/docs)
+- [Thinking in Backtick](https://backtickjs.com/docs/thinking-in-backtick), [Scripts in depth](https://backtickjs.com/docs/scripts-in-depth)
 
 ## License
 

@@ -52,8 +52,17 @@ export type GlobalThis = {
   [Key in keyof typeof globalThis]: (typeof globalThis)[Key];
 };
 
-// `globalThis`, which a name the script didn't bind is read off. In the type
-// and not in the object: nothing runs the virtual code it is written in.
+/**
+ * Writes a client script: code in the host's files that runs on the client.
+ * The template is one expression, one block in braces, or one function; a
+ * function that returns JSX is a client component. `$name` and
+ * `${expression}` splice host values into it. Returns a `Client<T>`, `T`
+ * being what the script computes. Compiled when the host loads the file, by
+ * a Backtick plugin; called uncompiled, it throws.
+ *
+ * `cs.globalThis` is what a name the script didn't bind is read off. In the
+ * type and not in the object: nothing runs the virtual code it is written in.
+ */
 export const cs = Object.assign(
   (_strings: TemplateStringsArray, ..._values: unknown[]): Client<unknown> => {
     throw new Error(

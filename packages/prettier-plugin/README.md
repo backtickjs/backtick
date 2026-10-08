@@ -56,7 +56,7 @@ A splice of a bare identifier in code prints in its short form (`${name}` become
 
 - [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): the `cs` tag
 - [Backtick for VS Code](https://marketplace.visualstudio.com/items?itemName=backtickjs.backtick-vscode): highlighting and type-checking inside scripts
-- [Documentation](https://backtickjs.com/docs)
+- [How it works](https://backtickjs.com/docs/how-it-works)
 
 ## License
 

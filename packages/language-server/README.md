@@ -16,7 +16,7 @@ The entry point is `bin/nodeServer.js`; it uses the TypeScript SDK passed by the
 
 - [`@backtickjs/language-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/language-plugin)
 - [Backtick for VS Code](https://marketplace.visualstudio.com/items?itemName=backtickjs.backtick-vscode)
-- [Documentation](https://backtickjs.com/docs)
+- [How it works](https://backtickjs.com/docs/how-it-works)
 
 ## License
 

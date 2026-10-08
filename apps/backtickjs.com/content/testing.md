@@ -15,9 +15,7 @@ does, with React Native's web build standing in for React Native:
 
 ```
 
-So a test covers the whole screen, from the server component through its
-splices to the client components and their hooks: the same bundle your phone
-gets. Testing Library draws it into [jsdom](https://github.com/jsdom/jsdom), a
+Testing Library draws it into [jsdom](https://github.com/jsdom/jsdom), a
 document that runs in Node.
 
 Here's the screen the test above draws. `Order` is a server component, and each
@@ -83,6 +81,5 @@ Try those on a phone.
 node --import ./server/test/setup.mjs --import @backtickjs/node-plugin --test "server/**/*.test.tsx"
 ```
 
-`server/test/setup.mjs` sets up jsdom, and `@backtickjs/node-plugin` compiles
-your screens as your server does. `npm run reset-project` rewrites
-`server/Home.test.tsx` to match its blank screen.
+`npm run reset-project` rewrites `server/Home.test.tsx` to match its blank
+screen.

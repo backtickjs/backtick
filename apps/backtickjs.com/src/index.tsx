@@ -1,6 +1,6 @@
 import { toHtml } from "./html.js";
 import { TEXT_FILES } from "./llms.js";
-import { NOT_FOUND, PAGES } from "./pages.js";
+import { NOT_FOUND, PAGES, REDIRECTS } from "./pages.js";
 
 const server = Bun.serve({
   port: 4321,
@@ -11,6 +11,10 @@ const server = Bun.serve({
         new Response(await toHtml(page), {
           headers: { "content-type": "text/html" },
         }),
+    ]),
+    ...Object.entries(REDIRECTS).map(([from, to]) => [
+      from,
+      () => Response.redirect(to, 301),
     ]),
     ...TEXT_FILES.map((file) => [
       file.path,

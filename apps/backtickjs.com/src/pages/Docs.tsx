@@ -31,86 +31,25 @@ const ENTRIES: { name: string; pages: Entry[] }[] = [
           "Build a coffee-ordering screen in five steps: a menu from your server, an order kept on the phone, sent back, and remembered for next time.",
         file: "tutorial.md",
       },
-      {
-        path: "/docs/thinking-in-backtick",
-        title: "Thinking in Backtick",
-        description:
-          "What runs on your server, what runs on the phone, and what crosses between them.",
-        file: "thinking-in-backtick.md",
-      },
     ],
   },
   {
     name: "Learn",
     pages: [
       {
-        path: "/docs/server-components",
-        title: "Server components",
+        path: "/docs/thinking-in-backtick",
+        title: "Thinking in Backtick",
         description:
-          "Functions your server runs for every request: they read your data and return the screen.",
-        file: "server-components.md",
+          "What runs on your server, what runs on the phone, and what crosses between them: server components, splices, client components, and how they compose.",
+        file: "thinking-in-backtick.md",
       },
       {
-        path: "/docs/client-scripts",
-        title: "Client scripts",
+        path: "/docs/react-native-and-packages",
+        title: "React Native and packages",
         description:
-          "Code inside cs`…`, written in your server's files and run on the phone.",
-        file: "client-scripts.md",
+          "Every component, API and hook of React Native and React, spliced into scripts with their own names and types, and any other package your app ships.",
+        file: "react-native-and-packages.md",
       },
-      {
-        path: "/docs/splices",
-        title: "Splices",
-        description:
-          "How a value crosses from your server into a client script, and what can cross.",
-        file: "splices.md",
-      },
-      {
-        path: "/docs/client-components",
-        title: "Client components",
-        description:
-          "Scripts written as functions that take props: drawn as tags, with state of their own on the phone.",
-        file: "client-components.md",
-      },
-      {
-        path: "/docs/composing",
-        title: "Composing",
-        description:
-          "Server components inside client scripts, client components inside server components, and the phone's state handed to your server's layout.",
-        file: "composing.md",
-      },
-      {
-        path: "/docs/react-native-apis",
-        title: "React Native's APIs",
-        description:
-          "Every component, API and hook of React Native and React, spliced into scripts with their own names and types.",
-        file: "react-native-apis.md",
-      },
-      {
-        path: "/docs/other-packages",
-        title: "Using other packages",
-        description:
-          "Any package your app ships, in a screen: createImport, versions, and the three places a package goes.",
-        file: "other-packages.md",
-      },
-      {
-        path: "/docs/type-checking",
-        title: "Type checking",
-        description:
-          "backtick-tsc and the editor check the code inside every script, and every value crossing into it.",
-        file: "type-checking.md",
-      },
-      {
-        path: "/docs/how-it-works",
-        title: "How it works",
-        description:
-          "Compiled when your server loads, bundled for each request, run by your app: what each step does.",
-        file: "how-it-works.md",
-      },
-    ],
-  },
-  {
-    name: "Guides",
-    pages: [
       {
         path: "/docs/testing",
         title: "Testing screens",
@@ -118,34 +57,50 @@ const ENTRIES: { name: string; pages: Entry[] }[] = [
           "Draw a screen in a test as your app does, tap it, and check what it shows.",
         file: "testing.md",
       },
+      {
+        path: "/docs/errors",
+        title: "Errors",
+        description:
+          "Every message Backtick can show you, by who says it, with its fix.",
+        file: "errors.md",
+      },
     ],
   },
   {
-    name: "Reference",
+    name: "Advanced",
     pages: [
       {
-        path: "/docs/reference/core",
-        title: "@backtickjs/core",
+        path: "/docs/how-it-works",
+        title: "How it works",
         description:
-          "The cs tag, and the types for what crosses from your server to the phone.",
-        file: "reference-core.md",
+          "Compiled when your server loads, checked by TypeScript, bundled for each request, run by your app: what each step does, and the packages that do it.",
+        file: "how-it-works.md",
       },
       {
-        path: "/docs/reference/bundler",
-        title: "@backtickjs/bundler",
+        path: "/docs/scripts-in-depth",
+        title: "Scripts in depth",
         description:
-          "Runs your server components and writes the bundle your app draws.",
-        file: "reference-bundler.md",
-      },
-      {
-        path: "/docs/reference/react-native-client",
-        title: "@backtickjs/react-native-client",
-        description: "Runs a bundle in your React Native app.",
-        file: "reference-react-native-client.md",
+          "A script's three shapes, when its code runs, scripts inside data, and what a splice checks.",
+        file: "scripts-in-depth.md",
       },
     ],
   },
 ];
+
+// Where pages that no longer exist went, for links to them.
+export const REDIRECTS: Record<string, string> = {
+  "/docs/server-components": "/docs/thinking-in-backtick",
+  "/docs/client-scripts": "/docs/thinking-in-backtick",
+  "/docs/splices": "/docs/thinking-in-backtick",
+  "/docs/client-components": "/docs/thinking-in-backtick",
+  "/docs/composing": "/docs/thinking-in-backtick",
+  "/docs/react-native-apis": "/docs/react-native-and-packages",
+  "/docs/other-packages": "/docs/react-native-and-packages",
+  "/docs/type-checking": "/docs/how-it-works",
+  "/docs/reference/core": "/docs/scripts-in-depth",
+  "/docs/reference/bundler": "/docs/how-it-works",
+  "/docs/reference/react-native-client": "/docs/how-it-works",
+};
 
 const SECTIONS: DocsSection[] = ENTRIES.map((section) => ({
   name: section.name,

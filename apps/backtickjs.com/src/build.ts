@@ -1,7 +1,7 @@
 import { cp, mkdir, rm, writeFile } from "node:fs/promises";
 import { toHtml } from "./html.js";
 import { TEXT_FILES } from "./llms.js";
-import { NOT_FOUND, PAGES, urlOf } from "./pages.js";
+import { NOT_FOUND, PAGES, REDIRECTS, redirectHtml, urlOf } from "./pages.js";
 
 // The site as static files, for GitHub Pages: `public/` as it is, each page
 // at its path's `index.html`, the page for addresses that don't exist, what
@@ -17,6 +17,12 @@ for (const page of PAGES) {
 }
 
 await writeFile(new URL("404.html", dist), await toHtml(NOT_FOUND));
+
+for (const [from, to] of Object.entries(REDIRECTS)) {
+  const directory = new URL(`.${from}/`, dist);
+  await mkdir(directory, { recursive: true });
+  await writeFile(new URL("index.html", directory), redirectHtml(to));
+}
 
 for (const file of TEXT_FILES) {
   await writeFile(new URL(`.${file.path}`, dist), file.text);

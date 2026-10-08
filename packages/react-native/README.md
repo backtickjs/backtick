@@ -2,8 +2,6 @@
 
 The React Native adapter for [Backtick](https://backtickjs.com): React Native's API as client values your scripts splice (`<$View>`, `$StyleSheet`, `$Animated`), each typed with React Native's own declarations. Its version tracks the React Native it supports: `0.86.3` works with React Native `^0.86.3`, as in Expo SDK 57. It pairs with [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/packages/react), which provides React's hooks, the JSX runtime and the compile plugin.
 
-A screen is a server component: an async function that runs on your server per request and answers with a bundle. The app runs that bundle with [`@backtickjs/react-native-client`](https://github.com/backtickjs/backtick/tree/main/packages/react-native-client), so a server change reaches the app without rebuilding it. As in React, hooks belong to client components, written as `` cs`(props) => …` ``.
-
 ## Install
 
 ```sh
@@ -11,7 +9,7 @@ npm install @backtickjs/react-native @backtickjs/react @backtickjs/core @backtic
 npm install -D @backtickjs/tsc
 ```
 
-`@backtickjs/core` has the `cs` tag, `@backtickjs/bundler` bundles per request, `@backtickjs/node-plugin` compiles scripts as Node loads your server (`@backtickjs/bun-plugin` on Bun), and `@backtickjs/tsc` type-checks scripts and their splices. The app itself needs `react`, `react-native` and `@backtickjs/react-native-client`.
+The app itself needs `react`, `react-native` and `@backtickjs/react-native-client`. The [repository's README](https://github.com/backtickjs/backtick#packages) says what each package is; `npx create-backtick-app@latest` sets them all up.
 
 ## Setup
 
@@ -97,7 +95,8 @@ React's own names (`useState`, `Suspense`, …), the JSX runtime and the compile
 - [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/packages/react): the React adapter
 - [`@backtickjs/react-native-client`](https://github.com/backtickjs/backtick/tree/main/packages/react-native-client): runs bundles in the app
 - [`@backtickjs/solid-js`](https://github.com/backtickjs/backtick/tree/main/packages/solid-js): the Solid adapter
-- [Documentation](https://backtickjs.com/docs)
+- [React Native and packages](https://backtickjs.com/docs/react-native-and-packages)
+- [How it works](https://backtickjs.com/docs/how-it-works)
 
 ## License
 

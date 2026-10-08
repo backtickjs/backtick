@@ -16,7 +16,7 @@ The package exports `getBacktickLanguagePlugin(ts, getFileName)` and the `Backti
 
 - [`@backtickjs/compiler`](https://github.com/backtickjs/backtick/tree/main/packages/compiler): produces the virtual code
 - [Backtick for VS Code](https://marketplace.visualstudio.com/items?itemName=backtickjs.backtick-vscode)
-- [Documentation](https://backtickjs.com/docs)
+- [How it works](https://backtickjs.com/docs/how-it-works)
 
 ## License
 

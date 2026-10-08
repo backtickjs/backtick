@@ -22,14 +22,10 @@ Then replace `server/Home.tsx`:
 
 ```
 
-Save, and the menu appears.
-
-- **`Home` awaits the menu on your server.** The phone never asks for it: it
-  arrives with the screen.
-- **`$menu` writes the menu into the screen as data.** In the script, it's an
-  ordinary array, with `getMenu`'s types.
-- **The styles are made in the script, with `$StyleSheet.create`.** They're
-  code that runs on the phone, like the JSX.
+Save, and the menu appears. `Home` awaited it on your server, and `$menu`
+wrote it into the screen, typed as `getMenu` returns it. The styles are made
+in the script, with `$StyleSheet.create`: they're code that runs on the
+phone, like the JSX.
 
 ## 2. Add a client component
 
@@ -41,12 +37,9 @@ state of its own.
 
 ```
 
-Tap "Add" a few times. Each button keeps its own count.
-
-- **`AddButton` is `` cs`() => …` ``,** a function that runs on the phone.
-  It's used as a tag, `<$AddButton />`.
-- **`$useState` is React's `useState`,** from `@backtickjs/react`. Hooks work
-  in client components as they do in any React component.
+Tap "Add" a few times. Each button keeps its own count: `AddButton` is a
+client component, like `Counter` in the quick start, and each tag is its own
+instance.
 
 ## 3. Share the order across the screen
 
@@ -65,8 +58,6 @@ Tap a price to add a coffee; the total updates below.
 - **`Order` holds the state; `CoffeeRow` gets it as props,** a count and an
   `onAdd` callback, as in any React app. Inside client code, props can be
   anything: functions included.
-- **`Home` only passes the menu:** `<$Order menu={$menu} />`. It no longer
-  draws the rows itself.
 
 ## 4. Send the order to your server
 
@@ -94,10 +85,8 @@ Add a coffee, then tap "Place order".
 
 - **`Home` takes props now.** The server reads them from the request, here the
   `origin`, and `Home` turns them into the screen.
-- **`ordersUrl` crosses as a prop of `Order`.** On the phone, `place` posts
-  the counts to it, then shows "Ordered ✓".
 - **The `/orders` route is an ordinary handler:** the screen talks to your
-  server like any app would.
+  server like any app would, with a `fetch` from the phone.
 
 ## 5. Make it personal
 
@@ -115,8 +104,6 @@ Place an order, then reload the app: press `r` in the terminal running it.
   and the phone gets only what it returns.
 - **`${usual ?? {}}` is a splice of an expression,** for when a name isn't
   enough. It's the order's starting state.
-- **Every user can get their own screen.** The server builds it per request,
-  so `lastOrder` could read the user's account, A/B group or location.
 
 ## What you learned
 
@@ -129,7 +116,9 @@ Place an order, then reload the app: press `r` in the terminal running it.
 | `{${<Usual />}}`                             | A server component inside a script      | Your server          |
 
 Everything you changed lives in `server/`. Deploy your server, and every user
-has the new screen the next time they open it, without an app release.
+has the new screen the next time they open it, without an app release. And
+the server builds each screen per request, so `lastOrder` could read the
+user's account, A/B group or location.
 
 Next, **[Thinking in Backtick](/docs/thinking-in-backtick)** explains the
 model behind these steps.

@@ -1,6 +1,6 @@
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 import type { Client } from "@backtickjs/core";
-import { DOCS_PAGES } from "./pages/Docs.js";
+import { DOCS_PAGES, REDIRECTS } from "./pages/Docs.js";
 import { Home } from "./pages/Home.js";
 import { NotFound } from "./pages/NotFound.js";
 
@@ -42,6 +42,28 @@ export const PAGES: (Page & { path: string })[] = [
   },
   ...DOCS_PAGES,
 ];
+
+// A page that moved: a document that sends the reader on, at the old address,
+// as GitHub Pages can't answer with a redirect itself.
+export function redirectHtml(to: string): string {
+  const href = urlOf(to);
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="0; url=${href}">
+    <link rel="canonical" href="${href}">
+    <meta name="robots" content="noindex">
+    <title>Moved</title>
+  </head>
+  <body>
+    <p>This page moved to <a href="${href}">${href}</a>.</p>
+  </body>
+</html>
+`;
+}
+
+export { REDIRECTS };
 
 // What GitHub Pages serves for any address that isn't a page, and what search
 // engines are told to leave out.

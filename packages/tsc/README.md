@@ -45,7 +45,7 @@ A script's declaration carries its real type, where plain `tsc` would write `Cli
 
 - [`@backtickjs/tspatch-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/tspatch-plugin): builds JavaScript with `tspc`
 - [`@backtickjs/node-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/node-plugin) and [`@backtickjs/bun-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/bun-plugin): compile at load time
-- [Documentation](https://backtickjs.com/docs)
+- [How it works](https://backtickjs.com/docs/how-it-works)
 
 ## License
 
