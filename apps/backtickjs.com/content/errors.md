@@ -46,8 +46,13 @@ Statements need braces: `` cs`{ a(); b(); }` ``. See the
 
 ### This `${…}` is in text, not code, so it isn't spliced
 
-A `${…}` inside a string, a template literal or a comment in a script is text
-to the phone. As an element's child, write it in braces: `{${…}}`.
+A `${…}` inside a string or a comment in a script is text to the phone. As an
+element's child, write it in braces: `{${…}}`.
+
+### A `cs` client script can't hold a template literal
+
+A script is a template literal itself, so `` \` `` can't start one inside it.
+Build the string with `+`: `n + "%"`, not `` `${n}%` ``.
 
 ### `$`-prefixed names are reserved for unbraced splices in a `cs` client script
 

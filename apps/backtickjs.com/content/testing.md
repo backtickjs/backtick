@@ -81,5 +81,7 @@ Try those on a phone.
 node --import ./server/test/setup.mjs --import @backtickjs/node-plugin --test "server/**/*.test.tsx"
 ```
 
-`npm run reset-project` rewrites `server/Home.test.tsx` to match its blank
-screen.
+The test runner compiles scripts without type-checking them, so a test can
+pass on a screen with a type error. Run `npm run typecheck` too, as CI
+should. `npm run reset-project` rewrites `server/Home.test.tsx` to match its
+blank screen.

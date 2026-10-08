@@ -145,7 +145,9 @@ Server and client components compose in both directions, in one file:
   a splice of its element. It runs on your server when the bundle is built,
   and the phone gets only what it returns.
 - **A server component inside a server component:** `Section` takes
-  `<Reviews />` as its children and draws them with `{$children}`.
+  `<Reviews />` as its children and draws them with `{$children}`. Its
+  `children` is a `JSX.Element` when it's handed a server element, as here,
+  and a `Client<JSX.Element>` when it's handed a script.
 
 A server component runs once per place it's drawn, as React renders an
 element at each place it stands. If two places need the same data, fetch it

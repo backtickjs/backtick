@@ -50,6 +50,12 @@ make it, in `useMemo`:
 
 ```
 
+## No template literals inside a script
+
+A script is a template literal itself, so it can't hold one: a backtick
+inside it is refused, with "A `cs` client script can't hold a template
+literal". Build the string with `+` instead: `n + "%"`, not `` `${n}%` ``.
+
 ## A script in data
 
 A splice can carry scripts inside data. On the phone, each `Client<U>` in it

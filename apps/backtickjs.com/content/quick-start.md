@@ -1,15 +1,10 @@
 ```sh
-npx create-backtick-app@latest my-app
+npx create-backtick-app@latest my-app --yes
 ```
 
-It asks for a framework and a runtime. Pick React Native, and it creates an
-Expo app with a Backtick server beside it, then installs its packages.
-
-To skip the questions, as an agent or a script would, pass the answers:
-
-```sh
-npx create-backtick-app@latest my-app --template react-native --runtime node
-```
+It creates an Expo app with a Backtick server beside it, on Node, and
+installs its packages. Without `--yes`, it asks for the framework and the
+runtime: that's where React, Solid and Bun are.
 
 ## Open it on your phone
 

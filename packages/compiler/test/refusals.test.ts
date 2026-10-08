@@ -17,6 +17,15 @@ function refusals(body: string): string[] {
 }
 
 describe("refusals", () => {
+  it("a template literal inside a script is refused", () => {
+    assert.deepStrictEqual(refusals("(n: number) => \\`\\${n}%\\`"), [
+      "A `cs` client script can't hold a template literal, which `\\`` " +
+        'would start. Build the string with `+`, e.g. n + "%".',
+    ]);
+    // A `\\` is the script's own, and no backtick.
+    assert.deepStrictEqual(refusals('"a\\\\b"'), []);
+  });
+
   it("a declared `$` name is refused, not emitted", () => {
     for (const body of [
       "{ function $done() {} }",
