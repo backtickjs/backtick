@@ -26,19 +26,19 @@ importers:
   apps/backtickjs.com:
     dependencies:
       '@backtickjs/bun-plugin':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../packages/bun-plugin
       '@backtickjs/bundler':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../packages/bundler
       '@backtickjs/core':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../packages/core
       '@backtickjs/solid-js':
         specifier: ^1.9.14
         version: link:../../packages/solid-js
       '@backtickjs/vscode-extension':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../vscode-extension
       '@shikijs/colorized-brackets':
         specifier: ^4.5.0
@@ -72,10 +72,10 @@ importers:
         version: 6.0.3
     devDependencies:
       '@backtickjs/node-plugin':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../packages/node-plugin
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../packages/prettier-plugin
       '@backtickjs/react':
         specifier: ^19.2.3
@@ -84,10 +84,10 @@ importers:
         specifier: ^0.86.3
         version: link:../../packages/react-native
       '@backtickjs/react-native-client':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../packages/react-native-client
       '@backtickjs/tsc':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../packages/tsc
       '@testing-library/react':
         specifier: ^16.3.3
@@ -172,23 +172,23 @@ importers:
   apps/js-framework-benchmark:
     dependencies:
       '@backtickjs/bundler':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../packages/bundler
       '@backtickjs/core':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../packages/core
       '@backtickjs/solid-js':
         specifier: ^1.9.14
         version: link:../../packages/solid-js
       '@backtickjs/tspatch-plugin':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../packages/tspatch-plugin
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../packages/tsc
       ts-patch:
         specifier: ^4.0.1
@@ -328,13 +328,13 @@ importers:
   packages/create-backtick-app/templates/react:
     dependencies:
       '@backtickjs/bundler':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../../bundler
       '@backtickjs/core':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../../core
       '@backtickjs/node-plugin':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../../node-plugin
       '@backtickjs/react':
         specifier: ^19.2.3
@@ -344,10 +344,10 @@ importers:
         version: 6.0.3
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../../prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../../tsc
       '@types/node':
         specifier: ^25.9.1
@@ -359,13 +359,13 @@ importers:
   packages/create-backtick-app/templates/react-native:
     dependencies:
       '@backtickjs/bundler':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../../bundler
       '@backtickjs/core':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../../core
       '@backtickjs/node-plugin':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../../node-plugin
       '@backtickjs/react':
         specifier: ^19.2.3
@@ -374,7 +374,7 @@ importers:
         specifier: ^0.86.3
         version: link:../../../react-native
       '@backtickjs/react-native-client':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../../react-native-client
       expo:
         specifier: ~57.0.26
@@ -402,10 +402,10 @@ importers:
         version: 6.0.3
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../../prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../../tsc
       '@testing-library/react':
         specifier: ^16.3.3
@@ -429,13 +429,13 @@ importers:
   packages/create-backtick-app/templates/solid-js:
     dependencies:
       '@backtickjs/bundler':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../../bundler
       '@backtickjs/core':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../../core
       '@backtickjs/node-plugin':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../../node-plugin
       '@backtickjs/solid-js':
         specifier: ^1.9.14
@@ -445,10 +445,10 @@ importers:
         version: 6.0.3
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../../prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.5
+        specifier: ^0.1.6
         version: link:../../../tsc
       '@types/node':
         specifier: ^25.9.1

@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/language-service",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Internal: Backtick's diagnostics and completions, layered on TypeScript's language service",
   "keywords": [
     "backtick",

@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/language-server",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": true,
   "description": "Internal: a Volar language server for Backtick client scripts, used by the VS Code extension in development",
   "license": "MIT",
