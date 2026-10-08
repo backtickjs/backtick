@@ -1,6 +1,6 @@
 {
   "name": "create-backtick-app",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Creates a Backtick app: React Native, React or Solid, with screens from your server on Node or Bun",
   "keywords": [
     "backtick",
