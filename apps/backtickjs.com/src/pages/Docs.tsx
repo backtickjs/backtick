@@ -114,8 +114,10 @@ export const DOCS_PAGES: (Page & { path: string })[] = await Promise.all(
     const { path, title, description } = entry;
     const previous = ORDER[index - 1] ?? null;
     const next = ORDER[index + 1] ?? null;
-    const source = await readPage(entry.file);
-    const { html, headings } = await renderPage(source);
+    const { html, headings } = await renderPage(
+      await readPage(entry.file, "html"),
+    );
+    const source = await readPage(entry.file, "markdown");
     return {
       path,
       title: `Backtick · ${title}`,

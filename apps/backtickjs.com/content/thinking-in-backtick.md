@@ -84,8 +84,10 @@ Everything in `user` crosses, including the email the screen never shows:
 
 ```
 
-```js file=thinking/server/Whole.bundle.js details="What the phone receives"
+In the bundle the phone receives, the splice is the whole object:
 
+```js
+const $thunk1 = () => ({ id: "u1", name: "Ada", email: "ada@example.com" });
 ```
 
 To send only the name, splice the expression: `${user.name}`. The same goes

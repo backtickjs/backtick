@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { it } from "node:test";
 import { render, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
@@ -9,7 +10,7 @@ import { Home as LogHome } from "../scripts-in-depth/server/Log.js";
 import { type MenuOnPhone, names } from "../scripts-in-depth/server/menu.js";
 import { Home as RowsHome } from "../scripts-in-depth/server/Rows.js";
 import { double, greeting, meal } from "../scripts-in-depth/server/shapes.js";
-import { assertBundle, drawScreen } from "./drawScreen.js";
+import { bundleScreen, drawScreen } from "./drawScreen.js";
 
 it("three shapes: each is what it computes", async () => {
   assert.match(
@@ -63,13 +64,18 @@ it("client code handed to a server component: the title follows the phone's stat
   assert.ok(screen.getByText("♥"));
 });
 
+// The line the page quotes from the bundle is in the bundle, and on the page.
 it("data, never code: a string is data, whatever it holds", async () => {
   const text = '"); require("fs").rmSync("/"); ("';
-  const code = await assertBundle(
-    new URL("../scripts-in-depth/server/Data.bundle.js", import.meta.url),
-    <Note text={text} />,
-  );
+  const line = String.raw`const $thunk1 = () => ("\"); require(\"fs\").rmSync(\"/\"); (\"");`;
+  const { code } = await bundleScreen(<Note text={text} />);
+  assert.ok(code.includes(line));
   assert.ok(!code.includes('require("fs")'));
+  const page = readFileSync(
+    new URL("../../scripts-in-depth.md", import.meta.url),
+    "utf8",
+  );
+  assert.ok(page.includes(`\n${line}\n`));
   render(await drawScreen(<Note text={text} />));
   assert.ok(screen.getByText(text));
 });

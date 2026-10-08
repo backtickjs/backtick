@@ -84,12 +84,15 @@ like code is still only text:
 
 ```
 
-```js file=scripts-in-depth/server/Data.bundle.js details="What the phone receives for a note holding code"
+For a note holding `"); require("fs").rmSync("/"); ("`, the bundle writes it
+escaped, inside quotes:
 
+<!-- prettier-ignore -->
+```js
+const $thunk1 = () => ("\"); require(\"fs\").rmSync(\"/\"); (\"");
 ```
 
-The bundle writes the note escaped, inside quotes. Nothing a user types can
-become code on the phone.
+Nothing a user types can become code on the phone.
 
 ## What a splice checks
 

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { it } from "node:test";
 import { render, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
@@ -11,7 +12,7 @@ import { Promo } from "../thinking/server/Promo.js";
 import { Signup } from "../thinking/server/Signup.js";
 import { Greeting } from "../thinking/server/Whole.js";
 import { Signup as SignupFixed } from "../thinking-fixed/server/Signup.js";
-import { assertBundle, bundleScreen, drawScreen } from "./drawScreen.js";
+import { bundleScreen, drawScreen } from "./drawScreen.js";
 
 it("one screen: a greeting, and a reorder button", async () => {
   render(await drawScreen(<Home user={{ id: "u-7", name: "Sam" }} />));
@@ -52,12 +53,19 @@ it("splices: the fix crosses a string and a script", async () => {
   assert.ok(screen.getByText("Opens Tue Oct 06 2026"));
 });
 
+// The line the page quotes from the bundle is in the bundle, and on the page.
 it("splices: `$user.name` ships the whole user", async () => {
-  const code = await assertBundle(
-    new URL("../thinking/server/Whole.bundle.js", import.meta.url),
+  const line =
+    'const $thunk1 = () => ({ id: "u1", name: "Ada", email: "ada@example.com" });';
+  const { code } = await bundleScreen(
     <Greeting user={{ id: "u1", name: "Ada", email: "ada@example.com" }} />,
   );
-  assert.ok(code.includes("ada@example.com"));
+  assert.ok(code.includes(line));
+  const page = readFileSync(
+    new URL("../../thinking-in-backtick.md", import.meta.url),
+    "utf8",
+  );
+  assert.ok(page.includes(`\n${line}\n`));
 });
 
 it("splices: a banner only for a user with an offer", async () => {

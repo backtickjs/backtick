@@ -1,5 +1,5 @@
 import { readFile } from "node:fs/promises";
-import { diffLines } from "diff";
+import { diffLines, structuredPatch } from "diff";
 import MarkdownIt from "markdown-it";
 import GithubSlugger from "github-slugger";
 import anchor from "markdown-it-anchor";
@@ -22,31 +22,42 @@ const CONTENT = new URL("../content/", import.meta.url);
 // `content/examples/`, shown under its name within the example:
 // `server/Home.tsx`. The examples are type-checked and tested, so what a page
 // shows works. With `diff=` naming another file, as the tutorial's previous
-// step, the lines that differ from it are marked. With `details="…"`, the file
-// is folded away under that summary, as a bundle is under its example.
+// step, the site shows the whole file with the lines that differ marked, and
+// the Markdown agents read shows a unified diff. With `details="…"`, the file
+// is folded away under that summary.
 const INCLUDE =
   /^```(\w+) file=(\S+)(?: diff=(\S+))?(?: (details="[^"]*"))?\n\s*```$/gm;
 
-// A page's Markdown with every example written out, as the site renders it
-// and as agents read it.
-export async function readPage(file: string): Promise<string> {
+// A page's Markdown with every example written out: for the site, or as
+// agents read it.
+export async function readPage(
+  file: string,
+  as: "html" | "markdown",
+): Promise<string> {
   const source = await readFile(new URL(file, CONTENT), "utf8");
   const includes = await Promise.all(
     [...source.matchAll(INCLUDE)].map(
       async ([, lang, path, before, details]) => {
         const code = (await readExample(path!)).trimEnd();
         const title = path!.split("/").slice(1).join("/");
-        const added =
-          before === undefined
-            ? ""
-            : ` added="${addedLines((await readExample(before)).trimEnd(), code)}"`;
         const folded = details === undefined ? "" : ` ${details}`;
-        return `\`\`\`${lang} title="${title}"${added}${folded}\n${code}\n\`\`\``;
+        if (before === undefined) {
+          return `\`\`\`${lang} title="${title}"${folded}\n${code}\n\`\`\``;
+        }
+        const previous = (await readExample(before)).trimEnd();
+        return as === "html"
+          ? `\`\`\`${lang} title="${title}" added="${addedLines(previous, code)}"${folded}\n${code}\n\`\`\``
+          : `\`\`\`diff title="${title}"${folded}\n${unifiedDiff(previous, code)}\n\`\`\``;
       },
     ),
   );
   let index = 0;
-  return source.replace(INCLUDE, () => includes[index++]!);
+  return (
+    source
+      .replace(INCLUDE, () => includes[index++]!)
+      // A note to the formatter, not to the reader.
+      .replace(/^<!-- prettier-ignore -->\n/gm, "")
+  );
 }
 
 function readExample(path: string): Promise<string> {
@@ -69,6 +80,19 @@ function addedLines(before: string, after: string): string {
     line += count;
   }
   return ranges.join(",");
+}
+
+// The hunks of `after` against `before`, as a unified diff without its file
+// header: what changed, with three lines around it.
+function unifiedDiff(before: string, after: string): string {
+  return structuredPatch("", "", before + "\n", after + "\n", "", "", {
+    context: 3,
+  })
+    .hunks.map(
+      (hunk) =>
+        `@@ -${hunk.oldStart},${hunk.oldLines} +${hunk.newStart},${hunk.newLines} @@\n${hunk.lines.join("\n")}`,
+    )
+    .join("\n");
 }
 
 // The line numbers an `added="…"` names.
