@@ -1,10 +1,11 @@
 ```sh
-npx create-backtick-app@latest my-app --yes
+npx create-backtick-app@latest
 ```
 
-It creates an Expo app with a Backtick server beside it, on Node, and
-installs its packages. Without `--yes`, it asks for the framework and the
-runtime: that's where React, Solid and Bun are.
+It asks for a name, then creates an Expo app with a Backtick server beside
+it, on Node, and installs its packages. For a web page instead, pass
+`--template react` or `--template solid-js`; for a server on Bun,
+`--runtime bun`.
 
 ## Open it on your phone
 

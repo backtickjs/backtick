@@ -1,6 +1,6 @@
 # create-backtick-app
 
-Creates an app whose screens come from your server, with [Backtick](https://backtickjs.com). Pick React Native and you get an Expo app with a Backtick server beside it; pick React or Solid and you get a web page served by one. Each starts with a welcome screen written as a server component, a small client component, and a development setup that redraws the screen when you save.
+Creates an app whose screens come from your server, with [Backtick](https://backtickjs.com): an Expo app with a Backtick server beside it, or with `--template react` or `--template solid-js`, a web page served by one. Each starts with a welcome screen written as a server component, a small client component, and a development setup that redraws the screen when you save.
 
 ## Usage
 
@@ -17,13 +17,7 @@ yarn create backtick-app
 bun create backtick-app
 ```
 
-It asks only what the command line didn't say:
-
-1. What is your app named? (default `my-app`)
-2. Which framework? `react-native` (an Expo app), `react` or `solid-js` (a web page)
-3. Which runtime? `node` or `bun`: Bun is the default when you ran it with Bun (`bun create`), Node otherwise
-
-It then copies the template into a new directory, installs with the package manager you ran it with (npm, pnpm, Yarn or Bun), and prints the commands to start. Requires Node 22.15 or later.
+It asks for a name, and nothing else: it copies the React Native template into that directory, installs with the package manager you ran it with (npm, pnpm, Yarn or Bun), and prints the commands to start. The server runs on Node, or on Bun when you ran it with Bun (`bun create`). Given the name on the command line, it asks nothing. Requires Node 22.15 or later.
 
 ## Options
 
@@ -31,13 +25,13 @@ It then copies the template into a new directory, installs with the package mana
 npx create-backtick-app@latest [name] [options]
 ```
 
-| Option                  | Description                                                                     |
-| ----------------------- | ------------------------------------------------------------------------------- |
-| `name`                  | The directory to create, and the app's name. It must be new or empty.           |
-| `-t, --template <name>` | `react-native`, `react` or `solid-js`.                                          |
-| `-r, --runtime <name>`  | What runs your Backtick server: `node` or `bun`.                                |
-| `-y, --yes`             | Ask nothing: `my-app`, `react-native`, and Bun if run with Bun, Node otherwise. |
-| `--no-install`          | Copy the files without installing dependencies.                                 |
+| Option                  | Description                                                           |
+| ----------------------- | --------------------------------------------------------------------- |
+| `name`                  | The directory to create, and the app's name. It must be new or empty. |
+| `-t, --template <name>` | `react-native`, the default; or `react` or `solid-js`, a web page.    |
+| `-r, --runtime <name>`  | What runs your Backtick server: `node`, the default, or `bun`.        |
+| `-y, --yes`             | Take `my-app` as the name rather than asking.                         |
+| `--no-install`          | Copy the files without installing dependencies.                       |
 
 With `npm create`, pass options after `--`: `npm create backtick-app@latest my-app -- -t react`.
 

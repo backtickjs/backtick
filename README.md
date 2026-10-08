@@ -28,10 +28,11 @@ server, type-checked end to end, and ship them without an app release.
 npx create-backtick-app@latest
 ```
 
-It asks for a name, a framework (React Native, React or Solid) and a runtime
-(Node or Bun), then creates a project with a Backtick server beside it. For
-React Native, that's an Expo app: run `npm start`, scan the QR code with your
-phone, and edit `server/Home.tsx` to change the screen.
+It asks for a name, then creates an Expo app with a Backtick server beside
+it: run `npm start`,
+scan the QR code with your phone, and edit `server/Home.tsx` to change the
+screen. For a web page instead, pass `--template react` or
+`--template solid-js`; for a server on Bun, `--runtime bun`.
 
 ## What it looks like
 

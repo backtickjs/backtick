@@ -110,6 +110,21 @@ test("creates the default project when its input isn't a terminal", async () => 
   assert.ok("@backtickjs/node-plugin" in manifest.dependencies);
 });
 
+// A name is the whole happy path, as create-expo-app's is: React Native, on
+// Node, with nothing asked.
+test("a name alone creates a React Native project on Node", () => {
+  execFileSync(process.execPath, [cli, "named-app", "--no-install"], {
+    cwd: work,
+    stdio: "pipe",
+  });
+  const manifest = JSON.parse(
+    readFileSync(path.join(work, "named-app", "package.json"), "utf8"),
+  ) as { dependencies: Record<string, string> };
+  assert.ok("@backtickjs/react-native" in manifest.dependencies);
+  assert.ok("@backtickjs/node-plugin" in manifest.dependencies);
+  assert.ok(!("@backtickjs/bun-plugin" in manifest.dependencies));
+});
+
 test("--help lists the options, and an unknown one shows them too", () => {
   const help = execFileSync(process.execPath, [cli, "--help"], {
     encoding: "utf8",
@@ -119,6 +134,7 @@ test("--help lists the options, and an unknown one shows them too", () => {
     /--template <name>  The framework: react-native, react, solid-js/,
   );
   assert.match(help, /--runtime <name>   The server's runtime: node, bun/);
+  assert.match(help, /Creates a React Native app with a Backtick server/);
 
   assert.throws(
     () =>

@@ -14,9 +14,9 @@ import { parseArgs } from "node:util";
 import prompts from "prompts";
 import { isSupportedNode } from "./nodeVersion.js";
 
-// Creates an app whose screens come from your server: a few questions, the
-// install, then the next steps, with the framework yours to pick and a
-// Backtick server beside it.
+// Creates an app whose screens come from your server: a React Native app
+// with a Backtick server beside it, unless asked for a web one. Given a
+// name, it asks nothing; the install, then the next steps.
 
 interface Template {
   title: string;
@@ -72,15 +72,15 @@ const RUNTIMES: Record<string, { title: string; loader: string }> = {
 
 const USAGE = `Usage: create-backtick-app [name] [options]
 
+Creates a React Native app with a Backtick server beside it, on Node, or on
+Bun when run with Bun.
+
 Options:
   -t, --template <name>  The framework: ${Object.keys(TEMPLATES).join(", ")}
   -r, --runtime <name>   The server's runtime: ${Object.keys(RUNTIMES).join(", ")}
-  -y, --yes              Use the defaults for anything not given
+  -y, --yes              Take my-app as the name rather than asking
   --no-install           Skip installing packages
-  -h, --help             Show this help
-
-Asks for what isn't given, in a terminal; elsewhere, uses the defaults:
-my-app, react-native, and node (bun when run with bun).`;
+  -h, --help             Show this help`;
 
 let parsed;
 try {
@@ -138,47 +138,29 @@ const manager = (process.env.npm_config_user_agent ?? "npm").split("/")[0];
 const run = ["npm", "pnpm", "yarn", "bun"].includes(manager) ? manager : "npm";
 const suggestedRuntime = run === "bun" ? "bun" : "node";
 
-// Asked only what the command line didn't say, and only in a terminal: an
-// agent or a CI script can't answer, so it gets the defaults, as `--yes` does.
-const ask = process.stdin.isTTY === true && !values.yes;
+// The name is the one question, asked when none was given, and only in a
+// terminal: an agent or a CI script can't answer, so it gets `my-app`, as
+// `--yes` does. The framework and the runtime have defaults, and flags for
+// the rest, as create-expo-app does: a name on the command line is a project
+// with no questions.
+const ask =
+  positionals[0] === undefined && process.stdin.isTTY === true && !values.yes;
 const answers = await prompts(
   [
     {
-      type: positionals[0] !== undefined || !ask ? null : "text",
+      type: ask ? "text" : null,
       name: "name",
       message: "What is your app named?",
       initial: "my-app",
-    },
-    {
-      type: values.template !== undefined || !ask ? null : "select",
-      name: "template",
-      message: "Which framework?",
-      choices: Object.entries(TEMPLATES).map(([value, template]) => ({
-        title: template.title,
-        description: template.description,
-        value,
-      })),
-    },
-    {
-      type: values.runtime !== undefined || !ask ? null : "select",
-      name: "runtime",
-      message: "Which runtime?",
-      choices: Object.entries(RUNTIMES).map(([value, runtime]) => ({
-        title: runtime.title,
-        value,
-      })),
-      initial: Object.keys(RUNTIMES).indexOf(suggestedRuntime),
     },
   ],
   { onCancel: () => process.exit(1) },
 );
 
 const name: string = positionals[0] ?? answers.name ?? "my-app";
-const templateName: string =
-  values.template ?? answers.template ?? "react-native";
+const templateName: string = values.template ?? "react-native";
 const template = TEMPLATES[templateName]!;
-const runtimeName: string =
-  values.runtime ?? answers.runtime ?? suggestedRuntime;
+const runtimeName: string = values.runtime ?? suggestedRuntime;
 
 const target = path.resolve(name);
 const slug = path.basename(target);
