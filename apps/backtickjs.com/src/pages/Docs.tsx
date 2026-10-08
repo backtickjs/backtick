@@ -109,6 +109,18 @@ const ENTRIES: { name: string; pages: Entry[] }[] = [
     ],
   },
   {
+    name: "Guides",
+    pages: [
+      {
+        path: "/docs/testing",
+        title: "Testing screens",
+        description:
+          "Draw a screen in a test as your app does, tap it, and check what it shows.",
+        file: "testing.md",
+      },
+    ],
+  },
+  {
     name: "Reference",
     pages: [
       {
