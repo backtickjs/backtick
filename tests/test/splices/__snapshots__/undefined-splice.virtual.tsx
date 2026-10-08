@@ -5,7 +5,7 @@ import { bundler } from "@backtickjs/bundler";
 import { evaluate } from "../evaluate.ts";
 import { createRoot } from "@backtickjs/solid-js";
 
-// A spliced `undefined` crosses as itself, written `void 0`: alone, as an
+// A spliced `undefined` crosses as itself, written `undefined`: alone, as an
 // object's member, its key kept, and as an array's element.
 describe("a spliced undefined", () => {
   it("arrives as undefined", async () => {
@@ -29,12 +29,12 @@ describe("a spliced undefined", () => {
     ]);
   });
 
-  it("is written as `void 0`", async () => {
+  it("is written as `undefined`", async () => {
     const bundle = await bundler.build({
       input: [undefined],
       packageVersions: {},
     });
     const { code } = bundle.generate({ format: "es" });
-    assert.match(code, /\[void 0\]/);
+    assert.match(code, /\[undefined\]/);
   });
 });

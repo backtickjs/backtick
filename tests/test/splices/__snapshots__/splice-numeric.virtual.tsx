@@ -9,9 +9,7 @@ it("spliceNumeric", async (t) => {
   await snapshotCase(t, "spliceNumeric", cs.lift((() => (cs.splice(1)))()));
 });
 
-// A number without a literal arrives as itself: written as what computes it,
-// `0 / 0` for NaN, `1 / 0` and `-1 / 0` for the infinities, `-0` for negative
-// zero.
+// NaN, the infinities and -0 arrive as themselves, written as in source.
 it("non-finite numbers and negative zero arrive as themselves", async () => {
   const numbers = [NaN, Infinity, -Infinity, -0];
   const arrived = (await evaluate(cs.lift((() => (cs.splice((createRoot)))(() => (cs.splice((numbers)))))()))) as number[];

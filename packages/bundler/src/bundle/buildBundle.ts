@@ -19,7 +19,6 @@ import {
   imported,
   literal,
   object,
-  undefinedValue,
 } from "../print/code.js";
 import type { Names } from "../print/code.js";
 
@@ -232,14 +231,9 @@ export async function buildBundle(
     if (isClientImport(value)) {
       return imported(names, value);
     }
-    if (value === null) {
-      return literal(null);
-    }
-    // Checked by name, since everything past here reads the value as an object.
-    if (value === undefined) {
-      return undefinedValue;
-    }
     if (
+      value === null ||
+      value === undefined ||
       typeof value === "number" ||
       typeof value === "string" ||
       typeof value === "boolean"

@@ -5,7 +5,7 @@ import { bundler } from "@backtickjs/bundler";
 import { evaluate } from "../evaluate.ts";
 import { createRoot } from "@backtickjs/solid-js";
 const $module0 = {
-  id: "2t2ypmsxn12hn:13:32",
+  id: "3ut30pihqnaaz:13:32",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => $splice1());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAYmC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAQ,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/undefined-splice.test.tsx"]}',
   dependencies: [],
@@ -16,7 +16,7 @@ const $module0 = {
   kind: "expression",
 };
 const $module1 = {
-  id: "2t2ypmsxn12hn:18:35",
+  id: "3ut30pihqnaaz:18:35",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => $splice1());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAiBsC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAK,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/undefined-splice.test.tsx"]}',
   dependencies: [],
@@ -27,7 +27,7 @@ const $module1 = {
   kind: "expression",
 };
 const $module2 = {
-  id: "2t2ypmsxn12hn:25:36",
+  id: "3ut30pihqnaaz:25:36",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => $splice1());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAwBuC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAK,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/undefined-splice.test.tsx"]}',
   dependencies: [],
@@ -37,7 +37,7 @@ const $module2 = {
   ],
   kind: "expression",
 };
-// A spliced `undefined` crosses as itself, written `void 0`: alone, as an
+// A spliced `undefined` crosses as itself, written `undefined`: alone, as an
 // object's member, its key kept, and as an array's element.
 describe("a spliced undefined", () => {
   it("arrives as undefined", async () => {
@@ -61,12 +61,12 @@ describe("a spliced undefined", () => {
       3,
     ]);
   });
-  it("is written as `void 0`", async () => {
+  it("is written as `undefined`", async () => {
     const bundle = await bundler.build({
       input: [undefined],
       packageVersions: {},
     });
     const { code } = bundle.generate({ format: "es" });
-    assert.match(code, /\[void 0\]/);
+    assert.match(code, /\[undefined\]/);
   });
 });

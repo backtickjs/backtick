@@ -32,24 +32,18 @@ export function string(value: string): string {
   );
 }
 
-export function literal(value: string | number | boolean | null): string {
+export function literal(
+  value: string | number | boolean | null | undefined,
+): string {
   if (typeof value === "string") {
     return string(value);
   }
   if (typeof value === "number") {
-    // What has no literal is written as what computes it, reading no global.
-    if (Number.isNaN(value)) {
-      return "0 / 0";
-    }
-    if (!Number.isFinite(value)) {
-      return value > 0 ? "1 / 0" : "-1 / 0";
-    }
+    // `String` writes NaN and the infinities by name, but -0 as "0".
     return Object.is(value, -0) ? "-0" : String(value);
   }
   return String(value);
 }
-
-export const undefinedValue = "void 0";
 
 export function call(callee: string, args: readonly string[]): string {
   return `${callee}(${args.join(", ")})`;
