@@ -5,7 +5,6 @@ import { AppSizeVisual } from "../components/AppSize.js";
 import { Hero } from "../components/Hero.js";
 import { Layout } from "../components/Layout.js";
 import { OneDeployVisual } from "../components/OneDeploy.js";
-import { Questions } from "../components/Questions.js";
 import { Section } from "../components/Section.js";
 
 export const Home = cs`() => (
@@ -38,10 +37,6 @@ export const Home = cs`() => (
       lede="Each new screen lives on your server, not in the app your users install."
     >
       <$AppSizeVisual />
-    </$Section>
-
-    <$Section eyebrow="Questions" title="What you're probably wondering.">
-      <$Questions />
     </$Section>
   </$Layout>
 )`;
