@@ -17,6 +17,8 @@
   /* Violet is the brand; cyan is React's. */
   --color-brand: light-dark(#7c3aed, #a78bfa);
   --color-react: light-dark(#0891b2, #61dafb);
+  /* The bad state in a diagram. */
+  --color-warn: light-dark(#d97706, #fbbf24);
 
   /* Code is dark in both themes, in VS Code's Dark+ greys, which the
      highlighter's colours are made for. */

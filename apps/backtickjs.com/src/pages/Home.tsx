@@ -5,6 +5,7 @@ import { AppSizeVisual } from "../components/AppSize.js";
 import { Hero } from "../components/Hero.js";
 import { HowItWorks } from "../components/HowItWorks.js";
 import { Layout } from "../components/Layout.js";
+import { OneDeployVisual } from "../components/OneDeploy.js";
 import { Questions } from "../components/Questions.js";
 import { Section } from "../components/Section.js";
 
@@ -18,6 +19,13 @@ export const Home = cs`() => (
       lede="Like a web page, users get your changes the next time they open the screen, client components included. Rolling back is another deploy."
     >
       <$DeployDemo />
+    </$Section>
+
+    <$Section
+      eyebrow="Updates"
+      title="Your users always see your latest screens."
+    >
+      <$OneDeployVisual />
     </$Section>
 
     <$Section
