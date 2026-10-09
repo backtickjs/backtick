@@ -16,7 +16,7 @@ export const Section = cs`(props: {
       {props.eyebrow}
     </p>
     {props.title === undefined ? null : (
-      <h2 class="max-w-[18em] text-[clamp(30px,4.6vw,44px)] text-pretty leading-[1.1] font-bold tracking-[-0.03em]">
+      <h2 class="max-w-[15.75em] text-[clamp(30px,4.6vw,44px)] text-pretty leading-[1.1] font-bold tracking-[-0.03em]">
         {props.title}
       </h2>
     )}

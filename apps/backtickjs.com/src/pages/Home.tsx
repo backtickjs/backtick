@@ -1,4 +1,5 @@
 import { cs } from "@backtickjs/core";
+import { DataVisual } from "../components/Data.js";
 import { DeployDemo } from "../components/DeployDemo.js";
 import { AppSizeVisual } from "../components/AppSize.js";
 import { Hero } from "../components/Hero.js";
@@ -16,8 +17,16 @@ export const Home = cs`() => (
     </$Section>
 
     <$Section
+      eyebrow="Data"
+      title="Your code is all screen, no boilerplate."
+      lede="Each screen runs its own query on your server, with no endpoint, fetch or hand-copied type to break."
+    >
+      <$DataVisual />
+    </$Section>
+
+    <$Section
       eyebrow="Updates"
-      title="Your users always see your latest screens."
+      title="Your users always see your latest changes."
       lede="Each change is one server deploy, with no API or app release to coordinate."
     >
       <$OneDeployVisual />
