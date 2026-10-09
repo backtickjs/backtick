@@ -1,7 +1,7 @@
 import { cs } from "@backtickjs/core";
 import { Pair } from "./Pair.js";
 
-// App size: the app's download as the product grows, stacked on the floor
+// App size: the app's size as the product grows, stacked on the floor
 // every React Native app has. Heights are percentages of the chart.
 const BASE = 50;
 const SIZES = [
@@ -19,9 +19,7 @@ const RUNTIME: Segment = {
 
 const Columns = cs`(props: { top: Segment; heights: number[] }) => (
   <div class="grid gap-3">
-    <span class="font-mono text-xs text-muted">
-      App download size, illustrative
-    </span>
+    <span class="font-mono text-xs text-muted">App size, illustrative</span>
     <div class="flex h-36 items-end gap-4 border-b border-line">
       {props.heights.map((height) => (
         <div class="flex flex-1 flex-col">
@@ -60,13 +58,13 @@ export const AppSizeVisual = cs`() => (
         heights={$SIZES.map((size) => size.bundled)}
       />
     }
-    withoutCaption="Every screen you write ends up in the app, so the app's download size grows with the product."
+    withoutCaption="Every screen you write ends up in the app, so the app's size grows with the product."
     backtick={
       <$Columns
         top={{ name: "Backtick client, under 1 KB", color: "bg-react" }}
         heights={$SIZES.map(() => 0)}
       />
     }
-    backtickCaption="Screens are built on your server and sent to the phone when opened, so they never add to the app's download size."
+    backtickCaption="Screens are built on your server and sent to the phone when opened, so they never add to the app's size."
   />
 )`;

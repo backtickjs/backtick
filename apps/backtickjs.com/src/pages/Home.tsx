@@ -24,6 +24,7 @@ export const Home = cs`() => (
     <$Section
       eyebrow="Updates"
       title="Your users always see your latest screens."
+      lede="Each change is one server deploy, with no API or app release to coordinate."
     >
       <$OneDeployVisual />
     </$Section>
@@ -31,6 +32,7 @@ export const Home = cs`() => (
     <$Section
       eyebrow="App size"
       title="Your app stays small as your product grows."
+      lede="Each new screen lives on your server, not in the app your users install."
     >
       <$AppSizeVisual />
     </$Section>
