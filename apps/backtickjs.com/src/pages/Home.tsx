@@ -1,6 +1,7 @@
 import { cs } from "@backtickjs/core";
 import { CLIENT_SCRIPT_SYNTAX, InlineCode } from "../components/Code.js";
 import { DeployDemo } from "../components/DeployDemo.js";
+import { AppSizeVisual } from "../components/AppSize.js";
 import { Hero } from "../components/Hero.js";
 import { HowItWorks } from "../components/HowItWorks.js";
 import { Layout } from "../components/Layout.js";
@@ -17,6 +18,13 @@ export const Home = cs`() => (
       lede="Like a web page, users get your changes the next time they open the screen, client components included. Rolling back is another deploy."
     >
       <$DeployDemo />
+    </$Section>
+
+    <$Section
+      eyebrow="App size"
+      title="Your app stays small as your product grows."
+    >
+      <$AppSizeVisual />
     </$Section>
 
     <$Section
