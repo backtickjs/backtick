@@ -86,8 +86,8 @@ export const DataVisual = cs`() => (
         <$Code file="app/screens/Offers.tsx" lines={$SCREEN} />
       </div>
     }
-    withoutCaption="Seven of these lines are boilerplate. They only move data from your database to the screen."
+    withoutCaption="Seven of these lines are boilerplate: a route, a query key, a fetch, a hand-copied type, only to move data to the screen. Then the screen waits for it."
     backtick={<$Code file="server/Offers.tsx" lines={$SERVER} />}
-    backtickCaption="One line does the same job, type-checked from the query to the screen."
+    backtickCaption="One query, on your server. Keys and secrets stay there; the screen arrives with its data, type-checked to the phone."
   />
 )`;

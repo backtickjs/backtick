@@ -17,8 +17,8 @@ export const Home = cs`() => (
 
     <$Section
       eyebrow="Data"
-      title="Your code is all screen, no boilerplate."
-      lede="Each screen runs its own query on your server, with no endpoint, fetch or hand-copied type to break."
+      title="Your server fetches the data, directly and securely."
+      lede="The component queries your database, calls APIs and reads environment variables, on your server. No API routes, no client state for server data, no network waterfalls."
     >
       <$DataVisual />
     </$Section>
