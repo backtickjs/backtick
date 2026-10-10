@@ -11,8 +11,7 @@ export const Hero = cs`() => (
       <span class="text-shine">{"React\u00a0Native."}</span>
     </h1>
     <p class="mt-[26px] max-w-[720px] text-xl leading-[1.55] text-muted">
-      Write screens on your server, type-checked end to end, and ship them
-      without an app update.
+      Write React Native on your server, and ship it without an app update.
     </p>
     <div class="mt-[34px] flex flex-wrap gap-3">
       <$Button href="/docs" solid label="Read the docs" event="read-docs" />

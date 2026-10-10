@@ -11,11 +11,7 @@ export const Home = cs`() => (
   <$Layout>
     <$Hero />
 
-    <$Section
-      eyebrow="Real code"
-      title="Ship new features with a deploy, not an app update."
-      lede="Write real React Native on your server, not a JSON schema: the same components, hooks and state you use today."
-    >
+    <$Section eyebrow="See it in action">
       <$DeployDemo />
     </$Section>
 
