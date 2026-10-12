@@ -1,13 +1,10 @@
 import { cs } from "@backtickjs/core";
-import { GitHubMark } from "./GitHubMark.js";
 
 // Filled or outlined, which is the only thing a caller decides — a page with
 // two ways of saying the same button is a page with two of everything.
 export const Button = cs`(props: {
   href: string;
   solid?: boolean;
-  // The GitHub mark before the label, for a link to the repository.
-  github?: boolean;
   label: string;
   // The name Umami counts a click under.
   event: string;
@@ -20,7 +17,6 @@ export const Button = cs`(props: {
       (props.solid ? "bg-ink text-paper" : "text-ink")
     }
   >
-    {props.github ? <$GitHubMark size={18} /> : null}
     {props.label}
   </a>
 )`;

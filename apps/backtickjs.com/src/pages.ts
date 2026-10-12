@@ -34,14 +34,14 @@ export const PAGES: (Page & { path: string })[] = [
   {
     path: "/",
     Page: Home,
-    title: "Backtick · A delightful programming model for React Native",
+    title: "Backtick · Fully server-driven React Native",
     description:
-      "A delightful programming model for React Native. Write screens on" +
-      " your server, type-checked end to end, and" +
-      " ship them without an app release.",
+      "Fully server-driven React Native. Write every screen on your server," +
+      " with its layout, data and behaviour. Every change ships with your" +
+      " next deploy, not your next app release.",
     // The hero's words and the links off it, for a reader that doesn't run
     // scripts: an agent's fetch, or a search engine.
-    staticHtml: `<div class="mx-auto box-border max-w-[1200px] px-6 pt-[80px]"><div class="pt-12"><h1 class="max-w-[12.5em] text-[clamp(40px,7.4vw,76px)] leading-[1.02] font-extrabold tracking-[-0.045em]">A delightful programming model for React Native.</h1><p class="mt-[26px] max-w-[720px] text-xl leading-[1.55] text-muted">Write screens on your server, type-checked end to end, and ship them without an app release.</p><p class="mt-[34px]"><a href="/docs">Read the docs</a> · <a href="/docs/tutorial">Tutorial</a> · <a href="https://github.com/backtickjs/backtick">GitHub</a> · <a href="/llms.txt">llms.txt</a></p></div></div>`,
+    staticHtml: `<div class="mx-auto box-border max-w-[1200px] px-6 pt-[80px]"><div class="pt-12"><h1 class="max-w-[12.5em] text-[clamp(40px,7.4vw,76px)] leading-[1.02] font-extrabold tracking-[-0.045em]">Fully server-driven React Native.</h1><p class="mt-[26px] max-w-[720px] text-xl leading-[1.55] text-muted">Write every screen on your server, with its layout, data and behaviour. Every change ships with your next deploy, not your next app release.</p><p class="mt-[34px]"><a href="/docs">Read the docs</a> · <a href="/docs/tutorial">Tutorial</a> · <a href="https://github.com/backtickjs/backtick">GitHub</a> · <a href="/llms.txt">llms.txt</a></p></div></div>`,
   },
   ...DOCS_PAGES,
 ];

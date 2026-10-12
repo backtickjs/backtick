@@ -1,18 +1,42 @@
 import { cs } from "@backtickjs/core";
+import { AppSizeVisual } from "../components/AppSize.js";
+import { Button } from "../components/Button.js";
 import { DataVisual } from "../components/Data.js";
 import { DeployDemo } from "../components/DeployDemo.js";
-import { AppSizeVisual } from "../components/AppSize.js";
 import { Hero } from "../components/Hero.js";
+import { LayersVisual } from "../components/Layers.js";
 import { Layout } from "../components/Layout.js";
+import { LimitsVisual } from "../components/Limits.js";
 import { OneDeployVisual } from "../components/OneDeploy.js";
+import { PerUserVisual } from "../components/PerUser.js";
+import { QuickStart } from "../components/QuickStart.js";
 import { Section } from "../components/Section.js";
 
 export const Home = cs`() => (
   <$Layout>
     <$Hero />
 
-    <$Section eyebrow="See it in action">
+    <$Section
+      eyebrow="See it in action"
+      title="One app build. Every change from your server."
+    >
       <$DeployDemo />
+    </$Section>
+
+    <$Section
+      eyebrow="Server-driven"
+      title="Most apps download data. Yours downloads whole screens."
+      lede="Buttons, state and what happens on a tap come from your server too, as React Native components. A new interaction reaches your users the next time they open the screen."
+    >
+      <$LayersVisual />
+    </$Section>
+
+    <$Section
+      eyebrow="Per user"
+      title="Every user gets a screen made for them."
+      lede="Your server decides what each person sees on each request, and sends only that. Code for other roles, plans and markets never reaches their phone."
+    >
+      <$PerUserVisual />
     </$Section>
 
     <$Section
@@ -37,6 +61,24 @@ export const Home = cs`() => (
       lede="Each new screen lives on your server, not in the app your users install."
     >
       <$AppSizeVisual />
+    </$Section>
+
+    <$Section
+      eyebrow="What stays in the app"
+      title="Your app is the shell. Your server is everything else."
+      lede="The app ships React Native, your native modules and the Backtick client. A few things still belong there."
+    >
+      <$LimitsVisual />
+    </$Section>
+
+    <$Section
+      eyebrow="Get started"
+      title="Move one screen to your server today."
+    >
+      <div class="flex flex-wrap gap-3">
+        <$QuickStart />
+        <$Button href="/docs" solid label="Read the docs" event="read-docs" />
+      </div>
     </$Section>
   </$Layout>
 )`;
