@@ -36,14 +36,14 @@ Each stage logs what it took, from the server to the phone's GPU. The server's l
   server    1.4 ms (build 1.0 ms, generate 0.4 ms)
   network   41.2 ms to first byte, 6.1 ms to download 33.8 KB
   evaluate  4.8 ms
-  render    128.8 ms to commit, 22.4 ms rendering
+  render    128.8 ms to commit
   heap      18.2 MB of 24.0 MB, 3 GCs at fetch, …
 [render] first GL frame 312.0 ms after mount: 2 shader programs, 94 geometries, 94 draw calls
 [runtime] 60 fps, worst frame 21.3 ms, 94 draw calls, 1128 triangles, heap 21.0 MB (+0.4 MB), 1 GCs
 ```
 
 - `[server]`, in `server/index.tsx`: running the server components and bundling them (`build`), then printing the code (`generate`), and the server's memory. The two times also travel to the app in a `Server-Timing` header.
-- `[pipeline]`, in `App.tsx`, once per screen: the network is the time to the first byte less the server's share. `render` runs from `evaluate` to React's first commit of the screen.
+- `[pipeline]`, in `App.tsx`, once per screen: the network is the time to the first byte less the server's share. `render` runs from `evaluate` to React's first commit of the screen, in development and production alike.
 - `[render]` and `[runtime]`, in `server/World.tsx`: the first frame R3F draws, its shaders compiled, then every 5 seconds the frame rate, the slowest frame and what the GPU was asked to draw.
 - `heap` is the JavaScript heap as Hermes reports it, and its garbage collections. On the web, Chrome reports the heap without its collections, and other browsers report neither. GL buffers and textures live in native memory, out of JavaScript's sight. When the OS runs short of memory, the app logs `[memory] warning from the OS` with the heap at that moment.
 

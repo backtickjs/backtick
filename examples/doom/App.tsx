@@ -4,11 +4,11 @@ import { StatusBar } from "expo-status-bar";
 import * as React from "react";
 import {
   Component,
-  Profiler,
   type ReactNode,
   Suspense,
   use,
   useEffect,
+  useLayoutEffect,
   useState,
 } from "react";
 import * as JSXRuntime from "react/jsx-runtime";
@@ -117,22 +117,15 @@ export default function App() {
 
 // What the server sent, once it has: suspending until then, and throwing,
 // for the boundary, a screen that couldn't be fetched or run. Its first commit
-// ends the pipeline, which it logs.
+// ends the pipeline, which it logs: a layout effect runs once the screen is
+// committed, in production too, where React's <Profiler> reports nothing.
 function Screen({ screen }: { screen: Promise<Fetched> }) {
   const fetched = use(screen);
-  return (
-    <Profiler
-      id={fetched.path}
-      onRender={(_, phase, duration) => {
-        if (phase === "mount") logPipeline(fetched, duration);
-      }}
-    >
-      {fetched.node}
-    </Profiler>
-  );
+  useLayoutEffect(() => logPipeline(fetched), [fetched]);
+  return fetched.node;
 }
 
-function logPipeline(fetched: Fetched, renderDuration: number) {
+function logPipeline(fetched: Fetched) {
   const committed = performance.now();
   const server = Object.values(fetched.server).reduce((a, b) => a + b, 0);
   const serverStages = Object.entries(fetched.server)
@@ -146,8 +139,7 @@ function logPipeline(fetched: Fetched, renderDuration: number) {
       `  network   ${ms(fetched.firstByte - fetched.started - server)} to first byte, ` +
         `${ms(fetched.downloaded - fetched.firstByte)} to download ${kb(fetched.bytes)}`,
       `  evaluate  ${ms(fetched.evaluated - fetched.downloaded)}`,
-      `  render    ${ms(committed - fetched.evaluated)} to commit, ` +
-        `${ms(renderDuration)} rendering`,
+      `  render    ${ms(committed - fetched.evaluated)} to commit`,
       `  heap      ${formatHeap(fetched.heap.started)} at fetch, ` +
         `${formatHeap(fetched.heap.evaluated)} after evaluate, ` +
         `${formatHeap(heap)} after commit`,
