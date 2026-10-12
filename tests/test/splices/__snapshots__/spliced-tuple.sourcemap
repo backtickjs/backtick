@@ -1,0 +1,49 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+4                → 4
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+[                → [
+__cs_x           → x
+,                → ,
+                 →  
+__cs_z           → z
+]                → ]
+:                → :
+                 →  
+readonly         → readonly
+                 →  
+[                → [
+x                → x
+:                → :
+                 →  
+number           → number
+,                → ,
+                 →  
+z                → z
+:                → :
+                 →  
+number           → number
+]                → ]
+                 →  
+=                → =
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(position)       → $position
+))               →  [-semantic -navigation]
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+__cs_x           → x
+                 →  
++                → +
+                 →  
+__cs_z           → z
+;                → ;
+\n               → \n    
+}                → }
+)())             → ` [-semantic -navigation]

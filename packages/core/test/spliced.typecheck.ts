@@ -19,6 +19,12 @@ point.label satisfies string;
 const list = spliced([clientNumber, clientNumber]);
 list satisfies number[];
 
+// A tuple stays a tuple, labels included.
+declare const position: readonly [x: number, z: Client<number>];
+spliced(position) satisfies readonly [x: number, z: number];
+// @ts-expect-error: a pair has no third element
+spliced(position)[2];
+
 // Plain data crosses unchanged.
 spliced("host label") satisfies string;
 spliced([1, [true, null]]) satisfies (number | (boolean | null)[])[];

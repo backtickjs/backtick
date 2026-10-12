@@ -32,14 +32,18 @@ export type SplicesAs<T> = [T] extends [Spliceable]
 
 // What a spliceable becomes on the client:
 //   Client<U>                 -> U
-//   T[]                       -> Spliced<T>[]
+//   T[], [A, B]               -> Spliced<T>[], [Spliced<A>, Spliced<B>]
 //   { k: T }                  -> { k: Spliced<T> }
 //   primitives                -> unchanged
+// A tuple maps homomorphically, which keeps it a tuple; any other array stays
+// `Spliced<Item>[]`, which TypeScript defers, so `Spliceable[]` doesn't recurse.
 export type Spliced<T> =
   T extends Client<infer U>
     ? U
     : T extends readonly (infer Item extends Spliceable)[]
-      ? Spliced<Item>[]
+      ? number extends T["length"]
+        ? Spliced<Item>[]
+        : { -readonly [K in keyof T]: Spliced<T[K]> }
       : T extends object
         ? { -readonly [K in keyof T]: Spliced<T[K]> }
         : T;
