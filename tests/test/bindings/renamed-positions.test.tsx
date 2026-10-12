@@ -39,4 +39,17 @@ describe("a script's names, wherever they stand", () => {
       [2, 4],
     );
   });
+
+  it("in a `typeof` nested in a type", async () => {
+    assert.equal(
+      await evaluate(
+        cs`$createRoot(() => {
+          const game = { imps: [{ x: 1 }] };
+          const first: (typeof game.imps)[number] = game.imps[0];
+          return first.x;
+        })`,
+      ),
+      1,
+    );
+  });
 });

@@ -3,6 +3,7 @@ import type { CodeInformation } from "./CodeInformation.js";
 import type { ClientScript, Splice } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
 import type { Segment } from "./segmentsToString.js";
+import { inTypePosition } from "./inTypePosition.js";
 import { tagRoot } from "./tagRoot.js";
 import { mangle } from "./unmangle.js";
 
@@ -321,29 +322,4 @@ function isReference(
     ts.isMetaProperty(parent) ||
     ts.isJsxNamespacedName(parent)
   );
-}
-
-// Whether a name stands in a type, which names types rather than values: all
-// but what a `typeof` reads, and a class's `extends`.
-function inTypePosition(
-  ts: typeof import("typescript"),
-  node: ts.Identifier,
-): boolean {
-  for (let at: ts.Node = node; at.parent !== undefined; at = at.parent) {
-    const parent = at.parent;
-    if (ts.isTypeQueryNode(parent)) {
-      return false;
-    }
-    if (
-      ts.isExpressionWithTypeArguments(parent) &&
-      ts.isHeritageClause(parent.parent) &&
-      ts.isClassLike(parent.parent.parent)
-    ) {
-      return false;
-    }
-    if (ts.isTypeNode(parent)) {
-      return true;
-    }
-  }
-  return false;
 }

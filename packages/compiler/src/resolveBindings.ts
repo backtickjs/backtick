@@ -1,4 +1,5 @@
 import type ts from "typescript";
+import { inTypePosition } from "./inTypePosition.js";
 import type { ClientScript } from "./parseFile.js";
 
 /**
@@ -198,20 +199,9 @@ export function resolveBindings(
   const escaped = new Set<string>();
 
   const visit = (node: ts.Node): void => {
-    // A type's names are never runtime bindings, but for a `typeof` and a
-    // class's `extends`, which read values.
-    if (
-      ts.isTypeNode(node) &&
-      !ts.isTypeQueryNode(node) &&
-      !(
-        ts.isExpressionWithTypeArguments(node) &&
-        ts.isHeritageClause(node.parent) &&
-        ts.isClassLike(node.parent.parent)
-      )
-    ) {
-      return;
-    }
-    if (ts.isIdentifier(node)) {
+    // A type's names are never runtime bindings, but for a `typeof`, however
+    // deep in a type, and a class's `extends`, which read values.
+    if (ts.isIdentifier(node) && !inTypePosition(ts, node)) {
       const script = scriptAt(node.getStart(file));
       const declaration = declarationOf(node);
       if (script === undefined) {

@@ -26,3 +26,14 @@ exports.default = (($splice0) => $splice0()(() => {
     return [copy.n, new Child().twice()];
 }));
 }
+
+// 46:9
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => $splice0()(() => {
+    const game = { imps: [{ x: 1 }] };
+    const first = game.imps[0];
+    return first.x;
+}));
+}

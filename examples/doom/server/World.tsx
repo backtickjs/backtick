@@ -21,16 +21,6 @@ export type Stats = {
   wounds: number;
 };
 
-type Imp = {
-  x: number;
-  z: number;
-  hp: number;
-  awake: boolean;
-  cooldown: number;
-  hurt: number;
-  dying: number;
-};
-
 // What Hermes, React Native's engine, reports of its heap. On the web, Chrome
 // reports its own, without its collections.
 type Hermes = { getInstrumentedStats?: () => Record<string, number> };
@@ -51,17 +41,15 @@ export const World = cs`(props: WorldProps) => {
     stats: { ...props.start },
     reload: 0,
     flash: 0,
-    imps: level.imps.map(
-      ({ x, z }): Imp => ({
-        x,
-        z,
-        hp: 2,
-        awake: false,
-        cooldown: 0,
-        hurt: 0,
-        dying: 0,
-      }),
-    ),
+    imps: level.imps.map(({ x, z }) => ({
+      x,
+      z,
+      hp: 2,
+      awake: false,
+      cooldown: 0,
+      hurt: 0,
+      dying: 0,
+    })),
     pickups: [
       ...level.medkits.map(({ x, z }) => ({
         kind: "medkit",
@@ -195,7 +183,7 @@ export const World = cs`(props: WorldProps) => {
       game.flash = 0.06;
       changed = true;
       // The nearest imp in the line of fire, the spread widening with range.
-      let target: Imp | undefined;
+      let target: (typeof game.imps)[number] | undefined;
       let nearest = Infinity;
       for (const imp of game.imps) {
         const dx = imp.x - player.x;

@@ -178,3 +178,76 @@ twice             → twice
 }                 → }
 )                 → )
 )())              → ` [-semantic -navigation]
+cs.lift((() =>    → cs` [-semantic -navigation]
+(cs.splice(       →  [-semantic -navigation]
+(createRoot)      → $createRoot
+))                →  [-semantic -navigation]
+(                 → (
+(                 → (
+)                 → )
+                  →  
+=>                → =>
+                  →  
+{                 → {
+\n                → \n          
+const             → const
+                  →  
+__cs_game         → game
+                  →  
+=                 → =
+                  →  
+{                 → {
+                  →  
+imps              → imps
+:                 → :
+                  →  
+[                 → [
+{                 → {
+                  →  
+x                 → x
+:                 → :
+                  →  
+1                 → 1
+                  →  
+}                 → }
+]                 → ]
+                  →  
+}                 → }
+;                 → ;
+\n                → \n          
+const             → const
+                  →  
+__cs_first        → first
+:                 → :
+                  →  
+(                 → (
+typeof            → typeof
+                  →  
+__cs_game         → game
+.                 → .
+imps              → imps
+)                 → )
+[                 → [
+number            → number
+]                 → ]
+                  →  
+=                 → =
+                  →  
+__cs_game         → game
+.                 → .
+imps              → imps
+[                 → [
+0                 → 0
+]                 → ]
+;                 → ;
+\n                → \n          
+return            → return
+                  →  
+__cs_first        → first
+.                 → .
+x                 → x
+;                 → ;
+\n                → \n        
+}                 → }
+)                 → )
+)())              → ` [-semantic -navigation]
