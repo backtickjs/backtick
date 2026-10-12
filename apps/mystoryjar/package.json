@@ -1,0 +1,56 @@
+{
+  "name": "mystoryjar",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MyStoryJar, a one-line-a-day journal for iOS and Android, its screens served by a Backtick server",
+  "main": "index.ts",
+  "scripts": {
+    "start": "node scripts/start.mjs",
+    "android": "node scripts/start.mjs --android",
+    "ios": "node scripts/start.mjs --ios",
+    "web": "node scripts/start.mjs --web",
+    "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit",
+    "test": "node --import ./server/test/setup.mjs --import @backtickjs/node-plugin --test \"server/**/*.test.tsx\"",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown ."
+  },
+  "dependencies": {
+    "@backtickjs/bundler": "^0.1.8",
+    "@backtickjs/core": "^0.1.8",
+    "@backtickjs/node-plugin": "^0.1.8",
+    "@backtickjs/react": "^19.2.3",
+    "@backtickjs/react-native": "^0.86.3",
+    "@backtickjs/react-native-client": "^0.1.8",
+    "@backtickjs/react-navigation-native": "^7.5.0",
+    "@react-navigation/native": "^7.5.0",
+    "@react-navigation/native-stack": "^7.20.0",
+    "expo": "~57.0.26",
+    "expo-constants": "~57.0.20",
+    "expo-secure-store": "~57.0.4",
+    "expo-status-bar": "~57.0.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.86.3",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-screens": "~4.26.2",
+    "react-native-web": "^0.21.0",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "@backtickjs/prettier-plugin": "^0.1.8",
+    "@backtickjs/tsc": "^0.1.8",
+    "@react-navigation/routers": "7.6.4",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
+    "@types/node": "^25.9.1",
+    "@types/react": "19.2.18",
+    "global-jsdom": "^30.0.0",
+    "jsdom": "^30.0.1",
+    "prettier": "^3.6.2"
+  },
+  "backtick": {
+    "plugins": [
+      "@backtickjs/react/plugin"
+    ]
+  }
+}

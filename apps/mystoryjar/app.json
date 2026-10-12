@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "MyStoryJar",
+    "slug": "mystoryjar",
+    "scheme": "mystoryjar",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "bundleIdentifier": "com.mystoryjar.app"
+    },
+    "android": {
+      "package": "com.mystoryjar.app"
+    },
+    "plugins": ["expo-secure-store"]
+  }
+}

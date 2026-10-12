@@ -94,22 +94,24 @@ const ReorderButton = cs`(props: { order: Order }) => {
 
 ## Packages
 
-| Package                                                           | What it is                                                         |
-| ----------------------------------------------------------------- | ------------------------------------------------------------------ |
-| [`create-backtick-app`](packages/create-backtick-app)             | Creates a project: React Native, React or Solid, on Node or Bun    |
-| [`@backtickjs/core`](packages/core)                               | The `cs` tag, and the types for what crosses to the client         |
-| [`@backtickjs/bundler`](packages/bundler)                         | Runs server components and bundles a screen per request            |
-| [`@backtickjs/react-native`](adapters/react-native)               | React Native's components and APIs, for scripts                    |
-| [`@backtickjs/react`](adapters/react)                             | React's hooks and APIs, for scripts                                |
-| [`@backtickjs/solid-js`](adapters/solid-js)                       | Solid's primitives, for scripts                                    |
-| [`@backtickjs/react-three-fiber`](adapters/react-three-fiber)     | React Three Fiber's components and hooks, for scripts              |
-| [`@backtickjs/three`](adapters/three)                             | three's classes, values and types, for scripts                     |
-| [`@backtickjs/react-native-client`](packages/react-native-client) | `evaluate`: runs a bundle with your app's own packages             |
-| [`@backtickjs/node-plugin`](packages/node-plugin)                 | Compiles scripts as a Node server loads them                       |
-| [`@backtickjs/bun-plugin`](packages/bun-plugin)                   | Compiles scripts as a Bun server loads them                        |
-| [`@backtickjs/tspatch-plugin`](packages/tspatch-plugin)           | Compiles scripts when you build a server ahead of time with `tspc` |
-| [`@backtickjs/tsc`](packages/tsc)                                 | `backtick-tsc`: type-checks scripts and their splices              |
-| [`@backtickjs/prettier-plugin`](packages/prettier-plugin)         | Formats the code inside scripts                                    |
+| Package                                                                   | What it is                                                         |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| [`create-backtick-app`](packages/create-backtick-app)                     | Creates a project: React Native, React or Solid, on Node or Bun    |
+| [`@backtickjs/core`](packages/core)                                       | The `cs` tag, and the types for what crosses to the client         |
+| [`@backtickjs/bundler`](packages/bundler)                                 | Runs server components and bundles a screen per request            |
+| [`@backtickjs/react-native`](adapters/react-native)                       | React Native's components and APIs, for scripts                    |
+| [`@backtickjs/react`](adapters/react)                                     | React's hooks and APIs, for scripts                                |
+| [`@backtickjs/solid-js`](adapters/solid-js)                               | Solid's primitives, for scripts                                    |
+| [`@backtickjs/react-three-fiber`](adapters/react-three-fiber)             | React Three Fiber's components and hooks, for scripts              |
+| [`@backtickjs/three`](adapters/three)                                     | three's classes, values and types, for scripts                     |
+| [`@backtickjs/react-navigation-native`](adapters/react-navigation-native) | React Navigation's hooks and actions, for scripts                  |
+| [`@backtickjs/expo-secure-store`](adapters/expo-secure-store)             | Expo SecureStore's functions, for scripts                          |
+| [`@backtickjs/react-native-client`](packages/react-native-client)         | `evaluate`: runs a bundle with your app's own packages             |
+| [`@backtickjs/node-plugin`](packages/node-plugin)                         | Compiles scripts as a Node server loads them                       |
+| [`@backtickjs/bun-plugin`](packages/bun-plugin)                           | Compiles scripts as a Bun server loads them                        |
+| [`@backtickjs/tspatch-plugin`](packages/tspatch-plugin)                   | Compiles scripts when you build a server ahead of time with `tspc` |
+| [`@backtickjs/tsc`](packages/tsc)                                         | `backtick-tsc`: type-checks scripts and their splices              |
+| [`@backtickjs/prettier-plugin`](packages/prettier-plugin)                 | Formats the code inside scripts                                    |
 
 Internal packages, used by the ones above: [`compiler`](packages/compiler),
 [`language-plugin`](packages/language-plugin),

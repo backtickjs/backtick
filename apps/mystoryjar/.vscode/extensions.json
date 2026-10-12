@@ -1,0 +1,6 @@
+{
+  "recommendations": [
+    "backtickjs.backtick-vscode",
+    "esbenp.prettier-vscode"
+  ]
+}
