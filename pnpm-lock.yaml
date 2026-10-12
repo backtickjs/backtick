@@ -257,6 +257,12 @@ importers:
       '@backtickjs/react-native-client':
         specifier: ^0.1.8
         version: link:../../packages/react-native-client
+      '@backtickjs/react-three-fiber':
+        specifier: ^9.8.1
+        version: link:../../packages/react-three-fiber
+      '@backtickjs/three':
+        specifier: ^0.182.0
+        version: link:../../packages/three
       '@react-three/fiber':
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.18)(expo-asset@57.0.19(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3))(expo-file-system@57.0.7(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3)))(expo-gl@57.0.2(expo@57.0.26)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(expo@57.0.26)(react-dom@19.2.3(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(three@0.182.0)
@@ -312,9 +318,6 @@ importers:
       '@types/react':
         specifier: 19.2.18
         version: 19.2.18
-      '@types/three':
-        specifier: 0.182.0
-        version: 0.182.0
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
@@ -735,6 +738,46 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
+  packages/react-three-fiber:
+    dependencies:
+      '@backtickjs/core':
+        specifier: workspace:^0.1.0
+        version: link:../core
+      '@backtickjs/react':
+        specifier: workspace:^19.2.3
+        version: link:../react
+      '@backtickjs/three':
+        specifier: workspace:^0.182.0
+        version: link:../three
+      '@react-three/fiber':
+        specifier: 9.8.1
+        version: 9.8.1(@types/react@19.2.18)(expo-asset@57.0.19(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3))(expo-file-system@57.0.7(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3)))(expo-gl@57.0.2(expo@57.0.26)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(expo@57.0.26)(react-dom@19.2.3(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(three@0.182.0)
+    devDependencies:
+      '@backtickjs/compiler':
+        specifier: workspace:^0.1.0
+        version: link:../compiler
+      '@backtickjs/prettier-plugin':
+        specifier: workspace:*
+        version: link:../prettier-plugin
+      '@backtickjs/tsc':
+        specifier: workspace:^0.1.0
+        version: link:../tsc
+      '@backtickjs/tspatch-plugin':
+        specifier: workspace:^0.1.0
+        version: link:../tspatch-plugin
+      '@types/react':
+        specifier: 19.2.18
+        version: 19.2.18
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      ts-patch:
+        specifier: ^4.0.1
+        version: 4.0.1
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   packages/solid-js:
     dependencies:
       '@babel/core':
@@ -762,6 +805,40 @@ importers:
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      ts-patch:
+        specifier: ^4.0.1
+        version: 4.0.1
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/three:
+    dependencies:
+      '@backtickjs/core':
+        specifier: workspace:^0.1.0
+        version: link:../core
+      '@types/three':
+        specifier: 0.182.0
+        version: 0.182.0
+      three:
+        specifier: 0.182.0
+        version: 0.182.0
+    devDependencies:
+      '@backtickjs/compiler':
+        specifier: workspace:^0.1.0
+        version: link:../compiler
+      '@backtickjs/prettier-plugin':
+        specifier: workspace:*
+        version: link:../prettier-plugin
+      '@backtickjs/tsc':
+        specifier: workspace:^0.1.0
+        version: link:../tsc
+      '@backtickjs/tspatch-plugin':
+        specifier: workspace:^0.1.0
+        version: link:../tspatch-plugin
       prettier:
         specifier: ^3.6.2
         version: 3.8.4

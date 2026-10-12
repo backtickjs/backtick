@@ -28,6 +28,8 @@ const ADAPTERS = {
   "@backtickjs/solid-js": "solid-js",
   "@backtickjs/react": "react",
   "@backtickjs/react-native": "react-native",
+  "@backtickjs/three": "three",
+  "@backtickjs/react-three-fiber": "@react-three/fiber",
 };
 
 const packages = manifests("packages");

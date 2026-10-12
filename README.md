@@ -102,6 +102,8 @@ const ReorderButton = cs`(props: { order: Order }) => {
 | [`@backtickjs/react-native`](packages/react-native)               | React Native's components and APIs, for scripts                    |
 | [`@backtickjs/react`](packages/react)                             | React's hooks and APIs, for scripts                                |
 | [`@backtickjs/solid-js`](packages/solid-js)                       | Solid's primitives, for scripts                                    |
+| [`@backtickjs/react-three-fiber`](packages/react-three-fiber)     | React Three Fiber's components and hooks, for scripts              |
+| [`@backtickjs/three`](packages/three)                             | three's classes, values and types, for scripts                     |
 | [`@backtickjs/react-native-client`](packages/react-native-client) | `evaluate`: runs a bundle with your app's own packages             |
 | [`@backtickjs/node-plugin`](packages/node-plugin)                 | Compiles scripts as a Node server loads them                       |
 | [`@backtickjs/bun-plugin`](packages/bun-plugin)                   | Compiles scripts as a Bun server loads them                        |

@@ -21,6 +21,8 @@
     "@backtickjs/react": "^19.2.3",
     "@backtickjs/react-native": "^0.86.3",
     "@backtickjs/react-native-client": "^0.1.8",
+    "@backtickjs/react-three-fiber": "^9.8.1",
+    "@backtickjs/three": "^0.182.0",
     "@react-three/fiber": "9.8.1",
     "expo": "~57.0.26",
     "expo-asset": "~57.0.19",
@@ -41,7 +43,6 @@
     "@react-three/test-renderer": "9.1.1",
     "@types/node": "^25.9.1",
     "@types/react": "19.2.18",
-    "@types/three": "0.182.0",
     "prettier": "^3.6.2"
   },
   "backtick": {

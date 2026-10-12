@@ -1,7 +1,7 @@
 import { cs } from "@backtickjs/core";
 import { useEffect, useRef, useState } from "@backtickjs/react";
 import { Platform, Pressable, Text, View } from "@backtickjs/react-native";
-import { Canvas } from "./fiber.js";
+import { Canvas } from "@backtickjs/react-three-fiber/native";
 import type { Level } from "./levels.js";
 import { World, type Input, type Stats } from "./World.js";
 
