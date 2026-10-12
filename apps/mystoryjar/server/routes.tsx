@@ -1,13 +1,48 @@
 import type { JSX } from "@backtickjs/react/jsx-runtime";
 import type { ScreenRequest } from "./request.js";
 import { Landing } from "./screens/Landing.js";
+import { Redirect } from "./screens/Redirect.js";
 import { SignIn } from "./screens/SignIn.js";
 import { SignUp } from "./screens/SignUp.js";
+import { Write } from "./screens/Write.js";
+
+type Route = {
+  // who it's for: anyone signed in, or anyone not, who are sent to the other
+  // side's first screen
+  for: "signedIn" | "signedOut";
+  draw: (request: ScreenRequest) => JSX.Element;
+};
 
 // The app's screens by path: the app holds a stack of these paths, and asks
 // for the one on top.
-export const routes: Record<string, (request: ScreenRequest) => JSX.Element> = {
-  "/": (request) => <Landing request={request} />,
-  "/signin": (request) => <SignIn request={request} />,
-  "/signup": (request) => <SignUp request={request} />,
+const routes: Record<string, Route> = {
+  "/": { for: "signedOut", draw: (request) => <Landing request={request} /> },
+  "/signin": {
+    for: "signedOut",
+    draw: (request) => <SignIn request={request} />,
+  },
+  "/signup": {
+    for: "signedOut",
+    draw: (request) => <SignUp request={request} />,
+  },
+  "/write": { for: "signedIn", draw: (request) => <Write request={request} /> },
 };
+
+/** The screen at `path` for this request, or undefined for no such path. */
+export function screenAt(
+  path: string,
+  request: ScreenRequest,
+): JSX.Element | undefined {
+  const route = routes[path];
+  if (route === undefined) {
+    return undefined;
+  }
+  const signedIn = request.user !== null;
+  if (route.for === "signedIn" && !signedIn) {
+    return <Redirect to="/signin" />;
+  }
+  if (route.for === "signedOut" && signedIn) {
+    return <Redirect to="/write" />;
+  }
+  return route.draw(request);
+}

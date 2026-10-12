@@ -1,5 +1,6 @@
 import { cs } from "@backtickjs/core";
 import {
+  CommonActions,
   StackActions,
   useNavigation,
 } from "@backtickjs/react-navigation-native";
@@ -19,5 +20,13 @@ export const useStack = cs`() => {
         $StackActions.replace("Screen", { path, animation: "none" }),
       ),
     back: () => navigation.goBack(),
+    // Starts the stack over at \`path\`, as signing in or out does.
+    restart: (path: string) =>
+      navigation.dispatch(
+        $CommonActions.reset({
+          index: 0,
+          routes: [{ name: "Screen", params: { path } }],
+        }),
+      ),
   };
 }`;

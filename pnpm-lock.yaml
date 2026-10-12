@@ -617,6 +617,9 @@ importers:
       '@backtickjs/expo-font':
         specifier: ^57.0.4
         version: link:../../adapters/expo-font
+      '@backtickjs/expo-secure-store':
+        specifier: ^57.0.4
+        version: link:../../adapters/expo-secure-store
       '@backtickjs/node-plugin':
         specifier: ^0.1.8
         version: link:../../packages/node-plugin
@@ -662,6 +665,9 @@ importers:
       expo-status-bar:
         specifier: ~57.0.1
         version: 57.0.1(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
+      jose:
+        specifier: ^6.2.12
+        version: 6.2.12
       react:
         specifier: 19.2.3
         version: 19.2.3
@@ -4240,6 +4246,9 @@ packages:
   jiti@2.7.0:
     resolution: {integrity: sha512-AC/7JofJvZGrrneWNaEnJeOLUx+JlGt7tNa0wZiRPT4MY1wmfKjt2+6O2p2uz2+skll8OZZmJMNqeke7kKbNgQ==}
     hasBin: true
+
+  jose@6.2.12:
+    resolution: {integrity: sha512-9NiFmJEex0sy2Dk58j2UGBSHgUs2ypF9eZSu4L6vjOX3Dp96Sw1F3uL+H+D1sx02jZZdzUT0HgvCy59CuvXcWw==}
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -9393,6 +9402,8 @@ snapshots:
   jimp-compact@0.16.1: {}
 
   jiti@2.7.0: {}
+
+  jose@6.2.12: {}
 
   js-tokens@4.0.0: {}
 

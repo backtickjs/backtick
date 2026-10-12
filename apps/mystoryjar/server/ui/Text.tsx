@@ -21,6 +21,8 @@ export type TextProps = {
   color?: keyof Colors;
   numberOfLines?: number;
   style?: StyleProp<TextStyle>;
+  onPress?: () => void;
+  accessibilityRole?: "link";
 };
 
 export const Text = cs`(props: TextProps) => {
@@ -28,6 +30,8 @@ export const Text = cs`(props: TextProps) => {
   return (
     <$NativeText
       numberOfLines={props.numberOfLines}
+      onPress={props.onPress}
+      accessibilityRole={props.accessibilityRole}
       style={[
         $sizes[props.size ?? 14],
         {

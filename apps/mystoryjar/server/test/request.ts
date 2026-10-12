@@ -4,4 +4,6 @@ import type { ScreenRequest } from "../request.js";
 export const request: ScreenRequest = {
   origin: "http://localhost:3000",
   timeZone: "America/New_York",
+  user: null,
+  session: null,
 };

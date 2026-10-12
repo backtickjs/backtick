@@ -2,8 +2,9 @@ import { readFile } from "node:fs/promises";
 import { createServer, type ServerResponse } from "node:http";
 import { createRequire } from "node:module";
 import { bundler } from "@backtickjs/bundler";
+import { answer, api } from "./api.js";
 import { screenRequest } from "./request.js";
-import { routes } from "./routes.js";
+import { screenAt } from "./routes.js";
 import { fontFiles } from "./ui/fonts.js";
 
 // Development is only what `npm start` runs, which sets NODE_ENV: any other
@@ -33,7 +34,7 @@ const server = createServer(async (request, response) => {
   response.setHeader("access-control-allow-origin", "*");
   response.setHeader(
     "access-control-allow-headers",
-    "authorization, x-time-zone, x-app-version",
+    "authorization, content-type, x-time-zone, x-app-version",
   );
   if (request.method === "OPTIONS") {
     response.end();
@@ -60,18 +61,23 @@ const server = createServer(async (request, response) => {
       return;
     }
   }
-  const route = routes[pathname];
-  if (route === undefined) {
-    response.statusCode = 404;
-    response.end();
-    return;
-  }
   try {
+    const handler = api[pathname];
+    if (request.method === "POST" && handler !== undefined) {
+      const { status, body } = await answer(handler, request);
+      response.statusCode = status;
+      response.setHeader("content-type", "application/json");
+      response.end(JSON.stringify(body));
+      return;
+    }
     const started = performance.now();
-    const bundle = await bundler.build({
-      input: route(screenRequest(request)),
-      packageVersions,
-    });
+    const input = screenAt(pathname, await screenRequest(request));
+    if (input === undefined) {
+      response.statusCode = 404;
+      response.end();
+      return;
+    }
+    const bundle = await bundler.build({ input, packageVersions });
     const { code } = bundle.generate({ format: "cjs" });
     response.setHeader("content-type", "text/javascript");
     response.end(code);

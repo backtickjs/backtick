@@ -2,7 +2,7 @@ import { createRequire } from "node:module";
 import { bundler } from "@backtickjs/bundler";
 import type { Spliceable } from "@backtickjs/core";
 import { evaluate } from "@backtickjs/react-native-client";
-import { StackActions } from "@react-navigation/routers";
+import { CommonActions, StackActions } from "@react-navigation/routers";
 import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNativeWeb from "react-native-web";
@@ -40,6 +40,7 @@ const modules = {
   "react/jsx-runtime": JSXRuntime,
   "react-native": ReactNativeWeb,
   "@react-navigation/native": {
+    CommonActions,
     StackActions,
     useNavigation: () => navigation,
   },

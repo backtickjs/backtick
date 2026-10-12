@@ -1,0 +1,71 @@
+import type { IncomingMessage } from "node:http";
+import { Readable } from "node:stream";
+import { afterEach, beforeEach } from "node:test";
+import { answer, api } from "../api.js";
+import { request } from "./request.js";
+
+// The network as tests see it. Firebase Auth's REST API answers for one
+// account, and records what each call was asked; the app's server, at the
+// test request's origin, is its API run in this process.
+export const account = {
+  uid: "uid-1",
+  email: "ada@example.com",
+  password: "correct horse",
+};
+
+export const asked: { method: string; body: Record<string, unknown> }[] = [];
+
+const real = globalThis.fetch;
+
+function reply(status: number, body: object): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { "content-type": "application/json" },
+  });
+}
+
+function refuse(code: string): Response {
+  return reply(400, { error: { code: 400, message: code } });
+}
+
+beforeEach(() => {
+  asked.length = 0;
+  globalThis.fetch = async (input, init) => {
+    const url = String(input);
+    if (url.startsWith(request.origin)) {
+      const handler = api[url.slice(request.origin.length)];
+      if (handler === undefined) {
+        return reply(404, {});
+      }
+      const { status, body } = await answer(
+        handler,
+        Readable.from([String(init?.body ?? "")]) as unknown as IncomingMessage,
+      );
+      return reply(status, body);
+    }
+    const method = /accounts:(\w+)/.exec(url)?.[1];
+    if (!url.includes("identitytoolkit") || method === undefined) {
+      return real(input, init);
+    }
+    const body = JSON.parse(String(init?.body));
+    asked.push({ method, body });
+    const known = body.email === account.email;
+    switch (method) {
+      case "signInWithPassword":
+        return known && body.password === account.password
+          ? reply(200, { localId: account.uid, email: account.email })
+          : refuse("INVALID_LOGIN_CREDENTIALS");
+      case "signUp":
+        return known
+          ? refuse("EMAIL_EXISTS")
+          : reply(200, { localId: "uid-new", email: body.email });
+      case "sendOobCode":
+        return body.email === "" ? refuse("MISSING_EMAIL") : reply(200, {});
+    }
+    return refuse("UNKNOWN");
+  };
+});
+
+afterEach(() => {
+  globalThis.fetch = real;
+});

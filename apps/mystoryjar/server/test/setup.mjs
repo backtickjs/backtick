@@ -6,6 +6,9 @@ import { afterEach } from "node:test";
 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
+// The key the server signs sessions with, from its environment.
+process.env.SESSION_SECRET ??= "test";
+
 afterEach(cleanup);
 
 // jsdom has no ResizeObserver, which React Native's web build looks for as it
