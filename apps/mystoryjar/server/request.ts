@@ -18,16 +18,23 @@ export type ScreenRequest = {
   theme: Theme;
 };
 
+/**
+ * Where the phone reached this server: the address the request came to, or
+ * behind a proxy, as on Cloud Run, the one it forwards.
+ */
+export function originOf(request: IncomingMessage): string {
+  const protocol = request.headers["x-forwarded-proto"] ?? "http";
+  const host = request.headers["x-forwarded-host"] ?? request.headers.host;
+  return `${protocol}://${host}`;
+}
+
 export async function screenRequest(
   request: IncomingMessage,
 ): Promise<ScreenRequest> {
-  // Behind a proxy, as on Cloud Run, the address the phone used is forwarded.
-  const protocol = request.headers["x-forwarded-proto"] ?? "http";
-  const host = request.headers["x-forwarded-host"] ?? request.headers.host;
   const session = request.headers.authorization?.replace(/^Bearer /, "");
   const user = await readSession(session);
   return {
-    origin: `${protocol}://${host}`,
+    origin: originOf(request),
     timeZone: String(request.headers["x-time-zone"] ?? "UTC"),
     user,
     session: session ?? null,

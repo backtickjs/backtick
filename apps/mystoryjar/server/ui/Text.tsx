@@ -39,6 +39,9 @@ export const Text = cs`(props: TextProps) => {
             ? ${fontFamilies.bold}
             : ${fontFamilies.medium},
           color: colors[props.color ?? "primaryText"],
+          // without Android's font padding, which sits Noto Sans JP low in
+          // its line, beside the icons it's centred with
+          includeFontPadding: false,
         },
         props.style,
       ]}

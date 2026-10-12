@@ -1,3 +1,5 @@
+import { Refusal } from "../refusal.js";
+
 // Firebase Auth's REST API, the one its web SDK calls: the same accounts, so
 // a user signs in to the app as they do to the website, and keeps their uid.
 // The project's API key is public, as Firebase's are: it names the project,
@@ -12,7 +14,7 @@ const base = emulator
   : "https://identitytoolkit.googleapis.com/v1";
 
 /** Why Firebase refused, in words for the person signing in. */
-export class AuthError extends Error {}
+export class AuthError extends Refusal {}
 
 // Firebase's codes, some followed by " : " and a detail.
 const messages: Record<string, string> = {

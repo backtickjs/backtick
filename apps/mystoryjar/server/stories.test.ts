@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
 import { Timestamp } from "firebase-admin/firestore";
-import { storyOf } from "./stories.js";
+import { Refusal } from "./refusal.js";
+import { checkStory, storyOf } from "./stories.js";
 
 const today = new Date("2026-10-12T15:00:00Z");
 
@@ -51,4 +52,42 @@ it("reads older shapes, and a photo only once it's in Storage", () => {
     { tags: [], location: "", photo: null },
   );
   assert.equal(story.onThisDay, true);
+});
+
+it("takes a story the composer sends", () => {
+  assert.deepEqual(
+    checkStory(
+      {
+        text: "Beach day.",
+        day: "2026-07-04",
+        favorite: true,
+        tags: ["summer"],
+        location: "Rockaway",
+        photoId: null,
+      },
+      "America/New_York",
+    ),
+    {
+      text: "Beach day.",
+      day: "2026-07-04",
+      favorite: true,
+      tags: ["summer"],
+      location: "Rockaway",
+      photoId: null,
+    },
+  );
+});
+
+it("refuses what the composer wouldn't send", () => {
+  const story = { text: "x", day: "2026-07-04", tags: [], location: "" };
+  const refused = (fields: object) =>
+    assert.throws(() => checkStory({ ...story, ...fields }, "UTC"), Refusal);
+  refused({ text: "" });
+  // 281 characters, counted as JavaScript counts them
+  refused({ text: "a".repeat(281) });
+  refused({ day: "2999-01-01" });
+  refused({ day: "July 4th" });
+  refused({ tags: "summer" });
+  // 280 is fine, an emoji counting as two
+  checkStory({ ...story, text: "😀".repeat(140) }, "UTC");
 });

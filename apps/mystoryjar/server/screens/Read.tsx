@@ -110,17 +110,34 @@ const Card = cs`(props: { story: Story }) => {
       />
       <$View style={{ flex: 1, margin: 8, marginLeft: 12, gap: 4 }}>
         <$Text>{story.text}</$Text>
-        {details.map((detail) => (
+        {/* the place and the tags on one line, as on the website, wrapping
+            when they don't fit */}
+        {details.length > 0 && (
           <$View
-            key={detail.icon}
-            style={{ flexDirection: "row", alignItems: "center", gap: 4 }}
+            style={{ flexDirection: "row", flexWrap: "wrap", columnGap: 12 }}
           >
-            <$Icon shapes={detail.icon} size={16} color="secondaryText" />
-            <$Text color="secondaryText" style={{ flexShrink: 1 }}>
-              {detail.text}
-            </$Text>
+            {details.map((detail) => (
+              <$View
+                key={detail.icon}
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: 4,
+                  flexShrink: 1,
+                }}
+              >
+                {/* centred on the letters rather than the line, which Noto
+                Sans JP draws tall for its kanji */}
+                <$View style={{ marginTop: 2 }}>
+                  <$Icon shapes={detail.icon} size={16} color="secondaryText" />
+                </$View>
+                <$Text color="secondaryText" style={{ flexShrink: 1 }}>
+                  {detail.text}
+                </$Text>
+              </$View>
+            ))}
           </$View>
-        ))}
+        )}
         {story.photo !== null && <$StoryPhoto photo={story.photo} />}
       </$View>
     </$View>

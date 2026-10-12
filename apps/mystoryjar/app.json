@@ -25,7 +25,12 @@
       "permissions": ["android.permission.INTERNET"]
     },
     "plugins": [
-      "expo-secure-store",
+      [
+        "expo-secure-store",
+        {
+          "faceIDPermission": false
+        }
+      ],
       [
         "react-native-fbsdk-next",
         {
@@ -43,6 +48,14 @@
         "@react-native-google-signin/google-signin",
         {
           "iosUrlScheme": "com.googleusercontent.apps.239132102423-k72sa3ecn8l9k2ptvjjcn68lnvo0masi"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "MyStoryJar adds the photos you choose to your stories.",
+          "cameraPermission": false,
+          "microphonePermission": false
         }
       ]
     ],

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
-import { midnightIn } from "./dates.js";
+import { dayIn, midnightIn, startOfDay } from "./dates.js";
 
 it("is midnight where the story was written, daylight saving included", () => {
   const summer = new Date("2026-07-04T15:00:00Z");
@@ -25,5 +25,16 @@ it("is the day it already is there, not here", () => {
   assert.equal(
     midnightIn("Asia/Tokyo", late).toISOString(),
     "2026-07-04T15:00:00.000Z",
+  );
+});
+
+it("starts a day the phone names, where the phone is", () => {
+  assert.equal(
+    startOfDay("America/New_York", "2026-03-08").toISOString(),
+    "2026-03-08T05:00:00.000Z",
+  );
+  assert.equal(
+    dayIn("Asia/Tokyo", new Date("2026-07-04T16:00:00Z")),
+    "2026-07-05",
   );
 });

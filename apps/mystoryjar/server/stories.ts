@@ -1,5 +1,12 @@
-import type { DocumentData } from "firebase-admin/firestore";
+import {
+  type DocumentData,
+  FieldValue,
+  Timestamp,
+} from "firebase-admin/firestore";
+import { dayIn, startOfDay } from "./dates.js";
 import { firestore, storageLink } from "./firebase.js";
+import { storedPhoto } from "./photos.js";
+import { Refusal } from "./refusal.js";
 
 /** A story as a screen shows it: what it says, and its day where it's read. */
 export type Story = {
@@ -95,4 +102,87 @@ export async function storiesOf(
             },
           },
     );
+}
+
+/** A new story as the composer sends it. */
+export type NewStory = {
+  text: string;
+  // the day it's for where the phone is, "2026-10-12"
+  day: string;
+  favorite: boolean;
+  tags: string[];
+  location: string;
+  // a photo the phone uploaded, by the id the upload answered
+  photoId: string | null;
+};
+
+const LIMIT = 280;
+
+/**
+ * Checks a story as the website's composer did: some text and no more than
+ * 280 characters (UTF-16 units, as JavaScript counts them), a day no later
+ * than today where the phone is, one photo at most. Anything else is refused.
+ */
+export function checkStory(input: unknown, timeZone: string): NewStory {
+  const story = (input ?? {}) as Record<string, unknown>;
+  const strings = (value: unknown) =>
+    Array.isArray(value) && value.every((each) => typeof each === "string")
+      ? (value as string[])
+      : null;
+  const text = typeof story.text === "string" ? story.text : "";
+  if (text.length === 0) {
+    throw new Refusal("Write something first.");
+  }
+  if (text.length > LIMIT) {
+    throw new Refusal(`Stories are ${LIMIT} characters at most.`);
+  }
+  const day = typeof story.day === "string" ? story.day : "";
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(day) || day > dayIn(timeZone)) {
+    throw new Refusal("Pick a day that's already happened.");
+  }
+  const tags = strings(story.tags);
+  if (
+    tags === null ||
+    tags.length > 50 ||
+    tags.some((tag) => tag.length > 100)
+  ) {
+    throw new Refusal("Those tags can't be saved.");
+  }
+  const location = typeof story.location === "string" ? story.location : "";
+  if (location.length > 200) {
+    throw new Refusal("That place is too long.");
+  }
+  return {
+    text,
+    day,
+    favorite: story.favorite === true,
+    tags,
+    location,
+    photoId: typeof story.photoId === "string" ? story.photoId : null,
+  };
+}
+
+/** Writes `story` as `uid`'s, in the shape the website writes: its id. */
+export async function addStory(
+  uid: string,
+  story: NewStory,
+  timeZone: string,
+): Promise<string> {
+  const photos =
+    story.photoId === null ? [] : [await storedPhoto(uid, story.photoId)];
+  const doc = await firestore.collection("stories").add({
+    author: uid,
+    value: story.text,
+    date: Timestamp.fromDate(startOfDay(timeZone, story.day)),
+    isFavorite: story.favorite,
+    tags: story.tags.map((label) => ({ label })),
+    location: story.location,
+    photos,
+    // the photo is already in Storage, so there's nothing for the website's
+    // Cloud Function to do
+    synced: true,
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+  });
+  return doc.id;
 }

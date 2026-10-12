@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
+import { getStorage } from "firebase-admin/storage";
 
 // The Firebase project the server reads and writes, as an admin. In
 // development, the emulators `npm start` runs, under `demo-mystoryjar`: a
@@ -20,6 +21,23 @@ const app = initializeApp({
 });
 
 export const firestore = getFirestore(app);
+export const bucket = getStorage(app).bucket();
+
+/**
+ * The link the website stores for a file in Storage: Firebase's download
+ * URL, whose token lets anyone holding it read the file. In development, the
+ * emulator's.
+ */
+export function downloadUrl(path: string, token: string): string {
+  const emulator = process.env.FIREBASE_STORAGE_EMULATOR_HOST;
+  const origin = emulator
+    ? `http://${emulator}`
+    : "https://firebasestorage.googleapis.com";
+  return (
+    `${origin}/v0/b/${bucket.name}/o/${encodeURIComponent(path)}` +
+    `?alt=media&token=${token}`
+  );
+}
 
 /**
  * A Storage download link as the phone can follow it: as is in production;

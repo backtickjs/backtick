@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { createServer, type ServerResponse } from "node:http";
 import { createRequire } from "node:module";
 import { bundler } from "@backtickjs/bundler";
-import { answer, api } from "./api.js";
+import { answer, callerOf } from "./api.js";
 import { screenRequest } from "./request.js";
 import { screenAt } from "./routes.js";
 import { fontFiles } from "./ui/fonts.js";
@@ -34,6 +34,7 @@ const packageVersions = {
     require("@react-native-google-signin/google-signin/package.json").version,
   "react-native-fbsdk-next": require("react-native-fbsdk-next/package.json")
     .version,
+  "expo-image-picker": require("expo-image-picker/package.json").version,
 };
 
 const server = createServer(async (request, response) => {
@@ -69,12 +70,14 @@ const server = createServer(async (request, response) => {
     }
   }
   try {
-    const handler = api[pathname];
-    if (request.method === "POST" && handler !== undefined) {
-      const { status, body } = await answer(handler, request);
-      response.statusCode = status;
+    const answered =
+      request.method === "POST"
+        ? await answer(pathname, request, await callerOf(request))
+        : undefined;
+    if (answered !== undefined) {
+      response.statusCode = answered.status;
       response.setHeader("content-type", "application/json");
-      response.end(JSON.stringify(body));
+      response.end(JSON.stringify(answered.body));
       return;
     }
     const started = performance.now();
@@ -107,6 +110,8 @@ function send(response: ServerResponse, type: string, body: Buffer) {
   response.end(body);
 }
 
-server.listen(3000, () => {
-  console.log("MyStoryJar server on http://localhost:3000");
+// 3000 unless PORT says otherwise, as a host such as Cloud Run does.
+const port = Number(process.env.PORT ?? 3000);
+server.listen(port, () => {
+  console.log(`MyStoryJar server on http://localhost:${port}`);
 });

@@ -1,5 +1,5 @@
 import * as Navigation from "@react-navigation/native";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useIsFocused } from "@react-navigation/native";
 import {
   createNativeStackNavigator,
   type NativeStackScreenProps,
@@ -9,6 +9,7 @@ import * as AppleAuthentication from "expo-apple-authentication";
 import Constants from "expo-constants";
 import * as Crypto from "expo-crypto";
 import * as Font from "expo-font";
+import * as ImagePicker from "expo-image-picker";
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
 import {
@@ -18,6 +19,7 @@ import {
   Suspense,
   use,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import * as JSXRuntime from "react/jsx-runtime";
@@ -55,6 +57,7 @@ const modules = {
     ? require("@react-native-google-signin/google-signin")
     : {},
   "react-native-fbsdk-next": native ? require("react-native-fbsdk-next") : {},
+  "expo-image-picker": ImagePicker,
 };
 
 // The app is one stack screen, `Screen`, drawn once per server path on the
@@ -86,12 +89,27 @@ async function request(path: string): Promise<Response> {
 
 // The screen at `path` on the server: its bundle, fetched and run with the
 // app's packages.
-async function fetchScreen(path: string): Promise<ReactNode> {
+async function loadScreen(path: string): Promise<ReactNode> {
   const response = await request(path);
   if (!response.ok) {
     throw new Error(`${path} answered ${response.status}.`);
   }
   return evaluate(await response.text(), modules) as ReactNode;
+}
+
+// The same, marked as settled once it has, as React's `use` reads a
+// promise: one fetched ahead, for a preloaded screen, then draws at once.
+function fetchScreen(path: string): Promise<ReactNode> {
+  const screen = loadScreen(path) as Promise<ReactNode> & {
+    status?: "fulfilled" | "rejected";
+    value?: ReactNode;
+    reason?: unknown;
+  };
+  screen.then(
+    (value) => Object.assign(screen, { status: "fulfilled", value }),
+    (reason) => Object.assign(screen, { status: "rejected", reason }),
+  );
+  return screen;
 }
 
 const Stack = createNativeStackNavigator<Routes>();
@@ -128,10 +146,7 @@ export default function App() {
   );
 }
 
-function ServerScreen({
-  route,
-  navigation,
-}: NativeStackScreenProps<Routes, "Screen">) {
+function ServerScreen({ route }: NativeStackScreenProps<Routes, "Screen">) {
   const { path } = route.params;
   // Held here, which doesn't suspend, so the request outlives the render
   // that waits for it. Each retry is numbered, so it also clears the error
@@ -139,43 +154,45 @@ function ServerScreen({
   const [request, setRequest] = useState(() => ({
     number: 0,
     screen: fetchScreen(path),
-    fetchedAt: Date.now(),
   }));
+  const fetchedAt = useRef(Date.now());
+  // A preloaded screen is fetched at once and drawn only once shown: drawn
+  // out of sight, Android can let it show through the screen in front.
+  const focused = useIsFocused();
+  const [shown, setShown] = useState(focused);
+  if (focused && !shown) {
+    setShown(true);
+  }
   // After an error: the spinner, while it loads again.
-  const retry = () =>
+  const retry = () => {
+    fetchedAt.current = Date.now();
     setRequest(({ number }) => ({
       number: number + 1,
       screen: fetchScreen(path),
-      fetchedAt: Date.now(),
     }));
+  };
   // The screen as it is now, drawn in place of the one shown, which stays
   // until then: a transition, so nothing flashes.
-  const refresh = () =>
+  const refresh = () => {
+    fetchedAt.current = Date.now();
     startTransition(() =>
-      setRequest(({ number }) => ({
-        number,
-        screen: fetchScreen(path),
-        fetchedAt: Date.now(),
-      })),
+      setRequest(({ number }) => ({ number, screen: fetchScreen(path) })),
     );
+  };
+  // Fetched again each time it's shown, as a preloaded screen may have been
+  // fetched long before; not when it was just fetched to be shown.
   useEffect(() => {
-    // Fetched again each time it's shown, as a preloaded screen may have
-    // been fetched long before; not when it was just fetched to be shown.
-    const unsubscribe = navigation.addListener("focus", () =>
-      setRequest((current) => {
-        if (Date.now() - current.fetchedAt > 1000) refresh();
-        return current;
-      }),
-    );
-    if (!__DEV__) {
-      return unsubscribe;
+    if (focused && Date.now() - fetchedAt.current > 1000) refresh();
+  }, [focused]);
+  useEffect(() => {
+    if (__DEV__) {
+      restarted.add(refresh);
+      return () => void restarted.delete(refresh);
     }
-    restarted.add(refresh);
-    return () => {
-      unsubscribe();
-      restarted.delete(refresh);
-    };
   }, []);
+  if (!shown) {
+    return null;
+  }
   return (
     <Boundary key={request.number} retry={retry}>
       <Suspense fallback={<ActivityIndicator style={{ flex: 1 }} />}>

@@ -29,6 +29,7 @@ const packageVersions = {
     require("@react-native-google-signin/google-signin/package.json").version,
   "react-native-fbsdk-next": require("react-native-fbsdk-next/package.json")
     .version,
+  "expo-image-picker": require("expo-image-picker/package.json").version,
 };
 
 /** The navigation actions screens dispatched, in order. */
@@ -71,7 +72,12 @@ const modules = {
         "data-color": props.color,
         dangerouslySetInnerHTML: { __html: props.xml },
       }),
+    Svg: (props: { children?: React.ReactNode }) =>
+      React.createElement("svg", null, props.children),
+    Circle: (props: { stroke?: string }) =>
+      React.createElement("circle", { "data-stroke": props.stroke }),
   },
+
   "react-native-safe-area-context": {
     useSafeAreaInsets: () => ({ top: 0, right: 0, bottom: 0, left: 0 }),
   },
@@ -80,7 +86,22 @@ const modules = {
   "expo-crypto": {},
   "@react-native-google-signin/google-signin": {},
   "react-native-fbsdk-next": {},
+  // a picker that answers what a test asked it to
+  "expo-image-picker": {
+    launchImageLibraryAsync: async () => picked,
+  },
 };
+
+type Picked =
+  | { canceled: true; assets: null }
+  | { canceled: false; assets: { uri: string; mimeType?: string }[] };
+
+let picked: Picked = { canceled: true, assets: null };
+
+/** What the photo picker answers when a screen opens it, from now on. */
+export function pickPhoto(answer: Picked) {
+  picked = answer;
+}
 
 // A screen, bundled as your server bundles it and run as your app runs it,
 // for Testing Library to draw.

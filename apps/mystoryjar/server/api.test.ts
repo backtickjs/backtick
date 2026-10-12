@@ -2,15 +2,24 @@ import assert from "node:assert/strict";
 import type { IncomingMessage } from "node:http";
 import { Readable } from "node:stream";
 import { it } from "node:test";
-import { answer, api } from "./api.js";
+import { answer, type Caller } from "./api.js";
 import { readSession } from "./auth/session.js";
 import { account, asked } from "./test/fetch.js";
 
-const post = (path: string, body: object) =>
-  answer(
-    api[path]!,
+const caller: Caller = {
+  user: null,
+  timeZone: "America/New_York",
+  origin: "http://localhost:3000",
+};
+
+async function post(path: string, body: object) {
+  const answered = await answer(
+    path,
     Readable.from([JSON.stringify(body)]) as unknown as IncomingMessage,
+    caller,
   );
+  return answered!;
+}
 
 it("signs in with Firebase, and answers a session naming the user", async () => {
   const { status, body } = await post("/api/auth/signin", account);
@@ -71,6 +80,11 @@ it("refuses a provider for an email that signs in another way", async () => {
 it("refuses a provider it doesn't know", async () => {
   const { status } = await post("/api/auth/idp", { provider: "github.com" });
   assert.equal(status, 400);
+});
+
+it("writes stories only for someone signed in", async () => {
+  const { status } = await post("/api/stories", { text: "Hello" });
+  assert.equal(status, 401);
 });
 
 it("asks Firebase to email a password reset", async () => {

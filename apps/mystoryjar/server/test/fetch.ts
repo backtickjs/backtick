@@ -1,7 +1,8 @@
 import type { IncomingMessage } from "node:http";
 import { Readable } from "node:stream";
 import { afterEach, beforeEach } from "node:test";
-import { answer, api } from "../api.js";
+import { answer } from "../api.js";
+import { readSession } from "../auth/session.js";
 import { request } from "./request.js";
 
 // The network as tests see it. Firebase Auth's REST API answers for one
@@ -33,15 +34,23 @@ beforeEach(() => {
   globalThis.fetch = async (input, init) => {
     const url = String(input);
     if (url.startsWith(request.origin)) {
-      const handler = api[url.slice(request.origin.length)];
-      if (handler === undefined) {
-        return reply(404, {});
-      }
-      const { status, body } = await answer(
-        handler,
-        Readable.from([String(init?.body ?? "")]) as unknown as IncomingMessage,
+      const headers = new Headers(init?.headers);
+      const answered = await answer(
+        url.slice(request.origin.length),
+        Readable.from([
+          Buffer.from((init?.body as string | Uint8Array | undefined) ?? ""),
+        ]) as unknown as IncomingMessage,
+        {
+          user: await readSession(
+            headers.get("authorization")?.replace(/^Bearer /, "") ?? undefined,
+          ),
+          timeZone: headers.get("x-time-zone") ?? "UTC",
+          origin: request.origin,
+        },
       );
-      return reply(status, body);
+      return answered === undefined
+        ? reply(404, {})
+        : reply(answered.status, answered.body);
     }
     const method = /accounts:(\w+)/.exec(url)?.[1];
     if (!url.includes("identitytoolkit") || method === undefined) {
