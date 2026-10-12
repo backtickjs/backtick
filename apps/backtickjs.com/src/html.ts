@@ -67,7 +67,7 @@ export async function toHtml({
     <meta property="og:image" content="${ORIGIN}/og.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Backtick: a delightful programming model for React Native.">
+    <meta property="og:image:alt" content="Backtick: fully server-driven React Native.">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">

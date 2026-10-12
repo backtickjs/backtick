@@ -1,7 +1,7 @@
 <a href="https://backtickjs.com/">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.png" />
-    <img src="assets/banner.png" alt="Backtick: a delightful programming model for React Native." />
+    <img src="assets/banner.png" alt="Backtick: fully server-driven React Native." />
   </picture>
 </a>
 
@@ -13,8 +13,9 @@
 
 ## What is Backtick?
 
-A delightful programming model for React Native. Write screens on your
-server, type-checked end to end, and ship them without an app release.
+Fully server-driven React Native. Write every screen in React, on your
+server: layout, data and behaviour. Changes ship with your next deploy, not
+your next app store release.
 
 [Website](https://backtickjs.com) · [Docs](https://backtickjs.com/docs) ·
 [VS Code extension](https://marketplace.visualstudio.com/items?itemName=backtickjs.backtick-vscode) ·

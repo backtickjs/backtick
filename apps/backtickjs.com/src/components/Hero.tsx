@@ -10,8 +10,8 @@ export const Hero = cs`() => (
       {" React\u00a0Native."}
     </h1>
     <p class="mt-[26px] max-w-[720px] text-xl leading-[1.55] text-muted">
-      Write every screen on your server, with its layout, data and behaviour.
-      Every change ships with your next deploy, not your next app release.
+      Write every screen in React, on your server: layout, data and behaviour.
+      Changes ship with your next deploy, not your next app store release.
     </p>
     <div class="mt-[34px] flex flex-wrap gap-3">
       <$QuickStart />

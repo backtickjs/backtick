@@ -11,7 +11,7 @@ export const TEXT_FILES: { path: string; text: string }[] = [
     path: "/llms.txt",
     text: `# Backtick
 
-> A delightful programming model for React Native. Write screens on your server, type-checked end to end, and ship them without an app release.
+> Fully server-driven React Native. Write every screen in React, on your server: layout, data and behaviour. Changes ship with your next deploy, not your next app store release.
 
 ## Docs
 
