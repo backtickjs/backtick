@@ -34,6 +34,9 @@ allowBuilds:
   keytar: false
   # Checks the versions of its command-line tools, which nothing here runs.
   protobufjs: false
+  # A native regex engine for firebase-tools' Hosting server, which falls back
+  # to JavaScript's own without it; nothing here serves Hosting.
+  re2: false
 # `bun-types` imports `undici-types` in its declarations without depending on
 # it, so it resolved only while pnpm happened to hoist a copy. Declared here so
 # what uses Bun's types (the site, the Bun plugin) typechecks whatever else the
