@@ -1,0 +1,162 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+(createSignal)   → $createSignal
+))               →  [-semantic -navigation]
+(                → (
+0                → 0
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+<                → <
+span             → span
+>                → >
+{                → {
+"count "         → "count "
+                 →  
++                → +
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(count)          → $count
+))               →  [-semantic -navigation]
+[                → [
+0                → 0
+]                → ]
+(                → (
+)                → )
+}                → }
+<                → <
+/                → /
+span             → span
+>                → >
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+(                → (
+\n               → \n  
+<                → <
+button           → button
+                 →  
+onclick          → onclick
+=                → =
+{                → {
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(count)          → $count
+))               →  [-semantic -navigation]
+[                → [
+1                → 1
+]                → ]
+(                → (
+(cs.splice(      →  [-semantic -navigation]
+(count)          → $count
+))               →  [-semantic -navigation]
+[                → [
+0                → 0
+]                → ]
+(                → (
+)                → )
+                 →  
++                → +
+                 →  
+1                → 1
+)                → )
+}                → }
+>                → >
+bump             → bump
+<                → <
+/                → /
+button           → button
+>                → >
+\n               → \n
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+\n               → \n  
+<                → <
+div              → div
+>                → >
+\n               → \n    
+$Shown           → $Shown [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
+(Shown)          → $Shown [-highlight]
+))               →  [-semantic -navigation]
+\n               → \n    
+$Shown           → $Shown [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
+(Shown)          → $Shown [-highlight]
+))               →  [-semantic -navigation]
+\n               → \n    
+$Bump            → $Bump [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
+(Bump)           → $Bump [-highlight]
+))               →  [-semantic -navigation]
+\n               → \n  
+<                → <
+/                → /
+div              → div
+>                → >
+\n               → \n
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+(createRoot)     → $createRoot
+))               →  [-semantic -navigation]
+(                → (
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n        
+const            → const
+                 →  
+__cs_pair        → pair
+                 →  
+=                → =
+                 →  
+[                → [
+(cs.splice(      →  [-semantic -navigation]
+(count)          → $count
+))               →  [-semantic -navigation]
+,                → ,
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(count)          → $count
+))               →  [-semantic -navigation]
+]                → ]
+;                → ;
+\n               → \n        
+return           → return
+                 →  
+__cs_pair        → pair
+[                → [
+0                → 0
+]                → ]
+                 →  
+===              → ===
+                 →  
+__cs_pair        → pair
+[                → [
+1                → 1
+]                → ]
+;                → ;
+\n               → \n      
+}                → }
+)                → )
+)())             → ` [-semantic -navigation]

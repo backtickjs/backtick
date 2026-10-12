@@ -1,0 +1,97 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+{                → {
+                 →  
+n                → n
+:                → :
+                 →  
+1                → 1
+                 →  
+}                → }
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+{                → {
+                 →  
+inner            → inner
+:                → :
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(inner)          → $inner
+))               →  [-semantic -navigation]
+,                → ,
+                 →  
+same             → same
+:                → :
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(inner)          → $inner
+))               →  [-semantic -navigation]
+                 →  
+===              → ===
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(inner)          → $inner
+))               →  [-semantic -navigation]
+                 →  
+}                → }
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+{                → {
+                 →  
+outer            → outer
+:                → :
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(outer)          → $outer
+))               →  [-semantic -navigation]
+,                → ,
+                 →  
+shared           → shared
+:                → :
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(outer)          → $outer
+))               →  [-semantic -navigation]
+.                → .
+inner            → inner
+                 →  
+===              → ===
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(inner)          → $inner
+))               →  [-semantic -navigation]
+                 →  
+}                → }
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+"root"           → "root"
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+__cs_n           → n
+:                → :
+                 →  
+number           → number
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_n           → n
+                 →  
+*                → *
+                 →  
+2                → 2
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+(double)         → $double
+))               →  [-semantic -navigation]
+(                → (
+21               → 21
+)                → )
+)())             → ` [-semantic -navigation]

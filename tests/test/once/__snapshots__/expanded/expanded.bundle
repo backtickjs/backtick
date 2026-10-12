@@ -1,0 +1,45 @@
+import { createComponent as $i0 } from "solid-js";
+const $modules = {
+  "1oyzhzji19ryi:19:14": (module, exports, require) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = ($splice0, $splice1) => [$splice0(), $splice1()];
+  },
+  "1oyzhzji19ryi:18:19": (module, exports, require) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = ($splice0) => ({
+      fallback: $splice0(),
+    });
+  },
+  "1uptcsn9236u2:352:9": (module, exports, require) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
+  },
+  "1oyzhzji19ryi:15:9": (module, exports, require) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = () => "default";
+  },
+};
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = { exports: {} };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("1oyzhzji19ryi:19:14").default;
+const $cs1 = $require("1oyzhzji19ryi:18:19").default;
+const $cs2 = $require("1uptcsn9236u2:352:9").default;
+const $cs3 = $require("1oyzhzji19ryi:15:9").default;
+const $thunk0 = () => $i0;
+const $thunk1 = () => $cs3();
+const $thunk2 = () => $cs2($thunk0, $thunk1);
+const $value3 = $cs1($thunk2);
+const $thunk4 = () => $value3;
+export default $cs0($thunk4, $thunk4);

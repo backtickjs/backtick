@@ -78,7 +78,8 @@ From the top:
   that the script calls when it reads the splice: Sam's name and order are
   there, as data. `ReorderButton` is `$function5`, made once for the whole
   bundle, so React keeps its state across renders. The same code anywhere in
-  the bundle is the same constant.
+  the bundle is the same constant. A `once` script is a `$value<n>`, made
+  once the same way.
 - **The root:** the screen, as the call of its script.
 
 Nothing of `Home` is in the bundle, and `db` isn't either: the phone gets

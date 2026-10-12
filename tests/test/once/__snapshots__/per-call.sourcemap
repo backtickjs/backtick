@@ -1,0 +1,36 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+{                → {
+                 →  
+label            → label
+:                → :
+                 →  
+"box"            → "box"
+                 →  
+}                → }
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+[                → [
+(cs.splice(      →  [-semantic -navigation]
+(a)              → $a
+))               →  [-semantic -navigation]
+                 →  
+===              → ===
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(a)              → $a
+))               →  [-semantic -navigation]
+,                → ,
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(a)              → $a
+))               →  [-semantic -navigation]
+                 →  
+===              → ===
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(b)              → $b
+))               →  [-semantic -navigation]
+]                → ]
+)())             → ` [-semantic -navigation]

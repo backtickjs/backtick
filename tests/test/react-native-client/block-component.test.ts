@@ -50,3 +50,21 @@ it("a component made by a block is made again on every render", async () => {
   assert.equal(container.textContent, "parent 1;counter 0;");
   await unmount();
 });
+
+// The same block made `once`: it runs once for the bundle, so the component
+// it returns is one component, which keeps its state.
+const madeOnce = source
+  .replace("const Counter = cs`{", "const Counter = once(cs`{")
+  .replace("}`;\n\nconst Parent", "}`);\n\nconst Parent")
+  .replace("import { cs } from", "import { cs, once } from");
+
+it("a component made once by a block keeps its state", async () => {
+  const { container, press, unmount } = await drawReactNative(
+    "block-component-once",
+    madeOnce,
+  );
+  await press("counter");
+  await press("parent");
+  assert.equal(container.textContent, "parent 1;counter 1;");
+  await unmount();
+});

@@ -162,4 +162,5 @@ once and pass it down.
 | A server value on the phone                                   | A splice: `$name`, or `${expression}`                           |
 | A piece of UI with its own props and state                    | A client component: `` cs`(props) => …` ``, used as `<$Name />` |
 | A function the phone calls                                    | A client function: `` cs`(n: number) => …` ``                   |
+| A value every client component shares, like a context         | A `once` script: ``once(cs`…`)``                                |
 | A piece of UI built on your server, inside a script           | A server component, spliced: `{${<Name />}}`                    |

@@ -1,0 +1,48 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+"default"        → "default"
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+{                → {
+                 →  
+fallback         → fallback
+:                → :
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(                → (
+<                → <
+Default          → Default
+ />              →  />
+)                → )
+))               →  [-semantic -navigation]
+                 →  
+}                → }
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+[                → [
+(cs.splice(      →  [-semantic -navigation]
+(theme)          → $theme
+))               →  [-semantic -navigation]
+,                → ,
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(theme)          → $theme
+))               →  [-semantic -navigation]
+]                → ]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+(createRoot)     → $createRoot
+))               →  [-semantic -navigation]
+(                → (
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(twice)          → $twice
+))               →  [-semantic -navigation]
+)                → )
+)())             → ` [-semantic -navigation]

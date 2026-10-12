@@ -1,0 +1,9 @@
+{
+  "outer": {
+    "inner": {
+      "n": 1
+    },
+    "same": true
+  },
+  "shared": true
+}

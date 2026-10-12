@@ -1,0 +1,20 @@
+const $modules = {
+  "2xj6rjrkmpsx6:20:39": (module, exports, require) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = () => "root";
+  },
+};
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = { exports: {} };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("2xj6rjrkmpsx6:20:39").default;
+const $value0 = $cs0();
+export default $value0;

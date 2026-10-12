@@ -28,8 +28,8 @@ import type { Names } from "../print/code.js";
  */
 export interface BundleTree {
   readonly modules: readonly (readonly [string, ClientModule])[];
-  // The functions the bundle makes once, each under its label, in the order
-  // they're finished: after what they read.
+  // The functions and `once` values the bundle makes once, each under its
+  // label, in the order they're finished: after what they read.
   readonly constants: readonly (readonly [string, string])[];
   readonly root: string;
   readonly names: Names;
@@ -177,6 +177,27 @@ export async function buildBundle(
     return label;
   };
 
+  // A `once` script is one value: its code run at the top of the bundle,
+  // where nothing encloses it, and every read is that constant. One per
+  // script, which is one per call of `once`, not per code: two runs of a host
+  // function that each make a context are two contexts, as two calls of
+  // `createContext` are. Running code is observable, so unlike a function it
+  // is never shared by code.
+  const values = new Map<ClientScript, string>();
+  const valueOf = (script: ClientScript): string => {
+    let label = values.get(script);
+    if (label === undefined) {
+      const code = call(
+        labelOf(scriptFor(script)),
+        exprCallArgs(script, rootScope()),
+      );
+      label = `$value${constants.length}`;
+      values.set(script, label);
+      constants.push([label, code]);
+    }
+    return label;
+  };
+
   // Writes a value as the code it becomes: composition as data, which is what
   // a bundle is. A script reference is a call naming which script and
   // what to hand it; everything else is its literal form. Rendered in order,
@@ -184,6 +205,9 @@ export async function buildBundle(
   // reached each script. Expansion has refused cycles, so it ends.
   const render = (value: unknown, scope: Scope = rootScope()): string => {
     if (isClientScript(value)) {
+      if (value.once) {
+        return valueOf(value);
+      }
       const target = scriptFor(value);
       if (target.module.kind !== "function") {
         return call(labelOf(target), exprCallArgs(value, scope));
@@ -276,7 +300,9 @@ export async function buildBundle(
         sourceName(key) +
         "` shadows it: the binding is still there, but no longer reachable by " +
         "name, and naming it anyway would mean emitting what the source " +
-        "couldn't say.",
+        "couldn't say. A `once` script is made at the top of the bundle, " +
+        "outside every script, so a fragment spliced into one can't reach " +
+        "its binding either.",
     );
   };
 

@@ -76,7 +76,15 @@ one: `` cs`<$View>…</$View>` ``.
 
 ## From the bundler
 
-Thrown by `bundler.build`, for the screen it was building.
+Thrown by `bundler.build`, for the screen it was building, and by `once`,
+where it's called.
+
+### Can't make this script `once`: it reads `…` from the script around it
+
+A `once` script was written inside another script, reading one of its
+variables. A `once` value is made at the top of the bundle, outside every
+script, so it can't. Make it outside the script, and splice it in. See
+[reading a script](/docs/scripts-in-depth#reading-a-script).
 
 ### Can't import `…` from "…": the client provides …
 

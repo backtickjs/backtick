@@ -25,13 +25,16 @@ from a server component. Annotate a function that builds scripts with
 
 ## Reading a script
 
-How a splice of a script behaves follows from its shape, as the same code
-written by hand in TypeScript would:
+How a splice of a script behaves follows from how it's written, as the same
+code written by hand in TypeScript would:
 
 - **A function is one function.** `$logTap` is the same function at every
   read, and its body runs each time it's called.
 - **An expression or a block is code, run each time it's read.** Reading
   `$logVisit` twice runs it twice.
+- **A `once` script is one value.** `once(cs`…`)` runs its code once, at the
+  top of the bundle, and every read is that value, as a module-level `const`
+  is.
 
 ```tsx file=scripts-in-depth/server/Log.tsx
 
@@ -49,6 +52,21 @@ make it, in `useMemo`:
 ```tsx file=scripts-in-depth/server/Rows.tsx
 
 ```
+
+What every component shares, a context or a store, is made with `once`.
+`ThemeContext` is one context for the bundle, as `createContext` at module
+level is one, so the provider and the consumer find each other. Written as an
+expression, the script would make a context at the provider's read and
+another at the consumer's, and the consumer would get the default.
+
+```tsx file=scripts-in-depth/server/Theme.tsx
+
+```
+
+Each call of `once` is one value: a server component calling it makes one per
+request. A `once` script can't read a variable of the script around it, since
+nothing encloses the top of the bundle; your server refuses it where it's
+made.
 
 ## No template literals inside a script
 

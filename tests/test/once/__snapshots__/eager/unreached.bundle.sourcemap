@@ -1,0 +1,30 @@
+// (carries sourcesContent)
+$splice0    → once/eager.test.tsx 17:22 <p>{false…
+ =>         → once/eager.test.tsx 17:22 <p>{false…
+_tmpl$      → once/eager.test.tsx 17:22 <p>{false…
+()          → once/eager.test.tsx 17:22 <p>{false…
+;           → once/eager.test.tsx 17:54 `;…
+() => {     → once/eager.test.tsx 11:25 {…
+const       → once/eager.test.tsx 12:3 const 
+counter     → once/eager.test.tsx 12:9 counter
+ =          → once/eager.test.tsx 12:16  = 
+globalThis  → once/eager.test.tsx 12:19 globalThis
+;           → once/eager.test.tsx 12:65 ;
+counter     → once/eager.test.tsx 13:3 counter
+.           → once/eager.test.tsx 13:10 .
+onceRuns    → once/eager.test.tsx 13:11 onceRuns
+ =          → once/eager.test.tsx 13:19  = 
+(           → once/eager.test.tsx 13:22 (
+counter     → once/eager.test.tsx 13:23 counter
+.           → once/eager.test.tsx 13:30 .
+onceRuns    → once/eager.test.tsx 13:31 onceRuns
+ ??         → once/eager.test.tsx 13:39  ?? 
+0           → once/eager.test.tsx 13:43 0
+) +         → once/eager.test.tsx 13:44 ) + 
+1           → once/eager.test.tsx 13:48 1
+;           → once/eager.test.tsx 13:49 ;
+return      → once/eager.test.tsx 14:3 return 
+"counted"   → once/eager.test.tsx 14:10 "counted"
+;           → once/eager.test.tsx 14:19 ;
+}           → once/eager.test.tsx 15:1 }
+;           → once/eager.test.tsx 15:2 `);…

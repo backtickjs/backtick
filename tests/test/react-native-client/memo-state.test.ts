@@ -92,3 +92,45 @@ it("a memo component made once per parent keeps its state", async () => {
   assert.equal(container.textContent, "parent 1row 1");
   await unmount();
 });
+
+// The same row made `once`: `memo(…)` runs once for the bundle, as at module
+// level, so it is one component and keeps its state.
+const madeOnce = `
+import { cs, once } from "@backtickjs/core";
+import { memo, useState } from "@backtickjs/react";
+import { Pressable, Text, View } from "@backtickjs/react-native";
+
+const Row = once(cs\`$memo(() => {
+  const [count, setCount] = $useState(0);
+  return (
+    <$Pressable testID="row" onPress={() => setCount(count + 1)}>
+      <$Text>row {count}</$Text>
+    </$Pressable>
+  );
+})\`);
+
+const Parent = cs\`() => {
+  const [count, setCount] = $useState(0);
+  return (
+    <$View>
+      <$Pressable testID="parent" onPress={() => setCount(count + 1)}>
+        <$Text>parent {count}</$Text>
+      </$Pressable>
+      <$Row />
+    </$View>
+  );
+}\`;
+
+export const screen = cs\`<$Parent />\`;
+`;
+
+it("a memo component made once keeps its state", async () => {
+  const { container, press, unmount } = await drawReactNative(
+    "memo-state-once",
+    madeOnce,
+  );
+  await press("row");
+  await press("parent");
+  assert.equal(container.textContent, "parent 1row 1");
+  await unmount();
+});

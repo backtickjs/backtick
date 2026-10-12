@@ -1,0 +1,78 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n  
+const            → const
+                 →  
+__cs_counter     → counter
+                 →  
+=                → =
+                 →  
+globalThis       → globalThis
+                 →  
+as               → as
+                 →  
+unknown          → unknown
+                 →  
+as               → as
+                 →  
+{                → {
+                 →  
+onceRuns         → onceRuns
+?                → ?
+:                → :
+                 →  
+number           → number
+                 →  
+}                → }
+;                → ;
+\n               → \n  
+__cs_counter     → counter
+.                → .
+onceRuns         → onceRuns
+                 →  
+=                → =
+                 →  
+(                → (
+__cs_counter     → counter
+.                → .
+onceRuns         → onceRuns
+                 →  
+??               → ??
+                 →  
+0                → 0
+)                → )
+                 →  
++                → +
+                 →  
+1                → 1
+;                → ;
+\n               → \n  
+return           → return
+                 →  
+"counted"        → "counted"
+;                → ;
+\n               → \n
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+<                → <
+p                → p
+>                → >
+{                → {
+false            → false
+                 →  
+?                → ?
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(counted)        → $counted
+))               →  [-semantic -navigation]
+                 →  
+:                → :
+                 →  
+"ok"             → "ok"
+}                → }
+<                → <
+/                → /
+p                → p
+>                → >
+)())             → ` [-semantic -navigation]

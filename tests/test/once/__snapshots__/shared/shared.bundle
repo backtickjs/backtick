@@ -1,0 +1,90 @@
+import { createSignal as $i0 } from "solid-js";
+import * as $module0 from "solid-js/web";
+const $modules = {
+  "2w4of91pb1pz1:20:15": (module, exports, require) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    const web_3 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);
+    exports.default = ($splice0, $splice1, $splice2) =>
+      (() => {
+        var _el$ = _tmpl$();
+        (0, web_3.insert)(
+          _el$,
+          () =>
+            (($Shown) => (0, web_2.createComponent)($Shown, {}))($splice0()),
+          null,
+        );
+        (0, web_3.insert)(
+          _el$,
+          () =>
+            (($Shown) => (0, web_2.createComponent)($Shown, {}))($splice1()),
+          null,
+        );
+        (0, web_3.insert)(
+          _el$,
+          () => (($Bump) => (0, web_2.createComponent)($Bump, {}))($splice2()),
+          null,
+        );
+        return _el$;
+      })();
+  },
+  "2w4of91pb1pz1:15:14": (module, exports, require) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>`);
+    exports.default = ($splice0) => () =>
+      (() => {
+        var _el$ = _tmpl$();
+        (0, web_2.insert)(_el$, () => "count " + $splice0()[0]());
+        return _el$;
+      })();
+  },
+  "2w4of91pb1pz1:13:19": (module, exports, require) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = ($splice0) => $splice0()(0);
+  },
+  "2w4of91pb1pz1:16:13": (module, exports, require) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<button>bump`);
+    exports.default = ($splice0, $splice1) => () =>
+      (() => {
+        var _el$ = _tmpl$();
+        _el$.$$click = () => $splice0()[1]($splice1()[0]() + 1);
+        return _el$;
+      })();
+    (0, web_2.delegateEvents)(["click"]);
+  },
+};
+const $exports = {
+  "solid-js/web": $module0,
+};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = { exports: {} };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("2w4of91pb1pz1:20:15").default;
+const $cs1 = $require("2w4of91pb1pz1:15:14").default;
+const $cs2 = $require("2w4of91pb1pz1:13:19").default;
+const $cs3 = $require("2w4of91pb1pz1:16:13").default;
+const $thunk0 = () => $i0;
+const $value1 = $cs2($thunk0);
+const $thunk2 = () => $value1;
+const $function3 = $cs1($thunk2);
+const $thunk4 = () => $function3;
+const $function5 = $cs3($thunk2, $thunk2);
+const $thunk6 = () => $function5;
+export default $cs0($thunk4, $thunk4, $thunk6);

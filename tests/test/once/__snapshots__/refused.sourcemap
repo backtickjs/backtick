@@ -1,0 +1,89 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n        
+const            → const
+                 →  
+__cs_x           → x
+                 →  
+=                → =
+                 →  
+1                → 1
+;                → ;
+\n               → \n        
+return           → return
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+once             → once
+(                → (
+cs.lift((() =>   → cs` [-semantic -navigation]
+__cs_x           → x
+                 →  
++                → +
+                 →  
+1                → 1
+)())             → ` [-semantic -navigation]
+)                → )
+))               →  [-semantic -navigation]
+;                → ;
+\n               → \n      
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+{                → {
+                 →  
+label            → label
+:                → :
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(label)          → $label
+))               →  [-semantic -navigation]
+                 →  
+}                → }
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+(box)            → $box
+))               →  [-semantic -navigation]
+.                → .
+label            → label
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_name        → name
+                 →  
+=                → =
+                 →  
+"n"              → "n"
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(                → (
+<                → <
+Boxed            → Boxed
+                 →  
+label            → label
+=                → =
+{                → {
+cs.lift((() =>   → cs` [-semantic -navigation]
+__cs_name        → name
+)())             → ` [-semantic -navigation]
+}                → }
+ />              →  />
+)                → )
+))               →  [-semantic -navigation]
+;                → ;
+\n               → \n    
+}                → }
+)())             → ` [-semantic -navigation]

@@ -1,0 +1,51 @@
+import assert from "node:assert/strict";
+import { describe, it } from "node:test";
+import { cs, once } from "@backtickjs/core";
+import { createRoot, createSignal } from "@backtickjs/solid-js";
+import { render, screen } from "@solidjs/testing-library";
+import { userEvent } from "@testing-library/user-event";
+import { evaluate } from "../evaluate.ts";
+import { snapshotCase } from "../snapshotCase.ts";
+
+// A `once` script is one value for the bundle, made at its top: every read is
+// that value, as a module-level `const` is in plain TypeScript. A signal made
+// once is one signal, which every component reading it shares.
+const count = once(cs`$createSignal(0)`);
+
+const Shown = cs`() => <span>{"count " + $count[0]()}</span>`;
+const Bump = cs`() => (
+  <button onclick={() => $count[1]($count[0]() + 1)}>bump</button>
+)`;
+
+const shared = cs`(
+  <div>
+    <$Shown />
+    <$Shown />
+    <$Bump />
+  </div>
+)`;
+
+describe("a once script", () => {
+  it("is one value at every read", async () => {
+    assert.equal(
+      await evaluate(cs`$createRoot(() => {
+        const pair = [$count, $count];
+        return pair[0] === pair[1];
+      })`),
+      true,
+    );
+  });
+
+  it("is shared by every component that reads it", async () => {
+    render(await evaluate(() => shared));
+    await userEvent.click(screen.getByRole("button"));
+    assert.deepEqual(
+      screen.getAllByText(/count/).map((node) => node.textContent),
+      ["count 1", "count 1"],
+    );
+  });
+});
+
+it("shared", async (t) => {
+  await snapshotCase(t, "shared", shared);
+});

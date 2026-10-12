@@ -28,12 +28,18 @@ export interface ClientModule {
   readonly kind: "function" | "expression" | "block";
 }
 
-// One run of a `cs`: its module, and the values that run passes it.
+// One run of a `cs`: its module, and the values that run passes it. The rest
+// are flags, how the bundle treats the script: each optional, absent meaning
+// the plain script, so code that makes or spreads a script without knowing a
+// flag reads the same.
 export interface ClientScript {
   readonly "@backtickjs": "ClientScript";
   readonly module: ClientModule;
   // one per splice, in parameter order
   readonly args: readonly Spliceable[];
+  // one value for the bundle, made at its top, rather than code run at each
+  // read: see `once`
+  readonly once?: true;
 }
 
 export function isClientScript(value: unknown): value is ClientScript {

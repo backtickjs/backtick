@@ -10,6 +10,7 @@ import { Home as LogHome } from "../scripts-in-depth/server/Log.js";
 import { type MenuOnPhone, names } from "../scripts-in-depth/server/menu.js";
 import { Home as RowsHome } from "../scripts-in-depth/server/Rows.js";
 import { double, greeting, meal } from "../scripts-in-depth/server/shapes.js";
+import { Home as ThemeHome } from "../scripts-in-depth/server/Theme.js";
 import { bundleScreen, drawScreen } from "./drawScreen.js";
 
 it("three shapes: each is what it computes", async () => {
@@ -46,6 +47,11 @@ it("reading a script: a memo component made once keeps its state", async () => {
   await userEvent.click(screen.getByText("list 0"));
   assert.ok(screen.getByText("list 1"));
   assert.ok(screen.getByText("row 1"));
+});
+
+it("reading a script: a once script is one value, which its consumers find", async () => {
+  render(await drawScreen(<ThemeHome dark />));
+  assert.ok(screen.getByText("dark"));
 });
 
 it("a script in data arrives as what it computes", async () => {
