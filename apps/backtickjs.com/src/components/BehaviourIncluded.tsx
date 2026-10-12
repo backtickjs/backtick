@@ -50,7 +50,7 @@ const APPROACHES: Approach[] = [
   },
 ];
 
-export const LayersVisual = cs`() => (
+export const BehaviourIncludedVisual = cs`() => (
   <div class="grid gap-5">
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {$APPROACHES.map((approach, index) => {

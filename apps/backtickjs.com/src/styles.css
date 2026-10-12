@@ -31,7 +31,7 @@
   --animate-enter: enter 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
   --animate-toast: toast 2.4s ease both;
   --animate-flash: flash 1.2s ease both;
-  /* As long as `DWELL_MS` in DeployDemo.tsx. */
+  /* As long as `DWELL_MS` in LiveDemo.tsx. */
   --animate-progress: progress 4.5s linear both;
   --animate-live: live 2s ease-out infinite;
 

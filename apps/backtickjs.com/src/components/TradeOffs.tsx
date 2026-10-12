@@ -17,7 +17,7 @@ const LIMITS = [
   },
 ];
 
-export const LimitsVisual = cs`() => (
+export const TradeOffsVisual = cs`() => (
   <div class="grid gap-4 md:grid-cols-3">
     {$LIMITS.map((limit) => (
       <div class="rounded-[20px] border border-line bg-wash p-5">

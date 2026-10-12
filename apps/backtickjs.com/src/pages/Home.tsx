@@ -1,58 +1,58 @@
 import { cs } from "@backtickjs/core";
 import { AppSizeVisual } from "../components/AppSize.js";
+import { BehaviourIncludedVisual } from "../components/BehaviourIncluded.js";
 import { Button } from "../components/Button.js";
-import { DataVisual } from "../components/Data.js";
-import { DeployDemo } from "../components/DeployDemo.js";
+import { DeveloperExperienceVisual } from "../components/DeveloperExperience.js";
 import { Hero } from "../components/Hero.js";
-import { LayersVisual } from "../components/Layers.js";
 import { Layout } from "../components/Layout.js";
-import { LimitsVisual } from "../components/Limits.js";
-import { OneDeployVisual } from "../components/OneDeploy.js";
-import { PerUserVisual } from "../components/PerUser.js";
+import { LiveDemo } from "../components/LiveDemo.js";
+import { OldAppVersionsVisual } from "../components/OldAppVersions.js";
+import { PersonalizedVisual } from "../components/Personalized.js";
 import { QuickStart } from "../components/QuickStart.js";
 import { Section } from "../components/Section.js";
+import { TradeOffsVisual } from "../components/TradeOffs.js";
 
 export const Home = cs`() => (
   <$Layout>
     <$Hero />
 
     <$Section
-      eyebrow="See it in action"
+      eyebrow="Live demo"
       title="One app build. Every change from your server."
     >
-      <$DeployDemo />
+      <$LiveDemo />
     </$Section>
 
     <$Section
-      eyebrow="Server-driven"
+      eyebrow="Behaviour included"
       title="Most apps download data. Yours downloads whole screens."
       lede="Buttons, state and what happens on a tap come from your server too, as React Native components. A new interaction reaches your users the next time they open the screen."
     >
-      <$LayersVisual />
+      <$BehaviourIncludedVisual />
     </$Section>
 
     <$Section
-      eyebrow="Per user"
+      eyebrow="Personalized"
       title="Every user gets a screen made for them."
       lede="Your server decides what each person sees on each request, and sends only that. Code for other roles, plans and markets never reaches their phone."
     >
-      <$PerUserVisual />
+      <$PersonalizedVisual />
     </$Section>
 
     <$Section
-      eyebrow="Data"
-      title="Your server fetches the data, directly and securely."
-      lede="The component queries your database, calls APIs and reads environment variables, on your server. No API routes, no client state for server data, no network waterfalls."
+      eyebrow="Developer experience"
+      title="Less code to write, and fewer bugs to ship."
+      lede="A screen is one file: the data it reads, the client code it sends and the types between them, written like the React Native you already know. Writes are still a fetch to your own routes."
     >
-      <$DataVisual />
+      <$DeveloperExperienceVisual />
     </$Section>
 
     <$Section
-      eyebrow="Updates"
+      eyebrow="Old app versions"
       title="Your users always see your latest changes."
-      lede="Each change is one server deploy, with no API or app release to coordinate."
+      lede="Each change is one server deploy, with no app release or read API to coordinate."
     >
-      <$OneDeployVisual />
+      <$OldAppVersionsVisual />
     </$Section>
 
     <$Section
@@ -64,11 +64,11 @@ export const Home = cs`() => (
     </$Section>
 
     <$Section
-      eyebrow="What stays in the app"
+      eyebrow="Trade-offs"
       title="Your app is the shell. Your server is everything else."
       lede="The app ships React Native, your native modules and the Backtick client. A few things still belong there."
     >
-      <$LimitsVisual />
+      <$TradeOffsVisual />
     </$Section>
 
     <$Section

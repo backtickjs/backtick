@@ -31,7 +31,7 @@ const RECEIVED: Received[] = [
   },
 ];
 
-export const PerUserVisual = cs`() => (
+export const PersonalizedVisual = cs`() => (
   <div class="grid items-start gap-4 md:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
     <$CodePanel file="server/Home.tsx" lines={$SERVER} />
     <div class="grid gap-4">

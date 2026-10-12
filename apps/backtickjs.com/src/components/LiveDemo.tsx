@@ -55,7 +55,7 @@ const height = "calc(21lh + 2rem)";
 
 // Three deploys to one server, and the phone that draws each. The app on it
 // is the same build throughout, which is the point.
-export const DeployDemo = cs`() => {
+export const LiveDemo = cs`() => {
   const [step, setStep] = $createSignal(0);
   // How many deploys have landed. Each one remounts the toast and the
   // progress bar, which restarts their animations.

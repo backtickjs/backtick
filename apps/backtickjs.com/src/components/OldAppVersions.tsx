@@ -49,7 +49,7 @@ const Fade = cs`(props: { to: number; color: string }) => (
   </div>
 )`;
 
-export const OneDeployVisual = cs`() => (
+export const OldAppVersionsVisual = cs`() => (
   <$Pair
     without={
       <div class="mb-3 grid gap-3">
@@ -88,7 +88,7 @@ export const OneDeployVisual = cs`() => (
         <$Caption />
         <$Lane name="API">
           <span class="flex h-full items-center font-mono text-xs text-muted">
-            no API layer
+            no read endpoints
           </span>
         </$Lane>
         <$Lane name="phones">
@@ -96,6 +96,6 @@ export const OneDeployVisual = cs`() => (
         </$Lane>
       </div>
     }
-    backtickCaption="Screens are built on your server, where they read your database directly, and sent to the phone when opened. With no API in between, there's no v1 to keep running."
+    backtickCaption="Screens are built on your server, where they read your database directly, and sent to the phone when opened. With no read API in between, there's no v1 to keep running."
   />
 )`;
