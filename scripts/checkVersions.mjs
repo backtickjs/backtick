@@ -6,8 +6,8 @@
 // with the core they were built against, so a version that drifts is a bug
 // users hit at runtime, not a cosmetic inconsistency.
 //
-// Adapters are the exception: an adapter's version is its framework's, which
-// it pins exactly.
+// Adapters, under `adapters/`, are the exception: an adapter's version is its
+// framework's, which it pins exactly.
 import { readdirSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 
@@ -23,18 +23,12 @@ function manifests(dir) {
     .map((file) => ({ file, json: JSON.parse(readFileSync(file, "utf8")) }));
 }
 
-// Each adapter, and the framework whose version it takes.
-const ADAPTERS = {
-  "@backtickjs/solid-js": "solid-js",
-  "@backtickjs/react": "react",
-  "@backtickjs/react-native": "react-native",
-  "@backtickjs/three": "three",
-  "@backtickjs/react-three-fiber": "@react-three/fiber",
-};
-
-const packages = manifests("packages");
-const released = packages.filter(({ json }) => !(json.name in ADAPTERS));
-const adapters = packages.filter(({ json }) => json.name in ADAPTERS);
+// What's an adapter is where it lives, so a new one is checked without being
+// listed here.
+const released = manifests("packages");
+const adapters = manifests("adapters");
+const packages = [...released, ...adapters];
+const isAdapter = (name) => adapters.some(({ json }) => json.name === name);
 // examples and benchmarks model a real consumer install, so their ranges are
 // checked but their own versions are not part of the release set.
 //
@@ -84,20 +78,22 @@ if (versions.size > 1) {
 
 const [expected] = versions.keys();
 
+// The framework is whichever dependency an adapter pins at its own version:
+// `react` for `@backtickjs/react` 19.2.3, which also pins `react-dom` there.
 for (const { file, json } of adapters) {
-  const framework = ADAPTERS[json.name];
-  const pinned = json.dependencies?.[framework];
-  if (pinned !== json.version) {
+  const pinned = Object.values(json.dependencies ?? {});
+  if (!pinned.includes(json.version)) {
     errors.push(
       `${file.slice(root.length)}: version is "${json.version}", expected ` +
-        `its pinned ${framework} dependency ("${pinned}")`,
+        `the version of the framework it pins, but no dependency is pinned ` +
+        `at it`,
     );
   }
 }
 
 // What a range pointing at each package must pin.
 const expectedOf = (name) =>
-  name in ADAPTERS
+  isAdapter(name)
     ? adapters.find(({ json }) => json.name === name)?.json.version
     : expected;
 

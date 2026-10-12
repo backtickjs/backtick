@@ -68,7 +68,7 @@ The client must provide that package, and the server must list it in the bundler
 ## Related
 
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): runs server components and writes the bundle
-- [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/packages/react), [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/packages/react-native), [`@backtickjs/solid-js`](https://github.com/backtickjs/backtick/tree/main/packages/solid-js): framework adapters
+- [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react), [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/adapters/react-native), [`@backtickjs/solid-js`](https://github.com/backtickjs/backtick/tree/main/adapters/solid-js): framework adapters
 - [`@backtickjs/node-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/node-plugin), [`@backtickjs/bun-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/bun-plugin): compile scripts as your server loads them
 - [`@backtickjs/tsc`](https://github.com/backtickjs/backtick/tree/main/packages/tsc): type-checks scripts and their splices
 - [Thinking in Backtick](https://backtickjs.com/docs/thinking-in-backtick), [Scripts in depth](https://backtickjs.com/docs/scripts-in-depth)

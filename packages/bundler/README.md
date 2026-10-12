@@ -68,7 +68,7 @@ Spliced values are written into the bundle as data, never as code. What can't cr
 
 - [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): the `cs` tag
 - [`@backtickjs/react-native-client`](https://github.com/backtickjs/backtick/tree/main/packages/react-native-client): runs a `cjs` bundle in a React Native app
-- [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/packages/react), [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/packages/react-native), [`@backtickjs/solid-js`](https://github.com/backtickjs/backtick/tree/main/packages/solid-js): framework adapters
+- [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react), [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/adapters/react-native), [`@backtickjs/solid-js`](https://github.com/backtickjs/backtick/tree/main/adapters/solid-js): framework adapters
 - [How it works](https://backtickjs.com/docs/how-it-works)
 - [Errors](https://backtickjs.com/docs/errors)
 

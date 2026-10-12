@@ -2,7 +2,7 @@
 
 The three.js adapter for [Backtick](https://backtickjs.com): three's API as client values your scripts splice (`new $Vector3(…)`, `$MathUtils`), each typed with three's own declarations, and each class's instance type under its name (`Mesh`, `Group`), so a server never imports from `three`. Its version tracks the three it supports: `0.182.0` works with three `^0.182.0`.
 
-To draw with three in React or React Native, pair it with [`@backtickjs/react-three-fiber`](https://github.com/backtickjs/backtick/tree/main/packages/react-three-fiber).
+To draw with three in React or React Native, pair it with [`@backtickjs/react-three-fiber`](https://github.com/backtickjs/backtick/tree/main/adapters/react-three-fiber).
 
 ## Install
 
@@ -50,7 +50,7 @@ const bundle = await bundler.build({
 ## Related
 
 - [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): the `cs` tag
-- [`@backtickjs/react-three-fiber`](https://github.com/backtickjs/backtick/tree/main/packages/react-three-fiber): React Three Fiber's components and hooks
+- [`@backtickjs/react-three-fiber`](https://github.com/backtickjs/backtick/tree/main/adapters/react-three-fiber): React Three Fiber's components and hooks
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): builds bundles
 
 ## License

@@ -42,7 +42,7 @@ tsc --noEmit && backtick-tsc -p server --noEmit
 arguments, and reports errors inside scripts at the line and column you wrote.
 Run it in CI as you would `tsc`. The server's `tsconfig.json` needs two
 settings, which the template sets and the
-[react-native adapter's README](https://github.com/backtickjs/backtick/tree/main/packages/react-native#setup)
+[react-native adapter's README](https://github.com/backtickjs/backtick/tree/main/adapters/react-native#setup)
 explains.
 
 [Backtick for VS Code](https://marketplace.visualstudio.com/items?itemName=backtickjs.backtick-vscode)
@@ -123,8 +123,8 @@ What a React Native project uses, each linked to its README:
 | Package                                                                                                            | What it is                                      |
 | ------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------- |
 | [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core)                               | The `cs` tag, and the types for what crosses    |
-| [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/packages/react-native)               | React Native's components and APIs, for scripts |
-| [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/packages/react)                             | React's hooks and APIs, for scripts             |
+| [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/adapters/react-native)               | React Native's components and APIs, for scripts |
+| [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react)                             | React's hooks and APIs, for scripts             |
 | [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler)                         | Runs server components and bundles a screen     |
 | [`@backtickjs/react-native-client`](https://github.com/backtickjs/backtick/tree/main/packages/react-native-client) | `evaluate`: runs a bundle in your app           |
 | [`@backtickjs/node-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/node-plugin)                 | Compiles scripts as your Node server loads them |

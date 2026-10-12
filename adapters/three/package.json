@@ -1,13 +1,12 @@
 {
-  "name": "@backtickjs/react-three-fiber",
-  "version": "9.8.1",
-  "description": "The React Three Fiber adapter for Backtick: R3F's API as client values your scripts splice, for React and React Native",
+  "name": "@backtickjs/three",
+  "version": "0.182.0",
+  "description": "The three.js adapter for Backtick: three's API as client values your scripts splice, and its classes' types",
   "keywords": [
     "backtick",
-    "react-three-fiber",
     "three",
+    "threejs",
     "3d",
-    "react-native",
     "server-driven-ui",
     "adapter"
   ],
@@ -18,7 +17,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/backtickjs/backtick.git",
-    "directory": "packages/react-three-fiber"
+    "directory": "adapters/three"
   },
   "license": "MIT",
   "author": "Jean-François Bisson <jf@backtickjs.com>",
@@ -27,10 +26,6 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    },
-    "./native": {
-      "types": "./dist/native.d.ts",
-      "default": "./dist/native.js"
     }
   },
   "files": [
@@ -53,16 +48,14 @@
   },
   "dependencies": {
     "@backtickjs/core": "workspace:^0.1.0",
-    "@backtickjs/react": "workspace:^19.2.3",
-    "@backtickjs/three": "workspace:^0.182.0",
-    "@react-three/fiber": "9.8.1"
+    "@types/three": "0.182.0",
+    "three": "0.182.0"
   },
   "devDependencies": {
     "@backtickjs/compiler": "workspace:^0.1.0",
     "@backtickjs/prettier-plugin": "workspace:*",
     "@backtickjs/tsc": "workspace:^0.1.0",
     "@backtickjs/tspatch-plugin": "workspace:^0.1.0",
-    "@types/react": "19.2.18",
     "prettier": "^3.6.2",
     "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"

@@ -1,6 +1,6 @@
 # @backtickjs/react-native
 
-The React Native adapter for [Backtick](https://backtickjs.com): React Native's API as client values your scripts splice (`<$View>`, `$StyleSheet`, `$Animated`), each typed with React Native's own declarations. Its version tracks the React Native it supports: `0.86.3` works with React Native `^0.86.3`, as in Expo SDK 57. It pairs with [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/packages/react), which provides React's hooks, the JSX runtime and the compile plugin.
+The React Native adapter for [Backtick](https://backtickjs.com): React Native's API as client values your scripts splice (`<$View>`, `$StyleSheet`, `$Animated`), each typed with React Native's own declarations. Its version tracks the React Native it supports: `0.86.3` works with React Native `^0.86.3`, as in Expo SDK 57. It pairs with [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react), which provides React's hooks, the JSX runtime and the compile plugin.
 
 ## Install
 
@@ -92,9 +92,9 @@ React's own names (`useState`, `Suspense`, …), the JSX runtime and the compile
 
 - [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): the `cs` tag
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): builds bundles
-- [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/packages/react): the React adapter
+- [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react): the React adapter
 - [`@backtickjs/react-native-client`](https://github.com/backtickjs/backtick/tree/main/packages/react-native-client): runs bundles in the app
-- [`@backtickjs/solid-js`](https://github.com/backtickjs/backtick/tree/main/packages/solid-js): the Solid adapter
+- [`@backtickjs/solid-js`](https://github.com/backtickjs/backtick/tree/main/adapters/solid-js): the Solid adapter
 - [React Native and packages](https://backtickjs.com/docs/react-native-and-packages)
 - [How it works](https://backtickjs.com/docs/how-it-works)
 

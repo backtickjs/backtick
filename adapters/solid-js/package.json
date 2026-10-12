@@ -1,14 +1,16 @@
 {
-  "name": "@backtickjs/three",
-  "version": "0.182.0",
-  "description": "The three.js adapter for Backtick: three's API as client values your scripts splice, and its classes' types",
+  "name": "@backtickjs/solid-js",
+  "version": "1.9.14",
+  "description": "The Solid adapter for Backtick: Solid's API as client values your scripts splice, and a JSX runtime for server components",
   "keywords": [
     "backtick",
-    "three",
-    "threejs",
-    "3d",
+    "react-native",
     "server-driven-ui",
-    "adapter"
+    "server-components",
+    "solid",
+    "solid-js",
+    "adapter",
+    "jsx-runtime"
   ],
   "homepage": "https://backtickjs.com",
   "bugs": {
@@ -17,7 +19,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/backtickjs/backtick.git",
-    "directory": "packages/three"
+    "directory": "adapters/solid-js"
   },
   "license": "MIT",
   "author": "Jean-François Bisson <jf@backtickjs.com>",
@@ -26,6 +28,26 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./store": {
+      "types": "./dist/store.d.ts",
+      "default": "./dist/store.js"
+    },
+    "./web": {
+      "types": "./dist/web.d.ts",
+      "default": "./dist/web.js"
+    },
+    "./jsx-runtime": {
+      "types": "./dist/jsx-runtime.d.ts",
+      "default": "./dist/jsx-runtime.js"
+    },
+    "./jsx-dev-runtime": {
+      "types": "./dist/jsx-runtime.d.ts",
+      "default": "./dist/jsx-runtime.js"
+    },
+    "./plugin": {
+      "types": "./dist/plugin.d.ts",
+      "default": "./dist/plugin.js"
     }
   },
   "files": [
@@ -40,26 +62,29 @@
     "typecheck": "backtick-tsc -p tsconfig.build.json --noEmit",
     "build": "tspc -b --noCheck --force",
     "dev": "tspc -b --noCheck --watch",
-    "test": "node --test \"test/**/*.test.ts\"",
+    "test": "node --conditions=browser --test \"test/**/*.test.ts\"",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "clean": "rm -rf node_modules dist .turbo",
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
+    "@babel/core": "^7.29.7",
     "@backtickjs/core": "workspace:^0.1.0",
-    "@types/three": "0.182.0",
-    "three": "0.182.0"
+    "babel-preset-solid": "1.9.12",
+    "solid-js": "1.9.14"
   },
   "devDependencies": {
-    "@backtickjs/compiler": "workspace:^0.1.0",
     "@backtickjs/prettier-plugin": "workspace:*",
     "@backtickjs/tsc": "workspace:^0.1.0",
     "@backtickjs/tspatch-plugin": "workspace:^0.1.0",
+    "@types/babel__core": "^7.20.5",
     "prettier": "^3.6.2",
     "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"
   },
+  "peerDependencies": {},
+  "peerDependenciesMeta": {},
   "prettier": {
     "plugins": [
       "@backtickjs/prettier-plugin"

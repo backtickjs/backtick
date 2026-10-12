@@ -1,6 +1,6 @@
 # @backtickjs/react-three-fiber
 
-The React Three Fiber adapter for [Backtick](https://backtickjs.com): R3F's API as client values your scripts splice (`<$Canvas>`, `$useFrame`, `$useThree`), each typed with R3F's own declarations, for React and React Native. Importing it also gives JSX three's elements, so `<mesh>` and `<boxGeometry>` are type-checked in a script. Its version tracks the R3F it supports: `9.8.1` works with `@react-three/fiber` `^9.8.1`. It pairs with [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/packages/react) for React's hooks, the JSX runtime and the compile plugin, and with [`@backtickjs/three`](https://github.com/backtickjs/backtick/tree/main/packages/three) for three's classes and types.
+The React Three Fiber adapter for [Backtick](https://backtickjs.com): R3F's API as client values your scripts splice (`<$Canvas>`, `$useFrame`, `$useThree`), each typed with R3F's own declarations, for React and React Native. Importing it also gives JSX three's elements, so `<mesh>` and `<boxGeometry>` are type-checked in a script. Its version tracks the R3F it supports: `9.8.1` works with `@react-three/fiber` `^9.8.1`. It pairs with [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react) for React's hooks, the JSX runtime and the compile plugin, and with [`@backtickjs/three`](https://github.com/backtickjs/backtick/tree/main/adapters/three) for three's classes and types.
 
 ## Install
 
@@ -78,9 +78,9 @@ const modules = {
 
 ## Related
 
-- [`@backtickjs/three`](https://github.com/backtickjs/backtick/tree/main/packages/three): three's classes, values and types
-- [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/packages/react): the React adapter
-- [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/packages/react-native): the React Native adapter
+- [`@backtickjs/three`](https://github.com/backtickjs/backtick/tree/main/adapters/three): three's classes, values and types
+- [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react): the React adapter
+- [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/adapters/react-native): the React Native adapter
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): builds bundles
 
 ## License

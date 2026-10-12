@@ -84,7 +84,7 @@ What a bundle may require, by specifier, each as its module namespace. At least 
 
 - [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): `cs` and the types for writing screens
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): builds the bundles this runs
-- [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/packages/react-native): React Native's components and APIs, to splice into scripts
+- [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/adapters/react-native): React Native's components and APIs, to splice into scripts
 - [`create-backtick-app`](https://github.com/backtickjs/backtick/tree/main/packages/create-backtick-app): an Expo app with a Backtick server beside it
 - [How it works](https://backtickjs.com/docs/how-it-works)
 - [Errors](https://backtickjs.com/docs/errors)
