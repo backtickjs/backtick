@@ -38,6 +38,12 @@
           "advertiserIDCollectionEnabled": false,
           "iosUserTrackingPermission": false
         }
+      ],
+      [
+        "@react-native-google-signin/google-signin",
+        {
+          "iosUrlScheme": "com.googleusercontent.apps.239132102423-k72sa3ecn8l9k2ptvjjcn68lnvo0masi"
+        }
       ]
     ],
     "extra": {

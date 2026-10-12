@@ -24,6 +24,7 @@ import type { IdpToken } from "../auth/firebaseAuth.js";
 import { facebook, google } from "../auth/providers.js";
 import { Button } from "../ui/Button.js";
 import { icons } from "../ui/icons.js";
+import { useColors } from "../ui/theme.js";
 
 // Signing in with Google, Apple or Facebook: each SDK asks its user on the
 // phone, and the token it gives goes to the server, which signs in to
@@ -119,6 +120,7 @@ const Facebook = cs`(props: SocialSignInProps) => (
 
 // Apple's own button, as its guidelines ask.
 const Apple = cs`(props: SocialSignInProps) => {
+  const colors = $useColors();
   const [available, setAvailable] = $useState(false);
   $useEffect(() => {
     $isAvailableAsync().then(setAvailable);
@@ -133,9 +135,15 @@ const Apple = cs`(props: SocialSignInProps) => {
           ? $AppleAuthenticationButtonType.SIGN_IN
           : $AppleAuthenticationButtonType.SIGN_UP
       }
-      buttonStyle={$AppleAuthenticationButtonStyle.BLACK}
+      // white, with the shadow the other buttons have, as they're white on
+      // the page's grey
+      buttonStyle={$AppleAuthenticationButtonStyle.WHITE}
       cornerRadius={20}
-      style={{ height: 40 }}
+      style={{
+        height: 40,
+        borderRadius: 20,
+        boxShadow: colors.smallShadow || undefined,
+      }}
       onPress={async () => {
         try {
           const { raw, hashed } = await $nonce();
