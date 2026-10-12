@@ -59,6 +59,18 @@ beforeEach(() => {
         return known
           ? refuse("EMAIL_EXISTS")
           : reply(200, { localId: "uid-new", email: body.email });
+      case "signInWithIdp": {
+        // a Google ID token "google:<email>", for an account of its own, or
+        // one whose email already signs in with a password
+        const credential = new URLSearchParams(body.postBody);
+        const email = credential.get("id_token")?.split(":")[1];
+        if (credential.get("providerId") !== "google.com" || !email) {
+          return refuse("INVALID_IDP_RESPONSE");
+        }
+        return email === account.email
+          ? reply(200, { localId: "uid-other", email, needConfirmation: true })
+          : reply(200, { localId: "uid-google", email });
+      }
       case "sendOobCode":
         return body.email === "" ? refuse("MISSING_EMAIL") : reply(200, {});
     }

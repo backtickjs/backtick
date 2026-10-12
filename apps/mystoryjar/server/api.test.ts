@@ -41,6 +41,38 @@ it("signs up a new email, and refuses one in use", async () => {
   });
 });
 
+it("signs in with a Google token, through Firebase", async () => {
+  const { body } = await post("/api/auth/idp", {
+    provider: "google.com",
+    idToken: "google:grace@example.com",
+  });
+  const user = await readSession((body as { session: string }).session);
+  assert.deepEqual(
+    { uid: user?.uid, email: user?.email },
+    { uid: "uid-google", email: "grace@example.com" },
+  );
+  assert.equal(
+    asked[0]?.body.postBody,
+    "providerId=google.com&id_token=google%3Agrace%40example.com",
+  );
+});
+
+it("refuses a provider for an email that signs in another way", async () => {
+  const { status, body } = await post("/api/auth/idp", {
+    provider: "google.com",
+    idToken: `google:${account.email}`,
+  });
+  assert.equal(status, 400);
+  assert.deepEqual(body, {
+    error: "This email already signs in another way. Sign in with that.",
+  });
+});
+
+it("refuses a provider it doesn't know", async () => {
+  const { status } = await post("/api/auth/idp", { provider: "github.com" });
+  assert.equal(status, 400);
+});
+
 it("asks Firebase to email a password reset", async () => {
   await post("/api/auth/reset", { email: account.email });
   assert.deepEqual(asked, [

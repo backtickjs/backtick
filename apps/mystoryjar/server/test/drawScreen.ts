@@ -22,6 +22,13 @@ const packageVersions = {
   "react-native-svg": require("react-native-svg/package.json").version,
   "react-native-safe-area-context":
     require("react-native-safe-area-context/package.json").version,
+  "expo-apple-authentication": require("expo-apple-authentication/package.json")
+    .version,
+  "expo-crypto": require("expo-crypto/package.json").version,
+  "@react-native-google-signin/google-signin":
+    require("@react-native-google-signin/google-signin/package.json").version,
+  "react-native-fbsdk-next": require("react-native-fbsdk-next/package.json")
+    .version,
 };
 
 /** The navigation actions screens dispatched, in order. */
@@ -61,6 +68,11 @@ const modules = {
   "react-native-safe-area-context": {
     useSafeAreaInsets: () => ({ top: 0, right: 0, bottom: 0, left: 0 }),
   },
+  // As on the web and in Expo Go: no native sign-in SDKs, and no Apple.
+  "expo-apple-authentication": { isAvailableAsync: async () => false },
+  "expo-crypto": {},
+  "@react-native-google-signin/google-signin": {},
+  "react-native-fbsdk-next": {},
 };
 
 // A screen, bundled as your server bundles it and run as your app runs it,

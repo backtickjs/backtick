@@ -3,6 +3,7 @@ import { useState } from "@backtickjs/react";
 import { setItemAsync } from "@backtickjs/expo-secure-store";
 import { Linking, Pressable, ScrollView, View } from "@backtickjs/react-native";
 import { useSafeAreaInsets } from "@backtickjs/react-native-safe-area-context";
+import type { IdpToken } from "../auth/firebaseAuth.js";
 import { useStack } from "../navigation.js";
 import { Button } from "../ui/Button.js";
 import { Icon } from "../ui/Icon.js";
@@ -13,6 +14,7 @@ import { usePost } from "../ui/server.js";
 import { Text } from "../ui/Text.js";
 import { TextInput } from "../ui/TextInput.js";
 import { TextLink } from "../ui/TextLink.js";
+import { SocialSignIn } from "./SocialSignIn.js";
 
 // The website's sign-in and sign-up form, one column 300 points wide: the
 // logo, or what went wrong in its place, then email and password.
@@ -81,12 +83,10 @@ export const AuthForm = cs`(props: AuthFormProps) => {
   const [busy, setBusy] = $useState(false);
   const signIn = props.action === "Sign in";
 
-  const submit = async () => {
+  // Signs in through the server, which answers a session to keep.
+  const signInWith = async (path: string, body: object) => {
     setBusy(true);
-    const answer = await post<{ session: string }>(
-      signIn ? "/api/auth/signin" : "/api/auth/signup",
-      { email, password },
-    );
+    const answer = await post<{ session: string }>(path, body);
     setBusy(false);
     if (answer.error !== undefined) {
       setError(answer.error);
@@ -95,6 +95,11 @@ export const AuthForm = cs`(props: AuthFormProps) => {
     await $setItemAsync("session", answer.session);
     stack.restart("/");
   };
+  const submit = () =>
+    signInWith(signIn ? "/api/auth/signin" : "/api/auth/signup", {
+      email,
+      password,
+    });
 
   return (
     <$ScrollView
@@ -157,6 +162,16 @@ export const AuthForm = cs`(props: AuthFormProps) => {
         </$View>
         <$View style={{ alignItems: "center", gap: 12, marginTop: 12 }}>
           {signIn && <$ForgotPassword email={email} onError={setError} />}
+        </$View>
+        <$View style={{ marginTop: 12, gap: 12 }}>
+          <$Text style={{ textAlign: "center" }}>or</$Text>
+          <$SocialSignIn
+            verb={props.action}
+            onToken={(token: IdpToken) => signInWith("/api/auth/idp", token)}
+            onError={setError}
+          />
+        </$View>
+        <$View style={{ alignItems: "center", gap: 12, marginTop: 20 }}>
           <$Text>
             {props.other.question}{" "}
             <$TextLink onPress={() => stack.replace(props.other.path)}>

@@ -37,3 +37,8 @@ packageExtensions:
   bun-types:
     dependencies:
       undici-types: "^7.24.6"
+minimumReleaseAgeExclude:
+  - expo-crypto@57.0.4
+  - expo-dev-client@57.0.20
+  - expo-dev-launcher@57.0.21
+  - expo-dev-menu@57.0.20

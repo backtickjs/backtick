@@ -7,11 +7,44 @@
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "bundleIdentifier": "com.mystoryjar.app"
+      "bundleIdentifier": "com.mystoryjar.app",
+      "usesAppleSignIn": true,
+      "infoPlist": {
+        "SKAdNetworkItems": [
+          {
+            "SKAdNetworkIdentifier": "v9wttpbfk9.skadnetwork"
+          },
+          {
+            "SKAdNetworkIdentifier": "n38lu8286q.skadnetwork"
+          }
+        ]
+      }
     },
     "android": {
-      "package": "com.mystoryjar.app"
+      "package": "com.mystoryjar.app",
+      "permissions": ["android.permission.INTERNET"]
     },
-    "plugins": ["expo-secure-store"]
+    "plugins": [
+      "expo-secure-store",
+      [
+        "react-native-fbsdk-next",
+        {
+          "appID": "575486299994058",
+          "clientToken": "b25536d7a54d9b924f5ef3f7eb47af42",
+          "displayName": "MyStoryJar",
+          "scheme": "fb575486299994058",
+          "isAutoInitEnabled": true,
+          "autoLogAppEventsEnabled": false,
+          "advertiserIDCollectionEnabled": false,
+          "iosUserTrackingPermission": false
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "1ebebe8d-15c2-41ac-954c-213543522989"
+      }
+    },
+    "owner": "jbisson"
   }
 }

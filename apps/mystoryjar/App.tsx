@@ -5,7 +5,9 @@ import {
   type NativeStackScreenProps,
 } from "@react-navigation/native-stack";
 import { evaluate } from "@backtickjs/react-native-client";
+import * as AppleAuthentication from "expo-apple-authentication";
 import Constants from "expo-constants";
+import * as Crypto from "expo-crypto";
 import * as Font from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
@@ -19,10 +21,22 @@ import {
 } from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNative from "react-native";
-import { ActivityIndicator, Pressable, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Platform,
+  Pressable,
+  Text,
+  View,
+} from "react-native";
 import * as SafeArea from "react-native-safe-area-context";
 import * as ReactNativeSvg from "react-native-svg";
 import { SecureStore } from "./secureStore";
+
+// Google's and Facebook's SDKs need native code that Expo Go and the web
+// don't have: there, they're offered empty, and screens leave out what needs
+// them.
+const native =
+  Platform.OS !== "web" && Constants.executionEnvironment !== "storeClient";
 
 // What a screen may require: the packages this app was built with.
 const modules = {
@@ -34,6 +48,12 @@ const modules = {
   "expo-font": Font,
   "react-native-svg": ReactNativeSvg,
   "react-native-safe-area-context": SafeArea,
+  "expo-apple-authentication": AppleAuthentication,
+  "expo-crypto": Crypto,
+  "@react-native-google-signin/google-signin": native
+    ? require("@react-native-google-signin/google-signin")
+    : {},
+  "react-native-fbsdk-next": native ? require("react-native-fbsdk-next") : {},
 };
 
 // The app is one stack screen, `Screen`, drawn once per server path on the

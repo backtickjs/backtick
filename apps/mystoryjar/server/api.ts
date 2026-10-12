@@ -1,7 +1,9 @@
 import type { IncomingMessage } from "node:http";
 import {
   AuthError,
+  type IdpToken,
   sendPasswordReset,
+  signInWithIdp,
   signInWithPassword,
   signUp,
 } from "./auth/firebaseAuth.js";
@@ -24,6 +26,17 @@ export const api: Record<string, Handler> = {
   "/api/auth/signup": async (body) => {
     const user = await signUp(text(body.email), text(body.password));
     return { session: await issueSession(user) };
+  },
+  "/api/auth/idp": async (body) => {
+    const provider = text(body.provider);
+    if (!["google.com", "apple.com", "facebook.com"].includes(provider)) {
+      throw new AuthError("That way of signing in isn't on yet.");
+    }
+    const token: IdpToken = { provider: provider as IdpToken["provider"] };
+    for (const key of ["idToken", "accessToken", "nonce"] as const) {
+      if (typeof body[key] === "string") token[key] = body[key];
+    }
+    return { session: await issueSession(await signInWithIdp(token)) };
   },
   "/api/auth/reset": async (body) => {
     await sendPasswordReset(text(body.email));

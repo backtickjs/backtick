@@ -109,6 +109,10 @@ const ReorderButton = cs`(props: { order: Order }) => {
 | [`@backtickjs/expo-font`](adapters/expo-font)                                           | Expo Font's functions and hooks, for scripts                       |
 | [`@backtickjs/react-native-svg`](adapters/react-native-svg)                             | React Native SVG's components, for scripts                         |
 | [`@backtickjs/react-native-safe-area-context`](adapters/react-native-safe-area-context) | Safe Area Context's hooks and components, for scripts              |
+| [`@backtickjs/react-native-google-signin`](adapters/react-native-google-signin)         | Google Sign-In, for scripts                                        |
+| [`@backtickjs/expo-apple-authentication`](adapters/expo-apple-authentication)           | Sign in with Apple, for scripts                                    |
+| [`@backtickjs/react-native-fbsdk-next`](adapters/react-native-fbsdk-next)               | Facebook Login, for scripts                                        |
+| [`@backtickjs/expo-crypto`](adapters/expo-crypto)                                       | Expo Crypto's hashes and random values, for scripts                |
 | [`@backtickjs/react-native-client`](packages/react-native-client)                       | `evaluate`: runs a bundle with your app's own packages             |
 | [`@backtickjs/node-plugin`](packages/node-plugin)                                       | Compiles scripts as a Node server loads them                       |
 | [`@backtickjs/bun-plugin`](packages/bun-plugin)                                         | Compiles scripts as a Bun server loads them                        |

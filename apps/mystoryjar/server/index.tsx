@@ -27,6 +27,13 @@ const packageVersions = {
   "react-native-svg": require("react-native-svg/package.json").version,
   "react-native-safe-area-context":
     require("react-native-safe-area-context/package.json").version,
+  "expo-apple-authentication": require("expo-apple-authentication/package.json")
+    .version,
+  "expo-crypto": require("expo-crypto/package.json").version,
+  "@react-native-google-signin/google-signin":
+    require("@react-native-google-signin/google-signin/package.json").version,
+  "react-native-fbsdk-next": require("react-native-fbsdk-next/package.json")
+    .version,
 };
 
 const server = createServer(async (request, response) => {
