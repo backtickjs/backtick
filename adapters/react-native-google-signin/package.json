@@ -1,0 +1,69 @@
+{
+  "name": "@backtickjs/react-native-google-signin",
+  "version": "16.1.5",
+  "description": "The Google Sign-In adapter for Backtick: `@react-native-google-signin/google-signin`'s API as client values your scripts splice",
+  "keywords": [
+    "backtick",
+    "google-signin",
+    "react-native",
+    "server-driven-ui",
+    "adapter"
+  ],
+  "homepage": "https://backtickjs.com",
+  "bugs": {
+    "url": "https://github.com/backtickjs/backtick/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/backtickjs/backtick.git",
+    "directory": "adapters/react-native-google-signin"
+  },
+  "license": "MIT",
+  "author": "Jean-François Bisson <jf@backtickjs.com>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!dist/._cache",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "typecheck": "backtick-tsc -p tsconfig.build.json --noEmit",
+    "build": "tspc -b --noCheck --force",
+    "dev": "tspc -b --noCheck --watch",
+    "test": "node --test \"test/**/*.test.ts\"",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown .",
+    "clean": "rm -rf node_modules dist .turbo",
+    "prepack": "cp ../../LICENSE ."
+  },
+  "dependencies": {
+    "@backtickjs/core": "^0.1.8",
+    "@react-native-google-signin/google-signin": "16.1.5"
+  },
+  "devDependencies": {
+    "@backtickjs/compiler": "^0.1.8",
+    "@backtickjs/prettier-plugin": "^0.1.8",
+    "@backtickjs/tsc": "^0.1.8",
+    "@backtickjs/tspatch-plugin": "^0.1.8",
+    "@types/react": "19.2.18",
+    "prettier": "^3.6.2",
+    "react": "19.2.3",
+    "react-native": "0.86.3",
+    "ts-patch": "^4.0.1",
+    "typescript": "^6.0.3"
+  },
+  "prettier": {
+    "plugins": [
+      "@backtickjs/prettier-plugin"
+    ]
+  }
+}
