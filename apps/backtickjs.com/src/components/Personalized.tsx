@@ -64,7 +64,9 @@ export const PersonalizedVisual = cs`() => (
         </figure>
       ))}
       <p class="text-[14.5px] text-muted">
-        Each phone gets one small JavaScript file, made for that request.
+        Each phone gets one small JavaScript file, made for that request. The
+        server component itself never reaches the phone: it runs on your server
+        and expands into the screen it chose.
       </p>
     </div>
   </div>
