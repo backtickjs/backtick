@@ -34,9 +34,14 @@ const packageVersions = {
 /** The navigation actions screens dispatched, in order. */
 export const navigated: unknown[] = [];
 
+/** The paths screens drew out of sight, to show at once later. */
+export const preloaded: string[] = [];
+
 const navigation = {
   dispatch: (action: unknown) => navigated.push(action),
   goBack: () => navigated.push({ type: "GO_BACK" }),
+  preload: (_name: string, params: { path: string }) =>
+    preloaded.push(params.path),
 };
 
 /** What screens kept in SecureStore. */
@@ -50,6 +55,8 @@ const modules = {
     CommonActions,
     StackActions,
     useNavigation: () => navigation,
+    // every screen a test draws is the one shown
+    useIsFocused: () => true,
   },
   "expo-secure-store": {
     getItemAsync: async (key: string) => secureStore.get(key) ?? null,
@@ -79,6 +86,7 @@ const modules = {
 // for Testing Library to draw.
 export async function drawScreen(input: Spliceable): Promise<React.ReactNode> {
   navigated.length = 0;
+  preloaded.length = 0;
   secureStore.clear();
   const bundle = await bundler.build({ input, packageVersions });
   const { code } = bundle.generate({ format: "cjs" });

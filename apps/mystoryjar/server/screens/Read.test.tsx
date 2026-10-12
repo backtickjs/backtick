@@ -4,7 +4,7 @@ import { StackActions } from "@react-navigation/routers";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { Story } from "../stories.js";
-import { drawScreen, navigated } from "../test/drawScreen.js";
+import { drawScreen, navigated, preloaded } from "../test/drawScreen.js";
 import { request } from "../test/request.js";
 import { ReadView } from "./Read.js";
 
@@ -99,8 +99,9 @@ it("invites a first story when there are none", async () => {
   ]);
 });
 
-it("switches to Write from its tab", async () => {
+it("switches to Write from its tab, drawn ahead of time", async () => {
   await draw();
+  assert.deepEqual(preloaded, ["/write"]);
   await userEvent.click(screen.getByRole("tab", { name: /Write/ }));
   assert.deepEqual(navigated, [
     StackActions.replace("Screen", { path: "/write", animation: "none" }),

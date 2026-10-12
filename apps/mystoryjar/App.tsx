@@ -14,6 +14,7 @@ import * as React from "react";
 import {
   Component,
   type ReactNode,
+  startTransition,
   Suspense,
   use,
   useEffect,
@@ -116,6 +117,9 @@ export default function App() {
             name="Screen"
             component={ServerScreen}
             initialParams={{ path: "/" }}
+            // a screen is its path: one a screen preloads is the one shown
+            // when the stack moves to that path
+            getId={({ params }) => params.path}
           />
         </Stack.Navigator>
       </NavigationContainer>
@@ -124,28 +128,56 @@ export default function App() {
   );
 }
 
-function ServerScreen({ route }: NativeStackScreenProps<Routes, "Screen">) {
+function ServerScreen({
+  route,
+  navigation,
+}: NativeStackScreenProps<Routes, "Screen">) {
   const { path } = route.params;
   // Held here, which doesn't suspend, so the request outlives the render
-  // that waits for it. Each request is numbered, so a new one also clears an
-  // error the last one showed.
+  // that waits for it. Each retry is numbered, so it also clears the error
+  // the last one showed.
   const [request, setRequest] = useState(() => ({
     number: 0,
     screen: fetchScreen(path),
+    fetchedAt: Date.now(),
   }));
-  const refetch = () =>
+  // After an error: the spinner, while it loads again.
+  const retry = () =>
     setRequest(({ number }) => ({
       number: number + 1,
       screen: fetchScreen(path),
+      fetchedAt: Date.now(),
     }));
+  // The screen as it is now, drawn in place of the one shown, which stays
+  // until then: a transition, so nothing flashes.
+  const refresh = () =>
+    startTransition(() =>
+      setRequest(({ number }) => ({
+        number,
+        screen: fetchScreen(path),
+        fetchedAt: Date.now(),
+      })),
+    );
   useEffect(() => {
-    if (__DEV__) {
-      restarted.add(refetch);
-      return () => void restarted.delete(refetch);
+    // Fetched again each time it's shown, as a preloaded screen may have
+    // been fetched long before; not when it was just fetched to be shown.
+    const unsubscribe = navigation.addListener("focus", () =>
+      setRequest((current) => {
+        if (Date.now() - current.fetchedAt > 1000) refresh();
+        return current;
+      }),
+    );
+    if (!__DEV__) {
+      return unsubscribe;
     }
+    restarted.add(refresh);
+    return () => {
+      unsubscribe();
+      restarted.delete(refresh);
+    };
   }, []);
   return (
-    <Boundary key={request.number} retry={refetch}>
+    <Boundary key={request.number} retry={retry}>
       <Suspense fallback={<ActivityIndicator style={{ flex: 1 }} />}>
         <Screen screen={request.screen} />
       </Suspense>

@@ -1,6 +1,8 @@
 import { cs } from "@backtickjs/core";
+import { useEffect } from "@backtickjs/react";
 import { deleteItemAsync } from "@backtickjs/expo-secure-store";
 import { Pressable, View } from "@backtickjs/react-native";
+import { useIsFocused } from "@backtickjs/react-navigation-native";
 import { useStack } from "../navigation.js";
 import { Dropdown } from "./Dropdown.js";
 import { Icon } from "./Icon.js";
@@ -23,6 +25,15 @@ const tabs: Tab[] = [
 const Tabs = cs`(props: { selected: string }) => {
   const colors = $useColors();
   const stack = $useStack();
+  // The other tabs, drawn out of sight, so switching shows them at once:
+  // once this one is shown, as a screen drawn out of sight can't preload.
+  const shown = $useIsFocused();
+  $useEffect(() => {
+    if (!shown) return;
+    for (const tab of $tabs) {
+      if (tab.path !== props.selected) stack.preload(tab.path);
+    }
+  }, [shown]);
   return (
     <$View style={{ flexDirection: "row" }}>
       {$tabs.map((tab) => {
