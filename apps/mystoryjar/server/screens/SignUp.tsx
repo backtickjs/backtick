@@ -13,9 +13,5 @@ export function SignUp({ request }: { request: ScreenRequest }) {
       path: "/signin",
     },
   };
-  return (
-    <Screen request={request} theme="light">
-      {cs`<$AuthForm {...$form} />`}
-    </Screen>
-  );
+  return <Screen request={request}>{cs`<$AuthForm {...$form} />`}</Screen>;
 }

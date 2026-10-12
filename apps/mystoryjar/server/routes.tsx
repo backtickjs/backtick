@@ -1,6 +1,7 @@
 import type { JSX } from "@backtickjs/react/jsx-runtime";
 import type { ScreenRequest } from "./request.js";
 import { Landing } from "./screens/Landing.js";
+import { Read } from "./screens/Read.js";
 import { Redirect } from "./screens/Redirect.js";
 import { SignIn } from "./screens/SignIn.js";
 import { SignUp } from "./screens/SignUp.js";
@@ -26,6 +27,7 @@ const routes: Record<string, Route> = {
     draw: (request) => <SignUp request={request} />,
   },
   "/write": { for: "signedIn", draw: (request) => <Write request={request} /> },
+  "/read": { for: "signedIn", draw: (request) => <Read request={request} /> },
 };
 
 /** The screen at `path` for this request, or undefined for no such path. */

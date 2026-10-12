@@ -1,5 +1,7 @@
 import type { IncomingMessage } from "node:http";
 import { readSession, type User } from "./auth/session.js";
+import { themeOf } from "./preferences.js";
+import type { Theme } from "./ui/theme.js";
 
 /** What a screen knows of the request it's drawn for. */
 export type ScreenRequest = {
@@ -12,6 +14,8 @@ export type ScreenRequest = {
   // screen's scripts send back
   user: User | null;
   session: string | null;
+  // light while signed out, as the website is; else the user's choice
+  theme: Theme;
 };
 
 export async function screenRequest(
@@ -21,10 +25,12 @@ export async function screenRequest(
   const protocol = request.headers["x-forwarded-proto"] ?? "http";
   const host = request.headers["x-forwarded-host"] ?? request.headers.host;
   const session = request.headers.authorization?.replace(/^Bearer /, "");
+  const user = await readSession(session);
   return {
     origin: `${protocol}://${host}`,
     timeZone: String(request.headers["x-time-zone"] ?? "UTC"),
-    user: await readSession(session),
+    user,
     session: session ?? null,
+    theme: user === null ? "light" : await themeOf(user.uid),
   };
 }

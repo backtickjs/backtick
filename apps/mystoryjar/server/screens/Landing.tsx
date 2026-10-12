@@ -120,7 +120,7 @@ export function Landing({ request }: { request: ScreenRequest }) {
     image: { uri: asset("sunrise@2x.png"), width: 518, height: 365 },
   };
   return (
-    <Screen request={request} theme="light">
+    <Screen request={request}>
       {cs`(
         <$View style={{ flex: 1 }}>
           <$Header />

@@ -6,4 +6,5 @@ export const request: ScreenRequest = {
   timeZone: "America/New_York",
   user: null,
   session: null,
+  theme: "light",
 };

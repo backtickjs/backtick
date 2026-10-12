@@ -19,13 +19,7 @@ const sample = cs`(
 )`;
 
 it("draws its components in the light palette", async () => {
-  render(
-    await drawScreen(
-      <Screen request={request} theme="light">
-        {sample}
-      </Screen>,
-    ),
-  );
+  render(await drawScreen(<Screen request={request}>{sample}</Screen>));
   const text = screen.getByText("Hello");
   assert.equal(getComputedStyle(text).color, "rgb(126, 125, 125)");
   assert.equal(
@@ -41,9 +35,7 @@ it("draws its components in the light palette", async () => {
 it("and in the dark one", async () => {
   const { container } = render(
     await drawScreen(
-      <Screen request={request} theme="dark">
-        {sample}
-      </Screen>,
+      <Screen request={{ ...request, theme: "dark" }}>{sample}</Screen>,
     ),
   );
   const background = container.firstElementChild as HTMLElement;

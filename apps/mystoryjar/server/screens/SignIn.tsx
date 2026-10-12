@@ -9,9 +9,5 @@ export function SignIn({ request }: { request: ScreenRequest }) {
     action: "Sign in",
     other: { question: "No account?", link: "Create one", path: "/signup" },
   };
-  return (
-    <Screen request={request} theme="light">
-      {cs`<$AuthForm {...$form} />`}
-    </Screen>
-  );
+  return <Screen request={request}>{cs`<$AuthForm {...$form} />`}</Screen>;
 }

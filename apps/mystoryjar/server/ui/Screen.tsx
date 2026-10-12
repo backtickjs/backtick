@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 import type { ScreenRequest } from "../request.js";
 import { fontSources } from "./fonts.js";
 import { type Server, ServerContext } from "./server.js";
-import { type Colors, palettes, type Theme, ThemeContext } from "./theme.js";
+import { type Colors, palettes, ThemeContext } from "./theme.js";
 
 // Every screen's root: its palette and the server, for the components inside
 // to read, its background, and the fonts it draws with. A screen waits for its fonts,
@@ -31,14 +31,12 @@ const Themed = cs`(props: {
 
 export function Screen({
   request,
-  theme,
   children,
 }: {
   request: ScreenRequest;
-  theme: Theme;
   children: Client<JSX.Element>;
 }) {
-  const colors = palettes[theme];
+  const colors = palettes[request.theme];
   const fonts = fontSources(request.origin);
   const server: Server = { origin: request.origin, session: request.session };
   return cs`(

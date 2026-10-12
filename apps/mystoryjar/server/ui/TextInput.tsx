@@ -1,5 +1,6 @@
 import { cs } from "@backtickjs/core";
 import { TextInput as NativeTextInput, View } from "@backtickjs/react-native";
+import type { ReactNode } from "react";
 import type { TextInputProps as NativeTextInputProps } from "react-native";
 import { fontFamilies } from "./fonts.js";
 import { Icon } from "./Icon.js";
@@ -8,10 +9,17 @@ import { useColors } from "./theme.js";
 export type TextInputProps = NativeTextInputProps & {
   // an icon before the text, from `icons`
   icon?: string;
+  // what follows the text, such as a button that clears it
+  after?: ReactNode;
 };
 
 // The website's input: a pill on the surface colour, its icon on the left.
-export const TextInput = cs`({ icon, style, ...props }: TextInputProps) => {
+export const TextInput = cs`({
+  icon,
+  after,
+  style,
+  ...props
+}: TextInputProps) => {
   const colors = $useColors();
   return (
     <$View
@@ -45,6 +53,7 @@ export const TextInput = cs`({ icon, style, ...props }: TextInputProps) => {
         ]}
         {...props}
       />
+      {after}
     </$View>
   );
 }`;
