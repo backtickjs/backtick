@@ -48,3 +48,49 @@ test("a component runs each place its element is drawn", async () => {
   await es(element);
   assert.equal(runs, 3);
 });
+
+test("sibling components expand at once", async () => {
+  // Each waits for the other to start, so expanding one after the other
+  // never finishes.
+  let started = 0;
+  let bothStarted!: () => void;
+  const both = new Promise<void>((resolve) => (bothStarted = resolve));
+  const Waits = async () => {
+    started += 1;
+    if (started === 2) {
+      bothStarted();
+    }
+    await both;
+    return "drawn";
+  };
+  const code = await Promise.race([
+    es([createJsxElement(Waits, {}), createJsxElement(Waits, {})]),
+    new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error("expanded one at a time")), 1000),
+    ),
+  ]);
+  assert.match(code, /^export default \(\["drawn", "drawn"\]\);$/m);
+});
+
+test("what a component draws is expanded in turn", async () => {
+  const Inner = async () => ({ label: "inner" });
+  const Outer = () => ({ child: createJsxElement(Inner, {}) });
+  assert.match(
+    await es(createJsxElement(Outer, {})),
+    /^export default \(\{ child: \{ label: "inner" \} \}\);$/m,
+  );
+});
+
+test("a component that draws its own element is a cycle", async () => {
+  const element = createJsxElement(() => [element], {});
+  await assert.rejects(() => es(element), /contains itself/);
+});
+
+test("a `__proto__` key next to a component stays a key", async () => {
+  const value = JSON.parse('{"__proto__": {"admin": true}}');
+  value.drawn = createJsxElement(() => "drawn", {});
+  assert.match(
+    await es(value),
+    /^export default \(\{ \["__proto__"\]: \{ admin: true \}, drawn: "drawn" \}\);$/m,
+  );
+});

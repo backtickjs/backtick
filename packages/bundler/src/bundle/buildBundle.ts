@@ -7,7 +7,7 @@ import {
   type JsxElement,
 } from "@backtickjs/core";
 
-import { expandJsxElement } from "./expandJsxElement.js";
+import { expandServerComponents } from "./expandServerComponents.js";
 import { bindingsOf, capturesOf } from "./params.js";
 import { sourceName } from "./bindingKey.js";
 import {
@@ -150,14 +150,14 @@ export async function buildBundle(
   // `write` renders a closure's code in a scope that records what it reads:
   // a constant's label if it read nothing of `scope` beyond `own`, its
   // parameters, or else the code, written where it's used.
-  const closure = async (
+  const closure = (
     scope: Scope,
     own: readonly string[],
-    write: (inner: Scope) => Promise<string>,
+    write: (inner: Scope) => string,
     name: string,
-  ): Promise<string> => {
+  ): string => {
     const read = new Set<string>();
-    const code = await write({
+    const code = write({
       bindings: new Set([...scope.bindings, ...own]),
       read,
     });
@@ -181,48 +181,22 @@ export async function buildBundle(
   // a bundle is. A script reference is a call naming which script and
   // what to hand it; everything else is its literal form. Rendered in order,
   // one value after the other, so the table follows the order rendering first
-  // reached each script.
-  // The objects rendering is inside of now. One it meets again contains
-  // itself, which written out would never end. A value used in two places
-  // isn't one: it's left before it's met again.
-  const path = new Set<object>();
-  const render = async (
-    value: unknown,
-    scope: Scope = rootScope(),
-  ): Promise<string> => {
-    if (typeof value !== "object" || value === null) {
-      return renderValue(value, scope);
-    }
-    if (path.has(value)) {
-      throw new Error(
-        "Can't splice a value that contains itself: a bundle writes each " +
-          "value out in full, so a cycle never ends. Break the cycle before " +
-          "splicing it.",
-      );
-    }
-    path.add(value);
-    try {
-      return await renderValue(value, scope);
-    } finally {
-      path.delete(value);
-    }
-  };
-  const renderValue = async (value: unknown, scope: Scope): Promise<string> => {
+  // reached each script. Expansion has refused cycles, so it ends.
+  const render = (value: unknown, scope: Scope = rootScope()): string => {
     if (isClientScript(value)) {
       const target = scriptFor(value);
       if (target.module.kind !== "function") {
-        return call(labelOf(target), await exprCallArgs(value, scope));
+        return call(labelOf(target), exprCallArgs(value, scope));
       }
       return closure(
         scope,
         [],
-        async (inner) =>
-          call(labelOf(target), await exprCallArgs(value, inner)),
+        (inner) => call(labelOf(target), exprCallArgs(value, inner)),
         "$function",
       );
     }
     if (isJsxElement(value)) {
-      return renderJsx(value, scope);
+      return renderJsx(value);
     }
     if (isClientImport(value)) {
       return imported(names, value);
@@ -240,7 +214,7 @@ export async function buildBundle(
     if (Array.isArray(value)) {
       const elements: string[] = [];
       for (const element of value) {
-        elements.push(await render(element, scope));
+        elements.push(render(element, scope));
       }
       return array(elements);
     }
@@ -281,7 +255,7 @@ export async function buildBundle(
     }
     const entries: [string, string][] = [];
     for (const [key, entry] of Object.entries(value)) {
-      entries.push([key, await render(entry, scope)]);
+      entries.push([key, render(entry, scope)]);
     }
     return object(entries);
   };
@@ -308,10 +282,7 @@ export async function buildBundle(
 
   // The arguments of a call of a script: a thunk per splice, then its
   // captures.
-  const exprCallArgs = async (
-    ref: ClientScript,
-    scope: Scope,
-  ): Promise<string[]> => {
+  const exprCallArgs = (ref: ClientScript, scope: Scope): string[] => {
     const target = scriptFor(ref);
     const parts: string[] = [];
     // The splices lead the parameters, one `arg` each.
@@ -322,11 +293,10 @@ export async function buildBundle(
       const passed = [...passKeys(target, index), ...capturesOf(target)];
       // A thunk taking them, the splice rendered inside it.
       parts.push(
-        await closure(
+        closure(
           scope,
           passed,
-          async (inner) =>
-            arrow(passed.map(displayName), await render(arg, inner)),
+          (inner) => arrow(passed.map(displayName), render(arg, inner)),
           "$thunk",
         ),
       );
@@ -337,18 +307,10 @@ export async function buildBundle(
     return parts;
   };
 
-  // A tag. A component runs on the host and what it drew stands where the tag
-  // stood; an element is its own name, each prop an expression in the
-  // enclosing script's scope.
-  //
-  // A prop that is `undefined` is left out, as JSX and TypeScript's optional
-  // props read it: a component forwarding an optional prop it wasn't given
-  // writes nothing.
-  const renderJsx = async (jsx: JsxElement, scope: Scope): Promise<string> => {
+  // A tag left after expansion, which ran every server component's: one the
+  // client draws.
+  const renderJsx = (jsx: JsxElement): never => {
     const type = jsx.type;
-    if (typeof type === "function" && !isClientImport(type)) {
-      return render(await expandJsxElement(jsx, type), scope);
-    }
     // An element and a client component (an import, or a script answering
     // one) are client code, so on the host they can't be tags: they are tags
     // in a script.
@@ -365,8 +327,9 @@ export async function buildBundle(
     );
   };
 
-  // Nothing encloses the root, so nothing it holds can capture.
-  const root = await render(value);
+  // Every server component first, so siblings run at once; then the drawing,
+  // in order. Nothing encloses the root, so nothing it holds can capture.
+  const root = render(await expandServerComponents(value));
   // In table order, which is the order rendering first reached each script.
   const modules = [...numbers.keys()].map(
     (script) => [labelOf(script), script.module] as const,
