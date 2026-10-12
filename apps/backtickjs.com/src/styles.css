@@ -97,6 +97,14 @@
   color: var(--color-ink);
 }
 
+/* Scrolls without showing a scrollbar, for one line that may not fit. */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* One line of highlighted code, and one marked added. */
 @utility code-line {
   min-height: 1lh;
