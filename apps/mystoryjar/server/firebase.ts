@@ -20,3 +20,20 @@ const app = initializeApp({
 });
 
 export const firestore = getFirestore(app);
+
+/**
+ * A Storage download link as the phone can follow it: as is in production;
+ * in development, the emulator on this computer, at the address the phone
+ * reached the server by, rather than at 127.0.0.1, which is the phone.
+ */
+export function storageLink(url: string, origin: string): string {
+  const emulator = process.env.FIREBASE_STORAGE_EMULATOR_HOST;
+  if (!development || emulator === undefined) {
+    return url;
+  }
+  const port = emulator.split(":")[1];
+  return url.replace(
+    `http://${emulator}`,
+    `http://${new URL(origin).hostname}:${port}`,
+  );
+}

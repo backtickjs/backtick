@@ -10,6 +10,7 @@ import { Icon } from "../ui/Icon.js";
 import { icons } from "../ui/icons.js";
 import { MainNavbar } from "../ui/MainNavbar.js";
 import { Screen } from "../ui/Screen.js";
+import { StoryPhoto } from "../ui/StoryPhoto.js";
 import { Text } from "../ui/Text.js";
 import { TextInput } from "../ui/TextInput.js";
 import { useColors } from "../ui/theme.js";
@@ -120,6 +121,7 @@ const Card = cs`(props: { story: Story }) => {
             </$Text>
           </$View>
         ))}
+        {story.photo !== null && <$StoryPhoto photo={story.photo} />}
       </$View>
     </$View>
   );
@@ -268,7 +270,11 @@ const EmptyJar = cs`() => {
 }`;
 
 export async function Read({ request }: { request: ScreenRequest }) {
-  const stories = await storiesOf(request.user!.uid, request.timeZone);
+  const stories = await storiesOf(
+    request.user!.uid,
+    request.timeZone,
+    request.origin,
+  );
   return <ReadView request={request} stories={stories} />;
 }
 

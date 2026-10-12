@@ -1,5 +1,5 @@
 import type { DocumentData } from "firebase-admin/firestore";
-import { firestore } from "./firebase.js";
+import { firestore, storageLink } from "./firebase.js";
 
 /** A story as a screen shows it: what it says, and its day where it's read. */
 export type Story = {
@@ -62,10 +62,14 @@ export function storyOf(
   };
 }
 
-/** Everything `uid` wrote, newest day first, and newest first within a day. */
+/**
+ * Everything `uid` wrote, newest day first, and newest first within a day,
+ * its photos linked for a phone that reached the server at `origin`.
+ */
 export async function storiesOf(
   uid: string,
   timeZone: string,
+  origin: string,
 ): Promise<Story[]> {
   const snapshot = await firestore
     .collection("stories")
@@ -79,5 +83,16 @@ export async function storiesOf(
         (b.data.createdAt?.toMillis() ?? 0) -
           (a.data.createdAt?.toMillis() ?? 0),
     )
-    .map(({ doc, data }) => storyOf(doc.id, data, timeZone));
+    .map(({ doc, data }) => storyOf(doc.id, data, timeZone))
+    .map((story) =>
+      story.photo === null
+        ? story
+        : {
+            ...story,
+            photo: {
+              small: storageLink(story.photo.small, origin),
+              large: storageLink(story.photo.large, origin),
+            },
+          },
+    );
 }

@@ -106,3 +106,18 @@ it("switches to Write from its tab", async () => {
     StackActions.replace("Screen", { path: "/write", animation: "none" }),
   ]);
 });
+
+it("shows a story's photo, at its small size", async () => {
+  await draw([
+    story({
+      id: "beach",
+      text: "Beach day.",
+      photo: {
+        small: "https://photos.example/small.jpg",
+        large: "https://photos.example/large.jpg",
+      },
+    }),
+  ]);
+  const image = screen.getByLabelText("Full Screen Image");
+  assert.ok(image.innerHTML.includes("https://photos.example/small.jpg"));
+});

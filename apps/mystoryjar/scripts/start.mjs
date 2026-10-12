@@ -28,7 +28,42 @@ const env = {
   FIREBASE_AUTH_EMULATOR_HOST: "127.0.0.1:9099",
   FIREBASE_STORAGE_EMULATOR_HOST: "127.0.0.1:9199",
 };
-const emulators = spawn(
+// What this run starts, stopped together however it ends, so a failed or
+// interrupted start leaves nothing behind holding a port.
+const started = [];
+const stop = (code) => {
+  for (const child of started) child.kill();
+  process.exit(code);
+};
+process.on("SIGINT", () => stop(130));
+process.on("SIGTERM", () => stop(143));
+const start = (...args) => {
+  const child = spawn(...args);
+  started.push(child);
+  return child;
+};
+
+// Each port free first: another run's emulators answering here would be
+// mistaken for this run's.
+const answers = (host) =>
+  fetch(`http://${host}/`)
+    .then(() => true)
+    .catch(() => false);
+const hosts = [
+  env.FIRESTORE_EMULATOR_HOST,
+  env.FIREBASE_AUTH_EMULATOR_HOST,
+  env.FIREBASE_STORAGE_EMULATOR_HOST,
+];
+for (const host of [...hosts, "127.0.0.1:3000"]) {
+  if (await answers(host)) {
+    console.error(
+      `Something already answers at ${host}: is another \`npm start\` running?`,
+    );
+    process.exit(1);
+  }
+}
+
+const emulators = start(
   npx,
   [
     "firebase-tools",
@@ -49,44 +84,34 @@ emulators.stdout.on("data", (chunk) => (said += chunk));
 emulators.on("exit", (code) => {
   if (code) {
     console.error(`${said}\nThe Firebase emulators stopped.`);
-    process.exit(code);
+    stop(code);
   }
 });
 // Up once each emulator answers.
-const answers = (host) =>
-  fetch(`http://${host}/`)
-    .then(() => true)
-    .catch(() => false);
-const hosts = [
-  env.FIRESTORE_EMULATOR_HOST,
-  env.FIREBASE_AUTH_EMULATOR_HOST,
-  env.FIREBASE_STORAGE_EMULATOR_HOST,
-];
 while (!(await Promise.all(hosts.map(answers))).every(Boolean)) {
   await sleep(500);
 }
-await new Promise((resolve) =>
-  spawn(runtime, [...loader, "server/dev/seed.ts"], {
+const seeded = await new Promise((resolve) =>
+  start(runtime, [...loader, "server/dev/seed.ts"], {
     stdio: "inherit",
     env,
   }).on("exit", resolve),
 );
+if (seeded !== 0) {
+  stop(1);
+}
 console.log("Firebase emulators on http://localhost:4000");
 
-const server = spawn(runtime, ["--watch", ...loader, "server/index.tsx"], {
+start(runtime, ["--watch", ...loader, "server/index.tsx"], {
   stdio: "inherit",
   env,
 });
-const expo = spawn(npx, ["expo", "start", ...process.argv.slice(2)], {
+const expo = start(npx, ["expo", "start", ...process.argv.slice(2)], {
   stdio: "inherit",
   shell: process.platform === "win32",
 });
 
-expo.on("exit", (code) => {
-  server.kill();
-  emulators.kill();
-  process.exit(code ?? 0);
-});
+expo.on("exit", (code) => stop(code ?? 0));
 
 // Expo shows how to open the app, its QR code, only in an interactive
 // terminal. Run elsewhere, as an agent runs it, this prints the address once

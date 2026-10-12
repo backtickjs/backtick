@@ -1,30 +1,56 @@
 // Fills the emulators `npm start` runs with an account to sign in as, and a
 // year of its stories, in the shape the website writes them. Development
 // only: it refuses to run anywhere but the emulators.
+import { randomUUID } from "node:crypto";
 import { initializeApp } from "firebase-admin/app";
 import { FieldValue, getFirestore, Timestamp } from "firebase-admin/firestore";
-import { signUp } from "../auth/firebaseAuth.js";
+import { getStorage } from "firebase-admin/storage";
 import { midnightIn } from "../dates.js";
+import { photo } from "./photos.js";
 
 if (process.env.FIRESTORE_EMULATOR_HOST === undefined) {
   throw new Error("The seed writes only to the Firebase emulators.");
 }
 
-const app = initializeApp({ projectId: "demo-mystoryjar" });
+const bucketName = "demo-mystoryjar.appspot.com";
+const app = initializeApp({
+  projectId: "demo-mystoryjar",
+  storageBucket: bucketName,
+});
 const firestore = getFirestore(app);
 
-// Who to sign in as in development, signed up as the app signs people up.
+// Who to sign in as in development, under the same uid on every run, so a
+// session the phone kept from the last run still finds these stories. Made
+// through the Auth emulator's admin API, which takes a uid, as the
+// firebase-admin SDK calls it.
 const tester = { email: "tester@mystoryjar.com", password: "storyjar" };
-const { uid } = await signUp(tester.email, tester.password);
+const uid = "tester";
+const created = await fetch(
+  `http://${process.env.FIREBASE_AUTH_EMULATOR_HOST}/identitytoolkit.googleapis.com/v1/projects/demo-mystoryjar/accounts`,
+  {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      authorization: "Bearer owner",
+    },
+    body: JSON.stringify({ localId: uid, ...tester }),
+  },
+);
+if (!created.ok) {
+  throw new Error(`Couldn't create the tester: ${await created.text()}`);
+}
 
 const entries: {
   text: string;
   tags?: string[];
   location?: string;
   favorite?: boolean;
+  // one of the scenes in photos.ts
+  photo?: string;
 }[] = [
   {
     text: "First snow of the year. The kids built a lopsided snowman and named him Gerald.",
+    photo: "snow",
     tags: ["family"],
     favorite: true,
   },
@@ -63,6 +89,7 @@ const entries: {
   },
   {
     text: "Long walk by the river after work. The light was gold for ten whole minutes.",
+    photo: "lake",
     location: "Hudson River Park",
   },
   {
@@ -86,6 +113,7 @@ const entries: {
   },
   {
     text: "Beach day. Sunburnt shoulders, sand in everything, worth it.",
+    photo: "sunset",
     tags: ["summer"],
     location: "Rockaway Beach",
   },
@@ -164,6 +192,33 @@ function daysAgo(days: number): Timestamp {
   return Timestamp.fromDate(midnightIn("America/New_York", date));
 }
 
+// A photo as the website's Cloud Function stores one: both sizes in Storage,
+// read through links whose token lets anyone holding them in.
+const bucket = getStorage(app).bucket();
+async function upload(scene: string) {
+  const id = randomUUID();
+  const sizes = await photo(scene);
+  const urls = { large: "", small: "" };
+  for (const size of ["large", "small"] as const) {
+    const path = `story_photos/${uid}/${size}/${id}`;
+    const token = randomUUID();
+    await bucket.file(path).save(sizes[size], {
+      contentType: "image/jpeg",
+      metadata: {
+        cacheControl: "private,max-age=31536000",
+        metadata: { firebaseStorageDownloadTokens: token },
+      },
+    });
+    urls[size] =
+      `http://${process.env.FIREBASE_STORAGE_EMULATOR_HOST}/v0/b/${bucketName}` +
+      `/o/${encodeURIComponent(path)}?alt=media&token=${token}`;
+  }
+  return { source: "storage", id, urls };
+}
+const photos = await Promise.all(
+  entries.map((entry) => (entry.photo ? upload(entry.photo) : null)),
+);
+
 const batch = firestore.batch();
 entries.forEach((entry, index) => {
   batch.set(firestore.collection("stories").doc(), {
@@ -173,7 +228,7 @@ entries.forEach((entry, index) => {
     isFavorite: entry.favorite ?? false,
     tags: (entry.tags ?? []).map((label) => ({ label })),
     location: entry.location ?? "",
-    photos: [],
+    photos: photos[index] ? [photos[index]] : [],
     synced: true,
     createdAt: FieldValue.serverTimestamp(),
     updatedAt: FieldValue.serverTimestamp(),
