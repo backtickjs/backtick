@@ -14,3 +14,4 @@ expo-env.d.ts
 
 # Written the way VS Code writes them, one entry per line.
 .vscode/extensions.json
+*-debug.log

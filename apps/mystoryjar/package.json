@@ -43,6 +43,7 @@
     "expo-secure-store": "~57.0.4",
     "expo-status-bar": "~57.0.1",
     "expo-system-ui": "~57.0.4",
+    "firebase-admin": "^14.5.0",
     "jose": "^6.2.12",
     "react": "19.2.3",
     "react-dom": "19.2.3",
@@ -64,6 +65,7 @@
     "@types/node": "^25.9.1",
     "@types/react": "19.2.18",
     "@types/subset-font": "^2.3.0",
+    "firebase-tools": "^15.33.0",
     "global-jsdom": "^30.0.0",
     "jsdom": "^30.0.1",
     "prettier": "^3.6.2"
