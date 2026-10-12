@@ -4,6 +4,9 @@ packages:
   # The projects `create-backtick-app` copies, installed here so they're
   # checked against the packages beside them.
   - "packages/create-backtick-app/templates/*"
+  # Complete apps that show Backtick with other libraries, checked the same
+  # way.
+  - "examples/*"
   # Built here and never published to npm: an editor extension and the
   # benchmark app.
   - "apps/*"

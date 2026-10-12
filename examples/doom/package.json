@@ -1,0 +1,50 @@
+{
+  "name": "backtick-example-doom",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Doom-like shooter drawn with React Three Fiber, its levels served by a Backtick server",
+  "main": "index.ts",
+  "scripts": {
+    "start": "node scripts/start.mjs",
+    "android": "node scripts/start.mjs --android",
+    "ios": "node scripts/start.mjs --ios",
+    "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit",
+    "test": "node --import ./server/test/setup.mjs --import @backtickjs/node-plugin --test \"server/**/*.test.ts\"",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown ."
+  },
+  "dependencies": {
+    "@backtickjs/bundler": "^0.1.8",
+    "@backtickjs/core": "^0.1.8",
+    "@backtickjs/node-plugin": "^0.1.8",
+    "@backtickjs/react": "^19.2.3",
+    "@backtickjs/react-native": "^0.86.3",
+    "@backtickjs/react-native-client": "^0.1.8",
+    "@react-three/fiber": "9.8.1",
+    "expo": "~57.0.26",
+    "expo-asset": "~57.0.19",
+    "expo-constants": "~57.0.20",
+    "expo-file-system": "~57.0.7",
+    "expo-gl": "~57.0.2",
+    "expo-status-bar": "~57.0.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.86.3",
+    "three": "0.182.0",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "@backtickjs/prettier-plugin": "^0.1.8",
+    "@backtickjs/tsc": "^0.1.8",
+    "@react-three/test-renderer": "9.1.1",
+    "@types/node": "^25.9.1",
+    "@types/react": "19.2.18",
+    "@types/three": "0.182.0",
+    "prettier": "^3.6.2"
+  },
+  "backtick": {
+    "plugins": [
+      "@backtickjs/react/plugin"
+    ]
+  }
+}
