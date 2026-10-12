@@ -23,6 +23,10 @@ const packageVersions = {
 };
 
 const server = createServer(async (request, response) => {
+  // `npm run web` serves the app from another origin, which reads the
+  // server's timing only when it's exposed.
+  response.setHeader("access-control-allow-origin", "*");
+  response.setHeader("access-control-expose-headers", "server-timing");
   if (development && request.url === "/live") {
     response.end(run);
     return;

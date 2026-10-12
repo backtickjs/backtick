@@ -13,8 +13,8 @@ import {
 } from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNative from "react-native";
-import * as Fiber from "@react-three/fiber/native";
 import { ActivityIndicator, AppState, Text } from "react-native";
+import { Fiber } from "./fiber";
 
 // What a screen may require: the packages this app was built with.
 const modules = {
@@ -166,9 +166,10 @@ function readServerTiming(header: string | null): Record<string, number> {
   return stages;
 }
 
-// The JS heap as Hermes, React Native's engine, reports it. Native memory,
-// GL buffers and textures included, isn't visible from JavaScript.
-type Heap = { allocated: number; size: number; collections: number };
+// The JS heap as Hermes, React Native's engine, reports it, or as Chrome
+// does on the web, without its collections. Native memory, GL buffers and
+// textures included, isn't visible from JavaScript.
+type Heap = { allocated: number; size: number; collections?: number };
 
 function readHeap(): Heap | undefined {
   const hermes = (
@@ -177,17 +178,29 @@ function readHeap(): Heap | undefined {
     }
   ).HermesInternal;
   const stats = hermes?.getInstrumentedStats?.();
-  if (!stats) return undefined;
-  return {
-    allocated: stats.js_allocatedBytes ?? 0,
-    size: stats.js_heapSize ?? 0,
-    collections: stats.js_numGCs ?? 0,
-  };
+  if (stats) {
+    return {
+      allocated: stats.js_allocatedBytes ?? 0,
+      size: stats.js_heapSize ?? 0,
+      collections: stats.js_numGCs ?? 0,
+    };
+  }
+  const chrome = (
+    performance as {
+      memory?: { usedJSHeapSize: number; totalJSHeapSize: number };
+    }
+  ).memory;
+  if (chrome) {
+    return { allocated: chrome.usedJSHeapSize, size: chrome.totalJSHeapSize };
+  }
+  return undefined;
 }
 
 function formatHeap(heap: Heap | undefined): string {
   if (!heap) return "heap unknown";
-  return `${mb(heap.allocated)} of ${mb(heap.size)}, ${heap.collections} GCs`;
+  const collections =
+    heap.collections === undefined ? "" : `, ${heap.collections} GCs`;
+  return `${mb(heap.allocated)} of ${mb(heap.size)}${collections}`;
 }
 
 const ms = (value: number) => `${value.toFixed(1)} ms`;

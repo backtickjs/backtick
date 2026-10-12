@@ -13,6 +13,8 @@ npm start
 
 Hold ▲ ▼ to walk, ◀ ▶ to turn, and FIRE to shoot. Clear every imp to finish the level.
 
+`npm run web` plays the same game in a browser, from the same server. There, the arrow keys or WASD move and turn, and space fires.
+
 ## Where things are
 
 - `server/levels.ts`: the levels, drawn as text, and read into walls, imps and pickups on the server.
@@ -21,10 +23,11 @@ Hold ▲ ▼ to walk, ◀ ▶ to turn, and FIRE to shoot. Clear every imp to fin
 - `server/World.tsx`: the 3D world, a client component inside the canvas: `<mesh>`, `<boxGeometry>` and `<pointLight>`, with the game loop in `$useFrame`.
 - `server/fiber.ts`: `Canvas` and `useFrame`, imported from the app with `createImport`. Importing R3F's types also teaches JSX its elements, so `<mesh>` is type-checked in a script.
 - `App.tsx`: the app. It offers `@react-three/fiber/native` to screens alongside React and React Native, and draws what the server sends.
+- `fiber.ts` and `fiber.web.ts`: R3F as the app offers it. On a phone, its React Native build; on the web, its web build, under the same name, so the server sends both the same bundle.
 
 ## What it costs
 
-Each stage logs what it took, from the server to the phone's GPU. The server's lines print in the `npm start` terminal, and so do the phone's, which Expo forwards there. The phone's numbers below are only an illustration:
+Each stage logs what it took, from the server to the phone's GPU. The server's lines print in the `npm start` terminal, and so do the phone's, which Expo forwards there; on the web, the app's print in the browser's console. The phone's numbers below are only an illustration:
 
 ```
 [server] /game: build 1.0 ms, generate 0.4 ms, 33.8 KB, heap 79.7 MB, rss 219.4 MB
@@ -41,7 +44,7 @@ Each stage logs what it took, from the server to the phone's GPU. The server's l
 - `[server]`, in `server/index.tsx`: running the server components and bundling them (`build`), then printing the code (`generate`), and the server's memory. The two times also travel to the app in a `Server-Timing` header.
 - `[pipeline]`, in `App.tsx`, once per screen: the network is the time to the first byte less the server's share. `render` runs from `evaluate` to React's first commit of the screen.
 - `[render]` and `[runtime]`, in `server/World.tsx`: the first frame R3F draws, its shaders compiled, then every 5 seconds the frame rate, the slowest frame and what the GPU was asked to draw.
-- `heap` is the JavaScript heap as Hermes reports it, and its garbage collections. GL buffers and textures live in native memory, out of JavaScript's sight. When the OS runs short of memory, the app logs `[memory] warning from the OS` with the heap at that moment.
+- `heap` is the JavaScript heap as Hermes reports it, and its garbage collections. On the web, Chrome reports the heap without its collections, and other browsers report neither. GL buffers and textures live in native memory, out of JavaScript's sight. When the OS runs short of memory, the app logs `[memory] warning from the OS` with the heap at that moment.
 
 ## Tests
 

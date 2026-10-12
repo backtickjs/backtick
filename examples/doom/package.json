@@ -8,6 +8,7 @@
     "start": "node scripts/start.mjs",
     "android": "node scripts/start.mjs --android",
     "ios": "node scripts/start.mjs --ios",
+    "web": "node scripts/start.mjs --web",
     "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit",
     "test": "node --import ./server/test/setup.mjs --import @backtickjs/node-plugin --test \"server/**/*.test.ts\"",
     "format": "prettier --write --ignore-unknown .",
@@ -30,6 +31,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-native": "0.86.3",
+    "react-native-web": "^0.21.0",
     "three": "0.182.0",
     "typescript": "^6.0.3"
   },

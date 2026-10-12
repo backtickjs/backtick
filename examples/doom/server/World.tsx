@@ -26,7 +26,8 @@ type Imp = {
   dying: number;
 };
 
-// What Hermes, React Native's engine, reports of its heap.
+// What Hermes, React Native's engine, reports of its heap. On the web, Chrome
+// reports its own, without its collections.
 type Hermes = { getInstrumentedStats?: () => Record<string, number> };
 
 export type WorldProps = {
@@ -116,7 +117,9 @@ export const World = cs`(props: WorldProps) => {
     const info = gl.info;
     const hermes = (globalThis as { HermesInternal?: Hermes }).HermesInternal;
     const stats = hermes?.getInstrumentedStats?.();
-    const heap = stats?.js_allocatedBytes ?? 0;
+    const chrome = (performance as { memory?: { usedJSHeapSize: number } })
+      .memory;
+    const heap = stats?.js_allocatedBytes ?? chrome?.usedJSHeapSize ?? 0;
     const collections = stats?.js_numGCs ?? 0;
     const mb = (bytes: number) => (bytes / 1024 / 1024).toFixed(1) + " MB";
     // This frame's callbacks run before it draws, so the second is the
@@ -150,16 +153,15 @@ export const World = cs`(props: WorldProps) => {
         " draw calls, " +
         info.render.triangles +
         " triangles, " +
-        (stats
+        (stats || chrome
           ? "heap " +
             mb(heap) +
             " (" +
             (heap >= m.heap ? "+" : "") +
             mb(heap - m.heap) +
-            "), " +
-            (collections - m.collections) +
-            " GCs"
-          : "heap unknown"),
+            ")"
+          : "heap unknown") +
+        (stats ? ", " + (collections - m.collections) + " GCs" : ""),
     );
     Object.assign(m, { frames: 0, elapsed: 0, worst: 0, heap, collections });
   });

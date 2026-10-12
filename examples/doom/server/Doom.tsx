@@ -100,6 +100,43 @@ export const Doom = cs`(props: { levels: Level[]; start: Stats }) => {
     return () => clearTimeout(timer);
   }, [stats.wounds]);
 
+  // On the web, the keyboard too: arrows or WASD to move and turn, space to
+  // fire. What's held is read again at each key, so opposite keys cancel.
+  $useEffect(() => {
+    if ($Platform.OS !== "web") return;
+    const keys: Record<string, [keyof Input, number]> = {
+      ArrowUp: ["move", 1],
+      KeyW: ["move", 1],
+      ArrowDown: ["move", -1],
+      KeyS: ["move", -1],
+      ArrowLeft: ["turn", -1],
+      KeyA: ["turn", -1],
+      ArrowRight: ["turn", 1],
+      KeyD: ["turn", 1],
+      Space: ["fire", 1],
+    };
+    const held = new Set<string>();
+    const update = (event: KeyboardEvent) => {
+      if (!(event.code in keys)) return;
+      event.preventDefault();
+      if (event.type === "keydown") held.add(event.code);
+      else held.delete(event.code);
+      const next = { move: 0, turn: 0, fire: 0 };
+      for (const code of held) next[keys[code]![0]] += keys[code]![1];
+      input.current = {
+        move: Math.sign(next.move),
+        turn: Math.sign(next.turn),
+        fire: next.fire > 0,
+      };
+    };
+    window.addEventListener("keydown", update);
+    window.addEventListener("keyup", update);
+    return () => {
+      window.removeEventListener("keydown", update);
+      window.removeEventListener("keyup", update);
+    };
+  }, []);
+
   const play = (level: number) => {
     input.current = { move: 0, turn: 0, fire: false };
     setStats(props.start);
