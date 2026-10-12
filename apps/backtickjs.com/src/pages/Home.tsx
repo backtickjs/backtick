@@ -6,7 +6,7 @@ import { DeveloperExperienceVisual } from "../components/DeveloperExperience.js"
 import { Hero } from "../components/Hero.js";
 import { Layout } from "../components/Layout.js";
 import { LiveDemo } from "../components/LiveDemo.js";
-import { OldAppVersionsVisual } from "../components/OldAppVersions.js";
+import { NoVersionSkewVisual } from "../components/NoVersionSkew.js";
 import { PersonalizedVisual } from "../components/Personalized.js";
 import { QuickStart } from "../components/QuickStart.js";
 import { Section } from "../components/Section.js";
@@ -48,11 +48,11 @@ export const Home = cs`() => (
     </$Section>
 
     <$Section
-      eyebrow="Old app versions"
-      title="Your users always see your latest changes."
-      lede="Each change is one server deploy, with no app release or read API to coordinate."
+      eyebrow="No version skew"
+      title="New features reach old app builds."
+      lede="Each screen arrives with the code that reads its data, so it runs on any build of your app that has the packages it uses. No waiting for users to update, and no old data formats to keep alive."
     >
-      <$OldAppVersionsVisual />
+      <$NoVersionSkewVisual />
     </$Section>
 
     <$Section
