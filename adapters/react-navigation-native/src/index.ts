@@ -1,6 +1,6 @@
-// `@react-navigation/native`, name for name, in alphabetical order: a value where
-// React Navigation both exports and declares it, with the instance type of
-// each class it names; a type for everything else it declares.
+// `@react-navigation/native`, name for name, in alphabetical order: a value
+// where React Navigation both exports and declares it, with the instance type
+// of each class it names; a type for everything else it declares.
 import type { Client } from "@backtickjs/core";
 import type * as Navigation from "@react-navigation/native";
 import { navigation } from "./imports.js";

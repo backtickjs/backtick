@@ -1,7 +1,10 @@
-import { createServer } from "node:http";
+import { readFile } from "node:fs/promises";
+import { createServer, type ServerResponse } from "node:http";
 import { createRequire } from "node:module";
 import { bundler } from "@backtickjs/bundler";
+import { screenRequest } from "./request.js";
 import { routes } from "./routes.js";
+import { fontFiles } from "./ui/fonts.js";
 
 // Development is only what `npm start` runs, which sets NODE_ENV: any other
 // run, a deploy included, is production. In development, this run of the
@@ -19,6 +22,10 @@ const packageVersions = {
   "@react-navigation/native": require("@react-navigation/native/package.json")
     .version,
   "expo-secure-store": require("expo-secure-store/package.json").version,
+  "expo-font": require("expo-font/package.json").version,
+  "react-native-svg": require("react-native-svg/package.json").version,
+  "react-native-safe-area-context":
+    require("react-native-safe-area-context/package.json").version,
 };
 
 const server = createServer(async (request, response) => {
@@ -37,6 +44,22 @@ const server = createServer(async (request, response) => {
     response.end(run);
     return;
   }
+  // The fonts and pictures screens link to, which don't change once served.
+  const font = /^\/fonts\/(\w+)\.ttf$/.exec(pathname)?.[1];
+  if (font !== undefined && fontFiles.has(font)) {
+    send(response, "font/ttf", fontFiles.get(font)!);
+    return;
+  }
+  const asset = /^\/assets\/([\w@-]+\.png)$/.exec(pathname)?.[1];
+  if (asset !== undefined) {
+    const file = await readFile(
+      new URL(`assets/${asset}`, import.meta.url),
+    ).catch(() => undefined);
+    if (file !== undefined) {
+      send(response, "image/png", file);
+      return;
+    }
+  }
   const route = routes[pathname];
   if (route === undefined) {
     response.statusCode = 404;
@@ -44,10 +67,19 @@ const server = createServer(async (request, response) => {
     return;
   }
   try {
-    const bundle = await bundler.build({ input: route(), packageVersions });
+    const started = performance.now();
+    const bundle = await bundler.build({
+      input: route(screenRequest(request)),
+      packageVersions,
+    });
     const { code } = bundle.generate({ format: "cjs" });
     response.setHeader("content-type", "text/javascript");
     response.end(code);
+    if (development) {
+      const time = (performance.now() - started).toFixed(1);
+      const size = (Buffer.byteLength(code) / 1024).toFixed(1);
+      console.log(`[server] ${pathname}: ${size} KB in ${time} ms`);
+    }
   } catch (error) {
     // Answered rather than crashed on, so the app can show why.
     console.error(error);
@@ -55,6 +87,12 @@ const server = createServer(async (request, response) => {
     response.end(String(error));
   }
 });
+
+function send(response: ServerResponse, type: string, body: Buffer) {
+  response.setHeader("content-type", type);
+  response.setHeader("cache-control", "public, max-age=31536000, immutable");
+  response.end(body);
+}
 
 server.listen(3000, () => {
   console.log("MyStoryJar server on http://localhost:3000");

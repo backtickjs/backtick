@@ -6,6 +6,7 @@ import {
 } from "@react-navigation/native-stack";
 import { evaluate } from "@backtickjs/react-native-client";
 import Constants from "expo-constants";
+import * as Font from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
 import {
@@ -19,7 +20,8 @@ import {
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNative from "react-native";
 import { ActivityIndicator, Pressable, Text, View } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import * as SafeArea from "react-native-safe-area-context";
+import * as ReactNativeSvg from "react-native-svg";
 import { SecureStore } from "./secureStore";
 
 // What a screen may require: the packages this app was built with.
@@ -29,6 +31,9 @@ const modules = {
   "react-native": ReactNative,
   "@react-navigation/native": Navigation,
   "expo-secure-store": SecureStore,
+  "expo-font": Font,
+  "react-native-svg": ReactNativeSvg,
+  "react-native-safe-area-context": SafeArea,
 };
 
 // The app is one stack screen, `Screen`, drawn once per server path on the
@@ -79,7 +84,7 @@ export default function App() {
     }
   }, []);
   return (
-    <SafeAreaProvider>
+    <SafeArea.SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={({ route }) => ({
@@ -95,7 +100,7 @@ export default function App() {
         </Stack.Navigator>
       </NavigationContainer>
       <StatusBar style="auto" />
-    </SafeAreaProvider>
+    </SafeArea.SafeAreaProvider>
   );
 }
 

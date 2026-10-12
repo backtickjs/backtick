@@ -9,7 +9,8 @@ import * as ReactNativeWeb from "react-native-web";
 
 // What the app provides, as `server/index.tsx` and `App.tsx` say, with React
 // Native's web build standing in for React Native, a navigator that records
-// what screens ask of it, and a SecureStore in memory.
+// what screens ask of it, a SecureStore in memory, fonts that are loaded at
+// once, an SVG drawn as its markup, and a phone without a notch.
 const require = createRequire(import.meta.url);
 const packageVersions = {
   react: require("react/package.json").version,
@@ -17,6 +18,10 @@ const packageVersions = {
   "@react-navigation/native": require("@react-navigation/native/package.json")
     .version,
   "expo-secure-store": require("expo-secure-store/package.json").version,
+  "expo-font": require("expo-font/package.json").version,
+  "react-native-svg": require("react-native-svg/package.json").version,
+  "react-native-safe-area-context":
+    require("react-native-safe-area-context/package.json").version,
 };
 
 /** The navigation actions screens dispatched, in order. */
@@ -43,6 +48,17 @@ const modules = {
     setItemAsync: async (key: string, value: string) =>
       void secureStore.set(key, value),
     deleteItemAsync: async (key: string) => void secureStore.delete(key),
+  },
+  "expo-font": { useFonts: () => [true, null] },
+  "react-native-svg": {
+    SvgXml: (props: { xml: string; color?: string }) =>
+      React.createElement("svg", {
+        "data-color": props.color,
+        dangerouslySetInnerHTML: { __html: props.xml },
+      }),
+  },
+  "react-native-safe-area-context": {
+    useSafeAreaInsets: () => ({ top: 0, right: 0, bottom: 0, left: 0 }),
   },
 };
 
