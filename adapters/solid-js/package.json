@@ -70,14 +70,14 @@
   },
   "dependencies": {
     "@babel/core": "^7.29.7",
-    "@backtickjs/core": "workspace:^0.1.0",
+    "@backtickjs/core": "^0.1.8",
     "babel-preset-solid": "1.9.12",
     "solid-js": "1.9.14"
   },
   "devDependencies": {
-    "@backtickjs/prettier-plugin": "workspace:*",
-    "@backtickjs/tsc": "workspace:^0.1.0",
-    "@backtickjs/tspatch-plugin": "workspace:^0.1.0",
+    "@backtickjs/prettier-plugin": "^0.1.8",
+    "@backtickjs/tsc": "^0.1.8",
+    "@backtickjs/tspatch-plugin": "^0.1.8",
     "@types/babel__core": "^7.20.5",
     "prettier": "^3.6.2",
     "ts-patch": "^4.0.1",

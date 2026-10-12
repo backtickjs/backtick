@@ -55,7 +55,7 @@
     "@jridgewell/trace-mapping": "^0.3.31"
   },
   "devDependencies": {
-    "@backtickjs/core": "workspace:*",
+    "@backtickjs/core": "^0.1.8",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   }

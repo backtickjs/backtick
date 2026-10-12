@@ -45,9 +45,9 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/compiler": "workspace:*",
-    "@backtickjs/language-service": "workspace:*",
-    "@backtickjs/language-plugin": "workspace:*",
+    "@backtickjs/compiler": "^0.1.8",
+    "@backtickjs/language-service": "^0.1.8",
+    "@backtickjs/language-plugin": "^0.1.8",
     "@volar/typescript": "^2.4.28"
   },
   "peerDependencies": {

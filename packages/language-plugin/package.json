@@ -47,7 +47,7 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/compiler": "workspace:*",
+    "@backtickjs/compiler": "^0.1.8",
     "@volar/language-core": "^2.4.28"
   },
   "devDependencies": {

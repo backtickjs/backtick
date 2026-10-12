@@ -85,10 +85,10 @@
     "package": "node scripts/package.mjs"
   },
   "dependencies": {
-    "@backtickjs/typescript-plugin": "workspace:*"
+    "@backtickjs/typescript-plugin": "^0.1.8"
   },
   "devDependencies": {
-    "@backtickjs/language-server": "workspace:*",
+    "@backtickjs/language-server": "^0.1.8",
     "@types/vscode": "^1.120.0",
     "@volar/language-server": "^2.4.28",
     "@volar/vscode": "^2.4.28",

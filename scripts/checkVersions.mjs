@@ -1,6 +1,6 @@
 // Enforces lockstep versioning: every `@backtickjs/*` package under
-// `packages/` shares one version, and every range pointing at one of them
-// either uses the workspace protocol or pins that same version.
+// `packages/` shares one version, and every reference to a workspace project,
+// anywhere in the workspace, is `^` and its version, linked to it.
 //
 // The plugins are published separately from core but are only ever compatible
 // with the core they were built against, so a version that drifts is a bug
@@ -8,54 +8,36 @@
 //
 // Adapters, under `adapters/`, are the exception: an adapter's version is its
 // framework's, which it pins exactly.
-import { readdirSync, readFileSync, existsSync } from "node:fs";
-import { join } from "node:path";
+import { execFileSync } from "node:child_process";
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
 
 const root = new URL("..", import.meta.url).pathname;
 
-function manifests(dir) {
-  const base = join(root, dir);
-  if (!existsSync(base)) return [];
-  return readdirSync(base, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => join(base, entry.name, "package.json"))
-    .filter((file) => existsSync(file))
-    .map((file) => ({ file, json: JSON.parse(readFileSync(file, "utf8")) }));
-}
+// Every project in the workspace, and how pnpm resolved each of its
+// dependencies.
+const projects = JSON.parse(
+  execFileSync("pnpm", ["ls", "-r", "--depth", "0", "--json"], {
+    cwd: root,
+    encoding: "utf8",
+    maxBuffer: 64 * 1024 * 1024,
+  }),
+).map((project) => {
+  const file = join(project.path, "package.json");
+  return { ...project, file, json: JSON.parse(readFileSync(file, "utf8")) };
+});
+const versionOf = new Map(
+  projects
+    .filter(({ name }) => name)
+    .map(({ name, version }) => [name, version]),
+);
 
 // What's an adapter is where it lives, so a new one is checked without being
 // listed here.
-const released = manifests("packages");
-const adapters = manifests("adapters");
-const packages = [...released, ...adapters];
-const isAdapter = (name) => adapters.some(({ json }) => json.name === name);
-// examples and benchmarks model a real consumer install, so their ranges are
-// checked but their own versions are not part of the release set.
-//
-// Found by looking rather than by naming a depth: a benchmark implementation
-// sits several levels inside the layout its driver expects, and a guard that
-// knows where consumers live is a guard that stops covering the next one.
-function consumers(dir) {
-  const base = join(root, dir);
-  if (!existsSync(base)) return [];
-  const found = [];
-  for (const entry of readdirSync(base, { withFileTypes: true })) {
-    if (entry.name === "node_modules") continue;
-    if (entry.isDirectory()) {
-      found.push(...consumers(join(dir, entry.name)));
-    } else if (entry.name === "package.json") {
-      const file = join(base, entry.name);
-      found.push({ file, json: JSON.parse(readFileSync(file, "utf8")) });
-    }
-  }
-  return found;
-}
-
-const consuming = [
-  ...consumers("examples"),
-  ...consumers("benchmarks"),
-  ...consumers("apps"),
-];
+const directlyIn = (dir) =>
+  projects.filter(({ path }) => dirname(path) === join(root, dir));
+const released = directlyIn("packages");
+const adapters = directlyIn("adapters");
 
 const errors = [];
 
@@ -91,12 +73,6 @@ for (const { file, json } of adapters) {
   }
 }
 
-// What a range pointing at each package must pin.
-const expectedOf = (name) =>
-  isAdapter(name)
-    ? adapters.find(({ json }) => json.name === name)?.json.version
-    : expected;
-
 const dependencyFields = [
   "dependencies",
   "devDependencies",
@@ -104,15 +80,34 @@ const dependencyFields = [
   "optionalDependencies",
 ];
 
-for (const { file, json } of [...packages, ...consuming]) {
+// One form for every reference to a workspace project, the one a user writes:
+// `^` and that project's version, as `"@backtickjs/core": "^0.1.8"`.
+for (const { file, json } of projects) {
   for (const field of dependencyFields) {
     for (const [name, range] of Object.entries(json[field] ?? {})) {
-      if (!name.startsWith("@backtickjs/")) continue;
-      if (range.startsWith("workspace:")) continue;
-      if (range === `^${expectedOf(name)}`) continue;
+      if (!versionOf.has(name) || range === `^${versionOf.get(name)}`) continue;
       errors.push(
         `${file.slice(root.length)}: ${field}["${name}"] is "${range}", ` +
-          `expected "^${expectedOf(name)}" or a workspace: range`,
+          `expected "^${versionOf.get(name)}"`,
+      );
+    }
+  }
+}
+
+// And each of those references linked to the project itself: a range the
+// local version doesn't satisfy would be installed from npm without a word,
+// and tests would run against what's published rather than what's here.
+for (const { file, ...resolved } of projects) {
+  for (const field of [
+    "dependencies",
+    "devDependencies",
+    "optionalDependencies",
+  ]) {
+    for (const [name, { version }] of Object.entries(resolved[field] ?? {})) {
+      if (!versionOf.has(name) || version.startsWith("link:")) continue;
+      errors.push(
+        `${file.slice(root.length)}: ${field}["${name}"] resolved to ` +
+          `${version} from the registry, not to the workspace's own`,
       );
     }
   }
@@ -126,5 +121,5 @@ if (errors.length > 0) {
 console.log(
   `✓ ${released.length} packages at ${expected}, ` +
     `${adapters.length} adapter(s) at their framework's version, ` +
-    `all @backtickjs ranges consistent`,
+    `every workspace reference "^<version>" and linked`,
 );

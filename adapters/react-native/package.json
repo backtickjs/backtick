@@ -47,15 +47,15 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/core": "workspace:^0.1.0",
-    "@backtickjs/react": "workspace:^19.2.3",
+    "@backtickjs/core": "^0.1.8",
+    "@backtickjs/react": "^19.2.3",
     "react-native": "0.86.3"
   },
   "devDependencies": {
-    "@backtickjs/compiler": "workspace:^0.1.0",
-    "@backtickjs/prettier-plugin": "workspace:*",
-    "@backtickjs/tsc": "workspace:^0.1.0",
-    "@backtickjs/tspatch-plugin": "workspace:^0.1.0",
+    "@backtickjs/compiler": "^0.1.8",
+    "@backtickjs/prettier-plugin": "^0.1.8",
+    "@backtickjs/tsc": "^0.1.8",
+    "@backtickjs/tspatch-plugin": "^0.1.8",
     "prettier": "^3.6.2",
     "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"

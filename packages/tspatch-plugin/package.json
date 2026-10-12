@@ -48,7 +48,7 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/compiler": "workspace:*"
+    "@backtickjs/compiler": "^0.1.8"
   },
   "peerDependencies": {
     "ts-patch": "^4.0.1",
