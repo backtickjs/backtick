@@ -1,6 +1,6 @@
 # @backtickjs/builds
 
-Keeps a [Backtick](https://backtickjs.com) server drawing for every build of its React Native app that's still in users' hands. A store build carries the packages it was built with, at those versions, for as long as it's installed. Your server moves on. Each build sends an id that names its packages, and the server bundles its screens for exactly those packages, or refuses a build it can't serve.
+Keeps a [Backtick](https://backtickjs.com) server drawing for every build of its React Native app that's still in users' hands. A store build carries the modules it was built with, at their versions, for as long as it's installed. Your server moves on. Each build sends an id that names its modules, and the server bundles its screens for exactly those modules, or refuses a build it can't serve.
 
 ## Install
 
@@ -26,7 +26,7 @@ npm install @backtickjs/builds
 
    An entry that decides at runtime, like `native() ? require("…") : {}`, is an error. What a platform lacks, its map leaves out.
 
-2. **Each build gets an id:** a hash of the packages its platform's map offers, at their installed versions. `app.config.ts` puts the ids in the app config:
+2. **Each build gets an id:** a hash of the modules its platform's map offers, each at the installed version of its package. `app.config.ts` puts the ids in the app config:
 
    ```ts
    // app.config.ts
@@ -46,7 +46,7 @@ npm install @backtickjs/builds
    const buildId = buildIdFrom(Constants.expoConfig?.extra, Platform.OS);
    ```
 
-4. **The server bundles for that build's packages:**
+4. **The server bundles for that build's modules:**
 
    ```ts
    import { createBuilds } from "@backtickjs/builds";
@@ -54,11 +54,11 @@ npm install @backtickjs/builds
 
    const builds = createBuilds({ projectRoot });
 
-   const packageVersions = builds.packagesOf(buildId);
-   const bundle = await bundler.build({ input, packageVersions });
+   const modules = builds.modulesOf(buildId);
+   const bundle = await bundler.build({ input, modules });
    ```
 
-   To draw differently for builds that lack a package, ask with `supports` from [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler), the same check the bundler makes: `supports(packageVersions, "react-native-fbsdk-next", "^13")`.
+   To draw differently for builds that lack a module, ask with `supports` from [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler), the same check the bundler makes: `supports(modules, "react-native-fbsdk-next", "^13")`.
 
 5. **Every build is registered before it ships,** in `builds/`, one file per id, committed with the code:
 
@@ -70,7 +70,11 @@ npm install @backtickjs/builds
    {
      "createdAt": "2026-10-12T00:00:00.000Z",
      "deprecated": false,
-     "packages": { "react": "19.2.3", "react-native": "0.86.3" }
+     "modules": {
+       "react": "19.2.3",
+       "react/jsx-runtime": "19.2.3",
+       "react-native": "0.86.3"
+     }
    }
    ```
 
@@ -84,7 +88,7 @@ npm install @backtickjs/builds
 
 ## Unknown and deprecated builds
 
-`packagesOf` throws for a build its server can't draw for:
+`modulesOf` throws for a build its server can't draw for:
 
 - **`UnknownBuild`**: no id, or one that isn't registered. Every build is registered before it ships, so this means the server or the build was deployed wrong, as when a server is rolled back past a build in users' hands. Answer it as a server error.
 - **`DeprecatedBuild`**: a build you retired by setting `"deprecated": true` in its file. Answer it with something your app shell recognises and turns into "update the app", such as HTTP 426. The shell has to know that answer before the build is retired, so ship it in your first build.
@@ -92,14 +96,14 @@ npm install @backtickjs/builds
 ## API
 
 - `buildIds(projectRoot)`: the id of the build the app at `projectRoot` now makes, on `ios`, `android` and `web`.
-- `createBuilds({ projectRoot })`: the app's builds for its server. `packagesOf(buildId)` resolves a build, `installed(platform)` is what this code's build carries, and `unregistered(platform)` says why this code's build couldn't ship, or null. Registered builds are read once. Module maps are only read for an id that isn't registered, as in development after a package change.
+- `createBuilds({ projectRoot })`: the app's builds for its server. `modulesOf(buildId)` resolves a build, `installed(platform)` is what this code's build carries, and `unregistered(platform)` says why this code's build couldn't ship, or null. Registered builds are read once. Module maps are only read for an id that isn't registered, as in development after a package change.
 - `register(projectRoot)`: what `backtick-builds register` runs. A build already registered keeps its `createdAt` and `deprecated`.
-- `readModuleMap(file)`, `moduleMapFile(projectRoot, platform)`, `installedPackages(projectRoot, platform)`, `buildIdOf(packages)`, `readBuilds(directory)`: the steps, for tools of your own.
+- `readModuleMap(file)`, `moduleMapFile(projectRoot, platform)`, `installedModules(projectRoot, platform)`, `buildIdOf(modules)`, `readBuilds(directory)`: the steps, for tools of your own.
 
 ## Related
 
 - [`@backtickjs/react-native-client`](https://github.com/backtickjs/backtick/tree/main/packages/react-native-client): `evaluate` and `buildIdFrom`, in the app
-- [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): bundles a screen for a build's packages, and `supports`
+- [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): bundles a screen for a build's modules, and `supports`
 
 ## License
 

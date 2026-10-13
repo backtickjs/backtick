@@ -47,8 +47,9 @@ On each request, bundle it for the versions the app provides:
 ```tsx
 const bundle = await bundler.build({
   input: <Home />,
-  packageVersions: {
+  modules: {
     react: "19.2.3",
+    "react/jsx-runtime": "19.2.3",
     "react-native": "0.86.3",
     "@react-navigation/native": "7.5.0",
   },
@@ -58,11 +59,9 @@ const bundle = await bundler.build({
 In the app, offer React Navigation to bundles by the name the adapter imports it from:
 
 ```tsx
-import * as Navigation from "@react-navigation/native";
-
-const modules = {
+const moduleMap = {
   // …react, react/jsx-runtime, react-native
-  "@react-navigation/native": Navigation,
+  "@react-navigation/native": () => require("@react-navigation/native"),
 };
 ```
 

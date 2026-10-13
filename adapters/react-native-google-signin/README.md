@@ -40,11 +40,10 @@ const SignInWithGoogle = cs`(props: { onToken: (idToken: string) => void }) => (
 On each request, bundle it for the versions the app provides, `"@react-native-google-signin/google-signin": "16.1.5"` among them. In the app, offer it to bundles by the name the adapter imports it from:
 
 ```tsx
-import * as GoogleSignIn from "@react-native-google-signin/google-signin";
-
-const modules = {
+const moduleMap = {
   // …react, react/jsx-runtime, react-native
-  "@react-native-google-signin/google-signin": GoogleSignIn,
+  "@react-native-google-signin/google-signin": () =>
+    require("@react-native-google-signin/google-signin"),
 };
 ```
 

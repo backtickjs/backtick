@@ -20,6 +20,7 @@ import {
   object,
 } from "../print/code.js";
 import type { Names } from "../print/code.js";
+import type { Modules } from "../modules.js";
 
 /**
  * A bundle as it is built, before it is printed: each script's module it
@@ -69,9 +70,9 @@ const rootScope = (): Scope => ({ bindings: new Set(), read: new Set() });
 // unique name, so there is nothing to disambiguate and nothing to rename.
 export async function buildBundle(
   value: unknown,
-  packageVersions: Readonly<Record<string, string>>,
+  provided: Modules,
 ): Promise<BundleTree> {
-  const names = createNames(packageVersions);
+  const names = createNames(provided);
   // Each script's number, in the order rendering first reaches it. Two
   // scripts written at one source location are one declaration, so the first
   // script with an id stands for all of them, and a reference to a shared

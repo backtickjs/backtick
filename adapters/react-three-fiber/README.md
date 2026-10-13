@@ -52,10 +52,11 @@ On each request, bundle it for the versions the app provides:
 ```tsx
 const bundle = await bundler.build({
   input: <Home />,
-  packageVersions: {
+  modules: {
     react: "19.2.3",
+    "react/jsx-runtime": "19.2.3",
     "react-native": "0.86.3",
-    "@react-three/fiber": "9.8.1",
+    "@react-three/fiber/native": "9.8.1",
   },
 });
 ```
@@ -63,11 +64,9 @@ const bundle = await bundler.build({
 In the app, offer R3F to bundles by the name the adapter imports it from:
 
 ```tsx
-import * as FiberNative from "@react-three/fiber/native";
-
-const modules = {
+const moduleMap = {
   // …react, react/jsx-runtime, react-native
-  "@react-three/fiber/native": FiberNative,
+  "@react-three/fiber/native": () => require("@react-three/fiber/native"),
 };
 ```
 

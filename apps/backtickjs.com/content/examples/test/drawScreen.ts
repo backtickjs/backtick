@@ -7,40 +7,38 @@ import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNativeWeb from "react-native-web";
 
 // A screen as the app draws it: bundled as the server bundles it, then run
-// with React Native's web build standing in for React Native. `packages` are
-// what else the app provides, each a module at a version.
+// with React Native's web build standing in for React Native. `modules` are
+// what else the app provides, each by specifier, at a version.
 export async function drawScreen(
   input: BuildOptions["input"],
-  packages: Packages = {},
+  modules: Provided = {},
 ): Promise<React.ReactNode> {
-  const { code } = await bundleScreen(input, packages);
+  const { code } = await bundleScreen(input, modules);
   return evaluate(code, {
     react: () => React,
     "react/jsx-runtime": () => JSXRuntime,
     "react-native": () => ReactNativeWeb,
     ...Object.fromEntries(
-      Object.entries(packages).map(([name, { module }]) => [
-        name,
-        () => module,
-      ]),
+      Object.entries(modules).map(([name, { module }]) => [name, () => module]),
     ),
   }) as React.ReactNode;
 }
 
-type Packages = Record<string, { version: string; module: unknown }>;
+type Provided = Record<string, { version: string; module: unknown }>;
 
 // The bundle the server sends for a screen.
 export async function bundleScreen(
   input: BuildOptions["input"],
-  packages: Packages = {},
+  modules: Provided = {},
 ) {
   const bundle = await bundler.build({
     input,
-    packageVersions: {
+    modules: {
       react: "19.2.3",
+      "react/jsx-runtime": "19.2.3",
       "react-native": "0.86.3",
       ...Object.fromEntries(
-        Object.entries(packages).map(([name, { version }]) => [name, version]),
+        Object.entries(modules).map(([name, { version }]) => [name, version]),
       ),
     },
   });

@@ -62,7 +62,7 @@ const greet = createImport<() => string>({
 // In a script: cs`<p>{$greet()}</p>`
 ```
 
-The client must provide that package, and the server must list it in the bundler's `packageVersions` at a version in that range.
+The client must provide that package, and the server must list it in the bundler's `modules` at a version in that range.
 
 ## API
 

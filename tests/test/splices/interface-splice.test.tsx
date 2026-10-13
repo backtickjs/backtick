@@ -69,7 +69,7 @@ export const unchecked = todo satisfies Spliceable;
 
 // The bundler takes what a splice takes.
 it("bundles an interface as input", async () => {
-  const bundle = await bundler.build({ input: todo, packageVersions: {} });
+  const bundle = await bundler.build({ input: todo, modules: {} });
   assert.match(bundle.generate({ format: "es" }).code, /"Ship 0\.1\.5"/);
 });
 
@@ -78,5 +78,5 @@ export const refusedInput = () =>
   bundler.build({
     // @ts-expect-error: Type 'WithMethod' is not assignable to type 'Spliceable'.
     input: withMethod,
-    packageVersions: {},
+    modules: {},
   });

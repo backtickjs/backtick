@@ -77,7 +77,11 @@ import { Home } from "./Home.js";
 const element = <Home />;
 const bundle = await bundler.build({
   input: cs`$createRoot(document.getElementById("app")!).render($element)`,
-  packageVersions: { react: "19.2.3", "react-dom": "19.2.3" },
+  modules: {
+    react: "19.2.3",
+    "react/jsx-runtime": "19.2.3",
+    "react-dom/client": "19.2.3",
+  },
 });
 const { code } = bundle.generate({ format: "es" });
 ```

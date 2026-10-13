@@ -33,11 +33,9 @@ const nonce = cs`async () => {
 On each request, bundle it for the versions the app provides, `"expo-crypto": "57.0.4"` among them. In the app, offer it to bundles by the name the adapter imports it from:
 
 ```tsx
-import * as ExpoCrypto from "expo-crypto";
-
-const modules = {
+const moduleMap = {
   // …react, react/jsx-runtime, react-native
-  "expo-crypto": ExpoCrypto,
+  "expo-crypto": () => require("expo-crypto"),
 };
 ```
 

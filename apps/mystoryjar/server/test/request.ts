@@ -10,5 +10,5 @@ export const request: ScreenRequest = {
   theme: "light",
   query: {},
   // the web build's, which tests draw with
-  packages: builds.installed("web"),
+  modules: builds.installed("web"),
 };

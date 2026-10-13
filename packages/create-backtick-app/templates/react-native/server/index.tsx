@@ -15,8 +15,9 @@ const run = crypto.randomUUID();
 // for apps of many versions would tell them apart, by their user agent for
 // one, and bundle each for its own.
 const require = createRequire(import.meta.url);
-const packageVersions = {
+const modules = {
   react: require("react/package.json").version,
+  "react/jsx-runtime": require("react/package.json").version,
   "react-native": require("react-native/package.json").version,
 };
 
@@ -29,7 +30,7 @@ const server = createServer(async (request, response) => {
   }
   if (request.url === "/home") {
     try {
-      const bundle = await bundler.build({ input: <Home />, packageVersions });
+      const bundle = await bundler.build({ input: <Home />, modules });
       const { code } = bundle.generate({ format: "cjs" });
       response.setHeader("content-type", "text/javascript");
       response.end(code);

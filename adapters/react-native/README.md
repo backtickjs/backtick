@@ -77,7 +77,11 @@ import { Home } from "./Home.js";
 
 const bundle = await bundler.build({
   input: <Home />,
-  packageVersions: { react: "19.2.3", "react-native": "0.86.3" },
+  modules: {
+    react: "19.2.3",
+    "react/jsx-runtime": "19.2.3",
+    "react-native": "0.86.3",
+  },
 });
 const { code } = bundle.generate({ format: "cjs" });
 ```

@@ -4,7 +4,11 @@ import { render } from "@backtickjs/solid-js/web";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 
 // The version of Solid the page loads, below: what each page is bundled for.
-const packageVersions = { "solid-js": "1.9.14" };
+const modules = {
+  "solid-js": "1.9.14",
+  "solid-js/store": "1.9.14",
+  "solid-js/web": "1.9.14",
+};
 
 // Development is only what `npm start` runs, which sets NODE_ENV: any other
 // run, a deploy included, is production.
@@ -28,7 +32,7 @@ const reload = `
 export async function toHtml(element: JSX.Element): Promise<string> {
   const bundle = await bundler.build({
     input: cs`$render(() => $element, document.getElementById("app")!)`,
-    packageVersions,
+    modules,
   });
   // In development, a map back to the files you wrote, for the browser's
   // devtools.

@@ -1,5 +1,5 @@
 import type { ClientImport } from "@backtickjs/core";
-import { packageOf, supports } from "../packages.js";
+import { type Modules, supports } from "../modules.js";
 
 // What a bundle is written as, and the one place its conventions live: how a
 // name is written, how a literal escapes, and how an element is written as JSX
@@ -9,17 +9,15 @@ const IDENTIFIER = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
 
 /**
  * What a bundle imports, keyed by specifier and export, each bound once; and
- * the packages it may import them from, which the client provides, by version.
+ * the modules it may import them from, which the client provides, by version.
  */
 export interface Names {
   readonly imports: Map<string, { from: string; name: string; local: string }>;
-  readonly packageVersions: Readonly<Record<string, string>>;
+  readonly modules: Modules;
 }
 
-export function createNames(
-  packageVersions: Readonly<Record<string, string>>,
-): Names {
-  return { imports: new Map(), packageVersions };
+export function createNames(modules: Modules): Names {
+  return { imports: new Map(), modules };
 }
 
 // A string, as a literal: `<` escaped, so no `</script>` or `<!--` appears
@@ -87,21 +85,20 @@ export function imported(
 ): string {
   // Where a script's import is written: a plugin's own (a framework's compile
   // step) are the plugin's, trusted as it is.
-  const pkg = packageOf(from);
-  const provided = names.packageVersions[pkg];
+  const provided = names.modules[from];
   if (provided === undefined) {
-    const packages = Object.entries(names.packageVersions).map(
-      ([provided, at]) => `${provided}@${at}`,
+    const listed = Object.entries(names.modules).map(
+      ([specifier, at]) => `${specifier}@${at}`,
     );
     throw new Error(
       `Can't import \`${name}\` from "${from}": the client provides ` +
-        `${packages.join(", ") || "no packages"}.`,
+        `${listed.join(", ") || "no modules"}.`,
     );
   }
-  if (!supports(names.packageVersions, pkg, version)) {
+  if (!supports(names.modules, from, version)) {
     throw new Error(
-      `Can't import \`${name}\` from "${from}": it needs ${pkg}@${version}, ` +
-        `and the client provides ${pkg}@${provided}.`,
+      `Can't import \`${name}\` from "${from}": it needs ${version}, and ` +
+        `the client provides ${from}@${provided}.`,
     );
   }
   const key = `${from}\0${name}`;

@@ -1,7 +1,7 @@
 import { buildIds } from "@backtickjs/builds";
 import type { ConfigContext, ExpoConfig } from "expo/config";
 
-// app.json, with this build's id on each platform, which names the packages
+// app.json, with this build's id on each platform, which names the modules
 // it carries there: the app sends its own, and the server bundles screens
 // for them.
 export default ({ config, projectRoot }: ConfigContext): ExpoConfig =>

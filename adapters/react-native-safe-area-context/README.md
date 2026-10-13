@@ -40,8 +40,9 @@ On each request, bundle it for the versions the app provides:
 ```tsx
 const bundle = await bundler.build({
   input: <Home />,
-  packageVersions: {
+  modules: {
     react: "19.2.3",
+    "react/jsx-runtime": "19.2.3",
     "react-native": "0.86.3",
     "react-native-safe-area-context": "5.7.0",
   },
@@ -51,11 +52,10 @@ const bundle = await bundler.build({
 In the app, offer it to bundles by the name the adapter imports it from:
 
 ```tsx
-import * as SafeArea from "react-native-safe-area-context";
-
-const modules = {
+const moduleMap = {
   // …react, react/jsx-runtime, react-native
-  "react-native-safe-area-context": SafeArea,
+  "react-native-safe-area-context": () =>
+    require("react-native-safe-area-context"),
 };
 ```
 

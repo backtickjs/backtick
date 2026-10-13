@@ -4,14 +4,18 @@ import { db } from "./db.js";
 import { Home } from "./Home.js";
 
 // The versions of React and React Native your app ships.
-const packageVersions = { react: "19.2.3", "react-native": "0.86.3" };
+const modules = {
+  react: "19.2.3",
+  "react/jsx-runtime": "19.2.3",
+  "react-native": "0.86.3",
+};
 
 createServer(async (request, response) => {
   if (request.url === "/screens/home") {
     const user = await db.userFor(request.headers.authorization);
     const bundle = await bundler.build({
       input: <Home user={user} />,
-      packageVersions,
+      modules,
     });
     const { code } = bundle.generate({ format: "cjs" });
     response.setHeader("content-type", "text/javascript");

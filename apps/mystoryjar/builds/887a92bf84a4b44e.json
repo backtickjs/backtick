@@ -1,7 +1,7 @@
 {
-  "createdAt": "2026-10-12T00:00:00.000Z",
+  "createdAt": "2026-10-13T04:02:39.767Z",
   "deprecated": false,
-  "packages": {
+  "modules": {
     "@react-navigation/native": "7.5.0",
     "expo-apple-authentication": "57.0.2",
     "expo-crypto": "57.0.4",
@@ -12,6 +12,7 @@
     "react": "19.2.3",
     "react-native": "0.86.3",
     "react-native-safe-area-context": "5.7.0",
-    "react-native-svg": "15.15.4"
+    "react-native-svg": "15.15.4",
+    "react/jsx-runtime": "19.2.3"
   }
 }

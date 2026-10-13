@@ -16,10 +16,12 @@ const run = crypto.randomUUID();
 // for apps of many versions would tell them apart, by their user agent for
 // one, and bundle each for its own.
 const require = createRequire(import.meta.url);
-const packageVersions = {
+const modules = {
   react: require("react/package.json").version,
+  "react/jsx-runtime": require("react/package.json").version,
   "react-native": require("react-native/package.json").version,
-  "@react-three/fiber": require("@react-three/fiber/package.json").version,
+  "@react-three/fiber/native": require("@react-three/fiber/package.json")
+    .version,
 };
 
 const server = createServer(async (request, response) => {
@@ -34,7 +36,7 @@ const server = createServer(async (request, response) => {
   if (request.url === "/game") {
     try {
       const start = performance.now();
-      const bundle = await bundler.build({ input: <Game />, packageVersions });
+      const bundle = await bundler.build({ input: <Game />, modules });
       const built = performance.now();
       const { code } = bundle.generate({ format: "cjs" });
       const generated = performance.now();

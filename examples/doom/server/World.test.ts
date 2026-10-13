@@ -18,10 +18,12 @@ import { type Input, type Stats, World, type WorldProps } from "./World.js";
 // web build standing in for its native one: the test renderer draws it
 // without a GPU.
 const require = createRequire(import.meta.url);
-const packageVersions = {
+const modules = {
   react: require("react/package.json").version,
+  "react/jsx-runtime": require("react/package.json").version,
   "react-native": require("react-native/package.json").version,
-  "@react-three/fiber": require("@react-three/fiber/package.json").version,
+  "@react-three/fiber/native": require("@react-three/fiber/package.json")
+    .version,
 };
 const moduleMap = {
   react: () => React,
@@ -30,7 +32,7 @@ const moduleMap = {
 };
 
 // `World` as the phone gets it: bundled by the server, run by the app.
-const bundle = await bundler.build({ input: World, packageVersions });
+const bundle = await bundler.build({ input: World, modules });
 const PlayedWorld = evaluate(
   bundle.generate({ format: "cjs" }).code,
   moduleMap,

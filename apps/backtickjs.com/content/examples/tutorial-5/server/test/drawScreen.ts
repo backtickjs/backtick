@@ -10,8 +10,9 @@ import * as ReactNativeWeb from "react-native-web";
 // Native's web build standing in for React Native. Add a package here when
 // your app provides one.
 const require = createRequire(import.meta.url);
-const packageVersions = {
+const modules = {
   react: require("react/package.json").version,
+  "react/jsx-runtime": require("react/package.json").version,
   "react-native": require("react-native/package.json").version,
 };
 const moduleMap = {
@@ -23,7 +24,7 @@ const moduleMap = {
 // A screen, bundled as your server bundles it and run as your app runs it,
 // for Testing Library to draw.
 export async function drawScreen(input: Spliceable): Promise<React.ReactNode> {
-  const bundle = await bundler.build({ input, packageVersions });
+  const bundle = await bundler.build({ input, modules });
   const { code } = bundle.generate({ format: "cjs" });
   return evaluate(code, moduleMap) as React.ReactNode;
 }

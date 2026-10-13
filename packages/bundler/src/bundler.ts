@@ -1,14 +1,15 @@
 import type { Spliceable, SplicesAs } from "@backtickjs/core";
 import { buildBundle } from "./bundle/buildBundle.js";
+import type { Modules } from "./modules.js";
 import { printBundle } from "./print/printBundle.js";
 
 export interface BuildOptions<T = Spliceable> {
   // What to bundle: what a splice could carry, checked as a splice checks it.
   readonly input: T;
-  // The packages the client provides, each at its exact version: left out of
-  // the bundle, which requires them. A script's import from any other, or
-  // needing a version it doesn't have, throws.
-  readonly packageVersions: Readonly<Record<string, string>>;
+  // The modules the client provides, by specifier, each at its package's
+  // exact version: left out of the bundle, which requires them. A script's
+  // import from any other, or needing a version it doesn't have, throws.
+  readonly modules: Modules;
 }
 
 export interface OutputOptions {
@@ -37,7 +38,7 @@ export interface Bundle {
  * What runs your components and hands back what they drew, shaped as Rollup
  * is: a build, then output from it.
  *
- *     const bundle = await bundler.build({ input: <Home />, packageVersions });
+ *     const bundle = await bundler.build({ input: <Home />, modules });
  *     const { code, map } = bundle.generate({ format: "es", sourcemap: "hidden" });
  *
  * The module's default export is the value (CommonJS: `module.exports`). A
@@ -47,11 +48,11 @@ export interface Bundle {
 export const bundler = {
   async build<T extends [T] extends [SplicesAs<T>] ? unknown : Spliceable>({
     input,
-    packageVersions,
+    modules,
   }: BuildOptions<T>): Promise<Bundle> {
     // Scripts come compiled for their framework when their host was built, so
     // the bundle is only put together: nothing is compiled or parsed here.
-    const tree = await buildBundle(input, packageVersions);
+    const tree = await buildBundle(input, modules);
     return {
       generate: ({ format, sourcemap = false }) => {
         const { code, map } = printBundle(tree, format);

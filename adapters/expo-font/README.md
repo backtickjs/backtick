@@ -40,8 +40,9 @@ On each request, bundle it for the versions the app provides:
 ```tsx
 const bundle = await bundler.build({
   input: <Home />,
-  packageVersions: {
+  modules: {
     react: "19.2.3",
+    "react/jsx-runtime": "19.2.3",
     "react-native": "0.86.3",
     "expo-font": "57.0.4",
   },
@@ -51,11 +52,9 @@ const bundle = await bundler.build({
 In the app, offer expo-font to bundles by the name the adapter imports it from:
 
 ```tsx
-import * as Font from "expo-font";
-
-const modules = {
+const moduleMap = {
   // …react, react/jsx-runtime, react-native
-  "expo-font": Font,
+  "expo-font": () => require("expo-font"),
 };
 ```
 

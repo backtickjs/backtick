@@ -40,7 +40,11 @@ export async function drawReactNative(name: string, source: string) {
   const { screen } = await import(file);
   const built = await bundler.build({
     input: screen,
-    packageVersions: { react: "19.2.3", "react-native": "0.86.3" },
+    modules: {
+      react: "19.2.3",
+      "react/jsx-runtime": "19.2.3",
+      "react-native": "0.86.3",
+    },
   });
   const drawn = evaluate(built.generate({ format: "cjs" }).code, {
     react: () => React,

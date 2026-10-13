@@ -16,10 +16,14 @@ For React Native, write CommonJS and serve it; the app fetches it and runs it wi
 import { bundler } from "@backtickjs/bundler";
 import { Home } from "./Home.js";
 
-const packageVersions = { react: "19.2.3", "react-native": "0.86.3" };
+const modules = {
+  react: "19.2.3",
+  "react/jsx-runtime": "19.2.3",
+  "react-native": "0.86.3",
+};
 
 // In a request handler:
-const bundle = await bundler.build({ input: <Home />, packageVersions });
+const bundle = await bundler.build({ input: <Home />, modules });
 const { code } = bundle.generate({ format: "cjs" });
 response.setHeader("content-type", "text/javascript");
 response.end(code);
@@ -36,14 +40,20 @@ import { Home } from "./Home.js";
 const element = <Home />;
 const bundle = await bundler.build({
   input: cs`$createRoot(document.getElementById("app")!).render($element)`,
-  packageVersions: { react: "19.2.3", "react-dom": "19.2.3" },
+  modules: {
+    react: "19.2.3",
+    "react/jsx-runtime": "19.2.3",
+    "react-dom/client": "19.2.3",
+  },
 });
 const { code } = bundle.generate({ format: "es", sourcemap: "inline" });
 ```
 
-### `packageVersions`
+### `modules`
 
-The packages the client provides, each at its exact version. The server decides which versions to bundle for: one app version, or one per client if your server tells them apart. Those packages are left out of the bundle, which imports (`es`) or requires (`cjs`) them. `build` rejects a script that imports from any other package, or whose import needs a range that doesn't include the version given: an adapter's (`^19.2.3` for `@backtickjs/react`) or one written with `createImport`.
+The modules the client provides, by specifier, each at the exact version of the package it comes from: `"react-dom/client": "19.2.3"`. The server decides which to bundle for: one app version, or one per build with [`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds). Those modules are left out of the bundle, which imports (`es`) or requires (`cjs`) them. `build` rejects a script that imports from any other module, or whose import needs a range that doesn't include the version given: an adapter's (`^19.2.3` for `@backtickjs/react`) or one written with `createImport`.
+
+`supports(modules, specifier, range)` makes the same check, for a server choosing what to draw for a client: `supports(modules, "expo-haptics", "^15")`.
 
 ### What crosses into a script
 
@@ -60,7 +70,7 @@ Spliced values are written into the bundle as data, never as code. What can't cr
 
 ## API
 
-- `bundler.build({ input, packageVersions })`: runs the server components in `input` and returns a `Bundle`. Async.
+- `bundler.build({ input, modules })`: runs the server components in `input` and returns a `Bundle`. Async.
 - `Bundle.generate({ format, sourcemap })`: writes the bundle; returns `{ code, map }`, where `map` is `null` without a source map.
 - Types: `BuildOptions`, `OutputOptions`, `OutputChunk`, `Bundle`.
 

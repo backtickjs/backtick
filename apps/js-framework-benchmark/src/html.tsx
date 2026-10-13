@@ -5,7 +5,11 @@ import { Main } from "./Main.js";
 
 const bundle = await bundler.build({
   input: cs`$render(() => ${(<Main />)}, document.getElementById("main")!)`,
-  packageVersions: { "solid-js": "1.9.14" },
+  modules: {
+    "solid-js": "1.9.14",
+    "solid-js/store": "1.9.14",
+    "solid-js/web": "1.9.14",
+  },
 });
 
 const { code } = bundle.generate({ format: "es" });

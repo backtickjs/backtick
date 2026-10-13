@@ -32,7 +32,7 @@ describe("a spliced undefined", () => {
   it("is written as `undefined`", async () => {
     const bundle = await bundler.build({
       input: [undefined],
-      packageVersions: {},
+      modules: {},
     });
     const { code } = bundle.generate({ format: "es" });
     assert.match(code, /\[undefined\]/);

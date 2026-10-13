@@ -4,7 +4,11 @@ import { createRoot } from "@backtickjs/react/client";
 import type { JSX } from "@backtickjs/react/jsx-runtime";
 
 // The versions of React the page loads, below: what each page is bundled for.
-const packageVersions = { react: "19.2.3", "react-dom": "19.2.3" };
+const modules = {
+  react: "19.2.3",
+  "react/jsx-runtime": "19.2.3",
+  "react-dom/client": "19.2.3",
+};
 
 // Development is only what `npm start` runs, which sets NODE_ENV: any other
 // run, a deploy included, is production.
@@ -28,7 +32,7 @@ const reload = `
 export async function toHtml(element: JSX.Element): Promise<string> {
   const bundle = await bundler.build({
     input: cs`$createRoot(document.getElementById("app")!).render($element)`,
-    packageVersions,
+    modules,
   });
   // In development, a map back to the files you wrote, for the browser's
   // devtools.

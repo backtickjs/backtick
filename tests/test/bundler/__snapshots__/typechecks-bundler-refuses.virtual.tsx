@@ -86,7 +86,7 @@ it("a symbol typed as any", async () => {
   });
 });
 
-// By design: what the app provides is the server's `packageVersions`, which
+// By design: what the app provides is the server's `modules`, which
 // only the bundler reads.
 it("an import from a package the app doesn't provide", async () => {
   const missing = createImport<() => void>({
@@ -96,6 +96,6 @@ it("an import from a package the app doesn't provide", async () => {
   });
   await assert.rejects(bundle(cs.lift((() => (cs.splice((missing)))())())), {
     message:
-      'Can\'t import `track` from "analytics": the client provides solid-js@1.9.14, app@1.0.0, acme-ui@1.0.0.',
+      'Can\'t import `track` from "analytics": the client provides solid-js@1.9.14, solid-js/store@1.9.14, solid-js/web@1.9.14, app@1.0.0, acme-ui@1.0.0.',
   });
 });

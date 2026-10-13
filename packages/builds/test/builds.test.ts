@@ -103,7 +103,26 @@ it("names each platform's build by its packages", () => {
   const ids = buildIds(mobile());
   assert.equal(ids.ios, ids.android);
   assert.notEqual(ids.ios, ids.web);
-  assert.equal(ids.web, buildIdOf({ react: "19.2.3" }));
+  assert.equal(
+    ids.web,
+    buildIdOf({ react: "19.2.3", "react/jsx-runtime": "19.2.3" }),
+  );
+});
+
+it("names a build by the modules it offers, not only their packages", () => {
+  // a later build offers another module from a package it already had
+  const before = buildIds(mobile());
+  const after = buildIds(
+    app(
+      {
+        "moduleMap.ts": map("react", "react/jsx-runtime", "fbsdk", "fbsdk/x"),
+        "moduleMap.web.ts": map("react", "react/jsx-runtime"),
+      },
+      { react: "19.2.3", fbsdk: "13.4.3" },
+    ),
+  );
+  assert.notEqual(after.ios, before.ios);
+  assert.equal(after.web, before.web);
 });
 
 describe("a server's builds", () => {
@@ -111,11 +130,15 @@ describe("a server's builds", () => {
     const root = mobile();
     const builds = createBuilds({ projectRoot: root });
     const ids = buildIds(root);
-    assert.deepEqual(builds.packagesOf(ids.ios), {
+    assert.deepEqual(builds.modulesOf(ids.ios), {
       fbsdk: "13.4.3",
       react: "19.2.3",
+      "react/jsx-runtime": "19.2.3",
     });
-    assert.deepEqual(builds.packagesOf(ids.web), { react: "19.2.3" });
+    assert.deepEqual(builds.modulesOf(ids.web), {
+      react: "19.2.3",
+      "react/jsx-runtime": "19.2.3",
+    });
   });
 
   it("resolves a registered build after the code moves on", () => {
@@ -127,13 +150,13 @@ describe("a server's builds", () => {
       JSON.stringify({ name: "fbsdk", version: "14.0.0" }),
     );
     const builds = createBuilds({ projectRoot: root });
-    assert.equal(builds.packagesOf(ios!.id).fbsdk, "13.4.3");
+    assert.equal(builds.modulesOf(ios!.id).fbsdk, "13.4.3");
   });
 
   it("refuses a build it doesn't know, or none", () => {
     const builds = createBuilds({ projectRoot: mobile() });
-    assert.throws(() => builds.packagesOf("0123456789abcdef"), UnknownBuild);
-    assert.throws(() => builds.packagesOf(null), /No build id was sent/);
+    assert.throws(() => builds.modulesOf("0123456789abcdef"), UnknownBuild);
+    assert.throws(() => builds.modulesOf(null), /No build id was sent/);
   });
 
   it("refuses a build deprecated on purpose", () => {
@@ -142,7 +165,7 @@ describe("a server's builds", () => {
     const build = JSON.parse(readFileSync(ios!.file, "utf8"));
     writeFileSync(ios!.file, JSON.stringify({ ...build, deprecated: true }));
     const builds = createBuilds({ projectRoot: root });
-    assert.throws(() => builds.packagesOf(ios!.id), DeprecatedBuild);
+    assert.throws(() => builds.modulesOf(ios!.id), DeprecatedBuild);
     assert.match(builds.unregistered("ios")!, /is deprecated/);
   });
 });
@@ -153,7 +176,11 @@ describe("registering", () => {
     const [first] = register(root);
     const recorded = JSON.parse(readFileSync(first!.file, "utf8"));
     assert.equal(recorded.deprecated, false);
-    assert.deepEqual(recorded.packages, { fbsdk: "13.4.3", react: "19.2.3" });
+    assert.deepEqual(recorded.modules, {
+      fbsdk: "13.4.3",
+      react: "19.2.3",
+      "react/jsx-runtime": "19.2.3",
+    });
     const [again] = register(root);
     assert.equal(
       JSON.parse(readFileSync(again!.file, "utf8")).createdAt,

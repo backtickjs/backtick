@@ -41,7 +41,7 @@ data the same way. Give it test data through its props, as the test gives
 ## Packages your app provides
 
 When your app provides another package, add it to both lists in `drawScreen.ts`:
-its version to `packageVersions`, as `server/index.tsx` does, and its module to
+its version to `modules`, as `server/index.tsx` does, and its module to
 `moduleMap`, as `App.tsx` does.
 
 A package with native code, like `expo-haptics`, has nothing to run in Node.

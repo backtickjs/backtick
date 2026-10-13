@@ -103,7 +103,7 @@ export async function drawScreen(input: Spliceable): Promise<React.ReactNode> {
   secureStore.clear();
   const bundle = await bundler.build({
     input,
-    packageVersions: builds.installed("web"),
+    modules: builds.installed("web"),
   });
   const { code } = bundle.generate({ format: "cjs" });
   return evaluate(code, testModuleMap) as React.ReactNode;

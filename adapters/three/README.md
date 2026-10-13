@@ -39,7 +39,7 @@ On each request, bundle it for the version the app provides:
 ```tsx
 const bundle = await bundler.build({
   input: <Home />,
-  packageVersions: { react: "19.2.3", three: "0.182.0" },
+  modules: { react: "19.2.3", three: "0.182.0" },
 });
 ```
 

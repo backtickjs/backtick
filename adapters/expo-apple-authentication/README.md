@@ -42,11 +42,9 @@ const SignInWithApple = cs`(props: { onToken: (token: string) => void }) => (
 On each request, bundle it for the versions the app provides, `"expo-apple-authentication": "57.0.2"` among them. In the app, offer it to bundles by the name the adapter imports it from:
 
 ```tsx
-import * as AppleAuthentication from "expo-apple-authentication";
-
-const modules = {
+const moduleMap = {
   // …react, react/jsx-runtime, react-native
-  "expo-apple-authentication": AppleAuthentication,
+  "expo-apple-authentication": () => require("expo-apple-authentication"),
 };
 ```
 

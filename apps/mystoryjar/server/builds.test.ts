@@ -33,7 +33,7 @@ it("draws for the build id the app sent, however it sent it", async () => {
   };
   const ids = buildIds(fileURLToPath(new URL("..", import.meta.url)));
   const web = await screenRequestOf({ ...sent, buildId: ids.web });
-  assert.deepEqual(web.packages, builds.installed("web"));
+  assert.deepEqual(web.modules, builds.installed("web"));
   await assert.rejects(
     screenRequestOf({ ...sent, buildId: "unknown" }),
     UnknownBuild,

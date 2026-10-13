@@ -107,6 +107,6 @@ it("4's server is the template's, with lines added", () => {
     return false;
   });
   assert.deepEqual(missing, [
-    "      const bundle = await bundler.build({ input: <Home />, packageVersions });",
+    "      const bundle = await bundler.build({ input: <Home />, modules });",
   ]);
 });

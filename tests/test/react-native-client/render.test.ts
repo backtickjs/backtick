@@ -59,7 +59,11 @@ it("draws a server's screen with the app's React Native", async () => {
   const { screen } = await import(file);
   const built = await bundler.build({
     input: screen,
-    packageVersions: { react: "19.2.3", "react-native": "0.86.3" },
+    modules: {
+      react: "19.2.3",
+      "react/jsx-runtime": "19.2.3",
+      "react-native": "0.86.3",
+    },
   });
   const { code } = built.generate({ format: "cjs" });
 

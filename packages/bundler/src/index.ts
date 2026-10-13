@@ -5,4 +5,4 @@ export {
   type OutputChunk,
   type OutputOptions,
 } from "./bundler.js";
-export { packageOf, supports } from "./packages.js";
+export { type Modules, supports } from "./modules.js";

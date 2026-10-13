@@ -52,7 +52,7 @@ function Screen({ screen }: { screen: Promise<React.ReactNode> }) {
 
 Wrap the `<Suspense>` in an error boundary to show a screen that couldn't be fetched or run. To fetch again, set a new promise in state. The React Native template of [create-backtick-app](https://github.com/backtickjs/backtick/tree/main/packages/create-backtick-app) has the full version, with the boundary and a refetch whenever the development server restarts.
 
-The server bundles for the versions the app runs: it passes them to `bundler.build` as `packageVersions`, so they should match the packages in your module map.
+The server bundles for the versions the app runs: it passes them to `bundler.build` as `modules`, so they should match the packages in your module map.
 
 ## API
 

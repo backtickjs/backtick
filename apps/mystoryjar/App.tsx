@@ -46,7 +46,7 @@ const server: string = __DEV__
 
 // `fetch` to the server, with the session a sign-in screen kept, the phone's
 // time zone (the server dates stories in it) and this build's id (the server
-// bundles screens for the packages it carries).
+// bundles screens for the modules it carries).
 async function request(path: string): Promise<Response> {
   const headers = new Headers({
     "x-time-zone": Intl.DateTimeFormat().resolvedOptions().timeZone,

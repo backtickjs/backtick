@@ -13,6 +13,6 @@ export function SignUp({ request }: { request: ScreenRequest }) {
       path: "/signin",
     },
   };
-  const AuthForm = authForm(request.packages);
+  const AuthForm = authForm(request.modules);
   return <Screen request={request}>{cs`<$AuthForm {...$form} />`}</Screen>;
 }

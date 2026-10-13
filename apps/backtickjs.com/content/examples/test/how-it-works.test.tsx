@@ -17,7 +17,11 @@ it("bundled: the bundle shown is the bundle built", async () => {
 it("bundled: a hidden map is answered alone", async () => {
   const bundle = await bundler.build({
     input: <Home user={{ id: "u-7", name: "Sam" }} />,
-    packageVersions: { react: "19.2.3", "react-native": "0.86.3" },
+    modules: {
+      react: "19.2.3",
+      "react/jsx-runtime": "19.2.3",
+      "react-native": "0.86.3",
+    },
   });
   const maps = new Map<string, string>();
   const code = write(bundle, maps, "home");

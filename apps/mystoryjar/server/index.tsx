@@ -83,12 +83,12 @@ const server = createServer(async (request, response) => {
       return;
     }
     const started = performance.now();
-    // for the build's packages: a build this server doesn't know throws
+    // for the build's modules: a build this server doesn't know throws
     const screen = await screenRequest(request);
     const input = screenAt(pathname, screen)!;
     const bundle = await bundler.build({
       input,
-      packageVersions: screen.packages,
+      modules: screen.modules,
     });
     const { code } = bundle.generate({ format: "cjs" });
     response.setHeader("content-type", "text/javascript");

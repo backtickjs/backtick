@@ -1,6 +1,6 @@
 import type { IncomingMessage } from "node:http";
 import { readSession, type User } from "./auth/session.js";
-import type { Packages } from "@backtickjs/builds";
+import type { Modules } from "@backtickjs/bundler";
 import { builds } from "./builds.js";
 import { themeOf } from "./preferences.js";
 import type { Theme } from "./ui/theme.js";
@@ -20,8 +20,8 @@ export type ScreenRequest = {
   theme: Theme;
   // the path's query: /edit?id=… has { id: "…" }
   query: Record<string, string>;
-  // the packages the app's build carries, which its screens are bundled for
-  packages: Packages;
+  // the modules the app's build carries, which its screens are bundled for
+  modules: Modules;
 };
 
 /**
@@ -47,7 +47,7 @@ export async function screenRequestOf(sent: {
   buildId: string | null;
   query: Record<string, string>;
 }): Promise<ScreenRequest> {
-  const packages = builds.packagesOf(sent.buildId);
+  const modules = builds.modulesOf(sent.buildId);
   const user = await readSession(sent.session ?? undefined);
   return {
     origin: sent.origin,
@@ -55,7 +55,7 @@ export async function screenRequestOf(sent: {
     user,
     session: sent.session,
     theme: user === null ? "light" : await themeOf(user.uid),
-    packages,
+    modules,
     query: sent.query,
   };
 }

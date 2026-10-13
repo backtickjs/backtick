@@ -15,4 +15,4 @@ export {
   platforms,
   readModuleMap,
 } from "./moduleMap.js";
-export { buildIdOf, installedPackages, type Packages } from "./packages.js";
+export { buildIdOf, installedModules } from "./modules.js";

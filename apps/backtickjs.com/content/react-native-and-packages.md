@@ -63,4 +63,4 @@ When a screen is bundled, the bundler checks it against the version your
 server says the app provides, and refuses a screen the app can't run, before
 anything reaches the phone. [Errors](/docs/errors#cant-import--from--the-client-provides-)
 has the messages. Serving apps of several versions, give each its own
-`packageVersions`, and each gets a screen it can run.
+`modules`, and each gets a screen it can run.
