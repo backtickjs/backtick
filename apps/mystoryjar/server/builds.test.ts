@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, it } from "node:test";
 import {
+  DeprecatedBuild,
   installed,
   packagesOf,
   supports,
@@ -91,4 +92,28 @@ it("draws for the build id the app sent, however it sent it", async () => {
     screenRequestOf({ ...sent, buildId: "unknown" }),
     UnknownBuild,
   );
+});
+
+it("refuses a build deprecated on purpose", () => {
+  const builds = new Map([
+    [
+      "old",
+      {
+        createdAt: "2026-01-01T00:00:00.000Z",
+        deprecated: false,
+        packages: installed.ios,
+      },
+    ],
+    [
+      "retired",
+      {
+        createdAt: "2025-01-01T00:00:00.000Z",
+        deprecated: true,
+        packages: installed.ios,
+      },
+    ],
+  ]);
+  assert.equal(packagesOf("old", builds), installed.ios);
+  assert.throws(() => packagesOf("retired", builds), DeprecatedBuild);
+  assert.throws(() => packagesOf("missing", builds), UnknownBuild);
 });

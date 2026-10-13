@@ -10,17 +10,31 @@ import {
   platforms,
 } from "./packages.js";
 
-// The packages each build of the app carries, by their hash: one file for
-// each, written by `pnpm register-build` and committed with the build's code.
-const directory = new URL("./builds/", import.meta.url);
-const registered = new Map<string, Packages>(
-  readdirSync(directory)
-    .filter((file) => file.endsWith(".json"))
-    .map((file) => [
-      file.slice(0, -".json".length),
-      JSON.parse(readFileSync(new URL(file, directory), "utf8")) as Packages,
-    ]),
-);
+/** A registered build: the packages it carries, and what's known of it. */
+export type Build = {
+  // when `pnpm register-build` first recorded it, as an ISO date
+  createdAt: string;
+  // set to true by hand to stop drawing for it: its users are asked to update
+  deprecated: boolean;
+  packages: Packages;
+};
+
+/**
+ * The builds registered in `directory`, by id: one file each, written by
+ * `pnpm register-build` and committed with the build's code.
+ */
+export function readBuilds(directory: URL): Map<string, Build> {
+  return new Map(
+    readdirSync(directory)
+      .filter((file) => file.endsWith(".json"))
+      .map((file) => [
+        file.slice(0, -".json".length),
+        JSON.parse(readFileSync(new URL(file, directory), "utf8")) as Build,
+      ]),
+  );
+}
+
+const registered = readBuilds(new URL("./builds/", import.meta.url));
 
 /** This project's packages, for each platform: what a build made now carries. */
 export const installed = Object.fromEntries(
@@ -43,11 +57,14 @@ const current = new Map(
  */
 export function unregistered(platform: Platform): string | null {
   const id = packagesHash(installed[platform]);
-  const packages = registered.get(id);
-  if (packages === undefined) {
+  const build = registered.get(id);
+  if (build === undefined) {
     return `No server/builds/${id}.json for ${platform}: run pnpm register-build and commit what it writes.`;
   }
-  if (!isDeepStrictEqual(packages, installed[platform])) {
+  if (build.deprecated) {
+    return `server/builds/${id}.json, ${platform}'s build, is deprecated: its users would only be asked to update.`;
+  }
+  if (!isDeepStrictEqual(build.packages, installed[platform])) {
     return `server/builds/${id}.json isn't ${platform}'s packages: run pnpm register-build.`;
   }
   return null;
@@ -65,15 +82,29 @@ export class UnknownBuild extends Error {
 }
 
 /**
- * The packages of the build with id `buildId`, however it was sent: one made
- * from this code, or a registered build's. Throws `UnknownBuild` for one this
- * server doesn't know, or none.
+ * A build its server no longer draws for, on purpose: its users are asked to
+ * update, as the app shows for the 426 this answers.
  */
-export function packagesOf(buildId: string | null): Packages {
+export class DeprecatedBuild extends Error {
+  constructor(readonly buildId: string) {
+    super(`Build ${JSON.stringify(buildId)} is deprecated.`);
+  }
+}
+
+/**
+ * The packages of the build with id `buildId`, however it was sent: one made
+ * from this code, or one registered in `builds`. Throws `DeprecatedBuild` for
+ * one marked deprecated, and `UnknownBuild` for one this server doesn't
+ * know, or none.
+ */
+export function packagesOf(
+  buildId: string | null,
+  builds: ReadonlyMap<string, Build> = registered,
+): Packages {
+  const build = buildId === null ? undefined : builds.get(buildId);
+  if (build?.deprecated) throw new DeprecatedBuild(buildId!);
   const packages =
-    buildId === null
-      ? undefined
-      : (current.get(buildId) ?? registered.get(buildId));
+    (buildId !== null && current.get(buildId)) || build?.packages;
   if (packages === undefined) throw new UnknownBuild(buildId);
   return packages;
 }

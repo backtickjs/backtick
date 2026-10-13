@@ -3,6 +3,7 @@ import { createServer, type ServerResponse } from "node:http";
 import { bundler } from "@backtickjs/bundler";
 import { answer, callerOf } from "./api.js";
 import { readBackupToken } from "./auth/session.js";
+import { DeprecatedBuild } from "./builds.js";
 import { backupPdf } from "./backup.js";
 import { screenRequest } from "./request.js";
 import { screenAt } from "./routes.js";
@@ -98,6 +99,12 @@ const server = createServer(async (request, response) => {
       console.log(`[server] ${pathname}: ${size} KB in ${time} ms`);
     }
   } catch (error) {
+    // A build retired on purpose: the app asks its user to update.
+    if (error instanceof DeprecatedBuild) {
+      response.statusCode = 426;
+      response.end(String(error));
+      return;
+    }
     // Answered rather than crashed on, so the app can show why.
     console.error(error);
     response.statusCode = 500;
