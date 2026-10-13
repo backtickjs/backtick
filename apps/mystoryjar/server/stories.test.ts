@@ -28,6 +28,7 @@ it("dates a story where it's read, as the website wrote it", () => {
     tags: ["running"],
     location: "Brooklyn",
     photo: null,
+    date: "2026-10-05",
     day: "05",
     month: "October 2026",
     searchDate: "october/05/2026",

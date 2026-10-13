@@ -9,10 +9,18 @@ import {
 } from "./auth/firebaseAuth.js";
 import { issueSession, readSession, type User } from "./auth/session.js";
 import { storageLink } from "./firebase.js";
-import { storePhoto } from "./photos.js";
+import { deletePhoto, storePhoto } from "./photos.js";
 import { Refusal } from "./refusal.js";
 import { originOf } from "./request.js";
-import { addStory, checkStory } from "./stories.js";
+import {
+  addStory,
+  checkStory,
+  deleteStory,
+  setFavorite,
+  storiesOf,
+  storyFor,
+  updateStory,
+} from "./stories.js";
 
 /** Who's asking: the session's user, the phone's time zone and address. */
 export type Caller = { user: User | null; timeZone: string; origin: string };
@@ -76,6 +84,44 @@ export const api: Record<string, Handler> = {
     const user = signedIn(caller);
     const story = checkStory(body, caller.timeZone);
     return { id: await addStory(user.uid, story, caller.timeZone) };
+  },
+  // An edited story: answered as Read shows it, to draw in place.
+  "/api/stories/update": async (body, caller) => {
+    const user = signedIn(caller);
+    const story = checkStory(body, caller.timeZone);
+    await updateStory(user.uid, text(body.id), story, caller.timeZone);
+    return {
+      story: await storyFor(
+        user.uid,
+        text(body.id),
+        caller.timeZone,
+        caller.origin,
+      ),
+    };
+  },
+  "/api/stories/favorite": async (body, caller) => {
+    const user = signedIn(caller);
+    await setFavorite(user.uid, text(body.id), body.favorite === true);
+    return {};
+  },
+  "/api/stories/delete": async (body, caller) => {
+    const user = signedIn(caller);
+    await deleteStory(user.uid, text(body.id));
+    return {};
+  },
+  // A photo uploaded, then taken off the story before it was saved: deleted,
+  // unless a saved story has it.
+  "/api/photos/discard": async (body, caller) => {
+    const user = signedIn(caller);
+    const id = text(body.id);
+    const stories = await storiesOf(user.uid, caller.timeZone, caller.origin);
+    if (
+      /^[0-9a-f-]{36}$/.test(id) &&
+      !stories.some((story) => story.photo?.id === id)
+    ) {
+      await deletePhoto(user.uid, id);
+    }
+    return {};
   },
 };
 

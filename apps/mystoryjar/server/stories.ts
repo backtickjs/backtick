@@ -5,7 +5,7 @@ import {
 } from "firebase-admin/firestore";
 import { dayIn, startOfDay } from "./dates.js";
 import { firestore, storageLink } from "./firebase.js";
-import { storedPhoto } from "./photos.js";
+import { deletePhoto, storedPhoto } from "./photos.js";
 import { Refusal } from "./refusal.js";
 
 /** A story as a screen shows it: what it says, and its day where it's read. */
@@ -15,7 +15,9 @@ export type Story = {
   favorite: boolean;
   tags: string[];
   location: string;
-  photo: { small: string; large: string } | null;
+  photo: { id: string; small: string; large: string } | null;
+  // its date where it's read, "2026-10-05", as the composer edits it
+  date: string;
   // its day, "05", and its month's heading, "October 2026"
   day: string;
   month: string;
@@ -60,13 +62,29 @@ export function storyOf(
     location: data.location ?? "",
     photo:
       photo?.source === "storage"
-        ? { small: photo.urls.small, large: photo.urls.large }
+        ? { id: photo.id, small: photo.urls.small, large: photo.urls.large }
         : null,
+    date: dayIn(timeZone, data.date.toDate()),
     day: date.day,
     month: `${date.month} ${date.year}`,
     searchDate: `${date.month}/${date.day}/${date.year}`.toLowerCase(),
     onThisDay: date.month === now.month && date.day === now.day,
   };
+}
+
+// A story with its photo linked for a phone that reached the server at
+// `origin`.
+function linked(story: Story, origin: string): Story {
+  return story.photo === null
+    ? story
+    : {
+        ...story,
+        photo: {
+          ...story.photo,
+          small: storageLink(story.photo.small, origin),
+          large: storageLink(story.photo.large, origin),
+        },
+      };
 }
 
 /**
@@ -90,18 +108,7 @@ export async function storiesOf(
         (b.data.createdAt?.toMillis() ?? 0) -
           (a.data.createdAt?.toMillis() ?? 0),
     )
-    .map(({ doc, data }) => storyOf(doc.id, data, timeZone))
-    .map((story) =>
-      story.photo === null
-        ? story
-        : {
-            ...story,
-            photo: {
-              small: storageLink(story.photo.small, origin),
-              large: storageLink(story.photo.large, origin),
-            },
-          },
-    );
+    .map(({ doc, data }) => linked(storyOf(doc.id, data, timeZone), origin));
 }
 
 /** A new story as the composer sends it. */
@@ -185,4 +192,86 @@ export async function addStory(
     updatedAt: FieldValue.serverTimestamp(),
   });
   return doc.id;
+}
+
+// The story `id`, if it's `uid`'s: anyone else's, or one that's gone, is
+// refused alike.
+async function own(uid: string, id: string) {
+  const doc = await firestore.doc(`stories/${id}`).get();
+  if (!doc.exists || doc.get("author") !== uid) {
+    throw new Refusal("That story is gone.", 404);
+  }
+  return doc;
+}
+
+/** The story `id` as a screen shows it, for the phone at `origin`. */
+export async function storyFor(
+  uid: string,
+  id: string,
+  timeZone: string,
+  origin: string,
+): Promise<Story> {
+  const doc = await own(uid, id);
+  return linked(storyOf(doc.id, doc.data()!, timeZone), origin);
+}
+
+/**
+ * Rewrites `uid`'s story `id` as edited: its photo kept when it's the same
+ * one, and its old photo's files deleted when it isn't, as the website's
+ * Cloud Function deletes them.
+ */
+export async function updateStory(
+  uid: string,
+  id: string,
+  story: NewStory,
+  timeZone: string,
+): Promise<void> {
+  const doc = await own(uid, id);
+  const before: { source?: string; id?: string } | undefined = (doc.get(
+    "photos",
+  ) ?? [])[0];
+  const kept = before !== undefined && before.id === story.photoId;
+  const photos = kept
+    ? doc.get("photos")
+    : story.photoId === null
+      ? []
+      : [await storedPhoto(uid, story.photoId)];
+  await doc.ref.update({
+    value: story.text,
+    date: Timestamp.fromDate(startOfDay(timeZone, story.day)),
+    isFavorite: story.favorite,
+    tags: story.tags.map((label) => ({ label })),
+    location: story.location,
+    photos,
+    synced: true,
+    updatedAt: FieldValue.serverTimestamp(),
+  });
+  if (!kept && before?.source === "storage" && before.id !== undefined) {
+    await deletePhoto(uid, before.id);
+  }
+}
+
+/** Marks `uid`'s story `id` a favorite, or not. */
+export async function setFavorite(
+  uid: string,
+  id: string,
+  favorite: boolean,
+): Promise<void> {
+  const doc = await own(uid, id);
+  await doc.ref.update({
+    isFavorite: favorite,
+    updatedAt: FieldValue.serverTimestamp(),
+  });
+}
+
+/** Deletes `uid`'s story `id`, and its photo's files. */
+export async function deleteStory(uid: string, id: string): Promise<void> {
+  const doc = await own(uid, id);
+  const photo: { source?: string; id?: string } | undefined = (doc.get(
+    "photos",
+  ) ?? [])[0];
+  await doc.ref.delete();
+  if (photo?.source === "storage" && photo.id !== undefined) {
+    await deletePhoto(uid, photo.id);
+  }
 }

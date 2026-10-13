@@ -82,7 +82,7 @@ const Menu = cs`() => {
   };
   return (
     <$Dropdown
-      accessibilityLabel="Story Menu"
+      accessibilityLabel="Menu"
       items={[{ label: "Sign Out", icon: ${icons.exit}, onPress: signOut }]}
     >
       <$View

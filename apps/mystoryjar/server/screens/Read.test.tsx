@@ -13,6 +13,7 @@ const story = (fields: Partial<Story> & Pick<Story, "id" | "text">): Story => ({
   tags: [],
   location: "",
   photo: null,
+  date: "2026-10-05",
   day: "05",
   month: "October 2026",
   searchDate: "october/05/2026",
@@ -114,6 +115,7 @@ it("shows a story's photo, at its small size", async () => {
       id: "beach",
       text: "Beach day.",
       photo: {
+        id: "photo-1",
         small: "https://photos.example/small.jpg",
         large: "https://photos.example/large.jpg",
       },

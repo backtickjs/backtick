@@ -1,6 +1,17 @@
 import { cs } from "@backtickjs/core";
-import { useDeferredValue, useMemo, useState } from "@backtickjs/react";
-import { Pressable, SectionList, View } from "@backtickjs/react-native";
+import {
+  useDeferredValue,
+  useEffect,
+  useMemo,
+  useState,
+} from "@backtickjs/react";
+import {
+  Modal,
+  Pressable,
+  ScrollView,
+  SectionList,
+  View,
+} from "@backtickjs/react-native";
 import { useStack } from "../navigation.js";
 import type { ScreenRequest } from "../request.js";
 import { type Story, storiesOf } from "../stories.js";
@@ -9,11 +20,15 @@ import { Dropdown } from "../ui/Dropdown.js";
 import { Icon } from "../ui/Icon.js";
 import { icons } from "../ui/icons.js";
 import { MainNavbar } from "../ui/MainNavbar.js";
+import { Navbar } from "../ui/Navbar.js";
+import { Notice } from "../ui/Notice.js";
 import { Screen } from "../ui/Screen.js";
+import { usePost } from "../ui/server.js";
 import { StoryPhoto } from "../ui/StoryPhoto.js";
 import { Text } from "../ui/Text.js";
 import { TextInput } from "../ui/TextInput.js";
 import { useColors } from "../ui/theme.js";
+import { Composer, type Draft } from "./Composer.js";
 
 // Every story the user wrote, newest first, under its month: searched and
 // filtered on the phone, as all of them are here.
@@ -45,7 +60,14 @@ const matches = cs`(story: Story, search: string) => {
     .every((word) => haystack.includes(word));
 }`;
 
-const Card = cs`(props: { story: Story }) => {
+type CardProps = {
+  story: Story;
+  onFavorite: () => void;
+  onEdit: () => void;
+  onDelete: () => void;
+};
+
+const Card = cs`(props: CardProps) => {
   const colors = $useColors();
   const { story } = props;
   const details = [
@@ -64,10 +86,13 @@ const Card = cs`(props: { story: Story }) => {
         boxShadow: colors.smallShadow || undefined,
       }}
     >
-      <$View
+      <$Pressable
+        accessibilityRole="button"
         accessibilityLabel={
           story.favorite ? "Favorite, " + story.day : story.day
         }
+        accessibilityHint="Toggles Favorite"
+        onPress={props.onFavorite}
         style={{
           width: 40,
           marginLeft: 4,
@@ -104,12 +129,40 @@ const Card = cs`(props: { story: Story }) => {
             </$Text>
           </$View>
         )}
-      </$View>
+      </$Pressable>
       <$View
         style={{ width: 1, marginVertical: 8, backgroundColor: colors.divider }}
       />
       <$View style={{ flex: 1, margin: 8, marginLeft: 12, gap: 4 }}>
-        <$Text>{story.text}</$Text>
+        <$View style={{ flexDirection: "row", gap: 4 }}>
+          <$Text style={{ flex: 1 }}>{story.text}</$Text>
+          <$Dropdown
+            accessibilityLabel="Story Menu"
+            items={[
+              { label: "Edit", icon: ${icons.pen}, onPress: props.onEdit },
+              {
+                label: "Delete",
+                icon: ${icons.basket},
+                onPress: props.onDelete,
+              },
+            ]}
+          >
+            <$View
+              style={{
+                width: 30,
+                height: 30,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <$Icon
+                shapes={${icons["dots-menu"]}}
+                size={20}
+                color="tertiaryText"
+              />
+            </$View>
+          </$Dropdown>
+        </$View>
         {/* the place and the tags on one line, as on the website, wrapping
             when they don't fit */}
         {details.length > 0 && (
@@ -210,14 +263,181 @@ const SearchRow = cs`(props: {
   );
 }`;
 
+// A story in the composer, over everything: saved, it's drawn in place on
+// the list; discarded, it's as it was.
+const EditStory = cs`(props: {
+  story: Story;
+  onSaved: (story: Story) => void;
+  onClose: () => void;
+}) => {
+  const colors = $useColors();
+  const post = $usePost();
+  const { story } = props;
+  const initial: Draft = {
+    day: story.date,
+    favorite: story.favorite,
+    location: story.location === "" ? null : story.location,
+    tags: story.tags.length === 0 ? null : story.tags,
+    photo: story.photo,
+    text: story.text,
+  };
+  const save = async (draft: Draft) => {
+    const answer = await post<{ story: Story }>("/api/stories/update", {
+      id: story.id,
+      text: draft.text,
+      day: draft.day,
+      favorite: draft.favorite,
+      tags: draft.tags ?? [],
+      location: draft.location ?? "",
+      photoId: draft.photo?.id ?? null,
+    });
+    if (answer.error !== undefined) return answer.error;
+    props.onSaved(answer.story);
+    return null;
+  };
+  return (
+    <$Modal animationType="slide" visible onRequestClose={props.onClose}>
+      <$View style={{ flex: 1, backgroundColor: colors.wash }}>
+        <$Navbar>
+          <$View style={{ flex: 1, alignItems: "center" }}>
+            <$Text bold size={16}>
+              Edit Story
+            </$Text>
+          </$View>
+        </$Navbar>
+        <$ScrollView
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={{
+            width: "100%",
+            maxWidth: 544,
+            alignSelf: "center",
+            padding: 16,
+          }}
+        >
+          <$Composer
+            initial={initial}
+            onSave={save}
+            onDiscard={props.onClose}
+          />
+        </$ScrollView>
+      </$View>
+    </$Modal>
+  );
+}`;
+
+// The website's confirmation, in a card over the page.
+const DeleteDialog = cs`(props: {
+  onCancel: () => void;
+  onDelete: () => void;
+}) => {
+  const colors = $useColors();
+  const [deleting, setDeleting] = $useState(false);
+  return (
+    <$Modal
+      transparent
+      animationType="fade"
+      visible
+      onRequestClose={props.onCancel}
+    >
+      <$View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          padding: 16,
+          backgroundColor: "rgba(0, 0, 0, 0.3)",
+        }}
+      >
+        <$View
+          accessibilityRole="alert"
+          style={{
+            alignSelf: "center",
+            width: "100%",
+            maxWidth: 544,
+            borderRadius: 20,
+            backgroundColor: colors.surface,
+            boxShadow: colors.largeShadow,
+          }}
+        >
+          <$Text bold size={16} style={{ padding: 12, paddingHorizontal: 16 }}>
+            Delete Story
+          </$Text>
+          <$View style={{ height: 1, backgroundColor: colors.divider }} />
+          <$Text style={{ padding: 12, paddingHorizontal: 16 }}>
+            Are you sure you want to delete this story?
+          </$Text>
+          <$View style={{ height: 1, backgroundColor: colors.divider }} />
+          <$View
+            style={{
+              flexDirection: "row",
+              justifyContent: "flex-end",
+              gap: 8,
+              margin: 8,
+            }}
+          >
+            <$Button label="Cancel" flat onPress={props.onCancel} />
+            <$Button
+              label="Delete"
+              primary
+              disabled={deleting}
+              onPress={() => {
+                setDeleting(true);
+                props.onDelete();
+              }}
+            />
+          </$View>
+        </$View>
+      </$View>
+    </$Modal>
+  );
+}`;
+
+// Newest day first, keeping the order within a day: where an edited story
+// moves to.
+const newestFirst = cs`(stories: Story[]) =>
+  [...stories].sort((a, b) =>
+    a.date < b.date ? 1 : a.date > b.date ? -1 : 0,
+  )`;
+
 const Stories = cs`(props: { stories: Story[] }) => {
+  const post = $usePost();
+  // the stories as changed here, until the screen is fetched again
+  const [stories, setStories] = $useState(props.stories);
+  $useEffect(() => setStories(props.stories), [props.stories]);
+  const [editing, setEditing] = $useState<Story | null>(null);
+  const [deleting, setDeleting] = $useState<Story | null>(null);
+  const [error, setError] = $useState<string | null>(null);
+  const replace = (story: Story) =>
+    setStories((current) =>
+      $newestFirst(
+        current.map((each) => (each.id === story.id ? story : each)),
+      ),
+    );
+  // shown at once, and taken back if the server refuses
+  const favorite = async (story: Story) => {
+    replace({ ...story, favorite: !story.favorite });
+    const answer = await post("/api/stories/favorite", {
+      id: story.id,
+      favorite: !story.favorite,
+    });
+    if (answer.error !== undefined) {
+      replace(story);
+      setError(answer.error);
+    }
+  };
+  const remove = async (story: Story) => {
+    const answer = await post("/api/stories/delete", { id: story.id });
+    setDeleting(null);
+    if (answer.error !== undefined) setError(answer.error);
+    else
+      setStories((current) => current.filter((each) => each.id !== story.id));
+  };
   const [search, setSearch] = $useState("");
   const [filter, setFilter] = $useState<Filter>("All");
   // typing stays quick while a long list catches up
   const deferred = $useDeferredValue(search);
   const sections = $useMemo(() => {
     const months: { title: string; data: Story[] }[] = [];
-    for (const story of props.stories) {
+    for (const story of stories) {
       if (!$passes(story, filter) || !$matches(story, deferred.trim())) {
         continue;
       }
@@ -226,42 +446,70 @@ const Stories = cs`(props: { stories: Story[] }) => {
       else months.push({ title: story.month, data: [story] });
     }
     return months;
-  }, [props.stories, filter, deferred]);
+  }, [stories, filter, deferred]);
 
   return (
-    <$SectionList
-      sections={sections}
-      keyExtractor={(story) => story.id}
-      keyboardShouldPersistTaps="handled"
-      keyboardDismissMode="on-drag"
-      contentContainerStyle={{ padding: 16, paddingBottom: 40 }}
-      stickySectionHeadersEnabled={false}
-      ListHeaderComponent={
-        <$SearchRow
-          search={search}
-          onSearch={setSearch}
-          filter={filter}
-          onFilter={setFilter}
+    <>
+      <$SectionList
+        sections={sections}
+        keyExtractor={(story) => story.id}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        contentContainerStyle={{ padding: 16, paddingBottom: 40 }}
+        stickySectionHeadersEnabled={false}
+        ListHeaderComponent={
+          <$View style={{ gap: 8 }}>
+            {error !== null && <$Notice>{error}</$Notice>}
+            <$SearchRow
+              search={search}
+              onSearch={setSearch}
+              filter={filter}
+              onFilter={setFilter}
+            />
+          </$View>
+        }
+        renderSectionHeader={({ section }) => (
+          <$Text
+            bold
+            size={16}
+            style={{ marginLeft: 12, marginTop: 8, marginBottom: 8 }}
+          >
+            {section.title}
+          </$Text>
+        )}
+        renderItem={({ item }) => (
+          <$Card
+            story={item}
+            onFavorite={() => favorite(item)}
+            onEdit={() => setEditing(item)}
+            onDelete={() => setDeleting(item)}
+          />
+        )}
+        ItemSeparatorComponent={() => <$View style={{ height: 8 }} />}
+        ListEmptyComponent={
+          <$View style={{ alignItems: "center", marginTop: 40, gap: 8 }}>
+            <$Icon shapes={${icons["logo-bummed"]}} size={120} color="accent" />
+            <$Text size={16}>No Stories to Show.</$Text>
+          </$View>
+        }
+      />
+      {editing !== null && (
+        <$EditStory
+          story={editing}
+          onSaved={(story) => {
+            replace(story);
+            setEditing(null);
+          }}
+          onClose={() => setEditing(null)}
         />
-      }
-      renderSectionHeader={({ section }) => (
-        <$Text
-          bold
-          size={16}
-          style={{ marginLeft: 12, marginTop: 8, marginBottom: 8 }}
-        >
-          {section.title}
-        </$Text>
       )}
-      renderItem={({ item }) => <$Card story={item} />}
-      ItemSeparatorComponent={() => <$View style={{ height: 8 }} />}
-      ListEmptyComponent={
-        <$View style={{ alignItems: "center", marginTop: 40, gap: 8 }}>
-          <$Icon shapes={${icons["logo-bummed"]}} size={120} color="accent" />
-          <$Text size={16}>No Stories to Show.</$Text>
-        </$View>
-      }
-    />
+      {deleting !== null && (
+        <$DeleteDialog
+          onCancel={() => setDeleting(null)}
+          onDelete={() => remove(deleting)}
+        />
+      )}
+    </>
   );
 }`;
 

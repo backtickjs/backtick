@@ -15,7 +15,7 @@ import { icons } from "../ui/icons.js";
 import { LimitRing } from "../ui/LimitRing.js";
 import { Notice } from "../ui/Notice.js";
 import { RoundButton } from "../ui/RoundButton.js";
-import { useUpload } from "../ui/server.js";
+import { usePost, useUpload } from "../ui/server.js";
 import { type Photo, StoryPhoto } from "../ui/StoryPhoto.js";
 import { Text } from "../ui/Text.js";
 import { TextInput } from "../ui/TextInput.js";
@@ -38,6 +38,8 @@ export type ComposerProps = {
   initial: Draft;
   // saves the draft: an error to show, or null once saved
   onSave: (draft: Draft) => Promise<string | null>;
+  // when editing: leaves without saving
+  onDiscard?: () => void;
 };
 
 const LIMIT = 280;
@@ -184,6 +186,7 @@ const Tags = cs`(props: {
 export const Composer = cs`(props: ComposerProps) => {
   const colors = $useColors();
   const upload = $useUpload();
+  const post = $usePost();
   const [draft, setDraft] = $useState(props.initial);
   const [uploading, setUploading] = $useState(false);
   const [saving, setSaving] = $useState(false);
@@ -312,7 +315,13 @@ export const Composer = cs`(props: ComposerProps) => {
               icon={${icons.close}}
               accessibilityLabel="Clear Photo"
               size={32}
-              onPress={() => change({ photo: null })}
+              onPress={() => {
+                // one uploaded here and not saved yet goes with it
+                if (draft.photo!.id !== props.initial.photo?.id) {
+                  post("/api/photos/discard", { id: draft.photo!.id });
+                }
+                change({ photo: null });
+              }}
             />
           </$View>
         </$View>
@@ -354,17 +363,33 @@ export const Composer = cs`(props: ComposerProps) => {
         }}
       >
         <$LimitRing length={draft.text.length} limit={$LIMIT} />
-        <$Button
-          label="Save"
-          primary
-          disabled={
-            saving ||
-            uploading ||
-            draft.text.length === 0 ||
-            draft.text.length > $LIMIT
-          }
-          onPress={save}
-        />
+        <$View style={{ flexDirection: "row", gap: 8 }}>
+          {props.onDiscard !== undefined && (
+            <$Button
+              label="Discard Changes"
+              onPress={() => {
+                if (
+                  draft.photo !== null &&
+                  draft.photo.id !== props.initial.photo?.id
+                ) {
+                  post("/api/photos/discard", { id: draft.photo.id });
+                }
+                props.onDiscard!();
+              }}
+            />
+          )}
+          <$Button
+            label="Save"
+            primary
+            disabled={
+              saving ||
+              uploading ||
+              draft.text.length === 0 ||
+              draft.text.length > $LIMIT
+            }
+            onPress={save}
+          />
+        </$View>
       </$View>
     </$View>
   );

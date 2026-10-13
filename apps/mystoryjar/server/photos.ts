@@ -86,3 +86,15 @@ export async function storedPhoto(
   }
   return { source: "storage", id, urls };
 }
+
+/**
+ * Deletes both sizes of `uid`'s photo `id`, as the website's Cloud Function
+ * does when a story loses its photo: one already gone is no matter.
+ */
+export async function deletePhoto(uid: string, id: string): Promise<void> {
+  await Promise.all(
+    (["large", "small"] as const).map((size) =>
+      bucket.file(path(uid, size, id)).delete({ ignoreNotFound: true }),
+    ),
+  );
+}
