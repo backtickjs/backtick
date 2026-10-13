@@ -20,9 +20,9 @@ export const Hero = cs`() => (
       <a
         href="https://github.com/backtickjs/backtick"
         data-umami-event="github"
-        class="inline-flex items-center gap-1.5 self-center px-2 text-sm text-muted no-underline transition-colors hover:text-ink"
+        class="inline-flex items-center gap-1.5 self-center px-2 text-[15px] text-muted no-underline transition-colors hover:text-ink"
       >
-        <$GitHubMark size={14} />
+        <$GitHubMark size={15} />
         Open source · MIT license
       </a>
     </div>
