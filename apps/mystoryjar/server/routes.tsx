@@ -42,6 +42,11 @@ const routes: Record<string, Route> = {
   },
 };
 
+/** Whether there's a screen at `path`, whoever asks. */
+export function isScreen(path: string): boolean {
+  return Object.hasOwn(routes, path);
+}
+
 /** The screen at `path` for this request, or undefined for no such path. */
 export function screenAt(
   path: string,

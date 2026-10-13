@@ -77,7 +77,11 @@ export function unregistered(platform: Platform): string | null {
  */
 export class UnknownBuild extends Error {
   constructor(readonly buildId: string | null) {
-    super(`No packages for build ${JSON.stringify(buildId)}.`);
+    super(
+      buildId === null
+        ? "No build id was sent: the app's code predates build ids, or doesn't send its own."
+        : `No packages for build ${JSON.stringify(buildId)}: it isn't registered here.`,
+    );
   }
 }
 

@@ -6,7 +6,7 @@ import { readBackupToken } from "./auth/session.js";
 import { DeprecatedBuild } from "./builds.js";
 import { backupPdf } from "./backup.js";
 import { screenRequest } from "./request.js";
-import { screenAt } from "./routes.js";
+import { isScreen, screenAt } from "./routes.js";
 import { fontFiles } from "./ui/fonts.js";
 
 // Development is only what `npm start` runs, which sets NODE_ENV: any other
@@ -77,15 +77,15 @@ const server = createServer(async (request, response) => {
       response.end(JSON.stringify(answered.body));
       return;
     }
-    const started = performance.now();
-    // for the build's packages: a build this server doesn't know throws
-    const screen = await screenRequest(request);
-    const input = screenAt(pathname, screen);
-    if (input === undefined) {
+    if (!isScreen(pathname)) {
       response.statusCode = 404;
       response.end();
       return;
     }
+    const started = performance.now();
+    // for the build's packages: a build this server doesn't know throws
+    const screen = await screenRequest(request);
+    const input = screenAt(pathname, screen)!;
     const bundle = await bundler.build({
       input,
       packageVersions: screen.packages,
@@ -106,7 +106,7 @@ const server = createServer(async (request, response) => {
       return;
     }
     // Answered rather than crashed on, so the app can show why.
-    console.error(error);
+    console.error(`[server] ${request.method} ${pathname}:`, error);
     response.statusCode = 500;
     response.end(String(error));
   }
