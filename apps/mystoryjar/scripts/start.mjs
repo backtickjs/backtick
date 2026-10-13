@@ -139,7 +139,9 @@ if (!process.stdout.isTTY) {
       .then((response) => response.text())
       .catch(() => "");
     if (status === "packager-status:running") {
-      console.log(`\nOpen exp://${address}:${port} in Expo Go.\n`);
+      console.log(
+        `\nOpen exp://${address}:${port} in the development build.\n`,
+      );
       break;
     }
     await sleep(500);

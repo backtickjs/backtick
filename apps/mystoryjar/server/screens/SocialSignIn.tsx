@@ -22,14 +22,17 @@ import {
 import { GoogleSignin } from "@backtickjs/react-native-google-signin";
 import type { IdpToken } from "../auth/firebaseAuth.js";
 import { facebook, google } from "../auth/providers.js";
+import { supports } from "../builds.js";
+import type { Packages } from "../packages.js";
 import { Button } from "../ui/Button.js";
 import { icons } from "../ui/icons.js";
 import { useColors } from "../ui/theme.js";
 
 // Signing in with Google, Apple or Facebook: each SDK asks its user on the
 // phone, and the token it gives goes to the server, which signs in to
-// Firebase with it. Google and Facebook need native code that Expo Go lacks;
-// there they're left out, as is Apple everywhere but iOS.
+// Firebase with it. Google and Facebook need native code, so only builds
+// whose module map has their SDK get their button; Apple is left out, on the
+// phone, everywhere but iOS.
 
 export type SocialSignInProps = {
   verb: "Sign in" | "Sign up";
@@ -170,21 +173,29 @@ const Apple = cs`(props: SocialSignInProps) => {
   );
 }`;
 
-// Which providers are registered, decided here; whether the app has their
-// SDK, on the phone.
-const registered = {
-  google: google.webClientId !== "",
-  facebook: facebook.appId !== "",
-};
+// No button, for a provider a build can't sign in with.
+const Nothing = cs`(_props: SocialSignInProps) => null`;
 
-export const SocialSignIn = cs`(props: SocialSignInProps) => (
-  <$View style={{ gap: 8 }}>
-    <$Apple {...props} />
-    {${registered.google} && $GoogleSignin !== undefined && (
-      <$Google {...props} />
-    )}
-    {${registered.facebook} && $LoginManager !== undefined && (
-      <$Facebook {...props} />
-    )}
-  </$View>
-)`;
+/**
+ * The sign-in buttons for a build with `packages`: Google's and Facebook's
+ * when the provider is registered and the build has its SDK. Decided here,
+ * so a build without one is never sent its script.
+ */
+export function socialSignIn(packages: Packages) {
+  const GoogleButton =
+    google.webClientId !== "" &&
+    supports(packages, "@react-native-google-signin/google-signin", "*")
+      ? Google
+      : Nothing;
+  const FacebookButton =
+    facebook.appId !== "" && supports(packages, "react-native-fbsdk-next", "*")
+      ? Facebook
+      : Nothing;
+  return cs`(props: SocialSignInProps) => (
+    <$View style={{ gap: 8 }}>
+      <$Apple {...props} />
+      <$GoogleButton {...props} />
+      <$FacebookButton {...props} />
+    </$View>
+  )`;
+}

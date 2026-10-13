@@ -1,5 +1,7 @@
 import type { IncomingMessage } from "node:http";
 import { readSession, type User } from "./auth/session.js";
+import { packagesOf } from "./builds.js";
+import type { Packages } from "./packages.js";
 import { themeOf } from "./preferences.js";
 import type { Theme } from "./ui/theme.js";
 
@@ -18,6 +20,8 @@ export type ScreenRequest = {
   theme: Theme;
   // the path's query: /edit?id=… has { id: "…" }
   query: Record<string, string>;
+  // the packages the app's build carries, which its screens are bundled for
+  packages: Packages;
 };
 
 /**
@@ -30,19 +34,44 @@ export function originOf(request: IncomingMessage): string {
   return `${protocol}://${host}`;
 }
 
-export async function screenRequest(
+/**
+ * What a screen is drawn for, from what the app sent however it sent it:
+ * an HTTP request's headers, as `screenRequest` reads them, or a GraphQL
+ * operation's variables. Throws `UnknownBuild` for a build this server
+ * doesn't know.
+ */
+export async function screenRequestOf(sent: {
+  origin: string;
+  timeZone: string;
+  session: string | null;
+  buildId: string | null;
+  query: Record<string, string>;
+}): Promise<ScreenRequest> {
+  const packages = packagesOf(sent.buildId);
+  const user = await readSession(sent.session ?? undefined);
+  return {
+    origin: sent.origin,
+    timeZone: sent.timeZone,
+    user,
+    session: sent.session,
+    theme: user === null ? "light" : await themeOf(user.uid),
+    packages,
+    query: sent.query,
+  };
+}
+
+/** The same, from an HTTP request: what this app's `fetch` sends. */
+export function screenRequest(
   request: IncomingMessage,
 ): Promise<ScreenRequest> {
-  const session = request.headers.authorization?.replace(/^Bearer /, "");
-  const user = await readSession(session);
-  return {
+  const header = (name: string) => request.headers[name]?.toString() || null;
+  return screenRequestOf({
     origin: originOf(request),
-    timeZone: String(request.headers["x-time-zone"] ?? "UTC"),
-    user,
-    session: session ?? null,
-    theme: user === null ? "light" : await themeOf(user.uid),
+    timeZone: header("x-time-zone") ?? "UTC",
+    session: header("authorization")?.replace(/^Bearer /, "") ?? null,
+    buildId: header("x-build-id"),
     query: Object.fromEntries(
       new URL(request.url ?? "/", "http://localhost").searchParams,
     ),
-  };
+  });
 }

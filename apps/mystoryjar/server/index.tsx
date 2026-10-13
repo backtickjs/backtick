@@ -1,6 +1,5 @@
 import { readFile } from "node:fs/promises";
 import { createServer, type ServerResponse } from "node:http";
-import { createRequire } from "node:module";
 import { bundler } from "@backtickjs/bundler";
 import { answer, callerOf } from "./api.js";
 import { readBackupToken } from "./auth/session.js";
@@ -16,36 +15,12 @@ import { fontFiles } from "./ui/fonts.js";
 const development = process.env.NODE_ENV === "development";
 const run = crypto.randomUUID();
 
-// The versions of the packages the app provides to screens: this project's
-// own, as the app and this server share a package.json.
-const require = createRequire(import.meta.url);
-const packageVersions = {
-  react: require("react/package.json").version,
-  "react-native": require("react-native/package.json").version,
-  "@react-navigation/native": require("@react-navigation/native/package.json")
-    .version,
-  "expo-secure-store": require("expo-secure-store/package.json").version,
-  "expo-font": require("expo-font/package.json").version,
-  "react-native-svg": require("react-native-svg/package.json").version,
-  "react-native-safe-area-context":
-    require("react-native-safe-area-context/package.json").version,
-  "expo-apple-authentication": require("expo-apple-authentication/package.json")
-    .version,
-  "expo-crypto": require("expo-crypto/package.json").version,
-  "@react-native-google-signin/google-signin":
-    require("@react-native-google-signin/google-signin/package.json").version,
-  "react-native-fbsdk-next": require("react-native-fbsdk-next/package.json")
-    .version,
-  "expo-image-picker": require("expo-image-picker/package.json").version,
-  "expo-file-system": require("expo-file-system/package.json").version,
-};
-
 const server = createServer(async (request, response) => {
   // `npm run web` serves the app from another origin.
   response.setHeader("access-control-allow-origin", "*");
   response.setHeader(
     "access-control-allow-headers",
-    "authorization, content-type, x-time-zone, x-app-version",
+    "authorization, content-type, x-time-zone, x-build-id",
   );
   if (request.method === "OPTIONS") {
     response.end();
@@ -102,13 +77,18 @@ const server = createServer(async (request, response) => {
       return;
     }
     const started = performance.now();
-    const input = screenAt(pathname, await screenRequest(request));
+    // for the build's packages: a build this server doesn't know throws
+    const screen = await screenRequest(request);
+    const input = screenAt(pathname, screen);
     if (input === undefined) {
       response.statusCode = 404;
       response.end();
       return;
     }
-    const bundle = await bundler.build({ input, packageVersions });
+    const bundle = await bundler.build({
+      input,
+      packageVersions: screen.packages,
+    });
     const { code } = bundle.generate({ format: "cjs" });
     response.setHeader("content-type", "text/javascript");
     response.end(code);

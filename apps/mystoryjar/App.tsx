@@ -1,15 +1,10 @@
-import * as Navigation from "@react-navigation/native";
 import { NavigationContainer, useIsFocused } from "@react-navigation/native";
 import {
   createNativeStackNavigator,
   type NativeStackScreenProps,
 } from "@react-navigation/native-stack";
 import { evaluate } from "@backtickjs/react-native-client";
-import * as AppleAuthentication from "expo-apple-authentication";
 import Constants from "expo-constants";
-import * as Crypto from "expo-crypto";
-import * as Font from "expo-font";
-import * as ImagePicker from "expo-image-picker";
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
 import {
@@ -22,45 +17,11 @@ import {
   useRef,
   useState,
 } from "react";
-import * as JSXRuntime from "react/jsx-runtime";
-import * as ReactNative from "react-native";
-import {
-  ActivityIndicator,
-  Platform,
-  Pressable,
-  Text,
-  View,
-} from "react-native";
+import { ActivityIndicator, Pressable, Text, View } from "react-native";
 import * as SafeArea from "react-native-safe-area-context";
-import * as ReactNativeSvg from "react-native-svg";
-import { FileSystem } from "./fileSystem";
-import { SecureStore } from "./secureStore";
-
-// Google's and Facebook's SDKs need native code that Expo Go and the web
-// don't have: there, they're offered empty, and screens leave out what needs
-// them.
-const native =
-  Platform.OS !== "web" && Constants.executionEnvironment !== "storeClient";
-
-// What a screen may require: the packages this app was built with.
-const modules = {
-  react: React,
-  "react/jsx-runtime": JSXRuntime,
-  "react-native": ReactNative,
-  "@react-navigation/native": Navigation,
-  "expo-secure-store": SecureStore,
-  "expo-font": Font,
-  "react-native-svg": ReactNativeSvg,
-  "react-native-safe-area-context": SafeArea,
-  "expo-apple-authentication": AppleAuthentication,
-  "expo-crypto": Crypto,
-  "@react-native-google-signin/google-signin": native
-    ? require("@react-native-google-signin/google-signin")
-    : {},
-  "react-native-fbsdk-next": native ? require("react-native-fbsdk-next") : {},
-  "expo-image-picker": ImagePicker,
-  "expo-file-system": FileSystem,
-};
+import { buildId } from "./build";
+import { moduleMap } from "./moduleMap";
+import * as SecureStore from "./secureStore";
 
 // The app is one stack screen, `Screen`, drawn once per server path on the
 // stack. Screens push, replace and pop it themselves: see
@@ -84,11 +45,12 @@ const server: string = __DEV__
   : Constants.expoConfig?.extra?.serverUrl;
 
 // `fetch` to the server, with the session a sign-in screen kept, the phone's
-// time zone (the server dates stories in it) and the app's version.
+// time zone (the server dates stories in it) and this build's id (the server
+// bundles screens for the packages it carries).
 async function request(path: string): Promise<Response> {
   const headers = new Headers({
     "x-time-zone": Intl.DateTimeFormat().resolvedOptions().timeZone,
-    "x-app-version": Constants.expoConfig?.version ?? "",
+    "x-build-id": buildId,
   });
   const session = await SecureStore.getItemAsync("session");
   if (session !== null) {
@@ -104,7 +66,7 @@ async function loadScreen(path: string): Promise<ReactNode> {
   if (!response.ok) {
     throw new Error(`${path} answered ${response.status}.`);
   }
-  return evaluate(await response.text(), modules) as ReactNode;
+  return evaluate(await response.text(), moduleMap) as ReactNode;
 }
 
 // The same, marked as settled once it has, as React's `use` reads a

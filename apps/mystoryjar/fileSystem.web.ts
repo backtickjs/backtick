@@ -1,6 +1,7 @@
-// FileSystem as screens require it on the web, where expo-file-system can't
-// upload: a picked photo's blob URL, posted with fetch.
-class File {
+// expo-file-system on the web, where it can't upload: a picked photo's blob
+// URL, posted with fetch. The web's module map offers it to screens in its
+// place.
+export class File {
   constructor(readonly uri: string) {}
   async upload(
     url: string,
@@ -19,5 +20,3 @@ class File {
     };
   }
 }
-
-export const FileSystem = { File };

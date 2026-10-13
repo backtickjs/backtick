@@ -74,3 +74,10 @@ it("goes back to what's under it otherwise", async () => {
   await userEvent.click(screen.getByRole("button", { name: "Back" }));
   assert.deepEqual(navigated, [{ type: "GO_BACK" }]);
 });
+
+it("offers the web build no Google or Facebook sign-in, which need native SDKs", async () => {
+  render(await drawScreen(<SignIn request={request} />));
+  assert.ok(await screen.findByRole("button", { name: "Sign in" }));
+  assert.equal(screen.queryByText("Sign in with Google"), null);
+  assert.equal(screen.queryByText("Sign in with Facebook"), null);
+});

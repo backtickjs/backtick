@@ -1,3 +1,3 @@
-// SecureStore as screens require it: the device's keychain or keystore.
-// `secureStore.web.ts` stands in on the web.
-export * as SecureStore from "expo-secure-store";
+// SecureStore as the app uses it for its session: the device's keychain or
+// keystore. `secureStore.web.ts` stands in on the web.
+export * from "expo-secure-store";

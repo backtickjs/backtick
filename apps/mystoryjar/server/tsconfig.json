@@ -11,7 +11,10 @@
     "skipLibCheck": true,
     "types": ["node"],
     "jsx": "react-jsx",
-    "jsxImportSource": "@backtickjs/react"
+    "jsxImportSource": "@backtickjs/react",
+    // as app.config.ts imports packages.ts, which Expo's loader needs
+    "allowImportingTsExtensions": true
   },
-  "include": ["."]
+  // with app.config.ts, which runs in Node as the server does
+  "include": [".", "../app.config.ts"]
 }

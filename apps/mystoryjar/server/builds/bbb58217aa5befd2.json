@@ -1,0 +1,15 @@
+{
+  "@react-native-google-signin/google-signin": "16.1.5",
+  "@react-navigation/native": "7.5.0",
+  "expo-apple-authentication": "57.0.2",
+  "expo-crypto": "57.0.4",
+  "expo-file-system": "57.0.7",
+  "expo-font": "57.0.4",
+  "expo-image-picker": "57.0.20",
+  "expo-secure-store": "57.0.4",
+  "react": "19.2.3",
+  "react-native": "0.86.3",
+  "react-native-fbsdk-next": "13.4.3",
+  "react-native-safe-area-context": "5.7.0",
+  "react-native-svg": "15.15.4"
+}
