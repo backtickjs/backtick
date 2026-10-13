@@ -109,6 +109,49 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
+  adapters/expo-file-system:
+    dependencies:
+      '@backtickjs/core':
+        specifier: ^0.1.8
+        version: link:../../packages/core
+      expo-file-system:
+        specifier: 57.0.7
+        version: 57.0.7(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))
+    devDependencies:
+      '@backtickjs/compiler':
+        specifier: ^0.1.8
+        version: link:../../packages/compiler
+      '@backtickjs/prettier-plugin':
+        specifier: ^0.1.8
+        version: link:../../packages/prettier-plugin
+      '@backtickjs/tsc':
+        specifier: ^0.1.8
+        version: link:../../packages/tsc
+      '@backtickjs/tspatch-plugin':
+        specifier: ^0.1.8
+        version: link:../../packages/tspatch-plugin
+      '@types/react':
+        specifier: 19.2.18
+        version: 19.2.18
+      expo:
+        specifier: ~57.0.26
+        version: 57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      react:
+        specifier: 19.2.3
+        version: 19.2.3
+      react-native:
+        specifier: 0.86.3
+        version: 0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3)
+      ts-patch:
+        specifier: ^4.0.1
+        version: 4.0.1
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   adapters/expo-font:
     dependencies:
       '@backtickjs/core':
@@ -829,6 +872,9 @@ importers:
       '@backtickjs/expo-crypto':
         specifier: ^57.0.4
         version: link:../../adapters/expo-crypto
+      '@backtickjs/expo-file-system':
+        specifier: ^57.0.7
+        version: link:../../adapters/expo-file-system
       '@backtickjs/expo-font':
         specifier: ^57.0.4
         version: link:../../adapters/expo-font
@@ -892,6 +938,9 @@ importers:
       expo-dev-client:
         specifier: ~57.0.20
         version: 57.0.20(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))
+      expo-file-system:
+        specifier: ~57.0.7
+        version: 57.0.7(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))
       expo-font:
         specifier: ~57.0.4
         version: 57.0.4(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)

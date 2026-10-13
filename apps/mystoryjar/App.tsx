@@ -33,6 +33,7 @@ import {
 } from "react-native";
 import * as SafeArea from "react-native-safe-area-context";
 import * as ReactNativeSvg from "react-native-svg";
+import { FileSystem } from "./fileSystem";
 import { SecureStore } from "./secureStore";
 
 // Google's and Facebook's SDKs need native code that Expo Go and the web
@@ -58,6 +59,7 @@ const modules = {
     : {},
   "react-native-fbsdk-next": native ? require("react-native-fbsdk-next") : {},
   "expo-image-picker": ImagePicker,
+  "expo-file-system": FileSystem,
 };
 
 // The app is one stack screen, `Screen`, drawn once per server path on the

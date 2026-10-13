@@ -37,6 +37,7 @@ const packageVersions = {
   "react-native-fbsdk-next": require("react-native-fbsdk-next/package.json")
     .version,
   "expo-image-picker": require("expo-image-picker/package.json").version,
+  "expo-file-system": require("expo-file-system/package.json").version,
 };
 
 const server = createServer(async (request, response) => {

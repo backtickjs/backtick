@@ -30,6 +30,7 @@ const packageVersions = {
   "react-native-fbsdk-next": require("react-native-fbsdk-next/package.json")
     .version,
   "expo-image-picker": require("expo-image-picker/package.json").version,
+  "expo-file-system": require("expo-file-system/package.json").version,
 };
 
 /** The navigation actions screens dispatched, in order. */
@@ -96,6 +97,10 @@ const modules = {
   "expo-image-picker": {
     launchImageLibraryAsync: async () => picked,
   },
+  // an upload as the app's web build sends one
+  "expo-file-system": await import("../../fileSystem.web.js").then(
+    (module) => module.FileSystem,
+  ),
 };
 
 type Picked =

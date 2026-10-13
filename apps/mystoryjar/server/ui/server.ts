@@ -1,5 +1,6 @@
 import { cs, once } from "@backtickjs/core";
 import { createContext, useContext } from "@backtickjs/react";
+import { File } from "@backtickjs/expo-file-system";
 
 /** Where a screen's scripts reach the server, and as whom. */
 export type Server = { origin: string; session: string | null };
@@ -49,7 +50,8 @@ export const usePost = cs`() => {
 
 /**
  * Uploads the file at `uri`, a photo the phone picked, as the body of a post
- * to the server's `path`, and gives back its answer, or `{ error }`.
+ * to the server's `path`, and gives back its answer, or `{ error }`. Sent
+ * from disk by the platform, never read into JavaScript.
  */
 export const useUpload = cs`() => {
   const server = $useContext($ServerContext)!;
@@ -59,13 +61,11 @@ export const useUpload = cs`() => {
     type: string,
   ): Promise<T & { error?: string }> {
     try {
-      const file = await (await fetch(uri)).blob();
-      const response = await fetch(server.origin + path, {
-        method: "POST",
+      const sent = await new $File(uri).upload(server.origin + path, {
         headers: $headers(server, type),
-        body: file,
+        mimeType: type,
       });
-      return await response.json();
+      return JSON.parse(sent.body);
     } catch {
       return { error: "That photo couldn't be sent. Try again." } as T & {
         error?: string;
