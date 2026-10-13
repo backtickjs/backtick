@@ -6,6 +6,7 @@
   // `tsc -b` at the root cover the tree.
   "references": [
     { "path": "packages/bun-plugin" },
+    { "path": "packages/builds" },
     { "path": "packages/bundler" },
     { "path": "packages/compiler" },
     { "path": "packages/core" },

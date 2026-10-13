@@ -1,5 +1,5 @@
 import type { ClientImport } from "@backtickjs/core";
-import semver from "semver";
+import { packageOf, supports } from "../packages.js";
 
 // What a bundle is written as, and the one place its conventions live: how a
 // name is written, how a literal escapes, and how an element is written as JSX
@@ -80,13 +80,6 @@ function member(key: string): string {
   return IDENTIFIER.test(key) ? key : string(key);
 }
 
-// The package a module is in: its specifier's first segment, or first two
-// when scoped (`solid-js/web` → `solid-js`, `@scope/pkg/x` → `@scope/pkg`).
-function packageOf(from: string): string {
-  const segments = from.split("/");
-  return segments.slice(0, from.startsWith("@") ? 2 : 1).join("/");
-}
-
 /** An export of a module the client provides, imported by the bundle. */
 export function imported(
   names: Names,
@@ -105,7 +98,7 @@ export function imported(
         `${packages.join(", ") || "no packages"}.`,
     );
   }
-  if (!semver.satisfies(provided, version)) {
+  if (!supports(names.packageVersions, pkg, version)) {
     throw new Error(
       `Can't import \`${name}\` from "${from}": it needs ${pkg}@${version}, ` +
         `and the client provides ${pkg}@${provided}.`,

@@ -51,3 +51,19 @@ export function evaluate(code: string, moduleMap: ModuleMap): unknown {
   );
   return module.exports;
 }
+
+/**
+ * This build's id on `platform`, from the app config's `extra`, where an
+ * `app.config.ts` puts `buildIds` from `@backtickjs/builds`: it names the
+ * packages the build carries, for the server to bundle screens it can run.
+ * Null for an app config without it. Send it however the app reaches its
+ * server: a header, a GraphQL variable.
+ *
+ *     const buildId = buildIdFrom(Constants.expoConfig?.extra, Platform.OS);
+ */
+export function buildIdFrom(extra: unknown, platform: string): string | null {
+  const ids = (extra as { buildIds?: Record<string, unknown> } | undefined)
+    ?.buildIds;
+  const id = ids?.[platform];
+  return typeof id === "string" ? id : null;
+}

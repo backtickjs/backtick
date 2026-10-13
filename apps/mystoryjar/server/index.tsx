@@ -1,9 +1,9 @@
 import { readFile } from "node:fs/promises";
 import { createServer, type ServerResponse } from "node:http";
 import { bundler } from "@backtickjs/bundler";
+import { DeprecatedBuild } from "@backtickjs/builds";
 import { answer, callerOf } from "./api.js";
 import { readBackupToken } from "./auth/session.js";
-import { DeprecatedBuild } from "./builds.js";
 import { backupPdf } from "./backup.js";
 import { screenRequest } from "./request.js";
 import { isScreen, screenAt } from "./routes.js";

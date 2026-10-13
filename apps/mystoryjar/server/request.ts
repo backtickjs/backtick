@@ -1,7 +1,7 @@
 import type { IncomingMessage } from "node:http";
 import { readSession, type User } from "./auth/session.js";
-import { packagesOf } from "./builds.js";
-import type { Packages } from "./packages.js";
+import type { Packages } from "@backtickjs/builds";
+import { builds } from "./builds.js";
 import { themeOf } from "./preferences.js";
 import type { Theme } from "./ui/theme.js";
 
@@ -47,7 +47,7 @@ export async function screenRequestOf(sent: {
   buildId: string | null;
   query: Record<string, string>;
 }): Promise<ScreenRequest> {
-  const packages = packagesOf(sent.buildId);
+  const packages = builds.packagesOf(sent.buildId);
   const user = await readSession(sent.session ?? undefined);
   return {
     origin: sent.origin,

@@ -1,0 +1,59 @@
+{
+  "name": "@backtickjs/builds",
+  "version": "0.1.8",
+  "description": "Keeps a Backtick server drawing for every build of its app in users' hands: build ids, a registry of what each build carries, and a check for EAS builds",
+  "keywords": [
+    "backtick",
+    "react-native",
+    "expo",
+    "server-driven-ui",
+    "builds",
+    "versioning"
+  ],
+  "homepage": "https://backtickjs.com",
+  "bugs": {
+    "url": "https://github.com/backtickjs/backtick/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/backtickjs/backtick.git",
+    "directory": "packages/builds"
+  },
+  "license": "MIT",
+  "author": "Jean-François Bisson <jf@backtickjs.com>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "backtick-builds": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "!dist/._cache",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b --watch",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown .",
+    "test": "node --test \"test/**/*.test.ts\"",
+    "clean": "rm -rf node_modules dist .turbo",
+    "prepack": "cp ../../LICENSE ."
+  },
+  "dependencies": {
+    "@backtickjs/bundler": "^0.1.8",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "prettier": "^3.6.2"
+  }
+}

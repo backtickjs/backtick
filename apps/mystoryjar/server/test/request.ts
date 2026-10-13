@@ -1,4 +1,4 @@
-import { installed } from "../builds.js";
+import { builds } from "../builds.js";
 import type { ScreenRequest } from "../request.js";
 
 /** A request as the app in the simulator makes one. */
@@ -10,5 +10,5 @@ export const request: ScreenRequest = {
   theme: "light",
   query: {},
   // the web build's, which tests draw with
-  packages: installed.web,
+  packages: builds.installed("web"),
 };

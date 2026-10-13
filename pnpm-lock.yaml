@@ -860,6 +860,9 @@ importers:
 
   apps/mystoryjar:
     dependencies:
+      '@backtickjs/builds':
+        specifier: ^0.1.8
+        version: link:../../packages/builds
       '@backtickjs/bundler':
         specifier: ^0.1.8
         version: link:../../packages/bundler
@@ -989,9 +992,6 @@ importers:
       react-native-web:
         specifier: ^0.21.0
         version: 0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      semver:
-        specifier: ^7.8.5
-        version: 7.8.5
       sharp:
         specifier: ^0.35.5
         version: 0.35.5(@types/node@25.9.1)
@@ -1026,9 +1026,6 @@ importers:
       '@types/react':
         specifier: 19.2.18
         version: 19.2.18
-      '@types/semver':
-        specifier: ^7.8.0
-        version: 7.8.0
       '@types/subset-font':
         specifier: ^2.3.0
         version: 2.3.0
@@ -1166,6 +1163,22 @@ importers:
       '@types/react':
         specifier: 19.2.18
         version: 19.2.18
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+
+  packages/builds:
+    dependencies:
+      '@backtickjs/bundler':
+        specifier: ^0.1.8
+        version: link:../bundler
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+    devDependencies:
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
       prettier:
         specifier: ^3.6.2
         version: 3.8.4

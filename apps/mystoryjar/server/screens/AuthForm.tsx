@@ -14,7 +14,7 @@ import { usePost } from "../ui/server.js";
 import { Text } from "../ui/Text.js";
 import { TextInput } from "../ui/TextInput.js";
 import { TextLink } from "../ui/TextLink.js";
-import type { Packages } from "../packages.js";
+import type { Packages } from "@backtickjs/builds";
 import { socialSignIn } from "./SocialSignIn.js";
 
 // The website's sign-in and sign-up form, one column 300 points wide: the

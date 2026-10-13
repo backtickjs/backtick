@@ -74,6 +74,20 @@ type ModuleMap = Readonly<Record<string, () => unknown>>;
 
 What a bundle may require, by specifier, each as a function that returns its module. It does for an app what a web page's import map does, with modules for values instead of URLs. At least `react`, `react/jsx-runtime` and `react-native`; add any other package the app chooses to offer its screens. Keep the functions' `require` calls inside them: Metro still bundles each one, and Node tools can then read the specifiers without loading React Native.
 
+### `buildIdFrom(extra: unknown, platform: string): string | null`
+
+This build's id on `platform`, read from the app config's `extra.buildIds`, which an `app.config.ts` fills with [`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds). The id names the packages the build carries, so the server bundles only screens it can run. Send it to the server however the app reaches it, as a header or a GraphQL variable:
+
+```ts
+import { buildIdFrom } from "@backtickjs/react-native-client";
+import Constants from "expo-constants";
+import { Platform } from "react-native";
+
+const buildId = buildIdFrom(Constants.expoConfig?.extra, Platform.OS);
+```
+
+Null when the config has no build ids.
+
 ## Security
 
 `evaluate` runs the bundle with `new Function`, which works on Hermes and JavaScriptCore. A bundle is code with the app's full abilities, so the server is trusted: serve screens over HTTPS from an endpoint you control.

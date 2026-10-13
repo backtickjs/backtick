@@ -1,3 +1,5 @@
+import type { Packages } from "@backtickjs/builds";
+import { supports } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
 import { useEffect, useState } from "@backtickjs/react";
 import {
@@ -22,8 +24,6 @@ import {
 import { GoogleSignin } from "@backtickjs/react-native-google-signin";
 import type { IdpToken } from "../auth/firebaseAuth.js";
 import { facebook, google } from "../auth/providers.js";
-import { supports } from "../builds.js";
-import type { Packages } from "../packages.js";
 import { Button } from "../ui/Button.js";
 import { icons } from "../ui/icons.js";
 import { useColors } from "../ui/theme.js";

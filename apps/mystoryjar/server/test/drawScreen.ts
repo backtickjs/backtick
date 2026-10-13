@@ -6,7 +6,7 @@ import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNativeWeb from "react-native-web";
 import type { moduleMap } from "../../moduleMap.web.ts";
-import { installed } from "../builds.js";
+import { builds } from "../builds.js";
 
 // What the app's web build provides, as its module map says, with React
 // Native's web build standing in for React Native, a navigator that records
@@ -103,7 +103,7 @@ export async function drawScreen(input: Spliceable): Promise<React.ReactNode> {
   secureStore.clear();
   const bundle = await bundler.build({
     input,
-    packageVersions: installed.web,
+    packageVersions: builds.installed("web"),
   });
   const { code } = bundle.generate({ format: "cjs" });
   return evaluate(code, testModuleMap) as React.ReactNode;
