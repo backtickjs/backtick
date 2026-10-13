@@ -5,13 +5,7 @@ import {
   useMemo,
   useState,
 } from "@backtickjs/react";
-import {
-  Modal,
-  Pressable,
-  ScrollView,
-  SectionList,
-  View,
-} from "@backtickjs/react-native";
+import { Modal, Pressable, SectionList, View } from "@backtickjs/react-native";
 import { useStack } from "../navigation.js";
 import type { ScreenRequest } from "../request.js";
 import { type Story, storiesOf } from "../stories.js";
@@ -20,7 +14,6 @@ import { Dropdown } from "../ui/Dropdown.js";
 import { Icon } from "../ui/Icon.js";
 import { icons } from "../ui/icons.js";
 import { MainNavbar } from "../ui/MainNavbar.js";
-import { Navbar } from "../ui/Navbar.js";
 import { Notice } from "../ui/Notice.js";
 import { Screen } from "../ui/Screen.js";
 import { usePost } from "../ui/server.js";
@@ -28,7 +21,6 @@ import { StoryPhoto } from "../ui/StoryPhoto.js";
 import { Text } from "../ui/Text.js";
 import { TextInput } from "../ui/TextInput.js";
 import { useColors } from "../ui/theme.js";
-import { Composer, type Draft } from "./Composer.js";
 
 // Every story the user wrote, newest first, under its month: searched and
 // filtered on the phone, as all of them are here.
@@ -263,68 +255,6 @@ const SearchRow = cs`(props: {
   );
 }`;
 
-// A story in the composer, over everything: saved, it's drawn in place on
-// the list; discarded, it's as it was.
-const EditStory = cs`(props: {
-  story: Story;
-  onSaved: (story: Story) => void;
-  onClose: () => void;
-}) => {
-  const colors = $useColors();
-  const post = $usePost();
-  const { story } = props;
-  const initial: Draft = {
-    day: story.date,
-    favorite: story.favorite,
-    location: story.location === "" ? null : story.location,
-    tags: story.tags.length === 0 ? null : story.tags,
-    photo: story.photo,
-    text: story.text,
-  };
-  const save = async (draft: Draft) => {
-    const answer = await post<{ story: Story }>("/api/stories/update", {
-      id: story.id,
-      text: draft.text,
-      day: draft.day,
-      favorite: draft.favorite,
-      tags: draft.tags ?? [],
-      location: draft.location ?? "",
-      photoId: draft.photo?.id ?? null,
-    });
-    if (answer.error !== undefined) return answer.error;
-    props.onSaved(answer.story);
-    return null;
-  };
-  return (
-    <$Modal animationType="slide" visible onRequestClose={props.onClose}>
-      <$View style={{ flex: 1, backgroundColor: colors.wash }}>
-        <$Navbar>
-          <$View style={{ flex: 1, alignItems: "center" }}>
-            <$Text bold size={16}>
-              Edit Story
-            </$Text>
-          </$View>
-        </$Navbar>
-        <$ScrollView
-          keyboardShouldPersistTaps="handled"
-          contentContainerStyle={{
-            width: "100%",
-            maxWidth: 544,
-            alignSelf: "center",
-            padding: 16,
-          }}
-        >
-          <$Composer
-            initial={initial}
-            onSave={save}
-            onDiscard={props.onClose}
-          />
-        </$ScrollView>
-      </$View>
-    </$Modal>
-  );
-}`;
-
 // The website's confirmation, in a card over the page.
 const DeleteDialog = cs`(props: {
   onCancel: () => void;
@@ -391,27 +321,17 @@ const DeleteDialog = cs`(props: {
   );
 }`;
 
-// Newest day first, keeping the order within a day: where an edited story
-// moves to.
-const newestFirst = cs`(stories: Story[]) =>
-  [...stories].sort((a, b) =>
-    a.date < b.date ? 1 : a.date > b.date ? -1 : 0,
-  )`;
-
 const Stories = cs`(props: { stories: Story[] }) => {
   const post = $usePost();
   const stack = $useStack();
   // the stories as changed here, until the screen is fetched again
   const [stories, setStories] = $useState(props.stories);
   $useEffect(() => setStories(props.stories), [props.stories]);
-  const [editing, setEditing] = $useState<Story | null>(null);
   const [deleting, setDeleting] = $useState<Story | null>(null);
   const [error, setError] = $useState<string | null>(null);
   const replace = (story: Story) =>
     setStories((current) =>
-      $newestFirst(
-        current.map((each) => (each.id === story.id ? story : each)),
-      ),
+      current.map((each) => (each.id === story.id ? story : each)),
     );
   // shown at once, and taken back if the server refuses
   const favorite = async (story: Story) => {
@@ -485,7 +405,11 @@ const Stories = cs`(props: { stories: Story[] }) => {
           <$Card
             story={item}
             onFavorite={() => favorite(item)}
-            onEdit={() => setEditing(item)}
+            onEdit={() =>
+              stack.navigate("/edit?id=" + encodeURIComponent(item.id), {
+                modal: true,
+              })
+            }
             onDelete={() => setDeleting(item)}
           />
         )}
@@ -497,16 +421,6 @@ const Stories = cs`(props: { stories: Story[] }) => {
           </$View>
         }
       />
-      {editing !== null && (
-        <$EditStory
-          story={editing}
-          onSaved={(story) => {
-            replace(story);
-            setEditing(null);
-          }}
-          onClose={() => setEditing(null)}
-        />
-      )}
       {deleting !== null && (
         <$DeleteDialog
           onCancel={() => setDeleting(null)}

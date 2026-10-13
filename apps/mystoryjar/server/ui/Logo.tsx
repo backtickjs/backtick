@@ -12,31 +12,46 @@ const wordmark =
 const TEXT_TO_MARK = 2 / 3;
 const TEXT_WIDTH_TO_HEIGHT = 73 / 21;
 
-export type LogoProps = {
-  // the jar's height, 36 unless said
-  size?: number;
-  withText?: boolean;
-};
-
-export const Logo = cs`(props: LogoProps) => {
+// The lettering, in the theme's accent, as tall as `height`.
+const Wordmark = cs`(props: { height: number }) => {
   const colors = $useColors();
-  const size = props.size ?? 36;
-  const textHeight = size * $TEXT_TO_MARK;
   return (
-    <$View style={{ flexDirection: "row", alignItems: "center" }}>
-      <$Icon shapes={${icons.logo}} size={size} color="accent" />
-      {props.withText !== false && (
-        <$SvgXml
-          xml={
-            '<svg viewBox="0 0 73 21"><path fill="currentColor" d="' +
-            $wordmark +
-            '"/></svg>'
-          }
-          width={textHeight * $TEXT_WIDTH_TO_HEIGHT}
-          height={textHeight}
-          color={colors.accentText}
-        />
-      )}
-    </$View>
+    <$SvgXml
+      xml={
+        '<svg viewBox="0 0 73 21"><path fill="currentColor" d="' +
+        $wordmark +
+        '"/></svg>'
+      }
+      width={props.height * $TEXT_WIDTH_TO_HEIGHT}
+      height={props.height}
+      color={colors.accentText}
+    />
   );
 }`;
+
+/**
+ * The jar, and the lettering beside it unless `withText` is false: decided
+ * here, so a screen that shows the jar alone doesn't carry the lettering's
+ * path, a sixth of a screen's bundle. Spliced into a script as an element:
+ * `${<Logo />}`.
+ */
+export function Logo({
+  size = 36,
+  withText = true,
+}: {
+  // the jar's height
+  size?: number;
+  withText?: boolean;
+}) {
+  const jar = cs`<$Icon shapes={${icons.logo}} size={$size} color="accent" />`;
+  if (!withText) {
+    return jar;
+  }
+  const textHeight = size * TEXT_TO_MARK;
+  return cs`(
+    <$View style={{ flexDirection: "row", alignItems: "center" }}>
+      {$jar}
+      <$Wordmark height={$textHeight} />
+    </$View>
+  )`;
+}

@@ -24,7 +24,6 @@ import {
   deleteStory,
   setFavorite,
   storiesOf,
-  storyFor,
   updateStory,
 } from "./stories.js";
 
@@ -91,19 +90,11 @@ export const api: Record<string, Handler> = {
     const story = checkStory(body, caller.timeZone);
     return { id: await addStory(user.uid, story, caller.timeZone) };
   },
-  // An edited story: answered as Read shows it, to draw in place.
   "/api/stories/update": async (body, caller) => {
     const user = signedIn(caller);
     const story = checkStory(body, caller.timeZone);
     await updateStory(user.uid, text(body.id), story, caller.timeZone);
-    return {
-      story: await storyFor(
-        user.uid,
-        text(body.id),
-        caller.timeZone,
-        caller.origin,
-      ),
-    };
+    return {};
   },
   "/api/stories/favorite": async (body, caller) => {
     const user = signedIn(caller);

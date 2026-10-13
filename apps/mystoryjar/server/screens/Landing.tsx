@@ -16,7 +16,7 @@ const Header = cs`() => {
   const stack = $useStack();
   return (
     <$Navbar>
-      <$Logo />
+      {${(<Logo />)}}
       <$View style={{ flexDirection: "row", gap: 8 }}>
         <$Button
           label="Sign in"

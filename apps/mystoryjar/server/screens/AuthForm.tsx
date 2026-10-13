@@ -127,7 +127,11 @@ export const AuthForm = cs`(props: AuthFormProps) => {
             justifyContent: "center",
           }}
         >
-          {error === null ? <$Logo size={50} /> : <$Notice>{error}</$Notice>}
+          {error === null ? (
+            ${(<Logo size={50} />)}
+          ) : (
+            <$Notice>{error}</$Notice>
+          )}
         </$View>
         <$Text size={16} style={{ textAlign: "center", marginBottom: 8 }}>
           {props.greeting}

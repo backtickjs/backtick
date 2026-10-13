@@ -3,7 +3,8 @@ import { it } from "node:test";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { Story } from "../stories.js";
-import { drawScreen } from "../test/drawScreen.js";
+import { StackActions } from "@react-navigation/routers";
+import { drawScreen, navigated } from "../test/drawScreen.js";
 import { request } from "../test/request.js";
 import { answer, sent } from "../test/server.js";
 import { ReadView } from "./Read.js";
@@ -53,47 +54,13 @@ it("takes a favorite back if the server refuses", async () => {
   assert.ok(screen.getByRole("button", { name: "05" }));
 });
 
-it("edits a story in the composer, and draws it as saved", async () => {
-  answer("/api/stories/update", (body) => ({
-    story: { ...story, text: (body as { text: string }).text },
-  }));
+it("opens a story's editor as a sheet", async () => {
   await draw();
   await userEvent.click(screen.getByRole("button", { name: "Story Menu" }));
   await userEvent.click(screen.getByText("Edit"));
-  assert.ok(screen.getByText("Edit Story"));
-  const text = screen.getByDisplayValue("Ran the half marathon.");
-  await userEvent.clear(text);
-  await userEvent.type(text, "Ran the full marathon.");
-  await userEvent.click(screen.getByRole("button", { name: "Save" }));
-  assert.ok(await screen.findByText("Ran the full marathon."));
-  assert.equal(screen.queryByText("Edit Story"), null);
-  assert.deepEqual(sent[0], {
-    path: "/api/stories/update",
-    body: {
-      id: "s1",
-      text: "Ran the full marathon.",
-      day: "2026-10-05",
-      favorite: false,
-      tags: ["running"],
-      location: "",
-      photoId: null,
-    },
-  });
-});
-
-it("leaves a story as it was when the changes are discarded", async () => {
-  await draw();
-  await userEvent.click(screen.getByRole("button", { name: "Story Menu" }));
-  await userEvent.click(screen.getByText("Edit"));
-  await userEvent.type(
-    screen.getByDisplayValue("Ran the half marathon."),
-    "!!",
-  );
-  await userEvent.click(
-    screen.getByRole("button", { name: "Discard Changes" }),
-  );
-  assert.ok(screen.getByText("Ran the half marathon."));
-  assert.deepEqual(sent, []);
+  assert.deepEqual(navigated, [
+    StackActions.push("Screen", { path: "/edit?id=s1", presentation: "modal" }),
+  ]);
 });
 
 it("deletes a story once confirmed", async () => {

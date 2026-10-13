@@ -8,7 +8,12 @@ import {
 
 // The app's one stack screen and its params, as App.tsx declares them.
 type Routes = {
-  Screen: { path: string; animation?: "default" | "none"; fresh?: number };
+  Screen: {
+    path: string;
+    animation?: "default" | "none";
+    presentation?: "modal";
+    fresh?: number;
+  };
 };
 
 // The app's stack as a client component drives it. The app draws one stack
@@ -17,9 +22,15 @@ type Routes = {
 export const useStack = cs`() => {
   const navigation = $useNavigation<NavigationProp<Routes>>();
   return {
-    // Shows the screen at \`path\` over the current one.
-    navigate: (path: string) =>
-      navigation.dispatch($StackActions.push("Screen", { path })),
+    // Shows the screen at \`path\` over the current one: as a sheet when
+    // \`modal\`.
+    navigate: (path: string, options: { modal?: boolean } = {}) =>
+      navigation.dispatch(
+        $StackActions.push("Screen", {
+          path,
+          ...(options.modal ? { presentation: "modal" as const } : {}),
+        }),
+      ),
     // Shows it in place of the current one, as a tab does: fetched again
     // when \`fresh\`, as after changing what it shows, though preloaded.
     replace: (path: string, options: { fresh?: boolean } = {}) =>
@@ -29,6 +40,16 @@ export const useStack = cs`() => {
           animation: "none",
           ...(options.fresh ? { fresh: Date.now() } : {}),
         }),
+      ),
+    // Returns to the screen at \`path\` under this one, fetched again, as
+    // after changing what it shows.
+    backFresh: (path: string) =>
+      navigation.dispatch(
+        $StackActions.popTo(
+          "Screen",
+          { path, fresh: Date.now() },
+          { merge: true },
+        ),
       ),
     // Fetches the current screen again, as pulling to refresh does.
     refresh: () => navigation.setParams({ fresh: Date.now() }),

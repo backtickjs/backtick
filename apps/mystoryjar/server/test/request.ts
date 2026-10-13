@@ -7,4 +7,5 @@ export const request: ScreenRequest = {
   user: null,
   session: null,
   theme: "light",
+  query: {},
 };

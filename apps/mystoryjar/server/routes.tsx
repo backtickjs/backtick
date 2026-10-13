@@ -1,6 +1,7 @@
 import type { JSX } from "@backtickjs/react/jsx-runtime";
 import type { ScreenRequest } from "./request.js";
 import { Account } from "./screens/Account.js";
+import { Edit } from "./screens/Edit.js";
 import { Feedback } from "./screens/Feedback.js";
 import { Landing } from "./screens/Landing.js";
 import { Read } from "./screens/Read.js";
@@ -34,6 +35,7 @@ const routes: Record<string, Route> = {
     for: "signedIn",
     draw: (request) => <Account request={request} />,
   },
+  "/edit": { for: "signedIn", draw: (request) => <Edit request={request} /> },
   "/feedback": {
     for: "signedIn",
     draw: (request) => <Feedback request={request} />,

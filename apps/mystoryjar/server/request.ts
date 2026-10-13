@@ -16,6 +16,8 @@ export type ScreenRequest = {
   session: string | null;
   // light while signed out, as the website is; else the user's choice
   theme: Theme;
+  // the path's query: /edit?id=… has { id: "…" }
+  query: Record<string, string>;
 };
 
 /**
@@ -39,5 +41,8 @@ export async function screenRequest(
     user,
     session: session ?? null,
     theme: user === null ? "light" : await themeOf(user.uid),
+    query: Object.fromEntries(
+      new URL(request.url ?? "/", "http://localhost").searchParams,
+    ),
   };
 }

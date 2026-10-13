@@ -132,7 +132,7 @@ export const MainNavbar = cs`(props: {
   dark: boolean;
 }) => (
   <$Navbar>
-    <$Logo withText={false} />
+    {${(<Logo withText={false} />)}}
     <$Tabs selected={props.selected} />
     <$Menu selected={props.selected} dark={props.dark} />
   </$Navbar>

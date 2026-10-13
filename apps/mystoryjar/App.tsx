@@ -67,6 +67,8 @@ type Routes = {
   Screen: {
     path: string;
     animation?: "default" | "none";
+    // shown as a sheet over the screen under it, as editing a story is
+    presentation?: "modal";
     // set, to a new value each time, when a screen is to be fetched again:
     // it changed elsewhere, or the person pulled to refresh
     fresh?: number;
@@ -137,6 +139,7 @@ export default function App() {
           screenOptions={({ route }) => ({
             headerShown: false,
             animation: route.params.animation ?? "default",
+            presentation: route.params.presentation ?? "card",
           })}
         >
           <Stack.Screen
