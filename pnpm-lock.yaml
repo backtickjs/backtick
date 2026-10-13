@@ -753,6 +753,9 @@ importers:
       '@backtickjs/tsc':
         specifier: ^0.1.9
         version: link:../../packages/tsc
+      '@hono/node-server':
+        specifier: ^2.1.4
+        version: 2.1.4(hono@4.13.13)
       '@testing-library/react':
         specifier: ^16.3.3
         version: 16.3.3(@testing-library/dom@10.4.2)(@types/react-dom@19.2.7(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -783,6 +786,9 @@ importers:
       global-jsdom:
         specifier: ^30.0.0
         version: 30.0.0(jsdom@30.0.1(@noble/hashes@1.8.0))
+      hono:
+        specifier: ^4.13.13
+        version: 4.13.13
       jsdom:
         specifier: ^30.0.1
         version: 30.0.1(@noble/hashes@1.8.0)
@@ -1288,6 +1294,12 @@ importers:
       '@backtickjs/react':
         specifier: ^19.2.3
         version: link:../../../../adapters/react
+      '@hono/node-server':
+        specifier: ^2.1.4
+        version: 2.1.4(hono@4.13.13)
+      hono:
+        specifier: ^4.13.13
+        version: 4.13.13
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -1328,6 +1340,9 @@ importers:
       '@backtickjs/react-native-client':
         specifier: ^0.1.9
         version: link:../../../react-native-client
+      '@hono/node-server':
+        specifier: ^2.1.4
+        version: 2.1.4(hono@4.13.13)
       expo:
         specifier: ~57.0.26
         version: 57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)
@@ -1337,6 +1352,9 @@ importers:
       expo-status-bar:
         specifier: ~57.0.1
         version: 57.0.1(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
+      hono:
+        specifier: ^4.13.13
+        version: 4.13.13
       react:
         specifier: 19.2.3
         version: 19.2.3
@@ -1395,6 +1413,12 @@ importers:
       '@backtickjs/solid-js':
         specifier: ^1.9.14
         version: link:../../../../adapters/solid-js
+      '@hono/node-server':
+        specifier: ^2.1.4
+        version: 2.1.4(hono@4.13.13)
+      hono:
+        specifier: ^4.13.13
+        version: 4.13.13
       typescript:
         specifier: ^6.0.3
         version: 6.0.3

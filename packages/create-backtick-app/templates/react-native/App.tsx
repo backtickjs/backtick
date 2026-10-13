@@ -38,7 +38,7 @@ export default function App() {
   // error the last one showed.
   const [request, setRequest] = useState(() => ({
     number: 0,
-    screen: fetchScreen("/home"),
+    screen: fetchScreen("/"),
   }));
   useEffect(() => {
     // In development, the screen is fetched again each time the server
@@ -47,7 +47,7 @@ export default function App() {
       return onServerRestart(() =>
         setRequest(({ number }) => ({
           number: number + 1,
-          screen: fetchScreen("/home"),
+          screen: fetchScreen("/"),
         })),
       );
     }

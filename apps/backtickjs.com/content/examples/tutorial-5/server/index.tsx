@@ -1,85 +1,42 @@
-import { createServer, type IncomingMessage } from "node:http";
-import { text } from "node:stream/consumers";
-import { fileURLToPath } from "node:url";
-import { createBuilds, DeprecatedBuild } from "@backtickjs/builds";
-import { bundler } from "@backtickjs/bundler";
-import type { JSX } from "@backtickjs/react/jsx-runtime";
-import { AppUpdateRequired } from "./AppUpdateRequired.js";
+import { serve } from "@hono/node-server";
+import { Hono } from "hono";
+import { cors } from "hono/cors";
 import { Home } from "./Home.js";
 import { saveOrder } from "./orders.js";
+import { screen } from "./screen.js";
 
-// Your app's screens, by path: add one here, and the app can fetch it. Each
-// draws its screen for the request, which carries what the app sent.
-const screens: Record<string, (request: IncomingMessage) => JSX.Element> = {
-  // with where the app reached this server, for the screen to send its
-  // order to
-  "/home": (request) => <Home origin={`http://${request.headers.host}`} />,
-};
+const app = new Hono();
+
+// `npm run web` serves the app from another origin.
+app.use(cors({ origin: "*", allowHeaders: ["x-build-id"] }));
+
+// Your app's screens: add a route, and the app can fetch it. A path can
+// take parameters, `/stories/:id`, read with `context.req.param("id")`.
+// with where the app reached this server, for the screen to send its order to
+app.get("/", (context) =>
+  screen(context, <Home origin={new URL(context.req.url).origin} />),
+);
+
+app.post("/orders", async (context) => {
+  await saveOrder(await context.req.json());
+  return context.body(null);
+});
 
 // Development is only what `npm start` runs, which sets NODE_ENV: any other
 // run, a deploy included, is production. In development, this run of the
 // server: `--watch` starts a new one whenever you save, and the app, seeing a
 // new one at `/live`, draws its screen again.
-const development = process.env.NODE_ENV === "development";
-const run = crypto.randomUUID();
+if (process.env.NODE_ENV === "development") {
+  const run = crypto.randomUUID();
+  app.get("/live", (context) => context.text(run));
+}
 
-// Your app's builds: each sends its id, and a screen is bundled for the
-// modules that build carries, from moduleMap.ts. A build in users' hands
-// keeps working as your app moves on, once registered: see builds/.
-const builds = createBuilds({
-  projectRoot: fileURLToPath(new URL("..", import.meta.url)),
+// Answered rather than crashed on, so the app can show why.
+app.onError((error, context) => {
+  console.error(error);
+  return context.text(String(error), 500);
 });
 
-const server = createServer(async (request, response) => {
-  // `npm run web` serves the app from another origin.
-  response.setHeader("access-control-allow-origin", "*");
-  response.setHeader("access-control-allow-headers", "x-build-id");
-  if (request.method === "OPTIONS") {
-    response.end();
-    return;
-  }
-  const { pathname } = new URL(request.url ?? "/", "http://localhost");
-  if (development && pathname === "/live") {
-    response.end(run);
-    return;
-  }
-  if (request.method === "POST" && pathname === "/orders") {
-    await saveOrder(JSON.parse(await text(request)));
-    response.end();
-    return;
-  }
-  const screen = screens[pathname];
-  if (screen === undefined) {
-    response.statusCode = 404;
-    response.end();
-    return;
-  }
-  try {
-    const buildId = request.headers["x-build-id"]?.toString() || null;
-    let input: JSX.Element;
-    let modules;
-    try {
-      modules = builds.modulesOf(buildId);
-      input = screen(request);
-    } catch (error) {
-      // A build you retired: a screen asking to update, bundled for the
-      // modules it has.
-      if (!(error instanceof DeprecatedBuild)) throw error;
-      input = <AppUpdateRequired />;
-      modules = error.modules;
-    }
-    const bundle = await bundler.build({ input, modules });
-    const { code } = bundle.generate({ format: "cjs" });
-    response.setHeader("content-type", "text/javascript");
-    response.end(code);
-  } catch (error) {
-    // Answered rather than crashed on, so the app can show why.
-    console.error(error);
-    response.statusCode = 500;
-    response.end(String(error));
-  }
-});
-
-server.listen(3000, () => {
+serve({ fetch: app.fetch, port: 3000 }, () => {
   console.log("Backtick server on http://localhost:3000");
 });

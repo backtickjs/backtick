@@ -41,7 +41,7 @@ Every template has:
 
 - `server/Home.tsx`: the welcome screen, a server component. It reads values on the server and splices them into a client script.
 - `server/HelloWave.tsx`: a client component, a waving hand animated where the screen runs. Tap or click it.
-- `server/index.tsx`: the Backtick server on http://localhost:3000.
+- `server/index.tsx`: the Backtick server on http://localhost:3000, a [Hono](https://hono.dev) app that runs on Node or Bun. Add a route there for each screen or page; a path can take parameters, as `/stories/:id`.
 - `scripts/start.mjs`: starts the server in development, restarting it whenever you save. The client polls `/live`, which exists only in development, and redraws when the server restarts.
 - `npm run reset-project`: replaces `server/Home.tsx` with a blank screen and removes `HelloWave.tsx`.
 - `npm run typecheck`: runs `backtick-tsc` over the server, scripts and splices included. In `react-native`, it also runs `tsc` over the Expo app.
@@ -49,7 +49,7 @@ Every template has:
 
 ### `react-native`
 
-An Expo app (SDK 57) with the Backtick server beside it in `server/`. `App.tsx` fetches the screen at `/home` and runs it with [`@backtickjs/react-native-client`](https://github.com/backtickjs/backtick/tree/main/packages/react-native-client), offering screens what `moduleMap.ts` lists.
+An Expo app (SDK 57) with the Backtick server beside it in `server/`. `App.tsx` fetches the screen at `/` and runs it with [`@backtickjs/react-native-client`](https://github.com/backtickjs/backtick/tree/main/packages/react-native-client), offering screens what `moduleMap.ts` lists.
 
 Each build of the app sends an id that names the modules it carries, which `app.config.ts` works out from `moduleMap.ts`. The server bundles each screen for that build's modules, with [`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds), so a build in users' hands keeps working as the app moves on:
 

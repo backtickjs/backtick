@@ -1,33 +1,27 @@
-import { createServer } from "node:http";
+import { serve } from "@hono/node-server";
+import { Hono } from "hono";
 import { Home } from "./Home.js";
 import { development, toHtml } from "./html.js";
 
+const app = new Hono();
+
+// Your pages: add a route, and the browser can open it. A path can take
+// parameters, `/stories/:id`, read with `context.req.param("id")`.
+app.get("/", async (context) => context.html(await toHtml(<Home />)));
+
 // In development, this run of the server: `--watch` starts a new one whenever
 // you save, and the page, seeing a new one at `/live`, reloads.
-const run = crypto.randomUUID();
+if (development) {
+  const run = crypto.randomUUID();
+  app.get("/live", (context) => context.text(run));
+}
 
-const server = createServer(async (request, response) => {
-  if (development && request.url === "/live") {
-    response.end(run);
-    return;
-  }
-  if (request.url === "/") {
-    try {
-      const html = await toHtml(<Home />);
-      response.setHeader("content-type", "text/html");
-      response.end(html);
-    } catch (error) {
-      // Answered rather than crashed on, so the browser can show why.
-      console.error(error);
-      response.statusCode = 500;
-      response.end(String(error));
-    }
-    return;
-  }
-  response.statusCode = 404;
-  response.end();
+// Answered rather than crashed on, so the browser can show why.
+app.onError((error, context) => {
+  console.error(error);
+  return context.text(String(error), 500);
 });
 
-server.listen(3000, () => {
+serve({ fetch: app.fetch, port: 3000 }, () => {
   console.log("Backtick server on http://localhost:3000");
 });
