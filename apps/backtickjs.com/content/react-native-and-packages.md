@@ -46,7 +46,8 @@ A package a screen uses has to be in three places:
 
 ```
 
-**3. Your app,** in the modules a screen may require, handed to `evaluate`:
+**3. Your app,** in its module map, the modules a screen may require, handed to
+`evaluate`:
 
 ```tsx file=react-native-and-packages/App.tsx
 

@@ -989,6 +989,9 @@ importers:
       react-native-web:
         specifier: ^0.21.0
         version: 0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      semver:
+        specifier: ^7.8.5
+        version: 7.8.5
       sharp:
         specifier: ^0.35.5
         version: 0.35.5(@types/node@25.9.1)
@@ -1023,6 +1026,9 @@ importers:
       '@types/react':
         specifier: 19.2.18
         version: 19.2.18
+      '@types/semver':
+        specifier: ^7.8.0
+        version: 7.8.0
       '@types/subset-font':
         specifier: ^2.3.0
         version: 2.3.0
@@ -14046,7 +14052,7 @@ snapshots:
       ignore-by-default: 1.0.1
       minimatch: 10.2.6
       pstree.remy: 1.1.8
-      semver: 7.8.1
+      semver: 7.8.5
       simple-update-notifier: 2.0.0
       supports-color: 5.5.0
       touch: 3.1.1
@@ -14178,7 +14184,7 @@ snapshots:
       follow-redirects: 1.16.1
       is-ci: 2.0.0
       leven: 3.1.0
-      semver: 7.8.1
+      semver: 7.8.5
       tmp: 0.2.7
       yauzl-promise: 4.0.0
     transitivePeerDependencies:

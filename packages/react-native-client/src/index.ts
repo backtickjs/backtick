@@ -1,37 +1,49 @@
 /**
- * What a bundle may require, by specifier: the packages the app was built
- * with, each as its module. At least React, React Native and React's JSX
- * runtime:
+ * What a bundle may import, by specifier, and how this app loads each: a
+ * function returning the module, called the first time a bundle requires it.
+ * At least React, React Native and React's JSX runtime:
  *
- *     import * as React from "react";
- *     import * as JSXRuntime from "react/jsx-runtime";
- *     import * as ReactNative from "react-native";
- *
- *     const modules = {
- *       "react": React,
- *       "react/jsx-runtime": JSXRuntime,
- *       "react-native": ReactNative,
+ *     const moduleMap = {
+ *       react: () => require("react"),
+ *       "react/jsx-runtime": () => require("react/jsx-runtime"),
+ *       "react-native": () => require("react-native"),
  *     };
+ *
+ * What a web page's import map does, for an app: the values are modules,
+ * not URLs.
+ * Loaded lazily, so a module no screen uses never loads, and Node can read
+ * the specifiers without loading React Native.
  */
-export type Modules = Readonly<Record<string, unknown>>;
+export type ModuleMap = Readonly<Record<string, () => unknown>>;
+
+// Each map's modules, once loaded: one instance of each, as `require` gives.
+const loaded = new WeakMap<ModuleMap, Map<string, unknown>>();
 
 /**
- * A bundle's code, run as CommonJS with `require` answered from `modules`:
+ * A bundle's code, run as CommonJS with `require` answered from `moduleMap`:
  * what it exports, the screen to draw. What a web page's import map and
  * script tag do for a browser, this does for an app; fetching the bundle, and
  * when, is the app's. A bundle requiring a module the app doesn't provide
  * throws.
  */
-export function evaluate(code: string, modules: Modules): unknown {
-  const module = { exports: {} as unknown };
+export function evaluate(code: string, moduleMap: ModuleMap): unknown {
+  let modules = loaded.get(moduleMap);
+  if (modules === undefined) {
+    modules = new Map();
+    loaded.set(moduleMap, modules);
+  }
   const require = (specifier: string): unknown => {
-    if (!Object.hasOwn(modules, specifier)) {
+    if (!Object.hasOwn(moduleMap, specifier)) {
       throw new Error(
         `The bundle requires "${specifier}", which this app doesn't provide.`,
       );
     }
-    return modules[specifier];
+    if (!modules.has(specifier)) {
+      modules.set(specifier, moduleMap[specifier]!());
+    }
+    return modules.get(specifier);
   };
+  const module = { exports: {} as unknown };
   new Function("module", "exports", "require", code)(
     module,
     module.exports,

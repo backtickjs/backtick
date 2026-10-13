@@ -11,17 +11,14 @@ import {
   useLayoutEffect,
   useState,
 } from "react";
-import * as JSXRuntime from "react/jsx-runtime";
-import * as ReactNative from "react-native";
 import { ActivityIndicator, AppState, Text } from "react-native";
-import { Fiber } from "./fiber";
 
 // What a screen may require: the packages this app was built with.
-const modules = {
-  react: React,
-  "react/jsx-runtime": JSXRuntime,
-  "react-native": ReactNative,
-  "@react-three/fiber/native": Fiber,
+const moduleMap = {
+  react: () => require("react"),
+  "react/jsx-runtime": () => require("react/jsx-runtime"),
+  "react-native": () => require("react-native"),
+  "@react-three/fiber/native": () => require("./fiber").Fiber,
 };
 
 // Your Backtick server runs on the computer Expo was started from.
@@ -54,7 +51,7 @@ async function fetchScreen(path: string): Promise<Fetched> {
   }
   const code = await response.text();
   const downloaded = performance.now();
-  const node = evaluate(code, modules) as ReactNode;
+  const node = evaluate(code, moduleMap) as ReactNode;
   const evaluated = performance.now();
   return {
     path,

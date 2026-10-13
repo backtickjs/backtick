@@ -42,17 +42,17 @@ data the same way. Give it test data through its props, as the test gives
 
 When your app provides another package, add it to both lists in `drawScreen.ts`:
 its version to `packageVersions`, as `server/index.tsx` does, and its module to
-`modules`, as `App.tsx` does.
+`moduleMap`, as `App.tsx` does.
 
 A package with native code, like `expo-haptics`, has nothing to run in Node.
-Give `modules` a stand-in with the exports your screens use:
+Give `moduleMap` a stand-in with the exports your screens use:
 
 ```ts
-const modules = {
-  react: React,
-  "react/jsx-runtime": JSXRuntime,
-  "react-native": ReactNativeWeb,
-  "expo-haptics": { impactAsync: async () => {} },
+const moduleMap = {
+  react: () => React,
+  "react/jsx-runtime": () => JSXRuntime,
+  "react-native": () => ReactNativeWeb,
+  "expo-haptics": () => ({ impactAsync: async () => {} }),
 };
 ```
 

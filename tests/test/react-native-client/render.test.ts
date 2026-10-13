@@ -66,9 +66,9 @@ it("draws a server's screen with the app's React Native", async () => {
   // The app: the bundle run with its packages, `react-native-web` standing in
   // for React Native, and drawn.
   const drawn = evaluate(code, {
-    react: React,
-    "react/jsx-runtime": JSXRuntime,
-    "react-native": ReactNativeWeb,
+    react: () => React,
+    "react/jsx-runtime": () => JSXRuntime,
+    "react-native": () => ReactNativeWeb,
   }) as React.ReactNode;
   const errors: unknown[] = [];
   const error = console.error;
@@ -93,11 +93,23 @@ it("refuses a bundle that requires what the app doesn't provide", () => {
   assert.throws(
     () =>
       evaluate('module.exports = require("react-native-maps");', {
-        react: React,
+        react: () => React,
       }),
     {
       message:
         'The bundle requires "react-native-maps", which this app doesn\'t provide.',
     },
   );
+});
+
+it("loads each module the first time a bundle requires it, once for the map", () => {
+  const loads: string[] = [];
+  const moduleMap = {
+    react: () => (loads.push("react"), React),
+    "react-native": () => (loads.push("react-native"), ReactNativeWeb),
+  };
+  const code = 'module.exports = require("react");';
+  assert.equal(evaluate(code, moduleMap), React);
+  assert.equal(evaluate(code, moduleMap), React);
+  assert.deepEqual(loads, ["react"]);
 });

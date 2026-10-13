@@ -1,7 +1,6 @@
 import { evaluate } from "@backtickjs/react-native-client";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
-import * as React from "react";
 import {
   Component,
   type ReactNode,
@@ -10,15 +9,13 @@ import {
   useEffect,
   useState,
 } from "react";
-import * as JSXRuntime from "react/jsx-runtime";
-import * as ReactNative from "react-native";
 import { ActivityIndicator, Text } from "react-native";
 
 // What a screen may require: the packages this app was built with.
-const modules = {
-  react: React,
-  "react/jsx-runtime": JSXRuntime,
-  "react-native": ReactNative,
+const moduleMap = {
+  react: () => require("react"),
+  "react/jsx-runtime": () => require("react/jsx-runtime"),
+  "react-native": () => require("react-native"),
 };
 
 // Your Backtick server runs on the computer Expo was started from.
@@ -32,7 +29,7 @@ async function fetchScreen(path: string): Promise<ReactNode> {
   if (!response.ok) {
     throw new Error(`${path} answered ${response.status}.`);
   }
-  return evaluate(await response.text(), modules) as ReactNode;
+  return evaluate(await response.text(), moduleMap) as ReactNode;
 }
 
 export default function App() {

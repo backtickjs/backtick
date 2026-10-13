@@ -23,17 +23,17 @@ const packageVersions = {
   "react-native": require("react-native/package.json").version,
   "@react-three/fiber": require("@react-three/fiber/package.json").version,
 };
-const modules = {
-  react: React,
-  "react/jsx-runtime": JSXRuntime,
-  "@react-three/fiber/native": Fiber,
+const moduleMap = {
+  react: () => React,
+  "react/jsx-runtime": () => JSXRuntime,
+  "@react-three/fiber/native": () => Fiber,
 };
 
 // `World` as the phone gets it: bundled by the server, run by the app.
 const bundle = await bundler.build({ input: World, packageVersions });
 const PlayedWorld = evaluate(
   bundle.generate({ format: "cjs" }).code,
-  modules,
+  moduleMap,
 ) as React.FC<WorldProps>;
 
 const start: Stats = { health: 100, ammo: 24, kills: 0, shots: 0, wounds: 0 };

@@ -14,10 +14,10 @@ const packageVersions = {
   react: require("react/package.json").version,
   "react-native": require("react-native/package.json").version,
 };
-const modules = {
-  react: React,
-  "react/jsx-runtime": JSXRuntime,
-  "react-native": ReactNativeWeb,
+const moduleMap = {
+  react: () => React,
+  "react/jsx-runtime": () => JSXRuntime,
+  "react-native": () => ReactNativeWeb,
 };
 
 // A screen, bundled as your server bundles it and run as your app runs it,
@@ -25,5 +25,5 @@ const modules = {
 export async function drawScreen(input: Spliceable): Promise<React.ReactNode> {
   const bundle = await bundler.build({ input, packageVersions });
   const { code } = bundle.generate({ format: "cjs" });
-  return evaluate(code, modules) as React.ReactNode;
+  return evaluate(code, moduleMap) as React.ReactNode;
 }
