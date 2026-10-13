@@ -36,9 +36,11 @@ const PickPhoto = cs`(props: { onPick: (uri: string) => void }) => (
 On each request, bundle it for the versions the app provides, `"expo-image-picker": "57.0.20"` among them. In the app, offer it to bundles by the name the adapter imports it from:
 
 ```tsx
+import * as ImagePicker from "expo-image-picker";
+
 const moduleMap = {
   // …react, react/jsx-runtime, react-native
-  "expo-image-picker": () => require("expo-image-picker"),
+  "expo-image-picker": ImagePicker,
 };
 ```
 

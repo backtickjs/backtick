@@ -14,9 +14,9 @@ const modules = createBuilds({
   projectRoot: fileURLToPath(new URL("../..", import.meta.url)),
 }).installed("web");
 const moduleMap = {
-  react: () => React,
-  "react/jsx-runtime": () => JSXRuntime,
-  "react-native": () => ReactNativeWeb,
+  react: React,
+  "react/jsx-runtime": JSXRuntime,
+  "react-native": ReactNativeWeb,
 };
 
 // A screen, bundled as your server bundles it and run as your app runs it,

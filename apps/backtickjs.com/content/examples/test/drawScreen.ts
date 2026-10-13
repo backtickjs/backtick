@@ -15,11 +15,11 @@ export async function drawScreen(
 ): Promise<React.ReactNode> {
   const { code } = await bundleScreen(input, modules);
   return evaluate(code, {
-    react: () => React,
-    "react/jsx-runtime": () => JSXRuntime,
-    "react-native": () => ReactNativeWeb,
+    react: React,
+    "react/jsx-runtime": JSXRuntime,
+    "react-native": ReactNativeWeb,
     ...Object.fromEntries(
-      Object.entries(modules).map(([name, { module }]) => [name, () => module]),
+      Object.entries(modules).map(([name, { module }]) => [name, module]),
     ),
   }) as React.ReactNode;
 }

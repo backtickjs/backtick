@@ -12,10 +12,10 @@ const require = createRequire(import.meta.url);
 
 /**
  * The specifiers a module map offers, read from its source without running
- * it: `export const moduleMap = { … }`, each entry `() => require("…")`, and
- * nothing else but type imports. Anything more, as a check of the platform,
- * would make what a build offers something only the device knows, so it
- * throws, naming the line.
+ * it: imports, and `export const moduleMap = { … }`, each entry
+ * `"specifier": Name` with `Name` bound by an import. Anything more, as a
+ * check of the platform, would make what a build offers something only the
+ * device knows, so it throws, naming the line.
  */
 export function readModuleMap(file: string): string[] {
   const ts = require("typescript") as typeof import("typescript");
@@ -30,12 +30,22 @@ export function readModuleMap(file: string): string[] {
     );
     return new Error(`${file}:${line + 1}: ${what}`);
   };
+  const imported = new Set<string>();
   let map: import("typescript").ObjectLiteralExpression | undefined;
   for (const statement of source.statements) {
-    if (
-      ts.isImportDeclaration(statement) &&
-      statement.importClause?.isTypeOnly
-    ) {
+    if (ts.isImportDeclaration(statement)) {
+      const clause = statement.importClause;
+      if (clause !== undefined && !clause.isTypeOnly) {
+        if (clause.name !== undefined) imported.add(clause.name.text);
+        const bindings = clause.namedBindings;
+        if (bindings !== undefined && ts.isNamespaceImport(bindings)) {
+          imported.add(bindings.name.text);
+        } else if (bindings !== undefined) {
+          for (const element of bindings.elements) {
+            if (!element.isTypeOnly) imported.add(element.name.text);
+          }
+        }
+      }
       continue;
     }
     const declaration = ts.isVariableStatement(statement)
@@ -56,26 +66,25 @@ export function readModuleMap(file: string): string[] {
     }
     throw wrong(
       statement,
-      "a module map holds `export const moduleMap = { … }` and type imports only",
+      "a module map holds imports and `export const moduleMap = { … }` only",
     );
   }
   if (map === undefined) {
-    throw new Error(`${file}: no \`export const moduleMap = { … }\``);
+    throw new Error(file + ": no `export const moduleMap = { … }`");
   }
   return map.properties.map((property) => {
     const entry =
       ts.isPropertyAssignment(property) &&
       (ts.isIdentifier(property.name) || ts.isStringLiteral(property.name)) &&
-      ts.isArrowFunction(property.initializer) &&
-      property.initializer.parameters.length === 0 &&
-      ts.isCallExpression(property.initializer.body) &&
-      property.initializer.body.expression.getText(source) === "require" &&
-      property.initializer.body.arguments.length === 1 &&
-      ts.isStringLiteral(property.initializer.body.arguments[0]!)
+      ts.isIdentifier(property.initializer) &&
+      imported.has(property.initializer.text)
         ? property.name
         : undefined;
     if (entry === undefined) {
-      throw wrong(property, 'each entry is `"specifier": () => require("…")`');
+      throw wrong(
+        property,
+        'each entry is `"specifier": Name`, with `Name` imported above',
+      );
     }
     return entry.text;
   });

@@ -39,8 +39,9 @@ function app(
 
 const map = (...specifiers: string[]) =>
   `import type { ModuleMap } from "@backtickjs/react-native-client";
+${specifiers.map((each, index) => `import * as M${index} from "${each}";`).join("\n")}
 export const moduleMap = {
-${specifiers.map((each) => `  "${each}": () => require("${each}"),`).join("\n")}
+${specifiers.map((each, index) => `  "${each}": M${index},`).join("\n")}
 } satisfies ModuleMap;
 `;
 
@@ -66,15 +67,49 @@ describe("a module map", () => {
 
   it("may not decide at runtime", () => {
     const root = app({
-      "moduleMap.ts": `export const moduleMap = {
-  react: () => require("react"),
-  fbsdk: () => (native() ? require("fbsdk") : {}),
+      "moduleMap.ts": `import * as React from "react";
+import * as Fbsdk from "fbsdk";
+export const moduleMap = {
+  react: React,
+  fbsdk: native ? Fbsdk : {},
 };`,
     });
     assert.throws(
       () => readModuleMap(join(root, "moduleMap.ts")),
-      /moduleMap\.ts:3: each entry is/,
+      /moduleMap\.ts:5: each entry is/,
     );
+  });
+
+  it("offers only what it imports", () => {
+    const root = app({
+      "moduleMap.ts": `import * as React from "react";
+export const moduleMap = {
+  react: React,
+  fbsdk: Fbsdk,
+};`,
+    });
+    assert.throws(
+      () => readModuleMap(join(root, "moduleMap.ts")),
+      /moduleMap\.ts:4: each entry is `"specifier": Name`, with `Name` imported above/,
+    );
+  });
+
+  it("takes any import: a namespace, a name, a default", () => {
+    const root = app({
+      "moduleMap.ts": `import * as React from "react";
+import { Fiber } from "./fiber";
+import Constants from "expo-constants";
+export const moduleMap = {
+  react: React,
+  "@react-three/fiber/native": Fiber,
+  "expo-constants": Constants,
+};`,
+    });
+    assert.deepEqual(readModuleMap(join(root, "moduleMap.ts")), [
+      "react",
+      "@react-three/fiber/native",
+      "expo-constants",
+    ]);
   });
 
   it("may hold nothing but the table", () => {

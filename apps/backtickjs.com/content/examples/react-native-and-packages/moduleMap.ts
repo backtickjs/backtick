@@ -1,11 +1,16 @@
 import type { ModuleMap } from "@backtickjs/react-native-client";
+import * as Haptics from "expo-haptics";
+import * as LinearGradient from "expo-linear-gradient";
+import * as React from "react";
+import * as JSXRuntime from "react/jsx-runtime";
+import * as ReactNative from "react-native";
 
-// What a screen may require, and where each comes from: the packages this
-// app is built with.
+// What a screen may require, as the app imports it: the packages it's built
+// with.
 export const moduleMap = {
-  react: () => require("react"),
-  "react/jsx-runtime": () => require("react/jsx-runtime"),
-  "react-native": () => require("react-native"),
-  "expo-haptics": () => require("expo-haptics"),
-  "expo-linear-gradient": () => require("expo-linear-gradient"),
+  react: React,
+  "react/jsx-runtime": JSXRuntime,
+  "react-native": ReactNative,
+  "expo-haptics": Haptics,
+  "expo-linear-gradient": LinearGradient,
 } satisfies ModuleMap;

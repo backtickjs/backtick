@@ -26,9 +26,9 @@ const modules = {
     .version,
 };
 const moduleMap = {
-  react: () => React,
-  "react/jsx-runtime": () => JSXRuntime,
-  "@react-three/fiber/native": () => Fiber,
+  react: React,
+  "react/jsx-runtime": JSXRuntime,
+  "@react-three/fiber/native": Fiber,
 };
 
 // `World` as the phone gets it: bundled by the server, run by the app.

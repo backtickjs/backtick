@@ -11,14 +11,17 @@ import {
   useLayoutEffect,
   useState,
 } from "react";
+import * as JSXRuntime from "react/jsx-runtime";
+import * as ReactNative from "react-native";
 import { ActivityIndicator, AppState, Text } from "react-native";
+import { Fiber } from "./fiber";
 
 // What a screen may require: the packages this app was built with.
 const moduleMap = {
-  react: () => require("react"),
-  "react/jsx-runtime": () => require("react/jsx-runtime"),
-  "react-native": () => require("react-native"),
-  "@react-three/fiber/native": () => require("./fiber").Fiber,
+  react: React,
+  "react/jsx-runtime": JSXRuntime,
+  "react-native": ReactNative,
+  "@react-three/fiber/native": Fiber,
 };
 
 // Your Backtick server runs on the computer Expo was started from.

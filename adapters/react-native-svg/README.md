@@ -47,9 +47,11 @@ const bundle = await bundler.build({
 In the app, offer react-native-svg to bundles by the name the adapter imports it from:
 
 ```tsx
+import * as ReactNativeSvg from "react-native-svg";
+
 const moduleMap = {
   // …react, react/jsx-runtime, react-native
-  "react-native-svg": () => require("react-native-svg"),
+  "react-native-svg": ReactNativeSvg,
 };
 ```
 

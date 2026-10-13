@@ -49,9 +49,11 @@ const bundle = await bundler.build({
 In the app, offer SecureStore to bundles by the name the adapter imports it from:
 
 ```tsx
+import * as SecureStore from "expo-secure-store";
+
 const moduleMap = {
   // …react, react/jsx-runtime, react-native
-  "expo-secure-store": () => require("expo-secure-store"),
+  "expo-secure-store": SecureStore,
 };
 ```
 

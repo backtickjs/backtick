@@ -64,9 +64,11 @@ const bundle = await bundler.build({
 In the app, offer R3F to bundles by the name the adapter imports it from:
 
 ```tsx
+import * as FiberNative from "@react-three/fiber/native";
+
 const moduleMap = {
   // …react, react/jsx-runtime, react-native
-  "@react-three/fiber/native": () => require("@react-three/fiber/native"),
+  "@react-three/fiber/native": FiberNative,
 };
 ```
 

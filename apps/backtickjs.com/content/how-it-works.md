@@ -103,8 +103,8 @@ has every option.
 
 Your app fetches the bundle like any request, and runs it with `evaluate` from
 `@backtickjs/react-native-client`, handing it its module map: the packages it
-ships, each loaded the first time a bundle needs it. What the
-bundle exports is the screen, a React node the app draws:
+ships, imported as it starts. What the bundle exports is the screen, a React
+node the app draws:
 
 ```tsx file=thinking/App.tsx
 

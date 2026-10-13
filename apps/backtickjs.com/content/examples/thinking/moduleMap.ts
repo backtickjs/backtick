@@ -1,8 +1,11 @@
 import type { ModuleMap } from "@backtickjs/react-native-client";
+import * as React from "react";
+import * as JSXRuntime from "react/jsx-runtime";
+import * as ReactNative from "react-native";
 
 // What a screen may require: the packages your app is built with.
 export const moduleMap = {
-  react: () => require("react"),
-  "react/jsx-runtime": () => require("react/jsx-runtime"),
-  "react-native": () => require("react-native"),
+  react: React,
+  "react/jsx-runtime": JSXRuntime,
+  "react-native": ReactNative,
 } satisfies ModuleMap;

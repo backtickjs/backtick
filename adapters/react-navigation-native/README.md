@@ -59,9 +59,11 @@ const bundle = await bundler.build({
 In the app, offer React Navigation to bundles by the name the adapter imports it from:
 
 ```tsx
+import * as Navigation from "@react-navigation/native";
+
 const moduleMap = {
   // …react, react/jsx-runtime, react-native
-  "@react-navigation/native": () => require("@react-navigation/native"),
+  "@react-navigation/native": Navigation,
 };
 ```
 

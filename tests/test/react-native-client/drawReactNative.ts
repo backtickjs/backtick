@@ -47,9 +47,9 @@ export async function drawReactNative(name: string, source: string) {
     },
   });
   const drawn = evaluate(built.generate({ format: "cjs" }).code, {
-    react: () => React,
-    "react/jsx-runtime": () => JSXRuntime,
-    "react-native": () => ReactNativeWeb,
+    react: React,
+    "react/jsx-runtime": JSXRuntime,
+    "react-native": ReactNativeWeb,
   }) as React.ReactNode;
 
   const container = document.createElement("div");

@@ -10,21 +10,25 @@ npm install @backtickjs/builds
 
 ## How it works
 
-1. **The app declares what it offers to screens** in a module map, one per platform as Metro picks files: `moduleMap.ts` for iOS and Android, and `moduleMap.web.ts` for the web. A module map is a table and nothing else, so it can be read without running it:
+1. **The app declares what it offers to screens** in a module map, one per platform as Metro picks files: `moduleMap.ts` for iOS and Android, and `moduleMap.web.ts` for the web. A module map is imports and a table, nothing else, so it can be read without running it:
 
    ```ts
    // moduleMap.ts
    import type { ModuleMap } from "@backtickjs/react-native-client";
+   import * as React from "react";
+   import * as JSXRuntime from "react/jsx-runtime";
+   import * as ReactNative from "react-native";
+   import * as Facebook from "react-native-fbsdk-next";
 
    export const moduleMap = {
-     react: () => require("react"),
-     "react/jsx-runtime": () => require("react/jsx-runtime"),
-     "react-native": () => require("react-native"),
-     "react-native-fbsdk-next": () => require("react-native-fbsdk-next"),
+     react: React,
+     "react/jsx-runtime": JSXRuntime,
+     "react-native": ReactNative,
+     "react-native-fbsdk-next": Facebook,
    } satisfies ModuleMap;
    ```
 
-   An entry that decides at runtime, like `native() ? require("…") : {}`, is an error. What a platform lacks, its map leaves out.
+   Each entry is `"specifier": Name`, with `Name` imported above. An entry that decides at runtime, like `native ? Facebook : {}`, is an error. What a platform lacks, its map leaves out.
 
 2. **Each build gets an id:** a hash of the modules its platform's map offers, each at the installed version of its package. `app.config.ts` puts the ids in the app config:
 

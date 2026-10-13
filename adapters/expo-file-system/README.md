@@ -31,9 +31,11 @@ const upload = cs`async (uri: string) => {
 On each request, bundle it for the versions the app provides, `"expo-file-system": "57.0.7"` among them. In the app, offer it to bundles by the name the adapter imports it from:
 
 ```tsx
+import * as FileSystem from "expo-file-system";
+
 const moduleMap = {
   // …react, react/jsx-runtime, react-native
-  "expo-file-system": () => require("expo-file-system"),
+  "expo-file-system": FileSystem,
 };
 ```
 

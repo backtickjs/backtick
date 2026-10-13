@@ -79,10 +79,6 @@ const modules: Record<keyof typeof moduleMap, unknown> = {
   "expo-file-system": await import("../../fileSystem.web.js"),
 };
 
-const testModuleMap = Object.fromEntries(
-  Object.entries(modules).map(([name, module]) => [name, () => module]),
-);
-
 type Picked =
   | { canceled: true; assets: null }
   | { canceled: false; assets: { uri: string; mimeType?: string }[] };
@@ -106,7 +102,7 @@ export async function drawScreen(input: Spliceable): Promise<React.ReactNode> {
     modules: builds.installed("web"),
   });
   const { code } = bundle.generate({ format: "cjs" });
-  return evaluate(code, testModuleMap) as React.ReactNode;
+  return evaluate(code, modules) as React.ReactNode;
 }
 
 let canGoBack = false;

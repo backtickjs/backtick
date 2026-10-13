@@ -52,9 +52,11 @@ const bundle = await bundler.build({
 In the app, offer expo-font to bundles by the name the adapter imports it from:
 
 ```tsx
+import * as Font from "expo-font";
+
 const moduleMap = {
   // …react, react/jsx-runtime, react-native
-  "expo-font": () => require("expo-font"),
+  "expo-font": Font,
 };
 ```
 

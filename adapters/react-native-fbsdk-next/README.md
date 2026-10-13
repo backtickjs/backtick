@@ -38,9 +38,11 @@ const SignInWithFacebook = cs`(props: { onToken: (token: string) => void }) => (
 On each request, bundle it for the versions the app provides, `"react-native-fbsdk-next": "13.4.3"` among them. In the app, offer it to bundles by the name the adapter imports it from:
 
 ```tsx
+import * as Fbsdk from "react-native-fbsdk-next";
+
 const moduleMap = {
   // …react, react/jsx-runtime, react-native
-  "react-native-fbsdk-next": () => require("react-native-fbsdk-next"),
+  "react-native-fbsdk-next": Fbsdk,
 };
 ```
 

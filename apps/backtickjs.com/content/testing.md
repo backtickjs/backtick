@@ -48,10 +48,10 @@ screens use:
 
 ```ts
 const moduleMap = {
-  react: () => React,
-  "react/jsx-runtime": () => JSXRuntime,
-  "react-native": () => ReactNativeWeb,
-  "expo-haptics": () => ({ impactAsync: async () => {} }),
+  react: React,
+  "react/jsx-runtime": JSXRuntime,
+  "react-native": ReactNativeWeb,
+  "expo-haptics": { impactAsync: async () => {} },
 };
 ```
 

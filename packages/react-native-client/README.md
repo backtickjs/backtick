@@ -12,18 +12,21 @@ npm install @backtickjs/react-native-client
 
 ## Usage
 
-Give `evaluate` the module map: the modules a bundle may require, each loaded the first time one does. Then fetch a screen and draw it. Hold the request, a promise, in state in a component that doesn't suspend, so it outlives the render that waits for it, and draw it with React's `use` under `<Suspense>`:
+Give `evaluate` the module map: the modules a bundle may require, imported as the app starts. Then fetch a screen and draw it. Hold the request, a promise, in state in a component that doesn't suspend, so it outlives the render that waits for it, and draw it with React's `use` under `<Suspense>`:
 
 ```tsx
 import { evaluate } from "@backtickjs/react-native-client";
+import * as React from "react";
 import { Suspense, use, useState } from "react";
+import * as JSXRuntime from "react/jsx-runtime";
+import * as ReactNative from "react-native";
 import { ActivityIndicator } from "react-native";
 
 // What a screen may require: the packages this app was built with.
 const moduleMap = {
-  react: () => require("react"),
-  "react/jsx-runtime": () => require("react/jsx-runtime"),
-  "react-native": () => require("react-native"),
+  react: React,
+  "react/jsx-runtime": JSXRuntime,
+  "react-native": ReactNative,
 };
 
 async function fetchScreen(url: string) {
@@ -35,9 +38,7 @@ async function fetchScreen(url: string) {
 }
 
 export default function App() {
-  const [screen] = useState(() =>
-    fetchScreen("https://api.example.com/screens/home"),
-  );
+  const [screen] = useState(() => fetchScreen("https://api.example.com/"));
   return (
     <Suspense fallback={<ActivityIndicator />}>
       <Screen screen={screen} />
@@ -58,7 +59,7 @@ The server bundles for the versions the app runs: it passes them to `bundler.bui
 
 ### `evaluate(code: string, moduleMap: ModuleMap): unknown`
 
-Runs `code` as a CommonJS module, with `require` answered from `moduleMap`, and returns what it exports: for a Backtick screen, the element to draw. Each module loads the first time a bundle requires it, once for every bundle run with the same map. A bundle that requires a specifier missing from `moduleMap` throws:
+Runs `code` as a CommonJS module, with `require` answered from `moduleMap`, and returns what it exports: for a Backtick screen, the element to draw. A bundle that requires a specifier missing from `moduleMap` throws:
 
 ```
 The bundle requires "expo-haptics", which this app doesn't provide.
@@ -69,10 +70,10 @@ Errors thrown while the bundle runs propagate to the caller.
 ### `ModuleMap`
 
 ```ts
-type ModuleMap = Readonly<Record<string, () => unknown>>;
+type ModuleMap = Readonly<Record<string, unknown>>;
 ```
 
-What a bundle may require, by specifier, each as a function that returns its module. It does for an app what a web page's import map does, with modules for values instead of URLs. At least `react`, `react/jsx-runtime` and `react-native`; add any other package the app chooses to offer its screens. Keep the functions' `require` calls inside them: Metro still bundles each one, and Node tools can then read the specifiers without loading React Native.
+What a bundle may require, by specifier, each as the module the app imported for it. It does for an app what a web page's import map does, with modules for values instead of URLs. At least `react`, `react/jsx-runtime` and `react-native`; add any other package the app chooses to offer its screens. Imported at the top of a file, the modules load as the app starts, so one that fails to load fails then, rather than on the first screen that needs it.
 
 ### `buildIdFrom(extra: unknown, platform: string): string`
 
