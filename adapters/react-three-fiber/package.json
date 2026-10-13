@@ -52,16 +52,16 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/core": "^0.1.8",
+    "@backtickjs/core": "^0.1.9",
     "@backtickjs/react": "^19.2.3",
     "@backtickjs/three": "^0.182.0",
     "@react-three/fiber": "9.8.1"
   },
   "devDependencies": {
-    "@backtickjs/compiler": "^0.1.8",
-    "@backtickjs/prettier-plugin": "^0.1.8",
-    "@backtickjs/tsc": "^0.1.8",
-    "@backtickjs/tspatch-plugin": "^0.1.8",
+    "@backtickjs/compiler": "^0.1.9",
+    "@backtickjs/prettier-plugin": "^0.1.9",
+    "@backtickjs/tsc": "^0.1.9",
+    "@backtickjs/tspatch-plugin": "^0.1.9",
     "@types/react": "19.2.18",
     "prettier": "^3.6.2",
     "ts-patch": "^4.0.1",

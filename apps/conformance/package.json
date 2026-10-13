@@ -12,14 +12,14 @@
     "clean": "rm -rf node_modules .cache test262"
   },
   "dependencies": {
-    "@backtickjs/bundler": "^0.1.8",
-    "@backtickjs/compiler": "^0.1.8",
-    "@backtickjs/core": "^0.1.8",
+    "@backtickjs/bundler": "^0.1.9",
+    "@backtickjs/compiler": "^0.1.9",
+    "@backtickjs/core": "^0.1.9",
     "typescript": "^6.0.3",
     "yaml": "^2.9.1"
   },
   "devDependencies": {
-    "@backtickjs/prettier-plugin": "^0.1.8",
+    "@backtickjs/prettier-plugin": "^0.1.9",
     "@types/node": "^25.9.1",
     "prettier": "^3.6.2"
   }

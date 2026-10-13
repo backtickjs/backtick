@@ -47,14 +47,14 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/core": "^0.1.8",
+    "@backtickjs/core": "^0.1.9",
     "react-native-svg": "15.15.4"
   },
   "devDependencies": {
-    "@backtickjs/compiler": "^0.1.8",
-    "@backtickjs/prettier-plugin": "^0.1.8",
-    "@backtickjs/tsc": "^0.1.8",
-    "@backtickjs/tspatch-plugin": "^0.1.8",
+    "@backtickjs/compiler": "^0.1.9",
+    "@backtickjs/prettier-plugin": "^0.1.9",
+    "@backtickjs/tsc": "^0.1.9",
+    "@backtickjs/tspatch-plugin": "^0.1.9",
     "@types/react": "19.2.18",
     "prettier": "^3.6.2",
     "react": "19.2.3",

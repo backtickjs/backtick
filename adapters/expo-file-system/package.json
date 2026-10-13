@@ -46,14 +46,14 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/core": "^0.1.8",
+    "@backtickjs/core": "^0.1.9",
     "expo-file-system": "57.0.7"
   },
   "devDependencies": {
-    "@backtickjs/compiler": "^0.1.8",
-    "@backtickjs/prettier-plugin": "^0.1.8",
-    "@backtickjs/tsc": "^0.1.8",
-    "@backtickjs/tspatch-plugin": "^0.1.8",
+    "@backtickjs/compiler": "^0.1.9",
+    "@backtickjs/prettier-plugin": "^0.1.9",
+    "@backtickjs/tsc": "^0.1.9",
+    "@backtickjs/tspatch-plugin": "^0.1.9",
     "@types/react": "19.2.18",
     "expo": "~57.0.26",
     "prettier": "^3.6.2",
