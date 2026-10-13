@@ -176,7 +176,11 @@ describe("a server's builds", () => {
     const build = JSON.parse(readFileSync(ios!.file, "utf8"));
     writeFileSync(ios!.file, JSON.stringify({ ...build, deprecated: true }));
     const builds = createBuilds({ projectRoot: root });
-    assert.throws(() => builds.modulesOf(ios!.id), DeprecatedBuild);
+    assert.throws(
+      () => builds.modulesOf(ios!.id),
+      (error) =>
+        error instanceof DeprecatedBuild && error.modules.fbsdk === "13.4.3",
+    );
     assert.match(builds.unregistered("ios")!, /is deprecated/);
   });
 });

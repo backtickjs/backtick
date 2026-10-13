@@ -91,7 +91,7 @@ npm install @backtickjs/builds
 `modulesOf` throws for a build its server can't draw for:
 
 - **`UnknownBuild`**: no id, or one that isn't registered. Every build is registered before it ships, so this means the server or the build was deployed wrong, as when a server is rolled back past a build in users' hands. Answer it as a server error.
-- **`DeprecatedBuild`**: a build you retired by setting `"deprecated": true` in its file. Answer it with something your app shell recognises and turns into "update the app", such as HTTP 426. The shell has to know that answer before the build is retired, so ship it in your first build.
+- **`DeprecatedBuild`**: a build you retired by setting `"deprecated": true` in its file. It carries the build's `modules`, so your server can still draw that build one screen, bundled for what it has: one asking its users to update. Answer every path with it.
 
 ## API
 

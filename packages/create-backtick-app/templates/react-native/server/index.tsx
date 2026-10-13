@@ -1,8 +1,16 @@
-import { createServer } from "node:http";
+import { createServer, type IncomingMessage } from "node:http";
 import { fileURLToPath } from "node:url";
 import { createBuilds, DeprecatedBuild } from "@backtickjs/builds";
 import { bundler } from "@backtickjs/bundler";
+import type { JSX } from "@backtickjs/react/jsx-runtime";
+import { AppUpdateRequired } from "./AppUpdateRequired.js";
 import { Home } from "./Home.js";
+
+// Your app's screens, by path: add one here, and the app can fetch it. Each
+// draws its screen for the request, which carries what the app sent.
+const screens: Record<string, (request: IncomingMessage) => JSX.Element> = {
+  "/home": () => <Home />,
+};
 
 // Development is only what `npm start` runs, which sets NODE_ENV: any other
 // run, a deploy included, is production. In development, this run of the
@@ -26,34 +34,41 @@ const server = createServer(async (request, response) => {
     response.end();
     return;
   }
-  if (development && request.url === "/live") {
+  const { pathname } = new URL(request.url ?? "/", "http://localhost");
+  if (development && pathname === "/live") {
     response.end(run);
     return;
   }
-  if (request.url === "/home") {
-    try {
-      const buildId = request.headers["x-build-id"]?.toString() || null;
-      const modules = builds.modulesOf(buildId);
-      const bundle = await bundler.build({ input: <Home />, modules });
-      const { code } = bundle.generate({ format: "cjs" });
-      response.setHeader("content-type", "text/javascript");
-      response.end(code);
-    } catch (error) {
-      // A build you retired: the app asks its user to update.
-      if (error instanceof DeprecatedBuild) {
-        response.statusCode = 426;
-        response.end(String(error));
-        return;
-      }
-      // Answered rather than crashed on, so the app can show why.
-      console.error(error);
-      response.statusCode = 500;
-      response.end(String(error));
-    }
+  const screen = screens[pathname];
+  if (screen === undefined) {
+    response.statusCode = 404;
+    response.end();
     return;
   }
-  response.statusCode = 404;
-  response.end();
+  try {
+    const buildId = request.headers["x-build-id"]?.toString() || null;
+    let input: JSX.Element;
+    let modules;
+    try {
+      modules = builds.modulesOf(buildId);
+      input = screen(request);
+    } catch (error) {
+      // A build you retired: a screen asking to update, bundled for the
+      // modules it has.
+      if (!(error instanceof DeprecatedBuild)) throw error;
+      input = <AppUpdateRequired />;
+      modules = error.modules;
+    }
+    const bundle = await bundler.build({ input, modules });
+    const { code } = bundle.generate({ format: "cjs" });
+    response.setHeader("content-type", "text/javascript");
+    response.end(code);
+  } catch (error) {
+    // Answered rather than crashed on, so the app can show why.
+    console.error(error);
+    response.statusCode = 500;
+    response.end(String(error));
+  }
 });
 
 server.listen(3000, () => {

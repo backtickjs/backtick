@@ -7,6 +7,7 @@ import { readBackupToken } from "./auth/session.js";
 import { backupPdf } from "./backup.js";
 import { screenRequest } from "./request.js";
 import { isScreen, screenAt } from "./routes.js";
+import { AppUpdateRequired } from "./screens/AppUpdateRequired.js";
 import { fontFiles } from "./ui/fonts.js";
 
 // Development is only what `npm start` runs, which sets NODE_ENV: any other
@@ -83,13 +84,19 @@ const server = createServer(async (request, response) => {
       return;
     }
     const started = performance.now();
-    // for the build's modules: a build this server doesn't know throws
-    const screen = await screenRequest(request);
-    const input = screenAt(pathname, screen)!;
-    const bundle = await bundler.build({
-      input,
-      modules: screen.modules,
-    });
+    // for the build's modules: a build this server doesn't know throws; one
+    // retired on purpose gets, on every path, a screen asking to update
+    const { input, modules } = await screenRequest(request).then(
+      (screen) => ({
+        input: screenAt(pathname, screen)!,
+        modules: screen.modules,
+      }),
+      (error) => {
+        if (!(error instanceof DeprecatedBuild)) throw error;
+        return { input: <AppUpdateRequired />, modules: error.modules };
+      },
+    );
+    const bundle = await bundler.build({ input, modules });
     const { code } = bundle.generate({ format: "cjs" });
     response.setHeader("content-type", "text/javascript");
     response.end(code);
@@ -99,12 +106,6 @@ const server = createServer(async (request, response) => {
       console.log(`[server] ${pathname}: ${size} KB in ${time} ms`);
     }
   } catch (error) {
-    // A build retired on purpose: the app asks its user to update.
-    if (error instanceof DeprecatedBuild) {
-      response.statusCode = 426;
-      response.end(String(error));
-      return;
-    }
     // Answered rather than crashed on, so the app can show why.
     console.error(`[server] ${request.method} ${pathname}:`, error);
     response.statusCode = 500;

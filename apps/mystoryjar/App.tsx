@@ -63,9 +63,6 @@ async function request(path: string): Promise<Response> {
 // app's packages.
 async function loadScreen(path: string): Promise<ReactNode> {
   const response = await request(path);
-  if (response.status === 426) {
-    throw new Deprecated();
-  }
   if (!response.ok) {
     throw new Error(`${path} answered ${response.status}.`);
   }
@@ -211,12 +208,7 @@ function onServerRestart(): () => void {
   return () => clearInterval(timer);
 }
 
-// What the server answers a build it no longer draws for, on purpose: in
-// every build, so a build retired later still knows to ask for an update.
-class Deprecated extends Error {}
-
-// A screen that couldn't be fetched or run: offline, most often; or this
-// build is retired, and only an update helps.
+// A screen that couldn't be fetched or run: offline, most often.
 class Boundary extends Component<
   { children: ReactNode; retry: () => void },
   { error: unknown }
@@ -230,16 +222,6 @@ class Boundary extends Component<
   render() {
     if (this.state.error === null) {
       return this.props.children;
-    }
-    if (this.state.error instanceof Deprecated) {
-      return (
-        <View style={{ flex: 1, justifyContent: "center", padding: 24 }}>
-          <Text style={{ fontSize: 16, textAlign: "center" }}>
-            This version of MyStoryJar is no longer supported. Update it from
-            the App Store or Google Play to keep writing your stories.
-          </Text>
-        </View>
-      );
     }
     return (
       <View style={{ flex: 1, justifyContent: "center", padding: 24, gap: 16 }}>

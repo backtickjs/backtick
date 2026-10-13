@@ -26,11 +26,6 @@ async function fetchScreen(path: string): Promise<ReactNode> {
   const response = await fetch(`${server}${path}`, {
     headers: { "x-build-id": buildId },
   });
-  if (response.status === 426) {
-    throw new Error(
-      "This version of the app is no longer supported: update it.",
-    );
-  }
   if (!response.ok) {
     throw new Error(`${path} answered ${response.status}.`);
   }

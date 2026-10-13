@@ -35,9 +35,16 @@ export class UnknownBuild extends Error {
   }
 }
 
-/** A build its server no longer draws for, on purpose: its users are asked to update. */
+/**
+ * A build its server no longer draws its screens for, on purpose. It carries
+ * the build's modules, so the server can still draw it one screen, built for
+ * what the build has: one asking its users to update.
+ */
 export class DeprecatedBuild extends Error {
-  constructor(readonly buildId: string) {
+  constructor(
+    readonly buildId: string,
+    readonly modules: Modules,
+  ) {
     super(`Build ${JSON.stringify(buildId)} is deprecated.`);
   }
 }
@@ -107,7 +114,7 @@ export function createBuilds({ projectRoot }: { projectRoot: string }): Builds {
   return {
     modulesOf(buildId) {
       const build = buildId === null ? undefined : registered.get(buildId);
-      if (build?.deprecated) throw new DeprecatedBuild(buildId!);
+      if (build?.deprecated) throw new DeprecatedBuild(buildId!, build.modules);
       if (build !== undefined) return build.modules;
       const current = platforms
         .map(installedOn)
