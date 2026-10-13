@@ -125,6 +125,17 @@ it("names a build by the modules it offers, not only their packages", () => {
   assert.equal(after.web, before.web);
 });
 
+it("finds a package installed above the app, as a workspace hoists it", () => {
+  const workspace = mobile();
+  const root = join(workspace, "apps", "app");
+  mkdirSync(root, { recursive: true });
+  writeFileSync(join(root, "moduleMap.ts"), map("react", "fbsdk"));
+  assert.equal(
+    buildIds(root).ios,
+    buildIdOf({ fbsdk: "13.4.3", react: "19.2.3" }),
+  );
+});
+
 describe("a server's builds", () => {
   it("resolves this code's builds, registered or not", () => {
     const root = mobile();

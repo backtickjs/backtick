@@ -1,20 +1,18 @@
 import { createServer } from "node:http";
-import { createRequire } from "node:module";
+import { fileURLToPath } from "node:url";
+import { createBuilds } from "@backtickjs/builds";
 import { bundler } from "@backtickjs/bundler";
 import { Home } from "./Home.js";
 
-// The packages the app provides to screens, each at the version it's built
-// with.
-const require = createRequire(import.meta.url);
-const modules = {
-  react: require("react/package.json").version,
-  "react/jsx-runtime": require("react/package.json").version,
-  "react-native": require("react-native/package.json").version,
-  "expo-haptics": require("expo-haptics/package.json").version,
-  "expo-linear-gradient": require("expo-linear-gradient/package.json").version,
-};
+// The app's builds: each screen is bundled for the modules the requesting
+// build carries, from its module map, at the versions it was built with.
+const builds = createBuilds({
+  projectRoot: fileURLToPath(new URL("..", import.meta.url)),
+});
 
 createServer(async (request, response) => {
+  const buildId = request.headers["x-build-id"]?.toString() || null;
+  const modules = builds.modulesOf(buildId);
   const bundle = await bundler.build({ input: <Home />, modules });
   response.setHeader("content-type", "text/javascript");
   response.end(bundle.generate({ format: "cjs" }).code);

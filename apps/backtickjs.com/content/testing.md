@@ -40,12 +40,11 @@ data the same way. Give it test data through its props, as the test gives
 
 ## Packages your app provides
 
-When your app provides another package, add it to both lists in `drawScreen.ts`:
-its version to `modules`, as `server/index.tsx` does, and its module to
-`moduleMap`, as `App.tsx` does.
-
-A package with native code, like `expo-haptics`, has nothing to run in Node.
-Give `moduleMap` a stand-in with the exports your screens use:
+`drawScreen.ts` bundles for the modules your app's `moduleMap.ts` offers, as
+your server does. When it offers another package, give the test's
+`moduleMap` its module too: a package with native code, like `expo-haptics`,
+has nothing to run in Node, so give it a stand-in with the exports your
+screens use:
 
 ```ts
 const moduleMap = {

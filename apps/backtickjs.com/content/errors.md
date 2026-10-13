@@ -88,9 +88,10 @@ script, so it can't. Make it outside the script, and splice it in. See
 
 ### Can't import `…` from "…": the client provides …
 
-A script uses a package missing from `modules`. Add it there, at the
-version the app is built with, and to the app's module map. See
-[the three places a package goes](/docs/react-native-and-packages#any-package-your-app-ships).
+A script uses a module the requesting build doesn't carry. Add it to the
+app's module map, and install it in the app. A build made before then doesn't
+carry it: draw that screen differently for it, with `supports`. See
+[where a package goes](/docs/react-native-and-packages#any-package-your-app-ships).
 
 ### Can't import `…` from "…": it needs …, and the client provides …
 
@@ -128,7 +129,7 @@ server. Draw it in a script: `` cs`<$Card />` ``.
 
 ### The bundle requires "…", which this app doesn't provide
 
-The bundle uses a package missing from the module map your app hands to
+The bundle uses a module missing from the module map your app hands to
 `evaluate`. Add it, and install it in the app so its native code ships. If
-your server shouldn't have sent it, check its `modules` for this app.
-See [the three places a package goes](/docs/react-native-and-packages#any-package-your-app-ships).
+your server shouldn't have sent it, check the build id the app sends.
+See [where a package goes](/docs/react-native-and-packages#any-package-your-app-ships).

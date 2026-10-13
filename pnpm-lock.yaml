@@ -686,6 +686,9 @@ importers:
 
   apps/backtickjs.com:
     dependencies:
+      '@backtickjs/builds':
+        specifier: ^0.1.8
+        version: link:../../packages/builds
       '@backtickjs/bun-plugin':
         specifier: ^0.1.8
         version: link:../../packages/bun-plugin
@@ -1304,6 +1307,9 @@ importers:
 
   packages/create-backtick-app/templates/react-native:
     dependencies:
+      '@backtickjs/builds':
+        specifier: ^0.1.8
+        version: link:../../../builds
       '@backtickjs/bundler':
         specifier: ^0.1.8
         version: link:../../../bundler

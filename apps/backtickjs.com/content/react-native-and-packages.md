@@ -32,7 +32,7 @@ a package, typed as the package types it, and splices like anything else:
 
 ```
 
-A package a screen uses has to be in three places:
+A package a screen uses has to be in two places:
 
 **1. The screen,** spliced as any value or component:
 
@@ -40,27 +40,43 @@ A package a screen uses has to be in three places:
 
 ```
 
-**2. Your server,** in the versions the app provides:
+**2. Your app's module map,** the modules a screen may require, which the app
+hands to `evaluate`:
+
+```ts file=react-native-and-packages/moduleMap.ts
+
+```
+
+Install the package in your app as usual, `npx expo install expo-haptics`, so
+it's built into the app and its native code ships with it. Your server reads
+the module map too, without running it, so it knows what each build of your
+app carries:
 
 ```tsx file=react-native-and-packages/server/index.tsx
 
 ```
 
-**3. Your app,** in its module map, the modules a screen may require, handed to
-`evaluate`:
-
-```tsx file=react-native-and-packages/App.tsx
-
-```
-
-Install the package in your app as usual, `npx expo install expo-haptics`, so
-it's built into the app and its native code ships with it.
-
 ## Versions are checked
 
 `createImport`'s `version` is the range of the package the export works with.
-When a screen is bundled, the bundler checks it against the version your
-server says the app provides, and refuses a screen the app can't run, before
+When a screen is bundled, the bundler checks it against the version the
+requesting build carries, and refuses a screen that build can't run, before
 anything reaches the phone. [Errors](/docs/errors#cant-import--from--the-client-provides-)
-has the messages. Serving apps of several versions, give each its own
-`modules`, and each gets a screen it can run.
+has the messages.
+
+## Every build in users' hands
+
+A store build keeps the modules it was built with for as long as it's
+installed, while your server moves on. Each build sends an id that names its
+modules, and the server bundles each screen for them, so an old build gets
+screens it can run. Before a build for the stores, record it:
+
+```sh
+npm run register-build
+```
+
+and commit what it writes to `builds/`. An EAS build that isn't registered
+fails, so a build your server doesn't know can't ship. To stop serving an old
+build, set `"deprecated": true` in its file: its users are asked to update.
+[`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds)
+has the details.

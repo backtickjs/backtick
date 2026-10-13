@@ -11,7 +11,7 @@ import * as JSXRuntime from "react/jsx-runtime";
 import { createRoot } from "react-dom/client";
 import * as ReactNativeWeb from "react-native-web";
 import ts from "typescript";
-import { evaluate } from "@backtickjs/react-native-client";
+import { buildIdFrom, evaluate } from "@backtickjs/react-native-client";
 
 // A server's screen: a client component of React Native's components, its
 // state React's, drawn by a server component.
@@ -116,4 +116,16 @@ it("loads each module the first time a bundle requires it, once for the map", ()
   assert.equal(evaluate(code, moduleMap), React);
   assert.equal(evaluate(code, moduleMap), React);
   assert.deepEqual(loads, ["react"]);
+});
+
+it("reads this build's id from the app config, or throws as the app starts", () => {
+  const extra = {
+    buildIds: { ios: "f327397121ce4e4e", web: "887a92bf84a4b44e" },
+  };
+  assert.equal(buildIdFrom(extra, "ios"), "f327397121ce4e4e");
+  assert.throws(() => buildIdFrom(extra, "android"), /No build id for android/);
+  assert.throws(
+    () => buildIdFrom(undefined, "ios"),
+    /is app.config.ts adding buildIds/,
+  );
 });

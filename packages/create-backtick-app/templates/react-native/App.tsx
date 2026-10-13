@@ -1,4 +1,4 @@
-import { evaluate } from "@backtickjs/react-native-client";
+import { buildIdFrom, evaluate } from "@backtickjs/react-native-client";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
 import {
@@ -9,23 +9,28 @@ import {
   useEffect,
   useState,
 } from "react";
-import { ActivityIndicator, Text } from "react-native";
-
-// What a screen may require: the packages this app was built with.
-const moduleMap = {
-  react: () => require("react"),
-  "react/jsx-runtime": () => require("react/jsx-runtime"),
-  "react-native": () => require("react-native"),
-};
+import { ActivityIndicator, Platform, Text } from "react-native";
+import { moduleMap } from "./moduleMap";
 
 // Your Backtick server runs on the computer Expo was started from.
 const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
 
+// This build's id, which names the modules it carries, for the server to
+// bundle screens it can run: see app.config.ts.
+const buildId = buildIdFrom(Constants.expoConfig?.extra, Platform.OS);
+
 // The screen at `path` on your server: its bundle, fetched and run with the
-// app's packages. Your fetch to shape: headers, auth, caching.
+// app's modules. Your fetch to shape: headers, auth, caching.
 async function fetchScreen(path: string): Promise<ReactNode> {
-  const response = await fetch(`${server}${path}`);
+  const response = await fetch(`${server}${path}`, {
+    headers: { "x-build-id": buildId },
+  });
+  if (response.status === 426) {
+    throw new Error(
+      "This version of the app is no longer supported: update it.",
+    );
+  }
   if (!response.ok) {
     throw new Error(`${path} answered ${response.status}.`);
   }

@@ -50,7 +50,7 @@ const server: string = __DEV__
 async function request(path: string): Promise<Response> {
   const headers = new Headers({
     "x-time-zone": Intl.DateTimeFormat().resolvedOptions().timeZone,
-    "x-build-id": buildId ?? "",
+    "x-build-id": buildId,
   });
   const session = await SecureStore.getItemAsync("session");
   if (session !== null) {

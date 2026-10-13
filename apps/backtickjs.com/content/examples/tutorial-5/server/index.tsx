@@ -1,6 +1,7 @@
 import { createServer } from "node:http";
-import { createRequire } from "node:module";
 import { text } from "node:stream/consumers";
+import { fileURLToPath } from "node:url";
+import { createBuilds, DeprecatedBuild } from "@backtickjs/builds";
 import { bundler } from "@backtickjs/bundler";
 import { Home } from "./Home.js";
 import { saveOrder } from "./orders.js";
@@ -12,20 +13,21 @@ import { saveOrder } from "./orders.js";
 const development = process.env.NODE_ENV === "development";
 const run = crypto.randomUUID();
 
-// The versions of React and React Native the app is built with: this
-// project's own, as the app and this server share a package.json. A server
-// for apps of many versions would tell them apart, by their user agent for
-// one, and bundle each for its own.
-const require = createRequire(import.meta.url);
-const modules = {
-  react: require("react/package.json").version,
-  "react/jsx-runtime": require("react/package.json").version,
-  "react-native": require("react-native/package.json").version,
-};
+// Your app's builds: each sends its id, and a screen is bundled for the
+// modules that build carries, from moduleMap.ts. A build in users' hands
+// keeps working as your app moves on, once registered: see builds/.
+const builds = createBuilds({
+  projectRoot: fileURLToPath(new URL("..", import.meta.url)),
+});
 
 const server = createServer(async (request, response) => {
   // `npm run web` serves the app from another origin.
   response.setHeader("access-control-allow-origin", "*");
+  response.setHeader("access-control-allow-headers", "x-build-id");
+  if (request.method === "OPTIONS") {
+    response.end();
+    return;
+  }
   if (development && request.url === "/live") {
     response.end(run);
     return;
@@ -39,6 +41,8 @@ const server = createServer(async (request, response) => {
     // Where the app reached this server, for the screen to send its order to.
     const origin = `http://${request.headers.host}`;
     try {
+      const buildId = request.headers["x-build-id"]?.toString() || null;
+      const modules = builds.modulesOf(buildId);
       const bundle = await bundler.build({
         input: <Home origin={origin} />,
         modules,
@@ -47,6 +51,12 @@ const server = createServer(async (request, response) => {
       response.setHeader("content-type", "text/javascript");
       response.end(code);
     } catch (error) {
+      // A build you retired: the app asks its user to update.
+      if (error instanceof DeprecatedBuild) {
+        response.statusCode = 426;
+        response.end(String(error));
+        return;
+      }
       // Answered rather than crashed on, so the app can show why.
       console.error(error);
       response.statusCode = 500;

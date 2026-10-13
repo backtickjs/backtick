@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
+import { existsSync, readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
 import type { Modules } from "@backtickjs/bundler";
 import { moduleMapFile, type Platform, readModuleMap } from "./moduleMap.js";
 
@@ -8,6 +8,18 @@ import { moduleMapFile, type Platform, readModuleMap } from "./moduleMap.js";
 function packageOf(specifier: string): string {
   const segments = specifier.split("/");
   return segments.slice(0, specifier.startsWith("@") ? 2 : 1).join("/");
+}
+
+// Where a package is installed for the app at `projectRoot`, as Node finds
+// it: in its node_modules, or the nearest above, as a workspace hoists it.
+function installed(projectRoot: string, name: string): string {
+  for (let directory = projectRoot; ; directory = dirname(directory)) {
+    const file = join(directory, "node_modules", name, "package.json");
+    if (existsSync(file)) return file;
+    if (dirname(directory) === directory) {
+      throw new Error(`${projectRoot}: ${name} isn't installed`);
+    }
+  }
 }
 
 /**
@@ -24,7 +36,7 @@ export function installedModules(
   const versionOf = (name: string) => {
     let version = versions.get(name);
     if (version === undefined) {
-      const file = join(projectRoot, "node_modules", name, "package.json");
+      const file = installed(projectRoot, name);
       version = (JSON.parse(readFileSync(file, "utf8")) as { version: string })
         .version;
       versions.set(name, version);

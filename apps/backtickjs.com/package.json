@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@backtickjs/bun-plugin": "^0.1.8",
+    "@backtickjs/builds": "^0.1.8",
     "@backtickjs/bundler": "^0.1.8",
     "@backtickjs/core": "^0.1.8",
     "@backtickjs/solid-js": "^1.9.14",

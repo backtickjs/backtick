@@ -1,4 +1,5 @@
-import { createRequire } from "node:module";
+import { fileURLToPath } from "node:url";
+import { createBuilds } from "@backtickjs/builds";
 import { bundler } from "@backtickjs/bundler";
 import type { Spliceable } from "@backtickjs/core";
 import { evaluate } from "@backtickjs/react-native-client";
@@ -6,15 +7,12 @@ import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNativeWeb from "react-native-web";
 
-// What the app provides, as `server/index.tsx` and `App.tsx` say, with React
-// Native's web build standing in for React Native. Add a package here when
-// your app provides one.
-const require = createRequire(import.meta.url);
-const modules = {
-  react: require("react/package.json").version,
-  "react/jsx-runtime": require("react/package.json").version,
-  "react-native": require("react-native/package.json").version,
-};
+// What the app's web build provides, as moduleMap.ts says, with React
+// Native's web build standing in for React Native. Add a stand-in here when
+// your module map offers another package.
+const modules = createBuilds({
+  projectRoot: fileURLToPath(new URL("../..", import.meta.url)),
+}).installed("web");
 const moduleMap = {
   react: () => React,
   "react/jsx-runtime": () => JSXRuntime,
