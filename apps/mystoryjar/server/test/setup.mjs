@@ -4,6 +4,15 @@ import "global-jsdom/register";
 import { cleanup } from "@testing-library/react";
 import { afterEach } from "node:test";
 
+// Node 24 or later, as `pnpm start` asks: Node 23's module hooks, which the
+// Backtick loader uses, break firebase-admin's auth, pdfkit and semver.
+if (Number(process.versions.node.split(".")[0]) < 24) {
+  console.error(
+    `MyStoryJar needs Node 24 or later, and this is Node ${process.versions.node}: nvm install 24`,
+  );
+  process.exit(1);
+}
+
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
 // The key the server signs sessions with, from its environment.
