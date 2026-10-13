@@ -32,6 +32,15 @@ expo.on("exit", (code) => {
   process.exit(code ?? 0);
 });
 
+// Stopped as a whole: a signal to this script alone, as a task runner sends
+// rather than Ctrl-C to the terminal, stops the server and Expo with it.
+for (const signal of ["SIGINT", "SIGTERM", "SIGHUP"]) {
+  process.on(signal, () => {
+    server.kill(signal);
+    expo.kill(signal);
+  });
+}
+
 // Expo shows how to open the app, its QR code, only in an interactive
 // terminal. Run elsewhere, as an agent runs it, this prints the address once
 // Metro is up.

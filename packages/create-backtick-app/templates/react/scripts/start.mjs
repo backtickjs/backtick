@@ -18,3 +18,9 @@ const server = spawn(runtime, ["--watch", ...loader, "server/index.tsx"], {
 });
 
 server.on("exit", (code) => process.exit(code ?? 0));
+
+// Stopped as a whole: a signal to this script alone, as a task runner sends
+// rather than Ctrl-C to the terminal, stops the server with it.
+for (const signal of ["SIGINT", "SIGTERM", "SIGHUP"]) {
+  process.on(signal, () => server.kill(signal));
+}
