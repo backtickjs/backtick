@@ -1,7 +1,5 @@
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 import type { Client } from "@backtickjs/core";
-import { DOCS_PAGES, REDIRECTS } from "./pages/Docs.js";
-import { Home } from "./pages/Home.js";
 import { NotFound } from "./pages/NotFound.js";
 
 // Where the site is served, for the addresses search engines and link previews
@@ -27,46 +25,6 @@ export type Page = {
   markdown?: string;
   staticHtml?: string;
 };
-
-// Every page on the site: what the dev server serves and what the build writes
-// out.
-export const PAGES: (Page & { path: string })[] = [
-  {
-    path: "/",
-    Page: Home,
-    title: "Backtick · Fully server-driven React Native",
-    description:
-      "Fully server-driven React Native. Write every screen in React, on" +
-      " your server: layout, data and behaviour. Changes ship with" +
-      " your next deploy, not your next app store release.",
-    // The hero's words and the links off it, for a reader that doesn't run
-    // scripts: an agent's fetch, or a search engine.
-    staticHtml: `<div class="mx-auto box-border max-w-[1200px] px-6 pt-[80px]"><div class="pt-12"><h1 class="max-w-[12.5em] text-[clamp(34px,7.4vw,76px)] leading-[1.02] font-extrabold tracking-[-0.045em]">Fully server-driven React Native.</h1><p class="mt-[26px] max-w-[720px] text-xl leading-[1.55] text-muted">Write every screen in React, on your server: layout, data and behaviour. Changes ship with your next deploy, not your next app store release.</p><p class="mt-[34px]"><a href="/docs">Read the docs</a> · <a href="/docs/tutorial">Tutorial</a> · <a href="https://github.com/backtickjs/backtick">GitHub</a> · <a href="/llms.txt">llms.txt</a></p><p class="mt-3 pl-5 text-sm text-muted"><a href="https://github.com/backtickjs/backtick">Open source · MIT license</a></p></div></div>`,
-  },
-  ...DOCS_PAGES,
-];
-
-// A page that moved: a document that sends the reader on, at the old address,
-// as GitHub Pages can't answer with a redirect itself.
-export function redirectHtml(to: string): string {
-  const href = urlOf(to);
-  return `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="refresh" content="0; url=${href}">
-    <link rel="canonical" href="${href}">
-    <meta name="robots" content="noindex">
-    <title>Moved</title>
-  </head>
-  <body>
-    <p>This page moved to <a href="${href}">${href}</a>.</p>
-  </body>
-</html>
-`;
-}
-
-export { REDIRECTS };
 
 // What GitHub Pages serves for any address that isn't a page, and what search
 // engines are told to leave out.

@@ -87,21 +87,6 @@ const ENTRIES: { name: string; pages: Entry[] }[] = [
   },
 ];
 
-// Where pages that no longer exist went, for links to them.
-export const REDIRECTS: Record<string, string> = {
-  "/docs/server-components": "/docs/thinking-in-backtick",
-  "/docs/client-scripts": "/docs/thinking-in-backtick",
-  "/docs/splices": "/docs/thinking-in-backtick",
-  "/docs/client-components": "/docs/thinking-in-backtick",
-  "/docs/composing": "/docs/thinking-in-backtick",
-  "/docs/react-native-apis": "/docs/react-native-and-packages",
-  "/docs/other-packages": "/docs/react-native-and-packages",
-  "/docs/type-checking": "/docs/how-it-works",
-  "/docs/reference/core": "/docs/scripts-in-depth",
-  "/docs/reference/bundler": "/docs/how-it-works",
-  "/docs/reference/react-native-client": "/docs/how-it-works",
-};
-
 const SECTIONS: DocsSection[] = ENTRIES.map((section) => ({
   name: section.name,
   pages: section.pages.map(({ path, title }) => ({ path, title })),
@@ -109,33 +94,34 @@ const SECTIONS: DocsSection[] = ENTRIES.map((section) => ({
 
 const ORDER = SECTIONS.flatMap((section) => section.pages);
 
-export const DOCS_PAGES: (Page & { path: string })[] = await Promise.all(
-  ENTRIES.flatMap((section) => section.pages).map(async (entry, index) => {
-    const { path, title, description } = entry;
-    const previous = ORDER[index - 1] ?? null;
-    const next = ORDER[index + 1] ?? null;
-    const { html, headings } = await renderPage(
-      await readPage(entry.file, "html"),
-    );
-    const source = await readPage(entry.file, "markdown");
-    return {
-      path,
-      title: `Backtick · ${title}`,
-      description,
-      markdown: `# ${title}\n\n${description}\n\n${source}`,
-      staticHtml: staticArticle(title, description, html),
-      Page: cs`() => (
-        <$DocsLayout
-          sections={$SECTIONS}
-          path={$path}
-          title={$title}
-          description={$description}
-          headings={$headings}
-          previous={$previous}
-          next={$next}
-          html={$html}
-        />
-      )`,
-    };
-  }),
-);
+export const DOCS_PAGES: (Page & { path: string; markdown: string })[] =
+  await Promise.all(
+    ENTRIES.flatMap((section) => section.pages).map(async (entry, index) => {
+      const { path, title, description } = entry;
+      const previous = ORDER[index - 1] ?? null;
+      const next = ORDER[index + 1] ?? null;
+      const { html, headings } = await renderPage(
+        await readPage(entry.file, "html"),
+      );
+      const source = await readPage(entry.file, "markdown");
+      return {
+        path,
+        title: `Backtick · ${title}`,
+        description,
+        markdown: `# ${title}\n\n${description}\n\n${source}`,
+        staticHtml: staticArticle(title, description, html),
+        Page: cs`() => (
+          <$DocsLayout
+            sections={$SECTIONS}
+            path={$path}
+            title={$title}
+            description={$description}
+            headings={$headings}
+            previous={$previous}
+            next={$next}
+            html={$html}
+          />
+        )`,
+      };
+    }),
+  );

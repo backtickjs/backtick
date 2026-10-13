@@ -1,0 +1,17 @@
+// The examples' apps, `App.tsx` and its module map, type-checked as an Expo
+// app's are: resolved as Metro resolves them, not as Node does.
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "types": ["node"],
+    "jsx": "react-jsx"
+  },
+  "include": ["*/App.tsx", "*/moduleMap.ts"]
+}

@@ -1,24 +1,17 @@
 import assert from "node:assert/strict";
-import type { IncomingMessage } from "node:http";
-import { Readable } from "node:stream";
 import { it } from "node:test";
-import { answer, type Caller } from "./api.js";
+import { api } from "./api.js";
 import { readSession } from "./auth/session.js";
 import { account, asked } from "./test/fetch.js";
 
-const caller: Caller = {
-  user: null,
-  timeZone: "America/New_York",
-  origin: "http://localhost:3000",
-};
-
+// A post from the app, signed out, in New York.
 async function post(path: string, body: object) {
-  const answered = await answer(
-    path,
-    Readable.from([JSON.stringify(body)]) as unknown as IncomingMessage,
-    caller,
-  );
-  return answered!;
+  const response = await api.request(`http://localhost:3000${path}`, {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: { "x-time-zone": "America/New_York" },
+  });
+  return { status: response.status, body: await response.json() };
 }
 
 it("signs in with Firebase, and answers a session naming the user", async () => {

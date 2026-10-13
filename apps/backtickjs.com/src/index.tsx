@@ -1,42 +1,19 @@
+import { serve } from "@hono/node-server";
+import { app } from "./app.js";
 import { toHtml } from "./html.js";
-import { TEXT_FILES } from "./llms.js";
-import { NOT_FOUND, PAGES, REDIRECTS } from "./pages.js";
+import { NOT_FOUND } from "./pages.js";
 
-const server = Bun.serve({
-  port: 4321,
-  routes: Object.fromEntries([
-    ...PAGES.map((page) => [
-      page.path,
-      async () =>
-        new Response(await toHtml(page), {
-          headers: { "content-type": "text/html" },
-        }),
-    ]),
-    ...Object.entries(REDIRECTS).map(([from, to]) => [
-      from,
-      () => Response.redirect(to, 301),
-    ]),
-    ...TEXT_FILES.map((file) => [
-      file.path,
-      () =>
-        new Response(file.text, {
-          headers: { "content-type": "text/plain; charset=utf-8" },
-        }),
-    ]),
-  ]),
-  // Anything else is a file in `public/`, as the build copies it, or the page
-  // for addresses that don't exist.
-  async fetch(request) {
-    const file = Bun.file(
-      new URL(`../public${new URL(request.url).pathname}`, import.meta.url),
-    );
-    return (await file.exists())
-      ? new Response(file)
-      : new Response(await toHtml(NOT_FOUND), {
-          status: 404,
-          headers: { "content-type": "text/html" },
-        });
-  },
+// Anything else is a file in `public/`, as the build copies it, or the page
+// for addresses that don't exist.
+app.get("*", async (context) => {
+  const file = Bun.file(
+    new URL(`../public${new URL(context.req.url).pathname}`, import.meta.url),
+  );
+  return (await file.exists())
+    ? new Response(file, { headers: { "content-type": file.type } })
+    : context.html(await toHtml(NOT_FOUND), 404);
 });
 
-console.log(`Preview on ${server.url}`);
+serve({ fetch: app.fetch, port: 4321 }, ({ port }) => {
+  console.log(`Preview on http://localhost:${port}/`);
+});

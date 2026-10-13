@@ -6,7 +6,7 @@
   "scripts": {
     "format": "prettier --write src content",
     "format:check": "prettier --check src content",
-    "typecheck": "backtick-tsc --noEmit && backtick-tsc -p content/examples --noEmit",
+    "typecheck": "backtick-tsc --noEmit && backtick-tsc -p content/examples --noEmit && backtick-tsc -p content/examples/tsconfig.app.json --noEmit",
     "test": "cd content/examples && node --no-warnings --import ./test/setup.ts --import @backtickjs/node-plugin --test 'test/**/*.test.tsx'",
     "test:update": "cd content/examples && UPDATE=1 node --no-warnings --import ./test/setup.ts --import @backtickjs/node-plugin --test 'test/**/*.test.tsx'",
     "build": "NODE_ENV=production bun src/build.ts",
@@ -46,6 +46,7 @@
     "@types/node": "^25.9.1",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.7",
+    "expo-constants": "~57.0.20",
     "expo-haptics": "~57.0.3",
     "expo-linear-gradient": "~57.0.2",
     "global-jsdom": "^30.0.0",

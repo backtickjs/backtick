@@ -1,4 +1,4 @@
-import type { IncomingMessage } from "node:http";
+import type { Context } from "hono";
 import { readSession, type User } from "./auth/session.js";
 import type { Modules } from "@backtickjs/bundler";
 import { builds } from "./builds.js";
@@ -28,10 +28,13 @@ export type ScreenRequest = {
  * Where the phone reached this server: the address the request came to, or
  * behind a proxy, as on Cloud Run, the one it forwards.
  */
-export function originOf(request: IncomingMessage): string {
-  const protocol = request.headers["x-forwarded-proto"] ?? "http";
-  const host = request.headers["x-forwarded-host"] ?? request.headers.host;
-  return `${protocol}://${host}`;
+export function originOf(context: Context): string {
+  const { protocol, host } = new URL(context.req.url);
+  return (
+    (context.req.header("x-forwarded-proto") ?? protocol.slice(0, -1)) +
+    "://" +
+    (context.req.header("x-forwarded-host") ?? host)
+  );
 }
 
 /**
@@ -61,17 +64,13 @@ export async function screenRequestOf(sent: {
 }
 
 /** The same, from an HTTP request: what this app's `fetch` sends. */
-export function screenRequest(
-  request: IncomingMessage,
-): Promise<ScreenRequest> {
-  const header = (name: string) => request.headers[name]?.toString() || null;
+export function screenRequest(context: Context): Promise<ScreenRequest> {
+  const header = (name: string) => context.req.header(name) || null;
   return screenRequestOf({
-    origin: originOf(request),
+    origin: originOf(context),
     timeZone: header("x-time-zone") ?? "UTC",
     session: header("authorization")?.replace(/^Bearer /, "") ?? null,
     buildId: header("x-build-id"),
-    query: Object.fromEntries(
-      new URL(request.url ?? "/", "http://localhost").searchParams,
-    ),
+    query: context.req.query(),
   });
 }

@@ -71,7 +71,7 @@ From the top:
 
 - **The packages the app provides,** required by name: `react-native`,
   `react`, `react/jsx-runtime`. The bundle requires them rather than including
-  them, and each is checked against the versions in `modules`.
+  them, and each is checked against the version the requesting build carries.
 - **The module table:** each script's compiled module, once, however many
   times it's used. Their JSX is React's `jsx` calls.
 - **The bundle's constants.** Each splice is a small function, `$thunk<n>`,

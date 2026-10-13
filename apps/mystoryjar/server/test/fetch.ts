@@ -1,13 +1,10 @@
-import type { IncomingMessage } from "node:http";
-import { Readable } from "node:stream";
 import { afterEach, beforeEach } from "node:test";
-import { answer } from "../api.js";
-import { readSession } from "../auth/session.js";
+import { api } from "../api.js";
 import { request } from "./request.js";
 
 // The network as tests see it. Firebase Auth's REST API answers for one
 // account, and records what each call was asked; the app's server, at the
-// test request's origin, is its API run in this process.
+// test request's origin, is its API, run in this process.
 export const account = {
   uid: "uid-1",
   email: "ada@example.com",
@@ -34,23 +31,7 @@ beforeEach(() => {
   globalThis.fetch = async (input, init) => {
     const url = String(input);
     if (url.startsWith(request.origin)) {
-      const headers = new Headers(init?.headers);
-      const answered = await answer(
-        url.slice(request.origin.length),
-        Readable.from([
-          Buffer.from((init?.body as string | Uint8Array | undefined) ?? ""),
-        ]) as unknown as IncomingMessage,
-        {
-          user: await readSession(
-            headers.get("authorization")?.replace(/^Bearer /, "") ?? undefined,
-          ),
-          timeZone: headers.get("x-time-zone") ?? "UTC",
-          origin: request.origin,
-        },
-      );
-      return answered === undefined
-        ? reply(404, {})
-        : reply(answered.status, answered.body);
+      return api.request(url, init);
     }
     const method = /accounts:(\w+)/.exec(url)?.[1];
     if (!url.includes("identitytoolkit") || method === undefined) {

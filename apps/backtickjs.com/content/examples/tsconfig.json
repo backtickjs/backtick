@@ -16,5 +16,7 @@
     "jsxImportSource": "@backtickjs/react",
     "allowImportingTsExtensions": true
   },
-  "include": ["**/*"]
+  "include": ["**/*"],
+  // the apps have their own: tsconfig.app.json
+  "exclude": ["*/App.tsx", "*/moduleMap.ts"]
 }

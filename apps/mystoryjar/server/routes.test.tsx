@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { it } from "node:test";
 import { StackActions } from "@react-navigation/routers";
 import { render, waitFor } from "@testing-library/react";
-import { screenAt } from "./routes.js";
+import { draw, routes } from "./routes.js";
 import { AppUpdateRequired } from "./screens/AppUpdateRequired.js";
 import { drawScreen, navigated } from "./test/drawScreen.js";
 import { request } from "./test/request.js";
@@ -13,7 +13,7 @@ const signedIn = {
 };
 
 it("sends someone signed out from Write to sign in", async () => {
-  render(await drawScreen(screenAt("/write", request)!));
+  render(await drawScreen(draw(routes["/write"]!, request)));
   await waitFor(() =>
     assert.deepEqual(navigated, [
       StackActions.replace("Screen", { path: "/signin", animation: "none" }),
@@ -22,7 +22,7 @@ it("sends someone signed out from Write to sign in", async () => {
 });
 
 it("sends someone signed in from the landing page to Write", async () => {
-  render(await drawScreen(screenAt("/", signedIn)!));
+  render(await drawScreen(draw(routes["/"]!, signedIn)));
   await waitFor(() =>
     assert.deepEqual(navigated, [
       StackActions.replace("Screen", { path: "/write", animation: "none" }),
@@ -31,7 +31,7 @@ it("sends someone signed in from the landing page to Write", async () => {
 });
 
 it("has no screen at an unknown path", () => {
-  assert.equal(screenAt("/nowhere", request), undefined);
+  assert.equal(routes["/nowhere"], undefined);
 });
 
 it("asks a deprecated build to update, drawn with React Native alone", async () => {

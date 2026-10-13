@@ -10,7 +10,7 @@ import { SignIn } from "./screens/SignIn.js";
 import { SignUp } from "./screens/SignUp.js";
 import { Write } from "./screens/Write.js";
 
-type Route = {
+export type Route = {
   // who it's for: anyone signed in, or anyone not, who are sent to the other
   // side's first screen
   for: "signedIn" | "signedOut";
@@ -19,7 +19,7 @@ type Route = {
 
 // The app's screens by path: the app holds a stack of these paths, and asks
 // for the one on top.
-const routes: Record<string, Route> = {
+export const routes: Record<string, Route> = {
   "/": { for: "signedOut", draw: (request) => <Landing request={request} /> },
   "/signin": {
     for: "signedOut",
@@ -42,20 +42,11 @@ const routes: Record<string, Route> = {
   },
 };
 
-/** Whether there's a screen at `path`, whoever asks. */
-export function isScreen(path: string): boolean {
-  return Object.hasOwn(routes, path);
-}
-
-/** The screen at `path` for this request, or undefined for no such path. */
-export function screenAt(
-  path: string,
-  request: ScreenRequest,
-): JSX.Element | undefined {
-  const route = routes[path];
-  if (route === undefined) {
-    return undefined;
-  }
+/**
+ * The screen a route draws for this request: its own, or, for someone it
+ * isn't for, a redirect to the other side's first screen.
+ */
+export function draw(route: Route, request: ScreenRequest): JSX.Element {
   const signedIn = request.user !== null;
   if (route.for === "signedIn" && !signedIn) {
     return <Redirect to="/signin" />;

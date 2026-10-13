@@ -777,6 +777,9 @@ importers:
       '@types/react-dom':
         specifier: 19.2.7
         version: 19.2.7(@types/react@19.2.18)
+      expo-constants:
+        specifier: ~57.0.20
+        version: 57.0.21(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))
       expo-haptics:
         specifier: ~57.0.3
         version: 57.0.3(expo@57.0.26)
@@ -926,6 +929,9 @@ importers:
       '@expo-google-fonts/noto-sans-jp':
         specifier: ^0.4.4
         version: 0.4.4
+      '@hono/node-server':
+        specifier: ^2.1.4
+        version: 2.1.4(hono@4.13.13)
       '@react-native-google-signin/google-signin':
         specifier: ^16.1.5
         version: 16.1.5(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
@@ -971,6 +977,9 @@ importers:
       firebase-admin:
         specifier: ^14.5.0
         version: 14.5.0
+      hono:
+        specifier: ^4.13.13
+        version: 4.13.13
       jose:
         specifier: ^6.2.12
         version: 6.2.12
@@ -1117,6 +1126,9 @@ importers:
       '@backtickjs/three':
         specifier: ^0.182.0
         version: link:../../adapters/three
+      '@hono/node-server':
+        specifier: ^2.1.4
+        version: 2.1.4(hono@4.13.13)
       '@react-three/fiber':
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.18)(expo-asset@57.0.19(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3))(expo-file-system@57.0.7(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3)))(expo-gl@57.0.2(expo@57.0.26)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(expo@57.0.26)(react-dom@19.2.3(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(three@0.182.0)
@@ -1138,6 +1150,9 @@ importers:
       expo-status-bar:
         specifier: ~57.0.1
         version: 57.0.1(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
+      hono:
+        specifier: ^4.13.13
+        version: 4.13.13
       react:
         specifier: 19.2.3
         version: 19.2.3
