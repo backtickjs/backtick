@@ -16,17 +16,15 @@ export const Hero = cs`() => (
     </p>
     <div class="mt-[34px] flex flex-wrap gap-3">
       <$QuickStart />
-      <$Button href="/docs" solid label="Read the docs" event="read-docs" />
-    </div>
-    <p class="mt-3 pl-5 text-sm">
+      <$Button href="/docs" label="Read the docs" event="read-docs" />
       <a
         href="https://github.com/backtickjs/backtick"
         data-umami-event="github"
-        class="inline-flex items-center gap-1.5 text-muted no-underline transition-colors hover:text-ink"
+        class="inline-flex items-center gap-1.5 self-center px-2 text-sm text-muted no-underline transition-colors hover:text-ink"
       >
         <$GitHubMark size={14} />
         Open source · MIT license
       </a>
-    </p>
+    </div>
   </div>
 )`;
