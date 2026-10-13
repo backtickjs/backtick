@@ -11,6 +11,8 @@ export type DropdownItem = {
   label: string;
   // from `icons`
   icon?: string;
+  // what the row shows at its right, such as a switch
+  after?: ReactNode;
   onPress: () => void;
 };
 
@@ -83,7 +85,10 @@ export const Dropdown = cs`(props: DropdownProps) => {
                   {item.icon !== undefined && (
                     <$Icon shapes={item.icon} size={20} color="secondaryText" />
                   )}
-                  <$Text color="secondaryText">{item.label}</$Text>
+                  <$Text color="secondaryText" style={{ flex: 1 }}>
+                    {item.label}
+                  </$Text>
+                  {item.after}
                 </$Pressable>
               ))}
             </$View>

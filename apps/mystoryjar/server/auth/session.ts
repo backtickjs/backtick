@@ -19,11 +19,15 @@ if (secret === "") {
 const key = new TextEncoder().encode(secret);
 
 export function issueSession(user: Omit<User, "signedInAt">): Promise<string> {
-  return new SignJWT({ email: user.email })
-    .setProtectedHeader({ alg: "HS256" })
-    .setSubject(user.uid)
-    .setIssuedAt()
-    .sign(key);
+  return (
+    new SignJWT({ email: user.email })
+      .setProtectedHeader({ alg: "HS256" })
+      // a session, which no other token this server signs can pass for
+      .setAudience("session")
+      .setSubject(user.uid)
+      .setIssuedAt()
+      .sign(key)
+  );
 }
 
 /** The user a session names, or null for none, or one this server didn't sign. */
@@ -36,12 +40,44 @@ export async function readSession(
   try {
     const { payload } = await jwtVerify<{ email: string }>(token, key, {
       algorithms: ["HS256"],
+      audience: "session",
     });
     return {
       uid: payload.sub!,
       email: payload.email,
       signedInAt: payload.iat! * 1000,
     };
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * A link's token for `uid`'s backup: good for five minutes, and for nothing
+ * else, as it travels in a URL a browser may keep.
+ */
+export function issueBackupToken(
+  uid: string,
+  timeZone: string,
+): Promise<string> {
+  return new SignJWT({ timeZone })
+    .setProtectedHeader({ alg: "HS256" })
+    .setAudience("backup")
+    .setSubject(uid)
+    .setExpirationTime("5m")
+    .sign(key);
+}
+
+/** Whose backup a link's token is for, and where, or null. */
+export async function readBackupToken(
+  token: string,
+): Promise<{ uid: string; timeZone: string } | null> {
+  try {
+    const { payload } = await jwtVerify<{ timeZone: string }>(token, key, {
+      algorithms: ["HS256"],
+      audience: "backup",
+    });
+    return { uid: payload.sub!, timeZone: payload.timeZone };
   } catch {
     return null;
   }

@@ -94,7 +94,8 @@ function linked(story: Story, origin: string): Story {
 export async function storiesOf(
   uid: string,
   timeZone: string,
-  origin: string,
+  // none for a reader on the server, as the backup is
+  origin?: string,
 ): Promise<Story[]> {
   const snapshot = await firestore
     .collection("stories")
@@ -108,7 +109,10 @@ export async function storiesOf(
         (b.data.createdAt?.toMillis() ?? 0) -
           (a.data.createdAt?.toMillis() ?? 0),
     )
-    .map(({ doc, data }) => linked(storyOf(doc.id, data, timeZone), origin));
+    .map(({ doc, data }) => {
+      const story = storyOf(doc.id, data, timeZone);
+      return origin === undefined ? story : linked(story, origin);
+    });
 }
 
 /** A new story as the composer sends it. */

@@ -7,7 +7,13 @@ import {
   signInWithPassword,
   signUp,
 } from "./auth/firebaseAuth.js";
-import { issueSession, readSession, type User } from "./auth/session.js";
+import { addFeedback, deleteAccount, setTheme } from "./account.js";
+import {
+  issueBackupToken,
+  issueSession,
+  readSession,
+  type User,
+} from "./auth/session.js";
 import { storageLink } from "./firebase.js";
 import { deletePhoto, storePhoto } from "./photos.js";
 import { Refusal } from "./refusal.js";
@@ -108,6 +114,27 @@ export const api: Record<string, Handler> = {
     const user = signedIn(caller);
     await deleteStory(user.uid, text(body.id));
     return {};
+  },
+  "/api/preferences": async (body, caller) => {
+    const user = signedIn(caller);
+    await setTheme(user.uid, body.theme === "dark" ? "dark" : "light");
+    return {};
+  },
+  "/api/feedback": async (body, caller) => {
+    const user = signedIn(caller);
+    await addFeedback(user.uid, text(body.value));
+    return {};
+  },
+  "/api/account/delete": async (_, caller) => {
+    await deleteAccount(signedIn(caller));
+    return {};
+  },
+  // Where the phone's browser downloads the backup: a link good for a few
+  // minutes, rather than the session in a URL.
+  "/api/backup": async (_, caller) => {
+    const user = signedIn(caller);
+    const token = await issueBackupToken(user.uid, caller.timeZone);
+    return { url: `${caller.origin}/backup.pdf?token=${token}` };
   },
   // A photo uploaded, then taken off the story before it was saved: deleted,
   // unless a saved story has it.

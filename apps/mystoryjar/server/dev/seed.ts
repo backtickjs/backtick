@@ -3,6 +3,7 @@
 // only: it refuses to run anywhere but the emulators.
 import { randomUUID } from "node:crypto";
 import { initializeApp } from "firebase-admin/app";
+import { getAuth } from "firebase-admin/auth";
 import { FieldValue, getFirestore, Timestamp } from "firebase-admin/firestore";
 import { getStorage } from "firebase-admin/storage";
 import { midnightIn } from "../dates.js";
@@ -20,25 +21,10 @@ const app = initializeApp({
 const firestore = getFirestore(app);
 
 // Who to sign in as in development, under the same uid on every run, so a
-// session the phone kept from the last run still finds these stories. Made
-// through the Auth emulator's admin API, which takes a uid, as the
-// firebase-admin SDK calls it.
+// session the phone kept from the last run still finds these stories.
 const tester = { email: "tester@mystoryjar.com", password: "storyjar" };
 const uid = "tester";
-const created = await fetch(
-  `http://${process.env.FIREBASE_AUTH_EMULATOR_HOST}/identitytoolkit.googleapis.com/v1/projects/demo-mystoryjar/accounts`,
-  {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      authorization: "Bearer owner",
-    },
-    body: JSON.stringify({ localId: uid, ...tester }),
-  },
-);
-if (!created.ok) {
-  throw new Error(`Couldn't create the tester: ${await created.text()}`);
-}
+await getAuth(app).createUser({ uid, ...tester });
 
 const entries: {
   text: string;

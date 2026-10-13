@@ -400,6 +400,7 @@ const newestFirst = cs`(stories: Story[]) =>
 
 const Stories = cs`(props: { stories: Story[] }) => {
   const post = $usePost();
+  const stack = $useStack();
   // the stories as changed here, until the screen is fetched again
   const [stories, setStories] = $useState(props.stories);
   $useEffect(() => setStories(props.stories), [props.stories]);
@@ -453,6 +454,9 @@ const Stories = cs`(props: { stories: Story[] }) => {
       <$SectionList
         sections={sections}
         keyExtractor={(story) => story.id}
+        // pulled, the screen is fetched again, as the server has it
+        refreshing={false}
+        onRefresh={stack.refresh}
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag"
         contentContainerStyle={{ padding: 16, paddingBottom: 40 }}
@@ -555,7 +559,7 @@ export function ReadView({
     <Screen request={request}>
       {cs`(
         <$View style={{ flex: 1 }}>
-          <$MainNavbar selected="/read" />
+          <$MainNavbar selected="/read" dark={${request.theme === "dark"}} />
           {${stories.length === 0} ? (
             <$EmptyJar />
           ) : (

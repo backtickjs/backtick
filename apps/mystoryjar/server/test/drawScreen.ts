@@ -41,8 +41,14 @@ export const preloaded: string[] = [];
 const navigation = {
   dispatch: (action: unknown) => navigated.push(action),
   goBack: () => navigated.push({ type: "GO_BACK" }),
+  // a test's screen is the stack's only one, unless it says otherwise
+  canGoBack: () => canGoBack,
+  setParams: (params: object) => navigated.push({ type: "SET_PARAMS", params }),
   preload: (_name: string, params: { path: string }) =>
     preloaded.push(params.path),
+  getState: () => ({
+    preloadedRoutes: preloaded.map((path) => ({ params: { path } })),
+  }),
 };
 
 /** What screens kept in SecureStore. */
@@ -108,8 +114,16 @@ export function pickPhoto(answer: Picked) {
 export async function drawScreen(input: Spliceable): Promise<React.ReactNode> {
   navigated.length = 0;
   preloaded.length = 0;
+  canGoBack = false;
   secureStore.clear();
   const bundle = await bundler.build({ input, packageVersions });
   const { code } = bundle.generate({ format: "cjs" });
   return evaluate(code, modules) as React.ReactNode;
+}
+
+let canGoBack = false;
+
+/** Whether the screen a test draws has one under it, from now on. */
+export function stackBelow(below: boolean) {
+  canGoBack = below;
 }

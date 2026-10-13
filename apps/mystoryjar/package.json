@@ -4,6 +4,9 @@
   "private": true,
   "description": "MyStoryJar, a one-line-a-day journal for iOS and Android, its screens served by a Backtick server",
   "main": "index.ts",
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "start": "node scripts/start.mjs",
     "android": "node scripts/start.mjs --android",
@@ -47,6 +50,7 @@
     "expo-system-ui": "~57.0.4",
     "firebase-admin": "^14.5.0",
     "jose": "^6.2.12",
+    "pdfkit": "^0.20.2",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-native": "0.86.3",
@@ -66,6 +70,7 @@
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.7",
     "@types/node": "^25.9.1",
+    "@types/pdfkit": "^0.17.6",
     "@types/react": "19.2.18",
     "@types/subset-font": "^2.3.0",
     "firebase-tools": "^15.33.0",

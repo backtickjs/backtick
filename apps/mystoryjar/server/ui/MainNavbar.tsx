@@ -5,6 +5,8 @@ import { Pressable, View } from "@backtickjs/react-native";
 import { useIsFocused } from "@backtickjs/react-navigation-native";
 import { useStack } from "../navigation.js";
 import { Dropdown } from "./Dropdown.js";
+import { usePost } from "./server.js";
+import { ToggleSwitch } from "./ToggleSwitch.js";
 import { Icon } from "./Icon.js";
 import { icons } from "./icons.js";
 import { Logo } from "./Logo.js";
@@ -73,17 +75,43 @@ const Tabs = cs`(props: { selected: string }) => {
   );
 }`;
 
-// What the website's hamburger menu holds that the app has so far.
-const Menu = cs`() => {
+// The website's hamburger menu. Dark Mode is saved for the account, then
+// the screen drawn again in it.
+const Menu = cs`(props: { selected: string; dark: boolean }) => {
   const stack = $useStack();
+  const post = $usePost();
   const signOut = async () => {
     await $deleteItemAsync("session");
     stack.restart("/");
   };
+  const toggleDark = async () => {
+    const answer = await post("/api/preferences", {
+      theme: props.dark ? "light" : "dark",
+    });
+    if (answer.error === undefined) stack.restart(props.selected);
+  };
   return (
     <$Dropdown
       accessibilityLabel="Menu"
-      items={[{ label: "Sign Out", icon: ${icons.exit}, onPress: signOut }]}
+      items={[
+        {
+          label: "My Account",
+          icon: ${icons.avatar},
+          onPress: () => stack.navigate("/account"),
+        },
+        {
+          label: "Dark Mode",
+          icon: ${icons.moon},
+          after: <$ToggleSwitch on={props.dark} />,
+          onPress: toggleDark,
+        },
+        {
+          label: "Give Feedback",
+          icon: ${icons.lamp},
+          onPress: () => stack.navigate("/feedback"),
+        },
+        { label: "Sign Out", icon: ${icons.exit}, onPress: signOut },
+      ]}
     >
       <$View
         style={{
@@ -99,10 +127,13 @@ const Menu = cs`() => {
   );
 }`;
 
-export const MainNavbar = cs`(props: { selected: "/write" | "/read" }) => (
+export const MainNavbar = cs`(props: {
+  selected: "/write" | "/read";
+  dark: boolean;
+}) => (
   <$Navbar>
     <$Logo withText={false} />
     <$Tabs selected={props.selected} />
-    <$Menu />
+    <$Menu selected={props.selected} dark={props.dark} />
   </$Navbar>
 )`;

@@ -31,7 +31,7 @@ const NewStory = cs`() => {
       photoId: draft.photo?.id ?? null,
     });
     if (answer.error !== undefined) return answer.error;
-    stack.replace("/read");
+    stack.replace("/read", { fresh: true });
     return null;
   };
   return <$Composer initial={initial} onSave={save} />;
@@ -42,7 +42,7 @@ export function Write({ request }: { request: ScreenRequest }) {
     <Screen request={request}>
       {cs`(
         <$View style={{ flex: 1 }}>
-          <$MainNavbar selected="/write" />
+          <$MainNavbar selected="/write" dark={${request.theme === "dark"}} />
           <$ScrollView
             keyboardShouldPersistTaps="handled"
             contentContainerStyle={{

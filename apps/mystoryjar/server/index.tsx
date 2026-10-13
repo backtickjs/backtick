@@ -3,6 +3,8 @@ import { createServer, type ServerResponse } from "node:http";
 import { createRequire } from "node:module";
 import { bundler } from "@backtickjs/bundler";
 import { answer, callerOf } from "./api.js";
+import { readBackupToken } from "./auth/session.js";
+import { backupPdf } from "./backup.js";
 import { screenRequest } from "./request.js";
 import { screenAt } from "./routes.js";
 import { fontFiles } from "./ui/fonts.js";
@@ -48,7 +50,8 @@ const server = createServer(async (request, response) => {
     response.end();
     return;
   }
-  const { pathname } = new URL(request.url ?? "/", "http://localhost");
+  const url = new URL(request.url ?? "/", "http://localhost");
+  const { pathname } = url;
   if (development && pathname === "/live") {
     response.end(run);
     return;
@@ -70,6 +73,23 @@ const server = createServer(async (request, response) => {
     }
   }
   try {
+    // The backup, for the link the app opened in the phone's browser.
+    if (pathname === "/backup.pdf") {
+      const backup = await readBackupToken(url.searchParams.get("token") ?? "");
+      if (backup === null) {
+        response.statusCode = 403;
+        response.end("This link has expired. Ask the app for a new one.");
+        return;
+      }
+      const pdf = await backupPdf(backup.uid, backup.timeZone);
+      response.setHeader("content-type", "application/pdf");
+      response.setHeader(
+        "content-disposition",
+        'inline; filename="MyStoryJar stories.pdf"',
+      );
+      response.end(pdf);
+      return;
+    }
     const answered =
       request.method === "POST"
         ? await answer(pathname, request, await callerOf(request))

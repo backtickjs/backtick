@@ -8,7 +8,7 @@ import {
 
 // The app's one stack screen and its params, as App.tsx declares them.
 type Routes = {
-  Screen: { path: string; animation?: "default" | "none" };
+  Screen: { path: string; animation?: "default" | "none"; fresh?: number };
 };
 
 // The app's stack as a client component drives it. The app draws one stack
@@ -20,16 +20,39 @@ export const useStack = cs`() => {
     // Shows the screen at \`path\` over the current one.
     navigate: (path: string) =>
       navigation.dispatch($StackActions.push("Screen", { path })),
-    // Shows it in place of the current one, as a tab does.
-    replace: (path: string) =>
+    // Shows it in place of the current one, as a tab does: fetched again
+    // when \`fresh\`, as after changing what it shows, though preloaded.
+    replace: (path: string, options: { fresh?: boolean } = {}) =>
       navigation.dispatch(
-        $StackActions.replace("Screen", { path, animation: "none" }),
+        $StackActions.replace("Screen", {
+          path,
+          animation: "none",
+          ...(options.fresh ? { fresh: Date.now() } : {}),
+        }),
       ),
-    back: () => navigation.goBack(),
+    // Fetches the current screen again, as pulling to refresh does.
+    refresh: () => navigation.setParams({ fresh: Date.now() }),
+    // Returns to the screen under this one, or, at the bottom of the stack,
+    // as after signing out, to the landing page in its place.
+    back: () =>
+      navigation.canGoBack()
+        ? navigation.goBack()
+        : navigation.dispatch(
+            $StackActions.replace("Screen", { path: "/", animation: "none" }),
+          ),
     // Draws the screen at \`path\` out of sight, so moving to it later
     // shows it at once.
-    preload: (path: string) =>
-      navigation.preload("Screen", { path, animation: "none" }),
+    // Once: a screen already drawn there is left as it is.
+    preload: (path: string) => {
+      // a stack's state, which lists what it preloaded
+      const state = navigation.getState() as
+        | { preloadedRoutes?: { params?: { path?: string } }[] }
+        | undefined;
+      const preloaded = state?.preloadedRoutes?.some(
+        (route) => route.params?.path === path,
+      );
+      if (!preloaded) navigation.preload("Screen", { path, animation: "none" });
+    },
     // Starts the stack over at \`path\`, as signing in or out does.
     restart: (path: string) =>
       navigation.dispatch(

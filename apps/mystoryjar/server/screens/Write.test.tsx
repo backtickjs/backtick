@@ -1,6 +1,5 @@
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, it } from "node:test";
-import { StackActions } from "@react-navigation/routers";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { dayIn } from "../dates.js";
@@ -60,11 +59,13 @@ it("saves a story for today, then shows Read", async () => {
     "Beach day.",
   );
   await userEvent.click(save());
-  await waitFor(() =>
-    assert.deepEqual(navigated, [
-      StackActions.replace("Screen", { path: "/read", animation: "none" }),
-    ]),
-  );
+  // Read, preloaded before this story, fetched again
+  await waitFor(() => assert.equal(navigated.length, 1));
+  const [shown] = navigated as {
+    payload: { params: Record<string, unknown> };
+  }[];
+  assert.equal(shown!.payload.params.path, "/read");
+  assert.equal(typeof shown!.payload.params.fresh, "number");
   // the phone's today, which in tests is this computer's
   const today = dayIn(Intl.DateTimeFormat().resolvedOptions().timeZone);
   assert.deepEqual(sent, [

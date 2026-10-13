@@ -64,7 +64,13 @@ const modules = {
 // stack. Screens push, replace and pop it themselves: see
 // server/navigation.ts, which names it the same.
 type Routes = {
-  Screen: { path: string; animation?: "default" | "none" };
+  Screen: {
+    path: string;
+    animation?: "default" | "none";
+    // set, to a new value each time, when a screen is to be fetched again:
+    // it changed elsewhere, or the person pulled to refresh
+    fresh?: number;
+  };
 };
 
 // In development, the server runs on the computer Expo was started from.
@@ -99,7 +105,9 @@ async function loadScreen(path: string): Promise<ReactNode> {
 
 // The same, marked as settled once it has, as React's `use` reads a
 // promise: one fetched ahead, for a preloaded screen, then draws at once.
-function fetchScreen(path: string): Promise<ReactNode> {
+// `why` is what asked, which development logs.
+function fetchScreen(path: string, why: string): Promise<ReactNode> {
+  if (__DEV__) console.log(`[app] ${path}: ${why}`);
   const screen = loadScreen(path) as Promise<ReactNode> & {
     status?: "fulfilled" | "rejected";
     value?: ReactNode;
@@ -153,9 +161,8 @@ function ServerScreen({ route }: NativeStackScreenProps<Routes, "Screen">) {
   // the last one showed.
   const [request, setRequest] = useState(() => ({
     number: 0,
-    screen: fetchScreen(path),
+    screen: fetchScreen(path, "mounted"),
   }));
-  const fetchedAt = useRef(Date.now());
   // A preloaded screen is fetched at once and drawn only once shown: drawn
   // out of sight, Android can let it show through the screen in front.
   const focused = useIsFocused();
@@ -164,30 +171,35 @@ function ServerScreen({ route }: NativeStackScreenProps<Routes, "Screen">) {
     setShown(true);
   }
   // After an error: the spinner, while it loads again.
-  const retry = () => {
-    fetchedAt.current = Date.now();
+  const retry = () =>
     setRequest(({ number }) => ({
       number: number + 1,
-      screen: fetchScreen(path),
+      screen: fetchScreen(path, "retried"),
     }));
-  };
   // The screen as it is now, drawn in place of the one shown, which stays
   // until then: a transition, so nothing flashes.
-  const refresh = () => {
-    fetchedAt.current = Date.now();
+  const refresh = (why: string) =>
     startTransition(() =>
-      setRequest(({ number }) => ({ number, screen: fetchScreen(path) })),
+      setRequest(({ number }) => ({ number, screen: fetchScreen(path, why) })),
     );
-  };
-  // Fetched again each time it's shown, as a preloaded screen may have been
-  // fetched long before; not when it was just fetched to be shown.
+  // Fetched again only when asked: by the screen that changed what this one
+  // shows, or by the person; never on focus, which a phone's stack sends
+  // while it changes, and which would remount the screen and lose what's
+  // being typed.
+  // A marker it was created with is the fetch it was created with.
+  const { fresh } = route.params;
+  const handled = useRef(fresh);
   useEffect(() => {
-    if (focused && Date.now() - fetchedAt.current > 1000) refresh();
-  }, [focused]);
+    if (fresh !== handled.current) {
+      handled.current = fresh;
+      refresh("asked to be fresh");
+    }
+  }, [fresh]);
   useEffect(() => {
     if (__DEV__) {
-      restarted.add(refresh);
-      return () => void restarted.delete(refresh);
+      const restart = () => refresh("the server restarted");
+      restarted.add(restart);
+      return () => void restarted.delete(restart);
     }
   }, []);
   if (!shown) {

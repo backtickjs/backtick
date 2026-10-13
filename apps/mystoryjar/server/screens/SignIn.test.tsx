@@ -1,10 +1,15 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
-import { CommonActions } from "@react-navigation/routers";
+import { CommonActions, StackActions } from "@react-navigation/routers";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { readSession } from "../auth/session.js";
-import { drawScreen, navigated, secureStore } from "../test/drawScreen.js";
+import {
+  drawScreen,
+  navigated,
+  secureStore,
+  stackBelow,
+} from "../test/drawScreen.js";
 import { account } from "../test/fetch.js";
 import { request } from "../test/request.js";
 import { SignIn } from "./SignIn.js";
@@ -53,4 +58,19 @@ it("emails a password reset", async () => {
   await userEvent.type(screen.getByPlaceholderText("email"), account.email);
   await userEvent.click(screen.getByText("Forgot Password?"));
   assert.ok(await screen.findByText("Success. Check your inbox"));
+});
+
+it("goes back to the landing page when nothing is under it", async () => {
+  render(await drawScreen(<SignIn request={request} />));
+  await userEvent.click(screen.getByRole("button", { name: "Back" }));
+  assert.deepEqual(navigated, [
+    StackActions.replace("Screen", { path: "/", animation: "none" }),
+  ]);
+});
+
+it("goes back to what's under it otherwise", async () => {
+  render(await drawScreen(<SignIn request={request} />));
+  stackBelow(true);
+  await userEvent.click(screen.getByRole("button", { name: "Back" }));
+  assert.deepEqual(navigated, [{ type: "GO_BACK" }]);
 });

@@ -8,6 +8,15 @@ import { readFileSync } from "node:fs";
 import { networkInterfaces } from "node:os";
 import { setTimeout as sleep } from "node:timers/promises";
 
+// Node 24 or later: Node 23's module hooks, which the Backtick loader uses,
+// break packages such as firebase-admin's auth and pdfkit.
+if (!process.versions.bun && Number(process.versions.node.split(".")[0]) < 24) {
+  console.error(
+    `MyStoryJar needs Node 24 or later, and this is Node ${process.versions.node}: nvm install 24`,
+  );
+  process.exit(1);
+}
+
 // The runtime is the one package.json has a Backtick loader for: Bun's, or
 // else Node's.
 const { dependencies } = JSON.parse(readFileSync("package.json", "utf8"));
