@@ -91,6 +91,6 @@ it("awaitInNestedScriptSplice", async (t) => {
 // included, even in an async function: only an awaiting splice makes the
 // script's function async.
 export async function rows() {
-  const response: Client<Promise<Response>> = cs.lift((() => cs.globalThis.fetch("/rows"))());
+  const response: Client<Promise<Response>> = cs.lift((() => fetch("/rows"))());
   return response;
 }

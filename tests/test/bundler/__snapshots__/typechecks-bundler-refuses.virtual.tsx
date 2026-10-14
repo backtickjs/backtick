@@ -56,8 +56,8 @@ it("an object that contains itself", async () => {
 
 it("a cycle through a script's splice", async () => {
   const holder: { script: Client<string> | null } = { script: null };
-  holder.script = cs.lift((() => cs.globalThis.String((cs.splice((holder)))))());
-  await assert.rejects(bundle(cs.lift((() => cs.globalThis.String((cs.splice((holder)))))())), { message });
+  holder.script = cs.lift((() => String((cs.splice((holder)))))());
+  await assert.rejects(bundle(cs.lift((() => String((cs.splice((holder)))))())), { message });
 });
 
 it("a value used in two places is no cycle", async () => {

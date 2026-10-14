@@ -89,7 +89,7 @@ async function drawAt(
 ): Promise<void> {
   const id = parent.id;
   const unmount = await evaluate(cs.lift((() => (cs.splice((createRoot)))((__cs_dispose: () => void) => {
-    const __cs_parent = cs.globalThis.document.getElementById((cs.splice((id))))!;
+    const __cs_parent = document.getElementById((cs.splice((id))))!;
     (cs.splice((insert)))(__cs_parent, (cs.splice((value))), __cs_parent.querySelector((cs.splice((selector)))));
     return __cs_dispose;
   }))()));

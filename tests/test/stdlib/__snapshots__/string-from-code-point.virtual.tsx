@@ -9,7 +9,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Written() {
   return cs.lift((() => {
     return (
-      <span>{cs.globalThis.String.fromCodePoint(72, 105) + cs.globalThis.String.fromCodePoint()}</span>
+      <span>{String.fromCodePoint(72, 105) + String.fromCodePoint()}</span>
     );
   })());
 }

@@ -28,7 +28,7 @@ describe("computed", () => {
         cs.lift((() => () => {
           const [__cs_n, __cs_setN] = (cs.splice((createSignal)))(1);
           const __cs_doubled = (cs.splice((createMemo)))(() => {
-            cs.globalThis.window.console.log();
+            window.console.log();
             return __cs_n() * 2;
           });
           return (
@@ -57,7 +57,7 @@ describe("computed", () => {
           const [__cs_n, __cs_setN] = (cs.splice((createSignal)))(1);
           const __cs_isBig = (cs.splice((createMemo)))(() => __cs_n() > 2);
           const __cs_label = () => {
-            cs.globalThis.window.console.log();
+            window.console.log();
             return __cs_isBig() ? "big" : "small";
           };
           return (

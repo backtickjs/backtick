@@ -15,9 +15,9 @@ it("fetchRequests", async (t) => {
     cs.lift((() => () => {
       const [__cs_held, __cs_setHeld] = (cs.splice((createSignal)))("waiting");
 
-      cs.globalThis.window
+      window
         .fetch("/cases/built-ins/Math/trunc/Math.trunc_Success", {
-          signal: cs.globalThis.window.AbortSignal.timeout(3000),
+          signal: window.AbortSignal.timeout(3000),
         })
         .then((__cs_response: Response) => {
           if (__cs_response.status !== 200) {
@@ -29,14 +29,14 @@ it("fetchRequests", async (t) => {
           __cs_setHeld(__cs_value === null ? "null" : "a value");
         })
         .catch((__cs_error: unknown) => {
-          __cs_setHeld("failed — " + cs.globalThis.String(__cs_error));
+          __cs_setHeld("failed — " + String(__cs_error));
         });
 
-      cs.globalThis.window
+      window
         .fetch("/cases", {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: cs.globalThis.JSON.stringify({ name: "Math.trunc", passed: true }),
+          body: JSON.stringify({ name: "Math.trunc", passed: true }),
         })
         .then((__cs_response: Response) => __cs_response.text())
         .then(
@@ -44,7 +44,7 @@ it("fetchRequests", async (t) => {
             __cs_setHeld(__cs_text);
           },
           (__cs_error: unknown) => {
-            __cs_setHeld(cs.globalThis.String(__cs_error));
+            __cs_setHeld(String(__cs_error));
           },
         );
 

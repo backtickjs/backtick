@@ -1,7 +1,7 @@
 import type ts from "typescript";
 import type { CodeInformation } from "./CodeInformation.js";
 import type { ClientScript, Splice } from "./parseFile.js";
-import type { BindingResolution } from "./resolveBindings.js";
+import type { RewrittenFile } from "./rewriteFile.js";
 import type { Segment } from "./segmentsToString.js";
 import { inTypePosition } from "./inTypePosition.js";
 import { tagRoot } from "./tagRoot.js";
@@ -26,7 +26,11 @@ const TAG_NAME: CodeInformation = {
  *
  * - its own binding, renamed (`x` to `__cs_x`), so it can't hide a host binding
  *   a splice names; a shorthand keeps its property name (`x: __cs_x`)
- * - a name nothing declares, read as the client's global (`cs.globalThis.x`)
+ * - a name nothing declares, the client's global: written as it is, unless
+ *   a host binding of that name is in scope at the script, which would hide
+ *   the global, and then read off `cs.globalThis.x`. A global declared with `const` or `let`,
+ *   as React Native's `__DEV__` is, is no property of `typeof globalThis`, so
+ *   only its bare name reads it.
  * - a splice, as the host value the client is handed: `$x` as
  *   `cs.splice((x))`, `${…}` as `cs.splice(…)` around the host code
  * - a splice written as a tag, `<$Card>`, as JSX on a name the host value is
@@ -40,7 +44,7 @@ const TAG_NAME: CodeInformation = {
 export function virtualScript(
   ts: typeof import("typescript"),
   script: ClientScript,
-  bindings: BindingResolution,
+  { bindings, hostReferences }: RewrittenFile,
   renderSplice: (splice: Splice) => Segment[],
 ): Segment[] {
   const file = script.fileWithPlaceholders;
@@ -147,7 +151,7 @@ export function virtualScript(
       mapped(mangle(node.text), node);
       return;
     }
-    if (node.text !== "undefined" && isReference(ts, node)) {
+    if (hostReferences.has(node)) {
       if (shorthand) {
         mapped(node.text, node);
         added(": ");
@@ -264,62 +268,4 @@ export function virtualScript(
   emit(file, 0);
   out.push([")())", undefined, closed, 1, WRAPPER]);
   return out;
-}
-
-// Whether a name is read as a value where it stands, rather than naming a
-// property, an attribute, a label or what a declaration declares.
-function isReference(
-  ts: typeof import("typescript"),
-  node: ts.Identifier,
-): boolean {
-  const parent = node.parent;
-  if (
-    (ts.isPropertyAccessExpression(parent) ||
-      ts.isPropertyAssignment(parent) ||
-      ts.isMethodDeclaration(parent) ||
-      ts.isPropertyDeclaration(parent) ||
-      ts.isGetAccessorDeclaration(parent) ||
-      ts.isSetAccessorDeclaration(parent) ||
-      ts.isPropertySignature(parent) ||
-      ts.isMethodSignature(parent) ||
-      ts.isEnumMember(parent) ||
-      ts.isJsxAttribute(parent) ||
-      ts.isVariableDeclaration(parent) ||
-      ts.isParameter(parent) ||
-      ts.isFunctionDeclaration(parent) ||
-      ts.isFunctionExpression(parent) ||
-      ts.isClassDeclaration(parent) ||
-      ts.isClassExpression(parent) ||
-      ts.isTypeAliasDeclaration(parent) ||
-      ts.isInterfaceDeclaration(parent) ||
-      ts.isEnumDeclaration(parent) ||
-      ts.isTypeParameterDeclaration(parent)) &&
-    parent.name === node
-  ) {
-    return false;
-  }
-  if (ts.isBindingElement(parent)) {
-    return false; // its name declares, its property name names a property
-  }
-  if (
-    (ts.isLabeledStatement(parent) ||
-      ts.isBreakStatement(parent) ||
-      ts.isContinueStatement(parent)) &&
-    parent.label === node
-  ) {
-    return false;
-  }
-  if (
-    (ts.isJsxOpeningElement(parent) ||
-      ts.isJsxSelfClosingElement(parent) ||
-      ts.isJsxClosingElement(parent)) &&
-    parent.tagName === node
-  ) {
-    return false; // an intrinsic element's name, or a host tag's (above)
-  }
-  return !(
-    ts.isQualifiedName(parent) ||
-    ts.isMetaProperty(parent) ||
-    ts.isJsxNamespacedName(parent)
-  );
 }

@@ -32,7 +32,6 @@ __cs_x            → x
 ,                 → ,
                   →  
 Math              → Math
-Math              → Math
                   →  
 }                 → }
 ;                 → ;

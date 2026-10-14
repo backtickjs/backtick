@@ -22,7 +22,7 @@ it("stdlibEs2015", async (t) => {
         endsWith: __cs_word.endsWith("tick", 4),
         repeated: "ab".repeat(3),
         codePoint: "\u{1F600}".codePointAt(0),
-        keys: cs.globalThis.Object.keys({ a: 1, b: 2 }),
+        keys: Object.keys({ a: 1, b: 2 }),
       };
     })()),
   );

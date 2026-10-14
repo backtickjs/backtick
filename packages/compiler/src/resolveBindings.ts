@@ -1,11 +1,11 @@
 import type ts from "typescript";
 import { inTypePosition } from "./inTypePosition.js";
-import type { ClientScript } from "./parseFile.js";
+import type { ClientScript, ParsedFile } from "./parseFile.js";
 
 /**
  * Every client script in a file, its scopes resolved by TypeScript's checker,
  * so any syntax TypeScript reads is resolved as the language does. It produces
- * two things:
+ * three things:
  *
  *  - `bindings`: every *bound* variable identifier — a declaration, an arrow
  *    parameter, or a reference that resolves to one of those — mapped to a
@@ -31,10 +31,18 @@ import type { ClientScript } from "./parseFile.js";
  *    captured by something, somewhere: a binding no fragment ever wants is
  *    dead weight in every thunk written for that hole.
  *
- * Scripts are checked as one text: each written `(() => …)`, a nested script
- * where its placeholder stands, as it lands at runtime. A reference is free
+ *  - `hostReferences`: every script identifier that resolves to a host
+ *    binding — a name the host file declares in scope around the script,
+ *    imports and all, and no script does. The client has no such binding, so
+ *    the virtual code reports the read: it has to be spliced. A name that
+ *    resolves to nothing is the client's global, read as written.
+ *
+ * The file is checked as one text: the host code as written, each script
+ * `(() => …)` where its template stands, a nested script where it stands in
+ * its splice's host expression, as it lands at runtime. A reference is free
  * for the script it appears in exactly when the binding it resolves to was
- * declared in an *enclosing* script (or in none at all).
+ * declared in an *enclosing* script (or in none at all); it is the host's when
+ * no script declares it.
  *
  * Uniqueness of keys has two axes. A per-file counter distinguishes bindings
  * *within* a file; a hash of the file's text (see `hashText`) distinguishes
@@ -56,6 +64,8 @@ export type BindingResolution = Map<ts.Identifier, string>;
 
 export interface ResolvedScopes {
   bindings: BindingResolution;
+  // the scripts' identifiers that read a host binding
+  hostReferences: Set<ts.Identifier>;
   // `params.get(script)[i]` is the script's parameter `i` (`$splice<i>`,
   // `$capture<i>`): splices in the order the script first reads them, then
   // captures
@@ -111,20 +121,25 @@ interface Combined {
 
 export function resolveBindings(
   ts: typeof import("typescript"),
-  scripts: ClientScript[],
+  { sourceFile, scripts }: ParsedFile,
   fileHash: string,
 ): ResolvedScopes {
-  const combined = combine(ts, scripts);
+  const combined = combine(ts, sourceFile, scripts);
   const file = ts.createSourceFile(
-    "scripts.tsx",
+    sourceFile.fileName,
     combined.text,
     ts.ScriptTarget.Latest,
     true,
-    ts.ScriptKind.TSX,
   );
   const checker = checkerOf(ts, file);
   const binding =
     ts.SymbolFlags.Variable | ts.SymbolFlags.Function | ts.SymbolFlags.Class;
+  // what the host declares by a name: the above, an enum, a namespace, an import
+  const hostBinding =
+    binding |
+    ts.SymbolFlags.Enum |
+    ts.SymbolFlags.Module |
+    ts.SymbolFlags.Alias;
 
   const scriptAt = (position: number): ClientScript | undefined =>
     combined.pieces.find(
@@ -179,39 +194,56 @@ export function resolveBindings(
     }
     return key;
   };
-  // The binding a name resolves to, where the scripts declare it.
-  const declarationOf = (
+  // What a name resolves to, and where it is declared.
+  const resolve = (
     identifier: ts.Identifier,
-  ): ts.Declaration | undefined => {
+  ): { symbol: ts.Symbol; declaration: ts.Declaration } | undefined => {
     const symbol =
       ts.isShorthandPropertyAssignment(identifier.parent) &&
       identifier.parent.name === identifier
         ? checker.getShorthandAssignmentValueSymbol(identifier.parent)
         : checker.getSymbolAtLocation(identifier);
-    return symbol !== undefined && symbol.flags & binding
-      ? symbol.declarations?.find(
-          (declaration) => declaration.getSourceFile() === file,
-        )
+    const declaration = symbol?.declarations?.find(
+      (declaration) => declaration.getSourceFile() === file,
+    );
+    return symbol !== undefined && declaration !== undefined
+      ? { symbol, declaration }
       : undefined;
   };
 
   // Every binding some nested script captures, whatever hole it was written at.
   const escaped = new Set<string>();
+  const hostReferences = new Set<ts.Identifier>();
 
   const visit = (node: ts.Node): void => {
     // A type's names are never runtime bindings, but for a `typeof`, however
     // deep in a type, and a class's `extends`, which read values.
     if (ts.isIdentifier(node) && !inTypePosition(ts, node)) {
       const script = scriptAt(node.getStart(file));
-      const declaration = declarationOf(node);
       if (script === undefined) {
         return;
       }
-      if (declaration === undefined) {
+      const resolved = resolve(node);
+      if (resolved === undefined) {
+        return;
+      }
+      const { symbol, declaration } = resolved;
+      const identifier = identifierAt(node.getStart(file));
+      if (scriptAt(declaration.getStart(file)) === undefined) {
+        // The host's, unless a `declare global` declares it: that is a global.
+        if (
+          (symbol.flags & hostBinding) !== 0 &&
+          !inGlobalAugmentation(ts, declaration) &&
+          identifier !== undefined
+        ) {
+          hostReferences.add(identifier);
+        }
+        return;
+      }
+      if ((symbol.flags & binding) === 0) {
         return;
       }
       const key = keyOf(declaration);
-      const identifier = identifierAt(node.getStart(file));
       if (identifier !== undefined) {
         bindings.set(identifier, key);
       }
@@ -277,13 +309,16 @@ export function resolveBindings(
     params.set(script, [...splices, ...captures.values()]);
   }
 
-  return { bindings, params };
+  return { bindings, hostReferences, params };
 }
 
-// The scripts as one text, each `(() => text)`, a nested script written where
-// its placeholder stands.
+// The file as one text: the host code as written, each script `(() => text)`
+// where its template stands, a braced splice's host expression where its
+// placeholder stands, parenthesized, with the scripts nested in it written the
+// same way.
 function combine(
   ts: typeof import("typescript"),
+  sourceFile: ts.SourceFile,
   scripts: ClientScript[],
 ): Combined {
   const combined: Combined = {
@@ -292,49 +327,64 @@ function combine(
     parents: new Map(),
     positions: new Map(),
   };
+  // Host text up to an offset, from where the last host text ended.
+  let at = 0;
+  const host = (to: number): void => {
+    combined.text += sourceFile.text.slice(at, to);
+    at = to;
+  };
   const emit = (script: ClientScript, parent?: ClientScript): void => {
     combined.parents.set(script, parent);
     const identifiers = identifiersOf(ts, script.fileWithPlaceholders);
-    const holes = [...identifiers.values()].filter((identifier) => {
-      const splice = script.splices[identifier.text];
-      return splice?.kind === "braced" && splice.scripts.length > 0;
-    });
+    const holes = [...identifiers.values()].filter(
+      (identifier) => script.splices[identifier.text]?.kind === "braced",
+    );
     combined.text += "(() => ";
-    let at = 0;
+    let cursor = 0;
     const copy = (to: number): void => {
       const start = combined.text.length;
-      combined.pieces.push({ start, length: to - at, script, from: at });
+      combined.pieces.push({
+        start,
+        length: to - cursor,
+        script,
+        from: cursor,
+      });
       for (const [offset, identifier] of identifiers) {
-        if (offset >= at && offset < to) {
-          combined.positions.set(identifier, start + offset - at);
+        if (offset >= cursor && offset < to) {
+          combined.positions.set(identifier, start + offset - cursor);
         }
       }
-      combined.text += script.textWithPlaceholders.slice(at, to);
-      at = to;
+      combined.text += script.textWithPlaceholders.slice(cursor, to);
+      cursor = to;
     };
     for (const hole of holes) {
       copy(hole.getStart(script.fileWithPlaceholders));
       combined.positions.set(hole, combined.text.length);
       const splice = script.splices[hole.text]!;
-      combined.text += "[";
-      splice.scripts.forEach((nested, index) => {
-        combined.text += index === 0 ? "" : ", ";
+      combined.text += "(";
+      at = splice.expression.getStart(sourceFile);
+      for (const nested of splice.scripts) {
+        host(nested.sourceNode.getStart(sourceFile));
         emit(nested, script);
-      });
-      combined.text += "]";
-      at = hole.getEnd();
+        at = nested.sourceNode.getEnd();
+      }
+      host(splice.expression.getEnd());
+      combined.text += ")";
+      cursor = hole.getEnd();
     }
     copy(script.textWithPlaceholders.length);
     combined.text += ")";
   };
   for (const script of scripts) {
+    host(script.sourceNode.getStart(sourceFile));
     emit(script);
-    combined.text += ";\n";
+    at = script.sourceNode.getEnd();
   }
+  host(sourceFile.text.length);
   return combined;
 }
 
-// A checker over the one file: no libraries, as only the scripts' own
+// A checker over the one file: no libraries, as only the file's own
 // bindings are asked about.
 function checkerOf(
   ts: typeof import("typescript"),
@@ -358,6 +408,21 @@ function checkerOf(
       host,
     )
     .getTypeChecker();
+}
+
+function inGlobalAugmentation(
+  ts: typeof import("typescript"),
+  declaration: ts.Declaration,
+): boolean {
+  for (let node: ts.Node | undefined = declaration; node; node = node.parent) {
+    if (
+      ts.isModuleDeclaration(node) &&
+      (node.flags & ts.NodeFlags.GlobalAugmentation) !== 0
+    ) {
+      return true;
+    }
+  }
+  return false;
 }
 
 // A script's own identifiers, by where they start in its placeholder text.

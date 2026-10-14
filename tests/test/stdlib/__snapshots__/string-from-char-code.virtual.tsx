@@ -8,7 +8,7 @@ async function Written() {
   return cs.lift((() => {
     return (
       <span>
-        {cs.globalThis.String.fromCharCode(72, 105) + cs.globalThis.String.fromCharCode(0xd83d, 0xde00)}
+        {String.fromCharCode(72, 105) + String.fromCharCode(0xd83d, 0xde00)}
       </span>
     );
   })());

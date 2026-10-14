@@ -65,7 +65,7 @@ describe("statements", () => {
           const __cs_log: string[] = [];
           const __cs_run = (__cs_fail: boolean) => {
             try {
-              if (__cs_fail) throw new cs.globalThis.Error("no");
+              if (__cs_fail) throw new Error("no");
               __cs_log.push("tried");
             } catch (__cs_error) {
               __cs_log.push("caught");
@@ -94,7 +94,7 @@ describe("statements", () => {
       await evaluate(
         cs.lift((() => (cs.splice((createRoot)))(() => {
           try {
-            throw new cs.globalThis.Error("boom");
+            throw new Error("boom");
           } catch ({ message: __cs_message }: any) {
             return __cs_message;
           }

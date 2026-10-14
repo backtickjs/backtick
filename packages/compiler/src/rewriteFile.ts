@@ -12,6 +12,8 @@ export interface RewrittenFile {
   scripts: Map<ts.TaggedTemplateExpression, RewrittenScript>;
   // every script's own bindings, by identifier (see `resolveBindings`)
   bindings: BindingResolution;
+  // the scripts' identifiers that read a host binding (see `resolveBindings`)
+  hostReferences: Set<ts.Identifier>;
   diagnostics: Diagnostic[];
 }
 
@@ -28,9 +30,9 @@ export function rewriteFile(
   // to distinguish this file from a same-named file in another codebase.
   const fileHash = hashText(sourceFile.text);
 
-  const { bindings, params } = resolveBindings(
+  const { bindings, hostReferences, params } = resolveBindings(
     ts,
-    parsedFile.scripts,
+    parsedFile,
     fileHash,
   );
 
@@ -48,5 +50,5 @@ export function rewriteFile(
 
   diagnostics.push(...hostElementDiagnostics(ts, sourceFile));
 
-  return { sourceFile, scripts, bindings, diagnostics };
+  return { sourceFile, scripts, bindings, hostReferences, diagnostics };
 }

@@ -13,7 +13,7 @@ async function Held({ again }: { again: Client<() => boolean> }) {
   return cs.lift((() => {
     const [__cs_shown, __cs_setShown] = (cs.splice((createSignal)))(false);
 
-    const __cs_started = cs.globalThis.window.setTimeout(() => {
+    const __cs_started = window.setTimeout(() => {
       if ((cs.splice((again)))()) {
         __cs_setShown(true);
       }

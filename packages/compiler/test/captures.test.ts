@@ -20,7 +20,7 @@ function capturesOf(params: readonly ResolvedParam[] = []): string[] {
 function captures(body: string): string[] {
   const source = `const script = cs\`${body}\`;`;
   const parsed = parseSourceText(ts, "test.ts", source);
-  const { params } = resolveBindings(ts, parsed.scripts, "hash");
+  const { params } = resolveBindings(ts, parsed, "hash");
   const [script] = parsed.scripts;
   return capturesOf(params.get(script));
 }
@@ -29,7 +29,7 @@ function captures(body: string): string[] {
 // order: the binding keys they must receive from the enclosing scope.
 function nested(source: string): string[] {
   const parsed = parseSourceText(ts, "test.ts", source);
-  const { params } = resolveBindings(ts, parsed.scripts, "hash");
+  const { params } = resolveBindings(ts, parsed, "hash");
   const [script] = parsed.scripts;
   return Object.values(script.splices)
     .flatMap((splice) => splice.scripts)
@@ -204,7 +204,7 @@ describe("captures", () => {
       const source =
         "const script = cs`{ const [a, b] = ${cs`a`}; return ${cs`[a, b]`}; }`;";
       const parsed = parseSourceText(ts, "test.ts", source);
-      const { params } = resolveBindings(ts, parsed.scripts, "hash");
+      const { params } = resolveBindings(ts, parsed, "hash");
       const [script] = parsed.scripts;
       assert.deepStrictEqual(
         params

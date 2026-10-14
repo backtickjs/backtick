@@ -1,9 +1,10 @@
 import { cs } from "@backtickjs/core";
 
-// A name a script didn't bind is the client's global, read off `globalThis`:
-// one the project declares — `window`, from the DOM's lib — reads as it is. A
-// host binding is no global, however it is in scope around the script, so it
-// is reported where it is written: it has to be spliced.
+// A name a script didn't bind is the client's global: one the project
+// declares — `window`, from the DOM's lib — reads as it is, and one it
+// doesn't is reported as TypeScript reports it. A host binding is no global,
+// however it is in scope around the script, so it is reported where it is
+// written: it has to be spliced.
 const hostValue = 5;
 
 export const host = cs`{
@@ -12,8 +13,14 @@ export const host = cs`{
 }`;
 
 export const assigned = cs`{
-  // @ts-expect-error: Property 'count' does not exist on type 'GlobalThis'.
+  // @ts-expect-error: Cannot find name 'count'.
   count = 1;
+}`;
+
+// However deep the host binding is declared, if the script is in its scope.
+export const scoped = (hostParam: number) => cs`{
+  // @ts-expect-error: Property 'hostParam' does not exist on type 'GlobalThis'.
+  return hostParam;
 }`;
 
 export const global = cs`window.location.href`;

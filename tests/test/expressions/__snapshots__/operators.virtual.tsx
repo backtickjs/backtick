@@ -20,7 +20,7 @@ it("binaryOperators", async (t) => {
         __cs_n == 5,
         __cs_n != 5,
         "length" in [__cs_n],
-        [__cs_n] instanceof cs.globalThis.Array,
+        [__cs_n] instanceof Array,
       ];
     })()),
   );

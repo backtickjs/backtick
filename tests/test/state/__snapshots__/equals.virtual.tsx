@@ -35,7 +35,7 @@ describe("equals", () => {
             { equals: (__cs_previous, __cs_next) => __cs_previous.isBig === __cs_next.isBig },
           );
           const __cs_label = () => {
-            cs.globalThis.window.console.log();
+            window.console.log();
             return __cs_size().isBig ? "big" : "small";
           };
           return (
@@ -67,7 +67,7 @@ describe("equals", () => {
             { equals: (__cs_previous, __cs_next) => __cs_previous.x === __cs_next.x },
           );
           const __cs_label = () => {
-            cs.globalThis.window.console.log();
+            window.console.log();
             return "x " + __cs_point().x;
           };
           return (
@@ -89,7 +89,7 @@ describe("equals", () => {
         cs.lift((() => () => {
           const [__cs_n, __cs_setN] = (cs.splice((createSignal)))(1, {
             equals: (__cs_previous, __cs_next) => {
-              cs.globalThis.window.console.log(__cs_previous, __cs_next);
+              window.console.log(__cs_previous, __cs_next);
               return __cs_previous === __cs_next;
             },
           });
@@ -108,7 +108,7 @@ describe("equals", () => {
         cs.lift((() => () => {
           const [__cs_n, __cs_setN] = (cs.splice((createSignal)))(1);
           const __cs_label = () => {
-            cs.globalThis.window.console.log();
+            window.console.log();
             return "n " + __cs_n();
           };
           return (
@@ -130,7 +130,7 @@ describe("equals", () => {
         cs.lift((() => () => {
           const [__cs_point, __cs_setPoint] = (cs.splice((createSignal)))({ x: 1 });
           const __cs_label = () => {
-            cs.globalThis.window.console.log();
+            window.console.log();
             return "x " + __cs_point().x;
           };
           return (

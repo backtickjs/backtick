@@ -22,7 +22,7 @@ async function draw(element: Client<JSXElement>): Promise<Element> {
   document.body.append(container);
   drawn.push(container);
   await evaluate(
-    cs.lift((() => (cs.splice((render)))(() => (cs.splice((element))), cs.globalThis.document.getElementById((cs.splice((id)))) as HTMLElement))()),
+    cs.lift((() => (cs.splice((render)))(() => (cs.splice((element))), document.getElementById((cs.splice((id)))) as HTMLElement))()),
   );
   return container;
 }

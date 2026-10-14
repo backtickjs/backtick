@@ -11,8 +11,8 @@ it("objectValues", async (t) => {
     cs.lift((() => {
       const __cs_prices = { apple: 1, pear: 2 };
       return {
-        values: cs.globalThis.Object.values(__cs_prices),
-        holds: [cs.globalThis.Object.hasOwn(__cs_prices, "pear"), cs.globalThis.Object.hasOwn(__cs_prices, "plum")],
+        values: Object.values(__cs_prices),
+        holds: [Object.hasOwn(__cs_prices, "pear"), Object.hasOwn(__cs_prices, "plum")],
       };
     })()),
   );

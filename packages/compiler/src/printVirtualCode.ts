@@ -51,7 +51,7 @@ function renderScript(
   if (rewritten.leftAsWritten) {
     return ["cs.lift(undefined as never)"];
   }
-  return virtualScript(ts, script, rewrittenFile.bindings, (splice) =>
+  return virtualScript(ts, script, rewrittenFile, (splice) =>
     renderSplice(
       ts,
       sourceFile,

@@ -30,7 +30,7 @@ import { evaluate } from "../evaluate.ts";
 const Held = cs.lift((() => (__cs_props: { again: () => boolean }) => {
   const [__cs_shown, __cs_setShown] = (cs.splice((createSignal)))(false);
 
-  const __cs_started = cs.globalThis.window.setTimeout(() => {
+  const __cs_started = window.setTimeout(() => {
     if (__cs_props.again()) {
       __cs_setShown(true);
     }

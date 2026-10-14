@@ -9,7 +9,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // runs when its module loads: once, whether or not what reads it is reached.
 // An expression written there would never run (`jsx/host-tag-evaluation`).
 const counted = once(cs.lift((() => {
-  const __cs_counter = cs.globalThis.globalThis as unknown as { onceRuns?: number };
+  const __cs_counter = globalThis as unknown as { onceRuns?: number };
   __cs_counter.onceRuns = (__cs_counter.onceRuns ?? 0) + 1;
   return "counted";
 })()));

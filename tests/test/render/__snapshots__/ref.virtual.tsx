@@ -77,7 +77,7 @@ describe("ref", () => {
               <div>
                 <button onclick={() => __cs_setN(__cs_n() + 1)}>{"n " + __cs_n()}</button>
                 {__cs_shown() ? (
-                  <p ref={() => cs.globalThis.window.console.log(__cs_n())}>shown</p>
+                  <p ref={() => window.console.log(__cs_n())}>shown</p>
                 ) : null}
               </div>
             );

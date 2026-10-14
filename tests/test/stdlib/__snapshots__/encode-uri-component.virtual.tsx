@@ -11,11 +11,11 @@ async function Encoded() {
     return (
       <span>
         {"/at?q=" +
-          cs.globalThis.encodeURIComponent("a b+c&d#é") +
+          encodeURIComponent("a b+c&d#é") +
           "&page=" +
-          cs.globalThis.encodeURIComponent(2.5) +
+          encodeURIComponent(2.5) +
           " " +
-          cs.globalThis.decodeURIComponent("a%20b%2Bc%26d%23%C3%A9")}
+          decodeURIComponent("a%20b%2Bc%26d%23%C3%A9")}
       </span>
     );
   })());

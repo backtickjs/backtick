@@ -14,12 +14,22 @@ hostValue                                 → hostValue
 )())                                      → ` [-semantic -navigation]
 cs.lift((() =>                            → cs` [-semantic -navigation]
 {                                         → {
-\n  // @ts-expect-error: Property 'count' does not exist on type 'GlobalThis'.\n  → \n  // @ts-expect-error: Property 'count' does not exist on type 'GlobalThis'.\n  
+\n  // @ts-expect-error: Cannot find name 'count'.\n  → \n  // @ts-expect-error: Cannot find name 'count'.\n  
 count                                     → count
                                           →  
 =                                         → =
                                           →  
 1                                         → 1
+;                                         → ;
+\n                                        → \n
+}                                         → }
+)())                                      → ` [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
+{                                         → {
+\n  // @ts-expect-error: Property 'hostParam' does not exist on type 'GlobalThis'.\n  → \n  // @ts-expect-error: Property 'hostParam' does not exist on type 'GlobalThis'.\n  
+return                                    → return
+                                          →  
+hostParam                                 → hostParam
 ;                                         → ;
 \n                                        → \n
 }                                         → }

@@ -8,12 +8,12 @@ import { snapshotCase } from "../snapshotCase.ts";
 // A host tag is a splice: its script is evaluated where the tag stands, each
 // time it is reached, as a value splice is.
 const Boom = cs.lift((() => {
-  throw new cs.globalThis.Error("boom");
+  throw new Error("boom");
   return (__cs_props: {}) => <b>never</b>;
 })());
 
 const Counted = cs.lift((() => {
-  const __cs_counter = cs.globalThis.globalThis as unknown as { evaluations?: number };
+  const __cs_counter = globalThis as unknown as { evaluations?: number };
   __cs_counter.evaluations = (__cs_counter.evaluations ?? 0) + 1;
   return (__cs_props: {}) => <b>counted</b>;
 })());

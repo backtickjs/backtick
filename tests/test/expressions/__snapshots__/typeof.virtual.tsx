@@ -20,7 +20,7 @@ it("typeofTable", async (t) => {
         typeof [1],
         typeof { a: 1 },
         typeof ((__cs_n: number) => __cs_n),
-        typeof cs.globalThis.Math.floor,
+        typeof Math.floor,
         typeof __cs_count,
       ];
     })()),

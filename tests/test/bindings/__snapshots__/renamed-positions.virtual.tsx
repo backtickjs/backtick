@@ -13,7 +13,7 @@ describe("a script's names, wherever they stand", () => {
       await evaluate(
         cs.lift((() => (cs.splice((createRoot)))(() => {
           const __cs_x = 1;
-          const __cs_both = { x: __cs_x, Math: cs.globalThis.Math };
+          const __cs_both = { x: __cs_x, Math };
           return [__cs_both.x, __cs_both.Math.max(2, 3)];
         }))()),
       ),

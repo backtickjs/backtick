@@ -6,7 +6,7 @@ import { evaluate } from "../evaluate.ts";
 // An action spliced twice as a statement runs twice: each `$log;` is the
 // action's code, run where it stands.
 const log = cs.lift((() => {
-  cs.globalThis.window.console.log("logged");
+  window.console.log("logged");
 })());
 
 it("an action spliced twice runs twice", async () => {

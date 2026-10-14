@@ -20,7 +20,7 @@ const answerItems = ["one", "two"];
 const WaitingList = cs.lift((() => (__cs_props: { more: () => boolean }) => {
   const [__cs_items, __cs_setItems] = (cs.splice((createSignal)))<string[]>([]);
 
-  const __cs_started = cs.globalThis.window.setTimeout(() => {
+  const __cs_started = window.setTimeout(() => {
     if (__cs_props.more()) {
       __cs_setItems((cs.splice((answerItems))));
     }

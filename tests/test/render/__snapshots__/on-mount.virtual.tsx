@@ -28,7 +28,7 @@ describe("onMount", () => {
       cs.lift((() => () => {
         const [__cs_count, __cs_setCount] = (cs.splice((createSignal)))(0);
         (cs.splice((onMount)))(() => {
-          cs.globalThis.window.console.log();
+          window.console.log();
           __cs_setCount(__cs_count() + 1);
         });
         return <p>{"mounted " + __cs_count()}</p>;
