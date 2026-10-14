@@ -26,23 +26,23 @@ importers:
   adapters/expo-apple-authentication:
     dependencies:
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       expo-apple-authentication:
         specifier: 57.0.2
         version: 57.0.2(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
     devDependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/compiler
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       '@backtickjs/tspatch-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tspatch-plugin
       '@types/react':
         specifier: 19.2.18
@@ -69,23 +69,23 @@ importers:
   adapters/expo-crypto:
     dependencies:
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       expo-crypto:
         specifier: 57.0.4
         version: 57.0.4(expo@57.0.26)
     devDependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/compiler
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       '@backtickjs/tspatch-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tspatch-plugin
       '@types/react':
         specifier: 19.2.18
@@ -112,23 +112,23 @@ importers:
   adapters/expo-file-system:
     dependencies:
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       expo-file-system:
         specifier: 57.0.7
         version: 57.0.7(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))
     devDependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/compiler
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       '@backtickjs/tspatch-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tspatch-plugin
       '@types/react':
         specifier: 19.2.18
@@ -155,23 +155,23 @@ importers:
   adapters/expo-font:
     dependencies:
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       expo-font:
         specifier: 57.0.4
         version: 57.0.4(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
     devDependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/compiler
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       '@backtickjs/tspatch-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tspatch-plugin
       '@types/react':
         specifier: 19.2.18
@@ -198,23 +198,23 @@ importers:
   adapters/expo-image-picker:
     dependencies:
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       expo-image-picker:
         specifier: 57.0.20
         version: 57.0.20(expo@57.0.26)
     devDependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/compiler
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       '@backtickjs/tspatch-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tspatch-plugin
       '@types/react':
         specifier: 19.2.18
@@ -241,23 +241,23 @@ importers:
   adapters/expo-secure-store:
     dependencies:
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       expo-secure-store:
         specifier: 57.0.4
         version: 57.0.4(expo@57.0.26)
     devDependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/compiler
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       '@backtickjs/tspatch-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tspatch-plugin
       '@types/react':
         specifier: 19.2.18
@@ -290,7 +290,7 @@ importers:
         specifier: ^7.29.7
         version: 7.29.7(@babel/core@7.29.7)
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       '@types/react':
         specifier: 19.2.18
@@ -306,19 +306,19 @@ importers:
         version: 19.2.3(react@19.2.3)
     devDependencies:
       '@backtickjs/bundler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/bundler
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/compiler
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       '@backtickjs/tspatch-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tspatch-plugin
       '@types/babel__core':
         specifier: ^7.20.5
@@ -342,7 +342,7 @@ importers:
   adapters/react-native:
     dependencies:
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       '@backtickjs/react':
         specifier: ^19.2.3
@@ -352,16 +352,16 @@ importers:
         version: 0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3)
     devDependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/compiler
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       '@backtickjs/tspatch-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tspatch-plugin
       prettier:
         specifier: ^3.6.2
@@ -376,23 +376,23 @@ importers:
   adapters/react-native-fbsdk-next:
     dependencies:
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       react-native-fbsdk-next:
         specifier: 13.4.3
         version: 13.4.3(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))
     devDependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/compiler
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       '@backtickjs/tspatch-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tspatch-plugin
       '@types/react':
         specifier: 19.2.18
@@ -416,23 +416,23 @@ importers:
   adapters/react-native-google-signin:
     dependencies:
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       '@react-native-google-signin/google-signin':
         specifier: 16.1.5
         version: 16.1.5(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
     devDependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/compiler
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       '@backtickjs/tspatch-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tspatch-plugin
       '@types/react':
         specifier: 19.2.18
@@ -456,23 +456,23 @@ importers:
   adapters/react-native-safe-area-context:
     dependencies:
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       react-native-safe-area-context:
         specifier: 5.7.0
         version: 5.7.0(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
     devDependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/compiler
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       '@backtickjs/tspatch-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tspatch-plugin
       '@types/react':
         specifier: 19.2.18
@@ -496,23 +496,23 @@ importers:
   adapters/react-native-svg:
     dependencies:
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       react-native-svg:
         specifier: 15.15.4
         version: 15.15.4(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
     devDependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/compiler
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       '@backtickjs/tspatch-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tspatch-plugin
       '@types/react':
         specifier: 19.2.18
@@ -536,23 +536,23 @@ importers:
   adapters/react-navigation-native:
     dependencies:
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       '@react-navigation/native':
         specifier: 7.5.0
         version: 7.5.0(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
     devDependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/compiler
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       '@backtickjs/tspatch-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tspatch-plugin
       '@types/react':
         specifier: 19.2.18
@@ -576,7 +576,7 @@ importers:
   adapters/react-three-fiber:
     dependencies:
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       '@backtickjs/react':
         specifier: ^19.2.3
@@ -589,16 +589,16 @@ importers:
         version: 9.8.1(@types/react@19.2.18)(expo-asset@57.0.19(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3))(expo-file-system@57.0.7(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3)))(expo-gl@57.0.2(expo@57.0.26)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(expo@57.0.26)(react-dom@19.2.3(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(three@0.182.0)
     devDependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/compiler
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       '@backtickjs/tspatch-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tspatch-plugin
       '@types/react':
         specifier: 19.2.18
@@ -619,7 +619,7 @@ importers:
         specifier: ^7.29.7
         version: 7.29.7
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       babel-preset-solid:
         specifier: 1.9.12
@@ -629,13 +629,13 @@ importers:
         version: 1.9.14
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       '@backtickjs/tspatch-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tspatch-plugin
       '@types/babel__core':
         specifier: ^7.20.5
@@ -653,7 +653,7 @@ importers:
   adapters/three:
     dependencies:
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       '@types/three':
         specifier: 0.182.0
@@ -663,16 +663,16 @@ importers:
         version: 0.182.0
     devDependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/compiler
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       '@backtickjs/tspatch-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tspatch-plugin
       prettier:
         specifier: ^3.6.2
@@ -687,22 +687,22 @@ importers:
   apps/backtickjs.com:
     dependencies:
       '@backtickjs/builds':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/builds
       '@backtickjs/bun-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/bun-plugin
       '@backtickjs/bundler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/bundler
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       '@backtickjs/solid-js':
         specifier: ^1.9.14
         version: link:../../adapters/solid-js
       '@backtickjs/vscode-extension':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../vscode-extension
       '@shikijs/colorized-brackets':
         specifier: ^4.5.0
@@ -736,10 +736,10 @@ importers:
         version: 6.0.3
     devDependencies:
       '@backtickjs/node-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/node-plugin
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/react':
         specifier: ^19.2.3
@@ -748,10 +748,10 @@ importers:
         specifier: ^0.86.3
         version: link:../../adapters/react-native
       '@backtickjs/react-native-client':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/react-native-client
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       '@hono/node-server':
         specifier: ^2.1.4
@@ -817,13 +817,13 @@ importers:
   apps/conformance:
     dependencies:
       '@backtickjs/bundler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/bundler
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/compiler
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       typescript:
         specifier: ^6.0.3
@@ -833,7 +833,7 @@ importers:
         version: 2.9.1
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@types/node':
         specifier: ^25.9.1
@@ -845,23 +845,23 @@ importers:
   apps/js-framework-benchmark:
     dependencies:
       '@backtickjs/bundler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/bundler
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       '@backtickjs/solid-js':
         specifier: ^1.9.14
         version: link:../../adapters/solid-js
       '@backtickjs/tspatch-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tspatch-plugin
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       ts-patch:
         specifier: ^4.0.1
@@ -873,13 +873,13 @@ importers:
   apps/mystoryjar:
     dependencies:
       '@backtickjs/builds':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/builds
       '@backtickjs/bundler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/bundler
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       '@backtickjs/expo-apple-authentication':
         specifier: ^57.0.2
@@ -900,7 +900,7 @@ importers:
         specifier: ^57.0.4
         version: link:../../adapters/expo-secure-store
       '@backtickjs/node-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/node-plugin
       '@backtickjs/react':
         specifier: ^19.2.3
@@ -909,7 +909,7 @@ importers:
         specifier: ^0.86.3
         version: link:../../adapters/react-native
       '@backtickjs/react-native-client':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/react-native-client
       '@backtickjs/react-native-fbsdk-next':
         specifier: ^13.4.3
@@ -1021,10 +1021,10 @@ importers:
         version: 6.0.3
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       '@react-navigation/routers':
         specifier: 7.6.4
@@ -1063,11 +1063,11 @@ importers:
   apps/vscode-extension:
     dependencies:
       '@backtickjs/typescript-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/typescript-plugin
     devDependencies:
       '@backtickjs/language-server':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/language-server
       '@types/vscode':
         specifier: ^1.120.0
@@ -1103,13 +1103,13 @@ importers:
   examples/doom:
     dependencies:
       '@backtickjs/bundler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/bundler
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/core
       '@backtickjs/node-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/node-plugin
       '@backtickjs/react':
         specifier: ^19.2.3
@@ -1118,7 +1118,7 @@ importers:
         specifier: ^0.86.3
         version: link:../../adapters/react-native
       '@backtickjs/react-native-client':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/react-native-client
       '@backtickjs/react-three-fiber':
         specifier: ^9.8.1
@@ -1173,10 +1173,10 @@ importers:
         version: 6.0.3
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../packages/tsc
       '@react-three/test-renderer':
         specifier: 9.1.1
@@ -1194,7 +1194,7 @@ importers:
   packages/builds:
     dependencies:
       '@backtickjs/bundler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../bundler
       typescript:
         specifier: ^6.0.3
@@ -1210,11 +1210,11 @@ importers:
   packages/bun-plugin:
     dependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../compiler
     devDependencies:
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../core
       '@types/bun':
         specifier: ^1.3.14
@@ -1229,7 +1229,7 @@ importers:
   packages/bundler:
     dependencies:
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../core
       semver:
         specifier: ^7.8.1
@@ -1258,7 +1258,7 @@ importers:
         version: 0.3.31
     devDependencies:
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../core
       prettier:
         specifier: ^3.6.2
@@ -1298,13 +1298,13 @@ importers:
   packages/create-backtick-app/templates/react:
     dependencies:
       '@backtickjs/bundler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../../bundler
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../../core
       '@backtickjs/node-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../../node-plugin
       '@backtickjs/react':
         specifier: ^19.2.3
@@ -1320,10 +1320,10 @@ importers:
         version: 6.0.3
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../../prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../../tsc
       '@types/node':
         specifier: ^25.9.1
@@ -1335,16 +1335,16 @@ importers:
   packages/create-backtick-app/templates/react-native:
     dependencies:
       '@backtickjs/builds':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../../builds
       '@backtickjs/bundler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../../bundler
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../../core
       '@backtickjs/node-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../../node-plugin
       '@backtickjs/react':
         specifier: ^19.2.3
@@ -1353,7 +1353,7 @@ importers:
         specifier: ^0.86.3
         version: link:../../../../adapters/react-native
       '@backtickjs/react-native-client':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../../react-native-client
       '@hono/node-server':
         specifier: ^2.1.4
@@ -1387,10 +1387,10 @@ importers:
         version: 6.0.3
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../../prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../../tsc
       '@testing-library/react':
         specifier: ^16.3.3
@@ -1417,13 +1417,13 @@ importers:
   packages/create-backtick-app/templates/solid-js:
     dependencies:
       '@backtickjs/bundler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../../bundler
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../../core
       '@backtickjs/node-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../../node-plugin
       '@backtickjs/solid-js':
         specifier: ^1.9.14
@@ -1439,10 +1439,10 @@ importers:
         version: 6.0.3
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../../prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../../../tsc
       '@types/node':
         specifier: ^25.9.1
@@ -1454,7 +1454,7 @@ importers:
   packages/language-plugin:
     dependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../compiler
       '@volar/language-core':
         specifier: ^2.4.28
@@ -1473,7 +1473,7 @@ importers:
   packages/language-server:
     dependencies:
       '@backtickjs/language-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../language-plugin
       '@volar/language-server':
         specifier: ^2.4.28
@@ -1489,10 +1489,10 @@ importers:
   packages/language-service:
     dependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../compiler
       '@backtickjs/language-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../language-plugin
       '@volar/language-core':
         specifier: ^2.4.28
@@ -1508,11 +1508,11 @@ importers:
   packages/node-plugin:
     dependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../compiler
     devDependencies:
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../core
       '@types/node':
         specifier: ^25.9.1
@@ -1527,7 +1527,7 @@ importers:
   packages/prettier-plugin:
     dependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../compiler
     devDependencies:
       '@types/estree':
@@ -1555,13 +1555,13 @@ importers:
   packages/tsc:
     dependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../compiler
       '@backtickjs/language-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../language-plugin
       '@backtickjs/language-service':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../language-service
       '@volar/typescript':
         specifier: ^2.4.28
@@ -1577,7 +1577,7 @@ importers:
   packages/tspatch-plugin:
     dependencies:
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../compiler
     devDependencies:
       prettier:
@@ -1593,10 +1593,10 @@ importers:
   packages/typescript-plugin:
     dependencies:
       '@backtickjs/language-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../language-plugin
       '@backtickjs/language-service':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../language-service
       '@volar/language-core':
         specifier: ^2.4.28
@@ -1606,7 +1606,7 @@ importers:
         version: 2.4.28
     devDependencies:
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../core
       '@backtickjs/solid-js':
         specifier: ^1.9.14
@@ -1621,16 +1621,16 @@ importers:
   tests:
     devDependencies:
       '@backtickjs/bundler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../packages/bundler
       '@backtickjs/compiler':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../packages/compiler
       '@backtickjs/core':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../packages/core
       '@backtickjs/prettier-plugin':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../packages/prettier-plugin
       '@backtickjs/react':
         specifier: ^19.2.3
@@ -1639,13 +1639,13 @@ importers:
         specifier: ^0.86.3
         version: link:../adapters/react-native
       '@backtickjs/react-native-client':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../packages/react-native-client
       '@backtickjs/solid-js':
         specifier: ^1.9.14
         version: link:../adapters/solid-js
       '@backtickjs/tsc':
-        specifier: ^0.1.9
+        specifier: ^0.1.10
         version: link:../packages/tsc
       '@jridgewell/trace-mapping':
         specifier: ^0.3.31
