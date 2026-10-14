@@ -26,11 +26,14 @@ const TAG_NAME: CodeInformation = {
  *
  * - its own binding, renamed (`x` to `__cs_x`), so it can't hide a host binding
  *   a splice names; a shorthand keeps its property name (`x: __cs_x`)
- * - a name nothing declares, the client's global: written as it is, unless
- *   a host binding of that name is in scope at the script, which would hide
- *   the global, and then read off `cs.globalThis.x`. A global declared with `const` or `let`,
- *   as React Native's `__DEV__` is, is no property of `typeof globalThis`, so
- *   only its bare name reads it.
+ * - a host binding, renamed the same way, as a HACK: `__cs_x` is declared
+ *   nowhere, so TypeScript reports "Cannot find name '__cs_x'" where it is
+ *   read, which `unmangle` turns into "Cannot find name 'x'": true of the
+ *   client, and the nearest TypeScript gets to "splice it". Nothing says that
+ *   the name is right there in the host, or that `$x` is the fix.
+ * - a name nothing declares, the client's global: written as it is. A global
+ *   declared with `const` or `let`, as React Native's `__DEV__` is, is no
+ *   property of `typeof globalThis`, so only its bare name reads it.
  * - a splice, as the host value the client is handed: `$x` as
  *   `cs.splice((x))`, `${…}` as `cs.splice(…)` around the host code
  * - a splice written as a tag, `<$Card>`, as JSX on a name the host value is
@@ -143,21 +146,13 @@ export function virtualScript(
         parent.propertyName === undefined &&
         parent.dotDotDotToken === undefined &&
         ts.isObjectBindingPattern(parent.parent));
-    if (bindings.has(node)) {
+    // A host reference is renamed like a binding on purpose: see the HACK above.
+    if (bindings.has(node) || hostReferences.has(node)) {
       if (shorthand) {
         mapped(node.text, node);
         added(": ");
       }
       mapped(mangle(node.text), node);
-      return;
-    }
-    if (hostReferences.has(node)) {
-      if (shorthand) {
-        mapped(node.text, node);
-        added(": ");
-      }
-      added("cs.globalThis.");
-      mapped(node.text, node);
       return;
     }
     verbatim(node.getStart(file), node.getEnd());

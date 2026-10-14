@@ -34,24 +34,6 @@ function awaited<T>(_: T): Awaited<T> {
   );
 }
 
-// What hangs off the tag.
-const members = {
-  awaited,
-  create,
-  lift,
-  splice,
-};
-
-/**
- * The globals a project declares — its libs, `@types`, a `declare global` —
- * as an ordinary object type: reading one it doesn't declare is an error
- * however strict the project is, where `typeof globalThis` itself lets it
- * through as `any` without `noImplicitAny`.
- */
-export type GlobalThis = {
-  [Key in keyof typeof globalThis]: (typeof globalThis)[Key];
-};
-
 /**
  * Writes a client script: code in the host's files that runs on the client.
  * The template is one expression, one block in braces, or one function; a
@@ -59,9 +41,6 @@ export type GlobalThis = {
  * `${expression}` splice host values into it. Returns a `Client<T>`, `T`
  * being what the script computes. Compiled when the host loads the file, by
  * a Backtick plugin; called uncompiled, it throws.
- *
- * `cs.globalThis` is what a name the script didn't bind is read off. In the
- * type and not in the object: nothing runs the virtual code it is written in.
  */
 export const cs = Object.assign(
   (_strings: TemplateStringsArray, ..._values: unknown[]): Client<unknown> => {
@@ -69,7 +48,5 @@ export const cs = Object.assign(
       "`cs` was not compiled. Is @backtickjs set up for this project?",
     );
   },
-  members as typeof members & {
-    readonly globalThis: GlobalThis;
-  },
+  { awaited, create, lift, splice },
 );

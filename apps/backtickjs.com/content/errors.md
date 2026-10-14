@@ -12,10 +12,11 @@ The splice holds something that can't cross: a function, a class instance, a
 client function, `` cs`(n: number) => …` ``. See
 [what can cross](/docs/thinking-in-backtick#splices).
 
-### Property '…' does not exist on type 'GlobalThis'
+### Cannot find name '…'
 
-A script used a name from your server without a `$`. Splice it: `$total`,
-not `total`. See [splices](/docs/thinking-in-backtick#splices).
+A script used a name from your server without a `$`, or a name nothing
+declares. Splice the server's: `$total`, not `total`. See
+[splices](/docs/thinking-in-backtick#splices).
 
 ### This expression is not callable. Type 'Client<…>' has no call signatures
 

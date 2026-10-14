@@ -71,9 +71,9 @@ handler as a client function, which runs on the phone.
 
 ```
 
-Forget the `$`, and the script looks for a global by that name: "Property
-'total' does not exist on type 'GlobalThis'". A script sees its own code and
-the phone's globals, never the file around it.
+Forget the `$`, and the script looks for a global by that name: "Cannot find
+name 'total'". A script sees its own code and the phone's globals, never the
+file around it.
 
 ### A splice takes the whole value
 
