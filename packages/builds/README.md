@@ -30,13 +30,13 @@ npm install @backtickjs/builds
 
    Each entry is `"specifier": Name`, with `Name` imported above. An entry that decides at runtime, like `native ? Facebook : {}`, is an error. What a platform lacks, its map leaves out.
 
-2. **Each build gets an id:** a hash of the modules its platform's map offers, each at the installed version of its package. This package's config plugin puts the ids in the app config's `extra.buildIds`:
+2. **Each build gets an id:** a hash of the modules its platform's map offers, each at the installed version of its package. In an Expo app, this package's config plugin, `@backtickjs/builds/expo`, puts the ids in the app config's `extra.buildIds`:
 
    ```json
    // app.json
    {
      "expo": {
-       "plugins": ["@backtickjs/builds"]
+       "plugins": ["@backtickjs/builds/expo"]
      }
    }
    ```
@@ -96,7 +96,7 @@ npm install @backtickjs/builds
 
 ## API
 
-- `@backtickjs/builds` in `app.json`'s `plugins`: the Expo config plugin, which sets `extra.buildIds` to `buildIds(projectRoot)`.
+- `@backtickjs/builds/expo` in `app.json`'s `plugins`: the Expo config plugin, which sets `extra.buildIds` to `buildIds(projectRoot)`.
 - `buildIds(projectRoot)`: the id of the build the app at `projectRoot` now makes, on `ios`, `android` and `web`.
 - `createBuilds({ projectRoot })`: the app's builds for its server. `modulesOf(buildId)` resolves a build, `installed(platform)` is what this code's build carries, and `unregistered(platform)` says why this code's build couldn't ship, or null. Registered builds are read once. Module maps are only read for an id that isn't registered, as in development after a package change.
 - `register(projectRoot)`: what `backtick-builds register` runs. A build already registered keeps its `createdAt` and `deprecated`.

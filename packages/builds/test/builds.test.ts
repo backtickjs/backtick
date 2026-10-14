@@ -15,7 +15,7 @@ import {
   register,
   UnknownBuild,
 } from "../dist/index.js";
-import withBuildIds from "../dist/plugin.js";
+import withBuildIds from "../dist/expo.js";
 
 const cli = fileURLToPath(new URL("../dist/cli.js", import.meta.url));
 

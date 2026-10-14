@@ -46,7 +46,7 @@ export function evaluate(code: string, moduleMap: ModuleMap): unknown {
 
 /**
  * This build's id on `platform`, from the app config's `extra`, where the
- * `@backtickjs/builds` config plugin puts `buildIds`: it names the
+ * `@backtickjs/builds/expo` config plugin puts `buildIds`: it names the
  * modules the build carries, for the server to bundle screens it can run.
  * Send it however the app reaches its server: a header, a GraphQL variable.
  * Throws for an app config without it, as the app starts: no screen could be
@@ -60,7 +60,7 @@ export function buildIdFrom(extra: unknown, platform: string): string {
   const id = ids?.[platform];
   if (typeof id !== "string") {
     throw new Error(
-      `No build id for ${platform} in the app config: is @backtickjs/builds in app.json's plugins?`,
+      `No build id for ${platform} in the app config: is @backtickjs/builds/expo in app.json's plugins?`,
     );
   }
   return id;

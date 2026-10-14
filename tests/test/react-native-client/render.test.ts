@@ -114,6 +114,6 @@ it("reads this build's id from the app config, or throws as the app starts", () 
   assert.throws(() => buildIdFrom(extra, "android"), /No build id for android/);
   assert.throws(
     () => buildIdFrom(undefined, "ios"),
-    /is @backtickjs\/builds in app.json's plugins/,
+    /is @backtickjs\/builds\/expo in app.json's plugins/,
   );
 });

@@ -77,7 +77,7 @@ What a bundle may require, by specifier, each as the module the app imported for
 
 ### `buildIdFrom(extra: unknown, platform: string): string`
 
-This build's id on `platform`, read from the app config's `extra.buildIds`, where the [`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds) config plugin puts it. The id names the modules the build carries, so the server bundles only screens it can run. Send it to the server however the app reaches it, as a header or a GraphQL variable:
+This build's id on `platform`, read from the app config's `extra.buildIds`, where the [`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds) config plugin, `@backtickjs/builds/expo`, puts it. The id names the modules the build carries, so the server bundles only screens it can run. Send it to the server however the app reaches it, as a header or a GraphQL variable:
 
 ```ts
 import { buildIdFrom } from "@backtickjs/react-native-client";
