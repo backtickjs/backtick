@@ -9,11 +9,16 @@ import { Home as LiveHome } from "../scripts-in-depth/server/LiveSection.js";
 import { Home as LogHome } from "../scripts-in-depth/server/Log.js";
 import { type MenuOnPhone, names } from "../scripts-in-depth/server/menu.js";
 import { Home as RowsHome } from "../scripts-in-depth/server/Rows.js";
-import { double, greeting, meal } from "../scripts-in-depth/server/shapes.js";
+import {
+  double,
+  greeting,
+  meal,
+  Tally,
+} from "../scripts-in-depth/server/shapes.js";
 import { Home as ThemeHome } from "../scripts-in-depth/server/Theme.js";
 import { bundleScreen, drawScreen } from "./drawScreen.js";
 
-it("three shapes: each is what it computes", async () => {
+it("four shapes: each is what it computes", async () => {
   assert.match(
     String(await drawScreen(greeting)),
     /^Good (morning|afternoon)$/,
@@ -23,9 +28,13 @@ it("three shapes: each is what it computes", async () => {
     n: number,
   ) => number;
   assert.equal(doubled(21), 42);
+  const Counter = (await drawScreen(Tally)) as unknown as new () => {
+    add(): number;
+  };
+  assert.equal(new Counter().add(), 1);
 });
 
-it("three shapes: a script built from another", async () => {
+it("four shapes: a script built from another", async () => {
   assert.equal(await drawScreen(total), "$8.50");
 });
 

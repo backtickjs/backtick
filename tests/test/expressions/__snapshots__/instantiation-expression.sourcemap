@@ -1,0 +1,110 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+<                → <
+T                → T
+,                → ,
+>                → >
+(                → (
+__cs_value       → value
+:                → :
+                 →  
+T                → T
+)                → )
+:                → :
+                 →  
+[                → [
+T                → T
+,                → ,
+                 →  
+T                → T
+]                → ]
+                 →  
+=>               → =>
+                 →  
+[                → [
+__cs_value       → value
+,                → ,
+                 →  
+__cs_value       → value
+]                → ]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n      
+function         → function
+                 →  
+__cs_wrap        → wrap
+<                → <
+T                → T
+>                → >
+(                → (
+__cs_value       → value
+:                → :
+                 →  
+T                → T
+)                → )
+:                → :
+                 →  
+T                → T
+[                → [
+]                → ]
+                 →  
+{                → {
+\n               → \n        
+return           → return
+                 →  
+[                → [
+__cs_value       → value
+]                → ]
+;                → ;
+\n               → \n      
+}                → }
+\n               → \n      
+const            → const
+                 →  
+__cs_wrapNumber  → wrapNumber
+                 →  
+=                → =
+                 →  
+__cs_wrap        → wrap
+<                → <
+number           → number
+>                → >
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+__cs_wrapNumber  → wrapNumber
+(                → (
+1                → 1
+)                → )
+;                → ;
+\n               → \n    
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_pairString  → pairString
+                 →  
+=                → =
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(pair)           → $pair
+))               →  [-semantic -navigation]
+<                → <
+string           → string
+>                → >
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+__cs_pairString  → pairString
+(                → (
+"a"              → "a"
+)                → )
+;                → ;
+\n               → \n    
+}                → }
+)())             → ` [-semantic -navigation]

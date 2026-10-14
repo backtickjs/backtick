@@ -7,6 +7,7 @@ import {
   paramName,
   scriptEdits,
 } from "./emitScript.js";
+import { isClass } from "./isClass.js";
 import { isComponentTag } from "./isComponentTag.js";
 import { call } from "./nodeFactory.js";
 import type { ClientScript } from "./parseFile.js";
@@ -18,7 +19,7 @@ import { tagRoot } from "./tagRoot.js";
 export interface RuntimeScript {
   id: string;
   // the module's `kind`
-  kind: "function" | "expression" | "block";
+  kind: "function" | "class" | "expression" | "block";
   // the module's `params`, an array literal of literals
   params: ts.Expression;
   // the script's `args`, an array literal of host expressions
@@ -153,30 +154,39 @@ export function rewriteScript(
     );
   }
 
-  // A script is one expression or one block: statements go in braces.
+  // A script is one expression, one class or one block: statements go in
+  // braces. A class is written as a declaration, `class Foo {}`.
   const [statement] = fileWithPlaceholders.statements;
   if (
     fileWithPlaceholders.statements.length !== 1 ||
-    !(ts.isExpressionStatement(statement!) || ts.isBlock(statement!))
+    !(
+      ts.isExpressionStatement(statement!) ||
+      ts.isBlock(statement!) ||
+      isClass(ts, statement!)
+    )
   ) {
     return leftAsWritten([
       {
         range: scriptRange,
         message:
-          "A `cs` client script is one expression or one block: write " +
-          "statements in braces, e.g. cs`{ a(); b(); }`.",
+          "A `cs` client script is one expression, one class or one block: " +
+          "write statements in braces, e.g. cs`{ a(); b(); }`.",
         category: ts.DiagnosticCategory.Error,
         code: 0,
       },
     ]);
   }
 
+  const expression = ts.isExpressionStatement(statement!)
+    ? skipParentheses(ts, statement.expression)
+    : undefined;
   const kind = ts.isBlock(statement!)
     ? "block"
-    : ts.isArrowFunction(skipParentheses(ts, statement.expression)) ||
-        ts.isFunctionExpression(skipParentheses(ts, statement.expression))
-      ? "function"
-      : "expression";
+    : expression === undefined || ts.isClassExpression(expression)
+      ? "class"
+      : ts.isArrowFunction(expression) || ts.isFunctionExpression(expression)
+        ? "function"
+        : "expression";
 
   // A `${…}` written where the script has text rather than code is no splice.
   const unspliced = unsplicedSpans(ts, clientScript);

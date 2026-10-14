@@ -3,6 +3,8 @@ import { eachMapping, TraceMap } from "@jridgewell/trace-mapping";
 import type ts from "typescript";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution, ResolvedParam } from "./resolveBindings.js";
+import { namesValue } from "./inTypePosition.js";
+import { isClass } from "./isClass.js";
 import { tagRoot } from "./tagRoot.js";
 
 /** A script as the client runs it, and where its code came from. */
@@ -176,10 +178,10 @@ export function emitScript(
           : call;
       };
       const visit = (node: ts.Node): ts.Node => {
-        // Types are TypeScript's to strip, after this. A class's `extends`
-        // is a type node too, but names a value, which is rewritten.
+        // Types are TypeScript's to strip, after this, but for the type nodes
+        // that name a value, which is rewritten.
         if (
-          (ts.isTypeNode(node) && !isClassExtends(ts, node)) ||
+          (ts.isTypeNode(node) && !namesValue(ts, node)) ||
           asWritten.has(node)
         ) {
           return node;
@@ -211,7 +213,29 @@ export function emitScript(
       if (statement === undefined) {
         return file;
       }
-      // Where the script stands, so the entry maps to it.
+      const classExpression = (node: ts.ClassDeclaration) =>
+        ts.setOriginalNode(
+          ts.setTextRange(
+            f.createClassExpression(
+              undefined,
+              node.name,
+              node.typeParameters,
+              node.heritageClauses,
+              node.members,
+            ),
+            node,
+          ),
+          node,
+        );
+      // Where the script stands, so the entry maps to it. A class declaration
+      // is its class as an expression.
+      const body = ts.isExpressionStatement(statement)
+        ? ts.visitNode(statement.expression, visit, ts.isExpression)
+        : isClass(ts, statement)
+          ? classExpression(
+              ts.visitNode(statement, visit, ts.isClassDeclaration),
+            )
+          : ts.visitNode(statement, visit, ts.isBlock);
       const entry = ts.setTextRange(
         f.createArrowFunction(
           undefined,
@@ -221,9 +245,7 @@ export function emitScript(
           ),
           undefined,
           f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
-          ts.isExpressionStatement(statement)
-            ? ts.visitNode(statement.expression, visit, ts.isExpression)
-            : ts.visitNode(statement, visit, ts.isBlock),
+          body,
         ),
         statement,
       );
@@ -298,16 +320,4 @@ function moved(map: string, script: ClientScript): string {
     sources: [sourceFile.fileName],
     mappings: toEncodedMap(into).mappings,
   });
-}
-
-// `extends Base<T>` in a class, whose `Base` is a value.
-function isClassExtends(
-  ts: typeof import("typescript"),
-  node: ts.Node,
-): boolean {
-  return (
-    ts.isExpressionWithTypeArguments(node) &&
-    ts.isHeritageClause(node.parent) &&
-    ts.isClassLike(node.parent.parent)
-  );
 }

@@ -13,3 +13,11 @@ export const meal: Client<string> = cs`{
 
 // A function is the function.
 export const double: Client<(n: number) => number> = cs`(n: number) => n * 2`;
+
+// A class is the class.
+export const Tally: Client<new () => { add(): number }> = cs`class Tally {
+  count = 0;
+  add() {
+    return ++this.count;
+  }
+}`;

@@ -1,0 +1,162 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+class            → class
+                 →  
+__cs_Base        → Base
+<                → <
+T                → T
+                 →  
+=                → =
+                 →  
+string           → string
+>                → >
+                 →  
+{                → {
+\n               → \n  
+constructor      → constructor
+(                → (
+readonly         → readonly
+                 →  
+value            → value
+:                → :
+                 →  
+T                → T
+)                → )
+                 →  
+{                → {
+}                → }
+\n               → \n  
+greet            → greet
+(                → (
+)                → )
+                 →  
+{                → {
+\n               → \n    
+return           → return
+                 →  
+"hi "            → "hi "
+                 →  
++                → +
+                 →  
+String           → String
+(                → (
+this             → this
+.                → .
+value            → value
+)                → )
+;                → ;
+\n               → \n  
+}                → }
+\n               → \n
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n      
+class            → class
+                 →  
+__cs_Loud        → Loud
+                 →  
+extends          → extends
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(Base)           → $Base
+))               →  [-semantic -navigation]
+                 →  
+{                → {
+\n               → \n        
+greet            → greet
+(                → (
+)                → )
+                 →  
+{                → {
+\n               → \n          
+return           → return
+                 →  
+super            → super
+.                → .
+greet            → greet
+(                → (
+)                → )
+                 →  
++                → +
+                 →  
+"!"              → "!"
+;                → ;
+\n               → \n        
+}                → }
+\n               → \n      
+}                → }
+\n               → \n      
+return           → return
+                 →  
+new              → new
+                 →  
+__cs_Loud        → Loud
+(                → (
+"Ada"            → "Ada"
+)                → )
+.                → .
+greet            → greet
+(                → (
+)                → )
+;                → ;
+\n               → \n    
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n      
+class            → class
+                 →  
+__cs_Counted     → Counted
+                 →  
+extends          → extends
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(Base)           → $Base
+))               →  [-semantic -navigation]
+<                → <
+number           → number
+>                → >
+                 →  
+{                → {
+\n               → \n        
+greet            → greet
+(                → (
+)                → )
+                 →  
+{                → {
+\n               → \n          
+return           → return
+                 →  
+super            → super
+.                → .
+greet            → greet
+(                → (
+)                → )
+                 →  
++                → +
+                 →  
+" times"         → " times"
+;                → ;
+\n               → \n        
+}                → }
+\n               → \n      
+}                → }
+\n               → \n      
+return           → return
+                 →  
+new              → new
+                 →  
+__cs_Counted     → Counted
+(                → (
+3                → 3
+)                → )
+.                → .
+greet            → greet
+(                → (
+)                → )
+;                → ;
+\n               → \n    
+}                → }
+)())             → ` [-semantic -navigation]

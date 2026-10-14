@@ -52,24 +52,26 @@ describe("refusals", () => {
     }
   });
 
-  it("a script that isn't one expression or one block is refused", () => {
+  it("a script that isn't one expression, one class or one block is refused", () => {
     for (const body of [
       "a(); b()",
       "a()\nb()",
       "const x = 1",
       "if (a) b()",
+      "export class A {}",
+      "abstract class A {}",
       "",
     ]) {
       assert.deepStrictEqual(
         refusals(body),
         [
-          "A `cs` client script is one expression or one block: write " +
-            "statements in braces, e.g. cs`{ a(); b(); }`.",
+          "A `cs` client script is one expression, one class or one block: " +
+            "write statements in braces, e.g. cs`{ a(); b(); }`.",
         ],
         body,
       );
     }
-    for (const body of ["a()", "a();", "{ a(); b(); }"]) {
+    for (const body of ["a()", "a();", "{ a(); b(); }", "class A {}"]) {
       assert.deepStrictEqual(refusals(body), [], body);
     }
   });

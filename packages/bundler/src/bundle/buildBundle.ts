@@ -8,7 +8,7 @@ import {
 } from "@backtickjs/core";
 
 import { expandServerComponents } from "./expandServerComponents.js";
-import { bindingsOf, capturesOf } from "./params.js";
+import { bindingsOf, capturesOf, isValue } from "./params.js";
 import { sourceName } from "./bindingKey.js";
 import {
   array,
@@ -69,7 +69,7 @@ const rootScope = (): Scope => ({ bindings: new Set(), read: new Set() });
 // intermediate script that binds a same-looking variable has a different
 // unique name, so there is nothing to disambiguate and nothing to rename.
 export async function buildBundle(
-  value: unknown,
+  spliceable: unknown,
   provided: Modules,
 ): Promise<BundleTree> {
   const names = createNames(provided);
@@ -178,9 +178,9 @@ export async function buildBundle(
     return label;
   };
 
-  // A `once` script is one value: its code run at the top of the bundle,
-  // where nothing encloses it, and every read is that constant. One per
-  // script, which is one per call of `once`, not per code: two runs of a host
+  // A `once` script is one value, and so is a class (see `isValue`): its
+  // code run at the top of the bundle, where nothing encloses it, and every
+  // read is that constant. One per script, not per code: two runs of a host
   // function that each make a context are two contexts, as two calls of
   // `createContext` are. Running code is observable, so unlike a function it
   // is never shared by code.
@@ -204,41 +204,41 @@ export async function buildBundle(
   // what to hand it; everything else is its literal form. Rendered in order,
   // one value after the other, so the table follows the order rendering first
   // reached each script. Expansion has refused cycles, so it ends.
-  const render = (value: unknown, scope: Scope = rootScope()): string => {
-    if (isClientScript(value)) {
-      if (value.once) {
-        return valueOf(value);
+  const render = (spliceable: unknown, scope: Scope = rootScope()): string => {
+    if (isClientScript(spliceable)) {
+      if (isValue(spliceable)) {
+        return valueOf(spliceable);
       }
-      const target = scriptFor(value);
+      const target = scriptFor(spliceable);
       if (target.module.kind !== "function") {
-        return call(labelOf(target), exprCallArgs(value, scope));
+        return call(labelOf(target), exprCallArgs(spliceable, scope));
       }
       return closure(
         scope,
         [],
-        (inner) => call(labelOf(target), exprCallArgs(value, inner)),
+        (inner) => call(labelOf(target), exprCallArgs(spliceable, inner)),
         "$function",
       );
     }
-    if (isJsxElement(value)) {
-      return renderJsx(value);
+    if (isJsxElement(spliceable)) {
+      return renderJsx(spliceable);
     }
-    if (isClientImport(value)) {
-      return imported(names, value);
+    if (isClientImport(spliceable)) {
+      return imported(names, spliceable);
     }
     if (
-      value === null ||
-      value === undefined ||
-      typeof value === "number" ||
-      typeof value === "bigint" ||
-      typeof value === "string" ||
-      typeof value === "boolean"
+      spliceable === null ||
+      spliceable === undefined ||
+      typeof spliceable === "number" ||
+      typeof spliceable === "bigint" ||
+      typeof spliceable === "string" ||
+      typeof spliceable === "boolean"
     ) {
-      return literal(value);
+      return literal(spliceable);
     }
-    if (Array.isArray(value)) {
+    if (Array.isArray(spliceable)) {
       const elements: string[] = [];
-      for (const element of value) {
+      for (const element of spliceable) {
         elements.push(render(element, scope));
       }
       return array(elements);
@@ -246,8 +246,8 @@ export async function buildBundle(
     // A host function is host code, which never reaches the client: client
     // code is written in a script, and reaches another as one.
     // A server component among them, written as a tag: `<$Rule />`.
-    if (typeof value === "function") {
-      const { name } = value;
+    if (typeof spliceable === "function") {
+      const { name } = spliceable;
       throw new Error(
         (name === ""
           ? "Can't splice a host function"
@@ -258,7 +258,7 @@ export async function buildBundle(
           `\`{\${<${/^[A-Z]/.test(name) ? name : "Name"} />}}\`.`,
       );
     }
-    if (typeof value !== "object") {
+    if (typeof spliceable !== "object") {
       throw new Error(
         "Can't splice a symbol: a bundle can't write one that is the same " +
           "symbol on the client. Splice a string, and make the symbol from it " +
@@ -270,16 +270,16 @@ export async function buildBundle(
     // vanish — so fail loudly instead. An object with behaviour is built by a
     // client function: `state` for what it holds, arrows for what may be done
     // to it.
-    const prototype = Object.getPrototypeOf(value);
+    const prototype = Object.getPrototypeOf(spliceable);
     if (prototype !== Object.prototype && prototype !== null) {
-      const name = value.constructor?.name ?? "an unknown class";
+      const name = spliceable.constructor?.name ?? "an unknown class";
       throw new Error(
         `Can't splice this \`${name}\` instance: only plain objects cross into ` +
           "a client script. Build one with a client function instead.",
       );
     }
     const entries: [string, string][] = [];
-    for (const [key, entry] of Object.entries(value)) {
+    for (const [key, entry] of Object.entries(spliceable)) {
       entries.push([key, render(entry, scope)]);
     }
     return object(entries);
@@ -356,7 +356,7 @@ export async function buildBundle(
 
   // Every server component first, so siblings run at once; then the drawing,
   // in order. Nothing encloses the root, so nothing it holds can capture.
-  const root = render(await expandServerComponents(value));
+  const root = render(await expandServerComponents(spliceable));
   // In table order, which is the order rendering first reached each script.
   const modules = [...numbers.keys()].map(
     (script) => [labelOf(script), script.module] as const,

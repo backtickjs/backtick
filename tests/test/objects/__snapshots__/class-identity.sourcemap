@@ -1,0 +1,129 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+class            → class
+                 →  
+__cs_Point       → Point
+                 →  
+{                → {
+\n               → \n  
+constructor      → constructor
+(                → (
+readonly         → readonly
+                 →  
+x                → x
+:                → :
+                 →  
+number           → number
+)                → )
+                 →  
+{                → {
+}                → }
+\n               → \n
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+class            → class
+                 →  
+__cs_Made        → Made
+                 →  
+{                → {
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+(Point)          → $Point
+))               →  [-semantic -navigation]
+                 →  
+===              → ===
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(Point)          → $Point
+))               →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+makeClass        → makeClass
+()               → ()
+))               →  [-semantic -navigation]
+                 →  
+===              → ===
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+makeClass        → makeClass
+()               → ()
+))               →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_make        → make
+                 →  
+=                → =
+                 →  
+(                → (
+__cs_label       → label
+:                → :
+                 →  
+string           → string
+)                → )
+                 →  
+=>               → =>
+\n               → \n        
+(cs.splice(      →  [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+class            → class
+                 →  
+__cs_Labelled    → Labelled
+                 →  
+{                → {
+\n               → \n          
+name             → name
+                 →  
+=                → =
+                 →  
+__cs_label       → label
+;                → ;
+\n               → \n        
+}                → }
+)())             → ` [-semantic -navigation]
+))               →  [-semantic -navigation]
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_A           → A
+                 →  
+=                → =
+                 →  
+__cs_make        → make
+(                → (
+"a"              → "a"
+)                → )
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+[                → [
+__cs_A           → A
+                 →  
+===              → ===
+                 →  
+__cs_make        → make
+(                → (
+"b"              → "b"
+)                → )
+,                → ,
+                 →  
+new              → new
+                 →  
+__cs_A           → A
+(                → (
+)                → )
+.                → .
+name             → name
+]                → ]
+;                → ;
+\n               → \n    
+}                → }
+)())             → ` [-semantic -navigation]

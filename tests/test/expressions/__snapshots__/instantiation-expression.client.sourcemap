@@ -1,0 +1,54 @@
+// 6:14
+() => (  → 6:17 <T,>(value:…
+value    → 6:22 value
+)        → 6:30 ):…
+=>       → 6:40 =>
+[        → 6:43 [
+value    → 6:44 value
+,        → 6:49 , 
+value    → 6:51 value
+]        → 6:56 ]
+);       → 6:57 `;…
+
+// 11:34
+() => {     → 11:37 {…
+function    → 12:7 function 
+wrap        → 12:16 wrap
+(           → 12:20 <T>(value:…
+value       → 12:24 value
+) {         → 12:32 ):…
+return      → 13:9 return 
+[           → 13:16 [
+value       → 13:17 value
+]           → 13:22 ]
+;           → 13:23 ;
+}           → 14:7 }
+const       → 15:7 const 
+wrapNumber  → 15:13 wrapNumber
+ =          → 15:23  = 
+(wrap       → 15:26 wrap<number>;…
+);          → 15:38 ;…
+return      → 16:7 return 
+wrapNumber  → 16:14 wrapNumber
+(           → 16:24 (
+1           → 16:25 1
+)           → 16:26 )
+;           → 16:27 ;
+}           → 17:5 }
+);          → 17:6 `);…
+
+// 22:34
+($splice0) => {  → 22:37 {…
+const            → 23:7 const 
+pairString       → 23:13 pairString
+ =               → 23:23  = 
+($splice0()      → 23:26 $pair<string>;…
+);               → 23:39 ;…
+return           → 24:7 return 
+pairString       → 24:14 pairString
+(                → 24:24 (
+"a"              → 24:25 "a"
+)                → 24:28 )
+;                → 24:29 ;
+}                → 25:5 }
+);               → 25:6 `);…

@@ -1,0 +1,89 @@
+// 7:14
+() => class   → 7:17 class…
+Base          → 7:23 Base
+ {            → 7:27 <T…
+value;        → 8:24 value:…
+constructor(  → 8:3 constructor(
+value         → 8:24 value
+) {           → 8:32 ) {
+this.value    → 8:24 value:…
+ =            → 8:29 :…
+value         → 8:24 value
+;             → 8:29 :…
+}             → 8:35 }
+greet         → 9:3 greet
+() {          → 9:8 () {
+return        → 10:5 return 
+"hi "         → 10:12 "hi "
+ +            → 10:17  + 
+String        → 10:20 String
+(             → 10:26 (
+this          → 10:27 this
+.             → 10:31 .
+value         → 10:32 value
+)             → 10:37 )
+;             → 10:38 ;
+}             → 11:3 }
+);            → 12:2 `;…
+
+// 16:37
+($splice0) => {  → 16:40 {…
+class            → 17:7 class 
+Loud             → 17:13 Loud
+ extends         → 17:18 extends…
+$splice0()       → 17:26 $Base…
+ {               → 17:31  {
+greet            → 18:9 greet
+() {             → 18:14 () {
+return           → 19:11 return 
+super            → 19:18 super
+.                → 19:23 .
+greet            → 19:24 greet
+()               → 19:29 ()
+ +               → 19:31  + 
+"!"              → 19:34 "!"
+;                → 19:37 ;
+}                → 20:9 }
+return           → 22:7 return 
+new              → 22:14 new 
+Loud             → 22:18 Loud
+(                → 22:22 (
+"Ada"            → 22:23 "Ada"
+)                → 22:28 )
+.                → 22:29 .
+greet            → 22:30 greet
+()               → 22:35 ()
+;                → 22:37 ;
+}                → 23:5 }
+);               → 23:6 `);…
+
+// 28:37
+($splice0) => {  → 28:40 {…
+class            → 29:7 class 
+Counted          → 29:13 Counted
+ extends         → 29:21 extends…
+$splice0()       → 29:29 $Base<number>…
+ {               → 29:42  {
+greet            → 30:9 greet
+() {             → 30:14 () {
+return           → 31:11 return 
+super            → 31:18 super
+.                → 31:23 .
+greet            → 31:24 greet
+()               → 31:29 ()
+ +               → 31:31  + 
+" times"         → 31:34 " times"
+;                → 31:42 ;
+}                → 32:9 }
+return           → 34:7 return 
+new              → 34:14 new 
+Counted          → 34:18 Counted
+(                → 34:25 (
+3                → 34:26 3
+)                → 34:27 )
+.                → 34:28 .
+greet            → 34:29 greet
+()               → 34:34 ()
+;                → 34:36 ;
+}                → 35:5 }
+);               → 35:6 `);…

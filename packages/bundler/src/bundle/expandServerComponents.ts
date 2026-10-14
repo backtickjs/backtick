@@ -4,6 +4,7 @@ import {
   isClientScript,
   isJsxElement,
 } from "@backtickjs/core";
+import { isValue } from "./params.js";
 
 const CYCLE_ERROR =
   "Can't splice a value that contains itself: a bundle writes each value " +
@@ -34,70 +35,71 @@ const contains = (ancestors: Ancestors | null, value: object): boolean => {
 // the client code it bottoms out in reaches the bundle. A value holding no
 // server component comes back as the same object.
 //
-// A `once` script is one value, so what it splices is expanded once, however
-// many places read it: a server component inside it runs once. `values` holds
+// A `once` script is one value, and so is a class (see `isValue`), so what it
+// splices is expanded once, however many places read it: a server component
+// inside it runs once. `values` holds
 // each one's expansion for the call.
 export async function expandServerComponents(
-  value: unknown,
+  spliceable: unknown,
   ancestors: Ancestors | null = null,
   values = new Map<ClientScript, Promise<unknown>>(),
 ): Promise<unknown> {
-  if (typeof value !== "object" || value === null) {
-    return value;
+  if (typeof spliceable !== "object" || spliceable === null) {
+    return spliceable;
   }
-  if (contains(ancestors, value)) {
+  if (contains(ancestors, spliceable)) {
     throw new Error(CYCLE_ERROR);
   }
-  const inside: Ancestors = { value, parent: ancestors };
+  const inside: Ancestors = { value: spliceable, parent: ancestors };
   const all = (entries: readonly unknown[]) =>
     Promise.all(
       entries.map((entry) => expandServerComponents(entry, inside, values)),
     );
 
-  if (isJsxElement(value)) {
-    const { type } = value;
+  if (isJsxElement(spliceable)) {
+    const { type } = spliceable;
     // A tag the client draws is left for rendering to refuse.
     if (typeof type !== "function" || isClientImport(type)) {
-      return value;
+      return spliceable;
     }
     return expandServerComponents(
-      await type(value.props as never),
+      await type(spliceable.props as never),
       inside,
       values,
     );
   }
-  if (isClientScript(value)) {
+  if (isClientScript(spliceable)) {
     const expanded = async (): Promise<unknown> => {
-      const args = await all(value.args);
-      return args.every((arg, index) => arg === value.args[index])
-        ? value
-        : { ...value, args };
+      const args = await all(spliceable.args);
+      return args.every((arg, index) => arg === spliceable.args[index])
+        ? spliceable
+        : { ...spliceable, args };
     };
-    if (!value.once) {
+    if (!isValue(spliceable)) {
       return expanded();
     }
-    let made = values.get(value);
+    let made = values.get(spliceable);
     if (made === undefined) {
       made = expanded();
-      values.set(value, made);
+      values.set(spliceable, made);
     }
     return made;
   }
-  if (Array.isArray(value)) {
-    const elements = await all(value);
-    return elements.every((element, index) => element === value[index])
-      ? value
+  if (Array.isArray(spliceable)) {
+    const elements = await all(spliceable);
+    return elements.every((element, index) => element === spliceable[index])
+      ? spliceable
       : elements;
   }
   // Only plain objects cross; rendering refuses anything else.
-  const prototype = Object.getPrototypeOf(value);
+  const prototype = Object.getPrototypeOf(spliceable);
   if (prototype !== Object.prototype && prototype !== null) {
-    return value;
+    return spliceable;
   }
-  const entries = Object.entries(value);
+  const entries = Object.entries(spliceable);
   const expanded = await all(entries.map(([, entry]) => entry));
   if (expanded.every((entry, index) => entry === entries[index]![1])) {
-    return value;
+    return spliceable;
   }
   // Defined, not assigned, so a `__proto__` key stays a key.
   return Object.fromEntries(

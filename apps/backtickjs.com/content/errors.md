@@ -40,10 +40,10 @@ Your server ran a script without the plugin that compiles them. Start it with
 `@backtickjs/bun-plugin`. A new project's `npm start` already does. See
 [How it works](/docs/how-it-works#1-compiled-with-your-server).
 
-### A `cs` client script is one expression or one block
+### A `cs` client script is one expression, one class or one block
 
 Statements need braces: `` cs`{ a(); b(); }` ``. See the
-[three shapes](/docs/scripts-in-depth#three-shapes).
+[four shapes](/docs/scripts-in-depth#four-shapes).
 
 ### This `${…}` is in text, not code, so it isn't spliced
 

@@ -80,7 +80,7 @@ const ENTRIES: { name: string; pages: Entry[] }[] = [
         path: "/docs/scripts-in-depth",
         title: "Scripts in depth",
         description:
-          "A script's three shapes, when its code runs, scripts inside data, and what a splice checks.",
+          "A script's four shapes, when its code runs, scripts inside data, and what a splice checks.",
         file: "scripts-in-depth.md",
       },
     ],

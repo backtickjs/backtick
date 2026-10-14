@@ -2,16 +2,16 @@ To your server, a script is a value, a `Client<T>`: something the phone will
 compute as a `T`. This page is what follows from that, for when a screen does
 something you didn't expect.
 
-## Three shapes
+## Four shapes
 
 ```ts file=scripts-in-depth/server/shapes.ts
 
 ```
 
-A script is an expression, a block of statements, or a function. An
+A script is an expression, a block of statements, a function, or a class. An
 expression is a `Client` of its value; a block, of what it returns; a
-function, of the function itself. A function that returns JSX is a client
-component. TypeScript infers each type; the annotations above only show
+function, of the function itself; a class, of the class. A function that
+returns JSX is a client component. TypeScript infers each type; the annotations above only show
 them.
 
 Your server can't read the `T`, which doesn't exist until the phone runs the
@@ -30,6 +30,10 @@ code written by hand in TypeScript would:
 
 - **A function is one function.** `$logTap` is the same function at every
   read, and its body runs each time it's called.
+- **A class is one class.** `` cs`class … {}` `` is the same class at every
+  read, as a module-level class is, unless it reads a variable of the script
+  around it: then it's made each time that script runs, as a class declared
+  in a function is.
 - **An expression or a block is code, run each time it's read.** Reading
   `$logVisit` twice runs it twice.
 - **A `once` script is one value.** `once(cs`…`)` runs its code once, at the
