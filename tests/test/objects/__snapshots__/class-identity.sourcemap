@@ -29,6 +29,24 @@ __cs_Made        → Made
 }                → }
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
+class            → class
+                 →  
+__cs_Holder      → Holder
+                 →  
+{                → {
+\n               → \n  
+value            → value
+                 →  
+=                → =
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(value)          → $value
+))               →  [-semantic -navigation]
+;                → ;
+\n               → \n
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
 (cs.splice(      →  [-semantic -navigation]
 (Point)          → $Point
 ))               →  [-semantic -navigation]
@@ -123,6 +141,38 @@ __cs_A           → A
 .                → .
 name             → name
 ]                → ]
+;                → ;
+\n               → \n    
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_n           → n
+                 →  
+=                → =
+                 →  
+2                → 2
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+new              → new
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+holder           → holder
+(                → (
+cs.lift((() =>   → cs` [-semantic -navigation]
+__cs_n           → n
+)())             → ` [-semantic -navigation]
+)                → )
+))               →  [-semantic -navigation]
+(                → (
+)                → )
+.                → .
+value            → value
 ;                → ;
 \n               → \n    
 }                → }

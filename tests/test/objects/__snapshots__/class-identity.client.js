@@ -18,11 +18,13 @@ exports.default = (() => class Made {
 });
 }
 
-// 15:33
+// 12:43
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $splice1) => $splice0() === $splice1());
+exports.default = (($splice0) => class Holder {
+    value = $splice0();
+});
 }
 
 // 19:33
@@ -36,6 +38,13 @@ exports.default = (($splice0, $splice1) => $splice0() === $splice1());
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0, $splice1) => $splice0() === $splice1());
+}
+
+// 27:33
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0) => {
     const make = (label) => $splice0(label);
     const A = make("a");
@@ -43,11 +52,28 @@ exports.default = (($splice0) => {
 });
 }
 
-// 25:11
+// 29:11
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($capture0) => class Labelled {
     name = $capture0;
 });
+}
+
+// 39:34
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => {
+    const n = 2;
+    return new ($splice0(n))().value;
+});
+}
+
+// 41:27
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($capture0) => $capture0);
 }

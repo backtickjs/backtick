@@ -184,18 +184,28 @@ export async function buildBundle(
   // function that each make a context are two contexts, as two calls of
   // `createContext` are. Running code is observable, so unlike a function it
   // is never shared by code.
+  //
+  // A class that reads a variable of the scope it's read in, itself or through
+  // what it's handed, is made there instead, as a class declared in a function
+  // is. A `once` script that does is refused.
   const values = new Map<ClientScript, string>();
-  const valueOf = (script: ClientScript): string => {
+  const valueOf = (script: ClientScript, scope: Scope): string => {
     let label = values.get(script);
-    if (label === undefined) {
-      const code = call(
-        labelOf(scriptFor(script)),
-        exprCallArgs(script, rootScope()),
-      );
-      label = `$value${constants.length}`;
-      values.set(script, label);
-      constants.push([label, code]);
+    if (label !== undefined) {
+      return label;
     }
+    const at: Scope = script.once
+      ? rootScope()
+      : { bindings: scope.bindings, read: new Set() };
+    const code = call(labelOf(scriptFor(script)), exprCallArgs(script, at));
+    const outside = [...at.read].filter((key) => scope.bindings.has(key));
+    if (outside.length > 0) {
+      outside.forEach((key) => scope.read.add(key));
+      return code;
+    }
+    label = `$value${constants.length}`;
+    values.set(script, label);
+    constants.push([label, code]);
     return label;
   };
 
@@ -207,7 +217,7 @@ export async function buildBundle(
   const render = (spliceable: unknown, scope: Scope = rootScope()): string => {
     if (isClientScript(spliceable)) {
       if (isValue(spliceable)) {
-        return valueOf(spliceable);
+        return valueOf(spliceable, scope);
       }
       const target = scriptFor(spliceable);
       if (target.module.kind !== "function") {

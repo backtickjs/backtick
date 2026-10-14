@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs } from "@backtickjs/core";
+import { type Client, cs } from "@backtickjs/core";
 import { evaluate } from "../evaluate.ts";
 
 const Point = cs.lift((() => class __cs_Point {
@@ -8,6 +8,10 @@ const Point = cs.lift((() => class __cs_Point {
 })());
 
 const makeClass = () => cs.lift((() => class __cs_Made {})());
+
+const holder = (value: Client<number>) => cs.lift((() => class __cs_Holder {
+  value = (cs.splice((value)));
+})());
 
 // A class is one class for the bundle, as a module-level class is.
 describe("a class script", () => {
@@ -29,5 +33,13 @@ describe("a class script", () => {
       return [__cs_A === __cs_make("b"), new __cs_A().name];
     })()));
     assert.deepEqual(same, [false, "a"]);
+  });
+
+  it("is made where it's read when it's handed a capture", async () => {
+    const value = await evaluate(cs.lift((() => {
+      const __cs_n = 2;
+      return new (cs.splice(holder(cs.lift((() => __cs_n)()))))().value;
+    })()));
+    assert.equal(value, 2);
   });
 });
