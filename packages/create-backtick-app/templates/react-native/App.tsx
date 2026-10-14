@@ -17,7 +17,7 @@ const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
 
 // This build's id, which names the modules it carries, for the server to
-// bundle screens it can run: see app.config.ts.
+// bundle screens it can run: `@backtickjs/builds`, in app.json, adds it.
 const buildId = buildIdFrom(Constants.expoConfig?.extra, Platform.OS);
 
 // The screen at `path` on your server: its bundle, fetched and run with the

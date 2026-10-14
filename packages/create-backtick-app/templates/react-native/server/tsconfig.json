@@ -13,6 +13,5 @@
     "jsx": "react-jsx",
     "jsxImportSource": "@backtickjs/react"
   },
-  // with app.config.ts, which runs in Node as the server does
-  "include": [".", "../app.config.ts"]
+  "include": ["."]
 }

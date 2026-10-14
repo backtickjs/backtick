@@ -51,7 +51,7 @@ Every template has:
 
 An Expo app (SDK 57) with the Backtick server beside it in `server/`. `App.tsx` fetches the screen at `/` and runs it with [`@backtickjs/react-native-client`](https://github.com/backtickjs/backtick/tree/main/packages/react-native-client), offering screens what `moduleMap.ts` lists.
 
-Each build of the app sends an id that names the modules it carries, which `app.config.ts` works out from `moduleMap.ts`. The server bundles each screen for that build's modules, with [`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds), so a build in users' hands keeps working as the app moves on:
+Each build of the app sends an id that names the modules it carries, which the `@backtickjs/builds` plugin in `app.json` works out from `moduleMap.ts`. The server bundles each screen for that build's modules, with [`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds), so a build in users' hands keeps working as the app moves on:
 
 - `npm run register-build` records this code's builds in `builds/`. Run it before a build for the stores, and commit what it writes.
 - On EAS, `eas-build-post-install` fails a preview or production build that isn't registered.

@@ -30,18 +30,15 @@ npm install @backtickjs/builds
 
    Each entry is `"specifier": Name`, with `Name` imported above. An entry that decides at runtime, like `native ? Facebook : {}`, is an error. What a platform lacks, its map leaves out.
 
-2. **Each build gets an id:** a hash of the modules its platform's map offers, each at the installed version of its package. `app.config.ts` puts the ids in the app config:
+2. **Each build gets an id:** a hash of the modules its platform's map offers, each at the installed version of its package. This package's config plugin puts the ids in the app config's `extra.buildIds`:
 
-   ```ts
-   // app.config.ts
-   import { buildIds } from "@backtickjs/builds";
-   import type { ConfigContext, ExpoConfig } from "expo/config";
-
-   export default ({ config, projectRoot }: ConfigContext): ExpoConfig =>
-     ({
-       ...config,
-       extra: { ...config.extra, buildIds: buildIds(projectRoot) },
-     }) as ExpoConfig;
+   ```json
+   // app.json
+   {
+     "expo": {
+       "plugins": ["@backtickjs/builds"]
+     }
+   }
    ```
 
 3. **The app sends its id** however it reaches its server: a header, a GraphQL variable. `buildIdFrom` from [`@backtickjs/react-native-client`](https://github.com/backtickjs/backtick/tree/main/packages/react-native-client) reads it:
@@ -99,6 +96,7 @@ npm install @backtickjs/builds
 
 ## API
 
+- `@backtickjs/builds` in `app.json`'s `plugins`: the Expo config plugin, which sets `extra.buildIds` to `buildIds(projectRoot)`.
 - `buildIds(projectRoot)`: the id of the build the app at `projectRoot` now makes, on `ios`, `android` and `web`.
 - `createBuilds({ projectRoot })`: the app's builds for its server. `modulesOf(buildId)` resolves a build, `installed(platform)` is what this code's build carries, and `unregistered(platform)` says why this code's build couldn't ship, or null. Registered builds are read once. Module maps are only read for an id that isn't registered, as in development after a package change.
 - `register(projectRoot)`: what `backtick-builds register` runs. A build already registered keeps its `createdAt` and `deprecated`.

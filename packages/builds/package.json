@@ -26,7 +26,8 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    }
+    },
+    "./app.plugin": "./app.plugin.js"
   },
   "bin": {
     "backtick-builds": "./dist/cli.js"
@@ -34,7 +35,8 @@
   "files": [
     "dist",
     "!dist/._cache",
-    "src"
+    "src",
+    "app.plugin.js"
   ],
   "publishConfig": {
     "access": "public"

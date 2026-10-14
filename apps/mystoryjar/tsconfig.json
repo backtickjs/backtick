@@ -3,5 +3,5 @@
   "compilerOptions": {
     "strict": true
   },
-  "exclude": ["server", "scripts", "app.config.ts"]
+  "exclude": ["server", "scripts"]
 }

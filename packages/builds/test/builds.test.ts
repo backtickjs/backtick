@@ -15,6 +15,7 @@ import {
   register,
   UnknownBuild,
 } from "../dist/index.js";
+import withBuildIds from "../dist/plugin.js";
 
 const cli = fileURLToPath(new URL("../dist/cli.js", import.meta.url));
 
@@ -142,6 +143,20 @@ it("names each platform's build by its packages", () => {
     ids.web,
     buildIdOf({ react: "19.2.3", "react/jsx-runtime": "19.2.3" }),
   );
+});
+
+it("puts each platform's id in the Expo config, keeping its extra", () => {
+  const root = mobile();
+  const config = withBuildIds({
+    name: "app",
+    extra: { eas: { projectId: "1" } },
+    _internal: { projectRoot: root },
+  });
+  assert.equal(config.name, "app");
+  assert.deepEqual(config.extra, {
+    eas: { projectId: "1" },
+    buildIds: buildIds(root),
+  });
 });
 
 it("names a build by the modules it offers, not only their packages", () => {

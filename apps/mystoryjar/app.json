@@ -25,6 +25,7 @@
       "permissions": ["android.permission.INTERNET"]
     },
     "plugins": [
+      "@backtickjs/builds",
       [
         "expo-secure-store",
         {
