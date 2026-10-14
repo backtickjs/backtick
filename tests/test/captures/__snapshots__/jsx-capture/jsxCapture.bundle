@@ -38,5 +38,5 @@ const $require = (id) => {
 const $cs0 = $require("njvzopgmpqpe:7:15").default;
 const $cs1 = $require("njvzopgmpqpe:9:11").default;
 const $thunk0 = (x) => $cs1(x);
-const $function1 = $cs0($thunk0);
-export default $function1;
+const $value1 = $cs0($thunk0);
+export default $value1;

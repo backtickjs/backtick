@@ -137,25 +137,22 @@ export async function buildBundle(
   const labelOf = (target: ClientScript): string =>
     `$cs${numbers.get(target)!}`;
 
-  // Every function the bundle writes is a closure: a function script, and the
-  // thunk a splice is handed over as. One whose code reads nothing of the
+  // The thunk a splice is handed over as. One whose code reads nothing of the
   // scope it's written in, beyond its own parameters, is the same function
   // wherever it's written, so the bundle makes it once, as a constant, and
-  // the same code anywhere else is that constant: a client component keeps
-  // its identity across renders, and a value spliced at every level of a deep
-  // composition is written once per level, not once per path. Making a
-  // function runs nothing, so sharing one isn't observable; everything is
-  // still rendered where it stands.
+  // the same code anywhere else is that constant: a value spliced at every
+  // level of a deep composition is written once per level, not once per path.
+  // A thunk is the bundle's own, never the script's, so sharing one isn't
+  // observable; everything is still rendered where it stands.
   const constants: (readonly [string, string])[] = [];
   const byCode = new Map<string, string>();
-  // `write` renders a closure's code in a scope that records what it reads:
-  // a constant's label if it read nothing of `scope` beyond `own`, its
+  // `write` renders a thunk's code in a scope that records what it reads: a
+  // constant's label if it read nothing of `scope` beyond `own`, its
   // parameters, or else the code, written where it's used.
-  const closure = (
+  const thunk = (
     scope: Scope,
     own: readonly string[],
     write: (inner: Scope) => string,
-    name: string,
   ): string => {
     const read = new Set<string>();
     const code = write({
@@ -171,23 +168,22 @@ export async function buildBundle(
     }
     let label = byCode.get(code);
     if (label === undefined) {
-      label = `${name}${constants.length}`;
+      label = `$thunk${constants.length}`;
       byCode.set(code, label);
       constants.push([label, code]);
     }
     return label;
   };
 
-  // A `once` script is one value, and so is a class (see `isValue`): its
-  // code run at the top of the bundle, where nothing encloses it, and every
-  // read is that constant. One per script, not per code: two runs of a host
-  // function that each make a context are two contexts, as two calls of
-  // `createContext` are. Running code is observable, so unlike a function it
-  // is never shared by code.
+  // A function, a class and a `once` script are each one value (see
+  // `isValue`): its code run at the top of the bundle, where nothing encloses
+  // it, and every read is that constant. One per script, not per code: two
+  // runs of a host function that each make a function are two functions, and
+  // two that each make a context two contexts, as in plain TypeScript.
   //
-  // A class that reads a variable of the scope it's read in, itself or through
-  // what it's handed, is made there instead, as a class declared in a function
-  // is. A `once` script that does is refused.
+  // A function or a class that reads a variable of the scope it's read in,
+  // itself or through what it's handed, is made there instead, as one
+  // declared in a function is. A `once` script that does is refused.
   const values = new Map<ClientScript, string>();
   const valueOf = (script: ClientScript, scope: Scope): string => {
     let label = values.get(script);
@@ -219,15 +215,9 @@ export async function buildBundle(
       if (isValue(spliceable)) {
         return valueOf(spliceable, scope);
       }
-      const target = scriptFor(spliceable);
-      if (target.module.kind !== "function") {
-        return call(labelOf(target), exprCallArgs(spliceable, scope));
-      }
-      return closure(
-        scope,
-        [],
-        (inner) => call(labelOf(target), exprCallArgs(spliceable, inner)),
-        "$function",
+      return call(
+        labelOf(scriptFor(spliceable)),
+        exprCallArgs(spliceable, scope),
       );
     }
     if (isJsxElement(spliceable)) {
@@ -330,11 +320,8 @@ export async function buildBundle(
       const passed = [...passKeys(target, index), ...capturesOf(target)];
       // A thunk taking them, the splice rendered inside it.
       parts.push(
-        closure(
-          scope,
-          passed,
-          (inner) => arrow(passed.map(displayName), render(arg, inner)),
-          "$thunk",
+        thunk(scope, passed, (inner) =>
+          arrow(passed.map(displayName), render(arg, inner)),
         ),
       );
     }

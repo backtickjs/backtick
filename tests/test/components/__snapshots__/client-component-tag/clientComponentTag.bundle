@@ -67,6 +67,6 @@ const $cs0 = $require("161a7f5q1feqz:14:15").default;
 const $cs1 = $require("161a7f5q1feqz:12:14").default;
 const $thunk0 = () => $i0;
 const $thunk1 = () => $i1;
-const $function2 = $cs1();
-const $thunk3 = () => $function2;
+const $value2 = $cs1();
+const $thunk3 = () => $value2;
 export default $cs0($thunk0, $thunk1, $thunk3);

@@ -35,9 +35,9 @@ const contains = (ancestors: Ancestors | null, value: object): boolean => {
 // the client code it bottoms out in reaches the bundle. A value holding no
 // server component comes back as the same object.
 //
-// A `once` script is one value, and so is a class (see `isValue`), so what it
-// splices is expanded once, however many places read it: a server component
-// inside it runs once. `values` holds
+// A function, a class and a `once` script are each one value (see `isValue`),
+// so what one splices is expanded once, however many places read it: a server
+// component inside it runs once. `values` holds
 // each one's expansion for the call.
 export async function expandServerComponents(
   spliceable: unknown,

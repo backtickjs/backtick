@@ -40,6 +40,6 @@ const $cs0 = $require("1dqhax1do6u08:21:4").default;
 const $cs1 = $require("1dqhax1do6u08:13:44").default;
 const $cs2 = $require("1dqhax1do6u08:8:27").default;
 const $thunk0 = () => $cs2();
-const $function1 = $cs1($thunk0);
-const $thunk2 = () => $function1;
+const $value1 = $cs1($thunk0);
+const $thunk2 = () => $value1;
 export default $cs0($thunk2, $thunk2);

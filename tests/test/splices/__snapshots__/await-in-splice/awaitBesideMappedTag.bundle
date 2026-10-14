@@ -54,6 +54,6 @@ const $require = (id) => {
 const $cs0 = $require("gh22ttmmbc28:47:4").default;
 const $cs1 = $require("gh22ttmmbc28:31:14").default;
 const $thunk0 = () => "hello";
-const $function1 = $cs1();
-const $thunk2 = () => $function1;
+const $value1 = $cs1();
+const $thunk2 = () => $value1;
 export default $cs0($thunk0, $thunk2);

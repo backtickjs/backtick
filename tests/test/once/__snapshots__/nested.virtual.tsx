@@ -4,7 +4,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 
 // A `once` script splicing another is made after it, as every constant is
 // made after what it reads; one at the root is the root; a function made once
-// is the function it already was, under `$value` rather than `$function`.
+// is the function it already was.
 const inner = once(cs.lift((() => ({ n: 1 }))()));
 const outer = once(cs.lift((() => ({ inner: (cs.splice((inner))), same: (cs.splice((inner))) === (cs.splice((inner))) }))()));
 

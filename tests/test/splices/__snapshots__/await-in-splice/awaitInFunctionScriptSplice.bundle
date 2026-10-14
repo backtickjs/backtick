@@ -17,5 +17,5 @@ const $require = (id) => {
 };
 const $cs0 = $require("gh22ttmmbc28:73:4").default;
 const $thunk0 = () => "hello";
-const $function1 = $cs0($thunk0);
-export default $function1;
+const $value1 = $cs0($thunk0);
+export default $value1;

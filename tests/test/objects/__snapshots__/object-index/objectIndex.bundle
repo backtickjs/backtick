@@ -22,5 +22,5 @@ const $require = (id) => {
 };
 const $cs0 = $require("o3ttyh4dq4dw:15:4").default;
 const $thunk0 = () => ({ usd: 3, eur: 4 });
-const $function1 = $cs0($thunk0);
-export default $function1;
+const $value1 = $cs0($thunk0);
+export default $value1;

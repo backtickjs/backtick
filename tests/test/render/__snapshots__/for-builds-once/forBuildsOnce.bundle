@@ -77,6 +77,6 @@ const $cs1 = $require("17esee640arqb:20:20").default;
 const $thunk0 = () => $i0;
 const $thunk1 = () => ["one", "two"];
 const $thunk2 = () => $i1;
-const $function3 = $cs1($thunk0, $thunk1, $thunk2);
-const $thunk4 = () => $function3;
+const $value3 = $cs1($thunk0, $thunk1, $thunk2);
+const $thunk4 = () => $value3;
 export default $cs0($thunk0, $thunk4);

@@ -57,5 +57,5 @@ const $require = (id) => {
 };
 const $cs0 = $require("2gt79jmb8630e:15:4").default;
 const $thunk0 = () => $i0;
-const $function1 = $cs0($thunk0);
-export default $function1;
+const $value1 = $cs0($thunk0);
+export default $value1;

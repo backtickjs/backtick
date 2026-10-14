@@ -59,6 +59,6 @@ const $require = (id) => {
 };
 const $cs0 = $require("7k5q0iuij35f:14:13").default;
 const $cs1 = $require("7k5q0iuij35f:11:9").default;
-const $function0 = $cs1();
-const $thunk1 = () => ({ Badge: $function0 });
+const $value0 = $cs1();
+const $thunk1 = () => ({ Badge: $value0 });
 export default $cs0($thunk1, $thunk1);
