@@ -1,0 +1,22 @@
+import { cs } from "@backtickjs/core";
+
+const Point = cs`class Point<T = number> {
+  constructor(readonly x: T) {}
+  static origin = 0;
+}`;
+
+const Empty = cs`class Empty {}`;
+
+const Holder = cs`class Holder {
+  value = ${cs`1`};
+  other = $Point;
+}`;
+
+const loud = cs`{
+  class Loud extends $Point<number> {
+    greet() {
+      return 1;
+    }
+  }
+  return new Loud(1);
+}`;

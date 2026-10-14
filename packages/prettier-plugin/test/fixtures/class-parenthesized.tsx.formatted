@@ -1,0 +1,17 @@
+import { cs } from "@backtickjs/core";
+
+const A = cs`class A {
+  x = 1;
+}`;
+
+const B = cs`(class {
+  x = 1;
+})`;
+
+const C = cs`class C {}`;
+
+const D = cs`class D {
+  value = ${cs`1`};
+}`;
+
+const E = cs`/* kept */ (class E {})`;

@@ -49,9 +49,10 @@ async function printScript(
   print: Print,
 ): Promise<Doc> {
   const parser = parserForFile(fileName);
-  const docWithPlaceholders = await textToDoc(script.textWithPlaceholders, {
-    parser,
-  });
+  const docWithPlaceholders = await textToDoc(
+    classAsDeclaration(script) ?? script.textWithPlaceholders,
+    { parser },
+  );
   const body = reinjectSplices(
     stripTrailingSemicolon(docWithPlaceholders),
     script,
@@ -59,6 +60,34 @@ async function printScript(
     print,
   );
   return ["cs", "`", isJsxRoot(script) ? wrapInParens(body) : body, "`"];
+}
+
+// A script that is one named class in parentheses, `(class A {})`, as the
+// declaration it's the same class as, `class A {}`. Only parentheses,
+// whitespace and a `;` around it: anything else, a comment, is kept as
+// written. A class without a name has no declaration form.
+function classAsDeclaration(script: ClientScript): string | undefined {
+  const [statement, ...rest] = script.fileWithPlaceholders.statements;
+  if (
+    statement === undefined ||
+    rest.length > 0 ||
+    !ts.isExpressionStatement(statement)
+  ) {
+    return undefined;
+  }
+  let root = statement.expression;
+  while (ts.isParenthesizedExpression(root)) {
+    root = root.expression;
+  }
+  if (!ts.isClassExpression(root) || root.name === undefined) {
+    return undefined;
+  }
+  const text = script.textWithPlaceholders;
+  const start = root.getStart(script.fileWithPlaceholders);
+  const around = text.slice(0, start) + text.slice(root.getEnd());
+  return /^[\s();]*$/.test(around)
+    ? text.slice(start, root.getEnd())
+    : undefined;
 }
 
 // A script that is one JSX element, parenthesized or not.
