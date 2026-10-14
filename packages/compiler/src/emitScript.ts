@@ -176,8 +176,12 @@ export function emitScript(
           : call;
       };
       const visit = (node: ts.Node): ts.Node => {
-        // Types are TypeScript's to strip, after this.
-        if (ts.isTypeNode(node) || asWritten.has(node)) {
+        // Types are TypeScript's to strip, after this. A class's `extends`
+        // is a type node too, but names a value, which is rewritten.
+        if (
+          (ts.isTypeNode(node) && !isClassExtends(ts, node)) ||
+          asWritten.has(node)
+        ) {
           return node;
         }
         if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
@@ -294,4 +298,16 @@ function moved(map: string, script: ClientScript): string {
     sources: [sourceFile.fileName],
     mappings: toEncodedMap(into).mappings,
   });
+}
+
+// `extends Base<T>` in a class, whose `Base` is a value.
+function isClassExtends(
+  ts: typeof import("typescript"),
+  node: ts.Node,
+): boolean {
+  return (
+    ts.isExpressionWithTypeArguments(node) &&
+    ts.isHeritageClause(node.parent) &&
+    ts.isClassLike(node.parent.parent)
+  );
 }
