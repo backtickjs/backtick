@@ -77,6 +77,6 @@ npm run register-build
 
 and commit what it writes to `builds/`. An EAS build that isn't registered
 fails, so a build your server doesn't know can't ship. To stop serving an old
-build, set `"deprecated": true` in its file: its users are asked to update.
+build, set `"deprecated": true` in its file: your server refuses it.
 [`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds)
-has the details.
+has the details, and how to show its users a screen asking them to update.

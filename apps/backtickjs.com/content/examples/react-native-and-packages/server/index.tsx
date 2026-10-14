@@ -14,7 +14,7 @@ const builds = createBuilds({
 const app = new Hono();
 
 app.get("/", async (context) => {
-  const buildId = context.req.header("x-build-id") || null;
+  const buildId = context.req.header("x-build-id") ?? null;
   const modules = builds.modulesOf(buildId);
   const bundle = await bundler.build({ input: <Home />, modules });
   const { code } = bundle.generate({ format: "cjs" });

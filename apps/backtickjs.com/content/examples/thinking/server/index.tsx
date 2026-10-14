@@ -16,7 +16,7 @@ const app = new Hono();
 
 app.get("/", async (context) => {
   const user = await db.userFor(context.req.header("authorization"));
-  const modules = builds.modulesOf(context.req.header("x-build-id") || null);
+  const modules = builds.modulesOf(context.req.header("x-build-id") ?? null);
   const bundle = await bundler.build({ input: <Home user={user} />, modules });
   const { code } = bundle.generate({ format: "cjs" });
   return context.body(code, 200, { "content-type": "text/javascript" });
