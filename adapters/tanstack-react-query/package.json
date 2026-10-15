@@ -1,0 +1,65 @@
+{
+  "name": "@backtickjs/tanstack-react-query",
+  "version": "5.104.0",
+  "description": "The TanStack Query adapter for Backtick: `@tanstack/react-query`'s hooks and options as client values your scripts splice",
+  "keywords": [
+    "backtick",
+    "tanstack",
+    "react-query",
+    "server-driven-ui",
+    "adapter"
+  ],
+  "homepage": "https://backtickjs.com",
+  "bugs": {
+    "url": "https://github.com/backtickjs/backtick/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/backtickjs/backtick.git",
+    "directory": "adapters/tanstack-react-query"
+  },
+  "license": "MIT",
+  "author": "Jean-François Bisson <jf@backtickjs.com>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!dist/._cache",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "typecheck": "backtick-tsc -p tsconfig.build.json --noEmit",
+    "build": "tsc -b --force",
+    "dev": "tsc -b --watch",
+    "test": "node --test \"test/**/*.test.ts\"",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown .",
+    "clean": "rm -rf node_modules dist .turbo",
+    "prepack": "cp ../../LICENSE ."
+  },
+  "dependencies": {
+    "@backtickjs/core": "^0.1.10",
+    "@tanstack/react-query": "5.104.0"
+  },
+  "devDependencies": {
+    "@backtickjs/prettier-plugin": "^0.1.10",
+    "@backtickjs/tsc": "^0.1.10",
+    "@types/react": "19.2.18",
+    "prettier": "^3.6.2",
+    "react": "19.2.3",
+    "typescript": "^6.0.3"
+  },
+  "prettier": {
+    "plugins": [
+      "@backtickjs/prettier-plugin"
+    ]
+  }
+}
