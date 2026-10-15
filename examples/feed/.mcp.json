@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "backtick-dev": {
+      "command": "npx",
+      "args": ["--no", "backtick-dev-mcp"]
+    }
+  }
+}

@@ -1,6 +1,6 @@
 # @backtickjs/dev
 
-[Backtick](https://backtickjs.com) in development. `backtick-dev` runs your server, restarts it when you save a file under `server/`, and reloads the app once the new server is up. It keeps your server's output and the app's console in one log, which you, or an agent, read with `curl`.
+[Backtick](https://backtickjs.com) in development. `backtick-dev` runs your server, restarts it when you save a file under `server/`, and reloads the app once the new server is up. It keeps your server's output and the app's console in one log, which agents read, with a screenshot of the app, through its MCP tools.
 
 ## Install
 
@@ -66,35 +66,35 @@ The package knows no platform: how the app reloads, and where its uncaught error
 - The dev channel is a WebSocket to `/__backtick`. Once the new server listens, `backtick-dev` sends `reload`, and the app reloads as you told it to. If your server fails to start, or crashes, the app logs why with `console.error`, which React Native's LogBox shows, and requests are answered `502` with it.
 - If `backtick-dev` itself restarts, the dev channel reconnects and reloads.
 
-## Logs
+## Agents: MCP tools
 
-`backtick-dev` keeps the last 5,000 lines of your server's output, the app's console and uncaught errors, and its own restarts, numbered in order:
+`backtick-dev-mcp` serves what `backtick-dev` sees of the app as MCP tools, over stdio, so an agent finds them in its tool list:
 
-```sh
-curl localhost:3000/__backtick/logs           # all of it
-curl localhost:3000/__backtick/logs?since=42  # what came after #42
-curl localhost:3000/__backtick/devices        # the apps connected
-```
+- `logs`: the last 5,000 lines of your server's output, the app's console and uncaught errors, and each restart of your server with the file that changed, numbered in order. `since`, the last number read, answers only what came after.
+- `screenshot`: a PNG of what the app has drawn, as an image the agent sees, from the newest app connected or the one at `device`. It's the app's window, not the display: it looks the same with the phone's screen off.
+- `devices`: the apps connected, by address.
 
 ```
 #41 2026-10-15T20:31:00.104Z server log Backtick server on http://localhost:51234
 #42 2026-10-15T20:31:02.990Z app 192.168.0.123 error Failed: TypeError: …
     at Item (…)
-#43 2026-10-15T20:31:05.311Z backtick-dev info Restarted your server after a change.
+#43 2026-10-15T20:31:05.311Z backtick-dev info Restarted your server: server/Item.tsx changed.
 ```
 
-`backtick-dev` prints these commands when it starts, for an agent that runs it to find them. The app's lines come from the dev channel: it sends `console` output, and the uncaught errors the app hands `channel.report`, keeping what was logged before it connected.
+Register it in the project's `.mcp.json`:
 
-## Screenshots
-
-With a `screenshot` option, `backtick-dev` can ask the app for a PNG of what it shows, for you or an agent:
-
-```sh
-curl -o screen.png localhost:3000/__backtick/screenshot                    # the newest app connected
-curl -o screen.png "localhost:3000/__backtick/screenshot?device=192.168.0.123"
+```json
+{
+  "mcpServers": {
+    "backtick-dev": {
+      "command": "npx",
+      "args": ["--no", "backtick-dev-mcp"]
+    }
+  }
+}
 ```
 
-It's the whole screen, as the person sees it. It answers `404` when no app is connected, `501` when the app takes no screenshots or failed to, and `504` when it doesn't answer within 10 seconds.
+`--no` keeps `npx` to the copy installed in the project. The tools ask the `backtick-dev` running on http://localhost:3000, or at `BACKTICK_DEV_ORIGIN`; without one, each says to start it with `npm start`. A screenshot needs the app's `screenshot` option. The app's lines come from the dev channel: it sends `console` output, and the uncaught errors the app hands `channel.report`, keeping what was logged before it connected.
 
 ## Related
 

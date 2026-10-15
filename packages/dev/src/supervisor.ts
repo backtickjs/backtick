@@ -234,7 +234,7 @@ export async function supervise(
       };
     }),
   );
-  // For an agent, or you, as text: `curl localhost:3000/__backtick/logs`.
+  // As text, for `backtick-dev-mcp`'s tools.
   app.get("/__backtick/devices", (context) =>
     context.text(
       [...devices.values()]

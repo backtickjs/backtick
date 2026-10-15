@@ -29,11 +29,9 @@ const supervisor = await supervise({
   port: 3000,
   env: { NODE_ENV: process.env.NODE_ENV ?? "development" },
 });
-// What an agent running this reads, to find what it can ask for.
+// What an agent running this reads, to find its tools.
 console.log(`Backtick server on http://localhost:3000
-  Logs:        curl "localhost:3000/__backtick/logs?since=N"
-  Screenshot:  curl -o screen.png localhost:3000/__backtick/screenshot
-  Devices:     curl localhost:3000/__backtick/devices`);
+  Agents: the backtick-dev MCP tools, from backtick-dev-mcp, show the app's screen and logs.`);
 
 const stop = async (code: number) => {
   await supervisor.close();

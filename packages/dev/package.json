@@ -5,7 +5,8 @@
   "keywords": [
     "backtick",
     "server-driven-ui",
-    "live-reload"
+    "hot-reload",
+    "mcp"
   ],
   "homepage": "https://backtickjs.com",
   "bugs": {
@@ -26,7 +27,8 @@
     }
   },
   "bin": {
-    "backtick-dev": "./dist/cli.js"
+    "backtick-dev": "./dist/cli.js",
+    "backtick-dev-mcp": "./dist/mcp.js"
   },
   "files": [
     "dist",
@@ -47,9 +49,11 @@
   },
   "dependencies": {
     "@hono/node-server": "^2.1.4",
+    "@modelcontextprotocol/sdk": "^1.32.1",
     "hono": "^4.13.13",
     "undici": "^8.10.2",
-    "ws": "^8.22.0"
+    "ws": "^8.22.0",
+    "zod": "^4.6.6"
   },
   "devDependencies": {
     "@types/node": "^25.9.1",

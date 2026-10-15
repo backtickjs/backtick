@@ -1,10 +1,10 @@
 # Seeing the app while you work
 
-`npm start` runs the server behind http://localhost:3000, and Expo beside it. While it runs, read the app from here:
+`npm start` runs the server behind http://localhost:3000, and Expo beside it. While it runs, the `backtick-dev` MCP tools, from `.mcp.json`, read the app:
 
-- `curl "localhost:3000/__backtick/logs?since=N"`: one log, numbered: the server's output, the app's console and uncaught errors, and each restart of the server. `N` is the last number you read; leave it out for everything kept.
-- `curl -o screen.png localhost:3000/__backtick/screenshot`: a PNG of what the app shows. It answers 404 when no app is open.
-- `curl localhost:3000/__backtick/devices`: the apps connected, by address.
+- `logs`: one log, numbered: the server's output, the app's console and uncaught errors, and each restart of the server. Pass the last number you read as `since`.
+- `screenshot`: what the app shows.
+- `devices`: the apps connected.
 
 Saving a file under `server/` restarts the server, and the app reloads with it: the log shows `Restarted your server`, then the app's `Running "main"`. The screen may still be loading for a moment after that.
 
