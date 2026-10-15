@@ -1,0 +1,55 @@
+{
+  "name": "backtick-example-feed",
+  "description": "A feed whose pages and items each come from their own route, served by Backtick",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "start": "node scripts/start.mjs",
+    "android": "node scripts/start.mjs --android",
+    "ios": "node scripts/start.mjs --ios",
+    "web": "node scripts/start.mjs --web",
+    "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit",
+    "test": "node --import ./server/test/setup.mjs --import @backtickjs/node-plugin --test \"server/**/*.test.tsx\"",
+    "register-build": "backtick-builds register",
+    "eas-build-post-install": "backtick-builds check",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown ."
+  },
+  "dependencies": {
+    "@backtickjs/builds": "^0.1.10",
+    "@backtickjs/bundler": "^0.1.10",
+    "@backtickjs/core": "^0.1.10",
+    "@backtickjs/node-plugin": "^0.1.10",
+    "@backtickjs/react": "^19.2.3",
+    "@backtickjs/react-native": "^0.86.3",
+    "@backtickjs/tanstack-react-query": "^5.104.0",
+    "@hono/node-server": "^2.1.4",
+    "@tanstack/react-query": "5.104.0",
+    "expo": "~57.0.26",
+    "expo-constants": "~57.0.20",
+    "expo-status-bar": "~57.0.1",
+    "hono": "^4.13.13",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.86.3",
+    "react-native-web": "^0.21.0",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "@backtickjs/prettier-plugin": "^0.1.10",
+    "@backtickjs/tsc": "^0.1.10",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
+    "@types/node": "^25.9.1",
+    "@types/react": "19.2.18",
+    "global-jsdom": "^30.0.0",
+    "jsdom": "^30.0.1",
+    "prettier": "^3.6.2"
+  },
+  "backtick": {
+    "plugins": [
+      "@backtickjs/react/plugin"
+    ]
+  }
+}

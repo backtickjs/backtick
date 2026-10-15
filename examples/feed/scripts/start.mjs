@@ -1,0 +1,66 @@
+// Starts your Backtick server in development, then Expo, both in this terminal:
+// Expo keeps its keys and QR code, and the server restarts whenever a file
+// under `server/` changes. Arguments are Expo's, as `npm run ios` passes
+// `--ios`.
+import { spawn } from "node:child_process";
+import { readFileSync } from "node:fs";
+import { networkInterfaces } from "node:os";
+import { setTimeout as sleep } from "node:timers/promises";
+
+// The runtime is the one package.json has a Backtick loader for: Bun's, or
+// else Node's.
+const { dependencies } = JSON.parse(readFileSync("package.json", "utf8"));
+const [runtime, ...loader] =
+  "@backtickjs/bun-plugin" in dependencies
+    ? ["bun", "--preload", "@backtickjs/bun-plugin"]
+    : ["node", "--enable-source-maps", "--import", "@backtickjs/node-plugin"];
+
+const server = spawn(runtime, ["--watch", ...loader, "server/index.tsx"], {
+  stdio: "inherit",
+  env: { ...process.env, NODE_ENV: process.env.NODE_ENV ?? "development" },
+});
+
+// `bunx` where Bun runs this script, as it does where Node isn't installed.
+const npx = process.versions.bun ? "bunx" : "npx";
+const expo = spawn(npx, ["expo", "start", ...process.argv.slice(2)], {
+  stdio: "inherit",
+  shell: process.platform === "win32",
+});
+
+expo.on("exit", (code) => {
+  server.kill();
+  process.exit(code ?? 0);
+});
+
+// Stopped as a whole: a signal to this script alone, as a task runner sends
+// rather than Ctrl-C to the terminal, stops the server and Expo with it.
+for (const signal of ["SIGINT", "SIGTERM", "SIGHUP"]) {
+  process.on(signal, () => {
+    server.kill(signal);
+    expo.kill(signal);
+  });
+}
+
+// Expo shows how to open the app, its QR code, only in an interactive
+// terminal. Run elsewhere, as an agent runs it, this prints the address once
+// Metro is up.
+if (!process.stdout.isTTY) {
+  const args = process.argv.slice(2);
+  const flag = args.findIndex((arg) => arg === "--port" || arg === "-p");
+  const port = flag === -1 ? 8081 : Number(args[flag + 1]);
+  const address = Object.values(networkInterfaces())
+    .flat()
+    .find(
+      (network) => network?.family === "IPv4" && !network.internal,
+    )?.address;
+  while (address !== undefined && expo.exitCode === null) {
+    const status = await fetch(`http://localhost:${port}/status`)
+      .then((response) => response.text())
+      .catch(() => "");
+    if (status === "packager-status:running") {
+      console.log(`\nOpen exp://${address}:${port} in Expo Go.\n`);
+      break;
+    }
+    await sleep(500);
+  }
+}

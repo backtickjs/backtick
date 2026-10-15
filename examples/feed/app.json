@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "backtick-feed",
+    "slug": "backtick-feed",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "plugins": ["@backtickjs/builds/expo"]
+  }
+}

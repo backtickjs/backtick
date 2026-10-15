@@ -1210,6 +1210,91 @@ importers:
         specifier: ^3.6.2
         version: 3.8.4
 
+  examples/feed:
+    dependencies:
+      '@backtickjs/builds':
+        specifier: ^0.1.10
+        version: link:../../packages/builds
+      '@backtickjs/bundler':
+        specifier: ^0.1.10
+        version: link:../../packages/bundler
+      '@backtickjs/core':
+        specifier: ^0.1.10
+        version: link:../../packages/core
+      '@backtickjs/node-plugin':
+        specifier: ^0.1.10
+        version: link:../../packages/node-plugin
+      '@backtickjs/react':
+        specifier: ^19.2.3
+        version: link:../../adapters/react
+      '@backtickjs/react-native':
+        specifier: ^0.86.3
+        version: link:../../adapters/react-native
+      '@backtickjs/tanstack-react-query':
+        specifier: ^5.104.0
+        version: link:../../adapters/tanstack-react-query
+      '@hono/node-server':
+        specifier: ^2.1.4
+        version: 2.1.4(hono@4.13.13)
+      '@tanstack/react-query':
+        specifier: 5.104.0
+        version: 5.104.0(react@19.2.3)
+      expo:
+        specifier: ~57.0.26
+        version: 57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)
+      expo-constants:
+        specifier: ~57.0.20
+        version: 57.0.21(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))
+      expo-status-bar:
+        specifier: ~57.0.1
+        version: 57.0.1(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
+      hono:
+        specifier: ^4.13.13
+        version: 4.13.13
+      react:
+        specifier: 19.2.3
+        version: 19.2.3
+      react-dom:
+        specifier: 19.2.3
+        version: 19.2.3(react@19.2.3)
+      react-native:
+        specifier: 0.86.3
+        version: 0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3)
+      react-native-web:
+        specifier: ^0.21.0
+        version: 0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+    devDependencies:
+      '@backtickjs/prettier-plugin':
+        specifier: ^0.1.10
+        version: link:../../packages/prettier-plugin
+      '@backtickjs/tsc':
+        specifier: ^0.1.10
+        version: link:../../packages/tsc
+      '@testing-library/react':
+        specifier: ^16.3.3
+        version: 16.3.3(@testing-library/dom@10.4.2)(@types/react-dom@19.2.7(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@testing-library/user-event':
+        specifier: ^14.6.7
+        version: 14.6.7(@testing-library/dom@10.4.2)
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
+      '@types/react':
+        specifier: 19.2.18
+        version: 19.2.18
+      global-jsdom:
+        specifier: ^30.0.0
+        version: 30.0.0(jsdom@30.0.1(@noble/hashes@1.8.0))
+      jsdom:
+        specifier: ^30.0.1
+        version: 30.0.1(@noble/hashes@1.8.0)
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+
   packages/builds:
     dependencies:
       '@backtickjs/bundler':
