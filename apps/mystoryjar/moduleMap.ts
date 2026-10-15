@@ -1,4 +1,3 @@
-import type { ModuleMap } from "@backtickjs/core";
 import * as GoogleSignIn from "@react-native-google-signin/google-signin";
 import * as Navigation from "@react-navigation/native";
 import * as AppleAuthentication from "expo-apple-authentication";
@@ -34,4 +33,4 @@ export const moduleMap = {
   "react-native-fbsdk-next": Facebook,
   "expo-image-picker": ImagePicker,
   "expo-file-system": FileSystem,
-} satisfies ModuleMap;
+};

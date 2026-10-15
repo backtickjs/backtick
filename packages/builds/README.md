@@ -14,7 +14,6 @@ npm install @backtickjs/builds
 
    ```ts
    // moduleMap.ts
-   import type { ModuleMap } from "@backtickjs/core";
    import * as React from "react";
    import * as JSXRuntime from "react/jsx-runtime";
    import * as ReactNative from "react-native";
@@ -25,7 +24,7 @@ npm install @backtickjs/builds
      "react/jsx-runtime": JSXRuntime,
      "react-native": ReactNative,
      "react-native-fbsdk-next": Facebook,
-   } satisfies ModuleMap;
+   };
    ```
 
    Each entry is `"specifier": Name`, with `Name` imported above. An entry that decides at runtime, like `native ? Facebook : {}`, is an error. What a platform lacks, its map leaves out.
@@ -106,7 +105,7 @@ npm install @backtickjs/builds
 
 ## Related
 
-- [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): `execRoot` and `ModuleMap`, which run a bundle in the app
+- [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): `execRoot`, which runs a bundle in the app
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): bundles a screen for a build's modules, and `supports`
 
 ## License

@@ -1,4 +1,3 @@
-import type { ModuleMap } from "@backtickjs/core";
 import * as Haptics from "expo-haptics";
 import * as LinearGradient from "expo-linear-gradient";
 import * as React from "react";
@@ -13,4 +12,4 @@ export const moduleMap = {
   "react-native": ReactNative,
   "expo-haptics": Haptics,
   "expo-linear-gradient": LinearGradient,
-} satisfies ModuleMap;
+};

@@ -40,11 +40,10 @@ function app(
 }
 
 const map = (...specifiers: string[]) =>
-  `import type { ModuleMap } from "@backtickjs/core";
-${specifiers.map((each, index) => `import * as M${index} from "${each}";`).join("\n")}
+  `${specifiers.map((each, index) => `import * as M${index} from "${each}";`).join("\n")}
 export const moduleMap = {
 ${specifiers.map((each, index) => `  "${each}": M${index},`).join("\n")}
-} satisfies ModuleMap;
+};
 `;
 
 // iOS and Android with a native SDK; the web without it.

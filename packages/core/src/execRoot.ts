@@ -13,7 +13,7 @@ import type { Bundle } from "./Bundle.js";
  *       react: React,
  *       "react/jsx-runtime": JSXRuntime,
  *       "react-native": ReactNative,
- *     } satisfies ModuleMap;
+ *     };
  */
 export type ModuleMap = Readonly<Record<string, unknown>>;
 

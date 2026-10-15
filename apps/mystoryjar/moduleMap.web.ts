@@ -1,4 +1,3 @@
-import type { ModuleMap } from "@backtickjs/core";
 import * as Navigation from "@react-navigation/native";
 import * as AppleAuthentication from "expo-apple-authentication";
 import * as Crypto from "expo-crypto";
@@ -30,4 +29,4 @@ export const moduleMap = {
   "expo-crypto": Crypto,
   "expo-image-picker": ImagePicker,
   "expo-file-system": FileSystem,
-} satisfies ModuleMap;
+};
