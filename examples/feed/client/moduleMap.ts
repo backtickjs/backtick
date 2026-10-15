@@ -1,5 +1,6 @@
 import * as ReactQuery from "@tanstack/react-query";
 import * as React from "react";
+import * as ReactErrorBoundary from "react-error-boundary";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNative from "react-native";
 
@@ -14,4 +15,5 @@ export const moduleMap = {
   "react-native": ReactNative,
   // the queries and mutations screens send the server: see connection.ts
   "@tanstack/react-query": ReactQuery,
+  "react-error-boundary": ReactErrorBoundary,
 };

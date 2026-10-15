@@ -1,7 +1,6 @@
 import { useIsFocused } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import {
-  Component,
   type ReactNode,
   startTransition,
   Suspense,
@@ -11,6 +10,11 @@ import {
   useState,
 } from "react";
 import { ActivityIndicator, Pressable, Text, View } from "react-native";
+import {
+  ErrorBoundary,
+  type FallbackProps,
+  getErrorMessage,
+} from "react-error-boundary";
 import { fetchScreen } from "./fetchScreen";
 import { onServerRestart } from "./serverRestarts";
 
@@ -79,11 +83,15 @@ export function ServerScreen({
     return null;
   }
   return (
-    <Boundary key={request.number} retry={retry}>
+    <ErrorBoundary
+      key={request.number}
+      FallbackComponent={Failed}
+      onReset={retry}
+    >
       <Suspense fallback={<ActivityIndicator style={{ flex: 1 }} />}>
         <Screen screen={request.screen} />
       </Suspense>
-    </Boundary>
+    </ErrorBoundary>
   );
 }
 
@@ -94,34 +102,23 @@ function Screen({ screen }: { screen: Promise<ReactNode> }) {
 }
 
 // A screen that couldn't be fetched or run: offline, most often.
-class Boundary extends Component<
-  { children: ReactNode; retry: () => void },
-  { error: unknown }
-> {
-  state = { error: null as unknown };
-
-  static getDerivedStateFromError(error: unknown) {
-    return { error };
-  }
-
-  render() {
-    if (this.state.error === null) {
-      return this.props.children;
-    }
-    return (
-      <View style={{ flex: 1, justifyContent: "center", padding: 24, gap: 16 }}>
-        <Text style={{ fontSize: 16, textAlign: "center" }}>
-          Couldn't reach MyStoryJar. Check your connection and try again.
+function Failed({ error, resetErrorBoundary }: FallbackProps) {
+  return (
+    <View style={{ flex: 1, justifyContent: "center", padding: 24, gap: 16 }}>
+      <Text style={{ fontSize: 16, textAlign: "center" }}>
+        Couldn't reach MyStoryJar. Check your connection and try again.
+      </Text>
+      {__DEV__ && (
+        <Text style={{ color: "#b91c1c", textAlign: "center" }}>
+          {getErrorMessage(error) ?? String(error)}
         </Text>
-        {__DEV__ && (
-          <Text style={{ color: "#b91c1c", textAlign: "center" }}>
-            {String((this.state.error as Error).message ?? this.state.error)}
-          </Text>
-        )}
-        <Pressable onPress={this.props.retry} style={{ alignSelf: "center" }}>
-          <Text style={{ fontSize: 16, fontWeight: "600" }}>Try again</Text>
-        </Pressable>
-      </View>
-    );
-  }
+      )}
+      <Pressable
+        onPress={() => resetErrorBoundary()}
+        style={{ alignSelf: "center" }}
+      >
+        <Text style={{ fontSize: 16, fontWeight: "600" }}>Try again</Text>
+      </Pressable>
+    </View>
+  );
 }

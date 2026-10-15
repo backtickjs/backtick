@@ -1,14 +1,12 @@
 import { QueryClientProvider } from "@tanstack/react-query";
 import { StatusBar } from "expo-status-bar";
-import {
-  Component,
-  type ReactNode,
-  Suspense,
-  use,
-  useEffect,
-  useState,
-} from "react";
+import { type ReactNode, Suspense, use, useEffect, useState } from "react";
 import { ActivityIndicator, Text } from "react-native";
+import {
+  ErrorBoundary,
+  type FallbackProps,
+  getErrorMessage,
+} from "react-error-boundary";
 import { createQueryClient, fetchBundle, server } from "./connection";
 
 export default function App() {
@@ -36,11 +34,11 @@ export default function App() {
   // query it makes: see server/Feed.tsx.
   return (
     <QueryClientProvider client={queryClient}>
-      <Boundary key={request.number}>
+      <ErrorBoundary key={request.number} FallbackComponent={Failed}>
         <Suspense fallback={<ActivityIndicator style={{ flex: 1 }} />}>
           <Screen screen={request.screen} />
         </Suspense>
-      </Boundary>
+      </ErrorBoundary>
       <StatusBar style="auto" />
     </QueryClientProvider>
   );
@@ -72,23 +70,11 @@ function onServerRestart(restarted: () => void): () => void {
 
 // Why the screen couldn't be drawn: the server unreachable, or a screen the
 // app can't run.
-class Boundary extends Component<{ children: ReactNode }, { error: unknown }> {
-  state = { error: null as unknown };
-
-  static getDerivedStateFromError(error: unknown) {
-    return { error };
-  }
-
-  render() {
-    if (this.state.error === null) {
-      return this.props.children;
-    }
-    return (
-      <Text style={{ margin: 24, marginTop: 96, color: "#b91c1c" }}>
-        {String((this.state.error as Error).message ?? this.state.error)}
-        {"\n\n"}Is your Backtick server running? npm start runs it alongside
-        Expo.
-      </Text>
-    );
-  }
+function Failed({ error }: FallbackProps) {
+  return (
+    <Text style={{ margin: 24, marginTop: 96, color: "#b91c1c" }}>
+      {getErrorMessage(error) ?? String(error)}
+      {"\n\n"}Is your Backtick server running? npm start runs it alongside Expo.
+    </Text>
+  );
 }

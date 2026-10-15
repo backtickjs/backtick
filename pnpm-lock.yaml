@@ -1042,6 +1042,9 @@ importers:
       react-dom:
         specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
+      react-error-boundary:
+        specifier: 6.1.6
+        version: 6.1.6(@types/react@19.2.18)(react@19.2.3)
       react-native:
         specifier: 0.86.3
         version: 0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3)
@@ -1206,6 +1209,9 @@ importers:
       react-dom:
         specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
+      react-error-boundary:
+        specifier: 6.1.6
+        version: 6.1.6(@types/react@19.2.18)(react@19.2.3)
       react-native:
         specifier: 0.86.3
         version: 0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3)
@@ -1255,6 +1261,9 @@ importers:
       '@backtickjs/react':
         specifier: ^19.2.3
         version: link:../../adapters/react
+      '@backtickjs/react-error-boundary':
+        specifier: ^6.1.6
+        version: link:../../adapters/react-error-boundary
       '@backtickjs/react-native':
         specifier: ^0.86.3
         version: link:../../adapters/react-native
@@ -1285,6 +1294,9 @@ importers:
       react-dom:
         specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
+      react-error-boundary:
+        specifier: 6.1.6
+        version: 6.1.6(@types/react@19.2.18)(react@19.2.3)
       react-native:
         specifier: 0.86.3
         version: 0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3)
@@ -1505,6 +1517,9 @@ importers:
       react-dom:
         specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
+      react-error-boundary:
+        specifier: 6.1.6
+        version: 6.1.6(@types/react@19.2.18)(react@19.2.3)
       react-native:
         specifier: 0.86.3
         version: 0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3)

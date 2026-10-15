@@ -1,5 +1,6 @@
 import { type Client, cs } from "@backtickjs/core";
-import { Component, Suspense, useState } from "@backtickjs/react";
+import { Suspense, useState } from "@backtickjs/react";
+import { ErrorBoundary } from "@backtickjs/react-error-boundary";
 import {
   ActivityIndicator,
   FlatList,
@@ -15,7 +16,6 @@ import {
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@backtickjs/tanstack-react-query";
-import type { ReactNode } from "react";
 import { cacheOf } from "./cache.js";
 import { answersFor, itemQuery, type ItemProps, likeMutation } from "./Item.js";
 import { likesOf, readPage } from "./items.js";
@@ -63,24 +63,6 @@ const ItemCard = cs`(props: ItemProps) => {
   return <Item {...props} />;
 }`;
 
-// An item that couldn't load shows its error, and the others still draw.
-const Caught = cs`class Caught extends $Component<
-  { children: ReactNode },
-  { failed: boolean }
-> {
-  state = { failed: false };
-  static getDerivedStateFromError() {
-    return { failed: true };
-  }
-  render() {
-    return this.state.failed ? (
-      <$Text>Couldn't load this item.</$Text>
-    ) : (
-      this.props.children
-    );
-  }
-}`;
-
 // The feed, on the phone, a page at a time: what's liked, and how many likes
 // each item has, the server's count until a like here answers with a new one.
 const FeedList = cs`() => {
@@ -106,7 +88,8 @@ const FeedList = cs`() => {
         keyExtractor={(item) => item.path}
         contentContainerStyle={{ padding: 16, gap: 12 }}
         renderItem={({ item }) => (
-          <$Caught>
+          // An item that couldn't load says so, and the others still draw.
+          <$ErrorBoundary fallback={<$Text>Couldn't load this item.</$Text>}>
             <$Suspense
               fallback={<$ActivityIndicator style={{ padding: 24 }} />}
             >
@@ -117,7 +100,7 @@ const FeedList = cs`() => {
                 onLike={() => onLike(item)}
               />
             </$Suspense>
-          </$Caught>
+          </$ErrorBoundary>
         )}
         onEndReached={() => {
           if (feed.hasNextPage && !feed.isFetchingNextPage) {

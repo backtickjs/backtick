@@ -6,6 +6,7 @@ import * as ReactQuery from "@tanstack/react-query";
 import { render } from "@testing-library/react";
 import * as React from "react";
 import { act, createElement, Suspense } from "react";
+import * as ReactErrorBoundary from "react-error-boundary";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNativeWeb from "react-native-web";
 import { app } from "../app.js";
@@ -51,6 +52,7 @@ const moduleMap = {
   "react/jsx-runtime": JSXRuntime,
   "react-native": ReactNativeWeb,
   "@tanstack/react-query": ReactQuery,
+  "react-error-boundary": ReactErrorBoundary,
 };
 
 /**

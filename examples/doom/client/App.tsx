@@ -4,7 +4,6 @@ import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
 import {
-  Component,
   type ReactNode,
   Suspense,
   use,
@@ -15,6 +14,11 @@ import {
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNative from "react-native";
 import { ActivityIndicator, AppState, Text } from "react-native";
+import {
+  ErrorBoundary,
+  type FallbackProps,
+  getErrorMessage,
+} from "react-error-boundary";
 import { Fiber } from "./fiber";
 
 // What a screen may require: the packages this app was built with.
@@ -102,7 +106,7 @@ export default function App() {
   // server/Game.tsx.
   return (
     <>
-      <Boundary key={request.number}>
+      <ErrorBoundary key={request.number} FallbackComponent={Failed}>
         <Suspense
           fallback={
             <ActivityIndicator style={{ flex: 1, backgroundColor: "#000" }} />
@@ -110,7 +114,7 @@ export default function App() {
         >
           <Screen screen={request.screen} />
         </Suspense>
-      </Boundary>
+      </ErrorBoundary>
       <StatusBar hidden />
     </>
   );
@@ -220,23 +224,11 @@ function onServerRestart(restarted: () => void): () => void {
 
 // Why the screen couldn't be drawn: the server unreachable, or a screen the
 // app can't run.
-class Boundary extends Component<{ children: ReactNode }, { error: unknown }> {
-  state = { error: null as unknown };
-
-  static getDerivedStateFromError(error: unknown) {
-    return { error };
-  }
-
-  render() {
-    if (this.state.error === null) {
-      return this.props.children;
-    }
-    return (
-      <Text style={{ margin: 24, marginTop: 96, color: "#b91c1c" }}>
-        {String((this.state.error as Error).message ?? this.state.error)}
-        {"\n\n"}Is your Backtick server running? npm start runs it alongside
-        Expo.
-      </Text>
-    );
-  }
+function Failed({ error }: FallbackProps) {
+  return (
+    <Text style={{ margin: 24, marginTop: 96, color: "#b91c1c" }}>
+      {getErrorMessage(error) ?? String(error)}
+      {"\n\n"}Is your Backtick server running? npm start runs it alongside Expo.
+    </Text>
+  );
 }

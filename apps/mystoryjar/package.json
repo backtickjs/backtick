@@ -59,6 +59,7 @@
     "pdfkit": "^0.20.2",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-error-boundary": "6.1.6",
     "react-native": "0.86.3",
     "react-native-fbsdk-next": "^13.4.3",
     "react-native-safe-area-context": "~5.7.0",

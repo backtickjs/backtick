@@ -22,6 +22,7 @@
     "@backtickjs/core": "^0.1.10",
     "@backtickjs/node-plugin": "^0.1.10",
     "@backtickjs/react": "^19.2.3",
+    "@backtickjs/react-error-boundary": "^6.1.6",
     "@backtickjs/react-native": "^0.86.3",
     "@backtickjs/tanstack-react-query": "^5.104.0",
     "@hono/node-server": "^2.1.4",
@@ -32,6 +33,7 @@
     "hono": "^4.13.13",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-error-boundary": "6.1.6",
     "react-native": "0.86.3",
     "react-native-web": "^0.21.0",
     "typescript": "^6.0.3"
