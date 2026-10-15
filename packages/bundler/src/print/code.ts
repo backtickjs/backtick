@@ -14,10 +14,12 @@ const IDENTIFIER = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
 export interface Names {
   readonly imports: Map<string, { from: string; name: string; local: string }>;
   readonly modules: Modules;
+  // whether a script runs another bundle, which `$run` does
+  run: boolean;
 }
 
 export function createNames(modules: Modules): Names {
-  return { imports: new Map(), modules };
+  return { imports: new Map(), modules, run: false };
 }
 
 // A string, as a literal: `<` escaped, so no `</script>` or `<!--` appears
