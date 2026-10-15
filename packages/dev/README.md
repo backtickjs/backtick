@@ -83,7 +83,7 @@ curl localhost:3000/__backtick/devices        # the apps connected
 #43 2026-10-15T20:31:05.311Z backtick-dev info Restarted your server after a change.
 ```
 
-The app's lines come from the dev channel: it sends `console` output, and the uncaught errors the app hands `channel.report`, keeping what was logged before it connected.
+`backtick-dev` prints these commands when it starts, for an agent that runs it to find them. The app's lines come from the dev channel: it sends `console` output, and the uncaught errors the app hands `channel.report`, keeping what was logged before it connected.
 
 ## Screenshots
 
