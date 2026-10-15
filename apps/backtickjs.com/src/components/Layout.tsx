@@ -7,15 +7,15 @@ import { Logo } from "./Logo.js";
 export const Layout = cs`(props: { children: JSX.Element }) => (
   <div class="mx-auto box-border max-w-[1200px] px-6 text-[17px] leading-relaxed">
     <header class="flex items-center justify-between gap-6 py-7">
-      <a href="/" class="flex text-ink">
+      {/* The logo and the GitHub mark carry no text, so their links say what
+          they are for anyone not looking at them. */}
+      <a href="/" aria-label="Backtick" class="flex text-ink">
         <$Logo />
       </a>
       <nav class="flex items-center gap-5 whitespace-nowrap text-[15px] font-medium">
         <a href="/docs" class="no-underline">
           Docs
         </a>
-        {/* The mark carries no text, so the link says what it is for anyone
-            not looking at it. */}
         <a
           href="https://github.com/backtickjs/backtick"
           aria-label="GitHub"
