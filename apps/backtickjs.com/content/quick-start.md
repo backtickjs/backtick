@@ -38,8 +38,9 @@ The screen is `server/Home.tsx`. Replace it with this, and save:
 
 ```
 
-The app redraws with the new screen, without rebuilding. Tap the counter, then
-save again: the time changes, because the server ran `Home` again.
+Reload the app, by pressing `r` in the terminal running it: it shows the new
+screen, without rebuilding. Tap the counter, then reload again: the time
+changes, because the server ran `Home` again.
 
 What you just wrote:
 

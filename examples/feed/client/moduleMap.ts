@@ -13,7 +13,6 @@ export const moduleMap = {
   react: React,
   "react/jsx-runtime": JSXRuntime,
   "react-native": ReactNative,
-  // the queries and mutations screens send the server: see connection.ts
   "@tanstack/react-query": ReactQuery,
   "react-error-boundary": ReactErrorBoundary,
 };

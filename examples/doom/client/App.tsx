@@ -76,24 +76,8 @@ async function fetchScreen(path: string): Promise<Fetched> {
 
 export default function App() {
   // Held here, which doesn't suspend, so the request outlives the render
-  // that waits for it. Each request is numbered, so a new one also clears an
-  // error the last one showed.
-  const [request, setRequest] = useState(() => ({
-    number: 0,
-    screen: fetchScreen("/game"),
-  }));
-  useEffect(() => {
-    // In development, the screen is fetched again each time the server
-    // restarts, so a change to server/ shows as soon as you save.
-    if (__DEV__) {
-      return onServerRestart(() =>
-        setRequest(({ number }) => ({
-          number: number + 1,
-          screen: fetchScreen("/game"),
-        })),
-      );
-    }
-  }, []);
+  // that waits for it.
+  const [screen] = useState(() => fetchScreen("/game"));
   // The OS asking the app to free memory: the moment to know what the heap
   // held.
   useEffect(() => {
@@ -106,13 +90,13 @@ export default function App() {
   // server/Game.tsx.
   return (
     <>
-      <ErrorBoundary key={request.number} FallbackComponent={Failed}>
+      <ErrorBoundary FallbackComponent={Failed}>
         <Suspense
           fallback={
             <ActivityIndicator style={{ flex: 1, backgroundColor: "#000" }} />
           }
         >
-          <Screen screen={request.screen} />
+          <Screen screen={screen} />
         </Suspense>
       </ErrorBoundary>
       <StatusBar hidden />
@@ -203,24 +187,6 @@ function formatHeap(heap: Heap | undefined): string {
 const ms = (value: number) => `${value.toFixed(1)} ms`;
 const kb = (bytes: number) => `${(bytes / 1024).toFixed(1)} KB`;
 const mb = (bytes: number) => `${(bytes / 1024 / 1024).toFixed(1)} MB`;
-
-// Calls `restarted` when the server starts a new run: it names each run at
-// `/live`, and a new name is a new run.
-function onServerRestart(restarted: () => void): () => void {
-  let run: string | undefined;
-  const timer = setInterval(async () => {
-    try {
-      const next = await (await fetch(`${server}/live`)).text();
-      if (run !== undefined && next !== run) {
-        restarted();
-      }
-      run = next;
-    } catch {
-      // Restarting: the next tick finds the new run.
-    }
-  }, 1000);
-  return () => clearInterval(timer);
-}
 
 // Why the screen couldn't be drawn: the server unreachable, or a screen the
 // app can't run.

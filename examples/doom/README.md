@@ -1,6 +1,6 @@
 # Doom, served by Backtick
 
-A Doom-like shooter for iOS and Android, drawn in 3D with [React Three Fiber](https://r3f.docs.pmnd.rs)'s React Native build, `@react-three/fiber/native`. The app ships nothing of the game: the levels, the 3D scene, the game loop and the HUD all come from a Backtick server, so a new level or a faster imp reaches every phone when you save.
+A Doom-like shooter for iOS and Android, drawn in 3D with [React Three Fiber](https://r3f.docs.pmnd.rs)'s React Native build, `@react-three/fiber/native`. The app ships nothing of the game: the levels, the 3D scene, the game loop and the HUD all come from a Backtick server, so a new level or a faster imp reaches every phone without a release.
 
 ## Run it
 
@@ -9,7 +9,7 @@ npm install
 npm start
 ```
 
-`npm start` runs the server and Expo side by side. Open the app in Expo Go, then edit a map in `server/levels.ts` and save: the phone plays the new map, without a rebuild.
+`npm start` runs the server and Expo side by side. Open the app in Expo Go, then edit a map in `server/levels.ts`, save, and reload the app (press `r` in the terminal): the phone plays the new map, without a rebuild.
 
 Hold ▲ ▼ to walk, ◀ ▶ to turn, and FIRE to shoot. Clear every imp to finish the level.
 

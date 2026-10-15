@@ -35,7 +35,7 @@ export async function Home() {
         <section style={styles.step}>
           <h2 style={styles.subtitle}>Step 1: Try it</h2>
           <p style={styles.body}>
-            Edit <b>server/Home.tsx</b> and save. This page redraws on its own.
+            Edit <b>server/Home.tsx</b>, save, and refresh this page.
           </p>
         </section>
 

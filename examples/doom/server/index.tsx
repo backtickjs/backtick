@@ -48,15 +48,6 @@ app.get("/game", async (context) => {
   });
 });
 
-// Development is only what `npm start` runs, which sets NODE_ENV: any other
-// run, a deploy included, is production. In development, this run of the
-// server: `--watch` starts a new one whenever you save, and the app, seeing a
-// new one at `/live`, draws its screen again.
-if (process.env.NODE_ENV === "development") {
-  const run = crypto.randomUUID();
-  app.get("/live", (context) => context.text(run));
-}
-
 // Answered rather than crashed on, so the app can show why.
 app.onError((error, context) => {
   console.error(error);

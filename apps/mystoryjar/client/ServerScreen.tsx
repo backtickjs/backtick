@@ -16,7 +16,6 @@ import {
   getErrorMessage,
 } from "react-error-boundary";
 import { fetchScreen } from "./fetchScreen";
-import { onServerRestart } from "./serverRestarts";
 
 /**
  * The app's one stack screen, `Screen`, drawn once per server path on the
@@ -78,7 +77,6 @@ export function ServerScreen({
       refresh();
     }
   }, [fresh]);
-  useEffect(() => (__DEV__ ? onServerRestart(refresh) : undefined), []);
   if (!shown) {
     return null;
   }

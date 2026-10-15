@@ -32,14 +32,6 @@ app.use(
   }),
 );
 
-// In development, this run of the server: `--watch` starts a new one
-// whenever you save, and the app, seeing a new one at `/live`, fetches its
-// screens again.
-if (development) {
-  const run = crypto.randomUUID();
-  app.get("/live", (context) => context.text(run));
-}
-
 // The fonts and pictures screens link to, which don't change once served.
 const immutable = (context: Context, type: string, body: Buffer) =>
   context.body(new Uint8Array(body), 200, {

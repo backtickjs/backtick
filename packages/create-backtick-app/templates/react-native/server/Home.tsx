@@ -49,8 +49,8 @@ export async function Home() {
         <$View style={styles.step}>
           <$Text style={styles.subtitle}>Step 1: Try it</$Text>
           <$Text style={styles.body}>
-            Edit <$Text style={styles.code}>server/Home.tsx</$Text> and save.
-            This screen redraws without rebuilding the app.
+            Edit <$Text style={styles.code}>server/Home.tsx</$Text>, save, and
+            reload the app. This screen changes without rebuilding it.
           </$Text>
         </$View>
 

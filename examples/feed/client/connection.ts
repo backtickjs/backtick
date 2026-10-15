@@ -8,7 +8,7 @@ import { moduleMap } from "./moduleMap";
 
 // Your Backtick server runs on the computer Expo was started from.
 const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
-export const server = `http://${host}:3000`;
+const server = `http://${host}:3000`;
 
 // This build's id, which names the modules it carries, for the server to
 // bundle what it can run: `@backtickjs/builds/expo`, in app.json, adds it.

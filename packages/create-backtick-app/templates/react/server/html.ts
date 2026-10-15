@@ -12,21 +12,7 @@ const modules = {
 
 // Development is only what `npm start` runs, which sets NODE_ENV: any other
 // run, a deploy included, is production.
-export const development = process.env.NODE_ENV === "development";
-
-// In development, what reloads the page whenever the server restarts, as it
-// does when you save.
-const reload = `
-    <script type="module">
-      let run;
-      setInterval(async () => {
-        try {
-          const next = await (await fetch("/live")).text();
-          if (run !== undefined && next !== run) location.reload();
-          run = next;
-        } catch {}
-      }, 1000);
-    </script>`;
+const development = process.env.NODE_ENV === "development";
 
 // A page: the element, bundled for the browser, and React from a CDN.
 export async function toHtml(element: JSX.Element): Promise<string> {
@@ -60,7 +46,6 @@ export async function toHtml(element: JSX.Element): Promise<string> {
   <body style="margin: 0">
     <div id="app"></div>
     <script type="module" src="data:text/javascript,${encodeURIComponent(code)}"></script>
-    ${development ? reload : ""}
   </body>
 </html>`;
 }
