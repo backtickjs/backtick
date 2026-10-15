@@ -20,7 +20,7 @@ export {
 // A bundle's code, typed by what it runs to, and running one on the client
 // as this one was.
 export type { Bundle } from "./Bundle.js";
-export { isClientRun, run, type ClientRun } from "./run.js";
+export { exec, isClientExec, type ClientExec } from "./exec.js";
 
 // A drawing as a host builds one: what an adapter's JSX runtime makes, and
 // what the bundler expands.

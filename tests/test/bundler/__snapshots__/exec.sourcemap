@@ -7,7 +7,7 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 (cs.splice(      →  [-semantic -navigation]
-(run)            → $run
+(exec)           → $exec
 ))               →  [-semantic -navigation]
 (                → (
 (cs.splice(      →  [-semantic -navigation]
@@ -60,7 +60,7 @@ __cs_count       → count
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 (cs.splice(      →  [-semantic -navigation]
-(run)            → $run
+(exec)           → $exec
 ))               →  [-semantic -navigation]
 (                → (
 (cs.splice(      →  [-semantic -navigation]
@@ -79,7 +79,7 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 (cs.splice(      →  [-semantic -navigation]
-(run)            → $run
+(exec)           → $exec
 ))               →  [-semantic -navigation]
 (                → (
 (cs.splice(      →  [-semantic -navigation]

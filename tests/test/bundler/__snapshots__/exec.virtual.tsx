@@ -5,7 +5,7 @@ import {
   type Bundle,
   createImport,
   cs,
-  run,
+  exec,
   type Spliceable,
   type Spliced,
 } from "@backtickjs/core";
@@ -41,10 +41,10 @@ function runCjs(code: string, provided: Record<string, unknown>): unknown {
   return module.exports;
 }
 
-describe("run", () => {
+describe("exec", () => {
   it("runs an ES module, to its value", async () => {
     const { code: answer } = await bundle(cs.lift((() => 40 + 2)()));
-    const value = await evaluate(cs.lift((() => (cs.splice((run)))((cs.splice((answer)))))()));
+    const value = await evaluate(cs.lift((() => (cs.splice((exec)))((cs.splice((answer)))))()));
     assert.equal(await value, 42);
   });
 
@@ -54,18 +54,18 @@ describe("run", () => {
       __cs_setCount(__cs_count() + 1);
       return __cs_count();
     })()));
-    const value = await evaluate(cs.lift((() => (cs.splice((run)))((cs.splice((counted)))))()));
+    const value = await evaluate(cs.lift((() => (cs.splice((exec)))((cs.splice((counted)))))()));
     assert.equal(await value, 2);
   });
 
   it("runs CommonJS with the require the bundle was handed", async () => {
     const inner = await bundleCjs(cs.lift((() => (cs.splice((answer))) + 1)()));
-    const outer = await bundleCjs(cs.lift((() => (cs.splice((run)))((cs.splice((inner)))))()));
+    const outer = await bundleCjs(cs.lift((() => (cs.splice((exec)))((cs.splice((inner)))))()));
     const value = runCjs(outer, { app: { answer: 41 } }) as Promise<number>;
     assert.equal(await value, 42);
   });
 
   it("is declared only in a bundle that reads it", async () => {
-    assert.doesNotMatch(await bundleCjs(cs.lift((() => 1)())), /\$run/);
+    assert.doesNotMatch(await bundleCjs(cs.lift((() => 1)())), /\$exec/);
   });
 });

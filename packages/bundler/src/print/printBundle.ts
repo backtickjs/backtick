@@ -16,10 +16,10 @@ const RUNTIME = `const $require = (id) => {
   return $exports[id];
 };`;
 
-// Another bundle, run as this one is, to its value. As CommonJS, handed the
+// Another bundle, executed as this one is, to its value. As CommonJS, handed the
 // `require` this bundle was: inside the module table, `require` is the
 // table's own.
-const RUN_CJS = `const $run = async (bundle) => {
+const EXEC_CJS = `const $exec = async (bundle) => {
   const module = { exports: {} };
   new Function("module", "exports", "require", bundle)(module, module.exports, require);
   return module.exports;
@@ -27,7 +27,7 @@ const RUN_CJS = `const $run = async (bundle) => {
 
 // As an ES module, imported whole, the page's import map answering its
 // imports as it answers this bundle's.
-const RUN_ES = `const $run = async (bundle) => {
+const EXEC_ES = `const $exec = async (bundle) => {
   const module = await import("data:text/javascript," + encodeURIComponent(bundle));
   return module.default;
 };`;
@@ -60,8 +60,8 @@ export function printBundle(
   for (const { from, name, local } of names.imports.values()) {
     module.line(declaration(from, name, local));
   }
-  if (names.run) {
-    module.line(format === "es" ? RUN_ES : RUN_CJS);
+  if (names.exec) {
+    module.line(format === "es" ? EXEC_ES : EXEC_CJS);
   }
   // Each script a module table's entry, as webpack's and Metro's are: its body
   // under its id, run once by `$require`. The modules they require are the

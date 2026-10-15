@@ -5,7 +5,7 @@ import {
   type Bundle,
   createImport,
   cs,
-  run,
+  exec,
   type Spliceable,
   type Spliced,
 } from "@backtickjs/core";
@@ -41,10 +41,10 @@ function runCjs(code: string, provided: Record<string, unknown>): unknown {
   return module.exports;
 }
 
-describe("run", () => {
+describe("exec", () => {
   it("runs an ES module, to its value", async () => {
     const { code: answer } = await bundle(cs`40 + 2`);
-    const value = await evaluate(cs`$run($answer)`);
+    const value = await evaluate(cs`$exec($answer)`);
     assert.equal(await value, 42);
   });
 
@@ -54,18 +54,18 @@ describe("run", () => {
       setCount(count() + 1);
       return count();
     }`);
-    const value = await evaluate(cs`$run($counted)`);
+    const value = await evaluate(cs`$exec($counted)`);
     assert.equal(await value, 2);
   });
 
   it("runs CommonJS with the require the bundle was handed", async () => {
     const inner = await bundleCjs(cs`$answer + 1`);
-    const outer = await bundleCjs(cs`$run($inner)`);
+    const outer = await bundleCjs(cs`$exec($inner)`);
     const value = runCjs(outer, { app: { answer: 41 } }) as Promise<number>;
     assert.equal(await value, 42);
   });
 
   it("is declared only in a bundle that reads it", async () => {
-    assert.doesNotMatch(await bundleCjs(cs`1`), /\$run/);
+    assert.doesNotMatch(await bundleCjs(cs`1`), /\$exec/);
   });
 });

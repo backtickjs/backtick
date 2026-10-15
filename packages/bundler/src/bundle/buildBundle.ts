@@ -1,7 +1,7 @@
 import {
   type ClientModule,
   type ClientScript,
-  isClientRun,
+  isClientExec,
   isClientImport,
   isClientScript,
   isJsxElement,
@@ -227,9 +227,9 @@ export async function buildBundle(
     if (isClientImport(spliceable)) {
       return imported(names, spliceable);
     }
-    if (isClientRun(spliceable)) {
-      names.run = true;
-      return "$run";
+    if (isClientExec(spliceable)) {
+      names.exec = true;
+      return "$exec";
     }
     if (
       spliceable === null ||
