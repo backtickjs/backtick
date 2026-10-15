@@ -1,4 +1,5 @@
-import { type Bundle, execRoot } from "@backtickjs/core";
+import type { Bundle } from "@backtickjs/core";
+import { execRoot } from "@backtickjs/core/cjs";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
@@ -54,7 +55,7 @@ async function fetchScreen(path: string): Promise<Fetched> {
   }
   const bundle = (await response.text()) as Bundle<ReactNode>;
   const downloaded = performance.now();
-  const node = await execRoot(bundle, { format: "cjs", moduleMap });
+  const node = await execRoot(bundle, moduleMap);
   const evaluated = performance.now();
   return {
     path,

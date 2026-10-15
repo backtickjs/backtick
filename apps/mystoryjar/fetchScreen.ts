@@ -1,4 +1,5 @@
-import { type Bundle, execRoot } from "@backtickjs/core";
+import type { Bundle } from "@backtickjs/core";
+import { execRoot } from "@backtickjs/core/cjs";
 import type { ReactNode } from "react";
 import { moduleMap } from "./moduleMap";
 import { request } from "./request";
@@ -27,5 +28,5 @@ async function load(path: string): Promise<ReactNode> {
     throw new Error(`${path} answered ${response.status}.`);
   }
   const bundle = (await response.text()) as Bundle<ReactNode>;
-  return execRoot(bundle, { format: "cjs", moduleMap });
+  return execRoot(bundle, moduleMap);
 }

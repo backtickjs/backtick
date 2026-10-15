@@ -3,7 +3,7 @@ import { rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { after, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { execRoot } from "@backtickjs/core";
+import { execRoot } from "@backtickjs/core/cjs";
 import { transpile } from "@backtickjs/compiler";
 import { react } from "@backtickjs/react/plugin";
 import * as React from "react";
@@ -70,12 +70,9 @@ it("draws a server's screen with the app's React Native", async () => {
   // The app: the bundle run with its packages, `react-native-web` standing in
   // for React Native, and drawn.
   const drawn = await execRoot(code, {
-    format: "cjs",
-    moduleMap: {
-      react: React,
-      "react/jsx-runtime": JSXRuntime,
-      "react-native": ReactNativeWeb,
-    },
+    react: React,
+    "react/jsx-runtime": JSXRuntime,
+    "react-native": ReactNativeWeb,
   });
   const errors: unknown[] = [];
   const error = console.error;

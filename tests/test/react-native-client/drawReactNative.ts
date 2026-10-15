@@ -4,7 +4,7 @@ import { after } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { transpile } from "@backtickjs/compiler";
 import { react } from "@backtickjs/react/plugin";
-import { execRoot } from "@backtickjs/core";
+import { execRoot } from "@backtickjs/core/cjs";
 import * as React from "react";
 import { act } from "react";
 import * as JSXRuntime from "react/jsx-runtime";
@@ -47,12 +47,9 @@ export async function drawReactNative(name: string, source: string) {
     },
   });
   const drawn = await execRoot(built.generate({ format: "cjs" }).code, {
-    format: "cjs",
-    moduleMap: {
-      react: React,
-      "react/jsx-runtime": JSXRuntime,
-      "react-native": ReactNativeWeb,
-    },
+    react: React,
+    "react/jsx-runtime": JSXRuntime,
+    "react-native": ReactNativeWeb,
   });
 
   const container = document.createElement("div");

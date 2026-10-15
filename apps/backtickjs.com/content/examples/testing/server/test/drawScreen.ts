@@ -1,7 +1,8 @@
 import { fileURLToPath } from "node:url";
 import { createBuilds } from "@backtickjs/builds";
 import { bundler } from "@backtickjs/bundler";
-import { execRoot, type Spliceable } from "@backtickjs/core";
+import type { Spliceable } from "@backtickjs/core";
+import { execRoot } from "@backtickjs/core/cjs";
 import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNativeWeb from "react-native-web";
@@ -23,5 +24,5 @@ const moduleMap = {
 export async function drawScreen<T extends Spliceable>(input: T) {
   const bundle = await bundler.build({ input, modules });
   const { code } = bundle.generate({ format: "cjs" });
-  return execRoot(code, { format: "cjs", moduleMap });
+  return execRoot(code, moduleMap);
 }

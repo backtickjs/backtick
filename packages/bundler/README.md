@@ -10,7 +10,7 @@ npm install @backtickjs/bundler @backtickjs/core
 
 ## Usage
 
-For React Native, write CommonJS and serve it; the app fetches it and runs it with `execRoot` from `@backtickjs/core`:
+For React Native, write CommonJS and serve it; the app fetches it and runs it with `execRoot` from `@backtickjs/core/cjs`:
 
 ```tsx
 import { bundler } from "@backtickjs/bundler";

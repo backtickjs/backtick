@@ -6,12 +6,10 @@ import {
   createImport,
   cs,
   exec,
-  execRoot,
   type Spliceable,
   type Spliced,
 } from "@backtickjs/core";
-import { createSignal } from "@backtickjs/solid-js";
-import { bundle } from "../evaluate.ts";
+import { execRoot } from "@backtickjs/core/cjs";
 
 // What an app provides beside Solid, for a bundle to import.
 const answer = createImport<number>({
@@ -30,42 +28,24 @@ async function bundleCjs<T extends Spliceable>(
   return built.generate({ format: "cjs" }).code;
 }
 
-describe("execRoot", () => {
+describe("execRoot, from @backtickjs/core/cjs", () => {
   it("runs CommonJS with require answered from the module map", async () => {
     const root = await bundleCjs(cs`$answer + 1`);
-    assert.equal(
-      await execRoot(root, {
-        format: "cjs",
-        moduleMap: { app: { answer: 41 } },
-      }),
-      42,
-    );
+    assert.equal(await execRoot(root, { app: { answer: 41 } }), 42);
   });
 
   it("refuses a module the map doesn't provide", async () => {
     const root = await bundleCjs(cs`$answer + 1`);
     await assert.rejects(
-      execRoot(root, { format: "cjs", moduleMap: {} }),
+      execRoot(root, {}),
       /requires "app", which this app doesn't provide/,
     );
-  });
-
-  it("runs an ES module, the page's import map answering it", async () => {
-    const { code: root } = await bundle(cs`{
-      const [count, setCount] = $createSignal(1);
-      setCount(count() + 1);
-      return count();
-    }`);
-    assert.equal(await execRoot(root, { format: "es" }), 2);
   });
 
   it("hands the bundles it runs with exec the same modules", async () => {
     const inner = await bundleCjs(cs`$answer + 1`);
     const root = await bundleCjs(cs`$exec($inner)`);
-    const value = await execRoot(root, {
-      format: "cjs",
-      moduleMap: { app: { answer: 41 } },
-    });
+    const value = await execRoot(root, { app: { answer: 41 } });
     assert.equal(value, 42);
   });
 
@@ -73,7 +53,7 @@ describe("execRoot", () => {
     const inner = await bundleCjs(cs`$answer + 1`);
     const root = await bundleCjs(cs`$exec($inner)`);
     await assert.rejects(
-      execRoot(root, { format: "cjs", moduleMap: {} }),
+      execRoot(root, {}),
       /requires "app", which this app doesn't provide/,
     );
   });

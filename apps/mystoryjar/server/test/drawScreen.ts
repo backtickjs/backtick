@@ -1,5 +1,6 @@
 import { bundler } from "@backtickjs/bundler";
-import { execRoot, type Spliceable } from "@backtickjs/core";
+import type { Spliceable } from "@backtickjs/core";
+import { execRoot } from "@backtickjs/core/cjs";
 import { CommonActions, StackActions } from "@react-navigation/routers";
 import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
@@ -101,7 +102,7 @@ export async function drawScreen<T extends Spliceable>(input: T) {
     modules: builds.installed("web"),
   });
   const { code } = bundle.generate({ format: "cjs" });
-  return execRoot(code, { format: "cjs", moduleMap: modules });
+  return execRoot(code, modules);
 }
 
 let canGoBack = false;

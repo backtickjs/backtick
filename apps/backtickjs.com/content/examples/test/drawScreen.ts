@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { readFileSync, writeFileSync } from "node:fs";
 import { bundler } from "@backtickjs/bundler";
-import { execRoot, type Spliceable } from "@backtickjs/core";
+import type { Spliceable } from "@backtickjs/core";
+import { execRoot } from "@backtickjs/core/cjs";
 import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNativeWeb from "react-native-web";
@@ -15,15 +16,12 @@ export async function drawScreen<T extends Spliceable>(
 ) {
   const { code } = await bundleScreen(input, modules);
   return execRoot(code, {
-    format: "cjs",
-    moduleMap: {
-      react: React,
-      "react/jsx-runtime": JSXRuntime,
-      "react-native": ReactNativeWeb,
-      ...Object.fromEntries(
-        Object.entries(modules).map(([name, { module }]) => [name, module]),
-      ),
-    },
+    react: React,
+    "react/jsx-runtime": JSXRuntime,
+    "react-native": ReactNativeWeb,
+    ...Object.fromEntries(
+      Object.entries(modules).map(([name, { module }]) => [name, module]),
+    ),
   });
 }
 

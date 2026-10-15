@@ -17,10 +17,10 @@ export {
   isClientImport,
   type ClientImport,
 } from "./ClientImport.js";
-// A bundle's code, typed by what it runs to; executing the one an app starts
-// from, and, in a script, another as this one was.
+// A bundle's code, typed by what it runs to, and, in a script, executing
+// another as this one was. The one an app starts from is executed by
+// `@backtickjs/core/cjs` or `@backtickjs/core/es`.
 export type { Bundle } from "./Bundle.js";
-export { type ExecOptions, execRoot, type ModuleMap } from "./execRoot.js";
 export { exec, isClientExec, type ClientExec } from "./exec.js";
 
 // A drawing as a host builds one: what an adapter's JSX runtime makes, and

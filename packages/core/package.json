@@ -28,6 +28,14 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./cjs": {
+      "types": "./dist/cjs.d.ts",
+      "default": "./dist/cjs.js"
+    },
+    "./es": {
+      "types": "./dist/es.d.ts",
+      "default": "./dist/es.js"
     }
   },
   "files": [

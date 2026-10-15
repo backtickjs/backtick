@@ -101,7 +101,7 @@ has every option.
 ## 4. Run by your app
 
 Your app fetches the bundle like any request, and runs it with `execRoot` from
-`@backtickjs/core`, handing it its module map: the packages it
+`@backtickjs/core/cjs`, handing it its module map: the packages it
 ships, imported as it starts. What the bundle exports is the screen, a React
 node the app draws:
 

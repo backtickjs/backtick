@@ -69,7 +69,7 @@ export async function Home() {
 }
 ```
 
-On each request, bundle it for the versions the app runs, and answer with the code, which the app runs with `execRoot` from `@backtickjs/core`:
+On each request, bundle it for the versions the app runs, and answer with the code, which the app runs with `execRoot` from `@backtickjs/core/cjs`:
 
 ```tsx
 import { bundler } from "@backtickjs/bundler";
