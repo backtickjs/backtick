@@ -227,8 +227,17 @@ describe("a server's builds", () => {
   });
 
   it("refuses a build it doesn't know, or none", () => {
-    const builds = createBuilds({ projectRoot: mobile() });
+    const root = mobile();
+    const builds = createBuilds({ projectRoot: root });
     assert.throws(() => builds.modulesOf("0123456789abcdef"), UnknownBuild);
+    // naming the builds this code makes, which it isn't
+    const { ios, web } = buildIds(root);
+    assert.throws(
+      () => builds.modulesOf("0123456789abcdef"),
+      new RegExp(
+        `^Error: No modules for build "0123456789abcdef": it isn't registered here, and this code makes "${ios}" and "${web}"\\.`,
+      ),
+    );
     assert.throws(() => builds.modulesOf(null), /No build id was sent/);
   });
 

@@ -62,7 +62,7 @@ The package knows no platform: how the app reloads, and where its uncaught error
 ## How it works
 
 - `backtick-dev` answers on http://localhost:3000 and forwards every request to your server, which it runs on a free port as `server/index.tsx`, with Node and `@backtickjs/node-plugin`, or Bun where `package.json` has `@backtickjs/bun-plugin`. The `Host` header is forwarded as the app sent it, so URLs your server makes from the request name where the app reached it.
-- A change under `server/` restarts your server. A request that arrives during the restart waits for the new server.
+- A change under `server/` restarts your server, and so does an install: `backtick-dev` watches `package.json`, and the lockfile of the nearest folder up that has one, the monorepo's root included, which package managers write once the packages are in place. A request that arrives during the restart waits for the new server. The log says what changed.
 - The dev channel is a WebSocket to `/__backtick`. Once the new server listens, `backtick-dev` sends `reload`, and the app reloads as you told it to. If your server fails to start, or crashes, the app logs why with `console.error`, which React Native's LogBox shows, and requests are answered `502` with it.
 - If `backtick-dev` itself restarts, the dev channel reconnects and reloads.
 

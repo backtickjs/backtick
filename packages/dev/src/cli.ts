@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 // `backtick-dev [command…]`: your Backtick server in development, behind
-// http://localhost:3000, restarted whenever a file under `server/` changes;
-// the app reloads once it's back. A command, `backtick-dev expo start`, runs
+// http://localhost:3000, restarted whenever a file under `server/` changes or
+// an install changes packages; the app reloads once it's back. A command, `backtick-dev expo start`, runs
 // alongside in this terminal, and stopping it stops both.
 import { spawn } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
 import { supervise } from "./supervisor.js";
 
 const { dependencies = {} } = JSON.parse(
@@ -24,7 +25,7 @@ const supervisor = await supervise({
           "@backtickjs/node-plugin",
           "server/index.tsx",
         ],
-  watch: "server",
+  watch: ["server", "package.json", ...lockfiles(process.cwd())],
   port: 3000,
   env: { NODE_ENV: process.env.NODE_ENV ?? "development" },
 });
@@ -51,4 +52,20 @@ if (command === undefined) {
   for (const signal of ["SIGINT", "SIGTERM", "SIGHUP"] as const) {
     process.on(signal, () => alongside.kill(signal));
   }
+}
+
+// The lockfiles of the nearest folder that has any, this project's or, in a
+// monorepo, its root's: an install writes them once packages are in place.
+function lockfiles(folder: string): string[] {
+  const found = [
+    "pnpm-lock.yaml",
+    "package-lock.json",
+    "yarn.lock",
+    "bun.lock",
+    "bun.lockb",
+  ]
+    .map((name) => join(folder, name))
+    .filter((path) => existsSync(path));
+  const parent = dirname(folder);
+  return found.length > 0 || parent === folder ? found : lockfiles(parent);
 }

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
-import { mkdtempSync, writeFileSync } from "node:fs";
+import { mkdtempSync, renameSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { basename, join } from "node:path";
 import { afterEach, it, mock } from "node:test";
 import { startDevChannel } from "../dist/client.js";
 import {
@@ -19,17 +19,21 @@ afterEach(() => supervisor?.close());
 async function project(answer: string) {
   const dir = mkdtempSync(join(tmpdir(), "backtick-dev-"));
   writeFileSync(join(dir, "answer.txt"), answer);
+  // A lockfile beside it, as a monorepo's root has one.
+  const lockfile = join(dir, "..", `${basename(dir)}.lock`);
+  writeFileSync(lockfile, "");
   // macOS reports a change made just before watching starts.
   await new Promise((resolve) => setTimeout(resolve, 300));
   supervisor = await supervise({
     command: ["node", fixture],
-    watch: dir,
+    watch: [dir, lockfile],
     port: 0,
     env: { DIR: dir },
   });
   const origin = `http://localhost:${supervisor.port}`;
   return {
     origin,
+    lockfile,
     save: (answer: string) => writeFileSync(join(dir, "answer.txt"), answer),
     get: async (path: string) => {
       const response = await fetch(`${origin}${path}`);
@@ -175,6 +179,19 @@ it("answers a PNG of what the newest app shows, or why there's none", async (t) 
   assert.equal(
     (await get("/__backtick/screenshot?device=203.0.113.9")).status,
     404,
+  );
+});
+
+it("restarts your server when an install replaces the lockfile", async () => {
+  const { get, origin, lockfile } = await project("one");
+  const { next } = await app(origin);
+  // as package managers write it: another file, renamed over it
+  writeFileSync(`${lockfile}.tmp`, "packages");
+  renameSync(`${lockfile}.tmp`, lockfile);
+  assert.deepEqual(await next(), { type: "reload" });
+  assert.match(
+    (await get("/__backtick/logs")).text,
+    new RegExp(`Restarted your server: \\S*${basename(lockfile)} changed\\.`),
   );
 });
 

@@ -48,8 +48,11 @@ export async function fetchBundle(
       ...init.headers,
     },
   });
+  // Why, as the server says it.
   if (!response.ok) {
-    throw new Error(`${path} answered ${response.status}.`);
+    throw new Error(
+      `${path} answered ${response.status}: ${await response.text()}`,
+    );
   }
   const bundle = (await response.text()) as Bundle<unknown>;
   return execRoot(bundle, moduleMap);

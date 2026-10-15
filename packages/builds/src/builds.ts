@@ -26,11 +26,16 @@ export type Build = {
  * doesn't know means it, or the build, was deployed wrong.
  */
 export class UnknownBuild extends Error {
-  constructor(readonly buildId: string | null) {
+  // `current`: the ids of the builds this code makes, for the message.
+  constructor(
+    readonly buildId: string | null,
+    current: readonly string[],
+  ) {
+    const made = current.map((id) => JSON.stringify(id)).join(" and ");
     super(
       buildId === null
         ? "No build id was sent: the app's code predates build ids, or doesn't send its own."
-        : `No modules for build ${JSON.stringify(buildId)}: it isn't registered here.`,
+        : `No modules for build ${JSON.stringify(buildId)}: it isn't registered here, and this code makes ${made}. An app built before its module map or packages changed is built again (in development, restart Expo), or registered to keep being served.`,
     );
   }
 }
@@ -119,7 +124,12 @@ export function createBuilds({ projectRoot }: { projectRoot: string }): Builds {
       const current = platforms
         .map(installedOn)
         .find((modules) => buildIdOf(modules) === buildId);
-      if (current === undefined) throw new UnknownBuild(buildId);
+      if (current === undefined) {
+        const ids = new Set(
+          platforms.map((each) => buildIdOf(installedOn(each))),
+        );
+        throw new UnknownBuild(buildId, [...ids]);
+      }
       return current;
     },
     installed: installedOn,

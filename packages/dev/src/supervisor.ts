@@ -1,7 +1,8 @@
 import { type ChildProcess, spawn } from "node:child_process";
 import { once } from "node:events";
-import { watch } from "node:fs";
+import { type FSWatcher, statSync, watch } from "node:fs";
 import { type AddressInfo, connect, createServer } from "node:net";
+import { basename, dirname, join, relative } from "node:path";
 import { Readable } from "node:stream";
 import { setTimeout as sleep } from "node:timers/promises";
 import { serve, upgradeWebSocket } from "@hono/node-server";
@@ -50,8 +51,9 @@ const kept = 5000;
 export interface SupervisorOptions {
   // What runs your server, which listens on `process.env.PORT`.
   readonly command: readonly [string, ...string[]];
-  // The folder whose changes restart it.
-  readonly watch: string;
+  // What restarts it when it changes: a folder, and anything under it, or a
+  // file, as a lockfile, even replaced by another of its name.
+  readonly watch: readonly string[];
   // Where the app reaches your server, and the dev client the supervisor.
   readonly port: number;
   readonly env?: NodeJS.ProcessEnv;
@@ -63,7 +65,7 @@ export interface Supervisor {
 }
 
 /**
- * Runs your server behind `port`, restarting it when a file under `watch`
+ * Runs your server behind `port`, restarting it when what `watch` names
  * changes, and tells each app connected to `/__backtick` to reload once the
  * new one listens. A request that arrives during a restart waits for it.
  * Your server's output and each app's console are kept, for
@@ -146,8 +148,9 @@ export async function supervise(
     return `http://127.0.0.1:${port}`;
   };
 
-  // `announce`: tell apps to reload, which the first start doesn't.
-  const restart = (announce: boolean) => {
+  // `changed`: what changed, for the log, and for apps to reload, which the
+  // first start doesn't.
+  const restart = (changed?: string) => {
     const previous = child;
     const current = (async () => {
       if (previous?.exitCode === null && previous.signalCode === null) {
@@ -161,11 +164,11 @@ export async function supervise(
     // Only the latest restart speaks: one a save interrupted fails quietly.
     current.then(
       () => {
-        if (announce && upstream === current) {
+        if (changed !== undefined && upstream === current) {
           record({
             source: "backtick-dev",
             level: "info",
-            message: "Restarted your server after a change.",
+            message: `Restarted your server: ${changed} changed.`,
           });
           send({ type: "reload" });
         }
@@ -310,12 +313,22 @@ export async function supervise(
   // Your server down, or failing to start: why, for the app to show.
   app.onError((error, context) => context.text(error.message, 502));
 
-  restart(false);
+  restart();
   let timer: ReturnType<typeof setTimeout> | undefined;
-  const watcher = watch(options.watch, { recursive: true }, () => {
+  const changed = (path: string) => {
     clearTimeout(timer);
-    timer = setTimeout(() => restart(true), 100);
-  });
+    timer = setTimeout(() => restart(relative(process.cwd(), path)), 100);
+  };
+  const watchers: FSWatcher[] = options.watch.map((path) =>
+    statSync(path).isDirectory()
+      ? watch(path, { recursive: true }, (_event, file) =>
+          changed(file === null ? path : join(path, file)),
+        )
+      : // Its folder, which still sees it once it's replaced.
+        watch(dirname(path), (_event, file) => {
+          if (file === basename(path)) changed(path);
+        }),
+  );
   const server = serve({
     fetch: app.fetch,
     port: options.port,
@@ -327,7 +340,7 @@ export async function supervise(
     port: (server.address() as AddressInfo).port,
     async close() {
       clearTimeout(timer);
-      watcher.close();
+      watchers.forEach((watcher) => watcher.close());
       for (const socket of devices.keys()) {
         socket.close();
       }
