@@ -116,6 +116,7 @@ const ReorderButton = cs`(props: { order: Order }) => {
 | [`@backtickjs/expo-image-picker`](adapters/expo-image-picker)                           | Expo Image Picker's library and camera pickers, for scripts        |
 | [`@backtickjs/expo-file-system`](adapters/expo-file-system)                             | Expo FileSystem's files, folders and native uploads, for scripts   |
 | [`@backtickjs/tanstack-react-query`](adapters/tanstack-react-query)                     | TanStack Query's hooks, options and client, for scripts            |
+| [`@backtickjs/react-error-boundary`](adapters/react-error-boundary)                     | react-error-boundary's boundary, hook and HOC, for scripts         |
 | [`@backtickjs/builds`](packages/builds)                                                 | Keeps your server drawing for every app build in users' hands      |
 | [`@backtickjs/node-plugin`](packages/node-plugin)                                       | Compiles scripts as a Node server loads them                       |
 | [`@backtickjs/bun-plugin`](packages/bun-plugin)                                         | Compiles scripts as a Bun server loads them                        |
