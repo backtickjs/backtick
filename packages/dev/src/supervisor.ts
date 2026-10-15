@@ -5,16 +5,37 @@ import { type AddressInfo, connect, createServer } from "node:net";
 import { Readable } from "node:stream";
 import { setTimeout as sleep } from "node:timers/promises";
 import { serve, upgradeWebSocket } from "@hono/node-server";
+import { getConnInfo } from "@hono/node-server/conninfo";
 import { Hono } from "hono";
 import { proxy } from "hono/proxy";
 import type { WSContext } from "hono/ws";
 import { type Dispatcher, request } from "undici";
 import { WebSocketServer } from "ws";
 
-/** What the supervisor tells the dev client, on `/__backtick`. */
-export type Message =
+/** What the supervisor tells the app, on `/__backtick`. */
+export type SupervisorMessage =
   | { type: "reload" }
   | { type: "server-error"; message: string };
+
+/** What the app tells the supervisor. */
+export type AppMessage = { type: "log"; level: Level; message: string };
+
+export type Level = "debug" | "log" | "info" | "warn" | "error";
+
+/** One entry of `/__backtick/logs`, numbered in the order it came. */
+export interface LogEntry {
+  readonly number: number;
+  readonly time: Date;
+  // Your server's output, the app's console, or the supervisor's own news.
+  readonly source: "server" | "app" | "backtick-dev";
+  // The app's address, for an entry it sent.
+  readonly device?: string;
+  readonly level: Level;
+  readonly message: string;
+}
+
+// As many entries as `/__backtick/logs` keeps: the oldest go first.
+const kept = 5000;
 
 export interface SupervisorOptions {
   // What runs your server, which listens on `process.env.PORT`.
@@ -35,15 +56,28 @@ export interface Supervisor {
  * Runs your server behind `port`, restarting it when a file under `watch`
  * changes, and tells each app connected to `/__backtick` to reload once the
  * new one listens. A request that arrives during a restart waits for it.
+ * Your server's output and each app's console are kept, for
+ * `/__backtick/logs`.
  */
 export async function supervise(
   options: SupervisorOptions,
 ): Promise<Supervisor> {
-  const sockets = new Set<WSContext>();
-  const send = (message: Message) => {
-    for (const socket of sockets) {
+  // Each app connected, by its socket: where it connects from, and when.
+  const devices = new Map<
+    WSContext,
+    { address: string; userAgent: string; connected: Date }
+  >();
+  const send = (message: SupervisorMessage) => {
+    for (const socket of devices.keys()) {
       socket.send(JSON.stringify(message));
     }
+  };
+
+  const entries: LogEntry[] = [];
+  let numbered = 0;
+  const record = (entry: Omit<LogEntry, "number" | "time">) => {
+    entries.push({ number: ++numbered, time: new Date(), ...entry });
+    entries.splice(0, entries.length - kept);
   };
 
   // Servers this stopped, whose exit isn't a failure.
@@ -57,15 +91,23 @@ export async function supervise(
     const port = await freePort();
     const [command, ...args] = options.command;
     const started = spawn(command, args, {
-      stdio: ["ignore", "inherit", "pipe"],
+      stdio: ["ignore", "pipe", "pipe"],
       env: { ...process.env, ...options.env, PORT: String(port) },
     });
     child = started;
+    // In this terminal, as before, and in the log, a line at a time.
     let output = "";
+    started.stdout!.on("data", (chunk: Buffer) => process.stdout.write(chunk));
     started.stderr!.on("data", (chunk: Buffer) => {
       process.stderr.write(chunk);
       output = (output + chunk).slice(-8000);
     });
+    eachLine(started.stdout!, (message) =>
+      record({ source: "server", level: "log", message }),
+    );
+    eachLine(started.stderr!, (message) =>
+      record({ source: "server", level: "error", message }),
+    );
     const failure = () =>
       new Error(output || `Your server exited with code ${started.exitCode}.`);
     let listening = false;
@@ -101,7 +143,16 @@ export async function supervise(
     upstream = current;
     // Only the latest restart speaks: one a save interrupted fails quietly.
     current.then(
-      () => announce && upstream === current && send({ type: "reload" }),
+      () => {
+        if (announce && upstream === current) {
+          record({
+            source: "backtick-dev",
+            level: "info",
+            message: "Restarted your server after a change.",
+          });
+          send({ type: "reload" });
+        }
+      },
       (error: Error) =>
         upstream === current &&
         send({ type: "server-error", message: error.message }),
@@ -123,11 +174,51 @@ export async function supervise(
   const app = new Hono();
   app.get(
     "/__backtick",
-    upgradeWebSocket(() => ({
-      onOpen: (_event, socket) => void sockets.add(socket),
-      onClose: (_event, socket) => void sockets.delete(socket),
-    })),
+    upgradeWebSocket((context) => {
+      // An IPv4 address, as Node names it on a socket that also takes IPv6.
+      const address = (
+        getConnInfo(context).remote.address ?? "unknown"
+      ).replace(/^::ffff:/, "");
+      const userAgent = context.req.header("user-agent") ?? "";
+      return {
+        onOpen: (_event, socket) =>
+          void devices.set(socket, {
+            address,
+            userAgent,
+            connected: new Date(),
+          }),
+        onClose: (_event, socket) => void devices.delete(socket),
+        onMessage: (event) => {
+          const message = JSON.parse(String(event.data)) as AppMessage;
+          if (message.type === "log") {
+            const { level, message: text } = message;
+            record({ source: "app", device: address, level, message: text });
+          }
+        },
+      };
+    }),
   );
+  // For an agent, or you, as text: `curl localhost:3000/__backtick/logs`.
+  app.get("/__backtick/devices", (context) =>
+    context.text(
+      [...devices.values()]
+        .map(
+          ({ address, userAgent, connected }) =>
+            `${address} connected ${connected.toISOString()} ${userAgent}\n`,
+        )
+        .join(""),
+    ),
+  );
+  // What came after entry `since`, which a reader passes to read on.
+  app.get("/__backtick/logs", (context) => {
+    const since = Number(context.req.query("since") ?? 0);
+    return context.text(
+      entries
+        .filter((entry) => entry.number > since)
+        .map(formatEntry)
+        .join(""),
+    );
+  });
   app.all("*", async (context) => {
     const target = await origin();
     const url = new URL(context.req.url);
@@ -160,7 +251,7 @@ export async function supervise(
     async close() {
       clearTimeout(timer);
       watcher.close();
-      for (const socket of sockets) {
+      for (const socket of devices.keys()) {
         socket.close();
       }
       server.close();
@@ -171,6 +262,26 @@ export async function supervise(
       }
     },
   };
+}
+
+// `#12 2026-10-15T20:31:00.123Z app 192.168.0.123 error …`, a stack's lines
+// indented under it.
+function formatEntry(entry: LogEntry): string {
+  const { number, time, source, device, level, message } = entry;
+  const where = device === undefined ? source : `${source} ${device}`;
+  const body = message.replaceAll("\n", "\n    ");
+  return `#${number} ${time.toISOString()} ${where} ${level} ${body}\n`;
+}
+
+// Calls `line` for each line `stream` writes, the last one included.
+function eachLine(stream: Readable, line: (text: string) => void): void {
+  let rest = "";
+  stream.on("data", (chunk: Buffer) => {
+    const lines = (rest + chunk).split("\n");
+    rest = lines.pop()!;
+    lines.forEach(line);
+  });
+  stream.on("end", () => rest && line(rest));
 }
 
 // `request` as `fetch` takes it and answers, but with its `Host` header kept.

@@ -14,5 +14,6 @@ createServer((request, response) => {
     console.error("Crashed.");
     process.exit(1);
   }
+  console.log(`Answered ${request.url}.`);
   response.end(`${answer} ${request.headers.host} ${request.url}`);
 }).listen(Number(process.env.PORT));

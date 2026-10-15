@@ -2,9 +2,10 @@ import assert from "node:assert/strict";
 import { mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { afterEach, it } from "node:test";
+import { afterEach, it, mock } from "node:test";
+import { startDevChannel } from "../dist/client.js";
 import {
-  type Message,
+  type SupervisorMessage,
   type Supervisor,
   supervise,
 } from "../dist/supervisor.js";
@@ -40,10 +41,10 @@ async function project(answer: string) {
 // An app connected to the channel, and what it's told.
 async function app(origin: string) {
   const socket = new WebSocket(`${origin.replace("http", "ws")}/__backtick`);
-  const messages: Message[] = [];
-  const waiting: ((message: Message) => void)[] = [];
+  const messages: SupervisorMessage[] = [];
+  const waiting: ((message: SupervisorMessage) => void)[] = [];
   socket.onmessage = (event) => {
-    const message = JSON.parse(String(event.data)) as Message;
+    const message = JSON.parse(String(event.data)) as SupervisorMessage;
     const next = waiting.shift();
     next ? next(message) : messages.push(message);
   };
@@ -52,7 +53,7 @@ async function app(origin: string) {
     next: () =>
       messages.length > 0
         ? Promise.resolve(messages.shift()!)
-        : new Promise<Message>((resolve) => waiting.push(resolve)),
+        : new Promise<SupervisorMessage>((resolve) => waiting.push(resolve)),
   };
 }
 
@@ -106,3 +107,43 @@ it("says why your server crashed once up", async () => {
   });
   assert.deepEqual(await get("/"), { status: 502, text: "Crashed.\n" });
 });
+
+it("keeps your server's output, a line at a time, and its restarts", async () => {
+  const { get, origin, save } = await project("one");
+  const { next } = await app(origin);
+  await get("/hello");
+  save("two");
+  await next();
+  const logs = (await get("/__backtick/logs")).text;
+  assert.match(logs, /^#1 \S+ server log Answered \/hello\.$/m);
+  assert.match(logs, /^#2 \S+ backtick-dev info Restarted your server/m);
+  // what came after
+  assert.equal((await get("/__backtick/logs?since=2")).text, "");
+});
+
+it("keeps the app's console, and the uncaught errors it reports", async (t) => {
+  const { get, origin } = await project("one");
+  t.mock.method(console, "error", () => {});
+  const reloads: number[] = [];
+  const channel = startDevChannel(origin, { reload: () => reloads.push(1) });
+  t.after(channel.stop);
+  // logged before the socket opens: sent once it does
+  console.error("Failed:", new Error("boom"), { id: 1 });
+  channel.report(new TypeError("uncaught"));
+  await waitFor(async () =>
+    (await get("/__backtick/logs")).text.includes("uncaught"),
+  );
+  const logs = (await get("/__backtick/logs")).text;
+  assert.match(logs, /^#\d+ \S+ app \S+ error Failed: Error: boom\n +at /m);
+  assert.match(logs, /\{"id":1\}/);
+  assert.match(logs, /^#\d+ \S+ app \S+ error Uncaught: TypeError: uncaught/m);
+  assert.match((await get("/__backtick/devices")).text, /^\S+ connected \S+/);
+  assert.deepEqual(reloads, []);
+});
+
+async function waitFor(condition: () => Promise<boolean>) {
+  for (let tries = 0; !(await condition()); tries++) {
+    assert.ok(tries < 100, "waited too long");
+    await new Promise((resolve) => setTimeout(resolve, 20));
+  }
+}

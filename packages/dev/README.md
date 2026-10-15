@@ -1,6 +1,6 @@
 # @backtickjs/dev
 
-[Backtick](https://backtickjs.com) in development. `backtick-dev` runs your server and Expo in one terminal, restarts the server when you save a file under `server/`, and reloads the app once the new server is up.
+[Backtick](https://backtickjs.com) in development. `backtick-dev` runs your server, restarts it when you save a file under `server/`, and reloads the app once the new server is up. It keeps your server's output and the app's console in one log, which you, or an agent, read with `curl`.
 
 ## Install
 
@@ -31,19 +31,31 @@ The command after `backtick-dev` runs in the same terminal, and stopping it stop
 serve({ fetch: app.fetch, port: Number(process.env.PORT ?? 3000) });
 ```
 
-**The app** starts the dev channel with the URL it reaches your server at, and how it reloads:
+**The app** starts the dev channel with the URL it reaches your server at, and how it reloads. It hands the channel its uncaught errors, from wherever its platform reports them:
 
 ```ts
 import { startDevChannel } from "@backtickjs/dev/client";
 
 // React Native
 if (__DEV__) {
-  startDevChannel(server, () => DevSettings.reload());
+  const channel = startDevChannel(server, {
+    reload: () => DevSettings.reload(),
+  });
+  const handler = ErrorUtils.getGlobalHandler();
+  ErrorUtils.setGlobalHandler((error, fatal) => {
+    channel.report(error);
+    handler(error, fatal);
+  });
 }
 
 // a web page
-startDevChannel(location.origin, () => location.reload());
+const channel = startDevChannel(location.origin, {
+  reload: () => location.reload(),
+});
+addEventListener("error", (event) => channel.report(event.error));
 ```
+
+The package knows no platform: how the app reloads, and where its uncaught errors come from, are the app's to say.
 
 ## How it works
 
@@ -51,6 +63,25 @@ startDevChannel(location.origin, () => location.reload());
 - A change under `server/` restarts your server. A request that arrives during the restart waits for the new server.
 - The dev channel is a WebSocket to `/__backtick`. Once the new server listens, `backtick-dev` sends `reload`, and the app reloads as you told it to. If your server fails to start, or crashes, the app logs why with `console.error`, which React Native's LogBox shows, and requests are answered `502` with it.
 - If `backtick-dev` itself restarts, the dev channel reconnects and reloads.
+
+## Logs
+
+`backtick-dev` keeps the last 5,000 lines of your server's output, the app's console and uncaught errors, and its own restarts, numbered in order:
+
+```sh
+curl localhost:3000/__backtick/logs           # all of it
+curl localhost:3000/__backtick/logs?since=42  # what came after #42
+curl localhost:3000/__backtick/devices        # the apps connected
+```
+
+```
+#41 2026-10-15T20:31:00.104Z server log Backtick server on http://localhost:51234
+#42 2026-10-15T20:31:02.990Z app 192.168.0.123 error Failed: TypeError: …
+    at Item (…)
+#43 2026-10-15T20:31:05.311Z backtick-dev info Restarted your server after a change.
+```
+
+The app's lines come from the dev channel: it sends `console` output, and the uncaught errors the app hands `channel.report`, keeping what was logged before it connected.
 
 ## Related
 

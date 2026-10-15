@@ -1,7 +1,7 @@
 {
   "name": "@backtickjs/dev",
   "version": "0.1.10",
-  "description": "Backtick in development: `backtick-dev` runs your server, restarts it when you save, and reloads the app once it's back",
+  "description": "Backtick in development: `backtick-dev` runs your server, restarts it when you save, reloads the app once it's back, and keeps both sides' logs",
   "keywords": [
     "backtick",
     "server-driven-ui",
@@ -41,7 +41,7 @@
     "dev": "tsc -b --watch",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
-    "test": "node --test \"test/**/*.test.ts\"",
+    "test": "node --test --test-timeout=20000 \"test/**/*.test.ts\"",
     "clean": "rm -rf node_modules dist .turbo",
     "prepack": "cp ../../LICENSE ."
   },

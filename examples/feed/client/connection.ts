@@ -11,9 +11,17 @@ import { moduleMap } from "./moduleMap";
 const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
 
-// In development, the app reloads when you save a file under server/.
+// In development, the app reloads when you save a file under server/, and
+// what it logs, uncaught errors included, reaches `backtick-dev`.
 if (__DEV__) {
-  startDevChannel(server, () => DevSettings.reload());
+  const channel = startDevChannel(server, {
+    reload: () => DevSettings.reload(),
+  });
+  const handler = ErrorUtils.getGlobalHandler();
+  ErrorUtils.setGlobalHandler((error, fatal) => {
+    channel.report(error);
+    handler(error, fatal);
+  });
 }
 
 // This build's id, which names the modules it carries, for the server to
