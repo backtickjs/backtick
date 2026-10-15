@@ -57,11 +57,13 @@ it("lists the tools, which say what to do when backtick-dev isn't running", asyn
 it("answers the logs, the devices, and a screenshot as an image", async (t) => {
   const dir = mkdtempSync(join(tmpdir(), "backtick-dev-mcp-"));
   writeFileSync(join(dir, "answer.txt"), "one");
+  // macOS reports a change made just before watching starts.
+  await new Promise((resolve) => setTimeout(resolve, 300));
   const supervisor = await supervise({
     command: ["node", fixture],
     watch: [dir],
     port: 0,
-    env: { DIR: dir },
+    env: { DIR: dir, PIDS: `${dir}.pids` },
   });
   t.after(() => supervisor.close());
   const origin = `http://localhost:${supervisor.port}`;

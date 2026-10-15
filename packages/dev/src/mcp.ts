@@ -128,7 +128,7 @@ server.registerTool(
   "inspect",
   {
     description:
-      'The app\'s UI as text: what it shows, in order, with a number on each element that can be pressed, typed in or scrolled, as `[3] press "♡ 0"` or `[4] input "" placeholder "Add a comment"`. Inspect again after acting, since the numbers follow what\'s drawn.',
+      'The app\'s UI as text: what it shows, in order, with a number on each element that can be pressed, typed in or scrolled, as `[3] press "♡ 0"` or `[4] input "" placeholder "Add a comment"`. What\'s beyond the screen, as further down a list, is marked `(off screen)`: scroll to it before pressing or typing. Inspect again after acting, since the numbers follow what\'s drawn.',
     inputSchema: { device },
   },
   ({ device }) => act({ kind: "inspect" }, device),

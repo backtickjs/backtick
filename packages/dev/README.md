@@ -73,6 +73,8 @@ The package knows no platform: how the app reloads, and where its uncaught error
 - `logs`: the last 5,000 lines of your server's output, the app's console and uncaught errors, and each restart of your server with the file that changed, numbered in order. `since`, the last number read, answers only what came after.
 - `screenshot`: a PNG of what the app has drawn, as an image the agent sees, from the newest app connected or the one at `device`. It's the app's window, not the display: it looks the same with the phone's screen off.
 - `devices`: the apps connected, by address.
+- `inspect`: the app's UI as text, in order, a number on each element that can be pressed, typed in or scrolled. What's beyond the screen, further down a list, is marked `(off screen)`.
+- `press`, `type` and `scroll`: act on an element by its number, as a person would: its `onPress`, its `onChangeText`, or the list's own scrolling, so a list that loads more as it nears its end does. An element off screen is scrolled to first; a stale number answers so.
 
 ```
 #41 2026-10-15T20:31:00.104Z server log Backtick server on http://localhost:51234
@@ -94,7 +96,7 @@ Register it in the project's `.mcp.json`:
 }
 ```
 
-`--no` keeps `npx` to the copy installed in the project. The tools ask the `backtick-dev` running on http://localhost:3000, or at `BACKTICK_DEV_ORIGIN`; without one, each says to start it with `npm start`. A screenshot needs the app's `screenshot` option. The app's lines come from the dev channel: it sends `console` output, and the uncaught errors the app hands `channel.report`, keeping what was logged before it connected.
+`--no` keeps `npx` to the copy installed in the project. The UI tools need the app's `ui` option: in React Native, `reactNativeUI`, from `@backtickjs/dev/react-native`, which reads the app's React tree through React DevTools' hook and measures it with the new architecture's renderer. The tools ask the `backtick-dev` running on http://localhost:3000, or at `BACKTICK_DEV_ORIGIN`; without one, each says to start it with `npm start`. A screenshot needs the app's `screenshot` option. The app's lines come from the dev channel: it sends `console` output, and the uncaught errors the app hands `channel.report`, keeping what was logged before it connected.
 
 ## Related
 

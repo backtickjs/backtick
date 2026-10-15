@@ -1,5 +1,11 @@
 import assert from "node:assert/strict";
-import { mkdtempSync, renameSync, writeFileSync } from "node:fs";
+import {
+  existsSync,
+  mkdtempSync,
+  readFileSync,
+  renameSync,
+  writeFileSync,
+} from "node:fs";
 import { tmpdir } from "node:os";
 import { basename, join } from "node:path";
 import { afterEach, it, mock } from "node:test";
@@ -16,11 +22,12 @@ let supervisor: Supervisor | undefined;
 afterEach(() => supervisor?.close());
 
 // A project whose server answers `answer`, supervised on a free port.
-async function project(answer: string) {
+async function project(answer: string, env: Record<string, string> = {}) {
   const dir = mkdtempSync(join(tmpdir(), "backtick-dev-"));
   writeFileSync(join(dir, "answer.txt"), answer);
   // A lockfile beside it, as a monorepo's root has one.
   const lockfile = join(dir, "..", `${basename(dir)}.lock`);
+  const pids = join(dir, "..", `${basename(dir)}.pids`);
   writeFileSync(lockfile, "");
   // macOS reports a change made just before watching starts.
   await new Promise((resolve) => setTimeout(resolve, 300));
@@ -28,12 +35,18 @@ async function project(answer: string) {
     command: ["node", fixture],
     watch: [dir, lockfile],
     port: 0,
-    env: { DIR: dir },
+    env: { DIR: dir, PIDS: pids, ...env },
   });
   const origin = `http://localhost:${supervisor.port}`;
   return {
     origin,
     lockfile,
+    // What its servers wrote: each one's process id as it started, and
+    // again with "stopping" when asked to stop.
+    pids: () =>
+      existsSync(pids)
+        ? readFileSync(pids, "utf8").split("\n").filter(Boolean)
+        : [],
     save: (answer: string) => writeFileSync(join(dir, "answer.txt"), answer),
     get: async (path: string) => {
       const response = await fetch(`${origin}${path}`);
@@ -193,6 +206,27 @@ it("restarts your server when an install replaces the lockfile", async () => {
     (await get("/__backtick/logs")).text,
     new RegExp(`Restarted your server: \\S*${basename(lockfile)} changed\\.`),
   );
+});
+
+it("leaves no server running when closed during a restart", async () => {
+  const { pids, save } = await project("one", { SLOW_STOP: "1" });
+  save("two");
+  // closed while the restart waits for the old server to stop
+  await waitFor(async () => pids().some((line) => line.endsWith("stopping")));
+  await supervisor!.close();
+  // past when the old server stops, and another could start
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  const running = pids()
+    .map((line) => Number(line.split(" ")[0]))
+    .filter((pid) => {
+      try {
+        process.kill(pid, 0);
+        return true;
+      } catch {
+        return false;
+      }
+    });
+  assert.deepEqual(running, []);
 });
 
 async function waitFor(condition: () => Promise<boolean>) {

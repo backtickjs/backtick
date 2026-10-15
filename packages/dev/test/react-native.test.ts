@@ -38,9 +38,12 @@ const h = React.createElement;
 function Pressable(props: {
   onPress: () => void;
   disabled?: boolean;
+  top?: number;
   children?: unknown;
 }) {
-  return h("div", null, props.children as never);
+  const at: Record<string, number> =
+    props.top === undefined ? {} : { "data-top": props.top, "data-height": 40 };
+  return h("div", at, props.children as never);
 }
 function Inner(props: { value: string; onChangeText: (text: string) => void }) {
   return h("input", { value: props.value, readOnly: true });
@@ -74,7 +77,8 @@ function Feed() {
   const [text, setText] = React.useState("");
   return h(
     "div",
-    null,
+    // the screen, 800 tall
+    { "data-top": 0, "data-height": 800 },
     h("span", null, "Feed"),
     // two text nodes, one line
     h("span", null, likes, " liked"),
@@ -91,11 +95,32 @@ function Feed() {
         onChangeText: setText,
       }),
       h(Pressable, { onPress: () => {}, disabled: text === "" }, "Send"),
+      // below the screen
+      h(Pressable, { onPress: () => {}, top: 1000 }, "Far"),
     ),
   );
 }
 
 Object.assign(globalThis, { IS_REACT_ACT_ENVIRONMENT: false });
+// React Native's renderer, measuring a native view by its node. jsdom lays
+// nothing out: an element is where its `data-top` and `data-height` say, and
+// of no size without them. Each element is its own node, as a Fabric
+// instance's `node`.
+Object.defineProperty(HTMLElement.prototype, "node", {
+  get() {
+    return this;
+  },
+});
+Object.assign(globalThis, {
+  nativeFabricUIManager: {
+    getBoundingClientRect: (node: HTMLElement) => [
+      0,
+      Number(node.dataset.top ?? 0),
+      400,
+      Number(node.dataset.height ?? 0),
+    ],
+  },
+});
 createRoot(document.body.appendChild(document.createElement("div"))).render(
   h(Feed),
 );
@@ -115,6 +140,7 @@ it("outlines what's drawn, a number on each element", async () => {
       '  [2] press "♡ 0"',
       '  [3] input "" placeholder "Add a comment"',
       '  [4] press "Send" (disabled)',
+      '  [5] press "Far" (off screen)',
     ].join("\n"),
   );
 });
@@ -153,4 +179,8 @@ it("says what it can't do", async () => {
     /\[3\] is input, not press/,
   );
   await assert.rejects(ui({ kind: "press", target: 9 }), /There's no \[9\]/);
+  await assert.rejects(
+    ui({ kind: "press", target: 5 }),
+    /^Error: \[5\] press "Far" \(off screen\) is off screen: scroll to it first\.$/,
+  );
 });

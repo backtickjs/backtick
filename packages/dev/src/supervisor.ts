@@ -156,8 +156,12 @@ export async function supervise(
   // stderr if it exits instead.
   let upstream: Promise<string>;
 
+  // Once closing, no server starts: a restart under way would leave one
+  // running, holding its port.
+  let closing = false;
   const start = async (): Promise<string> => {
     const port = await freePort();
+    if (closing) throw new Error("backtick-dev is closing.");
     const [command, ...args] = options.command;
     const started = spawn(command, args, {
       stdio: ["ignore", "pipe", "pipe"],
@@ -369,12 +373,15 @@ export async function supervise(
   return {
     port: (server.address() as AddressInfo).port,
     async close() {
+      closing = true;
       clearTimeout(timer);
       watchers.forEach((watcher) => watcher.close());
       for (const socket of devices.keys()) {
         socket.close();
       }
       server.close();
+      // A restart under way ends with the server it started, if any.
+      await upstream.catch(() => {});
       if (child?.exitCode === null && child.signalCode === null) {
         stopped.add(child);
         child.kill();

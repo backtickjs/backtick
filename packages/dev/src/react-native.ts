@@ -61,7 +61,65 @@ interface Element {
   number: number;
   kind: Kind;
   fiber: Fiber;
+  // Drawn wholly outside the screen: in a list, beyond what it shows.
+  offScreen: boolean;
 }
+
+interface Rect {
+  top: number;
+  left: number;
+  bottom: number;
+  right: number;
+}
+
+// React Native's renderer, which measures any native view by its node:
+// `[x, y, width, height]` on the screen.
+interface FabricUIManager {
+  getBoundingClientRect(
+    node: unknown,
+    includeTransform: boolean,
+  ): readonly [number, number, number, number] | null | undefined;
+}
+
+// Where `fiber`'s first native view is drawn. Undefined where it can't be
+// measured: outside React Native's new architecture.
+function rectOf(fiber: Fiber | null): Rect | undefined {
+  for (; fiber !== null; fiber = fiber.sibling) {
+    if (fiber.tag === hostComponent) {
+      const { nativeFabricUIManager } = globalThis as {
+        nativeFabricUIManager?: FabricUIManager;
+      };
+      const node = (fiber.stateNode as { node?: unknown } | null)?.node;
+      const box =
+        node === undefined
+          ? undefined
+          : nativeFabricUIManager?.getBoundingClientRect(node, true);
+      if (box == null) return undefined;
+      const [left, top, width, height] = box;
+      return { top, left, bottom: top + height, right: left + width };
+    }
+    const rect = rectOf(fiber.child);
+    if (rect !== undefined) return rect;
+  }
+  return undefined;
+}
+
+// Whether `rect` is drawn wholly outside `screen`. Neither measured, or
+// either of no size, as under a test's DOM, isn't.
+function outside(rect: Rect | undefined, screen: Rect | undefined): boolean {
+  if (rect === undefined || screen === undefined) return false;
+  const sized = (each: Rect) =>
+    each.right > each.left && each.bottom > each.top;
+  if (!sized(rect) || !sized(screen)) return false;
+  return (
+    rect.bottom <= screen.top ||
+    rect.top >= screen.bottom ||
+    rect.right <= screen.left ||
+    rect.left >= screen.right
+  );
+}
+
+const offScreen = " (off screen)";
 
 // The app's UI as lines of text, each element numbered, and the elements.
 function outline(): { lines: string[]; elements: Element[] } {
@@ -71,6 +129,9 @@ function outline(): { lines: string[]; elements: Element[] } {
   // FlatList wraps a VirtualizedList, which wraps a ScrollView, and a
   // TextInput's inner input takes its `onChangeText`. `label`: where text
   // goes, for an element that names itself by it.
+  // `screen`: where the root's first native view is drawn, which the app's
+  // root view covers.
+  let screen: Rect | undefined;
   const visit = (
     fiber: Fiber | null,
     depth: number,
@@ -82,13 +143,22 @@ function outline(): { lines: string[]; elements: Element[] } {
       if (fiber.tag === hostText || holdsText(fiber)) {
         const text = textOf(fiber).trim();
         if (text === "") continue;
-        if (label !== undefined) label.push(text);
-        else lines.push(`${"  ".repeat(depth)}${JSON.stringify(text)}`);
+        if (label !== undefined) {
+          label.push(text);
+          continue;
+        }
+        const where = outside(rectOf(fiber), screen) ? offScreen : "";
+        lines.push(`${"  ".repeat(depth)}${JSON.stringify(text)}${where}`);
         continue;
       }
       const kind = kindOf(fiber);
       if (kind !== undefined && !wrapped.has(kind)) {
-        const element = { number: elements.length + 1, kind, fiber };
+        const element = {
+          number: elements.length + 1,
+          kind,
+          fiber,
+          offScreen: outside(rectOf(fiber.child), screen),
+        };
         elements.push(element);
         const at = lines.push("") - 1;
         const own = kind === "scroll" ? label : [];
@@ -101,7 +171,10 @@ function outline(): { lines: string[]; elements: Element[] } {
       visit(fiber.child, depth, host ? new Set() : wrapped, label);
     }
   };
-  for (const root of roots()) visit(root.child, 0, new Set(), undefined);
+  for (const root of roots()) {
+    screen = rectOf(root.child);
+    visit(root.child, 0, new Set(), undefined);
+  }
   return { lines, elements };
 }
 
@@ -141,7 +214,8 @@ function textOf(fiber: Fiber): string {
 }
 
 // `[3] press "♡ 0"`, `[4] input "" placeholder "Add a comment"`.
-function describe({ number, kind, fiber }: Element, label: string[]): string {
+function describe(element: Element, label: string[]): string {
+  const { number, kind, fiber } = element;
   const props = fiber.memoizedProps ?? {};
   const parts = [`[${number}]`, kind];
   if (kind === "input") {
@@ -155,6 +229,7 @@ function describe({ number, kind, fiber }: Element, label: string[]): string {
   if (props.disabled === true || props.editable === false) {
     parts.push("(disabled)");
   }
+  if (element.offScreen) parts.push(offScreen.trim());
   return parts.join(" ");
 }
 
@@ -194,6 +269,9 @@ export async function reactNativeUI(action: UIAction): Promise<string> {
   )!;
   if (props.disabled === true || props.editable === false) {
     throw new Error(`${named.trim()} is disabled.`);
+  }
+  if (element.offScreen && action.kind !== "scroll") {
+    throw new Error(`${named.trim()} is off screen: scroll to it first.`);
   }
   if (action.kind === "press") {
     (props.onPress as (event: unknown) => void)(touch());
