@@ -1,6 +1,14 @@
 // The dev channel, which the app starts in development. Nothing of Node, or
 // of any platform, so any bundler can take it.
-import type { AppMessage, Level, SupervisorMessage } from "./supervisor.js";
+import type {
+  AppMessage,
+  Level,
+  Question,
+  SupervisorMessage,
+  UIAction,
+} from "./supervisor.js";
+
+export type { UIAction };
 
 const levels: readonly Level[] = ["debug", "log", "info", "warn", "error"];
 
@@ -15,6 +23,11 @@ export interface DevChannelOptions {
   // `captureScreen({ format: "png", result: "base64" })` in React Native.
   // Without it, `/__backtick/screenshot` answers that the app takes none.
   readonly screenshot?: () => Promise<string>;
+  // The app's UI, for an agent: an outline of it, with a number on what can
+  // be pressed, typed in or scrolled, and those actions, each answering what
+  // it did. `reactNativeUI`, from `@backtickjs/dev/react-native`, in React
+  // Native.
+  readonly ui?: (action: UIAction) => string | Promise<string>;
 }
 
 export interface DevChannel {
@@ -43,7 +56,7 @@ export interface DevChannel {
  */
 export function startDevChannel(
   server: string,
-  { reload, screenshot }: DevChannelOptions,
+  { reload, screenshot, ui }: DevChannelOptions,
 ): DevChannel {
   let socket: WebSocket | undefined;
   // What was logged before the socket opened, sent once it does.
@@ -55,6 +68,21 @@ export function startDevChannel(
       unsent.push(message);
       unsent.splice(0, unsent.length - waiting);
     }
+  };
+  // What the app answers `question` with, from the option for it.
+  const answer = async (question: Question): Promise<string> => {
+    if (question.kind === "screenshot") {
+      if (screenshot === undefined) {
+        throw new Error(
+          "This app takes no screenshots: pass `screenshot` to startDevChannel.",
+        );
+      }
+      return screenshot();
+    }
+    if (ui === undefined) {
+      throw new Error("This app offers no UI: pass `ui` to startDevChannel.");
+    }
+    return ui(question);
   };
   const log = (level: Level, args: unknown[]) =>
     send({ type: "log", level, message: args.map(format).join(" ") });
@@ -91,22 +119,17 @@ export function startDevChannel(
         reload();
       } else if (message.type === "server-error") {
         console.error(`Your Backtick server failed:\n\n${message.message}`);
-      } else if (message.type === "screenshot") {
-        const { id } = message;
-        if (screenshot === undefined) {
-          send({
-            type: "screenshot",
-            id,
-            error:
-              "This app takes no screenshots: pass `screenshot` to startDevChannel.",
-          });
-        } else {
-          screenshot().then(
-            (png) => send({ type: "screenshot", id, png }),
-            (error: unknown) =>
-              send({ type: "screenshot", id, error: format(error) }),
-          );
-        }
+      } else if (message.type === "ask") {
+        const { id, question } = message;
+        answer(question).then(
+          (value) => send({ type: "answer", id, value }),
+          (error: unknown) =>
+            send({
+              type: "answer",
+              id,
+              error: error instanceof Error ? error.message : format(error),
+            }),
+        );
       }
     };
     socket.onclose = () => {

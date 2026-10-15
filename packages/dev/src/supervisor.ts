@@ -13,23 +13,34 @@ import type { WSContext } from "hono/ws";
 import { type Dispatcher, request } from "undici";
 import { WebSocketServer } from "ws";
 
+/**
+ * What the app is asked, for an agent: a screenshot, or one of its UI's
+ * actions. A `target` is a number from the app's last `inspect`.
+ */
+export type Question = { kind: "screenshot" } | UIAction;
+export type UIAction =
+  | { kind: "inspect" }
+  | { kind: "press"; target: number }
+  | { kind: "type"; target: number; text: string }
+  | { kind: "scroll"; target: number; direction: "up" | "down" };
+
 /** What the supervisor tells the app, on `/__backtick`. */
 export type SupervisorMessage =
   | { type: "reload" }
   | { type: "server-error"; message: string }
-  | { type: "screenshot"; id: number };
+  | { type: "ask"; id: number; question: Question };
 
 /** What the app tells the supervisor. */
 export type AppMessage =
   | { type: "log"; level: Level; message: string }
-  // A PNG, base64, or why there's none.
-  | { type: "screenshot"; id: number; png: string }
-  | { type: "screenshot"; id: number; error: string };
+  // The answer to question `id`: text, or a screenshot's PNG, base64.
+  | { type: "answer"; id: number; value: string }
+  | { type: "answer"; id: number; error: string };
 
-type Screenshot = Extract<AppMessage, { type: "screenshot" }>;
+type Answer = Extract<AppMessage, { type: "answer" }>;
 
-// How long a screenshot is waited for.
-const screenshotTimeout = 10_000;
+// How long an answer is waited for.
+const answerTimeout = 10_000;
 
 export type Level = "debug" | "log" | "info" | "warn" | "error";
 
@@ -85,12 +96,51 @@ export async function supervise(
     }
   };
 
-  // Screenshots asked for, by id, until the app answers.
-  const screenshots = new Map<
+  // Questions asked, by id, until the app answers.
+  const questions = new Map<
     number,
-    { socket: WSContext; answer: (message: Screenshot) => void }
+    { socket: WSContext; answer: (message: Answer) => void }
   >();
   let asked = 0;
+  // `question`, to the newest app or the newest at `wanted`: its answer, or
+  // why there's none, with the status that says so.
+  const ask = async (
+    wanted: string | undefined,
+    question: Question,
+  ): Promise<
+    { value: string } | { error: string; status: 404 | 501 | 504 }
+  > => {
+    const socket = [...devices]
+      .filter(([, { address }]) => wanted === undefined || address === wanted)
+      .at(-1)?.[0];
+    if (socket === undefined) {
+      const error =
+        wanted === undefined
+          ? "No app is connected."
+          : `No app is connected from ${wanted}.`;
+      return { error, status: 404 };
+    }
+    const id = ++asked;
+    // Undefined once it's waited too long.
+    const answer = await new Promise<Answer | undefined>((resolve) => {
+      const timer = setTimeout(() => {
+        questions.delete(id);
+        resolve(undefined);
+      }, answerTimeout);
+      questions.set(id, {
+        socket,
+        answer: (message) => {
+          clearTimeout(timer);
+          resolve(message);
+        },
+      });
+      socket.send(JSON.stringify({ type: "ask", id, question }));
+    });
+    if (answer === undefined) {
+      return { error: "The app didn't answer.", status: 504 };
+    }
+    return "error" in answer ? { error: answer.error, status: 501 } : answer;
+  };
 
   const entries: LogEntry[] = [];
   let numbered = 0;
@@ -210,11 +260,11 @@ export async function supervise(
         onClose: (_event, socket) => {
           devices.delete(socket);
           // An app that reloads won't answer: say so now, not at the timeout.
-          for (const [id, asked] of screenshots) {
-            if (asked.socket === socket) {
-              screenshots.delete(id);
-              asked.answer({
-                type: "screenshot",
+          for (const [id, question] of questions) {
+            if (question.socket === socket) {
+              questions.delete(id);
+              question.answer({
+                type: "answer",
                 id,
                 error: "The app disconnected.",
               });
@@ -226,9 +276,9 @@ export async function supervise(
           if (message.type === "log") {
             const { level, message: text } = message;
             record({ source: "app", device: address, level, message: text });
-          } else if (message.type === "screenshot") {
-            screenshots.get(message.id)?.answer(message);
-            screenshots.delete(message.id);
+          } else if (message.type === "answer") {
+            questions.get(message.id)?.answer(message);
+            questions.delete(message.id);
           }
         },
       };
@@ -247,47 +297,27 @@ export async function supervise(
   );
   // A PNG of what the newest app shows, or the newest at `?device=`.
   app.get("/__backtick/screenshot", async (context) => {
-    const wanted = context.req.query("device");
-    const socket = [...devices]
-      .filter(([, { address }]) => wanted === undefined || address === wanted)
-      .at(-1)?.[0];
-    if (socket === undefined) {
-      return context.text(
-        wanted === undefined
-          ? "No app is connected."
-          : `No app is connected from ${wanted}.`,
-        404,
-      );
-    }
-    const id = ++asked;
-    // Undefined once it's waited too long.
-    const answer = await new Promise<Screenshot | undefined>((resolve) => {
-      const timer = setTimeout(() => {
-        screenshots.delete(id);
-        resolve(undefined);
-      }, screenshotTimeout);
-      screenshots.set(id, {
-        socket,
-        answer: (message) => {
-          clearTimeout(timer);
-          resolve(message);
-        },
-      });
-      socket.send(JSON.stringify({ type: "screenshot", id }));
+    const answer = await ask(context.req.query("device"), {
+      kind: "screenshot",
     });
-    if (answer === undefined) {
-      return context.text("The app didn't answer.", 504);
-    }
     if ("error" in answer) {
-      return context.text(answer.error, 501);
+      return context.text(answer.error, answer.status);
     }
     return context.body(
-      new Uint8Array(Buffer.from(answer.png, "base64")),
+      new Uint8Array(Buffer.from(answer.value, "base64")),
       200,
       {
         "content-type": "image/png",
       },
     );
+  });
+  // One of the app's UI actions, as JSON, and what it did, as text.
+  app.post("/__backtick/ui", async (context) => {
+    const action = await context.req.json<UIAction>();
+    const answer = await ask(context.req.query("device"), action);
+    return "error" in answer
+      ? context.text(answer.error, answer.status)
+      : context.text(answer.value);
   });
   // What came after entry `since`, which a reader passes to read on.
   app.get("/__backtick/logs", (context) => {

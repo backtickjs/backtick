@@ -24,6 +24,10 @@
     "./client": {
       "types": "./dist/client.d.ts",
       "default": "./dist/client.js"
+    },
+    "./react-native": {
+      "types": "./dist/react-native.d.ts",
+      "default": "./dist/react-native.js"
     }
   },
   "bin": {
@@ -57,8 +61,14 @@
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.3",
     "@types/ws": "^8.18.1",
+    "global-jsdom": "^30.0.0",
+    "jsdom": "^30.0.1",
     "prettier": "^3.6.2",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
     "typescript": "^6.0.3"
   }
 }

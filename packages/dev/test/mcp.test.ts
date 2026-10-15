@@ -39,8 +39,12 @@ it("lists the tools, which say what to do when backtick-dev isn't running", asyn
   const { tools } = await client.listTools();
   assert.deepEqual(tools.map((tool) => tool.name).sort(), [
     "devices",
+    "inspect",
     "logs",
+    "press",
     "screenshot",
+    "scroll",
+    "type",
   ]);
   const result = await client.callTool({ name: "logs", arguments: {} });
   assert.equal(result.isError, true);

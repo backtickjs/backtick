@@ -2,6 +2,7 @@ import { buildIdFrom } from "@backtickjs/builds/client";
 import type { Bundle } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 import { startDevChannel } from "@backtickjs/dev/client";
+import { reactNativeUI } from "@backtickjs/dev/react-native";
 import { QueryClient } from "@tanstack/react-query";
 import Constants from "expo-constants";
 import { DevSettings, Platform } from "react-native";
@@ -14,11 +15,12 @@ const server = `http://${host}:3000`;
 
 // In development, the app reloads when you save a file under server/, and
 // what it logs, uncaught errors included, and what it shows reach
-// `backtick-dev`.
+// `backtick-dev`, whose MCP tools can also press, type and scroll in it.
 if (__DEV__) {
   const channel = startDevChannel(server, {
     reload: () => DevSettings.reload(),
     screenshot: () => captureScreen({ format: "png", result: "base64" }),
+    ui: reactNativeUI,
   });
   const handler = ErrorUtils.getGlobalHandler();
   ErrorUtils.setGlobalHandler((error, fatal) => {
