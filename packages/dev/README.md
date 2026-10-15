@@ -40,6 +40,8 @@ import { startDevChannel } from "@backtickjs/dev/client";
 if (__DEV__) {
   const channel = startDevChannel(server, {
     reload: () => DevSettings.reload(),
+    // optional: what the screen shows, with react-native-view-shot
+    screenshot: () => captureScreen({ format: "png", result: "base64" }),
   });
   const handler = ErrorUtils.getGlobalHandler();
   ErrorUtils.setGlobalHandler((error, fatal) => {
@@ -82,6 +84,17 @@ curl localhost:3000/__backtick/devices        # the apps connected
 ```
 
 The app's lines come from the dev channel: it sends `console` output, and the uncaught errors the app hands `channel.report`, keeping what was logged before it connected.
+
+## Screenshots
+
+With a `screenshot` option, `backtick-dev` can ask the app for a PNG of what it shows, for you or an agent:
+
+```sh
+curl -o screen.png localhost:3000/__backtick/screenshot                    # the newest app connected
+curl -o screen.png "localhost:3000/__backtick/screenshot?device=192.168.0.123"
+```
+
+It's the whole screen, as the person sees it. It answers `404` when no app is connected, `501` when the app takes no screenshots or failed to, and `504` when it doesn't answer within 10 seconds.
 
 ## Related
 

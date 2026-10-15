@@ -11,6 +11,10 @@ export interface DevChannelOptions {
   // How the app reloads: `DevSettings.reload()` in React Native,
   // `location.reload()` on a web page.
   readonly reload: () => void;
+  // What the screen shows, as a PNG, base64: `react-native-view-shot`'s
+  // `captureScreen({ format: "png", result: "base64" })` in React Native.
+  // Without it, `/__backtick/screenshot` answers that the app takes none.
+  readonly screenshot?: () => Promise<string>;
 }
 
 export interface DevChannel {
@@ -29,6 +33,7 @@ export interface DevChannel {
  *
  *     const channel = startDevChannel(server, {
  *       reload: () => DevSettings.reload(),
+ *       screenshot: () => captureScreen({ format: "png", result: "base64" }),
  *     });
  *     const handler = ErrorUtils.getGlobalHandler();
  *     ErrorUtils.setGlobalHandler((error, fatal) => {
@@ -38,7 +43,7 @@ export interface DevChannel {
  */
 export function startDevChannel(
   server: string,
-  { reload }: DevChannelOptions,
+  { reload, screenshot }: DevChannelOptions,
 ): DevChannel {
   let socket: WebSocket | undefined;
   // What was logged before the socket opened, sent once it does.
@@ -86,6 +91,22 @@ export function startDevChannel(
         reload();
       } else if (message.type === "server-error") {
         console.error(`Your Backtick server failed:\n\n${message.message}`);
+      } else if (message.type === "screenshot") {
+        const { id } = message;
+        if (screenshot === undefined) {
+          send({
+            type: "screenshot",
+            id,
+            error:
+              "This app takes no screenshots: pass `screenshot` to startDevChannel.",
+          });
+        } else {
+          screenshot().then(
+            (png) => send({ type: "screenshot", id, png }),
+            (error: unknown) =>
+              send({ type: "screenshot", id, error: format(error) }),
+          );
+        }
       }
     };
     socket.onclose = () => {

@@ -141,6 +141,43 @@ it("keeps the app's console, and the uncaught errors it reports", async (t) => {
   assert.deepEqual(reloads, []);
 });
 
+it("answers a PNG of what the newest app shows, or why there's none", async (t) => {
+  const { get, origin } = await project("one");
+  assert.deepEqual(await get("/__backtick/screenshot"), {
+    status: 404,
+    text: "No app is connected.",
+  });
+  const png = Buffer.from([0x89, 0x50, 0x4e, 0x47, 1, 2, 3]);
+  const older = startDevChannel(origin, { reload: () => {} });
+  t.after(older.stop);
+  await waitFor(async () => (await get("/__backtick/devices")).text !== "");
+  // the newest is asked
+  const newer = startDevChannel(origin, {
+    reload: () => {},
+    screenshot: async () => png.toString("base64"),
+  });
+  t.after(newer.stop);
+  await waitFor(
+    async () => (await get("/__backtick/devices")).text.split("\n").length > 2,
+  );
+  const response = await fetch(`${origin}/__backtick/screenshot`);
+  assert.equal(response.headers.get("content-type"), "image/png");
+  assert.deepEqual(Buffer.from(await response.arrayBuffer()), png);
+  newer.stop();
+  await waitFor(
+    async () =>
+      (await get("/__backtick/devices")).text.split("\n").length === 2,
+  );
+  assert.deepEqual(await get("/__backtick/screenshot"), {
+    status: 501,
+    text: "This app takes no screenshots: pass `screenshot` to startDevChannel.",
+  });
+  assert.equal(
+    (await get("/__backtick/screenshot?device=203.0.113.9")).status,
+    404,
+  );
+});
+
 async function waitFor(condition: () => Promise<boolean>) {
   for (let tries = 0; !(await condition()); tries++) {
     assert.ok(tries < 100, "waited too long");

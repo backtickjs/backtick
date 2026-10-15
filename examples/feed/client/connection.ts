@@ -5,6 +5,7 @@ import { startDevChannel } from "@backtickjs/dev/client";
 import { QueryClient } from "@tanstack/react-query";
 import Constants from "expo-constants";
 import { DevSettings, Platform } from "react-native";
+import { captureScreen } from "react-native-view-shot";
 import { moduleMap } from "./moduleMap";
 
 // Your Backtick server runs on the computer Expo was started from.
@@ -12,10 +13,12 @@ const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
 
 // In development, the app reloads when you save a file under server/, and
-// what it logs, uncaught errors included, reaches `backtick-dev`.
+// what it logs, uncaught errors included, and what it shows reach
+// `backtick-dev`.
 if (__DEV__) {
   const channel = startDevChannel(server, {
     reload: () => DevSettings.reload(),
+    screenshot: () => captureScreen({ format: "png", result: "base64" }),
   });
   const handler = ErrorUtils.getGlobalHandler();
   ErrorUtils.setGlobalHandler((error, fatal) => {

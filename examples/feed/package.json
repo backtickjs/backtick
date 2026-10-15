@@ -36,6 +36,7 @@
     "react-dom": "19.2.3",
     "react-error-boundary": "6.1.6",
     "react-native": "0.86.3",
+    "react-native-view-shot": "5.1.0",
     "react-native-web": "^0.21.0",
     "typescript": "^6.0.3"
   },
