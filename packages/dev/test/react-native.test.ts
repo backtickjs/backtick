@@ -76,10 +76,14 @@ function Feed() {
     "div",
     null,
     h("span", null, "Feed"),
+    // two text nodes, one line
+    h("span", null, likes, " liked"),
     h(
       List,
       null,
       h("span", null, "Ada"),
+      // nested text, one line
+      h("p", null, h("b", null, "Grace"), " ", "Sunset over the harbour"),
       h(Pressable, { onPress: () => setLikes((n) => n + 1) }, `♡ ${likes}`),
       h(TextInput, {
         value: text,
@@ -104,8 +108,10 @@ it("outlines what's drawn, a number on each element", async () => {
     await ui({ kind: "inspect" }),
     [
       '"Feed"',
+      '"0 liked"',
       "[1] scroll",
       '  "Ada"',
+      '  "Grace Sunset over the harbour"',
       '  [2] press "♡ 0"',
       '  [3] input "" placeholder "Add a comment"',
       '  [4] press "Send" (disabled)',
@@ -125,6 +131,7 @@ it("presses, types and scrolls, as the outline names them", async () => {
   await settle();
   const outline = await ui({ kind: "inspect" });
   assert.match(outline, /\[2\] press "♡ 1"/);
+  assert.match(outline, /^"1 liked"$/m);
   assert.match(outline, /\[3\] input "Nice"/);
   assert.match(outline, /\[4\] press "Send"$/m);
   assert.equal(

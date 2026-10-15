@@ -78,17 +78,9 @@ function outline(): { lines: string[]; elements: Element[] } {
     label: string[] | undefined,
   ) => {
     for (; fiber !== null; fiber = fiber.sibling) {
-      // A text node, or a native view holding its text itself, as React
-      // DOM does with a lone string.
-      const children = fiber.memoizedProps?.children;
-      const held =
-        fiber.tag === hostComponent &&
-        fiber.child === null &&
-        (typeof children === "string" || typeof children === "number");
-      if (fiber.tag === hostText || held) {
-        const text = String(
-          held ? children : (fiber.memoizedProps ?? ""),
-        ).trim();
+      // A run of text: one line, joined as written, then trimmed.
+      if (fiber.tag === hostText || holdsText(fiber)) {
+        const text = textOf(fiber).trim();
         if (text === "") continue;
         if (label !== undefined) label.push(text);
         else lines.push(`${"  ".repeat(depth)}${JSON.stringify(text)}`);
@@ -111,6 +103,41 @@ function outline(): { lines: string[]; elements: Element[] } {
   };
   for (const root of roots()) visit(root.child, 0, new Set(), undefined);
   return { lines, elements };
+}
+
+// Whether `fiber` is a native view holding text itself, as a `Text` does:
+// what's under it is one run, nested text included, as `{count} liked`'s two
+// text nodes, or a bold name before a caption. A view holding only other
+// views of text, each its own run, doesn't.
+function holdsText(fiber: Fiber): boolean {
+  if (fiber.tag !== hostComponent) return false;
+  if (fiber.child === null) return lone(fiber) !== undefined;
+  for (let child: Fiber | null = fiber.child; child; child = child.sibling) {
+    if (child.tag === hostText) return true;
+  }
+  return false;
+}
+
+// A native view's text as React DOM holds a lone string: in its props, with
+// no text node.
+function lone(fiber: Fiber): string | undefined {
+  const children = fiber.memoizedProps?.children;
+  return typeof children === "string" || typeof children === "number"
+    ? String(children)
+    : undefined;
+}
+
+// All the text under `fiber`, joined as written.
+function textOf(fiber: Fiber): string {
+  if (fiber.tag === hostText) return String(fiber.memoizedProps ?? "");
+  if (fiber.tag === hostComponent && fiber.child === null) {
+    return lone(fiber) ?? "";
+  }
+  let text = "";
+  for (let child: Fiber | null = fiber.child; child; child = child.sibling) {
+    text += textOf(child);
+  }
+  return text;
 }
 
 // `[3] press "♡ 0"`, `[4] input "" placeholder "Add a comment"`.
