@@ -1,5 +1,5 @@
 export {
-  type Bundle,
+  type Build,
   type BuildOptions,
   bundler,
   type OutputChunk,

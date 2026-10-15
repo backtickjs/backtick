@@ -1,5 +1,5 @@
 import { bundler } from "@backtickjs/bundler";
-import type { Client, Spliceable, Spliced } from "@backtickjs/core";
+import type { Bundle, Client, Spliceable, Spliced } from "@backtickjs/core";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 import type { JSXElement } from "@backtickjs/solid-js";
 import { drawing } from "./drawing.tsx";
@@ -23,9 +23,9 @@ export type Evaluated<T> = T extends JSX.Element
  * test file was, against the modules a page's import map provides — Solid's,
  * and the one an app adds beside them (see `stdlib/target-builtins.test.tsx`).
  */
-export async function bundle(
-  value: Spliceable,
-): Promise<{ code: string; map: string }> {
+export async function bundle<T extends Spliceable>(
+  value: T,
+): Promise<{ code: Bundle<Spliced<T>>; map: string }> {
   const built = await bundler.build({
     input: value,
     modules: {

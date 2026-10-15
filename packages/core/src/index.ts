@@ -17,6 +17,8 @@ export {
   isClientImport,
   type ClientImport,
 } from "./ClientImport.js";
+// A bundle's code, typed by what it runs to.
+export type { Bundle } from "./Bundle.js";
 
 // A drawing as a host builds one: what an adapter's JSX runtime makes, and
 // what the bundler expands.

@@ -23,8 +23,8 @@ const modules = {
 };
 
 // In a request handler:
-const bundle = await bundler.build({ input: <Home />, modules });
-const { code } = bundle.generate({ format: "cjs" });
+const build = await bundler.build({ input: <Home />, modules });
+const { code } = build.generate({ format: "cjs" });
 response.setHeader("content-type", "text/javascript");
 response.end(code);
 ```
@@ -38,7 +38,7 @@ import { createRoot } from "@backtickjs/react/client";
 import { Home } from "./Home.js";
 
 const element = <Home />;
-const bundle = await bundler.build({
+const build = await bundler.build({
   input: cs`$createRoot(document.getElementById("app")!).render($element)`,
   modules: {
     react: "19.2.3",
@@ -46,7 +46,7 @@ const bundle = await bundler.build({
     "react-dom/client": "19.2.3",
   },
 });
-const { code } = bundle.generate({ format: "es", sourcemap: "inline" });
+const { code } = build.generate({ format: "es", sourcemap: "inline" });
 ```
 
 ### `modules`
@@ -70,9 +70,9 @@ Spliced values are written into the bundle as data, never as code. What can't cr
 
 ## API
 
-- `bundler.build({ input, modules })`: runs the server components in `input` and returns a `Bundle`. Async.
-- `Bundle.generate({ format, sourcemap })`: writes the bundle; returns `{ code, map }`, where `map` is `null` without a source map.
-- Types: `BuildOptions`, `OutputOptions`, `OutputChunk`, `Bundle`.
+- `bundler.build({ input, modules })`: runs the server components in `input` and returns a `Build`. Async.
+- `Build.generate({ format, sourcemap })`: writes the bundle; returns `{ code, map }`, where `code` is a `Bundle<T>` (from `@backtickjs/core`), typed by what `input` is on the client, and `map` is `null` without a source map.
+- Types: `BuildOptions`, `OutputOptions`, `OutputChunk`, `Build`.
 
 ## Related
 

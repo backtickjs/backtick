@@ -34,7 +34,7 @@ export type SplicesAs<T> = [T] extends [Spliceable]
 //   Client<U>                 -> U
 //   T[], [A, B]               -> Spliced<T>[], [Spliced<A>, Spliced<B>]
 //   { k: T }                  -> { k: Spliced<T> }
-//   primitives                -> unchanged
+//   primitives                -> unchanged, branded ones too e.g. `Bundle<T>`
 // A tuple maps homomorphically, which keeps it a tuple; any other array stays
 // `Spliced<Item>[]`, which TypeScript defers, so `Spliceable[]` doesn't recurse.
 export type Spliced<T> =
@@ -44,6 +44,8 @@ export type Spliced<T> =
       ? number extends T["length"]
         ? Spliced<Item>[]
         : { -readonly [K in keyof T]: Spliced<T[K]> }
-      : T extends object
-        ? { -readonly [K in keyof T]: Spliced<T[K]> }
-        : T;
+      : T extends string | number | bigint | boolean
+        ? T
+        : T extends object
+          ? { -readonly [K in keyof T]: Spliced<T[K]> }
+          : T;

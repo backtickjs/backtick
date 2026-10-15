@@ -1,4 +1,4 @@
-import type { Spliceable, SplicesAs } from "@backtickjs/core";
+import type { Bundle, Spliceable, Spliced, SplicesAs } from "@backtickjs/core";
 import { buildBundle } from "./bundle/buildBundle.js";
 import type { Modules } from "./modules.js";
 import { printBundle } from "./print/printBundle.js";
@@ -23,39 +23,45 @@ export interface OutputOptions {
   readonly sourcemap?: false | "inline" | "hidden";
 }
 
-/** What `generate` writes: the code, and its map where one was asked for. */
-export interface OutputChunk {
-  readonly code: string;
+/**
+ * What `generate` writes: the bundle, which runs to a `T`, and its map where
+ * one was asked for.
+ */
+export interface OutputChunk<T = unknown> {
+  readonly code: Bundle<T>;
   readonly map: string | null;
 }
 
-/** A built bundle, written out by `generate`. */
-export interface Bundle {
-  generate(options: OutputOptions): OutputChunk;
+/** What `build` makes of a value that is a `T` on the client, written out by
+ * `generate`. */
+export interface Build<T = unknown> {
+  generate(options: OutputOptions): OutputChunk<T>;
 }
 
 /**
  * What runs your components and hands back what they drew, shaped as Rollup
  * is: a build, then output from it.
  *
- *     const bundle = await bundler.build({ input: <Home />, modules });
- *     const { code, map } = bundle.generate({ format: "es", sourcemap: "hidden" });
+ *     const build = await bundler.build({ input: <Home />, modules });
+ *     const { code, map } = build.generate({ format: "es", sourcemap: "hidden" });
  *
- * The module's default export is the value (CommonJS: `module.exports`). A
- * namespace rather than a bare function, so `bundle` stays a name a caller can
- * give what comes back.
+ * `code` is the bundle, a module whose default export is the value (CommonJS:
+ * `module.exports`). A namespace rather than a bare function, so `build`
+ * stays a name a caller can give what comes back.
  */
 export const bundler = {
   async build<T extends [T] extends [SplicesAs<T>] ? unknown : Spliceable>({
     input,
     modules,
-  }: BuildOptions<T>): Promise<Bundle> {
+  }: BuildOptions<T>): Promise<Build<Spliced<T>>> {
     // Scripts come compiled for their framework when their host was built, so
     // the bundle is only put together: nothing is compiled or parsed here.
     const tree = await buildBundle(input, modules);
     return {
       generate: ({ format, sourcemap = false }) => {
-        const { code, map } = printBundle(tree, format);
+        const printed = printBundle(tree, format);
+        const code = printed.code as Bundle<Spliced<T>>;
+        const map = printed.map;
         if (sourcemap === false) {
           return { code, map: null };
         }
@@ -63,7 +69,10 @@ export const bundler = {
           return { code, map };
         }
         const url = `data:application/json;charset=utf-8,${encodeURIComponent(map)}`;
-        return { code: `${code}\n//# sourceMappingURL=${url}`, map };
+        return {
+          code: `${code}\n//# sourceMappingURL=${url}` as Bundle<Spliced<T>>,
+          map,
+        };
       },
     };
   },
