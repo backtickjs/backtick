@@ -37,9 +37,9 @@ export type ExecOptions =
 export async function execRoot<T>(
   bundle: Bundle<T>,
   options: ExecOptions,
-): Promise<T> {
+): Promise<Awaited<T>> {
   if (options.format === "es") {
-    const module: { default: T } = await import(
+    const module: { default: Awaited<T> } = await import(
       "data:text/javascript," + encodeURIComponent(bundle)
     );
     return module.default;
@@ -59,5 +59,5 @@ export async function execRoot<T>(
     module.exports,
     require,
   );
-  return module.exports as T;
+  return module.exports as Awaited<T>;
 }

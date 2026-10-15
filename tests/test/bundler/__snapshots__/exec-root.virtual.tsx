@@ -66,7 +66,7 @@ describe("execRoot", () => {
       format: "cjs",
       moduleMap: { app: { answer: 41 } },
     });
-    assert.equal(await value, 42);
+    assert.equal(value, 42);
   });
 
   it("refuses a module the map doesn't provide to the bundles exec runs", async () => {

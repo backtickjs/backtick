@@ -9,12 +9,12 @@ import type { Client } from "./Client.js";
  * URL, which the page's import map answers.
  */
 export interface ClientExec extends Client<
-  <T>(bundle: Bundle<T>) => Promise<T>
+  <T>(bundle: Bundle<T>) => Promise<Awaited<T>>
 > {
   readonly "@backtickjs": "ClientExec";
 }
 
-export const exec: Client<<T>(bundle: Bundle<T>) => Promise<T>> = {
+export const exec: Client<<T>(bundle: Bundle<T>) => Promise<Awaited<T>>> = {
   "@backtickjs": "ClientExec",
 } as unknown as ClientExec;
 

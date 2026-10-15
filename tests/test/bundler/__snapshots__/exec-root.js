@@ -5,7 +5,7 @@ import { createImport, cs, exec, execRoot } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
 import { bundle } from "../evaluate.ts";
 const $module0 = {
-  id: "356wctplsiv1b:35:33",
+  id: "2eh5betpngjo1:35:33",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + 1;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkCoCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
   dependencies: [],
@@ -13,7 +13,7 @@ const $module0 = {
   kind: "expression",
 };
 const $module1 = {
-  id: "356wctplsiv1b:46:33",
+  id: "2eh5betpngjo1:46:33",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + 1;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA6CoCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
   dependencies: [],
@@ -21,7 +21,7 @@ const $module1 = {
   kind: "expression",
 };
 const $module2 = {
-  id: "356wctplsiv1b:54:40",
+  id: "2eh5betpngjo1:54:40",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const [count, setCount] = $splice0()(1);\n    setCount(count() + 1);\n    return count();\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAqD2CA,QAAA;IACrC,MAAM,CAACC,KAAK,EAAEC,QAAQ,CAAC,GAAGF,QAAA,EAAa,CAAC,CAAC,CAAC;IAC1CE,QAAQ,CAACD,KAAK,EAAE,GAAG,CAAC,CAAC;IACrB,OAAOA,KAAK,EAAE;AAChB,CAAC","names":["$splice0","count","setCount"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
   dependencies: [],
@@ -29,7 +29,7 @@ const $module2 = {
   kind: "block",
 };
 const $module3 = {
-  id: "356wctplsiv1b:63:34",
+  id: "2eh5betpngjo1:63:34",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + 1;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA8DqCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
   dependencies: [],
@@ -37,7 +37,7 @@ const $module3 = {
   kind: "expression",
 };
 const $module4 = {
-  id: "356wctplsiv1b:64:33",
+  id: "2eh5betpngjo1:64:33",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()($splice1());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA+DoC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAK,CAACC,QAAA,EAAM,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
   dependencies: [],
@@ -48,7 +48,7 @@ const $module4 = {
   kind: "expression",
 };
 const $module5 = {
-  id: "356wctplsiv1b:73:34",
+  id: "2eh5betpngjo1:73:34",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + 1;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAwEqCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
   dependencies: [],
@@ -56,7 +56,7 @@ const $module5 = {
   kind: "expression",
 };
 const $module6 = {
-  id: "356wctplsiv1b:74:33",
+  id: "2eh5betpngjo1:74:33",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()($splice1());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAyEoC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAK,CAACC,QAAA,EAAM,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
   dependencies: [],
@@ -108,7 +108,7 @@ describe("execRoot", () => {
       format: "cjs",
       moduleMap: { app: { answer: 41 } },
     });
-    assert.equal(await value, 42);
+    assert.equal(value, 42);
   });
   it("refuses a module the map doesn't provide to the bundles exec runs", async () => {
     const inner = await bundleCjs(cs.create($module5, [answer]));
