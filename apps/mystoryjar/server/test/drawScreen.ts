@@ -1,6 +1,5 @@
 import { bundler } from "@backtickjs/bundler";
-import type { Spliceable } from "@backtickjs/core";
-import { evaluate } from "@backtickjs/react-native-client";
+import { execRoot, type Spliceable } from "@backtickjs/core";
 import { CommonActions, StackActions } from "@react-navigation/routers";
 import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
@@ -92,7 +91,7 @@ export function pickPhoto(answer: Picked) {
 
 // A screen, bundled as your server bundles it and run as your app runs it,
 // for Testing Library to draw.
-export async function drawScreen(input: Spliceable): Promise<React.ReactNode> {
+export async function drawScreen<T extends Spliceable>(input: T) {
   navigated.length = 0;
   preloaded.length = 0;
   canGoBack = false;
@@ -102,7 +101,7 @@ export async function drawScreen(input: Spliceable): Promise<React.ReactNode> {
     modules: builds.installed("web"),
   });
   const { code } = bundle.generate({ format: "cjs" });
-  return evaluate(code, modules) as React.ReactNode;
+  return execRoot(code, { format: "cjs", moduleMap: modules });
 }
 
 let canGoBack = false;

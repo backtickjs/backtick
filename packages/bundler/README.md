@@ -10,7 +10,7 @@ npm install @backtickjs/bundler @backtickjs/core
 
 ## Usage
 
-For React Native, write CommonJS and serve it; the app fetches it and runs it with `evaluate` from `@backtickjs/react-native-client`:
+For React Native, write CommonJS and serve it; the app fetches it and runs it with `execRoot` from `@backtickjs/core`:
 
 ```tsx
 import { bundler } from "@backtickjs/bundler";
@@ -62,7 +62,7 @@ Spliced values are written into the bundle as data, never as code. What can't cr
 ### Formats
 
 - `"es"`: an ES module, for a web page. Packages are imported by specifier, which the page's import map resolves.
-- `"cjs"`: CommonJS, for a client that provides `require` itself, as a React Native app does through `evaluate`.
+- `"cjs"`: CommonJS, for a client that provides `require` itself, as a React Native app does through `execRoot`.
 
 ### Source maps
 
@@ -76,8 +76,7 @@ Spliced values are written into the bundle as data, never as code. What can't cr
 
 ## Related
 
-- [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): the `cs` tag
-- [`@backtickjs/react-native-client`](https://github.com/backtickjs/backtick/tree/main/packages/react-native-client): runs a `cjs` bundle in a React Native app
+- [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): the `cs` tag, and `execRoot`, which runs a bundle in the app
 - [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react), [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/adapters/react-native), [`@backtickjs/solid-js`](https://github.com/backtickjs/backtick/tree/main/adapters/solid-js): framework adapters
 - [How it works](https://backtickjs.com/docs/how-it-works)
 - [Errors](https://backtickjs.com/docs/errors)

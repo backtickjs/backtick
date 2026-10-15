@@ -131,6 +131,6 @@ server. Draw it in a script: `` cs`<$Card />` ``.
 ### The bundle requires "…", which this app doesn't provide
 
 The bundle uses a module missing from the module map your app hands to
-`evaluate`. Add it, and install it in the app so its native code ships. If
+`execRoot`. Add it, and install it in the app so its native code ships. If
 your server shouldn't have sent it, check the build id the app sends.
 See [where a package goes](/docs/react-native-and-packages#any-package-your-app-ships).

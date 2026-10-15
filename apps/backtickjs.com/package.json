@@ -36,7 +36,6 @@
     "@backtickjs/prettier-plugin": "^0.1.10",
     "@backtickjs/react": "^19.2.3",
     "@backtickjs/react-native": "^0.86.3",
-    "@backtickjs/react-native-client": "^0.1.10",
     "@backtickjs/tsc": "^0.1.10",
     "@hono/node-server": "^2.1.4",
     "@testing-library/react": "^16.3.3",

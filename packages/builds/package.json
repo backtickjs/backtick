@@ -30,6 +30,10 @@
     "./expo": {
       "types": "./dist/expo.d.ts",
       "default": "./dist/expo.js"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "default": "./dist/client.js"
     }
   },
   "bin": {

@@ -1,4 +1,4 @@
-import type { ModuleMap } from "@backtickjs/react-native-client";
+import type { ModuleMap } from "@backtickjs/core";
 import * as Navigation from "@react-navigation/native";
 import * as AppleAuthentication from "expo-apple-authentication";
 import * as Crypto from "expo-crypto";

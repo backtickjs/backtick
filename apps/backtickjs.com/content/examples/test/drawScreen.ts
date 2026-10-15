@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFileSync, writeFileSync } from "node:fs";
-import { type BuildOptions, bundler } from "@backtickjs/bundler";
-import { evaluate } from "@backtickjs/react-native-client";
+import { bundler } from "@backtickjs/bundler";
+import { execRoot, type Spliceable } from "@backtickjs/core";
 import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNativeWeb from "react-native-web";
@@ -9,26 +9,29 @@ import * as ReactNativeWeb from "react-native-web";
 // A screen as the app draws it: bundled as the server bundles it, then run
 // with React Native's web build standing in for React Native. `modules` are
 // what else the app provides, each by specifier, at a version.
-export async function drawScreen(
-  input: BuildOptions["input"],
+export async function drawScreen<T extends Spliceable>(
+  input: T,
   modules: Provided = {},
-): Promise<React.ReactNode> {
+) {
   const { code } = await bundleScreen(input, modules);
-  return evaluate(code, {
-    react: React,
-    "react/jsx-runtime": JSXRuntime,
-    "react-native": ReactNativeWeb,
-    ...Object.fromEntries(
-      Object.entries(modules).map(([name, { module }]) => [name, module]),
-    ),
-  }) as React.ReactNode;
+  return execRoot(code, {
+    format: "cjs",
+    moduleMap: {
+      react: React,
+      "react/jsx-runtime": JSXRuntime,
+      "react-native": ReactNativeWeb,
+      ...Object.fromEntries(
+        Object.entries(modules).map(([name, { module }]) => [name, module]),
+      ),
+    },
+  });
 }
 
 type Provided = Record<string, { version: string; module: unknown }>;
 
 // The bundle the server sends for a screen.
-export async function bundleScreen(
-  input: BuildOptions["input"],
+export async function bundleScreen<T extends Spliceable>(
+  input: T,
   modules: Provided = {},
 ) {
   const bundle = await bundler.build({
@@ -49,7 +52,7 @@ export async function bundleScreen(
 // written with `UPDATE=1`, checked otherwise.
 export async function assertBundle(
   file: URL,
-  input: BuildOptions["input"],
+  input: Spliceable,
 ): Promise<string> {
   const { code } = await bundleScreen(input);
   if (process.env.UPDATE) {

@@ -32,7 +32,6 @@
     "@backtickjs/node-plugin": "^0.1.10",
     "@backtickjs/react": "^19.2.3",
     "@backtickjs/react-native": "^0.86.3",
-    "@backtickjs/react-native-client": "^0.1.10",
     "@backtickjs/react-native-fbsdk-next": "^13.4.3",
     "@backtickjs/react-native-google-signin": "^16.1.5",
     "@backtickjs/react-native-safe-area-context": "^5.7.0",

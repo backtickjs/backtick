@@ -1,4 +1,4 @@
-import { evaluate } from "@backtickjs/react-native-client";
+import { type Bundle, execRoot } from "@backtickjs/core";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
@@ -52,9 +52,9 @@ async function fetchScreen(path: string): Promise<Fetched> {
   if (!response.ok) {
     throw new Error(`${path} answered ${response.status}.`);
   }
-  const code = await response.text();
+  const bundle = (await response.text()) as Bundle<ReactNode>;
   const downloaded = performance.now();
-  const node = evaluate(code, moduleMap) as ReactNode;
+  const node = await execRoot(bundle, { format: "cjs", moduleMap });
   const evaluated = performance.now();
   return {
     path,
@@ -64,7 +64,7 @@ async function fetchScreen(path: string): Promise<Fetched> {
     firstByte,
     downloaded,
     evaluated,
-    bytes: code.length,
+    bytes: bundle.length,
     heap: { ...heap, evaluated: readHeap() },
   };
 }

@@ -9,7 +9,7 @@ npm install @backtickjs/react-native @backtickjs/react @backtickjs/core @backtic
 npm install -D @backtickjs/tsc
 ```
 
-The app itself needs `react`, `react-native` and `@backtickjs/react-native-client`. The [repository's README](https://github.com/backtickjs/backtick#packages) says what each package is; `npx create-backtick-app@latest` sets them all up.
+The app itself needs `react`, `react-native` and `@backtickjs/core`. The [repository's README](https://github.com/backtickjs/backtick#packages) says what each package is; `npx create-backtick-app@latest` sets them all up.
 
 ## Setup
 
@@ -69,7 +69,7 @@ export async function Home() {
 }
 ```
 
-On each request, bundle it for the versions the app runs, and answer with the code, which the app runs with `evaluate` from `@backtickjs/react-native-client`:
+On each request, bundle it for the versions the app runs, and answer with the code, which the app runs with `execRoot` from `@backtickjs/core`:
 
 ```tsx
 import { bundler } from "@backtickjs/bundler";
@@ -97,7 +97,6 @@ React's own names (`useState`, `Suspense`, …), the JSX runtime and the compile
 - [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): the `cs` tag
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): builds bundles
 - [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react): the React adapter
-- [`@backtickjs/react-native-client`](https://github.com/backtickjs/backtick/tree/main/packages/react-native-client): runs bundles in the app
 - [`@backtickjs/solid-js`](https://github.com/backtickjs/backtick/tree/main/adapters/solid-js): the Solid adapter
 - [React Native and packages](https://backtickjs.com/docs/react-native-and-packages)
 - [How it works](https://backtickjs.com/docs/how-it-works)

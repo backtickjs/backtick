@@ -15,6 +15,7 @@ import {
   register,
   UnknownBuild,
 } from "../dist/index.js";
+import { buildIdFrom } from "../dist/client.js";
 import withBuildIds from "../dist/expo.js";
 
 const cli = fileURLToPath(new URL("../dist/cli.js", import.meta.url));
@@ -39,7 +40,7 @@ function app(
 }
 
 const map = (...specifiers: string[]) =>
-  `import type { ModuleMap } from "@backtickjs/react-native-client";
+  `import type { ModuleMap } from "@backtickjs/core";
 ${specifiers.map((each, index) => `import * as M${index} from "${each}";`).join("\n")}
 export const moduleMap = {
 ${specifiers.map((each, index) => `  "${each}": M${index},`).join("\n")}
@@ -279,6 +280,23 @@ describe("backtick-builds check", () => {
     assert.equal(
       check(mobile(), { EAS_BUILD_PROFILE: "development" }).status,
       0,
+    );
+  });
+});
+
+describe("buildIdFrom", () => {
+  it("reads this build's id from the app config, or throws as the app starts", () => {
+    const extra = {
+      buildIds: { ios: "f327397121ce4e4e", web: "887a92bf84a4b44e" },
+    };
+    assert.equal(buildIdFrom(extra, "ios"), "f327397121ce4e4e");
+    assert.throws(
+      () => buildIdFrom(extra, "android"),
+      /No build id for android/,
+    );
+    assert.throws(
+      () => buildIdFrom(undefined, "ios"),
+      /is @backtickjs\/builds\/expo in app.json's plugins/,
     );
   });
 });

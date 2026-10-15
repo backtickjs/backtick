@@ -1,4 +1,5 @@
-import { buildIdFrom, evaluate } from "@backtickjs/react-native-client";
+import { buildIdFrom } from "@backtickjs/builds/client";
+import { type Bundle, execRoot } from "@backtickjs/core";
 import Constants from "expo-constants";
 import * as React from "react";
 import { Suspense, use, useState } from "react";
@@ -11,7 +12,8 @@ const buildId = buildIdFrom(Constants.expoConfig?.extra, Platform.OS);
 
 async function fetchScreen(url: string): Promise<React.ReactNode> {
   const response = await fetch(url, { headers: { "x-build-id": buildId } });
-  return evaluate(await response.text(), moduleMap) as React.ReactNode;
+  const bundle = (await response.text()) as Bundle<React.ReactNode>;
+  return execRoot(bundle, { format: "cjs", moduleMap });
 }
 
 export default function App() {

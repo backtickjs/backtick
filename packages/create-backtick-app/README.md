@@ -49,7 +49,7 @@ Every template has:
 
 ### `react-native`
 
-An Expo app (SDK 57) with the Backtick server beside it in `server/`. `App.tsx` fetches the screen at `/` and runs it with [`@backtickjs/react-native-client`](https://github.com/backtickjs/backtick/tree/main/packages/react-native-client), offering screens what `moduleMap.ts` lists.
+An Expo app (SDK 57) with the Backtick server beside it in `server/`. `App.tsx` fetches the screen at `/` and runs it with `execRoot` from [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core), offering screens what `moduleMap.ts` lists.
 
 Each build of the app sends an id that names the modules it carries, which the `@backtickjs/builds/expo` plugin in `app.json` works out from `moduleMap.ts`. The server bundles each screen for that build's modules, with [`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds), so a build in users' hands keeps working as the app moves on:
 
@@ -79,7 +79,6 @@ Then open http://localhost:3000. Edit `server/Home.tsx` and save to see the page
 
 - [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): the `cs` tag
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): runs server components and writes the bundle
-- [`@backtickjs/react-native-client`](https://github.com/backtickjs/backtick/tree/main/packages/react-native-client): runs a bundle in a React Native app
 - [Quick start](https://backtickjs.com/docs)
 - [Tutorial](https://backtickjs.com/docs/tutorial)
 

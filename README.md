@@ -115,7 +115,6 @@ const ReorderButton = cs`(props: { order: Order }) => {
 | [`@backtickjs/expo-crypto`](adapters/expo-crypto)                                       | Expo Crypto's hashes and random values, for scripts                |
 | [`@backtickjs/expo-image-picker`](adapters/expo-image-picker)                           | Expo Image Picker's library and camera pickers, for scripts        |
 | [`@backtickjs/expo-file-system`](adapters/expo-file-system)                             | Expo FileSystem's files, folders and native uploads, for scripts   |
-| [`@backtickjs/react-native-client`](packages/react-native-client)                       | `evaluate`: runs a bundle with your app's own packages             |
 | [`@backtickjs/builds`](packages/builds)                                                 | Keeps your server drawing for every app build in users' hands      |
 | [`@backtickjs/node-plugin`](packages/node-plugin)                                       | Compiles scripts as a Node server loads them                       |
 | [`@backtickjs/bun-plugin`](packages/bun-plugin)                                         | Compiles scripts as a Bun server loads them                        |

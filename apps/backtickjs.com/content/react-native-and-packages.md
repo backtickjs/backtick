@@ -41,7 +41,7 @@ A package a screen uses has to be in two places:
 ```
 
 **2. Your app's module map,** the modules a screen may require, which the app
-hands to `evaluate`:
+hands to `execRoot`:
 
 ```ts file=react-native-and-packages/moduleMap.ts
 

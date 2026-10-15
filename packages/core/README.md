@@ -73,6 +73,10 @@ The client must provide that package, and the server must list it in the bundler
 - `Spliced<T>`: what a spliceable value becomes on the client (`Client<U>` becomes `U`; arrays and objects map member by member).
 - `createImport<T>({ name, from, version })`: an export of a module the client provides, as a value a script can splice.
 - `isClientImport`, `ClientImport`: its check and type.
+- `Bundle<T>`: a bundle's code, branded with what it runs to. `bundler.build(…).generate(…)` writes one.
+- `execRoot(bundle, options)`: in the app, runs the bundle it starts from to its value, as a promise. `{ format: "cjs", moduleMap }` runs CommonJS with `require` answered from the `ModuleMap`, the modules the app provides; `{ format: "es" }` imports an ES module, the page's import map answering its imports. `ExecOptions` is its options' type.
+- `exec`: in a script, `$exec(bundle)` runs another bundle as the script's own was run, with the same modules, to a promise of its value.
+- `isClientExec`, `ClientExec`: its check and type.
 - `SplicesAs<T>`: `T` as a splice checks it, member by member. Used by the bundler to check its input.
 - `createJsxElement`, `isJsxElement`, `JsxElement`, `JsxElementOf`, `JsxElementTypeOf`: what a server-side JSX tag evaluates to before bundling. Used by adapters' JSX runtimes.
 - `create`, `isClientScript`, `ClientScript`, `ClientModule`, `Param`: the compiled form of a script, written by the compiler and read by the bundler. Not for application code.

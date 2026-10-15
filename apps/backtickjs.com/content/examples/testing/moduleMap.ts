@@ -1,4 +1,4 @@
-import type { ModuleMap } from "@backtickjs/react-native-client";
+import type { ModuleMap } from "@backtickjs/core";
 import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNative from "react-native";

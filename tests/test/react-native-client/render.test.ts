@@ -3,6 +3,7 @@ import { rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { after, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
+import { execRoot } from "@backtickjs/core";
 import { transpile } from "@backtickjs/compiler";
 import { react } from "@backtickjs/react/plugin";
 import * as React from "react";
@@ -11,7 +12,6 @@ import * as JSXRuntime from "react/jsx-runtime";
 import { createRoot } from "react-dom/client";
 import * as ReactNativeWeb from "react-native-web";
 import ts from "typescript";
-import { buildIdFrom, evaluate } from "@backtickjs/react-native-client";
 
 // A server's screen: a client component of React Native's components, its
 // state React's, drawn by a server component.
@@ -69,11 +69,14 @@ it("draws a server's screen with the app's React Native", async () => {
 
   // The app: the bundle run with its packages, `react-native-web` standing in
   // for React Native, and drawn.
-  const drawn = evaluate(code, {
-    react: React,
-    "react/jsx-runtime": JSXRuntime,
-    "react-native": ReactNativeWeb,
-  }) as React.ReactNode;
+  const drawn = await execRoot(code, {
+    format: "cjs",
+    moduleMap: {
+      react: React,
+      "react/jsx-runtime": JSXRuntime,
+      "react-native": ReactNativeWeb,
+    },
+  });
   const errors: unknown[] = [];
   const error = console.error;
   console.error = (...args: unknown[]) => errors.push(String(args[0]));
@@ -91,29 +94,4 @@ it("draws a server's screen with the app's React Native", async () => {
     console.error = error;
   }
   assert.deepEqual(errors, []);
-});
-
-it("refuses a bundle that requires what the app doesn't provide", () => {
-  assert.throws(
-    () =>
-      evaluate('module.exports = require("react-native-maps");', {
-        react: React,
-      }),
-    {
-      message:
-        'The bundle requires "react-native-maps", which this app doesn\'t provide.',
-    },
-  );
-});
-
-it("reads this build's id from the app config, or throws as the app starts", () => {
-  const extra = {
-    buildIds: { ios: "f327397121ce4e4e", web: "887a92bf84a4b44e" },
-  };
-  assert.equal(buildIdFrom(extra, "ios"), "f327397121ce4e4e");
-  assert.throws(() => buildIdFrom(extra, "android"), /No build id for android/);
-  assert.throws(
-    () => buildIdFrom(undefined, "ios"),
-    /is @backtickjs\/builds\/expo in app.json's plugins/,
-  );
 });

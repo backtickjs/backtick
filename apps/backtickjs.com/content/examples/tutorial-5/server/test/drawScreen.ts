@@ -1,8 +1,7 @@
 import { fileURLToPath } from "node:url";
 import { createBuilds } from "@backtickjs/builds";
 import { bundler } from "@backtickjs/bundler";
-import type { Spliceable } from "@backtickjs/core";
-import { evaluate } from "@backtickjs/react-native-client";
+import { execRoot, type Spliceable } from "@backtickjs/core";
 import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNativeWeb from "react-native-web";
@@ -21,8 +20,8 @@ const moduleMap = {
 
 // A screen, bundled as your server bundles it and run as your app runs it,
 // for Testing Library to draw.
-export async function drawScreen(input: Spliceable): Promise<React.ReactNode> {
+export async function drawScreen<T extends Spliceable>(input: T) {
   const bundle = await bundler.build({ input, modules });
   const { code } = bundle.generate({ format: "cjs" });
-  return evaluate(code, moduleMap) as React.ReactNode;
+  return execRoot(code, { format: "cjs", moduleMap });
 }

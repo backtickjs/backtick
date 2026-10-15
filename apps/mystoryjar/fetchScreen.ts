@@ -1,4 +1,4 @@
-import { evaluate } from "@backtickjs/react-native-client";
+import { type Bundle, execRoot } from "@backtickjs/core";
 import type { ReactNode } from "react";
 import { moduleMap } from "./moduleMap";
 import { request } from "./request";
@@ -26,5 +26,6 @@ async function load(path: string): Promise<ReactNode> {
   if (!response.ok) {
     throw new Error(`${path} answered ${response.status}.`);
   }
-  return evaluate(await response.text(), moduleMap) as ReactNode;
+  const bundle = (await response.text()) as Bundle<ReactNode>;
+  return execRoot(bundle, { format: "cjs", moduleMap });
 }

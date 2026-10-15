@@ -1,4 +1,4 @@
-import { buildIdFrom } from "@backtickjs/react-native-client";
+import { buildIdFrom } from "@backtickjs/builds/client";
 import Constants from "expo-constants";
 import { Platform } from "react-native";
 

@@ -1,4 +1,4 @@
-import type { ModuleMap } from "@backtickjs/react-native-client";
+import type { ModuleMap } from "@backtickjs/core";
 import * as Haptics from "expo-haptics";
 import * as LinearGradient from "expo-linear-gradient";
 import * as React from "react";

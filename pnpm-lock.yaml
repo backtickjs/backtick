@@ -747,9 +747,6 @@ importers:
       '@backtickjs/react-native':
         specifier: ^0.86.3
         version: link:../../adapters/react-native
-      '@backtickjs/react-native-client':
-        specifier: ^0.1.10
-        version: link:../../packages/react-native-client
       '@backtickjs/tsc':
         specifier: ^0.1.10
         version: link:../../packages/tsc
@@ -908,9 +905,6 @@ importers:
       '@backtickjs/react-native':
         specifier: ^0.86.3
         version: link:../../adapters/react-native
-      '@backtickjs/react-native-client':
-        specifier: ^0.1.10
-        version: link:../../packages/react-native-client
       '@backtickjs/react-native-fbsdk-next':
         specifier: ^13.4.3
         version: link:../../adapters/react-native-fbsdk-next
@@ -1117,9 +1111,6 @@ importers:
       '@backtickjs/react-native':
         specifier: ^0.86.3
         version: link:../../adapters/react-native
-      '@backtickjs/react-native-client':
-        specifier: ^0.1.10
-        version: link:../../packages/react-native-client
       '@backtickjs/react-three-fiber':
         specifier: ^9.8.1
         version: link:../../adapters/react-three-fiber
@@ -1352,9 +1343,6 @@ importers:
       '@backtickjs/react-native':
         specifier: ^0.86.3
         version: link:../../../../adapters/react-native
-      '@backtickjs/react-native-client':
-        specifier: ^0.1.10
-        version: link:../../../react-native-client
       '@hono/node-server':
         specifier: ^2.1.4
         version: 2.1.4(hono@4.13.13)
@@ -1543,15 +1531,6 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/react-native-client:
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
   packages/tsc:
     dependencies:
       '@backtickjs/compiler':
@@ -1638,9 +1617,6 @@ importers:
       '@backtickjs/react-native':
         specifier: ^0.86.3
         version: link:../adapters/react-native
-      '@backtickjs/react-native-client':
-        specifier: ^0.1.10
-        version: link:../packages/react-native-client
       '@backtickjs/solid-js':
         specifier: ^1.9.14
         version: link:../adapters/solid-js

@@ -100,8 +100,8 @@ has every option.
 
 ## 4. Run by your app
 
-Your app fetches the bundle like any request, and runs it with `evaluate` from
-`@backtickjs/react-native-client`, handing it its module map: the packages it
+Your app fetches the bundle like any request, and runs it with `execRoot` from
+`@backtickjs/core`, handing it its module map: the packages it
 ships, imported as it starts. What the bundle exports is the screen, a React
 node the app draws:
 
@@ -111,7 +111,7 @@ node the app draws:
 
 Both files are what `create-backtick-app` sets up, without its development
 extras. Fetching is your app's, and so is when: on launch, on focus, on a pull
-to refresh. `evaluate` runs the code it's given, as `eval` does, so fetch
+to refresh. `execRoot` runs the code it's given, as `eval` does, so fetch
 bundles only from your own server, over HTTPS.
 
 Because the phone runs code your server wrote, a deploy of your server is a
@@ -121,16 +121,15 @@ release of the screen: the next time someone opens it, they get the new one.
 
 What a React Native project uses, each linked to its README:
 
-| Package                                                                                                            | What it is                                      |
-| ------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------- |
-| [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core)                               | The `cs` tag, and the types for what crosses    |
-| [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/adapters/react-native)               | React Native's components and APIs, for scripts |
-| [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react)                             | React's hooks and APIs, for scripts             |
-| [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler)                         | Runs server components and bundles a screen     |
-| [`@backtickjs/react-native-client`](https://github.com/backtickjs/backtick/tree/main/packages/react-native-client) | `evaluate`: runs a bundle in your app           |
-| [`@backtickjs/node-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/node-plugin)                 | Compiles scripts as your Node server loads them |
-| [`@backtickjs/tsc`](https://github.com/backtickjs/backtick/tree/main/packages/tsc)                                 | `backtick-tsc`: type-checks scripts and splices |
-| [`@backtickjs/prettier-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/prettier-plugin)         | Formats the code inside scripts                 |
+| Package                                                                                                    | What it is                                      |
+| ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core)                       | The `cs` tag, and `execRoot` to run a bundle    |
+| [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/adapters/react-native)       | React Native's components and APIs, for scripts |
+| [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react)                     | React's hooks and APIs, for scripts             |
+| [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler)                 | Runs server components and bundles a screen     |
+| [`@backtickjs/node-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/node-plugin)         | Compiles scripts as your Node server loads them |
+| [`@backtickjs/tsc`](https://github.com/backtickjs/backtick/tree/main/packages/tsc)                         | `backtick-tsc`: type-checks scripts and splices |
+| [`@backtickjs/prettier-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/prettier-plugin) | Formats the code inside scripts                 |
 
 The [repository's README](https://github.com/backtickjs/backtick#packages)
 lists them all, the web adapters and Bun included.

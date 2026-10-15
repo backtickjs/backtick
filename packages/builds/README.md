@@ -14,7 +14,7 @@ npm install @backtickjs/builds
 
    ```ts
    // moduleMap.ts
-   import type { ModuleMap } from "@backtickjs/react-native-client";
+   import type { ModuleMap } from "@backtickjs/core";
    import * as React from "react";
    import * as JSXRuntime from "react/jsx-runtime";
    import * as ReactNative from "react-native";
@@ -41,9 +41,11 @@ npm install @backtickjs/builds
    }
    ```
 
-3. **The app sends its id** however it reaches its server: a header, a GraphQL variable. `buildIdFrom` from [`@backtickjs/react-native-client`](https://github.com/backtickjs/backtick/tree/main/packages/react-native-client) reads it:
+3. **The app sends its id** however it reaches its server: a header, a GraphQL variable. `buildIdFrom`, from `@backtickjs/builds/client`, reads it:
 
    ```ts
+   import { buildIdFrom } from "@backtickjs/builds/client";
+
    const buildId = buildIdFrom(Constants.expoConfig?.extra, Platform.OS);
    ```
 
@@ -104,7 +106,7 @@ npm install @backtickjs/builds
 
 ## Related
 
-- [`@backtickjs/react-native-client`](https://github.com/backtickjs/backtick/tree/main/packages/react-native-client): `evaluate` and `buildIdFrom`, in the app
+- [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): `execRoot` and `ModuleMap`, which run a bundle in the app
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): bundles a screen for a build's modules, and `supports`
 
 ## License
