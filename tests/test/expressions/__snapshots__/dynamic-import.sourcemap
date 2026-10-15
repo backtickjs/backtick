@@ -1,0 +1,25 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+async            → async
+                 →  
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+(                → (
+await            → await
+                 →  
+import           → import
+(                → (
+(cs.splice(      →  [-semantic -navigation]
+(url)            → $url
+))               →  [-semantic -navigation]
+)                → )
+)                → )
+.                → .
+default          → default
+)                → )
+(                → (
+)                → )
+)())             → ` [-semantic -navigation]

@@ -40,13 +40,15 @@ export function compileScript(
     maps.unshift(compiled.map);
   }
   // The module as CommonJS, by TypeScript: its imports `require` calls, its
-  // default export `exports.default`, so it runs as a function's body.
+  // default export `exports.default`, so it runs as a function's body. As
+  // Node's CommonJS, which keeps a dynamic `import()` one, as it would be in
+  // the same code written by hand, not a `require` of the module table.
   const dependencies: string[] = [];
   const output = ts.transpileModule(code, {
     fileName: "module.jsx",
     compilerOptions: {
       jsx: ts.JsxEmit.Preserve,
-      module: ts.ModuleKind.CommonJS,
+      module: ts.ModuleKind.NodeNext,
       target: ts.ScriptTarget.ESNext,
       sourceMap: true,
     },
