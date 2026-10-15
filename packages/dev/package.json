@@ -1,0 +1,60 @@
+{
+  "name": "@backtickjs/dev",
+  "version": "0.1.10",
+  "description": "Backtick in development: `backtick-dev` runs your server, restarts it when you save, and reloads the app once it's back",
+  "keywords": [
+    "backtick",
+    "server-driven-ui",
+    "live-reload"
+  ],
+  "homepage": "https://backtickjs.com",
+  "bugs": {
+    "url": "https://github.com/backtickjs/backtick/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/backtickjs/backtick.git",
+    "directory": "packages/dev"
+  },
+  "license": "MIT",
+  "author": "Jean-François Bisson <jf@backtickjs.com>",
+  "type": "module",
+  "exports": {
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "default": "./dist/client.js"
+    }
+  },
+  "bin": {
+    "backtick-dev": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "!dist/._cache",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b --watch",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown .",
+    "test": "node --test \"test/**/*.test.ts\"",
+    "clean": "rm -rf node_modules dist .turbo",
+    "prepack": "cp ../../LICENSE ."
+  },
+  "dependencies": {
+    "@hono/node-server": "^2.1.4",
+    "hono": "^4.13.13",
+    "undici": "^8.10.2",
+    "ws": "^8.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "@types/ws": "^8.18.1",
+    "prettier": "^3.6.2",
+    "typescript": "^6.0.3"
+  }
+}

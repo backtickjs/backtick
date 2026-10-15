@@ -1,14 +1,20 @@
 import { buildIdFrom } from "@backtickjs/builds/client";
 import type { Bundle } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
+import { startDevChannel } from "@backtickjs/dev/client";
 import { QueryClient } from "@tanstack/react-query";
 import Constants from "expo-constants";
-import { Platform } from "react-native";
+import { DevSettings, Platform } from "react-native";
 import { moduleMap } from "./moduleMap";
 
 // Your Backtick server runs on the computer Expo was started from.
 const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
+
+// In development, the app reloads when you save a file under server/.
+if (__DEV__) {
+  startDevChannel(server, () => DevSettings.reload());
+}
 
 // This build's id, which names the modules it carries, for the server to
 // bundle what it can run: `@backtickjs/builds/expo`, in app.json, adds it.

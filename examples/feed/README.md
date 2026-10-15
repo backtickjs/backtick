@@ -13,7 +13,7 @@ npm install
 npm start
 ```
 
-`npm start` runs the server and Expo side by side. Open the app in Expo Go, then edit an item in `server/items.ts` or its look in `server/Item.tsx`, save, and reload the app (press `r` in the terminal). The feed has 200 items, 3 to a page: the first 7 are written out in `server/items.ts`, and the server makes up the rest from their number. The next page loads as you scroll near the end, or with Load more. `npm run web` shows the same feed in a browser.
+`npm start` runs the server and Expo side by side. Open the app in Expo Go, then edit an item in `server/items.ts` or its look in `server/Item.tsx` and save: the app reloads with it. The feed has 200 items, 3 to a page: the first 7 are written out in `server/items.ts`, and the server makes up the rest from their number. The next page loads as you scroll near the end, or with Load more. `npm run web` shows the same feed in a browser.
 
 ## Where things are
 
