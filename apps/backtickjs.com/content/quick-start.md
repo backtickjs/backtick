@@ -59,7 +59,9 @@ What you just wrote:
 
 ```text
 my-app/
-├── App.tsx            The app: fetches each screen from your server and draws it
+├── client/
+│   ├── App.tsx        The app: fetches each screen from your server and draws it
+│   └── moduleMap.ts   What screens may import from the app
 ├── server/
 │   ├── index.tsx      Your server: bundles a screen per request
 │   ├── Home.tsx       The screen you just changed

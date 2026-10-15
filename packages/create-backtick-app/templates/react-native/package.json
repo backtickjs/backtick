@@ -2,7 +2,7 @@
   "name": "backtick-app-react-native",
   "version": "1.0.0",
   "private": true,
-  "main": "index.ts",
+  "main": "client/index.ts",
   "scripts": {
     "start": "node scripts/start.mjs",
     "android": "node scripts/start.mjs --android",
@@ -46,6 +46,7 @@
     "prettier": "^3.6.2"
   },
   "backtick": {
+    "clientRoot": "client",
     "plugins": [
       "@backtickjs/react/plugin"
     ]

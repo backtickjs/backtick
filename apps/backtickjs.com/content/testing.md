@@ -40,7 +40,7 @@ data the same way. Give it test data through its props, as the test gives
 
 ## Packages your app provides
 
-`drawScreen.ts` bundles for the modules your app's `moduleMap.ts` offers, as
+`drawScreen.ts` bundles for the modules your app's `client/moduleMap.ts` offers, as
 your server does. When it offers another package, give the test's
 `moduleMap` its module too: a package with native code, like `expo-haptics`,
 has nothing to run in Node, so give it a stand-in with the exports your

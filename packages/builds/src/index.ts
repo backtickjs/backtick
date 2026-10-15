@@ -10,6 +10,7 @@ export {
   UnknownBuild,
 } from "./builds.js";
 export {
+  clientRootOf,
   moduleMapFile,
   type Platform,
   platforms,

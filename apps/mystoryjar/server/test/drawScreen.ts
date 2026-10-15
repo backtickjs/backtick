@@ -5,7 +5,7 @@ import { CommonActions, StackActions } from "@react-navigation/routers";
 import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNativeWeb from "react-native-web";
-import type { moduleMap } from "../../moduleMap.web.ts";
+import type { moduleMap } from "../../client/moduleMap.web.ts";
 import { builds } from "../builds.js";
 
 // What the app's web build provides, as its module map says, with React
@@ -76,7 +76,7 @@ const modules: Record<keyof typeof moduleMap, unknown> = {
     launchImageLibraryAsync: async () => picked,
   },
   // an upload as the app's web build sends one
-  "expo-file-system": await import("../../fileSystem.web.js"),
+  "expo-file-system": await import("../../client/fileSystem.web.js"),
 };
 
 type Picked =

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "A Doom-like shooter drawn with React Three Fiber, its levels served by a Backtick server",
-  "main": "index.ts",
+  "main": "client/index.ts",
   "scripts": {
     "start": "node scripts/start.mjs",
     "android": "node scripts/start.mjs --android",

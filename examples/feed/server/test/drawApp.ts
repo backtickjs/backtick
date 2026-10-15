@@ -10,7 +10,7 @@ import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNativeWeb from "react-native-web";
 import { app } from "../app.js";
 
-// The app's web build, as moduleMap.ts says, with React Native's web build
+// The app's web build, as client/moduleMap.ts says, with React Native's web build
 // standing in for React Native.
 const buildId = buildIdOf(
   createBuilds({

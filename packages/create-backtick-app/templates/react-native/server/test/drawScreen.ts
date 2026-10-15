@@ -7,7 +7,7 @@ import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNativeWeb from "react-native-web";
 
-// What the app's web build provides, as moduleMap.ts says, with React
+// What the app's web build provides, as client/moduleMap.ts says, with React
 // Native's web build standing in for React Native. Add a stand-in here when
 // your module map offers another package.
 const modules = createBuilds({

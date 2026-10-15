@@ -21,8 +21,8 @@ Hold ▲ ▼ to walk, ◀ ▶ to turn, and FIRE to shoot. Clear every imp to fin
 - `server/Game.tsx`: the server component. It reads the levels and the starting loadout at every request, and hands them to `Doom`.
 - `server/Doom.tsx`: the screen, a client component. React Native views for the HUD, the shotgun and the touch controls, over R3F's `<$Canvas>`.
 - `server/World.tsx`: the 3D world, a client component inside the canvas: `<mesh>`, `<boxGeometry>` and `<pointLight>`, with the game loop in `$useFrame`.
-- `App.tsx`: the app. It offers `@react-three/fiber/native` to screens alongside React and React Native, and draws what the server sends.
-- `fiber.ts` and `fiber.web.ts`: R3F as the app offers it. On a phone, its React Native build; on the web, its web build, under the same name, so the server sends both the same bundle.
+- `client/App.tsx`: the app. It offers `@react-three/fiber/native` to screens alongside React and React Native, and draws what the server sends.
+- `client/fiber.ts` and `client/fiber.web.ts`: R3F as the app offers it. On a phone, its React Native build; on the web, its web build, under the same name, so the server sends both the same bundle.
 
 The server takes R3F and three from their adapters only, as it takes React Native from `@backtickjs/react-native`: `Canvas` and `useFrame` from `@backtickjs/react-three-fiber/native`, and the types of three's objects (`Mesh`, `PointLight`) from `@backtickjs/three`. Importing the R3F adapter also teaches JSX three's elements, so `<mesh>` is type-checked in a script.
 
@@ -43,7 +43,7 @@ Each stage logs what it took, from the server to the phone's GPU. The server's l
 ```
 
 - `[server]`, in `server/index.tsx`: running the server components and bundling them (`build`), then printing the code (`generate`), and the server's memory. The two times also travel to the app in a `Server-Timing` header.
-- `[pipeline]`, in `App.tsx`, once per screen: the network is the time to the first byte less the server's share. `render` runs from `execRoot` to React's first commit of the screen, in development and production alike.
+- `[pipeline]`, in `client/App.tsx`, once per screen: the network is the time to the first byte less the server's share. `render` runs from `execRoot` to React's first commit of the screen, in development and production alike.
 - `[render]` and `[runtime]`, in `server/World.tsx`: the first frame R3F draws, its shaders compiled, then every 5 seconds the frame rate, the slowest frame and what the GPU was asked to draw.
 - `heap` is the JavaScript heap as Hermes reports it, and its garbage collections. On the web, Chrome reports the heap without its collections, and other browsers report neither. GL buffers and textures live in native memory, out of JavaScript's sight. When the OS runs short of memory, the app logs `[memory] warning from the OS` with the heap at that moment.
 

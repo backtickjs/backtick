@@ -3,5 +3,6 @@
   "compilerOptions": {
     "strict": true
   },
-  "exclude": ["server"]
+  // The app; the server, in server/, has its own.
+  "include": ["client", ".expo/types/**/*.ts", "expo-env.d.ts"]
 }

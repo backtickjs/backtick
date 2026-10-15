@@ -6,7 +6,7 @@ import {
   type NavigationProp,
 } from "@backtickjs/react-navigation-native";
 
-// The app's one stack screen and its params, as ServerScreen.tsx declares
+// The app's one stack screen and its params, as client/ServerScreen.tsx declares
 // them.
 type Routes = {
   Screen: {
@@ -18,7 +18,7 @@ type Routes = {
 };
 
 // The app's stack as a client component drives it. The app draws one stack
-// screen, `Screen`, once per server path on the stack: see ServerScreen.tsx,
+// screen, `Screen`, once per server path on the stack: see client/ServerScreen.tsx,
 // which names it the same.
 export const useStack = cs`() => {
   const navigation = $useNavigation<NavigationProp<Routes>>();

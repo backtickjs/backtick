@@ -18,5 +18,5 @@
   },
   "include": ["**/*"],
   // the apps have their own: tsconfig.app.json
-  "exclude": ["*/App.tsx", "*/moduleMap.ts"]
+  "exclude": ["*/client"]
 }

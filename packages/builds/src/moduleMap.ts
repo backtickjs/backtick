@@ -91,15 +91,31 @@ export function readModuleMap(file: string): string[] {
 }
 
 /**
+ * Where the app at `projectRoot` keeps its own code, and so its module maps:
+ * the folder `package.json` names, as `"backtick": { "clientRoot": "client" }`,
+ * or the project root.
+ */
+export function clientRootOf(projectRoot: string): string {
+  const file = join(projectRoot, "package.json");
+  const { backtick } = existsSync(file)
+    ? (JSON.parse(readFileSync(file, "utf8")) as {
+        backtick?: { clientRoot?: string };
+      })
+    : {};
+  return join(projectRoot, backtick?.clientRoot ?? ".");
+}
+
+/**
  * The module map Metro picks for `platform` in the app at `projectRoot`, as
  * it picks any file: `moduleMap.ios.ts` (or `.android`, `.web`), then
- * `moduleMap.native.ts` off the web, then `moduleMap.ts`.
+ * `moduleMap.native.ts` off the web, then `moduleMap.ts`, in its client root.
  */
 export function moduleMapFile(projectRoot: string, platform: Platform): string {
+  const clientRoot = clientRootOf(projectRoot);
   const extensions = [platform, ...(platform === "web" ? [] : ["native"])];
   for (const extension of [...extensions.map((each) => `.${each}`), ""]) {
-    const file = join(projectRoot, `moduleMap${extension}.ts`);
+    const file = join(clientRoot, `moduleMap${extension}.ts`);
     if (existsSync(file)) return file;
   }
-  throw new Error(`${projectRoot}: no moduleMap.ts`);
+  throw new Error(`${clientRoot}: no moduleMap.ts`);
 }

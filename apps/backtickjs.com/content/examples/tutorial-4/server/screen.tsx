@@ -5,7 +5,7 @@ import type { JSX } from "@backtickjs/react/jsx-runtime";
 import type { Context } from "hono";
 
 // Your app's builds: each sends its id, and a screen is bundled for the
-// modules that build carries, from moduleMap.ts. A build in users' hands
+// modules that build carries, from client/moduleMap.ts. A build in users' hands
 // keeps working as your app moves on, once registered: see builds/.
 const builds = createBuilds({
   projectRoot: fileURLToPath(new URL("..", import.meta.url)),

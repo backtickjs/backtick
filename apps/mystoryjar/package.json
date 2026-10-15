@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "MyStoryJar, a one-line-a-day journal for iOS and Android, its screens served by a Backtick server",
-  "main": "index.ts",
+  "main": "client/index.ts",
   "engines": {
     "node": ">=24"
   },
@@ -85,6 +85,7 @@
     "prettier": "^3.6.2"
   },
   "backtick": {
+    "clientRoot": "client",
     "plugins": [
       "@backtickjs/react/plugin"
     ]

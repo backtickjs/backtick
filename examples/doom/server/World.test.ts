@@ -14,7 +14,7 @@ import { type Input, type Stats, World, type WorldProps } from "./World.js";
   globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }
 ).IS_REACT_ACT_ENVIRONMENT = true;
 
-// What the app provides, as `server/index.tsx` and `App.tsx` say, with R3F's
+// What the app provides, as `server/index.tsx` and `client/App.tsx` say, with R3F's
 // web build standing in for its native one: the test renderer draws it
 // without a GPU.
 const require = createRequire(import.meta.url);

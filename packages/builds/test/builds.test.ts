@@ -133,6 +133,18 @@ export const moduleMap = {
     assert.match(moduleMapFile(root, "android"), /moduleMap\.native\.ts$/);
     assert.match(moduleMapFile(root, "web"), /moduleMap\.ts$/);
   });
+
+  it("is in the client root package.json names", () => {
+    const root = app({
+      "package.json": JSON.stringify({ backtick: { clientRoot: "client" } }),
+    });
+    mkdirSync(join(root, "client"));
+    writeFileSync(join(root, "client", "moduleMap.ts"), map("react"));
+    assert.equal(
+      moduleMapFile(root, "ios"),
+      join(root, "client", "moduleMap.ts"),
+    );
+  });
 });
 
 it("names each platform's build by its packages", () => {

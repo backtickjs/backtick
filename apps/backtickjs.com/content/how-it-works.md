@@ -105,7 +105,7 @@ Your app fetches the bundle like any request, and runs it with `execRoot` from
 ships, imported as it starts. What the bundle exports is the screen, a React
 node the app draws:
 
-```tsx file=thinking/App.tsx
+```tsx file=thinking/client/App.tsx
 
 ```
 

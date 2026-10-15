@@ -1,4 +1,4 @@
-// The examples' apps, `App.tsx` and its module map, type-checked as an Expo
+// The examples' apps, `client/App.tsx` and its module map, type-checked as an Expo
 // app's are: resolved as Metro resolves them, not as Node does.
 {
   "compilerOptions": {
@@ -13,5 +13,5 @@
     "types": ["node"],
     "jsx": "react-jsx"
   },
-  "include": ["*/App.tsx", "*/moduleMap.ts"]
+  "include": ["*/client/App.tsx", "*/client/moduleMap.ts"]
 }
