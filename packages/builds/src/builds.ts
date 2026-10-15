@@ -35,7 +35,7 @@ export class UnknownBuild extends Error {
     super(
       buildId === null
         ? "No build id was sent: the app's code predates build ids, or doesn't send its own."
-        : `No modules for build ${JSON.stringify(buildId)}: it isn't registered here, and this code makes ${made}. An app built before its module map or packages changed is built again (in development, restart Expo), or registered to keep being served.`,
+        : `No modules for build ${JSON.stringify(buildId)}: it isn't registered here, and this code makes ${made}. An app built before its module map or packages changed is built again, or registered to keep being served. In development, close the app and open it again: a reload keeps the config it was opened with.`,
     );
   }
 }
