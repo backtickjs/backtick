@@ -102,8 +102,8 @@ const { code } = bundle.generate({ format: "es" });
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): builds bundles
 - [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react): the React adapter
 - [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/adapters/react-native): the React Native adapter
-- [Thinking in Backtick](https://backtickjs.com/docs/thinking-in-backtick)
-- [How it works](https://backtickjs.com/docs/how-it-works)
+- [Thinking in Backtick](https://backtickjs.com/docs/thinking-in-backtick/)
+- [How it works](https://backtickjs.com/docs/how-it-works/)
 
 ## License
 

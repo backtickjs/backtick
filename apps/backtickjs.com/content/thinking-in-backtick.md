@@ -23,7 +23,7 @@ Read it by where each part runs:
   the screen, keep state and handle taps.
 
 Your server bundles this screen for each request, and your app runs the
-bundle. [How it works](/docs/how-it-works) shows what the phone receives.
+bundle. [How it works](/docs/how-it-works/) shows what the phone receives.
 
 ## Server components
 
@@ -127,7 +127,7 @@ state and handles taps, and another script draws it as a tag.
 - **Lists take `key`,** as in React.
 - **Write it as a function, and it keeps its state.** A function script is
   one function for the whole bundle, so React sees the same component on
-  every render. [Scripts in depth](/docs/scripts-in-depth#reading-a-script)
+  every render. [Scripts in depth](/docs/scripts-in-depth/#reading-a-script)
   explains why an expression wouldn't.
 - **It's a tag in a script, never on your server.** Drawn on your server, it
   "does not have any construct or call signatures".

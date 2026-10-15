@@ -63,7 +63,7 @@ npm run ios      # or android, or web: a simulator, an emulator or a browser
 
 Each starts your Backtick server alongside Expo, in one terminal. Edit `server/Home.tsx` and save: the app fetches the screen again, without rebuilding. Where Expo can't show its QR code, as when an agent runs it, `npm start` prints the `exp://` address to open in Expo Go instead.
 
-`npm test` draws `server/Home.tsx` as the app would, in `server/Home.test.tsx`; [Testing screens](https://backtickjs.com/docs/testing) explains the test.
+`npm test` draws `server/Home.tsx` as the app would, in `server/Home.test.tsx`; [Testing screens](https://backtickjs.com/docs/testing/) explains the test.
 
 ### `react` and `solid-js`
 
@@ -79,8 +79,8 @@ Then open http://localhost:3000. Edit `server/Home.tsx` and save to see the page
 
 - [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): the `cs` tag
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): runs server components and writes the bundle
-- [Quick start](https://backtickjs.com/docs)
-- [Tutorial](https://backtickjs.com/docs/tutorial)
+- [Quick start](https://backtickjs.com/docs/)
+- [Tutorial](https://backtickjs.com/docs/tutorial/)
 
 ## License
 

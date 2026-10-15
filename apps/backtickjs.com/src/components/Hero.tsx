@@ -16,7 +16,7 @@ export const Hero = cs`() => (
     </p>
     <div class="mt-[34px] flex flex-wrap gap-3">
       <$QuickStart />
-      <$Button href="/docs" label="Read the docs" event="read-docs" />
+      <$Button href="/docs/" label="Read the docs" event="read-docs" />
       <a
         href="https://github.com/backtickjs/backtick"
         data-umami-event="github"

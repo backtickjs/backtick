@@ -56,7 +56,7 @@ export async function Home() {
           </p>
         </section>
 
-        <a style={styles.link} href="https://backtickjs.com/docs">
+        <a style={styles.link} href="https://backtickjs.com/docs/">
           Read the docs →
         </a>
       </main>

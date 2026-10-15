@@ -61,7 +61,7 @@ app carries:
 `createImport`'s `version` is the range of the package the export works with.
 When a screen is bundled, the bundler checks it against the version the
 requesting build carries, and refuses a screen that build can't run, before
-anything reaches the phone. [Errors](/docs/errors#cant-import--from--the-client-provides-)
+anything reaches the phone. [Errors](/docs/errors/#cant-import--from--the-client-provides-)
 has the messages.
 
 ## Every build in users' hands

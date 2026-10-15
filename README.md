@@ -17,7 +17,7 @@ Fully server-driven React Native. Write every screen in React, on your
 server: layout, data and behaviour. Changes ship with your next deploy, not
 your next app store release.
 
-[Website](https://backtickjs.com) · [Docs](https://backtickjs.com/docs) ·
+[Website](https://backtickjs.com) · [Docs](https://backtickjs.com/docs/) ·
 [VS Code extension](https://marketplace.visualstudio.com/items?itemName=backtickjs.backtick-vscode) ·
 [Discussions](https://github.com/backtickjs/backtick/discussions) ·
 [X](https://x.com/backtickjs) ·
@@ -41,7 +41,7 @@ A screen can be made of server components, client components or both, like
 this one. The server component reads its data where it lives, and the client
 code sits inline, in a client script, `` cs`…` ``. Each splice, `$name`, is
 a value crossing from your server to the client, type-checked on both sides.
-[Thinking in Backtick](https://backtickjs.com/docs/thinking-in-backtick)
+[Thinking in Backtick](https://backtickjs.com/docs/thinking-in-backtick/)
 explains what runs where.
 
 <img src="assets/example.png" width="760" alt="A server component, Home, that reads the user's usual order and returns a client script drawing a ScrollView with a greeting and, when there is one, a ReorderButton: a client component in the same file, with its own state." />

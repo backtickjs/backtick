@@ -74,7 +74,7 @@ export async function Home() {
 
         <$Text
           style={styles.link}
-          onPress={() => $Linking.openURL("https://backtickjs.com/docs")}
+          onPress={() => $Linking.openURL("https://backtickjs.com/docs/")}
         >
           Read the docs →
         </$Text>

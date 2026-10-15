@@ -77,7 +77,7 @@ export const Home = cs`() => (
     >
       <div class="flex flex-wrap gap-3">
         <$QuickStart />
-        <$Button href="/docs" label="Read the docs" event="read-docs" />
+        <$Button href="/docs/" label="Read the docs" event="read-docs" />
       </div>
     </$Section>
   </$Layout>

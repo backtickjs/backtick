@@ -6,17 +6,21 @@ import { NotFound } from "./pages/NotFound.js";
 // need whole.
 export const ORIGIN = "https://backtickjs.com";
 
-// A page's address, as GitHub Pages serves it: every page but the root ends in
-// a slash.
+// A page's whole address, for search engines and link previews.
 export function urlOf(path: string): string {
-  return ORIGIN + (path === "/" ? "/" : `${path}/`);
+  return ORIGIN + path;
 }
 
-// A page: where it lives, what draws it, and what search results and link
-// previews show for it. A page with no path has no address of its own, as the
-// one answering for addresses that don't exist. A page with Markdown is also
-// served as that, at its path and `.md`, for agents. A page with static HTML
-// has it in its document until it's drawn.
+// Where a page's Markdown is served: `/docs/tutorial/` at `/docs/tutorial.md`.
+export function markdownPathOf(path: string): string {
+  return `${path.slice(0, -1)}.md`;
+}
+
+// A page: where it lives, ending in a slash as GitHub Pages serves it, what
+// draws it, and what search results and link previews show for it. A page
+// with no path has no address of its own, as the one answering for addresses
+// that don't exist. A page with Markdown is also served as that, for agents.
+// A page with static HTML has it in its document until it's drawn.
 export type Page = {
   path: string | null;
   Page: Client<() => JSX.Element>;

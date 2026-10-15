@@ -7,7 +7,7 @@ import {
   renderPage,
   staticArticle,
 } from "../docs.js";
-import type { Page } from "../pages.js";
+import { markdownPathOf, type Page } from "../pages.js";
 
 // A docs page, its body Markdown in `content/`.
 type Entry = DocsLink & { description: string; file: string };
@@ -18,14 +18,14 @@ const ENTRIES: { name: string; pages: Entry[] }[] = [
     name: "Get started",
     pages: [
       {
-        path: "/docs",
+        path: "/docs/",
         title: "Quick start",
         description:
           "Create a React Native app with a Backtick server in one command, then write a screen, serve it per request and draw it in your app.",
         file: "quick-start.md",
       },
       {
-        path: "/docs/tutorial",
+        path: "/docs/tutorial/",
         title: "Tutorial",
         description:
           "Build a coffee-ordering screen in six steps: a menu from your server, an order kept on the phone, sent back, and remembered for next time.",
@@ -37,28 +37,28 @@ const ENTRIES: { name: string; pages: Entry[] }[] = [
     name: "Learn",
     pages: [
       {
-        path: "/docs/thinking-in-backtick",
+        path: "/docs/thinking-in-backtick/",
         title: "Thinking in Backtick",
         description:
           "What runs on your server, what runs on the phone, and what crosses between them: server components, splices, client components, and how they compose.",
         file: "thinking-in-backtick.md",
       },
       {
-        path: "/docs/react-native-and-packages",
+        path: "/docs/react-native-and-packages/",
         title: "React Native and packages",
         description:
           "Every component, API and hook of React Native and React, spliced into scripts with their own names and types, and any other package your app ships.",
         file: "react-native-and-packages.md",
       },
       {
-        path: "/docs/testing",
+        path: "/docs/testing/",
         title: "Testing screens",
         description:
           "Draw a screen in a test as your app does, tap it, and check what it shows.",
         file: "testing.md",
       },
       {
-        path: "/docs/errors",
+        path: "/docs/errors/",
         title: "Errors",
         description:
           "Every message Backtick can show you, by who says it, with its fix.",
@@ -70,14 +70,14 @@ const ENTRIES: { name: string; pages: Entry[] }[] = [
     name: "Advanced",
     pages: [
       {
-        path: "/docs/how-it-works",
+        path: "/docs/how-it-works/",
         title: "How it works",
         description:
           "Compiled when your server loads, checked by TypeScript, bundled for each request, run by your app: what each step does, and the packages that do it.",
         file: "how-it-works.md",
       },
       {
-        path: "/docs/scripts-in-depth",
+        path: "/docs/scripts-in-depth/",
         title: "Scripts in depth",
         description:
           "A script's four shapes, when its code runs, scripts inside data, and what a splice checks.",
@@ -104,6 +104,7 @@ export const DOCS_PAGES: (Page & { path: string; markdown: string })[] =
         await readPage(entry.file, "html"),
       );
       const source = await readPage(entry.file, "markdown");
+      const markdownPath = markdownPathOf(path);
       return {
         path,
         title: `Backtick · ${title}`,
@@ -114,6 +115,7 @@ export const DOCS_PAGES: (Page & { path: string; markdown: string })[] =
           <$DocsLayout
             sections={$SECTIONS}
             path={$path}
+            markdownPath={$markdownPath}
             title={$title}
             description={$description}
             headings={$headings}

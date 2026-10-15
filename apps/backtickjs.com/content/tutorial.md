@@ -1,6 +1,6 @@
 Each step shows `server/Home.tsx`, with what changed marked.
 
-Start from the project the [Quick start](/docs) creates, with the app running,
+Start from the project the [Quick start](/docs/) creates, with the app running,
 and clear the welcome screen:
 
 ```sh
@@ -120,7 +120,7 @@ Create `server/Home.test.tsx`:
 
 `npm test` runs it. The phone's `fetch` is answered in the test, so placing an
 order doesn't need your server; the usual does, through `saveOrder`.
-[Testing screens](/docs/testing) explains `drawScreen`, and what a test
+[Testing screens](/docs/testing/) explains `drawScreen`, and what a test
 doesn't cover.
 
 ## What you learned
@@ -138,5 +138,5 @@ has the new screen the next time they open it, without an app release. And
 the server builds each screen per request, so `lastOrder` could read the
 user's account, A/B group or location.
 
-Next, **[Thinking in Backtick](/docs/thinking-in-backtick)** explains the
+Next, **[Thinking in Backtick](/docs/thinking-in-backtick/)** explains the
 model behind these steps.

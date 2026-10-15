@@ -14,7 +14,7 @@ You don't install this package directly. It is used by [`@backtickjs/typescript-
 
 - [`@backtickjs/language-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/language-plugin)
 - [Backtick for VS Code](https://marketplace.visualstudio.com/items?itemName=backtickjs.backtick-vscode)
-- [How it works](https://backtickjs.com/docs/how-it-works)
+- [How it works](https://backtickjs.com/docs/how-it-works/)
 
 ## License
 

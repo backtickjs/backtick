@@ -136,7 +136,7 @@ Numbers include `NaN`, `Infinity` and `-0`, which arrive as themselves, as do
 bigints. A class whose members are all data looks like a plain object to
 TypeScript, so the bundler is what refuses it, when it builds the screen. A
 value that contains itself is refused too: a bundle writes each value out in
-full. [Errors](/docs/errors#from-the-bundler) has each message.
+full. [Errors](/docs/errors/#from-the-bundler) has each message.
 
 The rest of `@backtickjs/core` is how Backtick's own pieces talk to each
 other; its

@@ -98,8 +98,8 @@ React's own names (`useState`, `Suspense`, …), the JSX runtime and the compile
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): builds bundles
 - [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react): the React adapter
 - [`@backtickjs/solid-js`](https://github.com/backtickjs/backtick/tree/main/adapters/solid-js): the Solid adapter
-- [React Native and packages](https://backtickjs.com/docs/react-native-and-packages)
-- [How it works](https://backtickjs.com/docs/how-it-works)
+- [React Native and packages](https://backtickjs.com/docs/react-native-and-packages/)
+- [How it works](https://backtickjs.com/docs/how-it-works/)
 
 ## License
 

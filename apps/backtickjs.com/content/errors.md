@@ -10,24 +10,24 @@ last by your app.
 The splice holds something that can't cross: a function, a class instance, a
 `Date`. Splice what it's for instead: a `Date` as a string, a function as a
 client function, `` cs`(n: number) => …` ``. See
-[what can cross](/docs/thinking-in-backtick#splices).
+[what can cross](/docs/thinking-in-backtick/#splices).
 
 ### Cannot find name '…'
 
 A script used a name from your server without a `$`, or a name nothing
 declares. Splice the server's: `$total`, not `total`. See
-[splices](/docs/thinking-in-backtick#splices).
+[splices](/docs/thinking-in-backtick/#splices).
 
 ### This expression is not callable. Type 'Client<…>' has no call signatures
 
 A hook, or another client value, was called in a server component. Hooks
-belong in a [client component](/docs/thinking-in-backtick#client-components).
+belong in a [client component](/docs/thinking-in-backtick/#client-components).
 
 ### JSX element type '…' does not have any construct or call signatures
 
 A client component was drawn as a tag on your server. Draw it in a script:
 `` cs`<$Card />` ``. See
-[client components](/docs/thinking-in-backtick#client-components).
+[client components](/docs/thinking-in-backtick/#client-components).
 
 ## From the compiler
 
@@ -38,12 +38,12 @@ These are reported in the editor, and thrown when your server loads the file.
 Your server ran a script without the plugin that compiles them. Start it with
 `node --import @backtickjs/node-plugin`, or on Bun preload
 `@backtickjs/bun-plugin`. A new project's `npm start` already does. See
-[How it works](/docs/how-it-works#1-compiled-with-your-server).
+[How it works](/docs/how-it-works/#1-compiled-with-your-server).
 
 ### A `cs` client script is one expression, one class or one block
 
 Statements need braces: `` cs`{ a(); b(); }` ``. See the
-[four shapes](/docs/scripts-in-depth#four-shapes).
+[four shapes](/docs/scripts-in-depth/#four-shapes).
 
 ### This `${…}` is in text, not code, so it isn't spliced
 
@@ -85,14 +85,14 @@ where it's called.
 A `once` script was written inside another script, reading one of its
 variables. A `once` value is made at the top of the bundle, outside every
 script, so it can't. Make it outside the script, and splice it in. See
-[reading a script](/docs/scripts-in-depth#reading-a-script).
+[reading a script](/docs/scripts-in-depth/#reading-a-script).
 
 ### Can't import `…` from "…": the client provides …
 
 A script uses a module the requesting build doesn't carry. Add it to the
 app's module map, and install it in the app. A build made before then doesn't
 carry it: draw that screen differently for it, with `supports`. See
-[where a package goes](/docs/react-native-and-packages#any-package-your-app-ships).
+[where a package goes](/docs/react-native-and-packages/#any-package-your-app-ships).
 
 ### Can't import `…` from "…": it needs …, and the client provides …
 
@@ -133,4 +133,4 @@ server. Draw it in a script: `` cs`<$Card />` ``.
 The bundle uses a module missing from the module map your app hands to
 `execRoot`. Add it, and install it in the app so its native code ships. If
 your server shouldn't have sent it, check the build id the app sends.
-See [where a package goes](/docs/react-native-and-packages#any-package-your-app-ships).
+See [where a package goes](/docs/react-native-and-packages/#any-package-your-app-ships).

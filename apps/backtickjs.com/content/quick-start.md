@@ -82,7 +82,7 @@ you're ready to start your own.
 
 ## Next steps
 
-- **[Tutorial](/docs/tutorial):** build a coffee-ordering screen, step by step,
+- **[Tutorial](/docs/tutorial/):** build a coffee-ordering screen, step by step,
   in the project you just created.
-- **[Thinking in Backtick](/docs/thinking-in-backtick):** what runs where, and
+- **[Thinking in Backtick](/docs/thinking-in-backtick/):** what runs where, and
   what crosses between your server and the phone.

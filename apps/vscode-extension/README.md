@@ -23,5 +23,5 @@ Use Workspace Version**.
 
 ## Learn more
 
-- [How it works](https://backtickjs.com/docs/how-it-works)
+- [How it works](https://backtickjs.com/docs/how-it-works/)
 - [GitHub](https://github.com/backtickjs/backtick)

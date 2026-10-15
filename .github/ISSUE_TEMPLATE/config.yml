@@ -4,7 +4,7 @@ contact_links:
     url: https://github.com/backtickjs/backtick/discussions
     about: Ask and share in GitHub Discussions.
   - name: Documentation
-    url: https://backtickjs.com/docs
+    url: https://backtickjs.com/docs/
     about: How to set up Backtick and write screens.
   - name: Report a vulnerability
     url: https://github.com/backtickjs/backtick/security/advisories/new

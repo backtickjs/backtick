@@ -14,7 +14,7 @@ export const NotFound = cs`() => (
             home page
           </a>{" "}
           or the{" "}
-          <a href="/docs" class="font-medium text-react">
+          <a href="/docs/" class="font-medium text-react">
             docs
           </a>
           .

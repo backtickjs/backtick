@@ -13,7 +13,7 @@ export const Layout = cs`(props: { children: JSX.Element }) => (
         <$Logo />
       </a>
       <nav class="flex items-center gap-5 whitespace-nowrap text-[15px] font-medium">
-        <a href="/docs" class="no-underline">
+        <a href="/docs/" class="no-underline">
           Docs
         </a>
         <a

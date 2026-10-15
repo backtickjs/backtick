@@ -5,7 +5,7 @@ import { compile, optimize } from "@tailwindcss/node";
 import { Scanner } from "@tailwindcss/oxide";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { ORIGIN, type Page, urlOf } from "./pages.js";
+import { markdownPathOf, ORIGIN, type Page, urlOf } from "./pages.js";
 
 // In development, a map into the host files in each bundle, for devtools.
 const sourcemap = process.env.NODE_ENV === "production" ? undefined : "inline";
@@ -60,7 +60,7 @@ export async function toHtml({
     ${
       markdown === undefined || path === null
         ? ""
-        : `<link rel="alternate" type="text/markdown" href="${path}.md">`
+        : `<link rel="alternate" type="text/markdown" href="${markdownPathOf(path)}">`
     }
     <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
     <link rel="alternate" type="text/plain" href="/llms-full.txt" title="llms-full.txt">

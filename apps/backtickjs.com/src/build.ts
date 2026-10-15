@@ -16,9 +16,7 @@ for (const { method, path } of app.routes) {
   if (method !== "GET") continue;
   const response = await app.request(path);
   const page = response.headers.get("content-type")?.startsWith("text/html");
-  const file = page
-    ? new URL(`.${path === "/" ? "" : path}/index.html`, dist)
-    : new URL(`.${path}`, dist);
+  const file = new URL(`.${path}${page ? "index.html" : ""}`, dist);
   await mkdir(new URL(".", file), { recursive: true });
   await writeFile(file, await response.text());
   if (page) pages.push(path);

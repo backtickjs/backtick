@@ -59,6 +59,7 @@ const CopyMarkdown = cs`(props: { path: string }) => {
 export const DocsLayout = cs`(props: {
   sections: DocsSection[];
   path: string;
+  markdownPath: string;
   title: string;
   description: string;
   headings: Heading[];
@@ -133,7 +134,7 @@ export const DocsLayout = cs`(props: {
             </div>
           )}
           <div>
-            <$CopyMarkdown path={props.path + ".md"} />
+            <$CopyMarkdown path={props.markdownPath} />
           </div>
         </div>
       </aside>
