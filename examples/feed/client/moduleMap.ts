@@ -3,6 +3,7 @@ import * as React from "react";
 import * as ReactErrorBoundary from "react-error-boundary";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNative from "react-native";
+import * as SafeArea from "react-native-safe-area-context";
 
 // What a screen may require, as your app imports it: the packages it's built
 // with. Add one when a screen uses another package. Imports and a table,
@@ -15,4 +16,5 @@ export const moduleMap = {
   "react-native": ReactNative,
   "@tanstack/react-query": ReactQuery,
   "react-error-boundary": ReactErrorBoundary,
+  "react-native-safe-area-context": SafeArea,
 };

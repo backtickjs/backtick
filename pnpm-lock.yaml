@@ -1270,6 +1270,9 @@ importers:
       '@backtickjs/react-native':
         specifier: ^0.86.3
         version: link:../../adapters/react-native
+      '@backtickjs/react-native-safe-area-context':
+        specifier: ^5.7.0
+        version: link:../../adapters/react-native-safe-area-context
       '@backtickjs/tanstack-react-query':
         specifier: ^5.104.0
         version: link:../../adapters/tanstack-react-query
@@ -1303,6 +1306,9 @@ importers:
       react-native:
         specifier: 0.86.3
         version: 0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3)
+      react-native-safe-area-context:
+        specifier: ~5.7.0
+        version: 5.7.0(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
       react-native-view-shot:
         specifier: 5.1.0
         version: 5.1.0(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)

@@ -53,6 +53,7 @@ const moduleMap = {
   "react-native": ReactNativeWeb,
   "@tanstack/react-query": ReactQuery,
   "react-error-boundary": ReactErrorBoundary,
+  "react-native-safe-area-context": { SafeAreaView: ReactNativeWeb.View },
 };
 
 /**

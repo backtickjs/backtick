@@ -5,10 +5,10 @@ import {
   ActivityIndicator,
   FlatList,
   Pressable,
-  SafeAreaView,
   Text,
   View,
 } from "@backtickjs/react-native";
+import { SafeAreaView } from "@backtickjs/react-native-safe-area-context";
 import {
   HydrationBoundary,
   infiniteQueryOptions,
