@@ -125,6 +125,27 @@ test("a name alone creates a React Native project on Node", () => {
   assert.ok(!("@backtickjs/bun-plugin" in manifest.dependencies));
 });
 
+test("a project on Bun runs its server with Bun", () => {
+  for (const [template, script] of [
+    ["react-native", "server"],
+    ["react", "start"],
+  ] as const) {
+    const name = `bun-${template}-app`;
+    execFileSync(
+      process.execPath,
+      [cli, name, "-t", template, "--runtime", "bun", "--no-install"],
+      { cwd: work, stdio: "pipe" },
+    );
+    const manifest = JSON.parse(
+      readFileSync(path.join(work, name, "package.json"), "utf8"),
+    ) as { scripts: Record<string, string> };
+    assert.equal(
+      manifest.scripts[script],
+      "bun --watch --preload @backtickjs/bun-plugin server/index.tsx",
+    );
+  }
+});
+
 test("--help lists the options, and an unknown one shows them too", () => {
   const help = execFileSync(process.execPath, [cli, "--help"], {
     encoding: "utf8",

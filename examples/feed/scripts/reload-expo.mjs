@@ -1,4 +1,4 @@
-// `node --watch --import ./scripts/reload.mjs server/index.tsx`: once your
+// `node --watch --import ./scripts/reload-expo.mjs server/index.tsx`: once your
 // server listens, after each restart `--watch` makes, the apps Expo serves
 // reload, as pressing `r` in Expo's terminal does: a `reload` on its message
 // socket, which it accepts from this computer. Nothing happens without Expo

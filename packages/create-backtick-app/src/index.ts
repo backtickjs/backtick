@@ -190,8 +190,7 @@ cpSync(templateFolder, target, {
 renameSync(path.join(target, "gitignore"), path.join(target, ".gitignore"));
 rewriteJson(path.join(target, "package.json"), (json) => {
   json.name = slug;
-  // The templates ship Node's loader; another runtime gets its own, which is
-  // how `scripts/start.mjs` knows what to run.
+  // The templates ship Node's loader and scripts; another runtime gets its own.
   const loader = RUNTIMES[runtimeName]!.loader;
   if (!(loader in json.dependencies)) {
     const version = json.dependencies["@backtickjs/node-plugin"];
@@ -199,6 +198,18 @@ rewriteJson(path.join(target, "package.json"), (json) => {
     json.dependencies = Object.fromEntries(
       Object.entries({ ...json.dependencies, [loader]: version }).sort(),
     );
+  }
+  if (runtimeName === "bun") {
+    for (const [name, command] of Object.entries<string>(json.scripts)) {
+      json.scripts[name] = command
+        .replace(
+          "node --watch --enable-source-maps --import @backtickjs/node-plugin",
+          `bun --watch --preload ${loader}`,
+        )
+        // Bun doesn't report a server listening, which reload-expo.mjs waits for.
+        .replace(" --import ./scripts/reload-expo.mjs", "")
+        .replace("npm:server", "bun:server");
+    }
   }
 });
 if (existsSync(path.join(target, "app.json"))) {

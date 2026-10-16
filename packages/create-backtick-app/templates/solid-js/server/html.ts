@@ -10,9 +10,8 @@ const modules = {
   "solid-js/web": "1.9.14",
 };
 
-// Development is only what `npm start` runs, which sets NODE_ENV: any other
-// run, a deploy included, is production.
-const development = process.env.NODE_ENV === "development";
+// Development unless NODE_ENV says production, as hosts set it for a deploy.
+const development = process.env.NODE_ENV !== "production";
 
 // A page: the element, bundled for the browser, and Solid from a CDN.
 export async function toHtml(element: JSX.Element): Promise<string> {

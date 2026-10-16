@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node scripts/start.mjs",
+    "start": "node --watch --enable-source-maps --import @backtickjs/node-plugin server/index.tsx",
     "reset-project": "node scripts/reset-project.mjs",
     "typecheck": "backtick-tsc --noEmit",
     "format": "prettier --write --ignore-unknown .",
@@ -23,6 +23,7 @@
     "@backtickjs/prettier-plugin": "^0.1.10",
     "@backtickjs/tsc": "^0.1.10",
     "@types/node": "^25.9.1",
+    "agent-device": "^0.21.27",
     "prettier": "^3.6.2"
   },
   "backtick": {

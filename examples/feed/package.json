@@ -5,7 +5,7 @@
   "private": true,
   "main": "client/index.ts",
   "scripts": {
-    "server": "node --watch --enable-source-maps --import @backtickjs/node-plugin --import ./scripts/reload.mjs server/index.tsx",
+    "server": "node --watch --enable-source-maps --import @backtickjs/node-plugin --import ./scripts/reload-expo.mjs server/index.tsx",
     "start": "concurrently --raw --kill-others npm:server \"expo start\"",
     "android": "concurrently --raw --kill-others npm:server \"expo start --android\"",
     "ios": "concurrently --raw --kill-others npm:server \"expo start --ios\"",

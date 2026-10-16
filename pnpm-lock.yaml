@@ -1487,6 +1487,9 @@ importers:
       '@types/node':
         specifier: ^25.9.1
         version: 25.9.1
+      agent-device:
+        specifier: ^0.21.27
+        version: 0.21.27
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
@@ -1563,6 +1566,12 @@ importers:
       '@types/react':
         specifier: 19.2.18
         version: 19.2.18
+      agent-device:
+        specifier: ^0.21.27
+        version: 0.21.27
+      concurrently:
+        specifier: ^10.0.6
+        version: 10.0.6
       global-jsdom:
         specifier: ^30.0.0
         version: 30.0.0(jsdom@30.0.1(@noble/hashes@1.8.0))
@@ -1606,6 +1615,9 @@ importers:
       '@types/node':
         specifier: ^25.9.1
         version: 25.9.1
+      agent-device:
+        specifier: ^0.21.27
+        version: 0.21.27
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
