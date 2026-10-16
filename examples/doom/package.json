@@ -5,10 +5,11 @@
   "description": "A Doom-like shooter drawn with React Three Fiber, its levels served by a Backtick server",
   "main": "client/index.ts",
   "scripts": {
-    "start": "node scripts/start.mjs",
-    "android": "node scripts/start.mjs --android",
-    "ios": "node scripts/start.mjs --ios",
-    "web": "node scripts/start.mjs --web",
+    "server": "nodemon --exec \"node --enable-source-maps --import @backtickjs/node-plugin server/index.tsx\"",
+    "start": "concurrently --raw --kill-others npm:server \"expo start\"",
+    "android": "concurrently --raw --kill-others npm:server \"expo start --android\"",
+    "ios": "concurrently --raw --kill-others npm:server \"expo start --ios\"",
+    "web": "concurrently --raw --kill-others npm:server \"expo start --web\"",
     "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit",
     "test": "node --import ./server/test/setup.mjs --import @backtickjs/node-plugin --test \"server/**/*.test.ts\"",
     "format": "prettier --write --ignore-unknown .",
@@ -45,7 +46,19 @@
     "@react-three/test-renderer": "9.1.1",
     "@types/node": "^25.9.1",
     "@types/react": "19.2.18",
+    "agent-device": "^0.21.27",
+    "concurrently": "^10.0.6",
+    "nodemon": "^3.1.14",
     "prettier": "^3.6.2"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "server"
+    ],
+    "ext": "ts,tsx",
+    "events": {
+      "start": "node scripts/reload-expo.mjs"
+    }
   },
   "backtick": {
     "plugins": [

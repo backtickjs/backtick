@@ -1,11 +1,10 @@
 // Starts the Firebase emulators, with the seed's account and stories, then
 // your Backtick server, then Expo, all in this terminal: Expo keeps its keys
-// and QR code, and the server restarts whenever a file under `server/`
-// changes. Development never reaches the real Firebase project. Arguments are
-// Expo's, as `npm run ios` passes `--ios`.
+// and QR code, and nodemon restarts the server whenever a file under
+// `server/` changes. Development never reaches the real Firebase project.
+// Arguments are Expo's, as `npm run ios` passes `--ios`.
 import { spawn } from "node:child_process";
 import { readFileSync } from "node:fs";
-import { networkInterfaces } from "node:os";
 import { setTimeout as sleep } from "node:timers/promises";
 
 // Node 24 or later: Node 23's module hooks, which the Backtick loader uses,
@@ -111,39 +110,20 @@ if (seeded !== 0) {
 }
 console.log("Firebase emulators on http://localhost:4000");
 
-start(runtime, ["--watch", ...loader, "server/index.tsx"], {
-  stdio: "inherit",
-  env,
-});
+// Restarted by nodemon, which also reloads the app once it's back: see
+// `nodemonConfig` in package.json.
+start(
+  npx,
+  ["nodemon", "--exec", [runtime, ...loader, "server/index.tsx"].join(" ")],
+  {
+    stdio: "inherit",
+    env,
+    shell: process.platform === "win32",
+  },
+);
 const expo = start(npx, ["expo", "start", ...process.argv.slice(2)], {
   stdio: "inherit",
   shell: process.platform === "win32",
 });
 
 expo.on("exit", (code) => stop(code ?? 0));
-
-// Expo shows how to open the app, its QR code, only in an interactive
-// terminal. Run elsewhere, as an agent runs it, this prints the address once
-// Metro is up.
-if (!process.stdout.isTTY) {
-  const args = process.argv.slice(2);
-  const flag = args.findIndex((arg) => arg === "--port" || arg === "-p");
-  const port = flag === -1 ? 8081 : Number(args[flag + 1]);
-  const address = Object.values(networkInterfaces())
-    .flat()
-    .find(
-      (network) => network?.family === "IPv4" && !network.internal,
-    )?.address;
-  while (address !== undefined && expo.exitCode === null) {
-    const status = await fetch(`http://localhost:${port}/status`)
-      .then((response) => response.text())
-      .catch(() => "");
-    if (status === "packager-status:running") {
-      console.log(
-        `\nOpen exp://${address}:${port} in the development build.\n`,
-      );
-      break;
-    }
-    await sleep(500);
-  }
-}

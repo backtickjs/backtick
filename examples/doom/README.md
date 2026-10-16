@@ -9,7 +9,7 @@ npm install
 npm start
 ```
 
-`npm start` runs the server and Expo side by side. Open the app in Expo Go, then edit a map in `server/levels.ts`, save, and reload the app (press `r` in the terminal): the phone plays the new map, without a rebuild.
+`npm start` runs the server and Expo side by side. Open the app in Expo Go, then edit a map in `server/levels.ts` and save: the app reloads, and the phone plays the new map, without a rebuild.
 
 Hold ▲ ▼ to walk, ◀ ▶ to turn, and FIRE to shoot. Clear every imp to finish the level.
 

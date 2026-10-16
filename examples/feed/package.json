@@ -5,7 +5,7 @@
   "private": true,
   "main": "client/index.ts",
   "scripts": {
-    "server": "node --watch --enable-source-maps --import @backtickjs/node-plugin --import ./scripts/reload-expo.mjs server/index.tsx",
+    "server": "nodemon --exec \"node --enable-source-maps --import @backtickjs/node-plugin server/index.tsx\"",
     "start": "concurrently --raw --kill-others npm:server \"expo start\"",
     "android": "concurrently --raw --kill-others npm:server \"expo start --android\"",
     "ios": "concurrently --raw --kill-others npm:server \"expo start --ios\"",
@@ -52,7 +52,17 @@
     "concurrently": "^10.0.6",
     "global-jsdom": "^30.0.0",
     "jsdom": "^30.0.1",
+    "nodemon": "^3.1.14",
     "prettier": "^3.6.2"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "server"
+    ],
+    "ext": "ts,tsx",
+    "events": {
+      "start": "node scripts/reload-expo.mjs"
+    }
   },
   "backtick": {
     "clientRoot": "client",
