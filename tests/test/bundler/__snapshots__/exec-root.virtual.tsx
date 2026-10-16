@@ -15,7 +15,7 @@ import { execRoot } from "@backtickjs/core/cjs";
 const answer = createImport<number>({
   name: "answer",
   from: "app",
-  version: "^1.0.0",
+  version: "1.0.0",
 });
 
 async function bundleCjs<T extends Spliceable>(

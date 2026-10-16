@@ -3,7 +3,7 @@ import {
   isClientImportDeclaration,
   packageOf,
   runtimeClientImport,
-  versionRange,
+  installedVersion,
 } from "./clientImports.js";
 import { compileScript, type Plugin } from "./compileScript.js";
 import { parseSourceFile } from "./parseFile.js";
@@ -80,7 +80,7 @@ export function transform(
       // installed.
       if (isClientImportDeclaration(ts, node)) {
         const { moduleSpecifier } = node;
-        const version = versionRange(
+        const version = installedVersion(
           ts,
           moduleSpecifier.text,
           sourceFile.fileName,

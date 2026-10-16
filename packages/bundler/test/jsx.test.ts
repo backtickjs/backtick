@@ -25,7 +25,7 @@ test("a client module's component is not a tag on the host", async () => {
   const For = createImport({
     name: "For",
     from: "solid-js",
-    version: "^1.9.0",
+    version: "1.9.0",
   });
   await assert.rejects(
     () => printed(For as never, { each: [1] }),

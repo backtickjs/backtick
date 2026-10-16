@@ -7,27 +7,27 @@ import type * as Web from "solid-js/web";
 // Solid's own declarations, and each imported from Solid by the bundle that
 // uses it. Internal: the adapter's modules mirror Solid's, name for name.
 
-// What every name needs: the Solid it is typed against (the adapter's version,
-// and its `solid-js` dependency), or a later 1.x.
-const range = "^1.9.14";
+// The Solid every name is typed against: the adapter's version, and its
+// `solid-js` dependency.
+const version = "1.9.14";
 
 export const solid = <Name extends keyof typeof Solid>(name: Name) =>
   createImport<(typeof Solid)[Name]>({
     name,
     from: "solid-js",
-    version: range,
+    version,
   });
 
 export const store = <Name extends keyof typeof Store>(name: Name) =>
   createImport<(typeof Store)[Name]>({
     name,
     from: "solid-js/store",
-    version: range,
+    version,
   });
 
 export const web = <Name extends keyof typeof Web>(name: Name) =>
   createImport<(typeof Web)[Name]>({
     name,
     from: "solid-js/web",
-    version: range,
+    version,
   });

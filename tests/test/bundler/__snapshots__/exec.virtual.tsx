@@ -16,7 +16,7 @@ import { bundle, evaluate } from "../evaluate.ts";
 const answer = createImport<number>({
   name: "answer",
   from: "app",
-  version: "^1.0.0",
+  version: "1.0.0",
 });
 
 // A bundle as CommonJS, run as a React Native app runs one: handed a

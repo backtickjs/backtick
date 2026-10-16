@@ -6,10 +6,9 @@ import type * as AppleAuthentication from "expo-apple-authentication";
 // each required from `expo-apple-authentication` by the app that runs the
 // bundle. Internal: the adapter mirrors it, name for name.
 
-// What every name needs: the expo-apple-authentication it is typed against (the
-// adapter's version, and its `expo-apple-authentication` dependency), or a
-// later 57.x.
-const range = "^57.0.2";
+// The expo-apple-authentication every name is typed against: the adapter's
+// version, and its `expo-apple-authentication` dependency.
+const version = "57.0.2";
 
 export const appleAuthentication = <
   Name extends keyof typeof AppleAuthentication,
@@ -19,5 +18,5 @@ export const appleAuthentication = <
   createImport<(typeof AppleAuthentication)[Name]>({
     name,
     from: "expo-apple-authentication",
-    version: range,
+    version,
   });

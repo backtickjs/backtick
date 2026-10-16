@@ -10,21 +10,23 @@ const vocabulary = Object.assign({}, main, store, web);
 const versionOf = (url: URL): string =>
   (JSON.parse(readFileSync(url, "utf8")) as { version: string }).version;
 
-// Every name needs the Solid the adapter is typed against, or a later 1.x.
-const ranges = new Set(Object.values(vocabulary).map((value) => value.version));
+// Every name is typed against the Solid the adapter is.
+const versions = new Set(
+  Object.values(vocabulary).map((value) => value.version),
+);
 
-it("is one range for every name", () => {
-  assert.equal(ranges.size, 1);
+it("is one version for every name", () => {
+  assert.equal(versions.size, 1);
 });
 
-it("starts at the adapter's version", () => {
+it("is the adapter's version", () => {
   const version = versionOf(new URL("../package.json", import.meta.url));
-  assert.deepEqual([...ranges], [`^${version}`]);
+  assert.deepEqual([...versions], [version]);
 });
 
-it("starts at the installed solid-js", () => {
+it("is the installed solid-js", () => {
   const version = versionOf(
     new URL(import.meta.resolve("solid-js/package.json")),
   );
-  assert.deepEqual([...ranges], [`^${version}`]);
+  assert.deepEqual([...versions], [version]);
 });

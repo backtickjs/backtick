@@ -6,13 +6,13 @@ import type * as ExpoCrypto from "expo-crypto";
 // from `expo-crypto` by the app that runs the bundle. Internal: the adapter
 // mirrors it, name for name.
 
-// What every name needs: the expo-crypto it is typed against (the adapter's
-// version, and its `expo-crypto` dependency), or a later 57.x.
-const range = "^57.0.4";
+// The expo-crypto every name is typed against: the adapter's version, and its
+// `expo-crypto` dependency.
+const version = "57.0.4";
 
 export const crypto = <Name extends keyof typeof ExpoCrypto>(name: Name) =>
   createImport<(typeof ExpoCrypto)[Name]>({
     name,
     from: "expo-crypto",
-    version: range,
+    version,
   });

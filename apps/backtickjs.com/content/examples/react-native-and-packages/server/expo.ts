@@ -7,11 +7,11 @@ import type { LinearGradient as ExpoLinearGradient } from "expo-linear-gradient"
 export const impactAsync = createImport<typeof ImpactAsync>({
   name: "impactAsync",
   from: "expo-haptics",
-  version: "~57.0.0",
+  version: "57.0.0",
 });
 
 export const LinearGradient = createImport<typeof ExpoLinearGradient>({
   name: "LinearGradient",
   from: "expo-linear-gradient",
-  version: "~57.0.0",
+  version: "57.0.0",
 });

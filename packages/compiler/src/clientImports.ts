@@ -126,10 +126,9 @@ export function packageOf(specifier: string): string {
   return segments.slice(0, specifier.startsWith("@") ? 2 : 1).join("/");
 }
 
-// The versions a client import works with: its package's, as installed where
-// the importing file finds it, up its directories as `tsc` finds a config, or
-// a later compatible one.
-export function versionRange(
+// The version of its package a client import is typed against: as installed
+// where the importing file finds it, up its directories as `tsc` finds a config.
+export function installedVersion(
   ts: typeof import("typescript"),
   specifier: string,
   fileName: string,
@@ -143,12 +142,12 @@ export function versionRange(
   const { version } = JSON.parse(ts.sys.readFile(manifest)!) as {
     version: string;
   };
-  return "^" + version;
+  return version;
 }
 
 // For the runtime, a constant per value it names, in the declaration's place:
 // `const View = { "@backtickjs": "ClientImport", name: "View", from:
-// "react-native", version: "^0.86.3" }`, core's `ClientImport`.
+// "react-native", version: "0.86.3" }`, core's `ClientImport`.
 export function runtimeClientImport(
   ts: typeof import("typescript"),
   declaration: ts.ImportDeclaration & { moduleSpecifier: ts.StringLiteral },

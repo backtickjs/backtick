@@ -6,7 +6,7 @@ import { bundler } from "../dist/index.js";
 const greet = createImport<(name: string) => string>({
   name: "greet",
   from: "app",
-  version: "^1.0.0",
+  version: "1.0.0",
 });
 
 test("as CommonJS, the value is `module.exports`, its imports `require` calls", async () => {

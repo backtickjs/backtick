@@ -6,10 +6,10 @@ import type * as GoogleSignIn from "@react-native-google-signin/google-signin";
 // required from `@react-native-google-signin/google-signin` by the app that
 // runs the bundle. Internal: the adapter mirrors it, name for name.
 
-// What every name needs: the @react-native-google-signin/google-signin it is
-// typed against (the adapter's version, and its `@react-native-google-
-// signin/google-signin` dependency), or a later 16.x.
-const range = "^16.1.5";
+// The @react-native-google-signin/google-signin every name is typed against:
+// the adapter's version, and its `@react-native-google- signin/google-signin`
+// dependency.
+const version = "16.1.5";
 
 export const googleSignin = <Name extends keyof typeof GoogleSignIn>(
   name: Name,
@@ -17,5 +17,5 @@ export const googleSignin = <Name extends keyof typeof GoogleSignIn>(
   createImport<(typeof GoogleSignIn)[Name]>({
     name,
     from: "@react-native-google-signin/google-signin",
-    version: range,
+    version,
   });

@@ -6,14 +6,13 @@ import type * as SafeArea from "react-native-safe-area-context";
 // from `react-native-safe-area-context` by the app that runs the bundle.
 // Internal: the adapter mirrors it, name for name.
 
-// What every name needs: the react-native-safe-area-context it is typed
-// against (the adapter's version, and its `react-native-safe-area-context`
-// dependency), or a later 5.x.
-const range = "^5.7.0";
+// The react-native-safe-area-context every name is typed against: the adapter's
+// version, and its `react-native-safe-area-context` dependency.
+const version = "5.7.0";
 
 export const safeArea = <Name extends keyof typeof SafeArea>(name: Name) =>
   createImport<(typeof SafeArea)[Name]>({
     name,
     from: "react-native-safe-area-context",
-    version: range,
+    version,
   });

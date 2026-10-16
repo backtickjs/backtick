@@ -10,12 +10,12 @@ import { createRoot } from "@backtickjs/solid-js";
 const greet = createImport<() => string>({
   name: "greet",
   from: "app",
-  version: "^1.0.0",
+  version: "1.0.0",
 });
 const storage = createImport<{ get: (key: string) => string | null }>({
   name: "storage",
   from: "app",
-  version: "^1.0.0",
+  version: "1.0.0",
 });
 
 describe("a module an app provides", () => {

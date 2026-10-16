@@ -4,7 +4,7 @@ import { cs, createImport } from "@backtickjs/core";
 import { evaluate } from "../evaluate.ts";
 import { createRoot } from "@backtickjs/solid-js";
 const $module0 = {
-  id: "24se5744y85zv:25:32",
+  id: "9k86q37klbtv:25:32",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => $splice1()());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAwBmC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAM,EAAE,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["stdlib/target-builtins.test.tsx"]}',
   dependencies: [],
@@ -15,7 +15,7 @@ const $module0 = {
   kind: "expression",
 };
 const $module1 = {
-  id: "24se5744y85zv:32:21",
+  id: "9k86q37klbtv:32:21",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => $splice1().get("greeting"));\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA+BwB,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAQ,CAACC,GAAG,CAAC,UAAU,CAAC,CAAC","names":["$splice0","$splice1","get"],"ignoreList":[],"sources":["stdlib/target-builtins.test.tsx"]}',
   dependencies: [],
@@ -31,12 +31,12 @@ const $module1 = {
 const greet = createImport({
   name: "greet",
   from: "app",
-  version: "^1.0.0",
+  version: "1.0.0",
 });
 const storage = createImport({
   name: "storage",
   from: "app",
-  version: "^1.0.0",
+  version: "1.0.0",
 });
 describe("a module an app provides", () => {
   // Reached by splicing the value `createImport` made, which a bundle imports

@@ -11,7 +11,7 @@ export interface ClientImport<T> extends Client<T> {
   readonly name: string;
   // the specifier the client resolves
   readonly from: string;
-  // the versions of `from`'s package it works with, a semver range
+  // the exact version of `from`'s package it's typed against
   readonly version: string;
 }
 

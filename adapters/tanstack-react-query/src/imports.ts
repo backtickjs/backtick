@@ -6,14 +6,13 @@ import type * as ReactQuery from "@tanstack/react-query";
 // required from `@tanstack/react-query` by the app that runs the bundle.
 // Internal: the adapter mirrors it, name for name.
 
-// What every name needs: the @tanstack/react-query it is typed against (the
-// adapter's version, and its `@tanstack/react-query` dependency), or a later
-// 5.x.
-const range = "^5.104.0";
+// The @tanstack/react-query every name is typed against: the adapter's version,
+// and its `@tanstack/react-query` dependency.
+const version = "5.104.0";
 
 export const query = <Name extends keyof typeof ReactQuery>(name: Name) =>
   createImport<(typeof ReactQuery)[Name]>({
     name,
     from: "@tanstack/react-query",
-    version: range,
+    version,
   });

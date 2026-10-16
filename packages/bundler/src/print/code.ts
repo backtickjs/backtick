@@ -97,10 +97,11 @@ export function imported(
         `${listed.join(", ") || "no modules"}.`,
     );
   }
-  if (!supports(names.modules, from, version)) {
+  // Typed against one version, it works with a later one of the same major.
+  if (!supports(names.modules, from, `^${version}`)) {
     throw new Error(
-      `Can't import \`${name}\` from "${from}": it needs ${version}, and ` +
-        `the client provides ${from}@${provided}.`,
+      `Can't import \`${name}\` from "${from}": it's typed against ` +
+        `${version}, and the client provides ${from}@${provided}.`,
     );
   }
   const key = `${from}\0${name}`;

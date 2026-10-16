@@ -9,7 +9,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // is. `new` takes the member, not the splice: the splice reads as one value.
 const geometry = createImport<{
   Circle: new (radius: number) => { radius: number; diameter: number };
-}>({ name: "geometry", from: "app", version: "^1.0.0" });
+}>({ name: "geometry", from: "app", version: "1.0.0" });
 
 const diameter = cs.lift((() => (cs.splice((createRoot)))(() => new (cs.splice((geometry))).Circle(2).diameter))());
 

@@ -6,25 +6,25 @@ import * as main from "../dist/index.js";
 const versionOf = (url: URL): string =>
   (JSON.parse(readFileSync(url, "utf8")) as { version: string }).version;
 
-// Every name needs the @react-native-google-signin/google-signin the adapter is
-// typed against, or a later 16.x.
-const ranges = new Set(Object.values(main).map((value) => value.version));
+// Every name is typed against the @react-native-google-signin/google-signin the
+// adapter is.
+const versions = new Set(Object.values(main).map((value) => value.version));
 
-it("is one range for every name", () => {
-  assert.equal(ranges.size, 1);
+it("is one version for every name", () => {
+  assert.equal(versions.size, 1);
 });
 
-it("starts at the adapter's version", () => {
+it("is the adapter's version", () => {
   const version = versionOf(new URL("../package.json", import.meta.url));
-  assert.deepEqual([...ranges], [`^${version}`]);
+  assert.deepEqual([...versions], [version]);
 });
 
-it("starts at the installed @react-native-google-signin/google-signin", () => {
+it("is the installed @react-native-google-signin/google-signin", () => {
   const version = versionOf(
     new URL(
       "../node_modules/@react-native-google-signin/google-signin/package.json",
       import.meta.url,
     ),
   );
-  assert.deepEqual([...ranges], [`^${version}`]);
+  assert.deepEqual([...versions], [version]);
 });

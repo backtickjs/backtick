@@ -6,9 +6,9 @@ import type * as ReactNative from "react-native";
 // app that runs the bundle. Internal: the adapter mirrors `react-native`, name
 // for name.
 
-// What every name needs: the React Native it is typed against (the adapter's
-// version, and its `react-native` dependency), or a later 0.86.x.
-const range = "^0.86.3";
+// The React Native every name is typed against: the adapter's version, and its
+// `react-native` dependency.
+const version = "0.86.3";
 
 export const reactNative = <Name extends keyof typeof ReactNative>(
   name: Name,
@@ -16,5 +16,5 @@ export const reactNative = <Name extends keyof typeof ReactNative>(
   createImport<(typeof ReactNative)[Name]>({
     name,
     from: "react-native",
-    version: range,
+    version,
   });

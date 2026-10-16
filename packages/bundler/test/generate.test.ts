@@ -33,7 +33,7 @@ test("a map is written only where one is asked for", async () => {
 });
 
 test("a script's import from a module the client doesn't provide is refused", async () => {
-  const greet = createImport({ name: "greet", from: "app", version: "^1.0.0" });
+  const greet = createImport({ name: "greet", from: "app", version: "1.0.0" });
   await assert.rejects(
     () =>
       bundler.build({
@@ -48,7 +48,7 @@ test("a script's import needing a version the client doesn't have is refused", a
   const Portal = createImport({
     name: "Portal",
     from: "solid-js/web",
-    version: "^2.0.0",
+    version: "2.0.0",
   });
   await assert.rejects(
     () =>
@@ -56,7 +56,7 @@ test("a script's import needing a version the client doesn't have is refused", a
         input: Portal,
         modules: { "solid-js/web": "1.9.14" },
       }),
-    /Can't import `Portal` from "solid-js\/web": it needs \^2\.0\.0, and the client provides solid-js\/web@1\.9\.14\./,
+    /Can't import `Portal` from "solid-js\/web": it's typed against 2\.0\.0, and the client provides solid-js\/web@1\.9\.14\./,
   );
 });
 
@@ -64,12 +64,12 @@ test("a module is provided by its own specifier, not its package", async () => {
   const Portal = createImport({
     name: "Portal",
     from: "solid-js/web",
-    version: "^1.9.0",
+    version: "1.9.0",
   });
   const button = createImport({
     name: "button",
     from: "@scope/ui/button",
-    version: "^1.0.0",
+    version: "1.0.0",
   });
   const bundle = await bundler.build({
     input: [Portal, button],

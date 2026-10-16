@@ -6,13 +6,13 @@ import type * as FileSystem from "expo-file-system";
 // from `expo-file-system` by the app that runs the bundle. Internal: the
 // adapter mirrors it, name for name.
 
-// What every name needs: the expo-file-system it is typed against (the
-// adapter's version, and its `expo-file-system` dependency), or a later 57.x.
-const range = "^57.0.7";
+// The expo-file-system every name is typed against: the adapter's version, and
+// its `expo-file-system` dependency.
+const version = "57.0.7";
 
 export const fileSystem = <Name extends keyof typeof FileSystem>(name: Name) =>
   createImport<(typeof FileSystem)[Name]>({
     name,
     from: "expo-file-system",
-    version: range,
+    version,
   });

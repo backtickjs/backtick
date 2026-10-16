@@ -6,22 +6,21 @@ import * as main from "../dist/index.js";
 const versionOf = (url: URL): string =>
   (JSON.parse(readFileSync(url, "utf8")) as { version: string }).version;
 
-// Every name needs the expo-crypto the adapter is typed against, or a later
-// 57.x.
-const ranges = new Set(Object.values(main).map((value) => value.version));
+// Every name is typed against the expo-crypto the adapter is.
+const versions = new Set(Object.values(main).map((value) => value.version));
 
-it("is one range for every name", () => {
-  assert.equal(ranges.size, 1);
+it("is one version for every name", () => {
+  assert.equal(versions.size, 1);
 });
 
-it("starts at the adapter's version", () => {
+it("is the adapter's version", () => {
   const version = versionOf(new URL("../package.json", import.meta.url));
-  assert.deepEqual([...ranges], [`^${version}`]);
+  assert.deepEqual([...versions], [version]);
 });
 
-it("starts at the installed expo-crypto", () => {
+it("is the installed expo-crypto", () => {
   const version = versionOf(
     new URL("../node_modules/expo-crypto/package.json", import.meta.url),
   );
-  assert.deepEqual([...ranges], [`^${version}`]);
+  assert.deepEqual([...versions], [version]);
 });

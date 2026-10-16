@@ -6,14 +6,13 @@ import type * as Navigation from "@react-navigation/native";
 // declarations, and each required from `@react-navigation/native` by the app
 // that runs the bundle. Internal: the adapter mirrors it, name for name.
 
-// What every name needs: the React Navigation it is typed against (the
-// adapter's version, and its `@react-navigation/native` dependency), or a
-// later 7.x.
-const range = "^7.5.0";
+// The React Navigation every name is typed against: the adapter's version, and
+// its `@react-navigation/native` dependency.
+const version = "7.5.0";
 
 export const navigation = <Name extends keyof typeof Navigation>(name: Name) =>
   createImport<(typeof Navigation)[Name]>({
     name,
     from: "@react-navigation/native",
-    version: range,
+    version,
   });

@@ -5,7 +5,7 @@ import { createRoot } from "@backtickjs/solid-js";
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 const $module0 = {
-  id: "34amrub3e2oyr:14:17",
+  id: "16n4ud3f23u4d:14:17",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => new ($splice1().Circle)(2).diameter);\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAaoB,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAM,KAAIC,QAAA,EAAS,CAACC,MAAM,EAAC,CAAC,CAAC,CAACC,QAAQ,CAAC","names":["$splice0","$splice1","Circle","diameter"],"ignoreList":[],"sources":["stdlib/constructed-member.test.tsx"]}',
   dependencies: [],
@@ -20,7 +20,7 @@ const $module0 = {
 const geometry = createImport({
   name: "geometry",
   from: "app",
-  version: "^1.0.0",
+  version: "1.0.0",
 });
 const diameter = cs.create($module0, [createRoot, geometry]);
 it("constructedMember", async (t) => {

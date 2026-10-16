@@ -92,7 +92,7 @@ it("an import from a package the app doesn't provide", async () => {
   const missing = createImport<() => void>({
     name: "track",
     from: "analytics",
-    version: "^1.0.0",
+    version: "1.0.0",
   });
   await assert.rejects(bundle(cs.lift((() => (cs.splice((missing)))())())), {
     message:

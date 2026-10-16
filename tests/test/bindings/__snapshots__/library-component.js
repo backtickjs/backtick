@@ -8,7 +8,7 @@ const Button = {
   "@backtickjs": "ClientImport",
   name: "Button",
   from: "acme-ui",
-  version: "^1.0.0",
+  version: "1.0.0",
 };
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";

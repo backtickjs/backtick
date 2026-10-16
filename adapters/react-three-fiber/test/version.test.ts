@@ -7,26 +7,25 @@ import * as native from "../dist/native.js";
 const versionOf = (url: URL): string =>
   (JSON.parse(readFileSync(url, "utf8")) as { version: string }).version;
 
-// Every name, in both builds, needs the R3F the adapter is typed against, or
-// a later 9.x.
-const ranges = new Set(
+// Every name, in both builds, is typed against the R3F the adapter is.
+const versions = new Set(
   [...Object.values(main), ...Object.values(native)].map(
     (value) => value.version,
   ),
 );
 
-it("is one range for every name", () => {
-  assert.equal(ranges.size, 1);
+it("is one version for every name", () => {
+  assert.equal(versions.size, 1);
 });
 
-it("starts at the adapter's version", () => {
+it("is the adapter's version", () => {
   const version = versionOf(new URL("../package.json", import.meta.url));
-  assert.deepEqual([...ranges], [`^${version}`]);
+  assert.deepEqual([...versions], [version]);
 });
 
-it("starts at the installed @react-three/fiber", () => {
+it("is the installed @react-three/fiber", () => {
   const version = versionOf(
     new URL("../node_modules/@react-three/fiber/package.json", import.meta.url),
   );
-  assert.deepEqual([...ranges], [`^${version}`]);
+  assert.deepEqual([...versions], [version]);
 });

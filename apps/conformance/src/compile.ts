@@ -21,7 +21,7 @@ export async function compile(test: Test): Promise<Compiled> {
     `import { cs, createImport } from "@backtickjs/core";`,
     ...imports.map(
       (name) =>
-        `const ${name.slice(1)} = createImport({ name: ${JSON.stringify(name)}, from: "test262", version: "^1.0.0" });`,
+        `const ${name.slice(1)} = createImport({ name: ${JSON.stringify(name)}, from: "test262", version: "1.0.0" });`,
     ),
     `export default cs\`{\n${test.source}\n}\`;`,
   ].join("\n");

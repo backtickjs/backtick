@@ -51,7 +51,7 @@ const { code } = build.generate({ format: "es", sourcemap: "inline" });
 
 ### `modules`
 
-The modules the client provides, by specifier, each at the exact version of the package it comes from: `"react-dom/client": "19.2.3"`. The server decides which to bundle for: one app version, or one per build with [`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds). Those modules are left out of the bundle, which imports (`es`) or requires (`cjs`) them. `build` rejects a script that imports from any other module, or whose import needs a range that doesn't include the version given: an adapter's (`^19.2.3` for `@backtickjs/react`) or one written with `createImport`.
+The modules the client provides, by specifier, each at the exact version of the package it comes from: `"react-dom/client": "19.2.3"`. The server decides which to bundle for: one app version, or one per build with [`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds). Those modules are left out of the bundle, which imports (`es`) or requires (`cjs`) them. `build` rejects a script that imports from any other module, or whose import is typed against a version the one given isn't compatible with: an earlier one, or another major. `19.2.3` for `@backtickjs/react` takes any later 19.x.
 
 `supports(modules, specifier, range)` makes the same check, for a server choosing what to draw for a client: `supports(modules, "expo-haptics", "^15")`.
 

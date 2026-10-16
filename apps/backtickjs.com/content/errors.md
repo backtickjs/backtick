@@ -94,11 +94,11 @@ app's module map, and install it in the app. A build made before then doesn't
 carry it: draw that screen differently for it, with `supports`. See
 [where a package goes](/docs/react-native-and-packages/#any-package-your-app-ships).
 
-### Can't import `…` from "…": it needs …, and the client provides …
+### Can't import `…` from "…": it's typed against …, and the client provides …
 
-The app was built with a version of the package outside the range in
-`createImport`. Widen the range if the export works with that version, or
-serve that app a screen that doesn't use it.
+The app was built with a version of the package the server's code isn't typed
+against: an earlier one, or another major. Install the app's version on the
+server, or serve that app a screen that doesn't use it.
 
 ### Can't splice the host function `…`: it's host code, and only runs on the host
 

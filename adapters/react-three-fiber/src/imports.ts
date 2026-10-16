@@ -8,15 +8,15 @@ import type * as FiberNative from "@react-three/fiber/native";
 // its native build in React Native. Internal: the adapter mirrors both, name
 // for name.
 
-// What every name needs: the R3F it is typed against (the adapter's version,
-// and its `@react-three/fiber` dependency), or a later 9.x.
-const range = "^9.8.1";
+// The R3F every name is typed against: the adapter's version, and its
+// `@react-three/fiber` dependency.
+const version = "9.8.1";
 
 export const fiber = <Name extends keyof typeof Fiber>(name: Name) =>
   createImport<(typeof Fiber)[Name]>({
     name,
     from: "@react-three/fiber",
-    version: range,
+    version,
   });
 
 export const fiberNative = <Name extends keyof typeof FiberNative>(
@@ -25,5 +25,5 @@ export const fiberNative = <Name extends keyof typeof FiberNative>(
   createImport<(typeof FiberNative)[Name]>({
     name,
     from: "@react-three/fiber/native",
-    version: range,
+    version,
   });

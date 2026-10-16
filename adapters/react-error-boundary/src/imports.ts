@@ -6,10 +6,9 @@ import type * as ReactErrorBoundary from "react-error-boundary";
 // required from `react-error-boundary` by the app that runs the bundle.
 // Internal: the adapter mirrors it, name for name.
 
-// What every name needs: the react-error-boundary it is typed against (the
-// adapter's version, and its `react-error-boundary` dependency), or a later
-// 6.x.
-const range = "^6.1.6";
+// The react-error-boundary every name is typed against: the adapter's version,
+// and its `react-error-boundary` dependency.
+const version = "6.1.6";
 
 export const errorBoundary = <Name extends keyof typeof ReactErrorBoundary>(
   name: Name,
@@ -17,5 +16,5 @@ export const errorBoundary = <Name extends keyof typeof ReactErrorBoundary>(
   createImport<(typeof ReactErrorBoundary)[Name]>({
     name,
     from: "react-error-boundary",
-    version: range,
+    version,
   });

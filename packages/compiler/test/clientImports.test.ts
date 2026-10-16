@@ -24,7 +24,7 @@ describe("client imports", () => {
     assert.deepStrictEqual(messages, []);
     assert.ok(
       code.includes(
-        `const version = { "@backtickjs": "ClientImport", name: "version", from: "typescript/lib/typescript", version: "^${ts.version}" };`,
+        `const version = { "@backtickjs": "ClientImport", name: "version", from: "typescript/lib/typescript", version: "${ts.version}" };`,
       ),
       code,
     );

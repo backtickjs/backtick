@@ -6,13 +6,13 @@ import type * as ReactNativeSvg from "react-native-svg";
 // `react-native-svg` by the app that runs the bundle. Internal: the adapter
 // mirrors it, name for name.
 
-// What every name needs: the react-native-svg it is typed against (the
-// adapter's version, and its `react-native-svg` dependency), or a later 15.x.
-const range = "^15.15.4";
+// The react-native-svg every name is typed against: the adapter's version, and
+// its `react-native-svg` dependency.
+const version = "15.15.4";
 
 export const svg = <Name extends keyof typeof ReactNativeSvg>(name: Name) =>
   createImport<(typeof ReactNativeSvg)[Name]>({
     name,
     from: "react-native-svg",
-    version: range,
+    version,
   });

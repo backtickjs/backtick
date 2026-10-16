@@ -49,7 +49,7 @@ const Label = cs`() => <p>{$useContext($ThemeContext)}</p>`;
 // In a script: <$ThemeContext.Provider value="dark"><$Label /></$ThemeContext.Provider>
 ```
 
-To use a package the client provides beyond what an adapter covers, describe its export with `createImport`. `from` is the specifier the bundle imports, and `version` the semver range of its package that the export works with:
+To use a package the client provides beyond what an adapter covers, describe its export with `createImport`. `from` is the specifier the bundle imports, and `version` the version of its package the export is typed against:
 
 ```ts
 import { createImport } from "@backtickjs/core";
@@ -57,12 +57,12 @@ import { createImport } from "@backtickjs/core";
 const greet = createImport<() => string>({
   name: "greet",
   from: "my-native-module",
-  version: "^1.0.0",
+  version: "1.0.0",
 });
 // In a script: cs`<p>{$greet()}</p>`
 ```
 
-The client must provide that package, and the server must list it in the bundler's `modules` at a version in that range.
+The client must provide that package, and the server must list it in the bundler's `modules` at that version or a later one of the same major.
 
 ## API
 

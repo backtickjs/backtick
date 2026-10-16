@@ -6,10 +6,9 @@ import type * as SecureStore from "expo-secure-store";
 // the app that runs the bundle. Internal: the adapter mirrors it, name for
 // name.
 
-// What every name needs: the expo-secure-store it is typed against (the
-// adapter's version, and its `expo-secure-store` dependency), or a later
-// 57.x.
-const range = "^57.0.4";
+// The expo-secure-store every name is typed against: the adapter's version, and
+// its `expo-secure-store` dependency.
+const version = "57.0.4";
 
 export const secureStore = <Name extends keyof typeof SecureStore>(
   name: Name,
@@ -17,5 +16,5 @@ export const secureStore = <Name extends keyof typeof SecureStore>(
   createImport<(typeof SecureStore)[Name]>({
     name,
     from: "expo-secure-store",
-    version: range,
+    version,
   });
