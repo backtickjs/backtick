@@ -201,14 +201,14 @@ export function rewriteScript(
     return leftAsWritten(refused);
   }
 
-  // Which script this is (see `ClientModule.id`): its line from 1, and its
+  // Which script this is (see `ScriptModule.id`): its line from 1, and its
   // column from 0.
   const { line, character } = sourceFile.getLineAndCharacterOfPosition(
     scriptRange.start,
   );
   const id = `${fileHash}:${line + 1}:${character}`;
 
-  // The function's parameters, as `ClientModule.params` describes them, and
+  // The function's parameters, as `ScriptModule.params` describes them, and
   // what a run passes: for each splice and tag, the host expression written
   // there.
   const objectLiteral = (properties: Record<string, ts.Expression>) =>

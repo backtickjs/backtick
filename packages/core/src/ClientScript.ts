@@ -10,7 +10,7 @@ export type Param =
   | { kind: "capture"; key: string };
 
 // The compiled code of one `cs`, shared by every script it creates.
-export interface ClientModule {
+export interface ScriptModule {
   // `<fileHash>:<line>:<column>` of the `cs`. The hash keeps ids from two
   // files apart: they match only when the files are identical.
   readonly id: string;
@@ -35,7 +35,7 @@ export interface ClientModule {
 // flag reads the same.
 export interface ClientScript {
   readonly "@backtickjs": "ClientScript";
-  readonly module: ClientModule;
+  readonly module: ScriptModule;
   // one per splice, in parameter order
   readonly args: readonly Spliceable[];
   // one value for the bundle, made at its top, rather than code run at each
@@ -53,7 +53,7 @@ export function isClientScript(value: unknown): value is ClientScript {
 }
 
 export function create(
-  module: ClientModule,
+  module: ScriptModule,
   args: readonly Spliceable[],
 ): ClientScript {
   return { "@backtickjs": "ClientScript", module, args };

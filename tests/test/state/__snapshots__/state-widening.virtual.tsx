@@ -1,6 +1,6 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-declare const createSignal: import("@backtickjs/core").Client<(typeof import("solid-js"))["createSignal"]>;
+declare const { createSignal }: import("@backtickjs/core").ClientModule<typeof import("solid-js")>;
 import { snapshotCase } from "../snapshotCase.ts";
 
 // What a signal holds is the initial widened, so a second value of the same

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { render, screen } from "@solidjs/testing-library";
-declare const Button: import("@backtickjs/core").Client<(typeof import("acme-ui"))["Button"]>; import type { ButtonVariant as ButtonVariant } from "acme-ui"; import type { ButtonVariant as Variant } from "acme-ui";
+declare const { Button }: import("@backtickjs/core").ClientModule<typeof import("acme-ui")>; import type { ButtonVariant as ButtonVariant } from "acme-ui"; import type { ButtonVariant as Variant } from "acme-ui";
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 

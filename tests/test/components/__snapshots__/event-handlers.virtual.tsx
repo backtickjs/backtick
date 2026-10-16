@@ -1,6 +1,6 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-declare const createSignal: import("@backtickjs/core").Client<(typeof import("solid-js"))["createSignal"]>;
+declare const { createSignal }: import("@backtickjs/core").ClientModule<typeof import("solid-js")>;
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A handler is handed what the DOM hands it, and which event that is comes

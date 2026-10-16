@@ -67,54 +67,63 @@ function bindingsOf(
   return bindings;
 }
 
-// For the typechecker, a statement per name, each mapped back to where it's
-// written: a value a `declare const` of its client import's type, a type
-// imported from the module.
+// For the typechecker, each name mapped back to where it's written: the
+// values destructured from the module's exports as client imports, so the
+// editor goes from a name to where the module declares it; a namespace a
+// client import of the whole module; a type imported from the module.
 export function virtualClientImport(
   ts: typeof import("typescript"),
   sourceFile: ts.SourceFile,
   declaration: ts.ImportDeclaration,
 ): Segment[] {
-  const at = (node: ts.Node, text = node.getText(sourceFile)): Segment => [
-    text,
+  const at = (node: ts.Node): Segment => [
+    node.getText(sourceFile),
     undefined,
     node.getStart(sourceFile),
     node.getEnd() - node.getStart(sourceFile),
   ];
   const from = at(declaration.moduleSpecifier);
-  const statements = bindingsOf(ts, declaration).map(
-    ({ name, written, local, isType }): Segment[] => {
-      if (isType) {
-        return [
-          "import type { ",
-          at(written!),
-          " as ",
-          at(local),
-          " } from ",
-          from,
-          ";",
-        ];
-      }
-      const module: Segment[] = ["typeof import(", from, ")"];
-      const type =
-        name === "*"
-          ? module
-          : [
-              "(",
-              ...module,
-              ")[",
-              written ? at(written, JSON.stringify(name)) : '"default"',
-              "]",
-            ];
-      return [
+  const bindings = bindingsOf(ts, declaration);
+  const values = bindings.filter(({ name, isType }) => !isType && name !== "*");
+  const statements: Segment[][] = [];
+  if (values.length > 0) {
+    statements.push([
+      "declare const { ",
+      ...values.flatMap(({ written, local }, index): Segment[] => [
+        ...(index > 0 ? [", "] : []),
+        ...(written === undefined
+          ? ["default: "]
+          : written.getText(sourceFile) === local.text
+            ? []
+            : [at(written), ": "]),
+        at(local),
+      ]),
+      ' }: import("@backtickjs/core").ClientModule<typeof import(',
+      from,
+      ")>;",
+    ]);
+  }
+  for (const { name, written, local, isType } of bindings) {
+    if (name === "*") {
+      statements.push([
         "declare const ",
         at(local),
-        ': import("@backtickjs/core").Client<',
-        ...type,
-        ">;",
-      ];
-    },
-  );
+        ': import("@backtickjs/core").Client<typeof import(',
+        from,
+        ")>;",
+      ]);
+    } else if (isType) {
+      statements.push([
+        "import type { ",
+        at(written!),
+        " as ",
+        at(local),
+        " } from ",
+        from,
+        ";",
+      ]);
+    }
+  }
   return statements.flatMap((statement, index) =>
     index === 0 ? statement : [" ", ...statement],
   );

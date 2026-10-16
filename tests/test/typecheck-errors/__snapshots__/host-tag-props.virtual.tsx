@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-declare const For: import("@backtickjs/core").Client<(typeof import("solid-js"))["For"]>;
+declare const { For }: import("@backtickjs/core").ClientModule<typeof import("solid-js")>;
 
 // A host tag is checked as a call, and each of its errors is reported where the
 // JSX that made it is written: a prop's under the prop, a missing one and an

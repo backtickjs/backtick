@@ -17,6 +17,7 @@ export {
   isClientImport,
   type ClientImport,
 } from "./ClientImport.js";
+export type { ClientModule } from "./ClientModule.js";
 // A bundle's code, typed by what it runs to, and, in a script, executing
 // another as this one was. The one an app starts from is executed by
 // `@backtickjs/core/cjs` or `@backtickjs/core/es`.
@@ -37,7 +38,7 @@ export {
 // it, so the shape is neither end's.
 export {
   create,
-  type ClientModule,
+  type ScriptModule,
   type ClientScript,
   isClientScript,
   type Param,

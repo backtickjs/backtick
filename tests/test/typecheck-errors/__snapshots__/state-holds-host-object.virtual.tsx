@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-declare const createSignal: import("@backtickjs/core").Client<(typeof import("solid-js"))["createSignal"]>;
+declare const { createSignal }: import("@backtickjs/core").ClientModule<typeof import("solid-js")>;
 
 // A host object with behaviour reaching a cell, refused where it is written.
 //

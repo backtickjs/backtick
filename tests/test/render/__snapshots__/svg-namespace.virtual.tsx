@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-declare const For: import("@backtickjs/core").Client<(typeof import("solid-js"))["For"]>;
+declare const { For }: import("@backtickjs/core").ClientModule<typeof import("solid-js")>;
 import { snapshotCase } from "../snapshotCase.ts";
 import { namespaced } from "./dom.ts";
 import { evaluate } from "../evaluate.ts";

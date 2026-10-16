@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-declare const createRoot: import("@backtickjs/core").Client<(typeof import("solid-js"))["createRoot"]>;
+declare const { createRoot }: import("@backtickjs/core").ClientModule<typeof import("solid-js")>;
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 

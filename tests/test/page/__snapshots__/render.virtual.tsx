@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { type Client, cs } from "@backtickjs/core";
 import type { JSXElement } from "solid-js";
-declare const render: import("@backtickjs/core").Client<(typeof import("solid-js/web"))["render"]>;
+declare const { render }: import("@backtickjs/core").ClientModule<typeof import("solid-js/web")>;
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 

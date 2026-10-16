@@ -1,6 +1,6 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-declare const For: import("@backtickjs/core").Client<(typeof import("solid-js"))["For"]>;
+declare const { For }: import("@backtickjs/core").ClientModule<typeof import("solid-js")>;
 import { snapshotCase } from "../snapshotCase.ts";
 
 type Item = { sku: string; qty: number };

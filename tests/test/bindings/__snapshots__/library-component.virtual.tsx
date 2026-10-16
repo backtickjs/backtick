@@ -1,10 +1,10 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-declare const createSignal: import("@backtickjs/core").Client<(typeof import("solid-js"))["createSignal"]>;
+declare const { createSignal }: import("@backtickjs/core").ClientModule<typeof import("solid-js")>;
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
-declare const Button: import("@backtickjs/core").Client<(typeof import("acme-ui"))["Button"]>;
+declare const { Button }: import("@backtickjs/core").ClientModule<typeof import("acme-ui")>;
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 

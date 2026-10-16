@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { type ClientModule, create, once } from "../dist/index.js";
+import { type ScriptModule, create, once } from "../dist/index.js";
 
-const module = (params: ClientModule["params"]): ClientModule => ({
+const module = (params: ScriptModule["params"]): ScriptModule => ({
   id: "test:1:0",
   code: "",
   map: "",

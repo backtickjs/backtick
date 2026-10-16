@@ -1,5 +1,5 @@
 import type { BundleTree } from "../bundle/buildBundle.js";
-import type { ClientModule } from "@backtickjs/core";
+import type { ScriptModule } from "@backtickjs/core";
 import { importDeclaration, requireDeclaration, string } from "./code.js";
 
 const MODULE_ID = "bundle.js";
@@ -129,7 +129,7 @@ class ModuleWriter {
   }
 
   // A script's code, its map a section of the module's where it starts.
-  script({ code, map }: ClientModule): void {
+  script({ code, map }: ScriptModule): void {
     this.#sections.push({
       offset: { line: this.#line, column: this.#column },
       map: JSON.parse(map) as object,

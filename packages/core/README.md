@@ -74,7 +74,7 @@ The package must be installed where the server's file finds it, for its types an
 - `isClientExec`, `ClientExec`: its check and type.
 - `SplicesAs<T>`: `T` as a splice checks it, member by member. Used by the bundler to check its input.
 - `createJsxElement`, `isJsxElement`, `JsxElement`, `JsxElementOf`, `JsxElementTypeOf`: what a server-side JSX tag evaluates to before bundling. Used by adapters' JSX runtimes.
-- `create`, `isClientScript`, `ClientScript`, `ClientModule`, `Param`: the compiled form of a script, written by the compiler and read by the bundler. Not for application code.
+- `create`, `isClientScript`, `ClientScript`, `ScriptModule`, `Param`: the compiled form of a script, written by the compiler and read by the bundler. Not for application code.
 
 ## Related
 

@@ -1,5 +1,5 @@
 import {
-  type ClientModule,
+  type ScriptModule,
   type ClientScript,
   isClientExec,
   isClientImport,
@@ -29,7 +29,7 @@ import type { Modules } from "../modules.js";
  * root, as code; and what they import.
  */
 export interface BundleTree {
-  readonly modules: readonly (readonly [string, ClientModule])[];
+  readonly modules: readonly (readonly [string, ScriptModule])[];
   // The functions and `once` values the bundle makes once, each under its
   // label, in the order they're finished: after what they read.
   readonly constants: readonly (readonly [string, string])[];

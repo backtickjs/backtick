@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
 import { cs, type Client } from "@backtickjs/core";
-declare const createSignal: import("@backtickjs/core").Client<(typeof import("solid-js"))["createSignal"]>; declare const For: import("@backtickjs/core").Client<(typeof import("solid-js"))["For"]>;
+declare const { createSignal, For }: import("@backtickjs/core").ClientModule<typeof import("solid-js")>;
 import { bundle } from "../evaluate.ts";
 
 // A bundle is a function of what was spliced alone: bundling it again, or after

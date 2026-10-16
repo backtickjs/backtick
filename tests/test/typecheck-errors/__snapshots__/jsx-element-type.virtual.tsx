@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-declare const For: import("@backtickjs/core").Client<(typeof import("solid-js"))["For"]>;
+declare const { For }: import("@backtickjs/core").ClientModule<typeof import("solid-js")>;
 
 // What the JSX namespace admits, and what it refuses, in a script.
 //

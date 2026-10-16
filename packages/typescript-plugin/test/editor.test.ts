@@ -290,3 +290,29 @@ describe("a splice's `await`, in the editor", () => {
     );
   });
 });
+
+describe("a client import in the editor", () => {
+  const fixture = join(import.meta.dirname, "fixtures", "clientImports.ts");
+  const source = readFileSync(fixture, "utf8");
+  const service = languageServiceFor(fixture);
+  // The files go-to-definition goes to from `text`, plus `offset`.
+  const definitions = (text: string, offset: number) => [
+    ...new Set(
+      service
+        .getDefinitionAndBoundSpan(fixture, source.indexOf(text) + offset)
+        ?.definitions?.map((definition) =>
+          definition.fileName.split("/").pop(),
+        ),
+    ),
+  ];
+
+  it("goes from an imported name to the module's declaration alone", () => {
+    assert.deepEqual(definitions("createProgram,", 2), ["typescript.d.ts"]);
+    assert.deepEqual(definitions("version as", 2), ["typescript.d.ts"]);
+  });
+
+  it("goes from a splice of it to its import", () => {
+    assert.deepEqual(definitions("$createProgram", 3), ["clientImports.ts"]);
+    assert.deepEqual(definitions("$tsVersion", 3), ["clientImports.ts"]);
+  });
+});

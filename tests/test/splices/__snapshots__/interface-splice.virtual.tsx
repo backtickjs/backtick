@@ -7,7 +7,7 @@ import {
   type Spliceable,
   type SplicesAs,
 } from "@backtickjs/core";
-declare const createRoot: import("@backtickjs/core").Client<(typeof import("solid-js"))["createRoot"]>;
+declare const { createRoot }: import("@backtickjs/core").ClientModule<typeof import("solid-js")>;
 import { snapshotCase } from "../snapshotCase.ts";
 
 // Data declared with an interface splices as data declared with a type alias
