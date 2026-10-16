@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/builds",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "Keeps a Backtick server drawing for every build of its app in users' hands: build ids, a registry of what each build carries, and a check for EAS builds",
   "keywords": [
     "backtick",
@@ -57,7 +57,7 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/bundler": "^0.1.10",
+    "@backtickjs/bundler": "^0.1.11",
     "typescript": "^6.0.3"
   },
   "devDependencies": {

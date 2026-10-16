@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/language-plugin",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "Internal: the Volar language plugin that shows TypeScript what a Backtick client script means",
   "keywords": [
     "backtick",
@@ -47,7 +47,7 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/compiler": "^0.1.10",
+    "@backtickjs/compiler": "^0.1.11",
     "@volar/language-core": "^2.4.28"
   },
   "devDependencies": {

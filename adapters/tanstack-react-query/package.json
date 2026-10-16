@@ -46,12 +46,12 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/core": "^0.1.10",
+    "@backtickjs/core": "^0.1.11",
     "@tanstack/react-query": "5.104.0"
   },
   "devDependencies": {
-    "@backtickjs/prettier-plugin": "^0.1.10",
-    "@backtickjs/tsc": "^0.1.10",
+    "@backtickjs/prettier-plugin": "^0.1.11",
+    "@backtickjs/tsc": "^0.1.11",
     "@types/react": "19.2.18",
     "prettier": "^3.6.2",
     "react": "19.2.3",

@@ -11,17 +11,17 @@
     "format:check": "prettier --check --ignore-unknown ."
   },
   "dependencies": {
-    "@backtickjs/bundler": "^0.1.10",
-    "@backtickjs/core": "^0.1.10",
-    "@backtickjs/node-plugin": "^0.1.10",
+    "@backtickjs/bundler": "^0.1.11",
+    "@backtickjs/core": "^0.1.11",
+    "@backtickjs/node-plugin": "^0.1.11",
     "@backtickjs/solid-js": "^1.9.14",
     "@hono/node-server": "^2.1.4",
     "hono": "^4.13.13",
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@backtickjs/prettier-plugin": "^0.1.10",
-    "@backtickjs/tsc": "^0.1.10",
+    "@backtickjs/prettier-plugin": "^0.1.11",
+    "@backtickjs/tsc": "^0.1.11",
     "@types/node": "^25.9.1",
     "agent-device": "^0.21.27",
     "nodemon": "^3.1.14",
