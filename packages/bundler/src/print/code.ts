@@ -112,12 +112,15 @@ export function imported(
   return entry.local;
 }
 
-/** An import declaration of one export under its local name. */
+/** An import declaration of one export, or the namespace (`*`), by its local name. */
 export function importDeclaration(
   from: string,
   name: string,
   local: string,
 ): string {
+  if (name === "*") {
+    return `import * as ${local} from ${string(from)};`;
+  }
   const exported = IDENTIFIER.test(name) ? name : string(name);
   return `import { ${exported} as ${local} } from ${string(from)};`;
 }
@@ -128,6 +131,9 @@ export function requireDeclaration(
   name: string,
   local: string,
 ): string {
+  if (name === "*") {
+    return `const ${local} = require(${string(from)});`;
+  }
   const exported = IDENTIFIER.test(name) ? name : string(name);
   return `const { ${exported}: ${local} } = require(${string(from)});`;
 }

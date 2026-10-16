@@ -6,6 +6,7 @@ import type { Client } from "./Client.js";
  */
 export interface ClientImport<T> extends Client<T> {
   readonly "@backtickjs": "ClientImport";
+  // the export, or `*` for the module's namespace
   readonly name: string;
   // the specifier the client resolves
   readonly from: string;
@@ -22,8 +23,10 @@ export function isClientImport(value: unknown): value is ClientImport<unknown> {
   );
 }
 
-// `T` is what the module's own declarations say the export is; nothing here
-// can check the two agree, and the module the client resolves is what does.
+// What `import { View } from "react-native" with { backtick: "client" }`
+// compiles to, one per name. `T` is what the module's own declarations say the
+// export is; nothing here can check the two agree, and the module the client
+// resolves is what does.
 export function createImport<T>({
   name,
   from,
