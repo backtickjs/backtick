@@ -1,6 +1,6 @@
 import { cs } from "@backtickjs/core";
 import { useEffect } from "@backtickjs/react";
-import { View } from "@backtickjs/react-native";
+import { View } from "react-native" with { backtick: "client" };
 import { useStack } from "../navigation.js";
 
 // Where a path isn't for this user, signed in or out: the screen for them, in

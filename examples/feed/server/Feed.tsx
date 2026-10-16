@@ -1,21 +1,25 @@
 import { type Client, cs } from "@backtickjs/core";
 import { Suspense, useState } from "@backtickjs/react";
-import { ErrorBoundary } from "@backtickjs/react-error-boundary";
+import { ErrorBoundary } from "react-error-boundary" with {
+  backtick: "client",
+};
 import {
   ActivityIndicator,
   FlatList,
   Pressable,
   Text,
   View,
-} from "@backtickjs/react-native";
-import { SafeAreaView } from "@backtickjs/react-native-safe-area-context";
+} from "react-native" with { backtick: "client" };
+import { SafeAreaView } from "react-native-safe-area-context" with {
+  backtick: "client",
+};
 import {
   HydrationBoundary,
   infiniteQueryOptions,
   useMutation,
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
-} from "@backtickjs/tanstack-react-query";
+} from "@tanstack/react-query" with { backtick: "client" };
 import { cacheOf } from "./cache.js";
 import { answersFor, itemQuery, type ItemProps, likeMutation } from "./Item.js";
 import { likesOf, readPage } from "./items.js";

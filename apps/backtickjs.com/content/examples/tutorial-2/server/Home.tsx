@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Text,
   View,
-} from "@backtickjs/react-native";
+} from "react-native" with { backtick: "client" };
 import { getMenu } from "./menu.js";
 
 // A client component: it runs on the phone, with state of its own.

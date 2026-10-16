@@ -1,6 +1,9 @@
 import { cs } from "@backtickjs/core";
-import { Pressable, Text } from "@backtickjs/react-native";
-import { impactAsync, LinearGradient } from "./expo.js";
+import { impactAsync } from "expo-haptics" with { backtick: "client" };
+import { LinearGradient } from "expo-linear-gradient" with {
+  backtick: "client",
+};
+import { Pressable, Text } from "react-native" with { backtick: "client" };
 
 export async function Home() {
   return cs`(

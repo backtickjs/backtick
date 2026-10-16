@@ -12,7 +12,7 @@ import { drawReactNative } from "./drawReactNative.ts";
 const source = (made: string) => `
 import { cs, once } from "@backtickjs/core";
 import { createContext, useContext } from "@backtickjs/react";
-import { Text, View } from "@backtickjs/react-native";
+import { Text, View } from "react-native" with { backtick: "client" };
 
 const ThemeContext = ${made};
 

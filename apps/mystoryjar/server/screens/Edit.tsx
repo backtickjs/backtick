@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { ScrollView, View } from "@backtickjs/react-native";
+import { ScrollView, View } from "react-native" with { backtick: "client" };
 import { useStack } from "../navigation.js";
 import { Refusal } from "../refusal.js";
 import type { ScreenRequest } from "../request.js";

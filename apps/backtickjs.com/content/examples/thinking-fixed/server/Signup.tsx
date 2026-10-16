@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { Pressable, Text } from "@backtickjs/react-native";
+import { Pressable, Text } from "react-native" with { backtick: "client" };
 
 export async function Signup() {
   const opensAt = new Date(2026, 9, 6).toDateString();

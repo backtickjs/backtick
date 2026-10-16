@@ -4,7 +4,7 @@ import {
   ScrollView,
   TextInput as NativeTextInput,
   View,
-} from "@backtickjs/react-native";
+} from "react-native" with { backtick: "client" };
 import { useStack } from "../navigation.js";
 import type { ScreenRequest } from "../request.js";
 import { BackNavbar } from "../ui/BackNavbar.js";

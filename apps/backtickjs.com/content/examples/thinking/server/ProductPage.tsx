@@ -1,6 +1,8 @@
 import { cs } from "@backtickjs/core";
 import { useState } from "@backtickjs/react";
-import { Pressable, ScrollView, Text, View } from "@backtickjs/react-native";
+import { Pressable, ScrollView, Text, View } from "react-native" with {
+  backtick: "client",
+};
 import type { JSX } from "@backtickjs/react/jsx-runtime";
 import { reviewsFor } from "./reviews.js";
 

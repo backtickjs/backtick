@@ -1,5 +1,7 @@
 import { cs } from "@backtickjs/core";
-import { TextInput as NativeTextInput, View } from "@backtickjs/react-native";
+import { TextInput as NativeTextInput, View } from "react-native" with {
+  backtick: "client",
+};
 import type { ReactNode } from "react";
 import type { TextInputProps as NativeTextInputProps } from "react-native";
 import { fontFamilies } from "./fonts.js";

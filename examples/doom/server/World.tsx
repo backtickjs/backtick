@@ -1,12 +1,9 @@
 import { cs } from "@backtickjs/core";
 import { useEffect, useRef, useState } from "@backtickjs/react";
-import { useFrame } from "@backtickjs/react-three-fiber/native";
-import type {
-  Group,
-  Mesh,
-  MeshLambertMaterial,
-  PointLight,
-} from "@backtickjs/three";
+import { useFrame } from "@react-three/fiber/native" with {
+  backtick: "client",
+};
+import type { Group, Mesh, MeshLambertMaterial, PointLight } from "three";
 import type { Level } from "./levels.js";
 
 /** What the controls hold down: -1, 0 or 1 to move and turn. */

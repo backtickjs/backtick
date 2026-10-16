@@ -50,7 +50,8 @@ A splice can carry what can be written as data, and scripts:
 - Strings, numbers, bigints, booleans, `null` and `undefined`
 - Plain objects and arrays of those
 - Scripts: `` cs`…` `` values, client components and client functions
-- What the adapters export: `$View`, `$useState` and the rest
+- What the client provides: `$View`, imported with
+  `with { backtick: "client" }`, `$useState` and the rest
 
 Functions and class instances can't cross, because they're code and state on
 your server. TypeScript stops them where you write the splice:

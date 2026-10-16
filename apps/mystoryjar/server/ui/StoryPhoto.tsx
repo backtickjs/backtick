@@ -7,8 +7,10 @@ import {
   Pressable,
   ScrollView,
   View,
-} from "@backtickjs/react-native";
-import { useSafeAreaInsets } from "@backtickjs/react-native-safe-area-context";
+} from "react-native" with { backtick: "client" };
+import { useSafeAreaInsets } from "react-native-safe-area-context" with {
+  backtick: "client",
+};
 import { Button } from "./Button.js";
 import { Icon } from "./Icon.js";
 import { icons } from "./icons.js";

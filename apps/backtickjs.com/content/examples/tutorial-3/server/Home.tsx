@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Text,
   View,
-} from "@backtickjs/react-native";
+} from "react-native" with { backtick: "client" };
 import { type Coffee, getMenu } from "./menu.js";
 
 // The screen's styles: a script too, one the components below share.

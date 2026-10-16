@@ -1,6 +1,8 @@
 import { cs } from "@backtickjs/core";
 import { memo, useMemo, useState } from "@backtickjs/react";
-import { Pressable, Text, View } from "@backtickjs/react-native";
+import { Pressable, Text, View } from "react-native" with {
+  backtick: "client",
+};
 
 // A client component, written as a function: one component for the bundle.
 const Row = cs`(props: { label: string }) => {

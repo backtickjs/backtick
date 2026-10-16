@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { Text as NativeText } from "@backtickjs/react-native";
+import { Text as NativeText } from "react-native" with { backtick: "client" };
 import type { ReactNode } from "react";
 import type { StyleProp, TextStyle } from "react-native";
 import { fontFamilies } from "./fonts.js";

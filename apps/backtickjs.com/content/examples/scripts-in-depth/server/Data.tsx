@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { Text } from "@backtickjs/react-native";
+import { Text } from "react-native" with { backtick: "client" };
 
 // A splice is written into the bundle as data, never as code: whatever this
 // string holds, the phone shows it as text.

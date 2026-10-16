@@ -8,7 +8,7 @@ import {
   Text,
   useWindowDimensions,
   View,
-} from "@backtickjs/react-native";
+} from "react-native" with { backtick: "client" };
 import type { ReactNode } from "react";
 
 // Fades its children in when it appears.

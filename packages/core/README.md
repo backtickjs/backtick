@@ -2,7 +2,7 @@
 
 The `cs` tag and the types around it. A client script, written `` cs`…` `` inside a server component, is code that runs on the client; values from the server cross into it as splices written `$name`, type-checked on both sides. Every Backtick app imports `cs` from here, whatever its UI framework.
 
-`cs` is compiled at build time, so a project also needs a build plugin (`@backtickjs/node-plugin` or `@backtickjs/bun-plugin`), an adapter for its framework (`@backtickjs/react`, `@backtickjs/react-native` or `@backtickjs/solid-js`) and `@backtickjs/tsc` for type checking. Called without the compiler, `cs` throws. `npx create-backtick-app@latest` sets all of this up.
+`cs` is compiled at build time, so a project also needs a build plugin (`@backtickjs/node-plugin` or `@backtickjs/bun-plugin`), an adapter for its framework (`@backtickjs/react` or `@backtickjs/solid-js`) and `@backtickjs/tsc` for type checking. Called without the compiler, `cs` throws. `npx create-backtick-app@latest` sets all of this up.
 
 ## Install
 
@@ -49,20 +49,14 @@ const Label = cs`() => <p>{$useContext($ThemeContext)}</p>`;
 // In a script: <$ThemeContext.Provider value="dark"><$Label /></$ThemeContext.Provider>
 ```
 
-To use a package the client provides beyond what an adapter covers, describe its export with `createImport`. `from` is the specifier the bundle imports, and `version` the version of its package the export is typed against:
+To use a package the client provides, import it with `with { backtick: "client" }`. The server never loads it: each name is what the client provides, typed as the package types it, and a script splices it:
 
 ```ts
-import { createImport } from "@backtickjs/core";
-
-const greet = createImport<() => string>({
-  name: "greet",
-  from: "my-native-module",
-  version: "1.0.0",
-});
+import { greet } from "my-native-module" with { backtick: "client" };
 // In a script: cs`<p>{$greet()}</p>`
 ```
 
-The client must provide that package, and the server must list it in the bundler's `modules` at that version or a later one of the same major.
+The package must be installed where the server's file finds it, for its types and its version. The client must provide it, and the server must list it in the bundler's `modules` at that version or a later one of the same major. The compiler writes each name as what `createImport({ name, from, version })` makes, which a hand-written import can call too.
 
 ## API
 
@@ -85,7 +79,7 @@ The client must provide that package, and the server must list it in the bundler
 ## Related
 
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): runs server components and writes the bundle
-- [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react), [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/adapters/react-native), [`@backtickjs/solid-js`](https://github.com/backtickjs/backtick/tree/main/adapters/solid-js): framework adapters
+- [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react), [`@backtickjs/solid-js`](https://github.com/backtickjs/backtick/tree/main/adapters/solid-js): framework adapters
 - [`@backtickjs/node-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/node-plugin), [`@backtickjs/bun-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/bun-plugin): compile scripts as your server loads them
 - [`@backtickjs/tsc`](https://github.com/backtickjs/backtick/tree/main/packages/tsc): type-checks scripts and their splices
 - [Thinking in Backtick](https://backtickjs.com/docs/thinking-in-backtick/), [Scripts in depth](https://backtickjs.com/docs/scripts-in-depth/)

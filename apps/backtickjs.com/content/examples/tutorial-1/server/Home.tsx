@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Text,
   View,
-} from "@backtickjs/react-native";
+} from "react-native" with { backtick: "client" };
 import { getMenu } from "./menu.js";
 
 export async function Home() {

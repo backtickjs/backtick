@@ -2,9 +2,10 @@
 
 ```
 
-`@backtickjs/react-native` and `@backtickjs/react` export every component, API
-and hook of React Native and React, with the same names and types. In a
-script, splice them with `$`:
+Import React Native as you would in an app, marked
+`with { backtick: "client" }`: the server never loads it, and each name is
+what the phone provides, typed as React Native types it. React's hooks come
+from `@backtickjs/react`. In a script, splice them with `$`:
 
 - **Components are tags:** `<$View>`, `<$Pressable>`, `<$ScrollView>`.
 - **Members are tags too:** `<$Animated.View>` reads `View` off `Animated`.
@@ -24,17 +25,11 @@ a client component, as `StoreCard` does.
 
 ## Any package your app ships
 
-A screen can use any package your app ships. `createImport` names an export of
-a package, typed as the package types it, and splices like anything else:
-`$impactAsync()`, `<$LinearGradient>`.
+A screen imports any package your app ships the same way, and splices it like
+anything else: `$impactAsync()`, `<$LinearGradient>`. A package a screen uses
+has to be in two places:
 
-```ts file=react-native-and-packages/server/expo.ts
-
-```
-
-A package a screen uses has to be in two places:
-
-**1. The screen,** spliced as any value or component:
+**1. The screen,** imported for the client:
 
 ```tsx file=react-native-and-packages/server/Home.tsx
 
@@ -58,10 +53,11 @@ app carries:
 
 ## Versions are checked
 
-`createImport`'s `version` is the range of the package the export works with.
-When a screen is bundled, the bundler checks it against the version the
-requesting build carries, and refuses a screen that build can't run, before
-anything reaches the phone. [Errors](/docs/errors/#cant-import--from--the-client-provides-)
+A client import records the version of the package your server has installed,
+the one its types were checked against. When a screen is bundled, the bundler
+checks the requesting build carries that version or a later one of the same
+major, and refuses a screen that build can't run, before anything reaches the
+phone. [Errors](/docs/errors/#cant-import--from--the-client-provides-)
 has the messages.
 
 ## Every build in users' hands

@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { SvgXml } from "@backtickjs/react-native-svg";
+import { SvgXml } from "react-native-svg" with { backtick: "client" };
 import { type Colors, useColors } from "./theme.js";
 
 export type IconProps = {

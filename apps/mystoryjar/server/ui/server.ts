@@ -1,6 +1,6 @@
 import { cs, once } from "@backtickjs/core";
 import { createContext, useContext } from "@backtickjs/react";
-import { File } from "@backtickjs/expo-file-system";
+import { File } from "expo-file-system" with { backtick: "client" };
 
 /** Where a screen's scripts reach the server, and as whom. */
 export type Server = { origin: string; session: string | null };

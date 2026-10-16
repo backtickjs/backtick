@@ -1,11 +1,7 @@
 import { cs } from "@backtickjs/core";
-import {
-  Linking,
-  Platform,
-  Pressable,
-  Text,
-  View,
-} from "@backtickjs/react-native";
+import { Linking, Platform, Pressable, Text, View } from "react-native" with {
+  backtick: "client",
+};
 import { palettes } from "../ui/theme.js";
 
 // Google Play's listing; the App Store's needs its id, which it gets once

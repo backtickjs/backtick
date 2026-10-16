@@ -52,7 +52,7 @@ explains what runs where.
 ```tsx
 import { cs } from "@backtickjs/core";
 import { useState } from "@backtickjs/react";
-import { Pressable, ScrollView, Text } from "@backtickjs/react-native";
+import { Pressable, ScrollView, Text } from "react-native" with { backtick: "client" };
 
 // A server component: it runs on your server, for every request.
 export async function Home({ user }: { user: User }) {
@@ -99,24 +99,8 @@ const ReorderButton = cs`(props: { order: Order }) => {
 | [`create-backtick-app`](packages/create-backtick-app)                                   | Creates a project: React Native, React or Solid, on Node or Bun    |
 | [`@backtickjs/core`](packages/core)                                                     | The `cs` tag, and the types for what crosses to the client         |
 | [`@backtickjs/bundler`](packages/bundler)                                               | Runs server components and bundles a screen per request            |
-| [`@backtickjs/react-native`](adapters/react-native)                                     | React Native's components and APIs, for scripts                    |
 | [`@backtickjs/react`](adapters/react)                                                   | React's hooks and APIs, for scripts                                |
 | [`@backtickjs/solid-js`](adapters/solid-js)                                             | Solid's primitives, for scripts                                    |
-| [`@backtickjs/react-three-fiber`](adapters/react-three-fiber)                           | React Three Fiber's components and hooks, for scripts              |
-| [`@backtickjs/three`](adapters/three)                                                   | three's classes, values and types, for scripts                     |
-| [`@backtickjs/react-navigation-native`](adapters/react-navigation-native)               | React Navigation's hooks and actions, for scripts                  |
-| [`@backtickjs/expo-secure-store`](adapters/expo-secure-store)                           | Expo SecureStore's functions, for scripts                          |
-| [`@backtickjs/expo-font`](adapters/expo-font)                                           | Expo Font's functions and hooks, for scripts                       |
-| [`@backtickjs/react-native-svg`](adapters/react-native-svg)                             | React Native SVG's components, for scripts                         |
-| [`@backtickjs/react-native-safe-area-context`](adapters/react-native-safe-area-context) | Safe Area Context's hooks and components, for scripts              |
-| [`@backtickjs/react-native-google-signin`](adapters/react-native-google-signin)         | Google Sign-In, for scripts                                        |
-| [`@backtickjs/expo-apple-authentication`](adapters/expo-apple-authentication)           | Sign in with Apple, for scripts                                    |
-| [`@backtickjs/react-native-fbsdk-next`](adapters/react-native-fbsdk-next)               | Facebook Login, for scripts                                        |
-| [`@backtickjs/expo-crypto`](adapters/expo-crypto)                                       | Expo Crypto's hashes and random values, for scripts                |
-| [`@backtickjs/expo-image-picker`](adapters/expo-image-picker)                           | Expo Image Picker's library and camera pickers, for scripts        |
-| [`@backtickjs/expo-file-system`](adapters/expo-file-system)                             | Expo FileSystem's files, folders and native uploads, for scripts   |
-| [`@backtickjs/tanstack-react-query`](adapters/tanstack-react-query)                     | TanStack Query's hooks, options and client, for scripts            |
-| [`@backtickjs/react-error-boundary`](adapters/react-error-boundary)                     | react-error-boundary's boundary, hook and HOC, for scripts         |
 | [`@backtickjs/builds`](packages/builds)                                                 | Keeps your server drawing for every app build in users' hands      |
 | [`@backtickjs/node-plugin`](packages/node-plugin)                                       | Compiles scripts as a Node server loads them                       |
 | [`@backtickjs/bun-plugin`](packages/bun-plugin)                                         | Compiles scripts as a Bun server loads them                        |

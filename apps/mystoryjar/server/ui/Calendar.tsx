@@ -1,6 +1,8 @@
 import { cs } from "@backtickjs/core";
 import { useState } from "@backtickjs/react";
-import { Modal, Pressable, View } from "@backtickjs/react-native";
+import { Modal, Pressable, View } from "react-native" with {
+  backtick: "client",
+};
 import { Button } from "./Button.js";
 import { icons } from "./icons.js";
 import { RoundButton } from "./RoundButton.js";

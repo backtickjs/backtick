@@ -1,6 +1,8 @@
 import { cs } from "@backtickjs/core";
 import { useEffect, useRef } from "@backtickjs/react";
-import { Animated, Platform, Pressable } from "@backtickjs/react-native";
+import { Animated, Platform, Pressable } from "react-native" with {
+  backtick: "client",
+};
 
 // A client component: it runs on the phone, so its animation does too. It
 // waves when it appears, and again when you tap it.

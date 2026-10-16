@@ -34,7 +34,7 @@ it("react native: the platform's maps, opened by Linking", async () => {
   ]);
 });
 
-it("packages: the app's haptics and gradient, through createImport", async () => {
+it("packages: the app's haptics and gradient, imported for the client", async () => {
   const impacts: unknown[] = [];
   const LinearGradient = (props: {
     colors: string[];

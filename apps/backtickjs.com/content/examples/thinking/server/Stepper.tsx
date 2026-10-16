@@ -1,5 +1,7 @@
 import { cs } from "@backtickjs/core";
-import { Pressable, Text, View } from "@backtickjs/react-native";
+import { Pressable, Text, View } from "react-native" with {
+  backtick: "client",
+};
 
 // A client component in a file of its own: import it wherever a script draws
 // it.

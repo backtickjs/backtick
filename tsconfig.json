@@ -20,10 +20,7 @@
     { "path": "packages/tspatch-plugin" },
     { "path": "packages/typescript-plugin" },
     { "path": "adapters/react" },
-    { "path": "adapters/react-native" },
-    { "path": "adapters/react-three-fiber" },
     { "path": "adapters/solid-js" },
-    { "path": "adapters/three" },
     { "path": "apps/vscode-extension" },
     { "path": "tests" }
   ]

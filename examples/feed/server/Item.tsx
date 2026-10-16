@@ -1,12 +1,14 @@
 import { type Client, cs, type Spliceable } from "@backtickjs/core";
 import { Suspense, useState } from "@backtickjs/react";
-import { Pressable, Text, TextInput, View } from "@backtickjs/react-native";
+import { Pressable, Text, TextInput, View } from "react-native" with {
+  backtick: "client",
+};
 import {
   mutationOptions,
   queryOptions,
   useMutation,
   useSuspenseQuery,
-} from "@backtickjs/tanstack-react-query";
+} from "@tanstack/react-query" with { backtick: "client" };
 import type { ReactNode } from "react";
 import {
   addComment,

@@ -8,7 +8,7 @@ import { drawReactNative } from "./drawReactNative.ts";
 const source = `
 import { type Client, cs } from "@backtickjs/core";
 import { useState } from "@backtickjs/react";
-import { Text } from "@backtickjs/react-native";
+import { Text } from "react-native" with { backtick: "client" };
 
 async function Compare({ value }: { value: Client<{ count: number }> }) {
   return cs\`<$Text>{$value === $value ? "same" : "different"}</$Text>\`;

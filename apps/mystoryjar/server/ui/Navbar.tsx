@@ -1,6 +1,8 @@
 import { cs } from "@backtickjs/core";
-import { View } from "@backtickjs/react-native";
-import { useSafeAreaInsets } from "@backtickjs/react-native-safe-area-context";
+import { View } from "react-native" with { backtick: "client" };
+import { useSafeAreaInsets } from "react-native-safe-area-context" with {
+  backtick: "client",
+};
 import type { ReactNode } from "react";
 import { useColors } from "./theme.js";
 

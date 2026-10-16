@@ -1,7 +1,9 @@
 import { cs } from "@backtickjs/core";
 import { useEffect, useState } from "@backtickjs/react";
-import { deleteItemAsync } from "@backtickjs/expo-secure-store";
-import { Linking, Modal, ScrollView, View } from "@backtickjs/react-native";
+import { deleteItemAsync } from "expo-secure-store" with { backtick: "client" };
+import { Linking, Modal, ScrollView, View } from "react-native" with {
+  backtick: "client",
+};
 import { signedInRecently } from "../account.js";
 import { useStack } from "../navigation.js";
 import type { ScreenRequest } from "../request.js";

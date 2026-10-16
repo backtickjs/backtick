@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Text,
   View,
-} from "@backtickjs/react-native";
+} from "react-native" with { backtick: "client" };
 import { type Coffee, getMenu } from "./menu.js";
 import { type Counts, lastOrder } from "./orders.js";
 

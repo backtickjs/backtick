@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { Text } from "@backtickjs/react-native";
+import { Text } from "react-native" with { backtick: "client" };
 
 // A block: its code runs each time it's read.
 const logVisit = cs`{

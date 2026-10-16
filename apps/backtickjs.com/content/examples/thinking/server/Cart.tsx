@@ -1,6 +1,6 @@
 import { cs } from "@backtickjs/core";
 import { useState } from "@backtickjs/react";
-import { Text, View } from "@backtickjs/react-native";
+import { Text, View } from "react-native" with { backtick: "client" };
 import type { ReactNode } from "react";
 import { Stepper } from "./Stepper.js";
 

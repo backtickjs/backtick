@@ -1,12 +1,14 @@
 import { cs } from "@backtickjs/core";
 import { useRef, useState } from "@backtickjs/react";
-import { launchImageLibraryAsync } from "@backtickjs/expo-image-picker";
+import { launchImageLibraryAsync } from "expo-image-picker" with {
+  backtick: "client",
+};
 import {
   ActivityIndicator,
   Pressable,
   TextInput as NativeTextInput,
   View,
-} from "@backtickjs/react-native";
+} from "react-native" with { backtick: "client" };
 import { Button } from "../ui/Button.js";
 import { Calendar, dateOf } from "../ui/Calendar.js";
 import { fontFamilies } from "../ui/fonts.js";

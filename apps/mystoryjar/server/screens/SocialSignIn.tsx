@@ -8,19 +8,21 @@ import {
   AppleAuthenticationScope,
   isAvailableAsync,
   signInAsync,
-} from "@backtickjs/expo-apple-authentication";
+} from "expo-apple-authentication" with { backtick: "client" };
 import {
   CryptoDigestAlgorithm,
   digestStringAsync,
   randomUUID,
-} from "@backtickjs/expo-crypto";
-import { Platform, View } from "@backtickjs/react-native";
+} from "expo-crypto" with { backtick: "client" };
+import { Platform, View } from "react-native" with { backtick: "client" };
 import {
   AccessToken,
   AuthenticationToken,
   LoginManager,
-} from "@backtickjs/react-native-fbsdk-next";
-import { GoogleSignin } from "@backtickjs/react-native-google-signin";
+} from "react-native-fbsdk-next" with { backtick: "client" };
+import { GoogleSignin } from "@react-native-google-signin/google-signin" with {
+  backtick: "client",
+};
 import type { IdpToken } from "../auth/firebaseAuth.js";
 import { facebook, google } from "../auth/providers.js";
 import { Button } from "../ui/Button.js";

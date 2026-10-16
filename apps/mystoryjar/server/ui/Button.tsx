@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { Pressable, View } from "@backtickjs/react-native";
+import { Pressable, View } from "react-native" with { backtick: "client" };
 import { Icon } from "./Icon.js";
 import { Text } from "./Text.js";
 import { useColors } from "./theme.js";

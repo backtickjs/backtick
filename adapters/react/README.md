@@ -1,6 +1,6 @@
 # @backtickjs/react
 
-The React adapter for [Backtick](https://backtickjs.com): React's API as client values your scripts splice (`$useState`, `<$Suspense>`), a JSX runtime that type-checks the JSX in your server components against React's own types, and a compile plugin that runs React's JSX transform on each script at build time. Its version tracks the React it supports: `19.2.3` works with React `^19.2.3`. It is also the React half of [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/adapters/react-native).
+The React adapter for [Backtick](https://backtickjs.com): React's API as client values your scripts splice (`$useState`, `<$Suspense>`), a JSX runtime that type-checks the JSX in your server components against React's own types, and a compile plugin that runs React's JSX transform on each script at build time. Its version tracks the React it supports: `19.2.3` works with React `^19.2.3`. For React Native, import its components for the client: `import { View } from "react-native" with { backtick: "client" }`.
 
 ## Install
 
@@ -97,7 +97,6 @@ const { code } = bundle.generate({ format: "es" });
 
 - [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): the `cs` tag
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): builds bundles
-- [`@backtickjs/react-native`](https://github.com/backtickjs/backtick/tree/main/adapters/react-native): the React Native adapter
 - [`@backtickjs/solid-js`](https://github.com/backtickjs/backtick/tree/main/adapters/solid-js): the Solid adapter
 - [Thinking in Backtick](https://backtickjs.com/docs/thinking-in-backtick/)
 - [How it works](https://backtickjs.com/docs/how-it-works/)

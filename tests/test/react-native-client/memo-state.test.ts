@@ -11,7 +11,7 @@ import { drawReactNative } from "./drawReactNative.ts";
 const source = `
 import { cs } from "@backtickjs/core";
 import { memo, useState } from "@backtickjs/react";
-import { Pressable, Text, View } from "@backtickjs/react-native";
+import { Pressable, Text, View } from "react-native" with { backtick: "client" };
 
 const Row = cs\`$memo(() => {
   const [count, setCount] = $useState(0);
@@ -55,7 +55,7 @@ it("a memo component is made again when its parent re-renders", async () => {
 const kept = `
 import { cs } from "@backtickjs/core";
 import { memo, useMemo, useState } from "@backtickjs/react";
-import { Pressable, Text, View } from "@backtickjs/react-native";
+import { Pressable, Text, View } from "react-native" with { backtick: "client" };
 
 const Row = cs\`() => {
   const [count, setCount] = $useState(0);
@@ -98,7 +98,7 @@ it("a memo component made once per parent keeps its state", async () => {
 const madeOnce = `
 import { cs, once } from "@backtickjs/core";
 import { memo, useState } from "@backtickjs/react";
-import { Pressable, Text, View } from "@backtickjs/react-native";
+import { Pressable, Text, View } from "react-native" with { backtick: "client" };
 
 const Row = once(cs\`$memo(() => {
   const [count, setCount] = $useState(0);

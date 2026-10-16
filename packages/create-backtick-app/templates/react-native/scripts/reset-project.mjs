@@ -4,7 +4,7 @@ import { rmSync, writeFileSync } from "node:fs";
 writeFileSync(
   "server/Home.tsx",
   `import { cs } from "@backtickjs/core";
-import { Text, View } from "@backtickjs/react-native";
+import { Text, View } from "react-native" with { backtick: "client" };
 
 export async function Home() {
   return cs\`(

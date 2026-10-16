@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { Text, View } from "@backtickjs/react-native";
+import { Text, View } from "react-native" with { backtick: "client" };
 import type { Catalog } from "./catalog.js";
 
 // A server component: a function of its props, run on your server for every

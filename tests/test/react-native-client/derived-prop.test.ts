@@ -9,7 +9,7 @@ import { drawReactNative } from "./drawReactNative.ts";
 const source = `
 import { type Client, cs } from "@backtickjs/core";
 import { useState } from "@backtickjs/react";
-import { Pressable, Text, View } from "@backtickjs/react-native";
+import { Pressable, Text, View } from "react-native" with { backtick: "client" };
 
 async function Label({ text }: { text: Client<string> }) {
   return cs\`<$Text>{$text}</$Text>\`;

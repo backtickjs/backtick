@@ -106,7 +106,7 @@ test("creates the default project when its input isn't a terminal", async () => 
   const manifest = JSON.parse(
     readFileSync(path.join(work, "piped-app", "package.json"), "utf8"),
   ) as { dependencies: Record<string, string> };
-  assert.ok("@backtickjs/react-native" in manifest.dependencies);
+  assert.ok("react-native" in manifest.dependencies);
   assert.ok("@backtickjs/node-plugin" in manifest.dependencies);
 });
 
@@ -120,7 +120,7 @@ test("a name alone creates a React Native project on Node", () => {
   const manifest = JSON.parse(
     readFileSync(path.join(work, "named-app", "package.json"), "utf8"),
   ) as { dependencies: Record<string, string> };
-  assert.ok("@backtickjs/react-native" in manifest.dependencies);
+  assert.ok("react-native" in manifest.dependencies);
   assert.ok("@backtickjs/node-plugin" in manifest.dependencies);
   assert.ok(!("@backtickjs/bun-plugin" in manifest.dependencies));
 });

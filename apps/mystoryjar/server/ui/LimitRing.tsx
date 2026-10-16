@@ -1,6 +1,6 @@
 import { cs } from "@backtickjs/core";
-import { View } from "@backtickjs/react-native";
-import { Circle, Svg } from "@backtickjs/react-native-svg";
+import { View } from "react-native" with { backtick: "client" };
+import { Circle, Svg } from "react-native-svg" with { backtick: "client" };
 import { Text } from "./Text.js";
 import { useColors } from "./theme.js";
 

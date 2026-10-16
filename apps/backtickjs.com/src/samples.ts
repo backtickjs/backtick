@@ -8,7 +8,7 @@ export const DEPLOYS = [
     message: "Home screen",
     source: `
 import { cs } from "@backtickjs/core";
-import { ScrollView, Text } from "@backtickjs/react-native";
+import { ScrollView, Text } from "react-native" with { backtick: "client" };
 import { ProductCard } from "./ProductCard.js";
 
 // A server component: it runs on your server, for every request.
@@ -32,7 +32,7 @@ export async function Home({ user }: { user: User }) {
     message: "Promo from the CMS",
     source: `
 import { cs } from "@backtickjs/core";
-import { ScrollView, Text } from "@backtickjs/react-native";
+import { ScrollView, Text } from "react-native" with { backtick: "client" };
 import { ProductCard } from "./ProductCard.js";
 +import { PromoBanner } from "./PromoBanner.js";
 
@@ -60,7 +60,7 @@ export async function Home({ user }: { user: User }) {
     source: `
 import { cs } from "@backtickjs/core";
 +import { useState } from "@backtickjs/react";
-+import { Pressable, ScrollView, Text } from "@backtickjs/react-native";
++import { Pressable, ScrollView, Text } from "react-native" with { backtick: "client" };
 import { ProductCard } from "./ProductCard.js";
 import { PromoBanner } from "./PromoBanner.js";
 

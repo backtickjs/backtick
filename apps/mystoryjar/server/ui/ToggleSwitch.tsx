@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { View } from "@backtickjs/react-native";
+import { View } from "react-native" with { backtick: "client" };
 import { useColors } from "./theme.js";
 
 // The website's switch: a 42 × 22 track, its handle to the right when on.

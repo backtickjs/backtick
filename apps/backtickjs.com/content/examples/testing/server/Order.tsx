@@ -1,6 +1,8 @@
 import { cs } from "@backtickjs/core";
 import { useState } from "@backtickjs/react";
-import { Pressable, Text, View } from "@backtickjs/react-native";
+import { Pressable, Text, View } from "react-native" with {
+  backtick: "client",
+};
 
 // A client component: its count lives on the phone.
 const Stepper = cs`({ name }: { name: string }) => {

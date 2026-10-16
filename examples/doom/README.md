@@ -24,7 +24,7 @@ Hold ▲ ▼ to walk, ◀ ▶ to turn, and FIRE to shoot. Clear every imp to fin
 - `client/App.tsx`: the app. It sends its build id, runs what the server sends with `client/moduleMap.ts`, and draws it.
 - `client/moduleMap.ts` and `client/moduleMap.web.ts`: what the app offers screens. R3F on a phone is its React Native build; on the web, its web build, under the same name, so the server sends both the same bundle. Each build of the app sends an id naming these modules, and the server bundles for that build with [`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds). `npm start` registers this code's builds in `builds/`; commit them.
 
-The server takes R3F and three from their adapters only, as it takes React Native from `@backtickjs/react-native`: `Canvas` and `useFrame` from `@backtickjs/react-three-fiber/native`, and the types of three's objects (`Mesh`, `PointLight`) from `@backtickjs/three`. Importing the R3F adapter also teaches JSX three's elements, so `<mesh>` is type-checked in a script.
+The server never loads R3F or three, as it never loads React Native: `Canvas` and `useFrame` are imported from `@react-three/fiber/native` with `with { backtick: "client" }`, and the types of three's objects (`Mesh`, `PointLight`) from `three` as types. Importing R3F also teaches JSX three's elements, so `<mesh>` is type-checked in a script.
 
 ## What it costs
 

@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { View } from "@backtickjs/react-native";
+import { View } from "react-native" with { backtick: "client" };
 import { Icon } from "./Icon.js";
 import { icons } from "./icons.js";
 import { Text } from "./Text.js";

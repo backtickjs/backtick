@@ -10,7 +10,7 @@ import { drawReactNative } from "./drawReactNative.ts";
 const source = `
 import { cs } from "@backtickjs/core";
 import { useState } from "@backtickjs/react";
-import { Pressable, Text, View } from "@backtickjs/react-native";
+import { Pressable, Text, View } from "react-native" with { backtick: "client" };
 
 const Counter = cs\`{
   const color = "#0a7ea4";

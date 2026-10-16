@@ -1,8 +1,10 @@
 import { cs } from "@backtickjs/core";
 import { useEffect } from "@backtickjs/react";
-import { deleteItemAsync } from "@backtickjs/expo-secure-store";
-import { Pressable, View } from "@backtickjs/react-native";
-import { useIsFocused } from "@backtickjs/react-navigation-native";
+import { deleteItemAsync } from "expo-secure-store" with { backtick: "client" };
+import { Pressable, View } from "react-native" with { backtick: "client" };
+import { useIsFocused } from "@react-navigation/native" with {
+  backtick: "client",
+};
 import { useStack } from "../navigation.js";
 import { Dropdown } from "./Dropdown.js";
 import { usePost } from "./server.js";

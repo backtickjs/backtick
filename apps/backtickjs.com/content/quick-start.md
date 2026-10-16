@@ -54,7 +54,8 @@ What you just wrote:
 - **`Counter` is a client component.** It's a script that takes props, used as
   `<$Counter />`. Its state lives on the phone.
 - **`$View` and `$useState` are React Native and React,** with the same names
-  and types, spliced from `@backtickjs/react-native` and `@backtickjs/react`.
+  and types: `View` imported from `react-native` with
+  `with { backtick: "client" }`, and `useState` from `@backtickjs/react`.
 
 ## What's in your project
 

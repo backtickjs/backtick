@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Text,
   View,
-} from "@backtickjs/react-native";
+} from "react-native" with { backtick: "client" };
 import { HelloWave } from "./HelloWave.js";
 
 // A server component: it runs on your server for every request, and hands the

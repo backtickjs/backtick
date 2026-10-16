@@ -4,7 +4,7 @@ import { icons } from "./icons.js";
 import { Navbar } from "./Navbar.js";
 import { RoundButton } from "./RoundButton.js";
 import { Text } from "./Text.js";
-import { View } from "@backtickjs/react-native";
+import { View } from "react-native" with { backtick: "client" };
 
 // The website's navbar for a page off the menu: back, then the page's title.
 export const BackNavbar = cs`(props: { title: string }) => {

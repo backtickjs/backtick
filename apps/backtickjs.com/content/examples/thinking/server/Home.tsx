@@ -1,6 +1,8 @@
 import { cs } from "@backtickjs/core";
 import { useState } from "@backtickjs/react";
-import { Pressable, ScrollView, Text } from "@backtickjs/react-native";
+import { Pressable, ScrollView, Text } from "react-native" with {
+  backtick: "client",
+};
 import { db, type Order, type User } from "./db.js";
 
 // A client component: it runs on the phone, with state of its own.

@@ -4,7 +4,7 @@ import {
   StackActions,
   useNavigation,
   type NavigationProp,
-} from "@backtickjs/react-navigation-native";
+} from "@react-navigation/native" with { backtick: "client" };
 
 // The app's one stack screen and its params, as client/ServerScreen.tsx declares
 // them.

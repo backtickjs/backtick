@@ -5,7 +5,9 @@ import {
   useMemo,
   useState,
 } from "@backtickjs/react";
-import { Modal, Pressable, SectionList, View } from "@backtickjs/react-native";
+import { Modal, Pressable, SectionList, View } from "react-native" with {
+  backtick: "client",
+};
 import { useStack } from "../navigation.js";
 import type { ScreenRequest } from "../request.js";
 import { type Story, storiesOf } from "../stories.js";

@@ -1,6 +1,10 @@
 import { cs } from "@backtickjs/core";
-import { Image, ScrollView, View } from "@backtickjs/react-native";
-import { useSafeAreaInsets } from "@backtickjs/react-native-safe-area-context";
+import { Image, ScrollView, View } from "react-native" with {
+  backtick: "client",
+};
+import { useSafeAreaInsets } from "react-native-safe-area-context" with {
+  backtick: "client",
+};
 import { useStack } from "../navigation.js";
 import type { ScreenRequest } from "../request.js";
 import { Button } from "../ui/Button.js";
