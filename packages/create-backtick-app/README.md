@@ -42,7 +42,7 @@ Every template has:
 - `server/Home.tsx`: the welcome screen, a server component. It reads values on the server and splices them into a client script.
 - `server/HelloWave.tsx`: a client component, a waving hand animated where the screen runs. Tap or click it.
 - `server/index.tsx`: the Backtick server on http://localhost:3000, a [Hono](https://hono.dev) app that runs on Node or Bun. Add a route there for each screen or page; a path can take parameters, as `/stories/:id`.
-- `npm start`: starts the server in development, restarting it whenever you save. In `react-native`, Expo starts beside it.
+- `npm start`: starts the server in development with [nodemon](https://nodemon.io), restarting it whenever you save a file under `server/`. In `react-native`, Expo starts beside it.
 - `npm run reset-project`: replaces `server/Home.tsx` with a blank screen and removes `HelloWave.tsx`.
 - `npm run typecheck`: runs `backtick-tsc` over the server, scripts and splices included. In `react-native`, it also runs `tsc` over the Expo app.
 - `AGENTS.md`, which `CLAUDE.md` points to: how a coding agent sees the app while it works, with [agent-device](https://github.com/callstackincubator/agent-device)'s MCP tools from `.mcp.json`. In `react-native` they use the app on a phone `adb devices` lists; in `react` and `solid-js`, the page in a browser.
@@ -62,7 +62,7 @@ npm start        # then scan the QR code with your phone, in Expo Go
 npm run ios      # or android, or web: a simulator, an emulator or a browser
 ```
 
-Each starts your Backtick server alongside Expo, in one terminal. Edit `server/Home.tsx` and save: the server restarts, and `scripts/reload-expo.mjs` reloads the app once it's back, which fetches the new screen without rebuilding. On Bun, reload it yourself (press `r` in the terminal).
+Each starts your Backtick server alongside Expo, in one terminal. Edit `server/Home.tsx` and save: the server restarts, and `scripts/reload-expo.mjs`, which nodemon runs each time it starts the server, reloads the app once the server listens. The app fetches the new screen without rebuilding.
 
 `npm test` draws `server/Home.tsx` as the app would, in `server/Home.test.tsx`; [Testing screens](https://backtickjs.com/docs/testing/) explains the test.
 

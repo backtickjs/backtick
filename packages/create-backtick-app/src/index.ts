@@ -200,15 +200,20 @@ rewriteJson(path.join(target, "package.json"), (json) => {
     );
   }
   if (runtimeName === "bun") {
-    for (const [name, command] of Object.entries<string>(json.scripts)) {
-      json.scripts[name] = command
+    const bun = (command: string) =>
+      command
         .replace(
-          "node --watch --enable-source-maps --import @backtickjs/node-plugin",
-          `bun --watch --preload ${loader}`,
+          "node --enable-source-maps --import @backtickjs/node-plugin",
+          `bun --preload ${loader}`,
         )
-        // Bun doesn't report a server listening, which reload-expo.mjs waits for.
-        .replace(" --import ./scripts/reload-expo.mjs", "")
+        .replace("node scripts/", "bun scripts/")
         .replace("npm:server", "bun:server");
+    for (const [name, command] of Object.entries<string>(json.scripts)) {
+      json.scripts[name] = bun(command);
+    }
+    const events: Record<string, string> = json.nodemonConfig.events ?? {};
+    for (const [name, command] of Object.entries(events)) {
+      events[name] = bun(command);
     }
   }
 });

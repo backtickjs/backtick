@@ -138,11 +138,20 @@ test("a project on Bun runs its server with Bun", () => {
     );
     const manifest = JSON.parse(
       readFileSync(path.join(work, name, "package.json"), "utf8"),
-    ) as { scripts: Record<string, string> };
+    ) as {
+      scripts: Record<string, string>;
+      nodemonConfig: { events?: Record<string, string> };
+    };
     assert.equal(
       manifest.scripts[script],
-      "bun --watch --preload @backtickjs/bun-plugin server/index.tsx",
+      'nodemon --exec "bun --preload @backtickjs/bun-plugin server/index.tsx"',
     );
+    if (template === "react-native") {
+      assert.equal(
+        manifest.nodemonConfig.events?.start,
+        "bun scripts/reload-expo.mjs",
+      );
+    }
   }
 });
 
