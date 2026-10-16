@@ -1,0 +1,10 @@
+{
+  "createdAt": "2026-10-16T01:06:52.801Z",
+  "deprecated": false,
+  "modules": {
+    "@react-three/fiber/native": "9.8.1",
+    "react": "19.2.3",
+    "react-native": "0.86.3",
+    "react/jsx-runtime": "19.2.3"
+  }
+}

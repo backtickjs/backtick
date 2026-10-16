@@ -169,6 +169,25 @@ it("puts each platform's id in the Expo config, keeping its extra", () => {
     eas: { projectId: "1" },
     buildIds: buildIds(root),
   });
+  // outside development, as `eas build` reads it, registering nothing
+  assert.notEqual(
+    createBuilds({ projectRoot: root }).unregistered("ios"),
+    null,
+  );
+});
+
+it("registers this code's builds as `expo start` reads the config", (t) => {
+  const root = mobile();
+  const before = process.env.NODE_ENV;
+  t.after(() => {
+    if (before === undefined) delete process.env.NODE_ENV;
+    else process.env.NODE_ENV = before;
+  });
+  process.env.NODE_ENV = "development";
+  withBuildIds({ _internal: { projectRoot: root } });
+  const builds = createBuilds({ projectRoot: root });
+  assert.equal(builds.unregistered("ios"), null);
+  assert.equal(builds.unregistered("web"), null);
 });
 
 it("names a build by the modules it offers, not only their packages", () => {
@@ -199,10 +218,15 @@ it("finds a package installed above the app, as a workspace hoists it", () => {
 });
 
 describe("a server's builds", () => {
-  it("resolves this code's builds, registered or not", () => {
+  it("refuses this code's builds until they're registered, as it runs", () => {
     const root = mobile();
     const builds = createBuilds({ projectRoot: root });
     const ids = buildIds(root);
+    assert.throws(
+      () => builds.modulesOf(ids.ios),
+      /this code's: it isn't registered here\. Run backtick-builds register/,
+    );
+    register(root);
     assert.deepEqual(builds.modulesOf(ids.ios), {
       fbsdk: "13.4.3",
       react: "19.2.3",

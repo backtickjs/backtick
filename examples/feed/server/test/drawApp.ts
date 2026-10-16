@@ -1,5 +1,5 @@
 import { fileURLToPath } from "node:url";
-import { buildIdOf, createBuilds } from "@backtickjs/builds";
+import { register } from "@backtickjs/builds";
 import type { Bundle } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 import * as ReactQuery from "@tanstack/react-query";
@@ -12,12 +12,11 @@ import * as ReactNativeWeb from "react-native-web";
 import { app } from "../app.js";
 
 // The app's web build, as client/moduleMap.ts says, with React Native's web build
-// standing in for React Native.
-const buildId = buildIdOf(
-  createBuilds({
-    projectRoot: fileURLToPath(new URL("../..", import.meta.url)),
-  }).installed("web"),
-);
+// standing in for React Native: registered, as `expo start` registers this
+// code's builds, for the server to draw it.
+const buildId = register(fileURLToPath(new URL("../..", import.meta.url))).find(
+  ({ platform }) => platform === "web",
+)!.id;
 const headers = { "x-build-id": buildId };
 
 /** The requests the app made, in order: `GET /`, `GET /pages/1`… */

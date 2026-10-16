@@ -1,32 +1,34 @@
-import { createRequire } from "node:module";
 import { performance } from "node:perf_hooks";
+import { fileURLToPath } from "node:url";
 import { serve } from "@hono/node-server";
+import { createBuilds } from "@backtickjs/builds";
 import { bundler } from "@backtickjs/bundler";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { Game } from "./Game.js";
 
-// The versions of the packages the app provides to screens: this
-// project's own, as the app and this server share a package.json. A server
-// for apps of many versions would tell them apart, by their user agent for
-// one, and bundle each for its own.
-const require = createRequire(import.meta.url);
-const modules = {
-  react: require("react/package.json").version,
-  "react/jsx-runtime": require("react/package.json").version,
-  "react-native": require("react-native/package.json").version,
-  "@react-three/fiber/native": require("@react-three/fiber/package.json")
-    .version,
-};
+// The app's builds: each sends its id, and the game is bundled for the
+// modules that build carries, from client/moduleMap.ts. A build in players'
+// hands keeps working as the game moves on, once registered: see builds/.
+const builds = createBuilds({
+  projectRoot: fileURLToPath(new URL("..", import.meta.url)),
+});
 
 const app = new Hono();
 
-// `npm run web` serves the app from another origin, which reads the
-// server's timing only when it's exposed.
-app.use(cors({ origin: "*", exposeHeaders: ["server-timing"] }));
+// `npm run web` serves the app from another origin, which sends its build id
+// and reads the server's timing only when they're allowed.
+app.use(
+  cors({
+    origin: "*",
+    allowHeaders: ["x-build-id"],
+    exposeHeaders: ["server-timing"],
+  }),
+);
 
 app.get("/game", async (context) => {
   const start = performance.now();
+  const modules = builds.modulesOf(context.req.header("x-build-id") ?? null);
   const bundle = await bundler.build({ input: <Game />, modules });
   const built = performance.now();
   const { code } = bundle.generate({ format: "cjs" });

@@ -35,7 +35,9 @@ export class UnknownBuild extends Error {
     super(
       buildId === null
         ? "No build id was sent: the app's code predates build ids, or doesn't send its own."
-        : `No modules for build ${JSON.stringify(buildId)}: it isn't registered here, and this code makes ${made}. An app built before its module map or packages changed is built again, or registered to keep being served. In development, close the app and open it again: a reload keeps the config it was opened with.`,
+        : current.includes(buildId)
+          ? `No modules for build ${JSON.stringify(buildId)}, this code's: it isn't registered here. Run backtick-builds register, or in development, start Expo, which registers it.`
+          : `No modules for build ${JSON.stringify(buildId)}: it isn't registered here, and this code makes ${made}. An app built before its module map or packages changed is built again, or registered to keep being served. In development, close the app and open it again: a reload keeps the config it was opened with.`,
     );
   }
 }
@@ -85,10 +87,9 @@ export function buildIds(projectRoot: string): Record<Platform, string> {
 /** The builds of the app at `projectRoot`, as its server resolves them. */
 export type Builds = {
   /**
-   * The modules of the build with id `buildId`, however it was sent: a
-   * registered build's, or one this code makes. Throws `DeprecatedBuild` for
-   * one marked deprecated, and `UnknownBuild` for one this server doesn't
-   * know, or none.
+   * The modules of the registered build with id `buildId`. Throws
+   * `DeprecatedBuild` for one marked deprecated, and `UnknownBuild` for one
+   * that isn't registered, or none.
    */
   modulesOf(buildId: string | null): Modules;
   /** The modules the build this code makes for `platform` carries. */
@@ -102,11 +103,12 @@ export type Builds = {
 
 /**
  * The builds of the app at `projectRoot`, for its server: the registered
- * ones, read once, and the ones this code makes, worked out only when an id
- * isn't registered, as in development after a package change.
+ * ones, read again when an id isn't among them, as one Expo registers in
+ * development while the server runs.
  */
 export function createBuilds({ projectRoot }: { projectRoot: string }): Builds {
-  const registered = readBuilds(buildsDirectory(projectRoot));
+  const directory = buildsDirectory(projectRoot);
+  let registered = readBuilds(directory);
   const installed = new Map<Platform, Modules>();
   const installedOn = (platform: Platform) => {
     let modules = installed.get(platform);
@@ -118,19 +120,16 @@ export function createBuilds({ projectRoot }: { projectRoot: string }): Builds {
   };
   return {
     modulesOf(buildId) {
+      if (buildId !== null && !registered.has(buildId)) {
+        registered = readBuilds(directory);
+      }
       const build = buildId === null ? undefined : registered.get(buildId);
       if (build?.deprecated) throw new DeprecatedBuild(buildId!, build.modules);
       if (build !== undefined) return build.modules;
-      const current = platforms
-        .map(installedOn)
-        .find((modules) => buildIdOf(modules) === buildId);
-      if (current === undefined) {
-        const ids = new Set(
-          platforms.map((each) => buildIdOf(installedOn(each))),
-        );
-        throw new UnknownBuild(buildId, [...ids]);
-      }
-      return current;
+      const ids = new Set(
+        platforms.map((each) => buildIdOf(installedOn(each))),
+      );
+      throw new UnknownBuild(buildId, [...ids]);
     },
     installed: installedOn,
     unregistered(platform) {

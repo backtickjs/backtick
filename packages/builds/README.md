@@ -82,6 +82,8 @@ npm install @backtickjs/builds
    }
    ```
 
+   In development, the Expo config plugin registers this code's builds as `expo start` reads the config, so the app you're working on is always one its server knows. Commit what it writes with the rest: a build that ships is one of them.
+
    Run `backtick-builds check` in your tests, or let EAS run it: as `eas-build-post-install` in `package.json`, it fails a build that isn't registered, checking the platform being built and letting development builds through.
 
    ```json
@@ -94,14 +96,14 @@ npm install @backtickjs/builds
 
 `modulesOf` throws for a build its server can't draw for:
 
-- **`UnknownBuild`**: no id, or one that isn't registered. Every build is registered before it ships, so this means the server or the build was deployed wrong, as when a server is rolled back past a build in users' hands. In development, it means the app was opened before its module map or packages changed: close it and open it again, since a reload keeps the config it was opened with, and its build id with it. Its message names the builds this code makes. Answer it as a server error.
+- **`UnknownBuild`**: no id, or one that isn't registered. Every build is registered before it ships, so this means the server or the build was deployed wrong, as when a server is rolled back past a build in users' hands. In development, it means the app was opened before its module map or packages changed: close it and open it again, since a reload keeps the config it was opened with, and its build id with it. Its message names the builds this code makes, or says the one sent is this code's and isn't registered yet. Answer it as a server error.
 - **`DeprecatedBuild`**: a build you retired by setting `"deprecated": true` in its file. It carries the build's `modules`, so your server can still draw that build one screen, bundled for what it has: one asking its users to update. Answer every path with it. Left uncaught, it's a server error, as `UnknownBuild` is.
 
 ## API
 
-- `@backtickjs/builds/expo` in `app.json`'s `plugins`: the Expo config plugin, which sets `extra.buildIds` to `buildIds(projectRoot)`.
+- `@backtickjs/builds/expo` in `app.json`'s `plugins`: the Expo config plugin, which sets `extra.buildIds` to `buildIds(projectRoot)`, and with `NODE_ENV` set to `development`, as `expo start` sets it, runs `register(projectRoot)`.
 - `buildIds(projectRoot)`: the id of the build the app at `projectRoot` now makes, on `ios`, `android` and `web`.
-- `createBuilds({ projectRoot })`: the app's builds for its server. `modulesOf(buildId)` resolves a build, `installed(platform)` is what this code's build carries, and `unregistered(platform)` says why this code's build couldn't ship, or null. Registered builds are read once. Module maps are only read for an id that isn't registered, as in development after a package change.
+- `createBuilds({ projectRoot })`: the app's builds for its server. `modulesOf(buildId)` resolves a registered build, `installed(platform)` is what this code's build carries, and `unregistered(platform)` says why this code's build couldn't ship, or null. Registered builds are read when it's created, and again for an id that isn't among them, as one Expo registers while the server runs.
 - `register(projectRoot)`: what `backtick-builds register` runs. A build already registered keeps its `createdAt` and `deprecated`.
 - `readModuleMap(file)`, `clientRootOf(projectRoot)`, `moduleMapFile(projectRoot, platform)`, `installedModules(projectRoot, platform)`, `buildIdOf(modules)`, `readBuilds(directory)`: the steps, for tools of your own.
 

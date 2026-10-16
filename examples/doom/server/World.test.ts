@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
-import { createRequire } from "node:module";
 import { it } from "node:test";
+import { fileURLToPath } from "node:url";
+import { createBuilds } from "@backtickjs/builds";
 import { bundler } from "@backtickjs/bundler";
 import * as Fiber from "@react-three/fiber";
 import ReactThreeTestRenderer from "@react-three/test-renderer";
@@ -14,17 +15,11 @@ import { type Input, type Stats, World, type WorldProps } from "./World.js";
   globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }
 ).IS_REACT_ACT_ENVIRONMENT = true;
 
-// What the app provides, as `server/index.tsx` and `client/App.tsx` say, with R3F's
-// web build standing in for its native one: the test renderer draws it
-// without a GPU.
-const require = createRequire(import.meta.url);
-const modules = {
-  react: require("react/package.json").version,
-  "react/jsx-runtime": require("react/package.json").version,
-  "react-native": require("react-native/package.json").version,
-  "@react-three/fiber/native": require("@react-three/fiber/package.json")
-    .version,
-};
+// What the app's web build provides, as client/moduleMap.web.ts says: R3F's
+// web build, which the test renderer draws without a GPU.
+const modules = createBuilds({
+  projectRoot: fileURLToPath(new URL("..", import.meta.url)),
+}).installed("web");
 const moduleMap = {
   react: React,
   "react/jsx-runtime": JSXRuntime,

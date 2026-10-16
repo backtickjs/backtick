@@ -1164,6 +1164,9 @@ importers:
 
   examples/doom:
     dependencies:
+      '@backtickjs/builds':
+        specifier: ^0.1.10
+        version: link:../../packages/builds
       '@backtickjs/bundler':
         specifier: ^0.1.10
         version: link:../../packages/bundler

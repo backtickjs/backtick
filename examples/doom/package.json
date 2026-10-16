@@ -12,10 +12,13 @@
     "web": "concurrently --raw --kill-others npm:server \"expo start --web\"",
     "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit",
     "test": "node --import ./server/test/setup.mjs --import @backtickjs/node-plugin --test \"server/**/*.test.ts\"",
+    "register-build": "backtick-builds register",
+    "eas-build-post-install": "backtick-builds check",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown ."
   },
   "dependencies": {
+    "@backtickjs/builds": "^0.1.10",
     "@backtickjs/bundler": "^0.1.10",
     "@backtickjs/core": "^0.1.10",
     "@backtickjs/node-plugin": "^0.1.10",
@@ -61,6 +64,7 @@
     }
   },
   "backtick": {
+    "clientRoot": "client",
     "plugins": [
       "@backtickjs/react/plugin"
     ]

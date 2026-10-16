@@ -1,8 +1,8 @@
+import { buildIdFrom } from "@backtickjs/builds/client";
 import type { Bundle } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
-import * as React from "react";
 import {
   type ReactNode,
   Suspense,
@@ -11,27 +11,21 @@ import {
   useLayoutEffect,
   useState,
 } from "react";
-import * as JSXRuntime from "react/jsx-runtime";
-import * as ReactNative from "react-native";
-import { ActivityIndicator, AppState, Text } from "react-native";
+import { ActivityIndicator, AppState, Platform, Text } from "react-native";
 import {
   ErrorBoundary,
   type FallbackProps,
   getErrorMessage,
 } from "react-error-boundary";
-import { Fiber } from "./fiber";
-
-// What a screen may require: the packages this app was built with.
-const moduleMap = {
-  react: React,
-  "react/jsx-runtime": JSXRuntime,
-  "react-native": ReactNative,
-  "@react-three/fiber/native": Fiber,
-};
+import { moduleMap } from "./moduleMap";
 
 // Your Backtick server runs on the computer Expo was started from.
 const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
+
+// This build's id, which names the modules it carries, for the server to
+// bundle screens it can run: `@backtickjs/builds/expo`, in app.json, adds it.
+const buildId = buildIdFrom(Constants.expoConfig?.extra, Platform.OS);
 
 // A screen as fetched, with what each stage of getting it cost so far:
 // `Screen` adds the render and logs the whole pipeline.
@@ -48,11 +42,13 @@ type Fetched = {
 };
 
 // The screen at `path` on your server: its bundle, fetched and run with the
-// app's packages. Your fetch to shape: headers, auth, caching.
+// app's modules. Your fetch to shape: headers, auth, caching.
 async function fetchScreen(path: string): Promise<Fetched> {
   const heap = { started: readHeap() };
   const started = performance.now();
-  const response = await fetch(`${server}${path}`);
+  const response = await fetch(`${server}${path}`, {
+    headers: { "x-build-id": buildId },
+  });
   const firstByte = performance.now();
   if (!response.ok) {
     throw new Error(`${path} answered ${response.status}.`);
