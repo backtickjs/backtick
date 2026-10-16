@@ -1,20 +1,12 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, createImport } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
-import type { Button as LibraryButton } from "acme-ui";
+declare const Button: import("@backtickjs/core").Client<(typeof import("acme-ui"))["Button"]>;
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
-
-// A third-party Solid library's whole Backtick binding: one `createImport` per
-// component, typed with the library's own declaration.
-const Button = createImport<typeof LibraryButton>({
-  name: "Button",
-  from: "acme-ui",
-  version: "^1.0.0",
-});
 
 // In a script, the library's component as the library types it: a handler, a
 // slot taking script JSX, and children.

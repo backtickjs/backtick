@@ -1,4 +1,10 @@
 import type ts from "typescript";
+import {
+  isClientImportDeclaration,
+  packageOf,
+  runtimeClientImport,
+  versionRange,
+} from "./clientImports.js";
 import { compileScript, type Plugin } from "./compileScript.js";
 import { parseSourceFile } from "./parseFile.js";
 import { rewriteFile } from "./rewriteFile.js";
@@ -26,7 +32,12 @@ export function transform(
 ): ts.TransformerFactory<ts.SourceFile> {
   return (context) => (sourceFile) => {
     const parsedFile = parseSourceFile(ts, sourceFile);
-    if (parsedFile.scripts.length === 0) {
+    if (
+      parsedFile.scripts.length === 0 &&
+      !sourceFile.statements.some((statement) =>
+        isClientImportDeclaration(ts, statement),
+      )
+    ) {
       return sourceFile;
     }
 
@@ -64,6 +75,30 @@ export function transform(
     }
 
     const visit: ts.Visitor = (node) => {
+      // The server never loads a client import's module: the declaration is
+      // replaced by its client imports, or by nothing where the package isn't
+      // installed.
+      if (isClientImportDeclaration(ts, node)) {
+        const { moduleSpecifier } = node;
+        const version = versionRange(
+          ts,
+          moduleSpecifier.text,
+          sourceFile.fileName,
+        );
+        if (version === undefined) {
+          addDiagnostic?.({
+            file: sourceFile,
+            start: moduleSpecifier.getStart(sourceFile),
+            length: moduleSpecifier.getWidth(sourceFile),
+            messageText: `${packageOf(moduleSpecifier.text)} isn't installed where this file finds packages: install the version the client app has.`,
+            category: ts.DiagnosticCategory.Error,
+            code: 0,
+            source: "backtick",
+          });
+          return undefined;
+        }
+        return runtimeClientImport(ts, node, version);
+      }
       if (
         ts.isTaggedTemplateExpression(node) &&
         ts.isIdentifier(node.tag) &&
@@ -82,9 +117,10 @@ export function transform(
       visit,
       ts.isSourceFile,
     ) as ts.SourceFile;
-    // After the imports, before anything that could run a script.
+    // After the imports, client imports among them, before anything that
+    // could run a script.
     const imports = visited.statements.findIndex(
-      (statement) => !ts.isImportDeclaration(statement),
+      (statement) => !ts.isImportDeclaration(ts.getOriginalNode(statement)),
     );
     const at = imports === -1 ? visited.statements.length : imports;
     return context.factory.updateSourceFile(visited, [

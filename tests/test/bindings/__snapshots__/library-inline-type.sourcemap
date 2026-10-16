@@ -1,0 +1,34 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+\n               → \n  
+(Button)         → $Button [-highlight]
+$Button          → $Button [-semantic -navigation]
+variant          → variant
+=                → =
+{                → {
+(cs.splice(      →  [-semantic -navigation]
+(variant)        → $variant
+))               →  [-semantic -navigation]
+}                → }
+                 →  
+onClick          → onClick
+=                → =
+{                → {
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+}                → }
+}                → }
+>                → >
+\n               → \n    
+Save\n           → Save\n  
+$Button          → $Button [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
+(Button)         → $Button [-highlight]
+))               →  [-semantic -navigation]
+\n               → \n
+)                → )
+)())             → ` [-semantic -navigation]

@@ -1,5 +1,9 @@
 import type ts from "typescript";
 import { buildMappings, type SourceMapping } from "./buildMappings.js";
+import {
+  isClientImportDeclaration,
+  virtualClientImport,
+} from "./clientImports.js";
 import type { ClientScript, ParsedFile, Splice } from "./parseFile.js";
 import type { RewrittenFile } from "./rewriteFile.js";
 import { mayAwait } from "./rewriteScript.js";
@@ -19,12 +23,26 @@ export function printVirtualCode(
   const { sourceFile } = parsedFile;
   const segments: Segment[] = [];
 
+  // What's rewritten, client imports and scripts, in the order it's written.
+  const rewrites = [
+    ...sourceFile.statements
+      .filter((statement) => isClientImportDeclaration(ts, statement))
+      .map((declaration) => ({
+        node: declaration,
+        render: () => virtualClientImport(ts, sourceFile, declaration),
+      })),
+    ...parsedFile.scripts.map((script) => ({
+      node: script.sourceNode,
+      render: () => renderScript(ts, sourceFile, rewrittenFile, script),
+    })),
+  ].sort((a, b) => a.node.getStart(sourceFile) - b.node.getStart(sourceFile));
+
   let cursor = 0;
-  for (const script of parsedFile.scripts) {
-    const start = script.sourceNode.getStart(sourceFile);
+  for (const { node, render } of rewrites) {
+    const start = node.getStart(sourceFile);
     segments.push(...renderVerbatim(sourceFile.text, cursor, start - cursor));
-    segments.push(...renderScript(ts, sourceFile, rewrittenFile, script));
-    cursor = script.sourceNode.getEnd();
+    segments.push(...render());
+    cursor = node.getEnd();
   }
   segments.push(
     ...renderVerbatim(sourceFile.text, cursor, sourceFile.text.length - cursor),

@@ -1,10 +1,12 @@
 import type { JSX } from "solid-js";
 import { insert } from "solid-js/web";
 
+export type ButtonVariant = "primary" | "ghost";
+
 // A component a third-party Solid library ships, as its build would be: plain
 // Solid, typed with Solid's own types.
 export function Button(props: {
-  variant: "primary" | "ghost";
+  variant: ButtonVariant;
   onClick: () => void;
   icon?: JSX.Element;
   children: JSX.Element;

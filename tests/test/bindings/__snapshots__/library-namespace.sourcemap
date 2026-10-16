@@ -1,0 +1,43 @@
+cs.lift((() =>                            → cs` [-semantic -navigation]
+(                                         → (
+\n                                        → \n  
+(Acme)                                    → $Acme [-highlight]
+$Acme                                     → $Acme [-semantic -navigation]
+.Button                                   → .Button
+variant                                   → variant
+=                                         → =
+"ghost"                                   → "ghost"
+                                          →  
+onClick                                   → onClick
+=                                         → =
+{                                         → {
+(                                         → (
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
+{                                         → {
+}                                         → }
+}                                         → }
+>                                         → >
+\n                                        → \n    
+Save\n                                    → Save\n  
+$Acme                                     → $Acme [-semantic -navigation]
+.Button                                   → .Button
+)(cs.splice(                              →  [-semantic -navigation]
+(Acme)                                    → $Acme.Button [-highlight]
+))                                        →  [-semantic -navigation]
+\n                                        → \n
+)                                         → )
+)())                                      → ` [-semantic -navigation]
+cs.lift((() =>                            → cs` [-semantic -navigation]
+(                                         → (
+\n  // @ts-expect-error: Property 'Link' does not exist on type 'typeof import("acme-ui")'.\n  → \n  // @ts-expect-error: Property 'Link' does not exist on type 'typeof import("acme-ui")'.\n  
+$Acme                                     → $Acme [-semantic -navigation]
+.Link                                     → .Link
+)(cs.splice(                              →  [-semantic -navigation]
+(Acme)                                    → $Acme.Link [-highlight]
+))                                        →  [-semantic -navigation]
+\n                                        → \n
+)                                         → )
+)())                                      → ` [-semantic -navigation]

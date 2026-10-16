@@ -7,7 +7,7 @@
       "request": "launch",
       "runtimeExecutable": "${execPath}",
       "args": [
-        "${workspaceRoot}/packages/create-backtick-app/template",
+        "${workspaceRoot}/tests",
         "--extensionDevelopmentPath=${workspaceRoot}/apps/vscode-extension"
       ],
       "outFiles": ["${workspaceRoot}/*/*/dist/**/*.js"]

@@ -1,0 +1,34 @@
+import { Button as $i0 } from "acme-ui";
+import * as $module0 from "solid-js/web";
+const $modules = {
+  "30to2gbd5zcf7:19:14": (module, exports, require) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    const web_1 = require("solid-js/web");
+    exports.default = ($splice0, $splice1) =>
+      (($Button) =>
+        (0, web_1.createComponent)($Button, {
+          get variant() {
+            return $splice1();
+          },
+          onClick: () => {},
+          children: "Save",
+        }))($splice0());
+  },
+};
+const $exports = {
+  "solid-js/web": $module0,
+};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = { exports: {} };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("30to2gbd5zcf7:19:14").default;
+const $thunk0 = () => $i0;
+const $thunk1 = () => "ghost";
+export default $cs0($thunk0, $thunk1);
