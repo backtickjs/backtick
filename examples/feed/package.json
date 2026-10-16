@@ -5,7 +5,7 @@
   "private": true,
   "main": "client/index.ts",
   "scripts": {
-    "server": "node --watch --enable-source-maps --import @backtickjs/node-plugin --import @backtickjs/dev/reload server/index.tsx",
+    "server": "node --watch --enable-source-maps --import @backtickjs/node-plugin --import ./scripts/reload.mjs server/index.tsx",
     "start": "concurrently --raw --kill-others npm:server \"expo start\"",
     "android": "concurrently --raw --kill-others npm:server \"expo start --android\"",
     "ios": "concurrently --raw --kill-others npm:server \"expo start --ios\"",
@@ -21,7 +21,6 @@
     "@backtickjs/builds": "^0.1.10",
     "@backtickjs/bundler": "^0.1.10",
     "@backtickjs/core": "^0.1.10",
-    "@backtickjs/dev": "^0.1.10",
     "@backtickjs/node-plugin": "^0.1.10",
     "@backtickjs/react": "^19.2.3",
     "@backtickjs/react-error-boundary": "^6.1.6",
