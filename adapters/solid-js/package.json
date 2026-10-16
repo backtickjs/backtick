@@ -25,18 +25,6 @@
   "author": "Jean-François Bisson <jf@backtickjs.com>",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    },
-    "./store": {
-      "types": "./dist/store.d.ts",
-      "default": "./dist/store.js"
-    },
-    "./web": {
-      "types": "./dist/web.d.ts",
-      "default": "./dist/web.js"
-    },
     "./jsx-runtime": {
       "types": "./dist/jsx-runtime.d.ts",
       "default": "./dist/jsx-runtime.js"
@@ -71,8 +59,10 @@
   "dependencies": {
     "@babel/core": "^7.29.7",
     "@backtickjs/core": "^0.1.11",
-    "babel-preset-solid": "1.9.12",
-    "solid-js": "1.9.14"
+    "babel-preset-solid": "1.9.12"
+  },
+  "peerDependencies": {
+    "solid-js": "^1.9.14"
   },
   "devDependencies": {
     "@backtickjs/prettier-plugin": "^0.1.11",
@@ -80,10 +70,10 @@
     "@backtickjs/tspatch-plugin": "^0.1.11",
     "@types/babel__core": "^7.20.5",
     "prettier": "^3.6.2",
+    "solid-js": "1.9.14",
     "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"
   },
-  "peerDependencies": {},
   "peerDependenciesMeta": {},
   "prettier": {
     "plugins": [

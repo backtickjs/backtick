@@ -1,6 +1,6 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createSignal } from "@backtickjs/solid-js";
+declare const createSignal: import("@backtickjs/core").Client<(typeof import("solid-js"))["createSignal"]>;
 import { snapshotCase } from "../snapshotCase.ts";
 
 // The platform's own `fetch`: a status is failed on by throwing, and so is a

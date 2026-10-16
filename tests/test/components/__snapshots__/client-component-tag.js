@@ -1,13 +1,24 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createSignal, For } from "@backtickjs/solid-js";
+const createSignal = {
+  "@backtickjs": "ClientImport",
+  name: "createSignal",
+  from: "solid-js",
+  version: "1.9.14",
+};
+const For = {
+  "@backtickjs": "ClientImport",
+  name: "For",
+  from: "solid-js",
+  version: "1.9.14",
+};
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 const $module0 = {
-  id: "161a7f5q1feqz:12:14",
+  id: "1ly6b1p9zh78s:12:14",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<b>`);\nexports.default = () => props => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, () => "badge " + props.n);\n    return _el$;\n})();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAWiB,MAACA,KAAoB;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAAS,QAAQ,GAAGD,KAAK,CAACI,CAAC;IAAA,OAAAH,IAAA;AAAA,IAAK","names":["props","_el$","_tmpl$","_$insert","n"],"ignoreList":[],"sources":["components/client-component-tag.test.tsx"]}',
   dependencies: ["solid-js/web"],
@@ -15,7 +26,7 @@ const $module0 = {
   kind: "function",
 };
 const $module1 = {
-  id: "161a7f5q1feqz:14:15",
+  id: "1ly6b1p9zh78s:14:15",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nconst web_4 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><button>double`);\nexports.default = ($splice0, $splice1, $splice2) => {\n    const [scale, setScale] = $splice0()(1);\n    return (() => {\n        var _el$ = _tmpl$(), _el$2 = _el$.firstChild;\n        (0, web_4.insert)(_el$, () => ($For => (0, web_3.createComponent)($For, {\n            each: [1, 2],\n            children: n => ($Badge => (0, web_3.createComponent)($Badge, {\n                get n() {\n                    return n * scale();\n                }\n            }))($splice2())\n        }))($splice1()), _el$2);\n        _el$2.$$click = () => setScale(scale() * 2);\n        return _el$;\n    })();\n};\n(0, web_2.delegateEvents)(["click"]);\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;;kBAakB,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA;IAChB,MAAM,CAACC,KAAK,EAAEC,QAAQ,CAAC,GAAGJ,QAAA,EAAa,CAAC,CAAC,CAAC;IAC1C;QAAA,IAAAK,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;QAAAC,gBAAA,EAAAJ,IAAA,QAEI,CAAAK,IAAA,IAAAC,yBAAA,EAACD,IAAI;YAACE,IAAI,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC;YAAAC,QAAA,EAAIC,CAAC,IAAK,CAAAC,MAAA,IAAAJ,yBAAA,EAACI,MAAM;gBAAA,IAACD,CAACA;oBAAA,OAAEA,CAAC,GAAGX,KAAK,EAAE;gBAAA;aAAA,CAAI,EAAzBD,QAAA,EAAM;SAAmB,CAAQ,EAA7DD,QAAA,EAAI,CACL,EAAAM,KAAA;QAAAA,KAAA,CAAAS,OAAA,GAAiB,MAAMZ,QAAQ,CAACD,KAAK,EAAE,GAAG,CAAC,CAAC;QAAA,OAAAE,IAAA;IAAA;AAGlD,CAAC","names":["$splice0","$splice1","$splice2","scale","setScale","_el$","_tmpl$","_el$2","firstChild","_$insert","$For","_$createComponent","each","children","n","$Badge","$$click"],"ignoreList":[],"sources":["components/client-component-tag.test.tsx"]}',
   dependencies: ["solid-js/web"],

@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { For } from "@backtickjs/solid-js";
+import { For } from "solid-js" with { backtick: "client" };
 
 // A host tag is checked as a call, and each of its errors is reported where the
 // JSX that made it is written: a prop's under the prop, a missing one and an

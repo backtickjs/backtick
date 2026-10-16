@@ -124,7 +124,7 @@ What a React Native project uses, each linked to its README:
 | Package                                                                                                    | What it is                                      |
 | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
 | [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core)                       | The `cs` tag, and `execRoot` to run a bundle    |
-| [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react)                     | React's hooks and APIs, for scripts             |
+| [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react)                     | React's JSX, and its compile step for scripts   |
 | [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler)                 | Runs server components and bundles a screen     |
 | [`@backtickjs/node-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/node-plugin)         | Compiles scripts as your Node server loads them |
 | [`@backtickjs/tsc`](https://github.com/backtickjs/backtick/tree/main/packages/tsc)                         | `backtick-tsc`: type-checks scripts and splices |

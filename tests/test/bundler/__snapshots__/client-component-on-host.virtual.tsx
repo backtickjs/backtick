@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
-import { For } from "@backtickjs/solid-js";
+declare const For: import("@backtickjs/core").Client<(typeof import("solid-js"))["For"]>;
 
 // A client component written as a tag on the host, past the typechecker:
 // refused when bundling, as it is a tag in a script.

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { type Client, cs } from "@backtickjs/core";
-import { onMount } from "@backtickjs/solid-js";
+import { onMount } from "solid-js" with { backtick: "client" };
 import { render, screen } from "@solidjs/testing-library";
 import { evaluate } from "../evaluate.ts";
 

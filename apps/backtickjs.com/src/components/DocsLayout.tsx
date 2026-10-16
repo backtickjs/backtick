@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { createSignal } from "@backtickjs/solid-js";
+import { createSignal } from "solid-js" with { backtick: "client" };
 import type { DocsLink, DocsSection, Heading } from "../docs.js";
 import { Layout } from "./Layout.js";
 

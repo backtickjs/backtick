@@ -9,7 +9,7 @@ import {
   type Spliceable,
   type Spliced,
 } from "@backtickjs/core";
-import { createSignal } from "@backtickjs/solid-js";
+declare const createSignal: import("@backtickjs/core").Client<(typeof import("solid-js"))["createSignal"]>;
 import { bundle, evaluate } from "../evaluate.ts";
 
 // What an app provides beside Solid, for a bundle to import.

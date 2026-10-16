@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { useRef, useState } from "@backtickjs/react";
+import { useRef, useState } from "react" with { backtick: "client" };
 import { launchImageLibraryAsync } from "expo-image-picker" with {
   backtick: "client",
 };

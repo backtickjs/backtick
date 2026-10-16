@@ -1,5 +1,5 @@
 import { cs, once } from "@backtickjs/core";
-import { createContext, useContext } from "@backtickjs/react";
+import { createContext, useContext } from "react" with { backtick: "client" };
 
 // The colours of www.mystoryjar.com, from its `src/colors`: light while
 // signed out, and the user's choice once signed in.

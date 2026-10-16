@@ -1,10 +1,15 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createRoot } from "@backtickjs/solid-js";
+const createRoot = {
+  "@backtickjs": "ClientImport",
+  name: "createRoot",
+  from: "solid-js",
+  version: "1.9.14",
+};
 import { evaluate } from "../evaluate.ts";
 const $module0 = {
-  id: "39pisanvrmq3l:13:8",
+  id: "2zxuhei4xobu0:13:8",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0()(() => {\n    const undefined = 1;\n    return undefined;\n});\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAYWA,QAAA,IAAAA,QAAA,EAAW,CAAC;IACb,MAAMC,SAAS,GAAG,CAAC;IACnB,OAAOA,SAAS;AAClB,CAAC,CAAC","names":["$splice0","undefined"],"ignoreList":[],"sources":["expressions/undefined-binding.test.tsx"]}',
   dependencies: [],
@@ -12,7 +17,7 @@ const $module0 = {
   kind: "expression",
 };
 const $module1 = {
-  id: "39pisanvrmq3l:22:8",
+  id: "2zxuhei4xobu0:22:8",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0()(() => (undefined => undefined + 1)(2));\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAqBWA,QAAA,IAAAA,QAAA,EAAW,CAAC,MAAM,CAAEC,SAAiB,IAAKA,SAAS,GAAG,CAAC,EAAE,CAAC,CAAC,CAAC","names":["$splice0","undefined"],"ignoreList":[],"sources":["expressions/undefined-binding.test.tsx"]}',
   dependencies: [],
@@ -20,7 +25,7 @@ const $module1 = {
   kind: "expression",
 };
 const $module2 = {
-  id: "39pisanvrmq3l:31:8",
+  id: "2zxuhei4xobu0:31:8",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0()(() => {\n    {\n        const undefined = 1;\n    }\n    return undefined;\n});\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA8BWA,QAAA,IAAAA,QAAA,EAAW,CAAC;IACb;QACE,MAAMC,SAAS,GAAG,CAAC;IACrB;IACA,OAAOA,SAAS;AAClB,CAAC,CAAC","names":["$splice0","undefined"],"ignoreList":[],"sources":["expressions/undefined-binding.test.tsx"]}',
   dependencies: [],

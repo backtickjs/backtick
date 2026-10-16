@@ -6,7 +6,7 @@ import {
   type JsxElementTypeOf,
 } from "@backtickjs/core";
 import type { JSX as Solid } from "solid-js";
-import { createComponent } from "./index.js";
+import { createComponent } from "solid-js" with { backtick: "client" };
 
 export declare namespace JSX {
   export type FunctionMaybe<T = unknown> = Solid.FunctionMaybe<T>;

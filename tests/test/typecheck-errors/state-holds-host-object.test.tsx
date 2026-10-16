@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { createSignal } from "@backtickjs/solid-js";
+import { createSignal } from "solid-js" with { backtick: "client" };
 
 // A host object with behaviour reaching a cell, refused where it is written.
 //

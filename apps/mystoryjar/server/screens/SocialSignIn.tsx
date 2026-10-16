@@ -1,6 +1,6 @@
 import { type Modules, supports } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
-import { useEffect, useState } from "@backtickjs/react";
+import { useEffect, useState } from "react" with { backtick: "client" };
 import {
   AppleAuthenticationButton,
   AppleAuthenticationButtonStyle,

@@ -1,6 +1,6 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createSignal } from "@backtickjs/solid-js";
+import { createSignal } from "solid-js" with { backtick: "client" };
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A handler is handed what the DOM hands it, and which event that is comes

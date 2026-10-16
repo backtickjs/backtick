@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { type Client, cs } from "@backtickjs/core";
-import type { JSXElement } from "@backtickjs/solid-js";
-import { render } from "@backtickjs/solid-js/web";
+import type { JSXElement } from "solid-js";
+import { render } from "solid-js/web" with { backtick: "client" };
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 

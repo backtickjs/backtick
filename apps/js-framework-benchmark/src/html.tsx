@@ -1,6 +1,6 @@
 import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
-import { render } from "@backtickjs/solid-js/web";
+import { render } from "solid-js/web" with { backtick: "client" };
 import { Main } from "./Main.js";
 
 const bundle = await bundler.build({

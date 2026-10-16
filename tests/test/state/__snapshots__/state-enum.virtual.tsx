@@ -1,6 +1,6 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createSignal } from "@backtickjs/solid-js";
+declare const createSignal: import("@backtickjs/core").Client<(typeof import("solid-js"))["createSignal"]>;
 import type { Client } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 

@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import type { JSX } from "@backtickjs/solid-js";
+import type { JSX } from "solid-js";
 import { GitHubMark } from "./GitHubMark.js";
 import { Logo } from "./Logo.js";
 

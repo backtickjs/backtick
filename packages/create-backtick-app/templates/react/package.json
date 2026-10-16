@@ -17,12 +17,16 @@
     "@backtickjs/react": "^19.2.3",
     "@hono/node-server": "^2.1.4",
     "hono": "^4.13.13",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
     "typescript": "^6.0.3"
   },
   "devDependencies": {
     "@backtickjs/prettier-plugin": "^0.1.11",
     "@backtickjs/tsc": "^0.1.11",
     "@types/node": "^25.9.1",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.7",
     "agent-device": "^0.21.27",
     "nodemon": "^3.1.14",
     "prettier": "^3.6.2"

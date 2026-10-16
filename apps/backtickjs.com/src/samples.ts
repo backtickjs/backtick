@@ -59,7 +59,7 @@ export async function Home({ user }: { user: User }) {
     message: "One-tap reorder",
     source: `
 import { cs } from "@backtickjs/core";
-+import { useState } from "@backtickjs/react";
++import { useState } from "react" with { backtick: "client" };
 +import { Pressable, ScrollView, Text } from "react-native" with { backtick: "client" };
 import { ProductCard } from "./ProductCard.js";
 import { PromoBanner } from "./PromoBanner.js";

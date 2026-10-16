@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { createSignal } from "@backtickjs/solid-js";
+import { createSignal } from "solid-js" with { backtick: "client" };
 
 // A component may answer with a script, but the answer stands where a drawing
 // would — so it is expanded in value position, and an action, which completes

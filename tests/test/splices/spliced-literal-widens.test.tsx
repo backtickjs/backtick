@@ -1,6 +1,6 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createSignal } from "@backtickjs/solid-js";
+import { createSignal } from "solid-js" with { backtick: "client" };
 import { snapshotCase } from "../snapshotCase.ts";
 
 // What a splice hands over keeps the width the host gave it.

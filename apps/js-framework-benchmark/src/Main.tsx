@@ -6,7 +6,7 @@ import {
   For,
   type Accessor,
   type Setter,
-} from "@backtickjs/solid-js";
+} from "solid-js" with { backtick: "client" };
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 
 type Row = {

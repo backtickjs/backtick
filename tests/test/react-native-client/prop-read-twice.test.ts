@@ -7,7 +7,7 @@ import { drawReactNative } from "./drawReactNative.ts";
 // build two objects. `state/prop-read-twice.test.tsx` is the same in Solid.
 const source = `
 import { type Client, cs } from "@backtickjs/core";
-import { useState } from "@backtickjs/react";
+import { useState } from "react" with { backtick: "client" };
 import { Text } from "react-native" with { backtick: "client" };
 
 async function Compare({ value }: { value: Client<{ count: number }> }) {

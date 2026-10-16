@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { useEffect, useRef, useState } from "@backtickjs/react";
+import { useEffect, useRef, useState } from "react" with { backtick: "client" };
 import { useFrame } from "@react-three/fiber/native" with {
   backtick: "client",
 };

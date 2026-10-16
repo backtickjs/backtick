@@ -1,12 +1,7 @@
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import {
-  createMemo,
-  createSignal,
-  onCleanup,
-  onMount,
-} from "@backtickjs/solid-js";
+declare const createMemo: import("@backtickjs/core").Client<(typeof import("solid-js"))["createMemo"]>; declare const createSignal: import("@backtickjs/core").Client<(typeof import("solid-js"))["createSignal"]>; declare const onCleanup: import("@backtickjs/core").Client<(typeof import("solid-js"))["onCleanup"]>; declare const onMount: import("@backtickjs/core").Client<(typeof import("solid-js"))["onMount"]>;
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { evaluate } from "../evaluate.ts";

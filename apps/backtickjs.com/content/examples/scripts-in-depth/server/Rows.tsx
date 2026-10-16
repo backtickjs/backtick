@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { memo, useMemo, useState } from "@backtickjs/react";
+import { memo, useMemo, useState } from "react" with { backtick: "client" };
 import { Pressable, Text, View } from "react-native" with {
   backtick: "client",
 };

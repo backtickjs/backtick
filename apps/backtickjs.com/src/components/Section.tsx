@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import type { JSX } from "@backtickjs/solid-js";
+import type { JSX } from "solid-js";
 
 // One heading style for every section below the hero, so they read as a set.
 export const Section = cs`(props: {

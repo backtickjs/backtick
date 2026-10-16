@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { useEffect, useRef } from "@backtickjs/react";
+import { useEffect, useRef } from "react" with { backtick: "client" };
 
 // A client component: it runs in the browser, so its animation does too. It
 // waves when it appears, and again when you click it.

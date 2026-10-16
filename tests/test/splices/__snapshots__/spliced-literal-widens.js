@@ -1,9 +1,14 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createSignal } from "@backtickjs/solid-js";
+const createSignal = {
+  "@backtickjs": "ClientImport",
+  name: "createSignal",
+  from: "solid-js",
+  version: "1.9.14",
+};
 import { snapshotCase } from "../snapshotCase.ts";
 const $module0 = {
-  id: "2z8p56bmxvsx1:28:4",
+  id: "nr6ia3gm38io:28:4",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2, $splice3, $splice4) => {\n    const [n, setN] = $splice0()($splice1());\n    setN(6);\n    const [c, setC] = $splice2()($splice3());\n    setC($splice4());\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2BO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA;IACD,MAAM,CAACC,CAAC,EAAEC,IAAI,CAAC,GAAGN,QAAA,EAAa,CAACC,QAAA,EAAK,CAAC;IACtCK,IAAI,CAAC,CAAC,CAAC;IACP,MAAM,CAACC,CAAC,EAAEC,IAAI,CAAC,GAAGN,QAAA,EAAa,CAACC,QAAA,EAAY,CAAC;IAC7CK,IAAI,CAACJ,QAAA,EAAa,CAAC;AACrB,CAAC","names":["$splice0","$splice1","$splice2","$splice3","$splice4","n","setN","c","setC"],"ignoreList":[],"sources":["splices/spliced-literal-widens.test.tsx"]}',
   dependencies: [],

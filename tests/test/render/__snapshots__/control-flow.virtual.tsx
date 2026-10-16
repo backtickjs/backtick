@@ -1,14 +1,8 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import {
-  ErrorBoundary,
-  Index,
-  Match,
-  Suspense,
-  Switch,
-} from "@backtickjs/solid-js";
-import { Portal } from "@backtickjs/solid-js/web";
+declare const ErrorBoundary: import("@backtickjs/core").Client<(typeof import("solid-js"))["ErrorBoundary"]>; declare const Index: import("@backtickjs/core").Client<(typeof import("solid-js"))["Index"]>; declare const Match: import("@backtickjs/core").Client<(typeof import("solid-js"))["Match"]>; declare const Suspense: import("@backtickjs/core").Client<(typeof import("solid-js"))["Suspense"]>; declare const Switch: import("@backtickjs/core").Client<(typeof import("solid-js"))["Switch"]>;
+declare const Portal: import("@backtickjs/core").Client<(typeof import("solid-js/web"))["Portal"]>;
 import { evaluate } from "../evaluate.ts";
 import { render, screen } from "@solidjs/testing-library";
 import { snapshotCase } from "../snapshotCase.ts";

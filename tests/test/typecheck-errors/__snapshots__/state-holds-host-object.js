@@ -1,7 +1,12 @@
 import { cs } from "@backtickjs/core";
-import { createSignal } from "@backtickjs/solid-js";
+const createSignal = {
+  "@backtickjs": "ClientImport",
+  name: "createSignal",
+  from: "solid-js",
+  version: "1.9.14",
+};
 const $module0 = {
-  id: "3ar4dvnw04184:16:15",
+  id: "38thoopt3w7gl:16:15",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2) => {\n    const [held, setHeld] = $splice0()($splice1());\n    setHeld($splice2());\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAekB,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA;IAEhB,MAAM,CAACC,IAAI,EAAEC,OAAO,CAAC,GAAGJ,QAAA,EAAa,CAACC,QAAA,EAAK,CAAC;IAE5CG,OAAO,CAACF,QAAA,EAAK,CAAC;AAChB,CAAC","names":["$splice0","$splice1","$splice2","held","setHeld"],"ignoreList":[],"sources":["typecheck-errors/state-holds-host-object.test.tsx"]}',
   dependencies: [],

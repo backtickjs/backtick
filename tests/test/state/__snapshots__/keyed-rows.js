@@ -2,12 +2,23 @@ import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createSignal, For } from "@backtickjs/solid-js";
+const createSignal = {
+  "@backtickjs": "ClientImport",
+  name: "createSignal",
+  from: "solid-js",
+  version: "1.9.14",
+};
+const For = {
+  "@backtickjs": "ClientImport",
+  name: "For",
+  from: "solid-js",
+  version: "1.9.14",
+};
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn, text } from "./dom.ts";
 const $module0 = {
-  id: "eh9hlx1lzpze:13:9",
+  id: "3poe3cg2338pn:13:9",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nconst web_4 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span>swap</span><span>drop</span><div>`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<span>`);\nexports.default = ($splice0, $splice1) => {\n    const [ids, setIds] = $splice0()([1, 2, 3]);\n    const swap = () => {\n        const held = ids();\n        setIds(held.with(0, held[2]).with(2, held[0]));\n    };\n    const drop = () => {\n        setIds(ids().filter(id => id !== 2));\n    };\n    return (() => {\n        var _el$ = _tmpl$(), _el$2 = _el$.firstChild, _el$3 = _el$2.nextSibling, _el$4 = _el$3.nextSibling;\n        _el$2.$$click = swap;\n        _el$3.$$click = drop;\n        (0, web_4.insert)(_el$4, () => ($For => (0, web_3.createComponent)($For, {\n            get each() {\n                return ids();\n            },\n            children: id => (() => {\n                var _el$5 = _tmpl$2();\n                (0, web_4.insert)(_el$5, "row " + id);\n                return _el$5;\n            })()\n        }))($splice1()));\n        return _el$;\n    })();\n};\n(0, web_2.delegateEvents)(["click"]);\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;;kBAYY,CAAAA,QAAA,EAAAC,QAAA;IACR,MAAM,CAACC,GAAG,EAAEC,MAAM,CAAC,GAAGH,QAAA,EAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;IACxD,MAAMI,IAAI,GAAGA,GAAA;QACX,MAAMC,IAAI,GAAGH,GAAG,EAAE;QAClBC,MAAM,CAACE,IAAI,CAACC,IAAI,CAAC,CAAC,EAAED,IAAI,CAAC,CAAC,CAAC,CAAC,CAACC,IAAI,CAAC,CAAC,EAAED,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC;IAChD,CAAC;IACD,MAAME,IAAI,GAAGA,GAAA;QACXJ,MAAM,CAACD,GAAG,EAAE,CAACM,MAAM,CAAEC,EAAE,IAAKA,EAAE,KAAK,CAAC,CAAC,CAAC;IACxC,CAAC;IACD;QAAA,IAAAC,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAC,WAAA;QAAAH,KAAA,CAAAK,OAAA,GAEmBb,IAAI;QAAAU,KAAA,CAAAG,OAAA,GACJV,IAAI;QAAAW,gBAAA,EAAAF,KAAA,QAEjB,CAAAG,IAAA,IAAAC,yBAAA,EAACD,IAAI;YAAA,IAACE,IAAIA;gBAAA,OAAEnB,GAAG,EAAE;YAAA;YAAAoB,QAAA,EAAIb,EAAU;gBAAA,IAAAc,KAAA,GAAAC,OAAA;gBAAAN,gBAAA,EAAAK,KAAA,EAAY,MAAM,GAAGd,EAAE;gBAAA,OAAAc,KAAA;YAAA;SAAQ,CAAQ,EAArEtB,QAAA,EAAI,CACP;QAAA,OAAAS,IAAA;IAAA;AAGN,CAAC","names":["$splice0","$splice1","ids","setIds","swap","held","with","drop","filter","id","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","_el$4","$$click","_$insert","$For","_$createComponent","each","children","_el$5","_tmpl$2"],"ignoreList":[],"sources":["state/keyed-rows.test.tsx"]}',
   dependencies: ["solid-js/web"],

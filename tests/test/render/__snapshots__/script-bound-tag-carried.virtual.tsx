@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { type Client, cs } from "@backtickjs/core";
-import { createSignal } from "@backtickjs/solid-js";
+declare const createSignal: import("@backtickjs/core").Client<(typeof import("solid-js"))["createSignal"]>;
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
-import type { JSXElement } from "@backtickjs/solid-js";
+import type { JSXElement } from "solid-js";
 import { evaluate } from "../evaluate.ts";
 
 // A host component whose script declares its own `Badge`, and draws what it was

@@ -1,5 +1,5 @@
 import { type Client, cs } from "@backtickjs/core";
-import { Suspense, useState } from "@backtickjs/react";
+import { Suspense, useState } from "react" with { backtick: "client" };
 import { ErrorBoundary } from "react-error-boundary" with {
   backtick: "client",
 };

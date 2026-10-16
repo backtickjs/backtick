@@ -4,8 +4,8 @@
 
 Import React Native as you would in an app, marked
 `with { backtick: "client" }`: the server never loads it, and each name is
-what the phone provides, typed as React Native types it. React's hooks come
-from `@backtickjs/react`. In a script, splice them with `$`:
+what the phone provides, typed as React Native types it. React's hooks are
+imported the same way, from `react`. In a script, splice them with `$`:
 
 - **Components are tags:** `<$View>`, `<$Pressable>`, `<$ScrollView>`.
 - **Members are tags too:** `<$Animated.View>` reads `View` off `Animated`.

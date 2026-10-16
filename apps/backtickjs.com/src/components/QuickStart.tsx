@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { createSignal } from "@backtickjs/solid-js";
+import { createSignal } from "solid-js" with { backtick: "client" };
 
 const PACKAGE = "npx create-backtick-app";
 // Shown only where it fits; Copy always copies it.

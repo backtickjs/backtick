@@ -1,6 +1,6 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { For } from "@backtickjs/solid-js";
+declare const For: import("@backtickjs/core").Client<(typeof import("solid-js"))["For"]>;
 import { snapshotCase } from "../snapshotCase.ts";
 
 // One element template, expanded once per row on the client: the splice hole

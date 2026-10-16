@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs, createImport } from "@backtickjs/core";
 import { evaluate } from "../evaluate.ts";
-import { createRoot } from "@backtickjs/solid-js";
+declare const createRoot: import("@backtickjs/core").Client<(typeof import("solid-js"))["createRoot"]>;
 
 // What a client provides beside Solid: a module an app adds, and the names it
 // exports, imported the way Solid's own are. `app` is an entry of the import

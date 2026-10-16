@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createRoot } from "@backtickjs/solid-js";
+import { createRoot } from "solid-js" with { backtick: "client" };
 import { evaluate } from "../evaluate.ts";
 
 // A script may bind `undefined`, as a JavaScript function may: in its scope the

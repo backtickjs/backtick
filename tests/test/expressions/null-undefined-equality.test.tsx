@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { evaluate } from "../evaluate.ts";
-import { createRoot } from "@backtickjs/solid-js";
+import { createRoot } from "solid-js" with { backtick: "client" };
 
 // `null` and `undefined` are two values, each equal only to itself.
 describe("null and undefined", () => {

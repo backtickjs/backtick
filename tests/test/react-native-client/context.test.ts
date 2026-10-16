@@ -11,7 +11,7 @@ import { drawReactNative } from "./drawReactNative.ts";
 // gets the default.
 const source = (made: string) => `
 import { cs, once } from "@backtickjs/core";
-import { createContext, useContext } from "@backtickjs/react";
+import { createContext, useContext } from "react" with { backtick: "client" };
 import { Text, View } from "react-native" with { backtick: "client" };
 
 const ThemeContext = ${made};

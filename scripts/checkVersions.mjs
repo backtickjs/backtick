@@ -60,15 +60,20 @@ if (versions.size > 1) {
 
 const [expected] = versions.keys();
 
-// The framework is whichever dependency an adapter pins at its own version:
-// `react` for `@backtickjs/react` 19.2.3, which also pins `react-dom` there.
+// The framework is the peer an adapter is built against: pinned in its
+// `devDependencies` at the adapter's own version, and peered from there, as
+// `react` for `@backtickjs/react` 19.2.3 is `"19.2.3"` and `"^19.2.3"`.
 for (const { file, json } of adapters) {
-  const pinned = Object.values(json.dependencies ?? {});
-  if (!pinned.includes(json.version)) {
+  const frameworks = Object.entries(json.peerDependencies ?? {}).filter(
+    ([name, range]) =>
+      range === `^${json.version}` &&
+      json.devDependencies?.[name] === json.version,
+  );
+  if (frameworks.length === 0) {
     errors.push(
       `${file.slice(root.length)}: version is "${json.version}", expected ` +
-        `the version of the framework it pins, but no dependency is pinned ` +
-        `at it`,
+        `the version of the framework it's built against, but no peer is ` +
+        `"^${json.version}" with a devDependency pinned at it`,
     );
   }
 }

@@ -14,7 +14,7 @@ import { react } from "../dist/plugin.js";
 // by a server component, twice over in a host fragment.
 const source = `
 import { cs } from "@backtickjs/core";
-import { useState } from "@backtickjs/react";
+import { useState } from "react" with { backtick: "client" };
 
 const Counter = cs\`(props: { name: string }) => {
   const [count, setCount] = $useState(0);

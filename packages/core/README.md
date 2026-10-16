@@ -16,7 +16,7 @@ A server component reads data on the server and returns a client script. A clien
 
 ```tsx
 import { cs } from "@backtickjs/core";
-import { useState } from "@backtickjs/react";
+import { useState } from "react" with { backtick: "client" };
 
 // A client component: it runs on the client.
 const Counter = cs`(props: { start: number }) => {
@@ -42,7 +42,7 @@ A script every component shares, like a context or a store, is made once with `o
 
 ```tsx
 import { cs, once } from "@backtickjs/core";
-import { createContext, useContext } from "@backtickjs/react";
+import { createContext, useContext } from "react" with { backtick: "client" };
 
 const ThemeContext = once(cs`$createContext("light")`);
 const Label = cs`() => <p>{$useContext($ThemeContext)}</p>`;

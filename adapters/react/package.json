@@ -24,14 +24,6 @@
   "author": "Jean-François Bisson <jf@backtickjs.com>",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    },
-    "./client": {
-      "types": "./dist/client.d.ts",
-      "default": "./dist/client.js"
-    },
     "./jsx-runtime": {
       "types": "./dist/jsx-runtime.d.ts",
       "default": "./dist/jsx-runtime.js"
@@ -66,11 +58,11 @@
   "dependencies": {
     "@babel/core": "^7.29.7",
     "@babel/preset-react": "^7.29.7",
-    "@backtickjs/core": "^0.1.11",
-    "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.7",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "@backtickjs/core": "^0.1.11"
+  },
+  "peerDependencies": {
+    "react": "^19.2.3",
+    "@types/react": "^19.2.18"
   },
   "devDependencies": {
     "@backtickjs/bundler": "^0.1.11",
@@ -79,9 +71,13 @@
     "@backtickjs/tsc": "^0.1.11",
     "@backtickjs/tspatch-plugin": "^0.1.11",
     "@types/babel__core": "^7.20.5",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.7",
     "global-jsdom": "^30.0.0",
     "jsdom": "^30.0.1",
     "prettier": "^3.6.2",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
     "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"
   },

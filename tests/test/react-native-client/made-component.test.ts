@@ -9,7 +9,7 @@ import { drawReactNative } from "./drawReactNative.ts";
 // defined inside a render function is, and React remounts it.
 const source = `
 import { type Client, cs } from "@backtickjs/core";
-import { useState } from "@backtickjs/react";
+import { useState } from "react" with { backtick: "client" };
 import { Pressable, Text, View } from "react-native" with { backtick: "client" };
 
 function counter(id: string, label: Client<string>) {

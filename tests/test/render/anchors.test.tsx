@@ -2,8 +2,10 @@ import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { evaluate } from "../evaluate.ts";
 import { cs } from "@backtickjs/core";
-import { createRoot, createSignal, For } from "@backtickjs/solid-js";
-import { insert } from "@backtickjs/solid-js/web";
+import { createRoot, createSignal, For } from "solid-js" with {
+  backtick: "client",
+};
+import { insert } from "solid-js/web" with { backtick: "client" };
 import { screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";

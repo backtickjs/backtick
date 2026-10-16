@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { useEffect, useRef } from "@backtickjs/react";
+import { useEffect, useRef } from "react" with { backtick: "client" };
 import {
   Animated,
   Linking,

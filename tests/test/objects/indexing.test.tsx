@@ -3,7 +3,7 @@ import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import type { Spliceable } from "@backtickjs/core";
 import { evaluate } from "../evaluate.ts";
-import { createRoot } from "@backtickjs/solid-js";
+import { createRoot } from "solid-js" with { backtick: "client" };
 
 // What `a[k]` does with a key of another type: what JavaScript does.
 describe("a read by key", () => {

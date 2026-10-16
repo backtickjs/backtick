@@ -1,5 +1,5 @@
 import { type Client, cs, type Spliceable } from "@backtickjs/core";
-import { Suspense, useState } from "@backtickjs/react";
+import { Suspense, useState } from "react" with { backtick: "client" };
 import { Pressable, Text, TextInput, View } from "react-native" with {
   backtick: "client",
 };

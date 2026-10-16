@@ -2,11 +2,16 @@ import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import assert from "node:assert/strict";
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createSignal } from "@backtickjs/solid-js";
+const createSignal = {
+  "@backtickjs": "ClientImport",
+  name: "createSignal",
+  from: "solid-js",
+  version: "1.9.14",
+};
 import { render, screen } from "@solidjs/testing-library";
 import { evaluate } from "../evaluate.ts";
 const $module0 = {
-  id: "qxhjl19zgsnv:14:9",
+  id: "2j1x87k2raree:14:9",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>`);\nexports.default = ($splice0, $splice1) => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, () => $splice0() === $splice1() ? "same" : "different");\n    return _el$;\n})();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAaY,CAAAA,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAAIF,QAAA,EAAM,KAAKC,QAAA,EAAM,GAAG,MAAM,GAAG,WAAW;IAAA,OAAAC,IAAA;AAAA,IAAK","names":["$splice0","$splice1","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["state/prop-read-twice.test.tsx"]}',
   dependencies: ["solid-js/web"],
@@ -17,22 +22,22 @@ const $module0 = {
   kind: "expression",
 };
 const $module1 = {
-  id: "qxhjl19zgsnv:17:15",
+  id: "2j1x87k2raree:17:15",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = ($splice0, $splice1) => {\n    const [count] = $splice0()(0);\n    return (() => {\n        var _el$ = _tmpl$();\n        (0, web_2.insert)(_el$, () => $splice1(count));\n        return _el$;\n    })();\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAgBkB,CAAAA,QAAA,EAAAC,QAAA;IAChB,MAAM,CAACC,KAAK,CAAC,GAAGF,QAAA,EAAa,CAAC,CAAC,CAAC;IAChC;QAAA,IAAAG,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,QAAaF,QAAA,CAAAC,KAAA,CAAiD;QAAA,OAAAC,IAAA;IAAA;AAChE,CAAC","names":["$splice0","$splice1","count","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["state/prop-read-twice.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [
     { kind: "splice", bindings: [] },
-    { kind: "splice", bindings: ["count$qxhjl19zgsnv$0"] },
+    { kind: "splice", bindings: ["count$2j1x87k2raree$0"] },
   ],
   kind: "block",
 };
 const $module2 = {
-  id: "qxhjl19zgsnv:19:34",
+  id: "2j1x87k2raree:19:34",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $capture0 => ({\n    count: $capture0()\n});\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkBqCA,SAAA,KAAC;IAAEC,KAAK,EAAED,SAAK;CAAI,CAAC","names":["$capture0","count"],"ignoreList":[],"sources":["state/prop-read-twice.test.tsx"]}',
   dependencies: [],
-  params: [{ kind: "capture", key: "count$qxhjl19zgsnv$0" }],
+  params: [{ kind: "capture", key: "count$2j1x87k2raree$0" }],
   kind: "expression",
 };
 // A prop built from the parent's signal, read twice by the server component

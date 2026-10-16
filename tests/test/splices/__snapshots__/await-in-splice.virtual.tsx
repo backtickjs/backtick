@@ -1,6 +1,6 @@
 import { it } from "node:test";
 import { type Client, cs } from "@backtickjs/core";
-import type { JSX } from "@backtickjs/solid-js";
+import type { JSX } from "solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 
 async function fetchGreeting() {

@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { onMount } from "@backtickjs/solid-js";
+import { onMount } from "solid-js" with { backtick: "client" };
 
 // A client component: it runs in the browser, so its animation does too. It
 // waves when it appears, and again when you click it.

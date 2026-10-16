@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { For } from "@backtickjs/solid-js";
+import { For } from "solid-js" with { backtick: "client" };
 
 // What the JSX namespace admits, and what it refuses, in a script.
 //

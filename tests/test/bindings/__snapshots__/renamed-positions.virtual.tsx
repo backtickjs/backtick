@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createRoot } from "@backtickjs/solid-js";
+declare const createRoot: import("@backtickjs/core").Client<(typeof import("solid-js"))["createRoot"]>;
 import { evaluate } from "../evaluate.ts";
 
 // A script's own names and the client's globals, read where the checker sees

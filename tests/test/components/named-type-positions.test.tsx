@@ -1,6 +1,6 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createSignal, For } from "@backtickjs/solid-js";
+import { createSignal, For } from "solid-js" with { backtick: "client" };
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A type the host declared, named from inside a script: as a type argument, as

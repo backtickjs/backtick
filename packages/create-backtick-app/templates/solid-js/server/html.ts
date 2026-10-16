@@ -1,6 +1,6 @@
 import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
-import { render } from "@backtickjs/solid-js/web";
+import { render } from "solid-js/web" with { backtick: "client" };
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 
 // The version of Solid the page loads, below: what each page is bundled for.

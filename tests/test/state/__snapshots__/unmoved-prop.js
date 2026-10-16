@@ -2,14 +2,31 @@ import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createSelector, createSignal, For } from "@backtickjs/solid-js";
+const createSelector = {
+  "@backtickjs": "ClientImport",
+  name: "createSelector",
+  from: "solid-js",
+  version: "1.9.14",
+};
+const createSignal = {
+  "@backtickjs": "ClientImport",
+  name: "createSignal",
+  from: "solid-js",
+  version: "1.9.14",
+};
+const For = {
+  "@backtickjs": "ClientImport",
+  name: "For",
+  from: "solid-js",
+  version: "1.9.14",
+};
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn } from "./dom.ts";
 const $module0 = {
-  id: "1ghaummjwv2sp:14:9",
+  id: "355p0s4lldaba:16:9",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nconst web_4 = require("solid-js/web");\nconst web_5 = require("solid-js/web");\nconst web_6 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span>select</span><div>`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<a>`);\nexports.default = ($splice0, $splice1, $splice2) => {\n    const [selected, setSelected] = $splice0()(0);\n    const isSelected = $splice1()(selected);\n    return (() => {\n        var _el$ = _tmpl$(), _el$2 = _el$.firstChild, _el$3 = _el$2.nextSibling;\n        _el$2.$$click = () => setSelected(1);\n        (0, web_6.insert)(_el$3, () => ($For => (0, web_5.createComponent)($For, {\n            each: [0, 1, 2],\n            children: id => (() => {\n                var _el$4 = _tmpl$2();\n                (0, web_6.insert)(_el$4, "row " + id);\n                (0, web_4.effect)(() => (0, web_3.setAttribute)(_el$4, "href", isSelected(id) ? "#open" : "#closed"));\n                return _el$4;\n            })()\n        }))($splice2()));\n        return _el$;\n    })();\n};\n(0, web_2.delegateEvents)(["click"]);\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;;;;kBAaY,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA;IACR,MAAM,CAACC,QAAQ,EAAEC,WAAW,CAAC,GAAGJ,QAAA,EAAa,CAAC,CAAC,CAAC;IAChD,MAAMK,UAAU,GAAGJ,QAAA,EAAe,CAACE,QAAQ,CAAC;IAC5C;QAAA,IAAAG,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;QAAAH,KAAA,CAAAI,OAAA,GAEmB,MAAMR,WAAW,CAAC,CAAC,CAAC;QAAAS,gBAAA,EAAAH,KAAA,QAEjC,CAAAI,IAAA,IAAAC,yBAAA,EAACD,IAAI;YAACE,IAAI,EAAE,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC;YAAAC,QAAA,EACjBC,EAAU;gBAAA,IAAAC,KAAA,GAAAC,OAAA;gBAAAP,gBAAA,EAAAM,KAAA,EACsC,MAAM,GAAGD,EAAE;gBAAAG,gBAAA,QAAAC,sBAAA,EAAAH,KAAA,UAAlDd,UAAU,CAACa,EAAE,CAAC,GAAG,OAAO,GAAG,SAAS;gBAAA,OAAAC,KAAA;YAAA;SAC9C,CACI,EAJNjB,QAAA,EAAI,CAKP;QAAA,OAAAI,IAAA;IAAA;AAGN,CAAC","names":["$splice0","$splice1","$splice2","selected","setSelected","isSelected","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","$$click","_$insert","$For","_$createComponent","each","children","id","_el$4","_tmpl$2","_$effect","_$setAttribute"],"ignoreList":[],"sources":["state/unmoved-prop.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;;;;kBAeY,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA;IACR,MAAM,CAACC,QAAQ,EAAEC,WAAW,CAAC,GAAGJ,QAAA,EAAa,CAAC,CAAC,CAAC;IAChD,MAAMK,UAAU,GAAGJ,QAAA,EAAe,CAACE,QAAQ,CAAC;IAC5C;QAAA,IAAAG,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;QAAAH,KAAA,CAAAI,OAAA,GAEmB,MAAMR,WAAW,CAAC,CAAC,CAAC;QAAAS,gBAAA,EAAAH,KAAA,QAEjC,CAAAI,IAAA,IAAAC,yBAAA,EAACD,IAAI;YAACE,IAAI,EAAE,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC;YAAAC,QAAA,EACjBC,EAAU;gBAAA,IAAAC,KAAA,GAAAC,OAAA;gBAAAP,gBAAA,EAAAM,KAAA,EACsC,MAAM,GAAGD,EAAE;gBAAAG,gBAAA,QAAAC,sBAAA,EAAAH,KAAA,UAAlDd,UAAU,CAACa,EAAE,CAAC,GAAG,OAAO,GAAG,SAAS;gBAAA,OAAAC,KAAA;YAAA;SAC9C,CACI,EAJNjB,QAAA,EAAI,CAKP;QAAA,OAAAI,IAAA;IAAA;AAGN,CAAC","names":["$splice0","$splice1","$splice2","selected","setSelected","isSelected","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","$$click","_$insert","$For","_$createComponent","each","children","id","_el$4","_tmpl$2","_$effect","_$setAttribute"],"ignoreList":[],"sources":["state/unmoved-prop.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [
     { kind: "splice", bindings: [] },

@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { For } from "@backtickjs/solid-js";
+import { For } from "solid-js" with { backtick: "client" };
 
 // A client component is client code, a tag in a script. On the host it isn't
 // callable, so TypeScript refuses it as a tag: a client import, and a script

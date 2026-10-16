@@ -1,11 +1,16 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createRoot } from "@backtickjs/solid-js";
+const createRoot = {
+  "@backtickjs": "ClientImport",
+  name: "createRoot",
+  from: "solid-js",
+  version: "1.9.14",
+};
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 const $module0 = {
-  id: "17gesq3jbfgu2:9:41",
+  id: "8onavihi55vf:9:41",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAQ4CA,QAAA,IAAAA,QAAA,EAAI","names":["$splice0"],"ignoreList":[],"sources":["splices/splice-numeric.test.tsx"]}',
   dependencies: [],
@@ -13,7 +18,7 @@ const $module0 = {
   kind: "expression",
 };
 const $module1 = {
-  id: "17gesq3jbfgu2:16:34",
+  id: "8onavihi55vf:16:34",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => $splice1());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAeqC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAQ,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/splice-numeric.test.tsx"]}',
   dependencies: [],
@@ -24,7 +29,7 @@ const $module1 = {
   kind: "expression",
 };
 const $module2 = {
-  id: "17gesq3jbfgu2:22:34",
+  id: "8onavihi55vf:22:34",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => $splice1());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAqBqC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAQ,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/splice-numeric.test.tsx"]}',
   dependencies: [],
@@ -35,7 +40,7 @@ const $module2 = {
   kind: "expression",
 };
 const $module3 = {
-  id: "17gesq3jbfgu2:27:44",
+  id: "8onavihi55vf:27:44",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA0B+CA,QAAA,IAAAA,QAAA,EAAQ","names":["$splice0"],"ignoreList":[],"sources":["splices/splice-numeric.test.tsx"]}',
   dependencies: [],

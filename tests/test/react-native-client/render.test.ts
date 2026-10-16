@@ -17,7 +17,7 @@ import ts from "typescript";
 // state React's, drawn by a server component.
 const source = `
 import { cs } from "@backtickjs/core";
-import { useState } from "@backtickjs/react";
+import { useState } from "react" with { backtick: "client" };
 import { Pressable, Text, View } from "react-native" with { backtick: "client" };
 
 const Counter = cs\`(props: { label: string }) => {

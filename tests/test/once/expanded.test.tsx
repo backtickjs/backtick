@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs, once } from "@backtickjs/core";
-import { createRoot } from "@backtickjs/solid-js";
+import { createRoot } from "solid-js" with { backtick: "client" };
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 

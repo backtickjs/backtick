@@ -1,10 +1,15 @@
 import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createSignal } from "@backtickjs/solid-js";
+const createSignal = {
+  "@backtickjs": "ClientImport",
+  name: "createSignal",
+  from: "solid-js",
+  version: "1.9.14",
+};
 import { snapshotCase } from "../snapshotCase.ts";
 const $module0 = {
-  id: "3ekonqoxkrl1q:19:48",
+  id: "272luia50ttfl:19:48",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => c => {\n    return c === $splice0() ? "blue" : "red";\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkBmDA,QAAA,IAACC,CAAQ;IAC1D,OAAOA,CAAC,KAAKD,QAAA,EAAa,GAAG,MAAM,GAAG,KAAK;AAC7C,CAAC","names":["$splice0","c"],"ignoreList":[],"sources":["state/state-enum.test.tsx"]}',
   dependencies: [],
@@ -12,7 +17,7 @@ const $module0 = {
   kind: "function",
 };
 const $module1 = {
-  id: "3ekonqoxkrl1q:24:9",
+  id: "272luia50ttfl:24:9",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>`);\nexports.default = ($splice0, $splice1, $splice2, $splice3) => {\n    const [held, setHeld] = $splice0()($splice1());\n    return (() => {\n        var _el$ = _tmpl$();\n        _el$.$$click = () => setHeld($splice2());\n        (0, web_3.insert)(_el$, () => $splice3()(held()));\n        return _el$;\n    })();\n};\n(0, web_2.delegateEvents)(["click"]);\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAuBY,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA;IACR,MAAM,CAACC,IAAI,EAAEC,OAAO,CAAC,GAAGL,QAAA,EAAa,CAACC,QAAA,EAAY,CAAC;IACnD;QAAA,IAAAK,IAAA,GAAAC,MAAA;QAAAD,IAAA,CAAAE,OAAA,GACiB,MAAMH,OAAO,CAACH,QAAA,EAAa,CAAC;QAAAO,gBAAA,EAAAH,IAAA,QAAGH,QAAA,EAAU,CAACC,IAAI,EAAE,CAAC;QAAA,OAAAE,IAAA;IAAA;AAEpE,CAAC","names":["$splice0","$splice1","$splice2","$splice3","held","setHeld","_el$","_tmpl$","$$click","_$insert"],"ignoreList":[],"sources":["state/state-enum.test.tsx"]}',
   dependencies: ["solid-js/web"],

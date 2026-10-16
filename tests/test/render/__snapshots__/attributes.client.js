@@ -1,4 +1,4 @@
-// 32:30
+// 34:30
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -7,7 +7,7 @@ exports.default = (() => (<a href="/counter" id="press">
       </a>));
 }
 
-// 46:30
+// 48:30
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -18,14 +18,14 @@ exports.default = (() => (<div>
       </div>));
 }
 
-// 65:29
+// 67:29
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (() => <svg viewBox="0 0 279 38"/>);
 }
 
-// 73:29
+// 75:29
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -35,7 +35,7 @@ exports.default = (() => (<svg>
       </svg>));
 }
 
-// 90:29
+// 92:29
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -45,14 +45,14 @@ exports.default = (() => (<svg>
       </svg>));
 }
 
-// 103:29
+// 105:29
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (() => <div tabIndex={2}/>);
 }
 
-// 112:12
+// 114:12
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });

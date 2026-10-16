@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import type { Client } from "@backtickjs/core";
-import type { JSXElement } from "@backtickjs/solid-js";
+import type { JSXElement } from "solid-js";
 import { evaluate } from "../evaluate.ts";
 import { render } from "@solidjs/testing-library";
 

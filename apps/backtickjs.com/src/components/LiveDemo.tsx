@@ -6,7 +6,7 @@ import {
   onCleanup,
   onMount,
   Show,
-} from "@backtickjs/solid-js";
+} from "solid-js" with { backtick: "client" };
 import { highlight } from "../highlight.js";
 import { DEPLOYS } from "../samples.js";
 

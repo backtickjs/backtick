@@ -1,10 +1,7 @@
 import { cs } from "@backtickjs/core";
-import {
-  useDeferredValue,
-  useEffect,
-  useMemo,
-  useState,
-} from "@backtickjs/react";
+import { useDeferredValue, useEffect, useMemo, useState } from "react" with {
+  backtick: "client",
+};
 import { Modal, Pressable, SectionList, View } from "react-native" with {
   backtick: "client",
 };

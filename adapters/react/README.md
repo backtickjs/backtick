@@ -1,12 +1,12 @@
 # @backtickjs/react
 
-The React adapter for [Backtick](https://backtickjs.com): React's API as client values your scripts splice (`$useState`, `<$Suspense>`), a JSX runtime that type-checks the JSX in your server components against React's own types, and a compile plugin that runs React's JSX transform on each script at build time. Its version tracks the React it supports: `19.2.3` works with React `^19.2.3`. For React Native, import its components for the client: `import { View } from "react-native" with { backtick: "client" }`.
+The React adapter for [Backtick](https://backtickjs.com): a JSX runtime that type-checks the JSX in your server components against React's own types, and a compile plugin that runs React's JSX transform on each script at build time. React itself is imported for the client, as React Native and any other package is: `import { useState } from "react" with { backtick: "client" }`. React is a peer dependency: `19.2.3` is built against React 19.2.3, and works with any later 19.x.
 
 ## Install
 
 ```sh
-npm install @backtickjs/react @backtickjs/core @backtickjs/bundler @backtickjs/node-plugin
-npm install -D @backtickjs/tsc
+npm install react @backtickjs/react @backtickjs/core @backtickjs/bundler @backtickjs/node-plugin
+npm install -D @types/react @backtickjs/tsc
 ```
 
 The [repository's README](https://github.com/backtickjs/backtick#packages) says what each package is.
@@ -25,7 +25,7 @@ In `tsconfig.json`, point JSX at the adapter and keep imports as written:
 }
 ```
 
-`verbatimModuleSyntax` keeps the import of a name you only splice, such as `$useState`, which TypeScript would otherwise drop as unused.
+`verbatimModuleSyntax` keeps the import of a name you only splice, such as a client component from another file, which TypeScript would otherwise drop as unused.
 
 In `package.json`, name the compile plugin:
 
@@ -41,12 +41,12 @@ Run your server with `node --import @backtickjs/node-plugin server/index.tsx`.
 
 ## Usage
 
-A client component, with its hook spliced from the adapter, and a server component that draws it beside a server value:
+A client component, with React's hook imported for the client, and a server component that draws it beside a server value:
 
 ```tsx
 // server/Home.tsx
 import { cs } from "@backtickjs/core";
-import { useState } from "@backtickjs/react";
+import { useState } from "react" with { backtick: "client" };
 
 const Counter = cs`() => {
   const [count, setCount] = $useState(0);
@@ -71,7 +71,7 @@ On each request, bundle it for the React versions the page loads, and serve the 
 ```tsx
 import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
-import { createRoot } from "@backtickjs/react/client";
+import { createRoot } from "react-dom/client" with { backtick: "client" };
 import { Home } from "./Home.js";
 
 const element = <Home />;
@@ -88,8 +88,6 @@ const { code } = bundle.generate({ format: "es" });
 
 ## What it exports
 
-- `@backtickjs/react`: React's exports, name for name, as client values (`useState`, `useEffect`, `Suspense`, `createContext`, …), and React's types.
-- `@backtickjs/react/client`: `react-dom/client`'s `createRoot` and `hydrateRoot`, to mount a bundle in the browser.
 - `@backtickjs/react/jsx-runtime` and `@backtickjs/react/jsx-dev-runtime`: the JSX runtime for server components, and its `JSX` namespace.
 - `@backtickjs/react/plugin`: the compile plugin, React's JSX transform (`@babel/preset-react`, automatic runtime).
 

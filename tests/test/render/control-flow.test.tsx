@@ -1,14 +1,10 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import {
-  ErrorBoundary,
-  Index,
-  Match,
-  Suspense,
-  Switch,
-} from "@backtickjs/solid-js";
-import { Portal } from "@backtickjs/solid-js/web";
+import { ErrorBoundary, Index, Match, Suspense, Switch } from "solid-js" with {
+  backtick: "client",
+};
+import { Portal } from "solid-js/web" with { backtick: "client" };
 import { evaluate } from "../evaluate.ts";
 import { render, screen } from "@solidjs/testing-library";
 import { snapshotCase } from "../snapshotCase.ts";

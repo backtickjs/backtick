@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createRoot } from "@backtickjs/solid-js";
+declare const createRoot: import("@backtickjs/core").Client<(typeof import("solid-js"))["createRoot"]>;
 import { evaluate } from "../evaluate.ts";
 
 // A global the project declares with `const`, as React Native declares

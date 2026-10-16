@@ -1,7 +1,7 @@
 import { bundler } from "@backtickjs/bundler";
 import type { Bundle, Client, Spliceable, Spliced } from "@backtickjs/core";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
-import type { JSXElement } from "@backtickjs/solid-js";
+import type { JSXElement } from "solid-js";
 import { drawing } from "./drawing.tsx";
 
 /**

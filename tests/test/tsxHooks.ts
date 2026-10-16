@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
-import { createRequire, type LoadHook, type ResolveHook } from "node:module";
+import type { LoadHook, ResolveHook } from "node:module";
 import { dirname, relative } from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { fileURLToPath } from "node:url";
 import { transpile } from "@backtickjs/compiler";
 import { solid } from "@backtickjs/solid-js/plugin";
 import ts from "typescript";
@@ -46,10 +46,6 @@ export const load: LoadHook = async (url, context, nextLoad) => {
 const APP = new URL("./stdlib/app.ts", import.meta.url).href;
 const ACME_UI = new URL("../fixtures/acme-ui/index.ts", import.meta.url).href;
 
-const ADAPTER = pathToFileURL(
-  createRequire(import.meta.url).resolve("@backtickjs/solid-js"),
-).href;
-
 export const resolve: ResolveHook = (specifier, context, nextResolve) => {
   if (specifier === "app") {
     return { url: APP, shortCircuit: true };
@@ -60,8 +56,8 @@ export const resolve: ResolveHook = (specifier, context, nextResolve) => {
   if (specifier === "solid-js" || specifier.startsWith("solid-js/")) {
     return nextResolve(specifier, {
       ...context,
-      // The adapter's Solid, the one its names are typed against.
-      parentURL: ADAPTER,
+      // The tests' Solid, the one the adapter's peer is.
+      parentURL: import.meta.url,
       conditions: ["browser", ...context.conditions],
     });
   }

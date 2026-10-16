@@ -7,7 +7,9 @@ import {
   type Spliceable,
 } from "@backtickjs/core";
 import type { JSX as React, ReactElement, ReactNode } from "react";
-import { createElement, Fragment as ReactFragment } from "./index.js";
+import { createElement, Fragment as ReactFragment } from "react" with {
+  backtick: "client",
+};
 
 // JSX as React types it, for a host's JSX and a script's alike: an element is
 // also a client value, so a host hands one over, and a tag may also name a

@@ -1,6 +1,6 @@
 import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
-import { render } from "@backtickjs/solid-js/web";
+import { render } from "solid-js/web" with { backtick: "client" };
 import { compile, optimize } from "@tailwindcss/node";
 import { Scanner } from "@tailwindcss/oxide";
 import { readFile } from "node:fs/promises";

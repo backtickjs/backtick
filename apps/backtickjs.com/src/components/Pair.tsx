@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import type { JSX } from "@backtickjs/solid-js";
+import type { JSX } from "solid-js";
 
 // A picture of something a server screen does that one built into the app
 // can't, as a pair of panels: without Backtick, then with it.

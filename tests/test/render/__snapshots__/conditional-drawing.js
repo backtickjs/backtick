@@ -1,12 +1,17 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createSignal } from "@backtickjs/solid-js";
+const createSignal = {
+  "@backtickjs": "ClientImport",
+  name: "createSignal",
+  from: "solid-js",
+  version: "1.9.14",
+};
 import { render, screen } from "@solidjs/testing-library";
 import { snapshotCase } from "../snapshotCase.ts";
 import { evaluate } from "../evaluate.ts";
 const $module0 = {
-  id: "36xfcxts3aoah:30:13",
+  id: "kdjefp1ta4ua:30:13",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<em>shown`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<i>waiting`);\nexports.default = $splice0 => props => {\n    const [shown, setShown] = $splice0()(false);\n    const started = window.setTimeout(() => {\n        if (props.again()) {\n            setShown(true);\n        }\n    }, 0);\n    return (0, web_2.memo)(() => (0, web_2.memo)(() => !!shown())() ? _tmpl$() : _tmpl$2());\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBA6BgBA,QAAA,IAACC,KAA+B;IAC9C,MAAM,CAACC,KAAK,EAAEC,QAAQ,CAAC,GAAGH,QAAA,EAAa,CAAC,KAAK,CAAC;IAE9C,MAAMI,OAAO,GAAGC,MAAM,CAACC,UAAU,CAAC;QAChC,IAAIL,KAAK,CAACM,KAAK,EAAE,EAAE;YACjBJ,QAAQ,CAAC,IAAI,CAAC;QAChB;IACF,CAAC,EAAE,CAAC,CAAC;IAEL,OAAAK,cAAA,QAAUA,cAAA,UAAAN,KAAK,EAAE,MAAAO,MAAA,KAAAC,OAAA,EAAkC;AACrD,CAAC","names":["$splice0","props","shown","setShown","started","window","setTimeout","again","_$memo","_tmpl$","_tmpl$2"],"ignoreList":[],"sources":["render/conditional-drawing.test.tsx"]}',
   dependencies: ["solid-js/web"],
@@ -14,7 +19,7 @@ const $module0 = {
   kind: "function",
 };
 const $module1 = {
-  id: "36xfcxts3aoah:42:27",
+  id: "kdjefp1ta4ua:42:27",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span></span><section>`);\nexports.default = ($splice0, $splice1) => {\n    const [builds, setBuilds] = $splice0()(0);\n    return (() => {\n        var _el$ = _tmpl$(), _el$2 = _el$.firstChild, _el$3 = _el$2.nextSibling;\n        (0, web_3.insert)(_el$2, () => "builds " + builds());\n        (0, web_3.insert)(_el$3, () => ($Held => (0, web_2.createComponent)($Held, {\n            again: () => {\n                setBuilds(builds() + 1);\n                return builds() < 5;\n            }\n        }))($splice1()));\n        return _el$;\n    })();\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAyC8B,CAAAA,QAAA,EAAAC,QAAA;IAC5B,MAAM,CAACC,MAAM,EAAEC,SAAS,CAAC,GAAGH,QAAA,EAAa,CAAC,CAAC,CAAC;IAE5C;QAAA,IAAAI,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;QAAAC,gBAAA,EAAAJ,KAAA,QAEW,SAAS,GAAGJ,MAAM,EAAE;QAAAQ,gBAAA,EAAAF,KAAA,QAEzB,CAAAG,KAAA,IAAAC,yBAAA,EAACD,KAAK;YACJE,KAAK,EAAEA,GAAA;gBACLV,SAAS,CAACD,MAAM,EAAE,GAAG,CAAC,CAAC;gBACvB,OAAOA,MAAM,EAAE,GAAG,CAAC;YACrB;SAAC,CACD,EALDD,QAAA,EAAK,CAMR;QAAA,OAAAG,IAAA;IAAA;AAGN,CAAC","names":["$splice0","$splice1","builds","setBuilds","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","_$insert","$Held","_$createComponent","again"],"ignoreList":[],"sources":["render/conditional-drawing.test.tsx"]}',
   dependencies: ["solid-js/web"],

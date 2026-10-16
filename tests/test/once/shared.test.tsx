@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs, once } from "@backtickjs/core";
-import { createRoot, createSignal } from "@backtickjs/solid-js";
+import { createRoot, createSignal } from "solid-js" with { backtick: "client" };
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { evaluate } from "../evaluate.ts";

@@ -1,5 +1,5 @@
 import { cs, type Client, type Spliceable } from "@backtickjs/core";
-import { createRoot } from "@backtickjs/solid-js";
+import { createRoot } from "solid-js" with { backtick: "client" };
 
 /**
  * A value as a value test runs it: in a Solid root, made in client code by

@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { useEffect, useState } from "@backtickjs/react";
+import { useEffect, useState } from "react" with { backtick: "client" };
 import { deleteItemAsync } from "expo-secure-store" with { backtick: "client" };
 import { Linking, Modal, ScrollView, View } from "react-native" with {
   backtick: "client",

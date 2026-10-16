@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createSelector, createSignal, For } from "@backtickjs/solid-js";
+declare const createSelector: import("@backtickjs/core").Client<(typeof import("solid-js"))["createSelector"]>; declare const createSignal: import("@backtickjs/core").Client<(typeof import("solid-js"))["createSignal"]>; declare const For: import("@backtickjs/core").Client<(typeof import("solid-js"))["For"]>;
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn } from "./dom.ts";

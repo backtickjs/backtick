@@ -1,4 +1,4 @@
-// 20:17
+// 16:17
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -9,7 +9,7 @@ exports.default = (($splice0, $splice1) => (<ul>
   </ul>));
 }
 
-// 28:18
+// 24:18
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -23,14 +23,14 @@ exports.default = (($splice0, $splice1, $splice2) => (($Switch => <$Switch fallb
   </$Switch>)($splice0())));
 }
 
-// 39:16
+// 35:16
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0, $splice1) => ($ErrorBoundary => <$ErrorBoundary fallback={<p>caught</p>}>{$splice1()}</$ErrorBoundary>)($splice0()));
 }
 
-// 40:7
+// 36:7
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -39,7 +39,7 @@ exports.default = (() => {
 });
 }
 
-// 45:19
+// 41:19
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -48,7 +48,7 @@ exports.default = (($splice0) => (($Suspense => <$Suspense fallback={<p>loading<
   </$Suspense>)($splice0())));
 }
 
-// 51:18
+// 47:18
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });

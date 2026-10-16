@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { useEffect } from "@backtickjs/react";
+import { useEffect } from "react" with { backtick: "client" };
 import { View } from "react-native" with { backtick: "client" };
 import { useStack } from "../navigation.js";
 

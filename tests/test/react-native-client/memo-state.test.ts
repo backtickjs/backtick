@@ -10,7 +10,7 @@ import { drawReactNative } from "./drawReactNative.ts";
 // flag a call that returns a component.
 const source = `
 import { cs } from "@backtickjs/core";
-import { memo, useState } from "@backtickjs/react";
+import { memo, useState } from "react" with { backtick: "client" };
 import { Pressable, Text, View } from "react-native" with { backtick: "client" };
 
 const Row = cs\`$memo(() => {
@@ -54,7 +54,7 @@ it("a memo component is made again when its parent re-renders", async () => {
 // can't be made at module level.
 const kept = `
 import { cs } from "@backtickjs/core";
-import { memo, useMemo, useState } from "@backtickjs/react";
+import { memo, useMemo, useState } from "react" with { backtick: "client" };
 import { Pressable, Text, View } from "react-native" with { backtick: "client" };
 
 const Row = cs\`() => {
@@ -97,7 +97,7 @@ it("a memo component made once per parent keeps its state", async () => {
 // level, so it is one component and keeps its state.
 const madeOnce = `
 import { cs, once } from "@backtickjs/core";
-import { memo, useState } from "@backtickjs/react";
+import { memo, useState } from "react" with { backtick: "client" };
 import { Pressable, Text, View } from "react-native" with { backtick: "client" };
 
 const Row = once(cs\`$memo(() => {

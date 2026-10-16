@@ -55,7 +55,7 @@ What you just wrote:
   `<$Counter />`. Its state lives on the phone.
 - **`$View` and `$useState` are React Native and React,** with the same names
   and types: `View` imported from `react-native` with
-  `with { backtick: "client" }`, and `useState` from `@backtickjs/react`.
+  `with { backtick: "client" }`, and `useState` from `react`, the same way.
 
 ## What's in your project
 

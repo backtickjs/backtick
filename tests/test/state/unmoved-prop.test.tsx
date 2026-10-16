@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createSelector, createSignal, For } from "@backtickjs/solid-js";
+import { createSelector, createSignal, For } from "solid-js" with {
+  backtick: "client",
+};
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn } from "./dom.ts";

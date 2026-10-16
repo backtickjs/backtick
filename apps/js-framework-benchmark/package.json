@@ -36,7 +36,8 @@
     "@backtickjs/bundler": "^0.1.11",
     "@backtickjs/core": "^0.1.11",
     "@backtickjs/solid-js": "^1.9.14",
-    "@backtickjs/tspatch-plugin": "^0.1.11"
+    "@backtickjs/tspatch-plugin": "^0.1.11",
+    "solid-js": "1.9.14"
   },
   "devDependencies": {
     "@backtickjs/prettier-plugin": "^0.1.11",

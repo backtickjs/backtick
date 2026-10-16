@@ -28,6 +28,7 @@
     "markdown-it": "^15.0.2",
     "markdown-it-anchor": "^10.0.0",
     "shiki": "^4.5.0",
+    "solid-js": "1.9.14",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3"
   },

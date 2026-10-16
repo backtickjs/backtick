@@ -3,7 +3,7 @@ import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
 import { evaluate } from "../evaluate.ts";
-import { createRoot } from "@backtickjs/solid-js";
+declare const createRoot: import("@backtickjs/core").Client<(typeof import("solid-js"))["createRoot"]>;
 
 // A spliced `undefined` crosses as itself, written `undefined`: alone, as an
 // object's member, its key kept, and as an array's element.

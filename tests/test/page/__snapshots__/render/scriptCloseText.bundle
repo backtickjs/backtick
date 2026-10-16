@@ -1,6 +1,6 @@
 import * as $module0 from "solid-js/web";
 const $modules = {
-  "3ilsptqylvqsp:11:24": (module, exports, require) => {
+  "11l1n280zt2gs:11:24": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -26,6 +26,6 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $cs0 = $require("3ilsptqylvqsp:11:24").default;
+const $cs0 = $require("11l1n280zt2gs:11:24").default;
 const $thunk0 = () => "& \u003c > \" ' \u003c/script> \u003c!-- -->";
 export default $cs0($thunk0);

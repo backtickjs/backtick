@@ -9,7 +9,7 @@ import { drawReactNative } from "./drawReactNative.ts";
 // it keeps its state. A lint could flag a block that returns a component.
 const source = `
 import { cs } from "@backtickjs/core";
-import { useState } from "@backtickjs/react";
+import { useState } from "react" with { backtick: "client" };
 import { Pressable, Text, View } from "react-native" with { backtick: "client" };
 
 const Counter = cs\`{

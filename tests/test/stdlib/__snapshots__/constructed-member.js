@@ -1,11 +1,16 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs, createImport } from "@backtickjs/core";
-import { createRoot } from "@backtickjs/solid-js";
+const createRoot = {
+  "@backtickjs": "ClientImport",
+  name: "createRoot",
+  from: "solid-js",
+  version: "1.9.14",
+};
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 const $module0 = {
-  id: "16n4ud3f23u4d:14:17",
+  id: "3lrzh9pxuc0as:14:17",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => new ($splice1().Circle)(2).diameter);\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAaoB,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAM,KAAIC,QAAA,EAAS,CAACC,MAAM,EAAC,CAAC,CAAC,CAACC,QAAQ,CAAC","names":["$splice0","$splice1","Circle","diameter"],"ignoreList":[],"sources":["stdlib/constructed-member.test.tsx"]}',
   dependencies: [],

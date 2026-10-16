@@ -2,9 +2,14 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs, createImport } from "@backtickjs/core";
 import { evaluate } from "../evaluate.ts";
-import { createRoot } from "@backtickjs/solid-js";
+const createRoot = {
+  "@backtickjs": "ClientImport",
+  name: "createRoot",
+  from: "solid-js",
+  version: "1.9.14",
+};
 const $module0 = {
-  id: "9k86q37klbtv:25:32",
+  id: "kbqs3c8161y2:25:32",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => $splice1()());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAwBmC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAM,EAAE,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["stdlib/target-builtins.test.tsx"]}',
   dependencies: [],
@@ -15,7 +20,7 @@ const $module0 = {
   kind: "expression",
 };
 const $module1 = {
-  id: "9k86q37klbtv:32:21",
+  id: "kbqs3c8161y2:32:21",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => $splice1().get("greeting"));\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA+BwB,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAQ,CAACC,GAAG,CAAC,UAAU,CAAC,CAAC","names":["$splice0","$splice1","get"],"ignoreList":[],"sources":["stdlib/target-builtins.test.tsx"]}',
   dependencies: [],

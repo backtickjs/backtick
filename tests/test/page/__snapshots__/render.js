@@ -1,11 +1,16 @@
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { render } from "@backtickjs/solid-js/web";
+const render = {
+  "@backtickjs": "ClientImport",
+  name: "render",
+  from: "solid-js/web",
+  version: "1.9.14",
+};
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 const $module0 = {
-  id: "3ilsptqylvqsp:11:24",
+  id: "11l1n280zt2gs:11:24",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, $splice0);\n    return _el$;\n})();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAU2BA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAID,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAU","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["page/render.test.tsx"]}',
   dependencies: ["solid-js/web"],
@@ -13,7 +18,7 @@ const $module0 = {
   kind: "expression",
 };
 const $module1 = {
-  id: "3ilsptqylvqsp:25:4",
+  id: "11l1n280zt2gs:25:4",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2) => $splice0()(() => $splice1(), document.getElementById($splice2()));\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAwBO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,KAAAF,QAAA,EAAO,CAAC,MAAMC,QAAA,EAAQ,EAAEE,QAAQ,CAACC,cAAc,CAACF,QAAA,EAAG,CAAgB,CAAC","names":["$splice0","$splice1","$splice2","document","getElementById"],"ignoreList":[],"sources":["page/render.test.tsx"]}',
   dependencies: [],
@@ -25,7 +30,7 @@ const $module1 = {
   kind: "expression",
 };
 const $module2 = {
-  id: "3ilsptqylvqsp:37:29",
+  id: "11l1n280zt2gs:37:29",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>first`);\nexports.default = () => _tmpl$();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAoCgC,MAAAA,MAAA,EAAY","names":["_tmpl$"],"ignoreList":[],"sources":["page/render.test.tsx"]}',
   dependencies: ["solid-js/web"],
@@ -33,7 +38,7 @@ const $module2 = {
   kind: "expression",
 };
 const $module3 = {
-  id: "3ilsptqylvqsp:38:30",
+  id: "11l1n280zt2gs:38:30",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>second`);\nexports.default = () => _tmpl$();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAqCiC,MAAAA,MAAA,EAAa","names":["_tmpl$"],"ignoreList":[],"sources":["page/render.test.tsx"]}',
   dependencies: ["solid-js/web"],

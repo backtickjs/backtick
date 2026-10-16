@@ -1,11 +1,11 @@
 # @backtickjs/solid-js
 
-The Solid adapter for [Backtick](https://backtickjs.com): Solid's API as client values your scripts splice (`$createSignal`, `<$Show>`), a JSX runtime that type-checks the JSX in your server components against Solid's own types, and a compile plugin that runs Solid's compiler on each script at build time. Its version tracks the Solid it supports: `1.9.14` works with Solid `^1.9.14`.
+The Solid adapter for [Backtick](https://backtickjs.com): a JSX runtime that type-checks the JSX in your server components against Solid's own types, and a compile plugin that runs Solid's compiler on each script at build time. Solid itself is imported for the client, as any other package is: `import { createSignal } from "solid-js" with { backtick: "client" }`. Solid is a peer dependency: `1.9.14` is built against Solid 1.9.14, and works with any later 1.x.
 
 ## Install
 
 ```sh
-npm install @backtickjs/solid-js @backtickjs/core @backtickjs/bundler @backtickjs/node-plugin
+npm install solid-js @backtickjs/solid-js @backtickjs/core @backtickjs/bundler @backtickjs/node-plugin
 npm install -D @backtickjs/tsc
 ```
 
@@ -25,7 +25,7 @@ In `tsconfig.json`, point JSX at the adapter and keep imports as written:
 }
 ```
 
-`verbatimModuleSyntax` keeps the import of a name you only splice, such as `$createSignal`, which TypeScript would otherwise drop as unused. `"jsx": "react-jsx"` only applies to the JSX in your server components; scripts are compiled by Solid's compiler.
+`verbatimModuleSyntax` keeps the import of a name you only splice, such as a client component from another file, which TypeScript would otherwise drop as unused. `"jsx": "react-jsx"` only applies to the JSX in your server components; scripts are compiled by Solid's compiler.
 
 In `package.json`, name the compile plugin:
 
@@ -41,12 +41,12 @@ Run your server with `node --import @backtickjs/node-plugin server/index.tsx`.
 
 ## Usage
 
-A client component, with its signal spliced from the adapter, and a server component that draws it beside a server value:
+A client component, with Solid's signal imported for the client, and a server component that draws it beside a server value:
 
 ```tsx
 // server/Home.tsx
 import { cs } from "@backtickjs/core";
-import { createSignal } from "@backtickjs/solid-js";
+import { createSignal } from "solid-js" with { backtick: "client" };
 
 const Counter = cs`() => {
   const [count, setCount] = $createSignal(0);
@@ -73,7 +73,7 @@ On each request, bundle it for the Solid version the page loads, and serve the r
 ```tsx
 import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
-import { render } from "@backtickjs/solid-js/web";
+import { render } from "solid-js/web" with { backtick: "client" };
 import { Home } from "./Home.js";
 
 const element = <Home />;
@@ -90,9 +90,6 @@ const { code } = bundle.generate({ format: "es" });
 
 ## What it exports
 
-- `@backtickjs/solid-js`: `solid-js`'s exports, name for name, as client values (`createSignal`, `createEffect`, `onMount`, `Show`, `For`, …), and Solid's types.
-- `@backtickjs/solid-js/web`: `solid-js/web`'s exports (`render`, `Portal`, `Dynamic`, …), including what mounts a bundle in the browser.
-- `@backtickjs/solid-js/store`: `solid-js/store`'s exports (`createStore`, `produce`, `reconcile`, …).
 - `@backtickjs/solid-js/jsx-runtime` and `@backtickjs/solid-js/jsx-dev-runtime`: the JSX runtime for server components, and its `JSX` namespace.
 - `@backtickjs/solid-js/plugin`: the compile plugin, Solid's compiler (`babel-preset-solid`, DOM output).
 

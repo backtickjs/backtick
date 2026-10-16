@@ -2,10 +2,15 @@ import assert from "node:assert/strict";
 import { it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
-import { createRoot } from "@backtickjs/solid-js";
+const createRoot = {
+  "@backtickjs": "ClientImport",
+  name: "createRoot",
+  from: "solid-js",
+  version: "1.9.14",
+};
 import { snapshotCase } from "../snapshotCase.ts";
 const $module0 = {
-  id: "w6ejdrqonm90:28:4",
+  id: "3eix0d6ptibv5:28:4",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2, $splice3) => $splice0()(() => $splice1().title + " " + $splice2().done + " " + $splice3().tags[0]);\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2BO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,KAAAH,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAK,CAACG,KAAK,GAAG,GAAG,GAAGF,QAAA,EAAK,CAACG,IAAI,GAAG,GAAG,GAAGF,QAAA,EAAK,CAACG,IAAI,CAAC,CAAC,CAAC,CAAC","names":["$splice0","$splice1","$splice2","$splice3","title","done","tags"],"ignoreList":[],"sources":["splices/interface-splice.test.tsx"]}',
   dependencies: [],
@@ -18,7 +23,7 @@ const $module0 = {
   kind: "expression",
 };
 const $module1 = {
-  id: "w6ejdrqonm90:37:36",
+  id: "3eix0d6ptibv5:37:36",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => "computed";\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAoCuC,gBAAU","names":[],"ignoreList":[],"sources":["splices/interface-splice.test.tsx"]}',
   dependencies: [],
@@ -26,7 +31,7 @@ const $module1 = {
   kind: "expression",
 };
 const $module2 = {
-  id: "w6ejdrqonm90:43:4",
+  id: "3eix0d6ptibv5:43:4",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => $splice1().label.toUpperCase());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA0CO,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAS,CAACC,KAAK,CAACC,WAAW,EAAE,CAAC","names":["$splice0","$splice1","label","toUpperCase"],"ignoreList":[],"sources":["splices/interface-splice.test.tsx"]}',
   dependencies: [],
@@ -37,7 +42,7 @@ const $module2 = {
   kind: "expression",
 };
 const $module3 = {
-  id: "w6ejdrqonm90:57:23",
+  id: "3eix0d6ptibv5:57:23",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0().title;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAwD0BA,QAAA,IAAAA,QAAA,EAAW,CAACC,KAAK","names":["$splice0","title"],"ignoreList":[],"sources":["splices/interface-splice.test.tsx"]}',
   dependencies: [],

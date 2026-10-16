@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/es";
-import { createSignal } from "@backtickjs/solid-js";
+import { createSignal } from "solid-js" with { backtick: "client" };
 import { bundle } from "../evaluate.ts";
 
 describe("execRoot, from @backtickjs/core/es", () => {

@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { useEffect } from "@backtickjs/react";
+import { useEffect } from "react" with { backtick: "client" };
 import { deleteItemAsync } from "expo-secure-store" with { backtick: "client" };
 import { Pressable, View } from "react-native" with { backtick: "client" };
 import { useIsFocused } from "@react-navigation/native" with {
