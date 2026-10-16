@@ -1,12 +1,12 @@
 {
   "name": "@backtickjs/dev",
   "version": "0.1.10",
-  "description": "Backtick in development: `backtick-dev` runs your server, restarts it when you save, reloads the app once it's back, and keeps both sides' logs",
+  "description": "Backtick in development: `node --watch --import @backtickjs/dev/reload` reloads the app each time your server restarts",
   "keywords": [
     "backtick",
     "server-driven-ui",
     "hot-reload",
-    "mcp"
+    "expo"
   ],
   "homepage": "https://backtickjs.com",
   "bugs": {
@@ -21,18 +21,10 @@
   "author": "Jean-François Bisson <jf@backtickjs.com>",
   "type": "module",
   "exports": {
-    "./client": {
-      "types": "./dist/client.d.ts",
-      "default": "./dist/client.js"
-    },
-    "./react-native": {
-      "types": "./dist/react-native.d.ts",
-      "default": "./dist/react-native.js"
+    "./reload": {
+      "types": "./dist/reload.d.ts",
+      "default": "./dist/reload.js"
     }
-  },
-  "bin": {
-    "backtick-dev": "./dist/cli.js",
-    "backtick-dev-mcp": "./dist/mcp.js"
   },
   "files": [
     "dist",
@@ -51,24 +43,11 @@
     "clean": "rm -rf node_modules dist .turbo",
     "prepack": "cp ../../LICENSE ."
   },
-  "dependencies": {
-    "@hono/node-server": "^2.1.4",
-    "@modelcontextprotocol/sdk": "^1.32.1",
-    "hono": "^4.13.13",
-    "undici": "^8.10.2",
-    "ws": "^8.22.0",
-    "zod": "^4.6.6"
-  },
   "devDependencies": {
     "@types/node": "^25.9.1",
-    "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.3",
     "@types/ws": "^8.18.1",
-    "global-jsdom": "^30.0.0",
-    "jsdom": "^30.0.1",
     "prettier": "^3.6.2",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "ws": "^8.22.0"
   }
 }

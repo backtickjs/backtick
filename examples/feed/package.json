@@ -5,10 +5,11 @@
   "private": true,
   "main": "client/index.ts",
   "scripts": {
-    "start": "backtick-dev expo start",
-    "android": "backtick-dev expo start --android",
-    "ios": "backtick-dev expo start --ios",
-    "web": "backtick-dev expo start --web",
+    "server": "node --watch --enable-source-maps --import @backtickjs/node-plugin --import @backtickjs/dev/reload server/index.tsx",
+    "start": "concurrently --raw --kill-others npm:server \"expo start\"",
+    "android": "concurrently --raw --kill-others npm:server \"expo start --android\"",
+    "ios": "concurrently --raw --kill-others npm:server \"expo start --ios\"",
+    "web": "concurrently --raw --kill-others npm:server \"expo start --web\"",
     "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit",
     "test": "node --import ./server/test/setup.mjs --import @backtickjs/node-plugin --test \"server/**/*.test.tsx\"",
     "register-build": "backtick-builds register",
@@ -38,7 +39,6 @@
     "react-error-boundary": "6.1.6",
     "react-native": "0.86.3",
     "react-native-safe-area-context": "~5.7.0",
-    "react-native-view-shot": "5.1.0",
     "react-native-web": "^0.21.0",
     "typescript": "^6.0.3"
   },
@@ -49,6 +49,8 @@
     "@testing-library/user-event": "^14.6.7",
     "@types/node": "^25.9.1",
     "@types/react": "19.2.18",
+    "agent-device": "^0.21.27",
+    "concurrently": "^10.0.6",
     "global-jsdom": "^30.0.0",
     "jsdom": "^30.0.1",
     "prettier": "^3.6.2"

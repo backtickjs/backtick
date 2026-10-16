@@ -118,7 +118,7 @@ const ReorderButton = cs`(props: { order: Order }) => {
 | [`@backtickjs/tanstack-react-query`](adapters/tanstack-react-query)                     | TanStack Query's hooks, options and client, for scripts            |
 | [`@backtickjs/react-error-boundary`](adapters/react-error-boundary)                     | react-error-boundary's boundary, hook and HOC, for scripts         |
 | [`@backtickjs/builds`](packages/builds)                                                 | Keeps your server drawing for every app build in users' hands      |
-| [`@backtickjs/dev`](packages/dev)                                                       | Restarts your server on save, and reloads the app with it          |
+| [`@backtickjs/dev`](packages/dev)                                                       | Reloads the app each time your server restarts                     |
 | [`@backtickjs/node-plugin`](packages/node-plugin)                                       | Compiles scripts as a Node server loads them                       |
 | [`@backtickjs/bun-plugin`](packages/bun-plugin)                                         | Compiles scripts as a Bun server loads them                        |
 | [`@backtickjs/tspatch-plugin`](packages/tspatch-plugin)                                 | Compiles scripts when you build a server ahead of time with `tspc` |

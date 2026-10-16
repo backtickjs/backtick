@@ -1,33 +1,14 @@
 import { buildIdFrom } from "@backtickjs/builds/client";
 import type { Bundle } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
-import { startDevChannel } from "@backtickjs/dev/client";
-import { reactNativeUI } from "@backtickjs/dev/react-native";
 import { QueryClient } from "@tanstack/react-query";
 import Constants from "expo-constants";
-import { DevSettings, Platform } from "react-native";
-import { captureScreen } from "react-native-view-shot";
+import { Platform } from "react-native";
 import { moduleMap } from "./moduleMap";
 
 // Your Backtick server runs on the computer Expo was started from.
 const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
-
-// In development, the app reloads when you save a file under server/, and
-// what it logs, uncaught errors included, and what it shows reach
-// `backtick-dev`, whose MCP tools can also press, type and scroll in it.
-if (__DEV__) {
-  const channel = startDevChannel(server, {
-    reload: () => DevSettings.reload(),
-    screenshot: () => captureScreen({ format: "png", result: "base64" }),
-    ui: reactNativeUI,
-  });
-  const handler = ErrorUtils.getGlobalHandler();
-  ErrorUtils.setGlobalHandler((error, fatal) => {
-    channel.report(error);
-    handler(error, fatal);
-  });
-}
 
 // This build's id, which names the modules it carries, for the server to
 // bundle what it can run: `@backtickjs/builds/expo`, in app.json, adds it.
