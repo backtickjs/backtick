@@ -1,7 +1,12 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createImport, createJsxElement } from "@backtickjs/core";
-import { BundlerError, bundler, ClientVersionMismatch } from "../dist/index.js";
+import {
+  BundlerError,
+  bundler,
+  ClientVersionMismatch,
+  supports,
+} from "../dist/index.js";
 
 test("the output is a module whose default export is the value", async () => {
   const bundle = await bundler.build({ input: 42, modules: {} });
@@ -80,7 +85,7 @@ test("a script's import needing a version the client doesn't have is refused", a
       error.imported === "Portal" &&
       error.version === "2.0.0" &&
       error.provided === "1.9.14" &&
-      /Can't import `Portal` from "solid-js\/web": it's typed against 2\.0\.0, and the client provides solid-js\/web@1\.9\.14\. Check `supports\(modules, "solid-js\/web", "\^2\.0\.0"\)` first\.$/.test(
+      /Can't import `Portal` from "solid-js\/web": it's typed against 2\.0\.0, and the client provides solid-js\/web@1\.9\.14\. Check `supports\("solid-js\/web", "\^2\.0\.0"\)` first\.$/.test(
         error.message,
       ),
   );
@@ -129,5 +134,37 @@ test("what a server component throws passes through as it is", async () => {
   await assert.rejects(
     () => bundler.build({ input: createJsxElement(Failing, {}), modules: {} }),
     (error) => error === failed,
+  );
+});
+
+test("supports answers for the client a build is for, in a server component", async () => {
+  const Haptics = async () => {
+    // after an await, as a server component that reads data first would
+    await Promise.resolve();
+    return supports("expo-haptics", "^15") ? "haptics" : "none";
+  };
+  const drawn = async (modules: Record<string, string>) =>
+    (
+      await bundler.build({ input: createJsxElement(Haptics, {}), modules })
+    ).generate({ format: "es" }).code;
+  // at once, as a server answering three clients: each build its own
+  const [newer, older, without] = await Promise.all([
+    drawn({ "expo-haptics": "15.0.1" }),
+    drawn({ "expo-haptics": "14.0.0" }),
+    drawn({}),
+  ]);
+  assert.match(newer, /"haptics"/);
+  assert.match(older, /"none"/);
+  assert.match(without, /"none"/);
+});
+
+test("supports is refused outside a build, with no client to ask about", () => {
+  assert.throws(
+    () => supports("expo-haptics", "^15"),
+    (error) =>
+      error instanceof BundlerError &&
+      /call it in a server component, while bundler\.build runs it/.test(
+        error.message,
+      ),
   );
 });

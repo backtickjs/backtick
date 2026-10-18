@@ -1,4 +1,4 @@
-import { type Modules, supports } from "@backtickjs/bundler";
+import { supports } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
 import { useEffect, useState } from "react" with { backtick: "client" };
 import {
@@ -178,18 +178,18 @@ const Apple = cs`(props: SocialSignInProps) => {
 const Nothing = cs`(_props: SocialSignInProps) => null`;
 
 /**
- * The sign-in buttons for a build with `modules`: Google's and Facebook's
- * when the provider is registered and the build has its SDK. Decided here,
- * so a build without one is never sent its script.
+ * The sign-in buttons for the app being drawn for: Google's and Facebook's
+ * when the provider is registered and the app has its SDK. Decided here, so
+ * an app without one is never sent its script.
  */
-export function socialSignIn(modules: Modules) {
+export function socialSignIn() {
   const GoogleButton =
     google.webClientId !== "" &&
-    supports(modules, "@react-native-google-signin/google-signin", "*")
+    supports("@react-native-google-signin/google-signin", "*")
       ? Google
       : Nothing;
   const FacebookButton =
-    facebook.appId !== "" && supports(modules, "react-native-fbsdk-next", "*")
+    facebook.appId !== "" && supports("react-native-fbsdk-next", "*")
       ? Facebook
       : Nothing;
   return cs`(props: SocialSignInProps) => (

@@ -36,7 +36,7 @@ export class ClientVersionMismatch extends BundlerError {
       provided === undefined
         ? `the client provides ${listed || "no modules"}`
         : `it's typed against ${version}, and the client provides ${from}@${provided}`;
-    const fix = `supports(modules, "${from}", "^${version}")`;
+    const fix = `supports("${from}", "^${version}")`;
     super(
       `Can't import \`${imported}\` from "${from}": ${problem}. ` +
         `Check \`${fix}\` first.`,

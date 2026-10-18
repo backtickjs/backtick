@@ -1,6 +1,7 @@
 import type { Bundle, Spliceable, Spliced, SplicesAs } from "@backtickjs/core";
 import { buildBundle } from "./bundle/buildBundle.js";
 import { BundlerError } from "./errors.js";
+import { buildingFor } from "./supports.js";
 import { isModules, type Modules } from "./modules.js";
 import { printBundle } from "./print/printBundle.js";
 
@@ -62,7 +63,7 @@ export const bundler = {
     }
     // Scripts come compiled for their framework when their host was built, so
     // the bundle is only put together: nothing is compiled or parsed here.
-    const tree = await buildBundle(input, modules);
+    const tree = await buildingFor(modules, () => buildBundle(input, modules));
     return {
       generate: ({ format, sourcemap = false }) => {
         const printed = printBundle(tree, format);

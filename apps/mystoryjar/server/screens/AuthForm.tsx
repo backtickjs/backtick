@@ -18,7 +18,6 @@ import { usePost } from "../ui/server.js";
 import { Text } from "../ui/Text.js";
 import { TextInput } from "../ui/TextInput.js";
 import { TextLink } from "../ui/TextLink.js";
-import type { Modules } from "@backtickjs/bundler";
 import { socialSignIn } from "./SocialSignIn.js";
 
 // The website's sign-in and sign-up form, one column 300 points wide: the
@@ -78,9 +77,9 @@ const Legal = cs`() => (
   </$Text>
 )`;
 
-/** The form, for a build with `modules`, whose sign-in buttons it shows. */
-export function authForm(modules: Modules) {
-  const SocialSignIn = socialSignIn(modules);
+/** The form, for the app being drawn for, whose sign-in buttons it shows. */
+export function authForm() {
+  const SocialSignIn = socialSignIn();
   return cs`(props: AuthFormProps) => {
     const stack = $useStack();
     const post = $usePost();

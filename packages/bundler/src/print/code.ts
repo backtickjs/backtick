@@ -1,6 +1,7 @@
 import type { ClientImport } from "@backtickjs/core";
 import { ClientVersionMismatch } from "../errors.js";
-import { type Modules, supports } from "../modules.js";
+import semver from "semver";
+import type { Modules } from "../modules.js";
 
 // What a bundle is written as, and the one place its conventions live: how a
 // name is written, how a literal escapes, and how an element is written as JSX
@@ -89,7 +90,8 @@ export function imported(
   // Where a script's import is written: a plugin's own (a framework's compile
   // step) are the plugin's, trusted as it is. Typed against one version, it
   // works with a later one of the same major.
-  if (!supports(names.modules, from, `^${version}`)) {
+  const provided = names.modules[from];
+  if (provided === undefined || !semver.satisfies(provided, `^${version}`)) {
     throw new ClientVersionMismatch(from, name, version, names.modules);
   }
   const key = `${from}\0${name}`;

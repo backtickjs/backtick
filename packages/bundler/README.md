@@ -53,7 +53,7 @@ const { code } = build.generate({ format: "es", sourcemap: "inline" });
 
 The modules the client provides, by specifier, each at the exact version of the package it comes from: `"react-dom/client": "19.2.3"`. The server decides which to bundle for: one app version, or the ones each build sends, as [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core#every-build-in-users-hands) puts them together. Those modules are left out of the bundle, which imports (`es`) or requires (`cjs`) them. `build` rejects a script that imports from any other module, or whose import is typed against a version the one given isn't compatible with: an earlier one, or another major. `19.2.3` for `react` takes any later 19.x.
 
-`supports(modules, specifier, range)` makes the same check, for a server choosing what to draw for a client: `supports(modules, "expo-haptics", "^15")`.
+`supports(specifier, range)` makes the same check, for a server component choosing what to draw for the client the bundler is drawing for: `supports("expo-haptics", "^15")`. It asks about the modules of the build in progress, so it's called in a server component, while `build` runs it; outside one, it throws.
 
 A refused import throws `ClientVersionMismatch`, carrying the module (`from`), the export (`imported`), the version it's typed against (`version`) and the one the client provides (`provided`, or `undefined` for none). The client can't change, so a server catches it to answer that client differently, such as with a 426 its app answers with a screen asking to update:
 
@@ -83,7 +83,7 @@ Spliced values are written into the bundle as data, never as code. What can't cr
 
 - `bundler.build({ input, modules })`: runs the server components in `input` and returns a `Build`. Async.
 - `Build.generate({ format, sourcemap })`: writes the bundle; returns `{ code, map }`, where `code` is a `Bundle<T>` (from `@backtickjs/core`), typed by what `input` is on the client, and `map` is `null` without a source map.
-- `supports(modules, specifier, range)`: whether a client with `modules` provides `specifier` at a version in `range`.
+- `supports(specifier, range)`: in a server component, whether the client being drawn for provides `specifier` at a version in `range`.
 - `BundlerError`: what `build` throws when it refuses its input, such as a value it can't splice. An error a server component throws passes through as it is.
 - `ClientVersionMismatch`, a `BundlerError`: what `build` throws for a script's import the client can't run.
 - Types: `BuildOptions`, `OutputOptions`, `OutputChunk`, `Build`, `Modules`.

@@ -58,15 +58,17 @@ import { greet } from "my-native-module" with { backtick: "client" };
 
 The package must be installed where the server's file finds it, for its types and its version. The client must provide it, and the server must list it in the bundler's `modules` at that version or a later one of the same major. The compiler writes each name as what `createImport({ name, from, version })` makes, which a hand-written import can call too.
 
-To draw for clients on two majors of a package, install both, one under an alias: `"acme-ui-2": "npm:acme-ui@2"`. An import from either is of `acme-ui`, the module clients provide, typed against its own version; `supports` picks the one a client can run:
+To draw for clients on two majors of a package, install both, one under an alias: `"acme-ui-2": "npm:acme-ui@2"`. An import from either is of `acme-ui`, the module clients provide, typed against its own version; `supports`, in a server component, picks the one the client can run:
 
 ```ts
 import { Button } from "acme-ui" with { backtick: "client" };
 import { Button as Button2 } from "acme-ui-2" with { backtick: "client" };
 
-const save = supports(modules, "acme-ui", "^2.0.0")
-  ? cs`<$Button2 tone="primary">Save</$Button2>`
-  : cs`<$Button variant="primary">Save</$Button>`;
+function Save() {
+  return supports("acme-ui", "^2.0.0")
+    ? cs`<$Button2 tone="primary">Save</$Button2>`
+    : cs`<$Button variant="primary">Save</$Button>`;
+}
 ```
 
 ## Every build in users' hands
@@ -100,7 +102,7 @@ A store build carries the modules it was built with, at their versions, for as l
    const bundle = await bundler.build({ input, modules });
    ```
 
-   The bundler refuses modules that aren't `{ "specifier": "version" }`, and a screen that imports a module the build doesn't carry, or at a version it can't run. To draw differently for builds that lack a module, or to ask old ones to update, check with `supports` from [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): `supports(modules, "react-native", ">=0.86")`.
+   The bundler refuses modules that aren't `{ "specifier": "version" }`, and a screen that imports a module the build doesn't carry, or at a version it can't run. To draw differently for builds that lack a module, or to ask old ones to update, check with `supports` from [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler), in a server component: `supports("react-native", ">=0.86")`.
 
 In development, a reload keeps the app config the app was opened with, and its versions with it: after upgrading a package, close the app and open it again.
 

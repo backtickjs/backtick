@@ -9,6 +9,6 @@ export function SignIn({ request }: { request: ScreenRequest }) {
     action: "Sign in",
     other: { question: "No account?", link: "Create one", path: "/signup" },
   };
-  const AuthForm = authForm(request.modules);
+  const AuthForm = authForm();
   return <Screen request={request}>{cs`<$AuthForm {...$form} />`}</Screen>;
 }
