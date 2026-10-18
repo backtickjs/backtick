@@ -53,52 +53,63 @@ after(() => written.forEach((file) => rmSync(file)));
 ).IS_REACT_ACT_ENVIRONMENT = true;
 
 // A list of server components, each keyed on the host: React takes each key
-// from what the component draws, so a list asks for none.
-const listSource = `
+// from what the component draws, so a list asks for none. A key after a spread
+// is passed in the props, to the package's `createElement`.
+const listSource = (row: string) => `
 import { cs } from "@backtickjs/core";
 
 function Row({ name }: { name: string }) {
   return cs\`<li>{$name}</li>\`;
 }
 
-export const list = cs\`<ul>{\${["a", "b"].map((name) => <Row key={name} name={name} />)}}</ul>\`;
+export const list = cs\`<ul>{\${["a", "b"].map((name) => ${row})}}</ul>\`;
 `;
 
-it("keys what a keyed server component draws", async () => {
-  const host = transpile(
-    ts,
-    "list.tsx",
-    listSource,
-    "@backtickjs/jsx-react",
-    undefined,
-    { plugins: [react()] },
-  );
-  const { list } = await import(write("list.host.tmp.mjs", host));
-  const built = await bundler.build({
-    input: list,
-    modules: {
-      react: "19.2.3",
-      "react/jsx-runtime": "19.2.3",
-      "react-dom/client": "19.2.3",
-    },
-  });
-  const { code } = built.generate({ format: "es" });
-  const { default: drawn } = await import(write("list.client.tmp.mjs", code));
+for (const [what, row] of [
+  ["a keyed server component", "<Row key={name} name={name} />"],
+  [
+    "a server component keyed after a spread",
+    "<Row {...{ name }} key={name} />",
+  ],
+]) {
+  it(`keys what ${what} draws`, async () => {
+    const host = transpile(
+      ts,
+      "list.tsx",
+      listSource(row!),
+      "@backtickjs/jsx-react",
+      undefined,
+      { plugins: [react()] },
+    );
+    const { list } = await import(write(`${what}.host.tmp.mjs`, host));
+    const built = await bundler.build({
+      input: list,
+      modules: {
+        react: "19.2.3",
+        "react/jsx-runtime": "19.2.3",
+        "react-dom/client": "19.2.3",
+      },
+    });
+    const { code } = built.generate({ format: "es" });
+    const { default: drawn } = await import(
+      write(`${what}.client.tmp.mjs`, code)
+    );
 
-  const errors: unknown[] = [];
-  const error = console.error;
-  console.error = (...args: unknown[]) => errors.push(String(args[0]));
-  try {
-    const container = document.createElement("div");
-    const root = createRoot(container);
-    await act(() => root.render(drawn));
-    assert.equal(container.innerHTML, "<ul><li>a</li><li>b</li></ul>");
-    await act(() => root.unmount());
-  } finally {
-    console.error = error;
-  }
-  assert.deepEqual(errors, []);
-});
+    const errors: unknown[] = [];
+    const error = console.error;
+    console.error = (...args: unknown[]) => errors.push(String(args[0]));
+    try {
+      const container = document.createElement("div");
+      const root = createRoot(container);
+      await act(() => root.render(drawn));
+      assert.equal(container.innerHTML, "<ul><li>a</li><li>b</li></ul>");
+      await act(() => root.unmount());
+    } finally {
+      console.error = error;
+    }
+    assert.deepEqual(errors, []);
+  });
+}
 
 it("draws a page with React, its state React's", async () => {
   const host = transpile(

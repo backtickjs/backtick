@@ -23,6 +23,10 @@
   "author": "Jean-François Bisson <jf@backtickjs.com>",
   "type": "module",
   "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
     "./jsx-runtime": {
       "types": "./dist/jsx-runtime.d.ts",
       "default": "./dist/jsx-runtime.js"
