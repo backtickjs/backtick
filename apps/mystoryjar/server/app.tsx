@@ -1,15 +1,12 @@
 import { readFile } from "node:fs/promises";
-import { bundler } from "@backtickjs/bundler";
-import type { JSX } from "@backtickjs/jsx-react/jsx-runtime";
+import { bundler, ClientVersionMismatch } from "@backtickjs/bundler";
 import { type Context, Hono } from "hono";
 import { cors } from "hono/cors";
 import { api } from "./api.js";
 import { readBackupToken } from "./auth/session.js";
-import { updateRequired } from "./builds.js";
 import { backupPdf } from "./backup.js";
 import { screenRequest } from "./request.js";
 import { draw, type Route, routes } from "./routes.js";
-import { AppUpdateRequired } from "./screens/AppUpdateRequired.js";
 import { fontFiles } from "./ui/fonts.js";
 
 // Development is only what `npm start` runs, which sets NODE_ENV: any other
@@ -81,18 +78,24 @@ for (const [path, route] of Object.entries(routes)) {
   app.get(path, (context) => screen(context, route));
 }
 
-// A route's screen, bundled for the modules the requesting build carries: a
-// build too old for its screens gets one asking to update, on every path.
+// A route's screen, bundled for the modules the app that asked carries. An app
+// that can't run it, lacking a module or carrying a version its imports aren't
+// typed for, is answered 426: it draws its own screen asking to update.
 async function screen(context: Context, route: Route) {
   const started = performance.now();
   const request = await screenRequest(context);
   const { modules } = request;
-  const input: JSX.Element = updateRequired(modules) ? (
-    <AppUpdateRequired />
-  ) : (
-    draw(route, request)
-  );
-  const bundle = await bundler.build({ input, modules });
+  let bundle;
+  try {
+    bundle = await bundler.build({ input: draw(route, request), modules });
+  } catch (error) {
+    if (!(error instanceof ClientVersionMismatch)) throw error;
+    // In development, more likely a module missing from the module map.
+    if (development) {
+      console.warn(`[server] ${context.req.path}:`, error.message);
+    }
+    return context.body(null, 426);
+  }
   const { code } = bundle.generate({ format: "cjs" });
   if (development) {
     const time = (performance.now() - started).toFixed(1);

@@ -3,7 +3,6 @@ import { it } from "node:test";
 import { StackActions } from "@react-navigation/routers";
 import { render, waitFor } from "@testing-library/react";
 import { draw, routes } from "./routes.js";
-import { AppUpdateRequired } from "./screens/AppUpdateRequired.js";
 import { drawScreen, navigated } from "./test/drawScreen.js";
 import { request } from "./test/request.js";
 
@@ -32,9 +31,4 @@ it("sends someone signed in from the landing page to Write", async () => {
 
 it("has no screen at an unknown path", () => {
   assert.equal(routes["/nowhere"], undefined);
-});
-
-it("asks a build too old for its screens to update, drawn with React Native alone", async () => {
-  const { getByText } = render(await drawScreen(<AppUpdateRequired />));
-  assert.ok(getByText("Update MyStoryJar"));
 });

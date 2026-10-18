@@ -1,12 +1,7 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
-import { updateRequired } from "./builds.js";
 import { screenRequestOf } from "./request.js";
 import { webModules } from "./test/drawScreen.js";
-
-it("draws for the build this code makes", () => {
-  assert.equal(updateRequired(webModules), false);
-});
 
 it("draws for the modules the app sent, however it sent them", async () => {
   // as a GraphQL resolver would, from its operation's variables

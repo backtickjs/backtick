@@ -66,11 +66,5 @@ describe("the modules a build sends", () => {
       () => modulesOf(moduleMap, { react: "19.2.3" }),
       /offers "@facebook\/sdk\/login", but @facebook\/sdk isn't in package\.json's dependencies/,
     );
-    for (const packages of [undefined, null]) {
-      assert.throws(
-        () => modulesOf(moduleMap, packages),
-        /No installed packages: the app's build records them/,
-      );
-    }
   });
 });

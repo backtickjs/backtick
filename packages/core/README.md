@@ -71,7 +71,7 @@ A store build carries the modules it was built with, at their versions, for as l
    { "expo": { "plugins": ["@backtickjs/expo"] } }
    ```
 
-3. **The app sends its modules** however it reaches its server: a header, a GraphQL variable. `modulesOf` gives each module in the map its package's version, and throws as the app starts without them, or for a module from a package that isn't a dependency:
+3. **The app sends its modules** however it reaches its server: a header, a GraphQL variable. `modulesOf` gives each module in the map its package's version, and throws as the app starts for a module from a package that isn't a dependency:
 
    ```ts
    import { modulesOf } from "@backtickjs/core";

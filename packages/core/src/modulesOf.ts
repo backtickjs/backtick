@@ -26,20 +26,15 @@ function packageOf(specifier: string): string {
  * of the package it comes from: what the app sends however it reaches its
  * server, a header, a GraphQL variable, for the server to bundle screens it
  * can run. The app's build records them, with `installedPackages` from
- * `@backtickjs/core/node`. Throws as the app starts without them, or for a
- * module from a package that isn't a dependency.
+ * `@backtickjs/core/node`. Throws as the app starts for a module from a
+ * package that isn't a dependency.
  *
  *     const modules = modulesOf(moduleMap, installedPackages);
  */
 export function modulesOf(
   moduleMap: ModuleMap,
-  installedPackages: Readonly<Record<string, string>> | null | undefined,
+  installedPackages: Readonly<Record<string, string>>,
 ): Record<string, string> {
-  if (installedPackages == null) {
-    throw new Error(
-      "No installed packages: the app's build records them with installedPackages(projectRoot).",
-    );
-  }
   return Object.fromEntries(
     Object.keys(moduleMap).map((specifier) => {
       const version = installedPackages[packageOf(specifier)];

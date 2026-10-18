@@ -1,5 +1,5 @@
 import type { ClientImport } from "@backtickjs/core";
-import { type Modules, supports } from "../modules.js";
+import { ClientVersionMismatch, type Modules, supports } from "../modules.js";
 
 // What a bundle is written as, and the one place its conventions live: how a
 // name is written, how a literal escapes, and how an element is written as JSX
@@ -86,23 +86,10 @@ export function imported(
   { from, name, version }: ClientImport<unknown>,
 ): string {
   // Where a script's import is written: a plugin's own (a framework's compile
-  // step) are the plugin's, trusted as it is.
-  const provided = names.modules[from];
-  if (provided === undefined) {
-    const listed = Object.entries(names.modules).map(
-      ([specifier, at]) => `${specifier}@${at}`,
-    );
-    throw new Error(
-      `Can't import \`${name}\` from "${from}": the client provides ` +
-        `${listed.join(", ") || "no modules"}.`,
-    );
-  }
-  // Typed against one version, it works with a later one of the same major.
+  // step) are the plugin's, trusted as it is. Typed against one version, it
+  // works with a later one of the same major.
   if (!supports(names.modules, from, `^${version}`)) {
-    throw new Error(
-      `Can't import \`${name}\` from "${from}": it's typed against ` +
-        `${version}, and the client provides ${from}@${provided}.`,
-    );
+    throw new ClientVersionMismatch(from, name, version, names.modules);
   }
   const key = `${from}\0${name}`;
   let entry = names.imports.get(key);

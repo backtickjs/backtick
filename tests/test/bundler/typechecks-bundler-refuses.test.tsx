@@ -96,6 +96,6 @@ it("an import from a package the app doesn't provide", async () => {
   });
   await assert.rejects(bundle(cs`$missing()`), {
     message:
-      'Can\'t import `track` from "analytics": the client provides solid-js@1.9.14, solid-js/store@1.9.14, solid-js/web@1.9.14, app@1.0.0, acme-ui@1.0.0.',
+      'Can\'t import `track` from "analytics": the client provides solid-js@1.9.14, solid-js/store@1.9.14, solid-js/web@1.9.14, app@1.0.0, acme-ui@1.0.0. Check `supports(modules, "analytics", "^1.0.0")` first.',
   });
 });

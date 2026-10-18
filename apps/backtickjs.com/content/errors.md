@@ -89,9 +89,12 @@ script, so it can't. Make it outside the script, and splice it in. See
 
 ### Can't import `…` from "…": the client provides …
 
-A script uses a module the requesting build doesn't carry. Add it to the
-app's module map, and install it in the app. A build made before then doesn't
-carry it: draw that screen differently for it, with `supports`. See
+A script uses a module the app that asked doesn't provide. Add it to the
+app's module map, and install it in the app. An app built before then doesn't
+have it: draw it that screen differently, with `supports`, as the message
+says, or catch the error, a `ClientVersionMismatch`, and answer it as
+[`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler#modules)
+shows. See
 [where a package goes](/docs/react-native-and-packages/#any-package-your-app-ships).
 
 "No modules" means the request didn't say what the app carries: check it sends
@@ -103,7 +106,8 @@ with `curl` say, send them there:
 
 The app was built with a version of the package the server's code isn't typed
 against: an earlier one, or another major. Install the app's version on the
-server, or serve that app a screen that doesn't use it.
+server, or serve that app a screen that doesn't use it: branch with
+`supports`, as the message says, or catch the `ClientVersionMismatch`.
 
 ### The modules aren't { specifier: version }
 

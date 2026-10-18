@@ -55,6 +55,17 @@ The modules the client provides, by specifier, each at the exact version of the 
 
 `supports(modules, specifier, range)` makes the same check, for a server choosing what to draw for a client: `supports(modules, "expo-haptics", "^15")`.
 
+A refused import throws `ClientVersionMismatch`, carrying the module (`from`), the export (`imported`), the version it's typed against (`version`) and the one the client provides (`provided`, or `undefined` for none). The client can't change, so a server catches it to answer that client differently, such as with a 426 its app answers with a screen asking to update:
+
+```ts
+try {
+  bundle = await bundler.build({ input, modules });
+} catch (error) {
+  if (!(error instanceof ClientVersionMismatch)) throw error;
+  return context.body(null, 426);
+}
+```
+
 ### What crosses into a script
 
 Spliced values are written into the bundle as data, never as code. What can't cross, `build` rejects before anything reaches the client; [Errors](https://backtickjs.com/docs/errors/#from-the-bundler) has each message and its fix.
@@ -72,7 +83,9 @@ Spliced values are written into the bundle as data, never as code. What can't cr
 
 - `bundler.build({ input, modules })`: runs the server components in `input` and returns a `Build`. Async.
 - `Build.generate({ format, sourcemap })`: writes the bundle; returns `{ code, map }`, where `code` is a `Bundle<T>` (from `@backtickjs/core`), typed by what `input` is on the client, and `map` is `null` without a source map.
-- Types: `BuildOptions`, `OutputOptions`, `OutputChunk`, `Build`.
+- `supports(modules, specifier, range)`: whether a client with `modules` provides `specifier` at a version in `range`.
+- `ClientVersionMismatch`: what `build` throws for a script's import the client can't run.
+- Types: `BuildOptions`, `OutputOptions`, `OutputChunk`, `Build`, `Modules`.
 
 ## Related
 

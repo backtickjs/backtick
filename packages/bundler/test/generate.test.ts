@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createImport } from "@backtickjs/core";
-import { bundler } from "../dist/index.js";
+import { bundler, ClientVersionMismatch } from "../dist/index.js";
 
 test("the output is a module whose default export is the value", async () => {
   const bundle = await bundler.build({ input: 42, modules: {} });
@@ -49,7 +49,16 @@ test("a script's import from a module the client doesn't provide is refused", as
         input: greet,
         modules: { "solid-js": "1.9.14" },
       }),
-    /Can't import `greet` from "app": the client provides solid-js@1\.9\.14\./,
+    (error) =>
+      error instanceof ClientVersionMismatch &&
+      error.name === "ClientVersionMismatch" &&
+      error.from === "app" &&
+      error.imported === "greet" &&
+      error.version === "1.0.0" &&
+      error.provided === undefined &&
+      /Can't import `greet` from "app": the client provides solid-js@1\.9\.14\./.test(
+        error.message,
+      ),
   );
 });
 
@@ -65,7 +74,14 @@ test("a script's import needing a version the client doesn't have is refused", a
         input: Portal,
         modules: { "solid-js/web": "1.9.14" },
       }),
-    /Can't import `Portal` from "solid-js\/web": it's typed against 2\.0\.0, and the client provides solid-js\/web@1\.9\.14\./,
+    (error) =>
+      error instanceof ClientVersionMismatch &&
+      error.imported === "Portal" &&
+      error.version === "2.0.0" &&
+      error.provided === "1.9.14" &&
+      /Can't import `Portal` from "solid-js\/web": it's typed against 2\.0\.0, and the client provides solid-js\/web@1\.9\.14\. Check `supports\(modules, "solid-js\/web", "\^2\.0\.0"\)` first\.$/.test(
+        error.message,
+      ),
   );
 });
 

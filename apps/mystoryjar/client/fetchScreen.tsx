@@ -1,6 +1,7 @@
 import type { Bundle } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 import type { ReactNode } from "react";
+import { AppUpdateRequired } from "./AppUpdateRequired";
 import { moduleMap } from "./moduleMap";
 import { request } from "./request";
 
@@ -24,6 +25,10 @@ export function fetchScreen(path: string): Promise<ReactNode> {
 
 async function load(path: string): Promise<ReactNode> {
   const response = await request(path);
+  // The server can't draw for this app's modules: it needs updating.
+  if (response.status === 426) {
+    return <AppUpdateRequired />;
+  }
   if (!response.ok) {
     throw new Error(`${path} answered ${response.status}.`);
   }
