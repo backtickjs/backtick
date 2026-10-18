@@ -22,30 +22,27 @@ function packageOf(specifier: string): string {
 }
 
 /**
- * The modules `moduleMap` offers, each at the version in `packages` of the
- * package it comes from: what the app sends however it reaches its server, a
- * header, a GraphQL variable, for the server to bundle screens it can run.
- * An Expo app passes them from its config, where `app.config.ts` puts
- * `installedPackages(projectRoot)`. Throws as the app starts without them, or
- * for a module from a package that isn't a dependency.
+ * The modules `moduleMap` offers, each at the version in `installedPackages`
+ * of the package it comes from: what the app sends however it reaches its
+ * server, a header, a GraphQL variable, for the server to bundle screens it
+ * can run. The app's build records them, with `installedPackages` from
+ * `@backtickjs/core/node`. Throws as the app starts without them, or for a
+ * module from a package that isn't a dependency.
  *
- *     const modules = modulesOf(
- *       moduleMap,
- *       Constants.expoConfig?.extra?.backtick?.installedPackages,
- *     );
+ *     const modules = modulesOf(moduleMap, installedPackages);
  */
 export function modulesOf(
   moduleMap: ModuleMap,
-  packages: Readonly<Record<string, string>> | null | undefined,
+  installedPackages: Readonly<Record<string, string>> | null | undefined,
 ): Record<string, string> {
-  if (packages == null) {
+  if (installedPackages == null) {
     throw new Error(
-      "No packages: does app.config.ts put installedPackages(projectRoot) in the config's extra?",
+      "No installed packages: the app's build records them with installedPackages(projectRoot).",
     );
   }
   return Object.fromEntries(
     Object.keys(moduleMap).map((specifier) => {
-      const version = packages[packageOf(specifier)];
+      const version = installedPackages[packageOf(specifier)];
       if (version === undefined) {
         throw new Error(
           `The module map offers ${JSON.stringify(specifier)}, but ${packageOf(specifier)} isn't in package.json's dependencies.`,

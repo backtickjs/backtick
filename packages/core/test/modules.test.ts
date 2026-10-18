@@ -69,7 +69,7 @@ describe("the modules a build sends", () => {
     for (const packages of [undefined, null]) {
       assert.throws(
         () => modulesOf(moduleMap, packages),
-        /No packages: does app.config.ts put installedPackages\(projectRoot\)/,
+        /No installed packages: the app's build records them/,
       );
     }
   });

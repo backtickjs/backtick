@@ -52,14 +52,14 @@ Every template has:
 
 An Expo app (SDK 57) with the Backtick server beside it in `server/`. `client/App.tsx` fetches the screen at `/` and runs it with `execRoot` from [`@backtickjs/core/cjs`](https://github.com/backtickjs/backtick/tree/main/packages/core), offering screens what `client/moduleMap.ts` lists.
 
-Each build of the app sends the modules it carries: those `client/moduleMap.ts` offers, at the versions `app.config.ts` records. The server bundles each screen for those modules ([more](https://github.com/backtickjs/backtick/tree/main/packages/core#every-build-in-users-hands)), so a build in users' hands keeps working as the app moves on, with nothing to record before it ships.
+Each build of the app sends the modules it carries: those `client/moduleMap.ts` offers, at the versions the `@backtickjs/expo` plugin in `app.json` records. The server bundles each screen for those modules ([more](https://github.com/backtickjs/backtick/tree/main/packages/core#every-build-in-users-hands)), so a build in users' hands keeps working as the app moves on, with nothing to record before it ships.
 
 ```sh
 npm start        # then scan the QR code with your phone, in Expo Go
 npm run ios      # or android, or web: a simulator, an emulator or a browser
 ```
 
-Each starts your Backtick server alongside Expo, in one terminal. Edit `server/Home.tsx` and save: the server restarts, and `scripts/reload-expo.mjs`, which nodemon runs each time it starts the server, reloads the app once the server listens. The app fetches the new screen without rebuilding.
+Each starts your Backtick server alongside Expo, in one terminal. Edit `server/Home.tsx` and save: the server restarts, and once it listens, `reloadExpo()` in `server/index.tsx` reloads the app. The app fetches the new screen without rebuilding.
 
 `npm test` draws `server/Home.tsx` as the app would, in `server/Home.test.tsx`; [Testing screens](https://backtickjs.com/docs/testing/) explains the test.
 

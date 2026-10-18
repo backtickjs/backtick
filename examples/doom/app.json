@@ -4,6 +4,7 @@
     "slug": "backtick-doom",
     "version": "1.0.0",
     "orientation": "landscape",
-    "userInterfaceStyle": "dark"
+    "userInterfaceStyle": "dark",
+    "plugins": ["@backtickjs/expo"]
   }
 }

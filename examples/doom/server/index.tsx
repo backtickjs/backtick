@@ -1,3 +1,4 @@
+import { reloadExpo } from "@backtickjs/expo/server";
 import { performance } from "node:perf_hooks";
 import { serve } from "@hono/node-server";
 import { bundler } from "@backtickjs/bundler";
@@ -53,6 +54,8 @@ const ms = (value: number) => `${value.toFixed(1)} ms`;
 const kb = (bytes: number) => `${(bytes / 1024).toFixed(1)} KB`;
 const mb = (bytes: number) => `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 
+// Once it listens, the app Expo serves reloads to show this server's screens.
 serve({ fetch: app.fetch, port: 3000 }, () => {
   console.log("Backtick server on http://localhost:3000");
+  reloadExpo();
 });

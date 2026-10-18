@@ -211,10 +211,6 @@ rewriteJson(path.join(target, "package.json"), (json) => {
     for (const [name, command] of Object.entries<string>(json.scripts)) {
       json.scripts[name] = bun(command);
     }
-    const events: Record<string, string> = json.nodemonConfig.events ?? {};
-    for (const [name, command] of Object.entries(events)) {
-      events[name] = bun(command);
-    }
     // What still runs on Node, as the tests do, keeps Node's loader.
     if (
       Object.values<string>(json.scripts).some((command) =>

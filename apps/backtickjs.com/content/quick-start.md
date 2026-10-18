@@ -38,9 +38,9 @@ The screen is `server/Home.tsx`. Replace it with this, and save:
 
 ```
 
-Reload the app, by pressing `r` in the terminal running it: it shows the new
-screen, without rebuilding. Tap the counter, then reload again: the time
-changes, because the server ran `Home` again.
+Your server restarts, and the app reloads: it shows the new screen, without
+rebuilding. Tap the counter, then reload the app, by pressing `r` in the
+terminal running it: the time changes, because the server ran `Home` again.
 
 What you just wrote:
 
@@ -61,8 +61,7 @@ What you just wrote:
 
 ```text
 my-app/
-├── app.json           Expo's config
-├── app.config.ts      Adds your installed packages to it, for the app to send
+├── app.json           Expo's config, with Backtick's plugin
 ├── client/
 │   ├── App.tsx        The app: fetches each screen from your server and draws it
 │   └── moduleMap.ts   What screens may import from the app

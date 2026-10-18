@@ -64,33 +64,21 @@ A store build carries the modules it was built with, at their versions, for as l
 
 1. **The app's module map** offers what screens may require, each from a package in `package.json`'s dependencies. A platform that differs gets its own file, as Metro picks files: `client/moduleMap.web.ts` for the web.
 
-2. **The app's config carries its installed packages.** `installedPackages`, from `@backtickjs/core/node`, reads the installed version of each of the app's dependencies from `node_modules`. In an Expo app, `app.config.ts` puts them in the config, which Expo embeds in the app:
+2. **The app's build records its installed packages.** `installedPackages`, from `@backtickjs/core/node`, reads the installed version of each of the app's dependencies from `node_modules`, and the build embeds them in the app. In an Expo app, the config plugin from [`@backtickjs/expo`](https://github.com/backtickjs/backtick/tree/main/packages/expo) does it:
 
-   ```ts
-   // app.config.ts
-   import { installedPackages } from "@backtickjs/core/node";
-   import type { ConfigContext, ExpoConfig } from "expo/config";
-
-   export default ({ config, projectRoot }: ConfigContext): ExpoConfig => ({
-     ...(config as ExpoConfig),
-     extra: {
-       ...config.extra,
-       backtick: { installedPackages: installedPackages(projectRoot) },
-     },
-   });
+   ```json
+   // app.json
+   { "expo": { "plugins": ["@backtickjs/expo"] } }
    ```
 
 3. **The app sends its modules** however it reaches its server: a header, a GraphQL variable. `modulesOf` gives each module in the map its package's version, and throws as the app starts without them, or for a module from a package that isn't a dependency:
 
    ```ts
    import { modulesOf } from "@backtickjs/core";
+   import { getBacktickExtra } from "@backtickjs/expo";
 
-   const modules = JSON.stringify(
-     modulesOf(
-       moduleMap,
-       Constants.expoConfig?.extra?.backtick?.installedPackages,
-     ),
-   );
+   const { installedPackages } = getBacktickExtra(Constants.expoConfig);
+   const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
    fetch(url, { headers: { "x-backtick-modules": modules } });
    ```
 
@@ -119,7 +107,7 @@ A test draws a screen with a module map of its own, stand-ins included; its modu
 - `Bundle<T>`: a bundle's code, branded with what it runs to. `bundler.build(…).generate(…)` writes one.
 - `execRoot(bundle, moduleMap)`, from `@backtickjs/core/cjs`: in a React Native app, runs the CommonJS bundle it starts from to its value, as a promise, with `require` answered from `moduleMap`, a `ModuleMap`: the modules the app provides, by specifier.
 - `execRoot(bundle)`, from `@backtickjs/core/es`: in a web page, imports the ES bundle it starts from and resolves to its value, the page's import map answering its imports. Each format has its own entry, so a React Native app's bundler never reads the ES one's `import()`.
-- `modulesOf(moduleMap, packages)`: the modules `moduleMap`, a `ModuleMap`, offers, each at its package's version in `packages`, for the app to send its server.
+- `modulesOf(moduleMap, installedPackages)`: the modules `moduleMap`, a `ModuleMap`, offers, each at its package's version in `installedPackages`, for the app to send its server.
 - `installedPackages(projectRoot)`, from `@backtickjs/core/node`: the installed version of each of the app's dependencies, read from `node_modules` as Metro finds packages by default. A `metro.config.js` that aliases or redirects packages needs its own versions. Node only.
 - `exec`: in a script, `$exec(bundle)` runs another bundle as the script's own was run, with the same modules, to a promise of its value.
 - `isClientExec`, `ClientExec`: its check and type.

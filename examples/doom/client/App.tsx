@@ -1,5 +1,6 @@
 import { type Bundle, modulesOf } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
+import { getBacktickExtra } from "@backtickjs/expo";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
 import {
@@ -22,13 +23,9 @@ import { moduleMap } from "./moduleMap";
 const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
 
-// The modules this build carries, at the versions app.config.ts records.
-const modules = JSON.stringify(
-  modulesOf(
-    moduleMap,
-    Constants.expoConfig?.extra?.backtick?.installedPackages,
-  ),
-);
+// The modules this build carries, at the versions app.json's plugin records.
+const { installedPackages } = getBacktickExtra(Constants.expoConfig);
+const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
 
 // A screen as fetched, with what each stage of getting it cost so far:
 // `Screen` adds the render and logs the whole pipeline.

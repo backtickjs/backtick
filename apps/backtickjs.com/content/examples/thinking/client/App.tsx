@@ -1,18 +1,15 @@
 import { type Bundle, modulesOf } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
+import { getBacktickExtra } from "@backtickjs/expo";
 import Constants from "expo-constants";
 import * as React from "react";
 import { Suspense, use, useState } from "react";
 import { ActivityIndicator } from "react-native";
 import { moduleMap } from "./moduleMap";
 
-// The modules this build carries, at the versions app.config.ts records.
-const modules = JSON.stringify(
-  modulesOf(
-    moduleMap,
-    Constants.expoConfig?.extra?.backtick?.installedPackages,
-  ),
-);
+// The modules this build carries, at the versions app.json's plugin records.
+const { installedPackages } = getBacktickExtra(Constants.expoConfig);
+const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
 
 async function fetchScreen(url: string): Promise<React.ReactNode> {
   const response = await fetch(url, {

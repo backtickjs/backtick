@@ -101,6 +101,7 @@ const ReorderButton = cs`(props: { order: Order }) => {
 | [`create-backtick-app`](packages/create-backtick-app)     | Creates a project: React Native, React or Solid, on Node or Bun    |
 | [`@backtickjs/core`](packages/core)                       | The `cs` tag, and the types for what crosses to the client         |
 | [`@backtickjs/bundler`](packages/bundler)                 | Runs server components and bundles a screen per request            |
+| [`@backtickjs/expo`](packages/expo)                       | Expo's config plugin, and reloading the app when the server does   |
 | [`@backtickjs/jsx-react`](packages/jsx-react)             | React's JSX for server components, and its compile step            |
 | [`@backtickjs/jsx-solid`](packages/jsx-solid)             | Solid's JSX for server components, and its compile step            |
 | [`@backtickjs/node-plugin`](packages/node-plugin)         | Compiles scripts as a Node server loads them                       |

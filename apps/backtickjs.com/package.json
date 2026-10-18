@@ -17,6 +17,7 @@
     "@backtickjs/bun-plugin": "^0.2.1",
     "@backtickjs/bundler": "^0.2.1",
     "@backtickjs/core": "^0.2.1",
+    "@backtickjs/expo": "^0.2.1",
     "@backtickjs/jsx-solid": "^0.2.1",
     "@backtickjs/vscode-extension": "^0.2.1",
     "@shikijs/colorized-brackets": "^4.5.0",

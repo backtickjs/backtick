@@ -1,5 +1,6 @@
 import { type Bundle, modulesOf } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
+import { getBacktickExtra } from "@backtickjs/expo";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
 import { type ReactNode, Suspense, use, useState } from "react";
@@ -15,13 +16,9 @@ import { moduleMap } from "./moduleMap";
 const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
 
-// The modules this build carries, at the versions app.config.ts records.
-const modules = JSON.stringify(
-  modulesOf(
-    moduleMap,
-    Constants.expoConfig?.extra?.backtick?.installedPackages,
-  ),
-);
+// The modules this build carries, at the versions app.json's plugin records.
+const { installedPackages } = getBacktickExtra(Constants.expoConfig);
+const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
 
 // The screen at `path` on your server: its bundle, fetched and run with the
 // app's modules. Your fetch to shape: headers, auth, caching.

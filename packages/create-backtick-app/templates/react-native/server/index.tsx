@@ -1,3 +1,4 @@
+import { reloadExpo } from "@backtickjs/expo/server";
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
@@ -19,6 +20,8 @@ app.onError((error, context) => {
   return context.text(String(error), 500);
 });
 
+// Once it listens, the app Expo serves reloads to show this server's screens.
 serve({ fetch: app.fetch, port: 3000 }, () => {
   console.log("Backtick server on http://localhost:3000");
+  reloadExpo();
 });

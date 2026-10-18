@@ -110,8 +110,8 @@ if (seeded !== 0) {
 }
 console.log("Firebase emulators on http://localhost:4000");
 
-// Restarted by nodemon, which also reloads the app once it's back: see
-// `nodemonConfig` in package.json.
+// Restarted by nodemon; once it's back, it reloads the app: see
+// server/index.tsx.
 start(
   npx,
   ["nodemon", "--exec", [runtime, ...loader, "server/index.tsx"].join(" ")],
