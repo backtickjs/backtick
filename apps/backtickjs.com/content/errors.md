@@ -77,8 +77,9 @@ one: `` cs`<$View>…</$View>` ``.
 
 ## From the bundler
 
-Thrown by `bundler.build`, for the screen it was building, and by `once`,
-where it's called.
+Thrown by `bundler.build`, for the screen it was building, and by `once` and
+`supports`, where they're called. Each is a `BundlerError`; an error your
+server component throws passes through as it is.
 
 ### Can't make this script `once`: it reads `…` from the script around it
 
@@ -108,6 +109,12 @@ The app was built with a version of the package the server's code isn't typed
 against: an earlier one, or another major. Install the app's version on the
 server, or serve that app a screen that doesn't use it: branch with
 `supports`, as the message says, or catch the `ClientVersionMismatch`.
+
+### supports("…", "…") asks about the client a build is for
+
+`supports` was called outside a build, where there's no client to ask about:
+in a route handler, say, before `bundler.build`. Call it in a server
+component, which the bundler runs for the client it's drawing for.
 
 ### The modules aren't { specifier: version }
 
@@ -144,6 +151,12 @@ A client component, `` cs`(props) => …` ``, was drawn as a tag on your
 server. Draw it in a script: `` cs`<$Card />` ``.
 
 ## From your app
+
+### No extra.backtick in the app config: is @backtickjs/expo in app.json's plugins?
+
+`getBacktickExtra` found nothing the config plugin records. Add
+`"@backtickjs/expo"` to `app.json`'s `plugins`, then close the app and open it
+again: a reload keeps the config it was opened with.
 
 ### The module map offers "…", but … isn't in package.json's dependencies
 

@@ -66,8 +66,18 @@ has the messages.
 A store build keeps the modules it was built with for as long as it's
 installed, while your server moves on. Each build sends the modules it
 carries, at their versions, and the server bundles each screen for them, so an
-old build gets screens it can run, with nothing to record before it ships. To
-stop serving old builds, check what a build sends with `supports` and draw
-it a screen asking its users to update.
+old build gets screens it can run, with nothing to record before it ships.
+
+A server component draws an older build something it can run by asking first:
+`supports("expo-haptics", "^15")` answers for the build being drawn for. To
+draw for two majors of a package, install the second under an alias,
+`"acme-ui-2": "npm:acme-ui@2"`: imports from either are of `acme-ui`, each
+typed against its own version.
+
+A build that can't run a screen at all gets a `ClientVersionMismatch` from
+the bundler, instead of a screen. Catch it, answer `426`, and have the app
+draw its own screen asking its users to update: one the server bundled would
+need the same modules the build lacks.
 [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core#every-build-in-users-hands)
-has the details.
+and [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler#modules)
+have the details.
