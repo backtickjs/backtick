@@ -8,7 +8,7 @@ import { transpile } from "@backtickjs/compiler";
 import { act } from "react";
 import { createRoot } from "react-dom/client";
 import ts from "typescript";
-import { react } from "../dist/plugin.js";
+import react from "../dist/plugin.js";
 
 // A page's own code: a client component, whose state is React's, used as a tag
 // by a server component, twice over in a host fragment.

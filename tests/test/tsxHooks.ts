@@ -3,7 +3,7 @@ import type { LoadHook, ResolveHook } from "node:module";
 import { dirname, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { transpile } from "@backtickjs/compiler";
-import { solid } from "@backtickjs/jsx-solid/plugin";
+import solid from "@backtickjs/jsx-solid/plugin";
 import ts from "typescript";
 
 // A `.tsx` test file, compiled the way a project's own build compiles one: its

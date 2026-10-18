@@ -3,7 +3,7 @@ import { mkdirSync, readdirSync, readFileSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 import { describe, it } from "node:test";
 import { emitScripts, transpile, virtualize } from "@backtickjs/compiler";
-import { solid } from "@backtickjs/jsx-solid/plugin";
+import solid from "@backtickjs/jsx-solid/plugin";
 import prettier from "prettier";
 import ts from "typescript";
 import { renderClientCode, renderClientMappings } from "./renderClient.ts";

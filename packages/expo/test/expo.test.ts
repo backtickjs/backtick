@@ -6,7 +6,7 @@ import { describe, it } from "node:test";
 import { WebSocketServer } from "ws";
 import { getBacktickExtra } from "../dist/index.js";
 import withBacktickExtra from "../dist/app.plugin.js";
-import babel from "../dist/plugin.js";
+import expo from "../dist/plugin.js";
 import { reloadExpo } from "../dist/server.js";
 
 // An app with React installed.
@@ -101,7 +101,7 @@ describe("reloadExpo", () => {
 });
 
 describe("the Babel step", () => {
-  const step = babel();
+  const step = expo();
 
   it("moves an async arrow's default parameter into its body, for Hermes V1", () => {
     const { code } = step(

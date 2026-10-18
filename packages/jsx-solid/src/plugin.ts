@@ -6,8 +6,10 @@ import preset from "babel-preset-solid";
  * Solid's template and DOM code, importing from `solid-js/web`. Typed by its
  * shape, which is the compiler's `Plugin`, so this package needn't depend on the
  * compiler.
+ *
+ * Listed in `package.json`: `"backtick": { "plugins": ["@backtickjs/jsx-solid/plugin"] }`.
  */
-export function solid(): (
+export default function solid(): (
   code: string,
   id: string,
 ) => { code: string; map: string } {
@@ -22,7 +24,3 @@ export function solid(): (
     return { code: result.code!, map: JSON.stringify(result.map) };
   };
 }
-
-// What a project names to compile its scripts for Solid, in its `package.json`:
-// `"backtick": { "plugins": ["@backtickjs/jsx-solid/plugin"] }`.
-export default solid;

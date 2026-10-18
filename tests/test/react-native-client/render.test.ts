@@ -5,7 +5,7 @@ import { after, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { execRoot } from "@backtickjs/core/cjs";
 import { transpile } from "@backtickjs/compiler";
-import { react } from "@backtickjs/jsx-react/plugin";
+import react from "@backtickjs/jsx-react/plugin";
 import * as React from "react";
 import { act } from "react";
 import * as JSXRuntime from "react/jsx-runtime";

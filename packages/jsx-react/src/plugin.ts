@@ -5,8 +5,10 @@ import ts from "typescript";
  * as calls of `react/jsx-runtime`'s `jsx`, written by TypeScript's own
  * `react-jsx` emit. Typed by its shape, which is the compiler's `Plugin`, so
  * this package needn't depend on the compiler.
+ *
+ * Listed in `package.json`: `"backtick": { "plugins": ["@backtickjs/jsx-react/plugin"] }`.
  */
-export function react(): (
+export default function react(): (
   code: string,
   id: string,
 ) => { code: string; map: string } {
@@ -26,7 +28,3 @@ export function react(): (
     };
   };
 }
-
-// What a project names to compile its scripts for React, in its `package.json`:
-// `"backtick": { "plugins": ["@backtickjs/jsx-react/plugin"] }`.
-export default react;

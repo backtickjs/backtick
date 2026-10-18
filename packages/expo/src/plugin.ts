@@ -16,8 +16,10 @@ interface Babel {
  * app's own `expo` brings. A script is compiled once for every client, so no
  * platform is given: `process.env.EXPO_OS` is `null` in one, and
  * `Platform.OS` says the platform.
+ *
+ * Listed in `package.json`: `"backtick": { "plugins": ["@backtickjs/jsx-react/plugin", "@backtickjs/expo/plugin"] }`.
  */
-export default function babel(): (
+export default function expo(): (
   code: string,
   id: string,
 ) => { code: string; map: string } {
