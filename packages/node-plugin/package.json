@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/node-plugin",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Runs a Backtick server on Node without a build step, compiling its files and client scripts as they load",
   "keywords": [
     "backtick",
@@ -48,13 +48,13 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/compiler": "^0.2.0"
+    "@backtickjs/compiler": "^0.2.1"
   },
   "peerDependencies": {
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@backtickjs/core": "^0.2.0",
+    "@backtickjs/core": "^0.2.1",
     "@types/node": "^25.9.1",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
