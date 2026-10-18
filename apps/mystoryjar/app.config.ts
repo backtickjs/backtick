@@ -7,6 +7,6 @@ export default ({ config, projectRoot }: ConfigContext): ExpoConfig => ({
   ...(config as ExpoConfig),
   extra: {
     ...config.extra,
-    backtick: { packages: installedPackages(projectRoot) },
+    backtick: { installedPackages: installedPackages(projectRoot) },
   },
 });

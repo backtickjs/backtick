@@ -6,10 +6,12 @@ import { Suspense, use, useState } from "react";
 import { ActivityIndicator } from "react-native";
 import { moduleMap } from "./moduleMap";
 
-// The modules this build carries, for your server to bundle screens it can
-// run: app.config.ts adds its packages' versions.
+// The modules this build carries, at the versions app.config.ts records.
 const modules = JSON.stringify(
-  modulesOf(moduleMap, Constants.expoConfig?.extra?.backtick?.packages),
+  modulesOf(
+    moduleMap,
+    Constants.expoConfig?.extra?.backtick?.installedPackages,
+  ),
 );
 
 async function fetchScreen(url: string): Promise<React.ReactNode> {

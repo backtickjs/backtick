@@ -62,7 +62,7 @@ What you just wrote:
 ```text
 my-app/
 ├── app.json           Expo's config
-├── app.config.ts      Adds your packages' versions to it, for the app to send
+├── app.config.ts      Adds your installed packages to it, for the app to send
 ├── client/
 │   ├── App.tsx        The app: fetches each screen from your server and draws it
 │   └── moduleMap.ts   What screens may import from the app

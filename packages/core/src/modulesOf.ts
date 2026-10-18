@@ -31,7 +31,7 @@ function packageOf(specifier: string): string {
  *
  *     const modules = modulesOf(
  *       moduleMap,
- *       Constants.expoConfig?.extra?.backtick?.packages,
+ *       Constants.expoConfig?.extra?.backtick?.installedPackages,
  *     );
  */
 export function modulesOf(

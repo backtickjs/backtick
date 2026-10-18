@@ -22,10 +22,12 @@ import { moduleMap } from "./moduleMap";
 const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
 
-// The modules this build carries, for the server to bundle screens it can
-// run: app.config.ts adds its packages' versions.
+// The modules this build carries, at the versions app.config.ts records.
 const modules = JSON.stringify(
-  modulesOf(moduleMap, Constants.expoConfig?.extra?.backtick?.packages),
+  modulesOf(
+    moduleMap,
+    Constants.expoConfig?.extra?.backtick?.installedPackages,
+  ),
 );
 
 // A screen as fetched, with what each stage of getting it cost so far:

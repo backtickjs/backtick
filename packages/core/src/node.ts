@@ -17,12 +17,15 @@ function installed(projectRoot: string, name: string): string {
  * The installed version of each of the app's dependencies, at `projectRoot`:
  * what a build made from it now carries there, for `modulesOf`. Node only: an
  * Expo app calls it from `app.config.ts`, and passes it on in the config.
+ * Packages are found as Metro finds them by default, in `node_modules` here
+ * or above: a `metro.config.js` that aliases or redirects them needs its own
+ * versions.
  *
  *     export default ({ config, projectRoot }: ConfigContext) => ({
  *       ...config,
  *       extra: {
  *         ...config.extra,
- *         backtick: { packages: installedPackages(projectRoot) },
+ *         backtick: { installedPackages: installedPackages(projectRoot) },
  *       },
  *     });
  */
