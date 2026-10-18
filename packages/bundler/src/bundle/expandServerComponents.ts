@@ -4,6 +4,7 @@ import {
   isClientScript,
   isJsxElement,
 } from "@backtickjs/core";
+import { BundlerError } from "../errors.js";
 import { isValue } from "./params.js";
 
 const CYCLE_ERROR =
@@ -48,7 +49,7 @@ export async function expandServerComponents(
     return spliceable;
   }
   if (contains(ancestors, spliceable)) {
-    throw new Error(CYCLE_ERROR);
+    throw new BundlerError(CYCLE_ERROR);
   }
   const inside: Ancestors = { value: spliceable, parent: ancestors };
   const all = (entries: readonly unknown[]) =>

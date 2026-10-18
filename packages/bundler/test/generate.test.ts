@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { createImport } from "@backtickjs/core";
-import { bundler, ClientVersionMismatch } from "../dist/index.js";
+import { createImport, createJsxElement } from "@backtickjs/core";
+import { BundlerError, bundler, ClientVersionMismatch } from "../dist/index.js";
 
 test("the output is a module whose default export is the value", async () => {
   const bundle = await bundler.build({ input: 42, modules: {} });
@@ -51,6 +51,7 @@ test("a script's import from a module the client doesn't provide is refused", as
       }),
     (error) =>
       error instanceof ClientVersionMismatch &&
+      error instanceof BundlerError &&
       error.name === "ClientVersionMismatch" &&
       error.from === "app" &&
       error.imported === "greet" &&
@@ -107,5 +108,26 @@ test("a module is provided by its own specifier, not its package", async () => {
   await assert.rejects(
     () => bundler.build({ input: Portal, modules: { "solid-js": "1.9.14" } }),
     /Can't import `Portal` from "solid-js\/web": the client provides solid-js@1\.9\.14\./,
+  );
+});
+
+test("what the bundler refuses throws a BundlerError", async () => {
+  await assert.rejects(
+    () => bundler.build({ input: Symbol("key") as never, modules: {} }),
+    (error) =>
+      error instanceof BundlerError &&
+      error.name === "BundlerError" &&
+      /^Can't splice a symbol/.test(error.message),
+  );
+});
+
+test("what a server component throws passes through as it is", async () => {
+  const failed = new Error("the database is down");
+  const Failing = () => {
+    throw failed;
+  };
+  await assert.rejects(
+    () => bundler.build({ input: createJsxElement(Failing, {}), modules: {} }),
+    (error) => error === failed,
   );
 });

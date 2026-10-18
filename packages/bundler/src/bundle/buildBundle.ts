@@ -8,6 +8,7 @@ import {
   type JsxElement,
 } from "@backtickjs/core";
 
+import { BundlerError } from "../errors.js";
 import { expandServerComponents } from "./expandServerComponents.js";
 import { bindingsOf, capturesOf, isValue } from "./params.js";
 import { sourceName } from "./bindingKey.js";
@@ -253,7 +254,7 @@ export async function buildBundle(
     // A server component among them, written as a tag: `<$Rule />`.
     if (typeof spliceable === "function") {
       const { name } = spliceable;
-      throw new Error(
+      throw new BundlerError(
         (name === ""
           ? "Can't splice a host function"
           : `Can't splice the host function \`${name}\``) +
@@ -264,7 +265,7 @@ export async function buildBundle(
       );
     }
     if (typeof spliceable !== "object") {
-      throw new Error(
+      throw new BundlerError(
         "Can't splice a symbol: a bundle can't write one that is the same " +
           "symbol on the client. Splice a string, and make the symbol from it " +
           "in a script: cs`Symbol.for($key)`.",
@@ -278,7 +279,7 @@ export async function buildBundle(
     const prototype = Object.getPrototypeOf(spliceable);
     if (prototype !== Object.prototype && prototype !== null) {
       const name = spliceable.constructor?.name ?? "an unknown class";
-      throw new Error(
+      throw new BundlerError(
         `Can't splice this \`${name}\` instance: only plain objects cross into ` +
           "a client script. Build one with a client function instead.",
       );
@@ -298,7 +299,7 @@ export async function buildBundle(
       scope.read.add(key);
       return displayName(key);
     }
-    throw new Error(
+    throw new BundlerError(
       `Can't thread the capture \`${sourceName(key)}\`: nothing encloses ` +
         "this reference to supply it. A fragment carries the bindings it was " +
         "written under, so this is also what happens when one is spliced " +
@@ -344,13 +345,13 @@ export async function buildBundle(
     // one) are client code, so on the host they can't be tags: they are tags
     // in a script.
     if (typeof type === "string") {
-      throw new Error(
+      throw new BundlerError(
         `\`<${type}>\` is drawn by the client, so it belongs in a script: ` +
           `cs\`<${type}>…</${type}>\`.`,
       );
     }
     const tag = isClientImport(type) ? `\`<${type.name}>\`` : "A script";
-    throw new Error(
+    throw new BundlerError(
       `${tag} is a client component, so it can't be a tag on the host. ` +
         "Use it as a tag in a script.",
     );

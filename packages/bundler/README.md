@@ -84,7 +84,8 @@ Spliced values are written into the bundle as data, never as code. What can't cr
 - `bundler.build({ input, modules })`: runs the server components in `input` and returns a `Build`. Async.
 - `Build.generate({ format, sourcemap })`: writes the bundle; returns `{ code, map }`, where `code` is a `Bundle<T>` (from `@backtickjs/core`), typed by what `input` is on the client, and `map` is `null` without a source map.
 - `supports(modules, specifier, range)`: whether a client with `modules` provides `specifier` at a version in `range`.
-- `ClientVersionMismatch`: what `build` throws for a script's import the client can't run.
+- `BundlerError`: what `build` throws when it refuses its input, such as a value it can't splice. An error a server component throws passes through as it is.
+- `ClientVersionMismatch`, a `BundlerError`: what `build` throws for a script's import the client can't run.
 - Types: `BuildOptions`, `OutputOptions`, `OutputChunk`, `Build`, `Modules`.
 
 ## Related

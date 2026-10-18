@@ -1,5 +1,6 @@
 import type { Bundle, Spliceable, Spliced, SplicesAs } from "@backtickjs/core";
 import { buildBundle } from "./bundle/buildBundle.js";
+import { BundlerError } from "./errors.js";
 import { isModules, type Modules } from "./modules.js";
 import { printBundle } from "./print/printBundle.js";
 
@@ -55,7 +56,7 @@ export const bundler = {
     modules,
   }: BuildOptions<T>): Promise<Build<Spliced<T>>> {
     if (!isModules(modules)) {
-      throw new Error(
+      throw new BundlerError(
         `The modules aren't { specifier: version }: ${JSON.stringify(modules)?.slice(0, 80)}`,
       );
     }

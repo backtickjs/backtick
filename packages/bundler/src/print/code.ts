@@ -1,5 +1,6 @@
 import type { ClientImport } from "@backtickjs/core";
-import { ClientVersionMismatch, type Modules, supports } from "../modules.js";
+import { ClientVersionMismatch } from "../errors.js";
+import { type Modules, supports } from "../modules.js";
 
 // What a bundle is written as, and the one place its conventions live: how a
 // name is written, how a literal escapes, and how an element is written as JSX
