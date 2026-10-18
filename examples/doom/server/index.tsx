@@ -1,6 +1,5 @@
 import { performance } from "node:perf_hooks";
 import { serve } from "@hono/node-server";
-import { parseModules } from "@backtickjs/builds";
 import { bundler } from "@backtickjs/bundler";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
@@ -22,7 +21,7 @@ app.use(
 // client/moduleMap.ts offers them at its packages' versions.
 app.get("/game", async (context) => {
   const start = performance.now();
-  const modules = parseModules(context.req.header("x-backtick-modules"));
+  const modules = JSON.parse(context.req.header("x-backtick-modules") ?? "{}");
   const bundle = await bundler.build({ input: <Game />, modules });
   const built = performance.now();
   const { code } = bundle.generate({ format: "cjs" });

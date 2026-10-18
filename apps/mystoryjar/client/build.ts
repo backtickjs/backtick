@@ -1,4 +1,4 @@
-import { modulesOf } from "@backtickjs/builds/client";
+import { modulesOf } from "@backtickjs/core";
 import Constants from "expo-constants";
 import { moduleMap } from "./moduleMap";
 

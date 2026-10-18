@@ -52,7 +52,7 @@ Every template has:
 
 An Expo app (SDK 57) with the Backtick server beside it in `server/`. `client/App.tsx` fetches the screen at `/` and runs it with `execRoot` from [`@backtickjs/core/cjs`](https://github.com/backtickjs/backtick/tree/main/packages/core), offering screens what `client/moduleMap.ts` lists.
 
-Each build of the app sends the modules it carries: those `client/moduleMap.ts` offers, at the versions the `@backtickjs/builds/expo` plugin in `app.json` records. The server bundles each screen for those modules, with [`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds), so a build in users' hands keeps working as the app moves on, with nothing to record before it ships.
+Each build of the app sends the modules it carries: those `client/moduleMap.ts` offers, at the versions `app.config.ts` records. The server bundles each screen for those modules ([more](https://github.com/backtickjs/backtick/tree/main/packages/core#every-build-in-users-hands)), so a build in users' hands keeps working as the app moves on, with nothing to record before it ships.
 
 ```sh
 npm start        # then scan the QR code with your phone, in Expo Go

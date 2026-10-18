@@ -12,6 +12,15 @@ test("the output is a module whose default export is the value", async () => {
   );
 });
 
+test("the modules are { specifier: version }, as a client sends them", async () => {
+  for (const modules of [null, [], { react: 19 }]) {
+    await assert.rejects(
+      () => bundler.build({ input: 42, modules: modules as never }),
+      /The modules aren't \{ specifier: version \}/,
+    );
+  }
+});
+
 test("a map is written only where one is asked for", async () => {
   const bundle = await bundler.build({ input: 42, modules: {} });
   const { code } = bundle.generate({ format: "es" });

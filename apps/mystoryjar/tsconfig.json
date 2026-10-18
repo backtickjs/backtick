@@ -3,6 +3,6 @@
   "compilerOptions": {
     "strict": true
   },
-  // The app; the server, in server/, has its own.
-  "include": ["client"]
+  // The app and its config; the server, in server/, has its own.
+  "include": ["client", "app.config.ts"]
 }

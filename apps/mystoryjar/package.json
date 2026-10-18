@@ -18,7 +18,6 @@
     "format:check": "prettier --check --ignore-unknown ."
   },
   "dependencies": {
-    "@backtickjs/builds": "^0.2.0",
     "@backtickjs/bundler": "^0.2.0",
     "@backtickjs/core": "^0.2.0",
     "@backtickjs/node-plugin": "^0.2.0",

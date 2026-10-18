@@ -103,7 +103,6 @@ const ReorderButton = cs`(props: { order: Order }) => {
 | [`@backtickjs/bundler`](packages/bundler)                 | Runs server components and bundles a screen per request            |
 | [`@backtickjs/jsx-react`](packages/jsx-react)             | React's JSX for server components, and its compile step            |
 | [`@backtickjs/jsx-solid`](packages/jsx-solid)             | Solid's JSX for server components, and its compile step            |
-| [`@backtickjs/builds`](packages/builds)                   | Keeps your server drawing for every app build in users' hands      |
 | [`@backtickjs/node-plugin`](packages/node-plugin)         | Compiles scripts as a Node server loads them                       |
 | [`@backtickjs/bun-plugin`](packages/bun-plugin)           | Compiles scripts as a Bun server loads them                        |
 | [`@backtickjs/tspatch-plugin`](packages/tspatch-plugin)   | Compiles scripts when you build a server ahead of time with `tspc` |

@@ -43,3 +43,7 @@ export {
   isClientScript,
   type Param,
 } from "./ClientScript.js";
+
+// What an app provides bundles, and what it sends its server for them: the
+// modules it offers, at its packages' versions.
+export { modulesOf, type ModuleMap } from "./modulesOf.js";

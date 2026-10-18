@@ -1,6 +1,6 @@
 import type { Bundle, Spliceable, Spliced, SplicesAs } from "@backtickjs/core";
 import { buildBundle } from "./bundle/buildBundle.js";
-import type { Modules } from "./modules.js";
+import { isModules, type Modules } from "./modules.js";
 import { printBundle } from "./print/printBundle.js";
 
 export interface BuildOptions<T = Spliceable> {
@@ -54,6 +54,11 @@ export const bundler = {
     input,
     modules,
   }: BuildOptions<T>): Promise<Build<Spliced<T>>> {
+    if (!isModules(modules)) {
+      throw new Error(
+        `The modules aren't { specifier: version }: ${JSON.stringify(modules)?.slice(0, 80)}`,
+      );
+    }
     // Scripts come compiled for their framework when their host was built, so
     // the bundle is only put together: nothing is compiled or parsed here.
     const tree = await buildBundle(input, modules);

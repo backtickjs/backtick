@@ -1,5 +1,4 @@
 import { serve } from "@hono/node-server";
-import { parseModules } from "@backtickjs/builds";
 import { bundler } from "@backtickjs/bundler";
 import { Hono } from "hono";
 import { db } from "./db.js";
@@ -11,7 +10,7 @@ const app = new Hono();
 // its module map.
 app.get("/", async (context) => {
   const user = await db.userFor(context.req.header("authorization"));
-  const modules = parseModules(context.req.header("x-backtick-modules"));
+  const modules = JSON.parse(context.req.header("x-backtick-modules") ?? "{}");
   const bundle = await bundler.build({ input: <Home user={user} />, modules });
   const { code } = bundle.generate({ format: "cjs" });
   return context.body(code, 200, { "content-type": "text/javascript" });

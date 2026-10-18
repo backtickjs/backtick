@@ -1,4 +1,3 @@
-import { parseModules } from "@backtickjs/builds";
 import { bundler } from "@backtickjs/bundler";
 import type { JSX } from "@backtickjs/jsx-react/jsx-runtime";
 import type { Context } from "hono";
@@ -9,7 +8,7 @@ import type { Context } from "hono";
  * at its packages' versions.
  */
 export async function screen(context: Context, element: JSX.Element) {
-  const modules = parseModules(context.req.header("x-backtick-modules"));
+  const modules = JSON.parse(context.req.header("x-backtick-modules") ?? "{}");
   const bundle = await bundler.build({ input: element, modules });
   const { code } = bundle.generate({ format: "cjs" });
   return context.body(code, 200, { "content-type": "text/javascript" });

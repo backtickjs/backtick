@@ -22,7 +22,7 @@ Hold ▲ ▼ to walk, ◀ ▶ to turn, and FIRE to shoot. Clear every imp to fin
 - `server/Doom.tsx`: the screen, a client component. React Native views for the HUD, the shotgun and the touch controls, over R3F's `<$Canvas>`.
 - `server/World.tsx`: the 3D world, a client component inside the canvas: `<mesh>`, `<boxGeometry>` and `<pointLight>`, with the game loop in `$useFrame`.
 - `client/App.tsx`: the app. It sends the modules it carries, runs what the server sends with `client/moduleMap.ts`, and draws it.
-- `client/moduleMap.ts` and `client/moduleMap.web.ts`: what the app offers screens. R3F on a phone is its React Native build; on the web, its web build, under the same name, so the server sends both the same bundle. Each build of the app sends these modules at their versions, and the server bundles for them with [`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds).
+- `client/moduleMap.ts` and `client/moduleMap.web.ts`: what the app offers screens. R3F on a phone is its React Native build; on the web, its web build, under the same name, so the server sends both the same bundle. Each build of the app sends these modules at their versions, and the server bundles for them: see [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core#every-build-in-users-hands).
 
 The server never loads R3F or three, as it never loads React Native: `Canvas` and `useFrame` are imported from `@react-three/fiber/native` with `with { backtick: "client" }`, and the types of three's objects (`Mesh`, `PointLight`) from `three` as types. Importing R3F also teaches JSX three's elements, so `<mesh>` is type-checked in a script.
 

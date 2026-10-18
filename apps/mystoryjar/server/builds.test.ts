@@ -21,8 +21,8 @@ it("draws for the modules the app sent, however it sent them", async () => {
     modules: JSON.stringify(webModules),
   });
   assert.deepEqual(web.modules, webModules);
-  await assert.rejects(
-    screenRequestOf({ ...sent, modules: null }),
-    /No modules were sent/,
-  );
+  // none, as from an app that doesn't send them: the bundler refuses any
+  // screen with a client import
+  const none = await screenRequestOf({ ...sent, modules: null });
+  assert.deepEqual(none.modules, {});
 });

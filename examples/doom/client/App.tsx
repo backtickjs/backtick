@@ -1,5 +1,4 @@
-import { modulesOf } from "@backtickjs/builds/client";
-import type { Bundle } from "@backtickjs/core";
+import { type Bundle, modulesOf } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
@@ -24,7 +23,7 @@ const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
 
 // The modules this build carries, for the server to bundle screens it can
-// run: `@backtickjs/builds/expo`, in app.json, adds its packages' versions.
+// run: app.config.ts adds its packages' versions.
 const modules = JSON.stringify(
   modulesOf(moduleMap, Constants.expoConfig?.extra?.backtick?.packages),
 );

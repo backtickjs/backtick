@@ -1,7 +1,5 @@
 import type { Bundle } from "./Bundle.js";
-import type { ModuleMap } from "./ModuleMap.js";
-
-export type { ModuleMap };
+import type { ModuleMap } from "./modulesOf.js";
 
 /**
  * Executes a CommonJS bundle an app starts from, the one nothing else runs,

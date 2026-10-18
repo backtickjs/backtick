@@ -1,7 +1,7 @@
 import { fileURLToPath } from "node:url";
-import { installedPackages, modulesOf } from "@backtickjs/builds";
 import { bundler } from "@backtickjs/bundler";
-import type { Spliceable } from "@backtickjs/core";
+import { modulesOf, type Spliceable } from "@backtickjs/core";
+import { installedPackages } from "@backtickjs/core/node";
 import { execRoot } from "@backtickjs/core/cjs";
 import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";

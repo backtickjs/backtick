@@ -1,6 +1,5 @@
 import type { Context } from "hono";
 import { readSession, type User } from "./auth/session.js";
-import { parseModules } from "@backtickjs/builds";
 import type { Modules } from "@backtickjs/bundler";
 import { themeOf } from "./preferences.js";
 import type { Theme } from "./ui/theme.js";
@@ -40,8 +39,7 @@ export function originOf(context: Context): string {
 /**
  * What a screen is drawn for, from what the app sent however it sent it:
  * an HTTP request's headers, as `screenRequest` reads them, or a GraphQL
- * operation's variables. Throws for a request without the modules its
- * build carries.
+ * operation's variables.
  */
 export async function screenRequestOf(sent: {
   origin: string;
@@ -50,7 +48,7 @@ export async function screenRequestOf(sent: {
   modules: string | null;
   query: Record<string, string>;
 }): Promise<ScreenRequest> {
-  const modules = parseModules(sent.modules);
+  const modules = JSON.parse(sent.modules ?? "{}");
   const user = await readSession(sent.session ?? undefined);
   return {
     origin: sent.origin,

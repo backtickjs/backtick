@@ -69,5 +69,5 @@ carries, at their versions, and the server bundles each screen for them, so an
 old build gets screens it can run, with nothing to record before it ships. To
 stop serving old builds, check what a build sends with `supports` and draw
 it a screen asking its users to update.
-[`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds)
+[`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core#every-build-in-users-hands)
 has the details.

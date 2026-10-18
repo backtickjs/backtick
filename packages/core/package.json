@@ -36,6 +36,10 @@
     "./es": {
       "types": "./dist/es.d.ts",
       "default": "./dist/es.js"
+    },
+    "./node": {
+      "types": "./dist/node.d.ts",
+      "default": "./dist/node.js"
     }
   },
   "files": [

@@ -1,10 +1,11 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
 import { fileURLToPath } from "node:url";
-import { installedPackages, modulesOf } from "@backtickjs/builds";
+import { installedPackages } from "@backtickjs/core/node";
 import { bundler } from "@backtickjs/bundler";
 import * as Fiber from "@react-three/fiber";
 import ReactThreeTestRenderer from "@react-three/test-renderer";
+import { modulesOf } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";

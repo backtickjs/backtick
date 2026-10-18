@@ -28,9 +28,6 @@ importers:
 
   apps/backtickjs.com:
     dependencies:
-      '@backtickjs/builds':
-        specifier: ^0.2.0
-        version: link:../../packages/builds
       '@backtickjs/bun-plugin':
         specifier: ^0.2.0
         version: link:../../packages/bun-plugin
@@ -214,9 +211,6 @@ importers:
 
   apps/mystoryjar:
     dependencies:
-      '@backtickjs/builds':
-        specifier: ^0.2.0
-        version: link:../../packages/builds
       '@backtickjs/bundler':
         specifier: ^0.2.0
         version: link:../../packages/bundler
@@ -414,9 +408,6 @@ importers:
 
   examples/doom:
     dependencies:
-      '@backtickjs/builds':
-        specifier: ^0.2.0
-        version: link:../../packages/builds
       '@backtickjs/bundler':
         specifier: ^0.2.0
         version: link:../../packages/bundler
@@ -511,9 +502,6 @@ importers:
 
   examples/feed:
     dependencies:
-      '@backtickjs/builds':
-        specifier: ^0.2.0
-        version: link:../../packages/builds
       '@backtickjs/bundler':
         specifier: ^0.2.0
         version: link:../../packages/bundler
@@ -599,22 +587,6 @@ importers:
       nodemon:
         specifier: ^3.1.14
         version: 3.1.14
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-
-  packages/builds:
-    dependencies:
-      '@backtickjs/bundler':
-        specifier: ^0.2.0
-        version: link:../bundler
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-    devDependencies:
-      '@types/node':
-        specifier: ^25.9.1
-        version: 25.9.1
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
@@ -764,9 +736,6 @@ importers:
 
   packages/create-backtick-app/templates/react-native:
     dependencies:
-      '@backtickjs/builds':
-        specifier: ^0.2.0
-        version: link:../../../builds
       '@backtickjs/bundler':
         specifier: ^0.2.0
         version: link:../../../bundler

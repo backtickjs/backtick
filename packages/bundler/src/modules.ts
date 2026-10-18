@@ -7,6 +7,18 @@ import semver from "semver";
 export type Modules = Readonly<Record<string, string>>;
 
 /**
+ * Whether `value` is `Modules`: often what a client sent, parsed as it came.
+ */
+export function isModules(value: unknown): value is Modules {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    !Array.isArray(value) &&
+    Object.values(value).every((version) => typeof version === "string")
+  );
+}
+
+/**
  * Whether a client with `modules` provides `specifier` at a version in
  * `range`: the check a bundle's every import passes, so a server choosing
  * what to draw for a client can ask it first.

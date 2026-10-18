@@ -1,5 +1,4 @@
-import { modulesOf } from "@backtickjs/builds/client";
-import type { Bundle } from "@backtickjs/core";
+import { type Bundle, modulesOf } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 import Constants from "expo-constants";
 import * as React from "react";
@@ -8,7 +7,7 @@ import { ActivityIndicator } from "react-native";
 import { moduleMap } from "./moduleMap";
 
 // The modules this build carries, for your server to bundle screens it can
-// run: `@backtickjs/builds/expo`, in app.json, adds its packages' versions.
+// run: app.config.ts adds its packages' versions.
 const modules = JSON.stringify(
   modulesOf(moduleMap, Constants.expoConfig?.extra?.backtick?.packages),
 );

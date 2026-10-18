@@ -1,6 +1,5 @@
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import type { Modules } from "@backtickjs/bundler";
 
 // Where a package is installed for the app at `projectRoot`, as Node finds
 // it: in its node_modules, or the nearest above, as a workspace hoists it.
@@ -16,7 +15,16 @@ function installed(projectRoot: string, name: string): string {
 
 /**
  * The installed version of each of the app's dependencies, at `projectRoot`:
- * what a build made from it now carries there, for `modulesOf`.
+ * what a build made from it now carries there, for `modulesOf`. Node only: an
+ * Expo app calls it from `app.config.ts`, and passes it on in the config.
+ *
+ *     export default ({ config, projectRoot }: ConfigContext) => ({
+ *       ...config,
+ *       extra: {
+ *         ...config.extra,
+ *         backtick: { packages: installedPackages(projectRoot) },
+ *       },
+ *     });
  */
 export function installedPackages(projectRoot: string): Record<string, string> {
   const { dependencies = {} } = JSON.parse(
@@ -32,34 +40,4 @@ export function installedPackages(projectRoot: string): Record<string, string> {
       ).version,
     ]),
   );
-}
-
-/**
- * The modules a build sent, `modulesOf` as JSON:
- * `{ "react/jsx-runtime": "19.2.3" }`. Throws for none, or anything
- * else, as from an app that doesn't send them.
- */
-export function parseModules(text: string | null | undefined): Modules {
-  if (!text) {
-    throw new Error(
-      "No modules were sent: the app's code predates them, or doesn't send its own.",
-    );
-  }
-  let modules: unknown;
-  try {
-    modules = JSON.parse(text);
-  } catch {
-    throw new Error(`The modules sent aren't JSON: ${text.slice(0, 80)}`);
-  }
-  if (
-    typeof modules !== "object" ||
-    modules === null ||
-    Array.isArray(modules) ||
-    !Object.values(modules).every((version) => typeof version === "string")
-  ) {
-    throw new Error(
-      `The modules sent aren't { specifier: version }: ${text.slice(0, 80)}`,
-    );
-  }
-  return modules as Modules;
 }

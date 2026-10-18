@@ -1,6 +1,6 @@
 import { fileURLToPath } from "node:url";
-import { installedPackages, modulesOf } from "@backtickjs/builds";
-import type { Bundle } from "@backtickjs/core";
+import { type Bundle, modulesOf } from "@backtickjs/core";
+import { installedPackages } from "@backtickjs/core/node";
 import { execRoot } from "@backtickjs/core/cjs";
 import * as ReactQuery from "@tanstack/react-query";
 import { render } from "@testing-library/react";

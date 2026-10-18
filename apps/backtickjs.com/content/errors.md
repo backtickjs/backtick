@@ -94,11 +94,24 @@ app's module map, and install it in the app. A build made before then doesn't
 carry it: draw that screen differently for it, with `supports`. See
 [where a package goes](/docs/react-native-and-packages/#any-package-your-app-ships).
 
+"No modules" means the request didn't say what the app carries: check it sends
+what `modulesOf` gives it in `x-backtick-modules`. To fetch a screen yourself,
+with `curl` say, send them there:
+`{"react":"19.2.3","react/jsx-runtime":"19.2.3","react-native":"0.86.3"}`.
+
 ### Can't import `…` from "…": it's typed against …, and the client provides …
 
 The app was built with a version of the package the server's code isn't typed
 against: an earlier one, or another major. Install the app's version on the
 server, or serve that app a screen that doesn't use it.
+
+### The modules aren't { specifier: version }
+
+What the server passed the bundler as `modules` isn't an object of versions:
+the app sent something else in `x-backtick-modules`. It sends
+`JSON.stringify(modulesOf(…))`.
+[`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core#every-build-in-users-hands)
+has the details.
 
 ### Can't splice the host function `…`: it's host code, and only runs on the host
 
@@ -125,18 +138,6 @@ parents. Splice a copy without the back references.
 
 A client component, `` cs`(props) => …` ``, was drawn as a tag on your
 server. Draw it in a script: `` cs`<$Card />` ``.
-
-## From your server
-
-### No modules were sent / The modules sent aren't …
-
-Your server can't tell what the app that asked carries: the request had no
-`x-backtick-modules` header, or one that isn't JSON of
-`{ "specifier": "version" }`. Check the app sends what `modulesOf` gives it.
-To fetch a screen yourself, with `curl` say, send the modules in
-`x-backtick-modules`: `{"react":"19.2.3","react/jsx-runtime":"19.2.3","react-native":"0.86.3"}`.
-[`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds)
-has the details.
 
 ## From your app
 
