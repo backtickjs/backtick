@@ -11,9 +11,8 @@ const playStore =
 const colors = palettes.light;
 
 /**
- * Every path, for a build its server no longer draws screens for: drawn
- * with React Native alone, which every build has, and bundled for the
- * deprecated build's own modules.
+ * Every path, for a build too old for its screens: drawn with React Native
+ * alone, which every build has, and bundled for that build's own modules.
  */
 export function AppUpdateRequired() {
   return cs`(

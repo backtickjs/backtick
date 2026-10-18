@@ -1,7 +1,7 @@
 {
   "name": "@backtickjs/builds",
   "version": "0.2.0",
-  "description": "Keeps a Backtick server drawing for every build of its app in users' hands: build ids, a registry of what each build carries, and a check for EAS builds",
+  "description": "Keeps a Backtick server drawing for every build of its app in users' hands: each build sends the modules it carries, and the server bundles for them",
   "keywords": [
     "backtick",
     "react-native",
@@ -35,9 +35,6 @@
       "types": "./dist/client.d.ts",
       "default": "./dist/client.js"
     }
-  },
-  "bin": {
-    "backtick-builds": "./dist/cli.js"
   },
   "files": [
     "dist",

@@ -1,29 +1,24 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
-import { buildIds, platforms, UnknownBuild } from "@backtickjs/builds";
 import { supports } from "@backtickjs/bundler";
-import { fileURLToPath } from "node:url";
-import { builds } from "./builds.js";
+import { installed, updateRequired } from "./builds.js";
 import { screenRequestOf } from "./request.js";
 
-it("knows the builds this code makes, on every platform", () => {
-  // Fails after a package change until it's recorded: run
-  // `pnpm register-build` and commit the files it writes, so the server
-  // keeps bundling for these builds once the code moves on.
-  for (const platform of platforms) {
-    assert.equal(builds.unregistered(platform), null);
-  }
-});
-
 it("gives the web build no native sign-in SDK", () => {
-  const ios = builds.installed("ios");
-  const web = builds.installed("web");
+  const ios = installed("ios");
+  const web = installed("web");
   assert.ok(supports(ios, "react-native-fbsdk-next", "*"));
   assert.ok(!supports(web, "react-native-fbsdk-next", "*"));
   assert.ok(!supports(web, "@react-native-google-signin/google-signin", "*"));
 });
 
-it("draws for the build id the app sent, however it sent it", async () => {
+it("draws for the builds this code makes", () => {
+  for (const platform of ["ios", "android", "web"] as const) {
+    assert.equal(updateRequired(installed(platform)), false);
+  }
+});
+
+it("draws for the modules the app sent, however it sent them", async () => {
   // as a GraphQL resolver would, from its operation's variables
   const sent = {
     origin: "https://api.example.com",
@@ -31,11 +26,13 @@ it("draws for the build id the app sent, however it sent it", async () => {
     session: null,
     query: {},
   };
-  const ids = buildIds(fileURLToPath(new URL("..", import.meta.url)));
-  const web = await screenRequestOf({ ...sent, buildId: ids.web });
-  assert.deepEqual(web.modules, builds.installed("web"));
+  const web = await screenRequestOf({
+    ...sent,
+    modules: JSON.stringify(installed("web")),
+  });
+  assert.deepEqual(web.modules, installed("web"));
   await assert.rejects(
-    screenRequestOf({ ...sent, buildId: "unknown" }),
-    UnknownBuild,
+    screenRequestOf({ ...sent, modules: null }),
+    /No modules were sent/,
   );
 });

@@ -1,24 +1,16 @@
 import assert from "node:assert/strict";
-import { spawnSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, it } from "node:test";
-import { fileURLToPath } from "node:url";
 import {
-  buildIdOf,
-  buildIds,
-  createBuilds,
-  DeprecatedBuild,
+  installedModules,
   moduleMapFile,
+  parseModules,
   readModuleMap,
-  register,
-  UnknownBuild,
 } from "../dist/index.js";
-import { buildIdFrom } from "../dist/client.js";
-import withBuildIds from "../dist/expo.js";
-
-const cli = fileURLToPath(new URL("../dist/cli.js", import.meta.url));
+import { modulesFrom } from "../dist/client.js";
+import withModules from "../dist/expo.js";
 
 // An app: its module maps, and its installed packages at their versions.
 function app(
@@ -147,19 +139,9 @@ export const moduleMap = {
   });
 });
 
-it("names each platform's build by its packages", () => {
-  const ids = buildIds(mobile());
-  assert.equal(ids.ios, ids.android);
-  assert.notEqual(ids.ios, ids.web);
-  assert.equal(
-    ids.web,
-    buildIdOf({ react: "19.2.3", "react/jsx-runtime": "19.2.3" }),
-  );
-});
-
-it("puts each platform's id in the Expo config, keeping its extra", () => {
+it("puts each platform's modules in the Expo config, keeping its extra", () => {
   const root = mobile();
-  const config = withBuildIds({
+  const config = withModules({
     name: "app",
     extra: { eas: { projectId: "1" } },
     _internal: { projectRoot: root },
@@ -167,43 +149,34 @@ it("puts each platform's id in the Expo config, keeping its extra", () => {
   assert.equal(config.name, "app");
   assert.deepEqual(config.extra, {
     eas: { projectId: "1" },
-    buildIds: buildIds(root),
-  });
-  // outside development, as `eas build` reads it, registering nothing
-  assert.notEqual(
-    createBuilds({ projectRoot: root }).unregistered("ios"),
-    null,
-  );
-});
-
-it("registers this code's builds as `expo start` reads the config", (t) => {
-  const root = mobile();
-  const before = process.env.NODE_ENV;
-  t.after(() => {
-    if (before === undefined) delete process.env.NODE_ENV;
-    else process.env.NODE_ENV = before;
-  });
-  process.env.NODE_ENV = "development";
-  withBuildIds({ _internal: { projectRoot: root } });
-  const builds = createBuilds({ projectRoot: root });
-  assert.equal(builds.unregistered("ios"), null);
-  assert.equal(builds.unregistered("web"), null);
-});
-
-it("names a build by the modules it offers, not only their packages", () => {
-  // a later build offers another module from a package it already had
-  const before = buildIds(mobile());
-  const after = buildIds(
-    app(
-      {
-        "moduleMap.ts": map("react", "react/jsx-runtime", "fbsdk", "fbsdk/x"),
-        "moduleMap.web.ts": map("react", "react/jsx-runtime"),
+    backtick: {
+      modules: {
+        ios: {
+          fbsdk: "13.4.3",
+          react: "19.2.3",
+          "react/jsx-runtime": "19.2.3",
+        },
+        android: {
+          fbsdk: "13.4.3",
+          react: "19.2.3",
+          "react/jsx-runtime": "19.2.3",
+        },
+        web: { react: "19.2.3", "react/jsx-runtime": "19.2.3" },
       },
-      { react: "19.2.3", fbsdk: "13.4.3" },
-    ),
+    },
+  });
+});
+
+it("offers the modules a map names, not only their packages", () => {
+  const root = app(
+    { "moduleMap.ts": map("react", "fbsdk", "fbsdk/x") },
+    { react: "19.2.3", fbsdk: "13.4.3" },
   );
-  assert.notEqual(after.ios, before.ios);
-  assert.equal(after.web, before.web);
+  assert.deepEqual(installedModules(root, "ios"), {
+    fbsdk: "13.4.3",
+    "fbsdk/x": "13.4.3",
+    react: "19.2.3",
+  });
 });
 
 it("finds a package installed above the app, as a workspace hoists it", () => {
@@ -211,136 +184,40 @@ it("finds a package installed above the app, as a workspace hoists it", () => {
   const root = join(workspace, "apps", "app");
   mkdirSync(root, { recursive: true });
   writeFileSync(join(root, "moduleMap.ts"), map("react", "fbsdk"));
-  assert.equal(
-    buildIds(root).ios,
-    buildIdOf({ fbsdk: "13.4.3", react: "19.2.3" }),
-  );
+  assert.deepEqual(installedModules(root, "ios"), {
+    fbsdk: "13.4.3",
+    react: "19.2.3",
+  });
 });
 
-describe("a server's builds", () => {
-  it("refuses this code's builds until they're registered, as it runs", () => {
-    const root = mobile();
-    const builds = createBuilds({ projectRoot: root });
-    const ids = buildIds(root);
-    assert.throws(
-      () => builds.modulesOf(ids.ios),
-      /this code's: it isn't registered here\. Run backtick-builds register/,
-    );
-    register(root);
-    assert.deepEqual(builds.modulesOf(ids.ios), {
-      fbsdk: "13.4.3",
-      react: "19.2.3",
-      "react/jsx-runtime": "19.2.3",
-    });
-    assert.deepEqual(builds.modulesOf(ids.web), {
+describe("the modules a build sends", () => {
+  it("are what its server reads", () => {
+    const { extra } = withModules({ _internal: { projectRoot: mobile() } });
+    assert.deepEqual(parseModules(modulesFrom(extra, "web")), {
       react: "19.2.3",
       "react/jsx-runtime": "19.2.3",
     });
   });
 
-  it("resolves a registered build after the code moves on", () => {
-    const root = mobile();
-    const [ios] = register(root);
-    // fbsdk upgraded since
-    writeFileSync(
-      join(root, "node_modules", "fbsdk", "package.json"),
-      JSON.stringify({ name: "fbsdk", version: "14.0.0" }),
-    );
-    const builds = createBuilds({ projectRoot: root });
-    assert.equal(builds.modulesOf(ios!.id).fbsdk, "13.4.3");
-  });
-
-  it("refuses a build it doesn't know, or none", () => {
-    const root = mobile();
-    const builds = createBuilds({ projectRoot: root });
-    assert.throws(() => builds.modulesOf("0123456789abcdef"), UnknownBuild);
-    // naming the builds this code makes, which it isn't
-    const { ios, web } = buildIds(root);
+  it("are in the app config, or the app throws as it starts", () => {
     assert.throws(
-      () => builds.modulesOf("0123456789abcdef"),
-      new RegExp(
-        `^Error: No modules for build "0123456789abcdef": it isn't registered here, and this code makes "${ios}" and "${web}"\\.`,
-      ),
-    );
-    assert.throws(() => builds.modulesOf(null), /No build id was sent/);
-  });
-
-  it("refuses a build deprecated on purpose", () => {
-    const root = mobile();
-    const [ios] = register(root);
-    const build = JSON.parse(readFileSync(ios!.file, "utf8"));
-    writeFileSync(ios!.file, JSON.stringify({ ...build, deprecated: true }));
-    const builds = createBuilds({ projectRoot: root });
-    assert.throws(
-      () => builds.modulesOf(ios!.id),
-      (error) =>
-        error instanceof DeprecatedBuild && error.modules.fbsdk === "13.4.3",
-    );
-    assert.match(builds.unregistered("ios")!, /is deprecated/);
-  });
-});
-
-describe("registering", () => {
-  it("records each platform's build, keeping when it was first", () => {
-    const root = mobile();
-    const [first] = register(root);
-    const recorded = JSON.parse(readFileSync(first!.file, "utf8"));
-    assert.equal(recorded.deprecated, false);
-    assert.deepEqual(recorded.modules, {
-      fbsdk: "13.4.3",
-      react: "19.2.3",
-      "react/jsx-runtime": "19.2.3",
-    });
-    const [again] = register(root);
-    assert.equal(
-      JSON.parse(readFileSync(again!.file, "utf8")).createdAt,
-      recorded.createdAt,
-    );
-    assert.equal(createBuilds({ projectRoot: root }).unregistered("web"), null);
-  });
-});
-
-describe("backtick-builds check", () => {
-  const check = (root: string, env: Record<string, string> = {}) =>
-    spawnSync(process.execPath, [cli, "check"], {
-      cwd: root,
-      env: { ...process.env, ...env },
-      encoding: "utf8",
-    });
-
-  it("fails while a build isn't registered", () => {
-    const result = check(mobile());
-    assert.equal(result.status, 1);
-    assert.match(result.stderr, /No builds\/\w+\.json for ios/);
-  });
-
-  it("checks only the platform an EAS build builds", () => {
-    const root = mobile();
-    register(root);
-    assert.equal(check(root, { EAS_BUILD_PLATFORM: "ios" }).status, 0);
-  });
-
-  it("lets a development build through", () => {
-    assert.equal(
-      check(mobile(), { EAS_BUILD_PROFILE: "development" }).status,
-      0,
-    );
-  });
-});
-
-describe("buildIdFrom", () => {
-  it("reads this build's id from the app config, or throws as the app starts", () => {
-    const extra = {
-      buildIds: { ios: "f327397121ce4e4e", web: "887a92bf84a4b44e" },
-    };
-    assert.equal(buildIdFrom(extra, "ios"), "f327397121ce4e4e");
-    assert.throws(
-      () => buildIdFrom(extra, "android"),
-      /No build id for android/,
+      () => modulesFrom({ backtick: { modules: { ios: {} } } }, "android"),
+      /No modules for android/,
     );
     assert.throws(
-      () => buildIdFrom(undefined, "ios"),
+      () => modulesFrom(undefined, "ios"),
       /is @backtickjs\/builds\/expo in app.json's plugins/,
+    );
+  });
+
+  it("are refused by the server when missing or malformed", () => {
+    assert.throws(() => parseModules(undefined), /No modules were sent/);
+    assert.throws(() => parseModules(""), /No modules were sent/);
+    assert.throws(() => parseModules("{"), /aren't JSON/);
+    assert.throws(() => parseModules("[]"), /aren't \{ specifier: version \}/);
+    assert.throws(
+      () => parseModules('{"react":19}'),
+      /aren't \{ specifier: version \}/,
     );
   });
 });

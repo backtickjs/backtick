@@ -12,8 +12,6 @@
     "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit",
     "test": "node --import ./server/test/setup.mjs --import @backtickjs/node-plugin --test \"server/**/*.test.tsx\"",
     "reset-project": "node scripts/reset-project.mjs",
-    "register-build": "backtick-builds register",
-    "eas-build-post-install": "backtick-builds check",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown ."
   },

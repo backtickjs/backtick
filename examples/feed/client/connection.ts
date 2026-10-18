@@ -1,4 +1,4 @@
-import { buildIdFrom } from "@backtickjs/builds/client";
+import { modulesFrom } from "@backtickjs/builds/client";
 import type { Bundle } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 import { QueryClient } from "@tanstack/react-query";
@@ -10,13 +10,13 @@ import { moduleMap } from "./moduleMap";
 const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
 
-// This build's id, which names the modules it carries, for the server to
-// bundle what it can run: `@backtickjs/builds/expo`, in app.json, adds it.
-const buildId = buildIdFrom(Constants.expoConfig?.extra, Platform.OS);
+// The modules this build carries, for the server to bundle what it can run:
+// `@backtickjs/builds/expo`, in app.json, adds them.
+const modules = modulesFrom(Constants.expoConfig?.extra, Platform.OS);
 
 /**
  * What your server answers at `path`: its bundle, fetched with this build's
- * id and run with the app's modules. A screen, an item, a like's count. Your
+ * modules and run with the app's modules. A screen, an item, a like's count. Your
  * fetch to shape: headers, auth, caching.
  */
 export async function fetchBundle(
@@ -26,7 +26,7 @@ export async function fetchBundle(
   const response = await fetch(`${server}${path}`, {
     ...init,
     headers: {
-      "x-build-id": buildId,
+      "x-backtick-modules": modules,
       "content-type": "application/json",
       ...init.headers,
     },

@@ -9,8 +9,6 @@
   },
   "scripts": {
     "start": "node scripts/start.mjs",
-    "register-build": "backtick-builds register",
-    "eas-build-post-install": "backtick-builds check",
     "android": "node scripts/start.mjs --android",
     "ios": "node scripts/start.mjs --ios",
     "web": "node scripts/start.mjs --web",

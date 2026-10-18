@@ -52,10 +52,7 @@ Every template has:
 
 An Expo app (SDK 57) with the Backtick server beside it in `server/`. `client/App.tsx` fetches the screen at `/` and runs it with `execRoot` from [`@backtickjs/core/cjs`](https://github.com/backtickjs/backtick/tree/main/packages/core), offering screens what `client/moduleMap.ts` lists.
 
-Each build of the app sends an id that names the modules it carries, which the `@backtickjs/builds/expo` plugin in `app.json` works out from `client/moduleMap.ts`. The server bundles each screen for that build's modules, with [`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds), so a build in users' hands keeps working as the app moves on:
-
-- The server draws only registered builds, one file each in `builds/`. `npm start` registers this code's builds as Expo starts; `npm run register-build` does it without Expo, as before a build for the stores. Commit what they write.
-- On EAS, `eas-build-post-install` fails a preview or production build that isn't registered.
+Each build of the app sends the modules it carries, which the `@backtickjs/builds/expo` plugin in `app.json` works out from `client/moduleMap.ts`. The server bundles each screen for those modules, with [`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds), so a build in users' hands keeps working as the app moves on, with nothing to record before it ships.
 
 ```sh
 npm start        # then scan the QR code with your phone, in Expo Go

@@ -8,7 +8,7 @@ import { screen } from "./screen.js";
 const app = new Hono();
 
 // `npm run web` serves the app from another origin.
-app.use(cors({ origin: "*", allowHeaders: ["x-build-id"] }));
+app.use(cors({ origin: "*", allowHeaders: ["x-backtick-modules"] }));
 
 // Your app's screens: add a route, and the app can fetch it. A path can
 // take parameters, `/stories/:id`, read with `context.req.param("id")`.

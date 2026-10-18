@@ -1,6 +1,6 @@
 # @backtickjs/builds
 
-Keeps a [Backtick](https://backtickjs.com) server drawing for every build of its React Native app that's still in users' hands. A store build carries the modules it was built with, at their versions, for as long as it's installed. Your server moves on. Each build sends an id that names its modules, and the server bundles its screens for exactly those modules, or refuses a build it can't serve.
+Keeps a [Backtick](https://backtickjs.com) server drawing for every build of its React Native app that's still in users' hands. A store build carries the modules it was built with, at their versions, for as long as it's installed. Your server moves on. Each build sends the modules it carries, and the server bundles its screens for exactly those modules. There's nothing to record before a build ships, and any version of your server can draw for any build.
 
 ## Install
 
@@ -31,7 +31,7 @@ npm install @backtickjs/builds
 
    The module maps are in the app's client root: the folder `package.json` names, as `"backtick": { "clientRoot": "client" }`, or the project root.
 
-2. **Each build gets an id:** a hash of the modules its platform's map offers, each at the installed version of its package. In an Expo app, this package's config plugin, `@backtickjs/builds/expo`, puts the ids in the app config's `extra.buildIds`:
+2. **Each build knows its modules:** those its platform's map offers, each at the installed version of its package. In an Expo app, this package's config plugin, `@backtickjs/builds/expo`, puts them in the app config's `extra.backtick.modules`:
 
    ```json
    // app.json
@@ -42,70 +42,52 @@ npm install @backtickjs/builds
    }
    ```
 
-3. **The app sends its id** however it reaches its server: a header, a GraphQL variable. `buildIdFrom`, from `@backtickjs/builds/client`, reads it:
+3. **The app sends them** however it reaches its server: a header, a GraphQL variable. `modulesFrom`, from `@backtickjs/builds/client`, reads them as JSON to send:
 
    ```ts
-   import { buildIdFrom } from "@backtickjs/builds/client";
+   import { modulesFrom } from "@backtickjs/builds/client";
 
-   const buildId = buildIdFrom(Constants.expoConfig?.extra, Platform.OS);
+   const modules = modulesFrom(Constants.expoConfig?.extra, Platform.OS);
+   fetch(url, { headers: { "x-backtick-modules": modules } });
    ```
 
-4. **The server bundles for that build's modules:**
+   It throws as the app starts if the plugin isn't in `app.json`.
+
+4. **The server bundles for them:**
 
    ```ts
-   import { createBuilds } from "@backtickjs/builds";
+   import { parseModules } from "@backtickjs/builds";
    import { bundler } from "@backtickjs/bundler";
 
-   const builds = createBuilds({ projectRoot });
-
-   const modules = builds.modulesOf(buildId);
+   const modules = parseModules(context.req.header("x-backtick-modules"));
    const bundle = await bundler.build({ input, modules });
    ```
 
+   `parseModules` throws for a request without them, or with anything but `{ "specifier": "version" }` JSON: answer it as an error. The bundler refuses a screen that imports a module the build doesn't carry, or at a version it can't run.
+
    To draw differently for builds that lack a module, ask with `supports` from [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler), the same check the bundler makes: `supports(modules, "react-native-fbsdk-next", "^13")`.
 
-5. **Every build is registered before it ships,** in `builds/`, one file per id, committed with the code:
+In development, a reload keeps the app config the app was opened with, and its modules with it: after a change to the module map or the packages, close the app and open it again.
 
-   ```sh
-   npx backtick-builds register
-   ```
+## Old builds
 
-   ```json
-   {
-     "createdAt": "2026-10-12T00:00:00.000Z",
-     "deprecated": false,
-     "modules": {
-       "react": "19.2.3",
-       "react/jsx-runtime": "19.2.3",
-       "react-native": "0.86.3"
-     }
-   }
-   ```
+To stop drawing for old builds, decide by what they carry, and draw them one screen asking their users to update, bundled for their own modules:
 
-   In development, the Expo config plugin registers this code's builds as `expo start` reads the config, so the app you're working on is always one its server knows. Commit what it writes with the rest: a build that ships is one of them.
-
-   Run `backtick-builds check` in your tests, or let EAS run it: as `eas-build-post-install` in `package.json`, it fails a build that isn't registered, checking the platform being built and letting development builds through.
-
-   ```json
-   "scripts": {
-     "eas-build-post-install": "backtick-builds check"
-   }
-   ```
-
-## Unknown and deprecated builds
-
-`modulesOf` throws for a build its server can't draw for:
-
-- **`UnknownBuild`**: no id, or one that isn't registered. Every build is registered before it ships, so this means the server or the build was deployed wrong, as when a server is rolled back past a build in users' hands. In development, it means the app was opened before its module map or packages changed: close it and open it again, since a reload keeps the config it was opened with, and its build id with it. Its message names the builds this code makes, or says the one sent is this code's and isn't registered yet. Answer it as a server error.
-- **`DeprecatedBuild`**: a build you retired by setting `"deprecated": true` in its file. It carries the build's `modules`, so your server can still draw that build one screen, bundled for what it has: one asking its users to update. Answer every path with it. Left uncaught, it's a server error, as `UnknownBuild` is.
+```ts
+const input = supports(modules, "react-native", ">=0.86") ? (
+  <Home />
+) : (
+  <AppUpdateRequired />
+);
+```
 
 ## API
 
-- `@backtickjs/builds/expo` in `app.json`'s `plugins`: the Expo config plugin, which sets `extra.buildIds` to `buildIds(projectRoot)`, and with `NODE_ENV` set to `development`, as `expo start` sets it, runs `register(projectRoot)`.
-- `buildIds(projectRoot)`: the id of the build the app at `projectRoot` now makes, on `ios`, `android` and `web`.
-- `createBuilds({ projectRoot })`: the app's builds for its server. `modulesOf(buildId)` resolves a registered build, `installed(platform)` is what this code's build carries, and `unregistered(platform)` says why this code's build couldn't ship, or null. Registered builds are read when it's created, and again for an id that isn't among them, as one Expo registers while the server runs.
-- `register(projectRoot)`: what `backtick-builds register` runs. A build already registered keeps its `createdAt` and `deprecated`.
-- `readModuleMap(file)`, `clientRootOf(projectRoot)`, `moduleMapFile(projectRoot, platform)`, `installedModules(projectRoot, platform)`, `buildIdOf(modules)`, `readBuilds(directory)`: the steps, for tools of your own.
+- `@backtickjs/builds/expo` in `app.json`'s `plugins`: the Expo config plugin, which sets `extra.backtick.modules` to `installedModules(projectRoot, platform)` on `ios`, `android` and `web`.
+- `modulesFrom(extra, platform)`, from `@backtickjs/builds/client`: this build's modules, as JSON to send.
+- `parseModules(text)`: the modules a build sent, for `bundler.build`.
+- `installedModules(projectRoot, platform)`: the modules the build the app at `projectRoot` now makes carries, as tests bundle for.
+- `readModuleMap(file)`, `clientRootOf(projectRoot)`, `moduleMapFile(projectRoot, platform)`: the steps, for tools of your own.
 
 ## Related
 

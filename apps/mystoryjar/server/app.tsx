@@ -1,11 +1,11 @@
 import { readFile } from "node:fs/promises";
 import { bundler } from "@backtickjs/bundler";
-import { DeprecatedBuild } from "@backtickjs/builds";
 import type { JSX } from "@backtickjs/jsx-react/jsx-runtime";
 import { type Context, Hono } from "hono";
 import { cors } from "hono/cors";
 import { api } from "./api.js";
 import { readBackupToken } from "./auth/session.js";
+import { updateRequired } from "./builds.js";
 import { backupPdf } from "./backup.js";
 import { screenRequest } from "./request.js";
 import { draw, type Route, routes } from "./routes.js";
@@ -27,7 +27,7 @@ app.use(
       "authorization",
       "content-type",
       "x-time-zone",
-      "x-build-id",
+      "x-backtick-modules",
     ],
   }),
 );
@@ -82,21 +82,16 @@ for (const [path, route] of Object.entries(routes)) {
 }
 
 // A route's screen, bundled for the modules the requesting build carries: a
-// build this server doesn't know throws; one retired on purpose gets a
-// screen asking to update, on every path.
+// build too old for its screens gets one asking to update, on every path.
 async function screen(context: Context, route: Route) {
   const started = performance.now();
-  let input: JSX.Element;
-  let modules;
-  try {
-    const request = await screenRequest(context);
-    input = draw(route, request);
-    modules = request.modules;
-  } catch (error) {
-    if (!(error instanceof DeprecatedBuild)) throw error;
-    input = <AppUpdateRequired />;
-    modules = error.modules;
-  }
+  const request = await screenRequest(context);
+  const { modules } = request;
+  const input: JSX.Element = updateRequired(modules) ? (
+    <AppUpdateRequired />
+  ) : (
+    draw(route, request)
+  );
   const bundle = await bundler.build({ input, modules });
   const { code } = bundle.generate({ format: "cjs" });
   if (development) {

@@ -1,4 +1,4 @@
-import { buildIdFrom } from "@backtickjs/builds/client";
+import { modulesFrom } from "@backtickjs/builds/client";
 import type { Bundle } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 import Constants from "expo-constants";
@@ -23,9 +23,9 @@ import { moduleMap } from "./moduleMap";
 const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
 
-// This build's id, which names the modules it carries, for the server to
-// bundle screens it can run: `@backtickjs/builds/expo`, in app.json, adds it.
-const buildId = buildIdFrom(Constants.expoConfig?.extra, Platform.OS);
+// The modules this build carries, for the server to bundle screens it can
+// run: `@backtickjs/builds/expo`, in app.json, adds them.
+const modules = modulesFrom(Constants.expoConfig?.extra, Platform.OS);
 
 // A screen as fetched, with what each stage of getting it cost so far:
 // `Screen` adds the render and logs the whole pipeline.
@@ -47,7 +47,7 @@ async function fetchScreen(path: string): Promise<Fetched> {
   const heap = { started: readHeap() };
   const started = performance.now();
   const response = await fetch(`${server}${path}`, {
-    headers: { "x-build-id": buildId },
+    headers: { "x-backtick-modules": modules },
   });
   const firstByte = performance.now();
   if (!response.ok) {

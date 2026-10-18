@@ -128,13 +128,13 @@ server. Draw it in a script: `` cs`<$Card />` ``.
 
 ## From your server
 
-### No build id was sent / No modules for build "…"
+### No modules were sent / The modules sent aren't …
 
 Your server can't tell what the app that asked carries: the request had no
-`x-build-id` header, or one that isn't registered in `builds/`. In
-development, `npm start` registers the build as Expo starts: close the app and
-open it again. To fetch a screen yourself, with `curl` say, send a registered
-id in `x-build-id`, after `npm run register-build`.
+`x-backtick-modules` header, or one that isn't JSON of
+`{ "specifier": "version" }`. Check the app sends what `modulesFrom` gives it.
+To fetch a screen yourself, with `curl` say, send the modules in
+`x-backtick-modules`: `{"react":"19.2.3","react/jsx-runtime":"19.2.3","react-native":"0.86.3"}`.
 [`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds)
 has the details.
 
@@ -144,5 +144,5 @@ has the details.
 
 The bundle uses a module missing from the module map your app hands to
 `execRoot`. Add it, and install it in the app so its native code ships. If
-your server shouldn't have sent it, check the build id the app sends.
+your server shouldn't have sent it, check the modules the app sends.
 See [where a package goes](/docs/react-native-and-packages/#any-package-your-app-ships).

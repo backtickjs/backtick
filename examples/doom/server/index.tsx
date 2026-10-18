@@ -1,34 +1,28 @@
 import { performance } from "node:perf_hooks";
-import { fileURLToPath } from "node:url";
 import { serve } from "@hono/node-server";
-import { createBuilds } from "@backtickjs/builds";
+import { parseModules } from "@backtickjs/builds";
 import { bundler } from "@backtickjs/bundler";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { Game } from "./Game.js";
 
-// The app's builds: each sends its id, and the game is bundled for the
-// modules that build carries, from client/moduleMap.ts. A build in players'
-// hands keeps working as the game moves on, once registered: see builds/.
-const builds = createBuilds({
-  projectRoot: fileURLToPath(new URL("..", import.meta.url)),
-});
-
 const app = new Hono();
 
-// `npm run web` serves the app from another origin, which sends its build id
+// `npm run web` serves the app from another origin, which sends its modules
 // and reads the server's timing only when they're allowed.
 app.use(
   cors({
     origin: "*",
-    allowHeaders: ["x-build-id"],
+    allowHeaders: ["x-backtick-modules"],
     exposeHeaders: ["server-timing"],
   }),
 );
 
+// The game, bundled for the modules the requesting build carries, as
+// client/moduleMap.ts offers them at its packages' versions.
 app.get("/game", async (context) => {
   const start = performance.now();
-  const modules = builds.modulesOf(context.req.header("x-build-id") ?? null);
+  const modules = parseModules(context.req.header("x-backtick-modules"));
   const bundle = await bundler.build({ input: <Game />, modules });
   const built = performance.now();
   const { code } = bundle.generate({ format: "cjs" });

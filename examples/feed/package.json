@@ -12,8 +12,6 @@
     "web": "concurrently --raw --kill-others npm:server \"expo start --web\"",
     "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit",
     "test": "node --import ./server/test/setup.mjs --import @backtickjs/node-plugin --test \"server/**/*.test.tsx\"",
-    "register-build": "backtick-builds register",
-    "eas-build-post-install": "backtick-builds check",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown ."
   },

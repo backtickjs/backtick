@@ -6,4 +6,4 @@ The server's output is in the terminal `npm start` runs in.
 
 Saving a file under `server/` restarts the server, and Expo reloads the app once it's back: what the server keeps in memory starts over.
 
-A change to `client/moduleMap.ts` or the packages makes a new build: the app has to be closed and opened again. Until then, the server answers the open app with `UnknownBuild`.
+A change to `client/moduleMap.ts` or the packages reaches the server once the app is closed and opened again: a reload keeps the modules it sent when it was opened.

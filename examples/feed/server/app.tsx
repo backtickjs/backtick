@@ -8,7 +8,9 @@ import { screen } from "./screen.js";
 export const app = new Hono();
 
 // `npm run web` serves the app from another origin.
-app.use(cors({ origin: "*", allowHeaders: ["x-build-id", "content-type"] }));
+app.use(
+  cors({ origin: "*", allowHeaders: ["x-backtick-modules", "content-type"] }),
+);
 
 // The feed, and its pages, which know their items' paths only.
 app.get("/", (context) => screen(context, <Feed />));

@@ -63,16 +63,10 @@ has the messages.
 ## Every build in users' hands
 
 A store build keeps the modules it was built with for as long as it's
-installed, while your server moves on. Each build sends an id that names its
-modules, and the server bundles each screen for them, so an old build gets
-screens it can run. Before a build for the stores, record it:
-
-```sh
-npm run register-build
-```
-
-and commit what it writes to `builds/`. An EAS build that isn't registered
-fails, so a build your server doesn't know can't ship. To stop serving an old
-build, set `"deprecated": true` in its file: your server refuses it.
+installed, while your server moves on. Each build sends the modules it
+carries, at their versions, and the server bundles each screen for them, so an
+old build gets screens it can run, with nothing to record before it ships. To
+stop serving old builds, check what a build sends with `supports` and draw
+it a screen asking its users to update.
 [`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds)
-has the details, and how to show its users a screen asking them to update.
+has the details.

@@ -6,8 +6,8 @@ import { join } from "node:path";
 export const platforms = ["ios", "android", "web"] as const;
 export type Platform = (typeof platforms)[number];
 
-// TypeScript, loaded only to read a module map: a server reading registered
-// builds never needs it.
+// TypeScript, loaded only to read a module map: a server reading the
+// modules a build sent never needs it.
 const require = createRequire(import.meta.url);
 
 /**

@@ -1,7 +1,7 @@
 import type { Context } from "hono";
 import { readSession, type User } from "./auth/session.js";
+import { parseModules } from "@backtickjs/builds";
 import type { Modules } from "@backtickjs/bundler";
-import { builds } from "./builds.js";
 import { themeOf } from "./preferences.js";
 import type { Theme } from "./ui/theme.js";
 
@@ -40,17 +40,17 @@ export function originOf(context: Context): string {
 /**
  * What a screen is drawn for, from what the app sent however it sent it:
  * an HTTP request's headers, as `screenRequest` reads them, or a GraphQL
- * operation's variables. Throws `UnknownBuild` for a build this server
- * doesn't know.
+ * operation's variables. Throws for a request without the modules its
+ * build carries.
  */
 export async function screenRequestOf(sent: {
   origin: string;
   timeZone: string;
   session: string | null;
-  buildId: string | null;
+  modules: string | null;
   query: Record<string, string>;
 }): Promise<ScreenRequest> {
-  const modules = builds.modulesOf(sent.buildId);
+  const modules = parseModules(sent.modules);
   const user = await readSession(sent.session ?? undefined);
   return {
     origin: sent.origin,
@@ -70,7 +70,7 @@ export function screenRequest(context: Context): Promise<ScreenRequest> {
     origin: originOf(context),
     timeZone: header("x-time-zone") ?? "UTC",
     session: header("authorization")?.replace(/^Bearer /, "") ?? null,
-    buildId: header("x-build-id"),
+    modules: header("x-backtick-modules"),
     query: context.req.query(),
   });
 }

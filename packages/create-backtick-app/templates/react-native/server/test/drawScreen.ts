@@ -1,5 +1,5 @@
 import { fileURLToPath } from "node:url";
-import { createBuilds } from "@backtickjs/builds";
+import { installedModules } from "@backtickjs/builds";
 import { bundler } from "@backtickjs/bundler";
 import type { Spliceable } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
@@ -10,9 +10,10 @@ import * as ReactNativeWeb from "react-native-web";
 // What the app's web build provides, as client/moduleMap.ts says, with React
 // Native's web build standing in for React Native. Add a stand-in here when
 // your module map offers another package.
-const modules = createBuilds({
-  projectRoot: fileURLToPath(new URL("../..", import.meta.url)),
-}).installed("web");
+const modules = installedModules(
+  fileURLToPath(new URL("../..", import.meta.url)),
+  "web",
+);
 const moduleMap = {
   react: React,
   "react/jsx-runtime": JSXRuntime,

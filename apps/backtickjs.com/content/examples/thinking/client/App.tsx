@@ -1,4 +1,4 @@
-import { buildIdFrom } from "@backtickjs/builds/client";
+import { modulesFrom } from "@backtickjs/builds/client";
 import type { Bundle } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 import Constants from "expo-constants";
@@ -7,12 +7,14 @@ import { Suspense, use, useState } from "react";
 import { ActivityIndicator, Platform } from "react-native";
 import { moduleMap } from "./moduleMap";
 
-// This build's id, which names the modules it carries, for your server to
-// bundle screens it can run.
-const buildId = buildIdFrom(Constants.expoConfig?.extra, Platform.OS);
+// The modules this build carries, for your server to bundle screens it can
+// run.
+const modules = modulesFrom(Constants.expoConfig?.extra, Platform.OS);
 
 async function fetchScreen(url: string): Promise<React.ReactNode> {
-  const response = await fetch(url, { headers: { "x-build-id": buildId } });
+  const response = await fetch(url, {
+    headers: { "x-backtick-modules": modules },
+  });
   const bundle = (await response.text()) as Bundle<React.ReactNode>;
   return execRoot(bundle, moduleMap);
 }

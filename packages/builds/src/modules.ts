@@ -1,4 +1,3 @@
-import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import type { Modules } from "@backtickjs/bundler";
@@ -51,16 +50,31 @@ export function installedModules(
 }
 
 /**
- * The id of a build that carries `modules`: a hash of them, so two builds
- * that carry the same share it, and a build always names exactly what it
- * has.
+ * The modules a build sent, as `modulesFrom` gives the app them to send:
+ * JSON, `{ "react/jsx-runtime": "19.2.3" }`. Throws for none, or anything
+ * else, as from an app that doesn't send them.
  */
-export function buildIdOf(modules: Modules): string {
-  const sorted = Object.keys(modules)
-    .sort()
-    .map((specifier) => [specifier, modules[specifier]]);
-  return createHash("sha256")
-    .update(JSON.stringify(sorted))
-    .digest("hex")
-    .slice(0, 16);
+export function parseModules(text: string | null | undefined): Modules {
+  if (!text) {
+    throw new Error(
+      "No modules were sent: the app's code predates them, or doesn't send its own.",
+    );
+  }
+  let modules: unknown;
+  try {
+    modules = JSON.parse(text);
+  } catch {
+    throw new Error(`The modules sent aren't JSON: ${text.slice(0, 80)}`);
+  }
+  if (
+    typeof modules !== "object" ||
+    modules === null ||
+    Array.isArray(modules) ||
+    !Object.values(modules).every((version) => typeof version === "string")
+  ) {
+    throw new Error(
+      `The modules sent aren't { specifier: version }: ${text.slice(0, 80)}`,
+    );
+  }
+  return modules as Modules;
 }

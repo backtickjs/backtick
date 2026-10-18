@@ -34,7 +34,7 @@ it("has no screen at an unknown path", () => {
   assert.equal(routes["/nowhere"], undefined);
 });
 
-it("asks a deprecated build to update, drawn with React Native alone", async () => {
+it("asks a build too old for its screens to update, drawn with React Native alone", async () => {
   const { getByText } = render(await drawScreen(<AppUpdateRequired />));
   assert.ok(getByText("Update MyStoryJar"));
 });
