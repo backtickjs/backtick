@@ -135,23 +135,27 @@ export function packageOf(specifier: string): string {
   return segments.slice(0, specifier.startsWith("@") ? 2 : 1).join("/");
 }
 
-// The version of its package a client import is typed against: as installed
-// where the importing file finds it, up its directories as `tsc` finds a config.
-export function installedVersion(
+// The module a client import is of, and the version of its package it's typed
+// against: as installed where the importing file finds it, up its directories
+// as `tsc` finds a config. Named by its package's own name, so an alias,
+// `"acme-ui-2": "npm:acme-ui@2"`, imports from `acme-ui`, as clients name it.
+export function installedModule(
   ts: typeof import("typescript"),
   specifier: string,
   fileName: string,
-): string | undefined {
+): { from: string; version: string } | undefined {
+  const installed = packageOf(specifier);
   const manifest = ts.findConfigFile(
     ts.sys.resolvePath(fileName),
     ts.sys.fileExists,
-    `node_modules/${packageOf(specifier)}/package.json`,
+    `node_modules/${installed}/package.json`,
   );
   if (manifest === undefined) return undefined;
-  const { version } = JSON.parse(ts.sys.readFile(manifest)!) as {
-    version: string;
-  };
-  return version;
+  // A linked folder may not name itself: the folder's name is the module's.
+  const { name = installed, version } = JSON.parse(
+    ts.sys.readFile(manifest)!,
+  ) as { name?: string; version: string };
+  return { from: name + specifier.slice(installed.length), version };
 }
 
 // For the runtime, a constant per value it names, in the declaration's place:
@@ -160,7 +164,7 @@ export function installedVersion(
 export function runtimeClientImport(
   ts: typeof import("typescript"),
   declaration: ts.ImportDeclaration & { moduleSpecifier: ts.StringLiteral },
-  version: string,
+  { from, version }: { from: string; version: string },
 ): ts.Statement[] {
   const f = ts.factory;
   const property = (key: string | ts.PropertyName, value: string) =>
@@ -184,7 +188,7 @@ export function runtimeClientImport(
                     "ClientImport",
                   ),
                   property("name", name),
-                  property("from", declaration.moduleSpecifier.text),
+                  property("from", from),
                   property("version", version),
                 ]),
               ),

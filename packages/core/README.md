@@ -58,6 +58,17 @@ import { greet } from "my-native-module" with { backtick: "client" };
 
 The package must be installed where the server's file finds it, for its types and its version. The client must provide it, and the server must list it in the bundler's `modules` at that version or a later one of the same major. The compiler writes each name as what `createImport({ name, from, version })` makes, which a hand-written import can call too.
 
+To draw for clients on two majors of a package, install both, one under an alias: `"acme-ui-2": "npm:acme-ui@2"`. An import from either is of `acme-ui`, the module clients provide, typed against its own version; `supports` picks the one a client can run:
+
+```ts
+import { Button } from "acme-ui" with { backtick: "client" };
+import { Button as Button2 } from "acme-ui-2" with { backtick: "client" };
+
+const save = supports(modules, "acme-ui", "^2.0.0")
+  ? cs`<$Button2 tone="primary">Save</$Button2>`
+  : cs`<$Button variant="primary">Save</$Button>`;
+```
+
 ## Every build in users' hands
 
 A store build carries the modules it was built with, at their versions, for as long as it's installed, while your server moves on. Each build sends the modules it carries, and the server bundles its screens for exactly those: there's nothing to record before a build ships, and any version of your server can draw for any build.

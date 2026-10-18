@@ -3,7 +3,7 @@ import {
   isClientImportDeclaration,
   packageOf,
   runtimeClientImport,
-  installedVersion,
+  installedModule,
 } from "./clientImports.js";
 import { compileScript, type Plugin } from "./compileScript.js";
 import { parseSourceFile } from "./parseFile.js";
@@ -80,12 +80,12 @@ export function transform(
       // installed.
       if (isClientImportDeclaration(ts, node)) {
         const { moduleSpecifier } = node;
-        const version = installedVersion(
+        const installed = installedModule(
           ts,
           moduleSpecifier.text,
           sourceFile.fileName,
         );
-        if (version === undefined) {
+        if (installed === undefined) {
           addDiagnostic?.({
             file: sourceFile,
             start: moduleSpecifier.getStart(sourceFile),
@@ -97,7 +97,7 @@ export function transform(
           });
           return undefined;
         }
-        return runtimeClientImport(ts, node, version);
+        return runtimeClientImport(ts, node, installed);
       }
       if (
         ts.isTaggedTemplateExpression(node) &&

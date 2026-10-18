@@ -1,0 +1,11 @@
+{
+  "name": "acme-ui",
+  "version": "2.0.0",
+  "private": true,
+  "description": "acme-ui's next major, for the tests: installed beside 1.x under another name, as `npm:acme-ui@2` installs it",
+  "type": "module",
+  "exports": "./index.ts",
+  "dependencies": {
+    "solid-js": "1.9.14"
+  }
+}

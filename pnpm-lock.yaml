@@ -1190,6 +1190,9 @@ importers:
       acme-ui:
         specifier: ^1.0.0
         version: link:fixtures/acme-ui
+      acme-ui-2:
+        specifier: link:aliased/acme-ui-2
+        version: link:aliased/acme-ui-2
       global-jsdom:
         specifier: ^30.0.0
         version: 30.0.0(jsdom@30.0.1(@noble/hashes@1.8.0))
