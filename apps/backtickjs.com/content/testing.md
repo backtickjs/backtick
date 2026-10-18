@@ -4,7 +4,8 @@
 
 A test draws a screen the way your app does, then taps it and checks what it
 shows. A new React Native project has one, `server/Home.test.tsx`, and runs it
-with `npm test`.
+with `npm test`, on Node even when your server runs on Bun. The web templates
+have no tests yet.
 
 ## What a test runs
 

@@ -1,5 +1,20 @@
 Each step shows `server/Home.tsx`, with what changed marked.
 
+The steps use the React Native template, the Quick start's default. On a web
+template, `--template react` or `--template solid-js`, the same steps work
+with the browser's elements:
+
+- **Elements:** `<$View>`, `<$ScrollView>` and `<$Text>` become `<div>`,
+  `<main>` and `<span>`, written without `$`: the browser draws them.
+- **Taps:** `<$Pressable onPress={…}>` becomes `<button onClick={…}>`.
+- **Styles:** `$StyleSheet.create({…})` becomes a plain style object:
+  `{ fontSize: 18 }` for React, `{ "font-size": "18px" }` for Solid.
+- **State, in Solid:** `$createSignal` and `$createStore`, imported from
+  `solid-js` and `solid-js/store` with `with { backtick: "client" }`, replace
+  `$useState`. A Solid component runs once, so a value computed from state is
+  a function you call, `total()`, or it never updates. Lists use `<$For>`.
+- **Reloading:** refresh the page.
+
 Start from the project the [Quick start](/docs/) creates, with the app running,
 and clear the welcome screen:
 
@@ -84,6 +99,10 @@ Now the screen can send its order there:
 
 ```
 
+On a web template, `server/index.tsx` draws the page with `toHtml`: pass
+`origin` to `<Home>` there, and add the same `/orders` route. It needs no
+`cors`, since the page and its server share an address.
+
 Add a coffee, then tap "Place order".
 
 - **`Home` takes props now.** The server reads them from the request, here the
@@ -118,7 +137,8 @@ Create `server/Home.test.tsx`:
 
 ```
 
-`npm test` runs it. The phone's `fetch` is answered in the test, so placing an
+`npm test` runs it. The web templates have no tests yet, so this step needs
+the React Native template. The phone's `fetch` is answered in the test, so placing an
 order doesn't need your server; the usual does, through `saveOrder`.
 [Testing screens](/docs/testing/) explains `drawScreen`, and what a test
 doesn't cover.

@@ -17,7 +17,7 @@ yarn create backtick-app
 bun create backtick-app
 ```
 
-It asks for a name, and nothing else: it copies the React Native template into that directory, installs with the package manager you ran it with (npm, pnpm, Yarn or Bun), and prints the commands to start. The server runs on Node, or on Bun when you ran it with Bun (`bun create`). Given the name on the command line, it asks nothing. Requires Node 22.15 or later.
+It asks for a name, and nothing else: it copies the React Native template into that directory, installs with the package manager you ran it with (npm, pnpm, Yarn or Bun), and prints the commands to start. The server runs on Node, or on Bun when you ran it with Bun (`bun create`) or passed `--runtime bun`; tests run on Node either way. Given the name on the command line, it asks nothing. Requires Node 22.15 or later.
 
 ## Options
 

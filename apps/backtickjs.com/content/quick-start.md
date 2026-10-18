@@ -61,16 +61,20 @@ What you just wrote:
 
 ```text
 my-app/
+├── app.json           Expo's config, with the plugin that registers your builds
+├── builds/            The app builds your server draws for, written by npm start
 ├── client/
 │   ├── App.tsx        The app: fetches each screen from your server and draws it
 │   └── moduleMap.ts   What screens may import from the app
 ├── server/
-│   ├── index.tsx      Your server: bundles a screen per request
+│   ├── index.tsx      Your server: its routes
+│   ├── screen.tsx     Bundles a screen for the build that asked for it
 │   ├── Home.tsx       The screen you just changed
 │   ├── Home.test.tsx  A test that draws the welcome screen, run by npm test
 │   ├── HelloWave.tsx  The welcome screen's waving hand, safe to delete
-│   └── test/          What the test draws the screen with
-├── scripts/           What npm start runs: your server and Expo together
+│   ├── test/          What the test draws the screen with
+│   └── tsconfig.json  TypeScript for your server
+├── scripts/           What npm start runs, and npm run reset-project
 └── package.json
 ```
 
@@ -80,9 +84,16 @@ server, and users get the change the next time they open the screen.
 `npm run typecheck` checks the app and your server, the code inside every
 `` cs`…` `` included. `npm test` draws the welcome screen and checks what it
 shows, so it fails now that you've changed the screen; the tutorial writes a
-test for yours. `npm run reset-project` replaces `server/Home.tsx` with a
+test for yours. Tests run on Node, even when your server runs on Bun. `npm run reset-project` replaces `server/Home.tsx` with a
 blank screen, rewrites the test to match, and deletes `HelloWave.tsx`, when
 you're ready to start your own.
+
+## A web page instead
+
+With `--template react` or `--template solid-js`, `npm start` runs your server
+on http://localhost:3000, which serves the page: open it in a browser, and
+refresh after you save. The project has no `client/`: `server/html.ts` writes
+the page, which loads React or Solid from a CDN. It has no tests yet.
 
 ## Next steps
 

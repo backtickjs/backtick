@@ -126,6 +126,18 @@ parents. Splice a copy without the back references.
 A client component, `` cs`(props) => …` ``, was drawn as a tag on your
 server. Draw it in a script: `` cs`<$Card />` ``.
 
+## From your server
+
+### No build id was sent / No modules for build "…"
+
+Your server can't tell what the app that asked carries: the request had no
+`x-build-id` header, or one that isn't registered in `builds/`. In
+development, `npm start` registers the build as Expo starts: close the app and
+open it again. To fetch a screen yourself, with `curl` say, send a registered
+id in `x-build-id`, after `npm run register-build`.
+[`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds)
+has the details.
+
 ## From your app
 
 ### The bundle requires "…", which this app doesn't provide
