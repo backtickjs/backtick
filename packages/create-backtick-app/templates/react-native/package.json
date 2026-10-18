@@ -55,7 +55,8 @@
   },
   "backtick": {
     "plugins": [
-      "@backtickjs/jsx-react/plugin"
+      "@backtickjs/jsx-react/plugin",
+      "@backtickjs/expo/plugin"
     ]
   }
 }

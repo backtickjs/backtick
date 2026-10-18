@@ -29,10 +29,13 @@
       "types": "./dist/server.d.ts",
       "default": "./dist/server.js"
     },
-    "./app.plugin.js": "./app.plugin.js"
+    "./plugin": {
+      "types": "./dist/plugin.d.ts",
+      "default": "./dist/plugin.js"
+    },
+    "./app.plugin": "./dist/app.plugin.js"
   },
   "files": [
-    "app.plugin.js",
     "dist",
     "!dist/._cache",
     "src"
@@ -52,9 +55,13 @@
   "dependencies": {
     "@backtickjs/core": "^0.2.2"
   },
+  "peerDependencies": {
+    "expo": "*"
+  },
   "devDependencies": {
     "@types/node": "^25.9.1",
     "@types/ws": "^8.18.2",
+    "expo": "~57.0.26",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3",
     "ws": "^8.22.0"

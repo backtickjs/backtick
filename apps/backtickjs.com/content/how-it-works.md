@@ -18,6 +18,9 @@ Your server runs with a loader, `@backtickjs/node-plugin` on Node or
 }
 ```
 
+An Expo app adds `"@backtickjs/expo/plugin"` after it, so its scripts are
+compiled as Expo compiles the app's own code for Hermes.
+
 A compiled script is a module: a function of its splices, which reads each
 splice where the script wrote it. A script compiles once, however many requests
 use it. The loaders' READMEs,

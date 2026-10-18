@@ -5,7 +5,8 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 import { WebSocketServer } from "ws";
 import { getBacktickExtra } from "../dist/index.js";
-import withBacktickExtra from "../dist/plugin.js";
+import withBacktickExtra from "../dist/app.plugin.js";
+import babel from "../dist/plugin.js";
 import { reloadExpo } from "../dist/server.js";
 
 // An app with React installed.
@@ -96,5 +97,29 @@ describe("reloadExpo", () => {
     await new Promise((resolve) => server.close(resolve));
     reloadExpo(port);
     await new Promise((resolve) => setTimeout(resolve, 200));
+  });
+});
+
+describe("the Babel step", () => {
+  const step = babel();
+
+  it("moves an async arrow's default parameter into its body, for Hermes V1", () => {
+    const { code } = step(
+      "export default async (path, init = {}) => [await path, init];",
+      "script.jsx",
+    );
+    assert.match(code, /async \(path, _p\) => \{/);
+    assert.match(code, /var init = _p === undefined \? \{\} : _p;/);
+  });
+
+  it("keeps the script's imports, its modern syntax, and its platform checks", () => {
+    const { code, map } = step(
+      `import { Platform } from "react-native";
+export default (props) => [Platform.OS, props?.x ?? 0, { ...props }];`,
+      "script.jsx",
+    );
+    assert.match(code, /^import \{ Platform \} from "react-native";/);
+    assert.match(code, /Platform\.OS, props\?\.x \?\? 0, \{\n\s*\.\.\.props/);
+    assert.equal(JSON.parse(map).version, 3);
   });
 });
