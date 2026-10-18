@@ -43,8 +43,9 @@ hands to `execRoot`:
 ```
 
 Install the package in your app as usual, `npx expo install expo-haptics`, so
-it's built into the app and its native code ships with it. Your server reads
-the module map too, without running it, so it knows what each build of your
+it's built into the app and its native code ships with it, and listed in
+`package.json`'s dependencies. The app sends your server the modules its map
+offers, at the versions installed, so the server knows what each build of your
 app carries:
 
 ```tsx file=react-native-and-packages/server/index.tsx

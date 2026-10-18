@@ -4,7 +4,6 @@
   "backtick": {
     "plugins": [
       "@backtickjs/jsx-react/plugin"
-    ],
-    "clientRoot": "client"
+    ]
   }
 }

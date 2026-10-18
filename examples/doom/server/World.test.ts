@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
 import { fileURLToPath } from "node:url";
-import { installedModules } from "@backtickjs/builds";
+import { installedPackages, modulesOf } from "@backtickjs/builds";
 import { bundler } from "@backtickjs/bundler";
 import * as Fiber from "@react-three/fiber";
 import ReactThreeTestRenderer from "@react-three/test-renderer";
@@ -17,15 +17,16 @@ import { type Input, type Stats, World, type WorldProps } from "./World.js";
 
 // What the app's web build provides, as client/moduleMap.web.ts says: R3F's
 // web build, which the test renderer draws without a GPU.
-const modules = installedModules(
-  fileURLToPath(new URL("..", import.meta.url)),
-  "web",
-);
 const moduleMap = {
   react: React,
   "react/jsx-runtime": JSXRuntime,
   "@react-three/fiber/native": Fiber,
 };
+// at the versions the app installs, as its build sends them
+const modules = modulesOf(
+  moduleMap,
+  installedPackages(fileURLToPath(new URL("..", import.meta.url))),
+);
 
 // `World` as the phone gets it: bundled by the server, run by the app.
 const bundle = await bundler.build({ input: World, modules });

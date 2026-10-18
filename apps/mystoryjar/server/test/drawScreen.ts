@@ -1,3 +1,5 @@
+import { fileURLToPath } from "node:url";
+import { installedPackages, modulesOf } from "@backtickjs/builds";
 import { bundler } from "@backtickjs/bundler";
 import type { Spliceable } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
@@ -6,7 +8,6 @@ import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNativeWeb from "react-native-web";
 import type { moduleMap } from "../../client/moduleMap.web.ts";
-import { installed } from "../builds.js";
 
 // What the app's web build provides, as its module map says, with React
 // Native's web build standing in for React Native, a navigator that records
@@ -79,6 +80,12 @@ const modules: Record<keyof typeof moduleMap, unknown> = {
   "expo-file-system": await import("../../client/fileSystem.web.js"),
 };
 
+/** The web build's modules, at the versions the app installs, as it sends them. */
+export const webModules = modulesOf(
+  modules,
+  installedPackages(fileURLToPath(new URL("../..", import.meta.url))),
+);
+
 type Picked =
   | { canceled: true; assets: null }
   | { canceled: false; assets: { uri: string; mimeType?: string }[] };
@@ -99,7 +106,7 @@ export async function drawScreen<T extends Spliceable>(input: T) {
   secureStore.clear();
   const bundle = await bundler.build({
     input,
-    modules: installed("web"),
+    modules: webModules,
   });
   const { code } = bundle.generate({ format: "cjs" });
   return execRoot(code, modules);

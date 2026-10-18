@@ -1,9 +1,8 @@
-import { modulesFrom } from "@backtickjs/builds/client";
+import { modulesOf } from "@backtickjs/builds/client";
 import type { Bundle } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 import { QueryClient } from "@tanstack/react-query";
 import Constants from "expo-constants";
-import { Platform } from "react-native";
 import { moduleMap } from "./moduleMap";
 
 // Your Backtick server runs on the computer Expo was started from.
@@ -11,8 +10,10 @@ const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
 
 // The modules this build carries, for the server to bundle what it can run:
-// `@backtickjs/builds/expo`, in app.json, adds them.
-const modules = modulesFrom(Constants.expoConfig?.extra, Platform.OS);
+// `@backtickjs/builds/expo`, in app.json, adds its packages' versions.
+const modules = JSON.stringify(
+  modulesOf(moduleMap, Constants.expoConfig?.extra?.backtick?.packages),
+);
 
 /**
  * What your server answers at `path`: its bundle, fetched with this build's

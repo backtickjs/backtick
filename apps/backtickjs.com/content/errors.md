@@ -132,13 +132,19 @@ server. Draw it in a script: `` cs`<$Card />` ``.
 
 Your server can't tell what the app that asked carries: the request had no
 `x-backtick-modules` header, or one that isn't JSON of
-`{ "specifier": "version" }`. Check the app sends what `modulesFrom` gives it.
+`{ "specifier": "version" }`. Check the app sends what `modulesOf` gives it.
 To fetch a screen yourself, with `curl` say, send the modules in
 `x-backtick-modules`: `{"react":"19.2.3","react/jsx-runtime":"19.2.3","react-native":"0.86.3"}`.
 [`@backtickjs/builds`](https://github.com/backtickjs/backtick/tree/main/packages/builds)
 has the details.
 
 ## From your app
+
+### The module map offers "…", but … isn't in package.json's dependencies
+
+The app can't say which version of the package it carries. Install it in the
+app, `npx expo install <package>`, which lists it, then close the app and open
+it again.
 
 ### The bundle requires "…", which this app doesn't provide
 

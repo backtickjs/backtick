@@ -1,4 +1,4 @@
-import { modulesFrom } from "@backtickjs/builds/client";
+import { modulesOf } from "@backtickjs/builds/client";
 import type { Bundle } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 import Constants from "expo-constants";
@@ -11,7 +11,7 @@ import {
   useLayoutEffect,
   useState,
 } from "react";
-import { ActivityIndicator, AppState, Platform, Text } from "react-native";
+import { ActivityIndicator, AppState, Text } from "react-native";
 import {
   ErrorBoundary,
   type FallbackProps,
@@ -24,8 +24,10 @@ const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
 
 // The modules this build carries, for the server to bundle screens it can
-// run: `@backtickjs/builds/expo`, in app.json, adds them.
-const modules = modulesFrom(Constants.expoConfig?.extra, Platform.OS);
+// run: `@backtickjs/builds/expo`, in app.json, adds its packages' versions.
+const modules = JSON.stringify(
+  modulesOf(moduleMap, Constants.expoConfig?.extra?.backtick?.packages),
+);
 
 // A screen as fetched, with what each stage of getting it cost so far:
 // `Screen` adds the render and logs the whole pipeline.

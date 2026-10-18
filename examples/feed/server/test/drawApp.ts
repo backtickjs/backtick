@@ -1,5 +1,5 @@
 import { fileURLToPath } from "node:url";
-import { installedModules } from "@backtickjs/builds";
+import { installedPackages, modulesOf } from "@backtickjs/builds";
 import type { Bundle } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 import * as ReactQuery from "@tanstack/react-query";
@@ -12,10 +12,19 @@ import * as ReactNativeWeb from "react-native-web";
 import { app } from "../app.js";
 
 // The app's web build, as client/moduleMap.ts says, with React Native's web build
-// standing in for React Native: it sends its modules, as the app does.
-const modules = installedModules(
-  fileURLToPath(new URL("../..", import.meta.url)),
-  "web",
+// standing in for React Native: it sends its modules, at the versions the app
+// installs, as the app does.
+const moduleMap = {
+  react: React,
+  "react/jsx-runtime": JSXRuntime,
+  "react-native": ReactNativeWeb,
+  "@tanstack/react-query": ReactQuery,
+  "react-error-boundary": ReactErrorBoundary,
+  "react-native-safe-area-context": { SafeAreaView: ReactNativeWeb.View },
+};
+const modules = modulesOf(
+  moduleMap,
+  installedPackages(fileURLToPath(new URL("../..", import.meta.url))),
 );
 const headers = { "x-backtick-modules": JSON.stringify(modules) };
 
@@ -45,15 +54,6 @@ export async function fetchBundle(
   const bundle = await answer(init.method ?? "GET", path, init.body);
   return execRoot(bundle, moduleMap);
 }
-
-const moduleMap = {
-  react: React,
-  "react/jsx-runtime": JSXRuntime,
-  "react-native": ReactNativeWeb,
-  "@tanstack/react-query": ReactQuery,
-  "react-error-boundary": ReactErrorBoundary,
-  "react-native-safe-area-context": { SafeAreaView: ReactNativeWeb.View },
-};
 
 /**
  * The screen at `path`, fetched and run as the app runs it, and drawn by

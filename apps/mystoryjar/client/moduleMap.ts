@@ -15,8 +15,8 @@ import * as Svg from "react-native-svg";
 
 /**
  * What a screen may require on iOS and Android, as the app imports it:
- * `moduleMap.web.ts` is the web's. Imports and a table, nothing else: Node
- * reads it without running it, to name the modules each build carries.
+ * `moduleMap.web.ts` is the web's. The app sends the server what it offers,
+ * at the versions it's built with.
  */
 export const moduleMap = {
   react: React,

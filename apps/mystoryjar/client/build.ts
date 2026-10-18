@@ -1,7 +1,9 @@
-import { modulesFrom } from "@backtickjs/builds/client";
+import { modulesOf } from "@backtickjs/builds/client";
 import Constants from "expo-constants";
-import { Platform } from "react-native";
+import { moduleMap } from "./moduleMap";
 
-// The modules this build carries on this platform, so the server bundles
-// screens it can run: this app sends them as a header.
-export const modules = modulesFrom(Constants.expoConfig?.extra, Platform.OS);
+// The modules this build carries, so the server bundles screens it can run:
+// this app sends them as a header.
+export const modules = JSON.stringify(
+  modulesOf(moduleMap, Constants.expoConfig?.extra?.backtick?.packages),
+);

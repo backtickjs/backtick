@@ -83,7 +83,6 @@
     }
   },
   "backtick": {
-    "clientRoot": "client",
     "plugins": [
       "@backtickjs/jsx-react/plugin"
     ]

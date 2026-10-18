@@ -1,23 +1,43 @@
 // What the app imports: nothing of Node, so its bundler can take it.
+import type { Modules } from "@backtickjs/bundler";
+
+// The package a module specifier is in: `react` for `react/jsx-runtime`.
+function packageOf(specifier: string): string {
+  const segments = specifier.split("/");
+  return segments.slice(0, specifier.startsWith("@") ? 2 : 1).join("/");
+}
 
 /**
- * The modules this build carries on `platform`, from the app config's
- * `extra.backtick`, where the `@backtickjs/builds/expo` config plugin puts them: as
- * JSON, for the app to send however it reaches its server, a header, a
- * GraphQL variable, and the server to bundle screens it can run. Throws for
- * an app config without them, as the app starts: no screen could be drawn
- * for a build that doesn't say what it has.
+ * The modules `moduleMap` offers, each at the version in `packages` of the
+ * package it comes from: what the app sends however it reaches its server, a
+ * header, a GraphQL variable, for the server to bundle screens it can run.
+ * The `@backtickjs/builds/expo` config plugin puts the installed versions of
+ * the app's dependencies in the app config. Throws as the app starts without
+ * them, or for a module from a package that isn't a dependency.
  *
- *     const modules = modulesFrom(Constants.expoConfig?.extra, Platform.OS);
+ *     const modules = modulesOf(
+ *       moduleMap,
+ *       Constants.expoConfig?.extra?.backtick?.packages,
+ *     );
  */
-export function modulesFrom(extra: unknown, platform: string): string {
-  const modules = (
-    extra as { backtick?: { modules?: Record<string, unknown> } } | undefined
-  )?.backtick?.modules?.[platform];
-  if (typeof modules !== "object" || modules === null) {
+export function modulesOf(
+  moduleMap: object,
+  packages: Readonly<Record<string, string>> | undefined,
+): Modules {
+  if (packages === undefined) {
     throw new Error(
-      `No modules for ${platform} in the app config: is @backtickjs/builds/expo in app.json's plugins?`,
+      "No packages in the app config: is @backtickjs/builds/expo in app.json's plugins?",
     );
   }
-  return JSON.stringify(modules);
+  return Object.fromEntries(
+    Object.keys(moduleMap).map((specifier) => {
+      const version = packages[packageOf(specifier)];
+      if (version === undefined) {
+        throw new Error(
+          `The module map offers ${JSON.stringify(specifier)}, but ${packageOf(specifier)} isn't in package.json's dependencies.`,
+        );
+      }
+      return [specifier, version];
+    }),
+  );
 }

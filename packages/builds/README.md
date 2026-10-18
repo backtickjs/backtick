@@ -10,7 +10,7 @@ npm install @backtickjs/builds
 
 ## How it works
 
-1. **The app declares what it offers to screens** in a module map, one per platform as Metro picks files: `client/moduleMap.ts` for iOS and Android, and `client/moduleMap.web.ts` for the web. A module map is imports and a table, nothing else, so it can be read without running it:
+1. **The app declares what it offers to screens** in a module map, which it hands to `execRoot`. A platform that differs gets its own file, as Metro picks files: `client/moduleMap.web.ts` for the web.
 
    ```ts
    // client/moduleMap.ts
@@ -27,11 +27,9 @@ npm install @backtickjs/builds
    };
    ```
 
-   Each entry is `"specifier": Name`, with `Name` imported above. An entry that decides at runtime, like `native ? Facebook : {}`, is an error. What a platform lacks, its map leaves out.
+   Each module comes from a package in `package.json`'s dependencies.
 
-   The module maps are in the app's client root: the folder `package.json` names, as `"backtick": { "clientRoot": "client" }`, or the project root.
-
-2. **Each build knows its modules:** those its platform's map offers, each at the installed version of its package. In an Expo app, this package's config plugin, `@backtickjs/builds/expo`, puts them in the app config's `extra.backtick.modules`:
+2. **Each build knows its packages' versions.** This package's Expo config plugin, `@backtickjs/builds/expo`, puts the installed version of each of the app's dependencies in the app config's `extra.backtick.packages`:
 
    ```json
    // app.json
@@ -42,16 +40,19 @@ npm install @backtickjs/builds
    }
    ```
 
-3. **The app sends them** however it reaches its server: a header, a GraphQL variable. `modulesFrom`, from `@backtickjs/builds/client`, reads them as JSON to send:
+3. **The app sends its modules** however it reaches its server: a header, a GraphQL variable. `modulesOf`, from `@backtickjs/builds/client`, gives each module its package's version:
 
    ```ts
-   import { modulesFrom } from "@backtickjs/builds/client";
+   import { modulesOf } from "@backtickjs/builds/client";
+   import { moduleMap } from "./moduleMap";
 
-   const modules = modulesFrom(Constants.expoConfig?.extra, Platform.OS);
+   const modules = JSON.stringify(
+     modulesOf(moduleMap, Constants.expoConfig?.extra?.backtick?.packages),
+   );
    fetch(url, { headers: { "x-backtick-modules": modules } });
    ```
 
-   It throws as the app starts if the plugin isn't in `app.json`.
+   It throws as the app starts if the plugin isn't in `app.json`, or if a module comes from a package that isn't a dependency.
 
 4. **The server bundles for them:**
 
@@ -67,7 +68,7 @@ npm install @backtickjs/builds
 
    To draw differently for builds that lack a module, ask with `supports` from [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler), the same check the bundler makes: `supports(modules, "react-native-fbsdk-next", "^13")`.
 
-In development, a reload keeps the app config the app was opened with, and its modules with it: after a change to the module map or the packages, close the app and open it again.
+In development, a reload keeps the app config the app was opened with, and its versions with it: after upgrading a package, close the app and open it again. A change to the module map needs only a reload.
 
 ## Old builds
 
@@ -81,13 +82,20 @@ const input = supports(modules, "react-native", ">=0.86") ? (
 );
 ```
 
+## Tests
+
+A test draws a screen as the app would, with a module map of its own, stand-ins included. Its modules are that map's, at the versions the app installs:
+
+```ts
+const modules = modulesOf(moduleMap, installedPackages(projectRoot));
+```
+
 ## API
 
-- `@backtickjs/builds/expo` in `app.json`'s `plugins`: the Expo config plugin, which sets `extra.backtick.modules` to `installedModules(projectRoot, platform)` on `ios`, `android` and `web`.
-- `modulesFrom(extra, platform)`, from `@backtickjs/builds/client`: this build's modules, as JSON to send.
+- `@backtickjs/builds/expo` in `app.json`'s `plugins`: the Expo config plugin, which sets `extra.backtick.packages` to `installedPackages(projectRoot)`.
+- `modulesOf(moduleMap, packages)`, from `@backtickjs/builds/client` or `@backtickjs/builds`: the modules `moduleMap` offers, each at its package's version.
 - `parseModules(text)`: the modules a build sent, for `bundler.build`.
-- `installedModules(projectRoot, platform)`: the modules the build the app at `projectRoot` now makes carries, as tests bundle for.
-- `readModuleMap(file)`, `clientRootOf(projectRoot)`, `moduleMapFile(projectRoot, platform)`: the steps, for tools of your own.
+- `installedPackages(projectRoot)`: the installed version of each of the app's dependencies.
 
 ## Related
 

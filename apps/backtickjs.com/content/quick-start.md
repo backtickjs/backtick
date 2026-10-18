@@ -61,7 +61,7 @@ What you just wrote:
 
 ```text
 my-app/
-├── app.json           Expo's config, with the plugin that lists your build's modules
+├── app.json           Expo's config, with the plugin that records your packages' versions
 ├── client/
 │   ├── App.tsx        The app: fetches each screen from your server and draws it
 │   └── moduleMap.ts   What screens may import from the app

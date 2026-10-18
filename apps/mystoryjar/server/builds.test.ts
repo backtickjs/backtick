@@ -1,21 +1,11 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
-import { supports } from "@backtickjs/bundler";
-import { installed, updateRequired } from "./builds.js";
+import { updateRequired } from "./builds.js";
 import { screenRequestOf } from "./request.js";
+import { webModules } from "./test/drawScreen.js";
 
-it("gives the web build no native sign-in SDK", () => {
-  const ios = installed("ios");
-  const web = installed("web");
-  assert.ok(supports(ios, "react-native-fbsdk-next", "*"));
-  assert.ok(!supports(web, "react-native-fbsdk-next", "*"));
-  assert.ok(!supports(web, "@react-native-google-signin/google-signin", "*"));
-});
-
-it("draws for the builds this code makes", () => {
-  for (const platform of ["ios", "android", "web"] as const) {
-    assert.equal(updateRequired(installed(platform)), false);
-  }
+it("draws for the build this code makes", () => {
+  assert.equal(updateRequired(webModules), false);
 });
 
 it("draws for the modules the app sent, however it sent them", async () => {
@@ -28,9 +18,9 @@ it("draws for the modules the app sent, however it sent them", async () => {
   };
   const web = await screenRequestOf({
     ...sent,
-    modules: JSON.stringify(installed("web")),
+    modules: JSON.stringify(webModules),
   });
-  assert.deepEqual(web.modules, installed("web"));
+  assert.deepEqual(web.modules, webModules);
   await assert.rejects(
     screenRequestOf({ ...sent, modules: null }),
     /No modules were sent/,

@@ -1,13 +1,6 @@
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import type { Modules } from "@backtickjs/bundler";
-import { moduleMapFile, type Platform, readModuleMap } from "./moduleMap.js";
-
-// The package a module specifier is in: `react` for `react/jsx-runtime`.
-function packageOf(specifier: string): string {
-  const segments = specifier.split("/");
-  return segments.slice(0, specifier.startsWith("@") ? 2 : 1).join("/");
-}
 
 // Where a package is installed for the app at `projectRoot`, as Node finds
 // it: in its node_modules, or the nearest above, as a workspace hoists it.
@@ -22,36 +15,28 @@ function installed(projectRoot: string, name: string): string {
 }
 
 /**
- * The modules the module map for `platform` offers, each at the installed
- * version of the package it comes from, in the app at `projectRoot`: what a
- * build made from it now carries there.
+ * The installed version of each of the app's dependencies, at `projectRoot`:
+ * what a build made from it now carries there, for `modulesOf`.
  */
-export function installedModules(
-  projectRoot: string,
-  platform: Platform,
-): Modules {
-  const specifiers = readModuleMap(moduleMapFile(projectRoot, platform));
-  const versions = new Map<string, string>();
-  const versionOf = (name: string) => {
-    let version = versions.get(name);
-    if (version === undefined) {
-      const file = installed(projectRoot, name);
-      version = (JSON.parse(readFileSync(file, "utf8")) as { version: string })
-        .version;
-      versions.set(name, version);
-    }
-    return version;
-  };
+export function installedPackages(projectRoot: string): Record<string, string> {
+  const { dependencies = {} } = JSON.parse(
+    readFileSync(join(projectRoot, "package.json"), "utf8"),
+  ) as { dependencies?: Record<string, string> };
   return Object.fromEntries(
-    [...specifiers]
-      .sort()
-      .map((specifier) => [specifier, versionOf(packageOf(specifier))]),
+    Object.keys(dependencies).map((name) => [
+      name,
+      (
+        JSON.parse(readFileSync(installed(projectRoot, name), "utf8")) as {
+          version: string;
+        }
+      ).version,
+    ]),
   );
 }
 
 /**
- * The modules a build sent, as `modulesFrom` gives the app them to send:
- * JSON, `{ "react/jsx-runtime": "19.2.3" }`. Throws for none, or anything
+ * The modules a build sent, `modulesOf` as JSON:
+ * `{ "react/jsx-runtime": "19.2.3" }`. Throws for none, or anything
  * else, as from an app that doesn't send them.
  */
 export function parseModules(text: string | null | undefined): Modules {

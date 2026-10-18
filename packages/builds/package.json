@@ -54,8 +54,7 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/bundler": "^0.2.0",
-    "typescript": "^6.0.3"
+    "@backtickjs/bundler": "^0.2.0"
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
