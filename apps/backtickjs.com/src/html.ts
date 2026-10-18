@@ -36,9 +36,9 @@ export async function toHtml({
       $render($Page, app);
     }`,
     modules: {
-      "solid-js": "1.9.14",
-      "solid-js/store": "1.9.14",
-      "solid-js/web": "1.9.14",
+      "solid-js": "1.9.17",
+      "solid-js/store": "1.9.17",
+      "solid-js/web": "1.9.17",
     },
   });
 
@@ -84,9 +84,9 @@ export async function toHtml({
     <script type="importmap">
       {
         "imports": {
-          "solid-js": "https://cdn.jsdelivr.net/npm/solid-js@1.9.14/dist/solid.js",
-          "solid-js/web": "https://cdn.jsdelivr.net/npm/solid-js@1.9.14/web/dist/web.js",
-          "solid-js/store": "https://cdn.jsdelivr.net/npm/solid-js@1.9.14/store/dist/store.js"
+          "solid-js": "https://cdn.jsdelivr.net/npm/solid-js@1.9.17/dist/solid.js",
+          "solid-js/web": "https://cdn.jsdelivr.net/npm/solid-js@1.9.17/web/dist/web.js",
+          "solid-js/store": "https://cdn.jsdelivr.net/npm/solid-js@1.9.17/store/dist/store.js"
         }
       }
     </script>

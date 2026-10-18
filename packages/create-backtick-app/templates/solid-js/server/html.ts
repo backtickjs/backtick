@@ -5,9 +5,9 @@ import type { JSX } from "@backtickjs/jsx-solid/jsx-runtime";
 
 // The version of Solid the page loads, below: what each page is bundled for.
 const modules = {
-  "solid-js": "1.9.14",
-  "solid-js/store": "1.9.14",
-  "solid-js/web": "1.9.14",
+  "solid-js": "1.9.17",
+  "solid-js/store": "1.9.17",
+  "solid-js/web": "1.9.17",
 };
 
 // Development unless NODE_ENV says production, as hosts set it for a deploy.
@@ -35,9 +35,9 @@ export async function toHtml(element: JSX.Element): Promise<string> {
     <script type="importmap">
       {
         "imports": {
-          "solid-js": "https://cdn.jsdelivr.net/npm/solid-js@1.9.14/dist/solid.js",
-          "solid-js/web": "https://cdn.jsdelivr.net/npm/solid-js@1.9.14/web/dist/web.js",
-          "solid-js/store": "https://cdn.jsdelivr.net/npm/solid-js@1.9.14/store/dist/store.js"
+          "solid-js": "https://cdn.jsdelivr.net/npm/solid-js@1.9.17/dist/solid.js",
+          "solid-js/web": "https://cdn.jsdelivr.net/npm/solid-js@1.9.17/web/dist/web.js",
+          "solid-js/store": "https://cdn.jsdelivr.net/npm/solid-js@1.9.17/store/dist/store.js"
         }
       }
     </script>

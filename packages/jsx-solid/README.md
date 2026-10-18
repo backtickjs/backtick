@@ -80,9 +80,9 @@ const element = <Home />;
 const bundle = await bundler.build({
   input: cs`$render(() => $element, document.getElementById("app")!)`,
   modules: {
-    "solid-js": "1.9.14",
-    "solid-js/store": "1.9.14",
-    "solid-js/web": "1.9.14",
+    "solid-js": "1.9.17",
+    "solid-js/store": "1.9.17",
+    "solid-js/web": "1.9.17",
   },
 });
 const { code } = bundle.generate({ format: "es" });

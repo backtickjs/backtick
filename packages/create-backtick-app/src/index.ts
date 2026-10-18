@@ -192,8 +192,8 @@ rewriteJson(path.join(target, "package.json"), (json) => {
   json.name = slug;
   // The templates ship Node's loader and scripts; another runtime gets its own.
   const loader = RUNTIMES[runtimeName]!.loader;
+  const version = json.dependencies["@backtickjs/node-plugin"];
   if (!(loader in json.dependencies)) {
-    const version = json.dependencies["@backtickjs/node-plugin"];
     delete json.dependencies["@backtickjs/node-plugin"];
     json.dependencies = Object.fromEntries(
       Object.entries({ ...json.dependencies, [loader]: version }).sort(),
@@ -214,6 +214,19 @@ rewriteJson(path.join(target, "package.json"), (json) => {
     const events: Record<string, string> = json.nodemonConfig.events ?? {};
     for (const [name, command] of Object.entries(events)) {
       events[name] = bun(command);
+    }
+    // What still runs on Node, as the tests do, keeps Node's loader.
+    if (
+      Object.values<string>(json.scripts).some((command) =>
+        command.includes("@backtickjs/node-plugin"),
+      )
+    ) {
+      json.devDependencies = Object.fromEntries(
+        Object.entries({
+          ...json.devDependencies,
+          "@backtickjs/node-plugin": version,
+        }).sort(),
+      );
     }
   }
 });

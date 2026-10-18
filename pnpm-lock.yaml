@@ -71,8 +71,8 @@ importers:
         specifier: ^4.5.0
         version: 4.5.0
       solid-js:
-        specifier: 1.9.14
-        version: 1.9.14
+        specifier: 1.9.17
+        version: 1.9.17
       tailwindcss:
         specifier: ^4.3.3
         version: 4.3.3
@@ -196,8 +196,8 @@ importers:
         specifier: ^0.2.0
         version: link:../../packages/tspatch-plugin
       solid-js:
-        specifier: 1.9.14
-        version: 1.9.14
+        specifier: 1.9.17
+        version: 1.9.17
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.2.0
@@ -871,8 +871,8 @@ importers:
         specifier: ^4.13.13
         version: 4.13.13
       solid-js:
-        specifier: 1.9.14
-        version: 1.9.14
+        specifier: 1.9.17
+        version: 1.9.17
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -6948,8 +6948,18 @@ packages:
     peerDependencies:
       seroval: ^1.0
 
+  seroval-plugins@1.6.9:
+    resolution: {integrity: sha512-kiDK/Tb8IWZ61WEU8pA2PDmAuw37gKph9Y77OZlD56mg0Y2g0Bg7gZ1HeHhs5d40w+nRoUq/wj08V26ilbez9g==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      seroval: ^1.0
+
   seroval@1.5.6:
     resolution: {integrity: sha512-rVQVWjjSvlINzaQPZH5JFqsqEsIWdTxY3iJZCnTL/5gQbXIRooVZKI60tVCkOVfzcRPejboxO2t0P89dg5mQaA==}
+    engines: {node: '>=10'}
+
+  seroval@1.6.9:
+    resolution: {integrity: sha512-UeEzHwAK+yl0YLbsvROV1t5yMYEwZZ0CfKYxDvUgS2fO9Vxdf8djqVIB+OuVpuawRNPqw68LE1Du/GMsW2ZPqA==}
     engines: {node: '>=10'}
 
   serve-static@1.16.3:
@@ -7075,6 +7085,9 @@ packages:
 
   solid-js@1.9.14:
     resolution: {integrity: sha512-sAEXC0Kk0S1EDg+8ysEWJDbYhA3RRoEjwuySUGlKIemeo0I5YZfOyumNjNs9Sv3y2nmhD+0rW66ag2HsMuQiGQ==}
+
+  solid-js@1.9.17:
+    resolution: {integrity: sha512-4GAmLOWPfNV8H9Jfn2LSFTpNEG6jiOKPiwd5lnLGQtehHaX6l3TOLzJqQ7mqwB/3k1Yy3zyumFVopmc/tm34ow==}
 
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
@@ -14605,7 +14618,13 @@ snapshots:
     dependencies:
       seroval: 1.5.6
 
+  seroval-plugins@1.6.9(seroval@1.6.9):
+    dependencies:
+      seroval: 1.6.9
+
   seroval@1.5.6: {}
+
+  seroval@1.6.9: {}
 
   serve-static@1.16.3:
     dependencies:
@@ -14779,6 +14798,12 @@ snapshots:
       csstype: 3.2.3
       seroval: 1.5.6
       seroval-plugins: 1.5.6(seroval@1.5.6)
+
+  solid-js@1.9.17:
+    dependencies:
+      csstype: 3.2.3
+      seroval: 1.6.9
+      seroval-plugins: 1.6.9(seroval@1.6.9)
 
   source-map-js@1.2.1: {}
 

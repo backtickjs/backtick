@@ -141,16 +141,24 @@ test("a project on Bun runs its server with Bun", () => {
     ) as {
       scripts: Record<string, string>;
       nodemonConfig: { events?: Record<string, string> };
+      dependencies: Record<string, string>;
+      devDependencies: Record<string, string>;
     };
     assert.equal(
       manifest.scripts[script],
       'nodemon --exec "bun --preload @backtickjs/bun-plugin server/index.tsx"',
     );
+    assert.ok(!("@backtickjs/node-plugin" in manifest.dependencies));
     if (template === "react-native") {
       assert.equal(
         manifest.nodemonConfig.events?.start,
         "bun scripts/reload-expo.mjs",
       );
+      // Its tests still run on Node, with Node's loader.
+      assert.match(manifest.scripts.test!, /--import @backtickjs\/node-plugin/);
+      assert.ok("@backtickjs/node-plugin" in manifest.devDependencies);
+    } else {
+      assert.ok(!("@backtickjs/node-plugin" in manifest.devDependencies));
     }
   }
 });
