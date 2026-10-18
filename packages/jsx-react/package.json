@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/jsx-react",
-  "version": "0.1.11",
+  "version": "0.2.0",
   "description": "React's JSX for Backtick: a JSX runtime for server components, and the compile plugin for scripts",
   "keywords": [
     "backtick",
@@ -59,7 +59,7 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/core": "^0.1.11"
+    "@backtickjs/core": "^0.2.0"
   },
   "peerDependencies": {
     "react": "^19.2.3",
@@ -67,11 +67,11 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@backtickjs/bundler": "^0.1.11",
-    "@backtickjs/compiler": "^0.1.11",
-    "@backtickjs/prettier-plugin": "^0.1.11",
-    "@backtickjs/tsc": "^0.1.11",
-    "@backtickjs/tspatch-plugin": "^0.1.11",
+    "@backtickjs/bundler": "^0.2.0",
+    "@backtickjs/compiler": "^0.2.0",
+    "@backtickjs/prettier-plugin": "^0.2.0",
+    "@backtickjs/tsc": "^0.2.0",
+    "@backtickjs/tspatch-plugin": "^0.2.0",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.7",
     "global-jsdom": "^30.0.0",

@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/jsx-solid",
-  "version": "0.1.11",
+  "version": "0.2.0",
   "description": "Solid's JSX for Backtick: a JSX runtime for server components, and the compile plugin for scripts",
   "keywords": [
     "backtick",
@@ -57,16 +57,16 @@
   },
   "dependencies": {
     "@babel/core": "^7.29.7",
-    "@backtickjs/core": "^0.1.11",
+    "@backtickjs/core": "^0.2.0",
     "babel-preset-solid": "1.9.12"
   },
   "peerDependencies": {
     "solid-js": "^1.9.14"
   },
   "devDependencies": {
-    "@backtickjs/prettier-plugin": "^0.1.11",
-    "@backtickjs/tsc": "^0.1.11",
-    "@backtickjs/tspatch-plugin": "^0.1.11",
+    "@backtickjs/prettier-plugin": "^0.2.0",
+    "@backtickjs/tsc": "^0.2.0",
+    "@backtickjs/tspatch-plugin": "^0.2.0",
     "@types/babel__core": "^7.20.5",
     "prettier": "^3.6.2",
     "solid-js": "1.9.14",

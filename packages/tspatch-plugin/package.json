@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/tspatch-plugin",
-  "version": "0.1.11",
+  "version": "0.2.0",
   "description": "Compiles Backtick client scripts when you build your server ahead of time with ts-patch's tspc",
   "keywords": [
     "backtick",
@@ -48,7 +48,7 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/compiler": "^0.1.11"
+    "@backtickjs/compiler": "^0.2.0"
   },
   "peerDependencies": {
     "ts-patch": "^4.0.1",

@@ -20,11 +20,11 @@
     "format:check": "prettier --check --ignore-unknown ."
   },
   "dependencies": {
-    "@backtickjs/builds": "^0.1.11",
-    "@backtickjs/bundler": "^0.1.11",
-    "@backtickjs/core": "^0.1.11",
-    "@backtickjs/node-plugin": "^0.1.11",
-    "@backtickjs/jsx-react": "^0.1.11",
+    "@backtickjs/builds": "^0.2.0",
+    "@backtickjs/bundler": "^0.2.0",
+    "@backtickjs/core": "^0.2.0",
+    "@backtickjs/node-plugin": "^0.2.0",
+    "@backtickjs/jsx-react": "^0.2.0",
     "@expo-google-fonts/noto-sans-jp": "^0.4.4",
     "@hono/node-server": "^2.1.4",
     "@react-native-google-signin/google-signin": "^16.1.5",
@@ -59,8 +59,8 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@backtickjs/prettier-plugin": "^0.1.11",
-    "@backtickjs/tsc": "^0.1.11",
+    "@backtickjs/prettier-plugin": "^0.2.0",
+    "@backtickjs/tsc": "^0.2.0",
     "@react-navigation/routers": "7.6.4",
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.7",
