@@ -1,7 +1,7 @@
 import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
 import { createRoot } from "react-dom/client" with { backtick: "client" };
-import type { JSX } from "@backtickjs/react/jsx-runtime";
+import type { JSX } from "@backtickjs/jsx-react/jsx-runtime";
 
 // The versions of React the page loads, below: what each page is bundled for.
 const modules = {

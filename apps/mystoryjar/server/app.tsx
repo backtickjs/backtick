@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { bundler } from "@backtickjs/bundler";
 import { DeprecatedBuild } from "@backtickjs/builds";
-import type { JSX } from "@backtickjs/react/jsx-runtime";
+import type { JSX } from "@backtickjs/jsx-react/jsx-runtime";
 import { type Context, Hono } from "hono";
 import { cors } from "hono/cors";
 import { api } from "./api.js";

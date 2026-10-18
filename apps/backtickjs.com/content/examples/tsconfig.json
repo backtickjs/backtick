@@ -13,7 +13,7 @@
     "skipLibCheck": true,
     "types": ["node"],
     "jsx": "react-jsx",
-    "jsxImportSource": "@backtickjs/react",
+    "jsxImportSource": "@backtickjs/jsx-react",
     "allowImportingTsExtensions": true
   },
   "include": ["**/*"],

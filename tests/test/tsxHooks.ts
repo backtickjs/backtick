@@ -3,7 +3,7 @@ import type { LoadHook, ResolveHook } from "node:module";
 import { dirname, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { transpile } from "@backtickjs/compiler";
-import { solid } from "@backtickjs/solid-js/plugin";
+import { solid } from "@backtickjs/jsx-solid/plugin";
 import ts from "typescript";
 
 // A `.tsx` test file, compiled the way a project's own build compiles one: its
@@ -29,7 +29,7 @@ export const load: LoadHook = async (url, context, nextLoad) => {
       ts,
       fileName,
       sourceText,
-      "@backtickjs/solid-js",
+      "@backtickjs/jsx-solid",
       undefined,
       { plugins: [solid()] },
     ),
@@ -56,7 +56,7 @@ export const resolve: ResolveHook = (specifier, context, nextResolve) => {
   if (specifier === "solid-js" || specifier.startsWith("solid-js/")) {
     return nextResolve(specifier, {
       ...context,
-      // The tests' Solid, the one the adapter's peer is.
+      // The tests' Solid, the one `@backtickjs/jsx-solid`'s peer is.
       parentURL: import.meta.url,
       conditions: ["browser", ...context.conditions],
     });

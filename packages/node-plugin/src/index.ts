@@ -13,7 +13,7 @@ import { load, resolve } from "./hooks.js";
  * project's, named in its `package.json`:
  *
  * ```json
- * "backtick": { "plugins": ["@backtickjs/react/plugin"] }
+ * "backtick": { "plugins": ["@backtickjs/jsx-react/plugin"] }
  * ```
  */
 //

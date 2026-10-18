@@ -16,7 +16,7 @@ interface PluginModule {
  * with the project's own `require`:
  *
  * ```json
- * "backtick": { "plugins": ["@backtickjs/react/plugin"] }
+ * "backtick": { "plugins": ["@backtickjs/jsx-react/plugin"] }
  * ```
  */
 export function pluginsFrom(

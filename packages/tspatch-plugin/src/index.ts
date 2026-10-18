@@ -20,7 +20,7 @@ import type ts from "typescript";
  * compile steps are the project's, named in its `package.json`:
  *
  * ```json
- * "backtick": { "plugins": ["@backtickjs/solid-js/plugin"] }
+ * "backtick": { "plugins": ["@backtickjs/jsx-solid/plugin"] }
  * ```
  */
 export default function transformer(

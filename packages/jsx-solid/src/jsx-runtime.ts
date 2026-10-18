@@ -347,7 +347,7 @@ export function jsx(
   type: JSX.ElementType,
   props: unknown,
 ): Client<Solid.Element> {
-  // Core's element, as this adapter types it: a stand-in for a Solid element.
+  // Core's element, as this package types it: a stand-in for a Solid element.
   const element = createJsxElement(type, props) as Client<Solid.Element>;
   return cs`$createComponent(() => $element, {})`;
 }

@@ -34,7 +34,7 @@ function languageServiceFor(fileName: string): ts.LanguageService {
       skipLibCheck: true,
       types: [],
       jsx: ts.JsxEmit.ReactJSX,
-      jsxImportSource: "@backtickjs/solid-js",
+      jsxImportSource: "@backtickjs/jsx-solid",
     }),
     getDefaultLibFileName: (options) => ts.getDefaultLibFilePath(options),
     fileExists: ts.sys.fileExists,

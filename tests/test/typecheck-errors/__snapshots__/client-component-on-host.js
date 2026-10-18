@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/jsx-solid/jsx-runtime";
 import { cs } from "@backtickjs/core";
 const For = {
   "@backtickjs": "ClientImport",

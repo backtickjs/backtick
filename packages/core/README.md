@@ -2,7 +2,7 @@
 
 The `cs` tag and the types around it. A client script, written `` cs`…` `` inside a server component, is code that runs on the client; values from the server cross into it as splices written `$name`, type-checked on both sides. Every Backtick app imports `cs` from here, whatever its UI framework.
 
-`cs` is compiled at build time, so a project also needs a build plugin (`@backtickjs/node-plugin` or `@backtickjs/bun-plugin`), an adapter for its framework (`@backtickjs/react` or `@backtickjs/solid-js`) and `@backtickjs/tsc` for type checking. Called without the compiler, `cs` throws. `npx create-backtick-app@latest` sets all of this up.
+`cs` is compiled at build time, so a project also needs a build plugin (`@backtickjs/node-plugin` or `@backtickjs/bun-plugin`), its framework's JSX package (`@backtickjs/jsx-react` or `@backtickjs/jsx-solid`) and `@backtickjs/tsc` for type checking. Called without the compiler, `cs` throws. `npx create-backtick-app@latest` sets all of this up.
 
 ## Install
 
@@ -73,13 +73,13 @@ The package must be installed where the server's file finds it, for its types an
 - `exec`: in a script, `$exec(bundle)` runs another bundle as the script's own was run, with the same modules, to a promise of its value.
 - `isClientExec`, `ClientExec`: its check and type.
 - `SplicesAs<T>`: `T` as a splice checks it, member by member. Used by the bundler to check its input.
-- `createJsxElement`, `isJsxElement`, `JsxElement`, `JsxElementOf`, `JsxElementTypeOf`: what a server-side JSX tag evaluates to before bundling. Used by adapters' JSX runtimes.
+- `createJsxElement`, `isJsxElement`, `JsxElement`, `JsxElementOf`, `JsxElementTypeOf`: what a server-side JSX tag evaluates to before bundling. Used by the JSX packages' runtimes.
 - `create`, `isClientScript`, `ClientScript`, `ScriptModule`, `Param`: the compiled form of a script, written by the compiler and read by the bundler. Not for application code.
 
 ## Related
 
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): runs server components and writes the bundle
-- [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react), [`@backtickjs/solid-js`](https://github.com/backtickjs/backtick/tree/main/adapters/solid-js): framework adapters
+- [`@backtickjs/jsx-react`](https://github.com/backtickjs/backtick/tree/main/packages/jsx-react), [`@backtickjs/jsx-solid`](https://github.com/backtickjs/backtick/tree/main/packages/jsx-solid): each framework's JSX
 - [`@backtickjs/node-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/node-plugin), [`@backtickjs/bun-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/bun-plugin): compile scripts as your server loads them
 - [`@backtickjs/tsc`](https://github.com/backtickjs/backtick/tree/main/packages/tsc): type-checks scripts and their splices
 - [Thinking in Backtick](https://backtickjs.com/docs/thinking-in-backtick/), [Scripts in depth](https://backtickjs.com/docs/scripts-in-depth/)

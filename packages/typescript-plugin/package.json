@@ -56,7 +56,7 @@
   },
   "devDependencies": {
     "@backtickjs/core": "^0.1.11",
-    "@backtickjs/solid-js": "^1.9.14",
+    "@backtickjs/jsx-solid": "^0.1.11",
     "prettier": "^3.6.2",
     "solid-js": "1.9.14",
     "typescript": "^6.0.3"

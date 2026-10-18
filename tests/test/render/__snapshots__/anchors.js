@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/jsx-solid/jsx-runtime";
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { evaluate } from "../evaluate.ts";
@@ -31,7 +31,7 @@ import { screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 const $module0 = {
-  id: "3qgqhrrg0mw84:34:9",
+  id: "xj9kj8w2bwlg:34:9",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nconst web_4 = require("solid-js/web");\nconst web_5 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>clear`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<span>`);\nexports.default = ($splice0, $splice1) => {\n    const [ids, setIds] = $splice0()([1, 2, 3]);\n    const clear = () => {\n        setIds([]);\n    };\n    return [(() => {\n            var _el$ = _tmpl$();\n            _el$.$$click = clear;\n            return _el$;\n        })(), (0, web_5.memo)(() => ($For => (0, web_4.createComponent)($For, {\n            get each() {\n                return ids();\n            },\n            children: id => (() => {\n                var _el$2 = _tmpl$2();\n                (0, web_3.insert)(_el$2, "row " + id);\n                return _el$2;\n            })()\n        }))($splice1()))];\n};\n(0, web_2.delegateEvents)(["click"]);\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;;;kBAiCY,CAAAA,QAAA,EAAAC,QAAA;IACR,MAAM,CAACC,GAAG,EAAEC,MAAM,CAAC,GAAGH,QAAA,EAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;IACxD,MAAMI,KAAK,GAAGA,GAAA;QACZD,MAAM,CAAC,EAAE,CAAC;IACZ,CAAC;IACD;YAAA,IAAAE,IAAA,GAAAC,MAAA;YAAAD,IAAA,CAAAE,OAAA,GAEmBH,KAAK;YAAA,OAAAC,IAAA;QAAA,MAAAG,cAAA,QACpB,CAAAC,IAAA,IAAAC,yBAAA,EAACD,IAAI;YAAA,IAACE,IAAIA;gBAAA,OAAET,GAAG,EAAE;YAAA;YAAAU,QAAA,EAAIC,EAAU;gBAAA,IAAAC,KAAA,GAAAC,OAAA;gBAAAC,gBAAA,EAAAF,KAAA,EAAY,MAAM,GAAGD,EAAE;gBAAA,OAAAC,KAAA;YAAA;SAAQ,CAAQ,EAArEb,QAAA,EAAI,CACP;AAEJ,CAAC","names":["$splice0","$splice1","ids","setIds","clear","_el$","_tmpl$","$$click","_$memo","$For","_$createComponent","each","children","id","_el$2","_tmpl$2","_$insert"],"ignoreList":[],"sources":["render/anchors.test.tsx"]}',
   dependencies: ["solid-js/web"],
@@ -42,7 +42,7 @@ const $module0 = {
   kind: "block",
 };
 const $module1 = {
-  id: "3qgqhrrg0mw84:93:33",
+  id: "xj9kj8w2bwlg:93:33",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2, $splice3, $splice4) => $splice0()(dispose => {\n    const parent = document.getElementById($splice1());\n    $splice2()(parent, $splice3(), parent.querySelector($splice4()));\n    return dispose;\n});\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA4FoC,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,KAAAJ,QAAA,EAAW,CAAEK,OAAmB;IAChE,MAAMC,MAAM,GAAGC,QAAQ,CAACC,cAAc,CAACP,QAAA,EAAG,CAAE;IAC5CC,QAAA,EAAO,CAACI,MAAM,EAAEH,QAAA,EAAM,EAAEG,MAAM,CAACG,aAAa,CAACL,QAAA,EAAS,CAAC,CAAC;IACxD,OAAOC,OAAO;AAChB,CAAC,CAAC","names":["$splice0","$splice1","$splice2","$splice3","$splice4","dispose","parent","document","getElementById","querySelector"],"ignoreList":[],"sources":["render/anchors.test.tsx"]}',
   dependencies: [],

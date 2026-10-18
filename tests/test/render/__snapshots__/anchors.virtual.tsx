@@ -7,7 +7,7 @@ declare const { insert }: import("@backtickjs/core").ClientModule<typeof import(
 import { screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
-import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
+import type { JSX } from "@backtickjs/jsx-solid/jsx-runtime";
 
 // Where a render draws, and what it may move.
 //

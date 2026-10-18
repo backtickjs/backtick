@@ -59,7 +59,7 @@ export function jsx(
   props: unknown,
   key?: string | number,
 ): JSX.Element {
-  // Core's element, as this adapter types it: a stand-in for a React element.
+  // Core's element, as this package types it: a stand-in for a React element.
   const element = createJsxElement(
     type as (props: never) => unknown,
     props,

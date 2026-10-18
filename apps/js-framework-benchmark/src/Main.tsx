@@ -7,7 +7,7 @@ import {
   type Accessor,
   type Setter,
 } from "solid-js" with { backtick: "client" };
-import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
+import type { JSX } from "@backtickjs/jsx-solid/jsx-runtime";
 
 type Row = {
   id: number;

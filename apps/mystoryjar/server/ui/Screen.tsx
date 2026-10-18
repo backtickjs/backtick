@@ -1,7 +1,7 @@
 import { type Client, cs } from "@backtickjs/core";
 import { useFonts } from "expo-font" with { backtick: "client" };
 import { View } from "react-native" with { backtick: "client" };
-import type { JSX } from "@backtickjs/react/jsx-runtime";
+import type { JSX } from "@backtickjs/jsx-react/jsx-runtime";
 import type { ReactNode } from "react";
 import type { ScreenRequest } from "../request.js";
 import { fontSources } from "./fonts.js";

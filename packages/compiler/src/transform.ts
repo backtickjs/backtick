@@ -19,7 +19,7 @@ export interface TransformOptions {
   readonly sourceName?: (fileName: string) => string;
   /**
    * The framework's compile steps, run in series over each script: Solid's
-   * adapter's `solid()`. None by default, which leaves a script's JSX for a
+   * `@backtickjs/jsx-solid`'s `solid()`. None by default, which leaves a script's JSX for a
    * bundle's own plugins.
    */
   readonly plugins?: readonly Plugin[];

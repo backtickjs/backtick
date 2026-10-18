@@ -23,7 +23,7 @@ it("checks a tag in a script with React's tag attributes", () => {
     moduleResolution: ts.ModuleResolutionKind.NodeNext,
     target: ts.ScriptTarget.ESNext,
     jsx: ts.JsxEmit.ReactJSX,
-    jsxImportSource: "@backtickjs/react",
+    jsxImportSource: "@backtickjs/jsx-react",
     lib: ["lib.esnext.d.ts", "lib.dom.d.ts"],
     types: [],
   };

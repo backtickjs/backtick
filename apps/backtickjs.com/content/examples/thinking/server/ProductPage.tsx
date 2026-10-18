@@ -3,7 +3,7 @@ import { useState } from "react" with { backtick: "client" };
 import { Pressable, ScrollView, Text, View } from "react-native" with {
   backtick: "client",
 };
-import type { JSX } from "@backtickjs/react/jsx-runtime";
+import type { JSX } from "@backtickjs/jsx-react/jsx-runtime";
 import { reviewsFor } from "./reviews.js";
 
 // A client component.

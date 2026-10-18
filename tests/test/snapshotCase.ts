@@ -7,7 +7,7 @@ import { isNode } from "./node.ts";
 import { renderBundleMappings } from "./renderBundleMappings.ts";
 import { renderDrawing } from "./renderMarkup.ts";
 import { renderValue } from "./renderValue.ts";
-import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
+import type { JSX } from "@backtickjs/jsx-solid/jsx-runtime";
 import { bundle, evaluate } from "./evaluate.ts";
 import { inRoot } from "./inRoot.tsx";
 import { render } from "@solidjs/testing-library";

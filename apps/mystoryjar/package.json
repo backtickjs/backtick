@@ -24,7 +24,7 @@
     "@backtickjs/bundler": "^0.1.11",
     "@backtickjs/core": "^0.1.11",
     "@backtickjs/node-plugin": "^0.1.11",
-    "@backtickjs/react": "^19.2.3",
+    "@backtickjs/jsx-react": "^0.1.11",
     "@expo-google-fonts/noto-sans-jp": "^0.4.4",
     "@hono/node-server": "^2.1.4",
     "@react-native-google-signin/google-signin": "^16.1.5",
@@ -87,7 +87,7 @@
   "backtick": {
     "clientRoot": "client",
     "plugins": [
-      "@backtickjs/react/plugin"
+      "@backtickjs/jsx-react/plugin"
     ]
   }
 }

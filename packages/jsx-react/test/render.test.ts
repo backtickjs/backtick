@@ -69,7 +69,7 @@ it("keys what a keyed server component draws", async () => {
     ts,
     "list.tsx",
     listSource,
-    "@backtickjs/react",
+    "@backtickjs/jsx-react",
     undefined,
     { plugins: [react()] },
   );
@@ -105,7 +105,7 @@ it("draws a page with React, its state React's", async () => {
     ts,
     "page.tsx",
     source,
-    "@backtickjs/react",
+    "@backtickjs/jsx-react",
     undefined,
     { plugins: [react()] },
   );

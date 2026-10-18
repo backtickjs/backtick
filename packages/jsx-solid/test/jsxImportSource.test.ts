@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 import ts from "typescript";
 
-// What a project with `"jsxImportSource": "@backtickjs/solid-js"` gets.
+// What a project with `"jsxImportSource": "@backtickjs/jsx-solid"` gets.
 describe("as a jsxImportSource", () => {
   it("types JSX with Solid's own types", () => {
     const file = join(import.meta.dirname, "fixtures", "solid-jsx.tsx");
@@ -15,7 +15,7 @@ describe("as a jsxImportSource", () => {
       moduleResolution: ts.ModuleResolutionKind.NodeNext,
       target: ts.ScriptTarget.ESNext,
       jsx: ts.JsxEmit.Preserve,
-      jsxImportSource: "@backtickjs/solid-js",
+      jsxImportSource: "@backtickjs/jsx-solid",
       lib: ["lib.esnext.d.ts", "lib.dom.d.ts"],
       types: [],
     });

@@ -3,7 +3,7 @@ import { mkdirSync, readdirSync, readFileSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 import { describe, it } from "node:test";
 import { emitScripts, transpile, virtualize } from "@backtickjs/compiler";
-import { solid } from "@backtickjs/solid-js/plugin";
+import { solid } from "@backtickjs/jsx-solid/plugin";
 import prettier from "prettier";
 import ts from "typescript";
 import { renderClientCode, renderClientMappings } from "./renderClient.ts";
@@ -34,7 +34,7 @@ async function emit(fileName: string, sourceText: string): Promise<string> {
     ts,
     fileName,
     sourceText,
-    "@backtickjs/solid-js",
+    "@backtickjs/jsx-solid",
     undefined,
     { plugins: [solid()] },
   );

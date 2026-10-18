@@ -1,11 +1,11 @@
-# @backtickjs/react
+# @backtickjs/jsx-react
 
-The React adapter for [Backtick](https://backtickjs.com): a JSX runtime that type-checks the JSX in your server components against React's own types, and a compile plugin that runs React's JSX transform on each script at build time. React itself is imported for the client, as React Native and any other package is: `import { useState } from "react" with { backtick: "client" }`. React is a peer dependency: `19.2.3` is built against React 19.2.3, and works with any later 19.x.
+React's JSX for [Backtick](https://backtickjs.com): a JSX runtime that type-checks the JSX in your server components against React's own types, and a compile plugin that runs React's JSX transform on each script at build time. React itself is imported for the client, as React Native and any other package is: `import { useState } from "react" with { backtick: "client" }`. React is a peer dependency: this package is built against React 19.2.3, and works with any later 19.x.
 
 ## Install
 
 ```sh
-npm install react @backtickjs/react @backtickjs/core @backtickjs/bundler @backtickjs/node-plugin
+npm install react @backtickjs/jsx-react @backtickjs/core @backtickjs/bundler @backtickjs/node-plugin
 npm install -D @types/react @backtickjs/tsc
 ```
 
@@ -13,14 +13,14 @@ The [repository's README](https://github.com/backtickjs/backtick#packages) says 
 
 ## Setup
 
-In `tsconfig.json`, point JSX at the adapter and keep imports as written:
+In `tsconfig.json`, point JSX at this package and keep imports as written:
 
 ```jsonc
 {
   "compilerOptions": {
     "verbatimModuleSyntax": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "@backtickjs/react",
+    "jsxImportSource": "@backtickjs/jsx-react",
   },
 }
 ```
@@ -32,7 +32,7 @@ In `package.json`, name the compile plugin:
 ```json
 {
   "backtick": {
-    "plugins": ["@backtickjs/react/plugin"]
+    "plugins": ["@backtickjs/jsx-react/plugin"]
   }
 }
 ```
@@ -88,14 +88,14 @@ const { code } = bundle.generate({ format: "es" });
 
 ## What it exports
 
-- `@backtickjs/react/jsx-runtime` and `@backtickjs/react/jsx-dev-runtime`: the JSX runtime for server components, and its `JSX` namespace.
-- `@backtickjs/react/plugin`: the compile plugin, React's JSX transform (`@babel/preset-react`, automatic runtime).
+- `@backtickjs/jsx-react/jsx-runtime` and `@backtickjs/jsx-react/jsx-dev-runtime`: the JSX runtime for server components, and its `JSX` namespace.
+- `@backtickjs/jsx-react/plugin`: the compile plugin, React's JSX transform, by TypeScript's own `react-jsx` emit.
 
 ## Related
 
 - [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): the `cs` tag
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): builds bundles
-- [`@backtickjs/solid-js`](https://github.com/backtickjs/backtick/tree/main/adapters/solid-js): the Solid adapter
+- [`@backtickjs/jsx-solid`](https://github.com/backtickjs/backtick/tree/main/packages/jsx-solid): Solid's JSX
 - [Thinking in Backtick](https://backtickjs.com/docs/thinking-in-backtick/)
 - [How it works](https://backtickjs.com/docs/how-it-works/)
 

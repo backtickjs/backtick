@@ -9,27 +9,16 @@ const $modules = {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsx_runtime_1 = require("react/jsx-runtime");
-exports.default = ($splice0, $splice1, $splice2, $splice3, $splice4) => ($ScrollView => /*#__PURE__*/ (0, jsx_runtime_1.jsxs)($ScrollView, {
-    children: [($Text => /*#__PURE__*/ (0, jsx_runtime_1.jsxs)($Text, {
-            children: ["Good morning, ", $splice2().name]
-        }))($splice1()), ($ReorderButton => /*#__PURE__*/ (0, jsx_runtime_1.jsx)($ReorderButton, {
-            order: $splice4()
-        }))($splice3())]
-}))($splice0());
+exports.default = (($splice0, $splice1, $splice2, $splice3, $splice4) => (($ScrollView => (0, jsx_runtime_1.jsxs)($ScrollView, { children: [($Text => (0, jsx_runtime_1.jsxs)($Text, { children: ["Good morning, ", $splice2().name] }))($splice1()), ($ReorderButton => (0, jsx_runtime_1.jsx)($ReorderButton, { order: $splice4() }))($splice3())] }))($splice0())));
 },
 "hjsejdj37nio:9:22": (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsx_runtime_1 = require("react/jsx-runtime");
-exports.default = ($splice0, $splice1, $splice2) => props => {
+exports.default = (($splice0, $splice1, $splice2) => (props) => {
     const [added, setAdded] = $splice0()(false);
-    return ($Pressable => /*#__PURE__*/ (0, jsx_runtime_1.jsx)($Pressable, {
-        onPress: () => setAdded(true),
-        children: ($Text => /*#__PURE__*/ (0, jsx_runtime_1.jsx)($Text, {
-            children: added ? "Added ✓" : "Reorder " + props.order.name
-        }))($splice2())
-    }))($splice1());
-};
+    return (($Pressable => (0, jsx_runtime_1.jsx)($Pressable, { onPress: () => setAdded(true), children: ($Text => (0, jsx_runtime_1.jsx)($Text, { children: added ? "Added ✓" : "Reorder " + props.order.name }))($splice2()) }))($splice1()));
+});
 },
 };
 const $exports = {

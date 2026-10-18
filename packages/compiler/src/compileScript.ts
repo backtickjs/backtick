@@ -4,7 +4,7 @@ import type { EmittedScript } from "./emitScript.js";
 
 /**
  * A framework's compile step: a module in, the module it compiles to out, with
- * its map into the module it was given. Solid's adapter's `solid()` is one.
+ * its map into the module it was given. `@backtickjs/jsx-solid`'s `solid()` is one.
  * Synchronous, as a TypeScript transformer is.
  */
 export type Plugin = (

@@ -1,7 +1,7 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
-import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
+import type { JSX } from "@backtickjs/jsx-solid/jsx-runtime";
 
 // A tag naming a parameter of an arrow in the enclosing script. The nested
 // scripts sit inside the arrow's body, so the parameter reaches them through

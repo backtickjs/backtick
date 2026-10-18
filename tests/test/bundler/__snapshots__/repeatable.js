@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/jsx-solid/jsx-runtime";
 import assert from "node:assert/strict";
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";

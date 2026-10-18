@@ -3,8 +3,8 @@ import type { Client } from "./Client.js";
 /**
  * What a JSX tag evaluates to on the server, before bundling resolves it: the
  * tag and its props, which are the server's own. What a drawing is, is the
- * adapter's; this is what the bundler expands. A client value, of the type its
- * adapter names (Solid's: its element), so a host may hand one over wherever
+ * JSX package's; this is what the bundler expands. A client value, of the type
+ * its JSX package names (Solid's: its element), so a host may hand one over wherever
  * a drawing may stand.
  */
 export interface JsxElement extends Client<unknown> {
@@ -29,7 +29,7 @@ export function createJsxElement(
   return { "@backtickjs": "JsxElement", type, props } as JsxElement;
 }
 
-// What an adapter's JSX namespace types its `Element` and `ElementType` as,
+// What a JSX package's namespace types its `Element` and `ElementType` as,
 // given what its framework draws (Solid's `JSX.Element`, React's `ReactNode`).
 // One namespace types both a host's JSX and a script's, so each type answers
 // for both sides.

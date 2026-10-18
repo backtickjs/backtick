@@ -77,7 +77,7 @@ Spliced values are written into the bundle as data, never as code. What can't cr
 ## Related
 
 - [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): the `cs` tag, and `execRoot`, which runs a bundle in the app
-- [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react), [`@backtickjs/solid-js`](https://github.com/backtickjs/backtick/tree/main/adapters/solid-js): framework adapters
+- [`@backtickjs/jsx-react`](https://github.com/backtickjs/backtick/tree/main/packages/jsx-react), [`@backtickjs/jsx-solid`](https://github.com/backtickjs/backtick/tree/main/packages/jsx-solid): each framework's JSX
 - [How it works](https://backtickjs.com/docs/how-it-works/)
 - [Errors](https://backtickjs.com/docs/errors/)
 

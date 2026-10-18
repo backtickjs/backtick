@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { after } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { transpile } from "@backtickjs/compiler";
-import { react } from "@backtickjs/react/plugin";
+import { react } from "@backtickjs/jsx-react/plugin";
 import { execRoot } from "@backtickjs/core/cjs";
 import * as React from "react";
 import { act } from "react";
@@ -28,7 +28,7 @@ export async function drawReactNative(name: string, source: string) {
     ts,
     `${name}.tsx`,
     source,
-    "@backtickjs/react",
+    "@backtickjs/jsx-react",
     undefined,
     {
       plugins: [react()],

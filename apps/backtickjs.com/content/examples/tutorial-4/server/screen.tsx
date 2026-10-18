@@ -1,7 +1,7 @@
 import { fileURLToPath } from "node:url";
 import { createBuilds } from "@backtickjs/builds";
 import { bundler } from "@backtickjs/bundler";
-import type { JSX } from "@backtickjs/react/jsx-runtime";
+import type { JSX } from "@backtickjs/jsx-react/jsx-runtime";
 import type { Context } from "hono";
 
 // Your app's builds: each sends its id, and a screen is bundled for the

@@ -24,7 +24,7 @@ export type { ClientModule } from "./ClientModule.js";
 export type { Bundle } from "./Bundle.js";
 export { exec, isClientExec, type ClientExec } from "./exec.js";
 
-// A drawing as a host builds one: what an adapter's JSX runtime makes, and
+// A drawing as a host builds one: what a JSX package's runtime makes, and
 // what the bundler expands.
 export {
   createJsxElement,

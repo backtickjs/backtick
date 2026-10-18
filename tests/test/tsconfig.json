@@ -6,7 +6,7 @@
   "extends": "../../configs/tsconfig.test.json",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "@backtickjs/solid-js",
+    "jsxImportSource": "@backtickjs/jsx-solid",
     "noEmit": true,
     "composite": false
   },

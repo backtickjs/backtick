@@ -12,7 +12,7 @@
     "lib": ["esnext", "dom"],
     "types": ["node"],
     "jsx": "react-jsx",
-    "jsxImportSource": "@backtickjs/react"
+    "jsxImportSource": "@backtickjs/jsx-react"
   },
   "include": ["server"]
 }

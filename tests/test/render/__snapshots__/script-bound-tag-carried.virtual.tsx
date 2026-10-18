@@ -5,7 +5,7 @@ declare const { createSignal }: import("@backtickjs/core").ClientModule<typeof i
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
-import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
+import type { JSX } from "@backtickjs/jsx-solid/jsx-runtime";
 import type { JSXElement } from "solid-js";
 import { evaluate } from "../evaluate.ts";
 

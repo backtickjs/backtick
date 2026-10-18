@@ -35,7 +35,7 @@
   "dependencies": {
     "@backtickjs/bundler": "^0.1.11",
     "@backtickjs/core": "^0.1.11",
-    "@backtickjs/solid-js": "^1.9.14",
+    "@backtickjs/jsx-solid": "^0.1.11",
     "@backtickjs/tspatch-plugin": "^0.1.11",
     "solid-js": "1.9.14"
   },
@@ -47,7 +47,7 @@
   },
   "backtick": {
     "plugins": [
-      "@backtickjs/solid-js/plugin"
+      "@backtickjs/jsx-solid/plugin"
     ]
   }
 }

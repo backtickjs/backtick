@@ -1,8 +1,6 @@
 packages:
-  # What is published: the packages, all at one version, and the adapters,
-  # each at its framework's.
+  # What is published: the packages, all at one version.
   - "packages/*"
-  - "adapters/*"
   # The projects `create-backtick-app` copies, installed here so they're
   # checked against the packages beside them.
   - "packages/create-backtick-app/templates/*"

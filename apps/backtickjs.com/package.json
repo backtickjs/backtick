@@ -18,7 +18,7 @@
     "@backtickjs/bun-plugin": "^0.1.11",
     "@backtickjs/bundler": "^0.1.11",
     "@backtickjs/core": "^0.1.11",
-    "@backtickjs/solid-js": "^1.9.14",
+    "@backtickjs/jsx-solid": "^0.1.11",
     "@backtickjs/vscode-extension": "^0.1.11",
     "@shikijs/colorized-brackets": "^4.5.0",
     "@tailwindcss/node": "^4.3.3",
@@ -35,7 +35,7 @@
   "devDependencies": {
     "@backtickjs/node-plugin": "^0.1.11",
     "@backtickjs/prettier-plugin": "^0.1.11",
-    "@backtickjs/react": "^19.2.3",
+    "@backtickjs/jsx-react": "^0.1.11",
     "@backtickjs/tsc": "^0.1.11",
     "@hono/node-server": "^2.1.4",
     "@testing-library/react": "^16.3.3",
@@ -60,7 +60,7 @@
   },
   "backtick": {
     "plugins": [
-      "@backtickjs/solid-js/plugin"
+      "@backtickjs/jsx-solid/plugin"
     ]
   }
 }

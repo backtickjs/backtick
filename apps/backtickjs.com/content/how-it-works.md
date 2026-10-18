@@ -13,7 +13,7 @@ Your server runs with a loader, `@backtickjs/node-plugin` on Node or
 ```json
 {
   "backtick": {
-    "plugins": ["@backtickjs/react/plugin"]
+    "plugins": ["@backtickjs/jsx-react/plugin"]
   }
 }
 ```
@@ -42,7 +42,7 @@ tsc --noEmit && backtick-tsc -p server --noEmit
 arguments, and reports errors inside scripts at the line and column you wrote.
 Run it in CI as you would `tsc`. The server's `tsconfig.json` needs two
 settings, which the template sets and the
-[React adapter's README](https://github.com/backtickjs/backtick/tree/main/adapters/react#setup)
+[`@backtickjs/jsx-react` README](https://github.com/backtickjs/backtick/tree/main/packages/jsx-react#setup)
 explains.
 
 [Backtick for VS Code](https://marketplace.visualstudio.com/items?itemName=backtickjs.backtick-vscode)
@@ -124,11 +124,11 @@ What a React Native project uses, each linked to its README:
 | Package                                                                                                    | What it is                                      |
 | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
 | [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core)                       | The `cs` tag, and `execRoot` to run a bundle    |
-| [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react)                     | React's JSX, and its compile step for scripts   |
+| [`@backtickjs/jsx-react`](https://github.com/backtickjs/backtick/tree/main/packages/jsx-react)             | React's JSX, and its compile step for scripts   |
 | [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler)                 | Runs server components and bundles a screen     |
 | [`@backtickjs/node-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/node-plugin)         | Compiles scripts as your Node server loads them |
 | [`@backtickjs/tsc`](https://github.com/backtickjs/backtick/tree/main/packages/tsc)                         | `backtick-tsc`: type-checks scripts and splices |
 | [`@backtickjs/prettier-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/prettier-plugin) | Formats the code inside scripts                 |
 
 The [repository's README](https://github.com/backtickjs/backtick#packages)
-lists them all, the web adapters and Bun included.
+lists them all, Solid's JSX and Bun included.

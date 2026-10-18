@@ -42,12 +42,12 @@ Name your framework's compile steps in the project's `package.json`:
 ```json
 {
   "backtick": {
-    "plugins": ["@backtickjs/react/plugin"]
+    "plugins": ["@backtickjs/jsx-react/plugin"]
   }
 }
 ```
 
-Use `@backtickjs/solid-js/plugin` for Solid. The steps are loaded once, at startup, with the project's own `require`.
+Use `@backtickjs/jsx-solid/plugin` for Solid. The steps are loaded once, at startup, with the project's own `require`.
 
 Compiler options come from the nearest `tsconfig.json`, following `extends`. The plugin always emits ES modules (`ESNext`) with an inline source map, and ignores `outDir`, `rootDir` and other output-location options.
 

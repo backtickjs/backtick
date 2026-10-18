@@ -1,11 +1,11 @@
-# @backtickjs/solid-js
+# @backtickjs/jsx-solid
 
-The Solid adapter for [Backtick](https://backtickjs.com): a JSX runtime that type-checks the JSX in your server components against Solid's own types, and a compile plugin that runs Solid's compiler on each script at build time. Solid itself is imported for the client, as any other package is: `import { createSignal } from "solid-js" with { backtick: "client" }`. Solid is a peer dependency: `1.9.14` is built against Solid 1.9.14, and works with any later 1.x.
+Solid's JSX for [Backtick](https://backtickjs.com): a JSX runtime that type-checks the JSX in your server components against Solid's own types, and a compile plugin that runs Solid's compiler on each script at build time. Solid itself is imported for the client, as any other package is: `import { createSignal } from "solid-js" with { backtick: "client" }`. Solid is a peer dependency: this package is built against Solid 1.9.14, and works with any later 1.x.
 
 ## Install
 
 ```sh
-npm install solid-js @backtickjs/solid-js @backtickjs/core @backtickjs/bundler @backtickjs/node-plugin
+npm install solid-js @backtickjs/jsx-solid @backtickjs/core @backtickjs/bundler @backtickjs/node-plugin
 npm install -D @backtickjs/tsc
 ```
 
@@ -13,14 +13,14 @@ The [repository's README](https://github.com/backtickjs/backtick#packages) says 
 
 ## Setup
 
-In `tsconfig.json`, point JSX at the adapter and keep imports as written:
+In `tsconfig.json`, point JSX at this package and keep imports as written:
 
 ```jsonc
 {
   "compilerOptions": {
     "verbatimModuleSyntax": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "@backtickjs/solid-js",
+    "jsxImportSource": "@backtickjs/jsx-solid",
   },
 }
 ```
@@ -32,7 +32,7 @@ In `package.json`, name the compile plugin:
 ```json
 {
   "backtick": {
-    "plugins": ["@backtickjs/solid-js/plugin"]
+    "plugins": ["@backtickjs/jsx-solid/plugin"]
   }
 }
 ```
@@ -90,14 +90,14 @@ const { code } = bundle.generate({ format: "es" });
 
 ## What it exports
 
-- `@backtickjs/solid-js/jsx-runtime` and `@backtickjs/solid-js/jsx-dev-runtime`: the JSX runtime for server components, and its `JSX` namespace.
-- `@backtickjs/solid-js/plugin`: the compile plugin, Solid's compiler (`babel-preset-solid`, DOM output).
+- `@backtickjs/jsx-solid/jsx-runtime` and `@backtickjs/jsx-solid/jsx-dev-runtime`: the JSX runtime for server components, and its `JSX` namespace.
+- `@backtickjs/jsx-solid/plugin`: the compile plugin, Solid's compiler (`babel-preset-solid`, DOM output).
 
 ## Related
 
 - [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): the `cs` tag
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): builds bundles
-- [`@backtickjs/react`](https://github.com/backtickjs/backtick/tree/main/adapters/react): the React adapter
+- [`@backtickjs/jsx-react`](https://github.com/backtickjs/backtick/tree/main/packages/jsx-react): React's JSX
 - [Thinking in Backtick](https://backtickjs.com/docs/thinking-in-backtick/)
 - [How it works](https://backtickjs.com/docs/how-it-works/)
 

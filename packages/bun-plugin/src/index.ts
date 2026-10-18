@@ -28,7 +28,7 @@ const plugins = pluginsFrom(
  * `package.json`:
  *
  * ```json
- * "backtick": { "plugins": ["@backtickjs/solid-js/plugin"] }
+ * "backtick": { "plugins": ["@backtickjs/jsx-solid/plugin"] }
  * ```
  */
 plugin({

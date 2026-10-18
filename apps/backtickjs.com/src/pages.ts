@@ -1,4 +1,4 @@
-import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
+import type { JSX } from "@backtickjs/jsx-solid/jsx-runtime";
 import type { Client } from "@backtickjs/core";
 import { NotFound } from "./pages/NotFound.js";
 

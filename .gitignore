@@ -5,6 +5,5 @@ docs/
 .cache/
 .DS_Store
 packages/*/LICENSE
-adapters/*/LICENSE
 .vsix/
 *.vsix

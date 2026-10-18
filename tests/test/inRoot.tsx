@@ -3,8 +3,8 @@ import { createRoot } from "solid-js" with { backtick: "client" };
 
 /**
  * A value as a value test runs it: in a Solid root, made in client code by
- * the adapter's `createRoot`. A `.tsx` file of its own, as only those are
- * compiled by Backtick.
+ * Solid's `createRoot`. A `.tsx` file of its own, as only those are compiled
+ * by Backtick.
  */
 export function inRoot(value: Spliceable): Client<unknown> {
   return cs`$createRoot(() => $value)`;

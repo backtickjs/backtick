@@ -14,7 +14,7 @@
     "@backtickjs/bundler": "^0.1.11",
     "@backtickjs/core": "^0.1.11",
     "@backtickjs/node-plugin": "^0.1.11",
-    "@backtickjs/react": "^19.2.3",
+    "@backtickjs/jsx-react": "^0.1.11",
     "@hono/node-server": "^2.1.4",
     "hono": "^4.13.13",
     "react": "19.2.3",
@@ -39,7 +39,7 @@
   },
   "backtick": {
     "plugins": [
-      "@backtickjs/react/plugin"
+      "@backtickjs/jsx-react/plugin"
     ]
   }
 }

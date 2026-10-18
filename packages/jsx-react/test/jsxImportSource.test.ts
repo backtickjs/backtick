@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 import ts from "typescript";
 
-// What a project with `"jsxImportSource": "@backtickjs/react"` gets.
+// What a project with `"jsxImportSource": "@backtickjs/jsx-react"` gets.
 describe("as a jsxImportSource", () => {
   it("types JSX with React's own types", () => {
     const file = join(import.meta.dirname, "fixtures", "react-jsx.tsx");
@@ -15,7 +15,7 @@ describe("as a jsxImportSource", () => {
       moduleResolution: ts.ModuleResolutionKind.NodeNext,
       target: ts.ScriptTarget.ESNext,
       jsx: ts.JsxEmit.Preserve,
-      jsxImportSource: "@backtickjs/react",
+      jsxImportSource: "@backtickjs/jsx-react",
       lib: ["lib.esnext.d.ts", "lib.dom.d.ts"],
       types: [],
     });

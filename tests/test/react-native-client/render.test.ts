@@ -5,7 +5,7 @@ import { after, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { execRoot } from "@backtickjs/core/cjs";
 import { transpile } from "@backtickjs/compiler";
-import { react } from "@backtickjs/react/plugin";
+import { react } from "@backtickjs/jsx-react/plugin";
 import * as React from "react";
 import { act } from "react";
 import * as JSXRuntime from "react/jsx-runtime";
@@ -49,7 +49,7 @@ it("draws a server's screen with the app's React Native", async () => {
     ts,
     "screen.tsx",
     source,
-    "@backtickjs/react",
+    "@backtickjs/jsx-react",
     undefined,
     { plugins: [react()] },
   );

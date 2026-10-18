@@ -5,9 +5,6 @@
 // The plugins are published separately from core but are only ever compatible
 // with the core they were built against, so a version that drifts is a bug
 // users hit at runtime, not a cosmetic inconsistency.
-//
-// Adapters, under `adapters/`, are the exception: an adapter's version is its
-// framework's, which it pins exactly.
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -32,12 +29,11 @@ const versionOf = new Map(
     .map(({ name, version }) => [name, version]),
 );
 
-// What's an adapter is where it lives, so a new one is checked without being
-// listed here.
-const directlyIn = (dir) =>
-  projects.filter(({ path }) => dirname(path) === join(root, dir));
-const released = directlyIn("packages");
-const adapters = directlyIn("adapters");
+// What's released is where it lives, so a new package is checked without
+// being listed here.
+const released = projects.filter(
+  ({ path }) => dirname(path) === join(root, "packages"),
+);
 
 const errors = [];
 
@@ -59,24 +55,6 @@ if (versions.size > 1) {
 }
 
 const [expected] = versions.keys();
-
-// The framework is the peer an adapter is built against: pinned in its
-// `devDependencies` at the adapter's own version, and peered from there, as
-// `react` for `@backtickjs/react` 19.2.3 is `"19.2.3"` and `"^19.2.3"`.
-for (const { file, json } of adapters) {
-  const frameworks = Object.entries(json.peerDependencies ?? {}).filter(
-    ([name, range]) =>
-      range === `^${json.version}` &&
-      json.devDependencies?.[name] === json.version,
-  );
-  if (frameworks.length === 0) {
-    errors.push(
-      `${file.slice(root.length)}: version is "${json.version}", expected ` +
-        `the version of the framework it's built against, but no peer is ` +
-        `"^${json.version}" with a devDependency pinned at it`,
-    );
-  }
-}
 
 const dependencyFields = [
   "dependencies",
@@ -125,6 +103,5 @@ if (errors.length > 0) {
 
 console.log(
   `✓ ${released.length} packages at ${expected}, ` +
-    `${adapters.length} adapter(s) at their framework's version, ` +
     `every workspace reference "^<version>" and linked`,
 );

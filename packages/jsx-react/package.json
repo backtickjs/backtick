@@ -1,14 +1,13 @@
 {
-  "name": "@backtickjs/react",
-  "version": "19.2.3",
-  "description": "The React adapter for Backtick: React's API as client values your scripts splice, and a JSX runtime for server components",
+  "name": "@backtickjs/jsx-react",
+  "version": "0.1.11",
+  "description": "React's JSX for Backtick: a JSX runtime for server components, and the compile plugin for scripts",
   "keywords": [
     "backtick",
     "react-native",
     "server-driven-ui",
     "server-components",
     "react",
-    "adapter",
     "jsx-runtime"
   ],
   "homepage": "https://backtickjs.com",
@@ -18,7 +17,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/backtickjs/backtick.git",
-    "directory": "adapters/react"
+    "directory": "packages/jsx-react"
   },
   "license": "MIT",
   "author": "Jean-François Bisson <jf@backtickjs.com>",
@@ -56,13 +55,12 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@babel/core": "^7.29.7",
-    "@babel/preset-react": "^7.29.7",
     "@backtickjs/core": "^0.1.11"
   },
   "peerDependencies": {
     "react": "^19.2.3",
-    "@types/react": "^19.2.18"
+    "@types/react": "^19.2.18",
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
     "@backtickjs/bundler": "^0.1.11",
@@ -70,7 +68,6 @@
     "@backtickjs/prettier-plugin": "^0.1.11",
     "@backtickjs/tsc": "^0.1.11",
     "@backtickjs/tspatch-plugin": "^0.1.11",
-    "@types/babel__core": "^7.20.5",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.7",
     "global-jsdom": "^30.0.0",

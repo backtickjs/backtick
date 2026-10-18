@@ -6,7 +6,7 @@ const escape = (text: string): string =>
   text.replace(/\\/g, "\\\\").replace(/\t/g, "\\t");
 
 // A source as the compiler named it: a test file by its path under this
-// directory, a package's file (`@backtickjs/solid-js/src/…`) by its package's.
+// directory, a package's file (`@backtickjs/jsx-solid/src/…`) by its package's.
 const sourcePath = (source: string): string =>
   source.startsWith("@")
     ? join(import.meta.dirname, "../node_modules", source)

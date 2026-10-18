@@ -1,4 +1,4 @@
-import type { JSX } from "@backtickjs/react/jsx-runtime";
+import type { JSX } from "@backtickjs/jsx-react/jsx-runtime";
 import type { ScreenRequest } from "./request.js";
 import { Account } from "./screens/Account.js";
 import { Edit } from "./screens/Edit.js";
