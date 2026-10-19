@@ -4,3 +4,7 @@
 
 # Scratch copies the suites write while they run.
 .cache/
+
+# Their own projects, which format themselves.
+conformance/
+js-framework-benchmark/

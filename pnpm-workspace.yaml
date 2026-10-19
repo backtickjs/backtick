@@ -7,12 +7,16 @@ packages:
   # Complete apps that show Backtick with other libraries, checked the same
   # way.
   - "examples/*"
-  # Built here and never published to npm: an editor extension and the
-  # benchmark app.
+  # Built here and never published to npm: the website, the editor extension
+  # and an app.
   - "apps/*"
   - "tests"
   # A stand-in third-party library the tests bind to.
   - "tests/fixtures/*"
+  # test262, run as client scripts, and the js-framework-benchmark app: each
+  # its own project, beside the tests.
+  - "tests/conformance"
+  - "tests/js-framework-benchmark"
 
 linkWorkspacePackages: true
 preferWorkspacePackages: true
