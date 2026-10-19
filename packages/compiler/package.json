@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/compiler",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Internal: the compiler for Backtick client scripts, used by the build plugins, backtick-tsc and the editor tooling",
   "keywords": [
     "backtick",
@@ -55,7 +55,7 @@
     "@jridgewell/trace-mapping": "^0.3.31"
   },
   "devDependencies": {
-    "@backtickjs/core": "^0.2.2",
+    "@backtickjs/core": "^0.2.3",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   }

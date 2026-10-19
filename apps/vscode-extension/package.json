@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/vscode-extension",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "displayName": "Backtick for VS Code",
   "description": "Syntax highlighting and type-checking for Backtick.",
   "publisher": "backtickjs",
@@ -85,10 +85,10 @@
     "package": "node scripts/package.mjs"
   },
   "dependencies": {
-    "@backtickjs/typescript-plugin": "^0.2.2"
+    "@backtickjs/typescript-plugin": "^0.2.3"
   },
   "devDependencies": {
-    "@backtickjs/language-server": "^0.2.2",
+    "@backtickjs/language-server": "^0.2.3",
     "@types/vscode": "^1.120.0",
     "@volar/language-server": "^2.4.28",
     "@volar/vscode": "^2.4.28",

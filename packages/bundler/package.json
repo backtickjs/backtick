@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/bundler",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Runs Backtick server components and bundles a screen per request: one JavaScript file for the client",
   "keywords": [
     "backtick",
@@ -48,7 +48,7 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/core": "^0.2.2",
+    "@backtickjs/core": "^0.2.3",
     "semver": "^7.8.1"
   },
   "devDependencies": {
