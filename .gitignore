@@ -7,3 +7,4 @@ docs/
 packages/*/LICENSE
 .vsix/
 *.vsix
+local/
