@@ -7,8 +7,8 @@ packages:
   # Complete apps that show Backtick with other libraries, checked the same
   # way.
   - "examples/*"
-  # Built here and never published to npm: the website, the editor extension
-  # and an app.
+  # Built here and never published to npm: the website and the editor
+  # extension.
   - "apps/*"
   - "tests"
   # A stand-in third-party library the tests bind to.
@@ -26,19 +26,11 @@ saveWorkspaceProtocol: false # `pnpm add` writes "^2.16.9", not "workspace:^"
 verifyDepsBeforeRun: false
 allowBuilds:
   # Signs the VS Code extension when it's published to the Marketplace.
-  # Writes a default config for the Firebase web SDK's auto-init, which
-  # nothing here uses (firebase-tools and firebase-admin bring it along).
-  "@firebase/util": false
   "@vscode/vsce-sign": true
   esbuild: true
   # Stores Marketplace logins in the system keychain; publishing uses tokens
   # from the environment instead.
   keytar: false
-  # Checks the versions of its command-line tools, which nothing here runs.
-  protobufjs: false
-  # A native regex engine for firebase-tools' Hosting server, which falls back
-  # to JavaScript's own without it; nothing here serves Hosting.
-  re2: false
 # `bun-types` imports `undici-types` in its declarations without depending on
 # it, so it resolved only while pnpm happened to hoist a copy. Declared here so
 # what uses Bun's types (the site, the Bun plugin) typechecks whatever else the
@@ -47,8 +39,3 @@ packageExtensions:
   bun-types:
     dependencies:
       undici-types: "^7.24.6"
-minimumReleaseAgeExclude:
-  - expo-crypto@57.0.4
-  - expo-dev-client@57.0.20
-  - expo-dev-launcher@57.0.21
-  - expo-dev-menu@57.0.20
