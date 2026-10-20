@@ -12,7 +12,7 @@ The server behind Backtick's app builder. A chat app's model (Claude, ChatGPT) c
 
 Each user gets one sandbox, `build-<user>-<snapshot>`, made from a snapshot of this package and kept for 10 minutes after its last call. `start_app` makes it in the background, so the first `save_app` finds it warm. Its name includes the snapshot, so after a new snapshot no one's sandbox from the old one is reused.
 
-`supabase/migrations/` holds the database's schema: `apps` (made by an app's first save, with its title) and `versions` (one per clean `save_app`, numbered from 1).
+`supabase/migrations/` holds the database's schema: `apps` (made by an app's first save, with its title) and `versions` (one per clean `save_app`, numbered from 1), and `checks` (one per `save_app`, with its errors and warnings; a failed check keeps the source it checked, and is deleted after 30 days).
 
 ## The tools
 

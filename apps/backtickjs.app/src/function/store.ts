@@ -47,6 +47,29 @@ export async function saveVersion(
   return version;
 }
 
+// What one `save_app` check found: the version it became if it passed, or the
+// source it checked if it failed.
+export type Check = {
+  appId: string;
+  errors: string[];
+  warnings: string[];
+  durationMs: number;
+} & ({ version: number; source?: never } | { source: string; version?: never });
+
+export async function recordCheck(check: Check): Promise<void> {
+  const { error } = await supabase.from("checks").insert({
+    app_id: check.appId,
+    version: check.version ?? null,
+    source: check.source ?? null,
+    errors: check.errors,
+    warnings: check.warnings,
+    duration_ms: check.durationMs,
+  });
+  if (error) {
+    throw failed(error);
+  }
+}
+
 // Supabase's error isn't an `Error`, so its message would be lost.
 function failed(error: { message: string }): Error {
   return new Error(`Supabase: ${error.message}`, { cause: error });

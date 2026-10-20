@@ -6,7 +6,12 @@ import { waitUntil } from "@vercel/functions";
 import * as z from "zod";
 import { typecheckInSandbox } from "./sandbox.ts";
 import { starter } from "./starter.ts";
-import { latestVersion, saveVersion } from "./store.ts";
+import {
+  type Check,
+  latestVersion,
+  recordCheck,
+  saveVersion,
+} from "./store.ts";
 
 const user = "local";
 
@@ -96,20 +101,34 @@ export function tools(): McpServer {
       },
     },
     async ({ id, title, code }) => {
+      const started = performance.now();
       const { errors, warnings } = await typecheckInSandbox(
         user,
         code,
         snapshotId(),
       );
+      const durationMs = Math.round(performance.now() - started);
       if (errors.length > 0) {
+        recorded({ appId: id, source: code, errors, warnings, durationMs });
         return failed([...errors, ...warnings].join("\n"));
       }
       const version = await saveVersion(id, title, code);
+      recorded({ appId: id, version, errors, warnings, durationMs });
       return text([JSON.stringify({ id, version }), ...warnings].join("\n\n"));
     },
   );
 
   return server;
+}
+
+// Kept after the answer, and never failing it: a check that isn't recorded
+// is only logged.
+function recorded(check: Check): void {
+  waitUntil(
+    recordCheck(check).catch((error) =>
+      console.error("Recording a check failed:", error),
+    ),
+  );
 }
 
 function snapshotId(): string {
