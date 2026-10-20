@@ -1,0 +1,11 @@
+{
+  "name": "backtickjs.app-web",
+  "private": true,
+  "type": "module",
+  "description": "backtickjs.app's web pages, written with Backtick and Solid, compiled with tspc for the function to bundle",
+  "backtick": {
+    "plugins": [
+      "@backtickjs/jsx-solid/plugin"
+    ]
+  }
+}

@@ -40,6 +40,9 @@ importers:
       '@backtickjs/jsx-react':
         specifier: ^0.2.4
         version: link:../../packages/jsx-react
+      '@backtickjs/jsx-solid':
+        specifier: ^0.2.4
+        version: link:../../packages/jsx-solid
       '@backtickjs/node-plugin':
         specifier: ^0.2.4
         version: link:../../packages/node-plugin
@@ -82,6 +85,9 @@ importers:
       react-native:
         specifier: 0.86.3
         version: 0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3)
+      solid-js:
+        specifier: 1.9.17
+        version: 1.9.17
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -89,9 +95,15 @@ importers:
         specifier: ^4.6.5
         version: 4.6.7
     devDependencies:
+      '@backtickjs/tspatch-plugin':
+        specifier: ^0.2.4
+        version: link:../../packages/tspatch-plugin
       supabase:
         specifier: 2.119.0
         version: 2.119.0
+      ts-patch:
+        specifier: 4.0.1
+        version: 4.0.1
 
   apps/backtickjs.com:
     dependencies:

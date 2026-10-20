@@ -1,0 +1,23 @@
+{
+  // Built with `tspc` from ts-patch, not `tsc`: the pages are scripts, which
+  // Backtick's transformer compiles. The function imports `dist/`.
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ESNext",
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "types": ["node"],
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "@backtickjs/jsx-solid",
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "declaration": true,
+    "plugins": [{ "transform": "@backtickjs/tspatch-plugin" }]
+  },
+  "include": ["src"]
+}

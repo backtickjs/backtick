@@ -6,11 +6,14 @@ The server behind Backtick's app builder. A chat app's model (Claude, ChatGPT) c
 
 | Runs in             | Files                           | What it does                                                                                                                                             |
 | ------------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The Vercel Function | `src/index.ts`, `src/function/` | The MCP endpoint: the tools, the store and the client that drives the sandbox. It holds the secrets.                                                     |
+| The Vercel Function | `src/index.ts`, `src/function/` | The MCP endpoint: the tools, the store and the client that drives the sandbox, and the pages. It holds the secrets.                                      |
+| The browser         | `web/src/`                      | The pages' scripts, which the function bundles and Solid draws.                                                                                          |
 | A Vercel Sandbox    | `src/sandbox/`                  | A server on localhost that type-checks an `App.tsx` and bundles it for a phone's modules. It runs the model's code, so it has no secrets and no network. |
 | This machine        | `scripts/`, `test/`             | The snapshot, timing and dev scripts, and the tests.                                                                                                     |
 
 Each user gets one sandbox, `build-<user>-<snapshot>`, made from a snapshot of this package and kept for 10 minutes after its last call. `start_app` makes it in the background, so the first `save_app` finds it warm. Its name includes the snapshot, so after a new snapshot no one's sandbox from the old one is reused.
+
+`web/` holds the pages people see on backtickjs.app: the home page, the privacy policy Google's sign-in screen links to, and the consent page. They're Backtick scripts drawn with Solid, so `web/` has its own `package.json`, naming `@backtickjs/jsx-solid/plugin`, beside this package's React and Expo plugins for the apps. `pnpm build` compiles them with `tspc` into `web/dist/`, which Vercel runs before bundling the function; the function imports `web/dist/`, bundles each page on its first request, and serves it from memory after.
 
 `supabase/migrations/` holds the database's schema: `apps` (made by an app's first save, with its title) and `versions` (one per clean `save_app`, numbered from 1), and `checks` (one per `save_app`, with its errors and warnings; a failed check keeps the source it checked, and is deleted after 30 days).
 
@@ -55,7 +58,7 @@ Supabase is set up for it in its dashboard:
 
 - Authentication → Sign In / Providers → Google, with a client from Google Cloud whose redirect URI is `https://<ref>.supabase.co/auth/v1/callback`.
 - Authentication → OAuth Server: enabled, with dynamic registration, and the authorization path `/oauth/consent`, the page `src/function/consent.ts` serves.
-- Authentication → URL Configuration: the Site URL `https://backtickjs-app.vercel.app`, and `/oauth/consent` on it and on `http://localhost:3000` as redirect URLs.
+- Authentication → URL Configuration: the Site URL `https://backtickjs.app`, and `https://backtickjs.app/oauth/consent` as the one redirect URL. Supabase sends users to the Site URL's consent page wherever the MCP server runs, a laptop included.
 
 In Claude.ai, the connector signs in with **Register automatically**: Supabase doesn't read Claude's published identity (CIMD).
 

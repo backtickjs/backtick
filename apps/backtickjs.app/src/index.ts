@@ -11,8 +11,9 @@ import {
 } from "@modelcontextprotocol/server";
 import { Hono } from "hono";
 import { ownerOf, verifier } from "./function/auth.ts";
-import { consentPage } from "./function/consent.ts";
 import { tools } from "./function/tools.ts";
+// Compiled by `tspc` first: the pages are Backtick scripts.
+import { consentPage, homePage, privacyPage } from "../web/dist/index.js";
 
 const mcp = createMcpHandler((context) => tools(ownerOf(context.authInfo)));
 
@@ -42,9 +43,13 @@ app.get(
     }) ?? c.notFound(),
 );
 
+// What Google's sign-in screen links to, and what the domain shows.
+app.get("/", async (c) => c.html(await homePage()));
+app.get("/privacy", async (c) => c.html(await privacyPage()));
+
 // Where Supabase sends a user to allow a host: Authentication → OAuth Server →
 // Authorization Path.
-app.get("/oauth/consent", (c) => c.html(consentPage()));
+app.get("/oauth/consent", async (c) => c.html(await consentPage()));
 
 // Each request carries the user's access token. Without a valid one, a 401
 // that points at the documents above.

@@ -16,7 +16,11 @@ export function tools(owner: string): McpServer {
   // What a host sees before it loads the tools, so it's what decides whether
   // they're used at all.
   const server = new McpServer(
-    { name: "backtick", title: "Backtick", version: "0.0.0" },
+    {
+      name: "backtick",
+      title: "Backtick",
+      version: "0.0.0",
+    },
     {
       instructions:
         "Backtick makes native apps that run on the user's phone, in the " +
