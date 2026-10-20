@@ -54,7 +54,10 @@ it("typechecks and bundles over HTTP, file after file", async () => {
       starter.replace("$useState<number>(0)", '$useState<number>("0")'),
     );
     const app = write("serve-starter", starter);
-    assert.deepEqual(await post("typecheck", { file: app }), { errors: [] });
+    assert.deepEqual(await post("typecheck", { file: app }), {
+      errors: [],
+      warnings: [],
+    });
     const { errors } = await post("typecheck", { file: typo });
     assert.match(errors.join("\n"), /^App\.tsx\(18,49\): error TS2345/);
     assert.equal(

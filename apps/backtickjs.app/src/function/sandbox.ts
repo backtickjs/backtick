@@ -3,6 +3,7 @@
 // base snapshot and starts the server; each call keeps it another `warm`.
 import { randomUUID } from "node:crypto";
 import { Sandbox } from "@vercel/sandbox";
+import type { Typechecked } from "../sandbox/typecheck.ts";
 
 // Where `scripts/snapshot.ts` installs this package.
 const app = "/vercel/backtickjs.app";
@@ -16,15 +17,14 @@ export async function typecheckInSandbox(
   user: string,
   source: string,
   snapshotId: string,
-): Promise<string[]> {
-  const { errors } = await postMessageToSandbox<{ errors: string[] }>(
+): Promise<Typechecked> {
+  return postMessageToSandbox<Typechecked>(
     user,
     source,
     snapshotId,
     "typecheck",
     {},
   );
-  return errors;
 }
 
 export async function bundleInSandbox(

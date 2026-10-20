@@ -34,6 +34,24 @@ describe("refusals", () => {
     }
   });
 
+  it("a regex escaped as if in a string is warned about", () => {
+    // Each `\\` in these strings is one backslash in the script.
+    assert.deepStrictEqual(
+      refusals("(s: string) => /\\\\B(?=\\\\d{3})/.test(s)"),
+      [
+        "`\\\\B` in this regex matches a backslash and `B`. A `cs` client " +
+          "script is code as written, not a string, so write `\\B`.",
+      ],
+    );
+    for (const body of [
+      "(s: string) => /\\d+/.test(s)",
+      "(s: string) => /\\\\/.test(s)",
+      '(s: string) => s === "\\\\d"',
+    ]) {
+      assert.deepStrictEqual(refusals(body), [], body);
+    }
+  });
+
   it("a declared `$` name is refused, not emitted", () => {
     for (const body of [
       "{ function $done() {} }",

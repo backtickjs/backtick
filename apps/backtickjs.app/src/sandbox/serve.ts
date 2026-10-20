@@ -14,7 +14,7 @@ app.get("/ready", (c) => c.text("ready"));
 
 app.post("/typecheck", async (c) => {
   const { file } = await c.req.json<{ file: string }>();
-  return c.json({ errors: typecheck(file) });
+  return c.json(typecheck(file));
 });
 
 // A refusal is the bundler's error, by name, for the function to answer the

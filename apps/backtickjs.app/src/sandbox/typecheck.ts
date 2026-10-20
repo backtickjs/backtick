@@ -13,14 +13,24 @@ const { config } = ts.readConfigFile(
 const { options } = ts.parseJsonConfigFileContent(config, ts.sys, root);
 const host = keepingDeclarations(ts.createCompilerHost(options));
 
-// The errors, as tsc prints them, or none.
-export function typecheck(file: string): string[] {
+export type Typechecked = { errors: string[]; warnings: string[] };
+
+// The errors and the warnings, as tsc prints them: an error stops the app
+// being saved, a warning goes back with the saved version.
+export function typecheck(file: string): Typechecked {
   const program = createProgram({ rootNames: [file], options, host });
-  return ts
-    .getPreEmitDiagnostics(program, program.getSourceFile(file))
-    .map((diagnostic) =>
-      ts.formatDiagnostic(diagnostic, formatHost(file)).trimEnd(),
-    );
+  const checked: Typechecked = { errors: [], warnings: [] };
+  for (const diagnostic of ts.getPreEmitDiagnostics(
+    program,
+    program.getSourceFile(file),
+  )) {
+    const printed = ts.formatDiagnostic(diagnostic, formatHost(file)).trimEnd();
+    (diagnostic.category === ts.DiagnosticCategory.Warning
+      ? checked.warnings
+      : checked.errors
+    ).push(printed);
+  }
+  return checked;
 }
 
 // Relative to the current directory, as tsc prints paths: here the app's

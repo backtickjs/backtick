@@ -67,12 +67,16 @@ export function tools(): McpServer {
       if (latest === undefined) {
         return failed(`No app ${id}. Call create_app first.`);
       }
-      const errors = await typecheckInSandbox(user, code, snapshotId());
+      const { errors, warnings } = await typecheckInSandbox(
+        user,
+        code,
+        snapshotId(),
+      );
       if (errors.length > 0) {
-        return failed(errors.join("\n"));
+        return failed([...errors, ...warnings].join("\n"));
       }
       const version = await saveVersion(id, latest.version, code);
-      return text(JSON.stringify({ id, version }));
+      return text([JSON.stringify({ id, version }), ...warnings].join("\n\n"));
     },
   );
 

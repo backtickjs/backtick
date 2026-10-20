@@ -316,7 +316,8 @@ function unsplicedSpans(
 
 // What a script may not write though TypeScript would read it: a name it
 // declares where it can't, a tag naming what it doesn't declare, and a splice
-// it can't spell unbraced.
+// it can't spell unbraced. And what it likely didn't mean: a regex escaped as
+// if in a string.
 function refusals(
   ts: typeof import("typescript"),
   script: ClientScript,
@@ -392,6 +393,23 @@ function refusals(
           `\`<${written}>\` names nothing this script declares. A host value ` +
             `used as a tag is spliced: \`<$${written}>\`.`,
         );
+      }
+    }
+    // A script is code as written, not a string the host's template escapes:
+    // a regex's `\\d` is a backslash and a `d`. Warned, not refused: that's
+    // occasionally what's meant.
+    if (ts.isRegularExpressionLiteral(node)) {
+      const [doubled, letter] = /\\\\([A-Za-z])/.exec(node.text) ?? [];
+      if (doubled !== undefined) {
+        diagnostics.push({
+          range: script.toSourceRange(node),
+          message:
+            `\`${doubled}\` in this regex matches a backslash and \`${letter}\`. ` +
+            "A `cs` client script is code as written, not a string, so " +
+            `write \`\\${letter}\`.`,
+          category: ts.DiagnosticCategory.Warning,
+          code: 0,
+        });
       }
     }
     node.forEachChild(visit);

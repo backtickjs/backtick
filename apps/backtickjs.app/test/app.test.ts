@@ -28,7 +28,10 @@ function write(name: string, source: string): string {
 
 describe("typecheck", () => {
   it("passes the starter", () => {
-    assert.deepEqual(typecheck(write("starter", starter)), []);
+    assert.deepEqual(typecheck(write("starter", starter)), {
+      errors: [],
+      warnings: [],
+    });
   });
 
   it("reports type errors where they are in the file", () => {
@@ -37,8 +40,23 @@ describe("typecheck", () => {
       starter.replace("$useState<number>(0)", '$useState<number>("0")'),
     );
     assert.match(
-      typecheck(file).join("\n"),
+      typecheck(file).errors.join("\n"),
       /^App\.tsx\(18,49\): error TS2345: Argument of type 'string'/,
+    );
+  });
+  it("reports a regex escaped as if in a string as a warning, not an error", () => {
+    const file = write(
+      "warning",
+      starter.replace(
+        '{count + " taps"}',
+        '{String(count).replace(/\\\\B/g, ",") + " taps"}',
+      ),
+    );
+    const { errors, warnings } = typecheck(file);
+    assert.deepEqual(errors, []);
+    assert.match(
+      warnings.join("\n"),
+      /^App\.tsx\(22,62\): warning TS0: `\\\\B` in this regex matches a backslash/,
     );
   });
 });

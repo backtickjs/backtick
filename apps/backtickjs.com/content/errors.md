@@ -56,6 +56,12 @@ A script is a template literal itself, so `` \` `` can't start one inside it.
 Build the string with `+`: `n + "%"`, not `` `${n}%` ``. In a string or a
 comment, `` \` `` is a backtick, and fine.
 
+### `\\d` in this regex matches a backslash and `d`
+
+A warning. A script is code as written, not a string, so a regex in it is
+escaped once, as in a `.tsx` file: `/\d+/`, not `/\\d+/`. If you meant a
+backslash and a letter, ignore it.
+
 ### `$`-prefixed names are reserved for unbraced splices in a `cs` client script
 
 A script declared a name starting with `$`, as `const $label = …`. Those are
