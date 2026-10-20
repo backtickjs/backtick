@@ -57,9 +57,8 @@ async function postMessageToSandbox<T>(
     networkPolicy: "deny-all",
     onCreate: start,
   });
-  const dir = `${app}/.builds/${randomUUID()}`;
-  const file = `${dir}/App.tsx`;
-  await sandbox.mkDir(dir);
+  // Written with its folder: `writeFiles` makes the folders it needs.
+  const file = `${app}/.builds/${randomUUID()}/App.tsx`;
   await sandbox.writeFiles([{ path: file, content: Buffer.from(source) }]);
   const request = JSON.stringify({ file, ...body });
   // A server that died is started again, once.
