@@ -1,19 +1,17 @@
-// The MCP tools a host's model calls. Apps are kept in memory and every call
-// is one local user, until Supabase stores apps and signs users in.
-import { randomUUID } from "node:crypto";
+// The MCP tools a host's model calls. Every call is one local user, until
+// Supabase signs users in.
 import { readFileSync } from "node:fs";
 import { McpServer, type CallToolResult } from "@modelcontextprotocol/server";
 import { waitUntil } from "@vercel/functions";
 import * as z from "zod";
 import { typecheckInSandbox } from "./sandbox.ts";
+import { createApp, latestVersion, saveVersion } from "./store.ts";
 
 const user = "local";
 const starter = readFileSync(
   new URL("../../starter/App.tsx", import.meta.url),
   "utf8",
 );
-// Each app's versions, oldest first: version n is `versions[n - 1]`.
-const apps = new Map<string, { title: string; versions: string[] }>();
 
 export function tools(): McpServer {
   const server = new McpServer({ name: "backtick", version: "0.0.0" });
@@ -27,8 +25,7 @@ export function tools(): McpServer {
       inputSchema: z.object({ title: z.string() }),
     },
     async ({ title }) => {
-      const id = randomUUID();
-      apps.set(id, { title, versions: [] });
+      const id = await createApp(title);
       // The sandbox is made and warmed while the model writes its code, so
       // the first `update_app` finds it ready.
       waitUntil(
@@ -47,17 +44,16 @@ export function tools(): McpServer {
     "get_app",
     {
       description: "The app's latest App.tsx, to edit it.",
-      inputSchema: z.object({ id: z.string() }),
+      inputSchema: z.object({ id: z.uuid() }),
     },
     async ({ id }) => {
-      const app = apps.get(id);
-      if (app === undefined) {
+      const latest = await latestVersion(id);
+      if (latest === undefined) {
         return failed(`No app ${id}.`);
       }
-      const latest = app.versions.at(-1) ?? starter;
       return text(
-        `${JSON.stringify({ id, version: app.versions.length })}\n\n` +
-          `\`\`\`tsx\n${latest}\`\`\``,
+        `${JSON.stringify({ id, version: latest.version })}\n\n` +
+          `\`\`\`tsx\n${latest.source ?? starter}\`\`\``,
       );
     },
   );
@@ -68,19 +64,19 @@ export function tools(): McpServer {
       description:
         "Check the app's whole App.tsx and, if it has no errors, save it as " +
         "the app's next version. Returns the errors to fix, or the version.",
-      inputSchema: z.object({ id: z.string(), code: z.string() }),
+      inputSchema: z.object({ id: z.uuid(), code: z.string() }),
     },
     async ({ id, code }) => {
-      const app = apps.get(id);
-      if (app === undefined) {
+      const latest = await latestVersion(id);
+      if (latest === undefined) {
         return failed(`No app ${id}. Call create_app first.`);
       }
       const errors = await typecheckInSandbox(user, code, snapshotId());
       if (errors.length > 0) {
         return failed(errors.join("\n"));
       }
-      app.versions.push(code);
-      return text(JSON.stringify({ id, version: app.versions.length }));
+      const version = await saveVersion(id, latest.version, code);
+      return text(JSON.stringify({ id, version }));
     },
   );
 
