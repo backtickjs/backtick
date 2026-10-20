@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/expo",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Backtick for Expo apps: the config plugin that records the app's installed packages, and reloading apps when the server restarts",
   "keywords": [
     "backtick",
@@ -53,7 +53,7 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/core": "^0.2.3"
+    "@backtickjs/core": "^0.2.4"
   },
   "peerDependencies": {
     "expo": "*"

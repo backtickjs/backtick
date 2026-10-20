@@ -33,15 +33,15 @@
     "url": "https://github.com/backtickjs/backtick.git"
   },
   "dependencies": {
-    "@backtickjs/bundler": "^0.2.3",
-    "@backtickjs/core": "^0.2.3",
-    "@backtickjs/jsx-solid": "^0.2.3",
-    "@backtickjs/tspatch-plugin": "^0.2.3",
+    "@backtickjs/bundler": "^0.2.4",
+    "@backtickjs/core": "^0.2.4",
+    "@backtickjs/jsx-solid": "^0.2.4",
+    "@backtickjs/tspatch-plugin": "^0.2.4",
     "solid-js": "1.9.17"
   },
   "devDependencies": {
-    "@backtickjs/prettier-plugin": "^0.2.3",
-    "@backtickjs/tsc": "^0.2.3",
+    "@backtickjs/prettier-plugin": "^0.2.4",
+    "@backtickjs/tsc": "^0.2.4",
     "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"
   },

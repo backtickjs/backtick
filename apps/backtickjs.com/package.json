@@ -14,12 +14,12 @@
     "clean": "rm -rf node_modules"
   },
   "dependencies": {
-    "@backtickjs/bun-plugin": "^0.2.3",
-    "@backtickjs/bundler": "^0.2.3",
-    "@backtickjs/core": "^0.2.3",
-    "@backtickjs/expo": "^0.2.3",
-    "@backtickjs/jsx-solid": "^0.2.3",
-    "@backtickjs/vscode-extension": "^0.2.3",
+    "@backtickjs/bun-plugin": "^0.2.4",
+    "@backtickjs/bundler": "^0.2.4",
+    "@backtickjs/core": "^0.2.4",
+    "@backtickjs/expo": "^0.2.4",
+    "@backtickjs/jsx-solid": "^0.2.4",
+    "@backtickjs/vscode-extension": "^0.2.4",
     "@shikijs/colorized-brackets": "^4.5.0",
     "@tailwindcss/node": "^4.3.3",
     "@tailwindcss/oxide": "^4.3.3",
@@ -33,10 +33,10 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@backtickjs/node-plugin": "^0.2.3",
-    "@backtickjs/prettier-plugin": "^0.2.3",
-    "@backtickjs/jsx-react": "^0.2.3",
-    "@backtickjs/tsc": "^0.2.3",
+    "@backtickjs/node-plugin": "^0.2.4",
+    "@backtickjs/prettier-plugin": "^0.2.4",
+    "@backtickjs/jsx-react": "^0.2.4",
+    "@backtickjs/tsc": "^0.2.4",
     "@hono/node-server": "^2.1.4",
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.7",

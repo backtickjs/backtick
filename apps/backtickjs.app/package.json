@@ -12,12 +12,12 @@
     "clean": "rm -rf node_modules .builds"
   },
   "dependencies": {
-    "@backtickjs/bundler": "^0.2.3",
-    "@backtickjs/core": "^0.2.3",
-    "@backtickjs/expo": "^0.2.3",
-    "@backtickjs/jsx-react": "^0.2.3",
-    "@backtickjs/node-plugin": "^0.2.3",
-    "@backtickjs/tsc": "^0.2.3",
+    "@backtickjs/bundler": "^0.2.4",
+    "@backtickjs/core": "^0.2.4",
+    "@backtickjs/expo": "^0.2.4",
+    "@backtickjs/jsx-react": "^0.2.4",
+    "@backtickjs/node-plugin": "^0.2.4",
+    "@backtickjs/tsc": "^0.2.4",
     "@types/node": "^25.9.1",
     "@types/react": "19.2.18",
     "expo": "~57.0.26",
