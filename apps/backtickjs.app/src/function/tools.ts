@@ -23,9 +23,10 @@ export function tools(): McpServer {
     {
       instructions:
         "Backtick makes native apps that run on the user's phone, in the " +
-        "Backtick app. When the user asks for an app, a tool or a game for " +
-        "their phone, or to open something on their phone, use start_app " +
-        "and then save_app instead of making a web page or an artifact.",
+        "Backtick app. start_app gives a starter to edit, and save_app " +
+        "checks the code and saves it as a version the phone opens. These " +
+        "are the tools for an app the user wants on their phone: a web page " +
+        "or an artifact doesn't reach it.",
     },
   );
 
