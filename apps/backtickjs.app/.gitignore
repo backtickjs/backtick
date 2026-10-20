@@ -1,1 +1,4 @@
 .builds/
+# `vercel link` and `vercel env pull`
+.vercel/
+.env*.local

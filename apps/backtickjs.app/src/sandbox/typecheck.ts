@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import { createProgram } from "@backtickjs/tsc";
 import ts from "typescript";
 
-const root = fileURLToPath(new URL("..", import.meta.url));
+const root = fileURLToPath(new URL("../..", import.meta.url));
 const { config } = ts.readConfigFile(
   join(root, "tsconfig.app.json"),
   ts.sys.readFile,

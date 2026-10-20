@@ -7,8 +7,8 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "node --import @backtickjs/node-plugin --test \"test/**/*.test.ts\"",
-    "format": "prettier --write src test",
-    "format:check": "prettier --check src test",
+    "format": "prettier --write src test scripts",
+    "format:check": "prettier --check src test scripts",
     "clean": "rm -rf node_modules .builds"
   },
   "dependencies": {
@@ -18,9 +18,12 @@
     "@backtickjs/jsx-react": "^0.2.4",
     "@backtickjs/node-plugin": "^0.2.4",
     "@backtickjs/tsc": "^0.2.4",
+    "@hono/node-server": "^2.1.4",
     "@types/node": "^25.9.1",
     "@types/react": "19.2.18",
+    "@vercel/sandbox": "3.5.1",
     "expo": "~57.0.26",
+    "hono": "^4.13.13",
     "react": "19.2.3",
     "react-native": "0.86.3",
     "typescript": "^6.0.3"

@@ -4,8 +4,8 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 import { ClientVersionMismatch } from "@backtickjs/bundler";
 import { installedPackages } from "@backtickjs/core/node";
-import { bundle } from "../src/bundle.ts";
-import { typecheck } from "../src/typecheck.ts";
+import { bundle } from "../src/sandbox/bundle.ts";
+import { typecheck } from "../src/sandbox/typecheck.ts";
 
 const root = join(import.meta.dirname, "..");
 const starter = readFileSync(join(root, "starter/App.tsx"), "utf8");
