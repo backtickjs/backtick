@@ -5,6 +5,7 @@
   "type": "module",
   "description": "The MCP app builder's server: checks an app's code for update_app, and bundles it for each phone that opens it",
   "scripts": {
+    "dev": "node --env-file=.env.local scripts/dev.ts",
     "typecheck": "tsc --noEmit",
     "test": "node --import @backtickjs/node-plugin --test \"test/**/*.test.ts\"",
     "format": "prettier --write src test scripts",
@@ -19,14 +20,17 @@
     "@backtickjs/node-plugin": "^0.2.4",
     "@backtickjs/tsc": "^0.2.4",
     "@hono/node-server": "^2.1.4",
+    "@modelcontextprotocol/server": "2.3.1",
     "@types/node": "^25.9.1",
     "@types/react": "19.2.18",
+    "@vercel/functions": "3.9.11",
     "@vercel/sandbox": "3.5.1",
     "expo": "~57.0.26",
     "hono": "^4.13.13",
     "react": "19.2.3",
     "react-native": "0.86.3",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "zod": "4.6.5"
   },
   "backtick": {
     "plugins": [
