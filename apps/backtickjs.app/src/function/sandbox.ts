@@ -46,7 +46,9 @@ async function postMessageToSandbox<T>(
   body: object,
 ): Promise<T> {
   const sandbox = await Sandbox.getOrCreate({
-    name: `build-${user}`,
+    // Named for its snapshot too: after a new snapshot, a user's sandbox from
+    // the old one is never reused, and times out unasked.
+    name: `build-${user}-${snapshotId}`,
     source: { type: "snapshot", snapshotId },
     // Nothing in it outlives the server's cache.
     persistent: false,

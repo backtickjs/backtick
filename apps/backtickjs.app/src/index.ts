@@ -22,14 +22,26 @@ const hostnames = [
 
 const app = new Hono();
 
-// Until users sign in, the URL carries a secret: Claude.ai's connectors can't
-// send a header. Any other path is a 404.
-app.all("/mcp/:secret", (c) =>
-  isSecret(c.req.param("secret"))
-    ? (hostHeaderValidationResponse(c.req.raw, hostnames) ??
-      mcp.fetch(c.req.raw))
-    : c.notFound(),
-);
+// Until users sign in, each request carries a secret as a bearer token, set
+// as a header in the host's connector. Without it, a 404.
+app.all("/mcp", (c) => {
+  const authorization = c.req.header("authorization") ?? "";
+  if (!isSecret(authorization.replace(/^Bearer /, ""))) {
+    console.log("Refused", c.req.method, c.req.path, describe(authorization));
+    return c.notFound();
+  }
+  return (
+    hostHeaderValidationResponse(c.req.raw, hostnames) ?? mcp.fetch(c.req.raw)
+  );
+});
+
+// What came instead of the secret, without the secret: whether it starts
+// with `Bearer `, and its length.
+function describe(authorization: string): string {
+  return authorization === ""
+    ? "no authorization"
+    : `authorization ${authorization.startsWith("Bearer ") ? "Bearer" : "without Bearer"}, ${authorization.length} chars`;
+}
 
 function isSecret(given: string): boolean {
   const secret = Buffer.from(process.env.MCP_SECRET ?? "");

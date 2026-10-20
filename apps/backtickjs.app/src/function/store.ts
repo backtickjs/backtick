@@ -7,47 +7,37 @@ const supabase = createClient(
   { auth: { persistSession: false } },
 );
 
-export async function createApp(title: string): Promise<string> {
-  const { data, error } = await supabase
-    .from("apps")
-    .insert({ title })
-    .select("id")
-    .single();
-  if (error) {
-    throw failed(error);
-  }
-  return data.id;
-}
-
-// The latest version, `{ version: 0 }` for an app with none, or nothing for no
-// such app.
+// The latest saved version, or nothing for an app never saved.
 export async function latestVersion(
   id: string,
-): Promise<{ version: number; source?: string } | undefined> {
-  const { data: app, error } = await supabase
-    .from("apps")
-    .select("versions(version, source)")
-    .eq("id", id)
-    .order("version", { referencedTable: "versions", ascending: false })
-    .limit(1, { referencedTable: "versions" })
+): Promise<{ version: number; source: string } | undefined> {
+  const { data, error } = await supabase
+    .from("versions")
+    .select("version, source")
+    .eq("app_id", id)
+    .order("version", { ascending: false })
+    .limit(1)
     .maybeSingle();
   if (error) {
     throw failed(error);
   }
-  if (app === null) {
-    return undefined;
-  }
-  return app.versions[0] ?? { version: 0 };
+  return data ?? undefined;
 }
 
-// Saves the next version and returns its number. Two saves at once for one
-// app collide on the key, and the second fails.
+// Saves the app's next version, 1 for its first, and returns its number. The
+// first save creates the app, and each one gives it `title`. Two saves at once
+// for one app collide on the key, and the second fails.
 export async function saveVersion(
   id: string,
-  after: number,
+  title: string,
   source: string,
 ): Promise<number> {
-  const version = after + 1;
+  const app = await supabase.from("apps").upsert({ id, title });
+  if (app.error) {
+    throw failed(app.error);
+  }
+  const latest = await latestVersion(id);
+  const version = latest === undefined ? 1 : latest.version + 1;
   const { error } = await supabase
     .from("versions")
     .insert({ app_id: id, version, source });

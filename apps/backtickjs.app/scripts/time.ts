@@ -1,4 +1,4 @@
-// Times a sandbox from the snapshot as `update_app` and a phone use it: the
+// Times a sandbox from the snapshot as `save_app` and a phone use it: the
 // first typecheck creates it, then a warm typecheck, then two bundles.
 // `node --env-file=.env.local scripts/time.ts <snapshot id>`
 import { randomUUID } from "node:crypto";
@@ -45,5 +45,5 @@ try {
     bundleInSandbox(user, starter, phone, snapshotId),
   );
 } finally {
-  await (await Sandbox.get({ name: `build-${user}` })).stop();
+  await (await Sandbox.get({ name: `build-${user}-${snapshotId}` })).stop();
 }

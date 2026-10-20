@@ -1,4 +1,4 @@
-// What `create_app` hands the model: a working app, written as the model sees
+// What `start_app` hands the model: a working app, written as the model sees
 // it, to edit into what the user asked for.
 export const starter = `// A Backtick app:
 // 1. Import what the client provides \`with { backtick: "client" }\`.

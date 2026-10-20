@@ -1,4 +1,4 @@
-// What `update_app` checks: what `backtick-tsc` reports for the app's file, from
+// What `save_app` checks: what `backtick-tsc` reports for the app's file, from
 // its own program, in this process. Static only: the file's code doesn't run.
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";

@@ -1,29 +1,47 @@
 // The MCP tools a host's model calls. Every call is one local user, until
 // Supabase signs users in.
+import { randomUUID } from "node:crypto";
 import { McpServer, type CallToolResult } from "@modelcontextprotocol/server";
 import { waitUntil } from "@vercel/functions";
 import * as z from "zod";
 import { typecheckInSandbox } from "./sandbox.ts";
 import { starter } from "./starter.ts";
-import { createApp, latestVersion, saveVersion } from "./store.ts";
+import { latestVersion, saveVersion } from "./store.ts";
 
 const user = "local";
 
 export function tools(): McpServer {
-  const server = new McpServer({ name: "backtick", version: "0.0.0" });
-
-  server.registerTool(
-    "create_app",
+  // What a host sees before it loads the tools, so it's what decides whether
+  // they're used at all.
+  const server = new McpServer(
+    { name: "backtick", title: "Backtick", version: "0.0.0" },
     {
-      description:
-        "Start an app for the user's phone. Returns its id and a starter " +
-        "App.tsx, a working app to edit into what the user asked for.",
-      inputSchema: z.object({ title: z.string() }),
+      instructions:
+        "Backtick makes native apps that run on the user's phone, in the " +
+        "Backtick app. When the user asks for an app, a tool or a game for " +
+        "their phone, or to open something on their phone, use start_app " +
+        "and then save_app instead of making a web page or an artifact.",
     },
-    async ({ title }) => {
-      const id = await createApp(title);
+  );
+
+  // Saves nothing: the app exists from its first save. So it's read-only, and
+  // a host may run it without asking.
+  server.registerTool(
+    "start_app",
+    {
+      title: "Start an app",
+      description:
+        "Use when the user wants an app on their phone: a native app they " +
+        "open in the Backtick app, not a web page or an artifact. Returns a " +
+        "new app's id and a starter App.tsx, a working app to edit into what " +
+        "they asked for, then save with save_app. Saves nothing itself.",
+      inputSchema: z.object({}),
+      annotations: { readOnlyHint: true, openWorldHint: false },
+    },
+    async () => {
+      const id = randomUUID();
       // The sandbox is made and warmed while the model writes its code, so
-      // the first `update_app` finds it ready.
+      // the first `save_app` finds it ready.
       waitUntil(
         typecheckInSandbox(user, starter, snapshotId()).catch((error) =>
           console.error("Warming the sandbox failed:", error),
@@ -39,34 +57,45 @@ export function tools(): McpServer {
   server.registerTool(
     "get_app",
     {
-      description: "The app's latest App.tsx, to edit it.",
+      title: "Get an app",
+      description:
+        "An app's latest saved App.tsx and its version, to change it.",
       inputSchema: z.object({ id: z.uuid() }),
+      annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async ({ id }) => {
       const latest = await latestVersion(id);
       if (latest === undefined) {
-        return failed(`No app ${id}.`);
+        return failed(`No saved app ${id}.`);
       }
       return text(
         `${JSON.stringify({ id, version: latest.version })}\n\n` +
-          `\`\`\`tsx\n${latest.source ?? starter}\`\`\``,
+          `\`\`\`tsx\n${latest.source}\`\`\``,
       );
     },
   );
 
   server.registerTool(
-    "update_app",
+    "save_app",
     {
+      title: "Save an app",
       description:
-        "Check the app's whole App.tsx and, if it has no errors, save it as " +
-        "the app's next version. Returns the errors to fix, or the version.",
-      inputSchema: z.object({ id: z.uuid(), code: z.string() }),
+        "Type-check the app's whole App.tsx and, if it has no errors, save " +
+        "it as the app's next version, the one the user's phone opens. The " +
+        "first save creates the app with its title. Returns the errors to " +
+        "fix, or the version with any warnings.",
+      inputSchema: z.object({
+        id: z.uuid(),
+        title: z.string(),
+        code: z.string(),
+      }),
+      annotations: {
+        readOnlyHint: false,
+        destructiveHint: false,
+        openWorldHint: false,
+      },
     },
-    async ({ id, code }) => {
-      const latest = await latestVersion(id);
-      if (latest === undefined) {
-        return failed(`No app ${id}. Call create_app first.`);
-      }
+    async ({ id, title, code }) => {
       const { errors, warnings } = await typecheckInSandbox(
         user,
         code,
@@ -75,7 +104,7 @@ export function tools(): McpServer {
       if (errors.length > 0) {
         return failed([...errors, ...warnings].join("\n"));
       }
-      const version = await saveVersion(id, latest.version, code);
+      const version = await saveVersion(id, title, code);
       return text([JSON.stringify({ id, version }), ...warnings].join("\n\n"));
     },
   );
