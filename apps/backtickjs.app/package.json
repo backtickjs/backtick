@@ -31,7 +31,7 @@
     "react": "19.2.3",
     "react-native": "0.86.3",
     "typescript": "^6.0.3",
-    "zod": "4.6.5"
+    "zod": "^4.6.5"
   },
   "backtick": {
     "plugins": [

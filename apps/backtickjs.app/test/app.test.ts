@@ -1,14 +1,14 @@
 import assert from "node:assert/strict";
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, it } from "node:test";
 import { ClientVersionMismatch } from "@backtickjs/bundler";
 import { installedPackages } from "@backtickjs/core/node";
 import { bundle } from "../src/sandbox/bundle.ts";
 import { typecheck } from "../src/sandbox/typecheck.ts";
+import { starter } from "../src/function/starter.ts";
 
 const root = join(import.meta.dirname, "..");
-const starter = readFileSync(join(root, "starter/App.tsx"), "utf8");
 
 // What a phone carrying the versions installed here sends.
 const installed = installedPackages(root);

@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { it } from "node:test";
 import { installedPackages } from "@backtickjs/core/node";
+import { starter } from "../src/function/starter.ts";
 
 const root = join(import.meta.dirname, "..");
-const starter = readFileSync(join(root, "starter/App.tsx"), "utf8");
 const installed = installedPackages(root);
 const phone = {
   react: installed.react!,

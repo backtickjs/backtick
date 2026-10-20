@@ -1,17 +1,13 @@
 // The MCP tools a host's model calls. Every call is one local user, until
 // Supabase signs users in.
-import { readFileSync } from "node:fs";
 import { McpServer, type CallToolResult } from "@modelcontextprotocol/server";
 import { waitUntil } from "@vercel/functions";
 import * as z from "zod";
 import { typecheckInSandbox } from "./sandbox.ts";
+import { starter } from "./starter.ts";
 import { createApp, latestVersion, saveVersion } from "./store.ts";
 
 const user = "local";
-const starter = readFileSync(
-  new URL("../../starter/App.tsx", import.meta.url),
-  "utf8",
-);
 
 export function tools(): McpServer {
   const server = new McpServer({ name: "backtick", version: "0.0.0" });

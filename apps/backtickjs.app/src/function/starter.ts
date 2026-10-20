@@ -1,13 +1,15 @@
-// A Backtick app:
-// 1. Import what the client provides `with { backtick: "client" }`.
-// 2. A splice `$` marks a server value crossing into a client script cs`...`
+// What `create_app` hands the model: a working app, written as the model sees
+// it, to edit into what the user asked for.
+export const starter = `// A Backtick app:
+// 1. Import what the client provides \`with { backtick: "client" }\`.
+// 2. A splice \`$\` marks a server value crossing into a client script cs\`...\`
 // 3. Use + over template literals: a backtick ends the client script.
 
 import { cs } from "@backtickjs/core";
 import { useState } from "react" with { backtick: "client" };
 import { Pressable, StyleSheet, Text, View } from "react-native" with { backtick: "client" };
 
-export default cs`{
+export default cs\`{
   const styles = $StyleSheet.create({
     screen: { flex: 1, alignItems: "center", justifyContent: "center" },
     button: { padding: 12, borderRadius: 8, backgroundColor: "#0a7ea4" },
@@ -26,4 +28,5 @@ export default cs`{
   }
 
   return <App />;
-}`;
+}\`;
+`;
