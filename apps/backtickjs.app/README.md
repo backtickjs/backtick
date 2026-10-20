@@ -27,6 +27,8 @@ Each user gets one sandbox, `build-<user>-<snapshot>`, made from a snapshot of t
 
 An error stops the save; a warning, such as a regex escaped as if in a string, goes back with the saved version.
 
+The phone opens an app with `GET /apps/<id>`, signed in as its owner, sending its modules in `x-backtick-modules` as any Backtick client does. The answer is the latest version's bundle, made in the owner's sandbox for those modules, with its number in `x-backtick-version`; a module the phone lacks is a 426, the bundler's `ClientVersionMismatch`, for the phone's update screen. Someone else's app is a 404, like one that doesn't exist.
+
 ## Setting up
 
 Link the Vercel project and the Supabase project from this folder:
@@ -75,6 +77,8 @@ claude mcp add --transport http backtick http://localhost:3000/mcp
 ```
 
 `pnpm test` checks the typecheck, the bundle and the sandbox's server on this machine, with no Vercel or Supabase calls.
+
+`node --env-file=.env.local scripts/e2e.ts` runs the whole flow against `https://backtickjs.app`, or `BASE`: the tools as a host calls them, then the bundle as a phone fetches it. It signs in as `test@backtickjs.app` through `scripts/testUser.ts`: users sign in with Google only, with the Email provider off, so the test user signs in with a one-time link Supabase's admin API makes, which only the service role's key can ask for. The first link makes the user.
 
 ## Changing the schema
 

@@ -9,6 +9,15 @@ import type { Typechecked } from "../sandbox/typecheck.ts";
 const app = "/vercel/backtickjs.app";
 const warm = 10 * 60 * 1000;
 
+// The snapshot the function's sandboxes start from.
+export function snapshotId(): string {
+  const id = process.env.SNAPSHOT_ID;
+  if (id === undefined) {
+    throw new Error("Set SNAPSHOT_ID to the id scripts/snapshot.ts printed.");
+  }
+  return id;
+}
+
 export type Bundled =
   | { ok: true; code: string; map: string }
   | { ok: false; name: string; message: string };

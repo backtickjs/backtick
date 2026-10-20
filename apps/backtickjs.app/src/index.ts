@@ -10,7 +10,10 @@ import {
   requireBearerAuth,
 } from "@modelcontextprotocol/server";
 import { Hono } from "hono";
+import * as z from "zod";
 import { ownerOf, verifier } from "./function/auth.ts";
+import { bundleInSandbox, snapshotId } from "./function/sandbox.ts";
+import { latestVersion } from "./function/store.ts";
 import { tools } from "./function/tools.ts";
 // Compiled by `tspc` first: the pages are Backtick scripts.
 import { consentPage, homePage, privacyPage } from "../web/dist/index.js";
@@ -67,6 +70,49 @@ app.all("/mcp", async (c) => {
   return auth instanceof Response
     ? auth
     : mcp.fetch(c.req.raw, { authInfo: auth });
+});
+
+// The phone opens an app: its latest version, bundled for the modules the
+// phone sent in `x-backtick-modules`, as any Backtick client does. A module
+// the phone lacks is a 426, which the phone answers with its update screen.
+app.get("/apps/:id", async (c) => {
+  const rejected = hostHeaderValidationResponse(c.req.raw, hostnames);
+  if (rejected !== undefined) {
+    return rejected;
+  }
+  const auth = await requireBearerAuth({ verifier })(c.req.raw);
+  if (auth instanceof Response) {
+    return auth;
+  }
+  const id = c.req.param("id");
+  let modules: unknown;
+  try {
+    modules = JSON.parse(c.req.header("x-backtick-modules") ?? "");
+  } catch {
+    return c.text("Send the app's modules in x-backtick-modules.", 400);
+  }
+  const latest = z.uuid().safeParse(id).success
+    ? await latestVersion(id, ownerOf(auth))
+    : undefined;
+  if (latest === undefined) {
+    return c.notFound();
+  }
+  const bundled = await bundleInSandbox(
+    ownerOf(auth),
+    latest.source,
+    modules as Record<string, string>,
+    snapshotId(),
+  );
+  if (!bundled.ok) {
+    return c.json(
+      { name: bundled.name, message: bundled.message },
+      bundled.name === "ClientVersionMismatch" ? 426 : 400,
+    );
+  }
+  return c.body(bundled.code, 200, {
+    "content-type": "text/javascript",
+    "x-backtick-version": String(latest.version),
+  });
 });
 
 // Supabase's OAuth server's own discovery document, fetched once per instance.

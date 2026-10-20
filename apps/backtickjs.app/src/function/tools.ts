@@ -3,7 +3,7 @@ import { randomUUID } from "node:crypto";
 import { McpServer, type CallToolResult } from "@modelcontextprotocol/server";
 import { waitUntil } from "@vercel/functions";
 import * as z from "zod";
-import { typecheckInSandbox } from "./sandbox.ts";
+import { snapshotId, typecheckInSandbox } from "./sandbox.ts";
 import { starter } from "./starter.ts";
 import {
   type Check,
@@ -141,14 +141,6 @@ function recorded(check: Check): void {
       console.error("Recording a check failed:", error),
     ),
   );
-}
-
-function snapshotId(): string {
-  const id = process.env.SNAPSHOT_ID;
-  if (id === undefined) {
-    throw new Error("Set SNAPSHOT_ID to the id scripts/snapshot.ts printed.");
-  }
-  return id;
 }
 
 function text(content: string): CallToolResult {
