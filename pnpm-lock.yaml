@@ -26,6 +26,45 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
+  apps/backtickjs.app:
+    dependencies:
+      '@backtickjs/bundler':
+        specifier: ^0.2.3
+        version: link:../../packages/bundler
+      '@backtickjs/core':
+        specifier: ^0.2.3
+        version: link:../../packages/core
+      '@backtickjs/expo':
+        specifier: ^0.2.3
+        version: link:../../packages/expo
+      '@backtickjs/jsx-react':
+        specifier: ^0.2.3
+        version: link:../../packages/jsx-react
+      '@backtickjs/node-plugin':
+        specifier: ^0.2.3
+        version: link:../../packages/node-plugin
+      '@backtickjs/tsc':
+        specifier: ^0.2.3
+        version: link:../../packages/tsc
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
+      '@types/react':
+        specifier: 19.2.18
+        version: 19.2.18
+      expo:
+        specifier: ~57.0.26
+        version: 57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)
+      react:
+        specifier: 19.2.3
+        version: 19.2.3
+      react-native:
+        specifier: 0.86.3
+        version: 0.86.3(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.3)
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   apps/backtickjs.com:
     dependencies:
       '@backtickjs/bun-plugin':

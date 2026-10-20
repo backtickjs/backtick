@@ -1,0 +1,15 @@
+{
+  // An app's App.tsx, as the React Native template's server/ checks a file.
+  "compilerOptions": {
+    "verbatimModuleSyntax": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "target": "esnext",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "@backtickjs/jsx-react"
+  }
+}
