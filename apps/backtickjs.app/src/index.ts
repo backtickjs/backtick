@@ -1,20 +1,28 @@
 // The Vercel Function, where Vercel looks for it: the MCP endpoint the hosts
 // connect to, as the default export.
-import { timingSafeEqual } from "node:crypto";
 import {
   createMcpHandler,
+  getOAuthProtectedResourceMetadataUrl,
   hostHeaderValidationResponse,
   localhostAllowedHostnames,
+  type OAuthMetadata,
+  oauthMetadataResponse,
+  requireBearerAuth,
 } from "@modelcontextprotocol/server";
 import { Hono } from "hono";
+import { ownerOf, verifier } from "./function/auth.ts";
+import { consentPage } from "./function/consent.ts";
 import { tools } from "./function/tools.ts";
 
-const mcp = createMcpHandler(() => tools());
+const mcp = createMcpHandler((context) => tools(ownerOf(context.authInfo)));
 
-// This machine and the deployment's own hostnames: a page in the browser can't
-// reach the endpoint by pointing another domain at it.
+// This machine, the project's domains and the deployment's own hostnames: a
+// page in the browser can't reach the endpoint by pointing another domain at
+// it.
 const hostnames = [
   ...localhostAllowedHostnames(),
+  "backtickjs.app",
+  "backtickjs-app.vercel.app",
   process.env.VERCEL_URL,
   process.env.VERCEL_BRANCH_URL,
   process.env.VERCEL_PROJECT_PRODUCTION_URL,
@@ -22,35 +30,53 @@ const hostnames = [
 
 const app = new Hono();
 
-// Until users sign in, each request carries a secret as a bearer token, set
-// as a header in the host's connector. Without it, a 404.
-app.all("/mcp", (c) => {
-  const authorization = c.req.header("authorization") ?? "";
-  if (!isSecret(authorization.replace(/^Bearer /, ""))) {
-    console.log("Refused", c.req.method, c.req.path, describe(authorization));
-    return c.notFound();
+// Where a host finds out how to sign in: this endpoint is a resource whose
+// tokens Supabase's OAuth server issues.
+app.get(
+  "/.well-known/*",
+  async (c) =>
+    oauthMetadataResponse(c.req.raw, {
+      oauthMetadata: await authorizationServer(),
+      resourceServerUrl: new URL("/mcp", c.req.url),
+      resourceName: "Backtick",
+    }) ?? c.notFound(),
+);
+
+// Where Supabase sends a user to allow a host: Authentication → OAuth Server →
+// Authorization Path.
+app.get("/oauth/consent", (c) => c.html(consentPage()));
+
+// Each request carries the user's access token. Without a valid one, a 401
+// that points at the documents above.
+app.all("/mcp", async (c) => {
+  const rejected = hostHeaderValidationResponse(c.req.raw, hostnames);
+  if (rejected !== undefined) {
+    return rejected;
   }
-  return (
-    hostHeaderValidationResponse(c.req.raw, hostnames) ?? mcp.fetch(c.req.raw)
-  );
+  const auth = await requireBearerAuth({
+    verifier,
+    resourceMetadataUrl: getOAuthProtectedResourceMetadataUrl(
+      new URL("/mcp", c.req.url),
+    ),
+  })(c.req.raw);
+  return auth instanceof Response
+    ? auth
+    : mcp.fetch(c.req.raw, { authInfo: auth });
 });
 
-// What came instead of the secret, without the secret: whether it starts
-// with `Bearer `, and its length.
-function describe(authorization: string): string {
-  return authorization === ""
-    ? "no authorization"
-    : `authorization ${authorization.startsWith("Bearer ") ? "Bearer" : "without Bearer"}, ${authorization.length} chars`;
-}
-
-function isSecret(given: string): boolean {
-  const secret = Buffer.from(process.env.MCP_SECRET ?? "");
-  const candidate = Buffer.from(given);
-  return (
-    secret.length > 0 &&
-    candidate.length === secret.length &&
-    timingSafeEqual(candidate, secret)
-  );
+// Supabase's OAuth server's own discovery document, fetched once per instance.
+let metadata: Promise<OAuthMetadata> | undefined;
+function authorizationServer(): Promise<OAuthMetadata> {
+  metadata ??= fetch(
+    `${process.env.SUPABASE_URL}/.well-known/oauth-authorization-server/auth/v1`,
+  ).then(async (response) => {
+    if (!response.ok) {
+      metadata = undefined;
+      throw new Error(`Supabase's OAuth server answered ${response.status}.`);
+    }
+    return (await response.json()) as OAuthMetadata;
+  });
+  return metadata;
 }
 
 export default app;

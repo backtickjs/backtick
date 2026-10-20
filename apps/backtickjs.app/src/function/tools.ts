@@ -1,5 +1,4 @@
-// The MCP tools a host's model calls. Every call is one local user, until
-// Supabase signs users in.
+// The MCP tools a host's model calls, for the signed-in user it calls for.
 import { randomUUID } from "node:crypto";
 import { McpServer, type CallToolResult } from "@modelcontextprotocol/server";
 import { waitUntil } from "@vercel/functions";
@@ -13,9 +12,7 @@ import {
   saveVersion,
 } from "./store.ts";
 
-const user = "local";
-
-export function tools(): McpServer {
+export function tools(owner: string): McpServer {
   // What a host sees before it loads the tools, so it's what decides whether
   // they're used at all.
   const server = new McpServer(
@@ -49,7 +46,7 @@ export function tools(): McpServer {
       // The sandbox is made and warmed while the model writes its code, so
       // the first `save_app` finds it ready.
       waitUntil(
-        typecheckInSandbox(user, starter, snapshotId()).catch((error) =>
+        typecheckInSandbox(owner, starter, snapshotId()).catch((error) =>
           console.error("Warming the sandbox failed:", error),
         ),
       );
@@ -70,7 +67,7 @@ export function tools(): McpServer {
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async ({ id }) => {
-      const latest = await latestVersion(id);
+      const latest = await latestVersion(id, owner);
       if (latest === undefined) {
         return failed(`No saved app ${id}.`);
       }
@@ -104,17 +101,27 @@ export function tools(): McpServer {
     async ({ id, title, code }) => {
       const started = performance.now();
       const { errors, warnings } = await typecheckInSandbox(
-        user,
+        owner,
         code,
         snapshotId(),
       );
       const durationMs = Math.round(performance.now() - started);
       if (errors.length > 0) {
-        recorded({ appId: id, source: code, errors, warnings, durationMs });
+        recorded({
+          appId: id,
+          owner,
+          source: code,
+          errors,
+          warnings,
+          durationMs,
+        });
         return failed([...errors, ...warnings].join("\n"));
       }
-      const version = await saveVersion(id, title, code);
-      recorded({ appId: id, version, errors, warnings, durationMs });
+      const version = await saveVersion(id, owner, title, code);
+      if (version === undefined) {
+        return failed(`App ${id} isn't yours: start your own with start_app.`);
+      }
+      recorded({ appId: id, owner, version, errors, warnings, durationMs });
       return text([JSON.stringify({ id, version }), ...warnings].join("\n\n"));
     },
   );

@@ -36,16 +36,28 @@ pnpm exec supabase link
 
 The function reads these environment variables, set in the Vercel project for production and development, then pulled into `.env.local` with `vercel env pull`:
 
-| Variable                    | What it is                                                                       |
-| --------------------------- | -------------------------------------------------------------------------------- |
-| `SUPABASE_URL`              | The project's URL, `https://<ref>.supabase.co`, with nothing after it            |
-| `SUPABASE_SERVICE_ROLE_KEY` | Supabase's secret key. It bypasses row-level security: keep it in the function.  |
-| `SNAPSHOT_ID`               | The sandbox snapshot `scripts/snapshot.ts` printed                               |
-| `MCP_SECRET`                | The secret a host sends as `Authorization: Bearer <secret>`, until users sign in |
+| Variable                    | What it is                                                                      |
+| --------------------------- | ------------------------------------------------------------------------------- |
+| `SUPABASE_URL`              | The project's URL, `https://<ref>.supabase.co`, with nothing after it           |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase's secret key. It bypasses row-level security: keep it in the function. |
+| `SNAPSHOT_ID`               | The sandbox snapshot `scripts/snapshot.ts` printed                              |
+| `SUPABASE_PUBLISHABLE_KEY`  | Supabase's publishable key, for the consent page. Safe in a browser.            |
 
 `VERCEL_OIDC_TOKEN`, which `vercel env pull` also writes, lets the scripts drive sandboxes from this machine. It expires within hours; pull again when a script reports an authentication error.
 
-Vercel stores sensitive variables for production only, so `SUPABASE_SERVICE_ROLE_KEY` and `MCP_SECRET` are added to `.env.local` by hand.
+Vercel stores sensitive variables for production only, so `SUPABASE_SERVICE_ROLE_KEY` is added to `.env.local` by hand.
+
+## Signing in
+
+A host signs its user in with OAuth, and Supabase is the authorization server: `/mcp` answers a request without a valid token with a 401 that points to `/.well-known/oauth-protected-resource/mcp`, which names Supabase. A host registers itself with Supabase, sends the user to sign in and allow it, and sends the user's access token with each call. The function checks the token against Supabase's public keys, and its user owns the apps saved with it.
+
+Supabase is set up for it in its dashboard:
+
+- Authentication → Sign In / Providers → Google, with a client from Google Cloud whose redirect URI is `https://<ref>.supabase.co/auth/v1/callback`.
+- Authentication → OAuth Server: enabled, with dynamic registration, and the authorization path `/oauth/consent`, the page `src/function/consent.ts` serves.
+- Authentication → URL Configuration: the Site URL `https://backtickjs-app.vercel.app`, and `/oauth/consent` on it and on `http://localhost:3000` as redirect URLs.
+
+In Claude.ai, the connector signs in with **Register automatically**: Supabase doesn't read Claude's published identity (CIMD).
 
 ## Running it locally
 
@@ -53,10 +65,10 @@ Vercel stores sensitive variables for production only, so `SUPABASE_SERVICE_ROLE
 pnpm dev
 ```
 
-It serves the function at `http://localhost:3000/mcp`, against the real sandbox and the real database. To use it from Claude Code:
+It serves the function at `http://localhost:3000/mcp`, against the real sandbox and the real database. To use it from Claude Code, which signs in through Supabase on first use:
 
 ```sh
-claude mcp add --transport http backtick http://localhost:3000/mcp --header "Authorization: Bearer <secret>"
+claude mcp add --transport http backtick http://localhost:3000/mcp
 ```
 
 `pnpm test` checks the typecheck, the bundle and the sandbox's server on this machine, with no Vercel or Supabase calls.

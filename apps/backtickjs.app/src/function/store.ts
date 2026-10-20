@@ -7,36 +7,56 @@ const supabase = createClient(
   { auth: { persistSession: false } },
 );
 
-// The latest saved version, or nothing for an app never saved.
+// The latest saved version of the owner's app, or nothing for an app never
+// saved or someone else's.
 export async function latestVersion(
   id: string,
+  owner: string,
 ): Promise<{ version: number; source: string } | undefined> {
   const { data, error } = await supabase
     .from("versions")
-    .select("version, source")
+    .select("version, source, apps!inner(owner_id)")
     .eq("app_id", id)
+    .eq("apps.owner_id", owner)
     .order("version", { ascending: false })
     .limit(1)
     .maybeSingle();
   if (error) {
     throw failed(error);
   }
-  return data ?? undefined;
+  return data === null
+    ? undefined
+    : { version: data.version, source: data.source };
 }
 
-// Saves the app's next version, 1 for its first, and returns its number. The
-// first save creates the app, and each one gives it `title`. Two saves at once
-// for one app collide on the key, and the second fails.
+// Saves the owner's app's next version, 1 for its first, and returns its
+// number, or nothing if the app is someone else's. The first save creates the
+// app, and each one gives it `title`. Two saves at once for one app collide on
+// the key, and the second fails.
 export async function saveVersion(
   id: string,
+  owner: string,
   title: string,
   source: string,
-): Promise<number> {
-  const app = await supabase.from("apps").upsert({ id, title });
+): Promise<number | undefined> {
+  const existing = await supabase
+    .from("apps")
+    .select("owner_id")
+    .eq("id", id)
+    .maybeSingle();
+  if (existing.error) {
+    throw failed(existing.error);
+  }
+  if (existing.data !== null && existing.data.owner_id !== owner) {
+    return undefined;
+  }
+  const app = await (existing.data === null
+    ? supabase.from("apps").insert({ id, owner_id: owner, title })
+    : supabase.from("apps").update({ title }).eq("id", id));
   if (app.error) {
     throw failed(app.error);
   }
-  const latest = await latestVersion(id);
+  const latest = await latestVersion(id, owner);
   const version = latest === undefined ? 1 : latest.version + 1;
   const { error } = await supabase
     .from("versions")
@@ -51,6 +71,7 @@ export async function saveVersion(
 // source it checked if it failed.
 export type Check = {
   appId: string;
+  owner: string;
   errors: string[];
   warnings: string[];
   durationMs: number;
@@ -59,6 +80,7 @@ export type Check = {
 export async function recordCheck(check: Check): Promise<void> {
   const { error } = await supabase.from("checks").insert({
     app_id: check.appId,
+    owner_id: check.owner,
     version: check.version ?? null,
     source: check.source ?? null,
     errors: check.errors,

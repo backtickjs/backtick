@@ -1,7 +1,7 @@
 // The function's side: each call writes the app's file into the owner's
 // sandbox and asks its server. The first call creates the sandbox from the
 // base snapshot and starts the server; each call keeps it another `warm`.
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { Sandbox } from "@vercel/sandbox";
 import type { Typechecked } from "../sandbox/typecheck.ts";
 
@@ -46,9 +46,10 @@ async function postMessageToSandbox<T>(
   body: object,
 ): Promise<T> {
   const sandbox = await Sandbox.getOrCreate({
-    // Named for its snapshot too: after a new snapshot, a user's sandbox from
-    // the old one is never reused, and times out unasked.
-    name: `build-${user}-${snapshotId}`,
+    // One per user and snapshot: after a new snapshot, a user's sandbox from
+    // the old one is never reused, and times out unasked. Hashed, to keep the
+    // name short.
+    name: `build-${createHash("sha256").update(`${user}:${snapshotId}`).digest("hex").slice(0, 24)}`,
     source: { type: "snapshot", snapshotId },
     // Nothing in it outlives the server's cache.
     persistent: false,
