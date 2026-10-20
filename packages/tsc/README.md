@@ -36,6 +36,17 @@ backtick-tsc --emitDeclarationOnly
 
 A script's declaration carries its real type, where plain `tsc` would write `Client<unknown>`, and its parameter names read as you wrote them.
 
+To check files in-process, `createProgram` is `ts.createProgram` as `backtick-tsc` creates one. It takes the options form, with a host:
+
+```ts
+import { createProgram } from "@backtickjs/tsc";
+import ts from "typescript";
+
+const host = ts.createCompilerHost(options);
+const program = createProgram({ rootNames: ["App.tsx"], options, host });
+const diagnostics = ts.getPreEmitDiagnostics(program);
+```
+
 ## Notes
 
 - It writes declarations only. Run it with `--noEmit` or `--emitDeclarationOnly`; any other emit is refused with an error, because the JavaScript it would write is the code the type checker reads, not code that runs. To build JavaScript, use a loader ([`@backtickjs/node-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/node-plugin), [`@backtickjs/bun-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/bun-plugin)) or `tspc` with [`@backtickjs/tspatch-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/tspatch-plugin).

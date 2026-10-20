@@ -24,6 +24,13 @@
   "license": "MIT",
   "author": "Jean-François Bisson <jf@backtickjs.com>",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./bin/backtick-tsc.js": "./bin/backtick-tsc.js"
+  },
   "bin": {
     "backtick-tsc": "./bin/backtick-tsc.js"
   },

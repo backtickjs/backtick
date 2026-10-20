@@ -5,21 +5,20 @@ import {
   getBacktickDiagnostics,
   unmangleDiagnostic,
 } from "@backtickjs/language-service";
+import { proxyCreateProgram } from "@volar/typescript/lib/node/proxyCreateProgram.js";
 import { fillSourceFileText } from "@volar/typescript/lib/node/transform.js";
 import { runTsc } from "@volar/typescript/lib/quickstart/runTsc.js";
-import type ts from "typescript";
+// The standalone TypeScript API, not the `ts` `runTsc` hands its callback: that
+// one is its internal tsc.js CLI bundle, whose namespace members are lazy
+// `eval`-based getters that throw when read outside their module scope
+// (Backtick's `parseFile` reads `ts.ScriptTarget`).
+import ts from "typescript";
 
 const require = createRequire(import.meta.url);
 
+patchDecorateProgram();
+
 export function run(tscPath = require.resolve("typescript/lib/tsc.js")) {
-  // Use the standalone TypeScript API, not the `ts` handed to the callback: that
-  // one is `runTsc`'s internal tsc.js CLI bundle, whose namespace members are
-  // lazy `eval`-based getters that throw when read outside their module scope
-  // (Backtick's `parseFile` reads `ts.ScriptTarget`).
-  const ts = require("typescript") as typeof import("typescript");
-
-  patchDecorateProgram(ts);
-
   return runTsc(
     tscPath,
     // No extra file extensions: Backtick virtualizes standard .ts/.tsx/.js/.jsx
@@ -30,6 +29,11 @@ export function run(tscPath = require.resolve("typescript/lib/tsc.js")) {
     }),
   );
 }
+
+// `ts.createProgram` as `backtick-tsc` creates one, to check files in-process.
+export const createProgram = proxyCreateProgram(ts, ts.createProgram, () => ({
+  languagePlugins: [getBacktickLanguagePlugin(ts, (fileName) => fileName)],
+}));
 
 // What this tool is for beyond checking: a package that exports a client script
 // gets a declaration carrying the script's real type. Plain `tsc` types
@@ -42,10 +46,7 @@ export function run(tscPath = require.resolve("typescript/lib/tsc.js")) {
 // the emitter prints them, on identifiers alone, so nothing inside a string
 // literal is touched. Not at the file system: `sys.writeFile` writes through
 // `openSync`, and the CLI bundle's `sys` is not this module's anyway.
-function unmangleDeclarations(
-  ts: typeof import("typescript"),
-  program: ts.Program,
-): void {
+function unmangleDeclarations(program: ts.Program): void {
   const emit = program.emit.bind(program);
   program.emit = (
     targetSourceFile,
@@ -101,10 +102,10 @@ function refuseJavaScriptEmit(options: {
 
 // Surfaces Backtick's own compiler diagnostics through `tsc` by wrapping the
 // program's `getSemanticDiagnostics`. This has to patch Volar's `decorateProgram`
-// module in place: `runTsc` proxies TypeScript internally and calls the module's
-// export by property access at program-creation time, so reassigning it here is
-// picked up.
-function patchDecorateProgram(ts: typeof import("typescript")) {
+// module in place: Volar's program proxy calls the module's export by property
+// access at program-creation time, so reassigning it here is picked up. Once,
+// when this module loads, for `run` and `createProgram` alike.
+function patchDecorateProgram() {
   const decorateProgramModule =
     require("@volar/typescript/lib/node/decorateProgram.js") as typeof import("@volar/typescript/lib/node/decorateProgram.js");
   const volarDecorateProgram = decorateProgramModule.decorateProgram;
@@ -112,7 +113,7 @@ function patchDecorateProgram(ts: typeof import("typescript")) {
   decorateProgramModule.decorateProgram = (language, program) => {
     volarDecorateProgram(language, program);
     refuseJavaScriptEmit(program.getCompilerOptions());
-    unmangleDeclarations(ts, program);
+    unmangleDeclarations(program);
 
     const getSemanticDiagnostics = program.getSemanticDiagnostics.bind(program);
     program.getSemanticDiagnostics = (sourceFile, cancellationToken) => {
