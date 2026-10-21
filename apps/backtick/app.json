@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "Backtick",
+    "slug": "backtick",
+    "scheme": "backtick",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "plugins": ["@backtickjs/expo", "expo-web-browser"],
+    "extra": {
+      "server": "https://backtickjs.app",
+      "supabaseUrl": "https://evgfuotcvraqxvdtutso.supabase.co",
+      "supabasePublishableKey": "sb_publishable_EotSz0FFiuOqXCSjxqGYrQ_oRJqA0as"
+    }
+  }
+}
