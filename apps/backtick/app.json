@@ -6,7 +6,11 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
-    "plugins": ["@backtickjs/expo", "expo-web-browser"],
+    "plugins": [
+      "@backtickjs/expo",
+      "expo-web-browser",
+      "expo-router"
+    ],
     "extra": {
       "server": "https://backtickjs.app",
       "supabaseUrl": "https://evgfuotcvraqxvdtutso.supabase.co",

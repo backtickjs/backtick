@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "The Backtick app: sign in, see the apps your assistant made, and open them",
-  "main": "client/index.ts",
+  "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -17,13 +17,16 @@
     "@react-native-async-storage/async-storage": "2.2.0",
     "@supabase/supabase-js": "2.117.2",
     "expo": "~57.0.26",
-    "expo-constants": "~57.0.20",
+    "expo-constants": "~57.0.22",
     "expo-linking": "~57.0.13",
+    "expo-router": "~57.0.28",
     "expo-status-bar": "~57.0.1",
     "expo-web-browser": "~57.0.3",
     "react": "19.2.3",
     "react-error-boundary": "6.1.6",
     "react-native": "0.86.3",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-screens": "~4.26.2",
     "typescript": "^6.0.3"
   },
   "devDependencies": {
