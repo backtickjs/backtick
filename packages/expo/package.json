@@ -33,7 +33,8 @@
       "types": "./dist/plugin.d.ts",
       "default": "./dist/plugin.js"
     },
-    "./app.plugin": "./dist/app.plugin.js"
+    "./app.plugin": "./dist/app.plugin.js",
+    "./app.plugin.js": "./dist/app.plugin.js"
   },
   "files": [
     "dist",
