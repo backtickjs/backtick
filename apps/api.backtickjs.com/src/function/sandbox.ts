@@ -3,11 +3,13 @@
 // base snapshot and starts the server; each call keeps it another `warm`.
 import { createHash, randomUUID } from "node:crypto";
 import { Sandbox } from "@vercel/sandbox";
+import type { Answer } from "../../sandbox/src/screen.ts";
 import type { Typechecked } from "../../sandbox/src/typecheck.ts";
 
 // Where `scripts/snapshot.ts` installs the sandbox package (sandbox/).
 const app = "/vercel/backtickjs.app";
 const warm = 10 * 60 * 1000;
+const appTsconfig = `{ "extends": "../../tsconfig.app.json" }`;
 
 // The snapshot the function's sandboxes start from.
 export function snapshotId(): string {
@@ -17,10 +19,6 @@ export function snapshotId(): string {
   }
   return id;
 }
-
-export type Bundled =
-  | { ok: true; code: string; map: string }
-  | { ok: false; name: string; message: string };
 
 export async function typecheckInSandbox(
   user: string,
@@ -36,13 +34,17 @@ export async function typecheckInSandbox(
   );
 }
 
-export async function bundleInSandbox(
+// The app's answer at `path` for the phone's modules, as its Hono server
+// gives it.
+export async function screenInSandbox(
   user: string,
   source: string,
-  modules: Record<string, string>,
+  path: string,
+  modules: string,
   snapshotId: string,
-): Promise<Bundled> {
-  return postMessageToSandbox<Bundled>(user, source, snapshotId, "bundle", {
+): Promise<Answer> {
+  return postMessageToSandbox<Answer>(user, source, snapshotId, "screen", {
+    path,
     modules,
   });
 }
@@ -80,9 +82,14 @@ async function postMessageToSandbox<T>(
   body: object,
 ): Promise<T> {
   const sandbox = await sandboxOf(user, snapshotId);
-  // Written with its folder: `writeFiles` makes the folders it needs.
-  const file = `${app}/.builds/${randomUUID()}/App.tsx`;
-  await sandbox.writeFiles([{ path: file, content: Buffer.from(source) }]);
+  // Written with its folder: `writeFiles` makes the folders it needs. The
+  // compiler takes its JSX settings from the nearest tsconfig.json.
+  const folder = `${app}/.builds/${randomUUID()}`;
+  const file = `${folder}/App.tsx`;
+  await sandbox.writeFiles([
+    { path: file, content: Buffer.from(source) },
+    { path: `${folder}/tsconfig.json`, content: Buffer.from(appTsconfig) },
+  ]);
   const request = JSON.stringify({ file, ...body });
   // A server that died is started again, once.
   let answer = await curl(sandbox, path, request);

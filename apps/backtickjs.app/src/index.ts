@@ -28,12 +28,12 @@ app.use("*", async (c, next) => {
     : screen(c, id);
 });
 
-// The phone's request, as it sent it: the service checks its token and
-// answers with the app's bundle for its modules. Apps are one screen, so the
-// path isn't sent on yet.
+// The phone's request, as it sent it, at its path: the service checks its
+// token and answers with the app's screen there, for its modules.
 async function screen(c: Context, id: string): Promise<Response> {
   const authorization = c.req.header("authorization");
-  const answer = await fetch(`${api}/apps/${id}/bundle`, {
+  const url = new URL(c.req.url);
+  const answer = await fetch(`${api}/apps/${id}${url.pathname}${url.search}`, {
     headers: {
       ...(authorization === undefined ? {} : { authorization }),
       "x-backtick-modules": c.req.header("x-backtick-modules")!,

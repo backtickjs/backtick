@@ -107,6 +107,9 @@ importers:
       '@backtickjs/expo':
         specifier: ^0.2.4
         version: link:../../../packages/expo
+      '@backtickjs/hono':
+        specifier: ^0.2.4
+        version: link:../../../packages/hono
       '@backtickjs/jsx-react':
         specifier: ^0.2.4
         version: link:../../../packages/jsx-react
@@ -516,15 +519,15 @@ importers:
 
   apps/shell:
     dependencies:
-      '@backtickjs/bundler':
-        specifier: ^0.2.4
-        version: link:../../packages/bundler
       '@backtickjs/core':
         specifier: ^0.2.4
         version: link:../../packages/core
       '@backtickjs/expo':
         specifier: ^0.2.4
         version: link:../../packages/expo
+      '@backtickjs/hono':
+        specifier: ^0.2.4
+        version: link:../../packages/hono
       '@backtickjs/jsx-react':
         specifier: ^0.2.4
         version: link:../../packages/jsx-react
@@ -1155,6 +1158,9 @@ importers:
       '@backtickjs/expo':
         specifier: ^0.2.4
         version: link:../../../expo
+      '@backtickjs/hono':
+        specifier: ^0.2.4
+        version: link:../../../hono
       '@backtickjs/jsx-react':
         specifier: ^0.2.4
         version: link:../../../jsx-react
@@ -1302,6 +1308,25 @@ importers:
       ws:
         specifier: ^8.22.0
         version: 8.22.0
+
+  packages/hono:
+    dependencies:
+      '@backtickjs/bundler':
+        specifier: ^0.2.4
+        version: link:../bundler
+      '@backtickjs/core':
+        specifier: ^0.2.4
+        version: link:../core
+    devDependencies:
+      hono:
+        specifier: ^4.13.13
+        version: 4.13.13
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
 
   packages/jsx-react:
     dependencies:

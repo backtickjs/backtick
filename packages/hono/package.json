@@ -1,0 +1,60 @@
+{
+  "name": "@backtickjs/hono",
+  "version": "0.2.4",
+  "description": "Hono routes as Backtick screens: a route's answer is its server components, bundled for the client that asked",
+  "keywords": [
+    "backtick",
+    "hono",
+    "react-native",
+    "server-driven-ui",
+    "server-components"
+  ],
+  "homepage": "https://backtickjs.com",
+  "bugs": {
+    "url": "https://github.com/backtickjs/backtick/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/backtickjs/backtick.git",
+    "directory": "packages/hono"
+  },
+  "license": "MIT",
+  "author": "Jean-François Bisson <jf@backtickjs.com>",
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!dist/._cache",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b --watch",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown .",
+    "test": "node --test \"test/**/*.test.ts\"",
+    "clean": "rm -rf node_modules dist .turbo",
+    "prepack": "cp ../../LICENSE ."
+  },
+  "dependencies": {
+    "@backtickjs/bundler": "^0.2.4",
+    "@backtickjs/core": "^0.2.4"
+  },
+  "peerDependencies": {
+    "hono": "^4.13.13"
+  },
+  "devDependencies": {
+    "hono": "^4.13.13",
+    "prettier": "^3.6.2",
+    "typescript": "^6.0.3"
+  }
+}

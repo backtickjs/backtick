@@ -10,6 +10,7 @@
     { "path": "packages/compiler" },
     { "path": "packages/core" },
     { "path": "packages/expo" },
+    { "path": "packages/hono" },
     { "path": "packages/create-backtick-app" },
     { "path": "packages/language-plugin" },
     { "path": "packages/language-server" },

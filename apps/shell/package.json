@@ -34,9 +34,9 @@
     "format:check": "prettier --check --ignore-unknown ."
   },
   "dependencies": {
-    "@backtickjs/bundler": "^0.2.4",
     "@backtickjs/core": "^0.2.4",
     "@backtickjs/expo": "^0.2.4",
+    "@backtickjs/hono": "^0.2.4",
     "@backtickjs/jsx-react": "^0.2.4",
     "@expo/vector-icons": "^15.1.1",
     "@react-native-async-storage/async-storage": "2.2.0",

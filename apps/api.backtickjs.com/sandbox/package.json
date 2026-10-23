@@ -15,6 +15,7 @@
     "@backtickjs/bundler": "^0.2.4",
     "@backtickjs/core": "^0.2.4",
     "@backtickjs/expo": "^0.2.4",
+    "@backtickjs/hono": "^0.2.4",
     "@backtickjs/jsx-react": "^0.2.4",
     "@backtickjs/node-plugin": "^0.2.4",
     "@backtickjs/tsc": "^0.2.4",

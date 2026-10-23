@@ -15,7 +15,7 @@ import { Hono } from "hono";
 import * as z from "zod";
 import { ownerOf, verifier } from "./function/auth.ts";
 import {
-  bundleInSandbox,
+  screenInSandbox,
   snapshotId,
   warmSandbox,
 } from "./function/sandbox.ts";
@@ -87,20 +87,15 @@ app.post("/warm", async (c) => {
   return c.body(null, 202);
 });
 
-// An app's latest version, bundled in the owner's sandbox for the phone's
-// modules: what <id>.backtickjs.app answers the phone with, standing in for
-// the runtime (plan, section 10). Apps are one screen, so there's no path yet.
-app.get("/apps/:id/bundle", async (c) => {
+// An app's latest version answering the phone at a path, its Hono server run
+// in the owner's sandbox: what <id>.backtickjs.app answers the phone with,
+// standing in for the runtime (plan, section 10). `/apps/<id>/day` is the
+// app's `/day`.
+app.get("/apps/:id/*", async (c) => {
   const id = c.req.param("id");
   const auth = await requireBearerAuth({ verifier })(c.req.raw);
   if (auth instanceof Response) {
     return auth;
-  }
-  let modules: Record<string, string>;
-  try {
-    modules = JSON.parse(c.req.header("x-backtick-modules") ?? "");
-  } catch {
-    return c.text("Send the app's modules in x-backtick-modules.", 400);
   }
   const owner = ownerOf(auth);
   const latest = z.uuid().safeParse(id).success
@@ -109,20 +104,16 @@ app.get("/apps/:id/bundle", async (c) => {
   if (latest === undefined) {
     return c.notFound();
   }
-  const bundled = await bundleInSandbox(
+  const url = new URL(c.req.url);
+  const answer = await screenInSandbox(
     owner,
     latest.source,
-    modules,
+    (url.pathname.slice(`/apps/${id}`.length) || "/") + url.search,
+    c.req.header("x-backtick-modules") ?? "{}",
     snapshotId(),
   );
-  if (!bundled.ok) {
-    return c.json(
-      { name: bundled.name, message: bundled.message },
-      bundled.name === "ClientVersionMismatch" ? 426 : 400,
-    );
-  }
-  return c.body(bundled.code, 200, {
-    "content-type": "text/javascript",
+  return c.body(answer.body, answer.status as 200, {
+    "content-type": answer.contentType,
     "x-backtick-version": String(latest.version),
   });
 });

@@ -13,18 +13,23 @@ const counter = readFileSync(
 
 const root = join(import.meta.dirname, "..");
 const installed = installedPackages(root);
-const phone = {
+const phone = JSON.stringify({
   react: installed.react!,
   "react/jsx-runtime": installed.react!,
   "react-native": installed["react-native"]!,
   "react-native-safe-area-context":
     installed["react-native-safe-area-context"]!,
-};
+  "expo-router": installed["expo-router"]!,
+});
 
 function write(name: string, source: string): string {
   const dir = join(root, ".builds", "test", name);
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, "App.tsx"), source);
+  writeFileSync(
+    join(dir, "tsconfig.json"),
+    `{ "extends": "../../../tsconfig.app.json" }`,
+  );
   return join(dir, "App.tsx");
 }
 
@@ -66,14 +71,18 @@ it("typechecks and bundles over HTTP, file after file", async () => {
       warnings: [],
     });
     const { errors } = await post("typecheck", { file: typo });
-    assert.match(errors.join("\n"), /^App\.tsx\(23,49\): error TS2345/);
+    assert.match(errors.join("\n"), /^App\.tsx\(31,51\): error TS2345/);
     assert.equal(
-      (await post("bundle", { file: app, modules: phone })).ok,
-      true,
+      (await post("screen", { file: app, path: "/day", modules: phone }))
+        .status,
+      200,
     );
-    const refused = await post("bundle", { file: app, modules: {} });
-    assert.equal(refused.ok, false);
-    assert.equal(refused.name, "ClientVersionMismatch");
+    const refused = await post("screen", {
+      file: app,
+      path: "/",
+      modules: "{}",
+    });
+    assert.equal(refused.status, 426);
   } finally {
     server.kill();
   }

@@ -8,7 +8,7 @@ const modules = '{"react-native":"0.86.3"}';
 afterEach(() => mock.restoreAll());
 
 describe("an app's host", () => {
-  it("hands the phone's request to the service, with its token and modules", async () => {
+  it("hands the phone's request to the service at its path, with its token and modules", async () => {
     const sent: { url: string; headers: Headers }[] = [];
     mock.method(globalThis, "fetch", async (url: string, init: RequestInit) => {
       sent.push({ url, headers: new Headers(init.headers) });
@@ -19,13 +19,22 @@ describe("an app's host", () => {
         },
       });
     });
-    const answer = await app.request(`https://${id}.backtickjs.app/day`, {
-      headers: { authorization: "Bearer token", "x-backtick-modules": modules },
-    });
+    const answer = await app.request(
+      `https://${id}.backtickjs.app/day?week=2`,
+      {
+        headers: {
+          authorization: "Bearer token",
+          "x-backtick-modules": modules,
+        },
+      },
+    );
     assert.equal(answer.status, 200);
     assert.equal(await answer.text(), "bundle");
     assert.equal(answer.headers.get("x-backtick-version"), "3");
-    assert.equal(sent[0].url, `https://api.backtickjs.com/apps/${id}/bundle`);
+    assert.equal(
+      sent[0].url,
+      `https://api.backtickjs.com/apps/${id}/day?week=2`,
+    );
     assert.equal(sent[0].headers.get("authorization"), "Bearer token");
     assert.equal(sent[0].headers.get("x-backtick-modules"), modules);
   });

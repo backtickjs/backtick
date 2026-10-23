@@ -1,6 +1,6 @@
 // What `save_app` checks: what `backtick-tsc` reports for the app's file, from
 // its own program, in this process. Static only: the file's code doesn't run.
-import { dirname, join } from "node:path";
+import { basename, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createProgram } from "@backtickjs/tsc";
 import ts from "typescript";
@@ -30,7 +30,30 @@ export function typecheck(file: string): Typechecked {
       : checked.errors
     ).push(printed);
   }
+  if (!exportsServer(program, file)) {
+    checked.errors.push(
+      `${basename(file)}: error: the default export is the app's Hono ` +
+        "server, whose routes are its screens: `export default app;`.",
+    );
+  }
   return checked;
+}
+
+// Whether the file's default export has a `fetch`, as a Hono app does: what
+// the phone's requests are answered with.
+function exportsServer(program: ts.Program, file: string): boolean {
+  const checker = program.getTypeChecker();
+  const module = checker.getSymbolAtLocation(program.getSourceFile(file)!);
+  let exported =
+    module && checker.tryGetMemberInModuleExports("default", module);
+  if (exported === undefined) {
+    return false;
+  }
+  if (exported.flags & ts.SymbolFlags.Alias) {
+    exported = checker.getAliasedSymbol(exported);
+  }
+  const type = checker.getTypeOfSymbol(exported);
+  return checker.getPropertyOfType(type, "fetch") !== undefined;
 }
 
 // Relative to the current directory, as tsc prints paths: here the app's

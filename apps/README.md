@@ -17,7 +17,7 @@ How a screen reaches the phone:
 
 ```
 phone ── GET https://app.backtickjs.com/ ─────────────────► app.backtickjs.com: Backtick's home (sign-in, your apps)
-phone ── GET https://<id>.backtickjs.app/day ─────────────► backtickjs.app ── GET /apps/<id>/bundle ──► api.backtickjs.com
-                                                                                  (checks the token, bundles in the sandbox)
+phone ── GET https://<id>.backtickjs.app/day ─────────────► backtickjs.app ── GET /apps/<id>/day ──► api.backtickjs.com
+                                                                                (checks the token, runs the app in the sandbox)
 Claude ── /mcp ───────────────────────────────────────────► api.backtickjs.com: start_app, get_app, save_app
 ```

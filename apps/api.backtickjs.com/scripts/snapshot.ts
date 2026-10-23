@@ -11,7 +11,7 @@ const app = "/vercel/backtickjs.app";
 const files = [
   "package.json",
   "tsconfig.app.json",
-  "src/bundle.ts",
+  "src/screen.ts",
   "src/serve.ts",
   "src/typecheck.ts",
 ];

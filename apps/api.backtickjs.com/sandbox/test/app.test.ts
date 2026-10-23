@@ -2,9 +2,8 @@ import assert from "node:assert/strict";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, it } from "node:test";
-import { ClientVersionMismatch } from "@backtickjs/bundler";
 import { installedPackages } from "@backtickjs/core/node";
-import { bundle } from "../src/bundle.ts";
+import { screen } from "../src/screen.ts";
 import { typecheck } from "../src/typecheck.ts";
 
 // A counter app, as a model writes one from the service's starter.
@@ -17,19 +16,24 @@ const root = join(import.meta.dirname, "..");
 
 // What a phone carrying the versions installed here sends.
 const installed = installedPackages(root);
-const phone = {
+const phone = JSON.stringify({
   react: installed.react!,
   "react/jsx-runtime": installed.react!,
   "react-native": installed["react-native"]!,
   "react-native-safe-area-context":
     installed["react-native-safe-area-context"]!,
-};
+  "expo-router": installed["expo-router"]!,
+});
 
 // An app's `App.tsx`, in a directory of its own.
 function write(name: string, source: string): string {
   const dir = join(root, ".builds", "test", name);
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, "App.tsx"), source);
+  writeFileSync(
+    join(dir, "tsconfig.json"),
+    `{ "extends": "../../../tsconfig.app.json" }`,
+  );
   return join(dir, "App.tsx");
 }
 
@@ -48,7 +52,7 @@ describe("typecheck", () => {
     );
     assert.match(
       typecheck(file).errors.join("\n"),
-      /^App\.tsx\(23,49\): error TS2345: Argument of type 'string'/,
+      /^App\.tsx\(31,51\): error TS2345: Argument of type 'string'/,
     );
   });
   it("reports a regex escaped as if in a string as a warning, not an error", () => {
@@ -63,31 +67,55 @@ describe("typecheck", () => {
     assert.deepEqual(errors, []);
     assert.match(
       warnings.join("\n"),
-      /^App\.tsx\(27,62\): warning TS0: `\\\\B` in this regex matches a backslash/,
+      /^App\.tsx\(36,65\): warning TS0: `\\\\B` in this regex matches a backslash/,
     );
   });
 });
 
-describe("bundle", () => {
-  it("bundles the counter for a phone, with its map", async () => {
-    const { code, map } = await bundle(write("counter", counter), phone);
-    assert.match(code, /require\("react-native"\)/);
-    assert.equal(JSON.parse(map).version, 3);
+describe("typecheck's default export", () => {
+  it("refuses an app whose default export isn't its Hono server", () => {
+    const file = write(
+      "export",
+      counter.replace("export default app;", "export default styles;"),
+    );
+    assert.match(
+      typecheck(file).errors.join("\n"),
+      /^App\.tsx: error: the default export is the app's Hono server/,
+    );
+  });
+});
+
+describe("screen", () => {
+  it("answers each route with its screen, bundled for the phone", async () => {
+    const file = write("counter", counter);
+    for (const path of ["/", "/day"]) {
+      const { status, contentType, body } = await screen(file, path, phone);
+      assert.equal(status, 200);
+      assert.equal(contentType, "text/javascript");
+      assert.match(body, /require\("react-native"\)/);
+    }
   });
 
-  it("refuses a module the phone doesn't provide", async () => {
+  it("answers 426 for a module the phone doesn't provide", async () => {
     const file = write(
       "import",
       `import { isRunningInExpoGo } from "expo" with { backtick: "client" };\n` +
         counter.replace(
-          "return <App />;",
-          "$isRunningInExpoGo(); return <App />;",
+          "return <Screen />;",
+          "$isRunningInExpoGo(); return <Screen />;",
         ),
     );
-    await assert.rejects(
-      () => bundle(file, phone),
-      (error) =>
-        error instanceof ClientVersionMismatch && error.from === "expo",
+    const { status, body } = await screen(file, "/", phone);
+    assert.equal(status, 426);
+    assert.match(JSON.parse(body).message, /expo/);
+  });
+
+  it("answers 404 for a path the app has no route for", async () => {
+    const { status } = await screen(
+      write("counter", counter),
+      "/nowhere",
+      phone,
     );
+    assert.equal(status, 404);
   });
 });
