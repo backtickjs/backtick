@@ -28,7 +28,6 @@ const mcp = createMcpHandler((context) => tools(ownerOf(context.authInfo)));
 const hostnames = [
   ...localhostAllowedHostnames(),
   "api.backtickjs.com",
-  "backtickjs-app.vercel.app",
   process.env.VERCEL_URL,
   process.env.VERCEL_BRANCH_URL,
   process.env.VERCEL_PROJECT_PRODUCTION_URL,

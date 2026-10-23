@@ -1,6 +1,6 @@
 # api.backtickjs.com
 
-Backtick's service, at `https://api.backtickjs.com`: the server behind the app builder. One of the hosts in `apps/` (see `apps/README.md`); the phone's home is `app.backtickjs.com`, and each app's own host is `<id>.backtickjs.app`. A chat app's model (Claude, ChatGPT) calls its MCP tools to make an app for the user's phone, writing Backtick code; this server type-checks the code in a sandbox and stores each clean version in Supabase. It's private and deploys to Vercel as the project `backtickjs-app` (its root directory is this folder; the project's name predates the move).
+Backtick's service, at `https://api.backtickjs.com`: the server behind the app builder. One of the hosts in `apps/` (see `apps/README.md`); the phone's home is `app.backtickjs.com`, and each app's own host is `<id>.backtickjs.app`. A chat app's model (Claude, ChatGPT) calls its MCP tools to make an app for the user's phone, writing Backtick code; this server type-checks the code in a sandbox and stores each clean version in Supabase. It's private and deploys to Vercel as the project `api-backtickjs-com`, linked from this folder.
 
 ## Where the code runs
 
