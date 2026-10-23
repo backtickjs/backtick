@@ -1,6 +1,6 @@
 import { cs } from "@backtickjs/core";
 import { shellURL } from "./links.js";
-import { Link, Stack } from "expo-router" with { backtick: "client" };
+import { Link } from "expo-router" with { backtick: "client" };
 import { Pressable, StyleSheet, Text, View } from "react-native" with {
   backtick: "client",
 };
@@ -25,7 +25,6 @@ export function SignIn() {
 
     return (
       <$View style={styles.screen}>
-        <$Stack.Screen options={{ headerShown: false }} />
         <$Text style={styles.title}>Backtick</$Text>
         <$Text style={styles.muted}>
           The apps your assistant makes for you, on your phone.

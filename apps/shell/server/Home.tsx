@@ -81,7 +81,7 @@ export async function Home(props: { authorization: string }) {
 
     return (
       <>
-        <$Stack.Screen options={{ title: "Your apps" }} />
+        <$Stack.Screen options={{ headerShown: true, title: "Your apps" }} />
         <Apps />
       </>
     );

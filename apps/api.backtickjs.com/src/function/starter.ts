@@ -7,7 +7,8 @@ export const starter = `// A Backtick app:
 
 import { cs } from "@backtickjs/core";
 import { useState } from "react" with { backtick: "client" };
-import { Pressable, StyleSheet, Text, View } from "react-native" with { backtick: "client" };
+import { Pressable, StyleSheet, Text } from "react-native" with { backtick: "client" };
+import { SafeAreaView } from "react-native-safe-area-context" with { backtick: "client" };
 
 export default cs\`{
   const styles = $StyleSheet.create({
@@ -19,11 +20,11 @@ export default cs\`{
   function App() {
     const [count, setCount] = $useState<number>(0);
     return (
-      <$View style={styles.screen}>
+      <$SafeAreaView style={styles.screen}>
         <$Pressable style={styles.button} onPress={() => setCount(count + 1)}>
           <$Text style={styles.label}>{count + " taps"}</$Text>
         </$Pressable>
-      </$View>
+      </$SafeAreaView>
     );
   }
 

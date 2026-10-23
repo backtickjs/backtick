@@ -31,7 +31,11 @@ export default function Layout() {
     <CurrentSession value={session}>
       <Stack
         key={session?.user.id ?? "signed out"}
-        screenOptions={{ contentStyle: { backgroundColor: "#f3f5f2" } }}
+        screenOptions={{
+          // An app shows a header by asking: `<Stack.Screen options={{ headerShown: true }} />`.
+          headerShown: false,
+          contentStyle: { backgroundColor: "#f3f5f2" },
+        }}
       />
       <StatusBar style="auto" />
     </CurrentSession>

@@ -13,6 +13,8 @@ const phone = {
   react: installed.react!,
   "react/jsx-runtime": installed.react!,
   "react-native": installed["react-native"]!,
+  "react-native-safe-area-context":
+    installed["react-native-safe-area-context"]!,
 };
 
 async function call(name: string, args: object) {

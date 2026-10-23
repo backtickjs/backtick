@@ -23,11 +23,11 @@ export function tools(owner: string): McpServer {
     },
     {
       instructions:
-        "Backtick makes native apps that run on the user's phone, in the " +
-        "Backtick app. start_app gives a starter to edit, and save_app " +
-        "checks the code and saves it as a version the phone opens. These " +
-        "are the tools for an app the user wants on their phone: a web page " +
-        "or an artifact doesn't reach it.",
+        "Backtick makes native apps that run on the user's phone, in Expo " +
+        "Go. start_app gives a starter to edit, and save_app checks the code, " +
+        "saves it as a version the phone opens, and returns the app's link " +
+        "to give the user. These are the tools for an app the user wants on " +
+        "their phone: a web page or an artifact doesn't reach it.",
     },
   );
 
@@ -39,7 +39,7 @@ export function tools(owner: string): McpServer {
       title: "Start an app",
       description:
         "Use when the user wants an app on their phone: a native app they " +
-        "open in the Backtick app, not a web page or an artifact. Returns a " +
+        "open in Expo Go, not a web page or an artifact. Returns a " +
         "new app's id and a starter App.tsx, a working app to edit into what " +
         "they asked for, then save with save_app. Saves nothing itself.",
       inputSchema: z.object({}),
@@ -90,7 +90,8 @@ export function tools(owner: string): McpServer {
         "Type-check the app's whole App.tsx and, if it has no errors, save " +
         "it as the app's next version, the one the user's phone opens. The " +
         "first save creates the app with its title. Returns the errors to " +
-        "fix, or the version with any warnings.",
+        "fix, or the version and the app's link, with any warnings. Give " +
+        "the user the link: on their phone it opens the app in Expo Go.",
       inputSchema: z.object({
         id: z.uuid(),
         title: z.string(),
@@ -126,7 +127,10 @@ export function tools(owner: string): McpServer {
         return failed(`App ${id} isn't yours: start your own with start_app.`);
       }
       recorded({ appId: id, owner, version, errors, warnings, durationMs });
-      return text([JSON.stringify({ id, version }), ...warnings].join("\n\n"));
+      const url = `https://${id}.backtickjs.app`;
+      return text(
+        [JSON.stringify({ id, version, url }), ...warnings].join("\n\n"),
+      );
     },
   );
 
