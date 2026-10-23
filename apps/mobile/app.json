@@ -12,15 +12,39 @@
     },
     "android": {
       "package": "com.backtickjs.app",
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "backtickjs.app",
+              "pathPrefix": "/apps/"
+            },
+            {
+              "scheme": "https",
+              "host": "backtickjs.app",
+              "path": "/auth/callback"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "monochromeImage": "./assets/monochrome-icon.png",
         "backgroundColor": "#181818"
       }
     },
-    "plugins": ["@backtickjs/expo", "expo-web-browser", "expo-router"],
+    "plugins": [
+      "@backtickjs/expo",
+      "expo-web-browser",
+      ["expo-router", { "root": "./client/app" }]
+    ],
     "extra": {
       "server": "https://backtickjs.app",
+      "screens": "api.backtickjs.app",
       "supabaseUrl": "https://evgfuotcvraqxvdtutso.supabase.co",
       "supabasePublishableKey": "sb_publishable_EotSz0FFiuOqXCSjxqGYrQ_oRJqA0as"
     }

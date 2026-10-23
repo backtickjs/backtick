@@ -1,15 +1,12 @@
-import type { Session } from "@supabase/supabase-js";
-import { createContext } from "react";
+// The app the phone has open: the one whose screen is on top, or Backtick's
+// home (null). A screen keeps the app it was opened in, and makes it the open
+// one again when it's back on top, so an app's `/day` is its own `/day`.
+let openApp: string | null = null;
 
-export type App = { id: string; title: string };
+export function currentApp(): string | null {
+  return openApp;
+}
 
-// The signed-in user's session, as the layout keeps it current: screens are
-// opened only while there is one.
-export const CurrentSession = createContext<Session | null>(null);
-
-// The app whose screens are this app's routes outside /backtick, while it's
-// open: a screen's `<Link href="/day">` opens that app's `/day`.
-export const OpenApp = createContext<{
-  app: App | null;
-  open: (app: App) => void;
-}>({ app: null, open: () => {} });
+export function setOpenApp(app: string | null): void {
+  openApp = app;
+}

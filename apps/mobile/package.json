@@ -7,21 +7,27 @@
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown ."
   },
   "dependencies": {
+    "@backtickjs/bundler": "^0.2.4",
     "@backtickjs/core": "^0.2.4",
     "@backtickjs/expo": "^0.2.4",
+    "@backtickjs/jsx-react": "^0.2.4",
     "@react-native-async-storage/async-storage": "2.2.0",
     "@supabase/supabase-js": "2.117.2",
     "expo": "~57.0.26",
     "expo-constants": "~57.0.22",
+    "expo-crypto": "~57.0.4",
+    "expo-dev-client": "~57.0.20",
     "expo-linking": "~57.0.13",
     "expo-router": "~57.0.28",
+    "expo-secure-store": "~57.0.4",
     "expo-status-bar": "~57.0.1",
     "expo-web-browser": "~57.0.3",
+    "hono": "^4.13.13",
     "react": "19.2.3",
     "react-error-boundary": "6.1.6",
     "react-native": "0.86.3",
@@ -31,7 +37,15 @@
   },
   "devDependencies": {
     "@backtickjs/prettier-plugin": "^0.2.4",
+    "@backtickjs/tsc": "^0.2.4",
+    "@types/node": "^25.9.1",
     "@types/react": "19.2.18",
     "prettier": "^3.6.2"
+  },
+  "backtick": {
+    "plugins": [
+      "@backtickjs/jsx-react/plugin",
+      "@backtickjs/expo/plugin"
+    ]
   }
 }

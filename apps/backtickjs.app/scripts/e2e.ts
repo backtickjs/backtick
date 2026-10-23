@@ -46,7 +46,7 @@ async function call(name: string, args: object) {
 
 async function open(id: string, modules: object, auth = true) {
   const started = performance.now();
-  const response = await fetch(`${base}/apps/${id}`, {
+  const response = await fetch(`https://${id}.api.backtickjs.app/`, {
     headers: {
       ...(auth ? { authorization: `Bearer ${token}` } : {}),
       "x-backtick-modules": JSON.stringify(modules),
@@ -55,7 +55,7 @@ async function open(id: string, modules: object, auth = true) {
   const body = await response.text();
   const ms = Math.round(performance.now() - started);
   console.log(
-    `GET /apps ${response.status} ${ms} ms, version ${response.headers.get("x-backtick-version")}:`,
+    `GET ${id}.api.backtickjs.app ${response.status} ${ms} ms, version ${response.headers.get("x-backtick-version")}:`,
     body.slice(0, 90).replace(/\n/g, " "),
   );
 }

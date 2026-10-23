@@ -1,0 +1,12 @@
+{
+  "name": "backtickjs.app-mobile",
+  "private": true,
+  "type": "module",
+  "description": "Builds apps/mobile/server, the Backtick app's own screens, for the function to serve",
+  "backtick": {
+    "plugins": [
+      "@backtickjs/jsx-react/plugin",
+      "@backtickjs/expo/plugin"
+    ]
+  }
+}

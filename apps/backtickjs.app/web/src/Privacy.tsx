@@ -103,7 +103,7 @@ export const Privacy = cs`() => (
       effective date.
     </p>
     <p>
-      <a href="/">Backtick</a>
+      <a href="https://backtickjs.com">Backtick</a>
     </p>
   </main>
 )`;

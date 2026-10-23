@@ -1,0 +1,27 @@
+{
+  // The Backtick app's own screens, written in apps/mobile/server as any
+  // Backtick app's server is, built here with `tspc` from ts-patch, as web/
+  // is: they're scripts, which Backtick's transformer compiles, with this
+  // folder's plugins. The function imports `dist/`.
+  "compilerOptions": {
+    // ES modules as written: apps/mobile isn't `"type": "module"` (it's an Expo
+    // app), and dist/ is in this package, which is.
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "target": "ESNext",
+    "lib": ["esnext"],
+    "types": ["node"],
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "@backtickjs/jsx-react",
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "rootDir": "../../mobile/server",
+    "outDir": "dist",
+    "declaration": true,
+    "plugins": [{ "transform": "@backtickjs/tspatch-plugin" }]
+  },
+  "include": ["../../mobile/server"]
+}

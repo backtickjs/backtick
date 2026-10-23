@@ -3,10 +3,7 @@
 import { cs } from "@backtickjs/core";
 import { Consent } from "./Consent.tsx";
 import { toHtml } from "./document.ts";
-import { Home } from "./Home.tsx";
 import { Privacy } from "./Privacy.tsx";
-
-export const homePage = once(() => toHtml("Backtick", Home));
 
 export const privacyPage = once(() =>
   toHtml("Backtick · Privacy policy", Privacy),

@@ -38,6 +38,9 @@ export const Layout = cs`(props: { children: JSX.Element }) => (
         <a href="https://x.com/backtickjs">X</a>
         <a href="https://bsky.app/profile/backtickjs.com">Bluesky</a>
         <a href="mailto:hello@backtickjs.com">hello@backtickjs.com</a>
+        {/* The Backtick app's, which Google's sign-in needs this home page to
+            link to. */}
+        <a href="https://backtickjs.app/privacy">Privacy</a>
       </nav>
     </footer>
   </div>
