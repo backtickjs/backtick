@@ -1,86 +1,77 @@
 import assert from "node:assert/strict";
-import { mkdirSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
-import { describe, it } from "node:test";
-import { ClientVersionMismatch } from "@backtickjs/bundler";
-import { installedPackages } from "@backtickjs/core/node";
-import { bundle } from "../src/sandbox/bundle.ts";
-import { typecheck } from "../src/sandbox/typecheck.ts";
-import { starter } from "../src/function/starter.ts";
+import { afterEach, describe, it, mock } from "node:test";
+import app from "../src/index.ts";
 
-const root = join(import.meta.dirname, "..");
+const id = "3f2a6c1e-9b4d-4e8a-a1c2-7d5e9f0b1a2c";
+const modules = '{"react-native":"0.86.3"}';
 
-// What a phone carrying the versions installed here sends.
-const installed = installedPackages(root);
-const phone = {
-  react: installed.react!,
-  "react/jsx-runtime": installed.react!,
-  "react-native": installed["react-native"]!,
-};
+afterEach(() => mock.restoreAll());
 
-// An app's `App.tsx`, in a directory of its own.
-function write(name: string, source: string): string {
-  const dir = join(root, ".builds", "test", name);
-  mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, "App.tsx"), source);
-  return join(dir, "App.tsx");
-}
-
-describe("typecheck", () => {
-  it("passes the starter", () => {
-    assert.deepEqual(typecheck(write("starter", starter)), {
-      errors: [],
-      warnings: [],
+describe("an app's host", () => {
+  it("hands the phone's request to the service, with its token and modules", async () => {
+    const sent: { url: string; headers: Headers }[] = [];
+    mock.method(globalThis, "fetch", async (url: string, init: RequestInit) => {
+      sent.push({ url, headers: new Headers(init.headers) });
+      return new Response("bundle", {
+        headers: {
+          "content-type": "text/javascript",
+          "x-backtick-version": "3",
+        },
+      });
     });
+    const answer = await app.request(`https://${id}.backtickjs.app/day`, {
+      headers: { authorization: "Bearer token", "x-backtick-modules": modules },
+    });
+    assert.equal(answer.status, 200);
+    assert.equal(await answer.text(), "bundle");
+    assert.equal(answer.headers.get("x-backtick-version"), "3");
+    assert.equal(sent[0].url, `https://api.backtickjs.com/apps/${id}/bundle`);
+    assert.equal(sent[0].headers.get("authorization"), "Bearer token");
+    assert.equal(sent[0].headers.get("x-backtick-modules"), modules);
   });
 
-  it("reports type errors where they are in the file", () => {
-    const file = write(
-      "type",
-      starter.replace("$useState<number>(0)", '$useState<number>("0")'),
+  it("passes the service's refusal on", async () => {
+    mock.method(
+      globalThis,
+      "fetch",
+      async () => new Response("no", { status: 401 }),
     );
-    assert.match(
-      typecheck(file).errors.join("\n"),
-      /^App\.tsx\(18,49\): error TS2345: Argument of type 'string'/,
-    );
+    const answer = await app.request(`https://${id}.backtickjs.app/`, {
+      headers: { "x-backtick-modules": modules },
+    });
+    assert.equal(answer.status, 401);
   });
-  it("reports a regex escaped as if in a string as a warning, not an error", () => {
-    const file = write(
-      "warning",
-      starter.replace(
-        '{count + " taps"}',
-        '{String(count).replace(/\\\\B/g, ",") + " taps"}',
-      ),
-    );
-    const { errors, warnings } = typecheck(file);
-    assert.deepEqual(errors, []);
+
+  it("offers a browser the app in Backtick, at the same path", async () => {
+    const page = await app.request(`https://${id}.backtickjs.app/talks/42?x=1`);
+    assert.equal(page.status, 200);
     assert.match(
-      warnings.join("\n"),
-      /^App\.tsx\(22,62\): warning TS0: `\\\\B` in this regex matches a backslash/,
+      await page.text(),
+      new RegExp(`href="backtick://${id}/talks/42\\?x=1"`),
     );
   });
 });
 
-describe("bundle", () => {
-  it("bundles the starter for a phone, with its map", async () => {
-    const { code, map } = await bundle(write("starter", starter), phone);
-    assert.match(code, /require\("react-native"\)/);
-    assert.equal(JSON.parse(map).version, 3);
+describe("the bare domain", () => {
+  it("sends people to the website", async () => {
+    const answer = await app.request("https://backtickjs.app/");
+    assert.equal(answer.status, 302);
+    assert.equal(answer.headers.get("location"), "https://backtickjs.com");
   });
 
-  it("refuses a module the phone doesn't provide", async () => {
-    const file = write(
-      "import",
-      `import { isRunningInExpoGo } from "expo" with { backtick: "client" };\n` +
-        starter.replace(
-          "return <App />;",
-          "$isRunningInExpoGo(); return <App />;",
-        ),
+  it("names the phone app's signing keys for App Links", async () => {
+    process.env.ANDROID_CERT_SHA256 = "AA:BB, CC:DD";
+    const answer = await app.request(
+      "https://backtickjs.app/.well-known/assetlinks.json",
     );
-    await assert.rejects(
-      () => bundle(file, phone),
-      (error) =>
-        error instanceof ClientVersionMismatch && error.from === "expo",
-    );
+    const [link] = await answer.json();
+    assert.equal(link.target.package_name, "com.backtickjs.app");
+    assert.deepEqual(link.target.sha256_cert_fingerprints, ["AA:BB", "CC:DD"]);
+    delete process.env.ANDROID_CERT_SHA256;
+  });
+
+  it("isn't an app at a host that isn't one", async () => {
+    const answer = await app.request("https://www.backtickjs.app/");
+    assert.equal(answer.status, 302);
   });
 });

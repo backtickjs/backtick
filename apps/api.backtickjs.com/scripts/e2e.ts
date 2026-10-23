@@ -6,7 +6,7 @@ import { installedPackages } from "@backtickjs/core/node";
 import { starter } from "../src/function/starter.ts";
 import { testUserToken } from "./testUser.ts";
 
-const base = process.env.BASE ?? "https://backtickjs.app";
+const base = process.env.BASE ?? "https://api.backtickjs.com";
 const token = await testUserToken();
 const installed = installedPackages(join(import.meta.dirname, ".."));
 const phone = {
@@ -46,7 +46,8 @@ async function call(name: string, args: object) {
 
 async function open(id: string, modules: object, auth = true) {
   const started = performance.now();
-  const response = await fetch(`https://${id}.api.backtickjs.app/`, {
+  // As the phone does: through the app's own host.
+  const response = await fetch(`https://${id}.backtickjs.app/`, {
     headers: {
       ...(auth ? { authorization: `Bearer ${token}` } : {}),
       "x-backtick-modules": JSON.stringify(modules),
@@ -55,7 +56,7 @@ async function open(id: string, modules: object, auth = true) {
   const body = await response.text();
   const ms = Math.round(performance.now() - started);
   console.log(
-    `GET ${id}.api.backtickjs.app ${response.status} ${ms} ms, version ${response.headers.get("x-backtick-version")}:`,
+    `GET ${id}.backtickjs.app ${response.status} ${ms} ms, version ${response.headers.get("x-backtick-version")}:`,
     body.slice(0, 90).replace(/\n/g, " "),
   );
 }

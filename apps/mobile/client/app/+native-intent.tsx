@@ -1,13 +1,19 @@
 import { router } from "expo-router";
 import { Alert } from "react-native";
 import { currentApp, setOpenApp } from "../openApp";
-import { finishSignIn, server, signInWithGoogle, supabase } from "../supabase";
+import {
+  api,
+  apps,
+  finishSignIn,
+  signInWithGoogle,
+  supabase,
+} from "../supabase";
 
 // Every link into the phone: an app by its address, as a browser follows a
 // link to another site, and Backtick's own commands. An app's paths are left
 // as they are, so expo-router works in its screens as its docs say.
 //   backtick://<id>/<path>                    the app's <path>
-//   https://backtickjs.app/apps/<id>/<path>   the same, from the web
+//   https://<id>.backtickjs.app/<path>        the same: the app's own address
 //   backtick://sign-in, backtick://sign-out   from Backtick's home only
 //   backtick://auth/callback?code=…           sign-in's fallback (supabase.ts)
 // Anything else (a development build's own links) goes to expo-router as is.
@@ -31,7 +37,7 @@ export async function redirectSystemPath({
   const url = parse(path);
   // Google's sign-in returning by its App Link: the browser session waiting
   // in signInWithGoogle has it.
-  if (url?.origin === server) {
+  if (url?.origin === api) {
     return null;
   }
   if (url?.protocol !== "backtick:") {
@@ -59,14 +65,15 @@ function appLink(path: string): { app: string; path: string } | undefined {
   if (url === undefined) {
     return undefined;
   }
-  const web = /^\/apps\/([^/]+)(\/.*)?$/.exec(url.pathname);
-  if (url.origin === server && web !== null) {
-    return { app: web[1], path: (web[2] ?? "/") + url.search };
-  }
-  if (url.protocol === "backtick:" && isAppId(url.hostname)) {
-    return { app: url.hostname, path: (url.pathname || "/") + url.search };
-  }
-  return undefined;
+  const app =
+    url.protocol === "backtick:"
+      ? url.hostname
+      : url.protocol === "https:" && url.hostname.endsWith("." + apps)
+        ? url.hostname.slice(0, -("." + apps).length)
+        : undefined;
+  return app !== undefined && isAppId(app)
+    ? { app, path: (url.pathname || "/") + url.search }
+    : undefined;
 }
 
 function isAppId(host: string): boolean {

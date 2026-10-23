@@ -1,5 +1,5 @@
 {
-  "name": "backtickjs.app-mobile",
+  "name": "app.backtickjs.com-mobile",
   "private": true,
   "type": "module",
   "description": "Builds apps/mobile/server, the Backtick app's own screens, for the function to serve",

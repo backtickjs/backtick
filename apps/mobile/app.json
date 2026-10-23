@@ -16,15 +16,16 @@
         {
           "action": "VIEW",
           "autoVerify": true,
+          "data": [{ "scheme": "https", "host": "*.backtickjs.app" }],
+          "category": ["BROWSABLE", "DEFAULT"]
+        },
+        {
+          "action": "VIEW",
+          "autoVerify": true,
           "data": [
             {
               "scheme": "https",
-              "host": "backtickjs.app",
-              "pathPrefix": "/apps/"
-            },
-            {
-              "scheme": "https",
-              "host": "backtickjs.app",
+              "host": "api.backtickjs.com",
               "path": "/auth/callback"
             }
           ],
@@ -43,8 +44,9 @@
       ["expo-router", { "root": "./client/app" }]
     ],
     "extra": {
-      "server": "https://backtickjs.app",
-      "screens": "api.backtickjs.app",
+      "api": "https://api.backtickjs.com",
+      "home": "app.backtickjs.com",
+      "apps": "backtickjs.app",
       "supabaseUrl": "https://evgfuotcvraqxvdtutso.supabase.co",
       "supabasePublishableKey": "sb_publishable_EotSz0FFiuOqXCSjxqGYrQ_oRJqA0as"
     }

@@ -1,6 +1,3 @@
-.builds/
 # `vercel link` and `vercel env pull`
 .vercel/
 .env*.local
-web/dist/
-mobile/dist/

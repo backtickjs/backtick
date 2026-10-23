@@ -1,8 +1,8 @@
 {
   // The Backtick app's own screens, written in apps/mobile/server as any
-  // Backtick app's server is, built here with `tspc` from ts-patch, as web/
-  // is: they're scripts, which Backtick's transformer compiles, with this
-  // folder's plugins. The function imports `dist/`.
+  // Backtick app's server is, built here with `tspc` from ts-patch: they're
+  // scripts, which Backtick's transformer compiles, with this folder's
+  // plugins. The function imports `dist/`.
   "compilerOptions": {
     // ES modules as written: apps/mobile isn't `"type": "module"` (it's an Expo
     // app), and dist/ is in this package, which is.

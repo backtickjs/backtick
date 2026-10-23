@@ -3,49 +3,21 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "The MCP app builder's server: checks an app's code for update_app, and bundles it for each phone that opens it",
+  "description": "Every app's host: <id>.backtickjs.app, for the phone and for a browser",
   "scripts": {
-    "dev": "node --env-file=.env.local scripts/dev.ts",
-    "typecheck": "pnpm run build && tsc --noEmit && backtick-tsc -p web --noEmit && backtick-tsc -p mobile --noEmit",
-    "test": "node --import @backtickjs/node-plugin --test \"test/**/*.test.ts\"",
-    "format": "prettier --write src test scripts web/src",
-    "format:check": "prettier --check src test scripts web/src",
-    "clean": "rm -rf node_modules .builds web/dist mobile/dist",
-    "build": "tspc -p web --noCheck && tspc -p mobile --noCheck"
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"test/**/*.test.ts\"",
+    "format": "prettier --write src test",
+    "format:check": "prettier --check src test",
+    "clean": "rm -rf node_modules"
   },
   "dependencies": {
-    "@backtickjs/bundler": "^0.2.4",
-    "@backtickjs/core": "^0.2.4",
-    "@backtickjs/expo": "^0.2.4",
-    "@backtickjs/jsx-react": "^0.2.4",
-    "@backtickjs/jsx-solid": "^0.2.4",
-    "@backtickjs/node-plugin": "^0.2.4",
-    "@backtickjs/tsc": "^0.2.4",
-    "@hono/node-server": "^2.1.4",
-    "@modelcontextprotocol/server": "2.3.1",
-    "@supabase/supabase-js": "2.117.2",
-    "@types/node": "^25.9.1",
-    "@types/react": "19.2.18",
-    "@vercel/functions": "3.9.11",
-    "@vercel/sandbox": "3.5.1",
-    "expo": "~57.0.26",
     "hono": "^4.13.13",
-    "jose": "6.2.12",
-    "react": "19.2.3",
-    "react-native": "0.86.3",
-    "solid-js": "1.9.17",
-    "typescript": "^6.0.3",
-    "zod": "^4.6.5"
-  },
-  "backtick": {
-    "plugins": [
-      "@backtickjs/jsx-react/plugin",
-      "@backtickjs/expo/plugin"
-    ]
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@backtickjs/tspatch-plugin": "^0.2.4",
-    "supabase": "2.119.0",
-    "ts-patch": "4.0.1"
+    "@backtickjs/prettier-plugin": "^0.2.4",
+    "@types/node": "^25.9.1",
+    "prettier": "^3.6.2"
   }
 }

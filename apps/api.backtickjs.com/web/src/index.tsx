@@ -1,13 +1,8 @@
-// backtickjs.app's pages as HTML, for the function to serve. Each is the same
+// api.backtickjs.com's pages as HTML, for the function to serve. Each is the same
 // for every visitor, so it's bundled once per instance.
 import { cs } from "@backtickjs/core";
 import { Consent } from "./Consent.tsx";
 import { toHtml } from "./document.ts";
-import { Privacy } from "./Privacy.tsx";
-
-export const privacyPage = once(() =>
-  toHtml("Backtick · Privacy policy", Privacy),
-);
 
 // Its Supabase URL and publishable key are public: Supabase's browser client
 // signs the user in with them.

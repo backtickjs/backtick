@@ -1,0 +1,31 @@
+{
+  "name": "app.backtickjs.com",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "The Backtick app's own screens (apps/mobile/server), served to the phone",
+  "scripts": {
+    "typecheck": "pnpm run build && tsc --noEmit",
+    "format": "prettier --write src",
+    "format:check": "prettier --check src",
+    "clean": "rm -rf node_modules mobile/dist",
+    "build": "tspc -p mobile --noCheck"
+  },
+  "dependencies": {
+    "@backtickjs/bundler": "^0.2.4",
+    "@backtickjs/core": "^0.2.4",
+    "@backtickjs/expo": "^0.2.4",
+    "@backtickjs/jsx-react": "^0.2.4",
+    "@supabase/supabase-js": "2.117.2",
+    "expo": "~57.0.26",
+    "hono": "^4.13.13",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "@backtickjs/prettier-plugin": "^0.2.4",
+    "@backtickjs/tspatch-plugin": "^0.2.4",
+    "@types/node": "^25.9.1",
+    "prettier": "^3.6.2",
+    "ts-patch": "4.0.1"
+  }
+}

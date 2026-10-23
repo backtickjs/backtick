@@ -5,7 +5,7 @@ import Constants from "expo-constants";
 import type { Session } from "@supabase/supabase-js";
 import type { ReactNode } from "react";
 import { moduleMap } from "./moduleMap";
-import { screens } from "./supabase";
+import { apps, home } from "./supabase";
 
 // The modules this build carries, at the versions app.json's plugin records.
 const { installedPackages } = getBacktickExtra(Constants.expoConfig);
@@ -13,9 +13,9 @@ const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
 
 // Where an app's screen at `path` comes from: the app's own host, as a site's
 // page comes from its domain, and the very same path. Backtick's home, the
-// app when none is open, is the host itself.
+// app when none is open, has its own.
 export function screenUrl(app: string | null, path: string): string {
-  return `https://${app === null ? "" : app + "."}${screens}${path}`;
+  return `https://${app === null ? home : app + "." + apps}${path}`;
 }
 
 // The app's screen at `path`, bundled by its server for this phone's modules,

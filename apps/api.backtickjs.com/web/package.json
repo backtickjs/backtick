@@ -1,5 +1,5 @@
 {
-  "name": "backtickjs.app-web",
+  "name": "api.backtickjs.com-web",
   "private": true,
   "type": "module",
   "description": "backtickjs.app's web pages, written with Backtick and Solid, compiled with tspc for the function to bundle",

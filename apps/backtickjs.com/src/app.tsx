@@ -4,6 +4,7 @@ import { LLMS_FULL_TXT, LLMS_TXT } from "./llms.js";
 import { markdownPathOf } from "./pages.js";
 import { DOCS_PAGES } from "./pages/Docs.js";
 import { Home } from "./pages/Home.js";
+import { Privacy } from "./pages/Privacy.js";
 
 /**
  * The site's routes: what the preview serves, and what the build writes out,
@@ -34,6 +35,19 @@ for (const page of DOCS_PAGES) {
   app.get(page.path, async (context) => context.html(await toHtml(page)));
   app.get(markdownPathOf(page.path), (context) => context.text(page.markdown));
 }
+
+app.get("/privacy/", async (context) =>
+  context.html(
+    await toHtml({
+      path: "/privacy/",
+      Page: Privacy,
+      title: "Backtick · Privacy policy",
+      description:
+        "What Backtick's app builder collects, how it's used, who handles it," +
+        " and your choices.",
+    }),
+  ),
+);
 
 app.get("/llms.txt", (context) => context.text(LLMS_TXT));
 app.get("/llms-full.txt", (context) => context.text(LLMS_FULL_TXT));

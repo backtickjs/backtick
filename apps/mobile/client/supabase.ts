@@ -6,17 +6,20 @@ import { sessionStorage } from "./sessionStorage";
 
 // Public values, from app.json: Supabase's browser client signs in with them.
 const extra = Constants.expoConfig?.extra as {
-  server: string;
-  screens: string;
+  api: string;
+  home: string;
+  apps: string;
   supabaseUrl: string;
   supabasePublishableKey: string;
 };
 
-export const server = extra.server;
+// Backtick's service: sign-in returns there.
+export const api = extra.api;
 
-// The host the phone's screens come from: Backtick's home at it, each app at
-// <id>.<it>.
-export const screens = extra.screens;
+// Where screens come from: Backtick's home at `home`, each app at
+// <id>.`apps`, as a Vercel project is at <name>.vercel.app.
+export const home = extra.home;
+export const apps = extra.apps;
 
 // Hermes has no WebCrypto, and without it Supabase's PKCE falls back to the
 // `plain` method: expo-crypto's random values and SHA-256 make it S256.
@@ -48,7 +51,7 @@ export const supabase = createClient(
 // If the browser shows the page instead, its button hands the code over by
 // `backtick://auth/callback` (client/app/auth/callback.tsx), which PKCE keeps
 // useless to anyone without this phone's verifier.
-const redirectTo = `${server}/auth/callback`;
+const redirectTo = `${api}/auth/callback`;
 
 // Google's sign-in in the system browser, back into the app by its link, then
 // the code it brings traded for a session. Resolves without one if the user

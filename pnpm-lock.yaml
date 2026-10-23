@@ -26,7 +26,7 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  apps/backtickjs.app:
+  apps/api.backtickjs.com:
     dependencies:
       '@backtickjs/bundler':
         specifier: ^0.2.4
@@ -104,6 +104,68 @@ importers:
       ts-patch:
         specifier: 4.0.1
         version: 4.0.1
+
+  apps/app.backtickjs.com:
+    dependencies:
+      '@backtickjs/bundler':
+        specifier: ^0.2.4
+        version: link:../../packages/bundler
+      '@backtickjs/core':
+        specifier: ^0.2.4
+        version: link:../../packages/core
+      '@backtickjs/expo':
+        specifier: ^0.2.4
+        version: link:../../packages/expo
+      '@backtickjs/jsx-react':
+        specifier: ^0.2.4
+        version: link:../../packages/jsx-react
+      '@supabase/supabase-js':
+        specifier: 2.117.2
+        version: 2.117.2
+      expo:
+        specifier: ~57.0.26
+        version: 57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@57.0.28)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)
+      hono:
+        specifier: ^4.13.13
+        version: 4.13.13
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+    devDependencies:
+      '@backtickjs/prettier-plugin':
+        specifier: ^0.2.4
+        version: link:../../packages/prettier-plugin
+      '@backtickjs/tspatch-plugin':
+        specifier: ^0.2.4
+        version: link:../../packages/tspatch-plugin
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      ts-patch:
+        specifier: 4.0.1
+        version: 4.0.1
+
+  apps/backtickjs.app:
+    dependencies:
+      hono:
+        specifier: ^4.13.13
+        version: 4.13.13
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+    devDependencies:
+      '@backtickjs/prettier-plugin':
+        specifier: ^0.2.4
+        version: link:../../packages/prettier-plugin
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
 
   apps/backtickjs.com:
     dependencies:
