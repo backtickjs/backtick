@@ -10,10 +10,15 @@ import {
   oauthMetadataResponse,
   requireBearerAuth,
 } from "@modelcontextprotocol/server";
+import { waitUntil } from "@vercel/functions";
 import { Hono } from "hono";
 import * as z from "zod";
 import { ownerOf, verifier } from "./function/auth.ts";
-import { bundleInSandbox, snapshotId } from "./function/sandbox.ts";
+import {
+  bundleInSandbox,
+  snapshotId,
+  warmSandbox,
+} from "./function/sandbox.ts";
 import { latestVersion } from "./function/store.ts";
 import { tools } from "./function/tools.ts";
 // Compiled by `tspc` first: the pages are Backtick scripts.
@@ -69,6 +74,17 @@ app.all("/mcp", async (c) => {
   return auth instanceof Response
     ? auth
     : mcp.fetch(c.req.raw, { authInfo: auth });
+});
+
+// The owner's sandbox started in the background, so their next open doesn't
+// wait for it (about 3.5 s cold, 0.4 s warm). Answered at once.
+app.post("/warm", async (c) => {
+  const auth = await requireBearerAuth({ verifier })(c.req.raw);
+  if (auth instanceof Response) {
+    return auth;
+  }
+  waitUntil(warmSandbox(ownerOf(auth), snapshotId()));
+  return c.body(null, 202);
 });
 
 // An app's latest version, bundled in the owner's sandbox for the phone's

@@ -39,6 +39,7 @@
     "hono": "^4.13.13",
     "jose": "6.2.12",
     "react": "19.3.0",
+    "react-dom": "19.3.0",
     "react-native": "0.88.0",
     "react-native-safe-area-context": "~5.10.1",
     "react-native-svg": "15.16.0",

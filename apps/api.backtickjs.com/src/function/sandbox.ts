@@ -47,14 +47,17 @@ export async function bundleInSandbox(
   });
 }
 
-async function postMessageToSandbox<T>(
+// The owner's sandbox started, so the next open doesn't wait for it: the
+// phone's home asks for this as it lists the apps.
+export async function warmSandbox(
   user: string,
-  source: string,
   snapshotId: string,
-  path: string,
-  body: object,
-): Promise<T> {
-  const sandbox = await Sandbox.getOrCreate({
+): Promise<void> {
+  await keepWarm(await sandboxOf(user, snapshotId));
+}
+
+async function sandboxOf(user: string, snapshotId: string): Promise<Sandbox> {
+  return Sandbox.getOrCreate({
     // One per user and snapshot: after a new snapshot, a user's sandbox from
     // the old one is never reused, and times out unasked. Hashed, to keep the
     // name short.
@@ -67,6 +70,16 @@ async function postMessageToSandbox<T>(
     networkPolicy: "deny-all",
     onCreate: start,
   });
+}
+
+async function postMessageToSandbox<T>(
+  user: string,
+  source: string,
+  snapshotId: string,
+  path: string,
+  body: object,
+): Promise<T> {
+  const sandbox = await sandboxOf(user, snapshotId);
   // Written with its folder: `writeFiles` makes the folders it needs.
   const file = `${app}/.builds/${randomUUID()}/App.tsx`;
   await sandbox.writeFiles([{ path: file, content: Buffer.from(source) }]);
@@ -80,12 +93,16 @@ async function postMessageToSandbox<T>(
   if (answer === undefined) {
     throw new Error("The sandbox's server didn't answer.");
   }
-  // Vercel extends by a second at least; a minute keeps the calls few.
+  await keepWarm(sandbox);
+  return JSON.parse(answer) as T;
+}
+
+// Vercel extends by a second at least; a minute keeps the calls few.
+async function keepWarm(sandbox: Sandbox): Promise<void> {
   const left = (sandbox.expiresAt?.getTime() ?? 0) - Date.now();
   if (warm - left >= 60 * 1000) {
     await sandbox.extendTimeout(warm - left);
   }
-  return JSON.parse(answer) as T;
 }
 
 async function start(sandbox: Sandbox): Promise<void> {
