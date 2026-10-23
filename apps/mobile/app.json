@@ -6,6 +6,18 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
+    "icon": "./assets/icon.png",
+    "ios": {
+      "bundleIdentifier": "com.backtickjs.app"
+    },
+    "android": {
+      "package": "com.backtickjs.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "monochromeImage": "./assets/monochrome-icon.png",
+        "backgroundColor": "#181818"
+      }
+    },
     "plugins": ["@backtickjs/expo", "expo-web-browser", "expo-router"],
     "extra": {
       "server": "https://backtickjs.app",
