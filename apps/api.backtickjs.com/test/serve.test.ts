@@ -12,6 +12,8 @@ const phone = {
   react: installed.react!,
   "react/jsx-runtime": installed.react!,
   "react-native": installed["react-native"]!,
+  "react-native-safe-area-context":
+    installed["react-native-safe-area-context"]!,
 };
 
 function write(name: string, source: string): string {
@@ -59,7 +61,7 @@ it("typechecks and bundles over HTTP, file after file", async () => {
       warnings: [],
     });
     const { errors } = await post("typecheck", { file: typo });
-    assert.match(errors.join("\n"), /^App\.tsx\(18,49\): error TS2345/);
+    assert.match(errors.join("\n"), /^App\.tsx\(19,49\): error TS2345/);
     assert.equal(
       (await post("bundle", { file: app, modules: phone })).ok,
       true,

@@ -19,16 +19,12 @@
     },
     "plugins": [
       "@backtickjs/expo",
-      "expo-web-browser",
       [
         "expo-router",
         {
           "root": "./client/app"
         }
-      ],
-      "expo-image",
-      "expo-secure-store",
-      "expo-status-bar"
+      ]
     ],
     "extra": {
       "home": "app.backtickjs.com",

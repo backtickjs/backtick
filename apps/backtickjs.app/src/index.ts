@@ -4,7 +4,8 @@
 // to backtickjs.com. Users' code lives here, so this holds no secrets: the
 // service at api.backtickjs.com checks the token and bundles.
 import { type Context, Hono } from "hono";
-import { html } from "hono/html";
+import { html, raw } from "hono/html";
+import QRCode from "qrcode";
 
 const api = "https://api.backtickjs.com";
 
@@ -23,7 +24,7 @@ app.use("*", async (c, next) => {
     return next();
   }
   return c.req.header("x-backtick-modules") === undefined
-    ? openInBacktick(c, id)
+    ? openInExpoGo(c, id)
     : screen(c, id);
 });
 
@@ -48,19 +49,30 @@ async function screen(c: Context, id: string): Promise<Response> {
   return new Response(await answer.text(), { status: answer.status, headers });
 }
 
-// A browser: the app opens in Expo Go, at the same path.
-function openInBacktick(c: Context, id: string): Response | Promise<Response> {
+// A browser: the app opens in Expo Go, at the same path. A phone goes
+// straight there, with the button in case its browser waits for a tap; a
+// computer gets a QR code of this page, for the phone's camera.
+async function openInExpoGo(c: Context, id: string): Promise<Response> {
   const url = new URL(c.req.url);
   const params = new URLSearchParams(url.search);
   params.set("channel-name", "production");
   const link = `${shell}/--/${id}${url.pathname}?${params}`;
+  const phone = /Android|iPhone|iPad|iPod/.test(
+    c.req.header("user-agent") ?? "",
+  );
+  const qr = phone
+    ? ""
+    : await QRCode.toString(url.href, { type: "svg", margin: 0 });
   return c.html(
     html`<!doctype html>
       <html lang="en">
         <head>
           <meta charset="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <title>Open in Backtick</title>
+          ${phone
+            ? html`<meta http-equiv="refresh" content="0; url=${link}" />`
+            : ""}
+          <title>Open in Expo Go</title>
           <style>
             body {
               font:
@@ -81,11 +93,27 @@ function openInBacktick(c: Context, id: string): Response | Promise<Response> {
               font-weight: 600;
               text-decoration: none;
             }
+            .qr {
+              width: 240px;
+              height: 240px;
+              margin: 16px 0;
+              padding: 12px;
+              border-radius: 12px;
+              background: #fff;
+            }
+            .qr svg {
+              display: block;
+              width: 100%;
+              height: 100%;
+            }
           </style>
         </head>
         <body>
           <p>This app runs on your phone, in Expo Go.</p>
-          <a class="open" href="${link}">Open in Expo Go</a>
+          ${phone
+            ? html`<a class="open" href="${link}">Open in Expo Go</a>`
+            : html`<div class="qr">${raw(qr)}</div>
+                <p>Scan it with your phone's camera to open the app.</p>`}
           <p>
             No Expo Go yet? Get it from the
             <a href="https://apps.apple.com/app/expo-go/id982107779"

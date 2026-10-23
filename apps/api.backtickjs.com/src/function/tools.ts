@@ -1,8 +1,15 @@
 // The MCP tools a host's model calls, for the signed-in user it calls for.
 import { randomUUID } from "node:crypto";
+import {
+  RESOURCE_MIME_TYPE,
+  registerAppResource,
+  registerAppTool,
+} from "@modelcontextprotocol/ext-apps/server";
 import { McpServer, type CallToolResult } from "@modelcontextprotocol/server";
 import { waitUntil } from "@vercel/functions";
 import * as z from "zod";
+import { card, cardHtml, cardScriptOrigin, cardUri } from "./card.ts";
+import { phoneModules, unprovidedImports } from "./phoneModules.ts";
 import { snapshotId, typecheckInSandbox } from "./sandbox.ts";
 import { starter } from "./starter.ts";
 import {
@@ -56,7 +63,8 @@ export function tools(owner: string): McpServer {
       );
       return text(
         `${JSON.stringify({ id, file: "App.tsx" })}\n\n` +
-          `\`\`\`tsx\n${starter}\`\`\``,
+          `\`\`\`tsx\n${starter}\`\`\`\n\n` +
+          `The phone provides these client modules, and only these: ${phoneModules.join(", ")}.`,
       );
     },
   );
@@ -82,7 +90,26 @@ export function tools(owner: string): McpServer {
     },
   );
 
-  server.registerTool(
+  // The card the host shows with each save.
+  registerAppResource(
+    server,
+    "App card",
+    cardUri,
+    { description: "An app's title, version, and a button to open it." },
+    async () => ({
+      contents: [
+        {
+          uri: cardUri,
+          mimeType: RESOURCE_MIME_TYPE,
+          text: cardHtml,
+          _meta: { ui: { csp: { resourceDomains: [cardScriptOrigin] } } },
+        },
+      ],
+    }),
+  );
+
+  registerAppTool(
+    server,
     "save_app",
     {
       title: "Save an app",
@@ -102,14 +129,16 @@ export function tools(owner: string): McpServer {
         destructiveHint: false,
         openWorldHint: false,
       },
+      _meta: { ui: { resourceUri: cardUri } },
     },
     async ({ id, title, code }) => {
       const started = performance.now();
-      const { errors, warnings } = await typecheckInSandbox(
-        owner,
-        code,
-        snapshotId(),
-      );
+      const unprovided = await unprovidedImports("App.tsx", code);
+      const checked =
+        unprovided.length > 0
+          ? { errors: unprovided, warnings: [] }
+          : await typecheckInSandbox(owner, code, snapshotId());
+      const { errors, warnings } = checked;
       const durationMs = Math.round(performance.now() - started);
       if (errors.length > 0) {
         recorded({
@@ -128,9 +157,13 @@ export function tools(owner: string): McpServer {
       }
       recorded({ appId: id, owner, version, errors, warnings, durationMs });
       const url = `https://${id}.backtickjs.app`;
-      return text(
-        [JSON.stringify({ id, version, url }), ...warnings].join("\n\n"),
-      );
+      return {
+        ...text(
+          [JSON.stringify({ id, version, url }), ...warnings].join("\n\n"),
+        ),
+        // For the card only: the model reads the text above.
+        _meta: { "backtickjs.com/card": await card(id, title, version, url) },
+      };
     },
   );
 

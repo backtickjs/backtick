@@ -3,6 +3,7 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { ActivityIndicator } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { setOpenApp } from "../openApp";
 import { CurrentSession } from "../session";
 import { supabase } from "../supabase";
@@ -26,18 +27,21 @@ export default function Layout() {
   if (session === undefined) {
     return <ActivityIndicator style={{ flex: 1 }} />;
   }
-  // Drawn afresh when the user signs in or out, from Backtick's home.
+  // Drawn afresh when the user signs in or out, from Backtick's home. Inside
+  // gesture-handler's root, as an Expo Router app's root layout puts it.
   return (
-    <CurrentSession value={session}>
-      <Stack
-        key={session?.user.id ?? "signed out"}
-        screenOptions={{
-          // An app shows a header by asking: `<Stack.Screen options={{ headerShown: true }} />`.
-          headerShown: false,
-          contentStyle: { backgroundColor: "#f3f5f2" },
-        }}
-      />
-      <StatusBar style="auto" />
-    </CurrentSession>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <CurrentSession value={session}>
+        <Stack
+          key={session?.user.id ?? "signed out"}
+          screenOptions={{
+            // An app shows a header by asking: `<Stack.Screen options={{ headerShown: true }} />`.
+            headerShown: false,
+            contentStyle: { backgroundColor: "#f3f5f2" },
+          }}
+        />
+        <StatusBar style="auto" />
+      </CurrentSession>
+    </GestureHandlerRootView>
   );
 }

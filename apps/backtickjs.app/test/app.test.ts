@@ -42,15 +42,30 @@ describe("an app's host", () => {
     assert.equal(answer.status, 401);
   });
 
-  it("offers a browser the app in Expo Go, at the same path", async () => {
-    const page = await app.request(`https://${id}.backtickjs.app/talks/42?x=1`);
-    assert.equal(page.status, 200);
-    assert.match(
-      await page.text(),
-      new RegExp(
-        `href="exp://u\\.expo\\.dev/[0-9a-f-]+/--/${id}/talks/42\\?x=1&amp;channel-name=production"`,
-      ),
+  it("sends a phone's browser to Expo Go, at the same path", async () => {
+    const page = await app.request(
+      `https://${id}.backtickjs.app/talks/42?x=1`,
+      {
+        headers: { "user-agent": "Mozilla/5.0 (Linux; Android 15; Pixel 9)" },
+      },
     );
+    assert.equal(page.status, 200);
+    const link = `exp://u\\.expo\\.dev/[0-9a-f-]+/--/${id}/talks/42\\?x=1&amp;channel-name=production`;
+    const text = await page.text();
+    assert.match(
+      text,
+      new RegExp(`http-equiv="refresh" content="0; url=${link}"`),
+    );
+    assert.match(text, new RegExp(`href="${link}"`));
+  });
+
+  it("shows a computer a QR code of the page", async () => {
+    const page = await app.request(`https://${id}.backtickjs.app/talks/42`, {
+      headers: { "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 15_0)" },
+    });
+    const text = await page.text();
+    assert.match(text, /<svg /);
+    assert.doesNotMatch(text, /exp:\/\//);
   });
 });
 
