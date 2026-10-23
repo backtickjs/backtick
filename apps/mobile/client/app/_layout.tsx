@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { ActivityIndicator } from "react-native";
 import { setOpenApp } from "../openApp";
 import { CurrentSession } from "../session";
-import { UpdateSnackbar } from "../UpdateSnackbar";
 import { supabase } from "../supabase";
 
 // Nothing is drawn here: every screen, sign-in's included, comes from the
@@ -34,7 +33,6 @@ export default function Layout() {
         key={session?.user.id ?? "signed out"}
         screenOptions={{ contentStyle: { backgroundColor: "#f3f5f2" } }}
       />
-      <UpdateSnackbar />
       <StatusBar style="auto" />
     </CurrentSession>
   );
