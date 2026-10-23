@@ -9,7 +9,8 @@
     "format": "prettier --write src",
     "format:check": "prettier --check src",
     "clean": "rm -rf node_modules mobile/dist",
-    "build": "tspc -p mobile --noCheck"
+    "build": "tspc -p mobile --noCheck",
+    "deploy": "sh scripts/deploy.sh"
   },
   "dependencies": {
     "@backtickjs/bundler": "^0.2.4",

@@ -22,6 +22,14 @@ A Vercel project with this folder as its root directory, the domain `app.backtic
 | `SUPABASE_URL`             | The project's URL, `https://<ref>.supabase.co` |
 | `SUPABASE_PUBLISHABLE_KEY` | Supabase's publishable key. Safe in a phone.   |
 
+It's the Vercel project `app-backtickjs-com`, linked from this folder, and not connected to GitHub: it's deployed from this machine.
+
+```sh
+pnpm run deploy
+```
+
+`scripts/deploy.sh` builds it here (`vercel build`), since it compiles `apps/mobile/server`, outside this folder, which Vercel's own build can't see; then deploys the prebuilt output from the repo's root (`vercel deploy --prebuilt`), where its file paths start, naming the project by its ids. It cleans up after itself.
+
 `pnpm typecheck` builds and checks it. To try a screen without the phone, send a request with the phone's modules:
 
 ```sh
