@@ -1,19 +1,19 @@
-// Makes the base snapshot the sandboxes start from: this package, installed
-// with its dependencies at /vercel/backtickjs.app, `curl` to reach its
+// Makes the base snapshot the sandboxes start from: the sandbox package
+// (sandbox/), installed with its dependencies at /vercel/backtickjs.app, `curl` to reach its
 // server, and nothing running. Prints the snapshot id, for the function's environment.
 // `node --env-file=.env.local scripts/snapshot.ts`, after `vercel env pull`.
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { Sandbox } from "@vercel/sandbox";
 
-const root = join(import.meta.dirname, "..");
+const root = join(import.meta.dirname, "../sandbox");
 const app = "/vercel/backtickjs.app";
 const files = [
   "package.json",
   "tsconfig.app.json",
-  "src/sandbox/bundle.ts",
-  "src/sandbox/serve.ts",
-  "src/sandbox/typecheck.ts",
+  "src/bundle.ts",
+  "src/serve.ts",
+  "src/typecheck.ts",
 ];
 
 const sandbox = await Sandbox.create({
@@ -26,7 +26,7 @@ const sandbox = await Sandbox.create({
 try {
   await run(sandbox, {
     cmd: "mkdir",
-    args: ["-p", `${app}/src/sandbox`, `${app}/.builds`],
+    args: ["-p", `${app}/src`, `${app}/.builds`],
   });
   await sandbox.writeFiles(
     files.map((file) => ({

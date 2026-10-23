@@ -1,0 +1,14 @@
+# What a deploy from the repo's root leaves out (the apps build here as a
+# monorepo): this machine's secrets and links, and what .gitignore ignores.
+.env*
+.vercel
+node_modules
+dist
+docs
+.turbo
+.cache
+.expo
+.builds
+local
+.DS_Store
+*.vsix

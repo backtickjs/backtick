@@ -3,9 +3,9 @@
 // base snapshot and starts the server; each call keeps it another `warm`.
 import { createHash, randomUUID } from "node:crypto";
 import { Sandbox } from "@vercel/sandbox";
-import type { Typechecked } from "../sandbox/typecheck.ts";
+import type { Typechecked } from "../../sandbox/src/typecheck.ts";
 
-// Where `scripts/snapshot.ts` installs this package.
+// Where `scripts/snapshot.ts` installs the sandbox package (sandbox/).
 const app = "/vercel/backtickjs.app";
 const warm = 10 * 60 * 1000;
 
@@ -108,7 +108,7 @@ async function keepWarm(sandbox: Sandbox): Promise<void> {
 async function start(sandbox: Sandbox): Promise<void> {
   await sandbox.runCommand({
     cmd: "node",
-    args: ["--import", "@backtickjs/node-plugin", "src/sandbox/serve.ts"],
+    args: ["--import", "@backtickjs/node-plugin", "src/serve.ts"],
     cwd: app,
     detached: true,
   });

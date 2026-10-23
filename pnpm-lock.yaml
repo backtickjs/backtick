@@ -34,24 +34,12 @@ importers:
       '@backtickjs/core':
         specifier: ^0.2.4
         version: link:../../packages/core
-      '@backtickjs/expo':
-        specifier: ^0.2.4
-        version: link:../../packages/expo
-      '@backtickjs/jsx-react':
-        specifier: ^0.2.4
-        version: link:../../packages/jsx-react
       '@backtickjs/jsx-solid':
         specifier: ^0.2.4
         version: link:../../packages/jsx-solid
-      '@backtickjs/node-plugin':
-        specifier: ^0.2.4
-        version: link:../../packages/node-plugin
       '@backtickjs/tsc':
         specifier: ^0.2.4
         version: link:../../packages/tsc
-      '@expo/vector-icons':
-        specifier: ^15.1.1
-        version: 15.1.1(expo-font@58.0.9(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       '@hono/node-server':
         specifier: ^2.1.4
         version: 2.1.4(hono@4.13.13)
@@ -61,6 +49,79 @@ importers:
       '@modelcontextprotocol/server':
         specifier: 2.3.1
         version: 2.3.1
+      '@supabase/supabase-js':
+        specifier: 2.117.2
+        version: 2.117.2
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
+      '@vercel/functions':
+        specifier: 3.9.11
+        version: 3.9.11(ws@8.22.0)
+      '@vercel/sandbox':
+        specifier: 3.5.1
+        version: 3.5.1
+      hono:
+        specifier: ^4.13.13
+        version: 4.13.13
+      jose:
+        specifier: 6.2.12
+        version: 6.2.12
+      qrcode:
+        specifier: 1.5.4
+        version: 1.5.4
+      shell:
+        specifier: workspace:*
+        version: link:../shell
+      solid-js:
+        specifier: 1.9.17
+        version: 1.9.17
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+      zod:
+        specifier: ^4.6.5
+        version: 4.6.7
+    devDependencies:
+      '@backtickjs/tspatch-plugin':
+        specifier: ^0.2.4
+        version: link:../../packages/tspatch-plugin
+      '@types/qrcode':
+        specifier: ^1.5.6
+        version: 1.5.6
+      supabase:
+        specifier: 2.119.0
+        version: 2.119.0
+      ts-patch:
+        specifier: 4.0.1
+        version: 4.0.1
+
+  apps/api.backtickjs.com/sandbox:
+    dependencies:
+      '@backtickjs/bundler':
+        specifier: ^0.2.4
+        version: link:../../../packages/bundler
+      '@backtickjs/core':
+        specifier: ^0.2.4
+        version: link:../../../packages/core
+      '@backtickjs/expo':
+        specifier: ^0.2.4
+        version: link:../../../packages/expo
+      '@backtickjs/jsx-react':
+        specifier: ^0.2.4
+        version: link:../../../packages/jsx-react
+      '@backtickjs/node-plugin':
+        specifier: ^0.2.4
+        version: link:../../../packages/node-plugin
+      '@backtickjs/tsc':
+        specifier: ^0.2.4
+        version: link:../../../packages/tsc
+      '@expo/vector-icons':
+        specifier: ^15.1.1
+        version: 15.1.1(expo-font@58.0.9(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
+      '@hono/node-server':
+        specifier: ^2.1.4
+        version: 2.1.4(hono@4.13.13)
       '@react-native-async-storage/async-storage':
         specifier: 2.2.0
         version: 2.2.0(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))
@@ -85,21 +146,12 @@ importers:
       '@shopify/react-native-skia':
         specifier: 2.14.0
         version: 2.14.0(react-native-reanimated@4.7.1(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
-      '@supabase/supabase-js':
-        specifier: 2.117.2
-        version: 2.117.2
       '@types/node':
         specifier: ^25.9.1
         version: 25.9.1
       '@types/react':
         specifier: 19.3.0
         version: 19.3.0
-      '@vercel/functions':
-        specifier: 3.9.11
-        version: 3.9.11(ws@8.22.0)
-      '@vercel/sandbox':
-        specifier: 3.5.1
-        version: 3.5.1
       expo:
         specifier: ~58.0.17
         version: 58.0.17(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.25)(react-dom@19.3.0(react@19.3.0))(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native-webview@14.0.1(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
@@ -238,15 +290,9 @@ importers:
       hono:
         specifier: ^4.13.13
         version: 4.13.13
-      jose:
-        specifier: 6.2.12
-        version: 6.2.12
       lottie-react-native:
         specifier: ~7.5.0
         version: 7.5.0(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
-      qrcode:
-        specifier: 1.5.4
-        version: 1.5.4
       react:
         specifier: 19.3.0
         version: 19.3.0
@@ -286,74 +332,35 @@ importers:
       react-native-worklets:
         specifier: 0.13.0
         version: 0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
-      solid-js:
-        specifier: 1.9.17
-        version: 1.9.17
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
-      zod:
-        specifier: ^4.6.5
-        version: 4.6.7
     devDependencies:
-      '@backtickjs/tspatch-plugin':
-        specifier: ^0.2.4
-        version: link:../../packages/tspatch-plugin
-      '@types/qrcode':
-        specifier: ^1.5.6
-        version: 1.5.6
-      supabase:
-        specifier: 2.119.0
-        version: 2.119.0
-      ts-patch:
-        specifier: 4.0.1
-        version: 4.0.1
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
 
   apps/app.backtickjs.com:
     dependencies:
-      '@backtickjs/bundler':
-        specifier: ^0.2.4
-        version: link:../../packages/bundler
-      '@backtickjs/core':
-        specifier: ^0.2.4
-        version: link:../../packages/core
-      '@backtickjs/expo':
-        specifier: ^0.2.4
-        version: link:../../packages/expo
-      '@backtickjs/jsx-react':
-        specifier: ^0.2.4
-        version: link:../../packages/jsx-react
-      '@supabase/supabase-js':
-        specifier: 2.117.2
-        version: 2.117.2
       '@vercel/functions':
         specifier: 3.9.11
         version: 3.9.11(ws@8.22.0)
-      expo:
-        specifier: ~58.0.17
-        version: 58.0.17(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.25)(react-dom@19.3.0(react@19.3.0))(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native-webview@14.0.1(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
       hono:
         specifier: ^4.13.13
         version: 4.13.13
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
+      shell:
+        specifier: workspace:*
+        version: link:../shell
     devDependencies:
-      '@backtickjs/prettier-plugin':
-        specifier: ^0.2.4
-        version: link:../../packages/prettier-plugin
-      '@backtickjs/tspatch-plugin':
-        specifier: ^0.2.4
-        version: link:../../packages/tspatch-plugin
       '@types/node':
         specifier: ^25.9.1
         version: 25.9.1
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
-      ts-patch:
-        specifier: 4.0.1
-        version: 4.0.1
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
 
   apps/backtickjs.app:
     dependencies:
@@ -747,6 +754,9 @@ importers:
       '@backtickjs/tsc':
         specifier: ^0.2.4
         version: link:../../packages/tsc
+      '@backtickjs/tspatch-plugin':
+        specifier: ^0.2.4
+        version: link:../../packages/tspatch-plugin
       '@types/node':
         specifier: ^25.9.1
         version: 25.9.1
@@ -756,6 +766,9 @@ importers:
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
+      ts-patch:
+        specifier: 4.0.1
+        version: 4.0.1
 
   apps/vscode-extension:
     dependencies:

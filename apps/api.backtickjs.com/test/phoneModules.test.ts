@@ -1,24 +1,8 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
 import { describe, it } from "node:test";
-import {
-  phoneModules,
-  unprovidedImports,
-} from "../src/function/phoneModules.ts";
+import { unprovidedImports } from "../src/function/phoneModules.ts";
 
 describe("the phone's modules", () => {
-  it("are the shell's module map, in its order", () => {
-    const moduleMap = readFileSync(
-      join(import.meta.dirname, "../../shell/client/moduleMap.ts"),
-      "utf8",
-    );
-    const mapped = [...moduleMap.matchAll(/require\("([^"]+)"\)/g)].map(
-      ([, specifier]) => specifier,
-    );
-    assert.deepEqual(phoneModules, mapped);
-  });
-
   it("refuse a client import the phone doesn't provide, where it is", async () => {
     const errors = await unprovidedImports(
       "App.tsx",

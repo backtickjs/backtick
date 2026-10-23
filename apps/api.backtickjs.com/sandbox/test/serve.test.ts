@@ -1,10 +1,15 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { it } from "node:test";
 import { installedPackages } from "@backtickjs/core/node";
-import { starter } from "../src/function/starter.ts";
+
+// A counter app, as a model writes one from the service's starter.
+const counter = readFileSync(
+  join(import.meta.dirname, "fixtures/App.tsx"),
+  "utf8",
+);
 
 const root = join(import.meta.dirname, "..");
 const installed = installedPackages(root);
@@ -28,7 +33,7 @@ it("typechecks and bundles over HTTP, file after file", async () => {
   const port = 5199;
   const server = spawn(
     process.execPath,
-    ["--import", "@backtickjs/node-plugin", "src/sandbox/serve.ts"],
+    ["--import", "@backtickjs/node-plugin", "src/serve.ts"],
     {
       cwd: root,
       env: { ...process.env, PORT: String(port) },
@@ -53,15 +58,15 @@ it("typechecks and bundles over HTTP, file after file", async () => {
     }
     const typo = write(
       "serve-type",
-      starter.replace("$useState<number>(0)", '$useState<number>("0")'),
+      counter.replace("$useState<number>(0)", '$useState<number>("0")'),
     );
-    const app = write("serve-starter", starter);
+    const app = write("serve-counter", counter);
     assert.deepEqual(await post("typecheck", { file: app }), {
       errors: [],
       warnings: [],
     });
     const { errors } = await post("typecheck", { file: typo });
-    assert.match(errors.join("\n"), /^App\.tsx\(19,49\): error TS2345/);
+    assert.match(errors.join("\n"), /^App\.tsx\(23,49\): error TS2345/);
     assert.equal(
       (await post("bundle", { file: app, modules: phone })).ok,
       true,

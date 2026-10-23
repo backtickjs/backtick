@@ -35,4 +35,15 @@ The shell is an EAS Update on the `production` channel, which Expo Go opens from
 pnpm dlx eas-cli update --channel production --environment production --message "…"
 ```
 
-`pnpm start` runs it from this machine in Expo Go instead. `pnpm typecheck` checks the client and the server.
+`pnpm start` runs it from this machine in Expo Go instead.
+
+## What other projects import
+
+The shell is a workspace package too. `pnpm build` (`tsconfig.server.json`, with `tspc`) writes `build/`, which its `package.json` exports:
+
+| Import          | What it is                                                                                                                                                    |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `shell/screens` | Backtick's own screens (`server/`), compiled: what `apps/app.backtickjs.com` serves                                                                           |
+| `shell/modules` | The module map's names (`client/modules.ts`), as data: what `apps/api.backtickjs.com` lets an app import. `moduleMap.ts` must match it, or it won't typecheck |
+
+Not `dist/`: that's where `eas update` exports the app. `pnpm typecheck` checks the client and the server.

@@ -1,9 +1,8 @@
-// app.backtickjs.com's Vercel Function: the Backtick app's own screens, from
-// apps/shell/server, where the phone fetches them, at their own paths.
-// Compiled by `tspc` first: they're Backtick scripts.
+// app.backtickjs.com's Vercel Function: Backtick's own screens on the phone,
+// the shell's server (`shell/screens`), at their own paths.
 import { waitUntil } from "@vercel/functions";
 import { Hono } from "hono";
-import { app as screens } from "../shell/dist/index.js";
+import { app as screens } from "shell/screens";
 
 const app = new Hono();
 

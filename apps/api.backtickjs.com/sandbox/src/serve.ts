@@ -1,7 +1,7 @@
 // The sandbox's side: typechecks and bundles for as long as it runs, so a warm
 // sandbox loads TypeScript and parses the declarations once. Listens on
 // localhost only; the function reaches it with `curl` inside the sandbox.
-// `node --import @backtickjs/node-plugin src/sandbox/serve.ts`, on `PORT` or 3000.
+// `node --import @backtickjs/node-plugin src/serve.ts`, on `PORT` or 3000.
 import { serve } from "@hono/node-server";
 import { BundlerError } from "@backtickjs/bundler";
 import { Hono } from "hono";

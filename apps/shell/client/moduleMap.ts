@@ -4,6 +4,8 @@
 // Reanimated: its worklets don't compile in scripts yet. Each is a getter, so
 // a module loads when a screen first requires it. The app sends your server
 // what it offers, at the versions it's built with.
+import type { Module } from "./modules";
+
 export const moduleMap = {
   get react() {
     return require("react");
@@ -206,4 +208,4 @@ export const moduleMap = {
   get "react-native-webview"() {
     return require("react-native-webview");
   },
-};
+} satisfies Record<Module, unknown>;

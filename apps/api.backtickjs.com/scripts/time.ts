@@ -14,7 +14,8 @@ import { starter } from "../src/function/starter.ts";
 const root = join(import.meta.dirname, "..");
 const snapshotId = process.argv[2]!;
 const user = `time-${randomUUID().slice(0, 8)}`;
-const installed = installedPackages(root);
+// The sandbox's packages are the phone's, at its versions.
+const installed = installedPackages(join(root, "sandbox"));
 const phone = {
   react: installed.react!,
   "react/jsx-runtime": installed.react!,

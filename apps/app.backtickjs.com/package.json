@@ -3,31 +3,21 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "The Backtick app's own screens (apps/shell/server), served to the phone",
+  "description": "Backtick's own screens on the phone (the shell's server), served at app.backtickjs.com",
   "scripts": {
-    "typecheck": "pnpm run build && tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "format": "prettier --write src",
     "format:check": "prettier --check src",
-    "clean": "rm -rf node_modules shell/dist",
-    "build": "tspc -p shell --noCheck",
-    "deploy": "sh scripts/deploy.sh"
+    "clean": "rm -rf node_modules"
   },
   "dependencies": {
-    "@backtickjs/bundler": "^0.2.4",
-    "@backtickjs/core": "^0.2.4",
-    "@backtickjs/expo": "^0.2.4",
-    "@backtickjs/jsx-react": "^0.2.4",
-    "@supabase/supabase-js": "2.117.2",
     "@vercel/functions": "3.9.11",
-    "expo": "~58.0.17",
     "hono": "^4.13.13",
-    "typescript": "^6.0.3"
+    "shell": "workspace:*"
   },
   "devDependencies": {
-    "@backtickjs/prettier-plugin": "^0.2.4",
-    "@backtickjs/tspatch-plugin": "^0.2.4",
     "@types/node": "^25.9.1",
     "prettier": "^3.6.2",
-    "ts-patch": "4.0.1"
+    "typescript": "^6.0.3"
   }
 }

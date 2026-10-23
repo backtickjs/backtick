@@ -8,10 +8,10 @@ Backtick's service, at `https://api.backtickjs.com`: the server behind the app b
 | ------------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | The Vercel Function | `src/index.ts`, `src/function/` | The MCP endpoint: the tools, the store and the client that drives the sandbox, and the pages. It holds the secrets.                                      |
 | The browser         | `web/src/`                      | The pages' scripts, which the function bundles and Solid draws.                                                                                          |
-| A Vercel Sandbox    | `src/sandbox/`                  | A server on localhost that type-checks an `App.tsx` and bundles it for a phone's modules. It runs the model's code, so it has no secrets and no network. |
+| A Vercel Sandbox    | `sandbox/`                      | A server on localhost that type-checks an `App.tsx` and bundles it for a phone's modules. It runs the model's code, so it has no secrets and no network. |
 | This machine        | `scripts/`, `test/`             | The snapshot, timing and dev scripts, and the tests.                                                                                                     |
 
-Each user gets one sandbox, `build-<user>-<snapshot>`, made from a snapshot of this package and kept for 10 minutes after its last call. `start_app` makes it in the background, so the first `save_app` finds it warm. Its name includes the snapshot, so after a new snapshot no one's sandbox from the old one is reused.
+Each user gets one sandbox, `build-<user>-<snapshot>`, made from a snapshot of the sandbox package (`sandbox/`: its own `package.json`, with the phone's packages at the shell's versions, its server and its tests) and kept for 10 minutes after its last call. `start_app` makes it in the background, so the first `save_app` finds it warm. Its name includes the snapshot, so after a new snapshot no one's sandbox from the old one is reused.
 
 `web/` holds the one page people see here: the consent page, where a user allows an assistant. The website and the privacy policy are backtickjs.com's. They're Backtick scripts drawn with Solid, so `web/` has its own `package.json`, naming `@backtickjs/jsx-solid/plugin`, beside this package's React and Expo plugins for the apps. `pnpm build` compiles them with `tspc` into `web/dist/`, which Vercel runs before bundling the function; the function imports `web/dist/`, bundles each page on its first request, and serves it from memory after.
 
@@ -93,7 +93,7 @@ Don't change tables from Supabase's SQL editor: the database and `supabase/migra
 
 ## Releasing
 
-The sandbox installs `@backtickjs/*` from npm, so a change to them or to `src/sandbox/` reaches users only through a new snapshot. In this order:
+The sandbox installs `@backtickjs/*` from npm, so a change to them or to `sandbox/` reaches users only through a new snapshot. In this order:
 
 1. Release the `@backtickjs/*` packages, if they changed, and wait until `npm view @backtickjs/compiler version` shows the new version.
 2. Make a snapshot. It prints its id:
@@ -118,11 +118,16 @@ The sandbox installs `@backtickjs/*` from npm, so a change to them or to `src/sa
    vercel env pull
    ```
 
-5. Deploy the function, only now: it may expect what the new sandbox answers. Sandboxes from the old snapshot aren't reused, and time out on their own.
+5. Deploy the function, only now: it may expect what the new sandbox answers. Sandboxes from the old snapshot aren't reused, and time out on their own. Vercel builds it from the repo's root, as a monorepo: the project's root directory is this folder, `vercel.json` installs the workspace (`pnpm install` at the root) and builds what this project depends on (`turbo run build --filter=<project>...`). The root's `.vercelignore` keeps this machine's secrets and build output out of the upload. From the root:
 
    ```sh
+   cd ../..
+   VERCEL_ORG_ID=$(node -p 'require("./apps/api.backtickjs.com/.vercel/project.json").orgId') \
+   VERCEL_PROJECT_ID=$(node -p 'require("./apps/api.backtickjs.com/.vercel/project.json").projectId') \
    vercel deploy --prod
    ```
+
+   Without `--prod`, a preview to try first: a change that adds a package or a file belongs in one before production.
 
 6. Delete the previous snapshot once the new one has served for a while. Snapshots don't expire, and storage is billed.
 

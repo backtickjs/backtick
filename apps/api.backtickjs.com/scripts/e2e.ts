@@ -8,7 +8,8 @@ import { testUserToken } from "./testUser.ts";
 
 const base = process.env.BASE ?? "https://api.backtickjs.com";
 const token = await testUserToken();
-const installed = installedPackages(join(import.meta.dirname, ".."));
+// The sandbox's packages are the phone's, at its versions.
+const installed = installedPackages(join(import.meta.dirname, "../sandbox"));
 const phone = {
   react: installed.react!,
   "react/jsx-runtime": installed.react!,

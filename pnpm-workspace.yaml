@@ -10,6 +10,8 @@ packages:
   # Built here and never published to npm: the website and the editor
   # extension.
   - "apps/*"
+  # Each user's sandbox, which the service installs on its own.
+  - "apps/api.backtickjs.com/sandbox"
   - "tests"
   # A stand-in third-party library the tests bind to.
   - "tests/fixtures/*"

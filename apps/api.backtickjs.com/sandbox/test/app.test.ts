@@ -1,12 +1,17 @@
 import assert from "node:assert/strict";
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, it } from "node:test";
 import { ClientVersionMismatch } from "@backtickjs/bundler";
 import { installedPackages } from "@backtickjs/core/node";
-import { bundle } from "../src/sandbox/bundle.ts";
-import { typecheck } from "../src/sandbox/typecheck.ts";
-import { starter } from "../src/function/starter.ts";
+import { bundle } from "../src/bundle.ts";
+import { typecheck } from "../src/typecheck.ts";
+
+// A counter app, as a model writes one from the service's starter.
+const counter = readFileSync(
+  join(import.meta.dirname, "fixtures/App.tsx"),
+  "utf8",
+);
 
 const root = join(import.meta.dirname, "..");
 
@@ -29,8 +34,8 @@ function write(name: string, source: string): string {
 }
 
 describe("typecheck", () => {
-  it("passes the starter", () => {
-    assert.deepEqual(typecheck(write("starter", starter)), {
+  it("passes the counter", () => {
+    assert.deepEqual(typecheck(write("counter", counter)), {
       errors: [],
       warnings: [],
     });
@@ -39,17 +44,17 @@ describe("typecheck", () => {
   it("reports type errors where they are in the file", () => {
     const file = write(
       "type",
-      starter.replace("$useState<number>(0)", '$useState<number>("0")'),
+      counter.replace("$useState<number>(0)", '$useState<number>("0")'),
     );
     assert.match(
       typecheck(file).errors.join("\n"),
-      /^App\.tsx\(19,49\): error TS2345: Argument of type 'string'/,
+      /^App\.tsx\(23,49\): error TS2345: Argument of type 'string'/,
     );
   });
   it("reports a regex escaped as if in a string as a warning, not an error", () => {
     const file = write(
       "warning",
-      starter.replace(
+      counter.replace(
         '{count + " taps"}',
         '{String(count).replace(/\\\\B/g, ",") + " taps"}',
       ),
@@ -58,14 +63,14 @@ describe("typecheck", () => {
     assert.deepEqual(errors, []);
     assert.match(
       warnings.join("\n"),
-      /^App\.tsx\(23,62\): warning TS0: `\\\\B` in this regex matches a backslash/,
+      /^App\.tsx\(27,62\): warning TS0: `\\\\B` in this regex matches a backslash/,
     );
   });
 });
 
 describe("bundle", () => {
-  it("bundles the starter for a phone, with its map", async () => {
-    const { code, map } = await bundle(write("starter", starter), phone);
+  it("bundles the counter for a phone, with its map", async () => {
+    const { code, map } = await bundle(write("counter", counter), phone);
     assert.match(code, /require\("react-native"\)/);
     assert.equal(JSON.parse(map).version, 3);
   });
@@ -74,7 +79,7 @@ describe("bundle", () => {
     const file = write(
       "import",
       `import { isRunningInExpoGo } from "expo" with { backtick: "client" };\n` +
-        starter.replace(
+        counter.replace(
           "return <App />;",
           "$isRunningInExpoGo(); return <App />;",
         ),
