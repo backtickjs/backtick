@@ -1,12 +1,16 @@
 // backtickjs.app's Vercel Function: every app's host. <id>.backtickjs.app is
 // the app, as <project>.vercel.app is a project: the phone gets its screens
-// there, a browser a page to open it in Backtick. The bare domain sends people
+// there, a browser a page to open it in Expo Go. The bare domain sends people
 // to backtickjs.com. Users' code lives here, so this holds no secrets: the
 // service at api.backtickjs.com checks the token and bundles.
 import { type Context, Hono } from "hono";
 import { html } from "hono/html";
 
 const api = "https://api.backtickjs.com";
+
+// The shell, published with EAS Update: Expo Go opens it from anywhere, at
+// the Expo Go build's SDK, and follows the path after `--/`.
+const shell = "exp://u.expo.dev/baed8ee5-a651-438c-999f-aff346fa0064";
 
 const app = new Hono();
 
@@ -44,10 +48,12 @@ async function screen(c: Context, id: string): Promise<Response> {
   return new Response(await answer.text(), { status: answer.status, headers });
 }
 
-// A browser: the app opens in the Backtick app, at the same path.
+// A browser: the app opens in Expo Go, at the same path.
 function openInBacktick(c: Context, id: string): Response | Promise<Response> {
   const url = new URL(c.req.url);
-  const link = `backtick://${id}${url.pathname}${url.search}`;
+  const params = new URLSearchParams(url.search);
+  params.set("channel-name", "production");
+  const link = `${shell}/--/${id}${url.pathname}?${params}`;
   return c.html(
     html`<!doctype html>
       <html lang="en">
@@ -78,8 +84,19 @@ function openInBacktick(c: Context, id: string): Response | Promise<Response> {
           </style>
         </head>
         <body>
-          <p>This app runs on your phone, in the Backtick app.</p>
-          <a class="open" href="${link}">Open in Backtick</a>
+          <p>This app runs on your phone, in Expo Go.</p>
+          <a class="open" href="${link}">Open in Expo Go</a>
+          <p>
+            No Expo Go yet? Get it from the
+            <a href="https://apps.apple.com/app/expo-go/id982107779"
+              >App Store</a
+            >
+            or
+            <a
+              href="https://play.google.com/store/apps/details?id=host.exp.exponent"
+              >Google Play</a
+            >.
+          </p>
           <p><a href="https://backtickjs.com">What's Backtick?</a></p>
         </body>
       </html>`,
@@ -88,26 +105,5 @@ function openInBacktick(c: Context, id: string): Response | Promise<Response> {
 
 // The website is backtickjs.com.
 app.get("/", (c) => c.redirect("https://backtickjs.com", 302));
-
-// Android's App Links: the phone app opens every *.backtickjs.app link
-// itself, which Android checks here. The fingerprints are the SHA-256 of each
-// certificate the app is signed with (the development build's, EAS's, Google
-// Play's), comma-separated.
-app.get("/.well-known/assetlinks.json", (c) => {
-  const fingerprints = process.env.ANDROID_CERT_SHA256;
-  if (fingerprints === undefined) {
-    return c.notFound();
-  }
-  return c.json([
-    {
-      relation: ["delegate_permission/common.handle_all_urls"],
-      target: {
-        namespace: "android_app",
-        package_name: "com.backtickjs.app",
-        sha256_cert_fingerprints: fingerprints.split(",").map((f) => f.trim()),
-      },
-    },
-  ]);
-});
 
 export default app;

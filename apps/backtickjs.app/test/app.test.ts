@@ -42,12 +42,14 @@ describe("an app's host", () => {
     assert.equal(answer.status, 401);
   });
 
-  it("offers a browser the app in Backtick, at the same path", async () => {
+  it("offers a browser the app in Expo Go, at the same path", async () => {
     const page = await app.request(`https://${id}.backtickjs.app/talks/42?x=1`);
     assert.equal(page.status, 200);
     assert.match(
       await page.text(),
-      new RegExp(`href="backtick://${id}/talks/42\\?x=1"`),
+      new RegExp(
+        `href="exp://u\\.expo\\.dev/[0-9a-f-]+/--/${id}/talks/42\\?x=1&amp;channel-name=production"`,
+      ),
     );
   });
 });
@@ -57,17 +59,6 @@ describe("the bare domain", () => {
     const answer = await app.request("https://backtickjs.app/");
     assert.equal(answer.status, 302);
     assert.equal(answer.headers.get("location"), "https://backtickjs.com");
-  });
-
-  it("names the phone app's signing keys for App Links", async () => {
-    process.env.ANDROID_CERT_SHA256 = "AA:BB, CC:DD";
-    const answer = await app.request(
-      "https://backtickjs.app/.well-known/assetlinks.json",
-    );
-    const [link] = await answer.json();
-    assert.equal(link.target.package_name, "com.backtickjs.app");
-    assert.deepEqual(link.target.sha256_cert_fingerprints, ["AA:BB", "CC:DD"]);
-    delete process.env.ANDROID_CERT_SHA256;
   });
 
   it("isn't an app at a host that isn't one", async () => {

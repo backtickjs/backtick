@@ -29,8 +29,6 @@ An error stops the save; a warning, such as a regex escaped as if in a string, g
 
 The phone opens an app at its own host, `https://<id>.backtickjs.app`, which holds no secrets and forwards the request here, `GET /apps/<id>/bundle`, with the phone's token and its modules in `x-backtick-modules`, as any Backtick client sends them. The answer is the latest version's bundle, made in the owner's sandbox for those modules, with its number in `x-backtick-version`; a module the phone lacks is a 426, the bundler's `ClientVersionMismatch`, which the phone shows with the bundler's message. Someone else's app is a 404, like one that doesn't exist. The path on the phone isn't sent yet: apps are one screen until they're Hono apps with routes.
 
-Google's sign-in for the phone returns to `/auth/callback`: the phone app claims it as an App Link (`/.well-known/assetlinks.json`, from `ANDROID_CERT_SHA256`), and a browser that shows it gets a button handing the code to `backtick://auth/callback`.
-
 ## Setting up
 
 Link the Vercel project and the Supabase project from this folder:
@@ -49,7 +47,6 @@ The function reads these environment variables, set in the Vercel project for pr
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase's secret key. It bypasses row-level security: keep it in the function. |
 | `SNAPSHOT_ID`               | The sandbox snapshot `scripts/snapshot.ts` printed                              |
 | `SUPABASE_PUBLISHABLE_KEY`  | Supabase's publishable key, for the consent page. Safe in a browser.            |
-| `ANDROID_CERT_SHA256`       | The phone app's signing certificates' SHA-256, comma-separated, for App Links   |
 
 `VERCEL_OIDC_TOKEN`, which `vercel env pull` also writes, lets the scripts drive sandboxes from this machine. It expires within hours; pull again when a script reports an authentication error.
 
@@ -63,7 +60,7 @@ Supabase is set up for it in its dashboard:
 
 - Authentication → Sign In / Providers → Google, with a client from Google Cloud whose redirect URI is `https://<ref>.supabase.co/auth/v1/callback`.
 - Authentication → OAuth Server: enabled, with dynamic registration, and the authorization path `/oauth/consent`, the page `src/function/consent.ts` serves.
-- Authentication → URL Configuration: the Site URL `https://api.backtickjs.com`, and the redirect URLs `https://api.backtickjs.com/oauth/consent` and `https://api.backtickjs.com/auth/callback` (the phone's sign-in). Supabase sends users to the Site URL's consent page wherever the MCP server runs, a laptop included.
+- Authentication → URL Configuration: the Site URL `https://api.backtickjs.com`, and the redirect URLs `https://api.backtickjs.com/oauth/consent` and `exp://u.expo.dev/baed8ee5-a651-438c-999f-aff346fa0064/**` (the phone's sign-in, which returns to the shell in Expo Go). Supabase sends users to the Site URL's consent page wherever the MCP server runs, a laptop included.
 
 In Claude.ai, the connector signs in with **Register automatically**: Supabase doesn't read Claude's published identity (CIMD).
 

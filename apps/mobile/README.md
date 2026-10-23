@@ -1,12 +1,12 @@
 # mobile
 
-The Backtick app for phones. It's a shell, like a browser: it signs the user in, and every screen it shows comes from a server, Backtick's own included. Laid out as `create-backtick-app` makes any app:
+Backtick on phones. It's a shell, like a browser, that runs in Expo Go: it signs the user in, and every screen it shows comes from a server, Backtick's own included. Laid out as `create-backtick-app` makes any app:
 
-| Folder        | What it is                                                                                                                                                                  |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client/`     | The Expo app: the session, the screen stack, fetching and running screens, and nothing drawn of its own but errors and the new-version snackbar                             |
-| `client/app/` | Its routes (expo-router, `app.json`'s `root`): `index.tsx` and `[...path].tsx` show the open app's screen at any path; `+native-intent.tsx` handles every link into the app |
-| `server/`     | Backtick's own screens: sign-in and the app list. Deployed by `apps/app.backtickjs.com`                                                                                     |
+| Folder        | What it is                                                                                                                                                                    |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client/`     | The Expo app: the session, the screen stack, fetching and running screens, and nothing drawn of its own but errors                                                            |
+| `client/app/` | Its routes (expo-router, `app.json`'s `root`): `index.tsx` and `[...path].tsx` show the open app's screen at any path; `+native-intent.tsx` handles every link into the shell |
+| `server/`     | Backtick's own screens: sign-in and the app list. Deployed by `apps/app.backtickjs.com`                                                                                       |
 
 Where a screen comes from (`client/screens.ts`):
 
@@ -17,23 +17,22 @@ Where a screen comes from (`client/screens.ts`):
 
 The path is never changed: an app's `<Link href="/day">` is its server's `app.get("/day")`, and expo-router works in its screens as its docs say. The module map (`client/moduleMap.ts`) hands screens unmodified packages only.
 
-Links into the app (`client/app/+native-intent.tsx`):
+Links into the shell (`client/app/+native-intent.tsx`) are Expo Go's own, to the published project: `exp://u.expo.dev/<project>/--/<path>?channel-name=production`, written by `shellURL` (`server/links.ts`). Not `expo-linking`'s `createURL`: Expo Go 58 reports itself as a bare app, and `createURL` then writes a custom scheme Android can't open.
 
-| Link                                                           | Does                                                                            |
-| -------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `backtick://<id>/<path>`, `https://<id>.backtickjs.app/<path>` | Opens the app at the path                                                       |
-| `backtick://sign-in`, `backtick://sign-out`                    | Signs in or out, from Backtick's home only                                      |
-| `backtick://auth/callback?code=…`                              | Finishes Google's sign-in, when the browser didn't hand it back by the App Link |
+| Path after `--/`       | Does                                                                    |
+| ---------------------- | ----------------------------------------------------------------------- |
+| `<id>/<path>`          | Opens the app at the path                                               |
+| `sign-in`, `sign-out`  | Signs in or out, from Backtick's home only                              |
+| `auth/callback?code=…` | Google's sign-in returning, which the browser session hands back itself |
 
-Sign-in is Google's, through Supabase, in the system browser with PKCE; the session is sealed with AES-GCM, its key in the Keychain or Keystore. It returns by an App Link, `https://api.backtickjs.com/auth/callback`.
+Sign-in is Google's, through Supabase, in the system browser with PKCE (OAuth for native apps, RFC 8252), returning to `auth/callback`; the session is sealed with AES-GCM, its key in the Keychain or Keystore.
 
-## Running it
+## Publishing it
 
-It needs a development build (`eas.json`'s `development` profile): it claims `backtick://` and its App Links, and uses native modules Expo Go doesn't have.
+The shell is an EAS Update on the `production` channel, which Expo Go opens from anywhere at `exp://u.expo.dev/baed8ee5-a651-438c-999f-aff346fa0064?channel-name=production`. Its runtime version is the SDK (`exposdk:58.0.0`), and Expo Go only runs updates for its own SDK: when Expo Go moves to a new SDK, upgrade this app (`expo install expo@^<sdk> --fix`) and publish again.
 
 ```sh
-pnpm dlx eas-cli build -p android --profile development
-pnpm start
+pnpm dlx eas-cli update --channel production --environment production --message "…"
 ```
 
-`pnpm typecheck` checks the client and the server.
+`pnpm start` runs it from this machine in Expo Go instead. `pnpm typecheck` checks the client and the server.

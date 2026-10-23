@@ -2,7 +2,6 @@
   "expo": {
     "name": "Backtick",
     "slug": "backtick",
-    "scheme": "backtick",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
@@ -12,37 +11,6 @@
     },
     "android": {
       "package": "com.backtickjs.app",
-      "intentFilters": [
-        {
-          "action": "VIEW",
-          "autoVerify": true,
-          "data": [
-            {
-              "scheme": "https",
-              "host": "*.backtickjs.app"
-            }
-          ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
-        },
-        {
-          "action": "VIEW",
-          "autoVerify": true,
-          "data": [
-            {
-              "scheme": "https",
-              "host": "api.backtickjs.com",
-              "path": "/auth/callback"
-            }
-          ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
-        }
-      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "monochromeImage": "./assets/monochrome-icon.png",
@@ -58,53 +26,25 @@
           "root": "./client/app"
         }
       ],
-      "expo-image"
+      "expo-image",
+      "expo-secure-store",
+      "expo-status-bar"
     ],
     "extra": {
-      "api": "https://api.backtickjs.com",
       "home": "app.backtickjs.com",
       "apps": "backtickjs.app",
       "supabaseUrl": "https://evgfuotcvraqxvdtutso.supabase.co",
       "supabasePublishableKey": "sb_publishable_EotSz0FFiuOqXCSjxqGYrQ_oRJqA0as",
-      "backtick": {
-        "installedPackages": {
-          "@backtickjs/bundler": "0.2.4",
-          "@backtickjs/core": "0.2.4",
-          "@backtickjs/expo": "0.2.4",
-          "@backtickjs/jsx-react": "0.2.4",
-          "@expo/vector-icons": "15.1.1",
-          "@react-native-async-storage/async-storage": "2.2.0",
-          "@supabase/supabase-js": "2.117.2",
-          "expo": "57.0.26",
-          "expo-clipboard": "57.0.2",
-          "expo-constants": "57.0.22",
-          "expo-crypto": "57.0.4",
-          "expo-dev-client": "57.0.20",
-          "expo-haptics": "57.0.3",
-          "expo-image": "57.0.5",
-          "expo-linear-gradient": "57.0.2",
-          "expo-linking": "57.0.13",
-          "expo-router": "57.0.28",
-          "expo-secure-store": "57.0.4",
-          "expo-status-bar": "57.0.1",
-          "expo-web-browser": "57.0.3",
-          "hono": "4.13.13",
-          "react": "19.2.3",
-          "react-error-boundary": "6.1.6",
-          "react-native": "0.86.3",
-          "react-native-safe-area-context": "5.7.0",
-          "react-native-screens": "4.26.2",
-          "react-native-svg": "15.15.4",
-          "typescript": "6.0.3"
-        }
-      },
-      "router": {
-        "root": "./client/app"
-      },
       "eas": {
         "projectId": "baed8ee5-a651-438c-999f-aff346fa0064"
       }
     },
-    "owner": "jbisson"
+    "owner": "jbisson",
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/baed8ee5-a651-438c-999f-aff346fa0064"
+    }
   }
 }

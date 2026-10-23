@@ -11,7 +11,6 @@ import {
   requireBearerAuth,
 } from "@modelcontextprotocol/server";
 import { Hono } from "hono";
-import { html } from "hono/html";
 import * as z from "zod";
 import { ownerOf, verifier } from "./function/auth.ts";
 import { bundleInSandbox, snapshotId } from "./function/sandbox.ts";
@@ -34,27 +33,6 @@ const hostnames = [
 ].filter((hostname) => hostname !== undefined);
 
 const app = new Hono();
-
-// Android's App Links: the phone app opens /auth/callback itself. The
-// fingerprints are the SHA-256 of each certificate
-// the app is signed with (the development build's, EAS's, Google Play's),
-// comma-separated.
-app.get("/.well-known/assetlinks.json", (c) => {
-  const fingerprints = process.env.ANDROID_CERT_SHA256;
-  if (fingerprints === undefined) {
-    return c.notFound();
-  }
-  return c.json([
-    {
-      relation: ["delegate_permission/common.handle_all_urls"],
-      target: {
-        namespace: "android_app",
-        package_name: "com.backtickjs.app",
-        sha256_cert_fingerprints: fingerprints.split(",").map((f) => f.trim()),
-      },
-    },
-  ]);
-});
 
 // Where a host finds out how to sign in: this endpoint is a resource whose
 // tokens Supabase's OAuth server issues.
@@ -91,59 +69,6 @@ app.all("/mcp", async (c) => {
   return auth instanceof Response
     ? auth
     : mcp.fetch(c.req.raw, { authInfo: auth });
-});
-
-// Where Google's sign-in returns to the phone app. A phone whose App Link is
-// verified opens the app instead of this page; if the browser shows it, the
-// button hands the code to the app by its scheme. The code is useless without
-// the verifier the phone keeps (PKCE).
-app.get("/auth/callback", (c) => {
-  const code = c.req.query("code");
-  const problem = c.req.query("error_description");
-  return c.html(
-    html`<!doctype html>
-      <html lang="en">
-        <head>
-          <meta charset="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <title>Back to Backtick</title>
-          <style>
-            body {
-              font:
-                17px system-ui,
-                sans-serif;
-              margin: 0;
-              padding: 48px 24px;
-              color: #17201b;
-              background: #f3f5f2;
-            }
-            a {
-              display: inline-block;
-              margin-top: 16px;
-              padding: 14px 20px;
-              border-radius: 8px;
-              background: #1f7a55;
-              color: #fff;
-              font-weight: 600;
-              text-decoration: none;
-            }
-          </style>
-        </head>
-        <body>
-          ${code === undefined
-            ? html`<p>
-                Google's sign-in didn't finish${problem ? `: ${problem}` : "."}
-              </p>`
-            : html`<p>You're signed in. Head back to the app to continue.</p>
-                <a
-                  href="backtick://auth/callback?code=${encodeURIComponent(
-                    code,
-                  )}"
-                  >Return to Backtick</a
-                >`}
-        </body>
-      </html>`,
-  );
 });
 
 // An app's latest version, bundled in the owner's sandbox for the phone's

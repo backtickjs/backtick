@@ -1,12 +1,14 @@
 import { cs } from "@backtickjs/core";
+import { shellURL } from "./links.js";
 import { Link, Stack } from "expo-router" with { backtick: "client" };
 import { Pressable, StyleSheet, Text, View } from "react-native" with {
   backtick: "client",
 };
 
-// What a phone without a session sees. The button is `backtick://sign-in`,
-// which runs Google's sign-in on the phone, where the session is kept.
+// What a phone without a session sees. The button is the shell's `sign-in`
+// link, which runs Google's sign-in on the phone, where the session is kept.
 export function SignIn() {
+  const signIn = shellURL("sign-in");
   return cs`{
     const styles = $StyleSheet.create({
       screen: { flex: 1, justifyContent: "center", padding: 24, gap: 16 },
@@ -28,7 +30,7 @@ export function SignIn() {
         <$Text style={styles.muted}>
           The apps your assistant makes for you, on your phone.
         </$Text>
-        <$Link href="backtick://sign-in" asChild>
+        <$Link href={$signIn} asChild>
           <$Pressable style={styles.button}>
             <$Text style={styles.label}>Sign in with Google</$Text>
           </$Pressable>

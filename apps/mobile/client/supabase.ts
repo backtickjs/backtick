@@ -2,19 +2,16 @@ import { createClient } from "@supabase/supabase-js";
 import Constants from "expo-constants";
 import * as Crypto from "expo-crypto";
 import * as WebBrowser from "expo-web-browser";
+import { shellURL } from "../server/links";
 import { sessionStorage } from "./sessionStorage";
 
 // Public values, from app.json: Supabase's browser client signs in with them.
 const extra = Constants.expoConfig?.extra as {
-  api: string;
   home: string;
   apps: string;
   supabaseUrl: string;
   supabasePublishableKey: string;
 };
-
-// Backtick's service: sign-in returns there.
-export const api = extra.api;
 
 // Where screens come from: Backtick's home at `home`, each app at
 // <id>.`apps`, as a Vercel project is at <name>.vercel.app.
@@ -46,16 +43,13 @@ export const supabase = createClient(
   },
 );
 
-// Where Google's sign-in comes back: an App Link, so the phone's verified
-// claim on backtickjs.app opens the app, not a scheme any app can register.
-// If the browser shows the page instead, its button hands the code over by
-// `backtick://auth/callback` (client/app/auth/callback.tsx), which PKCE keeps
-// useless to anyone without this phone's verifier.
-const redirectTo = `${api}/auth/callback`;
+// Where Google's sign-in comes back: the shell's own link (server/links.ts),
+// which the browser session below catches and hands back. A code caught
+// elsewhere is useless without this phone's PKCE verifier.
+const redirectTo = shellURL("auth/callback");
 
-// Google's sign-in in the system browser, back into the app by its link, then
-// the code it brings traded for a session. Resolves without one if the user
-// closed the browser.
+// Google's sign-in in the system browser, then the code it brings back traded
+// for a session. Resolves without one if the user closed the browser.
 export async function signInWithGoogle(): Promise<void> {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
@@ -68,16 +62,12 @@ export async function signInWithGoogle(): Promise<void> {
   if (result.type !== "success") {
     return;
   }
-  await finishSignIn(new URL(result.url).searchParams.get("code"));
-}
-
-// The code Google's sign-in came back with, traded for a session.
-export async function finishSignIn(code: string | null): Promise<void> {
+  const code = new URL(result.url).searchParams.get("code");
   if (code === null) {
     throw new Error("Google's sign-in came back without a code.");
   }
-  const { error } = await supabase.auth.exchangeCodeForSession(code);
-  if (error) {
-    throw error;
+  const session = await supabase.auth.exchangeCodeForSession(code);
+  if (session.error) {
+    throw session.error;
   }
 }

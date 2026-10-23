@@ -1,4 +1,5 @@
 import { cs } from "@backtickjs/core";
+import { shellURL } from "./links.js";
 import { createClient } from "@supabase/supabase-js";
 import { useState } from "react" with { backtick: "client" };
 import { Link, router, Stack } from "expo-router" with { backtick: "client" };
@@ -6,10 +7,10 @@ import { FlatList, Pressable, StyleSheet, Text } from "react-native" with {
   backtick: "client",
 };
 
-// The home: the user's apps, newest first, each opened by its address,
-// `backtick://<id>`, as a page links to another site, and signing out. Pulled down, it loads `/` again,
-// as a browser reloads a page, for a list made afresh here. Read as the user, whose token
-// Supabase's policies let see only their own apps.
+// The home: the user's apps, newest first, each opened by the shell's link to
+// it, `<id>`, as a page links to another site, and signing out. Pulled down, it loads `/` again, as a browser reloads a page, for
+// a list made afresh here. Read as the user, whose token Supabase's policies
+// let see only their own apps.
 export async function Home(props: { authorization: string }) {
   const supabase = createClient(
     process.env.SUPABASE_URL!,
@@ -27,11 +28,8 @@ export async function Home(props: { authorization: string }) {
   if (error) {
     throw new Error(`Supabase: ${error.message}`, { cause: error });
   }
-  const apps = data.map(({ id, title }) => ({
-    id,
-    title,
-    url: `backtick://${id}`,
-  }));
+  const apps = data.map(({ id, title }) => ({ id, title, url: shellURL(id) }));
+  const signOut = shellURL("sign-out");
 
   return cs`{
     const styles = $StyleSheet.create({
@@ -73,7 +71,7 @@ export async function Home(props: { authorization: string }) {
             </$Link>
           )}
           ListFooterComponent={
-            <$Link href="backtick://sign-out" style={styles.link}>
+            <$Link href={$signOut} style={styles.link}>
               Sign out
             </$Link>
           }

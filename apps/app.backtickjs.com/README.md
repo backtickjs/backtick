@@ -1,6 +1,6 @@
 # app.backtickjs.com
 
-The Backtick app's own screens, at `https://app.backtickjs.com`: what the phone shows when no app is open. One of the hosts in `apps/` (see `apps/README.md`).
+Backtick's own screens on the phone, at `https://app.backtickjs.com`: what the phone shows when no app is open. One of the hosts in `apps/` (see `apps/README.md`).
 
 The screens are written in [`apps/mobile/server`](../mobile/server), beside the phone app that shows them, as `create-backtick-app` lays out any app: `client/` and `server/`. This folder only deploys them:
 

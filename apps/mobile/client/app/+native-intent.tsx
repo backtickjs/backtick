@@ -1,22 +1,16 @@
 import { router } from "expo-router";
 import { Alert } from "react-native";
 import { currentApp, setOpenApp } from "../openApp";
-import {
-  api,
-  apps,
-  finishSignIn,
-  signInWithGoogle,
-  supabase,
-} from "../supabase";
+import { signInWithGoogle, supabase } from "../supabase";
 
-// Every link into the phone: an app by its address, as a browser follows a
-// link to another site, and Backtick's own commands. An app's paths are left
+// Every link into the phone: an app by its ID, as a browser follows a link to
+// another site, and Backtick's own commands. An app's paths are left
 // as they are, so expo-router works in its screens as its docs say.
-//   backtick://<id>/<path>                    the app's <path>
-//   https://<id>.backtickjs.app/<path>        the same: the app's own address
-//   backtick://sign-in, backtick://sign-out   from Backtick's home only
-//   backtick://auth/callback?code=…           sign-in's fallback (supabase.ts)
-// Anything else (a development build's own links) goes to expo-router as is.
+//   …/--/<id>/<path>                 the app's <path>
+//   …/--/sign-in, …/--/sign-out      from Backtick's home only
+//   …/--/auth/callback?code=…        sign-in's return, which
+//                                    signInWithGoogle's browser session has
+// Anything else goes to expo-router as is.
 export async function redirectSystemPath({
   path,
   initial,
@@ -24,33 +18,30 @@ export async function redirectSystemPath({
   path: string;
   initial: boolean;
 }): Promise<string | null> {
-  const opened = appLink(path);
-  if (opened !== undefined) {
-    setOpenApp(opened.app);
+  const link = shellLink(path);
+  if (link === undefined) {
+    return path;
+  }
+  const [first, ...rest] = link.pathname.split("/");
+  if (isAppId(first)) {
+    setOpenApp(first);
+    const opened = "/" + rest.join("/") + link.search;
     // Pushed, so an app's `/` stacks on the home's `/`, and back returns to it.
     if (initial) {
-      return opened.path;
+      return opened;
     }
-    router.push(opened.path);
+    router.push(opened);
     return null;
   }
-  const url = parse(path);
-  // Google's sign-in returning by its App Link: the browser session waiting
-  // in signInWithGoogle has it.
-  if (url?.origin === api) {
-    return null;
-  }
-  if (url?.protocol !== "backtick:") {
+  if (!["sign-in", "sign-out", "auth/callback"].includes(link.pathname)) {
     return path;
   }
   try {
-    if (url.hostname === "auth" && url.pathname === "/callback") {
-      await finishSignIn(url.searchParams.get("code"));
-    } else if (currentApp() !== null) {
+    if (currentApp() !== null || link.pathname === "auth/callback") {
       // An app can't sign the user in or out.
-    } else if (url.hostname === "sign-in") {
+    } else if (link.pathname === "sign-in") {
       await signInWithGoogle();
-    } else if (url.hostname === "sign-out") {
+    } else if (link.pathname === "sign-out") {
       await supabase.auth.signOut();
     }
   } catch (error) {
@@ -59,33 +50,26 @@ export async function redirectSystemPath({
   return null;
 }
 
-// The app and path a link opens, if it's a link to an app.
-function appLink(path: string): { app: string; path: string } | undefined {
-  const url = parse(path);
-  if (url === undefined) {
+type Link = { pathname: string; search: string };
+
+// What a link names, after Expo Go's `/--/` (a scheme's `://` elsewhere):
+// `<id>/day`, `sign-in`. Its query's channel is Expo Go's, not the link's.
+function shellLink(url: string): Link | undefined {
+  const start = url.includes("/--/")
+    ? url.indexOf("/--/") + 4
+    : url.indexOf("://") + 3;
+  if (start < 3) {
     return undefined;
   }
-  const app =
-    url.protocol === "backtick:"
-      ? url.hostname
-      : url.protocol === "https:" && url.hostname.endsWith("." + apps)
-        ? url.hostname.slice(0, -("." + apps).length)
-        : undefined;
-  return app !== undefined && isAppId(app)
-    ? { app, path: (url.pathname || "/") + url.search }
-    : undefined;
+  const [pathname, query = ""] = url.slice(start).split("?");
+  const params = new URLSearchParams(query);
+  params.delete("channel-name");
+  const search = params.size === 0 ? "" : "?" + params;
+  return { pathname: pathname.replace(/\/$/, ""), search };
 }
 
 function isAppId(host: string): boolean {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(
     host,
   );
-}
-
-function parse(path: string): URL | undefined {
-  try {
-    return new URL(path);
-  } catch {
-    return undefined;
-  }
 }
