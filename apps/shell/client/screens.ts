@@ -5,7 +5,7 @@ import Constants from "expo-constants";
 import type { Session } from "@supabase/supabase-js";
 import type { ReactNode } from "react";
 import { moduleMap } from "./moduleMap";
-import { apps, home } from "./supabase";
+import { apps, home, supabase } from "./supabase";
 
 // The modules this build carries, at the versions app.json's plugin records.
 const { installedPackages } = getBacktickExtra(Constants.expoConfig);
@@ -26,6 +26,12 @@ export async function fetchScreen(
   path: string,
   session: Session | null,
 ): Promise<ReactNode> {
+  // A token that expired while the phone slept is refreshed first: timers,
+  // and so Supabase's refresh, don't run in the background. 90 s is
+  // Supabase's own margin.
+  if (session !== null && session.expires_at! * 1000 < Date.now() + 90_000) {
+    session = (await supabase.auth.getSession()).data.session;
+  }
   const response = await fetch(screenUrl(app, path), {
     headers: {
       ...(session ? { authorization: `Bearer ${session.access_token}` } : {}),

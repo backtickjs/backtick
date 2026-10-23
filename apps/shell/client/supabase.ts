@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import Constants from "expo-constants";
 import * as Crypto from "expo-crypto";
 import * as WebBrowser from "expo-web-browser";
+import { AppState } from "react-native";
 import { shellURL } from "../server/links";
 import { sessionStorage } from "./sessionStorage";
 
@@ -42,6 +43,15 @@ export const supabase = createClient(
     },
   },
 );
+
+// Refreshed only in the foreground, as Supabase's React Native guide has it.
+AppState.addEventListener("change", (state) => {
+  if (state === "active") {
+    supabase.auth.startAutoRefresh();
+  } else {
+    supabase.auth.stopAutoRefresh();
+  }
+});
 
 // Where Google's sign-in comes back: the shell's own link (server/links.ts),
 // which the browser session below catches and hands back. A code caught

@@ -6,14 +6,9 @@ import {
   useCallback,
   useState,
 } from "react";
-import {
-  ActivityIndicator,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { ActivityIndicator, Pressable, StyleSheet, Text } from "react-native";
 import { useFocusEffect } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { ErrorBoundary, getErrorMessage } from "react-error-boundary";
 import { currentApp, setOpenApp } from "./openApp";
 import { fetchScreen } from "./screens";
@@ -53,14 +48,14 @@ function Screen({ screen }: { screen: Promise<ReactNode> }) {
 
 function Failed({ error, retry }: { error: unknown; retry: () => void }) {
   return (
-    <View style={styles.failed}>
+    <SafeAreaView style={styles.failed}>
       <Text style={styles.error}>
         {getErrorMessage(error) ?? String(error)}
       </Text>
       <Pressable style={styles.button} onPress={retry}>
         <Text style={styles.label}>Retry</Text>
       </Pressable>
-    </View>
+    </SafeAreaView>
   );
 }
 
