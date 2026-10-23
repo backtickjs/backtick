@@ -2,9 +2,9 @@
 
 Backtick's own screens on the phone, at `https://app.backtickjs.com`: what the phone shows when no app is open. One of the hosts in `apps/` (see `apps/README.md`).
 
-The screens are written in [`apps/mobile/server`](../mobile/server), beside the phone app that shows them, as `create-backtick-app` lays out any app: `client/` and `server/`. This folder only deploys them:
+The screens are written in [`apps/shell/server`](../shell/server), beside the phone app that shows them, as `create-backtick-app` lays out any app: `client/` and `server/`. This folder only deploys them:
 
-- `mobile/` builds `apps/mobile/server` with `tspc` into `mobile/dist/`, with the React and Expo plugins its `package.json` names. The client imports' versions come from `apps/mobile`, the phone's own packages.
+- `shell/` builds `apps/shell/server` with `tspc` into `shell/dist/`, with the React and Expo plugins its `package.json` names. The client imports' versions come from `apps/shell`, the phone's own packages.
 - `src/index.ts` is the Vercel Function: that server, as it is.
 
 | Path | Screen                                                            |
@@ -28,7 +28,7 @@ It's the Vercel project `app-backtickjs-com`, linked from this folder, and not c
 pnpm run deploy
 ```
 
-`scripts/deploy.sh` builds it here (`vercel build`), since it compiles `apps/mobile/server`, outside this folder, which Vercel's own build can't see; then deploys the prebuilt output from the repo's root (`vercel deploy --prebuilt`), where its file paths start, naming the project by its ids. It cleans up after itself.
+`scripts/deploy.sh` builds it here (`vercel build`), since it compiles `apps/shell/server`, outside this folder, which Vercel's own build can't see; then deploys the prebuilt output from the repo's root (`vercel deploy --prebuilt`), where its file paths start, naming the project by its ids. It cleans up after itself.
 
 `pnpm typecheck` builds and checks it. To try a screen without the phone, send a request with the phone's modules:
 

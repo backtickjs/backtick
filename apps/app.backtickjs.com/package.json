@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "The Backtick app's own screens (apps/mobile/server), served to the phone",
+  "description": "The Backtick app's own screens (apps/shell/server), served to the phone",
   "scripts": {
     "typecheck": "pnpm run build && tsc --noEmit",
     "format": "prettier --write src",
     "format:check": "prettier --check src",
-    "clean": "rm -rf node_modules mobile/dist",
-    "build": "tspc -p mobile --noCheck",
+    "clean": "rm -rf node_modules shell/dist",
+    "build": "tspc -p shell --noCheck",
     "deploy": "sh scripts/deploy.sh"
   },
   "dependencies": {

@@ -161,7 +161,7 @@ site_url = "http://127.0.0.1:3000"
 # The public URL that Auth serves on. Defaults to the API external URL with `/auth/v1` appended.
 # external_url = ""
 # A list of *exact* URLs that auth providers are permitted to redirect to post authentication.
-# The Backtick app's sign-in returns by its App Link (apps/mobile).
+# The shell's sign-in returns to Expo Go (apps/shell).
 additional_redirect_urls = ["https://127.0.0.1:3000", "exp://u.expo.dev/baed8ee5-a651-438c-999f-aff346fa0064/**"]
 # How long tokens are valid for, in seconds. Defaults to 3600 (1 hour), maximum 604,800 (1 week).
 jwt_expiry = 3600

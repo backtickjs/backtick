@@ -1,6 +1,6 @@
 #!/bin/sh
 # Deploys app.backtickjs.com to production, built on this machine: it compiles
-# apps/mobile/server, outside this folder, so Vercel can't build it alone. A
+# apps/shell/server, outside this folder, so Vercel can't build it alone. A
 # monorepo's prebuilt output names its files from the repo's root, so it's
 # deployed from there, by the project's ids rather than a link.
 set -e
