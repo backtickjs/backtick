@@ -6,6 +6,7 @@ import { join } from "node:path";
 import { installedPackages } from "@backtickjs/core/node";
 import { Sandbox } from "@vercel/sandbox";
 import {
+  sandboxName,
   screenInSandbox,
   typecheckInSandbox,
 } from "../src/function/sandbox.ts";
@@ -44,10 +45,13 @@ try {
   const answer = await time("screen, first", () =>
     screenInSandbox(user, starter, "/", phone, snapshotId),
   );
-  console.log(answer.status, `${answer.body.length} bytes`);
+  console.log(
+    answer.status,
+    answer.status === 200 ? `${answer.body.length} bytes` : answer.body,
+  );
   await time("screen, warm", () =>
     screenInSandbox(user, starter, "/", phone, snapshotId),
   );
 } finally {
-  await (await Sandbox.get({ name: `build-${user}-${snapshotId}` })).stop();
+  await (await Sandbox.get({ name: sandboxName(user, snapshotId) })).stop();
 }

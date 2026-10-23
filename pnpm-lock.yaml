@@ -120,7 +120,7 @@ importers:
         specifier: ^0.2.4
         version: link:../../../packages/tsc
       '@expo/vector-icons':
-        specifier: ^15.1.1
+        specifier: 15.1.1
         version: 15.1.1(expo-font@58.0.9(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       '@hono/node-server':
         specifier: ^2.1.4
@@ -156,145 +156,145 @@ importers:
         specifier: 19.3.0
         version: 19.3.0
       expo:
-        specifier: ~58.0.17
+        specifier: 58.0.17
         version: 58.0.17(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.25)(react-dom@19.3.0(react@19.3.0))(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native-webview@14.0.1(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
       expo-application:
-        specifier: ~58.1.2
+        specifier: 58.1.2
         version: 58.1.2(expo@58.0.17)
       expo-asset:
-        specifier: ~58.0.18
+        specifier: 58.0.18
         version: 58.0.18(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
       expo-audio:
-        specifier: ~58.0.10
+        specifier: 58.0.10
         version: 58.0.10(expo-asset@58.0.18(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3))(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       expo-battery:
-        specifier: ~58.0.3
+        specifier: 58.0.3
         version: 58.0.3(expo@58.0.17)(react@19.3.0)
       expo-blur:
-        specifier: ~58.0.5
+        specifier: 58.0.5
         version: 58.0.5(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       expo-brightness:
-        specifier: ~58.0.2
+        specifier: 58.0.2
         version: 58.0.2(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))
       expo-calendar:
-        specifier: ~58.0.6
+        specifier: 58.0.6
         version: 58.0.6(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))
       expo-camera:
-        specifier: ~58.0.12
+        specifier: 58.0.12
         version: 58.0.12(@types/emscripten@1.41.6)(expo@58.0.17)(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       expo-cellular:
-        specifier: ~58.0.3
+        specifier: 58.0.3
         version: 58.0.3(expo@58.0.17)
       expo-clipboard:
-        specifier: ~58.0.4
+        specifier: 58.0.4
         version: 58.0.4(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       expo-constants:
-        specifier: ~58.0.13
+        specifier: 58.0.13
         version: 58.0.13(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(typescript@6.0.3)
       expo-contacts:
-        specifier: ~58.0.8
+        specifier: 58.0.8
         version: 58.0.8(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       expo-crypto:
-        specifier: ~58.0.7
+        specifier: 58.0.7
         version: 58.0.7(expo@58.0.17)
       expo-device:
-        specifier: ~58.0.5
+        specifier: 58.0.5
         version: 58.0.5(expo@58.0.17)
       expo-document-picker:
-        specifier: ~58.0.4
+        specifier: 58.0.4
         version: 58.0.4(expo@58.0.17)
       expo-font:
-        specifier: ~58.0.9
+        specifier: 58.0.9
         version: 58.0.9(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       expo-gl:
-        specifier: ~58.0.3
+        specifier: 58.0.3
         version: 58.0.3(expo@58.0.17)(react-dom@19.3.0(react@19.3.0))(react-native-reanimated@4.7.1(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       expo-haptics:
-        specifier: ~58.0.7
+        specifier: 58.0.7
         version: 58.0.7(expo@58.0.17)
       expo-image:
-        specifier: ~58.0.16
+        specifier: 58.0.16
         version: 58.0.16(expo@58.0.17)(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       expo-image-manipulator:
-        specifier: ~58.0.15
+        specifier: 58.0.15
         version: 58.0.15(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       expo-image-picker:
-        specifier: ~58.0.10
+        specifier: 58.0.10
         version: 58.0.10(expo@58.0.17)
       expo-linear-gradient:
-        specifier: ~58.0.3
+        specifier: 58.0.3
         version: 58.0.3(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       expo-linking:
-        specifier: ~58.0.14
+        specifier: 58.0.14
         version: 58.0.14(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
       expo-local-authentication:
-        specifier: ~58.0.2
+        specifier: 58.0.2
         version: 58.0.2(expo@58.0.17)
       expo-localization:
-        specifier: ~58.0.5
+        specifier: 58.0.5
         version: 58.0.5(expo@58.0.17)(react@19.3.0)
       expo-location:
-        specifier: ~58.0.18
+        specifier: 58.0.18
         version: 58.0.18(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
       expo-mail-composer:
-        specifier: ~58.0.3
+        specifier: 58.0.3
         version: 58.0.3(expo@58.0.17)
       expo-media-library:
-        specifier: ~58.0.11
+        specifier: 58.0.11
         version: 58.0.11(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))
       expo-network:
-        specifier: ~58.0.4
+        specifier: 58.0.4
         version: 58.0.4(expo@58.0.17)(react@19.3.0)
       expo-print:
-        specifier: ~58.0.7
+        specifier: 58.0.7
         version: 58.0.7(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))
       expo-router:
-        specifier: ~58.0.25
+        specifier: 58.0.25
         version: 58.0.25(bb4c62ecb00f4c24439d15042ce60321)
       expo-screen-capture:
-        specifier: ~58.0.6
+        specifier: 58.0.6
         version: 58.0.6(expo@58.0.17)(react@19.3.0)
       expo-screen-orientation:
-        specifier: ~58.0.3
+        specifier: 58.0.3
         version: 58.0.3(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))
       expo-secure-store:
-        specifier: ~58.0.2
+        specifier: 58.0.2
         version: 58.0.2(expo@58.0.17)
       expo-sensors:
-        specifier: ~58.0.4
+        specifier: 58.0.4
         version: 58.0.4(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))
       expo-sharing:
-        specifier: ~58.0.20
+        specifier: 58.0.20
         version: 58.0.20(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
       expo-sms:
-        specifier: ~58.0.2
+        specifier: 58.0.2
         version: 58.0.2(expo@58.0.17)
       expo-speech:
-        specifier: ~58.0.3
+        specifier: 58.0.3
         version: 58.0.3(expo@58.0.17)
       expo-sqlite:
-        specifier: ~58.0.13
+        specifier: 58.0.13
         version: 58.0.13(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       expo-store-review:
-        specifier: ~58.0.2
+        specifier: 58.0.2
         version: 58.0.2(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))
       expo-system-ui:
-        specifier: ~58.0.6
+        specifier: 58.0.6
         version: 58.0.6(expo@58.0.17)(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))
       expo-video:
-        specifier: ~58.0.12
+        specifier: 58.0.12
         version: 58.0.12(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       expo-video-thumbnails:
-        specifier: ~58.0.2
+        specifier: 58.0.2
         version: 58.0.2(expo@58.0.17)
       expo-web-browser:
-        specifier: ~58.0.6
+        specifier: 58.0.6
         version: 58.0.6(expo@58.0.17)(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))
       hono:
         specifier: ^4.13.13
         version: 4.13.13
       lottie-react-native:
-        specifier: ~7.5.0
+        specifier: 7.5.0
         version: 7.5.0(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       react:
         specifier: 19.3.0
@@ -306,7 +306,7 @@ importers:
         specifier: 0.88.0
         version: 0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0)
       react-native-gesture-handler:
-        specifier: ~3.3.0
+        specifier: 3.3.0
         version: 3.3.0(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       react-native-keyboard-controller:
         specifier: 1.22.7
@@ -318,10 +318,10 @@ importers:
         specifier: 4.7.1
         version: 4.7.1(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       react-native-safe-area-context:
-        specifier: ~5.10.1
+        specifier: 5.10.1
         version: 5.10.1(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       react-native-screens:
-        specifier: ~4.30.0
+        specifier: 4.30.0
         version: 4.30.0(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       react-native-svg:
         specifier: 15.16.0

@@ -58,12 +58,16 @@ export async function warmSandbox(
   await keepWarm(await sandboxOf(user, snapshotId));
 }
 
+// One per user and snapshot: after a new snapshot, a user's sandbox from the
+// old one is never reused, and times out unasked. Hashed, to keep the name
+// short.
+export function sandboxName(user: string, snapshotId: string): string {
+  return `build-${createHash("sha256").update(`${user}:${snapshotId}`).digest("hex").slice(0, 24)}`;
+}
+
 async function sandboxOf(user: string, snapshotId: string): Promise<Sandbox> {
   return Sandbox.getOrCreate({
-    // One per user and snapshot: after a new snapshot, a user's sandbox from
-    // the old one is never reused, and times out unasked. Hashed, to keep the
-    // name short.
-    name: `build-${createHash("sha256").update(`${user}:${snapshotId}`).digest("hex").slice(0, 24)}`,
+    name: sandboxName(user, snapshotId),
     source: { type: "snapshot", snapshotId },
     // Nothing in it outlives the server's cache.
     persistent: false,

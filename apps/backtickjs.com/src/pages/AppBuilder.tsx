@@ -3,19 +3,22 @@ import { Layout } from "../components/Layout.js";
 import { Section } from "../components/Section.js";
 
 const connector = "https://api.backtickjs.com/mcp";
+// Backtick's shell, published with EAS Update: Expo Go opens it.
+const shell =
+  "exp://u.expo.dev/baed8ee5-a651-438c-999f-aff346fa0064?channel-name=production";
 
 // The app builder's own page: what people sign in to with Google, and the home
 // page Google's sign-in screen names for it.
 export const AppBuilder = cs`() => (
   <$Layout>
     <$Section
-      eyebrow="The Backtick app"
+      eyebrow="Backtick for your phone"
       title="Ask your assistant for an app. Open it on your phone."
       lede={
         <>
           Ask Claude or ChatGPT for an app, a workout log or a packing list, and
-          it builds a real one with Backtick. It runs on your phone, in the
-          Backtick app, and changes each time you ask for something new.
+          it builds a real one with Backtick. It runs natively on your phone, in
+          Expo Go, and changes each time you ask for something new.
         </>
       }
     />
@@ -32,9 +35,18 @@ export const AppBuilder = cs`() => (
           assistant writes it, and Backtick checks and saves each version.
         </li>
         <li>
-          <strong>Open it in the Backtick app.</strong> Sign in with the same
-          Google account, and your apps are there. The Backtick app is in
-          testing on Android, coming to Google Play.
+          <strong>Open it in Expo Go.</strong> Get Expo Go from the{" "}
+          <a href="https://apps.apple.com/app/expo-go/id982107779">App Store</a>{" "}
+          or{" "}
+          <a href="https://play.google.com/store/apps/details?id=host.exp.exponent">
+            Google Play
+          </a>
+          , then, on your phone,{" "}
+          <a href={$shell} class="font-medium text-react">
+            open Backtick
+          </a>{" "}
+          and sign in with the same Google account: your apps are there. Each
+          app's link, from your assistant, opens it too.
         </li>
       </ol>
     </$Section>

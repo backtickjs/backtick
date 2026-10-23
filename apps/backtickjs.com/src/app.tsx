@@ -44,8 +44,8 @@ app.get("/app/", async (context) =>
       Page: AppBuilder,
       title: "Backtick · Apps from your assistant, on your phone",
       description:
-        "Ask Claude or ChatGPT for an app, and it runs on your phone in the" +
-        " Backtick app.",
+        "Ask Claude or ChatGPT for an app, and it runs natively on your" +
+        " phone, in Expo Go.",
     }),
   ),
 );
