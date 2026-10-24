@@ -50,6 +50,8 @@ async function screen(c: Context<Env>, id: string): Promise<Response> {
       401,
     );
   }
+  // A Worker's clock moves only while it waits, as each timed step does.
+  let started = Date.now();
   const latest = await asUser(
     c,
     authorization,
@@ -62,22 +64,39 @@ async function screen(c: Context<Env>, id: string): Promise<Response> {
   if (row === undefined) {
     return c.notFound();
   }
-  const release = c.env.LOADER.get(`${id}@${row.version}`, async () => ({
-    compatibilityDate: "2026-10-01",
-    compatibilityFlags: ["nodejs_compat"],
-    mainModule: "app.js",
-    modules: {
-      "app.js": await releaseCode(c, authorization, id, row.version),
-    },
-    globalOutbound: null,
-  }));
+  const fetched = Date.now() - started;
+  // Asked for only when the release has no isolate running here, while the
+  // isolate starts: the read is fetching, not the app's answer.
+  let miss = false;
+  let read = 0;
+  const release = c.env.LOADER.get(`${id}@${row.version}`, async () => {
+    miss = true;
+    const reading = Date.now();
+    const code = await releaseCode(c, authorization, id, row.version);
+    read = Date.now() - reading;
+    return {
+      compatibilityDate: "2026-10-01",
+      compatibilityFlags: ["nodejs_compat"],
+      mainModule: "app.js",
+      modules: { "app.js": code },
+      globalOutbound: null,
+    };
+  });
+  started = Date.now();
   const answer = await release.getEntrypoint().fetch(
     new Request(c.req.url, {
       headers: { "x-backtick-modules": c.req.header("x-backtick-modules")! },
     }),
   );
+  const answered = Date.now() - started;
   const response = new Response(answer.body, answer);
   response.headers.set("x-backtick-version", String(row.version));
+  // What the open read from outside, what the app took to answer, and
+  // whether the release's isolate was already running.
+  response.headers.set(
+    "server-timing",
+    `fetch;dur=${fetched + read}, bundle;dur=${answered - read}, cache;desc=${miss ? "miss" : "hit"}`,
+  );
   return response;
 }
 

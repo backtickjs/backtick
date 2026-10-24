@@ -86,6 +86,10 @@ describe("an app's host", () => {
     assert.equal(answer.status, 200);
     assert.equal(await answer.text(), "screen");
     assert.equal(answer.headers.get("x-backtick-version"), "3");
+    assert.match(
+      answer.headers.get("server-timing")!,
+      /^fetch;dur=\d+, bundle;dur=\d+, cache;desc=miss$/,
+    );
     const [{ id: release, code, request }] = loaded;
     assert.equal(release, `${id}@3`);
     assert.equal(code, "release 3");
