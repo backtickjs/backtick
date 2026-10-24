@@ -29,6 +29,7 @@
     "start": "expo start",
     "android": "expo start --android",
     "build": "tspc -p tsconfig.server.json --noCheck",
+    "postinstall": "[ -z \"$EAS_BUILD\" ] || turbo run build --filter=shell^...",
     "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown ."

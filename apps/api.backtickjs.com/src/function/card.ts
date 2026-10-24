@@ -11,17 +11,14 @@ export const cardUri = "ui://backtick/app-card.html";
 export const cardScriptOrigin = "https://cdn.jsdelivr.net";
 const cardScript = `${cardScriptOrigin}/npm/@modelcontextprotocol/ext-apps@2.0.3/dist/src/app-with-deps.js`;
 
-// The shell, published with EAS Update, as the apps' host links to it.
-const shell = "exp://u.expo.dev/baed8ee5-a651-438c-999f-aff346fa0064";
-
 // What the card shows, beside what the model reads: the app's page, and on a
-// phone its Expo Go link, opened by the host itself so that going back from
-// Expo Go returns to the chat, not to a browser.
+// phone its link in the Backtick app, opened by the host itself so that going
+// back from Backtick returns to the chat, not to a browser.
 export type Card = {
   title: string;
   version: number;
   url: string;
-  expoGo: string;
+  link: string;
   qr: string;
 };
 
@@ -31,9 +28,9 @@ export async function card(
   version: number,
   url: string,
 ): Promise<Card> {
-  const expoGo = `${shell}/--/${id}?channel-name=production`;
+  const link = `backtick://${id}`;
   const qr = await QRCode.toString(url, { type: "svg", margin: 0 });
-  return { title, version, url, expoGo, qr };
+  return { title, version, url, link, qr };
 }
 
 export const cardHtml = `<!doctype html>
@@ -131,7 +128,7 @@ export const cardHtml = `<!doctype html>
       <div class="text">
         <div class="title"></div>
         <div class="version"></div>
-        <button type="button">Open in Expo Go</button>
+        <button type="button">Open in Backtick</button>
       </div>
       <div class="qr" title="Scan with your phone's camera"></div>
     </div>
@@ -159,14 +156,14 @@ export const cardHtml = `<!doctype html>
       };
 
       // A host may refuse a link that isn't https: then the app's page, which
-      // sends the phone on to Expo Go.
+      // sends the phone on to Backtick.
       element.querySelector("button").addEventListener("click", async () => {
         if (card === undefined) {
           return;
         }
         if (phone()) {
           const opened = await app
-            .openLink({ url: card.expoGo })
+            .openLink({ url: card.link })
             .catch(() => ({ isError: true }));
           if (!opened.isError) {
             return;

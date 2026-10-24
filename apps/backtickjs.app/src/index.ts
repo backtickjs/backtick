@@ -1,7 +1,7 @@
 // backtickjs.app's Worker: every app's host. <id>.backtickjs.app is the app,
 // as <project>.vercel.app is a project: the phone gets its screens there, each
 // answered by the app's latest release in an isolate of its own, and a browser
-// a page to open it in Expo Go. The bare domain sends people to
+// a page to open it in Backtick. The bare domain sends people to
 // backtickjs.com. Users' code runs here, so this holds no secrets: Supabase
 // checks the phone's token as it reads the app.
 import { type Context, Hono } from "hono";
@@ -17,8 +17,9 @@ type Env = {
 };
 
 // The shell, published with EAS Update: Expo Go opens it from anywhere, at
-// the Expo Go build's SDK, and follows the path after `--/`.
-const shell = "exp://u.expo.dev/baed8ee5-a651-438c-999f-aff346fa0064";
+// the Expo Go build's SDK, and follows the path after `--/`. The Backtick app
+// runs the same shell, at its own scheme.
+const expoGo = "exp://u.expo.dev/baed8ee5-a651-438c-999f-aff346fa0064";
 
 const app = new Hono<Env>();
 
@@ -31,7 +32,7 @@ app.use("*", async (c, next) => {
     return next();
   }
   return c.req.header("x-backtick-modules") === undefined
-    ? openInExpoGo(c, id)
+    ? openInBacktick(c, id)
     : screen(c, id);
 });
 
@@ -150,14 +151,16 @@ function asUser(
   });
 }
 
-// A browser: the app opens in Expo Go, at the same path. A phone goes
-// straight there, with the button in case its browser waits for a tap; a
-// computer gets a QR code of this page, for the phone's camera.
-async function openInExpoGo(c: Context, id: string): Promise<Response> {
+// A browser: the app opens in Backtick, at the same path. A phone goes
+// straight there, with the button in case its browser waits for a tap, and
+// Expo Go's link for a phone without Backtick; a computer gets a QR code of
+// this page, for the phone's camera.
+async function openInBacktick(c: Context, id: string): Promise<Response> {
   const url = new URL(c.req.url);
+  const link = `backtick://${id}${url.pathname}${url.search}`;
   const params = new URLSearchParams(url.search);
   params.set("channel-name", "production");
-  const link = `${shell}/--/${id}${url.pathname}?${params}`;
+  const expoGoLink = `${expoGo}/--/${id}${url.pathname}?${params}`;
   const phone = /Android|iPhone|iPad|iPod/.test(
     c.req.header("user-agent") ?? "",
   );
@@ -173,7 +176,7 @@ async function openInExpoGo(c: Context, id: string): Promise<Response> {
           ${phone
             ? html`<meta http-equiv="refresh" content="0; url=${link}" />`
             : ""}
-          <title>Open in Expo Go</title>
+          <title>Open in Backtick</title>
           <style>
             body {
               font:
@@ -210,22 +213,16 @@ async function openInExpoGo(c: Context, id: string): Promise<Response> {
           </style>
         </head>
         <body>
-          <p>This app runs on your phone, in Expo Go.</p>
+          <p>This app runs on your phone, in Backtick.</p>
           ${phone
-            ? html`<a class="open" href="${link}">Open in Expo Go</a>`
+            ? html`<a class="open" href="${link}">Open in Backtick</a>`
             : html`<div class="qr">${raw(qr)}</div>
                 <p>Scan it with your phone's camera to open the app.</p>`}
-          <p>
-            No Expo Go yet? Get it from the
-            <a href="https://apps.apple.com/app/expo-go/id982107779"
-              >App Store</a
-            >
-            or
-            <a
-              href="https://play.google.com/store/apps/details?id=host.exp.exponent"
-              >Google Play</a
-            >.
-          </p>
+          ${phone
+            ? html`<p>
+                No Backtick? <a href="${expoGoLink}">Open it in Expo Go</a>.
+              </p>`
+            : ""}
           <p><a href="https://backtickjs.com">What's Backtick?</a></p>
         </body>
       </html>`,

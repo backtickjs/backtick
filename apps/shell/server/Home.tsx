@@ -28,8 +28,7 @@ export async function Home(props: { authorization: string }) {
   if (error) {
     throw new Error(`Supabase: ${error.message}`, { cause: error });
   }
-  const apps = data.map(({ id, title }) => ({ id, title, url: shellURL(id) }));
-  const signOut = shellURL("sign-out");
+  const apps = data.map(({ id, title }) => ({ id, title }));
 
   return cs`{
     const styles = $StyleSheet.create({
@@ -66,14 +65,14 @@ export async function Home(props: { authorization: string }) {
             </$Text>
           }
           renderItem={({ item }) => (
-            <$Link href={item.url} asChild>
+            <$Link href={$shellURL(item.id)} asChild>
               <$Pressable style={styles.row}>
                 <$Text style={styles.title}>{item.title}</$Text>
               </$Pressable>
             </$Link>
           )}
           ListFooterComponent={
-            <$Link href={$signOut} style={styles.link}>
+            <$Link href={$shellURL("sign-out")} style={styles.link}>
               Sign out
             </$Link>
           }

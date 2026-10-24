@@ -138,7 +138,7 @@ describe("an app's host", () => {
     assert.equal((await open("/", "Bearer token")).status, 404);
   });
 
-  it("sends a phone's browser to Expo Go, at the same path", async () => {
+  it("sends a phone's browser to Backtick, at the same path", async () => {
     const page = await app.request(
       `https://${id}.backtickjs.app/talks/42?x=1`,
       {
@@ -146,13 +146,20 @@ describe("an app's host", () => {
       },
     );
     assert.equal(page.status, 200);
-    const link = `exp://u\\.expo\\.dev/[0-9a-f-]+/--/${id}/talks/42\\?x=1&amp;channel-name=production`;
+    const link = `backtick://${id}/talks/42\\?x=1`;
     const text = await page.text();
     assert.match(
       text,
       new RegExp(`http-equiv="refresh" content="0; url=${link}"`),
     );
     assert.match(text, new RegExp(`href="${link}"`));
+    // and Expo Go, for a phone without Backtick
+    assert.match(
+      text,
+      new RegExp(
+        `href="exp://u\\.expo\\.dev/[0-9a-f-]+/--/${id}/talks/42\\?x=1&amp;channel-name=production"`,
+      ),
+    );
   });
 
   it("shows a computer a QR code of the page", async () => {

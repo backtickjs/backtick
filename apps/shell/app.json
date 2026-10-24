@@ -2,6 +2,7 @@
   "expo": {
     "name": "Backtick",
     "slug": "backtick",
+    "scheme": "backtick",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",

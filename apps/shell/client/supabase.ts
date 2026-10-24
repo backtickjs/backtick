@@ -1,9 +1,9 @@
 import { createClient } from "@supabase/supabase-js";
+import { applicationId } from "expo-application";
 import Constants from "expo-constants";
 import * as Crypto from "expo-crypto";
 import * as WebBrowser from "expo-web-browser";
 import { AppState } from "react-native";
-import { shellURL } from "../server/links";
 import { sessionStorage } from "./sessionStorage";
 
 // Public values, from app.json: Supabase's browser client signs in with them.
@@ -53,10 +53,14 @@ AppState.addEventListener("change", (state) => {
   }
 });
 
-// Where Google's sign-in comes back: the shell's own link (server/links.ts),
-// which the browser session below catches and hands back. A code caught
-// elsewhere is useless without this phone's PKCE verifier.
-const redirectTo = shellURL("auth/callback");
+// Where Google's sign-in comes back: the shell's own link, as
+// server/links.ts writes it, which the browser session below catches and
+// hands back. A code caught elsewhere is useless without this phone's PKCE
+// verifier.
+const redirectTo =
+  applicationId === "com.backtickjs.app"
+    ? "backtick://auth/callback"
+    : "exp://u.expo.dev/baed8ee5-a651-438c-999f-aff346fa0064/--/auth/callback?channel-name=production";
 
 // Google's sign-in in the system browser, then the code it brings back traded
 // for a session. Resolves without one if the user closed the browser.
