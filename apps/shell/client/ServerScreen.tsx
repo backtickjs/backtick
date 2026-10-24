@@ -6,7 +6,13 @@ import {
   useCallback,
   useState,
 } from "react";
-import { ActivityIndicator, Pressable, StyleSheet, Text } from "react-native";
+import {
+  ActivityIndicator,
+  Pressable,
+  StyleSheet,
+  Text,
+  useColorScheme,
+} from "react-native";
 import { useFocusEffect } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ErrorBoundary, getErrorMessage } from "react-error-boundary";
@@ -46,14 +52,21 @@ function Screen({ screen }: { screen: Promise<ReactNode> }) {
   return use(screen);
 }
 
+// In backtickjs.com's colours (server/look.ts): ink and paper, and its red.
 function Failed({ error, retry }: { error: unknown; retry: () => void }) {
+  const dark = useColorScheme() === "dark";
+  const ink = dark ? "#fafafa" : "#0e0e10";
+  const paper = dark ? "#0a0a0c" : "#ffffff";
   return (
     <SafeAreaView style={styles.failed}>
-      <Text style={styles.error}>
+      <Text style={[styles.error, { color: dark ? "#f87171" : "#dc2626" }]}>
         {getErrorMessage(error) ?? String(error)}
       </Text>
-      <Pressable style={styles.button} onPress={retry}>
-        <Text style={styles.label}>Retry</Text>
+      <Pressable
+        style={[styles.button, { backgroundColor: ink }]}
+        onPress={retry}
+      >
+        <Text style={[styles.label, { color: paper }]}>Retry</Text>
       </Pressable>
     </SafeAreaView>
   );
@@ -61,14 +74,13 @@ function Failed({ error, retry }: { error: unknown; retry: () => void }) {
 
 const styles = StyleSheet.create({
   fill: { flex: 1 },
-  failed: { margin: 24, gap: 16 },
-  error: { color: "#b91c1c" },
+  failed: { margin: 24, gap: 20 },
+  error: { fontSize: 16, lineHeight: 24 },
   button: {
     alignSelf: "flex-start",
-    backgroundColor: "#1f7a55",
-    borderRadius: 8,
-    paddingHorizontal: 16,
-    paddingVertical: 10,
+    borderRadius: 999,
+    paddingHorizontal: 22,
+    paddingVertical: 13,
   },
-  label: { color: "#fff", fontSize: 16, fontWeight: "600" },
+  label: { fontSize: 15, fontWeight: "600" },
 });
