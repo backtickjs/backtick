@@ -121,7 +121,12 @@ async function releaseCode(
   if (!read.ok) {
     throw new Error(`Reading release ${id}@${version}: ${read.status}`);
   }
-  const [{ compiled }] = await read.json<{ compiled: string }[]>();
+  const [{ compiled }] = await read.json<{ compiled: string | null }[]>();
+  // A save between the two reads clears this version's release; never cache
+  // that as its code. The phone's next open gets the new version.
+  if (compiled === null) {
+    throw new Error(`Release ${id}@${version} was replaced while opening it`);
+  }
   c.executionCtx.waitUntil(
     caches.default.put(
       key,

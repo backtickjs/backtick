@@ -29,16 +29,18 @@ export async function latestVersion(
     : { version: data.version, source: data.source };
 }
 
-// Saves the owner's app's next version, 1 for its first, with its release,
-// and returns its number, or nothing if the app is someone else's. The first save creates the
-// app, and each one gives it `title`. Two saves at once for one app collide on
-// the key, and the second fails.
+// Saves the owner's app's next version, 1 for its first, with its release and
+// the snapshot that made it, and returns its number, or nothing if the app is
+// someone else's. The first save creates the app, and each one gives it
+// `title`. Two saves at once for one app collide on the key, and the second
+// fails. Older versions keep their source but lose their release.
 export async function saveVersion(
   id: string,
   owner: string,
   title: string,
   source: string,
   compiled: string,
+  snapshotId: string,
 ): Promise<number | undefined> {
   const existing = await supabase
     .from("apps")
@@ -61,9 +63,19 @@ export async function saveVersion(
   const version = latest === undefined ? 1 : latest.version + 1;
   const { error } = await supabase
     .from("versions")
-    .insert({ app_id: id, version, source, compiled });
+    .insert({ app_id: id, version, source, compiled, snapshot_id: snapshotId });
   if (error) {
     throw failed(error);
+  }
+  // After the insert, so the app always has a release to open.
+  const cleared = await supabase
+    .from("versions")
+    .update({ compiled: null })
+    .eq("app_id", id)
+    .lt("version", version)
+    .not("compiled", "is", null);
+  if (cleared.error) {
+    throw failed(cleared.error);
   }
   return version;
 }

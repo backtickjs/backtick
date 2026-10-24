@@ -114,6 +114,19 @@ describe("an app's host", () => {
     );
   });
 
+  it("doesn't cache a release a save cleared while opening it", async () => {
+    const { open, read } = worker({
+      version: [{ version: 3 }],
+      compiled: [{ compiled: null }],
+    });
+    assert.equal((await open("/", "Bearer token")).status, 500);
+    assert.equal((await open("/", "Bearer token")).status, 500);
+    assert.deepEqual(
+      read.map((query) => new URLSearchParams(query).get("select")),
+      ["version", "compiled", "version", "compiled"],
+    );
+  });
+
   it("passes Supabase's refusal of the token on", async () => {
     const { open } = worker({});
     assert.equal((await open("/", "Bearer expired")).status, 401);
