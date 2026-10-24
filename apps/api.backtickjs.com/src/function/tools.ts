@@ -168,8 +168,13 @@ export function tools(owner: string): McpServer {
         compiled!,
         snapshot,
       );
-      if (version === undefined) {
+      if (version === "not yours") {
         return failed(`App ${id} isn't yours: start your own with start_app.`);
+      }
+      if (version === "deleted") {
+        return failed(
+          `App ${id} was deleted from the user's phone: start a new one with start_app.`,
+        );
       }
       recorded({ appId: id, owner, version, errors, warnings, durationMs });
       const url = `https://${id}.backtickjs.app`;

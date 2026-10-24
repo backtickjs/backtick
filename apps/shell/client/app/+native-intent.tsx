@@ -9,6 +9,7 @@ import { apps, signInWithGoogle, supabase } from "../supabase";
 //   https://<id>.<apps>/<path>       the app's <path>, its own link
 //   …/--/<id>/<path>                 the app's <path>
 //   …/--/sign-in, …/--/sign-out      from Backtick's home only
+//   …/--/delete/<id>                 deletes the app, from the home only
 //   …/--/auth/callback?code=…        sign-in's return, which
 //                                    signInWithGoogle's browser session has
 // Anything else goes to expo-router as is.
@@ -34,6 +35,10 @@ export async function redirectSystemPath({
     router.push(opened);
     return null;
   }
+  if (first === "delete" && isAppId(rest[0] ?? "") && rest.length === 1) {
+    await deleteApp(rest[0]!);
+    return null;
+  }
   if (!["sign-in", "sign-out", "auth/callback"].includes(link.pathname)) {
     return path;
   }
@@ -49,6 +54,23 @@ export async function redirectSystemPath({
     Alert.alert("Couldn't sign in", (error as Error).message);
   }
   return null;
+}
+
+// The home asked first: the app goes from its list, and its link stops
+// working. An open app can't delete one.
+async function deleteApp(id: string): Promise<void> {
+  if (currentApp() !== null) {
+    return;
+  }
+  const { data, error } = await supabase.rpc("delete_app", { app: id });
+  if (error || data !== true) {
+    Alert.alert(
+      "Couldn't delete the app",
+      error?.message ?? "It's already gone.",
+    );
+  }
+  // The home again, its list made afresh without the app.
+  router.replace("/");
 }
 
 type Link = { pathname: string; search: string };

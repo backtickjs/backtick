@@ -20,6 +20,7 @@ export const palette = {
     muted: "#6b6b76",
     line: "#e4e4e7",
     wash: "#f7f7f8",
+    danger: "#dc2626",
     shine: ["#0891b2", "#7c3aed"] as const,
   },
   dark: {
@@ -28,6 +29,7 @@ export const palette = {
     muted: "#a1a1aa",
     line: "#26262b",
     wash: "#121215",
+    danger: "#f87171",
     shine: ["#61dafb", "#a78bfa"] as const,
   },
 };

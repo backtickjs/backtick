@@ -8,16 +8,17 @@ const supabase = createClient(
 );
 
 // The latest saved version of the owner's app, or nothing for an app never
-// saved or someone else's.
+// saved, deleted, or someone else's.
 export async function latestVersion(
   id: string,
   owner: string,
 ): Promise<{ version: number; source: string } | undefined> {
   const { data, error } = await supabase
     .from("versions")
-    .select("version, source, apps!inner(owner_id)")
+    .select("version, source, apps!inner(owner_id, deleted_at)")
     .eq("app_id", id)
     .eq("apps.owner_id", owner)
+    .is("apps.deleted_at", null)
     .order("version", { ascending: false })
     .limit(1)
     .maybeSingle();
@@ -30,8 +31,9 @@ export async function latestVersion(
 }
 
 // Saves the owner's app's next version, 1 for its first, with its release and
-// the snapshot that made it, and returns its number, or nothing if the app is
-// someone else's. The first save creates the app, and each one gives it
+// the snapshot that made it, and returns its number, or why it can't: the app
+// is someone else's, or its owner deleted it. The first save creates the app,
+// and each one gives it
 // `title`. Two saves at once for one app collide on the key, and the second
 // fails. Older versions keep their source but lose their release.
 export async function saveVersion(
@@ -41,17 +43,20 @@ export async function saveVersion(
   source: string,
   compiled: string,
   snapshotId: string,
-): Promise<number | undefined> {
+): Promise<number | "not yours" | "deleted"> {
   const existing = await supabase
     .from("apps")
-    .select("owner_id")
+    .select("owner_id, deleted_at")
     .eq("id", id)
     .maybeSingle();
   if (existing.error) {
     throw failed(existing.error);
   }
   if (existing.data !== null && existing.data.owner_id !== owner) {
-    return undefined;
+    return "not yours";
+  }
+  if (existing.data?.deleted_at) {
+    return "deleted";
   }
   const app = await (existing.data === null
     ? supabase.from("apps").insert({ id, owner_id: owner, title })
