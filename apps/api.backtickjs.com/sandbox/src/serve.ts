@@ -1,11 +1,9 @@
-// The sandbox's side: typechecks, compiles and answers for as long as it
-// runs, so a warm sandbox loads TypeScript and parses the declarations once. Listens on
+// The sandbox's side: typechecks and compiles for as long as it runs, so a warm sandbox loads TypeScript and parses the declarations once. Listens on
 // localhost only; the function reaches it with `curl` inside the sandbox.
 // `node --import @backtickjs/node-plugin src/serve.ts`, on `PORT` or 3000.
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { compile } from "./compile.ts";
-import { screen } from "./screen.ts";
 import { typecheck } from "./typecheck.ts";
 
 const app = new Hono();
@@ -31,17 +29,6 @@ app.post("/check", async (c) => {
       ? { ...typechecked, compiled: release.code }
       : { ...typechecked, errors: release.errors },
   );
-});
-
-// The app's answer at a path, whatever its status, for the function to pass
-// on to the phone.
-app.post("/screen", async (c) => {
-  const { file, path, modules } = await c.req.json<{
-    file: string;
-    path: string;
-    modules: string;
-  }>();
-  return c.json(await screen(file, path, modules));
 });
 
 serve({

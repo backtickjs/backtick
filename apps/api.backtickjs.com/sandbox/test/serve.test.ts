@@ -3,7 +3,6 @@ import { spawn } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { it } from "node:test";
-import { installedPackages } from "@backtickjs/core/node";
 
 // A counter app, as a model writes one from the service's starter.
 const counter = readFileSync(
@@ -12,15 +11,6 @@ const counter = readFileSync(
 );
 
 const root = join(import.meta.dirname, "..");
-const installed = installedPackages(root);
-const phone = JSON.stringify({
-  react: installed.react!,
-  "react/jsx-runtime": installed.react!,
-  "react-native": installed["react-native"]!,
-  "react-native-safe-area-context":
-    installed["react-native-safe-area-context"]!,
-  "expo-router": installed["expo-router"]!,
-});
 
 function write(name: string, source: string): string {
   const dir = join(root, ".builds", "test", name);
@@ -34,7 +24,7 @@ function write(name: string, source: string): string {
 }
 
 // As the sandbox runs it: one process, asked again and again.
-it("typechecks, checks and answers over HTTP, file after file", async () => {
+it("typechecks and checks over HTTP, file after file", async () => {
   const port = 5199;
   const server = spawn(
     process.execPath,
@@ -78,17 +68,6 @@ it("typechecks, checks and answers over HTTP, file after file", async () => {
     const refusedCheck = await post("check", { file: typo });
     assert.equal(refusedCheck.compiled, undefined);
     assert.match(refusedCheck.errors.join("\n"), /TS2345/);
-    assert.equal(
-      (await post("screen", { file: app, path: "/day", modules: phone }))
-        .status,
-      200,
-    );
-    const refused = await post("screen", {
-      file: app,
-      path: "/",
-      modules: "{}",
-    });
-    assert.equal(refused.status, 426);
   } finally {
     server.kill();
   }

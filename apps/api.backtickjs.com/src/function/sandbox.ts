@@ -3,7 +3,6 @@
 // base snapshot and starts the server; each call keeps it another `warm`.
 import { createHash, randomUUID } from "node:crypto";
 import { Sandbox } from "@vercel/sandbox";
-import type { Answer } from "../../sandbox/src/screen.ts";
 import type { Typechecked } from "../../sandbox/src/typecheck.ts";
 
 // Where `scripts/snapshot.ts` installs the sandbox package (sandbox/).
@@ -48,21 +47,6 @@ export async function checkInSandbox(
     "check",
     {},
   );
-}
-
-// The app's answer at `path` for the phone's modules, as its Hono server
-// gives it.
-export async function screenInSandbox(
-  user: string,
-  source: string,
-  path: string,
-  modules: string,
-  snapshotId: string,
-): Promise<Answer> {
-  return postMessageToSandbox<Answer>(user, source, snapshotId, "screen", {
-    path,
-    modules,
-  });
 }
 
 // The owner's sandbox started, so the next open doesn't wait for it: the

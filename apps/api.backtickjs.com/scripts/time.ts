@@ -1,30 +1,18 @@
-// Times a sandbox from the snapshot as `save_app` and a phone use it: the
-// first typecheck creates it, then a warm typecheck, then two screens.
+// Times a sandbox from the snapshot as `save_app` uses it: the
+// first typecheck creates it, then a warm typecheck, then two saves' checks
+// (typecheck and compile).
 // `node --env-file=.env.local scripts/time.ts <snapshot id>`
 import { randomUUID } from "node:crypto";
-import { join } from "node:path";
-import { installedPackages } from "@backtickjs/core/node";
 import { Sandbox } from "@vercel/sandbox";
 import {
+  checkInSandbox,
   sandboxName,
-  screenInSandbox,
   typecheckInSandbox,
 } from "../src/function/sandbox.ts";
 import { starter } from "../src/function/starter.ts";
 
-const root = join(import.meta.dirname, "..");
 const snapshotId = process.argv[2]!;
 const user = `time-${randomUUID().slice(0, 8)}`;
-// The sandbox's packages are the phone's, at its versions.
-const installed = installedPackages(join(root, "sandbox"));
-const phone = JSON.stringify({
-  react: installed.react!,
-  "react/jsx-runtime": installed.react!,
-  "react-native": installed["react-native"]!,
-  "react-native-safe-area-context":
-    installed["react-native-safe-area-context"]!,
-  "expo-router": installed["expo-router"]!,
-});
 
 async function time<T>(label: string, run: () => Promise<T>): Promise<T> {
   const start = performance.now();
@@ -42,16 +30,11 @@ try {
   await time("typecheck, warm", () =>
     typecheckInSandbox(user, starter, snapshotId),
   );
-  const answer = await time("screen, first", () =>
-    screenInSandbox(user, starter, "/", phone, snapshotId),
+  const checked = await time("check, first", () =>
+    checkInSandbox(user, starter, snapshotId),
   );
-  console.log(
-    answer.status,
-    answer.status === 200 ? `${answer.body.length} bytes` : answer.body,
-  );
-  await time("screen, warm", () =>
-    screenInSandbox(user, starter, "/", phone, snapshotId),
-  );
+  console.log(checked.errors, `${checked.compiled?.length ?? 0} bytes`);
+  await time("check, warm", () => checkInSandbox(user, starter, snapshotId));
 } finally {
   await (await Sandbox.get({ name: sandboxName(user, snapshotId) })).stop();
 }

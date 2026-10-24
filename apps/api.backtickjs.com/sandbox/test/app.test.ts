@@ -5,7 +5,6 @@ import { describe, it } from "node:test";
 import ts from "typescript";
 import { installedPackages } from "@backtickjs/core/node";
 import { compile } from "../src/compile.ts";
-import { screen } from "../src/screen.ts";
 import { typecheck } from "../src/typecheck.ts";
 
 // A counter app, as a model writes one from the service's starter.
@@ -87,38 +86,49 @@ describe("typecheck's default export", () => {
   });
 });
 
-describe("screen", () => {
+// What the runtime runs: the release, imported on its own, answering a
+// phone's request.
+async function release(source: string, name: string) {
+  const { code } = await compile(write(name, source));
+  const file = join(root, ".builds", "test", name, "release.mjs");
+  writeFileSync(file, code!);
+  const { default: app } = await import(file);
+  return (path: string, modules: string) =>
+    app.fetch(
+      new Request(`http://app${path}`, {
+        headers: { "x-backtick-modules": modules },
+      }),
+    ) as Promise<Response>;
+}
+
+describe("a release", () => {
   it("answers each route with its screen, bundled for the phone", async () => {
-    const file = write("counter", counter);
+    const open = await release(counter, "release-counter");
     for (const path of ["/", "/day"]) {
-      const { status, contentType, body } = await screen(file, path, phone);
-      assert.equal(status, 200);
-      assert.equal(contentType, "text/javascript");
-      assert.match(body, /require\("react-native"\)/);
+      const answer = await open(path, phone);
+      assert.equal(answer.status, 200);
+      assert.equal(answer.headers.get("content-type"), "text/javascript");
+      assert.match(await answer.text(), /require\("react-native"\)/);
     }
   });
 
   it("answers 426 for a module the phone doesn't provide", async () => {
-    const file = write(
-      "import",
+    const open = await release(
       `import { isRunningInExpoGo } from "expo" with { backtick: "client" };\n` +
         counter.replace(
           "return <Screen />;",
           "$isRunningInExpoGo(); return <Screen />;",
         ),
+      "release-import",
     );
-    const { status, body } = await screen(file, "/", phone);
-    assert.equal(status, 426);
-    assert.match(JSON.parse(body).message, /expo/);
+    const answer = await open("/", phone);
+    assert.equal(answer.status, 426);
+    assert.match((await answer.json()).message, /expo/);
   });
 
   it("answers 404 for a path the app has no route for", async () => {
-    const { status } = await screen(
-      write("counter", counter),
-      "/nowhere",
-      phone,
-    );
-    assert.equal(status, 404);
+    const open = await release(counter, "release-404");
+    assert.equal((await open("/nowhere", phone)).status, 404);
   });
 });
 

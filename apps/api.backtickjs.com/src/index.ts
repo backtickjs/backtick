@@ -1,6 +1,6 @@
 // api.backtickjs.com's Vercel Function, where Vercel looks for it: the MCP
-// endpoint the hosts connect to, sign-in for it, and the app bundles the
-// phone gets through each app's host, <id>.backtickjs.app.
+// endpoint the hosts connect to, and sign-in for it. Apps are answered at
+// their own hosts, <id>.backtickjs.app, by apps/backtickjs.app.
 import {
   createMcpHandler,
   getOAuthProtectedResourceMetadataUrl,
@@ -12,14 +12,8 @@ import {
 } from "@modelcontextprotocol/server";
 import { waitUntil } from "@vercel/functions";
 import { Hono } from "hono";
-import * as z from "zod";
 import { ownerOf, verifier } from "./function/auth.ts";
-import {
-  screenInSandbox,
-  snapshotId,
-  warmSandbox,
-} from "./function/sandbox.ts";
-import { latestVersion } from "./function/store.ts";
+import { snapshotId, warmSandbox } from "./function/sandbox.ts";
 import { tools } from "./function/tools.ts";
 // Compiled by `tspc` first: the pages are Backtick scripts.
 import { consentPage } from "../web/dist/index.js";
@@ -85,37 +79,6 @@ app.post("/warm", async (c) => {
   }
   waitUntil(warmSandbox(ownerOf(auth), snapshotId()));
   return c.body(null, 202);
-});
-
-// An app's latest version answering the phone at a path, its Hono server run
-// in the owner's sandbox: what <id>.backtickjs.app answers the phone with,
-// standing in for the runtime (plan, section 10). `/apps/<id>/day` is the
-// app's `/day`.
-app.get("/apps/:id/*", async (c) => {
-  const id = c.req.param("id");
-  const auth = await requireBearerAuth({ verifier })(c.req.raw);
-  if (auth instanceof Response) {
-    return auth;
-  }
-  const owner = ownerOf(auth);
-  const latest = z.uuid().safeParse(id).success
-    ? await latestVersion(id, owner)
-    : undefined;
-  if (latest === undefined) {
-    return c.notFound();
-  }
-  const url = new URL(c.req.url);
-  const answer = await screenInSandbox(
-    owner,
-    latest.source,
-    (url.pathname.slice(`/apps/${id}`.length) || "/") + url.search,
-    c.req.header("x-backtick-modules") ?? "{}",
-    snapshotId(),
-  );
-  return c.body(answer.body, answer.status as 200, {
-    "content-type": answer.contentType,
-    "x-backtick-version": String(latest.version),
-  });
 });
 
 // Supabase's OAuth server's own discovery document, fetched once per instance.

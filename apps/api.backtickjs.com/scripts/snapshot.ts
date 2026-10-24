@@ -12,7 +12,6 @@ const files = [
   "package.json",
   "tsconfig.app.json",
   "src/compile.ts",
-  "src/screen.ts",
   "src/serve.ts",
   "src/typecheck.ts",
 ];
