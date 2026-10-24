@@ -1,19 +1,26 @@
-// backtickjs.app's Vercel Function: every app's host. <id>.backtickjs.app is
-// the app, as <project>.vercel.app is a project: the phone gets its screens
-// there, a browser a page to open it in Expo Go. The bare domain sends people
-// to backtickjs.com. Users' code lives here, so this holds no secrets: the
-// service at api.backtickjs.com checks the token and bundles.
+// backtickjs.app's Worker: every app's host. <id>.backtickjs.app is the app,
+// as <project>.vercel.app is a project: the phone gets its screens there, each
+// answered by the app's latest release in an isolate of its own, and a browser
+// a page to open it in Expo Go. The bare domain sends people to
+// backtickjs.com. Users' code runs here, so this holds no secrets: Supabase
+// checks the phone's token as it reads the app.
 import { type Context, Hono } from "hono";
 import { html, raw } from "hono/html";
 import QRCode from "qrcode";
 
-const api = "https://api.backtickjs.com";
+type Env = {
+  Bindings: {
+    LOADER: WorkerLoader;
+    SUPABASE_URL: string;
+    SUPABASE_PUBLISHABLE_KEY: string;
+  };
+};
 
 // The shell, published with EAS Update: Expo Go opens it from anywhere, at
 // the Expo Go build's SDK, and follows the path after `--/`.
 const shell = "exp://u.expo.dev/baed8ee5-a651-438c-999f-aff346fa0064";
 
-const app = new Hono();
+const app = new Hono<Env>();
 
 // An app's own host, matched before the bare domain's routes below.
 app.use("*", async (c, next) => {
@@ -28,25 +35,95 @@ app.use("*", async (c, next) => {
     : screen(c, id);
 });
 
-// The phone's request, as it sent it, at its path: the service checks its
-// token and answers with the app's screen there, for its modules.
-async function screen(c: Context, id: string): Promise<Response> {
+// The phone's request, answered by the app's latest release, loaded into an
+// isolate of its own: no network of its own, and never the token, only the
+// path and the phone's modules. Supabase checks the token as it reads the
+// version, so only the owner gets one; a token it refuses is the phone's 401.
+async function screen(c: Context<Env>, id: string): Promise<Response> {
   const authorization = c.req.header("authorization");
-  const url = new URL(c.req.url);
-  const answer = await fetch(`${api}/apps/${id}${url.pathname}${url.search}`, {
-    headers: {
-      ...(authorization === undefined ? {} : { authorization }),
-      "x-backtick-modules": c.req.header("x-backtick-modules")!,
-    },
-  });
-  const headers = new Headers();
-  for (const name of ["content-type", "x-backtick-version"]) {
-    const value = answer.headers.get(name);
-    if (value !== null) {
-      headers.set(name, value);
-    }
+  if (authorization === undefined) {
+    return c.json(
+      {
+        error: "invalid_token",
+        error_description: "Missing Authorization header",
+      },
+      401,
+    );
   }
-  return new Response(await answer.text(), { status: answer.status, headers });
+  const latest = await asUser(
+    c,
+    authorization,
+    `select=version&app_id=eq.${id}&compiled=not.is.null&order=version.desc&limit=1`,
+  );
+  if (!latest.ok) {
+    return latest;
+  }
+  const [row] = await latest.json<{ version: number }[]>();
+  if (row === undefined) {
+    return c.notFound();
+  }
+  const release = c.env.LOADER.get(`${id}@${row.version}`, async () => ({
+    compatibilityDate: "2026-10-01",
+    compatibilityFlags: ["nodejs_compat"],
+    mainModule: "app.js",
+    modules: {
+      "app.js": await releaseCode(c, authorization, id, row.version),
+    },
+    globalOutbound: null,
+  }));
+  const answer = await release.getEntrypoint().fetch(
+    new Request(c.req.url, {
+      headers: { "x-backtick-modules": c.req.header("x-backtick-modules")! },
+    }),
+  );
+  const response = new Response(answer.body, answer);
+  response.headers.set("x-backtick-version", String(row.version));
+  return response;
+}
+
+// A version's release, from this data center's cache, or read as the user the
+// first time: a release never changes, so it's kept as long as the cache will.
+async function releaseCode(
+  c: Context<Env>,
+  authorization: string,
+  id: string,
+  version: number,
+): Promise<string> {
+  const key = new Request(`https://releases.backtickjs.app/${id}@${version}`);
+  const cached = await caches.default.match(key);
+  if (cached !== undefined) {
+    return cached.text();
+  }
+  const read = await asUser(
+    c,
+    authorization,
+    `select=compiled&app_id=eq.${id}&version=eq.${version}`,
+  );
+  if (!read.ok) {
+    throw new Error(`Reading release ${id}@${version}: ${read.status}`);
+  }
+  const [{ compiled }] = await read.json<{ compiled: string }[]>();
+  c.executionCtx.waitUntil(
+    caches.default.put(
+      key,
+      new Response(compiled, {
+        headers: { "cache-control": "public, max-age=31536000, immutable" },
+      }),
+    ),
+  );
+  return compiled;
+}
+
+// The app's versions, as the user whose token it is: row-level security
+// answers only their own apps'.
+function asUser(
+  c: Context<Env>,
+  authorization: string,
+  query: string,
+): Promise<Response> {
+  return fetch(`${c.env.SUPABASE_URL}/rest/v1/versions?${query}`, {
+    headers: { apikey: c.env.SUPABASE_PUBLISHABLE_KEY, authorization },
+  });
 }
 
 // A browser: the app opens in Expo Go, at the same path. A phone goes

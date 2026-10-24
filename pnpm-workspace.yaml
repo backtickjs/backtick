@@ -33,6 +33,9 @@ allowBuilds:
   # Stores Marketplace logins in the system keychain; publishing uses tokens
   # from the environment instead.
   keytar: false
+  # Cloudflare's Workers runtime, which `wrangler dev` runs: its install
+  # fetches the binary for this machine.
+  workerd: true
 # `bun-types` imports `undici-types` in its declarations without depending on
 # it, so it resolved only while pnpm happened to hoist a copy. Declared here so
 # what uses Bun's types (the site, the Bun plugin) typechecks whatever else the

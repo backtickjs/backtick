@@ -7,48 +7,118 @@ const modules = '{"react-native":"0.86.3"}';
 
 afterEach(() => mock.restoreAll());
 
-describe("an app's host", () => {
-  it("hands the phone's request to the service at its path, with its token and modules", async () => {
-    const sent: { url: string; headers: Headers }[] = [];
-    mock.method(globalThis, "fetch", async (url: string, init: RequestInit) => {
-      sent.push({ url, headers: new Headers(init.headers) });
-      return new Response("bundle", {
-        headers: {
-          "content-type": "text/javascript",
-          "x-backtick-version": "3",
-        },
-      });
-    });
+// The Worker's bindings, standing in: Supabase's answers by query, the cache a
+// map, the loader running nothing but recording what it was asked for.
+function worker(versions: Record<string, unknown>) {
+  const read: string[] = [];
+  mock.method(globalThis, "fetch", async (url: string, init: RequestInit) => {
+    const query = new URL(url).search;
+    read.push(query);
+    const authorization = new Headers(init.headers).get("authorization");
+    if (authorization !== "Bearer token") {
+      return Response.json({ message: "JWT expired" }, { status: 401 });
+    }
+    const select = new URLSearchParams(query).get("select")!;
+    return Response.json(versions[select] ?? []);
+  });
+  const cached = new Map<string, string>();
+  (globalThis as { caches?: unknown }).caches = {
+    default: {
+      match: async (key: Request) =>
+        cached.has(key.url) ? new Response(cached.get(key.url)) : undefined,
+      put: async (key: Request, response: Response) => {
+        cached.set(key.url, await response.text());
+      },
+    },
+  };
+  const loaded: { id: string; code: string; request: Request }[] = [];
+  const env = {
+    SUPABASE_URL: "https://project.supabase.co",
+    SUPABASE_PUBLISHABLE_KEY: "sb_publishable_key",
+    LOADER: {
+      get: (
+        id: string,
+        getCode: () => Promise<{ modules: { "app.js": string } }>,
+      ) => ({
+        getEntrypoint: () => ({
+          fetch: async (request: Request) => {
+            const { modules } = await getCode();
+            loaded.push({ id, code: modules["app.js"], request });
+            return new Response("screen", {
+              headers: { "content-type": "text/javascript" },
+            });
+          },
+        }),
+      }),
+    },
+  };
+  const waiting: Promise<unknown>[] = [];
+  const context = {
+    waitUntil: (promise: Promise<unknown>) => waiting.push(promise),
+    passThroughOnException: () => {},
+    props: {},
+  };
+  const open = async (path: string, authorization?: string) => {
     const answer = await app.request(
-      `https://${id}.backtickjs.app/day?week=2`,
+      `https://${id}.backtickjs.app${path}`,
       {
         headers: {
-          authorization: "Bearer token",
           "x-backtick-modules": modules,
+          ...(authorization === undefined ? {} : { authorization }),
         },
       },
+      env,
+      context as unknown as ExecutionContext,
     );
+    await Promise.all(waiting);
+    return answer;
+  };
+  return { open, read, loaded };
+}
+
+describe("an app's host", () => {
+  it("answers the phone with the app's latest release, without its token", async () => {
+    const { open, loaded } = worker({
+      version: [{ version: 3 }],
+      compiled: [{ compiled: "release 3" }],
+    });
+    const answer = await open("/day?week=2", "Bearer token");
     assert.equal(answer.status, 200);
-    assert.equal(await answer.text(), "bundle");
+    assert.equal(await answer.text(), "screen");
     assert.equal(answer.headers.get("x-backtick-version"), "3");
+    const [{ id: release, code, request }] = loaded;
+    assert.equal(release, `${id}@3`);
+    assert.equal(code, "release 3");
     assert.equal(
-      sent[0].url,
-      `https://api.backtickjs.com/apps/${id}/day?week=2`,
+      new URL(request.url).pathname + new URL(request.url).search,
+      "/day?week=2",
     );
-    assert.equal(sent[0].headers.get("authorization"), "Bearer token");
-    assert.equal(sent[0].headers.get("x-backtick-modules"), modules);
+    assert.equal(request.headers.get("x-backtick-modules"), modules);
+    assert.equal(request.headers.get("authorization"), null);
   });
 
-  it("passes the service's refusal on", async () => {
-    mock.method(
-      globalThis,
-      "fetch",
-      async () => new Response("no", { status: 401 }),
-    );
-    const answer = await app.request(`https://${id}.backtickjs.app/`, {
-      headers: { "x-backtick-modules": modules },
+  it("reads a release from Postgres once, then from the cache", async () => {
+    const { open, read } = worker({
+      version: [{ version: 3 }],
+      compiled: [{ compiled: "release 3" }],
     });
-    assert.equal(answer.status, 401);
+    await open("/", "Bearer token");
+    await open("/", "Bearer token");
+    assert.deepEqual(
+      read.map((query) => new URLSearchParams(query).get("select")),
+      ["version", "compiled", "version"],
+    );
+  });
+
+  it("passes Supabase's refusal of the token on", async () => {
+    const { open } = worker({});
+    assert.equal((await open("/", "Bearer expired")).status, 401);
+    assert.equal((await open("/")).status, 401);
+  });
+
+  it("answers 404 for an app with no release, or someone else's", async () => {
+    const { open } = worker({ version: [] });
+    assert.equal((await open("/", "Bearer token")).status, 404);
   });
 
   it("sends a phone's browser to Expo Go, at the same path", async () => {

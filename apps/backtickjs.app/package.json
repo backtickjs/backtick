@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Every app's host: <id>.backtickjs.app, for the phone and for a browser",
+  "description": "Every app's host: <id>.backtickjs.app, for the phone and for a browser, on Cloudflare",
   "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
     "typecheck": "tsc --noEmit",
     "test": "node --test \"test/**/*.test.ts\"",
     "format": "prettier --write src test",
@@ -18,8 +20,10 @@
   },
   "devDependencies": {
     "@backtickjs/prettier-plugin": "^0.2.4",
+    "@cloudflare/workers-types": "5.20261018.1",
     "@types/node": "^25.9.1",
     "@types/qrcode": "^1.5.6",
-    "prettier": "^3.6.2"
+    "prettier": "^3.6.2",
+    "wrangler": "4.151.2"
   }
 }

@@ -1,0 +1,21 @@
+{
+  // Every app's host: <id>.backtickjs.app, each app's release loaded by
+  // LOADER into an isolate of its own.
+  "name": "backtickjs-app",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "worker_loaders": [{ "binding": "LOADER" }],
+  // The bare domain and every app's host, as the zone's proxied records send
+  // them. No workers.dev address: an app is known by its host.
+  "routes": [
+    { "pattern": "backtickjs.app/*", "zone_name": "backtickjs.app" },
+    { "pattern": "*.backtickjs.app/*", "zone_name": "backtickjs.app" },
+  ],
+  "workers_dev": false,
+  // Public: the shell carries the same.
+  "vars": {
+    "SUPABASE_URL": "https://evgfuotcvraqxvdtutso.supabase.co",
+    "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_EotSz0FFiuOqXCSjxqGYrQ_oRJqA0as",
+  },
+}
