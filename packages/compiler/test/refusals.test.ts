@@ -52,6 +52,17 @@ describe("refusals", () => {
     }
   });
 
+  it("a script warned about is still compiled", () => {
+    const output = transpile(
+      ts,
+      "test.tsx",
+      'import { cs } from "@backtickjs/core";\n' +
+        "export default cs`(s: string) => /\\\\B(?=\\\\d{3})/.test(s)`;",
+      "@backtickjs/core",
+    );
+    assert.doesNotMatch(output, /cs\s*`/);
+  });
+
   it("a declared `$` name is refused, not emitted", () => {
     for (const body of [
       "{ function $done() {} }",

@@ -195,9 +195,14 @@ export function rewriteScript(
   }
 
   // Nor is a script that writes what it can't: emitting it may not be
-  // possible, as a declared `$` name is a splice, not a name.
+  // possible, as a declared `$` name is a splice, not a name. A warning
+  // alone is the script's to keep: it's compiled, and the warning goes with it.
   const refused = refusals(ts, clientScript, bindings);
-  if (refused.length > 0) {
+  if (
+    refused.some(
+      (diagnostic) => diagnostic.category === ts.DiagnosticCategory.Error,
+    )
+  ) {
     return leftAsWritten(refused);
   }
 
@@ -258,7 +263,7 @@ export function rewriteScript(
   return {
     runtime: { id, kind, params: paramsLiteral, args: argsLiteral, emitted },
     leftAsWritten: false,
-    diagnostics: [],
+    diagnostics: refused,
   };
 }
 
