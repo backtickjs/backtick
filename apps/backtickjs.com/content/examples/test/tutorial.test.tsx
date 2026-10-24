@@ -107,6 +107,6 @@ it("4's server is the template's, with lines added", () => {
     return false;
   });
   assert.deepEqual(missing, [
-    'app.get("/", (context) => screen(context, <Home />));',
+    'app.get("/", (context) => context.render(<Home />));',
   ]);
 });

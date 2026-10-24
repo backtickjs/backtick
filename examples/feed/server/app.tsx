@@ -1,9 +1,9 @@
+import { backtick } from "@backtickjs/hono";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { Feed, pageFor } from "./Feed.js";
 import { commentFor, commentsFor, itemFor, likeFor } from "./Item.js";
 import { commentsPath, itemPath, likesPath, pagePath } from "./paths.js";
-import { screen } from "./screen.js";
 
 export const app = new Hono();
 
@@ -12,28 +12,31 @@ app.use(
   cors({ origin: "*", allowHeaders: ["x-backtick-modules", "content-type"] }),
 );
 
+// `context.render(value)` answers with it, bundled for the app.
+app.use(backtick());
+
 // The feed, and its pages, which know their items' paths only.
-app.get("/", (context) => screen(context, <Feed />));
+app.get("/", (context) => context.render(<Feed />));
 app.get(pagePath(":page"), (context) =>
-  screen(context, pageFor(Number(context.req.param("page")))),
+  context.render(pageFor(Number(context.req.param("page")))),
 );
 
 // Each item, which the phone queries by its path, answered with the
 // component that draws it; and a like, a POST, answered with the new count.
 app.get(itemPath(":id"), (context) =>
-  screen(context, itemFor(context.req.param("id"))),
+  context.render(itemFor(context.req.param("id"))),
 );
 app.post(likesPath(":id"), (context) =>
-  screen(context, likeFor(context.req.param("id"))),
+  context.render(likeFor(context.req.param("id"))),
 );
 
 // An item's comments, and a new one, a POST to the same path.
 app.get(commentsPath(":id"), (context) =>
-  screen(context, commentsFor(context.req.param("id"))),
+  context.render(commentsFor(context.req.param("id"))),
 );
 app.post(commentsPath(":id"), async (context) => {
   const { text } = await context.req.json<{ text: string }>();
-  return screen(context, commentFor(context.req.param("id"), text));
+  return context.render(commentFor(context.req.param("id"), text));
 });
 
 // Answered rather than crashed on, so the app can show why.

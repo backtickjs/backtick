@@ -18,6 +18,7 @@
     "@backtickjs/bundler": "^0.2.4",
     "@backtickjs/core": "^0.2.4",
     "@backtickjs/expo": "^0.2.4",
+    "@backtickjs/hono": "^0.2.4",
     "@backtickjs/jsx-solid": "^0.2.4",
     "@backtickjs/vscode-extension": "^0.2.4",
     "@shikijs/colorized-brackets": "^4.5.0",

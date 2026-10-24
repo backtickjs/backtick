@@ -33,7 +33,8 @@
     "react-native": "0.86.3",
     "react-native-safe-area-context": "~5.7.0",
     "react-native-web": "^0.21.0",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "@backtickjs/hono": "^0.2.4"
   },
   "devDependencies": {
     "@backtickjs/prettier-plugin": "^0.2.4",

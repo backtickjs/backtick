@@ -67,7 +67,6 @@ my-app/
 │   └── moduleMap.ts   What screens may import from the app
 ├── server/
 │   ├── index.tsx      Your server: its routes
-│   ├── screen.tsx     Bundles a screen for the build that asked for it
 │   ├── Home.tsx       The screen you just changed
 │   ├── Home.test.tsx  A test that draws the welcome screen, run by npm test
 │   ├── HelloWave.tsx  The welcome screen's waving hand, safe to delete

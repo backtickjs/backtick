@@ -13,7 +13,7 @@
   "dependencies": {
     "@vercel/functions": "3.9.11",
     "hono": "^4.13.13",
-    "shell": "workspace:*"
+    "shell": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
