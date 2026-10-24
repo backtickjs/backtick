@@ -205,9 +205,6 @@ export const moduleMap = {
   get "react-native-view-shot"() {
     return require("react-native-view-shot");
   },
-  get "react-native-webview"() {
-    return require("react-native-webview");
-  },
   get three() {
     return require("three");
   },
