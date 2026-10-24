@@ -1,11 +1,12 @@
 import { router } from "expo-router";
 import { Alert } from "react-native";
 import { currentApp, setOpenApp } from "../openApp";
-import { signInWithGoogle, supabase } from "../supabase";
+import { apps, signInWithGoogle, supabase } from "../supabase";
 
 // Every link into the phone: an app by its ID, as a browser follows a link to
 // another site, and Backtick's own commands. An app's paths are left
 // as they are, so expo-router works in its screens as its docs say.
+//   https://<id>.<apps>/<path>       the app's <path>, its own link
 //   …/--/<id>/<path>                 the app's <path>
 //   …/--/sign-in, …/--/sign-out      from Backtick's home only
 //   …/--/auth/callback?code=…        sign-in's return, which
@@ -52,9 +53,15 @@ export async function redirectSystemPath({
 
 type Link = { pathname: string; search: string };
 
-// What a link names, after Expo Go's `/--/` (a scheme's `://` elsewhere):
-// `<id>/day`, `sign-in`. Its query's channel is Expo Go's, not the link's.
+// What a link names, after Expo Go's `/--/` (a scheme's `://` elsewhere, and
+// an app's host for its own link): `<id>/day`, `sign-in`. Its query's channel
+// is Expo Go's, not the link's.
 function shellLink(url: string): Link | undefined {
+  // https://<id>.<apps>/day reads as https://<id>/day.
+  const host = url.startsWith("https://") ? url.indexOf(`.${apps}`) : -1;
+  if (host > 0) {
+    url = url.slice(0, host) + url.slice(host + apps.length + 1);
+  }
   const start = url.includes("/--/")
     ? url.indexOf("/--/") + 4
     : url.indexOf("://") + 3;

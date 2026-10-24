@@ -1,8 +1,24 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { unavailableImports } from "../src/function/imports.ts";
+import {
+  phoneModules,
+  phoneVersions,
+  unavailableImports,
+} from "../src/function/imports.ts";
 
 describe("an app's imports", () => {
+  it("name each phone module's exact version, for the model to write against", () => {
+    for (const specifier of phoneModules) {
+      assert.match(
+        phoneVersions[specifier] ?? "",
+        /^\d+\.\d+\.\d+$/,
+        specifier,
+      );
+    }
+    // a subpath is its package's
+    assert.equal(phoneVersions["react/jsx-runtime"], phoneVersions["react"]);
+  });
+
   it("refuse a client import the phone doesn't provide, where it is", async () => {
     const errors = await unavailableImports(
       "App.tsx",

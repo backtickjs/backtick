@@ -32,7 +32,7 @@ app.use("*", async (c, next) => {
     return next();
   }
   return c.req.header("x-backtick-modules") === undefined
-    ? openInBacktick(c, id)
+    ? openOnPhone(c, id)
     : screen(c, id);
 });
 
@@ -151,19 +151,23 @@ function asUser(
   });
 }
 
-// A browser: the app opens in Backtick, at the same path. A phone goes
-// straight there, with the button in case its browser waits for a tap, and
-// Expo Go's link for a phone without Backtick; a computer gets a QR code of
-// this page, for the phone's camera.
-async function openInBacktick(c: Context, id: string): Promise<Response> {
+// A browser: the app opens at the same path, in the Backtick app on Android
+// and in Expo Go on iOS, where there's no Backtick app yet. A phone goes
+// straight there, with the button in case its browser waits for a tap, and on
+// Android Expo Go's link for a phone without Backtick; a computer gets a QR
+// code of this page, for the phone's camera.
+async function openOnPhone(c: Context, id: string): Promise<Response> {
   const url = new URL(c.req.url);
-  const link = `backtick://${id}${url.pathname}${url.search}`;
+  const backtickLink = `backtick://${id}${url.pathname}${url.search}`;
   const params = new URLSearchParams(url.search);
   params.set("channel-name", "production");
   const expoGoLink = `${expoGo}/--/${id}${url.pathname}?${params}`;
-  const phone = /Android|iPhone|iPad|iPod/.test(
-    c.req.header("user-agent") ?? "",
-  );
+  const agent = c.req.header("user-agent") ?? "";
+  const iOS = /iPhone|iPad|iPod/.test(agent);
+  const phone = iOS || /Android/.test(agent);
+  const [link, shell] = iOS
+    ? [expoGoLink, "Expo Go"]
+    : [backtickLink, "Backtick"];
   const qr = phone
     ? ""
     : await QRCode.toString(url.href, { type: "svg", margin: 0 });
@@ -176,7 +180,7 @@ async function openInBacktick(c: Context, id: string): Promise<Response> {
           ${phone
             ? html`<meta http-equiv="refresh" content="0; url=${link}" />`
             : ""}
-          <title>Open in Backtick</title>
+          <title>Open in ${shell}</title>
           <style>
             body {
               font:
@@ -213,12 +217,12 @@ async function openInBacktick(c: Context, id: string): Promise<Response> {
           </style>
         </head>
         <body>
-          <p>This app runs on your phone, in Backtick.</p>
+          <p>This app runs on your phone, in ${shell}.</p>
           ${phone
-            ? html`<a class="open" href="${link}">Open in Backtick</a>`
+            ? html`<a class="open" href="${link}">Open in ${shell}</a>`
             : html`<div class="qr">${raw(qr)}</div>
                 <p>Scan it with your phone's camera to open the app.</p>`}
-          ${phone
+          ${phone && !iOS
             ? html`<p>
                 No Backtick? <a href="${expoGoLink}">Open it in Expo Go</a>.
               </p>`
@@ -228,6 +232,24 @@ async function openInBacktick(c: Context, id: string): Promise<Response> {
       </html>`,
   );
 }
+
+// The Backtick app claims every app's host (Android App Links), so a link to
+// <id>.backtickjs.app opens the app itself. For a wildcard host Android checks
+// this file at the bare domain: the app, and the certificate EAS signs it with.
+app.get("/.well-known/assetlinks.json", (c) =>
+  c.json([
+    {
+      relation: ["delegate_permission/common.handle_all_urls"],
+      target: {
+        namespace: "android_app",
+        package_name: "com.backtickjs.app",
+        sha256_cert_fingerprints: [
+          "89:AF:4E:D2:72:B6:B5:EF:49:4A:28:14:66:52:C7:18:70:EA:D7:C8:4C:C6:27:41:6E:C0:EA:C4:48:47:4C:B7",
+        ],
+      },
+    },
+  ]),
+);
 
 // The website is backtickjs.com.
 app.get("/", (c) => c.redirect("https://backtickjs.com", 302));

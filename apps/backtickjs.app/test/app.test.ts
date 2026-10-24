@@ -162,6 +162,23 @@ describe("an app's host", () => {
     );
   });
 
+  it("sends an iPhone's browser to Expo Go, at the same path", async () => {
+    const page = await app.request(`https://${id}.backtickjs.app/talks/42`, {
+      headers: {
+        "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 19_0 like Mac OS X)",
+      },
+    });
+    const text = await page.text();
+    assert.match(
+      text,
+      new RegExp(
+        `http-equiv="refresh" content="0; url=exp://u\\.expo\\.dev/[0-9a-f-]+/--/${id}/talks/42\\?channel-name=production"`,
+      ),
+    );
+    assert.match(text, /Open in Expo Go/);
+    assert.doesNotMatch(text, /backtick:\/\//);
+  });
+
   it("shows a computer a QR code of the page", async () => {
     const page = await app.request(`https://${id}.backtickjs.app/talks/42`, {
       headers: { "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 15_0)" },
@@ -177,6 +194,24 @@ describe("the bare domain", () => {
     const answer = await app.request("https://backtickjs.app/");
     assert.equal(answer.status, 302);
     assert.equal(answer.headers.get("location"), "https://backtickjs.com");
+  });
+
+  it("vouches for the Backtick app, for links to every app's host", async () => {
+    const answer = await app.request(
+      "https://backtickjs.app/.well-known/assetlinks.json",
+    );
+    assert.equal(answer.status, 200);
+    const [{ target }] =
+      await answer.json<
+        {
+          target: { package_name: string; sha256_cert_fingerprints: string[] };
+        }[]
+      >();
+    assert.equal(target.package_name, "com.backtickjs.app");
+    assert.match(
+      target.sha256_cert_fingerprints[0],
+      /^([0-9A-F]{2}:){31}[0-9A-F]{2}$/,
+    );
   });
 
   it("isn't an app at a host that isn't one", async () => {

@@ -11,14 +11,13 @@ export const cardUri = "ui://backtick/app-card.html";
 export const cardScriptOrigin = "https://cdn.jsdelivr.net";
 const cardScript = `${cardScriptOrigin}/npm/@modelcontextprotocol/ext-apps@2.0.3/dist/src/app-with-deps.js`;
 
-// What the card shows, beside what the model reads: the app's page, and on a
-// phone its link in the Backtick app, opened by the host itself so that going
-// back from Backtick returns to the chat, not to a browser.
+// What the card shows, beside what the model reads: the app's link, which
+// opens the Backtick app on Android (it claims every app's host) and otherwise
+// the app's page, which sends an iPhone on to Expo Go.
 export type Card = {
   title: string;
   version: number;
   url: string;
-  link: string;
   qr: string;
 };
 
@@ -28,9 +27,8 @@ export async function card(
   version: number,
   url: string,
 ): Promise<Card> {
-  const link = `backtick://${id}`;
   const qr = await QRCode.toString(url, { type: "svg", margin: 0 });
-  return { title, version, url, link, qr };
+  return { title, version, url, qr };
 }
 
 export const cardHtml = `<!doctype html>
@@ -138,9 +136,8 @@ export const cardHtml = `<!doctype html>
       const app = new App({ name: "Backtick app card", version: "1.0.0" });
       const element = document.querySelector(".card");
       let card;
-      const phone = () =>
-        app.getHostContext()?.platform === "mobile" ||
-        /Android|iPhone|iPad/.test(navigator.userAgent);
+      // Only the label: the link is the same everywhere.
+      const iOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
 
       app.ontoolresult = (result) => {
         card = result.isError ? undefined : result._meta?.["backtickjs.com/card"];
@@ -152,24 +149,17 @@ export const cardHtml = `<!doctype html>
         element.querySelector(".version").textContent =
           "Version " + card.version + " · published";
         element.querySelector(".qr").innerHTML = card.qr;
+        element.querySelector("button").textContent = iOS
+          ? "Open in Expo Go"
+          : "Open in Backtick";
         element.hidden = false;
       };
 
-      // A host may refuse a link that isn't https: then the app's page, which
-      // sends the phone on to Backtick.
+      // Opened by the host itself, so going back returns to the chat.
       element.querySelector("button").addEventListener("click", async () => {
-        if (card === undefined) {
-          return;
+        if (card !== undefined) {
+          await app.openLink({ url: card.url });
         }
-        if (phone()) {
-          const opened = await app
-            .openLink({ url: card.link })
-            .catch(() => ({ isError: true }));
-          if (!opened.isError) {
-            return;
-          }
-        }
-        await app.openLink({ url: card.url });
       });
 
       await app.connect();

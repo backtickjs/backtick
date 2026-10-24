@@ -9,7 +9,12 @@ import { McpServer, type CallToolResult } from "@modelcontextprotocol/server";
 import { waitUntil } from "@vercel/functions";
 import * as z from "zod";
 import { card, cardHtml, cardScriptOrigin, cardUri } from "./card.ts";
-import { phoneModules, serverModules, unavailableImports } from "./imports.ts";
+import {
+  phoneModules,
+  phoneVersions,
+  serverModules,
+  unavailableImports,
+} from "./imports.ts";
 import { checkInSandbox, snapshotId, typecheckInSandbox } from "./sandbox.ts";
 import { starter } from "./starter.ts";
 import {
@@ -30,8 +35,8 @@ export function tools(owner: string): McpServer {
     },
     {
       instructions:
-        "Backtick makes native apps that run on the user's phone, in the " +
-        "Backtick app. start_app gives a starter to edit, and save_app checks the code, " +
+        "Backtick makes native apps that run on the user's phone. " +
+        "start_app gives a starter to edit, and save_app checks the code, " +
         "saves it as a version the phone opens, and returns the app's link " +
         "to give the user. These are the tools for an app the user wants on " +
         "their phone: a web page or an artifact doesn't reach it.",
@@ -46,7 +51,7 @@ export function tools(owner: string): McpServer {
       title: "Start an app",
       description:
         "Use when the user wants an app on their phone: a native app they " +
-        "open in the Backtick app, not a web page or an artifact. Returns a " +
+        "open on their phone, not a web page or an artifact. Returns a " +
         "new app's id and a starter App.tsx, a working app to edit into what " +
         "they asked for, then save with save_app. Saves nothing itself.",
       inputSchema: z.object({}),
@@ -64,7 +69,9 @@ export function tools(owner: string): McpServer {
       return text(
         `${JSON.stringify({ id, file: "App.tsx" })}\n\n` +
           `\`\`\`tsx\n${starter}\`\`\`\n\n` +
-          `The phone provides these client modules, and only these: ${phoneModules.join(", ")}. ` +
+          `The phone provides these client modules, and only these, each at exactly this version: ` +
+          `${phoneModules.map((specifier) => `${specifier}@${phoneVersions[specifier]}`).join(", ")}. ` +
+          `The app is checked against these versions, and the phone runs them. ` +
           `The server has these packages, and only these: ${serverModules.join(", ")}.`,
       );
     },
@@ -119,7 +126,7 @@ export function tools(owner: string): McpServer {
         "it as the app's next version, the one the user's phone opens. The " +
         "first save creates the app with its title. Returns the errors to " +
         "fix, or the version and the app's link, with any warnings. Give " +
-        "the user the link: on their phone it opens the app in Backtick.",
+        "the user the link: on their phone it opens the app.",
       inputSchema: z.object({
         id: z.uuid(),
         title: z.string(),
