@@ -50,6 +50,8 @@ export async function Home(props: { authorization: string }) {
       const [refreshing, setRefreshing] = $useState(false);
       return (
         <$FlatList
+          // On iOS the header is translucent: the list starts below it.
+          contentInsetAdjustmentBehavior="automatic"
           contentContainerStyle={styles.list}
           refreshing={refreshing}
           onRefresh={() => {
