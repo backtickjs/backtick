@@ -12,6 +12,9 @@ app.use(backtick());
 // The user's apps, or sign-in for a phone without a session: nothing of
 // anyone's without a token.
 app.get("/", (context) => {
+  // The list changes behind the home's back (an app made in a chat, or
+  // deleted), so the phone checks again each time it's shown.
+  context.header("cache-control", "no-cache");
   const authorization = context.req.header("authorization");
   return authorization === undefined
     ? context.render(<SignIn />)

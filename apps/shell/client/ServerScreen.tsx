@@ -1,9 +1,9 @@
 import {
-  type ReactNode,
   startTransition,
   Suspense,
   use,
   useCallback,
+  useRef,
   useState,
 } from "react";
 import {
@@ -17,12 +17,13 @@ import { useFocusEffect } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ErrorBoundary, getErrorMessage } from "react-error-boundary";
 import { currentApp, setOpenApp } from "./openApp";
-import { fetchScreen } from "./screens";
+import { fetchScreen, type Screen as Fetched } from "./screens";
 import { CurrentSession } from "./session";
 
 // The open app's screen at `path`, from its server, with a spinner until it
 // arrives. It stays the app's, made the open one again when it's back on
-// top.
+// top, and kept as it was, as a browser's back does, unless its server said
+// `Cache-Control: no-cache`: then it's loaded again.
 export function ServerScreen({ path }: { path: string }) {
   const session = use(CurrentSession);
   const [app] = useState(currentApp);
@@ -34,7 +35,23 @@ export function ServerScreen({ path }: { path: string }) {
     () => startTransition(() => setScreen(fetchScreen(app, path, session))),
     [app, path, session],
   );
-  useFocusEffect(useCallback(() => setOpenApp(app), [app]));
+  // Read when focused, not a dependency: a reload changes it while the
+  // screen is on top, and mustn't count as being shown again.
+  const latest = useRef(screen);
+  latest.current = screen;
+  const shown = useRef(false);
+  useFocusEffect(
+    useCallback(() => {
+      setOpenApp(app);
+      if (shown.current) {
+        latest.current.then(
+          ({ revalidate }) => revalidate && reload(),
+          () => {},
+        );
+      }
+      shown.current = true;
+    }, [app, reload]),
+  );
 
   return (
     <ErrorBoundary
@@ -48,8 +65,8 @@ export function ServerScreen({ path }: { path: string }) {
   );
 }
 
-function Screen({ screen }: { screen: Promise<ReactNode> }) {
-  return use(screen);
+function Screen({ screen }: { screen: Promise<Fetched> }) {
+  return use(screen).node;
 }
 
 // In backtickjs.com's colours (server/look.ts): ink and paper, and its red.
