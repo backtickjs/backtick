@@ -22,6 +22,4 @@ Users' code runs on this domain, so it holds no secrets. A Cloudflare Worker (`s
 
 `wrangler.jsonc` names the Worker, `backtickjs-app`, its loader binding, and Supabase's URL and publishable key, which are public. `pnpm dev` runs it on this machine; a phone's request is one with its host, `curl -H "Host: <id>.backtickjs.app" localhost:8787/`. `pnpm run deploy` deploys it.
 
-Until the cutover (plan, section 10), the Vercel project `backtickjs-app`, linked from this folder, still serves `backtickjs.app` and `*.backtickjs.app` with the version before the Worker, forwarding the phone to `api.backtickjs.com`. Don't deploy it again: the Worker's code needs the loader.
-
 `pnpm test` checks its routing, with Supabase, the cache and the loader stubbed.

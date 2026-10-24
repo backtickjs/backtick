@@ -4,12 +4,12 @@ Backtick's service, at `https://api.backtickjs.com`: the server behind the app b
 
 ## Where the code runs
 
-| Runs in             | Files                           | What it does                                                                                                                                                                                  |
-| ------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The Vercel Function | `src/index.ts`, `src/function/` | The MCP endpoint: the tools, the store and the client that drives the sandbox, and the pages. It holds the secrets.                                                                           |
-| The browser         | `web/src/`                      | The pages' scripts, which the function bundles and Solid draws.                                                                                                                               |
-| A Vercel Sandbox    | `sandbox/`                      | A server on localhost that type-checks an `App.tsx` and answers a phone's request with it, at a path, for the phone's modules. It runs the model's code, so it has no secrets and no network. |
-| This machine        | `scripts/`, `test/`             | The snapshot, timing and dev scripts, and the tests.                                                                                                                                          |
+| Runs in             | Files                           | What it does                                                                                                                                  |
+| ------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| The Vercel Function | `src/index.ts`, `src/function/` | The MCP endpoint: the tools, the store and the client that drives the sandbox, and the pages. It holds the secrets.                           |
+| The browser         | `web/src/`                      | The pages' scripts, which the function bundles and Solid draws.                                                                               |
+| A Vercel Sandbox    | `sandbox/`                      | A server on localhost that type-checks an `App.tsx` and compiles its release. The model's code is in it, so it has no secrets and no network. |
+| This machine        | `scripts/`, `test/`             | The snapshot, timing and dev scripts, and the tests.                                                                                          |
 
 Each user gets one sandbox, `build-<user>-<snapshot>`, made from a snapshot of the sandbox package (`sandbox/`: its own `package.json`, with the phone's packages at the shell's versions, its server and its tests) and kept for 10 minutes after its last call. `start_app` makes it in the background, so the first `save_app` finds it warm. Its name includes the snapshot, so after a new snapshot no one's sandbox from the old one is reused.
 
@@ -27,7 +27,7 @@ Each user gets one sandbox, `build-<user>-<snapshot>`, made from a snapshot of t
 
 An error stops the save; a warning, such as a regex escaped as if in a string, goes back with the saved version.
 
-An app is a Hono server whose routes are its screens, rendered with `@backtickjs/hono`'s `backtick()`; its default export is the server, which `save_app` checks. The phone opens an app at its own host, `https://<id>.backtickjs.app/<path>`, which holds no secrets and forwards the request here, `GET /apps/<id>/<path>`, with the phone's token and its modules in `x-backtick-modules`, as any Backtick client sends them. The latest version's server answers it in the owner's sandbox, at the same path, with its number in `x-backtick-version`: the screen's bundle, a 426 with the bundler's message for a module the phone lacks, a 404 for a path with no route. Someone else's app is a 404, like one that doesn't exist.
+An app is a Hono server whose routes are its screens, rendered with `@backtickjs/hono`'s `backtick()`; its default export is the server, which `save_app` checks. Each save stores the version's source and its release, the app compiled and bundled into one module (`sandbox/src/compile.ts`), in `versions.compiled`. Nothing here answers the phone: it opens an app at the app's own host, `https://<id>.backtickjs.app/<path>`, whose Worker (`apps/backtickjs.app`) runs the latest release.
 
 ## Setting up
 
@@ -76,7 +76,7 @@ It serves the function at `http://localhost:3000/mcp`, against the real sandbox 
 claude mcp add --transport http backtick http://localhost:3000/mcp
 ```
 
-`pnpm test` checks the typecheck, the screens and the sandbox's server on this machine, with no Vercel or Supabase calls.
+`pnpm test` checks the imports, the typecheck, the releases and the sandbox's server on this machine, with no Vercel or Supabase calls.
 
 `node --env-file=.env.local scripts/e2e.ts` runs the whole flow against `https://api.backtickjs.com`, or `BASE`: the tools as a host calls them, then a screen as a phone fetches it, through `https://<id>.backtickjs.app`. It signs in as `test@backtickjs.app` through `scripts/testUser.ts`: users sign in with Google only, with the Email provider off, so the test user signs in with a one-time link Supabase's admin API makes, which only the service role's key can ask for. The first link makes the user.
 
