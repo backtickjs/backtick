@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/language-server",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "private": true,
   "description": "Internal: a Volar language server for Backtick client scripts, used by the VS Code extension in development",
   "license": "MIT",
@@ -13,7 +13,7 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/language-plugin": "^0.2.4",
+    "@backtickjs/language-plugin": "^0.2.5",
     "@volar/language-server": "^2.4.28",
     "vscode-uri": "^3.0.8"
   },

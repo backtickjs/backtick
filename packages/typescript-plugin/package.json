@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/typescript-plugin",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Internal: the tsserver plugin that type-checks Backtick client scripts in your editor",
   "keywords": [
     "backtick",
@@ -49,14 +49,14 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/language-plugin": "^0.2.4",
-    "@backtickjs/language-service": "^0.2.4",
+    "@backtickjs/language-plugin": "^0.2.5",
+    "@backtickjs/language-service": "^0.2.5",
     "@volar/language-core": "^2.4.28",
     "@volar/typescript": "^2.4.28"
   },
   "devDependencies": {
-    "@backtickjs/core": "^0.2.4",
-    "@backtickjs/jsx-solid": "^0.2.4",
+    "@backtickjs/core": "^0.2.5",
+    "@backtickjs/jsx-solid": "^0.2.5",
     "prettier": "^3.6.2",
     "solid-js": "1.9.14",
     "typescript": "^6.0.3"

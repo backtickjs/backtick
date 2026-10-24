@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/tsc",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "backtick-tsc: tsc that type-checks Backtick client scripts and every splice crossing into them",
   "keywords": [
     "backtick",
@@ -52,9 +52,9 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/compiler": "^0.2.4",
-    "@backtickjs/language-service": "^0.2.4",
-    "@backtickjs/language-plugin": "^0.2.4",
+    "@backtickjs/compiler": "^0.2.5",
+    "@backtickjs/language-service": "^0.2.5",
+    "@backtickjs/language-plugin": "^0.2.5",
     "@volar/typescript": "^2.4.28"
   },
   "peerDependencies": {
