@@ -3,7 +3,6 @@
 // base snapshot and starts the server; each call keeps it another `warm`.
 import { createHash, randomUUID } from "node:crypto";
 import { Sandbox } from "@vercel/sandbox";
-import type { Compiled } from "../../sandbox/src/compile.ts";
 import type { Answer } from "../../sandbox/src/screen.ts";
 import type { Typechecked } from "../../sandbox/src/typecheck.ts";
 
@@ -35,18 +34,18 @@ export async function typecheckInSandbox(
   );
 }
 
-// The app's release, compiled, with the versions of the server packages it
-// imports, or the errors that keep it from being one.
-export async function compileInSandbox(
+// What a save checks, in the owner's sandbox: the typecheck's errors and
+// warnings, and, if there are no errors, the app's release.
+export async function checkInSandbox(
   user: string,
   source: string,
   snapshotId: string,
-): Promise<Compiled> {
-  return postMessageToSandbox<Compiled>(
+): Promise<Typechecked & { compiled?: string }> {
+  return postMessageToSandbox<Typechecked & { compiled?: string }>(
     user,
     source,
     snapshotId,
-    "compile",
+    "check",
     {},
   );
 }

@@ -29,8 +29,8 @@ export async function latestVersion(
     : { version: data.version, source: data.source };
 }
 
-// Saves the owner's app's next version, 1 for its first, and returns its
-// number, or nothing if the app is someone else's. The first save creates the
+// Saves the owner's app's next version, 1 for its first, with its release,
+// and returns its number, or nothing if the app is someone else's. The first save creates the
 // app, and each one gives it `title`. Two saves at once for one app collide on
 // the key, and the second fails.
 export async function saveVersion(
@@ -38,6 +38,7 @@ export async function saveVersion(
   owner: string,
   title: string,
   source: string,
+  compiled: string,
 ): Promise<number | undefined> {
   const existing = await supabase
     .from("apps")
@@ -60,7 +61,7 @@ export async function saveVersion(
   const version = latest === undefined ? 1 : latest.version + 1;
   const { error } = await supabase
     .from("versions")
-    .insert({ app_id: id, version, source });
+    .insert({ app_id: id, version, source, compiled });
   if (error) {
     throw failed(error);
   }

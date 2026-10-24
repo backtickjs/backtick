@@ -34,7 +34,7 @@ function write(name: string, source: string): string {
 }
 
 // As the sandbox runs it: one process, asked again and again.
-it("typechecks and bundles over HTTP, file after file", async () => {
+it("typechecks, checks and answers over HTTP, file after file", async () => {
   const port = 5199;
   const server = spawn(
     process.execPath,
@@ -72,6 +72,12 @@ it("typechecks and bundles over HTTP, file after file", async () => {
     });
     const { errors } = await post("typecheck", { file: typo });
     assert.match(errors.join("\n"), /^App\.tsx\(31,51\): error TS2345/);
+    const checked = await post("check", { file: app });
+    assert.deepEqual(checked.errors, []);
+    assert.match(checked.compiled, /ClientVersionMismatch/);
+    const refusedCheck = await post("check", { file: typo });
+    assert.equal(refusedCheck.compiled, undefined);
+    assert.match(refusedCheck.errors.join("\n"), /TS2345/);
     assert.equal(
       (await post("screen", { file: app, path: "/day", modules: phone }))
         .status,

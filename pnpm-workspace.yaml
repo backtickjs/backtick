@@ -41,3 +41,13 @@ packageExtensions:
   bun-types:
     dependencies:
       undici-types: "^7.24.6"
+  # Its declarations add three.js's elements to React's JSX without depending
+  # on React's types, so they went to whichever copy pnpm hoisted: since the
+  # shell moved to @types/react 19.3.0, not the one Doom checks with. A peer,
+  # so each project's own copy is the one they extend.
+  "@react-three/fiber":
+    peerDependencies:
+      "@types/react": "*"
+    peerDependenciesMeta:
+      "@types/react":
+        optional: true

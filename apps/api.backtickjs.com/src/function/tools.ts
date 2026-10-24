@@ -10,7 +10,7 @@ import { waitUntil } from "@vercel/functions";
 import * as z from "zod";
 import { card, cardHtml, cardScriptOrigin, cardUri } from "./card.ts";
 import { phoneModules, serverModules, unavailableImports } from "./imports.ts";
-import { snapshotId, typecheckInSandbox } from "./sandbox.ts";
+import { checkInSandbox, snapshotId, typecheckInSandbox } from "./sandbox.ts";
 import { starter } from "./starter.ts";
 import {
   type Check,
@@ -138,8 +138,8 @@ export function tools(owner: string): McpServer {
       const checked =
         unprovided.length > 0
           ? { errors: unprovided, warnings: [] }
-          : await typecheckInSandbox(owner, code, snapshotId());
-      const { errors, warnings } = checked;
+          : await checkInSandbox(owner, code, snapshotId());
+      const { errors, warnings, compiled } = checked;
       const durationMs = Math.round(performance.now() - started);
       if (errors.length > 0) {
         recorded({
@@ -152,7 +152,7 @@ export function tools(owner: string): McpServer {
         });
         return failed([...errors, ...warnings].join("\n"));
       }
-      const version = await saveVersion(id, owner, title, code);
+      const version = await saveVersion(id, owner, title, code, compiled!);
       if (version === undefined) {
         return failed(`App ${id} isn't yours: start your own with start_app.`);
       }

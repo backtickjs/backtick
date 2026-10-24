@@ -1,5 +1,5 @@
-// The sandbox's side: typechecks, compiles and answers for as long as it runs, so a warm
-// sandbox loads TypeScript and parses the declarations once. Listens on
+// The sandbox's side: typechecks, compiles and answers for as long as it
+// runs, so a warm sandbox loads TypeScript and parses the declarations once. Listens on
 // localhost only; the function reaches it with `curl` inside the sandbox.
 // `node --import @backtickjs/node-plugin src/serve.ts`, on `PORT` or 3000.
 import { serve } from "@hono/node-server";
@@ -17,10 +17,20 @@ app.post("/typecheck", async (c) => {
   return c.json(typecheck(file));
 });
 
-// The app's release, or why it can't be one.
-app.post("/compile", async (c) => {
+// What a save checks: the typecheck, then, if it's clean, the release the app
+// compiles to. One call, so the app is written here once.
+app.post("/check", async (c) => {
   const { file } = await c.req.json<{ file: string }>();
-  return c.json(await compile(file));
+  const typechecked = typecheck(file);
+  if (typechecked.errors.length > 0) {
+    return c.json(typechecked);
+  }
+  const release = await compile(file);
+  return c.json(
+    release.errors === undefined
+      ? { ...typechecked, compiled: release.code }
+      : { ...typechecked, errors: release.errors },
+  );
 });
 
 // The app's answer at a path, whatever its status, for the function to pass
