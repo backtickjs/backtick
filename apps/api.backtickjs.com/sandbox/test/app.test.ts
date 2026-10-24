@@ -2,7 +2,9 @@ import assert from "node:assert/strict";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, it } from "node:test";
+import ts from "typescript";
 import { installedPackages } from "@backtickjs/core/node";
+import { compile } from "../src/compile.ts";
 import { screen } from "../src/screen.ts";
 import { typecheck } from "../src/typecheck.ts";
 
@@ -117,5 +119,19 @@ describe("screen", () => {
       phone,
     );
     assert.equal(status, 404);
+  });
+});
+
+describe("compile", () => {
+  it("bundles the counter into one minified release, its server packages in it", async () => {
+    const { code, errors } = await compile(write("counter", counter));
+    assert.equal(errors, undefined);
+    const imports = ts
+      .createSourceFile("release.js", code!, ts.ScriptTarget.Latest)
+      .statements.filter(ts.isImportDeclaration)
+      .map(({ moduleSpecifier }) => (moduleSpecifier as ts.StringLiteral).text);
+    assert.deepEqual([...new Set(imports)], ["node:async_hooks"]);
+    assert.match(code!, /ClientVersionMismatch/);
+    assert.ok(code!.length < 100_000, `${code!.length} bytes`);
   });
 });

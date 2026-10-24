@@ -9,7 +9,7 @@ import { McpServer, type CallToolResult } from "@modelcontextprotocol/server";
 import { waitUntil } from "@vercel/functions";
 import * as z from "zod";
 import { card, cardHtml, cardScriptOrigin, cardUri } from "./card.ts";
-import { phoneModules, unprovidedImports } from "./phoneModules.ts";
+import { phoneModules, serverModules, unavailableImports } from "./imports.ts";
 import { snapshotId, typecheckInSandbox } from "./sandbox.ts";
 import { starter } from "./starter.ts";
 import {
@@ -64,7 +64,8 @@ export function tools(owner: string): McpServer {
       return text(
         `${JSON.stringify({ id, file: "App.tsx" })}\n\n` +
           `\`\`\`tsx\n${starter}\`\`\`\n\n` +
-          `The phone provides these client modules, and only these: ${phoneModules.join(", ")}.`,
+          `The phone provides these client modules, and only these: ${phoneModules.join(", ")}. ` +
+          `The server has these packages, and only these: ${serverModules.join(", ")}.`,
       );
     },
   );
@@ -133,7 +134,7 @@ export function tools(owner: string): McpServer {
     },
     async ({ id, title, code }) => {
       const started = performance.now();
-      const unprovided = await unprovidedImports("App.tsx", code);
+      const unprovided = await unavailableImports("App.tsx", code);
       const checked =
         unprovided.length > 0
           ? { errors: unprovided, warnings: [] }

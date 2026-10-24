@@ -208,4 +208,10 @@ export const moduleMap = {
   get "react-native-webview"() {
     return require("react-native-webview");
   },
+  get three() {
+    return require("three");
+  },
+  get "@react-three/fiber/native"() {
+    return require("@react-three/fiber/native");
+  },
 } satisfies Record<Module, unknown>;

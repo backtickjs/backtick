@@ -69,6 +69,8 @@ export const modules = [
   "react-native-screens",
   "react-native-view-shot",
   "react-native-webview",
+  "three",
+  "@react-three/fiber/native",
 ] as const;
 
 export type Module = (typeof modules)[number];
