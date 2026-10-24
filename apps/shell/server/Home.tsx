@@ -11,10 +11,13 @@ import {
   Alert,
   FlatList,
   Image,
+  KeyboardAvoidingView,
   Linking,
   Modal,
+  Platform,
   Pressable,
   StyleSheet,
+  TextInput,
   Text,
   useWindowDimensions,
   View,
@@ -28,7 +31,8 @@ const placeholder = `${process.env.SUPABASE_URL}/storage/v1/object/public/screen
 // The home: the user's apps, last saved first, as a grid of cards the way app
 // builders list projects. A card opens its app by the shell's link to it, as a
 // page links to another site; its ⋯ opens a sheet with the app's details,
-// opening and deleting, and the avatar one with the account and signing out. Pulled down, it loads `/` again, as a browser reloads a
+// opening and deleting, the avatar one with the account and signing out, and
+// + New one that asks Claude or ChatGPT for a new app. Pulled down, it loads `/` again, as a browser reloads a
 // page. Read as the user, whose token Supabase's policies let see only their
 // own apps, and none they deleted.
 export async function Home(props: { authorization: string }) {
@@ -108,6 +112,20 @@ export async function Home(props: { authorization: string }) {
         justifyContent: "space-between",
       },
       initial: { alignItems: "center", justifyContent: "center" },
+      new: { borderRadius: 999, paddingHorizontal: 16, paddingVertical: 9 },
+      newLabel: { fontSize: 15, fontWeight: "600" },
+      idea: {
+        minHeight: 120,
+        borderWidth: 1,
+        borderRadius: 16,
+        padding: 16,
+        marginTop: 16,
+        marginBottom: 18,
+        fontSize: 17,
+        lineHeight: 24,
+        textAlignVertical: "top",
+      },
+      note: { fontSize: 13, lineHeight: 19, textAlign: "center", marginTop: 4 },
       account: {
         flexDirection: "row",
         alignItems: "center",
@@ -191,6 +209,7 @@ export async function Home(props: { authorization: string }) {
       paper: string;
       muted: string;
       line: string;
+      wash: string;
       danger: string;
     };
 
@@ -255,20 +274,100 @@ export async function Home(props: { authorization: string }) {
           animationType="slide"
           onRequestClose={onClose}
         >
-          <$Pressable style={styles.backdrop} onPress={onClose} />
-          <$View
+          {/* Above the keyboard, for a sheet with a text field. */}
+          <$KeyboardAvoidingView
+            // Below the status bar, however high the keyboard pushes it.
+            style={{ flex: 1, paddingTop: insets.top + 12 }}
+            behavior={$Platform.OS === "ios" ? "padding" : "height"}
+          >
+            <$Pressable style={styles.backdrop} onPress={onClose} />
+            <$View
+              style={[
+                styles.sheet,
+                {
+                  backgroundColor: colors.paper,
+                  paddingBottom: insets.bottom + 16,
+                },
+              ]}
+            >
+              <$View
+                style={[styles.handle, { backgroundColor: colors.line }]}
+              />
+              {props.children}
+            </$View>
+          </$KeyboardAvoidingView>
+        </$Modal>
+      );
+    }
+
+    // A new app, asked of an assistant: a new chat there, the prompt written in
+    // and not yet sent, framed for the Backtick connector the user added. Its
+    // card's Open in Backtick brings the app back here.
+    function CreateSheet(props: { colors: Colors; onClose: () => void }) {
+      const { colors, onClose } = props;
+      const [idea, setIdea] = $useState("");
+      // Names Backtick, so the assistant makes the app with its connector
+      // rather than answering in text.
+      const prompt = "Backtick app: " + idea.trim();
+      const ready = idea.trim().length > 0;
+      const ask = (url: string) => {
+        onClose();
+        $Linking.openURL(url + encodeURIComponent(prompt));
+      };
+      return (
+        <Sheet colors={colors} onClose={onClose}>
+          <$Text style={[styles.sheetTitle, { color: colors.ink }]}>
+            New app
+          </$Text>
+          <$TextInput
+            value={idea}
+            onChangeText={setIdea}
+            placeholder="An app that…"
+            placeholderTextColor={colors.muted}
+            multiline
+            autoFocus
             style={[
-              styles.sheet,
+              styles.idea,
               {
-                backgroundColor: colors.paper,
-                paddingBottom: insets.bottom + 16,
+                color: colors.ink,
+                borderColor: colors.line,
+                backgroundColor: colors.wash,
               },
             ]}
+          />
+          <$Pressable
+            disabled={!ready}
+            style={[
+              styles.button,
+              { backgroundColor: colors.ink, opacity: ready ? 1 : 0.4 },
+            ]}
+            onPress={() => ask("https://claude.ai/new?q=")}
           >
-            <$View style={[styles.handle, { backgroundColor: colors.line }]} />
-            {props.children}
-          </$View>
-        </$Modal>
+            <$Text style={[styles.label, { color: colors.paper }]}>
+              Ask Claude
+            </$Text>
+          </$Pressable>
+          <$Pressable
+            disabled={!ready}
+            style={[
+              styles.button,
+              {
+                borderWidth: 1,
+                borderColor: colors.line,
+                opacity: ready ? 1 : 0.4,
+              },
+            ]}
+            onPress={() => ask("https://chatgpt.com/?q=")}
+          >
+            <$Text style={[styles.label, { color: colors.ink }]}>
+              Ask ChatGPT
+            </$Text>
+          </$Pressable>
+          <$Text style={[styles.note, { color: colors.muted }]}>
+            Opens a new chat with your idea. The assistant needs the Backtick
+            connector.
+          </$Text>
+        </Sheet>
       );
     }
 
@@ -401,6 +500,7 @@ export async function Home(props: { authorization: string }) {
       const [refreshing, setRefreshing] = $useState(false);
       const [selected, setSelected] = $useState<App | null>(null);
       const [accountOpen, setAccountOpen] = $useState(false);
+      const [creating, setCreating] = $useState(false);
       // Two columns, 20 at the edges and 14 between.
       const cardWidth = Math.floor((width - 40 - 14) / 2);
       return (
@@ -432,9 +532,20 @@ export async function Home(props: { authorization: string }) {
                     <Avatar size={34} colors={colors} />
                   </$Pressable>
                 </$View>
-                <$Text style={[styles.heading, { color: colors.ink }]}>
-                  Your apps
-                </$Text>
+                <$View style={styles.top}>
+                  <$Text style={[styles.heading, { color: colors.ink }]}>
+                    Your apps
+                  </$Text>
+                  <$Pressable
+                    onPress={() => setCreating(true)}
+                    style={[styles.new, { backgroundColor: colors.ink }]}
+                    accessibilityLabel="New app"
+                  >
+                    <$Text style={[styles.newLabel, { color: colors.paper }]}>
+                      + New
+                    </$Text>
+                  </$Pressable>
+                </$View>
               </$View>
             }
             ListEmptyComponent={
@@ -451,6 +562,9 @@ export async function Home(props: { authorization: string }) {
               />
             )}
           />
+          {creating ? (
+            <CreateSheet colors={colors} onClose={() => setCreating(false)} />
+          ) : null}
           {accountOpen ? (
             <AccountSheet
               colors={colors}
