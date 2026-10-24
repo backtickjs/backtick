@@ -28,7 +28,7 @@ const placeholder = `${process.env.SUPABASE_URL}/storage/v1/object/public/screen
 // The home: the user's apps, last saved first, as a grid of cards the way app
 // builders list projects. A card opens its app by the shell's link to it, as a
 // page links to another site; its ⋯ opens a sheet with the app's details,
-// opening and deleting. Pulled down, it loads `/` again, as a browser reloads a
+// opening and deleting, and the avatar one with the account and signing out. Pulled down, it loads `/` again, as a browser reloads a
 // page. Read as the user, whose token Supabase's policies let see only their
 // own apps, and none they deleted.
 export async function Home(props: { authorization: string }) {
@@ -47,6 +47,18 @@ export async function Home(props: { authorization: string }) {
   if (error) {
     throw new Error(`Supabase: ${error.message}`, { cause: error });
   }
+  // Who's signed in, for the avatar, from the token's own claims: Supabase
+  // checked it in the query above, and Google's sign-in put the name and
+  // picture in its user metadata.
+  const claims = JSON.parse(
+    Buffer.from(props.authorization.split(".")[1]!, "base64url").toString(),
+  ) as { email?: string; user_metadata?: Record<string, unknown> };
+  const metadata = claims.user_metadata ?? {};
+  const account = {
+    name: String(metadata.full_name ?? metadata.name ?? ""),
+    email: claims.email ?? "",
+    picture: (metadata.avatar_url ?? metadata.picture ?? null) as string | null,
+  };
   const apps = data
     .map(({ id, title, created_at, versions }) => {
       const latest = versions.reduce((a, b) => (b.version > a.version ? b : a));
@@ -63,7 +75,9 @@ export async function Home(props: { authorization: string }) {
 
   return cs`{
     const styles = $StyleSheet.create({
-      list: { paddingHorizontal: 20, paddingBottom: 32 },
+      // The insets are added where it's drawn, so content scrolls under the
+      // status bar and ends clear of the gesture bar.
+      list: { paddingHorizontal: 20 },
       header: { gap: 22, paddingTop: 12, paddingBottom: 24 },
       heading: {
         fontSize: 40,
@@ -88,7 +102,18 @@ export async function Home(props: { authorization: string }) {
         paddingLeft: 8,
       },
       muted: { fontSize: 17, lineHeight: 26 },
-      link: { fontSize: 15, fontWeight: "600", paddingVertical: 16 },
+      top: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+      },
+      initial: { alignItems: "center", justifyContent: "center" },
+      account: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 16,
+        marginBottom: 24,
+      },
       backdrop: { flex: 1, backgroundColor: "rgba(0,0,0,0.4)" },
       sheet: {
         borderTopLeftRadius: 28,
@@ -215,11 +240,112 @@ export async function Home(props: { authorization: string }) {
       );
     }
 
-    // The app's details, and what can be done with it: a bottom sheet, as
-    // phones show a menu of actions.
-    function Sheet(props: { app: App; colors: Colors; onClose: () => void }) {
-      const { app, colors, onClose } = props;
+    // A bottom sheet, as phones show a menu of actions, over the dimmed home.
+    function Sheet(props: {
+      colors: Colors;
+      onClose: () => void;
+      children: any;
+    }) {
+      const { colors, onClose } = props;
       const insets = $useSafeAreaInsets();
+      return (
+        <$Modal
+          visible
+          transparent
+          animationType="slide"
+          onRequestClose={onClose}
+        >
+          <$Pressable style={styles.backdrop} onPress={onClose} />
+          <$View
+            style={[
+              styles.sheet,
+              {
+                backgroundColor: colors.paper,
+                paddingBottom: insets.bottom + 16,
+              },
+            ]}
+          >
+            <$View style={[styles.handle, { backgroundColor: colors.line }]} />
+            {props.children}
+          </$View>
+        </$Modal>
+      );
+    }
+
+    // The account's picture, or its initial in a circle.
+    function Avatar(props: { size: number; colors: Colors }) {
+      const { size, colors } = props;
+      const round = { width: size, height: size, borderRadius: size / 2 };
+      const picture = $account.picture;
+      return picture ? (
+        <$Image source={{ uri: picture }} style={round} />
+      ) : (
+        <$View
+          style={[round, styles.initial, { backgroundColor: colors.line }]}
+        >
+          <$Text
+            style={{
+              color: colors.ink,
+              fontSize: size * 0.42,
+              fontWeight: "700",
+            }}
+          >
+            {($account.name || $account.email || "?").slice(0, 1).toUpperCase()}
+          </$Text>
+        </$View>
+      );
+    }
+
+    // Who's signed in, and signing out.
+    function AccountSheet(props: { colors: Colors; onClose: () => void }) {
+      const { colors, onClose } = props;
+      const signOut = () => {
+        onClose();
+        $Linking.openURL($shellURL("sign-out"));
+      };
+      return (
+        <Sheet colors={colors} onClose={onClose}>
+          <$View style={styles.account}>
+            <Avatar size={56} colors={colors} />
+            <$View style={{ flex: 1 }}>
+              {$account.name ? (
+                <$Text
+                  numberOfLines={1}
+                  style={[styles.sheetTitle, { color: colors.ink }]}
+                >
+                  {$account.name}
+                </$Text>
+              ) : null}
+              <$Text
+                numberOfLines={1}
+                style={[styles.detail, { color: colors.muted }]}
+              >
+                {$account.email}
+              </$Text>
+            </$View>
+          </$View>
+          <$Pressable
+            style={[
+              styles.button,
+              { borderWidth: 1, borderColor: colors.line },
+            ]}
+            onPress={signOut}
+          >
+            <$Text style={[styles.label, { color: colors.ink }]}>
+              Sign out
+            </$Text>
+          </$Pressable>
+        </Sheet>
+      );
+    }
+
+    // The app's details, and what can be done with it.
+    function AppSheet(props: {
+      app: App;
+      colors: Colors;
+      onClose: () => void;
+    }) {
+      const { app, colors, onClose } = props;
       const open = () => {
         onClose();
         $Linking.openURL($shellURL(app.id));
@@ -241,49 +367,30 @@ export async function Home(props: { authorization: string }) {
           ],
         );
       return (
-        <$Modal
-          visible
-          transparent
-          animationType="slide"
-          onRequestClose={onClose}
-        >
-          <$Pressable style={styles.backdrop} onPress={onClose} />
-          <$View
-            style={[
-              styles.sheet,
-              {
-                backgroundColor: colors.paper,
-                paddingBottom: insets.bottom + 16,
-              },
-            ]}
-          >
-            <$View style={[styles.handle, { backgroundColor: colors.line }]} />
-            <$Text style={[styles.sheetTitle, { color: colors.ink }]}>
-              {app.title}
+        <Sheet colors={colors} onClose={onClose}>
+          <$Text style={[styles.sheetTitle, { color: colors.ink }]}>
+            {app.title}
+          </$Text>
+          <$View style={styles.details}>
+            <$Text style={[styles.detail, { color: colors.muted }]}>
+              {"Version " + app.version + " · saved " + ago(app.savedAt)}
             </$Text>
-            <$View style={styles.details}>
-              <$Text style={[styles.detail, { color: colors.muted }]}>
-                {"Version " + app.version + " · saved " + ago(app.savedAt)}
-              </$Text>
-              <$Text style={[styles.detail, { color: colors.muted }]}>
-                {"Created " + date(app.createdAt)}
-              </$Text>
-            </$View>
-            <$Pressable
-              style={[styles.button, { backgroundColor: colors.ink }]}
-              onPress={open}
-            >
-              <$Text style={[styles.label, { color: colors.paper }]}>
-                Open
-              </$Text>
-            </$Pressable>
-            <$Pressable style={styles.button} onPress={remove}>
-              <$Text style={[styles.label, { color: colors.danger }]}>
-                Delete
-              </$Text>
-            </$Pressable>
+            <$Text style={[styles.detail, { color: colors.muted }]}>
+              {"Created " + date(app.createdAt)}
+            </$Text>
           </$View>
-        </$Modal>
+          <$Pressable
+            style={[styles.button, { backgroundColor: colors.ink }]}
+            onPress={open}
+          >
+            <$Text style={[styles.label, { color: colors.paper }]}>Open</$Text>
+          </$Pressable>
+          <$Pressable style={styles.button} onPress={remove}>
+            <$Text style={[styles.label, { color: colors.danger }]}>
+              Delete
+            </$Text>
+          </$Pressable>
+        </Sheet>
       );
     }
 
@@ -293,13 +400,17 @@ export async function Home(props: { authorization: string }) {
       const { width } = $useWindowDimensions();
       const [refreshing, setRefreshing] = $useState(false);
       const [selected, setSelected] = $useState<App | null>(null);
+      const [accountOpen, setAccountOpen] = $useState(false);
       // Two columns, 20 at the edges and 14 between.
       const cardWidth = Math.floor((width - 40 - 14) / 2);
       return (
         <>
           <$FlatList
             style={{ backgroundColor: colors.paper }}
-            contentContainerStyle={[styles.list, { paddingTop: insets.top }]}
+            contentContainerStyle={[
+              styles.list,
+              { paddingTop: insets.top, paddingBottom: insets.bottom + 32 },
+            ]}
             numColumns={2}
             columnWrapperStyle={styles.columns}
             refreshing={refreshing}
@@ -311,7 +422,16 @@ export async function Home(props: { authorization: string }) {
             keyExtractor={(app) => app.id}
             ListHeaderComponent={
               <$View style={styles.header}>
-                <$Logo width={112} color={colors.ink} />
+                <$View style={styles.top}>
+                  <$Logo width={112} color={colors.ink} />
+                  <$Pressable
+                    onPress={() => setAccountOpen(true)}
+                    hitSlop={10}
+                    accessibilityLabel="Account"
+                  >
+                    <Avatar size={34} colors={colors} />
+                  </$Pressable>
+                </$View>
                 <$Text style={[styles.heading, { color: colors.ink }]}>
                   Your apps
                 </$Text>
@@ -330,17 +450,15 @@ export async function Home(props: { authorization: string }) {
                 onMore={() => setSelected(item)}
               />
             )}
-            ListFooterComponent={
-              <$Link
-                href={$shellURL("sign-out")}
-                style={[styles.link, { color: colors.muted }]}
-              >
-                Sign out
-              </$Link>
-            }
           />
+          {accountOpen ? (
+            <AccountSheet
+              colors={colors}
+              onClose={() => setAccountOpen(false)}
+            />
+          ) : null}
           {selected === null ? null : (
-            <Sheet
+            <AppSheet
               app={selected}
               colors={colors}
               onClose={() => setSelected(null)}
