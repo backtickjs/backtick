@@ -91,6 +91,13 @@ export function tools(owner: string): McpServer {
       if (latest === undefined) {
         return failed(`No saved app ${id}.`);
       }
+      // A change is coming: the sandbox is made and warmed while the model
+      // writes it, as for start_app.
+      waitUntil(
+        typecheckInSandbox(owner, starter, snapshotId()).catch((error) =>
+          console.error("Warming the sandbox failed:", error),
+        ),
+      );
       return text(
         `${JSON.stringify({ id, version: latest.version })}\n\n` +
           `\`\`\`tsx\n${latest.source}\`\`\``,
@@ -142,10 +149,22 @@ export function tools(owner: string): McpServer {
     async ({ id, title, code }) => {
       const started = performance.now();
       const unprovided = await unavailableImports("App.tsx", code);
+      // A check that fails (a sandbox that didn't answer, even asked again) is
+      // a failed save like any other: recorded with its source, to reproduce,
+      // and told to the model, to try again.
       const checked =
         unprovided.length > 0
           ? { errors: unprovided, warnings: [] }
-          : await checkInSandbox(owner, code, snapshotId());
+          : await checkInSandbox(owner, code, snapshotId()).catch(
+              (error: Error) => ({
+                errors: [
+                  `The check didn't finish (${error.message}). Save again.`,
+                ],
+                warnings: [],
+                compiled: undefined,
+                packages: undefined,
+              }),
+            );
       const { errors, warnings, compiled, packages } = checked;
       const durationMs = Math.round(performance.now() - started);
       if (errors.length > 0) {
