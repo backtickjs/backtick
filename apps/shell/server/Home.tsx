@@ -2,10 +2,10 @@ import { cs } from "@backtickjs/core";
 import { shellURL } from "./links.js";
 import { Logo, useColors } from "./look.js";
 import { createClient } from "@supabase/supabase-js";
-import { useCallback, useEffect, useRef, useState } from "react" with {
+import { useState } from "react" with {
   backtick: "client",
 };
-import { Link, useFocusEffect } from "expo-router" with {
+import { Link } from "expo-router" with {
   backtick: "client",
 };
 import { setStringAsync } from "expo-clipboard" with { backtick: "client" };
@@ -15,7 +15,6 @@ import { useSafeAreaInsets } from "react-native-safe-area-context" with {
 };
 import {
   Alert,
-  AppState,
   FlatList,
   Image,
   KeyboardAvoidingView,
@@ -40,8 +39,8 @@ const noPreview = `${process.env.SUPABASE_URL}/storage/v1/object/public/screensh
 // builders list projects. A card opens its app by the shell's link to it, as a
 // page links to another site; its ⋯ opens a sheet with the app's details,
 // opening, editing and deleting, the avatar one with the account and signing out, and
-// + New one that asks Claude for a new app. Pulled down, or back on
-// top, it loads `/` again, as a browser reloads a page. Read as the user, whose
+// + New one that asks Claude for a new app. Pulled down, it loads `/`
+// again, as a browser reloads a page. Read as the user, whose
 // token Supabase's policies let see only their own apps, and none they deleted.
 export async function Home(props: { authorization: string }) {
   const supabase = createClient(
@@ -92,7 +91,7 @@ export async function Home(props: { authorization: string }) {
   );
   // Whether the user connected Backtick to Claude (supabase/migrations,
   // assistants()), which registers by its name. Read each time the home
-  // loads, and the home reloads when Backtick comes back from Claude.
+  // loads.
   const { data: assistants } = await supabase.rpc("assistants");
   const claude = (assistants ?? []).some(({ name }: { name: string }) =>
     /claude/i.test(name),
@@ -658,32 +657,6 @@ export async function Home(props: { authorization: string }) {
         setRefreshing(true);
         $Linking.openURL($shellURL("reload"));
       };
-      // Back on top, the home refreshes itself, as a page does on pageshow:
-      // an app made in a chat, or deleted, changed the list meanwhile.
-      const shown = $useRef(false);
-      const onTop = $useRef(false);
-      $useFocusEffect(
-        $useCallback(() => {
-          if (shown.current) {
-            refresh();
-          }
-          shown.current = true;
-          onTop.current = true;
-          return () => {
-            onTop.current = false;
-          };
-        }, []),
-      );
-      // Back from another app (Claude, after connecting) with the home on
-      // top, it refreshes too, as a page does on visibilitychange.
-      $useEffect(() => {
-        const listener = $AppState.addEventListener("change", (state) => {
-          if (state === "active" && onTop.current) {
-            refresh();
-          }
-        });
-        return () => listener.remove();
-      }, []);
       const [asking, setAsking] = $useState<Ask | null>(null);
       const newApp = () =>
         setAsking({
