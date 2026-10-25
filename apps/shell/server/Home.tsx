@@ -193,7 +193,6 @@ export async function Home(props: { authorization: string }) {
       },
       details: { marginTop: 14, marginBottom: 22, gap: 6 },
       detail: { fontSize: 15 },
-      source: { alignSelf: "center", marginTop: 6, fontSize: 13 },
       button: {
         borderRadius: 999,
         paddingVertical: 15,
@@ -616,9 +615,15 @@ export async function Home(props: { authorization: string }) {
             {app.title}
           </$Text>
           <$View style={styles.details}>
-            <$Text style={[styles.detail, { color: colors.muted }]}>
+            {/* Tapped, it shows the version's source: for the curious, so
+                it looks like the rest of the details. */}
+            <$Link
+              href={"/source/" + app.id}
+              onPress={onClose}
+              style={[styles.detail, { color: colors.muted }]}
+            >
               {"Version " + app.version + " · saved " + ago(app.savedAt)}
-            </$Text>
+            </$Link>
             <$Text style={[styles.detail, { color: colors.muted }]}>
               {"Created " + date(app.createdAt)}
             </$Text>
@@ -643,13 +648,6 @@ export async function Home(props: { authorization: string }) {
               Delete
             </$Text>
           </$Pressable>
-          <$Link
-            href={"/source/" + app.id}
-            onPress={onClose}
-            style={[styles.source, { color: colors.muted }]}
-          >
-            View source
-          </$Link>
         </Sheet>
       );
     }
