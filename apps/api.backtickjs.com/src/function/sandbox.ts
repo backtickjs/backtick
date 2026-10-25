@@ -33,20 +33,20 @@ export async function typecheckInSandbox(
   );
 }
 
+type Checked = Typechecked & {
+  compiled?: string;
+  packages?: Record<string, string>;
+};
+
 // What a save checks, in the owner's sandbox: the typecheck's errors and
-// warnings, and, if there are no errors, the app's release.
+// warnings, and, if there are no errors, the app's release and the packages,
+// at their versions, it was built with.
 export async function checkInSandbox(
   user: string,
   source: string,
   snapshotId: string,
-): Promise<Typechecked & { compiled?: string }> {
-  return postMessageToSandbox<Typechecked & { compiled?: string }>(
-    user,
-    source,
-    snapshotId,
-    "check",
-    {},
-  );
+): Promise<Checked> {
+  return postMessageToSandbox<Checked>(user, source, snapshotId, "check", {});
 }
 
 // The owner's sandbox started, so the next open doesn't wait for it: the
@@ -108,11 +108,17 @@ async function postMessageToSandbox<T>(
   return JSON.parse(answer) as T;
 }
 
-// Vercel extends by a second at least; a minute keeps the calls few.
+// Vercel extends by a second at least; a minute keeps the calls few. Only
+// for the next call's speed, so it never fails this one: a sandbox at Vercel's
+// longest lifetime can't be extended, and stops; the next call gets a new one.
 async function keepWarm(sandbox: Sandbox): Promise<void> {
   const left = (sandbox.expiresAt?.getTime() ?? 0) - Date.now();
   if (warm - left >= 60 * 1000) {
-    await sandbox.extendTimeout(warm - left);
+    await sandbox
+      .extendTimeout(warm - left)
+      .catch((error) =>
+        console.error("Keeping the sandbox warm failed:", error),
+      );
   }
 }
 

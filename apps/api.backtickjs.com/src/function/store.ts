@@ -31,18 +31,18 @@ export async function latestVersion(
 }
 
 // Saves the owner's app's next version, 1 for its first, with its release and
-// the snapshot that made it, and returns its number, or why it can't: the app
-// is someone else's, or its owner deleted it. The first save creates the app,
-// and each one gives it
-// `title`. Two saves at once for one app collide on the key, and the second
-// fails. Older versions keep their source but lose their release.
+// the packages it was built with, and returns its number, or why it can't: the
+// app is someone else's, or its owner deleted it. The first save creates the
+// app, and each one gives it `title`. Two saves at once for one app collide on
+// the key, and the second fails. Older versions keep their source but lose
+// their release.
 export async function saveVersion(
   id: string,
   owner: string,
   title: string,
   source: string,
   compiled: string,
-  snapshotId: string,
+  packages: Record<string, string>,
 ): Promise<number | "not yours" | "deleted"> {
   const existing = await supabase
     .from("apps")
@@ -68,7 +68,7 @@ export async function saveVersion(
   const version = latest === undefined ? 1 : latest.version + 1;
   const { error } = await supabase
     .from("versions")
-    .insert({ app_id: id, version, source, compiled, snapshot_id: snapshotId });
+    .insert({ app_id: id, version, source, compiled, packages });
   if (error) {
     throw failed(error);
   }

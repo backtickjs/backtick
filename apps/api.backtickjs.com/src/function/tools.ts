@@ -142,12 +142,11 @@ export function tools(owner: string): McpServer {
     async ({ id, title, code }) => {
       const started = performance.now();
       const unprovided = await unavailableImports("App.tsx", code);
-      const snapshot = snapshotId();
       const checked =
         unprovided.length > 0
           ? { errors: unprovided, warnings: [] }
-          : await checkInSandbox(owner, code, snapshot);
-      const { errors, warnings, compiled } = checked;
+          : await checkInSandbox(owner, code, snapshotId());
+      const { errors, warnings, compiled, packages } = checked;
       const durationMs = Math.round(performance.now() - started);
       if (errors.length > 0) {
         recorded({
@@ -166,7 +165,7 @@ export function tools(owner: string): McpServer {
         title,
         code,
         compiled!,
-        snapshot,
+        packages!,
       );
       if (version === "not yours") {
         return failed(`App ${id} isn't yours: start your own with start_app.`);

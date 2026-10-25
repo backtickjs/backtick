@@ -3,6 +3,7 @@ import { spawn } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { it } from "node:test";
+import { installedPackages } from "@backtickjs/core/node";
 
 // A counter app, as a model writes one from the service's starter.
 const counter = readFileSync(
@@ -65,6 +66,9 @@ it("typechecks and checks over HTTP, file after file", async () => {
     const checked = await post("check", { file: app });
     assert.deepEqual(checked.errors, []);
     assert.match(checked.compiled, /ClientVersionMismatch/);
+    // what it was built with, at the versions installed
+    assert.equal(checked.packages.hono, installedPackages(root).hono);
+    assert.match(checked.packages["@backtickjs/core"], /^\d+\.\d+\.\d+$/);
     const refusedCheck = await post("check", { file: typo });
     assert.equal(refusedCheck.compiled, undefined);
     assert.match(refusedCheck.errors.join("\n"), /TS2345/);
