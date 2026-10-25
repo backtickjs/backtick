@@ -2,8 +2,12 @@ import { cs } from "@backtickjs/core";
 import { shellURL } from "./links.js";
 import { Logo, useColors } from "./look.js";
 import { createClient } from "@supabase/supabase-js";
-import { useState } from "react" with { backtick: "client" };
-import { Link, router } from "expo-router" with { backtick: "client" };
+import { useCallback, useRef, useState } from "react" with {
+  backtick: "client",
+};
+import { Link, useFocusEffect } from "expo-router" with {
+  backtick: "client",
+};
 import { useSafeAreaInsets } from "react-native-safe-area-context" with {
   backtick: "client",
 };
@@ -32,9 +36,9 @@ const placeholder = `${process.env.SUPABASE_URL}/storage/v1/object/public/screen
 // builders list projects. A card opens its app by the shell's link to it, as a
 // page links to another site; its ⋯ opens a sheet with the app's details,
 // opening and deleting, the avatar one with the account and signing out, and
-// + New one that asks Claude or ChatGPT for a new app. Pulled down, it loads `/` again, as a browser reloads a
-// page. Read as the user, whose token Supabase's policies let see only their
-// own apps, and none they deleted.
+// + New one that asks Claude or ChatGPT for a new app. Pulled down, or back on
+// top, it loads `/` again, as a browser reloads a page. Read as the user, whose
+// token Supabase's policies let see only their own apps, and none they deleted.
 export async function Home(props: { authorization: string }) {
   const supabase = createClient(
     process.env.SUPABASE_URL!,
@@ -498,6 +502,23 @@ export async function Home(props: { authorization: string }) {
       const insets = $useSafeAreaInsets();
       const { width } = $useWindowDimensions();
       const [refreshing, setRefreshing] = $useState(false);
+      // Loads the home again, in place, as location.reload() does: the
+      // spinner stays until the new one replaces this one.
+      const refresh = () => {
+        setRefreshing(true);
+        $Linking.openURL($shellURL("reload"));
+      };
+      // Back on top, the home refreshes itself, as a page does on pageshow:
+      // an app made in a chat, or deleted, changed the list meanwhile.
+      const shown = $useRef(false);
+      $useFocusEffect(
+        $useCallback(() => {
+          if (shown.current) {
+            refresh();
+          }
+          shown.current = true;
+        }, []),
+      );
       const [selected, setSelected] = $useState<App | null>(null);
       const [accountOpen, setAccountOpen] = $useState(false);
       const [creating, setCreating] = $useState(false);
@@ -514,10 +535,7 @@ export async function Home(props: { authorization: string }) {
             numColumns={2}
             columnWrapperStyle={styles.columns}
             refreshing={refreshing}
-            onRefresh={() => {
-              setRefreshing(true);
-              $router.replace("/");
-            }}
+            onRefresh={refresh}
             data={$apps}
             keyExtractor={(app) => app.id}
             ListHeaderComponent={

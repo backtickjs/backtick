@@ -1,6 +1,7 @@
 import { router } from "expo-router";
 import { Alert } from "react-native";
 import { currentApp, setOpenApp } from "../openApp";
+import { reloadShownScreen } from "../shown";
 import { apps, signInWithGoogle, supabase } from "../supabase";
 
 // Every link into the phone: an app by its ID, as a browser follows a link to
@@ -10,6 +11,8 @@ import { apps, signInWithGoogle, supabase } from "../supabase";
 //   …/--/<id>/<path>                 the app's <path>
 //   …/--/sign-in, …/--/sign-out      from Backtick's home only
 //   …/--/delete/<id>                 deletes the app, from the home only
+//   …/--/reload                      loads the screen on top again, in place,
+//                                    as location.reload() does
 //   …/--/auth/callback?code=…        sign-in's return, which
 //                                    signInWithGoogle's browser session has
 // Anything else goes to expo-router as is.
@@ -33,6 +36,10 @@ export async function redirectSystemPath({
       return opened;
     }
     router.push(opened);
+    return null;
+  }
+  if (link.pathname === "reload") {
+    reloadShownScreen();
     return null;
   }
   if (first === "delete" && isAppId(rest[0] ?? "") && rest.length === 1) {
@@ -69,8 +76,8 @@ async function deleteApp(id: string): Promise<void> {
       error?.message ?? "It's already gone.",
     );
   }
-  // The home again, its list made afresh without the app.
-  router.replace("/");
+  // The home, on top, loaded again in place without the app.
+  reloadShownScreen();
 }
 
 type Link = { pathname: string; search: string };

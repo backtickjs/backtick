@@ -18,11 +18,6 @@ export function screenUrl(app: string | null, path: string): string {
   return `https://${app === null ? home : app + "." + apps}${path}`;
 }
 
-// A screen, run, and whether its server asked for it to be checked again
-// before it's shown again: `Cache-Control: no-cache`, as a page whose content
-// goes stale says it.
-export type Screen = { node: ReactNode; revalidate: boolean };
-
 // The app's screen at `path`, bundled by its server for this phone's modules,
 // and run. Signed out, the request carries no token. A failure carries the
 // server's reason: a module this build lacks names it.
@@ -30,7 +25,7 @@ export async function fetchScreen(
   app: string | null,
   path: string,
   session: Session | null,
-): Promise<Screen> {
+): Promise<ReactNode> {
   // A token that expired while the phone slept is refreshed first: timers,
   // and so Supabase's refresh, don't run in the background. 90 s is
   // Supabase's own margin.
@@ -48,9 +43,6 @@ export async function fetchScreen(
       `The screen couldn't be opened (${response.status}): ${await response.text()}`,
     );
   }
-  const revalidate = /\bno-cache\b/.test(
-    response.headers.get("cache-control") ?? "",
-  );
   const bundle = (await response.text()) as Bundle<ReactNode>;
-  return { node: await execRoot(bundle, moduleMap), revalidate };
+  return execRoot(bundle, moduleMap);
 }
