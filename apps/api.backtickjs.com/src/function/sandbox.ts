@@ -49,15 +49,6 @@ export async function checkInSandbox(
   return postMessageToSandbox<Checked>(user, source, snapshotId, "check", {});
 }
 
-// The owner's sandbox started, so the next open doesn't wait for it: the
-// phone's home asks for this as it lists the apps.
-export async function warmSandbox(
-  user: string,
-  snapshotId: string,
-): Promise<void> {
-  await keepWarm(await sandboxOf(user, snapshotId));
-}
-
 // One per user and snapshot: after a new snapshot, a user's sandbox from the
 // old one is never reused, and times out unasked. Hashed, to keep the name
 // short.

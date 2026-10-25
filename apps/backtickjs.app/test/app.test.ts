@@ -201,12 +201,11 @@ describe("the bare domain", () => {
       "https://backtickjs.app/.well-known/assetlinks.json",
     );
     assert.equal(answer.status, 200);
-    const [{ target }] =
-      await answer.json<
-        {
-          target: { package_name: string; sha256_cert_fingerprints: string[] };
-        }[]
-      >();
+    const [{ target }] = await answer.json<
+      {
+        target: { package_name: string; sha256_cert_fingerprints: string[] };
+      }[]
+    >();
     assert.equal(target.package_name, "com.backtickjs.app");
     assert.match(
       target.sha256_cert_fingerprints[0],

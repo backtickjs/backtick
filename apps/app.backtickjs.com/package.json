@@ -11,7 +11,6 @@
     "clean": "rm -rf node_modules"
   },
   "dependencies": {
-    "@vercel/functions": "3.9.11",
     "hono": "^4.13.13",
     "shell": "^1.0.0"
   },

@@ -10,10 +10,8 @@ import {
   oauthMetadataResponse,
   requireBearerAuth,
 } from "@modelcontextprotocol/server";
-import { waitUntil } from "@vercel/functions";
 import { Hono } from "hono";
 import { ownerOf, verifier } from "./function/auth.ts";
-import { snapshotId, warmSandbox } from "./function/sandbox.ts";
 import { tools } from "./function/tools.ts";
 // Compiled by `tspc` first: the pages are Backtick scripts.
 import { consentPage } from "../web/dist/index.js";
@@ -68,17 +66,6 @@ app.all("/mcp", async (c) => {
   return auth instanceof Response
     ? auth
     : mcp.fetch(c.req.raw, { authInfo: auth });
-});
-
-// The owner's sandbox started in the background, so their next open doesn't
-// wait for it (about 3.5 s cold, 0.4 s warm). Answered at once.
-app.post("/warm", async (c) => {
-  const auth = await requireBearerAuth({ verifier })(c.req.raw);
-  if (auth instanceof Response) {
-    return auth;
-  }
-  waitUntil(warmSandbox(ownerOf(auth), snapshotId()));
-  return c.body(null, 202);
 });
 
 // Supabase's OAuth server's own discovery document, fetched once per instance.
