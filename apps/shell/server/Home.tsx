@@ -29,8 +29,9 @@ import {
   backtick: "client",
 };
 
-// Every app's card shows this until saves render screenshots of their own.
-const placeholder = `${process.env.SUPABASE_URL}/storage/v1/object/public/screenshots/placeholder.png`;
+// A card's preview until its app has been opened on the phone, which captures
+// one (client/preview.ts).
+const noPreview = `${process.env.SUPABASE_URL}/storage/v1/object/public/screenshots/no-preview.png`;
 
 // The home: the user's apps, last saved first, as a grid of cards the way app
 // builders list projects. A card opens its app by the shell's link to it, as a
@@ -60,15 +61,27 @@ export async function Home(props: { authorization: string }) {
   // picture in its user metadata.
   const claims = JSON.parse(
     Buffer.from(props.authorization.split(".")[1]!, "base64url").toString(),
-  ) as { email?: string; user_metadata?: Record<string, unknown> };
+  ) as {
+    sub: string;
+    email?: string;
+    user_metadata?: Record<string, unknown>;
+  };
   const metadata = claims.user_metadata ?? {};
   const account = {
     name: String(metadata.full_name ?? metadata.name ?? ""),
     email: claims.email ?? "",
     picture: (metadata.avatar_url ?? metadata.picture ?? null) as string | null,
   };
+  // Each app's preview, private to the user, through a link signed for an
+  // hour: none for an app never opened.
+  const { data: previews } = await supabase.storage
+    .from("previews")
+    .createSignedUrls(
+      data.map(({ id }) => `${claims.sub}/${id}.jpg`),
+      60 * 60,
+    );
   const apps = data
-    .map(({ id, title, created_at, versions }) => {
+    .map(({ id, title, created_at, versions }, index) => {
       const latest = versions.reduce((a, b) => (b.version > a.version ? b : a));
       return {
         id,
@@ -76,7 +89,7 @@ export async function Home(props: { authorization: string }) {
         createdAt: created_at,
         version: latest.version,
         savedAt: latest.created_at,
-        screenshot: placeholder,
+        screenshot: previews?.[index]?.signedUrl || noPreview,
       };
     })
     .sort((a, b) => b.savedAt.localeCompare(a.savedAt));
@@ -224,6 +237,11 @@ export async function Home(props: { authorization: string }) {
       onMore: () => void;
     }) {
       const { app, width, colors, onMore } = props;
+      // A phone's screen, shown from the top, where an app's title is.
+      const phone = $useWindowDimensions();
+      const screenHeight = Math.round(
+        ((width - 2) * phone.height) / phone.width,
+      );
       return (
         <$View style={[styles.card, { width }]}>
           <$Link href={$shellURL(app.id)} asChild>
@@ -232,13 +250,13 @@ export async function Home(props: { authorization: string }) {
               // function of the press.
               style={$StyleSheet.flatten([
                 styles.shot,
-                { borderColor: colors.line },
+                { borderColor: colors.line, height: Math.round(width * 1.9) },
               ])}
               onLongPress={onMore}
             >
               <$Image
                 source={{ uri: app.screenshot }}
-                style={{ width: width - 2, height: Math.round(width * 1.75) }}
+                style={{ width: width - 2, height: screenHeight }}
                 resizeMode="cover"
               />
             </$Pressable>

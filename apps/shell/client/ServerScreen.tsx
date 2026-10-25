@@ -4,6 +4,7 @@ import {
   Suspense,
   use,
   useCallback,
+  useEffect,
   useState,
 } from "react";
 import {
@@ -17,6 +18,7 @@ import { useFocusEffect } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ErrorBoundary, getErrorMessage } from "react-error-boundary";
 import { currentApp, setOpenApp } from "./openApp";
+import { savePreview } from "./preview";
 import { fetchScreen } from "./screens";
 import { showing } from "./shown";
 import { CurrentSession } from "./session";
@@ -35,6 +37,34 @@ export function ServerScreen({ path }: { path: string }) {
     () => startTransition(() => setScreen(fetchScreen(app, path, session))),
     [app, path, session],
   );
+  // An app's first screen, once it's had a moment to draw (a game's first
+  // frame included), is its preview on the home's card. Never in the way:
+  // a capture that fails is only logged.
+  useEffect(() => {
+    if (app === null || path !== "/" || session === null) {
+      return;
+    }
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let left = false;
+    screen.then(
+      () => {
+        if (!left) {
+          timer = setTimeout(
+            () =>
+              savePreview(app, session).catch((error) =>
+                console.warn("Saving the preview failed:", error),
+              ),
+            2000,
+          );
+        }
+      },
+      () => {},
+    );
+    return () => {
+      left = true;
+      clearTimeout(timer);
+    };
+  }, [app, path, session, screen]);
   // On top, it's the screen a `reload` link loads again, in place.
   useFocusEffect(
     useCallback(() => {
