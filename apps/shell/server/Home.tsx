@@ -8,6 +8,7 @@ import { useCallback, useRef, useState } from "react" with {
 import { Link, useFocusEffect } from "expo-router" with {
   backtick: "client",
 };
+import { Image as Preview } from "expo-image" with { backtick: "client" };
 import { useSafeAreaInsets } from "react-native-safe-area-context" with {
   backtick: "client",
 };
@@ -73,13 +74,20 @@ export async function Home(props: { authorization: string }) {
     picture: (metadata.avatar_url ?? metadata.picture ?? null) as string | null,
   };
   // Each app's preview, private to the user, through a link signed for an
-  // hour: none for an app never opened.
+  // hour: none for an app never opened. A link is new on every load, so the
+  // phone caches a preview by its app and when it was captured instead.
   const { data: previews } = await supabase.storage
     .from("previews")
     .createSignedUrls(
       data.map(({ id }) => `${claims.sub}/${id}.jpg`),
       60 * 60,
     );
+  const { data: files } = await supabase.storage
+    .from("previews")
+    .list(claims.sub, { limit: 1000 });
+  const captured = new Map(
+    (files ?? []).map((file) => [file.name, file.updated_at]),
+  );
   const apps = data
     .map(({ id, title, created_at, versions }, index) => {
       const latest = versions.reduce((a, b) => (b.version > a.version ? b : a));
@@ -89,7 +97,12 @@ export async function Home(props: { authorization: string }) {
         createdAt: created_at,
         version: latest.version,
         savedAt: latest.created_at,
-        screenshot: previews?.[index]?.signedUrl || noPreview,
+        screenshot: previews?.[index]?.signedUrl
+          ? {
+              uri: previews[index].signedUrl,
+              cacheKey: `${id}@${captured.get(`${id}.jpg`)}`,
+            }
+          : { uri: noPreview, cacheKey: "no-preview" },
       };
     })
     .sort((a, b) => b.savedAt.localeCompare(a.savedAt));
@@ -219,7 +232,7 @@ export async function Home(props: { authorization: string }) {
       createdAt: string;
       version: number;
       savedAt: string;
-      screenshot: string;
+      screenshot: { uri: string; cacheKey: string };
     };
     type Colors = {
       ink: string;
@@ -237,11 +250,6 @@ export async function Home(props: { authorization: string }) {
       onMore: () => void;
     }) {
       const { app, width, colors, onMore } = props;
-      // A phone's screen, shown from the top, where an app's title is.
-      const phone = $useWindowDimensions();
-      const screenHeight = Math.round(
-        ((width - 2) * phone.height) / phone.width,
-      );
       return (
         <$View style={[styles.card, { width }]}>
           <$Link href={$shellURL(app.id)} asChild>
@@ -254,10 +262,16 @@ export async function Home(props: { authorization: string }) {
               ])}
               onLongPress={onMore}
             >
-              <$Image
-                source={{ uri: app.screenshot }}
-                style={{ width: width - 2, height: screenHeight }}
-                resizeMode="cover"
+              <$Preview
+                source={app.screenshot}
+                style={{
+                  width: width - 2,
+                  height: Math.round(width * 1.9) - 2,
+                }}
+                // A phone's screen, from the top, where an app's title is.
+                contentFit="cover"
+                contentPosition="top"
+                cachePolicy="memory-disk"
               />
             </$Pressable>
           </$Link>
