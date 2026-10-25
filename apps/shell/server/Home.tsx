@@ -120,7 +120,7 @@ export async function Home(props: { authorization: string }) {
     const styles = $StyleSheet.create({
       // The insets are added where it's drawn, so content scrolls under the
       // status bar and ends clear of the gesture bar.
-      list: { paddingHorizontal: 20 },
+      list: { paddingHorizontal: 20, flexGrow: 1 },
       header: { gap: 22, paddingTop: 12, paddingBottom: 24 },
       heading: {
         fontSize: 40,
@@ -144,7 +144,20 @@ export async function Home(props: { authorization: string }) {
         letterSpacing: 1,
         paddingLeft: 8,
       },
-      muted: { fontSize: 17, lineHeight: 26 },
+      // In the middle of what's left below the header (the list's content
+      // fills the screen, so this can grow into it).
+      empty: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 14,
+      },
+      emptyText: {
+        fontSize: 16,
+        lineHeight: 23,
+        textAlign: "center",
+        maxWidth: 320,
+      },
       top: {
         flexDirection: "row",
         alignItems: "center",
@@ -672,6 +685,12 @@ export async function Home(props: { authorization: string }) {
         return () => listener.remove();
       }, []);
       const [asking, setAsking] = $useState<Ask | null>(null);
+      const newApp = () =>
+        setAsking({
+          title: "New app",
+          placeholder: "An app that…",
+          prompt: "Backtick app: ",
+        });
       const [selected, setSelected] = $useState<App | null>(null);
       const [accountOpen, setAccountOpen] = $useState(false);
       // Two columns, 20 at the edges and 14 between.
@@ -709,13 +728,7 @@ export async function Home(props: { authorization: string }) {
                     Your apps
                   </$Text>
                   <$Pressable
-                    onPress={() =>
-                      setAsking({
-                        title: "New app",
-                        placeholder: "An app that…",
-                        prompt: "Backtick app: ",
-                      })
-                    }
+                    onPress={newApp}
                     style={[styles.new, { backgroundColor: colors.ink }]}
                     accessibilityLabel="New app"
                   >
@@ -726,10 +739,13 @@ export async function Home(props: { authorization: string }) {
                 </$View>
               </$View>
             }
+            // No apps yet: where to start.
             ListEmptyComponent={
-              <$Text style={[styles.muted, { color: colors.muted }]}>
-                Ask Claude for an app for your phone, and it appears here.
-              </$Text>
+              <$View style={styles.empty}>
+                <$Text style={[styles.emptyText, { color: colors.muted }]}>
+                  Tap + New to create your first app.
+                </$Text>
+              </$View>
             }
             renderItem={({ item }) => (
               <Card
