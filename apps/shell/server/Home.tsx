@@ -2,18 +2,20 @@ import { cs } from "@backtickjs/core";
 import { shellURL } from "./links.js";
 import { Logo, useColors } from "./look.js";
 import { createClient } from "@supabase/supabase-js";
-import { useCallback, useRef, useState } from "react" with {
+import { useCallback, useEffect, useRef, useState } from "react" with {
   backtick: "client",
 };
 import { Link, useFocusEffect } from "expo-router" with {
   backtick: "client",
 };
+import { setStringAsync } from "expo-clipboard" with { backtick: "client" };
 import { Image as Preview } from "expo-image" with { backtick: "client" };
 import { useSafeAreaInsets } from "react-native-safe-area-context" with {
   backtick: "client",
 };
 import {
   Alert,
+  AppState,
   FlatList,
   Image,
   KeyboardAvoidingView,
@@ -22,8 +24,8 @@ import {
   Platform,
   Pressable,
   StyleSheet,
-  TextInput,
   Text,
+  TextInput,
   useWindowDimensions,
   View,
 } from "react-native" with {
@@ -38,7 +40,7 @@ const noPreview = `${process.env.SUPABASE_URL}/storage/v1/object/public/screensh
 // builders list projects. A card opens its app by the shell's link to it, as a
 // page links to another site; its ⋯ opens a sheet with the app's details,
 // opening, editing and deleting, the avatar one with the account and signing out, and
-// + New one that asks Claude or ChatGPT for a new app. Pulled down, or back on
+// + New one that asks Claude for a new app. Pulled down, or back on
 // top, it loads `/` again, as a browser reloads a page. Read as the user, whose
 // token Supabase's policies let see only their own apps, and none they deleted.
 export async function Home(props: { authorization: string }) {
@@ -87,6 +89,13 @@ export async function Home(props: { authorization: string }) {
     .list(claims.sub, { limit: 1000 });
   const captured = new Map(
     (files ?? []).map((file) => [file.name, file.updated_at]),
+  );
+  // Whether the user connected Backtick to Claude (supabase/migrations,
+  // assistants()), which registers by its name. Read each time the home
+  // loads, and the home reloads when Backtick comes back from Claude.
+  const { data: assistants } = await supabase.rpc("assistants");
+  const claude = (assistants ?? []).some(({ name }: { name: string }) =>
+    /claude/i.test(name),
   );
   const apps = data
     .map(({ id, title, created_at, versions }, index) => {
@@ -144,18 +153,6 @@ export async function Home(props: { authorization: string }) {
       initial: { alignItems: "center", justifyContent: "center" },
       new: { borderRadius: 999, paddingHorizontal: 16, paddingVertical: 9 },
       newLabel: { fontSize: 15, fontWeight: "600" },
-      idea: {
-        minHeight: 120,
-        borderWidth: 1,
-        borderRadius: 16,
-        padding: 16,
-        marginTop: 16,
-        marginBottom: 18,
-        fontSize: 17,
-        lineHeight: 24,
-        textAlignVertical: "top",
-      },
-      note: { fontSize: 13, lineHeight: 19, textAlign: "center", marginTop: 4 },
       account: {
         flexDirection: "row",
         alignItems: "center",
@@ -191,6 +188,38 @@ export async function Home(props: { authorization: string }) {
         marginBottom: 10,
       },
       label: { fontSize: 16, fontWeight: "600" },
+      idea: {
+        minHeight: 120,
+        borderWidth: 1,
+        borderRadius: 16,
+        padding: 16,
+        marginTop: 16,
+        marginBottom: 18,
+        fontSize: 17,
+        lineHeight: 24,
+        textAlignVertical: "top",
+      },
+      steps: { gap: 16, marginTop: 18, marginBottom: 24 },
+      step: { flexDirection: "row", gap: 14 },
+      stepNumber: { width: 18, fontSize: 16, fontWeight: "700" },
+      stepText: { fontSize: 16, lineHeight: 22 },
+      server: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 10,
+        borderWidth: 1,
+        borderRadius: 10,
+        paddingHorizontal: 12,
+        paddingVertical: 10,
+      },
+      // iOS has no font named monospace.
+      serverUrl: {
+        flex: 1,
+        fontFamily: $Platform.select({ ios: "Menlo", default: "monospace" }),
+        fontSize: 14,
+      },
+      copy: { fontSize: 14, fontWeight: "600" },
+      note: { fontSize: 13, lineHeight: 19, textAlign: "center", marginTop: 4 },
     });
 
     const months = [
@@ -336,13 +365,14 @@ export async function Home(props: { authorization: string }) {
       );
     }
 
-    // What to ask an assistant: a new app, or a change to one.
+    // What to ask Claude: a new app, or a change to one.
     type Ask = { title: string; placeholder: string; prompt: string };
 
-    // An app made or changed by an assistant: a new chat there, the prompt
-    // written in and not yet sent. It names Backtick (and the app, for a
-    // change), so the assistant uses the connector the user added rather than
-    // answering in text. The card's Open in Backtick brings the app back here.
+    // An app made or changed by Claude: a new chat there, the prompt written
+    // in and not yet sent. It names Backtick (and the app, for a change), so
+    // Claude uses the connector rather than answering in text. The card's
+    // Open in Backtick brings the app back here. Not connected, it shows how
+    // to connect instead, with nothing to write yet.
     function AskSheet(props: {
       ask: Ask;
       colors: Colors;
@@ -350,12 +380,10 @@ export async function Home(props: { authorization: string }) {
     }) {
       const { ask: what, colors, onClose } = props;
       const [idea, setIdea] = $useState("");
-      const prompt = what.prompt + idea.trim();
       const ready = idea.trim().length > 0;
-      const ask = (url: string) => {
-        onClose();
-        $Linking.openURL(url + encodeURIComponent(prompt));
-      };
+      if (!$claude) {
+        return <ConnectSheet colors={colors} onClose={onClose} />;
+      }
       return (
         <Sheet colors={colors} onClose={onClose}>
           <$Text style={[styles.sheetTitle, { color: colors.ink }]}>
@@ -383,32 +411,93 @@ export async function Home(props: { authorization: string }) {
               styles.button,
               { backgroundColor: colors.ink, opacity: ready ? 1 : 0.4 },
             ]}
-            onPress={() => ask("https://claude.ai/new?q=")}
+            onPress={() => {
+              onClose();
+              $Linking.openURL(
+                "https://claude.ai/new?q=" +
+                  encodeURIComponent(what.prompt + idea.trim()),
+              );
+            }}
           >
             <$Text style={[styles.label, { color: colors.paper }]}>
               Ask Claude
             </$Text>
           </$Pressable>
+          <$Text style={[styles.note, { color: colors.muted }]}>
+            Opens a new chat with what you wrote.
+          </$Text>
+        </Sheet>
+      );
+    }
+
+    // How to connect Backtick to Claude, as Claude's app asks it
+    // (2026-10-24), and the button to its Connectors screen.
+    function ConnectSheet(props: { colors: Colors; onClose: () => void }) {
+      const { colors, onClose } = props;
+      const server = "https://api.backtickjs.com/mcp";
+      const [copied, setCopied] = $useState(false);
+      const steps = [
+        "Open Claude's connectors.",
+        "Tap +, then Add custom connector.",
+        "Name it Backtick, with this MCP server URL:",
+        "Tap Continue, then sign in and allow Backtick.",
+        "Come back here.",
+      ];
+      return (
+        <Sheet colors={colors} onClose={onClose}>
+          <$Text style={[styles.sheetTitle, { color: colors.ink }]}>
+            Connect Backtick to Claude
+          </$Text>
+          <$View style={styles.steps}>
+            {steps.map((step, index) => (
+              <$View key={step} style={styles.step}>
+                <$Text style={[styles.stepNumber, { color: colors.muted }]}>
+                  {index + 1}
+                </$Text>
+                <$View style={{ flex: 1, gap: 8 }}>
+                  <$Text style={[styles.stepText, { color: colors.ink }]}>
+                    {step}
+                  </$Text>
+                  {index === 2 ? (
+                    // Tapped, it's copied, for Claude's form.
+                    <$Pressable
+                      onPress={async () => {
+                        await $setStringAsync(server);
+                        setCopied(true);
+                        setTimeout(() => setCopied(false), 2000);
+                      }}
+                      style={[
+                        styles.server,
+                        {
+                          backgroundColor: colors.wash,
+                          borderColor: colors.line,
+                        },
+                      ]}
+                      accessibilityLabel="Copy the MCP server URL"
+                    >
+                      <$Text style={[styles.serverUrl, { color: colors.ink }]}>
+                        {server}
+                      </$Text>
+                      <$Text style={[styles.copy, { color: colors.muted }]}>
+                        {copied ? "Copied" : "Copy"}
+                      </$Text>
+                    </$Pressable>
+                  ) : null}
+                </$View>
+              </$View>
+            ))}
+          </$View>
           <$Pressable
-            disabled={!ready}
-            style={[
-              styles.button,
-              {
-                borderWidth: 1,
-                borderColor: colors.line,
-                opacity: ready ? 1 : 0.4,
-              },
-            ]}
-            onPress={() => ask("https://chatgpt.com/?q=")}
+            style={[styles.button, { backgroundColor: colors.ink }]}
+            onPress={() => {
+              onClose();
+              $Linking.openURL("https://claude.ai/settings/connectors");
+            }}
           >
-            <$Text style={[styles.label, { color: colors.ink }]}>
-              Ask ChatGPT
+            <$Text style={[styles.label, { color: colors.paper }]}>
+              Open Claude's connectors
             </$Text>
           </$Pressable>
-          <$Text style={[styles.note, { color: colors.muted }]}>
-            Opens a new chat with what you wrote. The assistant needs the
-            Backtick connector.
-          </$Text>
         </Sheet>
       );
     }
@@ -559,17 +648,32 @@ export async function Home(props: { authorization: string }) {
       // Back on top, the home refreshes itself, as a page does on pageshow:
       // an app made in a chat, or deleted, changed the list meanwhile.
       const shown = $useRef(false);
+      const onTop = $useRef(false);
       $useFocusEffect(
         $useCallback(() => {
           if (shown.current) {
             refresh();
           }
           shown.current = true;
+          onTop.current = true;
+          return () => {
+            onTop.current = false;
+          };
         }, []),
       );
+      // Back from another app (Claude, after connecting) with the home on
+      // top, it refreshes too, as a page does on visibilitychange.
+      $useEffect(() => {
+        const listener = $AppState.addEventListener("change", (state) => {
+          if (state === "active" && onTop.current) {
+            refresh();
+          }
+        });
+        return () => listener.remove();
+      }, []);
+      const [asking, setAsking] = $useState<Ask | null>(null);
       const [selected, setSelected] = $useState<App | null>(null);
       const [accountOpen, setAccountOpen] = $useState(false);
-      const [asking, setAsking] = $useState<Ask | null>(null);
       // Two columns, 20 at the edges and 14 between.
       const cardWidth = Math.floor((width - 40 - 14) / 2);
       return (
