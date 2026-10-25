@@ -1,16 +1,9 @@
 import { cs } from "@backtickjs/core";
 import { useColorScheme } from "react-native" with { backtick: "client" };
-import {
-  Defs,
-  LinearGradient,
-  Path,
-  Stop,
-  Svg,
-  Text,
-} from "react-native-svg" with { backtick: "client" };
+import { Path, Svg } from "react-native-svg" with { backtick: "client" };
 
 // backtickjs.com's look, for Backtick's own screens: its colours
-// (apps/backtickjs.com/src/styles.css), its wordmark and its gradient.
+// (apps/backtickjs.com/src/styles.css) and its wordmark.
 
 // Light and dark, as the phone is set: violet is the brand, cyan is React's.
 export const palette = {
@@ -21,7 +14,6 @@ export const palette = {
     line: "#e4e4e7",
     wash: "#f7f7f8",
     danger: "#dc2626",
-    shine: ["#0891b2", "#7c3aed"] as const,
   },
   dark: {
     ink: "#fafafa",
@@ -30,7 +22,6 @@ export const palette = {
     line: "#26262b",
     wash: "#121215",
     danger: "#f87171",
-    shine: ["#61dafb", "#a78bfa"] as const,
   },
 };
 
@@ -55,32 +46,5 @@ export const Logo = cs`(props: { width: number; color: string }) => (
     {$paths.map((d) => (
       <$Path key={d.length} d={d} fill={props.color} />
     ))}
-  </$Svg>
-)`;
-
-// One line of text in the site's gradient (its `text-shine`), React's cyan to
-// the brand's violet, drawn as SVG text, set as large as the headline above it.
-export const Shine = cs`(props: {
-  size: number;
-  colors: readonly [string, string];
-  children: string;
-}) => (
-  <$Svg width="100%" height={Math.round(props.size * 1.2)}>
-    <$Defs>
-      <$LinearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
-        <$Stop offset="0" stopColor={props.colors[0]} />
-        <$Stop offset="1" stopColor={props.colors[1]} />
-      </$LinearGradient>
-    </$Defs>
-    <$Text
-      x={0}
-      y={Math.round(props.size * 0.92)}
-      fontSize={props.size}
-      fontWeight="800"
-      letterSpacing={-props.size * 0.043}
-      fill="url(#shine)"
-    >
-      {props.children}
-    </$Text>
   </$Svg>
 )`;
