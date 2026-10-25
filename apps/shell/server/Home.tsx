@@ -37,7 +37,7 @@ const noPreview = `${process.env.SUPABASE_URL}/storage/v1/object/public/screensh
 // The home: the user's apps, last saved first, as a grid of cards the way app
 // builders list projects. A card opens its app by the shell's link to it, as a
 // page links to another site; its ⋯ opens a sheet with the app's details,
-// opening and deleting, the avatar one with the account and signing out, and
+// opening, editing and deleting, the avatar one with the account and signing out, and
 // + New one that asks Claude or ChatGPT for a new app. Pulled down, or back on
 // top, it loads `/` again, as a browser reloads a page. Read as the user, whose
 // token Supabase's policies let see only their own apps, and none they deleted.
@@ -336,15 +336,21 @@ export async function Home(props: { authorization: string }) {
       );
     }
 
-    // A new app, asked of an assistant: a new chat there, the prompt written in
-    // and not yet sent, framed for the Backtick connector the user added. Its
-    // card's Open in Backtick brings the app back here.
-    function CreateSheet(props: { colors: Colors; onClose: () => void }) {
-      const { colors, onClose } = props;
+    // What to ask an assistant: a new app, or a change to one.
+    type Ask = { title: string; placeholder: string; prompt: string };
+
+    // An app made or changed by an assistant: a new chat there, the prompt
+    // written in and not yet sent. It names Backtick (and the app, for a
+    // change), so the assistant uses the connector the user added rather than
+    // answering in text. The card's Open in Backtick brings the app back here.
+    function AskSheet(props: {
+      ask: Ask;
+      colors: Colors;
+      onClose: () => void;
+    }) {
+      const { ask: what, colors, onClose } = props;
       const [idea, setIdea] = $useState("");
-      // Names Backtick, so the assistant makes the app with its connector
-      // rather than answering in text.
-      const prompt = "Backtick app: " + idea.trim();
+      const prompt = what.prompt + idea.trim();
       const ready = idea.trim().length > 0;
       const ask = (url: string) => {
         onClose();
@@ -353,12 +359,12 @@ export async function Home(props: { authorization: string }) {
       return (
         <Sheet colors={colors} onClose={onClose}>
           <$Text style={[styles.sheetTitle, { color: colors.ink }]}>
-            New app
+            {what.title}
           </$Text>
           <$TextInput
             value={idea}
             onChangeText={setIdea}
-            placeholder="An app that…"
+            placeholder={what.placeholder}
             placeholderTextColor={colors.muted}
             multiline
             autoFocus
@@ -400,8 +406,8 @@ export async function Home(props: { authorization: string }) {
             </$Text>
           </$Pressable>
           <$Text style={[styles.note, { color: colors.muted }]}>
-            Opens a new chat with your idea. The assistant needs the Backtick
-            connector.
+            Opens a new chat with what you wrote. The assistant needs the
+            Backtick connector.
           </$Text>
         </Sheet>
       );
@@ -479,8 +485,9 @@ export async function Home(props: { authorization: string }) {
       app: App;
       colors: Colors;
       onClose: () => void;
+      onEdit: () => void;
     }) {
-      const { app, colors, onClose } = props;
+      const { app, colors, onClose, onEdit } = props;
       const open = () => {
         onClose();
         $Linking.openURL($shellURL(app.id));
@@ -520,6 +527,15 @@ export async function Home(props: { authorization: string }) {
           >
             <$Text style={[styles.label, { color: colors.paper }]}>Open</$Text>
           </$Pressable>
+          <$Pressable
+            style={[
+              styles.button,
+              { borderWidth: 1, borderColor: colors.line },
+            ]}
+            onPress={onEdit}
+          >
+            <$Text style={[styles.label, { color: colors.ink }]}>Edit</$Text>
+          </$Pressable>
           <$Pressable style={styles.button} onPress={remove}>
             <$Text style={[styles.label, { color: colors.danger }]}>
               Delete
@@ -553,7 +569,7 @@ export async function Home(props: { authorization: string }) {
       );
       const [selected, setSelected] = $useState<App | null>(null);
       const [accountOpen, setAccountOpen] = $useState(false);
-      const [creating, setCreating] = $useState(false);
+      const [asking, setAsking] = $useState<Ask | null>(null);
       // Two columns, 20 at the edges and 14 between.
       const cardWidth = Math.floor((width - 40 - 14) / 2);
       return (
@@ -589,7 +605,13 @@ export async function Home(props: { authorization: string }) {
                     Your apps
                   </$Text>
                   <$Pressable
-                    onPress={() => setCreating(true)}
+                    onPress={() =>
+                      setAsking({
+                        title: "New app",
+                        placeholder: "An app that…",
+                        prompt: "Backtick app: ",
+                      })
+                    }
                     style={[styles.new, { backgroundColor: colors.ink }]}
                     accessibilityLabel="New app"
                   >
@@ -614,9 +636,13 @@ export async function Home(props: { authorization: string }) {
               />
             )}
           />
-          {creating ? (
-            <CreateSheet colors={colors} onClose={() => setCreating(false)} />
-          ) : null}
+          {asking === null ? null : (
+            <AskSheet
+              ask={asking}
+              colors={colors}
+              onClose={() => setAsking(null)}
+            />
+          )}
           {accountOpen ? (
             <AccountSheet
               colors={colors}
@@ -628,6 +654,14 @@ export async function Home(props: { authorization: string }) {
               app={selected}
               colors={colors}
               onClose={() => setSelected(null)}
+              onEdit={() => {
+                setSelected(null);
+                setAsking({
+                  title: "Edit " + selected.title,
+                  placeholder: "What should change?",
+                  prompt: "Backtick app " + selected.id + ": ",
+                });
+              }}
             />
           )}
         </>
