@@ -76,6 +76,14 @@ await call("save_app", {
 });
 await call("save_app", { id, title: "E2E counter", code: starter });
 await call("get_app", { id });
+await call("update_app", { id, old_str: "no such text", new_str: "" });
+await call("update_app", { id, old_str: "<$Text", new_str: "<$Text" });
+await call("update_app", {
+  id,
+  old_str: "useState<number>(0)",
+  new_str: 'useState<number>("zero")',
+});
+await call("update_app", { id, old_str: '" taps"', new_str: '" presses"' });
 await open(id, "/", phone);
 await open(id, "/", phone);
 await open(id, "/day", phone);

@@ -12,22 +12,23 @@ const supabase = createClient(
 export async function latestVersion(
   id: string,
   owner: string,
-): Promise<{ version: number; source: string } | undefined> {
+): Promise<{ version: number; source: string; title: string } | undefined> {
   const { data, error } = await supabase
-    .from("versions")
-    .select("version, source, apps!inner(owner_id, deleted_at)")
-    .eq("app_id", id)
-    .eq("apps.owner_id", owner)
-    .is("apps.deleted_at", null)
-    .order("version", { ascending: false })
-    .limit(1)
+    .from("apps")
+    .select("title, versions(version, source)")
+    .eq("id", id)
+    .eq("owner_id", owner)
+    .is("deleted_at", null)
+    .order("version", { referencedTable: "versions", ascending: false })
+    .limit(1, { referencedTable: "versions" })
     .maybeSingle();
   if (error) {
     throw failed(error);
   }
-  return data === null
+  const latest = data?.versions[0];
+  return latest === undefined
     ? undefined
-    : { version: data.version, source: data.source };
+    : { version: latest.version, source: latest.source, title: data!.title };
 }
 
 // Saves the owner's app's next version, 1 for its first, with its release and

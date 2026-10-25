@@ -146,65 +146,115 @@ export function tools(owner: string): McpServer {
       },
       _meta: { ui: { resourceUri: cardUri } },
     },
-    async ({ id, title, code }) => {
-      const started = performance.now();
-      const unprovided = await unavailableImports("App.tsx", code);
-      // A check that fails (a sandbox that didn't answer, even asked again) is
-      // a failed save like any other: recorded with its source, to reproduce,
-      // and told to the model, to try again.
-      const checked =
-        unprovided.length > 0
-          ? { errors: unprovided, warnings: [] }
-          : await checkInSandbox(owner, code, snapshotId()).catch(
-              (error: Error) => ({
-                errors: [
-                  `The check didn't finish (${error.message}). Save again.`,
-                ],
-                warnings: [],
-                compiled: undefined,
-                packages: undefined,
-              }),
-            );
-      const { errors, warnings, compiled, packages } = checked;
-      const durationMs = Math.round(performance.now() - started);
-      if (errors.length > 0) {
-        recorded({
-          appId: id,
-          owner,
-          source: code,
-          errors,
-          warnings,
-          durationMs,
-        });
-        return failed([...errors, ...warnings].join("\n"));
+    async ({ id, title, code }) => save(id, title, code),
+  );
+
+  // Artifact-shaped, as Claude's text editor tool's `str_replace`: one exact
+  // replacement, so a small change to a big app isn't the whole file again.
+  registerAppTool(
+    server,
+    "update_app",
+    {
+      title: "Update an app",
+      description:
+        "Replace old_str, which must match exactly once, with new_str in a " +
+        "saved app's latest App.tsx, then save it as save_app does.",
+      inputSchema: z.object({
+        id: z.uuid(),
+        old_str: z.string(),
+        new_str: z.string(),
+      }),
+      annotations: {
+        readOnlyHint: false,
+        destructiveHint: false,
+        openWorldHint: false,
+      },
+      _meta: { ui: { resourceUri: cardUri } },
+    },
+    async ({ id, old_str, new_str }) => {
+      const latest = await latestVersion(id, owner);
+      if (latest === undefined) {
+        return failed(`No saved app ${id}.`);
       }
-      const version = await saveVersion(
-        id,
-        owner,
-        title,
-        code,
-        compiled!,
-        packages!,
-      );
-      if (version === "not yours") {
-        return failed(`App ${id} isn't yours: start your own with start_app.`);
-      }
-      if (version === "deleted") {
+      const matches = latest.source.split(old_str).length - 1;
+      if (matches !== 1) {
         return failed(
-          `App ${id} was deleted from the user's phone: start a new one with start_app.`,
+          matches === 0
+            ? `No match for old_str in version ${latest.version}'s App.tsx. Check the text, or get_app for the latest, and try again.`
+            : `old_str matches ${matches} places in version ${latest.version}'s App.tsx: include more of the text around it, so it matches once.`,
         );
       }
-      recorded({ appId: id, owner, version, errors, warnings, durationMs });
-      const url = `https://${id}.backtickjs.app`;
-      return {
-        ...text(
-          [JSON.stringify({ id, version, url }), ...warnings].join("\n\n"),
-        ),
-        // For the card only: the model reads the text above.
-        _meta: { "backtickjs.com/card": await card(id, title, version, url) },
-      };
+      const at = latest.source.indexOf(old_str);
+      return save(
+        id,
+        latest.title,
+        latest.source.slice(0, at) +
+          new_str +
+          latest.source.slice(at + old_str.length),
+      );
     },
   );
+
+  async function save(
+    id: string,
+    title: string,
+    code: string,
+  ): Promise<CallToolResult> {
+    const started = performance.now();
+    const unprovided = await unavailableImports("App.tsx", code);
+    // A check that fails (a sandbox that didn't answer, even asked again) is
+    // a failed save like any other: recorded with its source, to reproduce,
+    // and told to the model, to try again.
+    const checked =
+      unprovided.length > 0
+        ? { errors: unprovided, warnings: [] }
+        : await checkInSandbox(owner, code, snapshotId()).catch(
+            (error: Error) => ({
+              errors: [
+                `The check didn't finish (${error.message}). Try again.`,
+              ],
+              warnings: [],
+              compiled: undefined,
+              packages: undefined,
+            }),
+          );
+    const { errors, warnings, compiled, packages } = checked;
+    const durationMs = Math.round(performance.now() - started);
+    if (errors.length > 0) {
+      recorded({
+        appId: id,
+        owner,
+        source: code,
+        errors,
+        warnings,
+        durationMs,
+      });
+      return failed([...errors, ...warnings].join("\n"));
+    }
+    const version = await saveVersion(
+      id,
+      owner,
+      title,
+      code,
+      compiled!,
+      packages!,
+    );
+    if (version === "not yours") {
+      return failed(`App ${id} isn't yours: start your own with start_app.`);
+    }
+    if (version === "deleted") {
+      return failed(
+        `App ${id} was deleted from the user's phone: start a new one with start_app.`,
+      );
+    }
+    recorded({ appId: id, owner, version, errors, warnings, durationMs });
+    const url = `https://${id}.backtickjs.app`;
+    return {
+      ...text([JSON.stringify({ id, version, url }), ...warnings].join("\n\n")),
+      // For the card only: the model reads the text above.
+      _meta: { "backtickjs.com/card": await card(id, title, version, url) },
+    };
+  }
 
   return server;
 }
