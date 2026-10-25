@@ -2,6 +2,7 @@ import { backtick } from "@backtickjs/hono";
 import { Hono } from "hono";
 import { Home } from "./Home.js";
 import { SignIn } from "./SignIn.js";
+import { Source } from "./Source.js";
 
 // Backtick's own screens, sign-in's included, served at app.backtickjs.com.
 // A token is the user's, checked by Supabase, which reads their apps as them.
@@ -23,6 +24,16 @@ app.use(async (context, next) => {
 // The user's apps.
 app.get("/", (context) =>
   context.render(<Home authorization={context.var.authorization} />),
+);
+
+// An app's source, from its ⋯ sheet.
+app.get("/source/:id", (context) =>
+  context.render(
+    <Source
+      authorization={context.var.authorization}
+      id={context.req.param("id")}
+    />,
+  ),
 );
 
 // Answered rather than crashed on, so the app can show why.
