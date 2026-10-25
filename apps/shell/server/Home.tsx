@@ -568,6 +568,8 @@ export async function Home(props: { authorization: string }) {
             columnWrapperStyle={styles.columns}
             refreshing={refreshing}
             onRefresh={refresh}
+            // Android draws the spinner at the list's top, under the status bar.
+            progressViewOffset={insets.top + 8}
             data={$apps}
             keyExtractor={(app) => app.id}
             ListHeaderComponent={
