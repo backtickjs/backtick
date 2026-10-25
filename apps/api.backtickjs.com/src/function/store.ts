@@ -31,6 +31,29 @@ export async function latestVersion(
     : { version: latest.version, source: latest.source, title: data!.title };
 }
 
+// The owner's apps that aren't deleted, last saved first.
+export async function listApps(
+  owner: string,
+): Promise<{ id: string; title: string; version: number; saved: string }[]> {
+  const { data, error } = await supabase
+    .from("apps")
+    .select("id, title, versions(version, created_at)")
+    .eq("owner_id", owner)
+    .is("deleted_at", null)
+    .order("version", { referencedTable: "versions", ascending: false })
+    .limit(1, { referencedTable: "versions" });
+  if (error) {
+    throw failed(error);
+  }
+  return data
+    .flatMap(({ id, title, versions: [latest] }) =>
+      latest === undefined
+        ? []
+        : [{ id, title, version: latest.version, saved: latest.created_at }],
+    )
+    .sort((a, b) => b.saved.localeCompare(a.saved));
+}
+
 // Saves the owner's app's next version, 1 for its first, with its release and
 // the packages it was built with, and returns its number, or why it can't: the
 // app is someone else's, or its owner deleted it. The first save creates the

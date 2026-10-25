@@ -76,6 +76,7 @@ await call("save_app", {
 });
 await call("save_app", { id, title: "E2E counter", code: starter });
 await call("get_app", { id });
+await call("list_apps", {});
 await call("update_app", { id, old_str: "no such text", new_str: "" });
 await call("update_app", { id, old_str: "<$Text", new_str: "<$Text" });
 await call("update_app", {

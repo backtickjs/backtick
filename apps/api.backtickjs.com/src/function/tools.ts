@@ -20,6 +20,7 @@ import { starter } from "./starter.ts";
 import {
   type Check,
   latestVersion,
+  listApps,
   recordCheck,
   saveVersion,
 } from "./store.ts";
@@ -103,6 +104,19 @@ export function tools(owner: string): McpServer {
           `\`\`\`tsx\n${latest.source}\`\`\``,
       );
     },
+  );
+
+  server.registerTool(
+    "list_apps",
+    {
+      title: "List apps",
+      description:
+        "The user's apps, last saved first: each one's id, title, latest " +
+        "version and when it was saved.",
+      inputSchema: z.object({}),
+      annotations: { readOnlyHint: true, openWorldHint: false },
+    },
+    async () => text(JSON.stringify(await listApps(owner))),
   );
 
   // The card the host shows with each save.
