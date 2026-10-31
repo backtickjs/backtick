@@ -177,6 +177,7 @@ export async function Home(props: { authorization: string }) {
       },
       backdrop: { flex: 1, backgroundColor: "rgba(0,0,0,0.4)" },
       sheet: {
+        flexShrink: 1,
         borderTopLeftRadius: 28,
         borderTopRightRadius: 28,
         paddingHorizontal: 24,
@@ -205,6 +206,7 @@ export async function Home(props: { authorization: string }) {
       },
       label: { fontSize: 16, fontWeight: "600" },
       idea: {
+        flexShrink: 1,
         minHeight: 120,
         borderWidth: 1,
         borderRadius: 16,
