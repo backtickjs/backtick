@@ -3,20 +3,26 @@ import { execRoot } from "@backtickjs/core/cjs";
 import { getBacktickExtra } from "@backtickjs/expo";
 import Constants from "expo-constants";
 import type { Session } from "@supabase/supabase-js";
-import type { ReactNode } from "react";
+import { createContext, type ReactNode } from "react";
+import { useColorScheme } from "react-native";
 import { moduleMap } from "./moduleMap";
 import { apps, home, supabase } from "./supabase";
 
 // What an app says about all its screens, at its own routes: `/_layout` is its
 // root layout, as an Expo Router app's `_layout.tsx`, and `/_loading` what shows
 // while a screen arrives. Known before the app opens; without them, the shell's.
-export type AppRoots = { layout?: ReactNode; loading?: ReactNode };
+export const roots = new Map<
+  string | null,
+  { layout?: ReactNode; loading?: ReactNode }
+>();
 
-const roots = new Map<string, AppRoots>();
-
-export function appRoots(app: string | null): AppRoots | undefined {
-  return app === null ? undefined : roots.get(app);
+// backtickjs.com's paper, behind every screen (server/look.ts).
+export function usePaper(): string {
+  return useColorScheme() === "dark" ? "#0a0a0c" : "#ffffff";
 }
+
+// The app these screens are, or Backtick's (null).
+export const OpenApp = createContext<string | null>(null);
 
 export async function loadRoots(app: string): Promise<void> {
   const { session } = (await supabase.auth.getSession()).data;

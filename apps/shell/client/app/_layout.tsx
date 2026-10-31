@@ -4,9 +4,9 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { ActivityIndicator } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { usePaper } from "../paper";
-import { setRoot } from "../root";
+import { usePaper } from "../screens";
 import { CurrentSession } from "../session";
+import { followRoot } from "./+native-intent";
 import { supabase } from "../supabase";
 
 // Nothing is drawn here: every screen, sign-in's included, comes from the
@@ -14,7 +14,7 @@ import { supabase } from "../supabase";
 export default function Layout() {
   const paper = usePaper();
   const [session, setSession] = useState<Session | null | undefined>();
-  setRoot(useNavigationContainerRef());
+  followRoot(useNavigationContainerRef());
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setSession(data.session));
     const { data } = supabase.auth.onAuthStateChange((_, next) => {

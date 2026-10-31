@@ -1,6 +1,6 @@
 import { use } from "react";
 import { useLocalSearchParams } from "expo-router";
-import { OpenApp } from "../OpenApp";
+import { OpenApp } from "../screens";
 import { ServerScreen } from "../ServerScreen";
 
 // Every path: the open app's screen at it, Backtick's home when none is. The

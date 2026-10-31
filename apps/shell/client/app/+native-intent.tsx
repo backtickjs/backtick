@@ -1,5 +1,5 @@
+import type { NavigationState, useNavigationContainerRef } from "expo-router";
 import { Alert, Linking } from "react-native";
-import { openOverHome } from "../root";
 import { loadRoots } from "../screens";
 import { backtickShown, reloadShownScreen } from "../shown";
 import { apps, signInWithGoogle, supabase } from "../supabase";
@@ -36,18 +36,7 @@ export async function redirectSystemPath({
   const [first, ...rest] = link.pathname.split("/");
   if (isAppId(first)) {
     await loadRoots(first);
-    const params = {
-      ...Object.fromEntries(new URLSearchParams(link.search)),
-      ...(rest.length > 0 && rest[0] !== "" ? { path: rest } : {}),
-    };
-    openOverHome({
-      name: "(app)",
-      params: {
-        backtickApp: first,
-        screen: "path" in params ? "[...path]" : "index",
-        params,
-      },
-    });
+    openOverHome(rest, link.search, first);
     return null;
   }
   if (link.pathname === "reload") {
@@ -59,13 +48,7 @@ export async function redirectSystemPath({
     return null;
   }
   if (!["sign-in", "sign-out", "auth/callback"].includes(link.pathname)) {
-    openOverHome({
-      name: "[...path]",
-      params: {
-        ...Object.fromEntries(new URLSearchParams(link.search)),
-        path: link.pathname.split("/"),
-      },
-    });
+    openOverHome(link.pathname.split("/"), link.search);
     return null;
   }
   try {
@@ -80,6 +63,40 @@ export async function redirectSystemPath({
     Alert.alert("Couldn't sign in", (error as Error).message);
   }
   return null;
+}
+
+let root: ReturnType<typeof useNavigationContainerRef>;
+
+export function followRoot(ref: typeof root): void {
+  root = ref;
+}
+
+// One thing open at a time: the stack becomes the home and the link's route,
+// new each time, so what's open closes with its navigator and an app's is its
+// own. Under expo-router's own root route.
+function openOverHome(path: string[], query: string, app?: string): void {
+  const state = root.getRootState().routes[0]!.state as NavigationState;
+  const params = { ...Object.fromEntries(new URLSearchParams(query)), path };
+  const screen = { name: "[...path]", params };
+  const route = app
+    ? {
+        name: "(app)",
+        params: { backtickApp: app },
+        state: { index: 0, routes: [screen] },
+      }
+    : screen;
+  root.dispatch({
+    type: "RESET",
+    target: state.key,
+    payload: {
+      ...state,
+      index: 1,
+      routes: [
+        state.routes[0],
+        { ...route, key: `${route.name}:${Date.now()}` },
+      ],
+    },
+  });
 }
 
 // The link that started the shell, once the home is on top. Read from React

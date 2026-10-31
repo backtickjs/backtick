@@ -1,17 +1,13 @@
 import { Stack, useRoute } from "expo-router";
-import { useState } from "react";
-import { OpenApp } from "../../OpenApp";
-import { usePaper } from "../../paper";
-import { appRoots } from "../../screens";
+import { OpenApp, roots, usePaper } from "../../screens";
 
 // A navigator for each app opened: the app's own, from its `/_layout`.
 export default function AppLayout() {
   const paper = usePaper();
-  const params = useRoute().params as { backtickApp: string };
-  const [app] = useState(params.backtickApp);
+  const { backtickApp } = useRoute().params as { backtickApp: string };
   return (
-    <OpenApp value={app}>
-      {appRoots(app)?.layout ?? (
+    <OpenApp value={backtickApp}>
+      {roots.get(backtickApp)?.layout ?? (
         <Stack
           screenOptions={{
             headerShown: false,
