@@ -114,7 +114,9 @@ function Failed({ error, retry }: { error: unknown; retry: () => void }) {
       </Text>
       <Pressable
         style={[styles.button, { backgroundColor: ink }]}
-        onPress={retry}
+        // Not `onPress={retry}`: that passes the press event to `reload`
+        // as its signal, and fetch throws calling its addEventListener.
+        onPress={() => retry()}
       >
         <Text style={[styles.label, { color: paper }]}>Retry</Text>
       </Pressable>
