@@ -242,37 +242,23 @@ export async function Home(props: { authorization: string }) {
       note: { fontSize: 13, lineHeight: 19, textAlign: "center", marginTop: 4 },
     });
 
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-
-    // "2 h ago", or the date once it's a month old.
+    // "2h ago", or the date once it's a month old.
     function ago(iso: string) {
       const minutes = (Date.now() - Date.parse(iso)) / 60000;
       if (minutes < 1) return "just now";
-      if (minutes < 60) return Math.floor(minutes) + " min ago";
-      if (minutes < 60 * 24) return Math.floor(minutes / 60) + " h ago";
+      if (minutes < 60) return Math.floor(minutes) + "m ago";
+      if (minutes < 60 * 24) return Math.floor(minutes / 60) + "h ago";
       if (minutes < 60 * 24 * 30)
-        return Math.floor(minutes / 60 / 24) + " d ago";
+        return Math.floor(minutes / 60 / 24) + "d ago";
       return date(iso);
     }
 
     function date(iso: string) {
-      const day = new Date(iso);
-      return (
-        months[day.getMonth()] + " " + day.getDate() + ", " + day.getFullYear()
-      );
+      return new Date(iso).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      });
     }
 
     type App = {
@@ -283,28 +269,15 @@ export async function Home(props: { authorization: string }) {
       savedAt: string;
       screenshot: { uri: string; cacheKey: string };
     };
-    type Colors = {
-      ink: string;
-      paper: string;
-      muted: string;
-      line: string;
-      wash: string;
-      danger: string;
-    };
 
-    function Card(props: {
-      app: App;
-      width: number;
-      colors: Colors;
-      onMore: () => void;
-    }) {
-      const { app, width, colors, onMore } = props;
+    function Card(props: { app: App; width: number; onMore: () => void }) {
+      const { app, width, onMore } = props;
+      const colors = $useColors();
       // Sprung in under the finger; a band of light crosses the card if the
-      // app takes a moment.
+      // app takes a moment. It waits off the card for its delay.
       const [scale] = $useState(() => new $Animated.Value(1));
       const [sweep] = $useState(() => new $Animated.Value(0));
       const [opening, setOpening] = $useState<boolean>(false);
-      const [sweeping, setSweeping] = $useState<boolean>(false);
       const height = Math.round(width * 1.9);
       const spring = (toValue: number, bounciness: number) =>
         $Animated
@@ -320,14 +293,6 @@ export async function Home(props: { authorization: string }) {
       $useFocusEffect($useCallback(() => () => setOpening(false), []));
       $useEffect(() => {
         if (!opening) {
-          setSweeping(false);
-          return;
-        }
-        const wait = setTimeout(() => setSweeping(true), 250);
-        return () => clearTimeout(wait);
-      }, [opening]);
-      $useEffect(() => {
-        if (!sweeping) {
           return;
         }
         sweep.setValue(0);
@@ -335,12 +300,13 @@ export async function Home(props: { authorization: string }) {
           $Animated.timing(sweep, {
             toValue: 1,
             duration: 1100,
+            delay: 250,
             useNativeDriver: true,
           }),
         );
         loop.start();
         return () => loop.stop();
-      }, [sweeping]);
+      }, [opening]);
       return (
         <$View style={[styles.card, { width }]}>
           <$Animated.View style={{ transform: [{ scale }] }}>
@@ -369,7 +335,7 @@ export async function Home(props: { authorization: string }) {
                   contentPosition="top"
                   cachePolicy="memory-disk"
                 />
-                {sweeping ? (
+                {opening ? (
                   <$Animated.View
                     pointerEvents="none"
                     style={[
@@ -422,13 +388,48 @@ export async function Home(props: { authorization: string }) {
       );
     }
 
-    // A bottom sheet, as phones show a menu of actions, over the dimmed home.
-    function Sheet(props: {
-      colors: Colors;
-      onClose: () => void;
-      children: any;
+    // A sheet's action: filled for the main one, outlined, or a danger's text.
+    function Button(props: {
+      label: string;
+      kind: "filled" | "outlined" | "danger";
+      onPress: () => void;
+      disabled?: boolean;
     }) {
-      const { colors, onClose } = props;
+      const { label, kind, onPress, disabled } = props;
+      const colors = $useColors();
+      return (
+        <$Pressable
+          disabled={disabled}
+          style={[
+            styles.button,
+            kind === "filled" && { backgroundColor: colors.ink },
+            kind === "outlined" && { borderWidth: 1, borderColor: colors.line },
+            disabled && { opacity: 0.4 },
+          ]}
+          onPress={onPress}
+        >
+          <$Text
+            style={[
+              styles.label,
+              {
+                color: {
+                  filled: colors.paper,
+                  outlined: colors.ink,
+                  danger: colors.danger,
+                }[kind],
+              },
+            ]}
+          >
+            {label}
+          </$Text>
+        </$Pressable>
+      );
+    }
+
+    // A bottom sheet, as phones show a menu of actions, over the dimmed home.
+    function Sheet(props: { onClose: () => void; children: any }) {
+      const { onClose } = props;
+      const colors = $useColors();
       const insets = $useSafeAreaInsets();
       return (
         <$Modal
@@ -471,19 +472,16 @@ export async function Home(props: { authorization: string }) {
     // Claude uses the connector rather than answering in text. The card's
     // Open in Backtick brings the app back here. Not connected, it shows how
     // to connect instead, with nothing to write yet.
-    function AskSheet(props: {
-      ask: Ask;
-      colors: Colors;
-      onClose: () => void;
-    }) {
-      const { ask: what, colors, onClose } = props;
+    function AskSheet(props: { ask: Ask; onClose: () => void }) {
+      const { ask: what, onClose } = props;
+      const colors = $useColors();
       const [idea, setIdea] = $useState("");
       const ready = idea.trim().length > 0;
       if (!$claude) {
-        return <ConnectSheet colors={colors} onClose={onClose} />;
+        return <ConnectSheet onClose={onClose} />;
       }
       return (
-        <Sheet colors={colors} onClose={onClose}>
+        <Sheet onClose={onClose}>
           <$Text style={[styles.sheetTitle, { color: colors.ink }]}>
             {what.title}
           </$Text>
@@ -503,12 +501,10 @@ export async function Home(props: { authorization: string }) {
               },
             ]}
           />
-          <$Pressable
+          <Button
+            label="Ask Claude"
+            kind="filled"
             disabled={!ready}
-            style={[
-              styles.button,
-              { backgroundColor: colors.ink, opacity: ready ? 1 : 0.4 },
-            ]}
             onPress={() => {
               onClose();
               $Linking.openURL(
@@ -516,11 +512,7 @@ export async function Home(props: { authorization: string }) {
                   encodeURIComponent(what.prompt + idea.trim()),
               );
             }}
-          >
-            <$Text style={[styles.label, { color: colors.paper }]}>
-              Ask Claude
-            </$Text>
-          </$Pressable>
+          />
           <$Text style={[styles.note, { color: colors.muted }]}>
             Opens a new chat with what you wrote.
           </$Text>
@@ -530,8 +522,9 @@ export async function Home(props: { authorization: string }) {
 
     // How to connect Backtick to Claude, as Claude's app asks it
     // (2026-10-24), and the button to its Connectors screen.
-    function ConnectSheet(props: { colors: Colors; onClose: () => void }) {
-      const { colors, onClose } = props;
+    function ConnectSheet(props: { onClose: () => void }) {
+      const { onClose } = props;
+      const colors = $useColors();
       const server = "https://api.backtickjs.com/mcp";
       const [copied, setCopied] = $useState(false);
       const steps = [
@@ -542,7 +535,7 @@ export async function Home(props: { authorization: string }) {
         "Come back here.",
       ];
       return (
-        <Sheet colors={colors} onClose={onClose}>
+        <Sheet onClose={onClose}>
           <$Text style={[styles.sheetTitle, { color: colors.ink }]}>
             Connect Backtick to Claude
           </$Text>
@@ -585,24 +578,22 @@ export async function Home(props: { authorization: string }) {
               </$View>
             ))}
           </$View>
-          <$Pressable
-            style={[styles.button, { backgroundColor: colors.ink }]}
+          <Button
+            label="Open Claude's connectors"
+            kind="filled"
             onPress={() => {
               onClose();
               $Linking.openURL("https://claude.ai/settings/connectors");
             }}
-          >
-            <$Text style={[styles.label, { color: colors.paper }]}>
-              Open Claude's connectors
-            </$Text>
-          </$Pressable>
+          />
         </Sheet>
       );
     }
 
     // The account's picture, or its initial in a circle.
-    function Avatar(props: { size: number; colors: Colors }) {
-      const { size, colors } = props;
+    function Avatar(props: { size: number }) {
+      const { size } = props;
+      const colors = $useColors();
       const round = { width: size, height: size, borderRadius: size / 2 };
       const picture = $account.picture;
       return picture ? (
@@ -625,16 +616,17 @@ export async function Home(props: { authorization: string }) {
     }
 
     // Who's signed in, and signing out.
-    function AccountSheet(props: { colors: Colors; onClose: () => void }) {
-      const { colors, onClose } = props;
+    function AccountSheet(props: { onClose: () => void }) {
+      const { onClose } = props;
+      const colors = $useColors();
       const signOut = () => {
         onClose();
         $Linking.openURL($shellURL("sign-out"));
       };
       return (
-        <Sheet colors={colors} onClose={onClose}>
+        <Sheet onClose={onClose}>
           <$View style={styles.account}>
-            <Avatar size={56} colors={colors} />
+            <Avatar size={56} />
             <$View style={{ flex: 1 }}>
               {$account.name ? (
                 <$Text
@@ -652,17 +644,7 @@ export async function Home(props: { authorization: string }) {
               </$Text>
             </$View>
           </$View>
-          <$Pressable
-            style={[
-              styles.button,
-              { borderWidth: 1, borderColor: colors.line },
-            ]}
-            onPress={signOut}
-          >
-            <$Text style={[styles.label, { color: colors.ink }]}>
-              Sign out
-            </$Text>
-          </$Pressable>
+          <Button label="Sign out" kind="outlined" onPress={signOut} />
         </Sheet>
       );
     }
@@ -670,11 +652,11 @@ export async function Home(props: { authorization: string }) {
     // The app's details, and what can be done with it.
     function AppSheet(props: {
       app: App;
-      colors: Colors;
       onClose: () => void;
       onEdit: () => void;
     }) {
-      const { app, colors, onClose, onEdit } = props;
+      const { app, onClose, onEdit } = props;
+      const colors = $useColors();
       const open = () => {
         onClose();
         $Linking.openURL($shellURL(app.id));
@@ -696,7 +678,7 @@ export async function Home(props: { authorization: string }) {
           ],
         );
       return (
-        <Sheet colors={colors} onClose={onClose}>
+        <Sheet onClose={onClose}>
           <$Text style={[styles.sheetTitle, { color: colors.ink }]}>
             {app.title}
           </$Text>
@@ -714,26 +696,9 @@ export async function Home(props: { authorization: string }) {
               {"Created " + date(app.createdAt)}
             </$Text>
           </$View>
-          <$Pressable
-            style={[styles.button, { backgroundColor: colors.ink }]}
-            onPress={open}
-          >
-            <$Text style={[styles.label, { color: colors.paper }]}>Open</$Text>
-          </$Pressable>
-          <$Pressable
-            style={[
-              styles.button,
-              { borderWidth: 1, borderColor: colors.line },
-            ]}
-            onPress={onEdit}
-          >
-            <$Text style={[styles.label, { color: colors.ink }]}>Edit</$Text>
-          </$Pressable>
-          <$Pressable style={styles.button} onPress={remove}>
-            <$Text style={[styles.label, { color: colors.danger }]}>
-              Delete
-            </$Text>
-          </$Pressable>
+          <Button label="Open" kind="filled" onPress={open} />
+          <Button label="Edit" kind="outlined" onPress={onEdit} />
+          <Button label="Delete" kind="danger" onPress={remove} />
         </Sheet>
       );
     }
@@ -785,7 +750,7 @@ export async function Home(props: { authorization: string }) {
                     hitSlop={10}
                     accessibilityLabel="Account"
                   >
-                    <Avatar size={34} colors={colors} />
+                    <Avatar size={34} />
                   </$Pressable>
                 </$View>
                 <$View style={styles.top}>
@@ -816,28 +781,19 @@ export async function Home(props: { authorization: string }) {
               <Card
                 app={item}
                 width={cardWidth}
-                colors={colors}
                 onMore={() => setSelected(item)}
               />
             )}
           />
           {asking === null ? null : (
-            <AskSheet
-              ask={asking}
-              colors={colors}
-              onClose={() => setAsking(null)}
-            />
+            <AskSheet ask={asking} onClose={() => setAsking(null)} />
           )}
           {accountOpen ? (
-            <AccountSheet
-              colors={colors}
-              onClose={() => setAccountOpen(false)}
-            />
+            <AccountSheet onClose={() => setAccountOpen(false)} />
           ) : null}
           {selected === null ? null : (
             <AppSheet
               app={selected}
-              colors={colors}
               onClose={() => setSelected(null)}
               onEdit={() => {
                 setSelected(null);
