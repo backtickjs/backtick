@@ -57,16 +57,16 @@
   },
   "dependencies": {
     "@babel/core": "^7.29.7",
-    "@backtickjs/core": "^0.2.6",
+    "@backtickjs/core": "0.2.6",
     "babel-preset-solid": "1.9.12"
   },
   "peerDependencies": {
     "solid-js": "^1.9.14"
   },
   "devDependencies": {
-    "@backtickjs/prettier-plugin": "^0.2.6",
-    "@backtickjs/tsc": "^0.2.6",
-    "@backtickjs/tspatch-plugin": "^0.2.6",
+    "@backtickjs/prettier-plugin": "0.2.6",
+    "@backtickjs/tsc": "0.2.6",
+    "@backtickjs/tspatch-plugin": "0.2.6",
     "@types/babel__core": "^7.20.5",
     "prettier": "^3.6.2",
     "solid-js": "1.9.14",

@@ -13,7 +13,7 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/language-plugin": "^0.2.6",
+    "@backtickjs/language-plugin": "0.2.6",
     "@volar/language-server": "^2.4.28",
     "vscode-uri": "^3.0.8"
   },

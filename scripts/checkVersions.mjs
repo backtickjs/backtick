@@ -1,6 +1,6 @@
 // Enforces lockstep versioning: every `@backtickjs/*` package under
 // `packages/` shares one version, and every reference to a workspace project,
-// anywhere in the workspace, is `^` and its version, linked to it.
+// anywhere in the workspace, is exactly its version, linked to it.
 //
 // The plugins are published separately from core but are only ever compatible
 // with the core they were built against, so a version that drifts is a bug
@@ -63,25 +63,15 @@ const dependencyFields = [
   "optionalDependencies",
 ];
 
-// One form for every reference to a workspace project, the one a user writes:
-// `^` and that project's version, as `"@backtickjs/core": "^0.1.8"`. Except a
-// package phones carry, which the sandbox pins exactly: npm there would take
-// a newer one than phones have (sandbox/test/versions.test.ts).
-const sandbox = "/apps/api.backtickjs.com/sandbox/package.json";
+// One form for every reference to a workspace project: its exact version, as
+// `"@backtickjs/core": "0.1.8"`. Released together, they're installed together.
 for (const { file, json } of projects) {
   for (const field of dependencyFields) {
     for (const [name, range] of Object.entries(json[field] ?? {})) {
-      if (!versionOf.has(name) || range === `^${versionOf.get(name)}`) continue;
-      if (
-        file.endsWith(sandbox) &&
-        name === "@backtickjs/router" &&
-        range === versionOf.get(name)
-      ) {
-        continue;
-      }
+      if (!versionOf.has(name) || range === versionOf.get(name)) continue;
       errors.push(
         `${file.slice(root.length)}: ${field}["${name}"] is "${range}", ` +
-          `expected "^${versionOf.get(name)}"`,
+          `expected "${versionOf.get(name)}"`,
       );
     }
   }
@@ -113,5 +103,5 @@ if (errors.length > 0) {
 
 console.log(
   `✓ ${released.length} packages at ${expected}, ` +
-    `every workspace reference "^<version>" and linked`,
+    `every workspace reference exact and linked`,
 );

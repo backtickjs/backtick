@@ -54,7 +54,7 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/core": "^0.2.6"
+    "@backtickjs/core": "0.2.6"
   },
   "peerDependencies": {
     "expo": "*"
