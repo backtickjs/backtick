@@ -5,11 +5,13 @@ export const starter = `// A Backtick app:
 // 2. A splice \`$\` marks a server value crossing into a client script cs\`...\`
 // 3. Use + over template literals: a backtick ends the client script.
 // 4. Each route is a screen: <$Link href="/day"> opens the one at "/day".
+// 5. "/_layout" is the app's root layout, as Expo Router's _layout.tsx, and
+//    "/_loading" what shows while a screen arrives.
 
 import { cs } from "@backtickjs/core";
 import { backtick } from "@backtickjs/hono";
 import { Hono } from "hono";
-import { Link } from "expo-router" with { backtick: "client" };
+import { Link, Stack } from "expo-router" with { backtick: "client" };
 import { useState } from "react" with { backtick: "client" };
 import { Pressable, StyleSheet, Text } from "react-native" with { backtick: "client" };
 import { SafeAreaView } from "react-native-safe-area-context" with { backtick: "client" };
@@ -20,6 +22,8 @@ const app = new Hono();
 app.use(backtick());
 app.get("/", (context) => context.render(<Home />));
 app.get("/day", (context) => context.render(<Day />));
+app.get("/_layout", (context) => context.render(layout));
+app.get("/_loading", (context) => context.render(loading));
 
 // Server components: they run on the server each time their screen opens.
 function Home() {
@@ -58,6 +62,17 @@ const styles = cs\`$StyleSheet.create({
   label: { color: "#fff", fontSize: 18 },
   link: { fontSize: 18, color: "#0a7ea4" },
 })\`;
+
+const layout = cs\`
+  <$Stack
+    screenOptions={{
+      headerShown: false,
+      contentStyle: { backgroundColor: "#ffffff" },
+    }}
+  />
+\`;
+
+const loading = cs\`<$SafeAreaView style={$styles.screen} />\`;
 
 export default app;
 `;

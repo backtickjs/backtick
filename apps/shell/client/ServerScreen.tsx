@@ -19,7 +19,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ErrorBoundary, getErrorMessage } from "react-error-boundary";
 import { followStartingLink } from "./app/+native-intent";
 import { savePreview } from "./preview";
-import { fetchScreen } from "./screens";
+import { appRoots, fetchScreen } from "./screens";
 import { showing } from "./shown";
 import { CurrentSession } from "./session";
 
@@ -82,7 +82,11 @@ export function ServerScreen({
       resetKeys={[screen]}
       fallbackRender={({ error }) => <Failed error={error} retry={reload} />}
     >
-      <Suspense fallback={<ActivityIndicator style={styles.fill} />}>
+      <Suspense
+        fallback={
+          appRoots(app)?.loading ?? <ActivityIndicator style={styles.fill} />
+        }
+      >
         <Screen screen={screen} />
       </Suspense>
     </ErrorBoundary>

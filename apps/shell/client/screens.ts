@@ -7,6 +7,28 @@ import type { ReactNode } from "react";
 import { moduleMap } from "./moduleMap";
 import { apps, home, supabase } from "./supabase";
 
+// What an app says about all its screens, at its own routes: `/_layout` is its
+// root layout, as an Expo Router app's `_layout.tsx`, and `/_loading` what shows
+// while a screen arrives. Known before the app opens; without them, the shell's.
+export type AppRoots = { layout?: ReactNode; loading?: ReactNode };
+
+const roots = new Map<string, AppRoots>();
+
+export function appRoots(app: string | null): AppRoots | undefined {
+  return app === null ? undefined : roots.get(app);
+}
+
+export async function loadRoots(app: string): Promise<void> {
+  const { session } = (await supabase.auth.getSession()).data;
+  const load = (path: string) =>
+    fetchScreen(app, path, session).catch(() => undefined);
+  const [layout, loading] = await Promise.all([
+    load("/_layout"),
+    load("/_loading"),
+  ]);
+  roots.set(app, { layout, loading });
+}
+
 // The modules this build carries, at the versions app.json's plugin records.
 const { installedPackages } = getBacktickExtra(Constants.expoConfig);
 const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));

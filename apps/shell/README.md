@@ -2,11 +2,11 @@
 
 Backtick on phones. It's a shell, like a browser, that runs in Expo Go: it signs the user in, and every screen it shows comes from a server, Backtick's own included. Laid out as `create-backtick-app` makes any app:
 
-| Folder        | What it is                                                                                                                                                                    |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client/`     | The Expo app: the session, the screen stack, fetching and running screens, and nothing drawn of its own but errors                                                            |
-| `client/app/` | Its routes (expo-router, `app.json`'s `root`): `index.tsx` and `[...path].tsx` show the open app's screen at any path; `+native-intent.tsx` handles every link into the shell |
-| `server/`     | Backtick's own screens: sign-in and the app list. Deployed by `apps/app.backtickjs.com`                                                                                       |
+| Folder        | What it is                                                                                                                                                                                                                         |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client/`     | The Expo app: the session, the screen stack, fetching and running screens, and nothing drawn of its own but errors                                                                                                                 |
+| `client/app/` | Its routes (expo-router, `app.json`'s `root`): `index.tsx` and `[...path].tsx` show Backtick's screens, `(app)/` a navigator per app opened, from the app's own `/_layout`; `+native-intent.tsx` handles every link into the shell |
+| `server/`     | Backtick's own screens: sign-in and the app list. Deployed by `apps/app.backtickjs.com`                                                                                                                                            |
 
 Where a screen comes from (`client/screens.ts`):
 

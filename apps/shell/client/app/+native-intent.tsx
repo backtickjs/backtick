@@ -1,5 +1,6 @@
-import { router } from "expo-router";
 import { Alert, Linking } from "react-native";
+import { openOverHome } from "../root";
+import { loadRoots } from "../screens";
 import { backtickShown, reloadShownScreen } from "../shown";
 import { apps, signInWithGoogle, supabase } from "../supabase";
 
@@ -34,7 +35,19 @@ export async function redirectSystemPath({
   }
   const [first, ...rest] = link.pathname.split("/");
   if (isAppId(first)) {
-    openOverHome(first, rest.join("/"), link.search);
+    await loadRoots(first);
+    const params = {
+      ...Object.fromEntries(new URLSearchParams(link.search)),
+      ...(rest.length > 0 && rest[0] !== "" ? { path: rest } : {}),
+    };
+    openOverHome({
+      name: "(app)",
+      params: {
+        backtickApp: first,
+        screen: "path" in params ? "[...path]" : "index",
+        params,
+      },
+    });
     return null;
   }
   if (link.pathname === "reload") {
@@ -46,7 +59,13 @@ export async function redirectSystemPath({
     return null;
   }
   if (!["sign-in", "sign-out", "auth/callback"].includes(link.pathname)) {
-    openOverHome("", link.pathname, link.search);
+    openOverHome({
+      name: "[...path]",
+      params: {
+        ...Object.fromEntries(new URLSearchParams(link.search)),
+        path: link.pathname.split("/"),
+      },
+    });
     return null;
   }
   try {
@@ -61,18 +80,6 @@ export async function redirectSystemPath({
     Alert.alert("Couldn't sign in", (error as Error).message);
   }
   return null;
-}
-
-// One thing open at a time: what's open closes, and the link's screen stacks on
-// the home, saying whose it is, as what's closing is still in the stack as it
-// first renders. Backtick's are the app "".
-function openOverHome(app: string, path: string, query: string): void {
-  if (router.canDismiss()) {
-    router.dismissAll();
-  }
-  const search = new URLSearchParams(query);
-  search.set("backtickApp", app);
-  router.push(`/${path}?${search}`);
 }
 
 // The link that started the shell, once the home is on top. Read from React
