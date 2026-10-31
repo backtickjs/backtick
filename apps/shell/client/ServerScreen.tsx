@@ -87,7 +87,11 @@ export function ServerScreen({
       >
         <Suspense
           fallback={
-            roots.get(app)?.loading ?? <ActivityIndicator style={styles.fill} />
+            <Delayed>
+              {roots.get(app)?.loading ?? (
+                <ActivityIndicator style={styles.fill} />
+              )}
+            </Delayed>
           }
         >
           <Screen screen={screen} />
@@ -95,6 +99,17 @@ export function ServerScreen({
       </ErrorBoundary>
     </>
   );
+}
+
+// Only if the screen takes a moment: a fast one shows nothing before it. For
+// every app's loading screen, as a browser holds its paint.
+function Delayed({ children }: { children: ReactNode }) {
+  const [slow, setSlow] = useState(false);
+  useEffect(() => {
+    const wait = setTimeout(() => setSlow(true), 300);
+    return () => clearTimeout(wait);
+  }, []);
+  return slow ? children : null;
 }
 
 function Screen({ screen }: { screen: Promise<ReactNode> }) {

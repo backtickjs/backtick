@@ -11,6 +11,7 @@ export default function AppLayout() {
         <Stack
           screenOptions={{
             headerShown: false,
+            animation: "fade",
             contentStyle: { backgroundColor: paper },
           }}
         />

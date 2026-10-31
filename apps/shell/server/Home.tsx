@@ -300,7 +300,7 @@ export async function Home(props: { authorization: string }) {
           $Animated.timing(sweep, {
             toValue: 1,
             duration: 1100,
-            delay: 250,
+            delay: 300,
             useNativeDriver: true,
           }),
         );
