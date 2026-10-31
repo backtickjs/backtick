@@ -13,7 +13,11 @@ import { apps, home, supabase } from "./supabase";
 // while a screen arrives. Known before the app opens; without them, the shell's.
 export const roots = new Map<
   string | null,
-  { layout?: ReactNode; loading?: ReactNode }
+  {
+    layout?: ReactNode;
+    loading?: ReactNode;
+    first?: Promise<ReactNode>;
+  }
 >();
 
 // backtickjs.com's paper, behind every screen (server/look.ts).
@@ -24,15 +28,28 @@ export function usePaper(): string {
 // The app these screens are, or Backtick's (null).
 export const OpenApp = createContext<string | null>(null);
 
-export async function loadRoots(app: string): Promise<void> {
+// The route an open pushes, the one its first screen is for. Each app has a
+// navigator per open, so the name is only ever that route's.
+export const firstRoute = "first";
+
+// With them, the screen the app opens at: there as the app is pushed, its
+// options apply as it mounts, as in any app, instead of moving what's shown.
+// Settled, success or failure, and marked the way React marks a promise, so
+// `use` doesn't suspend for a tick.
+export async function loadRoots(app: string, path: string): Promise<void> {
   const { session } = (await supabase.auth.getSession()).data;
   const load = (path: string) =>
     fetchScreen(app, path, session).catch(() => undefined);
+  const first = fetchScreen(app, path, session);
   const [layout, loading] = await Promise.all([
     load("/_layout"),
     load("/_loading"),
+    first.then(
+      (value) => void Object.assign(first, { status: "fulfilled", value }),
+      (reason) => void Object.assign(first, { status: "rejected", reason }),
+    ),
   ]);
-  roots.set(app, { layout, loading });
+  roots.set(app, { layout, loading, first });
 }
 
 // The modules this build carries, at the versions app.json's plugin records.

@@ -14,12 +14,12 @@ import {
   Text,
   useColorScheme,
 } from "react-native";
-import { Stack, useFocusEffect } from "expo-router";
+import { Stack, useFocusEffect, useRoute } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ErrorBoundary, getErrorMessage } from "react-error-boundary";
 import { followStartingLink } from "./app/+native-intent";
 import { savePreview } from "./preview";
-import { fetchScreen, roots } from "./screens";
+import { fetchScreen, firstRoute, roots } from "./screens";
 import { showing } from "./shown";
 import { CurrentSession } from "./session";
 
@@ -35,7 +35,18 @@ export function ServerScreen({
   const session = use(CurrentSession);
   // Held here, where nothing suspends, so the request outlives the render
   // that waits for it.
-  const [screen, setScreen] = useState(() => fetchScreen(app, path, session));
+  const { key } = useRoute();
+  const [screen, setScreen] = useState(
+    () =>
+      (key === firstRoute ? roots.get(app)?.first : undefined) ??
+      fetchScreen(app, path, session),
+  );
+  // Used once: after this, the latest copy is fetched.
+  useEffect(() => {
+    if (key === firstRoute) {
+      delete roots.get(app)?.first;
+    }
+  }, [app, key]);
   // The current screen stays until the new one has arrived.
   const reload = useCallback(
     () => startTransition(() => setScreen(fetchScreen(app, path, session))),

@@ -1,6 +1,6 @@
 import type { NavigationState, useNavigationContainerRef } from "expo-router";
 import { Alert, Linking } from "react-native";
-import { loadRoots } from "../screens";
+import { firstRoute, loadRoots } from "../screens";
 import { backtickShown, reloadShownScreen } from "../shown";
 import { apps, signInWithGoogle, supabase } from "../supabase";
 
@@ -35,7 +35,7 @@ export async function redirectSystemPath({
   }
   const [first, ...rest] = link.pathname.split("/");
   if (isAppId(first)) {
-    await loadRoots(first);
+    await loadRoots(first, `/${rest.join("/")}${link.search}`);
     openOverHome(rest, link.search, first);
     return null;
   }
@@ -82,7 +82,7 @@ function openOverHome(path: string[], query: string, app?: string): void {
     ? {
         name: "(app)",
         params: { backtickApp: app },
-        state: { index: 0, routes: [screen] },
+        state: { index: 0, routes: [{ ...screen, key: firstRoute }] },
       }
     : screen;
   root.dispatch({
