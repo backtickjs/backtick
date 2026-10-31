@@ -20,8 +20,10 @@ declare module "hono" {
  *     app.use(backtick());
  *     app.get("/", (context) => context.render(<Home />));
  *
- * A client without a module the screen needs gets a 426, and any other
- * refusal of the bundler's a 400, each with `{ name, message }`.
+ * The status is the context's, so `context.status(404)` makes a not-found
+ * screen, and screens are `no-store`: each opens as its latest copy. A client
+ * without a module the screen needs gets a 426, and any other refusal of the
+ * bundler's a 400, each with `{ name, message }`.
  */
 export function backtick(): MiddlewareHandler {
   return async (context, next) => {
@@ -39,7 +41,9 @@ export function backtick(): MiddlewareHandler {
       try {
         const build = await bundler.build({ input, modules });
         const { code } = build.generate({ format: "cjs" });
-        return context.body(code, 200, { "content-type": "text/javascript" });
+        context.header("content-type", "text/javascript");
+        context.header("cache-control", "no-store");
+        return context.body(code);
       } catch (error) {
         if (error instanceof BundlerError) {
           return context.json(

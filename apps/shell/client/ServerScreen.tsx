@@ -7,23 +7,20 @@ import {
   useEffect,
   useState,
 } from "react";
-import {
-  ActivityIndicator,
-  Pressable,
-  StyleSheet,
-  Text,
-  useColorScheme,
-} from "react-native";
-import { Stack, useFocusEffect, useRoute } from "expo-router";
+import { Pressable, StyleSheet, Text, useColorScheme } from "react-native";
+import { Stack, useFocusEffect } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ErrorBoundary, getErrorMessage } from "react-error-boundary";
 import { followStartingLink } from "./app/+native-intent";
 import { savePreview } from "./preview";
-import { fetchScreen, firstRoute, roots } from "./screens";
+import { fetchScreen } from "./screens";
 import { showing } from "./shown";
 import { CurrentSession } from "./session";
 
-// `app`'s screen at `path`, from its server, with a spinner until it arrives.
+// One object, so it's set once and doesn't overwrite a screen's own title.
+const noTitle = { title: "" };
+
+// `app`'s screen at `path`, from its server.
 // Backtick's home is the app null.
 export function ServerScreen({
   app,
@@ -35,18 +32,7 @@ export function ServerScreen({
   const session = use(CurrentSession);
   // Held here, where nothing suspends, so the request outlives the render
   // that waits for it.
-  const { key } = useRoute();
-  const [screen, setScreen] = useState(
-    () =>
-      (key === firstRoute ? roots.get(app)?.first : undefined) ??
-      fetchScreen(app, path, session),
-  );
-  // Used once: after this, the latest copy is fetched.
-  useEffect(() => {
-    if (key === firstRoute) {
-      delete roots.get(app)?.first;
-    }
-  }, [app, key]);
+  const [screen, setScreen] = useState(() => fetchScreen(app, path, session));
   // The current screen stays until the new one has arrived.
   const reload = useCallback(
     () => startTransition(() => setScreen(fetchScreen(app, path, session))),
@@ -91,36 +77,17 @@ export function ServerScreen({
   return (
     <>
       {/* Empty until a screen titles itself: the route's name is ours. */}
-      <Stack.Screen options={{ title: "" }} />
+      <Stack.Screen options={noTitle} />
       <ErrorBoundary
         resetKeys={[screen]}
         fallbackRender={({ error }) => <Failed error={error} retry={reload} />}
       >
-        <Suspense
-          fallback={
-            <Delayed>
-              {roots.get(app)?.loading ?? (
-                <ActivityIndicator style={styles.fill} />
-              )}
-            </Delayed>
-          }
-        >
+        <Suspense fallback={null}>
           <Screen screen={screen} />
         </Suspense>
       </ErrorBoundary>
     </>
   );
-}
-
-// Only if the screen takes a moment: a fast one shows nothing before it. For
-// every app's loading screen, as a browser holds its paint.
-function Delayed({ children }: { children: ReactNode }) {
-  const [slow, setSlow] = useState(false);
-  useEffect(() => {
-    const wait = setTimeout(() => setSlow(true), 300);
-    return () => clearTimeout(wait);
-  }, []);
-  return slow ? children : null;
 }
 
 function Screen({ screen }: { screen: Promise<ReactNode> }) {
@@ -148,7 +115,6 @@ function Failed({ error, retry }: { error: unknown; retry: () => void }) {
 }
 
 const styles = StyleSheet.create({
-  fill: { flex: 1 },
   failed: { margin: 24, gap: 20 },
   error: { fontSize: 16, lineHeight: 24 },
   button: {

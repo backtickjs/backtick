@@ -5,13 +5,11 @@ export const starter = `// A Backtick app:
 // 2. A splice \`$\` marks a server value crossing into a client script cs\`...\`
 // 3. Use + over template literals: a backtick ends the client script.
 // 4. Each route is a screen, and runs on the server each time it opens.
-// 5. "/_layout" is the app's root layout.
-// 6. "/_loading" shows between every screen.
 
 import { cs } from "@backtickjs/core";
 import { backtick } from "@backtickjs/hono";
 import { Hono } from "hono";
-import { Link, Stack } from "expo-router" with { backtick: "client" };
+import { Link } from "expo-router" with { backtick: "client" };
 import { useState } from "react" with { backtick: "client" };
 import { Pressable, StyleSheet, Text } from "react-native" with { backtick: "client" };
 import { SafeAreaView } from "react-native-safe-area-context" with { backtick: "client" };
@@ -23,21 +21,6 @@ const styles = cs\`$StyleSheet.create({
   label: { color: "#fff", fontSize: 18 },
   link: { fontSize: 18, color: "#0a7ea4" },
 })\`;
-
-function Layout() {
-  return cs\`
-    <$Stack
-      screenOptions={{
-        headerShown: false,
-        contentStyle: { backgroundColor: "#ffffff" },
-      }}
-    />
-  \`;
-}
-
-function Loading() {
-  return cs\`<$SafeAreaView style={$styles.screen} />\`;
-}
 
 function Home() {
   const time = new Date().toLocaleTimeString("en-US");
@@ -69,8 +52,6 @@ function Day() {
 
 const app = new Hono();
 app.use(backtick());
-app.get("/_layout", (context) => context.render(<Layout />));
-app.get("/_loading", (context) => context.render(<Loading />));
 app.get("/", (context) => context.render(<Home />));
 app.get("/day", (context) => context.render(<Day />));
 

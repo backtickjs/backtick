@@ -13,6 +13,17 @@ const greet = createImport<(name: string) => string>({
 const app = new Hono();
 app.use(backtick());
 app.get("/", (context) => context.render(greet));
+app.notFound((context) => {
+  context.status(404);
+  return context.render(greet);
+});
+app.onError((_, context) => {
+  context.status(500);
+  return context.render(greet);
+});
+app.get("/broken", () => {
+  throw new Error("broken");
+});
 
 const request = (modules?: string) =>
   app.request(
@@ -26,6 +37,24 @@ test("a screen is its input bundled as CommonJS for the client's modules", async
   assert.equal(response.headers.get("content-type"), "text/javascript");
   assert.match(await response.text(), /require\("app"\)/);
 });
+
+test("screens are never stored", async () => {
+  const response = await request(JSON.stringify({ app: "1.0.0" }));
+  assert.equal(response.headers.get("cache-control"), "no-store");
+});
+
+for (const [path, status] of [
+  ["/missing", 404],
+  ["/broken", 500],
+] as const) {
+  test(`a screen answers with the context's status (${status})`, async () => {
+    const response = await app.request(path, {
+      headers: { "x-backtick-modules": JSON.stringify({ app: "1.0.0" }) },
+    });
+    assert.equal(response.status, status);
+    assert.equal(response.headers.get("content-type"), "text/javascript");
+  });
+}
 
 test("a client without a module the screen needs gets a 426 naming it", async () => {
   const response = await request();

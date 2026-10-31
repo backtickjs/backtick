@@ -8,18 +8,6 @@ import { useColorScheme } from "react-native";
 import { moduleMap } from "./moduleMap";
 import { apps, home, supabase } from "./supabase";
 
-// What an app says about all its screens, at its own routes: `/_layout` is its
-// root layout, as an Expo Router app's `_layout.tsx`, and `/_loading` what shows
-// while a screen arrives. Known before the app opens; without them, the shell's.
-export const roots = new Map<
-  string | null,
-  {
-    layout?: ReactNode;
-    loading?: ReactNode;
-    first?: Promise<ReactNode>;
-  }
->();
-
 // backtickjs.com's paper, behind every screen (server/look.ts).
 export function usePaper(): string {
   return useColorScheme() === "dark" ? "#0a0a0c" : "#ffffff";
@@ -27,30 +15,6 @@ export function usePaper(): string {
 
 // The app these screens are, or Backtick's (null).
 export const OpenApp = createContext<string | null>(null);
-
-// The route an open pushes, the one its first screen is for. Each app has a
-// navigator per open, so the name is only ever that route's.
-export const firstRoute = "first";
-
-// With them, the screen the app opens at: there as the app is pushed, its
-// options apply as it mounts, as in any app, instead of moving what's shown.
-// Settled, success or failure, and marked the way React marks a promise, so
-// `use` doesn't suspend for a tick.
-export async function loadRoots(app: string, path: string): Promise<void> {
-  const { session } = (await supabase.auth.getSession()).data;
-  const load = (path: string) =>
-    fetchScreen(app, path, session).catch(() => undefined);
-  const first = fetchScreen(app, path, session);
-  const [layout, loading] = await Promise.all([
-    load("/_layout"),
-    load("/_loading"),
-    first.then(
-      (value) => void Object.assign(first, { status: "fulfilled", value }),
-      (reason) => void Object.assign(first, { status: "rejected", reason }),
-    ),
-  ]);
-  roots.set(app, { layout, loading, first });
-}
 
 // The modules this build carries, at the versions app.json's plugin records.
 const { installedPackages } = getBacktickExtra(Constants.expoConfig);
@@ -65,7 +29,8 @@ export function screenUrl(app: string | null, path: string): string {
 
 // The app's screen at `path`, bundled by its server for this phone's modules,
 // and run. Signed out, the request carries no token. A failure carries the
-// server's reason: a module this build lacks names it.
+// server's reason: a module this build lacks names it. Any bundle runs, whatever
+// its status: an app's not-found screen is a screen.
 export async function fetchScreen(
   app: string | null,
   path: string,
@@ -77,17 +42,28 @@ export async function fetchScreen(
   if (session !== null && session.expires_at! * 1000 < Date.now() + 90_000) {
     session = (await supabase.auth.getSession()).data.session;
   }
-  const response = await fetch(screenUrl(app, path), {
-    headers: {
-      ...(session ? { authorization: `Bearer ${session.access_token}` } : {}),
-      "x-backtick-modules": modules,
-    },
-  });
-  if (!response.ok) {
-    throw new Error(
-      `The screen couldn't be opened (${response.status}): ${await response.text()}`,
-    );
+  const timeout = new AbortController();
+  const timer = setTimeout(() => timeout.abort(), 15_000);
+  try {
+    const response = await fetch(screenUrl(app, path), {
+      signal: timeout.signal,
+      headers: {
+        ...(session ? { authorization: `Bearer ${session.access_token}` } : {}),
+        "x-backtick-modules": modules,
+      },
+    });
+    const body = await response.text();
+    if (!response.headers.get("content-type")?.startsWith("text/javascript")) {
+      throw new Error(
+        `The screen couldn't be opened (${response.status}): ${body}`,
+      );
+    }
+    return execRoot(body as Bundle<ReactNode>, moduleMap);
+  } catch (error) {
+    throw timeout.signal.aborted
+      ? new Error("The screen took too long to open.", { cause: error })
+      : error;
+  } finally {
+    clearTimeout(timer);
   }
-  const bundle = (await response.text()) as Bundle<ReactNode>;
-  return execRoot(bundle, moduleMap);
 }
