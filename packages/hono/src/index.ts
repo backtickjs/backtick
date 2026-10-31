@@ -35,8 +35,8 @@ export interface Manifest {
  * without a module the screen needs gets a 426, and any other refusal of the
  * bundler's a 400, each with `{ name, message }`.
  *
- * `manifest` is the app's web app manifest, at `/manifest.webmanifest` and in
- * `x-backtick-manifest` on every screen, so it's as fresh as they are.
+ * `manifest` is the app's web app manifest, sent in `x-backtick-manifest` on
+ * every screen, so it's as fresh as they are.
  */
 export function backtick(
   options: { manifest?: Manifest } = {},
@@ -44,14 +44,6 @@ export function backtick(
   const { manifest } = options;
   const json = JSON.stringify(manifest);
   return async (context, next) => {
-    if (
-      manifest !== undefined &&
-      context.req.path === "/manifest.webmanifest"
-    ) {
-      return context.body(json, 200, {
-        "content-type": "application/manifest+json",
-      });
-    }
     context.setRenderer(async (input) => {
       let modules: Modules;
       try {

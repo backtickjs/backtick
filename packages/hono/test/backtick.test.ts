@@ -55,22 +55,9 @@ test("a manifest travels with every screen, percent-encoded", async () => {
   );
 });
 
-test("a manifest is served at its standard path", async () => {
-  const response = await manifested.request("/manifest.webmanifest");
-  assert.equal(
-    response.headers.get("content-type"),
-    "application/manifest+json",
-  );
-  assert.deepEqual(await response.json(), manifest);
-});
-
-test("without a manifest, the header and the path aren't there", async () => {
+test("without a manifest, there's no header", async () => {
   const response = await request(JSON.stringify({ app: "1.0.0" }));
   assert.equal(response.headers.get("x-backtick-manifest"), null);
-  const missing = await app.request("/manifest.webmanifest", {
-    headers: { "x-backtick-modules": JSON.stringify({ app: "1.0.0" }) },
-  });
-  assert.equal(missing.headers.get("content-type"), "text/javascript");
 });
 
 test("screens are never stored", async () => {
