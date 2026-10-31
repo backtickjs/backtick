@@ -2,19 +2,26 @@ import { cs } from "@backtickjs/core";
 import { shellURL } from "./links.js";
 import { Logo, useColors } from "./look.js";
 import { createClient } from "@supabase/supabase-js";
-import { useState } from "react" with {
+import { useCallback, useEffect, useState } from "react" with {
   backtick: "client",
 };
-import { Link } from "expo-router" with {
+import { Link, useFocusEffect } from "expo-router" with {
   backtick: "client",
 };
 import { setStringAsync } from "expo-clipboard" with { backtick: "client" };
+import { impactAsync, ImpactFeedbackStyle } from "expo-haptics" with {
+  backtick: "client",
+};
 import { Image as Preview } from "expo-image" with { backtick: "client" };
+import { LinearGradient } from "expo-linear-gradient" with {
+  backtick: "client",
+};
 import { useSafeAreaInsets } from "react-native-safe-area-context" with {
   backtick: "client",
 };
 import {
   Alert,
+  Animated,
   FlatList,
   Image,
   KeyboardAvoidingView,
@@ -130,6 +137,7 @@ export async function Home(props: { authorization: string }) {
       columns: { gap: 14 },
       card: { marginBottom: 22 },
       shot: { borderRadius: 18, borderWidth: 1, overflow: "hidden" },
+      sweep: { position: "absolute", top: 0, bottom: 0 },
       caption: {
         flexDirection: "row",
         alignItems: "flex-start",
@@ -291,31 +299,109 @@ export async function Home(props: { authorization: string }) {
       onMore: () => void;
     }) {
       const { app, width, colors, onMore } = props;
+      // Sprung in under the finger; a band of light crosses the card if the
+      // app takes a moment.
+      const [scale] = $useState(() => new $Animated.Value(1));
+      const [sweep] = $useState(() => new $Animated.Value(0));
+      const [opening, setOpening] = $useState<boolean>(false);
+      const [sweeping, setSweeping] = $useState<boolean>(false);
+      const height = Math.round(width * 1.9);
+      const spring = (toValue: number, bounciness: number) =>
+        $Animated
+          .spring(scale, {
+            toValue,
+            bounciness,
+            speed: 40,
+            useNativeDriver: true,
+          })
+          .start();
+      // Over as the app covers the home, not when it's back: a back swipe shows
+      // the card before the home is on top again.
+      $useFocusEffect($useCallback(() => () => setOpening(false), []));
+      $useEffect(() => {
+        if (!opening) {
+          setSweeping(false);
+          return;
+        }
+        const wait = setTimeout(() => setSweeping(true), 250);
+        return () => clearTimeout(wait);
+      }, [opening]);
+      $useEffect(() => {
+        if (!sweeping) {
+          return;
+        }
+        sweep.setValue(0);
+        const loop = $Animated.loop(
+          $Animated.timing(sweep, {
+            toValue: 1,
+            duration: 1100,
+            useNativeDriver: true,
+          }),
+        );
+        loop.start();
+        return () => loop.stop();
+      }, [sweeping]);
       return (
         <$View style={[styles.card, { width }]}>
-          <$Link href={$shellURL(app.id)} asChild>
-            <$Pressable
-              // One style object: Link's asChild drops an array, and a
-              // function of the press.
-              style={$StyleSheet.flatten([
-                styles.shot,
-                { borderColor: colors.line, height: Math.round(width * 1.9) },
-              ])}
-              onLongPress={onMore}
-            >
-              <$Preview
-                source={app.screenshot}
-                style={{
-                  width: width - 2,
-                  height: Math.round(width * 1.9) - 2,
+          <$Animated.View style={{ transform: [{ scale }] }}>
+            <$Link href={$shellURL(app.id)} asChild>
+              <$Pressable
+                // One style object: Link's asChild drops an array, and a
+                // function of the press.
+                style={$StyleSheet.flatten([
+                  styles.shot,
+                  { borderColor: colors.line, height },
+                ])}
+                onPressIn={() => spring(0.97, 0)}
+                onPressOut={() => spring(1, 8)}
+                onPress={() => {
+                  // On the tap, not the touch: a touch may be a scroll.
+                  void $impactAsync($ImpactFeedbackStyle.Light);
+                  setOpening(true);
                 }}
-                // A phone's screen, from the top, where an app's title is.
-                contentFit="cover"
-                contentPosition="top"
-                cachePolicy="memory-disk"
-              />
-            </$Pressable>
-          </$Link>
+                onLongPress={onMore}
+              >
+                <$Preview
+                  source={app.screenshot}
+                  style={{ width: width - 2, height: height - 2 }}
+                  // A phone's screen, from the top, where an app's title is.
+                  contentFit="cover"
+                  contentPosition="top"
+                  cachePolicy="memory-disk"
+                />
+                {sweeping ? (
+                  <$Animated.View
+                    pointerEvents="none"
+                    style={[
+                      styles.sweep,
+                      {
+                        width,
+                        transform: [
+                          {
+                            translateX: sweep.interpolate({
+                              inputRange: [0, 1],
+                              outputRange: [-width, width],
+                            }),
+                          },
+                        ],
+                      },
+                    ]}
+                  >
+                    <$LinearGradient
+                      colors={[
+                        "rgba(255,255,255,0)",
+                        "rgba(255,255,255,0.55)",
+                        "rgba(255,255,255,0)",
+                      ]}
+                      start={{ x: 0, y: 0.35 }}
+                      end={{ x: 1, y: 0.65 }}
+                      style={{ flex: 1 }}
+                    />
+                  </$Animated.View>
+                ) : null}
+              </$Pressable>
+            </$Link>
+          </$Animated.View>
           <$View style={styles.caption}>
             <$View style={{ flex: 1 }}>
               <$Text
