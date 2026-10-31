@@ -166,6 +166,9 @@ export const moduleMap = {
   get "expo-sqlite"() {
     return require("expo-sqlite");
   },
+  get "expo-status-bar"() {
+    return require("expo-status-bar");
+  },
   get "expo-store-review"() {
     return require("expo-store-review");
   },

@@ -55,6 +55,7 @@ export const modules = [
   "expo-sms",
   "expo-speech",
   "expo-sqlite",
+  "expo-status-bar",
   "expo-store-review",
   "expo-system-ui",
   "expo-video",

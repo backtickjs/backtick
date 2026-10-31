@@ -13,6 +13,7 @@ import { backtick } from "@backtickjs/hono";
 import { Hono } from "hono";
 import { Link } from "@backtickjs/router" with { backtick: "client" };
 import { Stack } from "expo-router" with { backtick: "client" };
+import { StatusBar } from "expo-status-bar" with { backtick: "client" };
 import { useState } from "react" with { backtick: "client" };
 import { Pressable, StyleSheet, Text } from "react-native" with { backtick: "client" };
 import { SafeAreaView } from "react-native-safe-area-context" with { backtick: "client" };
@@ -33,6 +34,7 @@ function Home() {
       return (
         <$SafeAreaView style={$styles.screen}>
           <$Stack.Screen options={{ headerShown: false }} />
+          <$StatusBar style="dark" />
           <$Text style={$styles.text}>{"The server's time: " + $time}</$Text>
           <$Pressable style={$styles.button} onPress={() => setCount(count + 1)}>
             <$Text style={$styles.label}>{count + " taps"}</$Text>
