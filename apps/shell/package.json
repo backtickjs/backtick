@@ -35,12 +35,12 @@
     "format:check": "prettier --check --ignore-unknown ."
   },
   "dependencies": {
-    "@backtickjs/core": "0.2.6",
-    "@backtickjs/expo": "0.2.6",
-    "@backtickjs/hono": "0.2.6",
-    "@backtickjs/jsx-react": "0.2.6",
-    "@backtickjs/router": "0.2.6",
-    "@backtickjs/vscode-extension": "0.2.6",
+    "@backtickjs/core": "0.2.7",
+    "@backtickjs/expo": "0.2.7",
+    "@backtickjs/hono": "0.2.7",
+    "@backtickjs/jsx-react": "0.2.7",
+    "@backtickjs/router": "0.2.7",
+    "@backtickjs/vscode-extension": "0.2.7",
     "@expo/vector-icons": "^15.1.1",
     "@react-native-async-storage/async-storage": "2.2.0",
     "@react-native-community/datetimepicker": "9.2.1",
@@ -121,9 +121,9 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@backtickjs/prettier-plugin": "0.2.6",
-    "@backtickjs/tsc": "0.2.6",
-    "@backtickjs/tspatch-plugin": "0.2.6",
+    "@backtickjs/prettier-plugin": "0.2.7",
+    "@backtickjs/tsc": "0.2.7",
+    "@backtickjs/tspatch-plugin": "0.2.7",
     "@types/node": "^25.9.1",
     "@types/react": "19.3.0",
     "prettier": "^3.6.2",
