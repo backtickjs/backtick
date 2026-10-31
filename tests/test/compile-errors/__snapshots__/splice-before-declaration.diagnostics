@@ -1,0 +1,6 @@
+10:41-10:48 error TS2448: Block-scoped variable 'styles' used before its declaration. A splice is read when the `cs` line runs, even in a function of the script.
+17:23-17:29 error TS2448: Block-scoped variable 'label' used before its declaration. A splice is read when the `cs` line runs, even in a function of the script.
+25:28-25:34 error TS2448: Block-scoped variable 'config' used before its declaration. A splice is read when the `cs` line runs, even in a function of the script.
+31:26-31:31 error TS2448: Block-scoped variable 'Card' used before its declaration. A splice is read when the `cs` line runs, even in a function of the script.
+39:24-39:31 error TS2448: Block-scoped variable 'suffix' used before its declaration. A splice is read when the `cs` line runs, even in a function of the script.
+46:29-46:35 error TS2449: Class 'Point' used before its declaration. A splice is read when the `cs` line runs, even in a function of the script.

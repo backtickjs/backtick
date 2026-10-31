@@ -1,0 +1,4 @@
+11:23 error TS2448: Block-scoped variable 'size' used before its declaration.
+11:23 error TS2454: Variable 'size' is used before being assigned.
+19:13 error TS2448: Block-scoped variable 'label' used before its declaration.
+19:13 error TS2454: Variable 'label' is used before being assigned.

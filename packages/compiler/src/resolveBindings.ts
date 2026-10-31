@@ -1,6 +1,7 @@
 import type ts from "typescript";
 import { inTypePosition } from "./inTypePosition.js";
 import type { ClientScript, ParsedFile } from "./parseFile.js";
+import { programOf } from "./programOf.js";
 
 /**
  * Every client script in a file, its scopes resolved by TypeScript's checker,
@@ -131,7 +132,7 @@ export function resolveBindings(
     ts.ScriptTarget.Latest,
     true,
   );
-  const checker = checkerOf(ts, file);
+  const checker = programOf(ts, file).getTypeChecker();
   const binding =
     ts.SymbolFlags.Variable | ts.SymbolFlags.Function | ts.SymbolFlags.Class;
   // what the host declares by a name: the above, an enum, a namespace, an import
@@ -382,32 +383,6 @@ function combine(
   }
   host(sourceFile.text.length);
   return combined;
-}
-
-// A checker over the one file: no libraries, as only the file's own
-// bindings are asked about.
-function checkerOf(
-  ts: typeof import("typescript"),
-  file: ts.SourceFile,
-): ts.TypeChecker {
-  const host: ts.CompilerHost = {
-    getSourceFile: (name) => (name === file.fileName ? file : undefined),
-    getDefaultLibFileName: () => "lib.d.ts",
-    writeFile: () => {},
-    getCurrentDirectory: () => "/",
-    getCanonicalFileName: (name) => name,
-    useCaseSensitiveFileNames: () => true,
-    getNewLine: () => "\n",
-    fileExists: (name) => name === file.fileName,
-    readFile: () => undefined,
-  };
-  return ts
-    .createProgram(
-      [file.fileName],
-      { noLib: true, noResolve: true, types: [], jsx: ts.JsxEmit.Preserve },
-      host,
-    )
-    .getTypeChecker();
 }
 
 function inGlobalAugmentation(

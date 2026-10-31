@@ -1,0 +1,130 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(theme)          → $theme
+))               →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_get         → get
+                 →  
+=                → =
+                 →  
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(x)              → $x
+))               →  [-semantic -navigation]
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+__cs_get         → get
+;                → ;
+\n               → \n    
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+(n)              → $n
+))               →  [-semantic -navigation]
+                 →  
+*                → *
+                 →  
+10               → 10
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n      
+const            → const
+                 →  
+__cs_now         → now
+                 →  
+=                → =
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(size)           → $size
+))               →  [-semantic -navigation]
+;                → ;
+\n               → \n      
+const            → const
+                 →  
+__cs_later       → later
+                 →  
+=                → =
+                 →  
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(size)           → $size
+))               →  [-semantic -navigation]
+;                → ;
+\n               → \n      
+return           → return
+                 →  
+[                → [
+__cs_now         → now
+,                → ,
+                 →  
+__cs_later       → later
+(                → (
+)                → )
+]                → ]
+;                → ;
+\n               → \n    
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+(items)          → $items
+))               →  [-semantic -navigation]
+.                → .
+map              → map
+(                → (
+(                → (
+__cs_item        → item
+:                → :
+                 →  
+number           → number
+)                → )
+                 →  
+=>               → =>
+                 →  
+__cs_item        → item
+                 →  
+*                → *
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(factor)         → $factor
+))               →  [-semantic -navigation]
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+(cs.splice(      →  [-semantic -navigation]
+(i)              → $i
+))               →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+++               → ++
+made             → made
+))               →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]

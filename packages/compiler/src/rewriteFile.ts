@@ -6,6 +6,7 @@ import { hostElementDiagnostics } from "./hostElements.js";
 import type { ParsedFile } from "./parseFile.js";
 import { type BindingResolution, resolveBindings } from "./resolveBindings.js";
 import { type RewrittenScript, rewriteScript } from "./rewriteScript.js";
+import { splicesReadEarly } from "./splicesReadEarly.js";
 
 export interface RewrittenFile {
   sourceFile: ts.SourceFile;
@@ -49,6 +50,7 @@ export function rewriteFile(
   }
 
   diagnostics.push(...hostElementDiagnostics(ts, sourceFile));
+  diagnostics.push(...splicesReadEarly(ts, parsedFile));
 
   return { sourceFile, scripts, bindings, hostReferences, diagnostics };
 }
