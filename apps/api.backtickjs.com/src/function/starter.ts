@@ -32,6 +32,7 @@ function Home() {
       const [count, setCount] = $useState<number>(0);
       return (
         <$SafeAreaView style={$styles.screen}>
+          <$Stack.Screen options={{ headerShown: false }} />
           <$Text style={$styles.text}>{"The server's time: " + $time}</$Text>
           <$Pressable style={$styles.button} onPress={() => setCount(count + 1)}>
             <$Text style={$styles.label}>{count + " taps"}</$Text>
@@ -47,8 +48,8 @@ function Home() {
 function Day() {
   const day = new Date().toLocaleDateString("en-US", { weekday: "long" });
   return cs\`
-    <$SafeAreaView style={$styles.screen}>
-      <$Stack.Screen options={{ headerShown: true, title: "Day" }} />
+    <$SafeAreaView style={$styles.screen} edges={["bottom"]}>
+      <$Stack.Screen options={{ title: "Day" }} />
       <$Text style={$styles.text}>{"On the server, it's " + $day}</$Text>
     </$SafeAreaView>
   \`;
