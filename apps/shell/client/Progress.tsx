@@ -7,7 +7,9 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { manifestOf } from "./manifest";
 import { useInk } from "./screens";
+import { shownApp } from "./shown";
 
 const delay = 300;
 const minimum = 500;
@@ -57,7 +59,7 @@ function Bar() {
         {
           top,
           width: width / 3,
-          backgroundColor: ink,
+          backgroundColor: manifestOf(shownApp())?.theme_color ?? ink,
           transform: [{ translateX }],
         },
       ]}

@@ -4,10 +4,10 @@ import { fetchScreen } from "./screens";
 import { reloadShownScreen, shownApp } from "./shown";
 import { supabase } from "./supabase";
 
-// Tells the screen pushed what was fetched for it, in a route param: never
-// sent to the app's server.
+// Tells the screen pushed what was fetched for it (`routeParam.ts`).
 function withScreen(href: string, screen: string): Href {
-  return `${href}${href.includes("?") ? "&" : "?"}backtick=${screen}` as Href;
+  const param = new URLSearchParams({ backtick: JSON.stringify({ screen }) });
+  return `${href}${href.includes("?") ? "&" : "?"}${param}` as Href;
 }
 
 // @backtickjs/router's Link and router, on this shell's fetch and navigator.

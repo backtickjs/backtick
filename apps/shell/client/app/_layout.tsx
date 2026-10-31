@@ -37,6 +37,7 @@ export default function Layout() {
           key={session?.user.id ?? "signed out"}
           screenOptions={{
             // An app shows a header by asking: `<Stack.Screen options={{ headerShown: true }} />`.
+            title: "",
             headerShown: false,
             contentStyle: { backgroundColor: paper },
           }}

@@ -38,6 +38,41 @@ test("a screen is its input bundled as CommonJS for the client's modules", async
   assert.match(await response.text(), /require\("app"\)/);
 });
 
+const manifest = { name: "Crème", background_color: "#ffffff" };
+const manifested = new Hono();
+manifested.use(backtick({ manifest }));
+manifested.get("/", (context) => context.render(greet));
+
+test("a manifest travels with every screen, percent-encoded", async () => {
+  const response = await manifested.request("/", {
+    headers: { "x-backtick-modules": JSON.stringify({ app: "1.0.0" }) },
+  });
+  assert.deepEqual(
+    JSON.parse(
+      decodeURIComponent(response.headers.get("x-backtick-manifest")!),
+    ),
+    manifest,
+  );
+});
+
+test("a manifest is served at its standard path", async () => {
+  const response = await manifested.request("/manifest.webmanifest");
+  assert.equal(
+    response.headers.get("content-type"),
+    "application/manifest+json",
+  );
+  assert.deepEqual(await response.json(), manifest);
+});
+
+test("without a manifest, the header and the path aren't there", async () => {
+  const response = await request(JSON.stringify({ app: "1.0.0" }));
+  assert.equal(response.headers.get("x-backtick-manifest"), null);
+  const missing = await app.request("/manifest.webmanifest", {
+    headers: { "x-backtick-modules": JSON.stringify({ app: "1.0.0" }) },
+  });
+  assert.equal(missing.headers.get("content-type"), "text/javascript");
+});
+
 test("screens are never stored", async () => {
   const response = await request(JSON.stringify({ app: "1.0.0" }));
   assert.equal(response.headers.get("cache-control"), "no-store");

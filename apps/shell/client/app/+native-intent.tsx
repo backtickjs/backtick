@@ -1,6 +1,7 @@
 import { router } from "@backtickjs/router";
 import type { NavigationState, useNavigationContainerRef } from "expo-router";
 import { Alert, Linking } from "react-native";
+import { loadManifest } from "../manifest";
 import { backtickShown } from "../shown";
 import { apps, signInWithGoogle, supabase } from "../supabase";
 
@@ -35,6 +36,7 @@ export async function redirectSystemPath({
   }
   const [first, ...rest] = link.pathname.split("/");
   if (isAppId(first)) {
+    await loadManifest(first);
     openOverHome(rest, link.search, first);
     return null;
   }
@@ -75,12 +77,17 @@ export function followRoot(ref: typeof root): void {
 // own. Under expo-router's own root route.
 function openOverHome(path: string[], query: string, app?: string): void {
   const state = root.getRootState().routes[0]!.state as NavigationState;
-  const params = { ...Object.fromEntries(new URLSearchParams(query)), path };
-  const screen = { name: "[...path]", params };
+  const params = { ...queryParams(query), path };
+  const screen = {
+    name: "[...path]",
+    params: app
+      ? { ...params, backtick: JSON.stringify({ splash: true }) }
+      : params,
+  };
   const route = app
     ? {
         name: "(app)",
-        params: { backtickApp: app },
+        params: { backtick: JSON.stringify({ app }) },
         state: { index: 0, routes: [screen] },
       }
     : screen;
@@ -96,6 +103,16 @@ function openOverHome(path: string[], query: string, app?: string): void {
       ],
     },
   });
+}
+
+// A repeated name keeps all its values, as a route's params hold them.
+function queryParams(query: string): Record<string, string | string[]> {
+  const params: Record<string, string | string[]> = {};
+  for (const [name, value] of new URLSearchParams(query)) {
+    const held = params[name];
+    params[name] = held === undefined ? value : [held, value].flat();
+  }
+  return params;
 }
 
 // The link that started the shell, once the home is on top. Read from React

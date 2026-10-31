@@ -12,6 +12,16 @@ declare module "hono" {
   }
 }
 
+/** A web app manifest: what the phone uses of an app before and around it. */
+export interface Manifest {
+  name?: string;
+  short_name?: string;
+  icons?: { src: string; sizes?: string; type?: string }[];
+  theme_color?: string;
+  background_color?: string;
+  display?: "fullscreen" | "standalone" | "minimal-ui" | "browser";
+}
+
 /**
  * Hono's renderer for Backtick screens: under it, `context.render(input)`
  * answers with `input` bundled for the modules the client sent in
@@ -24,9 +34,24 @@ declare module "hono" {
  * screen, and screens are `no-store`: each opens as its latest copy. A client
  * without a module the screen needs gets a 426, and any other refusal of the
  * bundler's a 400, each with `{ name, message }`.
+ *
+ * `manifest` is the app's web app manifest, at `/manifest.webmanifest` and in
+ * `x-backtick-manifest` on every screen, so it's as fresh as they are.
  */
-export function backtick(): MiddlewareHandler {
+export function backtick(
+  options: { manifest?: Manifest } = {},
+): MiddlewareHandler {
+  const { manifest } = options;
+  const json = JSON.stringify(manifest);
   return async (context, next) => {
+    if (
+      manifest !== undefined &&
+      context.req.path === "/manifest.webmanifest"
+    ) {
+      return context.body(json, 200, {
+        "content-type": "application/manifest+json",
+      });
+    }
     context.setRenderer(async (input) => {
       let modules: Modules;
       try {
@@ -43,6 +68,9 @@ export function backtick(): MiddlewareHandler {
         const { code } = build.generate({ format: "cjs" });
         context.header("content-type", "text/javascript");
         context.header("cache-control", "no-store");
+        if (manifest !== undefined) {
+          context.header("x-backtick-manifest", encodeURIComponent(json));
+        }
         return context.body(code);
       } catch (error) {
         if (error instanceof BundlerError) {

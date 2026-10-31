@@ -5,12 +5,20 @@ import Constants from "expo-constants";
 import type { Session } from "@supabase/supabase-js";
 import { createContext, type ReactNode } from "react";
 import { useColorScheme } from "react-native";
+import { keepManifest, type Manifest } from "./manifest";
 import { moduleMap } from "./moduleMap";
 import { apps, home, supabase } from "./supabase";
 
-// backtickjs.com's paper, behind every screen (server/look.ts).
+// backtickjs.com's paper, behind every screen (server/look.tsx).
 export function usePaper(): string {
   return useColorScheme() === "dark" ? "#0a0a0c" : "#ffffff";
+}
+
+// `background_color` is the app's in the light: a manifest has no dark one.
+export function useAppPaper(manifest: Manifest | undefined): string {
+  const paper = usePaper();
+  const dark = useColorScheme() === "dark";
+  return (!dark && manifest?.background_color) || paper;
 }
 
 // backtickjs.com's ink, for what the shell draws over a screen.
@@ -60,6 +68,9 @@ export async function fetchScreen(
     throw new Error(
       `The screen couldn't be opened (${response.status}): ${body}`,
     );
+  }
+  if (app !== null) {
+    keepManifest(app, response.headers.get("x-backtick-manifest"));
   }
   return execRoot(body as Bundle<ReactNode>, moduleMap);
 }

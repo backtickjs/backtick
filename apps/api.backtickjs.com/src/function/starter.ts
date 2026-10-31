@@ -12,6 +12,7 @@ import { cs } from "@backtickjs/core";
 import { backtick } from "@backtickjs/hono";
 import { Hono } from "hono";
 import { Link } from "@backtickjs/router" with { backtick: "client" };
+import { Stack } from "expo-router" with { backtick: "client" };
 import { useState } from "react" with { backtick: "client" };
 import { Pressable, StyleSheet, Text } from "react-native" with { backtick: "client" };
 import { SafeAreaView } from "react-native-safe-area-context" with { backtick: "client" };
@@ -47,13 +48,21 @@ function Day() {
   const day = new Date().toLocaleDateString("en-US", { weekday: "long" });
   return cs\`
     <$SafeAreaView style={$styles.screen}>
+      <$Stack.Screen options={{ headerShown: true, title: "Day" }} />
       <$Text style={$styles.text}>{"On the server, it's " + $day}</$Text>
     </$SafeAreaView>
   \`;
 }
 
+// https://w3c.github.io/manifest/
+const manifest = {
+  name: "My app",
+  theme_color: "#0a7ea4",
+  background_color: "#ffffff",
+};
+
 const app = new Hono();
-app.use(backtick());
+app.use(backtick({ manifest }));
 app.get("/", (context) => context.render(<Home />));
 app.get("/day", (context) => context.render(<Day />));
 

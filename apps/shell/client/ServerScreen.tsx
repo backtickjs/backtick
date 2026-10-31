@@ -8,18 +8,15 @@ import {
   useState,
 } from "react";
 import { Pressable, StyleSheet, Text, useColorScheme } from "react-native";
-import { Stack, useFocusEffect } from "expo-router";
+import { useFocusEffect } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ErrorBoundary, getErrorMessage } from "react-error-boundary";
 import { followStartingLink } from "./app/+native-intent";
 import { savePreview } from "./preview";
 import { cancel } from "@backtickjs/router";
-import { fetchScreen } from "./screens";
+import { fetchScreen, useInk, usePaper } from "./screens";
 import { showing } from "./shown";
 import { CurrentSession } from "./session";
-
-// One object, so it's set once and doesn't overwrite a screen's own title.
-const noTitle = { title: "" };
 
 // `app`'s screen at `path`, from its server.
 // Backtick's home is the app null.
@@ -88,18 +85,14 @@ export function ServerScreen({
   );
 
   return (
-    <>
-      {/* Empty until a screen titles itself: the route's name is ours. */}
-      <Stack.Screen options={noTitle} />
-      <ErrorBoundary
-        resetKeys={[screen]}
-        fallbackRender={({ error }) => <Failed error={error} retry={reload} />}
-      >
-        <Suspense fallback={null}>
-          <Screen screen={screen} />
-        </Suspense>
-      </ErrorBoundary>
-    </>
+    <ErrorBoundary
+      resetKeys={[screen]}
+      fallbackRender={({ error }) => <Failed error={error} retry={reload} />}
+    >
+      <Suspense fallback={null}>
+        <Screen screen={screen} />
+      </Suspense>
+    </ErrorBoundary>
   );
 }
 
@@ -107,11 +100,11 @@ function Screen({ screen }: { screen: Promise<ReactNode> }) {
   return use(screen);
 }
 
-// In backtickjs.com's colours (server/look.ts): ink and paper, and its red.
+// In backtickjs.com's colours (server/look.tsx): ink and paper, and its red.
 function Failed({ error, retry }: { error: unknown; retry: () => void }) {
   const dark = useColorScheme() === "dark";
-  const ink = dark ? "#fafafa" : "#0e0e10";
-  const paper = dark ? "#0a0a0c" : "#ffffff";
+  const ink = useInk();
+  const paper = usePaper();
   return (
     <SafeAreaView style={styles.failed}>
       <Text style={[styles.error, { color: dark ? "#f87171" : "#dc2626" }]}>

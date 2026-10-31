@@ -2,7 +2,7 @@ import { cs } from "@backtickjs/core";
 import { shellURL } from "./links.js";
 import { Logo, useColors } from "./look.js";
 import { createClient } from "@supabase/supabase-js";
-import { useCallback, useEffect, useState } from "react" with {
+import { useCallback, useState } from "react" with {
   backtick: "client",
 };
 import { Link, useFocusEffect } from "expo-router" with {
@@ -13,9 +13,6 @@ import { impactAsync, ImpactFeedbackStyle } from "expo-haptics" with {
   backtick: "client",
 };
 import { Image as Preview } from "expo-image" with { backtick: "client" };
-import { LinearGradient } from "expo-linear-gradient" with {
-  backtick: "client",
-};
 import { useSafeAreaInsets } from "react-native-safe-area-context" with {
   backtick: "client",
 };
@@ -137,7 +134,6 @@ export async function Home(props: { authorization: string }) {
       columns: { gap: 14 },
       card: { marginBottom: 22 },
       shot: { borderRadius: 18, borderWidth: 1, overflow: "hidden" },
-      sweep: { position: "absolute", top: 0, bottom: 0 },
       caption: {
         flexDirection: "row",
         alignItems: "flex-start",
@@ -276,7 +272,6 @@ export async function Home(props: { authorization: string }) {
       // Sprung in under the finger; a band of light crosses the card if the
       // app takes a moment. It waits off the card for its delay.
       const [scale] = $useState(() => new $Animated.Value(1));
-      const [sweep] = $useState(() => new $Animated.Value(0));
       const [opening, setOpening] = $useState<boolean>(false);
       const height = Math.round(width * 1.9);
       const spring = (toValue: number, bounciness: number) =>
@@ -291,27 +286,6 @@ export async function Home(props: { authorization: string }) {
       // Over as the app covers the home, not when it's back: a back swipe shows
       // the card before the home is on top again.
       $useFocusEffect($useCallback(() => () => setOpening(false), []));
-      $useEffect(() => {
-        if (!opening) {
-          return;
-        }
-        sweep.setValue(0);
-        const loop = $Animated.loop(
-          $Animated.timing(sweep, {
-            toValue: 1,
-            duration: 1100,
-            delay: 300,
-            useNativeDriver: true,
-          }),
-        );
-        loop.start();
-        // A link that never opens gives the card back.
-        const giveUp = setTimeout(() => setOpening(false), 15000);
-        return () => {
-          loop.stop();
-          clearTimeout(giveUp);
-        };
-      }, [opening]);
       return (
         <$View style={[styles.card, { width }]}>
           <$Animated.View style={{ transform: [{ scale }] }}>
@@ -342,36 +316,6 @@ export async function Home(props: { authorization: string }) {
                   contentPosition="top"
                   cachePolicy="memory-disk"
                 />
-                {opening ? (
-                  <$Animated.View
-                    pointerEvents="none"
-                    style={[
-                      styles.sweep,
-                      {
-                        width,
-                        transform: [
-                          {
-                            translateX: sweep.interpolate({
-                              inputRange: [0, 1],
-                              outputRange: [-width, width],
-                            }),
-                          },
-                        ],
-                      },
-                    ]}
-                  >
-                    <$LinearGradient
-                      colors={[
-                        "rgba(255,255,255,0)",
-                        "rgba(255,255,255,0.55)",
-                        "rgba(255,255,255,0)",
-                      ]}
-                      start={{ x: 0, y: 0.35 }}
-                      end={{ x: 1, y: 0.65 }}
-                      style={{ flex: 1 }}
-                    />
-                  </$Animated.View>
-                ) : null}
               </$Pressable>
             </$Link>
           </$Animated.View>
