@@ -14,7 +14,7 @@ Users' code runs on this domain, so it holds no secrets. A Cloudflare Worker (`s
 
 1. It reads the app's latest version from Supabase with the phone's own token. Row-level security answers only the owner's apps, and Supabase refuses a missing or expired token, which is the phone's 401.
 2. It loads that version's release (`versions.compiled`, which `save_app` writes) with the Dynamic Worker Loader, as `<id>@<version>`, into an isolate of its own. The code comes from this data center's Cache API, or from Supabase the first time, and is kept: a release never changes.
-3. It hands the release the path and `x-backtick-modules`, never the token, and no network of its own. The release's Hono server answers: the screen, a 426 for a module the phone lacks, a 404 for a path with no route.
+3. It hands the release the path and `x-backtick-modules`, never the token. The release's Hono server answers: the screen, a 426 for a module the phone lacks, a 404 for a path with no route. Its `fetch()` reaches the internet through `OutboundGateway` (`src/worker.ts`), which logs each call's app and host.
 
 `backtickjs.app` goes on the Public Suffix List, so each app is its own site in a browser, apart from the others and from Backtick's sign-in.
 

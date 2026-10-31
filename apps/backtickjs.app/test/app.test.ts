@@ -31,19 +31,32 @@ function worker(versions: Record<string, unknown>) {
       },
     },
   };
-  const loaded: { id: string; code: string; request: Request }[] = [];
+  const loaded: {
+    id: string;
+    code: string;
+    request: Request;
+    globalOutbound: unknown;
+  }[] = [];
   const env = {
     SUPABASE_URL: "https://project.supabase.co",
     SUPABASE_PUBLISHABLE_KEY: "sb_publishable_key",
     LOADER: {
       get: (
         id: string,
-        getCode: () => Promise<{ modules: { "app.js": string } }>,
+        getCode: () => Promise<{
+          modules: { "app.js": string };
+          globalOutbound: unknown;
+        }>,
       ) => ({
         getEntrypoint: () => ({
           fetch: async (request: Request) => {
-            const { modules } = await getCode();
-            loaded.push({ id, code: modules["app.js"], request });
+            const { modules, globalOutbound } = await getCode();
+            loaded.push({
+              id,
+              code: modules["app.js"],
+              request,
+              globalOutbound,
+            });
             return new Response("screen", {
               headers: { "content-type": "text/javascript" },
             });
@@ -57,6 +70,9 @@ function worker(versions: Record<string, unknown>) {
     waitUntil: (promise: Promise<unknown>) => waiting.push(promise),
     passThroughOnException: () => {},
     props: {},
+    exports: {
+      OutboundGateway: (options: { props: unknown }) => options.props,
+    },
   };
   const open = async (path: string, authorization?: string) => {
     const answer = await app.request(
@@ -99,6 +115,15 @@ describe("an app's host", () => {
     );
     assert.equal(request.headers.get("x-backtick-modules"), modules);
     assert.equal(request.headers.get("authorization"), null);
+  });
+
+  it("sends a release's network through the gateway, as its app", async () => {
+    const { open, loaded } = worker({
+      version: [{ version: 3 }],
+      compiled: [{ compiled: "release 3" }],
+    });
+    await open("/", "Bearer token");
+    assert.deepEqual(loaded[0].globalOutbound, { app: id });
   });
 
   it("reads a release from Postgres once, then from the cache", async () => {

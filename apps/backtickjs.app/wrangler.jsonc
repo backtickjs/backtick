@@ -2,7 +2,7 @@
   // Every app's host: <id>.backtickjs.app, each app's release loaded by
   // LOADER into an isolate of its own.
   "name": "backtickjs-app",
-  "main": "src/index.ts",
+  "main": "src/worker.ts",
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat"],
   "worker_loaders": [{ "binding": "LOADER" }],

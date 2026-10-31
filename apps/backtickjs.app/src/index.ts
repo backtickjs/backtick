@@ -37,9 +37,10 @@ app.use("*", async (c, next) => {
 });
 
 // The phone's request, answered by the app's latest release, loaded into an
-// isolate of its own: no network of its own, and never the token, only the
-// path and the phone's modules. Supabase checks the token as it reads the
-// version, so only the owner gets one; a token it refuses is the phone's 401.
+// isolate of its own: the internet through OutboundGateway, and never the
+// token, only the path and the phone's modules. Supabase checks the token as it
+// reads the version, so only the owner gets one; a token it refuses is the
+// phone's 401.
 async function screen(c: Context<Env>, id: string): Promise<Response> {
   const authorization = c.req.header("authorization");
   if (authorization === undefined) {
@@ -80,7 +81,9 @@ async function screen(c: Context<Env>, id: string): Promise<Response> {
       compatibilityFlags: ["nodejs_compat"],
       mainModule: "app.js",
       modules: { "app.js": code },
-      globalOutbound: null,
+      globalOutbound: c.executionCtx.exports.OutboundGateway({
+        props: { app: id },
+      }),
     };
   });
   started = Date.now();
