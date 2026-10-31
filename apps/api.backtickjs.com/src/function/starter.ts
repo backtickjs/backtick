@@ -4,10 +4,9 @@ export const starter = `// A Backtick app:
 // 1. Import what the client provides \`with { backtick: "client" }\`.
 // 2. A splice \`$\` marks a server value crossing into a client script cs\`...\`
 // 3. Use + over template literals: a backtick ends the client script.
-// 4. Each route is a screen, and runs on the server each time it opens:
-//    <$Link href="/day"> opens the one at "/day".
-// 5. "/_layout" is the app's root layout, as Expo Router's _layout.tsx, and
-//    "/_loading" what shows while a screen arrives.
+// 4. Each route is a screen, and runs on the server each time it opens.
+// 5. "/_layout" is the app's root layout.
+// 6. "/_loading" shows between every screen.
 
 import { cs } from "@backtickjs/core";
 import { backtick } from "@backtickjs/hono";
