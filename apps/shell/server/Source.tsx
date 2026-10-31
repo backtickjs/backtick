@@ -5,14 +5,12 @@ import { createClient } from "@supabase/supabase-js";
 import { useSafeAreaInsets } from "react-native-safe-area-context" with {
   backtick: "client",
 };
-import { useState } from "react" with { backtick: "client" };
 import {
   FlatList,
   Platform,
   ScrollView,
   StatusBar,
   StyleSheet,
-  Switch,
   Text,
   View,
 } from "react-native" with {
@@ -48,21 +46,11 @@ export async function Source(props: { authorization: string; id: string }) {
   return cs`{
     const styles = $StyleSheet.create({
       screen: { flex: 1 },
-      header: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        paddingHorizontal: 16,
-        paddingTop: 12,
-        paddingBottom: 12,
-      },
-      titles: { gap: 4 },
+      header: { gap: 4, paddingHorizontal: 16, paddingVertical: 12 },
       file: { fontSize: 17, fontWeight: "700" },
       meta: { fontSize: 13 },
-      toggle: { flexDirection: "row", alignItems: "center", gap: 8 },
       line: { flexDirection: "row", paddingHorizontal: 16 },
       number: { minWidth: 28, textAlign: "right", marginRight: 12 },
-      wrapped: { flex: 1 },
       code: {
         fontSize: 12,
         lineHeight: 18,
@@ -73,29 +61,6 @@ export async function Source(props: { authorization: string; id: string }) {
 
     function Source() {
       const insets = $useSafeAreaInsets();
-      // Unwrapped by default, as in the editor: long lines scroll sideways.
-      const [wrap, setWrap] = $useState(false);
-      const list = (
-        <$FlatList
-          contentContainerStyle={{ paddingBottom: insets.bottom + 24 }}
-          data={$lines}
-          keyExtractor={(_, index) => String(index)}
-          renderItem={({ item, index }) => (
-            <$View style={styles.line}>
-              <$Text style={[styles.code, styles.number, { color: $muted }]}>
-                {index + 1}
-              </$Text>
-              <$Text style={[styles.code, wrap && styles.wrapped]} selectable>
-                {item.map(([color, text], at) => (
-                  <$Text key={at} style={{ color: $colors[color] }}>
-                    {text}
-                  </$Text>
-                ))}
-              </$Text>
-            </$View>
-          )}
-        />
-      );
       return (
         <$View
           style={[
@@ -105,24 +70,35 @@ export async function Source(props: { authorization: string; id: string }) {
         >
           <$StatusBar barStyle="light-content" />
           <$View style={styles.header}>
-            <$View style={styles.titles}>
-              <$Text style={[styles.file, { color: $ink }]}>App.tsx</$Text>
-              <$Text style={[styles.meta, { color: $muted }]}>
-                {$version === null ? "No saved version" : "Version " + $version}
-              </$Text>
-            </$View>
-            <$View style={styles.toggle}>
-              <$Text style={[styles.meta, { color: $muted }]}>Wrap</$Text>
-              <$Switch value={wrap} onValueChange={setWrap} />
-            </$View>
+            <$Text style={[styles.file, { color: $ink }]}>App.tsx</$Text>
+            <$Text style={[styles.meta, { color: $muted }]}>
+              {$version === null ? "No saved version" : "Version " + $version}
+            </$Text>
           </$View>
-          {wrap ? (
-            list
-          ) : (
-            <$ScrollView horizontal contentContainerStyle={{ flexGrow: 1 }}>
-              {list}
-            </$ScrollView>
-          )}
+          {/* As in the editor: long lines scroll sideways. */}
+          <$ScrollView horizontal contentContainerStyle={{ flexGrow: 1 }}>
+            <$FlatList
+              contentContainerStyle={{ paddingBottom: insets.bottom + 24 }}
+              data={$lines}
+              keyExtractor={(_, index) => String(index)}
+              renderItem={({ item, index }) => (
+                <$View style={styles.line}>
+                  <$Text
+                    style={[styles.code, styles.number, { color: $muted }]}
+                  >
+                    {index + 1}
+                  </$Text>
+                  <$Text style={styles.code} selectable>
+                    {item.map(([color, text], at) => (
+                      <$Text key={at} style={{ color: $colors[color] }}>
+                        {text}
+                      </$Text>
+                    ))}
+                  </$Text>
+                </$View>
+              )}
+            />
+          </$ScrollView>
         </$View>
       );
     }
