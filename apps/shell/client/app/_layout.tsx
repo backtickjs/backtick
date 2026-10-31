@@ -4,6 +4,8 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { ActivityIndicator } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import "../navigator";
+import { Progress } from "../Progress";
 import { usePaper } from "../screens";
 import { CurrentSession } from "../session";
 import { followRoot } from "./+native-intent";
@@ -39,6 +41,7 @@ export default function Layout() {
             contentStyle: { backgroundColor: paper },
           }}
         />
+        <Progress />
         <StatusBar style="auto" />
       </CurrentSession>
     </GestureHandlerRootView>

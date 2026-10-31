@@ -15,7 +15,7 @@ Where a screen comes from (`client/screens.ts`):
 | none: Backtick's home | `/`           | `https://app.backtickjs.com/`            |
 | `<id>`                | `/day?week=2` | `https://<id>.backtickjs.app/day?week=2` |
 
-The path is never changed: an app's `<Link href="/day">` is its server's `app.get("/day")`, and expo-router works in its screens as its docs say. The module map (`client/moduleMap.ts`) hands screens unmodified packages only.
+The path is never changed: an app's `<Link href="/day">` is its server's `app.get("/day")`, and expo-router works in its screens as its docs say. `Link` and `router` from `@backtickjs/router` fetch the next screen first, on the shell's fetch and navigator (`client/navigator.ts`), with the progress bar in `client/Progress.tsx`. The module map (`client/moduleMap.ts`) hands screens unmodified packages only.
 
 Links into the shell (`client/app/+native-intent.tsx`) are Expo Go's own, to the published project: `exp://u.expo.dev/<project>/--/<path>?channel-name=production`, written by `shellURL` (`server/links.ts`). Not `expo-linking`'s `createURL`: Expo Go 58 reports itself as a bare app, and `createURL` then writes a custom scheme Android can't open.
 

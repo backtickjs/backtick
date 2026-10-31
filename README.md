@@ -96,20 +96,21 @@ const ReorderButton = cs`(props: { order: Order }) => {
 
 ## Packages
 
-| Package                                                   | What it is                                                         |
-| --------------------------------------------------------- | ------------------------------------------------------------------ |
-| [`create-backtick-app`](packages/create-backtick-app)     | Creates a project: React Native, React or Solid, on Node or Bun    |
-| [`@backtickjs/core`](packages/core)                       | The `cs` tag, and the types for what crosses to the client         |
-| [`@backtickjs/bundler`](packages/bundler)                 | Runs server components and bundles a screen per request            |
-| [`@backtickjs/hono`](packages/hono)                       | Hono routes as screens: `context.render()` answers with the bundle |
-| [`@backtickjs/expo`](packages/expo)                       | Expo's config plugin, and reloading the app when the server does   |
-| [`@backtickjs/jsx-react`](packages/jsx-react)             | React's JSX for server components, and its compile step            |
-| [`@backtickjs/jsx-solid`](packages/jsx-solid)             | Solid's JSX for server components, and its compile step            |
-| [`@backtickjs/node-plugin`](packages/node-plugin)         | Compiles scripts as a Node server loads them                       |
-| [`@backtickjs/bun-plugin`](packages/bun-plugin)           | Compiles scripts as a Bun server loads them                        |
-| [`@backtickjs/tspatch-plugin`](packages/tspatch-plugin)   | Compiles scripts when you build a server ahead of time with `tspc` |
-| [`@backtickjs/tsc`](packages/tsc)                         | `backtick-tsc`: type-checks scripts and their splices              |
-| [`@backtickjs/prettier-plugin`](packages/prettier-plugin) | Formats the code inside scripts                                    |
+| Package                                                   | What it is                                                                    |
+| --------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| [`create-backtick-app`](packages/create-backtick-app)     | Creates a project: React Native, React or Solid, on Node or Bun               |
+| [`@backtickjs/core`](packages/core)                       | The `cs` tag, and the types for what crosses to the client                    |
+| [`@backtickjs/bundler`](packages/bundler)                 | Runs server components and bundles a screen per request                       |
+| [`@backtickjs/hono`](packages/hono)                       | Hono routes as screens: `context.render()` answers with the bundle            |
+| [`@backtickjs/router`](packages/router)                   | expo-router's `Link` and `router`, fetching the next screen before showing it |
+| [`@backtickjs/expo`](packages/expo)                       | Expo's config plugin, and reloading the app when the server does              |
+| [`@backtickjs/jsx-react`](packages/jsx-react)             | React's JSX for server components, and its compile step                       |
+| [`@backtickjs/jsx-solid`](packages/jsx-solid)             | Solid's JSX for server components, and its compile step                       |
+| [`@backtickjs/node-plugin`](packages/node-plugin)         | Compiles scripts as a Node server loads them                                  |
+| [`@backtickjs/bun-plugin`](packages/bun-plugin)           | Compiles scripts as a Bun server loads them                                   |
+| [`@backtickjs/tspatch-plugin`](packages/tspatch-plugin)   | Compiles scripts when you build a server ahead of time with `tspc`            |
+| [`@backtickjs/tsc`](packages/tsc)                         | `backtick-tsc`: type-checks scripts and their splices                         |
+| [`@backtickjs/prettier-plugin`](packages/prettier-plugin) | Formats the code inside scripts                                               |
 
 Internal packages, used by the ones above: [`compiler`](packages/compiler),
 [`language-plugin`](packages/language-plugin),

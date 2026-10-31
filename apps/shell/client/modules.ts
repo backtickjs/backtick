@@ -70,6 +70,7 @@ export const modules = [
   "react-native-view-shot",
   "three",
   "@react-three/fiber/native",
+  "@backtickjs/router",
 ] as const;
 
 export type Module = (typeof modules)[number];

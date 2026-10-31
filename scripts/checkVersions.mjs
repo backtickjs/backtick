@@ -64,11 +64,21 @@ const dependencyFields = [
 ];
 
 // One form for every reference to a workspace project, the one a user writes:
-// `^` and that project's version, as `"@backtickjs/core": "^0.1.8"`.
+// `^` and that project's version, as `"@backtickjs/core": "^0.1.8"`. Except a
+// package phones carry, which the sandbox pins exactly: npm there would take
+// a newer one than phones have (sandbox/test/versions.test.ts).
+const sandbox = "/apps/api.backtickjs.com/sandbox/package.json";
 for (const { file, json } of projects) {
   for (const field of dependencyFields) {
     for (const [name, range] of Object.entries(json[field] ?? {})) {
       if (!versionOf.has(name) || range === `^${versionOf.get(name)}`) continue;
+      if (
+        file.endsWith(sandbox) &&
+        name === "@backtickjs/router" &&
+        range === versionOf.get(name)
+      ) {
+        continue;
+      }
       errors.push(
         `${file.slice(root.length)}: ${field}["${name}"] is "${range}", ` +
           `expected "^${versionOf.get(name)}"`,

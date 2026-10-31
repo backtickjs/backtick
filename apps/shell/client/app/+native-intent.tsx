@@ -1,6 +1,7 @@
+import { router } from "@backtickjs/router";
 import type { NavigationState, useNavigationContainerRef } from "expo-router";
 import { Alert, Linking } from "react-native";
-import { backtickShown, reloadShownScreen } from "../shown";
+import { backtickShown } from "../shown";
 import { apps, signInWithGoogle, supabase } from "../supabase";
 
 // Every link into the phone: an app by its ID, as a browser follows a link to
@@ -38,7 +39,7 @@ export async function redirectSystemPath({
     return null;
   }
   if (link.pathname === "reload") {
-    reloadShownScreen();
+    void router.reload();
     return null;
   }
   if (first === "delete" && isAppId(rest[0] ?? "") && rest.length === 1) {
@@ -124,7 +125,7 @@ async function deleteApp(id: string): Promise<void> {
     );
   }
   // The home, on top, loaded again in place without the app.
-  reloadShownScreen();
+  void router.reload();
 }
 
 type Link = { pathname: string; search: string };

@@ -5,11 +5,13 @@ export const starter = `// A Backtick app:
 // 2. A splice \`$\` marks a server value crossing into a client script cs\`...\`
 // 3. Use + over template literals: a backtick ends the client script.
 // 4. Each route is a screen, and runs on the server each time it opens.
+// 5. Link and router from "@backtickjs/router" work like expo-router's, but fetch the
+//    next screen before showing it.
 
 import { cs } from "@backtickjs/core";
 import { backtick } from "@backtickjs/hono";
 import { Hono } from "hono";
-import { Link } from "expo-router" with { backtick: "client" };
+import { Link } from "@backtickjs/router" with { backtick: "client" };
 import { useState } from "react" with { backtick: "client" };
 import { Pressable, StyleSheet, Text } from "react-native" with { backtick: "client" };
 import { SafeAreaView } from "react-native-safe-area-context" with { backtick: "client" };

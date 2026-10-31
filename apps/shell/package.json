@@ -39,6 +39,7 @@
     "@backtickjs/expo": "^0.2.6",
     "@backtickjs/hono": "^0.2.6",
     "@backtickjs/jsx-react": "^0.2.6",
+    "@backtickjs/router": "^0.2.6",
     "@backtickjs/vscode-extension": "^0.2.6",
     "@expo/vector-icons": "^15.1.1",
     "@react-native-async-storage/async-storage": "2.2.0",

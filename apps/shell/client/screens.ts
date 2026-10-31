@@ -13,6 +13,11 @@ export function usePaper(): string {
   return useColorScheme() === "dark" ? "#0a0a0c" : "#ffffff";
 }
 
+// backtickjs.com's ink, for what the shell draws over a screen.
+export function useInk(): string {
+  return useColorScheme() === "dark" ? "#fafafa" : "#0e0e10";
+}
+
 // The app these screens are, or Backtick's (null).
 export const OpenApp = createContext<string | null>(null);
 
@@ -35,6 +40,7 @@ export async function fetchScreen(
   app: string | null,
   path: string,
   session: Session | null,
+  signal?: AbortSignal,
 ): Promise<ReactNode> {
   // A token that expired while the phone slept is refreshed first: timers,
   // and so Supabase's refresh, don't run in the background. 90 s is
@@ -42,28 +48,18 @@ export async function fetchScreen(
   if (session !== null && session.expires_at! * 1000 < Date.now() + 90_000) {
     session = (await supabase.auth.getSession()).data.session;
   }
-  const timeout = new AbortController();
-  const timer = setTimeout(() => timeout.abort(), 15_000);
-  try {
-    const response = await fetch(screenUrl(app, path), {
-      signal: timeout.signal,
-      headers: {
-        ...(session ? { authorization: `Bearer ${session.access_token}` } : {}),
-        "x-backtick-modules": modules,
-      },
-    });
-    const body = await response.text();
-    if (!response.headers.get("content-type")?.startsWith("text/javascript")) {
-      throw new Error(
-        `The screen couldn't be opened (${response.status}): ${body}`,
-      );
-    }
-    return execRoot(body as Bundle<ReactNode>, moduleMap);
-  } catch (error) {
-    throw timeout.signal.aborted
-      ? new Error("The screen took too long to open.", { cause: error })
-      : error;
-  } finally {
-    clearTimeout(timer);
+  const response = await fetch(screenUrl(app, path), {
+    signal,
+    headers: {
+      ...(session ? { authorization: `Bearer ${session.access_token}` } : {}),
+      "x-backtick-modules": modules,
+    },
+  });
+  const body = await response.text();
+  if (!response.headers.get("content-type")?.startsWith("text/javascript")) {
+    throw new Error(
+      `The screen couldn't be opened (${response.status}): ${body}`,
+    );
   }
+  return execRoot(body as Bundle<ReactNode>, moduleMap);
 }
