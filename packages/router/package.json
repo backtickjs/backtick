@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/router",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "expo-router's Link and router for Backtick: the next screen is fetched before it's shown, and the current one stays until then.",
   "keywords": [
     "backtick",
