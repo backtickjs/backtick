@@ -15,6 +15,7 @@ import { followStartingLink } from "./app/+native-intent";
 import { savePreview } from "./preview";
 import { cancel } from "@backtickjs/router";
 import { fetchScreen, useInk, usePaper } from "./screens";
+import { ShellSplash } from "./ShellSplash";
 import { showing } from "./shown";
 import { CurrentSession } from "./session";
 
@@ -89,7 +90,9 @@ export function ServerScreen({
       resetKeys={[screen]}
       fallbackRender={({ error }) => <Failed error={error} retry={reload} />}
     >
-      <Suspense fallback={null}>
+      <Suspense
+        fallback={app === null && path === "/" ? <ShellSplash /> : null}
+      >
         <Screen screen={screen} />
       </Suspense>
     </ErrorBoundary>

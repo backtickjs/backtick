@@ -2,11 +2,11 @@ import type { Session } from "@supabase/supabase-js";
 import { Stack, useNavigationContainerRef } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
-import { ActivityIndicator } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "../navigator";
 import { Progress } from "../Progress";
 import { usePaper } from "../screens";
+import { ShellSplash } from "../ShellSplash";
 import { CurrentSession } from "../session";
 import { followRoot } from "./+native-intent";
 import { supabase } from "../supabase";
@@ -26,7 +26,7 @@ export default function Layout() {
   }, []);
 
   if (session === undefined) {
-    return <ActivityIndicator style={{ flex: 1, backgroundColor: paper }} />;
+    return <ShellSplash />;
   }
   // Drawn afresh when the user signs in or out, from Backtick's home. Inside
   // gesture-handler's root, as an Expo Router app's root layout puts it.

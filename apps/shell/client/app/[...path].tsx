@@ -1,10 +1,10 @@
 import { arrived } from "@backtickjs/router";
 import { use, useEffect } from "react";
 import { useLocalSearchParams } from "expo-router";
+import { AppSplash } from "../AppSplash";
 import { readRouteParam } from "../routeParam";
 import { OpenApp } from "../screens";
 import { ServerScreen } from "../ServerScreen";
-import { Splash } from "../Splash";
 
 // Every path: the open app's screen at it, Backtick's home when none is. The
 // path and its query, exactly as the link had them, without what `navigator.ts`
@@ -28,7 +28,7 @@ export default function AppScreen() {
     }
   }, [screen]);
   if (splash && app !== null) {
-    return <Splash app={app} path={route} />;
+    return <AppSplash app={app} path={route} />;
   }
   return (
     <ServerScreen
