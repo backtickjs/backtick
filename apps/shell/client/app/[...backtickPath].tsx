@@ -10,8 +10,8 @@ import { ServerScreen } from "../ServerScreen";
 // path and its query, exactly as the link had them, without what `navigator.ts`
 // adds for the shell.
 export default function AppScreen() {
-  const { path, backtick, ...query } = useLocalSearchParams();
-  const { screen, splash } = readRouteParam(backtick);
+  const { backtickPath, __backtick, ...query } = useLocalSearchParams();
+  const { screen, splash } = readRouteParam(__backtick);
   const app = use(OpenApp);
   const search = new URLSearchParams();
   for (const [name, value] of Object.entries(query)) {
@@ -20,7 +20,9 @@ export default function AppScreen() {
     }
   }
   const route =
-    "/" + [path ?? []].flat().join("/") + (search.size > 0 ? "?" + search : "");
+    "/" +
+    [backtickPath ?? []].flat().map(encodeURIComponent).join("/") +
+    (search.size > 0 ? "?" + search : "");
   // Used once: after this, the latest copy is fetched.
   useEffect(() => {
     if (screen !== undefined) {

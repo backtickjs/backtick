@@ -5,7 +5,7 @@ import {
   back,
   cancel,
   configure,
-  dismissTo,
+  leftScreen,
   navigate,
   navigationState,
   reload,
@@ -16,9 +16,11 @@ const passing = {
   dismissAll() {},
   canGoBack: () => true,
   canDismiss: () => true,
-  setParams() {},
+  isShown: (href: string) => href === "/here",
+  shownScreen: () => from,
 };
 
+let from: string | undefined;
 let loads: {
   href: string;
   signal: AbortSignal;
@@ -46,7 +48,6 @@ beforeEach(() => {
     push: (href, screen) => shown.push(["push", href, screen]),
     replace: (href, screen) => shown.push(["replace", href, screen]),
     back: () => shown.push(["back", ""]),
-    dismissTo: (href) => shown.push(["dismissTo", href]),
     ...passing,
     reload: () => Promise.resolve(),
   });
@@ -118,10 +119,69 @@ test("back aborts what's on its way", async () => {
   assert.equal(navigationState(), "idle");
 });
 
-test("dismissTo fetches nothing: the screen below stays", () => {
-  dismissTo("/");
+test("navigate leaves the screen on top where it is; push adds another", () => {
+  navigate("navigate", "/here");
   assert.equal(loads.length, 0);
-  assert.deepEqual(shown, [["dismissTo", "/"]]);
+  navigate("push", "/here");
+  assert.equal(loads.length, 1);
+});
+
+test("replace after push of the same href isn't lost", () => {
+  navigate("push", "/day");
+  navigate("replace", "/day");
+  assert.equal(loads.length, 2);
+  assert.equal(loads[0]!.signal.aborted, true);
+});
+
+test("a load that throws is a failure, not a stuck navigation", async () => {
+  configure({
+    load() {
+      throw new Error("no session");
+    },
+    push: (href, screen) => shown.push(["push", href, screen]),
+    replace() {},
+    back() {},
+    ...passing,
+    reload: () => Promise.resolve(),
+  });
+  navigate("push", "/day");
+  await settled();
+  assert.equal(navigationState(), "idle");
+  assert.equal(shown.length, 1);
+});
+
+test("leaving a screen drops what it started, and only that", async () => {
+  from = "a";
+  navigate("push", "/day");
+  from = "b";
+  leftScreen("b");
+  assert.equal(loads[0]!.signal.aborted, false);
+  leftScreen("a");
+  assert.equal(loads[0]!.signal.aborted, true);
+  assert.equal(navigationState(), "idle");
+  loads[0]!.finish();
+  await settled();
+  assert.deepEqual(shown, []);
+});
+
+test("cancel ends a hung reload", async () => {
+  let signal: AbortSignal | undefined;
+  configure({
+    load: () => Promise.resolve(null),
+    push() {},
+    replace() {},
+    back() {},
+    ...passing,
+    reload(aborted) {
+      signal = aborted;
+      return new Promise(() => {});
+    },
+  });
+  void reload();
+  assert.equal(navigationState(), "loading");
+  cancel();
+  assert.equal(signal!.aborted, true);
+  assert.equal(navigationState(), "idle");
 });
 
 test("a reload is a navigation in progress, and survives failing", async () => {
@@ -130,7 +190,6 @@ test("a reload is a navigation in progress, and survives failing", async () => {
     push() {},
     replace() {},
     back() {},
-    dismissTo() {},
     ...passing,
     reload: () => Promise.reject(new Error("offline")),
   });

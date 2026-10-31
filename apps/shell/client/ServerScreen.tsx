@@ -8,12 +8,12 @@ import {
   useState,
 } from "react";
 import { Pressable, StyleSheet, Text, useColorScheme } from "react-native";
-import { useFocusEffect } from "expo-router";
+import { useFocusEffect, useRoute } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ErrorBoundary, getErrorMessage } from "react-error-boundary";
 import { followStartingLink } from "./app/+native-intent";
 import { savePreview } from "./preview";
-import { cancel } from "@backtickjs/router";
+import { leftScreen } from "@backtickjs/router";
 import { fetchScreen, useInk, usePaper } from "./screens";
 import { ShellSplash } from "./ShellSplash";
 import { showing } from "./shown";
@@ -32,17 +32,21 @@ export function ServerScreen({
   initialScreen?: Promise<ReactNode>;
 }) {
   const session = use(CurrentSession);
+  const { key } = useRoute();
   // Held here, where nothing suspends, so the request outlives the render
   // that waits for it.
   const [screen, setScreen] = useState(
     () => initialScreen ?? fetchScreen(app, path, session),
   );
   // The current screen stays until the new one has arrived.
-  const reload = useCallback(() => {
-    const next = fetchScreen(app, path, session);
-    startTransition(() => setScreen(next));
-    return next;
-  }, [app, path, session]);
+  const reload = useCallback(
+    (signal?: AbortSignal) => {
+      const next = fetchScreen(app, path, session, signal);
+      startTransition(() => setScreen(next));
+      return next;
+    },
+    [app, path, session],
+  );
   // An app's first screen, once it's had a moment to draw (a game's first
   // frame included), is its preview on the home's card. Never in the way:
   // a capture that fails is only logged.
@@ -75,15 +79,10 @@ export function ServerScreen({
   useFocusEffect(
     useCallback(() => {
       void followStartingLink();
-      const hide = showing(app, reload);
-      // Whatever was on its way from this screen is no longer wanted: a swipe
-      // back or the back button, which no Link sees.
-      return () => {
-        hide();
-        cancel();
-      };
-    }, [app, reload]),
+      return showing(key, app, path, reload);
+    }, [key, app, path, reload]),
   );
+  useEffect(() => () => leftScreen(key), [key]);
 
   return (
     <ErrorBoundary

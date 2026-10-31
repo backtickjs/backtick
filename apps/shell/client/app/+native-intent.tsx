@@ -77,17 +77,21 @@ export function followRoot(ref: typeof root): void {
 // own. Under expo-router's own root route.
 function openOverHome(path: string[], query: string, app?: string): void {
   const state = root.getRootState().routes[0]!.state as NavigationState;
-  const params = { ...queryParams(query), path };
+  // A route's params are decoded, as a push leaves them.
+  const params = {
+    ...queryParams(query),
+    backtickPath: path.map(decodeURIComponent),
+  };
   const screen = {
-    name: "[...path]",
+    name: "[...backtickPath]",
     params: app
-      ? { ...params, backtick: JSON.stringify({ splash: true }) }
+      ? { ...params, __backtick: JSON.stringify({ splash: true }) }
       : params,
   };
   const route = app
     ? {
         name: "(app)",
-        params: { backtick: JSON.stringify({ app }) },
+        params: { __backtick: JSON.stringify({ app }) },
         state: { index: 0, routes: [screen] },
       }
     : screen;

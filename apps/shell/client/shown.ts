@@ -1,14 +1,21 @@
 // The screen on top: its app, for the commands only Backtick's own screens may
 // send, and for the `reload` link, a page asking the browser to load it again,
 // as `location.reload()` does on the web.
-let shown: { app: string | null; reload: () => Promise<unknown> } | null = null;
+let shown: {
+  key: string;
+  app: string | null;
+  path: string;
+  reload: (signal?: AbortSignal) => Promise<unknown>;
+} | null = null;
 
 // While the screen is on top; the returned function ends that.
 export function showing(
+  key: string,
   app: string | null,
-  reload: () => Promise<unknown>,
+  path: string,
+  reload: (signal?: AbortSignal) => Promise<unknown>,
 ): () => void {
-  const screen = { app, reload };
+  const screen = { key, app, path, reload };
   shown = screen;
   return () => {
     if (shown === screen) {
@@ -25,6 +32,14 @@ export function shownApp(): string | null {
   return shown?.app ?? null;
 }
 
-export async function reloadShownScreen(): Promise<void> {
-  await shown?.reload();
+export function shownPath(): string | undefined {
+  return shown?.path;
+}
+
+export function shownScreen(): string | undefined {
+  return shown?.key;
+}
+
+export async function reloadShownScreen(signal?: AbortSignal): Promise<void> {
+  await shown?.reload(signal);
 }

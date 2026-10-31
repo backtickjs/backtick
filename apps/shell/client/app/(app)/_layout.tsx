@@ -5,8 +5,8 @@ import { OpenApp, useAppPaper } from "../../screens";
 
 // A navigator for each app opened, so what's open closes with it.
 export default function AppLayout() {
-  const { backtick } = useRoute().params as { backtick: string };
-  const app = readRouteParam(backtick).app!;
+  const { __backtick } = useRoute().params as { __backtick: string };
+  const app = readRouteParam(__backtick).app!;
   const manifest = useManifest(app);
   const paper = useAppPaper(manifest);
   return (

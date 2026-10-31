@@ -18,16 +18,22 @@ const minimum = 500;
 // a moment, and then long enough to read as a bar, not a flicker.
 export function Progress() {
   const { state } = useNavigation();
-  const [shown, setShown] = useState(false);
+  const [shownAt, setShownAt] = useState<number | null>(null);
   useEffect(() => {
     if (state === "loading") {
-      const wait = setTimeout(() => setShown(true), delay);
+      if (shownAt !== null) {
+        return;
+      }
+      const wait = setTimeout(() => setShownAt(Date.now()), delay);
       return () => clearTimeout(wait);
     }
-    const wait = setTimeout(() => setShown(false), shown ? minimum : 0);
-    return () => clearTimeout(wait);
-  }, [state, shown]);
-  return shown ? <Bar /> : null;
+    if (shownAt !== null) {
+      const left = shownAt + minimum - Date.now();
+      const wait = setTimeout(() => setShownAt(null), Math.max(left, 0));
+      return () => clearTimeout(wait);
+    }
+  }, [state, shownAt]);
+  return shownAt === null ? null : <Bar />;
 }
 
 function Bar() {
