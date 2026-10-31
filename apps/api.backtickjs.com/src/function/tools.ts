@@ -8,6 +8,7 @@ import {
 import { McpServer, type CallToolResult } from "@modelcontextprotocol/server";
 import { waitUntil } from "@vercel/functions";
 import * as z from "zod";
+import { applyEdits } from "./applyEdits.ts";
 import { card, cardHtml, cardScriptOrigin, cardUri } from "./card.ts";
 import {
   phoneModules,
@@ -163,20 +164,25 @@ export function tools(owner: string): McpServer {
     async ({ id, title, code }) => save(id, title, code),
   );
 
-  // Artifact-shaped, as Claude's text editor tool's `str_replace`: one exact
-  // replacement, so a small change to a big app isn't the whole file again.
+  // Artifact-shaped, as Claude's Artifact tool's `edits`: exact replacements,
+  // so a small change to a big app isn't the whole file again. A list because
+  // each call is a check, a version and a card.
   registerAppTool(
     server,
     "update_app",
     {
       title: "Update an app",
       description:
-        "Replace old_str, which must match exactly once, with new_str in a " +
-        "saved app's latest App.tsx, then save it as save_app does.",
+        "Apply edits to a saved app's latest App.tsx, then save it as " +
+        "save_app does. Each edit replaces old_str, which must match exactly " +
+        "once, with new_str, in order, each on the last's result; if one " +
+        "doesn't match, nothing is saved. Each call is a new version the " +
+        "user sees, so put every edit for a change in one call.",
       inputSchema: z.object({
         id: z.uuid(),
-        old_str: z.string(),
-        new_str: z.string(),
+        edits: z
+          .array(z.object({ old_str: z.string(), new_str: z.string() }))
+          .min(1),
       }),
       annotations: {
         readOnlyHint: false,
@@ -185,27 +191,16 @@ export function tools(owner: string): McpServer {
       },
       _meta: { ui: { resourceUri: cardUri } },
     },
-    async ({ id, old_str, new_str }) => {
+    async ({ id, edits }) => {
       const latest = await latestVersion(id, owner);
       if (latest === undefined) {
         return failed(`No saved app ${id}.`);
       }
-      const matches = latest.source.split(old_str).length - 1;
-      if (matches !== 1) {
-        return failed(
-          matches === 0
-            ? `No match for old_str in version ${latest.version}'s App.tsx. Check the text, or get_app for the latest, and try again.`
-            : `old_str matches ${matches} places in version ${latest.version}'s App.tsx: include more of the text around it, so it matches once.`,
-        );
+      const edited = applyEdits(latest.source, edits);
+      if ("error" in edited) {
+        return failed(`Version ${latest.version}: ${edited.error}`);
       }
-      const at = latest.source.indexOf(old_str);
-      return save(
-        id,
-        latest.title,
-        latest.source.slice(0, at) +
-          new_str +
-          latest.source.slice(at + old_str.length),
-      );
+      return save(id, latest.title, edited.code);
     },
   );
 
