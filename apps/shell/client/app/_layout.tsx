@@ -4,7 +4,6 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, useColorScheme } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { setOpenApp } from "../openApp";
 import { CurrentSession } from "../session";
 import { supabase } from "../supabase";
 
@@ -16,11 +15,7 @@ export default function Layout() {
   const [session, setSession] = useState<Session | null | undefined>();
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setSession(data.session));
-    const { data } = supabase.auth.onAuthStateChange((event, next) => {
-      // Signed in or out, the phone starts over at Backtick's home.
-      if (event === "SIGNED_IN" || event === "SIGNED_OUT") {
-        setOpenApp(null);
-      }
+    const { data } = supabase.auth.onAuthStateChange((_, next) => {
       setSession(next);
     });
     return () => data.subscription.unsubscribe();

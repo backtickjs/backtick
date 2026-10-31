@@ -1,17 +1,23 @@
-// The screen on top, for the `reload` link: a page asking the browser to
-// load it again, as `location.reload()` does on the web.
-let reloadShown: (() => void) | null = null;
+// The screen on top: its app, for the commands only Backtick's own screens may
+// send, and for the `reload` link, a page asking the browser to load it again,
+// as `location.reload()` does on the web.
+let shown: { app: string | null; reload: () => void } | null = null;
 
-// While `reload` is the screen on top's; the returned function ends that.
-export function showing(reload: () => void): () => void {
-  reloadShown = reload;
+// While the screen is on top; the returned function ends that.
+export function showing(app: string | null, reload: () => void): () => void {
+  const screen = { app, reload };
+  shown = screen;
   return () => {
-    if (reloadShown === reload) {
-      reloadShown = null;
+    if (shown === screen) {
+      shown = null;
     }
   };
 }
 
+export function backtickShown(): boolean {
+  return shown !== null && shown.app === null;
+}
+
 export function reloadShownScreen(): void {
-  reloadShown?.();
+  shown?.reload();
 }

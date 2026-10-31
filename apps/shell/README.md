@@ -21,7 +21,7 @@ Links into the shell (`client/app/+native-intent.tsx`) are Expo Go's own, to the
 
 | Path after `--/`       | Does                                                                    |
 | ---------------------- | ----------------------------------------------------------------------- |
-| `<id>/<path>`          | Opens the app at the path                                               |
+| `<id>/<path>`          | Closes what's open and opens the app at the path, over the home         |
 | `sign-in`, `sign-out`  | Signs in or out, from Backtick's home only                              |
 | `auth/callback?code=…` | Google's sign-in returning, which the browser session hands back itself |
 

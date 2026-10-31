@@ -17,18 +17,22 @@ import {
 import { useFocusEffect } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ErrorBoundary, getErrorMessage } from "react-error-boundary";
-import { currentApp, setOpenApp } from "./openApp";
+import { followStartingLink } from "./app/+native-intent";
 import { savePreview } from "./preview";
 import { fetchScreen } from "./screens";
 import { showing } from "./shown";
 import { CurrentSession } from "./session";
 
-// The open app's screen at `path`, from its server, with a spinner until it
-// arrives. It stays the app's, made the open one again when it's back on
-// top.
-export function ServerScreen({ path }: { path: string }) {
+// `app`'s screen at `path`, from its server, with a spinner until it arrives.
+// Backtick's home is the app null.
+export function ServerScreen({
+  app,
+  path,
+}: {
+  app: string | null;
+  path: string;
+}) {
   const session = use(CurrentSession);
-  const [app] = useState(currentApp);
   // Held here, where nothing suspends, so the request outlives the render
   // that waits for it.
   const [screen, setScreen] = useState(() => fetchScreen(app, path, session));
@@ -68,8 +72,8 @@ export function ServerScreen({ path }: { path: string }) {
   // On top, it's the screen a `reload` link loads again, in place.
   useFocusEffect(
     useCallback(() => {
-      setOpenApp(app);
-      return showing(reload);
+      void followStartingLink();
+      return showing(app, reload);
     }, [app, reload]),
   );
 

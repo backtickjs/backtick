@@ -1,7 +1,6 @@
 import { router } from "expo-router";
-import { Alert } from "react-native";
-import { currentApp, setOpenApp } from "../openApp";
-import { reloadShownScreen } from "../shown";
+import { Alert, Linking } from "react-native";
+import { backtickShown, reloadShownScreen } from "../shown";
 import { apps, signInWithGoogle, supabase } from "../supabase";
 
 // Every link into the phone: an app by its ID, as a browser follows a link to
@@ -15,7 +14,8 @@ import { apps, signInWithGoogle, supabase } from "../supabase";
 //                                    as location.reload() does
 //   …/--/auth/callback?code=…        sign-in's return, which
 //                                    signInWithGoogle's browser session has
-// Anything else goes to expo-router as is.
+//   …/--/<path>                      Backtick's <path>
+// Expo Go's own link to the shell, naming no path, goes to expo-router as is.
 export async function redirectSystemPath({
   path,
   initial,
@@ -27,15 +27,14 @@ export async function redirectSystemPath({
   if (link === undefined) {
     return path;
   }
+  // The shell always starts at the home: followStartingLink follows it from
+  // there, so back from an app returns to the home.
+  if (initial) {
+    return "/";
+  }
   const [first, ...rest] = link.pathname.split("/");
   if (isAppId(first)) {
-    setOpenApp(first);
-    const opened = "/" + rest.join("/") + link.search;
-    // Pushed, so an app's `/` stacks on the home's `/`, and back returns to it.
-    if (initial) {
-      return opened;
-    }
-    router.push(opened);
+    openOverHome(first, rest.join("/"), link.search);
     return null;
   }
   if (link.pathname === "reload") {
@@ -47,10 +46,11 @@ export async function redirectSystemPath({
     return null;
   }
   if (!["sign-in", "sign-out", "auth/callback"].includes(link.pathname)) {
-    return path;
+    openOverHome("", link.pathname, link.search);
+    return null;
   }
   try {
-    if (currentApp() !== null || link.pathname === "auth/callback") {
+    if (!backtickShown() || link.pathname === "auth/callback") {
       // An app can't sign the user in or out.
     } else if (link.pathname === "sign-in") {
       await signInWithGoogle();
@@ -63,10 +63,35 @@ export async function redirectSystemPath({
   return null;
 }
 
+// One thing open at a time: what's open closes, and the link's screen stacks on
+// the home, saying whose it is, as what's closing is still in the stack as it
+// first renders. Backtick's are the app "".
+function openOverHome(app: string, path: string, query: string): void {
+  if (router.canDismiss()) {
+    router.dismissAll();
+  }
+  const search = new URLSearchParams(query);
+  search.set("backtickApp", app);
+  router.push(`/${path}?${search}`);
+}
+
+// The link that started the shell, once the home is on top. Read from React
+// Native: on iOS in Expo Go, expo-router's own read of it is null.
+let followed = false;
+export async function followStartingLink(): Promise<void> {
+  if (!followed) {
+    followed = true;
+    const url = await Linking.getInitialURL();
+    if (url) {
+      await redirectSystemPath({ path: url, initial: false });
+    }
+  }
+}
+
 // The home asked first: the app goes from its list, and its link stops
 // working. An open app can't delete one.
 async function deleteApp(id: string): Promise<void> {
-  if (currentApp() !== null) {
+  if (!backtickShown()) {
     return;
   }
   const { data, error } = await supabase.rpc("delete_app", { app: id });
@@ -86,6 +111,9 @@ type Link = { pathname: string; search: string };
 // an app's host for its own link): `<id>/day`, `sign-in`. Its query's channel
 // is Expo Go's, not the link's.
 function shellLink(url: string): Link | undefined {
+  if (url.startsWith("exp://") && !url.includes("/--/")) {
+    return undefined;
+  }
   // https://<id>.<apps>/day reads as https://<id>/day.
   const host = url.startsWith("https://") ? url.indexOf(`.${apps}`) : -1;
   if (host > 0) {
