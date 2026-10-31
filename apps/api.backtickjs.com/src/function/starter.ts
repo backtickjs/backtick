@@ -4,7 +4,8 @@ export const starter = `// A Backtick app:
 // 1. Import what the client provides \`with { backtick: "client" }\`.
 // 2. A splice \`$\` marks a server value crossing into a client script cs\`...\`
 // 3. Use + over template literals: a backtick ends the client script.
-// 4. Each route is a screen: <$Link href="/day"> opens the one at "/day".
+// 4. Each route is a screen, and runs on the server each time it opens:
+//    <$Link href="/day"> opens the one at "/day".
 // 5. "/_layout" is the app's root layout, as Expo Router's _layout.tsx, and
 //    "/_loading" what shows while a screen arrives.
 
@@ -16,16 +17,29 @@ import { useState } from "react" with { backtick: "client" };
 import { Pressable, StyleSheet, Text } from "react-native" with { backtick: "client" };
 import { SafeAreaView } from "react-native-safe-area-context" with { backtick: "client" };
 
-const app = new Hono();
+const styles = cs\`$StyleSheet.create({
+  screen: { flex: 1, alignItems: "center", justifyContent: "center", gap: 16 },
+  text: { fontSize: 18 },
+  button: { padding: 12, borderRadius: 8, backgroundColor: "#0a7ea4" },
+  label: { color: "#fff", fontSize: 18 },
+  link: { fontSize: 18, color: "#0a7ea4" },
+})\`;
 
-// \`context.render(element)\` answers with the screen, bundled for the phone.
-app.use(backtick());
-app.get("/", (context) => context.render(<Home />));
-app.get("/day", (context) => context.render(<Day />));
-app.get("/_layout", (context) => context.render(layout));
-app.get("/_loading", (context) => context.render(loading));
+function Layout() {
+  return cs\`
+    <$Stack
+      screenOptions={{
+        headerShown: false,
+        contentStyle: { backgroundColor: "#ffffff" },
+      }}
+    />
+  \`;
+}
 
-// Server components: they run on the server each time their screen opens.
+function Loading() {
+  return cs\`<$SafeAreaView style={$styles.screen} />\`;
+}
+
 function Home() {
   const time = new Date().toLocaleTimeString("en-US");
   return cs\`{
@@ -54,25 +68,12 @@ function Day() {
   \`;
 }
 
-// Styles every screen shares: a client value, spliced as $styles.
-const styles = cs\`$StyleSheet.create({
-  screen: { flex: 1, alignItems: "center", justifyContent: "center", gap: 16 },
-  text: { fontSize: 18 },
-  button: { padding: 12, borderRadius: 8, backgroundColor: "#0a7ea4" },
-  label: { color: "#fff", fontSize: 18 },
-  link: { fontSize: 18, color: "#0a7ea4" },
-})\`;
-
-const layout = cs\`
-  <$Stack
-    screenOptions={{
-      headerShown: false,
-      contentStyle: { backgroundColor: "#ffffff" },
-    }}
-  />
-\`;
-
-const loading = cs\`<$SafeAreaView style={$styles.screen} />\`;
+const app = new Hono();
+app.use(backtick());
+app.get("/_layout", (context) => context.render(<Layout />));
+app.get("/_loading", (context) => context.render(<Loading />));
+app.get("/", (context) => context.render(<Home />));
+app.get("/day", (context) => context.render(<Day />));
 
 export default app;
 `;
