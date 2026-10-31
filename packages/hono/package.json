@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/hono",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Hono routes as Backtick screens: a route's answer is its server components, bundled for the client that asked",
   "keywords": [
     "backtick",
@@ -46,8 +46,8 @@
     "prepack": "cp ../../LICENSE ."
   },
   "dependencies": {
-    "@backtickjs/bundler": "^0.2.5",
-    "@backtickjs/core": "^0.2.5"
+    "@backtickjs/bundler": "^0.2.6",
+    "@backtickjs/core": "^0.2.6"
   },
   "peerDependencies": {
     "hono": "^4.13.13"

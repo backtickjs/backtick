@@ -16,12 +16,12 @@
     "format:check": "prettier --check --ignore-unknown ."
   },
   "dependencies": {
-    "@backtickjs/bundler": "^0.2.5",
-    "@backtickjs/core": "^0.2.5",
-    "@backtickjs/expo": "^0.2.5",
-    "@backtickjs/hono": "^0.2.5",
-    "@backtickjs/node-plugin": "^0.2.5",
-    "@backtickjs/jsx-react": "^0.2.5",
+    "@backtickjs/bundler": "^0.2.6",
+    "@backtickjs/core": "^0.2.6",
+    "@backtickjs/expo": "^0.2.6",
+    "@backtickjs/hono": "^0.2.6",
+    "@backtickjs/node-plugin": "^0.2.6",
+    "@backtickjs/jsx-react": "^0.2.6",
     "@hono/node-server": "^2.1.4",
     "expo": "~57.0.26",
     "expo-constants": "~57.0.20",
@@ -35,8 +35,8 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@backtickjs/prettier-plugin": "^0.2.5",
-    "@backtickjs/tsc": "^0.2.5",
+    "@backtickjs/prettier-plugin": "^0.2.6",
+    "@backtickjs/tsc": "^0.2.6",
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.7",
     "@types/node": "^25.9.1",
