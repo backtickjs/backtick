@@ -1,7 +1,7 @@
 import { Stack, useRoute } from "expo-router";
 import { useManifest } from "../../manifest";
 import { readRouteParam } from "../../routeParam";
-import { OpenApp, useAppPaper } from "../../screens";
+import { appPaper, OpenApp } from "../../screens";
 
 type RouteParams = { __backtick?: string } | undefined;
 
@@ -10,7 +10,7 @@ export default function AppLayout() {
   const { __backtick } = useRoute().params as { __backtick: string };
   const app = readRouteParam(__backtick).app!;
   const manifest = useManifest(app);
-  const paper = useAppPaper(manifest);
+  const paper = appPaper(manifest);
   return (
     <OpenApp value={app}>
       <Stack

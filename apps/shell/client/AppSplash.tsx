@@ -2,7 +2,7 @@ import { leftScreen, router } from "@backtickjs/router";
 import { useFocusEffect, useRoute } from "expo-router";
 import { useCallback, useEffect } from "react";
 import { useManifest } from "./manifest";
-import { screenUrl, useAppPaper } from "./screens";
+import { appPaper, screenUrl } from "./screens";
 import { showing } from "./shown";
 import { SplashView } from "./SplashView";
 
@@ -13,7 +13,7 @@ import { SplashView } from "./SplashView";
 export function AppSplash({ app, path }: { app: string; path: string }) {
   const { key } = useRoute();
   const manifest = useManifest(app);
-  const paper = useAppPaper(manifest);
+  const paper = appPaper(manifest);
   useFocusEffect(
     useCallback(() => {
       const hide = showing(key, app, path, () => Promise.resolve());
@@ -26,6 +26,7 @@ export function AppSplash({ app, path }: { app: string; path: string }) {
   return (
     <SplashView
       paper={paper}
+      ink={manifest?.theme_color}
       name={manifest?.name}
       icon={
         icon === undefined

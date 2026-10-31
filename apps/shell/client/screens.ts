@@ -14,11 +14,11 @@ export function usePaper(): string {
   return useColorScheme() === "dark" ? "#0a0a0c" : "#ffffff";
 }
 
-// `background_color` is the app's in the light: a manifest has no dark one.
-export function useAppPaper(manifest: Manifest | undefined): string {
-  const paper = usePaper();
-  const dark = useColorScheme() === "dark";
-  return (!dark && manifest?.background_color) || paper;
+// Behind an app's screens: its `background_color`, whatever the phone's
+// setting, since an app's own colours don't follow that setting unless it says
+// so. Without one, as an Expo Router app, light.
+export function appPaper(manifest: Manifest | undefined): string {
+  return manifest?.background_color ?? "#ffffff";
 }
 
 // backtickjs.com's ink, for what the shell draws over a screen.

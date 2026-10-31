@@ -5,19 +5,19 @@ import {
   Text,
   View,
 } from "react-native";
-import { useInk } from "./screens";
 
 // A launch screen, as an installed web app gets.
 export function SplashView({
   paper,
+  ink,
   name,
   icon,
 }: {
   paper: string;
+  ink?: string;
   name?: string;
   icon?: ImageSourcePropType;
 }) {
-  const ink = useInk();
   return (
     <View style={[styles.splash, { backgroundColor: paper }]}>
       {icon === undefined ? null : <Image source={icon} style={styles.icon} />}
