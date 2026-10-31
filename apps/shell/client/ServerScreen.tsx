@@ -14,7 +14,7 @@ import {
   Text,
   useColorScheme,
 } from "react-native";
-import { useFocusEffect } from "expo-router";
+import { Stack, useFocusEffect } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ErrorBoundary, getErrorMessage } from "react-error-boundary";
 import { followStartingLink } from "./app/+native-intent";
@@ -78,18 +78,22 @@ export function ServerScreen({
   );
 
   return (
-    <ErrorBoundary
-      resetKeys={[screen]}
-      fallbackRender={({ error }) => <Failed error={error} retry={reload} />}
-    >
-      <Suspense
-        fallback={
-          roots.get(app)?.loading ?? <ActivityIndicator style={styles.fill} />
-        }
+    <>
+      {/* Empty until a screen titles itself: the route's name is ours. */}
+      <Stack.Screen options={{ title: "" }} />
+      <ErrorBoundary
+        resetKeys={[screen]}
+        fallbackRender={({ error }) => <Failed error={error} retry={reload} />}
       >
-        <Screen screen={screen} />
-      </Suspense>
-    </ErrorBoundary>
+        <Suspense
+          fallback={
+            roots.get(app)?.loading ?? <ActivityIndicator style={styles.fill} />
+          }
+        >
+          <Screen screen={screen} />
+        </Suspense>
+      </ErrorBoundary>
+    </>
   );
 }
 
