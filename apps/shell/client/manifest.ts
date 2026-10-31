@@ -7,7 +7,6 @@ export interface Manifest {
   icons?: { src: string }[];
   theme_color?: string;
   background_color?: string;
-  display?: "fullscreen" | "standalone" | "minimal-ui" | "browser";
 }
 
 // Each app's latest, as its screens bring it, and the last one on the phone

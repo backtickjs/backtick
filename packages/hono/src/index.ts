@@ -19,7 +19,6 @@ export interface Manifest {
   icons?: { src: string; sizes?: string; type?: string }[];
   theme_color?: string;
   background_color?: string;
-  display?: "fullscreen" | "standalone" | "minimal-ui" | "browser";
 }
 
 /**

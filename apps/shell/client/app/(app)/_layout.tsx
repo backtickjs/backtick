@@ -15,9 +15,7 @@ export default function AppLayout() {
         screenOptions={({ navigation, route }) => ({
           // Empty until a screen titles itself: the route's name is ours.
           title: "",
-          headerShown:
-            manifest?.display === "minimal-ui" ||
-            manifest?.display === "browser",
+          headerShown: false,
           headerTintColor: manifest?.theme_color,
           contentStyle: { backgroundColor: paper },
           // The first screen, in the splash's place.
