@@ -305,7 +305,12 @@ export async function Home(props: { authorization: string }) {
           }),
         );
         loop.start();
-        return () => loop.stop();
+        // A link that never opens gives the card back.
+        const giveUp = setTimeout(() => setOpening(false), 15000);
+        return () => {
+          loop.stop();
+          clearTimeout(giveUp);
+        };
       }, [opening]);
       return (
         <$View style={[styles.card, { width }]}>
@@ -318,6 +323,8 @@ export async function Home(props: { authorization: string }) {
                   styles.shot,
                   { borderColor: colors.line, height },
                 ])}
+                // One open at a time, however many taps.
+                disabled={opening}
                 onPressIn={() => spring(0.97, 0)}
                 onPressOut={() => spring(1, 8)}
                 onPress={() => {
