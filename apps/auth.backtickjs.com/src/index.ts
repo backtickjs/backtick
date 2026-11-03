@@ -4,6 +4,7 @@
 // (RFC 8707, RFC 9068) signed with its own key, and revocation (RFC 7009).
 // The app is its one client. Backtick's hosts check its tokens against
 // /.well-known/jwks.json; they never reach Supabase.
+import { createHash, timingSafeEqual } from "node:crypto";
 import { type Context, Hono } from "hono";
 import { deleteCookie, getCookie, setCookie } from "hono/cookie";
 import type { JWK } from "jose";
@@ -46,6 +47,7 @@ import {
   sealPending,
   userFromCode,
   userFromEmailCode,
+  userOfEmail,
   sendCode,
   type Pending,
 } from "./function/supabaseAuth.ts";
@@ -179,7 +181,11 @@ app.post("/authorize/email", async (c) => {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return backToSignIn(c, request, "email");
   }
-  if (!(await sendCode(email, clientIp(c)))) {
+  // The review account's code is fixed: nothing to send.
+  if (
+    email !== reviewAccount()?.email &&
+    !(await sendCode(email, clientIp(c)))
+  ) {
     return backToSignIn(c, request, "send");
   }
   keepPending(c, { request, email });
@@ -202,9 +208,15 @@ app.post("/authorize/code", async (c) => {
     return backToSignIn(c, request, "expired");
   }
   const code = (fields!.code ?? "").replace(/\s/g, "");
-  const user = /^\d{6}$/.test(code)
-    ? await userFromEmailCode(pending.email, code, clientIp(c))
-    : undefined;
+  const review = reviewAccount();
+  const user =
+    pending.email === review?.email
+      ? sameText(code, review.code)
+        ? await userOfEmail(review.email)
+        : undefined
+      : /^\d{6}$/.test(code)
+        ? await userFromEmailCode(pending.email, code, clientIp(c))
+        : undefined;
   if (user === undefined) {
     return backToSignIn(c, request, "code", "code");
   }
@@ -491,6 +503,21 @@ let key: JWK | undefined;
 function signingKey(): JWK {
   key ??= JSON.parse(required("BACKTICK_SIGNING_JWK")) as JWK;
   return key;
+}
+
+// The stores' reviewers' account: a random address and a fixed six-digit
+// code, both secret, set only while a review is in progress. Every address
+// gets the same code step, so nothing says which one this is; its address
+// gets no email, and any other still needs its emailed code.
+function reviewAccount(): { email: string; code: string } | undefined {
+  const email = process.env.BACKTICK_REVIEW_EMAIL?.trim().toLowerCase();
+  const code = process.env.BACKTICK_REVIEW_CODE?.trim();
+  return email && code && /^\d{6}$/.test(code) ? { email, code } : undefined;
+}
+
+function sameText(a: string, b: string): boolean {
+  const hash = (text: string) => createHash("sha256").update(text).digest();
+  return timingSafeEqual(hash(a), hash(b));
 }
 
 // What signs the sign-in cookie: the nonce secret, under its own label.

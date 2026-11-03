@@ -105,6 +105,21 @@ export function userFromEmailCode(
   return userFromSession("verify", { type: "email", email, token: code }, ip);
 }
 
+// The user behind `email`, sending nothing: for the review account, whose
+// fixed code this server checks itself. Asked with the secret key (Supabase's
+// admin API); the link it makes is never used.
+export async function userOfEmail(email: string): Promise<string | undefined> {
+  const answer = await fetch(`${auth()}/admin/generate_link`, {
+    method: "POST",
+    headers: { ...headers(undefined), "content-type": "application/json" },
+    body: JSON.stringify({ type: "magiclink", email }),
+  }).catch(() => undefined);
+  if (answer?.ok !== true) {
+    return undefined;
+  }
+  return ((await answer.json()) as { id?: string }).id;
+}
+
 async function userFromSession(
   grant: "pkce" | "verify",
   body: Record<string, string>,

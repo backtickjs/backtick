@@ -5,6 +5,8 @@ process.env.SUPABASE_URL = "https://project.supabase.co";
 process.env.SUPABASE_PUBLISHABLE_KEY = "publishable";
 process.env.SUPABASE_SERVICE_ROLE_KEY = "service";
 process.env.BACKTICK_DPOP_NONCE_SECRET = "nonce secret";
+process.env.BACKTICK_REVIEW_EMAIL = "review-k7q2m9@example.com";
+process.env.BACKTICK_REVIEW_CODE = "246810";
 const { default: app } = await import("../src/index.ts");
 
 const user = "6d1f0b2a-4c3e-4b5a-9e8d-7c6b5a4f3e2d";
@@ -31,6 +33,9 @@ function supabase(answers: { token?: number; otp?: number } = {}) {
     const body =
       typeof init?.body === "string" ? JSON.parse(init.body) : undefined;
     calls.push({ url: String(url), body, headers: new Headers(init?.headers) });
+    if (String(url).includes("/auth/v1/admin/generate_link")) {
+      return Response.json({ id: user, action_link: "unused" });
+    }
     if (String(url).includes("/auth/v1/otp")) {
       return new Response("{}", { status: answers.otp ?? 200 });
     }
@@ -317,6 +322,73 @@ describe("signing in with an emailed code", () => {
       headers: { cookie },
     });
     assert.equal(answer.status, 400);
+  });
+});
+
+describe("the review account", () => {
+  const post = (path: string, fields: Record<string, string>, cookie = "") =>
+    app.request(`${host}${path}`, {
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded", cookie },
+      body: new URLSearchParams({ ...request, ...fields }).toString(),
+    });
+
+  async function started(email: string) {
+    const calls = supabase();
+    const answer = await post("/authorize/email", { email });
+    return {
+      calls,
+      cookie: answer.headers.get("set-cookie")!.split(";")[0]!,
+      answer,
+    };
+  }
+
+  it("gets no email, and signs in with its fixed code", async () => {
+    const { calls, cookie, answer } = await started(
+      "Review-K7Q2M9@example.com",
+    );
+    assert.equal(
+      new URL(answer.headers.get("location")!, host).searchParams.get("step"),
+      "code",
+    );
+    assert.equal(calls.length, 0);
+    const signedIn = await post("/authorize/code", { code: "246 810" }, cookie);
+    const to = new URL(signedIn.headers.get("location")!);
+    assert.equal(
+      to.origin + to.pathname,
+      "https://app.backtickjs.com/signed-in",
+    );
+    assert.ok(calls.some((call) => call.url.includes("/admin/generate_link")));
+    assert.ok(!calls.some((call) => call.url.includes("/auth/v1/verify")));
+  });
+
+  it("refuses a wrong code, and the fixed code for anyone else", async () => {
+    const review = await started("review-k7q2m9@example.com");
+    const wrong = await post(
+      "/authorize/code",
+      { code: "246811" },
+      review.cookie,
+    );
+    assert.equal(
+      new URL(wrong.headers.get("location")!, host).searchParams.get("error"),
+      "code",
+    );
+    // Anyone else's code is Supabase's to check, which refuses it.
+    const other = await started("someone@example.com");
+    const calls = supabase({ token: 400 });
+    const borrowed = await post(
+      "/authorize/code",
+      { code: "246810" },
+      other.cookie,
+    );
+    assert.equal(
+      new URL(borrowed.headers.get("location")!, host).searchParams.get(
+        "error",
+      ),
+      "code",
+    );
+    assert.ok(calls.some((call) => call.url.endsWith("/auth/v1/verify")));
+    assert.ok(!calls.some((call) => call.url.includes("/admin/generate_link")));
   });
 });
 
