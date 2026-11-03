@@ -1,0 +1,17 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'expo.modules.backticksession'
+version = '1.0.0'
+
+android {
+  namespace "expo.modules.backticksession"
+}
+
+dependencies {
+  implementation 'com.facebook.react:react-android'
+  // Auth Tab, for sign-in with an HTTPS callback.
+  implementation 'androidx.browser:browser:1.9.0'
+}

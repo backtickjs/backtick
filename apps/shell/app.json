@@ -40,7 +40,17 @@
           "android": {
             "enableMinifyInReleaseBuilds": false,
             "enableShrinkResourcesInReleaseBuilds": false
+          },
+          "ios": {
+            "deploymentTarget": "17.4"
           }
+        }
+      ],
+      [
+        "./modules/backtick-session/app.plugin.js",
+        {
+          "authorizationServer": "https://auth.backtickjs.com",
+          "signInCallback": "https://app.backtickjs.com/signed-in"
         }
       ]
     ],
