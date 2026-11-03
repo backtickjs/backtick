@@ -40,11 +40,11 @@ import {
 const noPreview = `${process.env.SUPABASE_URL}/storage/v1/object/public/screenshots/no-preview.png`;
 
 // The home: the user's apps, last saved first, as a grid of cards the way app
-// builders list projects. A card opens its app by the shell's link to it, as a
-// page links to another site; its ⋯ opens a sheet with the app's details,
+// builders list projects. A card opens its app by the shell's link to it; its
+// ⋯ opens a sheet with the app's details,
 // opening, editing and deleting, the avatar one with the account and signing out, and
 // + New one that asks Claude for a new app. Pulled down, it loads `/`
-// again, as a browser reloads a page. Read as the user, whose
+// again. Read as the user, whose
 // token Supabase's policies let see only their own apps, and none they deleted.
 export async function Home(props: { authorization: string }) {
   const supabase = createClient(
@@ -661,8 +661,8 @@ export async function Home(props: { authorization: string }) {
       const insets = $useSafeAreaInsets();
       const { width } = $useWindowDimensions();
       const [refreshing, setRefreshing] = $useState(false);
-      // Loads the home again, in place, as location.reload() does: the
-      // spinner stays until the new one replaces this one.
+      // Loads the home again, in place: the spinner stays until the new one
+      // replaces this one.
       const refresh = () => {
         setRefreshing(true);
         $Linking.openURL($shellURL("reload"));

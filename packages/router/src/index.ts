@@ -51,7 +51,7 @@ export interface LinkProps extends Omit<TextProps, "onPress"> {
 
 /**
  * expo-router's `Link`, except that the screen is fetched first and shown when
- * it arrives, like a page in a browser: the current one stays until then.
+ * it arrives: the current one stays until then.
  */
 export function Link({
   href,

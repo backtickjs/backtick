@@ -33,9 +33,8 @@ export const OpenApp = createContext<string | null>(null);
 const { installedPackages } = getBacktickExtra(Constants.expoConfig);
 const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
 
-// Where an app's screen at `path` comes from: the app's own host, as a site's
-// page comes from its domain, and the very same path. Backtick's home, the
-// app when none is open, has its own.
+// Where an app's screen at `path` comes from: the app's own host, and the very
+// same path. Backtick's home, the app when none is open, has its own.
 export function screenUrl(app: string | null, path: string): string {
   return `https://${app === null ? home : app + "." + apps}${path}`;
 }

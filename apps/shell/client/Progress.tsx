@@ -14,7 +14,7 @@ import { shownApp } from "./shown";
 const delay = 300;
 const minimum = 500;
 
-// The browser's progress bar, along the top. Only once a navigation has taken
+// A progress bar along the top. Only once a navigation has taken
 // a moment, and then long enough to read as a bar, not a flicker.
 export function Progress() {
   const { state } = useNavigation();

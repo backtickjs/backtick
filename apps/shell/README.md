@@ -1,6 +1,6 @@
 # shell
 
-Backtick on phones. It's a shell, like a browser, that runs in Expo Go: it signs the user in, and every screen it shows comes from a server, Backtick's own included. Laid out as `create-backtick-app` makes any app:
+Backtick on phones, running in Expo Go: it signs the user in, and every screen it shows comes from a server, Backtick's own included. Laid out as `create-backtick-app` makes any app:
 
 | Folder        | What it is                                                                                                                                                                                                  |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

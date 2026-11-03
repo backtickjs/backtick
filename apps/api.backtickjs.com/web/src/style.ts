@@ -13,4 +13,8 @@ a { color: var(--accent); }
 .buttons { display: flex; gap: 8px; }
 button { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid var(--muted); background: none; color: var(--fg); font: inherit; cursor: pointer; }
 button.allow { background: var(--accent); border-color: var(--accent); color: #fff; }
+button:disabled { opacity: 0.5; cursor: default; }
+.buttons.stacked { flex-direction: column; }
+form.email { display: flex; flex-direction: column; gap: 8px; margin-top: 24px; }
+input { padding: 12px; border-radius: 8px; border: 1px solid var(--muted); background: none; color: var(--fg); font: inherit; }
 `;

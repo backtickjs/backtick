@@ -5,15 +5,14 @@ import { loadManifest } from "../manifest";
 import { backtickShown } from "../shown";
 import { apps, signInWithGoogle, supabase } from "../supabase";
 
-// Every link into the phone: an app by its ID, as a browser follows a link to
-// another site, and Backtick's own commands. An app's paths are left
+// Every link into the phone: an app by its ID, and Backtick's own commands.
+// An app's paths are left
 // as they are, so expo-router works in its screens as its docs say.
 //   https://<id>.<apps>/<path>       the app's <path>, its own link
 //   …/--/<id>/<path>                 the app's <path>
 //   …/--/sign-in, …/--/sign-out      from Backtick's home only
 //   …/--/delete/<id>                 deletes the app, from the home only
-//   …/--/reload                      loads the screen on top again, in place,
-//                                    as location.reload() does
+//   …/--/reload                      loads the screen on top again, in place
 //   …/--/auth/callback?code=…        sign-in's return, which
 //                                    signInWithGoogle's browser session has
 //   …/--/<path>                      Backtick's <path>

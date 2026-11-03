@@ -61,7 +61,7 @@ function changed(): void {
   listeners.forEach((listener) => listener());
 }
 
-/** Drops what's in flight, as a browser does when another navigation starts. */
+/** Drops what's in flight when another navigation starts. */
 export function cancel(): void {
   if (pending === null && reloading === null) {
     return;

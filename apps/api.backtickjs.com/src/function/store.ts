@@ -1,11 +1,5 @@
 // Apps and their versions, in Supabase, read and written with the service role.
-import { createClient } from "@supabase/supabase-js";
-
-const supabase = createClient(
-  required("SUPABASE_URL"),
-  required("SUPABASE_SERVICE_ROLE_KEY"),
-  { auth: { persistSession: false } },
-);
+import { failed, supabase } from "./supabase.ts";
 
 // The latest saved version of the owner's app, or nothing for an app never
 // saved, deleted, or someone else's.
@@ -132,17 +126,4 @@ export async function recordCheck(check: Check): Promise<void> {
   if (error) {
     throw failed(error);
   }
-}
-
-// Supabase's error isn't an `Error`, so its message would be lost.
-function failed(error: { message: string }): Error {
-  return new Error(`Supabase: ${error.message}`, { cause: error });
-}
-
-function required(name: string): string {
-  const value = process.env[name];
-  if (value === undefined) {
-    throw new Error(`Set ${name}: it's in Supabase's project settings.`);
-  }
-  return value;
 }

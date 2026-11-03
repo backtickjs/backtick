@@ -1,6 +1,5 @@
 // The screen on top: its app, for the commands only Backtick's own screens may
-// send, and for the `reload` link, a page asking the browser to load it again,
-// as `location.reload()` does on the web.
+// send, and for the `reload` link, which loads it again in place.
 let shown: {
   key: string;
   app: string | null;
