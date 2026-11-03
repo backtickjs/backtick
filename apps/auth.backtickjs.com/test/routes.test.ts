@@ -26,11 +26,11 @@ afterEach(() => mock.restoreAll());
 // Supabase, standing in: Auth's token and logout endpoints, and the codes
 // table. Each call is recorded.
 function supabase(answers: { token?: number } = {}) {
-  const calls: { url: string; body?: unknown }[] = [];
+  const calls: { url: string; body?: unknown; headers: Headers }[] = [];
   mock.method(globalThis, "fetch", async (url: string, init?: RequestInit) => {
     const body =
       typeof init?.body === "string" ? JSON.parse(init.body) : undefined;
-    calls.push({ url: String(url), body });
+    calls.push({ url: String(url), body, headers: new Headers(init?.headers) });
     if (String(url).includes("/auth/v1/token")) {
       return (answers.token ?? 200) === 200
         ? Response.json({
@@ -160,6 +160,24 @@ describe("signing in with a provider", () => {
     assert.equal(to.pathname, "/authorize");
     assert.equal(to.searchParams.get("error"), "sign-in");
     assert.equal(to.searchParams.get("state"), request.state);
+  });
+});
+
+describe("Supabase's per-IP limits", () => {
+  it("count the user's IP, sent with the secret key, not this server's", async () => {
+    const { cookie } = await startGoogle();
+    const calls = supabase();
+    await app.request(`${host}/authorize/callback?code=c`, {
+      headers: { cookie, "x-forwarded-for": "203.0.113.7, 10.0.0.1" },
+    });
+    for (const call of calls.filter((call) => call.url.includes("/auth/v1/"))) {
+      assert.equal(
+        call.headers.get("sb-forwarded-for"),
+        "203.0.113.7",
+        call.url,
+      );
+      assert.equal(call.headers.get("apikey"), "service", call.url);
+    }
   });
 });
 

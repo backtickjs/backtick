@@ -152,7 +152,7 @@ app.get("/authorize/callback", async (c) => {
   if (pending === undefined || code === undefined) {
     return c.text("Open sign-in from the Backtick app.", 400, noStore);
   }
-  const user = await userFromCode(code, pending.verifier);
+  const user = await userFromCode(code, pending.verifier, clientIp(c));
   return user === undefined
     ? backToSignIn(c, pending.request, "sign-in")
     : signedIn(c, pending.request, user);
@@ -172,7 +172,11 @@ app.post("/authorize/password", async (c) => {
   if (!passwordAccounts().includes(email)) {
     return backToSignIn(c, request, "password-account");
   }
-  const user = await userFromPassword(email, fields!.password ?? "");
+  const user = await userFromPassword(
+    email,
+    fields!.password ?? "",
+    clientIp(c),
+  );
   return user === undefined
     ? backToSignIn(c, request, "password")
     : signedIn(c, request, user);
@@ -212,6 +216,12 @@ function backToSignIn(
     `/authorize?${new URLSearchParams({ ...request, error })}`,
     303,
   );
+}
+
+// The user's IP, as Vercel's edge writes it: it replaces any
+// `x-forwarded-for` the client sent, so it can't be made up.
+function clientIp(c: Context): string | undefined {
+  return c.req.header("x-forwarded-for")?.split(",")[0]?.trim() || undefined;
 }
 
 // The authorization request's own parameters, each once (OAuth 2.1, section

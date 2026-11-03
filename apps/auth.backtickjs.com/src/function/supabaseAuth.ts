@@ -13,7 +13,17 @@ import { required } from "./supabase.ts";
 export type Provider = "apple" | "google";
 
 const auth = () => `${required("SUPABASE_URL")}/auth/v1`;
-const apikey = () => ({ apikey: required("SUPABASE_PUBLISHABLE_KEY") });
+
+// Supabase counts sign-ins per IP. Asked from this server, every user would
+// share its IP, so each request names the user's own (`Sb-Forwarded-For`),
+// which Supabase honours only with a secret key and the project's IP
+// forwarding on.
+function headers(ip: string | undefined): Record<string, string> {
+  return {
+    apikey: required("SUPABASE_SERVICE_ROLE_KEY"),
+    ...(ip === undefined ? {} : { "sb-forwarded-for": ip }),
+  };
+}
 
 // Where to send the browser to sign in with `provider`, returning to
 // `callback` with a code only `verifier` can redeem.
@@ -32,28 +42,35 @@ export function providerUrl(
   return url.href;
 }
 
-// The user behind a provider's code, or nothing.
+// The user behind a provider's code, or nothing. `ip` is the user's.
 export function userFromCode(
   code: string,
   verifier: string,
+  ip: string | undefined,
 ): Promise<string | undefined> {
-  return userFromSession("pkce", { auth_code: code, code_verifier: verifier });
+  return userFromSession(
+    "pkce",
+    { auth_code: code, code_verifier: verifier },
+    ip,
+  );
 }
 
 export function userFromPassword(
   email: string,
   password: string,
+  ip: string | undefined,
 ): Promise<string | undefined> {
-  return userFromSession("password", { email, password });
+  return userFromSession("password", { email, password }, ip);
 }
 
 async function userFromSession(
   grant: "pkce" | "password",
   body: Record<string, string>,
+  ip: string | undefined,
 ): Promise<string | undefined> {
   const answer = await fetch(`${auth()}/token?grant_type=${grant}`, {
     method: "POST",
-    headers: { ...apikey(), "content-type": "application/json" },
+    headers: { ...headers(ip), "content-type": "application/json" },
     body: JSON.stringify(body),
   });
   if (!answer.ok) {
@@ -67,7 +84,10 @@ async function userFromSession(
   if (session.access_token !== undefined) {
     await fetch(`${auth()}/logout?scope=local`, {
       method: "POST",
-      headers: { ...apikey(), authorization: `Bearer ${session.access_token}` },
+      headers: {
+        ...headers(ip),
+        authorization: `Bearer ${session.access_token}`,
+      },
     }).catch(() => {});
   }
   return session.user?.id;
