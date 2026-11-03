@@ -63,7 +63,9 @@ const answer = await fetch(settings, {
   body: JSON.stringify({ external_apple_secret: secret }),
 });
 if (!answer.ok) {
-  throw new Error(`Supabase refused the new secret: ${answer.status}.`);
+  throw new Error(
+    `Supabase refused the new secret: ${answer.status} ${await answer.text()}`,
+  );
 }
 const expires = new Date((now + lifetime) * 1000).toISOString().slice(0, 10);
 console.log(`Apple's client secret renewed, good until ${expires}.`);
