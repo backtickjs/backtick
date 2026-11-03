@@ -175,9 +175,19 @@ final class Session: NSObject, @unchecked Sendable {
     let query = URLComponents(url: returned, resolvingAgainstBaseURL: false)?.queryItems ?? []
     let value = { (name: String) in query.first { $0.name == name }?.value }
     // The answer is to this request (`state`) from this server (`iss`, RFC 9207).
-    guard let code = value("code"), value("state").map({ Self.equal($0, state) }) == true,
+    guard value("state").map({ Self.equal($0, state) }) == true,
       value("iss") == authorizationServer.absoluteString.trimmingSuffix("/")
     else {
+      throw SessionError.callback
+    }
+    // Refused (RFC 6749, 4.1.2.1): the user saying no is the same as closing.
+    if let error = value("error") {
+      if error == "access_denied" {
+        return false
+      }
+      throw SessionError.server(error)
+    }
+    guard let code = value("code") else {
       throw SessionError.callback
     }
     let home = "https://\(callback.host!)"

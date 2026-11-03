@@ -27,7 +27,7 @@
   "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
+    "android": "expo run:android",
     "build": "tspc -p tsconfig.server.json --noCheck",
     "postinstall": "[ -z \"$EAS_BUILD\" ] || turbo run build --filter=shell^...",
     "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit",

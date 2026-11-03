@@ -8,7 +8,8 @@
     "userInterfaceStyle": "automatic",
     "icon": "./assets/icon.png",
     "ios": {
-      "bundleIdentifier": "com.backtickjs.app"
+      "bundleIdentifier": "com.backtickjs.app",
+      "appleTeamId": "BM4485734W"
     },
     "android": {
       "package": "com.backtickjs.app",

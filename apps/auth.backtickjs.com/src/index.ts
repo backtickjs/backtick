@@ -160,13 +160,17 @@ app.get(`/authorize/:provider{${providers.join("|")}}`, (c) => {
 app.get("/authorize/callback", async (c) => {
   const pending = openPending(getCookie(c, pendingCookie), cookieSecret());
   deleteCookie(c, pendingCookie, { path: "/", secure: true });
-  const code = c.req.query("code");
-  if (pending === undefined || code === undefined) {
+  if (pending === undefined) {
     return c.text("Open sign-in from the Backtick app.", 400, noStore);
+  }
+  // No code: the user said no at the provider.
+  const code = c.req.query("code");
+  if (code === undefined) {
+    return refused(c, pending.request, "access_denied");
   }
   const user = await userFromCode(code, pending.verifier, clientIp(c));
   return user === undefined
-    ? backToSignIn(c, pending.request, "sign-in")
+    ? refused(c, pending.request, "server_error")
     : signedIn(c, pending.request, user);
 });
 
@@ -218,11 +222,28 @@ async function signedIn(
   return c.redirect(redirect.href, 303);
 }
 
+// Not signed in, told to the app at its redirect URI (RFC 6749, 4.1.2.1):
+// Apple and Google are the app's own buttons, so there's no page to go back
+// to.
+function refused(
+  c: Context,
+  request: Record<string, string>,
+  error: "access_denied" | "server_error",
+): Response {
+  const redirect = new URL(client.redirectUri);
+  redirect.search = new URLSearchParams({
+    error,
+    state: request.state!,
+    iss: issuer,
+  }).toString();
+  return c.redirect(redirect.href, 303);
+}
+
 // The sign-in page again, with why.
 function backToSignIn(
   c: Context,
   request: Record<string, string>,
-  error: "sign-in" | "password" | "password-account",
+  error: "password" | "password-account",
 ): Response {
   return c.redirect(
     `/authorize?${new URLSearchParams({ ...request, error })}`,

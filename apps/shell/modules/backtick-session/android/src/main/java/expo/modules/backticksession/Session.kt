@@ -184,12 +184,17 @@ object Session {
       sign.done(
         runCatching {
           // The answer is to this request (`state`) from this server (`iss`, RFC 9207).
-          val code = uri.getQueryParameter("code")
-          if (code == null || !equal(uri.getQueryParameter("state") ?: "", sign.state) ||
+          if (!equal(uri.getQueryParameter("state") ?: "", sign.state) ||
             uri.getQueryParameter("iss") != authorizationServer
           ) {
             throw SessionException("callback")
           }
+          // Refused (RFC 6749, 4.1.2.1): the user saying no is the same as closing.
+          uri.getQueryParameter("error")?.let { error ->
+            if (error == "access_denied") return@runCatching false
+            throw SessionException(error)
+          }
+          val code = uri.getQueryParameter("code") ?: throw SessionException("callback")
           val home = "https://${callback.host}"
           val answer = token(
             mapOf(

@@ -12,3 +12,7 @@ docs
 local
 .DS_Store
 *.vsix
+# Native projects that `expo prebuild` generates
+apps/shell/ios
+apps/shell/android
+apps/shell/modules/*/android/build

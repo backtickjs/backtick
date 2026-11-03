@@ -149,17 +149,26 @@ describe("signing in with a provider", () => {
     assert.deepEqual(calls, []);
   });
 
-  it("goes back to the page when Supabase refuses the code", async () => {
-    const { cookie } = await startGoogle();
-    supabase({ token: 400 });
-    const answer = await app.request(`${host}/authorize/callback?code=c`, {
-      headers: { cookie },
-    });
-    assert.equal(answer.status, 303);
-    const to = new URL(answer.headers.get("location")!, host);
-    assert.equal(to.pathname, "/authorize");
-    assert.equal(to.searchParams.get("error"), "sign-in");
-    assert.equal(to.searchParams.get("state"), request.state);
+  it("tells the app when Supabase refuses the code, or the user said no", async () => {
+    for (const [query, error] of [
+      ["?code=c", "server_error"],
+      ["?error=access_denied", "access_denied"],
+    ] as const) {
+      const { cookie } = await startGoogle();
+      supabase({ token: 400 });
+      const answer = await app.request(`${host}/authorize/callback${query}`, {
+        headers: { cookie },
+      });
+      assert.equal(answer.status, 303);
+      const to = new URL(answer.headers.get("location")!);
+      assert.equal(
+        to.origin + to.pathname,
+        "https://app.backtickjs.com/signed-in",
+      );
+      assert.equal(to.searchParams.get("error"), error);
+      assert.equal(to.searchParams.get("state"), request.state);
+      assert.equal(to.searchParams.get("code"), null);
+    }
   });
 });
 
