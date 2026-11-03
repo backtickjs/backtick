@@ -1,6 +1,6 @@
 # shell
 
-Backtick on phones, running in Expo Go: it signs the user in, and every screen it shows comes from a server, Backtick's own included. Laid out as `create-backtick-app` makes any app:
+Backtick on phones, as its own app: it signs the user in, and every screen it shows comes from a server, Backtick's own included. Laid out as `create-backtick-app` makes any app:
 
 | Folder        | What it is                                                                                                                                                                                                  |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -17,25 +17,25 @@ Where a screen comes from (`client/screens.ts`):
 
 The path is never changed: an app's `<Link href="/day">` is its server's `app.get("/day")`, and expo-router works in its screens as its docs say. `Link` and `router` from `@backtickjs/router` fetch the next screen first, on the shell's fetch and navigator (`client/navigator.ts`), with the progress bar in `client/Progress.tsx`. An app's web app manifest comes with each of its screens (`x-backtick-manifest`), and the last one is kept on the phone (`client/manifest.ts`) for the splash an open shows (`client/AppSplash.tsx`). The module map (`client/moduleMap.ts`) hands screens unmodified packages only.
 
-Links into the shell (`client/app/+native-intent.tsx`) are Expo Go's own, to the published project: `exp://u.expo.dev/<project>/--/<path>?channel-name=production`, written by `shellURL` (`server/links.ts`). Not `expo-linking`'s `createURL`: Expo Go 58 reports itself as a bare app, and `createURL` then writes a custom scheme Android can't open.
+Links into the shell (`client/app/+native-intent.tsx`) are the Backtick app's own: `backtick://<path>`, written by `shellURL` (`server/links.ts`), and an app's own address, `https://<id>.backtickjs.app/<path>`, as a verified App Link.
 
-| Path after `--/`       | Does                                                                    |
-| ---------------------- | ----------------------------------------------------------------------- |
-| `<id>/<path>`          | Closes what's open and opens the app at the path, over the home         |
-| `sign-in`, `sign-out`  | Signs in or out, from Backtick's home only                              |
-| `auth/callback?code=…` | Google's sign-in returning, which the browser session hands back itself |
+| Link                             | Does                                                            |
+| -------------------------------- | --------------------------------------------------------------- |
+| `backtick://<id>/<path>`         | Closes what's open and opens the app at the path, over the home |
+| `backtick://sign-in`, `sign-out` | Signs in or out, from Backtick's home only                      |
+| `backtick://reload`              | Loads the screen on top again, in place                         |
 
-Sign-in is Google's, through Supabase, in the system browser with PKCE (OAuth for native apps, RFC 8252), returning to `auth/callback`; the session is sealed with AES-GCM, its key in the Keychain or Keystore.
+Sign-in and the session are the native module's (`modules/backtick-session`): sign-in in the system's sign-in browser at `auth.backtickjs.com` (OAuth 2.1 for native apps, with PKCE and DPoP), a key that never leaves the phone, and access tokens attached to requests to Backtick's own hosts below JavaScript. Its return, `https://app.backtickjs.com/signed-in`, is caught by the module, never by these links.
 
 ## Publishing it
 
-The shell is an EAS Update on the `production` channel, which Expo Go opens from anywhere at `exp://u.expo.dev/baed8ee5-a651-438c-999f-aff346fa0064?channel-name=production`. Its runtime version is the SDK (`exposdk:58.0.0`), and Expo Go only runs updates for its own SDK: when Expo Go moves to a new SDK, upgrade this app (`expo install expo@^<sdk> --fix`) and publish again.
+The shell is its own app, built with EAS (`eas.json`): `development` builds an Android APK on its own update channel, for testing. Its runtime version is the SDK, so EAS Update ships JavaScript changes to builds of the same SDK on the same channel; a change to native code (the session module, a module in the map, the SDK) needs a new build.
 
 ```sh
-pnpm dlx eas-cli update --channel production --environment production --message "…"
+pnpm dlx eas-cli build -p android --profile development --local
 ```
 
-`pnpm start` runs it from this machine in Expo Go instead.
+Without `--local`, EAS builds it in the cloud. A build signed by EAS is the only kind that can finish signing in: `app.backtickjs.com` vouches for EAS's certificate.
 
 ## What other projects import
 

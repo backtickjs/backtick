@@ -60,7 +60,7 @@ Supabase is set up for it in its dashboard:
 
 - Authentication → Sign In / Providers → Google, with a client from Google Cloud whose redirect URI is `https://<ref>.supabase.co/auth/v1/callback`.
 - Authentication → OAuth Server: enabled, with dynamic registration, and the authorization path `/oauth/consent`, the page `src/function/consent.ts` serves.
-- Authentication → URL Configuration: the Site URL `https://api.backtickjs.com`, and the redirect URLs `https://api.backtickjs.com/oauth/consent` and `exp://u.expo.dev/baed8ee5-a651-438c-999f-aff346fa0064/**` (the phone's sign-in, which returns to the shell in Expo Go). Supabase sends users to the Site URL's consent page wherever the MCP server runs, a laptop included.
+- Authentication → URL Configuration: the Site URL `https://api.backtickjs.com`, and the redirect URLs `https://api.backtickjs.com/oauth/consent` and `https://auth.backtickjs.com/authorize**` (the Backtick app's sign-in, `apps/auth.backtickjs.com`). Supabase sends users to the Site URL's consent page wherever the MCP server runs, a laptop included.
 
 In Claude.ai, the connector signs in with **Register automatically**: Supabase doesn't read Claude's published identity (CIMD).
 
