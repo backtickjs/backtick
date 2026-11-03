@@ -21,11 +21,6 @@ type Env = {
   };
 };
 
-// The shell, published with EAS Update: Expo Go opens it from anywhere, at
-// the Expo Go build's SDK, and follows the path after `--/`. The Backtick app
-// runs the same shell, at its own scheme.
-const expoGo = "exp://u.expo.dev/baed8ee5-a651-438c-999f-aff346fa0064";
-
 const app = new Hono<Env>();
 
 // An app's own host, matched before the bare domain's routes below.
@@ -219,23 +214,16 @@ async function read(c: Context<Env>, query: string): Promise<unknown[]> {
   return answer.json<unknown[]>();
 }
 
-// A browser: the app opens at the same path, in the Backtick app on Android
-// and in Expo Go on iOS, where there's no Backtick app yet. A phone goes
-// straight there, with the button in case its browser waits for a tap, and on
-// Android Expo Go's link for a phone without Backtick; a computer gets a QR
-// code of this page, for the phone's camera.
+// A browser: the app opens at the same path, in the Backtick app. A phone goes
+// straight there, with the button in case its browser waits for a tap, and a
+// link to get Backtick for a phone without it; a computer gets a QR code of
+// this page, for the phone's camera.
 async function openOnPhone(c: Context, id: string): Promise<Response> {
   const url = new URL(c.req.url);
-  const backtickLink = `backtick://${id}${url.pathname}${url.search}`;
-  const params = new URLSearchParams(url.search);
-  params.set("channel-name", "production");
-  const expoGoLink = `${expoGo}/--/${id}${url.pathname}?${params}`;
-  const agent = c.req.header("user-agent") ?? "";
-  const iOS = /iPhone|iPad|iPod/.test(agent);
-  const phone = iOS || /Android/.test(agent);
-  const [link, shell] = iOS
-    ? [expoGoLink, "Expo Go"]
-    : [backtickLink, "Backtick"];
+  const link = `backtick://${id}${url.pathname}${url.search}`;
+  const phone = /iPhone|iPad|iPod|Android/.test(
+    c.req.header("user-agent") ?? "",
+  );
   const qr = phone
     ? ""
     : await QRCode.toString(url.href, { type: "svg", margin: 0 });
@@ -248,7 +236,7 @@ async function openOnPhone(c: Context, id: string): Promise<Response> {
           ${phone
             ? html`<meta http-equiv="refresh" content="0; url=${link}" />`
             : ""}
-          <title>Open in ${shell}</title>
+          <title>Open in Backtick</title>
           <style>
             body {
               font:
@@ -285,17 +273,15 @@ async function openOnPhone(c: Context, id: string): Promise<Response> {
           </style>
         </head>
         <body>
-          <p>This app runs on your phone, in ${shell}.</p>
+          <p>This app runs on your phone, in Backtick.</p>
           ${phone
-            ? html`<a class="open" href="${link}">Open in ${shell}</a>`
+            ? html`<a class="open" href="${link}">Open in Backtick</a>`
             : html`<div class="qr">${raw(qr)}</div>
                 <p>Scan it with your phone's camera to open the app.</p>`}
-          ${phone && !iOS
-            ? html`<p>
-                No Backtick? <a href="${expoGoLink}">Open it in Expo Go</a>.
-              </p>`
-            : ""}
-          <p><a href="https://backtickjs.com">What's Backtick?</a></p>
+          <p>
+            Don't have Backtick?
+            <a href="https://backtickjs.com">Get it on backtickjs.com</a>.
+          </p>
         </body>
       </html>`,
   );

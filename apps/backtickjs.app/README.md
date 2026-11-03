@@ -2,13 +2,13 @@
 
 Each app at its own host, `https://<id>.backtickjs.app`, as each Vercel project is at `<project>.vercel.app`. One of the hosts in `apps/` (see `apps/README.md`).
 
-| Request                                                                    | Answer                                                                                                                       |
-| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| The phone, at `<id>.backtickjs.app/<path>` (it sends `x-backtick-modules`) | The app's screen: the app's latest release, loaded into an isolate of its own, answers the path for the phone's modules      |
-| A browser, at `<id>.backtickjs.app/<path>`                                 | A page with **Open in Expo Go**, a link to the shell's `exp://u.expo.dev/<project>/--/<id>/<path>`, and where to get Expo Go |
-| `backtickjs.app/`                                                          | A redirect to backtickjs.com                                                                                                 |
+| Request                                                                    | Answer                                                                                                                                 |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| The phone, at `<id>.backtickjs.app/<path>` (it sends `x-backtick-modules`) | The app's screen: the app's latest release, loaded into an isolate of its own, answers the path for the phone's modules                |
+| A browser, at `<id>.backtickjs.app/<path>`                                 | A page with **Open in Backtick**, a link to `backtick://<id>/<path>`, and where to get Backtick; a computer gets a QR code of the page |
+| `backtickjs.app/`                                                          | A redirect to backtickjs.com                                                                                                           |
 
-The address is the app's share link: `https://<id>.backtickjs.app/day` offers the app at `/day`, in Expo Go. And a path is the app's own: the app's server answers `/day` at `/day`.
+The address opens the app at the same path in Backtick, for its owner: `https://<id>.backtickjs.app/day` opens it at `/day`. And a path is the app's own: the app's server answers `/day` at `/day`.
 
 Users' code runs on this domain: the Worker's secrets stay in its own environment, and a release is loaded with none of them. A Cloudflare Worker (`src/index.ts`) answers the phone:
 

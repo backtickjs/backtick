@@ -222,44 +222,26 @@ describe("an app's host", () => {
   });
 
   it("sends a phone's browser to Backtick, at the same path", async () => {
-    const page = await app.request(
-      `https://${id}.backtickjs.app/talks/42?x=1`,
-      {
-        headers: { "user-agent": "Mozilla/5.0 (Linux; Android 15; Pixel 9)" },
-      },
-    );
-    assert.equal(page.status, 200);
-    const link = `backtick://${id}/talks/42\\?x=1`;
-    const text = await page.text();
-    assert.match(
-      text,
-      new RegExp(`http-equiv="refresh" content="0; url=${link}"`),
-    );
-    assert.match(text, new RegExp(`href="${link}"`));
-    // and Expo Go, for a phone without Backtick
-    assert.match(
-      text,
-      new RegExp(
-        `href="exp://u\\.expo\\.dev/[0-9a-f-]+/--/${id}/talks/42\\?x=1&amp;channel-name=production"`,
-      ),
-    );
-  });
-
-  it("sends an iPhone's browser to Expo Go, at the same path", async () => {
-    const page = await app.request(`https://${id}.backtickjs.app/talks/42`, {
-      headers: {
-        "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 19_0 like Mac OS X)",
-      },
-    });
-    const text = await page.text();
-    assert.match(
-      text,
-      new RegExp(
-        `http-equiv="refresh" content="0; url=exp://u\\.expo\\.dev/[0-9a-f-]+/--/${id}/talks/42\\?channel-name=production"`,
-      ),
-    );
-    assert.match(text, /Open in Expo Go/);
-    assert.doesNotMatch(text, /backtick:\/\//);
+    for (const agent of [
+      "Mozilla/5.0 (Linux; Android 15; Pixel 9)",
+      "Mozilla/5.0 (iPhone; CPU iPhone OS 19_0 like Mac OS X)",
+    ]) {
+      const page = await app.request(
+        `https://${id}.backtickjs.app/talks/42?x=1`,
+        { headers: { "user-agent": agent } },
+      );
+      assert.equal(page.status, 200);
+      const link = `backtick://${id}/talks/42\\?x=1`;
+      const text = await page.text();
+      assert.match(
+        text,
+        new RegExp(`http-equiv="refresh" content="0; url=${link}"`),
+      );
+      assert.match(text, new RegExp(`href="${link}"`));
+      // and where to get Backtick, for a phone without it
+      assert.match(text, /href="https:\/\/backtickjs\.com"/);
+      assert.doesNotMatch(text, /exp:\/\/|Expo Go/);
+    }
   });
 
   it("shows a computer a QR code of the page", async () => {
@@ -268,7 +250,7 @@ describe("an app's host", () => {
     });
     const text = await page.text();
     assert.match(text, /<svg /);
-    assert.doesNotMatch(text, /exp:\/\//);
+    assert.doesNotMatch(text, /exp:\/\/|Expo Go/);
   });
 });
 

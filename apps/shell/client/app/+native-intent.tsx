@@ -7,16 +7,16 @@ import { signIn, signOut } from "../../modules/backtick-session/src";
 import { apps, home } from "../hosts";
 
 // Every link into the phone: an app by its ID, and Backtick's own commands.
-// An app's paths are left
-// as they are, so expo-router works in its screens as its docs say.
+// An app's paths are left as they are, so expo-router works in its screens as
+// its docs say.
 //   https://<id>.<apps>/<path>       the app's <path>, its own link
-//   …/--/<id>/<path>                 the app's <path>
-//   …/--/sign-in, …/--/sign-out      from Backtick's home only
-//   …/--/reload                      loads the screen on top again, in place
-//   …/--/<path>                      Backtick's <path>
+//   backtick://<id>/<path>           the app's <path>
+//   backtick://sign-in, …sign-out    from Backtick's home only
+//   backtick://reload                loads the screen on top again, in place
+//   backtick://<path>                Backtick's <path>
 // Sign-in's return (https://<home>/signed-in) is the session module's own,
-// caught natively: never followed here.
-// Expo Go's own link to the shell, naming no path, goes to expo-router as is.
+// caught natively: never followed here. Anything else goes to expo-router as
+// is.
 export async function redirectSystemPath({
   path,
   initial,
@@ -118,7 +118,8 @@ function queryParams(query: string): Record<string, string | string[]> {
 }
 
 // The link that started the shell, once the home is on top. Read from React
-// Native: on iOS in Expo Go, expo-router's own read of it is null.
+// Native: in Expo Go on iOS, expo-router's own read of it was null; not yet
+// checked in the Backtick app.
 let followed = false;
 export async function followStartingLink(): Promise<void> {
   if (!followed) {
@@ -132,29 +133,27 @@ export async function followStartingLink(): Promise<void> {
 
 type Link = { pathname: string; search: string };
 
-// What a link names, after Expo Go's `/--/` (a scheme's `://` elsewhere, and
-// an app's host for its own link): `<id>/day`, `sign-in`. Its query's channel
-// is Expo Go's, not the link's.
+// What a link names, after the scheme's `://`, or an app's host for its own
+// link: `<id>/day`, `sign-in`.
 function shellLink(url: string): Link | undefined {
-  if (url.startsWith("exp://") && !url.includes("/--/")) {
-    return undefined;
+  let rest: string;
+  if (url.startsWith("backtick://")) {
+    rest = url.slice("backtick://".length);
+  } else {
+    // https://<id>.<apps>/day reads as <id>/day.
+    const match = new RegExp(
+      `^https://([0-9a-f-]{36})\\.${apps.replaceAll(".", "\\.")}(/.*)?$`,
+    ).exec(url);
+    if (match === null) {
+      return undefined;
+    }
+    rest = match[1] + (match[2] ?? "");
   }
-  // https://<id>.<apps>/day reads as https://<id>/day.
-  const host = url.startsWith("https://") ? url.indexOf(`.${apps}`) : -1;
-  if (host > 0) {
-    url = url.slice(0, host) + url.slice(host + apps.length + 1);
-  }
-  const start = url.includes("/--/")
-    ? url.indexOf("/--/") + 4
-    : url.indexOf("://") + 3;
-  if (start < 3) {
-    return undefined;
-  }
-  const [pathname, query = ""] = url.slice(start).split("?");
-  const params = new URLSearchParams(query);
-  params.delete("channel-name");
-  const search = params.size === 0 ? "" : "?" + params;
-  return { pathname: pathname.replace(/\/$/, ""), search };
+  const [pathname, query = ""] = rest.split("?");
+  return {
+    pathname: pathname!.replace(/\/$/, ""),
+    search: query === "" ? "" : "?" + query,
+  };
 }
 
 function isAppId(host: string): boolean {
