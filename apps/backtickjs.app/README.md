@@ -10,16 +10,16 @@ Each app at its own host, `https://<id>.backtickjs.app`, as each Vercel project 
 
 The address is the app's share link: `https://<id>.backtickjs.app/day` offers the app at `/day`, in Expo Go. And a path is the app's own: the app's server answers `/day` at `/day`.
 
-Users' code runs on this domain, so it holds no secrets. A Cloudflare Worker (`src/index.ts`) answers the phone:
+Users' code runs on this domain: the Worker's secrets stay in its own environment, and a release is loaded with none of them. A Cloudflare Worker (`src/index.ts`) answers the phone:
 
-1. It reads the app's latest version from Supabase with the phone's own token. Row-level security answers only the owner's apps, and Supabase refuses a missing or expired token, which is the phone's 401.
+1. It checks the phone's access token: issued by `auth.backtickjs.com` (signed with a key it publishes), for this app's own origin, `https://<id>.backtickjs.app`, and not expired. Anything else is the phone's 401. It then reads the app's latest version from Supabase with its own key, only if the app is the token's user's and not deleted.
 2. It loads that version's release (`versions.compiled`, which `save_app` writes) with the Dynamic Worker Loader, as `<id>@<version>`, into an isolate of its own. The code comes from this data center's Cache API, or from Supabase the first time, and is kept: a release never changes.
-3. It hands the release the path and `x-backtick-modules`, never the token. The release's Hono server answers: the screen, a 426 for a module the phone lacks, a 404 for a path with no route. Its `fetch()` reaches the internet through `OutboundGateway` (`src/worker.ts`), which logs each call's app and host.
+3. It hands the release the path, `x-backtick-modules` and `x-backtick-user`, the user's ID for this app alone (an HMAC of the app and the user, so two apps can't match their users), never the token or the account's ID. The release's Hono server answers: the screen, a 426 for a module the phone lacks, a 404 for a path with no route. Its `fetch()` reaches the internet through `OutboundGateway` (`src/worker.ts`), which logs each call's app and host.
 
 `backtickjs.app` goes on the Public Suffix List, so each app is its own site in a browser, apart from the others and from Backtick's sign-in.
 
 ## Setting up
 
-`wrangler.jsonc` names the Worker, `backtickjs-app`, its loader binding, and Supabase's URL and publishable key, which are public. `pnpm dev` runs it on this machine; a phone's request is one with its host, `curl -H "Host: <id>.backtickjs.app" localhost:8787/`. `pnpm run deploy` deploys it.
+`wrangler.jsonc` names the Worker, `backtickjs-app`, its loader binding, Supabase's URL and the token issuer, which are public. Two secrets, set with `wrangler secret put`: `SUPABASE_SERVICE_ROLE_KEY`, and `BACKTICK_APP_USER_SECRET` (random; changing it changes every app's user IDs). `pnpm dev` runs it on this machine; a phone's request is one with its host, `curl -H "Host: <id>.backtickjs.app" localhost:8787/`. `pnpm run deploy` deploys it.
 
-`pnpm test` checks its routing, with Supabase, the cache and the loader stubbed.
+`pnpm test` checks its routing and its token checks, with the issuer's keys, Supabase, the cache and the loader stubbed.

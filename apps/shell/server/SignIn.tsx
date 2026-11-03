@@ -7,8 +7,8 @@ import { Pressable, StyleSheet, Text, View } from "react-native" with {
 };
 
 // What a phone without a session sees: the wordmark and the button, in
-// backtickjs.com's look. The button is the shell's `sign-in` link, which runs
-// Google's sign-in on the phone, where the session is kept.
+// backtickjs.com's look. The button is the shell's `sign-in` link, which opens
+// Backtick's sign-in (Apple, Google, email) in the system's sign-in browser.
 export function SignIn() {
   return cs`{
     const styles = $StyleSheet.create({
@@ -36,7 +36,7 @@ export function SignIn() {
               ])}
             >
               <$Text style={[styles.label, { color: colors.paper }]}>
-                Sign in with Google
+                Sign in
               </$Text>
             </$Pressable>
           </$Link>

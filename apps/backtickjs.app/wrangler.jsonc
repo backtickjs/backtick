@@ -13,9 +13,10 @@
     { "pattern": "*.backtickjs.app/*", "zone_name": "backtickjs.app" },
   ],
   "workers_dev": false,
-  // Public: the shell carries the same.
+  // Public. The secrets, SUPABASE_SERVICE_ROLE_KEY and
+  // BACKTICK_APP_USER_SECRET, are set with `wrangler secret put`.
   "vars": {
     "SUPABASE_URL": "https://evgfuotcvraqxvdtutso.supabase.co",
-    "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_EotSz0FFiuOqXCSjxqGYrQ_oRJqA0as",
+    "BACKTICK_AUTH_ORIGIN": "https://auth.backtickjs.com",
   },
 }

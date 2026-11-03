@@ -2,12 +2,11 @@ import { type Bundle, modulesOf } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 import { getBacktickExtra } from "@backtickjs/expo";
 import Constants from "expo-constants";
-import type { Session } from "@supabase/supabase-js";
 import { createContext, type ReactNode } from "react";
 import { useColorScheme } from "react-native";
 import { keepManifest, type Manifest } from "./manifest";
 import { moduleMap } from "./moduleMap";
-import { apps, home, supabase } from "./supabase";
+import { apps, home } from "./hosts";
 
 // backtickjs.com's paper, behind every screen (server/look.tsx).
 export function usePaper(): string {
@@ -40,27 +39,18 @@ export function screenUrl(app: string | null, path: string): string {
 }
 
 // The app's screen at `path`, bundled by its server for this phone's modules,
-// and run. Signed out, the request carries no token. A failure carries the
-// server's reason: a module this build lacks names it. Any bundle runs, whatever
-// its status: an app's not-found screen is a screen.
+// and run. The session's token, when there is one, is attached below
+// JavaScript. A failure carries the server's reason: a module this build lacks
+// names it. Any bundle runs, whatever its status: an app's not-found screen is
+// a screen.
 export async function fetchScreen(
   app: string | null,
   path: string,
-  session: Session | null,
   signal?: AbortSignal,
 ): Promise<ReactNode> {
-  // A token that expired while the phone slept is refreshed first: timers,
-  // and so Supabase's refresh, don't run in the background. 90 s is
-  // Supabase's own margin.
-  if (session !== null && session.expires_at! * 1000 < Date.now() + 90_000) {
-    session = (await supabase.auth.getSession()).data.session;
-  }
   const response = await fetch(screenUrl(app, path), {
     signal,
-    headers: {
-      ...(session ? { authorization: `Bearer ${session.access_token}` } : {}),
-      "x-backtick-modules": modules,
-    },
+    headers: { "x-backtick-modules": modules },
   });
   const body = await response.text();
   if (!response.headers.get("content-type")?.startsWith("text/javascript")) {

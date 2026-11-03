@@ -1,24 +1,51 @@
 import assert from "node:assert/strict";
+import { generateKeyPairSync, randomUUID } from "node:crypto";
 import { afterEach, describe, it, mock } from "node:test";
+import { exportJWK, SignJWT } from "jose";
 import app from "../src/index.ts";
 
 const id = "3f2a6c1e-9b4d-4e8a-a1c2-7d5e9f0b1a2c";
+const user = "6d1f0b2a-4c3e-4b5a-9e8d-7c6b5a4f3e2d";
 const modules = '{"react-native":"0.86.3"}';
+const issuer = "https://auth.example";
+const { privateKey, publicKey } = generateKeyPairSync("ec", {
+  namedCurve: "P-256",
+});
+const kid = randomUUID();
 
 afterEach(() => mock.restoreAll());
 
-// The Worker's bindings, standing in: Supabase's answers by query, the cache a
-// map, the loader running nothing but recording what it was asked for.
+// An access token as auth.backtickjs.com mints one, for `origin`.
+async function token(
+  origin = `https://${id}.backtickjs.app`,
+  claims: { sub?: string; iss?: string; typ?: string; exp?: number } = {},
+) {
+  const now = Math.floor(Date.now() / 1000);
+  return new SignJWT({ client_id: "backtick-app" })
+    .setProtectedHeader({ alg: "ES256", kid, typ: claims.typ ?? "at+jwt" })
+    .setIssuer(claims.iss ?? issuer)
+    .setSubject(claims.sub ?? user)
+    .setAudience(origin)
+    .setIssuedAt(now)
+    .setExpirationTime(claims.exp ?? now + 300)
+    .sign(privateKey);
+}
+
+// The Worker's bindings, standing in: the issuer's keys, Supabase's answers by
+// query, the cache a map, the loader running nothing but recording what it
+// was asked for.
 function worker(versions: Record<string, unknown>) {
   const read: string[] = [];
   mock.method(globalThis, "fetch", async (url: string, init: RequestInit) => {
+    if (String(url) === `${issuer}/.well-known/jwks.json`) {
+      return Response.json({
+        keys: [{ ...(await exportJWK(publicKey)), kid, alg: "ES256" }],
+      });
+    }
     const query = new URL(url).search;
     read.push(query);
-    const authorization = new Headers(init.headers).get("authorization");
-    if (authorization !== "Bearer token") {
-      return Response.json({ message: "JWT expired" }, { status: 401 });
-    }
-    const select = new URLSearchParams(query).get("select")!;
+    assert.equal(new Headers(init.headers).get("apikey"), "service role key");
+    const select = new URLSearchParams(query).get("select")!.split(",")[0];
     return Response.json(versions[select] ?? []);
   });
   const cached = new Map<string, string>();
@@ -39,7 +66,9 @@ function worker(versions: Record<string, unknown>) {
   }[] = [];
   const env = {
     SUPABASE_URL: "https://project.supabase.co",
-    SUPABASE_PUBLISHABLE_KEY: "sb_publishable_key",
+    SUPABASE_SERVICE_ROLE_KEY: "service role key",
+    BACKTICK_APP_USER_SECRET: "app user secret",
+    BACKTICK_AUTH_ORIGIN: issuer,
     LOADER: {
       get: (
         id: string,
@@ -94,11 +123,11 @@ function worker(versions: Record<string, unknown>) {
 
 describe("an app's host", () => {
   it("answers the phone with the app's latest release, without its token", async () => {
-    const { open, loaded } = worker({
+    const { open, loaded, read } = worker({
       version: [{ version: 3 }],
       compiled: [{ compiled: "release 3" }],
     });
-    const answer = await open("/day?week=2", "Bearer token");
+    const answer = await open("/day?week=2", `Bearer ${await token()}`);
     assert.equal(answer.status, 200);
     assert.equal(await answer.text(), "screen");
     assert.equal(answer.headers.get("x-backtick-version"), "3");
@@ -115,6 +144,20 @@ describe("an app's host", () => {
     );
     assert.equal(request.headers.get("x-backtick-modules"), modules);
     assert.equal(request.headers.get("authorization"), null);
+    // Only the token's user's own app.
+    const owner = new URLSearchParams(read[0]).get("apps.owner_id");
+    assert.equal(owner, `eq.${user}`);
+  });
+
+  it("tells a release who's asking by an ID of this app's own", async () => {
+    const { open, loaded } = worker({
+      version: [{ version: 3 }],
+      compiled: [{ compiled: "release 3" }],
+    });
+    await open("/", `Bearer ${await token()}`);
+    const appUser = loaded[0].request.headers.get("x-backtick-user")!;
+    assert.match(appUser, /^[A-Za-z0-9_-]{43}$/);
+    assert.notEqual(appUser, user);
   });
 
   it("sends a release's network through the gateway, as its app", async () => {
@@ -122,7 +165,7 @@ describe("an app's host", () => {
       version: [{ version: 3 }],
       compiled: [{ compiled: "release 3" }],
     });
-    await open("/", "Bearer token");
+    await open("/", `Bearer ${await token()}`);
     assert.deepEqual(loaded[0].globalOutbound, { app: id });
   });
 
@@ -131,10 +174,12 @@ describe("an app's host", () => {
       version: [{ version: 3 }],
       compiled: [{ compiled: "release 3" }],
     });
-    await open("/", "Bearer token");
-    await open("/", "Bearer token");
+    await open("/", `Bearer ${await token()}`);
+    await open("/", `Bearer ${await token()}`);
     assert.deepEqual(
-      read.map((query) => new URLSearchParams(query).get("select")),
+      read.map(
+        (query) => new URLSearchParams(query).get("select")!.split(",")[0],
+      ),
       ["version", "compiled", "version"],
     );
   });
@@ -144,23 +189,36 @@ describe("an app's host", () => {
       version: [{ version: 3 }],
       compiled: [{ compiled: null }],
     });
-    assert.equal((await open("/", "Bearer token")).status, 500);
-    assert.equal((await open("/", "Bearer token")).status, 500);
+    assert.equal((await open("/", `Bearer ${await token()}`)).status, 500);
+    assert.equal((await open("/", `Bearer ${await token()}`)).status, 500);
     assert.deepEqual(
-      read.map((query) => new URLSearchParams(query).get("select")),
+      read.map(
+        (query) => new URLSearchParams(query).get("select")!.split(",")[0],
+      ),
       ["version", "compiled", "version", "compiled"],
     );
   });
 
-  it("passes Supabase's refusal of the token on", async () => {
-    const { open } = worker({});
-    assert.equal((await open("/", "Bearer expired")).status, 401);
-    assert.equal((await open("/")).status, 401);
+  it("refuses a missing token, or one for anywhere else, by anyone else, or expired", async () => {
+    const { open, read } = worker({ version: [{ version: 3 }] });
+    const now = Math.floor(Date.now() / 1000);
+    for (const authorization of [
+      undefined,
+      "Bearer not-a-token",
+      `Bearer ${await token("https://app.backtickjs.com")}`,
+      `Bearer ${await token("https://9a8b7c6d-0000-4000-8000-000000000000.backtickjs.app")}`,
+      `Bearer ${await token(undefined, { iss: "https://elsewhere.example" })}`,
+      `Bearer ${await token(undefined, { typ: "JWT" })}`,
+      `Bearer ${await token(undefined, { exp: now - 10 })}`,
+    ]) {
+      assert.equal((await open("/", authorization)).status, 401, authorization);
+    }
+    assert.deepEqual(read, []);
   });
 
   it("answers 404 for an app with no release, or someone else's", async () => {
     const { open } = worker({ version: [] });
-    assert.equal((await open("/", "Bearer token")).status, 404);
+    assert.equal((await open("/", `Bearer ${await token()}`)).status, 404);
   });
 
   it("sends a phone's browser to Backtick, at the same path", async () => {

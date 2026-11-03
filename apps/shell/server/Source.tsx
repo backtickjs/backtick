@@ -1,7 +1,7 @@
 import { cs } from "@backtickjs/core";
 import { highlight } from "./highlight.js";
 import { palette } from "./look.js";
-import { createClient } from "@supabase/supabase-js";
+import { failed, supabase } from "./account.js";
 import { useSafeAreaInsets } from "react-native-safe-area-context" with {
   backtick: "client",
 };
@@ -19,26 +19,20 @@ import {
 
 // An app's latest App.tsx, line by line, as Claude wrote it and coloured as
 // in the editor: for the curious, from the ⋯ sheet. On the editor theme's
-// dark panel, whatever the phone's setting. Read as the user, whose token
-// Supabase's policies let read only their own apps' versions.
-export async function Source(props: { authorization: string; id: string }) {
-  const supabase = createClient(
-    process.env.SUPABASE_URL!,
-    process.env.SUPABASE_PUBLISHABLE_KEY!,
-    {
-      global: { headers: { authorization: props.authorization } },
-      auth: { persistSession: false },
-    },
-  );
-  const { data, error } = await supabase
+// dark panel, whatever the phone's setting. Only the user's own app, not
+// deleted.
+export async function Source(props: { user: string; id: string }) {
+  const { data, error } = await supabase()
     .from("versions")
-    .select("version, source")
+    .select("version, source, apps!inner(id)")
     .eq("app_id", props.id)
+    .eq("apps.owner_id", props.user)
+    .is("apps.deleted_at", null)
     .order("version", { ascending: false })
     .limit(1)
     .maybeSingle();
   if (error) {
-    throw new Error(`Supabase: ${error.message}`, { cause: error });
+    throw failed(error);
   }
   const version = data?.version ?? null;
   const { colors, background, lines } = await highlight(data?.source ?? "");

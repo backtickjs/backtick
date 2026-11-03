@@ -17,7 +17,7 @@ import { leftScreen } from "@backtickjs/router";
 import { fetchScreen, useInk, usePaper } from "./screens";
 import { ShellSplash } from "./ShellSplash";
 import { showing } from "./shown";
-import { CurrentSession } from "./session";
+import { isSignedIn } from "../modules/backtick-session/src";
 
 // `app`'s screen at `path`, from its server.
 // Backtick's home is the app null.
@@ -31,27 +31,26 @@ export function ServerScreen({
   // When a Link fetched it first.
   initialScreen?: Promise<ReactNode>;
 }) {
-  const session = use(CurrentSession);
   const { key } = useRoute();
   // Held here, where nothing suspends, so the request outlives the render
   // that waits for it.
   const [screen, setScreen] = useState(
-    () => initialScreen ?? fetchScreen(app, path, session),
+    () => initialScreen ?? fetchScreen(app, path),
   );
   // The current screen stays until the new one has arrived.
   const reload = useCallback(
     (signal?: AbortSignal) => {
-      const next = fetchScreen(app, path, session, signal);
+      const next = fetchScreen(app, path, signal);
       startTransition(() => setScreen(next));
       return next;
     },
-    [app, path, session],
+    [app, path],
   );
   // An app's first screen, once it's had a moment to draw (a game's first
   // frame included), is its preview on the home's card. Never in the way:
   // a capture that fails is only logged.
   useEffect(() => {
-    if (app === null || path !== "/" || session === null) {
+    if (app === null || path !== "/" || !isSignedIn()) {
       return;
     }
     let timer: ReturnType<typeof setTimeout> | undefined;
@@ -61,7 +60,7 @@ export function ServerScreen({
         if (!left) {
           timer = setTimeout(
             () =>
-              savePreview(app, session).catch((error) =>
+              savePreview(app).catch((error) =>
                 console.warn("Saving the preview failed:", error),
               ),
             2000,
@@ -74,7 +73,7 @@ export function ServerScreen({
       left = true;
       clearTimeout(timer);
     };
-  }, [app, path, session, screen]);
+  }, [app, path, screen]);
   // On top, it's the screen a `reload` link loads again, in place.
   useFocusEffect(
     useCallback(() => {

@@ -3,7 +3,8 @@ import type { NavigationState, useNavigationContainerRef } from "expo-router";
 import { Alert, Linking } from "react-native";
 import { loadManifest } from "../manifest";
 import { backtickShown } from "../shown";
-import { apps, signInWithGoogle, supabase } from "../supabase";
+import { signIn, signOut } from "../../modules/backtick-session/src";
+import { apps, home } from "../hosts";
 
 // Every link into the phone: an app by its ID, and Backtick's own commands.
 // An app's paths are left
@@ -11,11 +12,10 @@ import { apps, signInWithGoogle, supabase } from "../supabase";
 //   https://<id>.<apps>/<path>       the app's <path>, its own link
 //   …/--/<id>/<path>                 the app's <path>
 //   …/--/sign-in, …/--/sign-out      from Backtick's home only
-//   …/--/delete/<id>                 deletes the app, from the home only
 //   …/--/reload                      loads the screen on top again, in place
-//   …/--/auth/callback?code=…        sign-in's return, which
-//                                    signInWithGoogle's browser session has
 //   …/--/<path>                      Backtick's <path>
+// Sign-in's return (https://<home>/signed-in) is the session module's own,
+// caught natively: never followed here.
 // Expo Go's own link to the shell, naming no path, goes to expo-router as is.
 export async function redirectSystemPath({
   path,
@@ -24,6 +24,9 @@ export async function redirectSystemPath({
   path: string;
   initial: boolean;
 }): Promise<string | null> {
+  if (path.startsWith(`https://${home}/signed-in`)) {
+    return null;
+  }
   const link = shellLink(path);
   if (link === undefined) {
     return path;
@@ -43,21 +46,17 @@ export async function redirectSystemPath({
     void router.reload();
     return null;
   }
-  if (first === "delete" && isAppId(rest[0] ?? "") && rest.length === 1) {
-    await deleteApp(rest[0]!);
-    return null;
-  }
-  if (!["sign-in", "sign-out", "auth/callback"].includes(link.pathname)) {
+  if (!["sign-in", "sign-out"].includes(link.pathname)) {
     openOverHome(link.pathname.split("/"), link.search);
     return null;
   }
   try {
-    if (!backtickShown() || link.pathname === "auth/callback") {
+    if (!backtickShown()) {
       // An app can't sign the user in or out.
     } else if (link.pathname === "sign-in") {
-      await signInWithGoogle();
-    } else if (link.pathname === "sign-out") {
-      await supabase.auth.signOut();
+      await signIn();
+    } else {
+      await signOut();
     }
   } catch (error) {
     Alert.alert("Couldn't sign in", (error as Error).message);
@@ -129,23 +128,6 @@ export async function followStartingLink(): Promise<void> {
       await redirectSystemPath({ path: url, initial: false });
     }
   }
-}
-
-// The home asked first: the app goes from its list, and its link stops
-// working. An open app can't delete one.
-async function deleteApp(id: string): Promise<void> {
-  if (!backtickShown()) {
-    return;
-  }
-  const { data, error } = await supabase.rpc("delete_app", { app: id });
-  if (error || data !== true) {
-    Alert.alert(
-      "Couldn't delete the app",
-      error?.message ?? "It's already gone.",
-    );
-  }
-  // The home, on top, loaded again in place without the app.
-  void router.reload();
 }
 
 type Link = { pathname: string; search: string };

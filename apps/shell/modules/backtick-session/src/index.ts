@@ -1,7 +1,7 @@
 // The phone's session: signing in and out. The key,
 // the refresh token and every access token stay in native code, which attaches
 // tokens to requests to Backtick's own origins; nothing here can read them.
-import { type EventSubscription, requireNativeModule } from "expo-modules-core";
+import { type EventSubscription, requireNativeModule } from "expo";
 
 type Native = {
   isSignedIn(): boolean;

@@ -2,7 +2,6 @@ import { configure } from "@backtickjs/router";
 import { type Href, router } from "expo-router";
 import { fetchScreen } from "./screens";
 import { reloadShownScreen, shownApp, shownPath, shownScreen } from "./shown";
-import { supabase } from "./supabase";
 
 // Tells the screen pushed what was fetched for it (`routeParam.ts`). A hash
 // means nothing to a native screen, and would swallow the param.
@@ -19,8 +18,7 @@ configure({
   async load(href, signal) {
     // Whose screen this is, before anything else can change that.
     const app = shownApp();
-    const { session } = (await supabase.auth.getSession()).data;
-    return fetchScreen(app, href, session, signal);
+    return fetchScreen(app, href, signal);
   },
   push: (href, screen) => router.push(withScreen(href, screen)),
   replace: (href, screen) => router.replace(withScreen(href, screen)),

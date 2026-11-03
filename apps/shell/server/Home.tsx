@@ -1,7 +1,7 @@
 import { cs } from "@backtickjs/core";
 import { shellURL } from "./links.js";
 import { Logo, useColors } from "./look.js";
-import { createClient } from "@supabase/supabase-js";
+import { failed, supabase } from "./account.js";
 import { useCallback, useState } from "react" with {
   backtick: "client",
 };
@@ -39,64 +39,58 @@ import {
 // one (client/preview.ts).
 const noPreview = `${process.env.SUPABASE_URL}/storage/v1/object/public/screenshots/no-preview.png`;
 
+// The home's own origin, where its sheet's requests go.
+const home = process.env.BACKTICK_HOME_ORIGIN!;
+
 // The home: the user's apps, last saved first, as a grid of cards the way app
 // builders list projects. A card opens its app by the shell's link to it; its
 // ⋯ opens a sheet with the app's details,
 // opening, editing and deleting, the avatar one with the account and signing out, and
 // + New one that asks Claude for a new app. Pulled down, it loads `/`
-// again. Read as the user, whose
-// token Supabase's policies let see only their own apps, and none they deleted.
-export async function Home(props: { authorization: string }) {
-  const supabase = createClient(
-    process.env.SUPABASE_URL!,
-    process.env.SUPABASE_PUBLISHABLE_KEY!,
-    {
-      global: { headers: { authorization: props.authorization } },
-      auth: { persistSession: false },
-    },
-  );
+// again. Only the user's own apps, and none they deleted.
+export async function Home(props: { user: string }) {
   // An app still at its starter, with no saved version, isn't one yet.
-  const { data, error } = await supabase
+  const { data, error } = await supabase()
     .from("apps")
-    .select("id, title, created_at, versions!inner(version, created_at)");
+    .select("id, title, created_at, versions!inner(version, created_at)")
+    .eq("owner_id", props.user)
+    .is("deleted_at", null);
   if (error) {
-    throw new Error(`Supabase: ${error.message}`, { cause: error });
+    throw failed(error);
   }
-  // Who's signed in, for the avatar, from the token's own claims: Supabase
-  // checked it in the query above, and Google's sign-in put the name and
-  // picture in its user metadata.
-  const claims = JSON.parse(
-    Buffer.from(props.authorization.split(".")[1]!, "base64url").toString(),
-  ) as {
-    sub: string;
-    email?: string;
-    user_metadata?: Record<string, unknown>;
-  };
-  const metadata = claims.user_metadata ?? {};
+  // Who's signed in, for the avatar: Apple's or Google's sign-in put the name
+  // and picture in the user's metadata.
+  const profile = await supabase().auth.admin.getUserById(props.user);
+  if (profile.error) {
+    throw failed(profile.error);
+  }
+  const metadata = profile.data.user.user_metadata ?? {};
   const account = {
     name: String(metadata.full_name ?? metadata.name ?? ""),
-    email: claims.email ?? "",
+    email: profile.data.user.email ?? "",
     picture: (metadata.avatar_url ?? metadata.picture ?? null) as string | null,
   };
   // Each app's preview, private to the user, through a link signed for an
   // hour: none for an app never opened. A link is new on every load, so the
   // phone caches a preview by its app and when it was captured instead.
-  const { data: previews } = await supabase.storage
-    .from("previews")
+  const { data: previews } = await supabase()
+    .storage.from("previews")
     .createSignedUrls(
-      data.map(({ id }) => `${claims.sub}/${id}.jpg`),
+      data.map(({ id }) => `${props.user}/${id}.jpg`),
       60 * 60,
     );
-  const { data: files } = await supabase.storage
-    .from("previews")
-    .list(claims.sub, { limit: 1000 });
+  const { data: files } = await supabase()
+    .storage.from("previews")
+    .list(props.user, { limit: 1000 });
   const captured = new Map(
     (files ?? []).map((file) => [file.name, file.updated_at]),
   );
   // Whether the user connected Backtick to Claude (supabase/migrations,
-  // assistants()), which registers by its name. Read each time the home
+  // assistants_of()), which registers by its name. Read each time the home
   // loads.
-  const { data: assistants } = await supabase.rpc("assistants");
+  const { data: assistants } = await supabase().rpc("assistants_of", {
+    owner: props.user,
+  });
   const claude = (assistants ?? []).some(({ name }: { name: string }) =>
     /claude/i.test(name),
   );
@@ -623,9 +617,13 @@ export async function Home(props: { authorization: string }) {
             {
               text: "Delete",
               style: "destructive",
-              onPress: () => {
+              // The home's own server deletes it, then the home loads again.
+              onPress: async () => {
                 onClose();
-                $Linking.openURL($shellURL("delete/" + app.id));
+                await fetch($home + "/apps/" + app.id + "/delete", {
+                  method: "POST",
+                });
+                $Linking.openURL($shellURL("reload"));
               },
             },
           ],
