@@ -31,6 +31,27 @@ function headers(ip: string | undefined): Record<string, string> {
   };
 }
 
+// Whether Supabase has `provider` on, from its public settings, so a provider
+// that's off never shows the user Supabase's raw error. Kept a minute; a
+// failure to ask isn't kept.
+let settings: { external: Record<string, boolean>; until: number } | undefined;
+
+export async function providerEnabled(provider: Provider): Promise<boolean> {
+  if (settings === undefined || settings.until < Date.now()) {
+    const answer = await fetch(`${auth()}/settings`, {
+      headers: { apikey: required("SUPABASE_PUBLISHABLE_KEY") },
+    }).catch(() => undefined);
+    if (answer?.ok !== true) {
+      return false;
+    }
+    const { external } = (await answer.json()) as {
+      external: Record<string, boolean>;
+    };
+    settings = { external, until: Date.now() + 60_000 };
+  }
+  return settings.external[provider] === true;
+}
+
 // Where to send the browser to sign in with `provider`, returning to
 // `callback` with a code only `verifier` can redeem.
 export function providerUrl(

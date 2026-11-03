@@ -26,6 +26,7 @@ afterEach(() => mock.restoreAll());
 // Supabase, standing in: Auth's token and logout endpoints, and the codes
 // table. Each call is recorded.
 function supabase(answers: { token?: number } = {}) {
+  mock.restoreAll();
   const calls: { url: string; body?: unknown; headers: Headers }[] = [];
   mock.method(globalThis, "fetch", async (url: string, init?: RequestInit) => {
     const body =
@@ -39,6 +40,9 @@ function supabase(answers: { token?: number } = {}) {
           })
         : Response.json({ error: "invalid_grant" }, { status: 400 });
     }
+    if (String(url).includes("/auth/v1/settings")) {
+      return Response.json({ external: { apple: false, google: true } });
+    }
     if (String(url).includes("/auth/v1/logout")) {
       return new Response(null, { status: 204 });
     }
@@ -48,6 +52,7 @@ function supabase(answers: { token?: number } = {}) {
 }
 
 async function startGoogle() {
+  supabase();
   const answer = await app.request(`${host}/authorize/google?${query}`);
   const cookie = answer.headers.get("set-cookie")!;
   return { answer, cookie: cookie.split(";")[0]! };
@@ -75,6 +80,20 @@ describe("signing in with a provider", () => {
     assert.match(set, /Secure/);
     assert.match(set, /SameSite=Lax/);
     assert.match(set, /Path=\//);
+  });
+
+  it("tells the app, not the user, when a provider is off in Supabase", async () => {
+    supabase();
+    const answer = await app.request(`${host}/authorize/apple?${query}`);
+    assert.equal(answer.status, 303);
+    const to = new URL(answer.headers.get("location")!);
+    assert.equal(
+      to.origin + to.pathname,
+      "https://app.backtickjs.com/signed-in",
+    );
+    assert.equal(to.searchParams.get("error"), "temporarily_unavailable");
+    assert.equal(to.searchParams.get("state"), request.state);
+    assert.equal(answer.headers.get("set-cookie"), null);
   });
 
   it("refuses a request that isn't the app's", async () => {

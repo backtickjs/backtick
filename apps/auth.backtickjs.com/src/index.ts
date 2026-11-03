@@ -40,6 +40,7 @@ import {
   pendingSeconds,
   type Provider,
   isProvider,
+  providerEnabled,
   providers,
   providerUrl,
   sealPending,
@@ -129,10 +130,14 @@ app.get("/authorize", async (c) => {
 // Apple or Google, through Supabase's own sign-in, returning to
 // /authorize/callback. The request and the Supabase PKCE verifier wait in a
 // signed cookie on this host meanwhile.
-app.get(`/authorize/:provider{${providers.join("|")}}`, (c) => {
+app.get(`/authorize/:provider{${providers.join("|")}}`, async (c) => {
   const request = requestOf(c.req.queries());
   if (request === undefined || authorizeError(authorizeParams(request))) {
     return c.text("Open sign-in from the Backtick app.", 400, noStore);
+  }
+  const provider = c.req.param("provider") as Provider;
+  if (!(await providerEnabled(provider))) {
+    return refused(c, request, "temporarily_unavailable");
   }
   const verifier = newVerifier();
   setCookie(
@@ -148,11 +153,7 @@ app.get(`/authorize/:provider{${providers.join("|")}}`, (c) => {
     },
   );
   return c.redirect(
-    providerUrl(
-      c.req.param("provider") as Provider,
-      `${issuer}/authorize/callback`,
-      verifier,
-    ),
+    providerUrl(provider, `${issuer}/authorize/callback`, verifier),
     302,
   );
 });
@@ -228,7 +229,7 @@ async function signedIn(
 function refused(
   c: Context,
   request: Record<string, string>,
-  error: "access_denied" | "server_error",
+  error: "access_denied" | "server_error" | "temporarily_unavailable",
 ): Response {
   const redirect = new URL(client.redirectUri);
   redirect.search = new URLSearchParams({
