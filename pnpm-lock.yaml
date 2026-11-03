@@ -419,6 +419,9 @@ importers:
       '@backtickjs/tspatch-plugin':
         specifier: 0.2.8
         version: link:../../packages/tspatch-plugin
+      esbuild:
+        specifier: 0.28.0
+        version: 0.28.0
       ts-patch:
         specifier: 4.0.1
         version: 4.0.1
@@ -17281,7 +17284,7 @@ snapshots:
 
   tsx@4.22.4:
     dependencies:
-      esbuild: 0.28.0
+      esbuild: 0.28.2
     optionalDependencies:
       fsevents: 2.3.3
 

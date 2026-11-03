@@ -10,8 +10,8 @@
     "test": "node --test \"test/**/*.test.ts\"",
     "format": "prettier --write src test scripts web/src",
     "format:check": "prettier --check src test scripts web/src",
-    "clean": "rm -rf node_modules web/dist",
-    "build": "tspc -p web --noCheck"
+    "clean": "rm -rf node_modules web/dist public/sign-in.js",
+    "build": "tspc -p web --noCheck && node scripts/page.ts"
   },
   "dependencies": {
     "@backtickjs/bundler": "0.2.8",
@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@backtickjs/tspatch-plugin": "0.2.8",
+    "esbuild": "0.28.0",
     "ts-patch": "4.0.1"
   }
 }

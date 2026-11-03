@@ -15,11 +15,11 @@ The Backtick app's sign-in, at `https://auth.backtickjs.com`: an OAuth 2.1 autho
 
 ## Where the code runs
 
-| Runs in             | Files                           | What it does                                                                                                                                                        |
-| ------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The Vercel Function | `src/index.ts`, `src/function/` | The endpoints, the codes and devices in Supabase (with the service role), and the page                                                                              |
-| The browser         | `web/src/`                      | The sign-in page: Apple, Google, and email and password for App Review's accounts only; it signs in with Supabase in the browser and trades that session for a code |
-| This machine        | `scripts/`, `test/`             | `pnpm dev`, and the tests                                                                                                                                           |
+| Runs in             | Files                           | What it does                                                                                                                                                                                                                                                                                                                                                                               |
+| ------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| The Vercel Function | `src/index.ts`, `src/function/` | The endpoints, the codes and devices in Supabase (with the service role), and the page                                                                                                                                                                                                                                                                                                     |
+| The browser         | `web/src/`                      | The sign-in page: links to Apple and Google, and an email and password form for App Review's accounts only. No Supabase in the browser: the server signs in with Supabase Auth itself (`src/function/supabaseAuth.ts`), with PKCE for Apple and Google. its one script, Solid included, is a static file built at `pnpm build` (`scripts/page.ts`), under a strict content security policy |
+| This machine        | `scripts/`, `test/`             | `pnpm dev`, and the tests                                                                                                                                                                                                                                                                                                                                                                  |
 
 The tables (`authorization_codes`, `devices`, `dpop_proofs`) are in the Supabase project's migrations, in `apps/api.backtickjs.com/supabase/migrations`.
 
@@ -30,10 +30,10 @@ A Vercel project with this folder as its root directory, the domain `auth.backti
 | Variable                     | What it is                                                                                                                                             |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `SUPABASE_URL`               | The project's URL                                                                                                                                      |
-| `SUPABASE_PUBLISHABLE_KEY`   | For the sign-in page's Supabase client. Safe in a browser                                                                                              |
+| `SUPABASE_PUBLISHABLE_KEY`   | For signing in with Supabase Auth, from the server                                                                                                     |
 | `SUPABASE_SERVICE_ROLE_KEY`  | For the codes and devices                                                                                                                              |
 | `BACKTICK_SIGNING_JWK`       | This server's private ES256 key, a JWK with a `kid`. To rotate: publish the new key beside the old, sign with the new, drop the old five minutes later |
-| `BACKTICK_DPOP_NONCE_SECRET` | Random; signs DPoP nonces                                                                                                                              |
+| `BACKTICK_DPOP_NONCE_SECRET` | Random; signs DPoP nonces, and the cookie a sign-in waits in                                                                                           |
 | `BACKTICK_HOME_ORIGIN`       | `https://app.backtickjs.com`                                                                                                                           |
 | `BACKTICK_APPS_DOMAIN`       | `backtickjs.app`                                                                                                                                       |
 | `BACKTICK_PASSWORD_ACCOUNTS` | Comma-separated emails that may sign in with a password: App Review's                                                                                  |

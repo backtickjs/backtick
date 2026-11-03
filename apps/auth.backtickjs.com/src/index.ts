@@ -5,9 +5,8 @@
 // The app is its one client. Backtick's hosts check its tokens against
 // /.well-known/jwks.json; they never reach Supabase.
 import { type Context, Hono } from "hono";
-import { secureHeaders } from "hono/secure-headers";
+import { deleteCookie, getCookie, setCookie } from "hono/cookie";
 import type { JWK } from "jose";
-import { browserUser } from "./function/browserUser.ts";
 import {
   addDevice,
   deviceOf,
@@ -34,8 +33,19 @@ import {
   verifyProof,
 } from "./function/oauth.ts";
 import { required } from "./function/supabase.ts";
-// Compiled by `tspc` first: the page is a Backtick script.
-import { signInPage } from "../web/dist/index.js";
+import {
+  newVerifier,
+  openPending,
+  pendingCookie,
+  pendingSeconds,
+  type Provider,
+  providerUrl,
+  sealPending,
+  userFromCode,
+  userFromPassword,
+} from "./function/supabaseAuth.ts";
+// Compiled by `tspc` first; its script is built into public/ (scripts/page.ts).
+import { signInHtml } from "../web/dist/html.js";
 
 const app = new Hono();
 
@@ -71,63 +81,165 @@ app.get("/.well-known/oauth-authorization-server", (c) =>
 // The website is backtickjs.com.
 app.get("/", (c) => c.redirect("https://backtickjs.com", 302));
 
-// The page can't be framed by another site, so it can't be clicked through.
-const pageHeaders = secureHeaders({
-  xFrameOptions: "DENY",
-  contentSecurityPolicy: { frameAncestors: ["'none'"] },
-});
+// The sign-in page's own policy: its script from this origin only, its form
+// only to this server (and the app's callback it redirects to), and no
+// framing by another site.
+const pageHeaders = {
+  "cache-control": "no-store",
+  "content-security-policy": [
+    "default-src 'none'",
+    "script-src 'self'",
+    "style-src 'unsafe-inline'",
+    "img-src 'self'",
+    `form-action 'self' ${new URL(client.redirectUri).origin}`,
+    "base-uri 'none'",
+    "frame-ancestors 'none'",
+  ].join("; "),
+  "x-frame-options": "DENY",
+  "referrer-policy": "no-referrer",
+  "x-content-type-options": "nosniff",
+};
 
 // The sign-in page, which the app opens in the system's sign-in browser with
 // an OAuth authorization request (PKCE, and `dpop_jkt`, its key's thumbprint).
-app.get("/authorize", pageHeaders, async (c) => {
-  const query = c.req.queries();
-  const error = Object.values(query).some((values) => values.length > 1)
-    ? "A parameter appears twice."
-    : authorizeError(authorizeParams(c.req.query()));
+// Its buttons and form come back here with the same request.
+app.get("/authorize", async (c) => {
+  const request = requestOf(c.req.queries());
+  const error =
+    request === undefined
+      ? "A parameter appears twice."
+      : authorizeError(authorizeParams(request));
   return error === undefined
-    ? c.html(await signInPage())
+    ? c.html(signInHtml, 200, pageHeaders)
     : c.text(error, 400, noStore);
 });
 
-// The sign-in page, signed in with Supabase in the browser, turns that into an
-// authorization code for the app that asked, sent to the app's own redirect
-// URI with the request's `state` and this server as `iss` (RFC 9207).
-app.post("/authorize", async (c) => {
-  const user = await browserUser(c.req.header("authorization"));
-  const params = authorizeParams(
-    await c.req.json<Record<string, unknown>>().catch(() => ({})),
+// Apple or Google, through Supabase's own sign-in, returning to
+// /authorize/callback. The request and the Supabase PKCE verifier wait in a
+// signed cookie on this host meanwhile.
+app.get("/authorize/:provider{apple|google}", (c) => {
+  const request = requestOf(c.req.queries());
+  if (request === undefined || authorizeError(authorizeParams(request))) {
+    return c.text("Open sign-in from the Backtick app.", 400, noStore);
+  }
+  const verifier = newVerifier();
+  setCookie(
+    c,
+    pendingCookie,
+    sealPending({ request, verifier }, cookieSecret()),
+    {
+      path: "/",
+      secure: true,
+      httpOnly: true,
+      sameSite: "Lax",
+      maxAge: pendingSeconds,
+    },
   );
-  if (user === undefined) {
-    return c.json({ error: "Sign in first." }, 401, noStore);
+  return c.redirect(
+    providerUrl(
+      c.req.param("provider") as Provider,
+      `${issuer}/authorize/callback`,
+      verifier,
+    ),
+    302,
+  );
+});
+
+app.get("/authorize/callback", async (c) => {
+  const pending = openPending(getCookie(c, pendingCookie), cookieSecret());
+  deleteCookie(c, pendingCookie, { path: "/", secure: true });
+  const code = c.req.query("code");
+  if (pending === undefined || code === undefined) {
+    return c.text("Open sign-in from the Backtick app.", 400, noStore);
   }
-  // Email and password is for App Review's account only: anyone else signs in
-  // with Apple or Google, so a password set by someone else on an account (an
-  // assistant's token can change it) opens no phone session.
-  if (
-    user.methods.includes("password") &&
-    !passwordAccounts().includes(user.email)
-  ) {
-    return c.json({ error: "Sign in with Apple or Google." }, 403, noStore);
+  const user = await userFromCode(code, pending.verifier);
+  return user === undefined
+    ? backToSignIn(c, pending.request, "sign-in")
+    : signedIn(c, pending.request, user);
+});
+
+// Email and password, for App Review's accounts only: anyone else signs in
+// with Apple or Google, so a password set by someone else on an account (an
+// assistant's token can change it) opens no phone session.
+app.post("/authorize/password", async (c) => {
+  const form = await c.req.parseBody({ all: true }).catch(() => ({}));
+  const fields = single(form);
+  const request = fields === undefined ? undefined : requestOf(fields);
+  if (request === undefined || authorizeError(authorizeParams(request))) {
+    return c.text("Open sign-in from the Backtick app.", 400, noStore);
   }
-  const error = authorizeError(params);
-  if (error !== undefined) {
-    return c.json({ error }, 400, noStore);
+  const email = (fields!.email ?? "").trim().toLowerCase();
+  if (!passwordAccounts().includes(email)) {
+    return backToSignIn(c, request, "password-account");
   }
+  const user = await userFromPassword(email, fields!.password ?? "");
+  return user === undefined
+    ? backToSignIn(c, request, "password")
+    : signedIn(c, request, user);
+});
+
+// Signed in: an authorization code for the app that asked, sent to the app's
+// own redirect URI with the request's `state` and this server as `iss` (RFC
+// 9207).
+async function signedIn(
+  c: Context,
+  request: Record<string, string>,
+  user: string,
+): Promise<Response> {
   const code = newSecret();
   await saveCode({
     hash: hashOf(code),
-    userId: user.id,
-    codeChallenge: params.codeChallenge as string,
-    dpopJkt: params.dpopJkt as string,
+    userId: user,
+    codeChallenge: request.code_challenge!,
+    dpopJkt: request.dpop_jkt!,
   });
   const redirect = new URL(client.redirectUri);
   redirect.search = new URLSearchParams({
     code,
-    state: params.state as string,
+    state: request.state!,
     iss: issuer,
   }).toString();
-  return c.json({ redirect: redirect.href }, 200, noStore);
-});
+  return c.redirect(redirect.href, 303);
+}
+
+// The sign-in page again, with why.
+function backToSignIn(
+  c: Context,
+  request: Record<string, string>,
+  error: "sign-in" | "password" | "password-account",
+): Response {
+  return c.redirect(
+    `/authorize?${new URLSearchParams({ ...request, error })}`,
+    303,
+  );
+}
+
+// The authorization request's own parameters, each once (OAuth 2.1, section
+// 3.1), from a query or a form.
+function requestOf(
+  params: Record<string, string | string[]>,
+): Record<string, string> | undefined {
+  const request: Record<string, string> = {};
+  for (const name of [
+    "response_type",
+    "client_id",
+    "redirect_uri",
+    "code_challenge",
+    "code_challenge_method",
+    "state",
+    "dpop_jkt",
+  ]) {
+    const value = params[name];
+    if (Array.isArray(value) && value.length > 1) {
+      return undefined;
+    }
+    const one = Array.isArray(value) ? value[0] : value;
+    if (one !== undefined) {
+      request[name] = one;
+    }
+  }
+  return request;
+}
 
 // The token endpoint, for the Backtick app only, every request with a DPoP
 // proof by its key and a `resource`: the origin the access token is for.
@@ -307,6 +419,11 @@ let key: JWK | undefined;
 function signingKey(): JWK {
   key ??= JSON.parse(required("BACKTICK_SIGNING_JWK")) as JWK;
   return key;
+}
+
+// What signs the sign-in cookie: the nonce secret, under its own label.
+function cookieSecret(): string {
+  return required("BACKTICK_DPOP_NONCE_SECRET");
 }
 
 // The accounts that may sign in with email and password: App Review's.
