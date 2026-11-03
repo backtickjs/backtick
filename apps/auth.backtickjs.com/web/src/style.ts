@@ -17,4 +17,7 @@ form { display: flex; flex-direction: column; gap: 12px; }
 input { height: 52px; padding: 0 20px; border-radius: 999px; border: 1px solid var(--line); background: none; color: var(--ink); font: inherit; outline: none; }
 input:focus { border-color: var(--ink); }
 input::placeholder { color: var(--muted); }
+.lede { color: var(--muted); text-align: center; margin: -4px 0 12px; font-size: 15px; }
+input.code { text-align: center; font-size: 22px; letter-spacing: 0.3em; font-variant-numeric: tabular-nums; }
+.other { color: var(--muted); text-align: center; font-size: 15px; margin-top: 8px; }
 `;

@@ -1,5 +1,5 @@
 // Who the user is, from Supabase Auth, asked server side: Apple or Google
-// through Supabase's own OAuth with PKCE, or an email and password. The
+// through Supabase's own OAuth with PKCE, or a code sent to an email. The
 // Supabase session that proves it is ended at once; it never reaches the
 // browser or the phone.
 import {
@@ -82,25 +82,41 @@ export function userFromCode(
   );
 }
 
-export function userFromPassword(
+// Emails a six-digit code to `email`, making the account if it's new. False
+// if Supabase wouldn't (its limits, per user).
+export async function sendCode(
   email: string,
-  password: string,
+  ip: string | undefined,
+): Promise<boolean> {
+  const answer = await fetch(`${auth()}/otp`, {
+    method: "POST",
+    headers: { ...headers(ip), "content-type": "application/json" },
+    body: JSON.stringify({ email, create_user: true }),
+  }).catch(() => undefined);
+  return answer?.ok === true;
+}
+
+// The user behind an emailed code, or nothing.
+export function userFromEmailCode(
+  email: string,
+  code: string,
   ip: string | undefined,
 ): Promise<string | undefined> {
-  return userFromSession("password", { email, password }, ip);
+  return userFromSession("verify", { type: "email", email, token: code }, ip);
 }
 
 async function userFromSession(
-  grant: "pkce" | "password",
+  grant: "pkce" | "verify",
   body: Record<string, string>,
   ip: string | undefined,
 ): Promise<string | undefined> {
-  const answer = await fetch(`${auth()}/token?grant_type=${grant}`, {
+  const path = grant === "verify" ? "verify" : `token?grant_type=${grant}`;
+  const answer = await fetch(`${auth()}/${path}`, {
     method: "POST",
     headers: { ...headers(ip), "content-type": "application/json" },
     body: JSON.stringify(body),
-  });
-  if (!answer.ok) {
+  }).catch(() => undefined);
+  if (answer?.ok !== true) {
     return undefined;
   }
   const session = (await answer.json()) as {
@@ -120,16 +136,16 @@ async function userFromSession(
   return session.user?.id;
 }
 
-// What the browser carries between the provider's redirect and its return:
-// the app's request and the Supabase PKCE verifier, signed so it can't be
-// changed, and good for ten minutes. In an HttpOnly cookie on this host only.
+// What the browser carries between steps: the app's request, and the
+// Supabase PKCE verifier (a provider's redirect and return) or the email a
+// code went to. Signed so it can't be changed, and good for ten minutes, as
+// long as a code. In an HttpOnly cookie on this host only.
 export const pendingCookie = "__Host-backtick-sign-in";
 export const pendingSeconds = 10 * 60;
 
 export type Pending = {
   request: Record<string, string>;
-  verifier: string;
-};
+} & ({ verifier: string } | { email: string });
 
 export function sealPending(pending: Pending, secret: string): string {
   const body = Buffer.from(
@@ -155,9 +171,11 @@ export function openPending(
     const pending = JSON.parse(
       Buffer.from(body, "base64url").toString(),
     ) as Pending & { exp: number };
-    return pending.exp > Date.now()
-      ? { request: pending.request, verifier: pending.verifier }
-      : undefined;
+    if (pending.exp <= Date.now()) {
+      return undefined;
+    }
+    const { exp: _, ...rest } = pending;
+    return rest;
   } catch {
     return undefined;
   }

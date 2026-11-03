@@ -5,7 +5,6 @@ process.env.SUPABASE_URL = "https://project.supabase.co";
 process.env.SUPABASE_PUBLISHABLE_KEY = "publishable";
 process.env.SUPABASE_SERVICE_ROLE_KEY = "service";
 process.env.BACKTICK_DPOP_NONCE_SECRET = "nonce secret";
-process.env.BACKTICK_PASSWORD_ACCOUNTS = "review@example.com";
 const { default: app } = await import("../src/index.ts");
 
 const user = "6d1f0b2a-4c3e-4b5a-9e8d-7c6b5a4f3e2d";
@@ -25,14 +24,20 @@ afterEach(() => mock.restoreAll());
 
 // Supabase, standing in: Auth's token and logout endpoints, and the codes
 // table. Each call is recorded.
-function supabase(answers: { token?: number } = {}) {
+function supabase(answers: { token?: number; otp?: number } = {}) {
   mock.restoreAll();
   const calls: { url: string; body?: unknown; headers: Headers }[] = [];
   mock.method(globalThis, "fetch", async (url: string, init?: RequestInit) => {
     const body =
       typeof init?.body === "string" ? JSON.parse(init.body) : undefined;
     calls.push({ url: String(url), body, headers: new Headers(init?.headers) });
-    if (String(url).includes("/auth/v1/token")) {
+    if (String(url).includes("/auth/v1/otp")) {
+      return new Response("{}", { status: answers.otp ?? 200 });
+    }
+    if (
+      String(url).includes("/auth/v1/token") ||
+      String(url).includes("/auth/v1/verify")
+    ) {
       return (answers.token ?? 200) === 200
         ? Response.json({
             access_token: "supabase session",
@@ -209,46 +214,109 @@ describe("Supabase's per-IP limits", () => {
   });
 });
 
-describe("signing in with a password", () => {
-  const form = (fields: Record<string, string>) =>
-    app.request(`${host}/authorize/password`, {
+describe("signing in with an emailed code", () => {
+  const post = (path: string, fields: Record<string, string>, cookie = "") =>
+    app.request(`${host}${path}`, {
       method: "POST",
-      headers: { "content-type": "application/x-www-form-urlencoded" },
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+        cookie,
+        "x-forwarded-for": "203.0.113.7",
+      },
       body: new URLSearchParams({ ...request, ...fields }).toString(),
     });
 
-  it("is only for the listed accounts, which Supabase isn't even asked about", async () => {
+  async function sent() {
     const calls = supabase();
-    const answer = await form({ email: "someone@example.com", password: "p" });
+    const answer = await post("/authorize/email", {
+      email: " You@Example.com ",
+    });
+    const cookie = answer.headers.get("set-cookie")!.split(";")[0]!;
+    return { answer, cookie, calls };
+  }
+
+  it("sends a code, keeping the address in the cookie, not the URL", async () => {
+    const { answer, cookie, calls } = await sent();
     assert.equal(answer.status, 303);
+    const to = new URL(answer.headers.get("location")!, host);
+    assert.equal(to.pathname, "/authorize");
+    assert.equal(to.searchParams.get("step"), "code");
+    assert.equal(to.searchParams.get("state"), request.state);
+    assert.doesNotMatch(to.href, /example\.com/i);
+    assert.match(cookie, /^__Host-backtick-sign-in=/);
+    const otp = calls.find((call) => call.url.endsWith("/auth/v1/otp"))!;
+    assert.deepEqual(otp.body, { email: "you@example.com", create_user: true });
+    assert.equal(otp.headers.get("sb-forwarded-for"), "203.0.113.7");
+  });
+
+  it("refuses what isn't an address, and says when Supabase won't send", async () => {
+    const calls = supabase();
+    const bad = await post("/authorize/email", { email: "nope" });
     assert.equal(
-      new URL(answer.headers.get("location")!, host).searchParams.get("error"),
-      "password-account",
+      new URL(bad.headers.get("location")!, host).searchParams.get("error"),
+      "email",
     );
     assert.deepEqual(calls, []);
+    supabase({ otp: 429 });
+    const limited = await post("/authorize/email", { email: "a@b.co" });
+    assert.equal(
+      new URL(limited.headers.get("location")!, host).searchParams.get("error"),
+      "send",
+    );
   });
 
-  it("gives a listed account the app's code", async () => {
+  it("gives the app its code for the right one", async () => {
+    const { cookie } = await sent();
     const calls = supabase();
-    const answer = await form({ email: "Review@Example.com", password: "p" });
+    const answer = await post("/authorize/code", { code: "123 456" }, cookie);
     assert.equal(answer.status, 303);
+    const to = new URL(answer.headers.get("location")!);
     assert.equal(
-      new URL(answer.headers.get("location")!).origin,
-      "https://app.backtickjs.com",
+      to.origin + to.pathname,
+      "https://app.backtickjs.com/signed-in",
     );
-    assert.ok(calls.some((call) => call.url.includes("grant_type=password")));
+    assert.match(to.searchParams.get("code")!, /^[A-Za-z0-9_-]{43}$/);
+    const verify = calls.find((call) => call.url.endsWith("/auth/v1/verify"))!;
+    assert.deepEqual(verify.body, {
+      type: "email",
+      email: "you@example.com",
+      token: "123456",
+    });
+    assert.ok(calls.some((call) => call.url.includes("/auth/v1/logout")));
+    assert.match(answer.headers.get("set-cookie")!, /Max-Age=0/);
   });
 
-  it("goes back to the page on a wrong password", async () => {
+  it("stays on the code step for a wrong code", async () => {
+    const { cookie } = await sent();
     supabase({ token: 400 });
-    const answer = await form({
-      email: "review@example.com",
-      password: "wrong",
+    for (const code of ["000000", "abc"]) {
+      const answer = await post("/authorize/code", { code }, cookie);
+      const to = new URL(answer.headers.get("location")!, host);
+      assert.equal(to.searchParams.get("step"), "code");
+      assert.equal(to.searchParams.get("error"), "code");
+    }
+  });
+
+  it("starts over without the cookie, or with another request's", async () => {
+    const { cookie } = await sent();
+    supabase();
+    for (const [fields, withCookie] of [
+      [{ code: "123456" }, ""],
+      [{ code: "123456", state: "u".repeat(32) }, cookie],
+    ] as const) {
+      const answer = await post("/authorize/code", fields, withCookie);
+      const to = new URL(answer.headers.get("location")!, host);
+      assert.equal(to.searchParams.get("error"), "expired");
+      assert.equal(to.searchParams.get("step"), null);
+    }
+  });
+
+  it("keeps the email cookie out of a provider's callback", async () => {
+    const { cookie } = await sent();
+    const answer = await app.request(`${host}/authorize/callback?code=c`, {
+      headers: { cookie },
     });
-    assert.equal(
-      new URL(answer.headers.get("location")!, host).searchParams.get("error"),
-      "password",
-    );
+    assert.equal(answer.status, 400);
   });
 });
 

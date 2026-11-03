@@ -45,7 +45,9 @@ import {
   providerUrl,
   sealPending,
   userFromCode,
-  userFromPassword,
+  userFromEmailCode,
+  sendCode,
+  type Pending,
 } from "./function/supabaseAuth.ts";
 // Compiled by `tspc` first; its script is built into public/ (scripts/page.ts).
 import { signInHtml } from "../web/dist/html.js";
@@ -140,18 +142,7 @@ app.get(`/authorize/:provider{${providers.join("|")}}`, async (c) => {
     return refused(c, request, "temporarily_unavailable");
   }
   const verifier = newVerifier();
-  setCookie(
-    c,
-    pendingCookie,
-    sealPending({ request, verifier }, cookieSecret()),
-    {
-      path: "/",
-      secure: true,
-      httpOnly: true,
-      sameSite: "Lax",
-      maxAge: pendingSeconds,
-    },
-  );
+  keepPending(c, { request, verifier });
   return c.redirect(
     providerUrl(provider, `${issuer}/authorize/callback`, verifier),
     302,
@@ -161,7 +152,7 @@ app.get(`/authorize/:provider{${providers.join("|")}}`, async (c) => {
 app.get("/authorize/callback", async (c) => {
   const pending = openPending(getCookie(c, pendingCookie), cookieSecret());
   deleteCookie(c, pendingCookie, { path: "/", secure: true });
-  if (pending === undefined) {
+  if (pending === undefined || !("verifier" in pending)) {
     return c.text("Open sign-in from the Backtick app.", 400, noStore);
   }
   // No code: the user said no at the provider.
@@ -175,29 +166,61 @@ app.get("/authorize/callback", async (c) => {
     : signedIn(c, pending.request, user);
 });
 
-// Email and password, for App Review's accounts only: anyone else signs in
-// with Apple or Google, so a password set by someone else on an account (an
-// assistant's token can change it) opens no phone session.
-app.post("/authorize/password", async (c) => {
-  const form = await c.req.parseBody({ all: true }).catch(() => ({}));
-  const fields = single(form);
+// Email: a code sent to the address, new accounts included, then typed on
+// the page. No passwords: nothing a session (an assistant's) could set opens
+// a phone session. The address waits in the signed cookie, not the URL.
+app.post("/authorize/email", async (c) => {
+  const fields = single(await c.req.parseBody({ all: true }).catch(() => ({})));
   const request = fields === undefined ? undefined : requestOf(fields);
   if (request === undefined || authorizeError(authorizeParams(request))) {
     return c.text("Open sign-in from the Backtick app.", 400, noStore);
   }
   const email = (fields!.email ?? "").trim().toLowerCase();
-  if (!passwordAccounts().includes(email)) {
-    return backToSignIn(c, request, "password-account");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return backToSignIn(c, request, "email");
   }
-  const user = await userFromPassword(
-    email,
-    fields!.password ?? "",
-    clientIp(c),
-  );
-  return user === undefined
-    ? backToSignIn(c, request, "password")
-    : signedIn(c, request, user);
+  if (!(await sendCode(email, clientIp(c)))) {
+    return backToSignIn(c, request, "send");
+  }
+  keepPending(c, { request, email });
+  return backToSignIn(c, request, undefined, "code");
 });
+
+app.post("/authorize/code", async (c) => {
+  const fields = single(await c.req.parseBody({ all: true }).catch(() => ({})));
+  const request = fields === undefined ? undefined : requestOf(fields);
+  if (request === undefined || authorizeError(authorizeParams(request))) {
+    return c.text("Open sign-in from the Backtick app.", 400, noStore);
+  }
+  const pending = openPending(getCookie(c, pendingCookie), cookieSecret());
+  // The code is for the request it was sent for.
+  if (
+    pending === undefined ||
+    !("email" in pending) ||
+    pending.request.state !== request.state
+  ) {
+    return backToSignIn(c, request, "expired");
+  }
+  const code = (fields!.code ?? "").replace(/\s/g, "");
+  const user = /^\d{6}$/.test(code)
+    ? await userFromEmailCode(pending.email, code, clientIp(c))
+    : undefined;
+  if (user === undefined) {
+    return backToSignIn(c, request, "code", "code");
+  }
+  deleteCookie(c, pendingCookie, { path: "/", secure: true });
+  return signedIn(c, pending.request, user);
+});
+
+function keepPending(c: Context, pending: Pending): void {
+  setCookie(c, pendingCookie, sealPending(pending, cookieSecret()), {
+    path: "/",
+    secure: true,
+    httpOnly: true,
+    sameSite: "Lax",
+    maxAge: pendingSeconds,
+  });
+}
 
 // Signed in: an authorization code for the app that asked, sent to the app's
 // own redirect URI with the request's `state` and this server as `iss` (RFC
@@ -240,16 +263,21 @@ function refused(
   return c.redirect(redirect.href, 303);
 }
 
-// The sign-in page again, with why.
+// The sign-in page again, at its email or code step, with why.
 function backToSignIn(
   c: Context,
   request: Record<string, string>,
-  error: "password" | "password-account",
+  error: "email" | "send" | "code" | "expired" | undefined,
+  step: "email" | "code" = "email",
 ): Response {
-  return c.redirect(
-    `/authorize?${new URLSearchParams({ ...request, error })}`,
-    303,
-  );
+  const query = new URLSearchParams(request);
+  if (step === "code") {
+    query.set("step", "code");
+  }
+  if (error !== undefined) {
+    query.set("error", error);
+  }
+  return c.redirect(`/authorize?${query}`, 303);
 }
 
 // The user's IP, as Vercel's edge writes it: it replaces any
@@ -468,14 +496,6 @@ function signingKey(): JWK {
 // What signs the sign-in cookie: the nonce secret, under its own label.
 function cookieSecret(): string {
   return required("BACKTICK_DPOP_NONCE_SECRET");
-}
-
-// The accounts that may sign in with email and password: App Review's.
-function passwordAccounts(): string[] {
-  return (process.env.BACKTICK_PASSWORD_ACCOUNTS ?? "")
-    .split(",")
-    .map((email) => email.trim().toLowerCase())
-    .filter(Boolean);
 }
 
 export default app;
