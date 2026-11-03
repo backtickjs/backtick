@@ -1,9 +1,10 @@
 // Renews the client secret Supabase signs in with Apple with: an ES256 token
-// from the Sign in with Apple key, which Apple lets last 6 months at most.
-// Run monthly (.github/workflows/apple-secret.yml), each new one good for 6
-// months, so five failed runs in a row still leave sign-in working.
+// from the Sign in with Apple key, which Apple lets last 6 months at most. Run
+// by hand when .github/workflows/apple-secret.yml says so, then set the date
+// it prints there.
 //   APPLE_SIGN_IN_KEY      the key's .p8, as text
-//   SUPABASE_ACCESS_TOKEN  a Supabase access token for the project's settings
+//   SUPABASE_ACCESS_TOKEN  a Supabase access token that can change the
+//                          project's auth settings (the CLI's login does)
 import { createPrivateKey, sign } from "node:crypto";
 
 const team = "BM4485734W";
@@ -68,4 +69,6 @@ if (!answer.ok) {
   );
 }
 const expires = new Date((now + lifetime) * 1000).toISOString().slice(0, 10);
-console.log(`Apple's client secret renewed, good until ${expires}.`);
+console.log(
+  `Apple's client secret renewed, good until ${expires}: set EXPIRES to "${expires}" in .github/workflows/apple-secret.yml.`,
+);
