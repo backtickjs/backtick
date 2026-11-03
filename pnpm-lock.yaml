@@ -380,6 +380,49 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
+  apps/auth.backtickjs.com:
+    dependencies:
+      '@backtickjs/bundler':
+        specifier: 0.2.8
+        version: link:../../packages/bundler
+      '@backtickjs/core':
+        specifier: 0.2.8
+        version: link:../../packages/core
+      '@backtickjs/jsx-solid':
+        specifier: 0.2.8
+        version: link:../../packages/jsx-solid
+      '@backtickjs/tsc':
+        specifier: 0.2.8
+        version: link:../../packages/tsc
+      '@hono/node-server':
+        specifier: ^2.1.4
+        version: 2.1.4(hono@4.13.13)
+      '@supabase/supabase-js':
+        specifier: 2.117.2
+        version: 2.117.2
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
+      hono:
+        specifier: ^4.13.13
+        version: 4.13.13
+      jose:
+        specifier: 6.2.12
+        version: 6.2.12
+      solid-js:
+        specifier: 1.9.17
+        version: 1.9.17
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+    devDependencies:
+      '@backtickjs/tspatch-plugin':
+        specifier: 0.2.8
+        version: link:../../packages/tspatch-plugin
+      ts-patch:
+        specifier: 4.0.1
+        version: 4.0.1
+
   apps/backtickjs.app:
     dependencies:
       hono:

@@ -1,0 +1,11 @@
+{
+  "name": "auth.backtickjs.com-web",
+  "private": true,
+  "type": "module",
+  "description": "auth.backtickjs.com's sign-in page, written with Backtick and Solid, compiled with tspc for the function to bundle",
+  "backtick": {
+    "plugins": [
+      "@backtickjs/jsx-solid/plugin"
+    ]
+  }
+}

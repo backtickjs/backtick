@@ -2,7 +2,7 @@
 // or an existing account's email and password (App Review's). Signed in, the
 // page trades its Supabase session for an authorization code, ends that
 // session, and sends the code to the app, which redeems it with its PKCE
-// verifier and DPoP key (docs/security-model.md). The URL is the app's OAuth
+// verifier and DPoP key. The URL is the app's OAuth
 // authorization request; /authorize checked it before serving the page.
 import { cs } from "@backtickjs/core";
 import { createClient } from "@supabase/supabase-js" with {

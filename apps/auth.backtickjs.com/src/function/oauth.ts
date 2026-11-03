@@ -1,4 +1,4 @@
-// The Backtick app's authorization server (docs/security-model.md), to the
+// The Backtick app's authorization server, to the
 // standards: OAuth 2.1 for a native app (RFC 8252) with PKCE (RFC 7636), a
 // DPoP-bound refresh token (RFC 9449), and access tokens for one origin each
 // (resource indicators, RFC 8707; JWT access tokens, RFC 9068), its tokens
@@ -27,7 +27,7 @@ export const client = {
   redirectUri: "https://app.backtickjs.com/signed-in",
 };
 
-export const issuer = "https://api.backtickjs.com";
+export const issuer = "https://auth.backtickjs.com";
 export const accessTokenSeconds = 5 * 60;
 export const codeSeconds = 2 * 60;
 // A proof is as fresh as its nonce: the phone's clock isn't trusted for it

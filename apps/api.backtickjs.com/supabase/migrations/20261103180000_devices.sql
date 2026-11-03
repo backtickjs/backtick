@@ -1,4 +1,4 @@
--- The Backtick app's sessions (docs/security-model.md): OAuth 2.1 with PKCE and
+-- The Backtick app's sessions: OAuth 2.1 with PKCE and
 -- DPoP. Only the function reads and writes them, with the service role.
 
 -- An authorization code: one use, two minutes, bound to the PKCE challenge and

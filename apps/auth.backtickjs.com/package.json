@@ -1,0 +1,33 @@
+{
+  "name": "auth.backtickjs.com",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "The Backtick app's sign-in: an OAuth 2.1 authorization server, and the sign-in page",
+  "scripts": {
+    "dev": "node --env-file=.env.local scripts/dev.ts",
+    "typecheck": "pnpm run build && tsc --noEmit && backtick-tsc -p web --noEmit",
+    "test": "node --test \"test/**/*.test.ts\"",
+    "format": "prettier --write src test scripts web/src",
+    "format:check": "prettier --check src test scripts web/src",
+    "clean": "rm -rf node_modules web/dist",
+    "build": "tspc -p web --noCheck"
+  },
+  "dependencies": {
+    "@backtickjs/bundler": "0.2.8",
+    "@backtickjs/core": "0.2.8",
+    "@backtickjs/jsx-solid": "0.2.8",
+    "@backtickjs/tsc": "0.2.8",
+    "@hono/node-server": "^2.1.4",
+    "@supabase/supabase-js": "2.117.2",
+    "@types/node": "^25.9.1",
+    "hono": "^4.13.13",
+    "jose": "6.2.12",
+    "solid-js": "1.9.17",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "@backtickjs/tspatch-plugin": "0.2.8",
+    "ts-patch": "4.0.1"
+  }
+}
