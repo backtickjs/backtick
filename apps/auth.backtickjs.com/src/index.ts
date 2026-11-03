@@ -39,6 +39,8 @@ import {
   pendingCookie,
   pendingSeconds,
   type Provider,
+  isProvider,
+  providers,
   providerUrl,
   sealPending,
   userFromCode,
@@ -102,22 +104,32 @@ const pageHeaders = {
 
 // The sign-in page, which the app opens in the system's sign-in browser with
 // an OAuth authorization request (PKCE, and `dpop_jkt`, its key's thumbprint).
-// Its buttons and form come back here with the same request.
+// Its buttons and form come back here with the same request. With `provider`
+// (a hint like Auth0's `connection`), the app already chose: straight to that
+// provider, no page. A provider this server doesn't know gets the page.
 app.get("/authorize", async (c) => {
   const request = requestOf(c.req.queries());
   const error =
     request === undefined
       ? "A parameter appears twice."
       : authorizeError(authorizeParams(request));
-  return error === undefined
-    ? c.html(signInHtml, 200, pageHeaders)
-    : c.text(error, 400, noStore);
+  if (error !== undefined) {
+    return c.text(error, 400, noStore);
+  }
+  const provider = c.req.query("provider");
+  if (!isProvider(provider)) {
+    return c.html(signInHtml, 200, pageHeaders);
+  }
+  return c.redirect(
+    `/authorize/${provider}?${new URLSearchParams(request!)}`,
+    302,
+  );
 });
 
 // Apple or Google, through Supabase's own sign-in, returning to
 // /authorize/callback. The request and the Supabase PKCE verifier wait in a
 // signed cookie on this host meanwhile.
-app.get("/authorize/:provider{apple|google}", (c) => {
+app.get(`/authorize/:provider{${providers.join("|")}}`, (c) => {
   const request = requestOf(c.req.queries());
   if (request === undefined || authorizeError(authorizeParams(request))) {
     return c.text("Open sign-in from the Backtick app.", 400, noStore);

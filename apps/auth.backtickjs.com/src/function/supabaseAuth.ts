@@ -10,7 +10,13 @@ import {
 } from "node:crypto";
 import { required } from "./supabase.ts";
 
-export type Provider = "apple" | "google";
+// The sign-in providers, enabled in Supabase. The only list: the app and its
+// home name a provider, and anything else gets the sign-in page.
+export const providers = ["apple", "google"] as const;
+export type Provider = (typeof providers)[number];
+
+export const isProvider = (name: string | undefined): name is Provider =>
+  (providers as readonly (string | undefined)[]).includes(name);
 
 const auth = () => `${required("SUPABASE_URL")}/auth/v1`;
 

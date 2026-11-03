@@ -224,6 +224,31 @@ describe("signing in with a password", () => {
   });
 });
 
+describe("a provider hint", () => {
+  it("goes straight to that provider, with the same request", async () => {
+    const answer = await app.request(
+      `${host}/authorize?${query}&provider=google`,
+    );
+    assert.equal(answer.status, 302);
+    const to = new URL(answer.headers.get("location")!, host);
+    assert.equal(to.pathname, "/authorize/google");
+    assert.deepEqual(Object.fromEntries(to.searchParams), request);
+  });
+
+  it("shows the page for a provider it doesn't know, and still checks the request", async () => {
+    const unknown = await app.request(
+      `${host}/authorize?${query}&provider=github`,
+    );
+    assert.equal(unknown.status, 200);
+    assert.match(await unknown.text(), /sign-in\.js/);
+    const bad = new URLSearchParams({ ...request, client_id: "other" });
+    assert.equal(
+      (await app.request(`${host}/authorize?${bad}&provider=google`)).status,
+      400,
+    );
+  });
+});
+
 describe("the sign-in page", () => {
   it("allows only its own script, its import map, and its form's destinations", async () => {
     const answer = await app.request(`${host}/authorize?${query}`);

@@ -111,6 +111,8 @@ final class Session: NSObject, @unchecked Sendable {
         "client_id": clientID,
         "resource": origin,
       ])
+      // A seal that fails keeps the session in memory: the token still works.
+      try? adopt(answer)
       return keep(answer, for: origin)
     } catch SessionError.server("invalid_grant") {
       // Revoked, or idle too long: signed out.
@@ -123,9 +125,11 @@ final class Session: NSObject, @unchecked Sendable {
 
   // Sign-in (RFC 8252, with PKCE and `dpop_jkt`) in the system's sign-in
   // browser, returning to the HTTPS callback only this app can receive. False
-  // if the user closed it.
+  // if the user closed it. `extra` goes to the authorization server as is
+  // (`provider`, `login_hint`, `prompt`: what it reads is its own business),
+  // but never in place of the request's own parameters.
   @MainActor
-  func signIn() async throws -> Bool {
+  func signIn(extra: [String: String]) async throws -> Bool {
     let key = try DeviceKey.loadOrCreate()
     let jkt = DeviceKey.thumbprint(try DeviceKey.publicJWK(key))
     let verifier = Self.random()
@@ -141,6 +145,10 @@ final class Session: NSObject, @unchecked Sendable {
       URLQueryItem(name: "state", value: state),
       URLQueryItem(name: "dpop_jkt", value: jkt),
     ]
+    let own = Set(authorize.queryItems!.map(\.name))
+    for (name, value) in extra.sorted(by: { $0.key < $1.key }) where !own.contains(name) {
+      authorize.queryItems!.append(URLQueryItem(name: name, value: value))
+    }
     let returned: URL? = try await withCheckedThrowingContinuation { continuation in
       let session = ASWebAuthenticationSession(
         url: authorize.url!,
@@ -181,15 +189,10 @@ final class Session: NSObject, @unchecked Sendable {
       "client_id": clientID,
       "resource": home,
     ])
-    guard let refreshToken = answer["refresh_token"] as? String else {
+    guard answer["refresh_token"] is String else {
       throw SessionError.server("no refresh token")
     }
-    let origins = answer["backtick_origins"] as? [String] ?? []
-    try SealedState.save(.init(refreshToken: refreshToken, origins: origins), key)
-    lock.withLock {
-      self.refreshToken = refreshToken
-      self.origins = origins
-    }
+    try adopt(answer)
     _ = keep(answer, for: home)
     NotificationCenter.default.post(name: Self.changed, object: nil)
     return true
@@ -214,6 +217,25 @@ final class Session: NSObject, @unchecked Sendable {
     SealedState.delete()
     DeviceKey.delete()
     NotificationCenter.default.post(name: Self.changed, object: nil)
+  }
+
+  // What a token answer carries for the session, at sign-in or any refresh: a
+  // refresh token (the server may rotate it) and the origins (it may add
+  // some). Kept, and sealed again.
+  private func adopt(_ answer: [String: Any]) throws {
+    let next: SealedState? = lock.withLock {
+      let refresh = answer["refresh_token"] as? String ?? refreshToken
+      let patterns = answer["backtick_origins"] as? [String] ?? origins
+      guard let refresh, refresh != refreshToken || patterns != origins else {
+        return nil
+      }
+      refreshToken = refresh
+      origins = patterns
+      return SealedState(refreshToken: refresh, origins: patterns)
+    }
+    if let next, let key = DeviceKey.load() {
+      try SealedState.save(next, key)
+    }
   }
 
   private func keep(_ answer: [String: Any], for origin: String) -> String? {

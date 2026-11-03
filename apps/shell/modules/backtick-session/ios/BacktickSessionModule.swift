@@ -11,8 +11,8 @@ public class BacktickSessionModule: Module {
 
     Function("isSignedIn") { Session.shared.isSignedIn }
 
-    AsyncFunction("signIn") { () async throws -> Bool in
-      try await Session.shared.signIn()
+    AsyncFunction("signIn") { (extra: [String: String]) async throws -> Bool in
+      try await Session.shared.signIn(extra: extra)
     }
 
     AsyncFunction("signOut") { () async in

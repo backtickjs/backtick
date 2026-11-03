@@ -11,7 +11,10 @@ import { apps, home } from "../hosts";
 // its docs say.
 //   https://<id>.<apps>/<path>       the app's <path>, its own link
 //   backtick://<id>/<path>           the app's <path>
-//   backtick://sign-in, …sign-out    from Backtick's home only
+//   backtick://sign-in?<params>      from Backtick's home only: the params
+//                                    go to auth.backtickjs.com as they are
+//                                    (`provider=google` goes straight there)
+//   backtick://sign-out              from Backtick's home only
 //   backtick://reload                loads the screen on top again, in place
 //   backtick://<path>                Backtick's <path>
 // Sign-in's return (https://<home>/signed-in) is the session module's own,
@@ -54,7 +57,7 @@ export async function redirectSystemPath({
     if (!backtickShown()) {
       // An app can't sign the user in or out.
     } else if (link.pathname === "sign-in") {
-      await signIn();
+      await signIn(Object.fromEntries(new URLSearchParams(link.search)));
     } else {
       await signOut();
     }

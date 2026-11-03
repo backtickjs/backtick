@@ -5,7 +5,7 @@ import { type EventSubscription, requireNativeModule } from "expo";
 
 type Native = {
   isSignedIn(): boolean;
-  signIn(): Promise<boolean>;
+  signIn(extra: Record<string, string>): Promise<boolean>;
   signOut(): Promise<void>;
   addListener(
     event: "onChange",
@@ -17,9 +17,12 @@ const native = requireNativeModule<Native>("BacktickSession");
 
 export const isSignedIn = (): boolean => native.isSignedIn();
 
-// Opens the sign-in page in the system's sign-in browser. Resolves false if the
-// user closed it.
-export const signIn = (): Promise<boolean> => native.signIn();
+// Opens sign-in in the system's sign-in browser, with `extra` added to the
+// authorization request: `provider` goes straight to one the authorization
+// server knows, or its page lets the user choose. Resolves false if the user
+// closed it.
+export const signIn = (extra: Record<string, string> = {}): Promise<boolean> =>
+  native.signIn(extra);
 
 export const signOut = (): Promise<void> => native.signOut();
 

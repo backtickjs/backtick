@@ -17,8 +17,8 @@ class BacktickSessionModule : Module() {
 
     Function("isSignedIn") { Session.isSignedIn }
 
-    AsyncFunction("signIn") { promise: Promise ->
-      Session.signIn { result ->
+    AsyncFunction("signIn") { extra: Map<String, String>, promise: Promise ->
+      Session.signIn(extra) { result ->
         result.fold(
           onSuccess = { promise.resolve(it) },
           onFailure = { promise.reject("ERR_SIGN_IN", it.message ?: "Sign-in failed", it) },

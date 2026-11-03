@@ -107,6 +107,8 @@ object Session {
           "resource" to origin,
         )
       )
+      // A seal that fails keeps the session in memory: the token still works.
+      runCatching { adopt(answer) }
       keep(answer, origin)
     } catch (e: SessionException) {
       // Revoked, or idle too long: signed out.
@@ -142,21 +144,32 @@ object Session {
   }
 
   // Sign-in (RFC 8252, with PKCE and `dpop_jkt`) in Chrome's Auth Tab,
-  // returning to the HTTPS callback only this app can receive.
-  fun signIn(done: (Result<Boolean>) -> Unit) {
+  // returning to the HTTPS callback only this app can receive. `extra` goes to
+  // the authorization server as is (`provider`, `login_hint`, `prompt`: what
+  // it reads is its own business), but never in place of the request's own
+  // parameters.
+  fun signIn(extra: Map<String, String>, done: (Result<Boolean>) -> Unit) {
     val launcher = launcher ?: return done(Result.failure(SessionException("No activity")))
     DeviceKey.loadOrCreate()
     val verifier = random()
     val state = random()
     pending = Pending(verifier, state, done)
+    val own = linkedMapOf(
+      "response_type" to "code",
+      "client_id" to CLIENT_ID,
+      "redirect_uri" to callback.toString(),
+      "code_challenge" to challenge(verifier),
+      "code_challenge_method" to "S256",
+      "state" to state,
+      "dpop_jkt" to DeviceKey.thumbprint(DeviceKey.publicJwk()),
+    )
     val url = Uri.parse("$authorizationServer/authorize").buildUpon()
-      .appendQueryParameter("response_type", "code")
-      .appendQueryParameter("client_id", CLIENT_ID)
-      .appendQueryParameter("redirect_uri", callback.toString())
-      .appendQueryParameter("code_challenge", challenge(verifier))
-      .appendQueryParameter("code_challenge_method", "S256")
-      .appendQueryParameter("state", state)
-      .appendQueryParameter("dpop_jkt", DeviceKey.thumbprint(DeviceKey.publicJwk()))
+      .apply {
+        own.forEach { (name, value) -> appendQueryParameter(name, value) }
+        extra.toSortedMap().forEach { (name, value) ->
+          if (name !in own) appendQueryParameter(name, value)
+        }
+      }
       .build()
     Handler(Looper.getMainLooper()).post {
       AuthTabIntent.Builder().setEphemeralBrowsingEnabled(true).build()
@@ -188,17 +201,9 @@ object Session {
               "resource" to home,
             )
           )
-          val refresh = answer.getString("refresh_token")
-          val patterns = answer.optJSONArray("backtick_origins") ?: JSONArray()
-          val sealed = DeviceKey.seal(
-            JSONObject().put("refreshToken", refresh).put("origins", patterns).toString().toByteArray()
-          )
-          preferences().edit().putString("sealed", android.util.Base64.encodeToString(sealed, 0)).apply()
-          synchronized(lock) {
-            refreshToken = refresh
-            origins = (0 until patterns.length()).map { patterns.getString(it) }
-            keep(answer, home)
-          }
+          answer.getString("refresh_token")
+          adopt(answer)
+          synchronized(lock) { keep(answer, home) }
           changed()
           true
         }
@@ -229,6 +234,23 @@ object Session {
     preferences().edit().remove("sealed").apply()
     DeviceKey.delete()
     changed()
+  }
+
+  // What a token answer carries for the session, at sign-in or any refresh: a
+  // refresh token (the server may rotate it) and the origins (it may add
+  // some). Kept, and sealed again.
+  private fun adopt(answer: JSONObject) {
+    val next = synchronized(lock) {
+      val refresh = answer.optString("refresh_token").ifEmpty { refreshToken } ?: return
+      val patterns = answer.optJSONArray("backtick_origins")
+        ?.let { list -> (0 until list.length()).map { list.getString(it) } } ?: origins
+      if (refresh == refreshToken && patterns == origins) return
+      refreshToken = refresh
+      origins = patterns
+      JSONObject().put("refreshToken", refresh).put("origins", JSONArray(patterns))
+    }
+    val sealed = DeviceKey.seal(next.toString().toByteArray())
+    preferences().edit().putString("sealed", android.util.Base64.encodeToString(sealed, 0)).apply()
   }
 
   private fun keep(answer: JSONObject, origin: String): String? {
