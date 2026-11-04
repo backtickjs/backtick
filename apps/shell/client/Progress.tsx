@@ -1,4 +1,3 @@
-import { useNavigation } from "@backtickjs/router";
 import { useEffect, useState } from "react";
 import {
   Animated,
@@ -7,6 +6,7 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { unstable_useIsNavigating } from "expo-router";
 import { manifestOf } from "./manifest";
 import { useInk } from "./screens";
 import { shownApp } from "./shown";
@@ -17,10 +17,10 @@ const minimum = 500;
 // A progress bar along the top. Only once a navigation has taken
 // a moment, and then long enough to read as a bar, not a flicker.
 export function Progress() {
-  const { state } = useNavigation();
+  const navigating = unstable_useIsNavigating();
   const [shownAt, setShownAt] = useState<number | null>(null);
   useEffect(() => {
-    if (state === "loading") {
+    if (navigating) {
       if (shownAt !== null) {
         return;
       }
@@ -32,7 +32,7 @@ export function Progress() {
       const wait = setTimeout(() => setShownAt(null), Math.max(left, 0));
       return () => clearTimeout(wait);
     }
-  }, [state, shownAt]);
+  }, [navigating, shownAt]);
   return shownAt === null ? null : <Bar />;
 }
 

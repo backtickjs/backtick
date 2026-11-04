@@ -2,11 +2,11 @@
 
 Backtick on phones, as its own app: it signs the user in, and every screen it shows comes from a server, Backtick's own included. Laid out as `create-backtick-app` makes any app:
 
-| Folder        | What it is                                                                                                                                                                                                  |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client/`     | The Expo app: the session, the screen stack, fetching and running screens, and nothing drawn of its own but errors                                                                                          |
-| `client/app/` | Its routes (expo-router, `app.json`'s `root`): `index.tsx` and `[...backtickPath].tsx` show Backtick's screens, `(app)/` a navigator per app opened; `+native-intent.tsx` handles every link into the shell |
-| `server/`     | Backtick's own screens: sign-in and the app list. Deployed by `apps/app.backtickjs.com`                                                                                                                     |
+| Folder        | What it is                                                                                                                                                                                                         |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `client/`     | The Expo app: the session, the screen stack, fetching and running screens, and nothing drawn of its own but errors                                                                                                 |
+| `client/app/` | Its routes (expo-router, `app.json`'s `root`): `(home)/` is Backtick's screens and `(app)/` a navigator per app opened, each run by `client/AppLayout.tsx`; `+native-intent.tsx` handles every link into the shell |
+| `server/`     | Backtick's own screens: sign-in and the app list. Deployed by `apps/app.backtickjs.com`                                                                                                                            |
 
 Where a screen comes from (`client/screens.ts`):
 
@@ -15,7 +15,7 @@ Where a screen comes from (`client/screens.ts`):
 | none: Backtick's home | `/`           | `https://app.backtickjs.com/`            |
 | `<id>`                | `/day?week=2` | `https://<id>.backtickjs.app/day?week=2` |
 
-The path is never changed: an app's `<Link href="/day">` is its server's `app.get("/day")`, and expo-router works in its screens as its docs say. `Link` and `router` from `@backtickjs/router` fetch the next screen first, on the shell's fetch and navigator (`client/navigator.ts`), with the progress bar in `client/Progress.tsx`. An app's web app manifest comes with each of its screens (`x-backtick-manifest`), and the last one is kept on the phone (`client/manifest.ts`) for the splash an open shows (`client/AppSplash.tsx`). The module map (`client/moduleMap.ts`) hands screens unmodified packages only.
+The path is never changed: an app's `<Link href="/day">` is its server's `app.get("/day")`, and expo-router works in its screens as its docs say. Navigating to a path fetches it, and the screen on top stays until it arrives, as in a browser: expo-router dispatches every navigation in a transition (`router.setTransitionMode("always")`), and the navigator's layout (`client/AppLayout.tsx`) suspends while the screen is fetched. Each route shows what its layout fetched (`client/Document.tsx`); the progress bar (`client/Progress.tsx`) reads expo-router's `unstable_useIsNavigating()`. An app's web app manifest comes with each of its screens (`x-backtick-manifest`), and the last one is kept on the phone (`client/manifest.ts`) for the splash an open shows (`client/AppSplash.tsx`). The module map (`client/moduleMap.ts`) hands screens unmodified packages only.
 
 Links into the shell (`client/app/+native-intent.tsx`) are the Backtick app's own: `backtick://<path>`, written by `shellURL` (`server/links.ts`), and an app's own address, `https://<id>.backtickjs.app/<path>`, as a verified App Link.
 

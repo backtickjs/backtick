@@ -1,8 +1,7 @@
-import { router } from "@backtickjs/router";
 import type { NavigationState, useNavigationContainerRef } from "expo-router";
 import { Alert, Linking } from "react-native";
 import { loadManifest } from "../manifest";
-import { backtickShown } from "../shown";
+import { backtickShown, reloadShownScreen } from "../shown";
 import { signIn, signOut } from "../../modules/backtick-session/src";
 import { apps, home } from "../hosts";
 
@@ -18,8 +17,7 @@ import { apps, home } from "../hosts";
 //   backtick://reload                loads the screen on top again, in place
 //   backtick://<path>                Backtick's <path>
 // Sign-in's return (https://<home>/signed-in) is the session module's own,
-// caught natively: never followed here. Anything else goes to expo-router as
-// is.
+// caught natively: never followed here. Anything else is ignored.
 export async function redirectSystemPath({
   path,
   initial,
@@ -27,17 +25,18 @@ export async function redirectSystemPath({
   path: string;
   initial: boolean;
 }): Promise<string | null> {
+  // The shell always starts at the home: followStartingLink follows the link
+  // from there, so back from an app returns to the home. Named by its group:
+  // an app's navigator has a `/` too.
+  if (initial) {
+    return "/(home)";
+  }
   if (path.startsWith(`https://${home}/signed-in`)) {
     return null;
   }
   const link = shellLink(path);
   if (link === undefined) {
-    return path;
-  }
-  // The shell always starts at the home: followStartingLink follows it from
-  // there, so back from an app returns to the home.
-  if (initial) {
-    return "/";
+    return null;
   }
   const [first, ...rest] = link.pathname.split("/");
   if (isAppId(first)) {
@@ -46,7 +45,7 @@ export async function redirectSystemPath({
     return null;
   }
   if (link.pathname === "reload") {
-    void router.reload();
+    void reloadShownScreen();
     return null;
   }
   if (!["sign-in", "sign-out"].includes(link.pathname)) {
@@ -73,40 +72,48 @@ export function followRoot(ref: typeof root): void {
   root = ref;
 }
 
-// One thing open at a time: the stack becomes the home and the link's route,
-// new each time, so what's open closes with its navigator and an app's is its
-// own. Under expo-router's own root route.
+// One thing open at a time: the stack becomes the home and what the link
+// opens, new each time, so what's open closes with its navigator and an app's
+// is its own. Backtick's own path is a screen on the home's navigator; an
+// app's, the first of a navigator of its own. Under expo-router's own root
+// route.
 function openOverHome(path: string[], query: string, app?: string): void {
   const state = root.getRootState().routes[0]!.state as NavigationState;
+  const home = state.routes[0]!;
   // A route's params are decoded, as a push leaves them.
-  const params = {
-    ...queryParams(query),
-    backtickPath: path.map(decodeURIComponent),
-  };
   const screen = {
     name: "[...backtickPath]",
-    params: app
-      ? { ...params, __backtick: JSON.stringify({ splash: true }) }
-      : params,
+    params: {
+      ...queryParams(query),
+      backtickPath: path.map(decodeURIComponent),
+    },
   };
-  const route = app
-    ? {
-        name: "(app)",
-        params: { __backtick: JSON.stringify({ app }) },
-        state: { index: 0, routes: [screen] },
-      }
-    : screen;
+  const routes = app
+    ? [
+        home,
+        {
+          name: "(app)",
+          key: `(app):${Date.now()}`,
+          params: { __backtick: app },
+          state: { index: 0, routes: [screen] },
+        },
+      ]
+    : [
+        {
+          ...home,
+          state: {
+            index: 1,
+            routes: [
+              (home.state as NavigationState).routes[0],
+              { ...screen, key: `screen:${Date.now()}` },
+            ],
+          },
+        },
+      ];
   root.dispatch({
     type: "RESET",
     target: state.key,
-    payload: {
-      ...state,
-      index: 1,
-      routes: [
-        state.routes[0],
-        { ...route, key: `${route.name}:${Date.now()}` },
-      ],
-    },
+    payload: { ...state, index: routes.length - 1, routes },
   });
 }
 

@@ -8,35 +8,29 @@ import {
   useState,
 } from "react";
 import { Pressable, StyleSheet, Text, useColorScheme } from "react-native";
-import { useFocusEffect, useRoute } from "expo-router";
+import { useFocusEffect, useUnstableGlobalHref } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ErrorBoundary, getErrorMessage } from "react-error-boundary";
 import { followStartingLink } from "./app/+native-intent";
+import { hrefOf, LoadedScreens } from "./AppLayout";
 import { savePreview } from "./preview";
-import { leftScreen } from "@backtickjs/router";
 import { fetchScreen, useInk, usePaper } from "./screens";
-import { ShellSplash } from "./ShellSplash";
 import { showing } from "./shown";
 import { isSignedIn } from "../modules/backtick-session/src";
 
-// `app`'s screen at `path`, from its server.
-// Backtick's home is the app null.
-export function ServerScreen({
-  app,
-  path,
-  initialScreen,
-}: {
-  app: string | null;
-  path: string;
-  // When a Link fetched it first.
-  initialScreen?: Promise<ReactNode>;
-}) {
-  const { key } = useRoute();
+// A route's screen: the one its app's layout fetched as it was navigated to,
+// or, when none was (the same path pushed again), its own.
+export function Document() {
+  const { app, loads, showing: shows } = use(LoadedScreens);
+  // What was on top as the route arrived is the route's own, for good.
+  const globalHref = useUnstableGlobalHref();
+  const [path] = useState(() => hrefOf(globalHref));
   // Held here, where nothing suspends, so the request outlives the render
   // that waits for it.
   const [screen, setScreen] = useState(
-    () => initialScreen ?? fetchScreen(app, path),
+    () => loads.get(path) ?? fetchScreen(app, path),
   );
+  useEffect(() => shows(path), [shows, path]);
   // The current screen stays until the new one has arrived.
   const reload = useCallback(
     (signal?: AbortSignal) => {
@@ -78,19 +72,16 @@ export function ServerScreen({
   useFocusEffect(
     useCallback(() => {
       void followStartingLink();
-      return showing(key, app, path, reload);
-    }, [key, app, path, reload]),
+      return showing(app, reload);
+    }, [app, reload]),
   );
-  useEffect(() => () => leftScreen(key), [key]);
 
   return (
     <ErrorBoundary
       resetKeys={[screen]}
       fallbackRender={({ error }) => <Failed error={error} retry={reload} />}
     >
-      <Suspense
-        fallback={app === null && path === "/" ? <ShellSplash /> : null}
-      >
+      <Suspense fallback={null}>
         <Screen screen={screen} />
       </Suspense>
     </ErrorBoundary>

@@ -2,7 +2,7 @@ import { type Bundle, modulesOf } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 import { getBacktickExtra } from "@backtickjs/expo";
 import Constants from "expo-constants";
-import { createContext, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { useColorScheme } from "react-native";
 import { keepManifest, type Manifest } from "./manifest";
 import { moduleMap } from "./moduleMap";
@@ -24,9 +24,6 @@ export function appPaper(manifest: Manifest | undefined): string {
 export function useInk(): string {
   return useColorScheme() === "dark" ? "#fafafa" : "#0e0e10";
 }
-
-// The app these screens are, or Backtick's (null).
-export const OpenApp = createContext<string | null>(null);
 
 // The modules this build carries, at the versions app.json's plugin records.
 const { installedPackages } = getBacktickExtra(Constants.expoConfig);

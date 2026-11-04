@@ -214,7 +214,4 @@ export const moduleMap = {
   get "@react-three/fiber/native"() {
     return require("@react-three/fiber/native");
   },
-  get "@backtickjs/router"() {
-    return require("@backtickjs/router");
-  },
 } satisfies Record<Module, unknown>;
