@@ -562,13 +562,18 @@ export async function Home(props: { user: string }) {
       );
     }
 
-    // Who's signed in, and signing out.
+    // Who's signed in, signing out, and deleting the account.
     function AccountSheet(props: { onClose: () => void }) {
       const { onClose } = props;
       const colors = $useColors();
       const signOut = () => {
         onClose();
         $Linking.openURL($shellURL("sign-out"));
+      };
+      // The shell asks first, deletes, and signs out.
+      const deleteAccount = () => {
+        onClose();
+        $Linking.openURL($shellURL("delete-account"));
       };
       return (
         <Sheet onClose={onClose}>
@@ -592,6 +597,11 @@ export async function Home(props: { user: string }) {
             </$View>
           </$View>
           <Button label="Sign out" kind="outlined" onPress={signOut} />
+          <Button
+            label="Delete account"
+            kind="danger"
+            onPress={deleteAccount}
+          />
         </Sheet>
       );
     }

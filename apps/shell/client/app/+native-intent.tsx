@@ -18,6 +18,8 @@ import { apps, home } from "../hosts";
 //                                    params go to auth.backtickjs.com as they
 //                                    are (`provider=google` goes straight there)
 //   backtick://sign-out              asks, then signs out
+//   backtick://delete-account        asks, then deletes the account and signs
+//                                    out
 //   backtick://reload                loads the screen on top again, in place
 //   backtick://<path>                Backtick's <path>
 // Sign-in's return (https://<home>/signed-in) is the session module's own,
@@ -52,26 +54,55 @@ export async function redirectSystemPath({
     void reloadShownScreen();
     return null;
   }
-  if (!["sign-in", "sign-out"].includes(link.pathname)) {
+  if (!["sign-in", "sign-out", "delete-account"].includes(link.pathname)) {
     openOverHome(link.pathname.split("/"), link.search);
     return null;
   }
   // Links that ask, never act on their own: any page or app can open one.
-  // Sign-in does something only while signed out, when no app can run; and
-  // signing out is confirmed first.
+  // Sign-in does something only while signed out, when no app can run;
+  // signing out and deleting the account are confirmed first.
   if (link.pathname === "sign-in") {
     if (!isSignedIn()) {
       signIn(Object.fromEntries(new URLSearchParams(link.search))).catch(
         (error: Error) => Alert.alert("Couldn't sign in", error.message),
       );
     }
-  } else {
+  } else if (link.pathname === "sign-out") {
     Alert.alert("Sign out of Backtick?", undefined, [
       { text: "Cancel", style: "cancel" },
       { text: "Sign out", style: "destructive", onPress: () => void signOut() },
     ]);
+  } else if (isSignedIn()) {
+    Alert.alert(
+      "Delete your Backtick account?",
+      "Your apps, their links and everything Backtick keeps for you are deleted now. This can't be undone.",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: () =>
+            void deleteAccount().catch((error: Error) =>
+              Alert.alert("Couldn't delete your account", error.message),
+            ),
+        },
+      ],
+    );
   }
   return null;
+}
+
+// The home's server deletes the account (the session attaches the home's
+// token), then the phone signs out: its session would fail at its next refresh
+// anyway, and the sign-in screen shows now.
+async function deleteAccount(): Promise<void> {
+  const response = await fetch(`https://${home}/account/delete`, {
+    method: "POST",
+  });
+  if (!response.ok) {
+    throw new Error(`The server answered ${response.status}. Try again.`);
+  }
+  await signOut();
 }
 
 let root: ReturnType<typeof useNavigationContainerRef>;

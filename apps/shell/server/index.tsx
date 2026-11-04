@@ -1,6 +1,6 @@
 import { backtick } from "@backtickjs/hono";
 import { Hono } from "hono";
-import { failed, supabase, userOf } from "./account.js";
+import { deleteAccount, failed, supabase, userOf } from "./account.js";
 import { Home } from "./Home.js";
 import { SignIn } from "./SignIn.js";
 import { Source } from "./Source.js";
@@ -47,6 +47,14 @@ app.post("/apps/:id/delete", async (context) => {
     throw failed(error);
   }
   return context.json({ deleted: data.length > 0 });
+});
+
+// Deleting the user's account and everything Backtick keeps for it, now. A
+// POST the shell makes itself once the user confirms in its own alert (the
+// `delete-account` link), then signs the phone out.
+app.post("/account/delete", async (context) => {
+  await deleteAccount(context.var.user);
+  return context.json({ deleted: true });
 });
 
 // An app's preview, captured on the phone a moment after it opens: kept in

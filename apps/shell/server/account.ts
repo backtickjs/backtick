@@ -40,6 +40,33 @@ export function supabase(): SupabaseClient {
   return client;
 }
 
+// Deletes the user's account and everything Backtick keeps for it, now: the
+// previews in the user's folder, which storage keeps apart from the database,
+// then the user, whose apps (and their versions), checks, devices, sessions
+// and assistants' consents go with it (`on delete cascade`).
+export async function deleteAccount(user: string): Promise<void> {
+  const previews = supabase().storage.from("previews");
+  for (;;) {
+    const { data, error } = await previews.list(user, { limit: 1000 });
+    if (error) {
+      throw failed(error);
+    }
+    if (data.length === 0) {
+      break;
+    }
+    const removed = await previews.remove(
+      data.map((file) => `${user}/${file.name}`),
+    );
+    if (removed.error) {
+      throw failed(removed.error);
+    }
+  }
+  const { error } = await supabase().auth.admin.deleteUser(user);
+  if (error) {
+    throw failed(error);
+  }
+}
+
 // Supabase's error isn't an `Error`, so its message would be lost.
 export function failed(error: { message: string }): Error {
   return new Error(`Supabase: ${error.message}`, { cause: error });
