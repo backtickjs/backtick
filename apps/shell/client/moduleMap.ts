@@ -1,9 +1,14 @@
-// What a screen may require, as your app imports it: the modules Expo Go
-// ships (apps/expo-go's package.json, SDK 58) that work alike on iOS and
-// Android with no keys or native setup, since what saves must run. Not
-// Reanimated: its worklets don't compile in scripts yet. Each is a getter, so
-// a module loads when a screen first requires it. The app sends your server
-// what it offers, at the versions it's built with.
+// What a screen may require, as your app imports it: the modules Expo Go ships
+// (on SDK 58, its package.json and every Expo module its Podfile links) that
+// need no keys, entitlements or store declarations, less Expo Go's own (expo,
+// expo-updates, expo-splash-screen, expo-dev-menu, expo-image-loader). Not
+// WebView: an app builds its screens natively. Not expo-intent-launcher: it
+// throws on iOS. Not @expo/ui's SwiftUI and Jetpack Compose entries: each works
+// on one platform, which a typecheck can't see. Not Reanimated: the worklets
+// plugin finds worklets by hook name, and a script's hooks are spliced, so a
+// saved animation would throw on the phone. Each is a getter, so a module loads
+// when a screen first requires it. The app sends your server what it offers, at
+// the versions it's built with.
 import type { Module } from "./modules";
 
 export const moduleMap = {
@@ -178,9 +183,6 @@ export const moduleMap = {
   get "expo-video"() {
     return require("expo-video");
   },
-  get "expo-video-thumbnails"() {
-    return require("expo-video-thumbnails");
-  },
   get "expo-web-browser"() {
     return require("expo-web-browser");
   },
@@ -213,5 +215,83 @@ export const moduleMap = {
   },
   get "@react-three/fiber/native"() {
     return require("@react-three/fiber/native");
+  },
+  get "expo-file-system"() {
+    return require("expo-file-system");
+  },
+  get "expo-keep-awake"() {
+    return require("expo-keep-awake");
+  },
+  get "@expo/ui"() {
+    return require("@expo/ui");
+  },
+  get "@expo/ui/community/datetime-picker"() {
+    return require("@expo/ui/community/datetime-picker");
+  },
+  get "@expo/ui/community/bottom-sheet"() {
+    return require("@expo/ui/community/bottom-sheet");
+  },
+  get "@expo/ui/community/segmented-control"() {
+    return require("@expo/ui/community/segmented-control");
+  },
+  get "@expo/ui/community/picker"() {
+    return require("@expo/ui/community/picker");
+  },
+  get "@expo/ui/community/slider"() {
+    return require("@expo/ui/community/slider");
+  },
+  get "@expo/ui/community/masked-view"() {
+    return require("@expo/ui/community/masked-view");
+  },
+  get "@expo/ui/community/menu"() {
+    return require("@expo/ui/community/menu");
+  },
+  get "@expo/ui/community/pager-view"() {
+    return require("@expo/ui/community/pager-view");
+  },
+  get "expo-blob"() {
+    return require("expo-blob");
+  },
+  get "expo-hinge"() {
+    return require("expo-hinge");
+  },
+  get "expo-live-photo"() {
+    return require("expo-live-photo");
+  },
+  get "expo-mesh-gradient"() {
+    return require("expo-mesh-gradient");
+  },
+  get "expo-navigation-bar"() {
+    return require("expo-navigation-bar");
+  },
+  get "expo-symbols"() {
+    return require("expo-symbols");
+  },
+  get "expo-symbols/androidWeights/thin"() {
+    return require("expo-symbols/androidWeights/thin");
+  },
+  get "expo-symbols/androidWeights/extraLight"() {
+    return require("expo-symbols/androidWeights/extraLight");
+  },
+  get "expo-symbols/androidWeights/light"() {
+    return require("expo-symbols/androidWeights/light");
+  },
+  get "expo-symbols/androidWeights/regular"() {
+    return require("expo-symbols/androidWeights/regular");
+  },
+  get "expo-symbols/androidWeights/medium"() {
+    return require("expo-symbols/androidWeights/medium");
+  },
+  get "expo-symbols/androidWeights/semiBold"() {
+    return require("expo-symbols/androidWeights/semiBold");
+  },
+  get "expo-symbols/androidWeights/bold"() {
+    return require("expo-symbols/androidWeights/bold");
+  },
+  get "expo-glass-effect"() {
+    return require("expo-glass-effect");
+  },
+  get "expo-checkbox"() {
+    return require("expo-checkbox");
   },
 } satisfies Record<Module, unknown>;
