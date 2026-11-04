@@ -45,7 +45,7 @@ app.get("/app/", async (context) =>
       title: "Backtick · Apps from your assistant, on your phone",
       description:
         "Ask Claude or ChatGPT for an app, and it runs natively on your" +
-        " phone, in Expo Go.",
+        " phone, in the Backtick app.",
     }),
   ),
 );

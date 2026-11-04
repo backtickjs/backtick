@@ -1,6 +1,6 @@
 {
   "cli": {
-    "appVersionSource": "local"
+    "appVersionSource": "remote"
   },
   "build": {
     "preview": {
@@ -22,6 +22,10 @@
       "env": {
         "ORG_GRADLE_PROJECT_reactNativeArchitectures": "arm64-v8a"
       }
+    },
+    "production": {
+      "channel": "production",
+      "autoIncrement": true
     }
   }
 }

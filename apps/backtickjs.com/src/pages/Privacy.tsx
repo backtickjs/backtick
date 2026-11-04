@@ -16,8 +16,8 @@ export const Privacy = cs`() => (
         <p>
           This policy covers Backtick's app builder: the service that lets an
           assistant such as Claude or ChatGPT make apps for you, and Backtick's
-          app that runs them on your phone, in Expo Go. It's run by
-          Jean-François Bisson. Questions and requests go to{" "}
+          app that runs them on your phone. It's run by Jean-François Bisson.
+          Questions and requests go to{" "}
           <a href={"mailto:" + $contact}>{$contact}</a>.
         </p>
 
