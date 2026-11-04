@@ -472,7 +472,7 @@ export async function Home(props: { user: string }) {
     function ConnectSheet(props: { onClose: () => void }) {
       const { onClose } = props;
       const colors = $useColors();
-      const server = "https://api.backtickjs.com/mcp";
+      const server = "https://mcp.backtickjs.com";
       const [copied, setCopied] = $useState(false);
       const steps = [
         "Open Claude's connectors.",

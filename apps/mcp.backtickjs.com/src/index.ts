@@ -1,5 +1,5 @@
-// api.backtickjs.com's Vercel Function, where Vercel looks for it: the MCP
-// endpoint the hosts connect to, and sign-in for it. Apps are answered at
+// mcp.backtickjs.com's Vercel Function, where Vercel looks for it: the MCP
+// endpoint the hosts connect to, at the root, and sign-in for it. Apps are answered at
 // their own hosts, <id>.backtickjs.app, by apps/backtickjs.app.
 import {
   createMcpHandler,
@@ -24,7 +24,7 @@ const mcp = createMcpHandler((context) => tools(ownerOf(context.authInfo)));
 // it.
 const hostnames = [
   ...localhostAllowedHostnames(),
-  "api.backtickjs.com",
+  "mcp.backtickjs.com",
   process.env.VERCEL_URL,
   process.env.VERCEL_BRANCH_URL,
   process.env.VERCEL_PROJECT_PRODUCTION_URL,
@@ -39,13 +39,10 @@ app.get(
   async (c) =>
     oauthMetadataResponse(c.req.raw, {
       oauthMetadata: await authorizationServer(),
-      resourceServerUrl: new URL("/mcp", c.req.url),
+      resourceServerUrl: new URL("/", c.req.url),
       resourceName: "Backtick",
     }) ?? c.notFound(),
 );
-
-// The website is backtickjs.com.
-app.get("/", (c) => c.redirect("https://backtickjs.com", 302));
 
 // Where Supabase sends a user to allow a host: Authentication → OAuth Server →
 // Authorization Path.
@@ -62,7 +59,7 @@ app.get(
 
 // Each request carries the user's access token. Without a valid one, a 401
 // that points at the documents above.
-app.all("/mcp", async (c) => {
+app.all("/", async (c) => {
   const rejected = hostHeaderValidationResponse(c.req.raw, hostnames);
   if (rejected !== undefined) {
     return rejected;
@@ -70,7 +67,7 @@ app.all("/mcp", async (c) => {
   const auth = await requireBearerAuth({
     verifier,
     resourceMetadataUrl: getOAuthProtectedResourceMetadataUrl(
-      new URL("/mcp", c.req.url),
+      new URL("/", c.req.url),
     ),
   })(c.req.raw);
   return auth instanceof Response

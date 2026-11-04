@@ -1,7 +1,14 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
+    "strict": true,
+    "paths": {
+      // Its "react-native" export is its source, which doesn't type-check
+      // against React Native 0.88; its published types do.
+      "react-native-view-shot": [
+        "./node_modules/react-native-view-shot/lib/index.d.ts"
+      ]
+    }
   },
   // The app; the server, in server/, has its own.
   "include": ["client"]

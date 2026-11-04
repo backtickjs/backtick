@@ -5,7 +5,7 @@ What runs Backtick, one folder per host, laid out as Vercel's own is: `vercel.co
 | Folder                                       | Serves                        | What it is                                                                                                                                                                                                          |
 | -------------------------------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`backtickjs.com`](backtickjs.com)           | `https://backtickjs.com`      | The website and docs, and the app builder's privacy policy. Built with Bun into static files for GitHub Pages.                                                                                                      |
-| [`api.backtickjs.com`](api.backtickjs.com)   | `https://api.backtickjs.com`  | The service: the MCP server Claude and ChatGPT connect to, sign-in for it, the build sandbox that checks apps and compiles their releases, the database's schema. Holds the secrets.                                |
+| [`mcp.backtickjs.com`](mcp.backtickjs.com)   | `https://mcp.backtickjs.com`  | The service: the MCP server Claude and ChatGPT connect to, sign-in for it, the build sandbox that checks apps and compiles their releases, the database's schema. Holds the secrets.                                |
 | [`auth.backtickjs.com`](auth.backtickjs.com) | `https://auth.backtickjs.com` | The Backtick app's sign-in: an OAuth 2.1 authorization server (PKCE, DPoP, tokens for one origin each) and the sign-in page.                                                                                        |
 | [`app.backtickjs.com`](app.backtickjs.com)   | `https://app.backtickjs.com`  | Backtick's own screens on the phone (sign-in, the app list), from `shell/server`.                                                                                                                                   |
 | [`backtickjs.app`](backtickjs.app)           | `https://<id>.backtickjs.app` | Each app at its own host, a Cloudflare Worker: its screens for the phone, each from the app's release in an isolate of its own, and a page to open it for a browser. Users' code runs here, so it holds no secrets. |
@@ -20,6 +20,6 @@ How a screen reaches the phone:
 phone ── GET https://app.backtickjs.com/ ─────────────────► app.backtickjs.com: Backtick's home (sign-in, your apps)
 phone ── GET https://<id>.backtickjs.app/day ─────────────► backtickjs.app (Cloudflare): the latest version from Supabase,
                                                              as the phone's user; its release answers /day in an isolate
-Claude ── /mcp ───────────────────────────────────────────► api.backtickjs.com: start_app, get_app, save_app (each save
+Claude ── MCP ────────────────────────────────────────────► mcp.backtickjs.com: start_app, get_app, save_app (each save
                                                              checks the app and stores its release in Supabase)
 ```

@@ -11,7 +11,7 @@ packages:
   # extension.
   - "apps/*"
   # Each user's sandbox, which the service installs on its own.
-  - "apps/api.backtickjs.com/sandbox"
+  - "apps/mcp.backtickjs.com/sandbox"
   - "tests"
   # A stand-in third-party library the tests bind to.
   - "tests/fixtures/*"

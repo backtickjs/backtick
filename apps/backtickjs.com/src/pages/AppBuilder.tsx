@@ -2,7 +2,7 @@ import { cs } from "@backtickjs/core";
 import { Layout } from "../components/Layout.js";
 import { Section } from "../components/Section.js";
 
-const connector = "https://api.backtickjs.com/mcp";
+const connector = "https://mcp.backtickjs.com";
 // Backtick's shell, published with EAS Update: Expo Go opens it.
 const shell =
   "exp://u.expo.dev/baed8ee5-a651-438c-999f-aff346fa0064?channel-name=production";

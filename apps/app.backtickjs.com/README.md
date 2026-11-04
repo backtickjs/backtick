@@ -8,7 +8,7 @@ The screens are written in [`apps/shell/server`](../shell/server), beside the ph
 | ---- | ----------------------------------------------------------------- |
 | `/`  | Sign-in, for a request without a token; the user's apps, with one |
 
-The phone's access token is checked here: issued by `auth.backtickjs.com` (against the key it publishes), for this origin, and not expired. The home then reads and changes the user's apps with Supabase's service role, always filtered by that user. It's first party, so it holds that key, as `api.backtickjs.com` does.
+The phone's access token is checked here: issued by `auth.backtickjs.com` (against the key it publishes), for this origin, and not expired. The home then reads and changes the user's apps with Supabase's service role, always filtered by that user. It's first party, so it holds that key, as `mcp.backtickjs.com` does.
 
 It also serves what lets only the Backtick app receive its sign-in: `/.well-known/apple-app-site-association`, `/.well-known/assetlinks.json`, and `/signed-in` for a browser without the app.
 

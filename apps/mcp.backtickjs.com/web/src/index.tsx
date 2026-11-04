@@ -1,4 +1,4 @@
-// api.backtickjs.com's pages as HTML, for the function to serve. Each is the same
+// mcp.backtickjs.com's pages as HTML, for the function to serve. Each is the same
 // for every visitor, so it's bundled once per instance.
 import { cs } from "@backtickjs/core";
 import { Consent } from "./Consent.tsx";

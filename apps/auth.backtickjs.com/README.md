@@ -1,6 +1,6 @@
 # auth.backtickjs.com
 
-The Backtick app's sign-in, at `https://auth.backtickjs.com`: an OAuth 2.1 authorization server whose one client is the Backtick app. One of the hosts in `apps/` (see `apps/README.md`). It signs nothing for assistants: Claude and ChatGPT sign in through Supabase's own OAuth server, behind `api.backtickjs.com`.
+The Backtick app's sign-in, at `https://auth.backtickjs.com`: an OAuth 2.1 authorization server whose one client is the Backtick app. One of the hosts in `apps/` (see `apps/README.md`). It signs nothing for assistants: Claude and ChatGPT sign in through Supabase's own OAuth server, behind `mcp.backtickjs.com`.
 
 | Standard                                       | Here                                                                                                                                                                                     |
 | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -21,7 +21,7 @@ The Backtick app's sign-in, at `https://auth.backtickjs.com`: an OAuth 2.1 autho
 | The browser         | `web/src/`                      | The sign-in page, email only (Apple and Google are the app's own buttons, which skip it): an email, then the six-digit code Supabase sends to it, new accounts included. No passwords anywhere. No Supabase in the browser: the server signs in with Supabase Auth itself (`src/function/supabaseAuth.ts`), with PKCE for Apple and Google. Its one script, Solid included, is a static file built at `pnpm build` (`scripts/page.ts`), under a strict content security policy |
 | This machine        | `scripts/`, `test/`             | `pnpm dev`, and the tests                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
-The tables (`authorization_codes`, `devices`, `dpop_proofs`) are in the Supabase project's migrations, in `apps/api.backtickjs.com/supabase/migrations`.
+The tables (`authorization_codes`, `devices`, `dpop_proofs`) are in the Supabase project's migrations, in `apps/mcp.backtickjs.com/supabase/migrations`.
 
 ## Setting up
 

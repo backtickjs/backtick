@@ -26,7 +26,236 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  apps/api.backtickjs.com:
+  apps/app.backtickjs.com:
+    dependencies:
+      hono:
+        specifier: ^4.13.13
+        version: 4.13.13
+      shell:
+        specifier: 1.0.0
+        version: link:../shell
+    devDependencies:
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  apps/auth.backtickjs.com:
+    dependencies:
+      '@backtickjs/bundler':
+        specifier: 0.2.8
+        version: link:../../packages/bundler
+      '@backtickjs/core':
+        specifier: 0.2.8
+        version: link:../../packages/core
+      '@backtickjs/jsx-solid':
+        specifier: 0.2.8
+        version: link:../../packages/jsx-solid
+      '@backtickjs/tsc':
+        specifier: 0.2.8
+        version: link:../../packages/tsc
+      '@hono/node-server':
+        specifier: ^2.1.4
+        version: 2.1.4(hono@4.13.13)
+      '@supabase/supabase-js':
+        specifier: 2.117.2
+        version: 2.117.2
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
+      hono:
+        specifier: ^4.13.13
+        version: 4.13.13
+      jose:
+        specifier: 6.2.12
+        version: 6.2.12
+      solid-js:
+        specifier: 1.9.17
+        version: 1.9.17
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+    devDependencies:
+      '@backtickjs/tspatch-plugin':
+        specifier: 0.2.8
+        version: link:../../packages/tspatch-plugin
+      esbuild:
+        specifier: 0.28.0
+        version: 0.28.0
+      ts-patch:
+        specifier: 4.0.1
+        version: 4.0.1
+
+  apps/backtickjs.app:
+    dependencies:
+      hono:
+        specifier: ^4.13.13
+        version: 4.13.13
+      jose:
+        specifier: 6.2.12
+        version: 6.2.12
+      qrcode:
+        specifier: 1.5.4
+        version: 1.5.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+    devDependencies:
+      '@backtickjs/prettier-plugin':
+        specifier: 0.2.8
+        version: link:../../packages/prettier-plugin
+      '@cloudflare/workers-types':
+        specifier: 5.20261018.1
+        version: 5.20261018.1
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
+      '@types/qrcode':
+        specifier: ^1.5.6
+        version: 1.5.6
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      wrangler:
+        specifier: 4.151.2
+        version: 4.151.2(@cloudflare/workers-types@5.20261018.1)(@types/node@25.9.1)
+
+  apps/backtickjs.com:
+    dependencies:
+      '@backtickjs/bun-plugin':
+        specifier: 0.2.8
+        version: link:../../packages/bun-plugin
+      '@backtickjs/bundler':
+        specifier: 0.2.8
+        version: link:../../packages/bundler
+      '@backtickjs/core':
+        specifier: 0.2.8
+        version: link:../../packages/core
+      '@backtickjs/expo':
+        specifier: 0.2.8
+        version: link:../../packages/expo
+      '@backtickjs/hono':
+        specifier: 0.2.8
+        version: link:../../packages/hono
+      '@backtickjs/jsx-solid':
+        specifier: 0.2.8
+        version: link:../../packages/jsx-solid
+      '@backtickjs/vscode-extension':
+        specifier: 0.2.8
+        version: link:../vscode-extension
+      '@shikijs/colorized-brackets':
+        specifier: ^4.5.0
+        version: 4.5.0
+      '@tailwindcss/node':
+        specifier: ^4.3.3
+        version: 4.3.3
+      '@tailwindcss/oxide':
+        specifier: ^4.3.3
+        version: 4.3.3
+      diff:
+        specifier: ^9.0.0
+        version: 9.0.0
+      github-slugger:
+        specifier: ^2.0.0
+        version: 2.0.0
+      markdown-it:
+        specifier: ^15.0.2
+        version: 15.0.2
+      markdown-it-anchor:
+        specifier: ^10.0.0
+        version: 10.0.0(@types/markdown-it@14.2.0)(markdown-it@15.0.2)
+      shiki:
+        specifier: ^4.5.0
+        version: 4.5.0
+      solid-js:
+        specifier: 1.9.17
+        version: 1.9.17
+      tailwindcss:
+        specifier: ^4.3.3
+        version: 4.3.3
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+    devDependencies:
+      '@backtickjs/jsx-react':
+        specifier: 0.2.8
+        version: link:../../packages/jsx-react
+      '@backtickjs/node-plugin':
+        specifier: 0.2.8
+        version: link:../../packages/node-plugin
+      '@backtickjs/prettier-plugin':
+        specifier: 0.2.8
+        version: link:../../packages/prettier-plugin
+      '@backtickjs/tsc':
+        specifier: 0.2.8
+        version: link:../../packages/tsc
+      '@hono/node-server':
+        specifier: ^2.1.4
+        version: 2.1.4(hono@4.13.13)
+      '@testing-library/react':
+        specifier: ^16.3.3
+        version: 16.3.3(@testing-library/dom@10.4.2)(@types/react-dom@19.2.7(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@testing-library/user-event':
+        specifier: ^14.6.7
+        version: 14.6.7(@testing-library/dom@10.4.2)
+      '@types/bun':
+        specifier: ^1.3.14
+        version: 1.3.14
+      '@types/markdown-it':
+        specifier: ^14.2.0
+        version: 14.2.0
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
+      '@types/react':
+        specifier: 19.2.18
+        version: 19.2.18
+      '@types/react-dom':
+        specifier: 19.2.7
+        version: 19.2.7(@types/react@19.2.18)
+      expo-constants:
+        specifier: ~57.0.20
+        version: 57.0.21(expo@58.0.17)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))
+      expo-haptics:
+        specifier: ~57.0.3
+        version: 57.0.3(expo@58.0.17)
+      expo-linear-gradient:
+        specifier: ~57.0.2
+        version: 57.0.2(expo@58.0.17)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
+      global-jsdom:
+        specifier: ^30.0.0
+        version: 30.0.0(jsdom@30.0.1(@noble/hashes@1.8.0))
+      hono:
+        specifier: ^4.13.13
+        version: 4.13.13
+      jsdom:
+        specifier: ^30.0.1
+        version: 30.0.1(@noble/hashes@1.8.0)
+      nodemon:
+        specifier: ^3.1.14
+        version: 3.1.14
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      react:
+        specifier: 19.2.3
+        version: 19.2.3
+      react-dom:
+        specifier: 19.2.3
+        version: 19.2.3(react@19.2.3)
+      react-native:
+        specifier: 0.86.3
+        version: 0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3)
+      react-native-web:
+        specifier: 0.21.3
+        version: 0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+
+  apps/mcp.backtickjs.com:
     dependencies:
       '@backtickjs/bundler':
         specifier: 0.2.8
@@ -96,7 +325,7 @@ importers:
         specifier: 4.0.1
         version: 4.0.1
 
-  apps/api.backtickjs.com/sandbox:
+  apps/mcp.backtickjs.com/sandbox:
     dependencies:
       '@backtickjs/bundler':
         specifier: 0.2.8
@@ -360,235 +589,6 @@ importers:
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
-
-  apps/app.backtickjs.com:
-    dependencies:
-      hono:
-        specifier: ^4.13.13
-        version: 4.13.13
-      shell:
-        specifier: 1.0.0
-        version: link:../shell
-    devDependencies:
-      '@types/node':
-        specifier: ^25.9.1
-        version: 25.9.1
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  apps/auth.backtickjs.com:
-    dependencies:
-      '@backtickjs/bundler':
-        specifier: 0.2.8
-        version: link:../../packages/bundler
-      '@backtickjs/core':
-        specifier: 0.2.8
-        version: link:../../packages/core
-      '@backtickjs/jsx-solid':
-        specifier: 0.2.8
-        version: link:../../packages/jsx-solid
-      '@backtickjs/tsc':
-        specifier: 0.2.8
-        version: link:../../packages/tsc
-      '@hono/node-server':
-        specifier: ^2.1.4
-        version: 2.1.4(hono@4.13.13)
-      '@supabase/supabase-js':
-        specifier: 2.117.2
-        version: 2.117.2
-      '@types/node':
-        specifier: ^25.9.1
-        version: 25.9.1
-      hono:
-        specifier: ^4.13.13
-        version: 4.13.13
-      jose:
-        specifier: 6.2.12
-        version: 6.2.12
-      solid-js:
-        specifier: 1.9.17
-        version: 1.9.17
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-    devDependencies:
-      '@backtickjs/tspatch-plugin':
-        specifier: 0.2.8
-        version: link:../../packages/tspatch-plugin
-      esbuild:
-        specifier: 0.28.0
-        version: 0.28.0
-      ts-patch:
-        specifier: 4.0.1
-        version: 4.0.1
-
-  apps/backtickjs.app:
-    dependencies:
-      hono:
-        specifier: ^4.13.13
-        version: 4.13.13
-      jose:
-        specifier: 6.2.12
-        version: 6.2.12
-      qrcode:
-        specifier: 1.5.4
-        version: 1.5.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-    devDependencies:
-      '@backtickjs/prettier-plugin':
-        specifier: 0.2.8
-        version: link:../../packages/prettier-plugin
-      '@cloudflare/workers-types':
-        specifier: 5.20261018.1
-        version: 5.20261018.1
-      '@types/node':
-        specifier: ^25.9.1
-        version: 25.9.1
-      '@types/qrcode':
-        specifier: ^1.5.6
-        version: 1.5.6
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      wrangler:
-        specifier: 4.151.2
-        version: 4.151.2(@cloudflare/workers-types@5.20261018.1)(@types/node@25.9.1)
-
-  apps/backtickjs.com:
-    dependencies:
-      '@backtickjs/bun-plugin':
-        specifier: 0.2.8
-        version: link:../../packages/bun-plugin
-      '@backtickjs/bundler':
-        specifier: 0.2.8
-        version: link:../../packages/bundler
-      '@backtickjs/core':
-        specifier: 0.2.8
-        version: link:../../packages/core
-      '@backtickjs/expo':
-        specifier: 0.2.8
-        version: link:../../packages/expo
-      '@backtickjs/hono':
-        specifier: 0.2.8
-        version: link:../../packages/hono
-      '@backtickjs/jsx-solid':
-        specifier: 0.2.8
-        version: link:../../packages/jsx-solid
-      '@backtickjs/vscode-extension':
-        specifier: 0.2.8
-        version: link:../vscode-extension
-      '@shikijs/colorized-brackets':
-        specifier: ^4.5.0
-        version: 4.5.0
-      '@tailwindcss/node':
-        specifier: ^4.3.3
-        version: 4.3.3
-      '@tailwindcss/oxide':
-        specifier: ^4.3.3
-        version: 4.3.3
-      diff:
-        specifier: ^9.0.0
-        version: 9.0.0
-      github-slugger:
-        specifier: ^2.0.0
-        version: 2.0.0
-      markdown-it:
-        specifier: ^15.0.2
-        version: 15.0.2
-      markdown-it-anchor:
-        specifier: ^10.0.0
-        version: 10.0.0(@types/markdown-it@14.2.0)(markdown-it@15.0.2)
-      shiki:
-        specifier: ^4.5.0
-        version: 4.5.0
-      solid-js:
-        specifier: 1.9.17
-        version: 1.9.17
-      tailwindcss:
-        specifier: ^4.3.3
-        version: 4.3.3
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-    devDependencies:
-      '@backtickjs/jsx-react':
-        specifier: 0.2.8
-        version: link:../../packages/jsx-react
-      '@backtickjs/node-plugin':
-        specifier: 0.2.8
-        version: link:../../packages/node-plugin
-      '@backtickjs/prettier-plugin':
-        specifier: 0.2.8
-        version: link:../../packages/prettier-plugin
-      '@backtickjs/tsc':
-        specifier: 0.2.8
-        version: link:../../packages/tsc
-      '@hono/node-server':
-        specifier: ^2.1.4
-        version: 2.1.4(hono@4.13.13)
-      '@testing-library/react':
-        specifier: ^16.3.3
-        version: 16.3.3(@testing-library/dom@10.4.2)(@types/react-dom@19.2.7(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@testing-library/user-event':
-        specifier: ^14.6.7
-        version: 14.6.7(@testing-library/dom@10.4.2)
-      '@types/bun':
-        specifier: ^1.3.14
-        version: 1.3.14
-      '@types/markdown-it':
-        specifier: ^14.2.0
-        version: 14.2.0
-      '@types/node':
-        specifier: ^25.9.1
-        version: 25.9.1
-      '@types/react':
-        specifier: 19.2.18
-        version: 19.2.18
-      '@types/react-dom':
-        specifier: 19.2.7
-        version: 19.2.7(@types/react@19.2.18)
-      expo-constants:
-        specifier: ~57.0.20
-        version: 57.0.21(expo@58.0.17)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))
-      expo-haptics:
-        specifier: ~57.0.3
-        version: 57.0.3(expo@58.0.17)
-      expo-linear-gradient:
-        specifier: ~57.0.2
-        version: 57.0.2(expo@58.0.17)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
-      global-jsdom:
-        specifier: ^30.0.0
-        version: 30.0.0(jsdom@30.0.1(@noble/hashes@1.8.0))
-      hono:
-        specifier: ^4.13.13
-        version: 4.13.13
-      jsdom:
-        specifier: ^30.0.1
-        version: 30.0.1(@noble/hashes@1.8.0)
-      nodemon:
-        specifier: ^3.1.14
-        version: 3.1.14
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      react:
-        specifier: 19.2.3
-        version: 19.2.3
-      react-dom:
-        specifier: 19.2.3
-        version: 19.2.3(react@19.2.3)
-      react-native:
-        specifier: 0.86.3
-        version: 0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3)
-      react-native-web:
-        specifier: 0.21.3
-        version: 0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
 
   apps/shell:
     dependencies:
@@ -10327,7 +10327,7 @@ snapshots:
       postcss: 8.5.28
       resolve-from: 5.0.0
     optionalDependencies:
-      expo: 58.0.17(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.25)(react-dom@19.3.0(react@19.3.0))(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native-webview@14.0.1(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
+      expo: 58.0.17(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.25)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native-webview@14.0.1(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -12712,7 +12712,7 @@ snapshots:
       react-refresh: 0.14.2
     optionalDependencies:
       '@babel/runtime': 7.29.7
-      expo: 58.0.17(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.25)(react-dom@19.3.0(react@19.3.0))(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native-webview@14.0.1(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
+      expo: 58.0.17(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.25)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native-webview@14.0.1(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.0(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)
     transitivePeerDependencies:
       - '@babel/core'
       - supports-color

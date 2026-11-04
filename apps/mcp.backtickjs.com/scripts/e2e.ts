@@ -7,7 +7,7 @@ import { modules } from "shell/modules";
 import { starter } from "../src/function/starter.ts";
 import { testUserToken } from "./testUser.ts";
 
-const base = process.env.BASE ?? "https://api.backtickjs.com";
+const base = process.env.BASE ?? "https://mcp.backtickjs.com";
 const token = await testUserToken();
 // What the phone sends: each of its modules at its package's version, which
 // the sandbox installs too.
@@ -23,7 +23,7 @@ const phone = Object.fromEntries(
 
 async function call(name: string, args: object) {
   const started = performance.now();
-  const response = await fetch(`${base}/mcp`, {
+  const response = await fetch(`${base}/`, {
     method: "POST",
     headers: {
       authorization: `Bearer ${token}`,

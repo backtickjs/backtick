@@ -1,6 +1,6 @@
-# api.backtickjs.com
+# mcp.backtickjs.com
 
-Backtick's service, at `https://api.backtickjs.com`: the server behind the app builder. One of the hosts in `apps/` (see `apps/README.md`); the phone's home is `app.backtickjs.com`, and each app's own host is `<id>.backtickjs.app`. A chat app's model (Claude, ChatGPT) calls its MCP tools to make an app for the user's phone, writing Backtick code; this server type-checks the code in a sandbox and stores each clean version in Supabase. It's private and deploys to Vercel as the project `api-backtickjs-com`, linked from this folder.
+Backtick's service, at `https://mcp.backtickjs.com`: the server behind the app builder. One of the hosts in `apps/` (see `apps/README.md`); the phone's home is `app.backtickjs.com`, and each app's own host is `<id>.backtickjs.app`. A chat app's model (Claude, ChatGPT) calls its MCP tools to make an app for the user's phone, writing Backtick code; this server type-checks the code in a sandbox and stores each clean version in Supabase. It's private and deploys to Vercel as the project `mcp-backtickjs-com`, linked from this folder.
 
 ## Where the code runs
 
@@ -54,13 +54,13 @@ Vercel stores sensitive variables for production only, so `SUPABASE_SERVICE_ROLE
 
 ## Signing in
 
-A host signs its user in with OAuth, and Supabase is the authorization server: `/mcp` answers a request without a valid token with a 401 that points to `/.well-known/oauth-protected-resource/mcp`, which names Supabase. A host registers itself with Supabase, sends the user to sign in and allow it, and sends the user's access token with each call. The function checks the token against Supabase's public keys, and its user owns the apps saved with it.
+A host signs its user in with OAuth, and Supabase is the authorization server: The endpoint answers a request without a valid token with a 401 that points to `/.well-known/oauth-protected-resource`, which names Supabase. A host registers itself with Supabase, sends the user to sign in and allow it, and sends the user's access token with each call. The function checks the token against Supabase's public keys, and its user owns the apps saved with it.
 
 Supabase is set up for it in its dashboard:
 
 - Authentication → Sign In / Providers → Google, with a client from Google Cloud whose redirect URI is `https://<ref>.supabase.co/auth/v1/callback`.
 - Authentication → OAuth Server: enabled, with dynamic registration, and the authorization path `/oauth/consent`, the page `src/function/consent.ts` serves.
-- Authentication → URL Configuration: the Site URL `https://api.backtickjs.com`, and the redirect URLs `https://api.backtickjs.com/oauth/consent` and `https://auth.backtickjs.com/authorize**` (the Backtick app's sign-in, `apps/auth.backtickjs.com`). Supabase sends users to the Site URL's consent page wherever the MCP server runs, a laptop included.
+- Authentication → URL Configuration: the Site URL `https://mcp.backtickjs.com`, and the redirect URLs `https://mcp.backtickjs.com/oauth/consent` and `https://auth.backtickjs.com/authorize**` (the Backtick app's sign-in, `apps/auth.backtickjs.com`). Supabase sends users to the Site URL's consent page wherever the MCP server runs, a laptop included.
 
 In Claude.ai, the connector signs in with **Register automatically**: Supabase doesn't read Claude's published identity (CIMD).
 
@@ -70,15 +70,15 @@ In Claude.ai, the connector signs in with **Register automatically**: Supabase d
 pnpm dev
 ```
 
-It serves the function at `http://localhost:3000/mcp`, against the real sandbox and the real database. To use it from Claude Code, which signs in through Supabase on first use:
+It serves the function at `http://localhost:3000`, against the real sandbox and the real database. To use it from Claude Code, which signs in through Supabase on first use:
 
 ```sh
-claude mcp add --transport http backtick http://localhost:3000/mcp
+claude mcp add --transport http backtick http://localhost:3000
 ```
 
 `pnpm test` checks the imports, the typecheck, the releases and the sandbox's server on this machine, with no Vercel or Supabase calls.
 
-`node --env-file=.env.local scripts/e2e.ts` runs the whole flow against `https://api.backtickjs.com`, or `BASE`: the tools as a host calls them, then a screen as a phone fetches it, through `https://<id>.backtickjs.app`. It signs in as `test@backtickjs.app` through `scripts/testUser.ts`: users sign in with Google only, with the Email provider off, so the test user signs in with a one-time link Supabase's admin API makes, which only the service role's key can ask for. The first link makes the user.
+`node --env-file=.env.local scripts/e2e.ts` runs the whole flow against `https://mcp.backtickjs.com`, or `BASE`: the tools as a host calls them, then a screen as a phone fetches it, through `https://<id>.backtickjs.app`. It signs in as `test@backtickjs.app` through `scripts/testUser.ts`: the test user signs in with a one-time link Supabase's admin API makes, sending no email, which only the service role's key can ask for. The first link makes the user.
 
 ## Changing the schema
 
@@ -122,8 +122,8 @@ The sandbox installs `@backtickjs/*` from npm, so a change to them or to `sandbo
 
    ```sh
    cd ../..
-   VERCEL_ORG_ID=$(node -p 'require("./apps/api.backtickjs.com/.vercel/project.json").orgId') \
-   VERCEL_PROJECT_ID=$(node -p 'require("./apps/api.backtickjs.com/.vercel/project.json").projectId') \
+   VERCEL_ORG_ID=$(node -p 'require("./apps/mcp.backtickjs.com/.vercel/project.json").orgId') \
+   VERCEL_PROJECT_ID=$(node -p 'require("./apps/mcp.backtickjs.com/.vercel/project.json").projectId') \
    vercel deploy --prod
    ```
 

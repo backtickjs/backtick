@@ -2,5 +2,5 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "hono",
   "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
-  "buildCommand": "cd ../.. && pnpm exec turbo run build --filter=api.backtickjs.com..."
+  "buildCommand": "cd ../.. && pnpm exec turbo run build --filter=mcp.backtickjs.com..."
 }
