@@ -30,33 +30,45 @@ const { installedPackages } = getBacktickExtra(Constants.expoConfig);
 const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
 
 // Where an app's screen at `path` comes from: the app's own host, and the very
-// same path. Backtick's home, the app when none is open, has its own.
-export function screenUrl(app: string | null, path: string): string {
-  return `https://${app === null ? home : app + "." + apps}${path}`;
+// same path.
+export function appUrl(app: string, path: string): string {
+  return `https://${app}.${apps}${path}`;
 }
 
-// The app's screen at `path`, bundled by its server for this phone's modules,
-// and run. The session's token, when there is one, is attached below
-// JavaScript. A failure carries the server's reason: a module this build lacks
-// names it. Any bundle runs, whatever its status: an app's not-found screen is
-// a screen.
-export async function fetchScreen(
-  app: string | null,
+// Backtick's home screen at `path`, the screens when no app is open.
+export async function fetchHome(
   path: string,
   signal?: AbortSignal,
 ): Promise<ReactNode> {
-  const response = await fetch(screenUrl(app, path), {
-    signal,
-    headers: { "x-backtick-modules": modules },
-  });
+  return run(await request(`https://${home}${path}`, signal));
+}
+
+// The app's screen at `path`.
+export async function fetchApp(
+  app: string,
+  path: string,
+  signal?: AbortSignal,
+): Promise<ReactNode> {
+  const response = await request(appUrl(app, path), signal);
+  keepManifest(app, response.headers.get("x-backtick-manifest"));
+  return run(response);
+}
+
+// A screen, bundled by its server for this phone's modules. The session's
+// token, when there is one, is attached below JavaScript.
+function request(url: string, signal?: AbortSignal): Promise<Response> {
+  return fetch(url, { signal, headers: { "x-backtick-modules": modules } });
+}
+
+// A screen's bundle, run, or the server's reason it isn't one: a module this
+// build lacks names it. Any bundle runs, whatever its status: an app's
+// not-found screen is a screen.
+async function run(response: Response): Promise<ReactNode> {
   const body = await response.text();
   if (!response.headers.get("content-type")?.startsWith("text/javascript")) {
     throw new Error(
       `The screen couldn't be opened (${response.status}): ${body}`,
     );
-  }
-  if (app !== null) {
-    keepManifest(app, response.headers.get("x-backtick-manifest"));
   }
   return execRoot(body as Bundle<ReactNode>, moduleMap);
 }

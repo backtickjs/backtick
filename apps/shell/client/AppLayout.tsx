@@ -9,7 +9,7 @@ import {
   useState,
 } from "react";
 import { Progress } from "./Progress";
-import { fetchScreen } from "./screens";
+import { fetchApp, fetchHome } from "./screens";
 
 // A screen on its way.
 interface Load {
@@ -29,7 +29,9 @@ export class Screens {
   constructor(readonly app: string | null) {}
 
   fetch(href: string, signal?: AbortSignal): Promise<ReactNode> {
-    return fetchScreen(this.app, href, signal);
+    return this.app === null
+      ? fetchHome(href, signal)
+      : fetchApp(this.app, href, signal);
   }
 
   // What a navigation to `href` waits for: nothing if a route shows it

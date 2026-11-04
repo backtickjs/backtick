@@ -1,5 +1,5 @@
 import { useManifest } from "./manifest";
-import { appPaper, screenUrl } from "./screens";
+import { appPaper, appUrl } from "./screens";
 import { SplashView } from "./SplashView";
 
 // An app's splash, while its first screen is fetched. From the manifest the
@@ -15,7 +15,7 @@ export function AppSplash({ app }: { app: string }) {
       icon={
         icon === undefined
           ? undefined
-          : { uri: new URL(icon, screenUrl(app, "/")).href }
+          : { uri: new URL(icon, appUrl(app, "/")).href }
       }
     />
   );
