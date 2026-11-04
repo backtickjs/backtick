@@ -278,6 +278,31 @@ describe("the bare domain", () => {
     );
   });
 
+  it("vouches for the Backtick app on iOS, at the bare domain and every app's host", async () => {
+    for (const host of [
+      "backtickjs.app",
+      "d023f4c5-b6c2-4c5f-8749-bd415de07f84.backtickjs.app",
+    ]) {
+      const answer = await app.request(
+        `https://${host}/.well-known/apple-app-site-association`,
+      );
+      assert.equal(answer.status, 200, host);
+      assert.match(
+        answer.headers.get("content-type") ?? "",
+        /^application\/json/,
+      );
+      const { applinks } = await answer.json<{
+        applinks: {
+          details: { appIDs: string[]; components: object[] }[];
+        };
+      }>();
+      assert.deepEqual(applinks.details[0]!.appIDs, [
+        "BM4485734W.com.backtickjs.app",
+      ]);
+      assert.deepEqual(applinks.details[0]!.components, [{ "/": "*" }]);
+    }
+  });
+
   it("isn't an app at a host that isn't one", async () => {
     const answer = await app.request("https://www.backtickjs.app/");
     assert.equal(answer.status, 302);

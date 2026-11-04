@@ -23,6 +23,25 @@ type Env = {
 
 const app = new Hono<Env>();
 
+// The Backtick app claims every app's host for universal links
+// (`applinks:*.backtickjs.app` in its entitlement), so a link to
+// <id>.backtickjs.app opens the app itself, as App Links do on Android
+// (assetlinks.json below). Every host serves the file, the bare domain and
+// each app's: Apple's docs have each host serve its own. Before an app's
+// host is handed to the app, below.
+app.get("/.well-known/apple-app-site-association", (c) =>
+  c.json({
+    applinks: {
+      details: [
+        {
+          appIDs: ["BM4485734W.com.backtickjs.app"],
+          components: [{ "/": "*" }],
+        },
+      ],
+    },
+  }),
+);
+
 // An app's own host, matched before the bare domain's routes below.
 app.use("*", async (c, next) => {
   const id = /^([0-9a-f-]{36})\.backtickjs\.app$/.exec(
