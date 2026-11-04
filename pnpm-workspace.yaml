@@ -54,3 +54,8 @@ packageExtensions:
     peerDependenciesMeta:
       "@types/react":
         optional: true
+# `expo-updates` has `expo-dev-client` as an optional peer, which pnpm installs
+# anyway; prebuild then applies its plugin to the shell, which doesn't use it,
+# adding the dev launcher's local network string to the store build.
+overrides:
+  "expo-updates>expo-dev-client": "-"

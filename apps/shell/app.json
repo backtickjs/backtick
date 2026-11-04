@@ -9,7 +9,26 @@
     "icon": "./assets/icon.png",
     "ios": {
       "bundleIdentifier": "com.backtickjs.app",
-      "appleTeamId": "BM4485734W"
+      "appleTeamId": "BM4485734W",
+      "infoPlist": {
+        "NSCalendarsFullAccessUsageDescription": "Allow the apps you make in Backtick to access your calendar",
+        "NSCalendarsUsageDescription": "Allow the apps you make in Backtick to access your calendar",
+        "NSCameraUsageDescription": "Allow Backtick to access your camera to take photos",
+        "NSContactsUsageDescription": "Allow the apps you make in Backtick to access your contacts",
+        "NSFaceIDUsageDescription": "Allow the apps you make in Backtick to use Face ID",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Allow the apps you make in Backtick to use your location",
+        "NSLocationAlwaysUsageDescription": "Allow the apps you make in Backtick to use your location",
+        "NSLocationTemporaryUsageDescriptionDictionary": {
+          "ExpoLocationFullAccuracy": "Allow the apps you make in Backtick to use your precise location"
+        },
+        "NSLocationWhenInUseUsageDescription": "The app shows you the current location on a map and makes it available when you request it",
+        "NSMicrophoneUsageDescription": "Allow the apps you make in Backtick to access your microphone",
+        "NSMotionUsageDescription": "Allow the apps you make in Backtick to access your device accelerometer",
+        "NSPhotoLibraryAddUsageDescription": "Give the apps you make in Backtick permission to save photos",
+        "NSPhotoLibraryUsageDescription": "Give the apps you make in Backtick permission to access your photos",
+        "NSRemindersFullAccessUsageDescription": "Allow the apps you make in Backtick to access your reminders",
+        "NSRemindersUsageDescription": "Allow the apps you make in Backtick to access your reminders"
+      }
     },
     "android": {
       "package": "com.backtickjs.app",
