@@ -19,7 +19,6 @@
     "@backtickjs/hono": "0.2.8",
     "@backtickjs/jsx-react": "0.2.8",
     "@backtickjs/node-plugin": "0.2.8",
-    "@backtickjs/router": "0.2.8",
     "@backtickjs/tsc": "0.2.8",
     "@expo/vector-icons": "15.1.1",
     "@hono/node-server": "^2.1.4",
