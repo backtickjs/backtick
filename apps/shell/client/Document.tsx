@@ -5,46 +5,60 @@ import {
   use,
   useCallback,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import { Pressable, StyleSheet, Text, useColorScheme } from "react-native";
-import { useFocusEffect, useUnstableGlobalHref } from "expo-router";
+import { useFocusEffect, useIsFocused, useRoute } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ErrorBoundary, getErrorMessage } from "react-error-boundary";
 import { followStartingLink } from "./app/+native-intent";
-import { hrefOf, LoadedScreens } from "./AppLayout";
+import { hrefOfRoute, LoadedScreens } from "./AppLayout";
 import { savePreview } from "./preview";
-import { fetchScreen, useInk, usePaper } from "./screens";
+import { useInk, usePaper } from "./screens";
 import { showing } from "./shown";
 import { isSignedIn } from "../modules/backtick-session/src";
 
-// A route's screen: the one its app's layout fetched as it was navigated to,
-// or, when none was (the same path pushed again), its own.
+// A route's screen: the one its navigation waited for. A route mounted
+// hidden (`<Link prefetch>`) shows nothing until it comes on top, and then
+// takes the screen fetched for the navigation that put it there, whichever
+// route expo-router reuses for it.
 export function Document() {
-  const { app, loads, showing: shows } = use(LoadedScreens);
-  // What was on top as the route arrived is the route's own, for good.
-  const globalHref = useUnstableGlobalHref();
-  const [path] = useState(() => hrefOf(globalHref));
+  const screens = use(LoadedScreens);
+  const { app } = screens;
+  // The route's own href, from its params: a route's never changes.
+  const path = hrefOfRoute(useRoute().params);
+  const focused = useIsFocused();
   // Held here, where nothing suspends, so the request outlives the render
   // that waits for it.
-  const [screen, setScreen] = useState(
-    () => loads.get(path) ?? fetchScreen(app, path),
+  const [screen, setScreen] = useState<Promise<ReactNode> | null>(() =>
+    focused ? screens.screenFor(path) : null,
   );
-  useEffect(() => shows(path), [shows, path]);
+  if (focused && screen === null) {
+    setScreen(screens.screenFor(path));
+  }
+  // Shown once focused, until it unmounts.
+  const shown = useRef<() => void>(undefined);
+  useEffect(() => {
+    if (focused && shown.current === undefined) {
+      shown.current = screens.showing(path);
+    }
+  }, [focused, screens, path]);
+  useEffect(() => () => shown.current?.(), []);
   // The current screen stays until the new one has arrived.
   const reload = useCallback(
     (signal?: AbortSignal) => {
-      const next = fetchScreen(app, path, signal);
+      const next = screens.fetch(path, signal);
       startTransition(() => setScreen(next));
       return next;
     },
-    [app, path],
+    [screens, path],
   );
   // An app's first screen, once it's had a moment to draw (a game's first
   // frame included), is its preview on the home's card. Never in the way:
   // a capture that fails is only logged.
   useEffect(() => {
-    if (app === null || path !== "/" || !isSignedIn()) {
+    if (screen === null || app === null || path !== "/" || !isSignedIn()) {
       return;
     }
     let timer: ReturnType<typeof setTimeout> | undefined;
@@ -72,10 +86,13 @@ export function Document() {
   useFocusEffect(
     useCallback(() => {
       void followStartingLink();
-      return showing(app, reload);
-    }, [app, reload]),
+      return showing(reload);
+    }, [reload]),
   );
 
+  if (screen === null) {
+    return null;
+  }
   return (
     <ErrorBoundary
       resetKeys={[screen]}

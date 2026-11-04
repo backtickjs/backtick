@@ -9,14 +9,13 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { unstable_useIsNavigating } from "expo-router";
 import { manifestOf } from "./manifest";
 import { useInk } from "./screens";
-import { shownApp } from "./shown";
 
 const delay = 300;
 const minimum = 500;
 
 // A progress bar along the top. Only once a navigation has taken
 // a moment, and then long enough to read as a bar, not a flicker.
-export function Progress() {
+export function Progress({ app }: { app: string | null }) {
   const navigating = unstable_useIsNavigating();
   const [shownAt, setShownAt] = useState<number | null>(null);
   useEffect(() => {
@@ -33,10 +32,10 @@ export function Progress() {
       return () => clearTimeout(wait);
     }
   }, [navigating, shownAt]);
-  return shownAt === null ? null : <Bar />;
+  return shownAt === null ? null : <Bar app={app} />;
 }
 
-function Bar() {
+function Bar({ app }: { app: string | null }) {
   const ink = useInk();
   const { top } = useSafeAreaInsets();
   const { width } = useWindowDimensions();
@@ -65,7 +64,7 @@ function Bar() {
         {
           top,
           width: width / 3,
-          backgroundColor: manifestOf(shownApp())?.theme_color ?? ink,
+          backgroundColor: manifestOf(app)?.theme_color ?? ink,
           transform: [{ translateX }],
         },
       ]}

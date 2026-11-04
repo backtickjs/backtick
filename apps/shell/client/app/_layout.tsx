@@ -3,7 +3,6 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { onSessionChange } from "../../modules/backtick-session/src";
-import { Progress } from "../Progress";
 import { usePaper } from "../screens";
 import { followRoot } from "./+native-intent";
 
@@ -34,7 +33,6 @@ export default function Layout() {
           contentStyle: { backgroundColor: paper },
         }}
       />
-      <Progress />
       <StatusBar style="auto" />
     </GestureHandlerRootView>
   );
