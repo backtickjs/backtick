@@ -10,6 +10,10 @@
     "ios": {
       "bundleIdentifier": "com.backtickjs.app",
       "appleTeamId": "BM4485734W",
+      "associatedDomains": ["applinks:*.backtickjs.app"],
+      "config": {
+        "usesNonExemptEncryption": false
+      },
       "infoPlist": {
         "NSCalendarsFullAccessUsageDescription": "Allow the apps you make in Backtick to access your calendar",
         "NSCalendarsUsageDescription": "Allow the apps you make in Backtick to access your calendar",
