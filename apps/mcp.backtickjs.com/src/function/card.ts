@@ -12,8 +12,8 @@ export const cardScriptOrigin = "https://cdn.jsdelivr.net";
 const cardScript = `${cardScriptOrigin}/npm/@modelcontextprotocol/ext-apps@2.0.3/dist/src/app-with-deps.js`;
 
 // What the card shows, beside what the model reads: the app's link, which
-// opens the Backtick app on Android (it claims every app's host) and otherwise
-// the app's page, which sends an iPhone on to Expo Go.
+// opens the Backtick app where it claims every app's host, and otherwise the
+// app's page, which offers to open it in Backtick or to get Backtick.
 export type Card = {
   title: string;
   version: number;
@@ -137,8 +137,6 @@ export const cardHtml = `<!doctype html>
       const element = document.querySelector(".card");
       let card;
       // Only the label: the link is the same everywhere.
-      const iOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
-
       app.ontoolresult = (result) => {
         card = result.isError ? undefined : result._meta?.["backtickjs.com/card"];
         if (card === undefined) {
@@ -149,9 +147,6 @@ export const cardHtml = `<!doctype html>
         element.querySelector(".version").textContent =
           "Version " + card.version + " · published";
         element.querySelector(".qr").innerHTML = card.qr;
-        element.querySelector("button").textContent = iOS
-          ? "Open in Expo Go"
-          : "Open in Backtick";
         element.hidden = false;
       };
 
