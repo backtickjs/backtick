@@ -1,5 +1,5 @@
-// The screen on top: its app, for the commands only Backtick's own screens may
-// send, and for the `reload` link, which loads it again in place.
+// The screen on top: its app, for the progress bar's colour, and the `reload`
+// link, which loads it again in place.
 let shown: {
   app: string | null;
   reload: (signal?: AbortSignal) => Promise<unknown>;
@@ -17,10 +17,6 @@ export function showing(
       shown = null;
     }
   };
-}
-
-export function backtickShown(): boolean {
-  return shown !== null && shown.app === null;
 }
 
 export function shownApp(): string | null {

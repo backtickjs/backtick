@@ -22,7 +22,7 @@ Links into the shell (`client/app/+native-intent.tsx`) are the Backtick app's ow
 | Link                             | Does                                                            |
 | -------------------------------- | --------------------------------------------------------------- |
 | `backtick://<id>/<path>`         | Closes what's open and opens the app at the path, over the home |
-| `backtick://sign-in`, `sign-out` | Signs in or out, from Backtick's home only                      |
+| `backtick://sign-in`, `sign-out` | Signs in while signed out; asks, then signs out                 |
 | `backtick://reload`              | Loads the screen on top again, in place                         |
 
 Sign-in and the session are the native module's (`modules/backtick-session`): sign-in in the system's sign-in browser at `auth.backtickjs.com` (OAuth 2.1 for native apps, with PKCE and DPoP), a key that never leaves the phone, and access tokens attached to requests to Backtick's own hosts below JavaScript. Its return, `https://app.backtickjs.com/signed-in`, is caught by the module, never by these links.
