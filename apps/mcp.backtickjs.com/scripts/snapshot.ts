@@ -22,6 +22,9 @@ const sandbox = await Sandbox.create({
   timeout: 10 * 60 * 1000,
   // npm's registry, for the install; the sandboxes made from it deny all.
   networkPolicy: "allow-all",
+  // Only the snapshot is kept: a persistent sandbox's storage counts against
+  // the plan's limit after it stops.
+  persistent: false,
 });
 try {
   await run(sandbox, {
