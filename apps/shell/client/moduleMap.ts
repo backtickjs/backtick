@@ -7,7 +7,9 @@
 // on one platform, which a typecheck can't see. Reanimated without worklets in
 // scripts: the worklets plugin finds them by hook name, and a script's hooks
 // are spliced, so its CSS animations, transitions and layout animations work
-// and `useAnimatedStyle` doesn't. Each is a getter, so a module loads when a
+// and `useAnimatedStyle` doesn't; save_app refuses its worklet APIs
+// (apps/mcp.backtickjs.com/src/function/diagnostics/
+// unsupported-reanimated-api.ts). Each is a getter, so a module loads when a
 // screen first requires it. The app sends your server what it offers, at the
 // versions it's built with.
 import type { Module } from "./modules";

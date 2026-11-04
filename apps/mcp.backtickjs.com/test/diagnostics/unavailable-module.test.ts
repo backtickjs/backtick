@@ -1,26 +1,19 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import {
-  phoneModules,
-  phoneVersions,
-  unavailableImports,
-} from "../src/function/imports.ts";
+import ts from "typescript";
+import { unavailableModule } from "../../src/function/diagnostics/unavailable-module.ts";
 
-describe("an app's imports", () => {
-  it("name each phone module's exact version, for the model to write against", () => {
-    for (const specifier of phoneModules) {
-      assert.match(
-        phoneVersions[specifier] ?? "",
-        /^\d+\.\d+\.\d+$/,
-        specifier,
-      );
-    }
-    // a subpath is its package's
-    assert.equal(phoneVersions["react/jsx-runtime"], phoneVersions["react"]);
-  });
+// What the check refuses in `code`, as save_app parses it.
+function refusals(file: string, code: string): string[] {
+  return unavailableModule(
+    ts,
+    ts.createSourceFile(file, code, ts.ScriptTarget.Latest, true),
+  );
+}
 
+describe("unavailable-module", () => {
   it("refuse a client import the phone doesn't provide, where it is", async () => {
-    const errors = await unavailableImports(
+    const errors = refusals(
       "App.tsx",
       [
         'import { cs } from "@backtickjs/core";',
@@ -35,7 +28,7 @@ describe("an app's imports", () => {
   });
 
   it("refuse a server import the server doesn't have, the phone's packages included", async () => {
-    const errors = await unavailableImports(
+    const errors = refusals(
       "App.tsx",
       [
         'import { z } from "zod";',
@@ -50,7 +43,7 @@ describe("an app's imports", () => {
   });
 
   it("accept what each side has, subpaths and type-only imports included", async () => {
-    const errors = await unavailableImports(
+    const errors = refusals(
       "App.tsx",
       [
         'import { Hono } from "hono";',

@@ -2,8 +2,8 @@
 // JavaScript as node-plugin compiles it here, then bundled with the server
 // packages it imports into one minified module: frozen as it was checked, so
 // nothing Backtick upgrades later changes it. save_app has refused imports
-// the server doesn't have (imports.ts). Static only: the file's code doesn't
-// run.
+// the server doesn't have (src/function/diagnostics/unavailable-module.ts).
+// Static only: the file's code doesn't run.
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join, relative } from "node:path";

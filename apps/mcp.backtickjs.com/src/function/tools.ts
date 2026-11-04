@@ -10,12 +10,8 @@ import { waitUntil } from "@vercel/functions";
 import * as z from "zod";
 import { applyEdits } from "./applyEdits.ts";
 import { card, cardHtml, cardScriptOrigin, cardUri } from "./card.ts";
-import {
-  phoneModules,
-  phoneVersions,
-  serverModules,
-  unavailableImports,
-} from "./imports.ts";
+import { diagnose } from "./diagnostics/index.ts";
+import { phoneModules, phoneVersions, serverModules } from "./modules.ts";
 import { checkInSandbox, snapshotId, typecheckInSandbox } from "./sandbox.ts";
 import { starter } from "./starter.ts";
 import {
@@ -210,7 +206,13 @@ export function tools(owner: string): McpServer {
     code: string,
   ): Promise<CallToolResult> {
     const started = performance.now();
-    const unprovided = await unavailableImports("App.tsx", code);
+    // What save_app's own rules refuse (diagnostics/), before the sandbox
+    // checks the rest. TypeScript loads here, not as the function starts.
+    const { default: ts } = await import("typescript");
+    const unprovided = diagnose(
+      ts,
+      ts.createSourceFile("App.tsx", code, ts.ScriptTarget.Latest, true),
+    );
     // A check that fails (a sandbox that didn't answer, even asked again) is
     // a failed save like any other: recorded with its source, to reproduce,
     // and told to the model, to try again.
