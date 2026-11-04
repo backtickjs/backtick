@@ -4,11 +4,12 @@
 // expo-updates, expo-splash-screen, expo-dev-menu, expo-image-loader). Not
 // WebView: an app builds its screens natively. Not expo-intent-launcher: it
 // throws on iOS. Not @expo/ui's SwiftUI and Jetpack Compose entries: each works
-// on one platform, which a typecheck can't see. Not Reanimated: the worklets
-// plugin finds worklets by hook name, and a script's hooks are spliced, so a
-// saved animation would throw on the phone. Each is a getter, so a module loads
-// when a screen first requires it. The app sends your server what it offers, at
-// the versions it's built with.
+// on one platform, which a typecheck can't see. Reanimated without worklets in
+// scripts: the worklets plugin finds them by hook name, and a script's hooks
+// are spliced, so its CSS animations, transitions and layout animations work
+// and `useAnimatedStyle` doesn't. Each is a getter, so a module loads when a
+// screen first requires it. The app sends your server what it offers, at the
+// versions it's built with.
 import type { Module } from "./modules";
 
 export const moduleMap = {
@@ -293,5 +294,11 @@ export const moduleMap = {
   },
   get "expo-checkbox"() {
     return require("expo-checkbox");
+  },
+  get "react-native-reanimated"() {
+    return require("react-native-reanimated");
+  },
+  get "react-native-worklets"() {
+    return require("react-native-worklets");
   },
 } satisfies Record<Module, unknown>;

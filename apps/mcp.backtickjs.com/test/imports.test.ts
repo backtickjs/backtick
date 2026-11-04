@@ -24,13 +24,13 @@ describe("an app's imports", () => {
       "App.tsx",
       [
         'import { cs } from "@backtickjs/core";',
-        'import Animated from "react-native-reanimated" with { backtick: "client" };',
+        'import { WebView } from "react-native-webview" with { backtick: "client" };',
       ].join("\n"),
     );
     assert.equal(errors.length, 1);
     assert.match(
       errors[0]!,
-      /^App\.tsx\(2,22\): error: The phone doesn't provide "react-native-reanimated"\./,
+      /^App\.tsx\(2,25\): error: The phone doesn't provide "react-native-webview"\./,
     );
   });
 

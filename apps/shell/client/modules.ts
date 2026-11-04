@@ -96,6 +96,8 @@ export const modules = [
   "expo-symbols/androidWeights/bold",
   "expo-glass-effect",
   "expo-checkbox",
+  "react-native-reanimated",
+  "react-native-worklets",
 ] as const;
 
 export type Module = (typeof modules)[number];
