@@ -1,18 +1,25 @@
-// The pages' CSS: one card on a quiet background, in light and dark.
+// The page's CSS, in backtickjs.com's look, as the Backtick app's sign-in page
+// (apps/auth.backtickjs.com) has it: its ink and paper, light and dark, and
+// its pill buttons.
 export const style = `
-:root { color-scheme: light dark; --fg: #17201b; --muted: #64706a; --bg: #f3f5f2; --card: #fff; --accent: #1f7a55; }
-@media (prefers-color-scheme: dark) { :root { --fg: #eaf0ec; --muted: #94a39b; --bg: #0f1412; --card: #18201c; --accent: #3dbe86; } }
-body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.5 system-ui, sans-serif; }
-#app { min-height: 100vh; display: grid; place-items: center; }
-main { width: min(100% - 32px, 640px); background: var(--card); border-radius: 12px; padding: 24px; margin: 16px 0; box-sizing: border-box; }
-h1 { font-size: 22px; margin: 0 0 8px; }
-h2 { font-size: 17px; margin: 24px 0 8px; }
-p, li { color: var(--muted); }
-p { margin: 0 0 16px; }
-a { color: var(--accent); }
-.buttons { display: flex; gap: 8px; }
-button { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid var(--muted); background: none; color: var(--fg); font: inherit; cursor: pointer; }
-.stack { display: grid; gap: 8px; margin-bottom: 16px; }
-input { padding: 12px; border-radius: 8px; border: 1px solid var(--muted); background: none; color: var(--fg); font: inherit; }
-button.allow { background: var(--accent); border-color: var(--accent); color: #fff; }
+:root { color-scheme: light dark; --ink: #0e0e10; --paper: #ffffff; --muted: #6b6b76; --line: #e4e4e7; --danger: #dc2626; }
+@media (prefers-color-scheme: dark) { :root { --ink: #fafafa; --paper: #0a0a0c; --muted: #a1a1aa; --line: #26262b; --danger: #f87171; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.5 Inter, "Helvetica Neue", Helvetica, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+#app { min-height: 100dvh; display: grid; place-items: center; padding: 32px 24px; }
+main { width: 100%; max-width: 380px; display: flex; flex-direction: column; gap: 12px; }
+.wordmark { width: 150px; height: auto; margin: 0 auto 20px; }
+h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; text-align: center; margin: 0 0 12px; }
+.message { color: var(--danger); text-align: center; margin: 0 0 4px; font-size: 15px; }
+.pill { display: flex; align-items: center; justify-content: center; gap: 10px; height: 52px; border-radius: 999px; border: 1px solid var(--ink); background: none; color: var(--ink); font-family: inherit; font-size: 16px; font-weight: 600; line-height: 1; text-decoration: none; cursor: pointer; transition: opacity 0.15s; }
+.pill.solid { background: var(--ink); color: var(--paper); }
+.pill:active { opacity: 0.8; }
+form { display: flex; flex-direction: column; gap: 12px; }
+input { height: 52px; padding: 0 20px; border-radius: 999px; border: 1px solid var(--line); background: none; color: var(--ink); font: inherit; outline: none; }
+input:focus { border-color: var(--ink); }
+input::placeholder { color: var(--muted); }
+.lede { color: var(--muted); text-align: center; margin: -4px 0 12px; font-size: 15px; }
+input.code { text-align: center; font-size: 22px; letter-spacing: 0.3em; font-variant-numeric: tabular-nums; }
+.other { color: var(--muted); text-align: center; font-size: 15px; margin-top: 8px; background: none; border: none; font-family: inherit; cursor: pointer; }
+.or { color: var(--muted); text-align: center; font-size: 14px; margin: 4px 0; }
 `;

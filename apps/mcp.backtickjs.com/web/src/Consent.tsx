@@ -12,6 +12,7 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
   const supabase = $createClient(props.url, props.publishableKey);
   const id = new URLSearchParams(window.location.search).get("authorization_id");
   const [message, setMessage] = $createSignal("Loading…");
+  const [error, setError] = $createSignal("");
   const [step, setStep] = $createSignal<"loading" | "sign-in" | "code" | "asking">(
     "loading",
   );
@@ -25,13 +26,12 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
     }
     const { data: { session } } = await supabase.auth.getSession();
     if (session === null) {
-      setMessage("Sign in with the account you use in the Backtick app.");
       setStep("sign-in");
       return;
     }
     const { data, error } = await supabase.auth.oauth.getAuthorizationDetails(id);
     if (error) {
-      setMessage(error.message);
+      setError(error.message);
       return;
     }
     // Allowed before: Supabase already has the answer.
@@ -54,7 +54,7 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
       options: { redirectTo: window.location.href },
     });
     if (error) {
-      setMessage(error.message);
+      setError(error.message);
     }
   }
 
@@ -64,10 +64,10 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
       email: email().trim(),
     });
     if (error) {
-      setMessage("Couldn't send a code just now. Try again in a minute.");
+      setError("Couldn't send a code just now. Try again in a minute.");
       return;
     }
-    setMessage("Enter the six-digit code we sent to " + email().trim() + ".");
+    setError("");
     setStep("code");
   }
 
@@ -95,10 +95,11 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
           })
         : undefined;
       if (review === undefined || review.error) {
-        setMessage("That code didn't work. Check it, or ask for a new one.");
+        setError("That code didn't work. Check it, or ask for a new one.");
         return;
       }
     }
+    setError("");
     setStep("loading");
     await consent();
   }
@@ -108,65 +109,84 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
       ? await supabase.auth.oauth.approveAuthorization(id!)
       : await supabase.auth.oauth.denyAuthorization(id!);
     if (error) {
-      setMessage(error.message);
+      setError(error.message);
     }
   }
 
-  consent().catch((error: Error) => setMessage(error.message));
+  consent().catch((failure: Error) => setError(failure.message));
 
   return (
     <main>
-      <h1>Connect to Backtick</h1>
-      <p>{message()}</p>
+      <img class="wordmark" src="/wordmark.svg" alt="Backtick" />
       {step() === "sign-in" ? (
         <>
-          <div class="stack">
-            <button onClick={() => withProvider("apple")}>
-              Continue with Apple
-            </button>
-            <button onClick={() => withProvider("google")}>
-              Continue with Google
-            </button>
-          </div>
-          <form class="stack" onSubmit={sendCode}>
+          <h1>Connect to Backtick</h1>
+          <p class="lede">Sign in with the account you use in the Backtick app.</p>
+          {error() ? <p class="message">{error()}</p> : null}
+          <button class="pill" onClick={() => withProvider("apple")}>
+            Continue with Apple
+          </button>
+          <button class="pill" onClick={() => withProvider("google")}>
+            Continue with Google
+          </button>
+          <p class="or">or</p>
+          <form onSubmit={sendCode}>
             <input
               type="email"
               autocomplete="email"
-              placeholder="Email"
+              placeholder="you@example.com"
               required
               value={email()}
               onInput={(event) => setEmail(event.currentTarget.value)}
             />
-            <button type="submit">Continue with email</button>
+            <button class="pill solid" type="submit">
+              Continue with email
+            </button>
           </form>
         </>
-      ) : null}
-      {step() === "code" ? (
-        <form class="stack" onSubmit={checkCode}>
-          <input
-            inputmode="numeric"
-            autocomplete="one-time-code"
-            placeholder="Code"
-            required
-            value={code()}
-            onInput={(event) => setCode(event.currentTarget.value)}
-          />
-          <button type="submit" class="allow">
-            Sign in
-          </button>
-          <button type="button" onClick={() => setStep("sign-in")}>
+      ) : step() === "code" ? (
+        <>
+          <h1>Check your email</h1>
+          <p class="lede">Enter the six-digit code we sent to {email().trim()}.</p>
+          {error() ? <p class="message">{error()}</p> : null}
+          <form onSubmit={checkCode}>
+            <input
+              class="code"
+              inputmode="numeric"
+              autocomplete="one-time-code"
+              maxlength="7"
+              placeholder="000000"
+              required
+              value={code()}
+              onInput={(event) => setCode(event.currentTarget.value)}
+            />
+            <button class="pill solid" type="submit">
+              Continue
+            </button>
+          </form>
+          <button class="other" onClick={() => setStep("sign-in")}>
             Use a different email
           </button>
-        </form>
-      ) : null}
-      {step() === "asking" ? (
-        <div class="buttons">
-          <button onClick={() => decide(false)}>Deny</button>
-          <button class="allow" onClick={() => decide(true)}>
+        </>
+      ) : step() === "asking" ? (
+        <>
+          <h1>Connect to Backtick</h1>
+          <p class="lede">{message()}</p>
+          {error() ? <p class="message">{error()}</p> : null}
+          <button class="pill solid" onClick={() => decide(true)}>
             Allow
           </button>
-        </div>
-      ) : null}
+          <button class="pill" onClick={() => decide(false)}>
+            Deny
+          </button>
+        </>
+      ) : (
+        <>
+          <h1>Connect to Backtick</h1>
+          <p class="lede">{message()}</p>
+          {error() ? <p class="message">{error()}</p> : null}
+        </>
+      )}
     </main>
   );
 }`;
