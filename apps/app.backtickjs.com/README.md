@@ -16,13 +16,14 @@ It also serves what lets only the Backtick app receive its sign-in: `/.well-know
 
 A Vercel project with this folder as its root directory, the domain `app.backtickjs.com`, and these variables:
 
-| Variable                    | What it is                                                                 |
-| --------------------------- | -------------------------------------------------------------------------- |
-| `SUPABASE_URL`              | The project's URL, `https://<ref>.supabase.co`                             |
-| `SUPABASE_SERVICE_ROLE_KEY` | Supabase's service role key. Secret                                        |
-| `BACKTICK_AUTH_ORIGIN`      | `https://auth.backtickjs.com`, whose tokens it accepts                     |
-| `BACKTICK_HOME_ORIGIN`      | `https://app.backtickjs.com`, the audience its tokens must name            |
-| `APPLE_TEAM_ID`             | The Apple team the Backtick app is signed by, for the iOS association file |
+| Variable                    | What it is                                                                                                                           |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `SUPABASE_URL`              | The project's URL, `https://<ref>.supabase.co`                                                                                       |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase's service role key. Secret                                                                                                  |
+| `BACKTICK_AUTH_ORIGIN`      | `https://auth.backtickjs.com`, whose tokens it accepts                                                                               |
+| `BACKTICK_HOME_ORIGIN`      | `https://app.backtickjs.com`, the audience its tokens must name                                                                      |
+| `APPLE_TEAM_ID`             | The Apple team the Backtick app is signed by, for the iOS association file                                                           |
+| `CRON_SECRET`               | Random. Vercel Cron sends it to `/cron/erase-deleted-apps`, which erases apps deleted 30 days ago with their previews, daily. Secret |
 
 It's the Vercel project `app-backtickjs-com`, linked from this folder, and not connected to GitHub: it's deployed from this machine. Vercel builds it from the repo's root, as a monorepo: the project's root directory is this folder, `vercel.json` installs the workspace (`pnpm install` at the root) and builds what this project depends on (`turbo run build --filter=<project>...`). The root's `.vercelignore` keeps this machine's secrets and build output out of the upload. Deploy from the root, naming the project by its ids:
 

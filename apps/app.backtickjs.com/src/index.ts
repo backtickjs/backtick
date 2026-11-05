@@ -2,7 +2,7 @@
 // the shell's server (`shell/screens`), at their own paths; and what lets only
 // the Backtick app receive its sign-in, at `/signed-in`.
 import { Hono } from "hono";
-import { app as screens } from "shell/screens";
+import { eraseDeletedApps, app as screens } from "shell/screens";
 
 const app = new Hono();
 
@@ -67,6 +67,19 @@ app.get("/signed-in", (c) => {
     200,
     headers,
   );
+});
+
+// Vercel Cron's daily call, with the project's `CRON_SECRET` as its bearer
+// token: erases what was deleted 30 days ago. Without the secret set, refused.
+app.get("/cron/erase-deleted-apps", async (c) => {
+  const secret = process.env.CRON_SECRET;
+  if (
+    secret === undefined ||
+    c.req.header("authorization") !== `Bearer ${secret}`
+  ) {
+    return c.text("Unauthorized", 401);
+  }
+  return c.json({ erased: await eraseDeletedApps() });
 });
 
 app.route("/", screens);

@@ -150,7 +150,8 @@ export const Privacy = cs`() => (
         <ul>
           <li>
             <strong>Delete an app</strong> in Backtick. It disappears from
-            Backtick right away, and we erase it permanently after 30 days.
+            Backtick right away, and we erase it permanently, with its preview,
+            after 30 days.
           </li>
           <li>
             <strong>Delete your account</strong> in Backtick: open your account

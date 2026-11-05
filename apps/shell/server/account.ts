@@ -67,6 +67,43 @@ export async function deleteAccount(user: string): Promise<void> {
   }
 }
 
+// Erases the apps their owners deleted more than 30 days ago: their previews,
+// which storage keeps apart from the database and only its API deletes, then
+// the apps, whose versions go with them (`on delete cascade`). Previews
+// first, so an app whose preview couldn't go stays, for the next run. Daily,
+// from app.backtickjs.com's cron; a run takes up to 1,000, the next the rest.
+export async function eraseDeletedApps(): Promise<number> {
+  const expired = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+  const { data, error } = await supabase()
+    .from("apps")
+    .select("id, owner_id")
+    .lt("deleted_at", expired.toISOString())
+    .limit(1000);
+  if (error) {
+    throw failed(error);
+  }
+  if (data.length === 0) {
+    return 0;
+  }
+  const removed = await supabase()
+    .storage.from("previews")
+    .remove(data.map((app) => `${app.owner_id}/${app.id}.jpg`));
+  if (removed.error) {
+    throw failed(removed.error);
+  }
+  const erased = await supabase()
+    .from("apps")
+    .delete()
+    .in(
+      "id",
+      data.map((app) => app.id),
+    );
+  if (erased.error) {
+    throw failed(erased.error);
+  }
+  return data.length;
+}
+
 // Supabase's error isn't an `Error`, so its message would be lost.
 export function failed(error: { message: string }): Error {
   return new Error(`Supabase: ${error.message}`, { cause: error });

@@ -5,6 +5,8 @@ import { Home } from "./Home.js";
 import { SignIn } from "./SignIn.js";
 import { Source } from "./Source.js";
 
+export { eraseDeletedApps } from "./account.js";
+
 // Backtick's own screens, sign-in's included, served at app.backtickjs.com,
 // for the user the phone's access token names.
 export const app = new Hono<{ Variables: { user: string } }>();
@@ -33,8 +35,9 @@ app.get("/source/:id", (context) =>
   ),
 );
 
-// Deleting one of the user's apps, from the home's own sheet: hidden at once,
-// erased after 30 days. A POST, so no link can do it.
+// Deleting one of the user's apps, from the home's own sheet: gone from
+// Backtick at once, and erased with its preview after 30 days
+// (`eraseDeletedApps`). A POST, so no link can do it.
 app.post("/apps/:id/delete", async (context) => {
   const { data, error } = await supabase()
     .from("apps")
