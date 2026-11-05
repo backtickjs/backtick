@@ -46,7 +46,6 @@ const CopyMarkdown = cs`(props: { path: string }) => {
     <button
       class="cursor-pointer rounded-full border border-line bg-paper px-3.5 py-1.5 text-sm font-medium transition hover:border-react/40"
       onclick={copy}
-      data-umami-event="copy-markdown"
     >
       {copied() ? "Copied" : "Copy as Markdown"}
     </button>

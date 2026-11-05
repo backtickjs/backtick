@@ -26,7 +26,6 @@ export const QuickStart = cs`() => {
       <button
         class="flex-none cursor-pointer rounded-full border border-ink bg-ink px-3.5 py-2 font-sans text-sm font-medium text-paper sm:px-4 transition hover:opacity-90"
         onclick={copy}
-        data-umami-event="copy-command"
       >
         {copied() ? "Copied" : "Copy"}
       </button>

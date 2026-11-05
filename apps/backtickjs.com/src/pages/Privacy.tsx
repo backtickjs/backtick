@@ -94,7 +94,9 @@ export const Privacy = cs`() => (
           <li>
             <strong>Vercel</strong> runs our websites, our sign-in service, and
             the service your assistant connects to, which checks your apps'
-            code.
+            code. It also counts visits to our websites, without cookies and
+            without identifying you: which page, where from, and the kind of
+            device and browser. The Backtick app has no analytics.
           </li>
           <li>
             <strong>Cloudflare</strong> runs your apps' servers when you open
@@ -113,11 +115,6 @@ export const Privacy = cs`() => (
             <strong>The assistant you connect</strong>, such as Claude, reads
             and changes your apps on your behalf, with the access you allowed.
             What it does with your conversations is covered by its own policy.
-          </li>
-          <li>
-            <strong>Umami</strong> counts visits to our websites, without
-            cookies and without identifying you. The Backtick app has no
-            analytics.
           </li>
         </ul>
         <p>

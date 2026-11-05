@@ -6,12 +6,9 @@ export const Button = cs`(props: {
   href: string;
   solid?: boolean;
   label: string;
-  // The name Umami counts a click under.
-  event: string;
 }) => (
   <a
     href={props.href}
-    data-umami-event={props.event}
     class={
       "inline-flex items-center gap-2 rounded-full border border-ink px-[22px] py-[13px] text-[15px] font-semibold no-underline transition hover:-translate-y-px hover:shadow-lg " +
       (props.solid ? "bg-ink text-paper" : "text-ink")
