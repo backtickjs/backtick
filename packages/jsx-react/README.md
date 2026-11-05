@@ -96,8 +96,8 @@ const { code } = bundle.generate({ format: "es" });
 - [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): the `cs` tag
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): builds bundles
 - [`@backtickjs/jsx-solid`](https://github.com/backtickjs/backtick/tree/main/packages/jsx-solid): Solid's JSX
-- [Thinking in Backtick](https://backtickjs.com/docs/thinking-in-backtick/)
-- [How it works](https://backtickjs.com/docs/how-it-works/)
+- [Thinking in Backtick](https://backtickjs.dev/docs/thinking-in-backtick/)
+- [How it works](https://backtickjs.dev/docs/how-it-works/)
 
 ## License
 

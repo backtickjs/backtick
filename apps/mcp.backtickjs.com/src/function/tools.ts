@@ -29,11 +29,13 @@ export function tools(owner: string): McpServer {
     {
       name: "backtick",
       title: "Backtick",
+      description: "Build native apps with AI, all from your phone.",
+      websiteUrl: "https://backtickjs.com",
       version: "0.0.0",
     },
     {
       instructions:
-        "Backtick makes native apps that run on the user's phone. " +
+        "Backtick builds native apps that run on the user's phone. " +
         "start_app gives a starter to edit, and save_app checks the code, " +
         "saves it as a version the phone opens, and returns the app's link " +
         "to give the user. These are the tools for an app the user wants on " +

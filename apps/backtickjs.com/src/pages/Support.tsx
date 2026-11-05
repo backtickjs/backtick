@@ -16,6 +16,10 @@ export const Support = cs`() => (
           you sign in with. Tell us what you were doing and what happened; a
           screenshot helps.
         </p>
+        <p>
+          Getting started, and what to do when something doesn't work, is in{" "}
+          <a href="/help/">Help</a>.
+        </p>
 
         <h2>Deleting your account</h2>
         <p>

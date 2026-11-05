@@ -6,9 +6,6 @@ import { NotFound } from "./pages/NotFound.js";
 // need whole.
 export const ORIGIN = "https://backtickjs.com";
 
-// The framework's site, where the docs moved.
-export const DOCS_ORIGIN = "https://backtickjs.dev";
-
 // A page's whole address, for search engines and link previews.
 export function urlOf(path: string): string {
   return ORIGIN + path;

@@ -56,7 +56,7 @@ const diagnostics = ts.getPreEmitDiagnostics(program);
 
 - [`@backtickjs/tspatch-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/tspatch-plugin): builds JavaScript with `tspc`
 - [`@backtickjs/node-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/node-plugin) and [`@backtickjs/bun-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/bun-plugin): compile at load time
-- [How it works](https://backtickjs.com/docs/how-it-works/)
+- [How it works](https://backtickjs.dev/docs/how-it-works/)
 
 ## License
 

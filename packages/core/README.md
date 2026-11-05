@@ -36,7 +36,7 @@ export async function Home() {
 }
 ```
 
-`$node` and `$Counter` are splices: `node` is a server variable, written into the bundle as data; `Counter` is a script. `$useState` is a splice too, of an export the client provides. What can be spliced is `Spliceable`: data, and scripts. [Thinking in Backtick](https://backtickjs.com/docs/thinking-in-backtick/) has what can cross, what can't, and how server and client components compose.
+`$node` and `$Counter` are splices: `node` is a server variable, written into the bundle as data; `Counter` is a script. `$useState` is a splice too, of an export the client provides. What can be spliced is `Spliceable`: data, and scripts. [Thinking in Backtick](https://backtickjs.dev/docs/thinking-in-backtick/) has what can cross, what can't, and how server and client components compose.
 
 A script every component shares, like a context or a store, is made once with `once`: one value for the bundle, where an expression script would run again at each read.
 
@@ -134,7 +134,7 @@ A test draws a screen with a module map of its own, stand-ins included; its modu
 - [`@backtickjs/jsx-react`](https://github.com/backtickjs/backtick/tree/main/packages/jsx-react), [`@backtickjs/jsx-solid`](https://github.com/backtickjs/backtick/tree/main/packages/jsx-solid): each framework's JSX
 - [`@backtickjs/node-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/node-plugin), [`@backtickjs/bun-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/bun-plugin): compile scripts as your server loads them
 - [`@backtickjs/tsc`](https://github.com/backtickjs/backtick/tree/main/packages/tsc): type-checks scripts and their splices
-- [Thinking in Backtick](https://backtickjs.com/docs/thinking-in-backtick/), [Scripts in depth](https://backtickjs.com/docs/scripts-in-depth/)
+- [Thinking in Backtick](https://backtickjs.dev/docs/thinking-in-backtick/), [Scripts in depth](https://backtickjs.dev/docs/scripts-in-depth/)
 
 ## License
 

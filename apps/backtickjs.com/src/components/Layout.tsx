@@ -15,6 +15,9 @@ export const Layout = cs`(props: { children: JSX.Element }) => (
         <a href="/download/" class="no-underline">
           Download
         </a>
+        <a href="/help/" class="no-underline">
+          Help
+        </a>
         <a href="/support/" class="no-underline">
           Support
         </a>

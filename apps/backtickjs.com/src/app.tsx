@@ -1,7 +1,8 @@
 import { Hono } from "hono";
 import { toHtml } from "./html.js";
-import { DOCS_ORIGIN, NOT_FOUND, urlOf } from "./pages.js";
+import { NOT_FOUND, urlOf } from "./pages.js";
 import { Download } from "./pages/Download.js";
+import { Help } from "./pages/Help.js";
 import { Home } from "./pages/Home.js";
 import { Privacy } from "./pages/Privacy.js";
 import { Support } from "./pages/Support.js";
@@ -37,6 +38,19 @@ app.get("/download/", async (context) =>
       Page: Download,
       title: "Backtick · Download",
       description: "Get the Backtick app for iPhone and Android.",
+    }),
+  ),
+);
+
+app.get("/help/", async (context) =>
+  context.html(
+    await toHtml({
+      path: "/help/",
+      Page: Help,
+      title: "Backtick · Help",
+      description:
+        "How to make apps with Claude and Backtick, and what to do when" +
+        " something doesn't work.",
     }),
   ),
 );
@@ -77,27 +91,11 @@ app.get("/terms/", async (context) =>
   ),
 );
 
-// The framework's docs moved to backtickjs.dev: their old addresses go there,
-// at the same paths.
-app.get("/docs", (context) => context.redirect(`${DOCS_ORIGIN}/docs/`, 301));
-app.get("/docs/*", (context) =>
-  context.redirect(DOCS_ORIGIN + context.req.path, 301),
-);
-app.get("/llms.txt", (context) =>
-  context.redirect(`${DOCS_ORIGIN}/llms.txt`, 301),
-);
-app.get("/llms-full.txt", (context) =>
-  context.redirect(`${DOCS_ORIGIN}/llms-full.txt`, 301),
-);
-
-// The app's page was here before it was the home page.
-app.get("/app/", (context) => context.redirect("/", 301));
-
 // What search engines read: every page.
 app.get("/sitemap.xml", (context) => {
-  const urls = ["/", "/download/", "/support/", "/privacy/", "/terms/"].map(
-    (path) => `  <url><loc>${urlOf(path)}</loc></url>`,
-  );
+  const urls = app.routes
+    .filter(({ method, path }) => method === "GET" && path.endsWith("/"))
+    .map(({ path }) => `  <url><loc>${urlOf(path)}</loc></url>`);
   return context.body(
     `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

@@ -68,7 +68,7 @@ try {
 
 ### What crosses into a script
 
-Spliced values are written into the bundle as data, never as code. What can't cross, `build` rejects before anything reaches the client; [Errors](https://backtickjs.com/docs/errors/#from-the-bundler) has each message and its fix.
+Spliced values are written into the bundle as data, never as code. What can't cross, `build` rejects before anything reaches the client; [Errors](https://backtickjs.dev/docs/errors/#from-the-bundler) has each message and its fix.
 
 ### Formats
 
@@ -92,8 +92,8 @@ Spliced values are written into the bundle as data, never as code. What can't cr
 
 - [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): the `cs` tag, and `execRoot`, which runs a bundle in the app
 - [`@backtickjs/jsx-react`](https://github.com/backtickjs/backtick/tree/main/packages/jsx-react), [`@backtickjs/jsx-solid`](https://github.com/backtickjs/backtick/tree/main/packages/jsx-solid): each framework's JSX
-- [How it works](https://backtickjs.com/docs/how-it-works/)
-- [Errors](https://backtickjs.com/docs/errors/)
+- [How it works](https://backtickjs.dev/docs/how-it-works/)
+- [Errors](https://backtickjs.dev/docs/errors/)
 
 ## License
 
