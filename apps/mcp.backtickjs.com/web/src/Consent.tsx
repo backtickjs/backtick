@@ -10,18 +10,23 @@ import { createSignal } from "solid-js" with { backtick: "client" };
 
 export const Consent = cs`(props: { url: string; publishableKey: string }) => {
   const supabase = $createClient(props.url, props.publishableKey);
-  const id = new URLSearchParams(window.location.search).get("authorization_id");
+  const query = new URLSearchParams(window.location.search);
+  const id = query.get("authorization_id");
   const [message, setMessage] = $createSignal("Loading…");
   const [error, setError] = $createSignal("");
-  const [step, setStep] = $createSignal<"loading" | "sign-in" | "email" | "code" | "asking">(
+  const [step, setStep] = $createSignal<"loading" | "account" | "sign-in" | "email" | "code" | "asking">(
     "loading",
   );
   const [email, setEmail] = $createSignal("");
-  // Who's signed in on this page, beside the way to switch.
+  // Who's signed in on this page, to confirm before anything else.
   const [account, setAccount] = $createSignal("");
   const [code, setCode] = $createSignal("");
 
-  async function consent() {
+  // Supabase gives the request to the first account that reads it, and any
+  // other is refused ("authorization not found"). So someone already signed
+  // in here confirms the account first; someone who just signed in already
+  // chose it.
+  async function consent(chosen: boolean) {
     if (id === null) {
       setMessage("Open this page from an app that's connecting to Backtick.");
       return;
@@ -29,6 +34,11 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
     const { data: { session } } = await supabase.auth.getSession();
     if (session === null) {
       setStep("sign-in");
+      return;
+    }
+    if (!chosen) {
+      setAccount(session.user.email ?? "");
+      setStep("account");
       return;
     }
     const { data, error } = await supabase.auth.oauth.getAuthorizationDetails(id);
@@ -43,9 +53,10 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
     }
     setMessage(
       (data.client.name || "An app") +
-        " wants to see, build and edit apps in your Backtick account.",
+        " wants to see, build and edit apps in your Backtick account, " +
+        data.user.email +
+        ".",
     );
-    setAccount(data.user.email);
     setStep("asking");
   }
 
@@ -53,7 +64,8 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
   async function withProvider(provider: "apple" | "google") {
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
-      options: { redirectTo: window.location.href },
+      // Marked as just signed in, so it isn't asked to confirm the account.
+      options: { redirectTo: window.location.href + "&signed_in" },
     });
     if (error) {
       setError(error.message);
@@ -103,11 +115,11 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
     }
     setError("");
     setStep("loading");
-    await consent();
+    await consent(true);
   }
 
-  // Signed out on this page only, back to the sign-in options: for someone
-  // signed in here with another account before.
+  // Signed out on this page only, back to the sign-in options, before the
+  // request is read: for someone signed in here with another account before.
   async function switchAccount() {
     await supabase.auth.signOut({ scope: "local" });
     setError("");
@@ -123,7 +135,9 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
     }
   }
 
-  consent().catch((failure: Error) => setError(failure.message));
+  consent(query.has("signed_in")).catch((failure: Error) =>
+    setError(failure.message),
+  );
 
   return (
     <main>
@@ -202,6 +216,17 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
             Use a different email
           </button>
         </>
+      ) : step() === "account" ? (
+        <>
+          <p class="lede">You're signed in to Backtick as {account()}.</p>
+          {error() ? <p class="message">{error()}</p> : null}
+          <button class="pill solid" onClick={() => consent(true)}>
+            Continue
+          </button>
+          <button class="pill" onClick={switchAccount}>
+            Use a different account
+          </button>
+        </>
       ) : step() === "asking" ? (
         <>
           <p class="lede">{message()}</p>
@@ -211,9 +236,6 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
           </button>
           <button class="pill" onClick={() => decide(false)}>
             Deny
-          </button>
-          <button class="other" onClick={switchAccount}>
-            Not {account()}? Use a different account
           </button>
         </>
       ) : (
