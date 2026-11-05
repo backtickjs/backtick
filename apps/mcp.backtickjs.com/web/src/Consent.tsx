@@ -1,6 +1,7 @@
 // The page Supabase's OAuth server sends a user to when a host asks to connect:
-// sign in with Google if needed, then allow or deny the host. Supabase adds
-// `authorization_id` to its URL.
+// sign in if needed, as the Backtick app does (Apple, Google, or a code sent
+// to an email), then allow or deny the host. Supabase adds `authorization_id`
+// to its URL.
 import { cs } from "@backtickjs/core";
 import { createClient } from "@supabase/supabase-js" with {
   backtick: "client",
@@ -11,7 +12,11 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
   const supabase = $createClient(props.url, props.publishableKey);
   const id = new URLSearchParams(window.location.search).get("authorization_id");
   const [message, setMessage] = $createSignal("Loading…");
-  const [asking, setAsking] = $createSignal(false);
+  const [step, setStep] = $createSignal<"loading" | "sign-in" | "code" | "asking">(
+    "loading",
+  );
+  const [email, setEmail] = $createSignal("");
+  const [code, setCode] = $createSignal("");
 
   async function consent() {
     if (id === null) {
@@ -20,11 +25,8 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
     }
     const { data: { session } } = await supabase.auth.getSession();
     if (session === null) {
-      // Back to this page, signed in, with the same authorization_id.
-      await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: { redirectTo: window.location.href },
-      });
+      setMessage("Sign in with the account you use in the Backtick app.");
+      setStep("sign-in");
       return;
     }
     const { data, error } = await supabase.auth.oauth.getAuthorizationDetails(id);
@@ -42,7 +44,63 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
         " wants to make and change apps in your Backtick account, " +
         data.user.email + ".",
     );
-    setAsking(true);
+    setStep("asking");
+  }
+
+  // Back to this page, signed in, with the same authorization_id.
+  async function withProvider(provider: "apple" | "google") {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: { redirectTo: window.location.href },
+    });
+    if (error) {
+      setMessage(error.message);
+    }
+  }
+
+  async function sendCode(event: SubmitEvent) {
+    event.preventDefault();
+    const { error } = await supabase.auth.signInWithOtp({
+      email: email().trim(),
+    });
+    if (error) {
+      setMessage("Couldn't send a code just now. Try again in a minute.");
+      return;
+    }
+    setMessage("Enter the six-digit code we sent to " + email().trim() + ".");
+    setStep("code");
+  }
+
+  // The emailed code, or the review account's fixed one, which only the
+  // server knows: it answers with a one-time sign-in for that account.
+  async function checkCode(event: SubmitEvent) {
+    event.preventDefault();
+    const address = email().trim();
+    const token = code().replace(/\s/g, "");
+    const emailed = await supabase.auth.verifyOtp({
+      email: address,
+      token,
+      type: "email",
+    });
+    if (emailed.error) {
+      const answer = await fetch("/oauth/review-code", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ email: address, code: token }),
+      });
+      const review = answer.ok
+        ? await supabase.auth.verifyOtp({
+            token_hash: (await answer.json()).tokenHash,
+            type: "email",
+          })
+        : undefined;
+      if (review === undefined || review.error) {
+        setMessage("That code didn't work. Check it, or ask for a new one.");
+        return;
+      }
+    }
+    setStep("loading");
+    await consent();
   }
 
   async function decide(allow: boolean) {
@@ -60,10 +118,53 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
     <main>
       <h1>Connect to Backtick</h1>
       <p>{message()}</p>
-      {asking() ? (
+      {step() === "sign-in" ? (
+        <>
+          <div class="stack">
+            <button onClick={() => withProvider("apple")}>
+              Continue with Apple
+            </button>
+            <button onClick={() => withProvider("google")}>
+              Continue with Google
+            </button>
+          </div>
+          <form class="stack" onSubmit={sendCode}>
+            <input
+              type="email"
+              autocomplete="email"
+              placeholder="Email"
+              required
+              value={email()}
+              onInput={(event) => setEmail(event.currentTarget.value)}
+            />
+            <button type="submit">Continue with email</button>
+          </form>
+        </>
+      ) : null}
+      {step() === "code" ? (
+        <form class="stack" onSubmit={checkCode}>
+          <input
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            placeholder="Code"
+            required
+            value={code()}
+            onInput={(event) => setCode(event.currentTarget.value)}
+          />
+          <button type="submit" class="allow">
+            Sign in
+          </button>
+          <button type="button" onClick={() => setStep("sign-in")}>
+            Use a different email
+          </button>
+        </form>
+      ) : null}
+      {step() === "asking" ? (
         <div class="buttons">
           <button onClick={() => decide(false)}>Deny</button>
-          <button class="allow" onClick={() => decide(true)}>Allow</button>
+          <button class="allow" onClick={() => decide(true)}>
+            Allow
+          </button>
         </div>
       ) : null}
     </main>

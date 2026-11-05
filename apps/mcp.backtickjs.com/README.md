@@ -58,9 +58,11 @@ A host signs its user in with OAuth, and Supabase is the authorization server: T
 
 Supabase is set up for it in its dashboard:
 
-- Authentication → Sign In / Providers → Google, with a client from Google Cloud whose redirect URI is `https://<ref>.supabase.co/auth/v1/callback`.
-- Authentication → OAuth Server: enabled, with dynamic registration, and the authorization path `/oauth/consent`, the page `src/function/consent.ts` serves.
+- Authentication → Sign In / Providers: Apple, Google and email, as the Backtick app signs in (`apps/auth.backtickjs.com`), so the same account connects to Claude whichever one a user picked. The consent page offers all three.
+- Authentication → OAuth Server: enabled, with dynamic registration, and the authorization path `/oauth/consent`, the page `web/src/Consent.tsx` draws.
 - Authentication → URL Configuration: the Site URL `https://mcp.backtickjs.com`, and the redirect URLs `https://mcp.backtickjs.com/oauth/consent` and `https://auth.backtickjs.com/authorize**` (the Backtick app's sign-in, `apps/auth.backtickjs.com`). Supabase sends users to the Site URL's consent page wherever the MCP server runs, a laptop included.
+
+The reviewers' account (stores and connector directory) signs in with a fixed code instead of an emailed one: `BACKTICK_REVIEW_EMAIL` and `BACKTICK_REVIEW_CODE`, the same as on `auth.backtickjs.com`, set only while a review is in progress. The consent page tries an emailed code first, then `/oauth/review-code`, which answers with a one-time sign-in for that account only.
 
 In Claude.ai, the connector signs in with **Register automatically**: Supabase doesn't read Claude's published identity (CIMD).
 

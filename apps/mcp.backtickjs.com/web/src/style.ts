@@ -12,5 +12,7 @@ p { margin: 0 0 16px; }
 a { color: var(--accent); }
 .buttons { display: flex; gap: 8px; }
 button { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid var(--muted); background: none; color: var(--fg); font: inherit; cursor: pointer; }
+.stack { display: grid; gap: 8px; margin-bottom: 16px; }
+input { padding: 12px; border-radius: 8px; border: 1px solid var(--muted); background: none; color: var(--fg); font: inherit; }
 button.allow { background: var(--accent); border-color: var(--accent); color: #fff; }
 `;

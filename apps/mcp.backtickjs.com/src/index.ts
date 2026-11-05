@@ -13,6 +13,7 @@ import {
 import { Hono } from "hono";
 import { secureHeaders } from "hono/secure-headers";
 import { ownerOf, verifier } from "./function/auth.ts";
+import { reviewSignIn } from "./function/review.ts";
 import { tools } from "./function/tools.ts";
 // Compiled by `tspc` first: the pages are Backtick scripts.
 import { consentPage } from "../web/dist/index.js";
@@ -56,6 +57,16 @@ app.get(
   }),
   async (c) => c.html(await consentPage()),
 );
+
+// The review account's code, from the consent page: a one-time sign-in for
+// it, or a 401 for anything else.
+app.post("/oauth/review-code", async (c) => {
+  const body = await c.req.json().catch(() => ({}));
+  const tokenHash = await reviewSignIn(body.email, body.code);
+  return tokenHash === undefined
+    ? c.json({}, 401, { "cache-control": "no-store" })
+    : c.json({ tokenHash }, 200, { "cache-control": "no-store" });
+});
 
 // Each request carries the user's access token. Without a valid one, a 401
 // that points at the documents above.
