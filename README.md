@@ -124,11 +124,6 @@ Internal packages, used by the ones above: [`compiler`](packages/compiler),
 - **`backtick-tsc`** type-checks from the command line, and in CI.
 - **The Prettier plugin** formats scripts on save.
 
-## Requirements
-
-Backtick is early. Today it supports Expo SDK 57 (React Native 0.86 and
-React 19.2) and Solid 1.9, with servers on Node 22 (22.15 or later) or 24 (24.3 or later), or Bun.
-
 ## Who's behind it
 
 I'm Jean-François Bisson. I spent a few years building mobile infrastructure
