@@ -1,20 +1,17 @@
 // Makes the base snapshot the sandboxes start from: the sandbox package
-// (sandbox/), installed with its dependencies at /vercel/backtickjs.app, `curl` to reach its
-// server, and nothing running. Prints the snapshot id, for the function's environment.
+// (sandbox/), installed with its dependencies at /vercel/backtickjs.app,
+// `curl` to reach its server, and nothing running. Records its id in
+// snapshot.json, with the hash of the files it was made from, for the
+// function to read.
 // `node --env-file=.env.local scripts/snapshot.ts`, after `vercel env pull`.
-import { readFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { Sandbox } from "@vercel/sandbox";
+import { sandboxFiles, sandboxHash, sandboxRoot } from "./sandboxFiles.ts";
 
-const root = join(import.meta.dirname, "../sandbox");
 const app = "/vercel/backtickjs.app";
-const files = [
-  "package.json",
-  "tsconfig.app.json",
-  "src/compile.ts",
-  "src/serve.ts",
-  "src/typecheck.ts",
-];
+// Taken before the files are read, so a file changed meanwhile fails the test.
+const hash = sandboxHash();
 
 const sandbox = await Sandbox.create({
   image: "vercel/sandbox/node:24",
@@ -32,9 +29,9 @@ try {
     args: ["-p", `${app}/src`, `${app}/.builds`],
   });
   await sandbox.writeFiles(
-    files.map((file) => ({
+    sandboxFiles.map((file) => ({
       path: `${app}/${file}`,
-      content: readFileSync(join(root, file)),
+      content: readFileSync(join(sandboxRoot, file)),
     })),
   );
   await run(sandbox, {
@@ -42,9 +39,10 @@ try {
     args: ["-c", "apt-get update -q && apt-get install -yq curl"],
     sudo: true,
   });
+  // Exactly the lockfile's packages (scripts/lock.ts writes it).
   await run(sandbox, {
     cmd: "npm",
-    args: ["install", "--no-audit", "--no-fund"],
+    args: ["ci", "--no-audit", "--no-fund"],
     cwd: app,
   });
 } catch (error) {
@@ -52,6 +50,11 @@ try {
   throw error;
 }
 const snapshot = await sandbox.snapshot({ expiration: 0 });
+writeFileSync(
+  join(import.meta.dirname, "../snapshot.json"),
+  JSON.stringify({ snapshotId: snapshot.snapshotId, sandbox: hash }, null, 2) +
+    "\n",
+);
 console.log(snapshot.snapshotId);
 
 async function run(

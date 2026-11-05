@@ -45,7 +45,6 @@ The function reads these environment variables, set in the Vercel project for pr
 | --------------------------- | ------------------------------------------------------------------------------- |
 | `SUPABASE_URL`              | The project's URL, `https://<ref>.supabase.co`, with nothing after it           |
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase's secret key. It bypasses row-level security: keep it in the function. |
-| `SNAPSHOT_ID`               | The sandbox snapshot `scripts/snapshot.ts` printed                              |
 | `SUPABASE_PUBLISHABLE_KEY`  | Supabase's publishable key, for the consent page. Safe in a browser.            |
 
 `VERCEL_OIDC_TOKEN`, which `vercel env pull` also writes, lets the scripts drive sandboxes from this machine. It expires within hours; pull again when a script reports an authentication error.
@@ -98,29 +97,25 @@ Don't change tables from Supabase's SQL editor: the database and `supabase/migra
 The sandbox installs `@backtickjs/*` from npm, so a change to them or to `sandbox/` reaches users only through a new snapshot. In this order:
 
 1. Release the `@backtickjs/*` packages, if they changed, and wait until `npm view @backtickjs/compiler version` shows the new version.
-2. Make a snapshot. It prints its id:
+2. After a change to `sandbox/package.json`, write its lockfile, which the snapshot installs exactly (`npm ci`):
+
+   ```sh
+   node scripts/lock.ts
+   ```
+
+3. Make a snapshot. It records its id in `snapshot.json`, with a hash of the files it was made from (`scripts/sandboxFiles.ts`), and the function starts sandboxes from the snapshot that file names:
 
    ```sh
    node --env-file=.env.local scripts/snapshot.ts
    ```
 
-3. Check it: the four timings print, and the starter's typecheck prints `{ errors: [], warnings: [] }`.
+4. Check it: the four timings print, and the starter's typecheck prints `{ errors: [], warnings: [] }`.
 
    ```sh
-   node --env-file=.env.local scripts/time.ts <snapshot id>
+   node --env-file=.env.local scripts/time.ts
    ```
 
-4. Point the function at it, in production and development:
-
-   ```sh
-   vercel env rm SNAPSHOT_ID production --yes
-   printf <snapshot id> | vercel env add SNAPSHOT_ID production
-   vercel env rm SNAPSHOT_ID development --yes
-   printf <snapshot id> | vercel env add SNAPSHOT_ID development
-   vercel env pull
-   ```
-
-5. Push the commit that expects the new sandbox, only now: a push to `main` deploys the function (see `apps/README.md`, Deploying). Sandboxes from the old snapshot aren't reused, and time out on their own. A change that adds a package or a file belongs in a pull request first, whose preview tries it.
+5. Commit `snapshot.json` with the change to `sandbox/` and its lockfile, and push: a push to `main` deploys the function (see `apps/README.md`, Deploying). A change to `sandbox/` without a new snapshot, or to its `package.json` without a new lockfile, fails `pnpm test`, so CI holds it back. Sandboxes from the old snapshot aren't reused, and time out on their own. A change that adds a package or a file belongs in a pull request first, whose preview tries it.
 
 6. Delete the previous snapshot once the new one has served for a while. Snapshots don't expire, and storage is billed.
 

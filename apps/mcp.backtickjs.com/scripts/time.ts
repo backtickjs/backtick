@@ -1,17 +1,19 @@
 // Times a sandbox from the snapshot as `save_app` uses it: the
 // first typecheck creates it, then a warm typecheck, then two saves' checks
 // (typecheck and compile).
-// `node --env-file=.env.local scripts/time.ts <snapshot id>`
+// `node --env-file=.env.local scripts/time.ts [snapshot id]`, snapshot.json's
+// by default.
 import { randomUUID } from "node:crypto";
 import { Sandbox } from "@vercel/sandbox";
 import {
   checkInSandbox,
   sandboxName,
+  snapshotId as recordedSnapshot,
   typecheckInSandbox,
 } from "../src/function/sandbox.ts";
 import { starter } from "../src/function/starter.ts";
 
-const snapshotId = process.argv[2]!;
+const snapshotId = process.argv[2] ?? recordedSnapshot();
 const user = `time-${randomUUID().slice(0, 8)}`;
 
 async function time<T>(label: string, run: () => Promise<T>): Promise<T> {

@@ -32,8 +32,7 @@ A push to `main` deploys every Vercel host it changes: each is a Vercel project 
 So `main` must always be safe to ship as it is:
 
 1. A migration is applied (`supabase db push`, `mcp.backtickjs.com`) before the commit that needs it reaches `main`, or the code works with and without it.
-2. A new build sandbox snapshot (`mcp.backtickjs.com`, after a `@backtickjs/*` release) is made and set as `SNAPSHOT_ID` before the commit that expects it.
-3. A secret, a variable or DNS a commit needs is set before it's pushed.
+2. A secret, a variable or DNS a commit needs is set before it's pushed.
 
 Vercel's settings for this live in each project: the connection, "skip unaffected projects" (`enableAffectedProjectsDeployments`) and the `CI` check.
 

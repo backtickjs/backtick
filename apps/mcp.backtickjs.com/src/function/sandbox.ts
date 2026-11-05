@@ -4,6 +4,7 @@
 import { createHash, randomUUID } from "node:crypto";
 import { Sandbox } from "@vercel/sandbox";
 import type { Typechecked } from "../../sandbox/src/typecheck.ts";
+import snapshot from "../../snapshot.json" with { type: "json" };
 
 // Where `scripts/snapshot.ts` installs the sandbox package (sandbox/).
 const app = "/vercel/backtickjs.app";
@@ -13,13 +14,10 @@ const warm = 10 * 60 * 1000;
 const patience = 30 * 1000;
 const appTsconfig = `{ "extends": "../../tsconfig.app.json" }`;
 
-// The snapshot the function's sandboxes start from.
+// The snapshot the function's sandboxes start from, as `scripts/snapshot.ts`
+// recorded it: the one made from this commit's sandbox/.
 export function snapshotId(): string {
-  const id = process.env.SNAPSHOT_ID;
-  if (id === undefined) {
-    throw new Error("Set SNAPSHOT_ID to the id scripts/snapshot.ts printed.");
-  }
-  return id;
+  return snapshot.snapshotId;
 }
 
 export async function typecheckInSandbox(
