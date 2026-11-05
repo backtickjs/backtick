@@ -5,7 +5,7 @@ import { Section } from "../components/Section.js";
 // Where each phone installs Backtick from, once it can: TestFlight's public
 // link and the Android APK for now, the App Store and Google Play later.
 // Without one, the platform says it's coming.
-const iphone: string | undefined = undefined;
+const iphone: string | undefined = "https://testflight.apple.com/join/HUrBgzn7";
 const android: string | undefined = undefined;
 
 export const Download = cs`() => (
