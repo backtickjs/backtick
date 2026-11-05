@@ -680,7 +680,7 @@ export async function Home(props: { user: string }) {
         setAsking({
           title: "New app",
           placeholder: "An app that…",
-          prompt: "Backtick app: ",
+          prompt: "New Backtick app: ",
         });
       const [selected, setSelected] = $useState<App | null>(null);
       const [accountOpen, setAccountOpen] = $useState(false);
@@ -761,7 +761,7 @@ export async function Home(props: { user: string }) {
                 setAsking({
                   title: "Edit " + selected.title,
                   placeholder: "What should change?",
-                  prompt: "Backtick app " + selected.id + ": ",
+                  prompt: "Edit Backtick app " + selected.id + ": ",
                 });
               }}
             />
