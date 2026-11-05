@@ -128,6 +128,61 @@ importers:
         specifier: 4.151.2
         version: 4.151.2(@cloudflare/workers-types@5.20261018.1)(@types/node@25.9.1)
 
+  apps/backtickjs.com:
+    dependencies:
+      '@backtickjs/bundler':
+        specifier: 0.2.8
+        version: link:../../packages/bundler
+      '@backtickjs/core':
+        specifier: 0.2.8
+        version: link:../../packages/core
+      '@backtickjs/jsx-solid':
+        specifier: 0.2.8
+        version: link:../../packages/jsx-solid
+      '@tailwindcss/node':
+        specifier: ^4.3.3
+        version: 4.3.3
+      '@tailwindcss/oxide':
+        specifier: ^4.3.3
+        version: 4.3.3
+      hono:
+        specifier: ^4.13.13
+        version: 4.13.13
+      solid-js:
+        specifier: 1.9.17
+        version: 1.9.17
+      tailwindcss:
+        specifier: ^4.3.3
+        version: 4.3.3
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+    devDependencies:
+      '@backtickjs/prettier-plugin':
+        specifier: 0.2.8
+        version: link:../../packages/prettier-plugin
+      '@backtickjs/tsc':
+        specifier: 0.2.8
+        version: link:../../packages/tsc
+      '@backtickjs/tspatch-plugin':
+        specifier: 0.2.8
+        version: link:../../packages/tspatch-plugin
+      '@hono/node-server':
+        specifier: ^2.1.4
+        version: 2.1.4(hono@4.13.13)
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
+      nodemon:
+        specifier: ^3.1.14
+        version: 3.1.14
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      ts-patch:
+        specifier: 4.0.1
+        version: 4.0.1
+
   apps/backtickjs.dev:
     dependencies:
       '@backtickjs/bundler':

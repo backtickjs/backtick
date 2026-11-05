@@ -4,9 +4,9 @@ import { Section } from "../components/Section.js";
 
 const connector = "https://mcp.backtickjs.com";
 
-// The app builder's own page: what people sign in to with Google, and the home
-// page Google's sign-in screen names for it.
-export const AppBuilder = cs`() => (
+// Backtick's home page: what the app is, and the home page Google's sign-in
+// screen names for it.
+export const Home = cs`() => (
   <$Layout>
     <$Section
       eyebrow="Backtick for your phone"

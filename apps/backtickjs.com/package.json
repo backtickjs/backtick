@@ -1,0 +1,40 @@
+{
+  "name": "backtickjs.com",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "format": "prettier --write src",
+    "format:check": "prettier --check src",
+    "typecheck": "backtick-tsc --noEmit",
+    "build": "rm -rf dist && tspc -p tsconfig.build.json --noCheck && node dist/css.js",
+    "start": "nodemon --watch src --ext ts,tsx,css --exec \"pnpm build && node dist/dev.js\"",
+    "clean": "rm -rf node_modules dist"
+  },
+  "dependencies": {
+    "@backtickjs/bundler": "0.2.8",
+    "@backtickjs/core": "0.2.8",
+    "@backtickjs/jsx-solid": "0.2.8",
+    "@tailwindcss/node": "^4.3.3",
+    "@tailwindcss/oxide": "^4.3.3",
+    "hono": "^4.13.13",
+    "solid-js": "1.9.17",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "@backtickjs/prettier-plugin": "0.2.8",
+    "@backtickjs/tsc": "0.2.8",
+    "@backtickjs/tspatch-plugin": "0.2.8",
+    "@hono/node-server": "^2.1.4",
+    "@types/node": "^25.9.1",
+    "nodemon": "^3.1.14",
+    "prettier": "^3.6.2",
+    "ts-patch": "4.0.1"
+  },
+  "backtick": {
+    "plugins": [
+      "@backtickjs/jsx-solid/plugin"
+    ]
+  }
+}

@@ -3,9 +3,7 @@ import { toHtml } from "./html.js";
 import { LLMS_FULL_TXT, LLMS_TXT } from "./llms.js";
 import { markdownPathOf, NOT_FOUND, urlOf } from "./pages.js";
 import { DOCS_PAGES } from "./pages/Docs.js";
-import { AppBuilder } from "./pages/AppBuilder.js";
 import { Home } from "./pages/Home.js";
-import { Privacy } from "./pages/Privacy.js";
 
 // The site's routes, as Vercel's function and the preview serve them.
 export const app = new Hono();
@@ -40,32 +38,6 @@ for (const page of DOCS_PAGES) {
   app.get(page.path, async (context) => context.html(await toHtml(page)));
   app.get(markdownPathOf(page.path), (context) => context.text(page.markdown));
 }
-
-app.get("/app/", async (context) =>
-  context.html(
-    await toHtml({
-      path: "/app/",
-      Page: AppBuilder,
-      title: "Backtick · Apps from your assistant, on your phone",
-      description:
-        "Ask Claude or ChatGPT for an app, and it runs natively on your" +
-        " phone, in the Backtick app.",
-    }),
-  ),
-);
-
-app.get("/privacy/", async (context) =>
-  context.html(
-    await toHtml({
-      path: "/privacy/",
-      Page: Privacy,
-      title: "Backtick · Privacy policy",
-      description:
-        "What Backtick's app builder collects, how it's used, who handles it," +
-        " and your choices.",
-    }),
-  ),
-);
 
 app.get("/llms.txt", (context) => context.text(LLMS_TXT));
 app.get("/llms-full.txt", (context) => context.text(LLMS_FULL_TXT));
