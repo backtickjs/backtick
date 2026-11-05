@@ -48,7 +48,11 @@ export function tools(owner: string): McpServer {
         "A new native app for the user's phone: its id and a starter " +
         "App.tsx to edit, then save with save_app.",
       inputSchema: z.object({}),
-      annotations: { readOnlyHint: true, openWorldHint: false },
+      annotations: {
+        title: "New app",
+        readOnlyHint: true,
+        openWorldHint: false,
+      },
     },
     async () => {
       const id = randomUUID();
@@ -70,7 +74,11 @@ export function tools(owner: string): McpServer {
       title: "Get an app",
       description: "An app's latest App.tsx and version, to change it.",
       inputSchema: z.object({ id: z.uuid() }),
-      annotations: { readOnlyHint: true, openWorldHint: false },
+      annotations: {
+        title: "Get an app",
+        readOnlyHint: true,
+        openWorldHint: false,
+      },
     },
     async ({ id }) => {
       const latest = await latestVersion(id, owner);
@@ -92,7 +100,11 @@ export function tools(owner: string): McpServer {
       description:
         "The user's apps, last saved first, with their ids and titles.",
       inputSchema: z.object({}),
-      annotations: { readOnlyHint: true, openWorldHint: false },
+      annotations: {
+        title: "List apps",
+        readOnlyHint: true,
+        openWorldHint: false,
+      },
     },
     async () => text(JSON.stringify(await listApps(owner))),
   );
@@ -130,6 +142,7 @@ export function tools(owner: string): McpServer {
         code: z.string(),
       }),
       annotations: {
+        title: "Save an app",
         readOnlyHint: false,
         destructiveHint: false,
         openWorldHint: false,
@@ -158,6 +171,7 @@ export function tools(owner: string): McpServer {
           .min(1),
       }),
       annotations: {
+        title: "Update an app",
         readOnlyHint: false,
         destructiveHint: false,
         openWorldHint: false,
