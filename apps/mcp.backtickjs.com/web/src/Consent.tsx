@@ -13,7 +13,7 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
   const id = new URLSearchParams(window.location.search).get("authorization_id");
   const [message, setMessage] = $createSignal("Loading…");
   const [error, setError] = $createSignal("");
-  const [step, setStep] = $createSignal<"loading" | "sign-in" | "code" | "asking">(
+  const [step, setStep] = $createSignal<"loading" | "sign-in" | "email" | "code" | "asking">(
     "loading",
   );
   const [email, setEmail] = $createSignal("");
@@ -128,29 +128,53 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
       <img class="wordmark" src="/wordmark.svg" alt="Backtick" />
       {step() === "sign-in" ? (
         <>
-          <h1>Connect to Backtick</h1>
           <p class="lede">Sign in with the account you use in the Backtick app.</p>
           {error() ? <p class="message">{error()}</p> : null}
-          <button class="pill" onClick={() => withProvider("apple")}>
+          <button class="pill solid" onClick={() => withProvider("apple")}>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.05 12.54c-.03-2.78 2.27-4.12 2.37-4.18-1.29-1.89-3.3-2.15-4.02-2.18-1.71-.17-3.34 1.01-4.21 1.01-.87 0-2.21-.98-3.63-.96-1.87.03-3.59 1.09-4.55 2.76-1.94 3.37-.5 8.35 1.39 11.08.92 1.34 2.03 2.84 3.47 2.78 1.39-.06 1.92-.9 3.6-.9 1.68 0 2.15.9 3.62.87 1.5-.03 2.45-1.36 3.36-2.71 1.06-1.55 1.5-3.06 1.52-3.14-.03-.01-2.92-1.12-2.95-4.45zM14.3 4.38c.77-.93 1.29-2.22 1.15-3.51-1.11.05-2.45.74-3.25 1.67-.71.82-1.34 2.14-1.17 3.4 1.24.1 2.5-.63 3.27-1.56z" />
+            </svg>
             Continue with Apple
           </button>
-          <button class="pill" onClick={() => withProvider("google")}>
+          <button class="pill solid" onClick={() => withProvider("google")}>
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+              <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+              <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+              <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+            </svg>
             Continue with Google
           </button>
-          <p class="or">or</p>
+          <button class="pill" onClick={() => setStep("email")}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="m3.5 6.5 8.5 6.5 8.5-6.5" />
+            </svg>
+            Continue with email
+          </button>
+        </>
+      ) : step() === "email" ? (
+        <>
+          <h1>Continue with email</h1>
+          <p class="lede">We'll email you a code to sign in. New here? This makes your account.</p>
+          {error() ? <p class="message">{error()}</p> : null}
           <form onSubmit={sendCode}>
             <input
               type="email"
               autocomplete="email"
               placeholder="you@example.com"
+              autofocus
               required
               value={email()}
               onInput={(event) => setEmail(event.currentTarget.value)}
             />
             <button class="pill solid" type="submit">
-              Continue with email
+              Send code
             </button>
           </form>
+          <button class="other" onClick={() => setStep("sign-in")}>
+            Other ways to sign in
+          </button>
         </>
       ) : step() === "code" ? (
         <>
@@ -172,13 +196,12 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
               Continue
             </button>
           </form>
-          <button class="other" onClick={() => setStep("sign-in")}>
+          <button class="other" onClick={() => setStep("email")}>
             Use a different email
           </button>
         </>
       ) : step() === "asking" ? (
         <>
-          <h1>Connect to Backtick</h1>
           <p class="lede">{message()}</p>
           {error() ? <p class="message">{error()}</p> : null}
           <button class="pill solid" onClick={() => decide(true)}>
@@ -193,7 +216,6 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
         </>
       ) : (
         <>
-          <h1>Connect to Backtick</h1>
           <p class="lede">{message()}</p>
           {error() ? <p class="message">{error()}</p> : null}
         </>
