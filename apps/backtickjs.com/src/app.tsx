@@ -23,7 +23,7 @@ app.get("/", async (context) =>
     await toHtml({
       path: "/",
       Page: Home,
-      title: "Backtick · Build apps with AI, on your phone",
+      title: "Backtick · Build native apps with AI, all from your phone",
       description:
         "Ask Claude for an app, and it runs natively on your phone, in the" +
         " Backtick app.",
