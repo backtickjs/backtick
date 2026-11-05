@@ -63,8 +63,8 @@ export const Help = cs`() => (
         <h2>What Claude can do with Backtick</h2>
         <ul>
           <li>
-            <strong>Start an app</strong>: gives Claude a working app to build
-            from. It saves nothing.
+            <strong>New app</strong>: gives Claude a working app to build from.
+            It saves nothing.
           </li>
           <li>
             <strong>Save an app</strong>: checks the app's code and, if it has

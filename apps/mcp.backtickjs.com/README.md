@@ -11,7 +11,7 @@ Backtick's service, at `https://mcp.backtickjs.com`: the server behind the app b
 | A Vercel Sandbox    | `sandbox/`                      | A server on localhost that type-checks an `App.tsx` and compiles its release. The model's code is in it, so it has no secrets and no network. |
 | This machine        | `scripts/`, `test/`             | The snapshot, timing and dev scripts, and the tests.                                                                                          |
 
-Each user gets one sandbox, `build-<user>-<snapshot>`, made from a snapshot of the sandbox package (`sandbox/`: its own `package.json`, with the phone's packages at the shell's versions, its server and its tests) and kept for 10 minutes after its last call. `start_app` makes it in the background, so the first `save_app` finds it warm. Its name includes the snapshot, so after a new snapshot no one's sandbox from the old one is reused.
+Each user gets one sandbox, `build-<user>-<snapshot>`, made from a snapshot of the sandbox package (`sandbox/`: its own `package.json`, with the phone's packages at the shell's versions, its server and its tests) and kept for 10 minutes after its last call. `new_app` makes it in the background, so the first `save_app` finds it warm. Its name includes the snapshot, so after a new snapshot no one's sandbox from the old one is reused.
 
 `web/` holds the one page people see here: the consent page, where a user allows an assistant. The website and the privacy policy are backtickjs.com's. They're Backtick scripts drawn with Solid, so `web/` has its own `package.json`, naming `@backtickjs/jsx-solid/plugin`, beside this package's React and Expo plugins for the apps. `pnpm build` compiles them with `tspc` into `web/dist/`, which Vercel runs before bundling the function; the function imports `web/dist/`, bundles each page on its first request, and serves it from memory after.
 
@@ -19,11 +19,11 @@ Each user gets one sandbox, `build-<user>-<snapshot>`, made from a snapshot of t
 
 ## The tools
 
-| Tool        | Takes                 | Returns                                                                                                                |
-| ----------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `start_app` | nothing               | A new app's id and the starter `App.tsx` (`src/function/starter.ts`) to edit. Saves nothing, so it's marked read-only. |
-| `get_app`   | `id`                  | The latest saved version's number and source                                                                           |
-| `save_app`  | `id`, `title`, `code` | The type errors to fix, or the new version's number with any warnings. The first save creates the app.                 |
+| Tool       | Takes                 | Returns                                                                                                                |
+| ---------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `new_app`  | nothing               | A new app's id and the starter `App.tsx` (`src/function/starter.ts`) to edit. Saves nothing, so it's marked read-only. |
+| `get_app`  | `id`                  | The latest saved version's number and source                                                                           |
+| `save_app` | `id`, `title`, `code` | The type errors to fix, or the new version's number with any warnings. The first save creates the app.                 |
 
 An error stops the save; a warning, such as a regex escaped as if in a string, goes back with the saved version.
 

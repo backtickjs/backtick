@@ -67,7 +67,7 @@ async function open(id: string, path: string, modules: object, auth = true) {
   );
 }
 
-const id = JSON.parse((await call("start_app", {})).split("\n")[0]).id;
+const id = JSON.parse((await call("new_app", {})).split("\n")[0]).id;
 await new Promise((resolve) => setTimeout(resolve, 8000));
 await call("save_app", {
   id,

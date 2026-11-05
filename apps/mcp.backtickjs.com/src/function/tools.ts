@@ -34,38 +34,25 @@ export function tools(owner: string): McpServer {
       version: "0.0.0",
     },
     {
-      instructions:
-        "Backtick builds native apps that run on the user's phone. " +
-        "start_app gives a starter to edit, and save_app checks the code, " +
-        "saves it as a version the phone opens, and returns the app's link " +
-        "to give the user. These are the tools for an app the user wants on " +
-        "their phone: a web page or an artifact doesn't reach it.",
+      instructions: "Backtick builds native apps that run on the user's phone.",
     },
   );
 
   // Saves nothing: the app exists from its first save. So it's read-only, and
   // a host may run it without asking.
   server.registerTool(
-    "start_app",
+    "new_app",
     {
-      title: "Start an app",
+      title: "New app",
       description:
-        "Use when the user wants an app on their phone: a native app they " +
-        "open on their phone, not a web page or an artifact. Returns a " +
-        "new app's id and a starter App.tsx, a working app to edit into what " +
-        "they asked for, then save with save_app. Saves nothing itself.",
+        "A new native app for the user's phone: its id and a starter " +
+        "App.tsx to edit, then save with save_app.",
       inputSchema: z.object({}),
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
     async () => {
       const id = randomUUID();
-      // The sandbox is made and warmed while the model writes its code, so
-      // the first `save_app` finds it ready.
-      waitUntil(
-        typecheckInSandbox(owner, starter, snapshotId()).catch((error) =>
-          console.error("Warming the sandbox failed:", error),
-        ),
-      );
+      warmSandbox();
       return text(
         `${JSON.stringify({ id, file: "App.tsx" })}\n\n` +
           `\`\`\`tsx\n${starter}\`\`\`\n\n` +
@@ -81,8 +68,7 @@ export function tools(owner: string): McpServer {
     "get_app",
     {
       title: "Get an app",
-      description:
-        "An app's latest saved App.tsx and its version, to change it.",
+      description: "An app's latest App.tsx and version, to change it.",
       inputSchema: z.object({ id: z.uuid() }),
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
@@ -91,13 +77,7 @@ export function tools(owner: string): McpServer {
       if (latest === undefined) {
         return failed(`No saved app ${id}.`);
       }
-      // A change is coming: the sandbox is made and warmed while the model
-      // writes it, as for start_app.
-      waitUntil(
-        typecheckInSandbox(owner, starter, snapshotId()).catch((error) =>
-          console.error("Warming the sandbox failed:", error),
-        ),
-      );
+      warmSandbox();
       return text(
         `${JSON.stringify({ id, version: latest.version })}\n\n` +
           `\`\`\`tsx\n${latest.source}\`\`\``,
@@ -110,8 +90,7 @@ export function tools(owner: string): McpServer {
     {
       title: "List apps",
       description:
-        "The user's apps, last saved first: each one's id, title, latest " +
-        "version and when it was saved.",
+        "The user's apps, last saved first, with their ids and titles.",
       inputSchema: z.object({}),
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
@@ -142,11 +121,9 @@ export function tools(owner: string): McpServer {
     {
       title: "Save an app",
       description:
-        "Type-check the app's whole App.tsx and, if it has no errors, save " +
-        "it as the app's next version, the one the user's phone opens. The " +
-        "first save creates the app with its title. Returns the errors to " +
-        "fix, or the version and the app's link, with any warnings. Give " +
-        "the user the link: on their phone it opens the app.",
+        "Checks App.tsx and, if it has no errors, saves it as the app's " +
+        "next version, which the phone opens. Returns the errors to fix, " +
+        "or the app's link to give the user.",
       inputSchema: z.object({
         id: z.uuid(),
         title: z.string(),
@@ -171,11 +148,9 @@ export function tools(owner: string): McpServer {
     {
       title: "Update an app",
       description:
-        "Apply edits to a saved app's latest App.tsx, then save it as " +
-        "save_app does. Each edit replaces old_str, which must match exactly " +
-        "once, with new_str, in order, each on the last's result; if one " +
-        "doesn't match, nothing is saved. Each call is a new version the " +
-        "user sees, so put every edit for a change in one call.",
+        "Edits an app's latest App.tsx, in order, then saves it as " +
+        "save_app does. Each old_str must match exactly once, or nothing " +
+        "is saved. Put every edit for a change in one call.",
       inputSchema: z.object({
         id: z.uuid(),
         edits: z
@@ -202,6 +177,16 @@ export function tools(owner: string): McpServer {
     },
   );
 
+  // A save is coming: the sandbox is made and warmed while the model writes
+  // the code, so the save finds it ready.
+  function warmSandbox(): void {
+    waitUntil(
+      typecheckInSandbox(owner, starter, snapshotId()).catch((error) =>
+        console.error("Warming the sandbox failed:", error),
+      ),
+    );
+  }
+
   async function save(
     id: string,
     title: string,
@@ -227,8 +212,6 @@ export function tools(owner: string): McpServer {
                 `The check didn't finish (${error.message}). Try again.`,
               ],
               warnings: [],
-              compiled: undefined,
-              packages: undefined,
             }),
           );
     const { errors, warnings, compiled, packages } = checked;
@@ -253,11 +236,11 @@ export function tools(owner: string): McpServer {
       packages!,
     );
     if (version === "not yours") {
-      return failed(`App ${id} isn't yours: start your own with start_app.`);
+      return failed(`App ${id} isn't yours: make your own with new_app.`);
     }
     if (version === "deleted") {
       return failed(
-        `App ${id} was deleted from the user's phone: start a new one with start_app.`,
+        `App ${id} was deleted from the user's phone: make a new one with new_app.`,
       );
     }
     recorded({ appId: id, owner, version, errors, warnings, durationMs });

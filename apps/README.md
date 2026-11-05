@@ -21,7 +21,7 @@ How a screen reaches the phone:
 phone ── GET https://app.backtickjs.com/ ─────────────────► app.backtickjs.com: Backtick's home (sign-in, your apps)
 phone ── GET https://<id>.backtickjs.app/day ─────────────► backtickjs.app (Cloudflare): the latest version from Supabase,
                                                              as the phone's user; its release answers /day in an isolate
-Claude ── MCP ────────────────────────────────────────────► mcp.backtickjs.com: start_app, get_app, save_app (each save
+Claude ── MCP ────────────────────────────────────────────► mcp.backtickjs.com: new_app, get_app, save_app (each save
                                                              checks the app and stores its release in Supabase)
 ```
 
