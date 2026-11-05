@@ -1,17 +1,21 @@
 import { Hono } from "hono";
 import { toHtml } from "./html.js";
 import { LLMS_FULL_TXT, LLMS_TXT } from "./llms.js";
-import { markdownPathOf } from "./pages.js";
+import { markdownPathOf, NOT_FOUND, urlOf } from "./pages.js";
 import { DOCS_PAGES } from "./pages/Docs.js";
 import { AppBuilder } from "./pages/AppBuilder.js";
 import { Home } from "./pages/Home.js";
 import { Privacy } from "./pages/Privacy.js";
 
-/**
- * The site's routes: what the preview serves, and what the build writes out,
- * one file per route.
- */
+// The site's routes, as Vercel's function and the preview serve them.
 export const app = new Hono();
+
+// Kept by Vercel's CDN until the next deploy, which clears it: the pages
+// change only then. Browsers check again each time.
+app.use(async (context, next) => {
+  await next();
+  context.header("cache-control", "public, max-age=0, s-maxage=31536000");
+});
 
 app.get("/", async (context) =>
   context.html(
@@ -65,3 +69,29 @@ app.get("/privacy/", async (context) =>
 
 app.get("/llms.txt", (context) => context.text(LLMS_TXT));
 app.get("/llms-full.txt", (context) => context.text(LLMS_FULL_TXT));
+
+// What search engines read: every page.
+app.get("/sitemap.xml", (context) => {
+  const urls = app.routes
+    .filter(({ method, path }) => method === "GET" && path.endsWith("/"))
+    .map(({ path }) => `  <url><loc>${urlOf(path)}</loc></url>`);
+  return context.body(
+    `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.join("\n")}
+</urlset>
+`,
+    200,
+    { "content-type": "application/xml" },
+  );
+});
+
+app.get("/robots.txt", (context) =>
+  context.text(`User-agent: *
+Allow: /
+
+Sitemap: ${urlOf("/")}sitemap.xml
+`),
+);
+
+app.notFound(async (context) => context.html(await toHtml(NOT_FOUND), 404));

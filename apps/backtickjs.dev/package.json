@@ -1,5 +1,5 @@
 {
-  "name": "backtickjs.com",
+  "name": "backtickjs.dev",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -9,12 +9,11 @@
     "typecheck": "backtick-tsc --noEmit && backtick-tsc -p content/examples --noEmit && backtick-tsc -p content/examples/tsconfig.app.json --noEmit",
     "test": "cd content/examples && node --no-warnings --import ./test/setup.ts --import @backtickjs/node-plugin --test 'test/**/*.test.tsx'",
     "test:update": "cd content/examples && UPDATE=1 node --no-warnings --import ./test/setup.ts --import @backtickjs/node-plugin --test 'test/**/*.test.tsx'",
-    "build": "NODE_ENV=production bun src/build.ts",
-    "start": "nodemon --ext ts,tsx,json,css,md --exec bun src/index.tsx",
-    "clean": "rm -rf node_modules"
+    "build": "rm -rf dist && tspc -p tsconfig.build.json --noCheck && node dist/css.js && node dist/content.js",
+    "start": "nodemon --watch src --watch content --ext ts,tsx,json,css,md --exec \"pnpm build && node dist/dev.js\"",
+    "clean": "rm -rf node_modules dist"
   },
   "dependencies": {
-    "@backtickjs/bun-plugin": "0.2.8",
     "@backtickjs/bundler": "0.2.8",
     "@backtickjs/core": "0.2.8",
     "@backtickjs/expo": "0.2.8",
@@ -26,6 +25,7 @@
     "@tailwindcss/oxide": "^4.3.3",
     "diff": "^9.0.0",
     "github-slugger": "^2.0.0",
+    "hono": "^4.13.13",
     "markdown-it": "^15.0.2",
     "markdown-it-anchor": "^10.0.0",
     "shiki": "^4.5.0",
@@ -34,14 +34,14 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
+    "@backtickjs/jsx-react": "0.2.8",
     "@backtickjs/node-plugin": "0.2.8",
     "@backtickjs/prettier-plugin": "0.2.8",
-    "@backtickjs/jsx-react": "0.2.8",
     "@backtickjs/tsc": "0.2.8",
+    "@backtickjs/tspatch-plugin": "0.2.8",
     "@hono/node-server": "^2.1.4",
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.7",
-    "@types/bun": "^1.3.14",
     "@types/markdown-it": "^14.2.0",
     "@types/node": "^25.9.1",
     "@types/react": "19.2.18",
@@ -50,14 +50,14 @@
     "expo-haptics": "~57.0.3",
     "expo-linear-gradient": "~57.0.2",
     "global-jsdom": "^30.0.0",
-    "hono": "^4.13.13",
     "jsdom": "^30.0.1",
     "nodemon": "^3.1.14",
     "prettier": "^3.6.2",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-native": "0.86.3",
-    "react-native-web": "0.21.3"
+    "react-native-web": "0.21.3",
+    "ts-patch": "4.0.1"
   },
   "backtick": {
     "plugins": [

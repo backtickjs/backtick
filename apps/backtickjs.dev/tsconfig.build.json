@@ -1,0 +1,13 @@
+{
+  // The site as Vercel runs it, in dist/: src/ compiled with tspc from
+  // ts-patch, since its pages are scripts (package.json's plugins).
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "rootDir": "src",
+    "outDir": "dist",
+    "declaration": true,
+    "plugins": [{ "transform": "@backtickjs/tspatch-plugin" }]
+  },
+  "include": ["src"]
+}

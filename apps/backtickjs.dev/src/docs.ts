@@ -4,6 +4,7 @@ import MarkdownIt from "markdown-it";
 import GithubSlugger from "github-slugger";
 import anchor from "markdown-it-anchor";
 import { highlight } from "./highlight.js";
+import { INCLUDE } from "./includes.js";
 
 // A type alias rather than an interface: what is spliced into a script has to
 // answer as a plain record of client values, and an interface does not.
@@ -11,22 +12,11 @@ export type DocsLink = { title: string; path: string };
 export type DocsSection = { name: string; pages: DocsLink[] };
 export type Heading = { id: string; text: string };
 
-const CONTENT = new URL("../content/", import.meta.url);
-
-// A fence naming an example file and nothing else, as
-//
-//     ```tsx file=quick-start/server/Home.tsx
-//     ```
-//
-// (Prettier leaves a blank line inside) is that file, from
-// `content/examples/`, shown under its name within the example:
-// `server/Home.tsx`. The examples are type-checked and tested, so what a page
-// shows works. With `diff=` naming another file, as the tutorial's previous
-// step, the site shows the whole file with the lines that differ marked, and
-// the Markdown agents read shows a unified diff. With `details="…"`, the file
-// is folded away under that summary.
-const INCLUDE =
-  /^```(\w+) file=(\S+)(?: diff=(\S+))?(?: (details="[^"]*"))?\n\s*```$/gm;
+// The docs' Markdown and the example files it names, as the build gathers
+// them (content.ts): each file's text, by its path from content/.
+const CONTENT: Record<string, string> = JSON.parse(
+  await readFile(new URL("content.json", import.meta.url), "utf8"),
+);
 
 // A page's Markdown with every example written out: for the site, or as
 // agents read it.
@@ -34,7 +24,7 @@ export async function readPage(
   file: string,
   as: "html" | "markdown",
 ): Promise<string> {
-  const source = await readFile(new URL(file, CONTENT), "utf8");
+  const source = contentOf(file);
   const includes = await Promise.all(
     [...source.matchAll(INCLUDE)].map(
       async ([, lang, path, before, details]) => {
@@ -60,8 +50,16 @@ export async function readPage(
   );
 }
 
-function readExample(path: string): Promise<string> {
-  return readFile(new URL(`examples/${path}`, CONTENT), "utf8");
+function readExample(path: string): string {
+  return contentOf(`examples/${path}`);
+}
+
+function contentOf(path: string): string {
+  const text = CONTENT[path];
+  if (text === undefined) {
+    throw new Error(`content/${path} doesn't exist.`);
+  }
+  return text;
 }
 
 // The lines of `after` that aren't in `before`, numbered from 1, as ranges:
