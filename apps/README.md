@@ -24,3 +24,17 @@ phone ── GET https://<id>.backtickjs.app/day ──────────�
 Claude ── MCP ────────────────────────────────────────────► mcp.backtickjs.com: start_app, get_app, save_app (each save
                                                              checks the app and stores its release in Supabase)
 ```
+
+## Deploying
+
+A push to `main` deploys every Vercel host it changes: each is a Vercel project connected to this repo, with its folder as its root directory. Vercel skips a host when neither its folder, nor a workspace package it depends on, nor its part of the lockfile changed; a change outside the workspace (a root file) deploys them all. Each production deployment goes live only once CI's `check` job passes on its commit (a Deployment Check, 30 minutes at most); a pull request gets a preview of each host it changes.
+
+So `main` must always be safe to ship as it is:
+
+1. A migration is applied (`supabase db push`, `mcp.backtickjs.com`) before the commit that needs it reaches `main`, or the code works with and without it.
+2. A new build sandbox snapshot (`mcp.backtickjs.com`, after a `@backtickjs/*` release) is made and set as `SNAPSHOT_ID` before the commit that expects it.
+3. A secret, a variable or DNS a commit needs is set before it's pushed.
+
+Vercel's settings for this live in each project: the connection, "skip unaffected projects" (`enableAffectedProjectsDeployments`) and the `CI` check.
+
+`backtickjs.app` deploys the same way from Cloudflare (Workers Builds on the Worker `backtickjs-app`): a push to `main` that changes its folder or the lockfile runs `pnpm run deploy` there. Unlike Vercel, Cloudflare doesn't wait for CI: the commit goes live as soon as Wrangler deploys it.

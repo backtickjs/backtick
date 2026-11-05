@@ -10,13 +10,4 @@ It's a Backtick app itself: Hono routes (`src/app.tsx`) whose pages are Solid sc
 
 ## Setting up
 
-A Vercel project with this folder as its root directory and the domain `backtickjs.dev`, deployed from this machine as `app.backtickjs.com` is (see its README): from the repo's root, naming the project by its ids.
-
-```sh
-cd ../..
-VERCEL_ORG_ID=$(node -p 'require("./apps/backtickjs.dev/.vercel/project.json").orgId') \
-VERCEL_PROJECT_ID=$(node -p 'require("./apps/backtickjs.dev/.vercel/project.json").projectId') \
-vercel deploy --prod
-```
-
-Without `--prod`, a preview to try first.
+The Vercel project `backtickjs-dev`, with this folder as its root directory and the domain `backtickjs.dev`. A push to `main` deploys it (see `apps/README.md`, Deploying).

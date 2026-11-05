@@ -15,4 +15,4 @@ It's built as backtickjs.dev is: Hono routes (`src/app.tsx`) whose pages are Sol
 
 ## Setting up
 
-A Vercel project with this folder as its root directory and the domain `backtickjs.com`, deployed from this machine as backtickjs.dev is (see its README).
+The Vercel project `backtickjs-com`, with this folder as its root directory and the domains `backtickjs.com` and `www.backtickjs.com` (redirected to it). A push to `main` deploys it (see `apps/README.md`, Deploying).

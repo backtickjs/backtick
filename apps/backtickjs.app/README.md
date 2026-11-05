@@ -20,6 +20,6 @@ Users' code runs on this domain: the Worker's secrets stay in its own environmen
 
 ## Setting up
 
-`wrangler.jsonc` names the Worker, `backtickjs-app`, its loader binding, Supabase's URL and the token issuer, which are public. Two secrets, set with `wrangler secret put`: `SUPABASE_SERVICE_ROLE_KEY`, and `BACKTICK_APP_USER_SECRET` (random; changing it changes every app's user IDs). `pnpm dev` runs it on this machine; a phone's request is one with its host, `curl -H "Host: <id>.backtickjs.app" localhost:8787/`. `pnpm run deploy` deploys it.
+`wrangler.jsonc` names the Worker, `backtickjs-app`, its loader binding, Supabase's URL and the token issuer, which are public. Two secrets, set with `wrangler secret put`: `SUPABASE_SERVICE_ROLE_KEY`, and `BACKTICK_APP_USER_SECRET` (random; changing it changes every app's user IDs). `pnpm dev` runs it on this machine; a phone's request is one with its host, `curl -H "Host: <id>.backtickjs.app" localhost:8787/`. A push to `main` deploys it (see `apps/README.md`, Deploying); `pnpm run deploy` deploys it from this machine.
 
 `pnpm test` checks its routing and its token checks, with the issuer's keys, Supabase, the cache and the loader stubbed.

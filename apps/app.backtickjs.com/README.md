@@ -25,16 +25,7 @@ A Vercel project with this folder as its root directory, the domain `app.backtic
 | `APPLE_TEAM_ID`             | The Apple team the Backtick app is signed by, for the iOS association file                                                           |
 | `CRON_SECRET`               | Random. Vercel Cron sends it to `/cron/erase-deleted-apps`, which erases apps deleted 30 days ago with their previews, daily. Secret |
 
-It's the Vercel project `app-backtickjs-com`, linked from this folder, and not connected to GitHub: it's deployed from this machine. Vercel builds it from the repo's root, as a monorepo: the project's root directory is this folder, `vercel.json` installs the workspace (`pnpm install` at the root) and builds what this project depends on (`turbo run build --filter=<project>...`). The root's `.vercelignore` keeps this machine's secrets and build output out of the upload. Deploy from the root, naming the project by its ids:
-
-```sh
-cd ../..
-VERCEL_ORG_ID=$(node -p 'require("./apps/app.backtickjs.com/.vercel/project.json").orgId') \
-VERCEL_PROJECT_ID=$(node -p 'require("./apps/app.backtickjs.com/.vercel/project.json").projectId') \
-vercel deploy --prod
-```
-
-Without `--prod`, a preview to try first.
+It's the Vercel project `app-backtickjs-com`, linked from this folder. A push to `main` deploys it (see `apps/README.md`, Deploying). Vercel builds it from the repo's root, as a monorepo: the project's root directory is this folder, `vercel.json` installs the workspace (`pnpm install` at the root) and builds what this project depends on (`turbo run build --filter=<project>...`).
 
 `pnpm typecheck` checks it, against the shell's build (`pnpm build` in `apps/shell`, which turbo runs first). To try a screen without the phone, send a request with the phone's modules:
 

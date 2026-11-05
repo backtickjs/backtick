@@ -25,7 +25,7 @@ The tables (`authorization_codes`, `devices`, `dpop_proofs`) are in the Supabase
 
 ## Setting up
 
-A Vercel project with this folder as its root directory, the domain `auth.backtickjs.com`, and these variables:
+A Vercel project with this folder as its root directory, the domain `auth.backtickjs.com`, and these variables. A push to `main` deploys it (see `apps/README.md`, Deploying).
 
 | Variable                     | What it is                                                                                                                                             |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |

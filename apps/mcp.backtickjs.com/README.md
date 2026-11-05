@@ -118,17 +118,8 @@ The sandbox installs `@backtickjs/*` from npm, so a change to them or to `sandbo
    vercel env pull
    ```
 
-5. Deploy the function, only now: it may expect what the new sandbox answers. Sandboxes from the old snapshot aren't reused, and time out on their own. Vercel builds it from the repo's root, as a monorepo: the project's root directory is this folder, `vercel.json` installs the workspace (`pnpm install` at the root) and builds what this project depends on (`turbo run build --filter=<project>...`). The root's `.vercelignore` keeps this machine's secrets and build output out of the upload. From the root:
-
-   ```sh
-   cd ../..
-   VERCEL_ORG_ID=$(node -p 'require("./apps/mcp.backtickjs.com/.vercel/project.json").orgId') \
-   VERCEL_PROJECT_ID=$(node -p 'require("./apps/mcp.backtickjs.com/.vercel/project.json").projectId') \
-   vercel deploy --prod
-   ```
-
-   Without `--prod`, a preview to try first: a change that adds a package or a file belongs in one before production.
+5. Push the commit that expects the new sandbox, only now: a push to `main` deploys the function (see `apps/README.md`, Deploying). Sandboxes from the old snapshot aren't reused, and time out on their own. A change that adds a package or a file belongs in a pull request first, whose preview tries it.
 
 6. Delete the previous snapshot once the new one has served for a while. Snapshots don't expire, and storage is billed.
 
-A change to `src/function/` alone needs only step 5.
+A change to `src/function/` alone needs only the push.
