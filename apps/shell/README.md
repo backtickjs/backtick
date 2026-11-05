@@ -30,7 +30,7 @@ Sign-in and the session are the native module's (`modules/backtick-session`): si
 
 ## Publishing it
 
-The shell is its own app, built with EAS (`eas.json`): `development` builds an Android APK on its own update channel, for testing. EAS Update ships JavaScript changes to builds of the same runtime version (`runtimeVersion` in `app.json`, set by hand) on the same channel. A change to native code (a dependency with native code, the session module, a config plugin, the SDK) needs a new build and a new runtime version; `pnpm test` fails until it has one (`native.json` records the native side; `UPDATE=1 pnpm test` rewrites it).
+The shell is its own app, built with EAS (`eas.json`): `development` builds an Android APK on its own update channel, for testing. EAS Update ships JavaScript changes to builds of the same runtime version on the same channel. The runtime version is Expo's fingerprint of the native side (`"policy": "fingerprint"` in `app.json`): native dependencies, the session module, config plugins and the native settings in `app.json`. A change to any of them gives the next build a new runtime version, and updates published after it reach only builds that have it; `eas fingerprint:compare` shows what changed.
 
 ```sh
 pnpm dlx eas-cli build -p android --profile development --local
