@@ -104,6 +104,14 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
     await consent();
   }
 
+  // Signed out on this page only, back to the sign-in options: for someone
+  // signed in here with another account before.
+  async function switchAccount() {
+    await supabase.auth.signOut({ scope: "local" });
+    setError("");
+    setStep("sign-in");
+  }
+
   async function decide(allow: boolean) {
     const { error } = allow
       ? await supabase.auth.oauth.approveAuthorization(id!)
@@ -178,6 +186,9 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
           </button>
           <button class="pill" onClick={() => decide(false)}>
             Deny
+          </button>
+          <button class="other" onClick={switchAccount}>
+            Use a different account
           </button>
         </>
       ) : (
