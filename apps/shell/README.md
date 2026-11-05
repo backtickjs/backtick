@@ -38,6 +38,8 @@ pnpm dlx eas-cli build -p android --profile development --local
 
 Without `--local`, EAS builds it in the cloud. A build signed by EAS is the only kind that can finish signing in: `app.backtickjs.com` vouches for EAS's certificate.
 
+For iOS, run it with `EXPO_NO_CAPABILITY_SYNC=1`: the App ID's capabilities (Sign in with Apple, Associated Domains) are set in Apple's developer console, and EAS would otherwise turn Sign in with Apple off, since the app signs in with Apple on the web rather than with its native API. Apple refuses that anyway: the sign-in Services ID, `com.backtickjs.app.signin`, depends on it.
+
 ## What other projects import
 
 The shell is a workspace package too. `pnpm build` (`tsconfig.server.json`, with `tspc`) writes `build/`, which its `package.json` exports:
