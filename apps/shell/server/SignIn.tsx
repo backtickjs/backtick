@@ -18,8 +18,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context" with {
 import { Path, Svg } from "react-native-svg" with { backtick: "client" };
 
 // What a phone without a session sees, in backtickjs.com's look: the wordmark
-// above, and the ways to sign in below, within the thumb's reach. Apple (on
-// an iPhone) and Google are one tap; email opens Backtick's sign-in page.
+// above, and the ways to sign in below, within the thumb's reach. Google and
+// Apple (on an iPhone) are one tap; email opens Backtick's sign-in page.
 // Each is a shell link that opens the system's sign-in browser.
 export function SignIn() {
   return cs`{
@@ -129,6 +129,12 @@ export function SignIn() {
             </$Text>
           </$View>
           <$View style={styles.buttons}>
+            <Continue
+              to="sign-in?provider=google"
+              label="Continue with Google"
+              solid
+              icon="google"
+            />
             {$Platform.OS === "ios" ? (
               <Continue
                 to="sign-in?provider=apple"
@@ -137,12 +143,6 @@ export function SignIn() {
                 icon="apple"
               />
             ) : null}
-            <Continue
-              to="sign-in?provider=google"
-              label="Continue with Google"
-              solid
-              icon="google"
-            />
             <Continue
               to="sign-in"
               label="Continue with email"

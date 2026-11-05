@@ -17,6 +17,8 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
     "loading",
   );
   const [email, setEmail] = $createSignal("");
+  // Who's signed in on this page, beside the way to switch.
+  const [account, setAccount] = $createSignal("");
   const [code, setCode] = $createSignal("");
 
   async function consent() {
@@ -41,9 +43,9 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
     }
     setMessage(
       (data.client.name || "An app") +
-        " wants to make and change apps in your Backtick account, " +
-        data.user.email + ".",
+        " wants to see, build and edit apps in your Backtick account.",
     );
+    setAccount(data.user.email);
     setStep("asking");
   }
 
@@ -130,12 +132,6 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
         <>
           <p class="lede">Sign in with the account you use in the Backtick app.</p>
           {error() ? <p class="message">{error()}</p> : null}
-          <button class="pill solid" onClick={() => withProvider("apple")}>
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M17.05 12.54c-.03-2.78 2.27-4.12 2.37-4.18-1.29-1.89-3.3-2.15-4.02-2.18-1.71-.17-3.34 1.01-4.21 1.01-.87 0-2.21-.98-3.63-.96-1.87.03-3.59 1.09-4.55 2.76-1.94 3.37-.5 8.35 1.39 11.08.92 1.34 2.03 2.84 3.47 2.78 1.39-.06 1.92-.9 3.6-.9 1.68 0 2.15.9 3.62.87 1.5-.03 2.45-1.36 3.36-2.71 1.06-1.55 1.5-3.06 1.52-3.14-.03-.01-2.92-1.12-2.95-4.45zM14.3 4.38c.77-.93 1.29-2.22 1.15-3.51-1.11.05-2.45.74-3.25 1.67-.71.82-1.34 2.14-1.17 3.4 1.24.1 2.5-.63 3.27-1.56z" />
-            </svg>
-            Continue with Apple
-          </button>
           <button class="pill solid" onClick={() => withProvider("google")}>
             <svg viewBox="0 0 48 48" aria-hidden="true">
               <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
@@ -144,6 +140,12 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
               <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
             </svg>
             Continue with Google
+          </button>
+          <button class="pill solid" onClick={() => withProvider("apple")}>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.05 12.54c-.03-2.78 2.27-4.12 2.37-4.18-1.29-1.89-3.3-2.15-4.02-2.18-1.71-.17-3.34 1.01-4.21 1.01-.87 0-2.21-.98-3.63-.96-1.87.03-3.59 1.09-4.55 2.76-1.94 3.37-.5 8.35 1.39 11.08.92 1.34 2.03 2.84 3.47 2.78 1.39-.06 1.92-.9 3.6-.9 1.68 0 2.15.9 3.62.87 1.5-.03 2.45-1.36 3.36-2.71 1.06-1.55 1.5-3.06 1.52-3.14-.03-.01-2.92-1.12-2.95-4.45zM14.3 4.38c.77-.93 1.29-2.22 1.15-3.51-1.11.05-2.45.74-3.25 1.67-.71.82-1.34 2.14-1.17 3.4 1.24.1 2.5-.63 3.27-1.56z" />
+            </svg>
+            Continue with Apple
           </button>
           <button class="pill" onClick={() => setStep("email")}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true">
@@ -211,7 +213,7 @@ export const Consent = cs`(props: { url: string; publishableKey: string }) => {
             Deny
           </button>
           <button class="other" onClick={switchAccount}>
-            Use a different account
+            Not {account()}? Use a different account
           </button>
         </>
       ) : (
