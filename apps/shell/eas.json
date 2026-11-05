@@ -32,6 +32,13 @@
         }
       }
     },
+    "simulator": {
+      "extends": "production",
+      "autoIncrement": false,
+      "ios": {
+        "simulator": true
+      }
+    },
     "production-local": {
       "extends": "production",
       "android": {
