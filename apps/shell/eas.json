@@ -31,6 +31,15 @@
           "ORG_GRADLE_PROJECT_reactNativeArchitectures": "arm64-v8a,armeabi-v7a"
         }
       }
+    },
+    "production-local": {
+      "extends": "production",
+      "android": {
+        "env": {
+          "ORG_GRADLE_PROJECT_reactNativeArchitectures": "arm64-v8a,armeabi-v7a",
+          "GRADLE_OPTS": "-Dorg.gradle.jvmargs=\"-Xmx3g -XX:MaxMetaspaceSize=768m\" -Dorg.gradle.parallel=false -Dorg.gradle.workers.max=1 -Dkotlin.daemon.jvm.options=-Xmx1536m"
+        }
+      }
     }
   },
   "submit": {

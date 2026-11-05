@@ -26,6 +26,7 @@
   "description": "The Backtick app: sign in, see the apps your assistant made, and open them",
   "main": "expo-router/entry",
   "scripts": {
+    "build:android": "taskpolicy -b pnpm dlx eas-cli build -p android --profile production-local --local",
     "start": "expo start",
     "android": "expo run:android",
     "build": "tspc -p tsconfig.server.json --noCheck",
