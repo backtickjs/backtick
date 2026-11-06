@@ -3,19 +3,8 @@ import { execRoot } from "@backtickjs/core/cjs";
 import { getBacktickExtra } from "@backtickjs/expo";
 import Constants from "expo-constants";
 import type { ComponentType, ReactNode } from "react";
-import { useColorScheme } from "react-native";
 import { moduleMap } from "./moduleMap";
 import { apps, home } from "./hosts";
-
-// backtickjs.com's paper, behind every screen (server/look.tsx).
-export function usePaper(): string {
-  return useColorScheme() === "dark" ? "#0a0a0c" : "#ffffff";
-}
-
-// backtickjs.com's ink, for what the shell draws over a screen.
-export function useInk(): string {
-  return useColorScheme() === "dark" ? "#fafafa" : "#0e0e10";
-}
 
 // The modules this build carries, at the versions app.json's plugin records.
 const { installedPackages } = getBacktickExtra(Constants.expoConfig);

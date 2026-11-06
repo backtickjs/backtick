@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, Text, useColorScheme } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getErrorMessage } from "react-error-boundary";
-import { useInk, usePaper } from "./screens";
+import { useInk, usePaper } from "./theme";
 
 // What a screen or a root layout that didn't load shows, with Retry.
 // In backtickjs.com's colours (server/look.tsx): ink and paper, and its red.

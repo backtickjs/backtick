@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { onSessionChange } from "../../modules/backtick-session/src";
-import { usePaper } from "../screens";
+import { usePaper } from "../theme";
 import { followRoot } from "./+native-intent";
 
 // Nothing is drawn here: every screen, sign-in's included, comes from the
@@ -14,7 +14,7 @@ export default function Layout() {
   const [sessions, setSessions] = useState(0);
   followRoot(useNavigationContainerRef());
   // Every navigation a transition, not only preloads: an app's layout holds
-  // the screen on top while the next one is fetched (AppLayout.tsx).
+  // the screen on top while the next one is fetched (App.tsx).
   useEffect(() => router.setTransitionMode("always"), []);
   useEffect(() => {
     const subscription = onSessionChange(() => setSessions((n) => n + 1));

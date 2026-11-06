@@ -1,5 +1,5 @@
 import { useRoute } from "expo-router";
-import { AppLayout } from "../../AppLayout";
+import { App } from "../../App";
 import { ShellSplash } from "../../ShellSplash";
 
 // A navigator for each app opened, so what's open closes with it. The app is
@@ -8,5 +8,5 @@ import { ShellSplash } from "../../ShellSplash";
 // have arrived, so the wait is the builder's; the app starts with them.
 export default function AppNavigator() {
   const app = (useRoute().params as { __backtick: string }).__backtick;
-  return <AppLayout app={app} splash={<ShellSplash />} />;
+  return <App app={app} splash={<ShellSplash />} />;
 }

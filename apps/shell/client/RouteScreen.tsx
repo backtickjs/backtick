@@ -12,16 +12,16 @@ import { useFocusEffect, useIsFocused, useRoute } from "expo-router";
 import { ErrorBoundary } from "react-error-boundary";
 import { followStartingLink } from "./app/+native-intent";
 import { Failed } from "./Failed";
-import { hrefOfRoute, LoadedScreens } from "./AppLayout";
+import { hrefOfRoute, LoadedScreens } from "./App";
 import { savePreview } from "./preview";
-import { showing } from "./shown";
+import { showing } from "./reload";
 import { isSignedIn } from "../modules/backtick-session/src";
 
 // A route's screen: the one its navigation waited for. A route mounted
 // hidden (`<Link prefetch>`) shows nothing until it comes on top, and then
 // takes the screen fetched for the navigation that put it there, whichever
 // route expo-router reuses for it.
-export function Document() {
+export function RouteScreen() {
   const screens = use(LoadedScreens);
   const { app } = screens;
   // The route's own href, from its params: a route's never changes.

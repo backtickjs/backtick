@@ -129,7 +129,7 @@ export function hrefOfRoute(params: object | undefined): string {
 // first open, `splash` shows until the root layout and the first screen have
 // both arrived. The navigator is the app's own, its root layout's Stack: the
 // shell has none.
-export function AppLayout({
+export function App({
   app,
   splash,
 }: {

@@ -1,6 +1,6 @@
 import type { NavigationState, useNavigationContainerRef } from "expo-router";
 import { Alert, Linking } from "react-native";
-import { reloadShownScreen } from "../shown";
+import { reloadShownScreen } from "../reload";
 import {
   isSignedIn,
   signIn,
