@@ -46,3 +46,7 @@ build/
 # Local store builds (`pnpm build:android`)
 *.aab
 *.apk
+# The store signing key, if downloaded with `eas credentials`: never committed
+*.jks
+*.keystore
+pepk*.zip
