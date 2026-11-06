@@ -2,22 +2,14 @@ import { type Bundle, modulesOf } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 import { getBacktickExtra } from "@backtickjs/expo";
 import Constants from "expo-constants";
-import type { ReactNode } from "react";
+import type { ComponentType, ReactNode } from "react";
 import { useColorScheme } from "react-native";
-import { keepManifest, type Manifest } from "./manifest";
 import { moduleMap } from "./moduleMap";
 import { apps, home } from "./hosts";
 
 // backtickjs.com's paper, behind every screen (server/look.tsx).
 export function usePaper(): string {
   return useColorScheme() === "dark" ? "#0a0a0c" : "#ffffff";
-}
-
-// Behind an app's screens: its `background_color`, whatever the phone's
-// setting, since an app's own colours don't follow that setting unless it says
-// so. Without one, as an Expo Router app, light.
-export function appPaper(manifest: Manifest | undefined): string {
-  return manifest?.background_color ?? "#ffffff";
 }
 
 // backtickjs.com's ink, for what the shell draws over a screen.
@@ -49,9 +41,26 @@ export async function fetchApp(
   path: string,
   signal?: AbortSignal,
 ): Promise<ReactNode> {
-  const response = await request(appUrl(app, path), signal);
-  keepManifest(app, response.headers.get("x-backtick-manifest"));
-  return run(response);
+  return run(await request(appUrl(app, path), signal));
+}
+
+// An app's root layout: a component rendering its navigator, given the
+// screen a navigation is loading, to hold the current one until it arrives.
+export type RootLayout = ComponentType<{ navigating?: Promise<void> }>;
+
+// The root layout of an app, or of Backtick's home (app null). Every app has
+// one; an app without one answers 404.
+export async function fetchRootLayout(app: string | null): Promise<RootLayout> {
+  const path = "/.well-known/backtick/root-layout";
+  const response = await request(
+    app === null ? `https://${home}${path}` : appUrl(app, path),
+  );
+  if (response.status !== 200) {
+    throw new Error(
+      `The app's root layout couldn't be loaded (${response.status}).`,
+    );
+  }
+  return (await run(response)) as unknown as RootLayout;
 }
 
 // A screen, bundled by its server for this phone's modules. The session's

@@ -1,6 +1,5 @@
 import type { NavigationState, useNavigationContainerRef } from "expo-router";
 import { Alert, Linking } from "react-native";
-import { loadManifest } from "../manifest";
 import { reloadShownScreen } from "../shown";
 import {
   isSignedIn,
@@ -46,7 +45,6 @@ export async function redirectSystemPath({
   }
   const [first, ...rest] = link.pathname.split("/");
   if (isAppId(first)) {
-    await loadManifest(first);
     openOverHome(rest, link.search, first);
     return null;
   }

@@ -8,14 +8,12 @@ import {
   useRef,
   useState,
 } from "react";
-import { Pressable, StyleSheet, Text, useColorScheme } from "react-native";
 import { useFocusEffect, useIsFocused, useRoute } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { ErrorBoundary, getErrorMessage } from "react-error-boundary";
+import { ErrorBoundary } from "react-error-boundary";
 import { followStartingLink } from "./app/+native-intent";
+import { Failed } from "./Failed";
 import { hrefOfRoute, LoadedScreens } from "./AppLayout";
 import { savePreview } from "./preview";
-import { useInk, usePaper } from "./screens";
 import { showing } from "./shown";
 import { isSignedIn } from "../modules/backtick-session/src";
 
@@ -108,37 +106,3 @@ export function Document() {
 function Screen({ screen }: { screen: Promise<ReactNode> }) {
   return use(screen);
 }
-
-// In backtickjs.com's colours (server/look.tsx): ink and paper, and its red.
-function Failed({ error, retry }: { error: unknown; retry: () => void }) {
-  const dark = useColorScheme() === "dark";
-  const ink = useInk();
-  const paper = usePaper();
-  return (
-    <SafeAreaView style={styles.failed}>
-      <Text style={[styles.error, { color: dark ? "#f87171" : "#dc2626" }]}>
-        {getErrorMessage(error) ?? String(error)}
-      </Text>
-      <Pressable
-        style={[styles.button, { backgroundColor: ink }]}
-        // Not `onPress={retry}`: that passes the press event to `reload`
-        // as its signal, and fetch throws calling its addEventListener.
-        onPress={() => retry()}
-      >
-        <Text style={[styles.label, { color: paper }]}>Retry</Text>
-      </Pressable>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  failed: { margin: 24, gap: 20 },
-  error: { fontSize: 16, lineHeight: 24 },
-  button: {
-    alignSelf: "flex-start",
-    borderRadius: 999,
-    paddingHorizontal: 22,
-    paddingVertical: 13,
-  },
-  label: { fontSize: 15, fontWeight: "600" },
-});

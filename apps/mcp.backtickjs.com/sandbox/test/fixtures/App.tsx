@@ -5,10 +5,10 @@
 // 4. Each route is a screen: <$Link href="/day"> opens the one at "/day".
 
 import { cs } from "@backtickjs/core";
-import { backtick } from "@backtickjs/hono";
+import { backtick, type RootLayoutProps } from "@backtickjs/hono";
 import { Hono } from "hono";
-import { Link } from "expo-router" with { backtick: "client" };
-import { useState } from "react" with { backtick: "client" };
+import { Link, Stack } from "expo-router" with { backtick: "client" };
+import { use, useState } from "react" with { backtick: "client" };
 import { Pressable, StyleSheet, Text } from "react-native" with {
   backtick: "client",
 };
@@ -19,7 +19,12 @@ import { SafeAreaView } from "react-native-safe-area-context" with {
 const app = new Hono();
 
 // `context.render(element)` answers with the screen, bundled for the phone.
-app.use(backtick());
+const RootLayout = cs`(props: RootLayoutProps) => {
+  if (props.navigating) $use(props.navigating);
+  return <$Stack />;
+}`;
+
+app.use(backtick({ rootLayout: RootLayout }));
 app.get("/", (context) => context.render(<Home />));
 app.get("/day", (context) => context.render(<Day />));
 

@@ -7,11 +7,11 @@ export const starter = `// A Backtick app:
 // 4. Each route is a screen, and runs on the server each time it opens.
 
 import { cs } from "@backtickjs/core";
-import { backtick } from "@backtickjs/hono";
+import { backtick, type RootLayoutProps } from "@backtickjs/hono";
 import { Hono } from "hono";
 import { Link, Stack } from "expo-router" with { backtick: "client" };
 import { StatusBar } from "expo-status-bar" with { backtick: "client" };
-import { useState } from "react" with { backtick: "client" };
+import { type ReactNode, Suspense, use, useState } from "react" with { backtick: "client" };
 import { Pressable, StyleSheet, Text } from "react-native" with { backtick: "client" };
 import { SafeAreaView } from "react-native-safe-area-context" with { backtick: "client" };
 
@@ -54,15 +54,23 @@ function Day() {
   \`;
 }
 
-// https://w3c.github.io/manifest/
-const manifest = {
-  name: "My app",
-  theme_color: "#0a7ea4",
-  background_color: "#ffffff",
-};
+// Keeps the screen on top until the next one arrives.
+const HoldScreen = cs\`(props: { navigating?: Promise<void>; children: ReactNode }) => {
+  if (props.navigating) $use(props.navigating);
+  return props.children;
+}\`;
+
+// Around every screen, as expo-router's app/_layout.tsx.
+const RootLayout = cs\`(props: RootLayoutProps) => (
+  <$Suspense fallback={null}>
+    <$HoldScreen navigating={props.navigating}>
+      <$Stack />
+    </$HoldScreen>
+  </$Suspense>
+)\`;
 
 const app = new Hono();
-app.use(backtick({ manifest }));
+app.use(backtick({ rootLayout: RootLayout }));
 app.get("/", (context) => context.render(<Home />));
 app.get("/day", (context) => context.render(<Day />));
 

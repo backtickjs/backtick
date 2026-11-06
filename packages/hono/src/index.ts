@@ -1,5 +1,5 @@
 import { bundler, BundlerError, type Modules } from "@backtickjs/bundler";
-import type { Spliceable, SplicesAs } from "@backtickjs/core";
+import type { Client, Spliceable, SplicesAs } from "@backtickjs/core";
 import type { MiddlewareHandler } from "hono";
 
 declare module "hono" {
@@ -12,13 +12,14 @@ declare module "hono" {
   }
 }
 
-/** A web app manifest: what the phone uses of an app before and around it. */
-export interface Manifest {
-  name?: string;
-  short_name?: string;
-  icons?: { src: string; sizes?: string; type?: string }[];
-  theme_color?: string;
-  background_color?: string;
+/** What the phone passes an app's root layout. */
+export interface RootLayoutProps {
+  /**
+   * The screen a navigation is loading, until it arrives: `use()` it to keep
+   * the current screen up meanwhile, as a transition does. Undefined when
+   * nothing is loading.
+   */
+  navigating?: Promise<void>;
 }
 
 /**
@@ -26,7 +27,7 @@ export interface Manifest {
  * answers with `input` bundled for the modules the client sent in
  * `x-backtick-modules`, so each route is a screen.
  *
- *     app.use(backtick());
+ *     app.use(backtick({ rootLayout: RootLayout }));
  *     app.get("/", (context) => context.render(<Home />));
  *
  * The status is the context's, so `context.status(404)` makes a not-found
@@ -34,14 +35,26 @@ export interface Manifest {
  * without a module the screen needs gets a 426, and any other refusal of the
  * bundler's a 400, each with `{ name, message }`.
  *
- * `manifest` is the app's web app manifest, sent in `x-backtick-manifest` on
- * every screen, so it's as fresh as they are.
+ * `rootLayout` is the app's root layout, as expo-router's `app/_layout.tsx`
+ * is one: a client component rendered once as the app opens and mounted while
+ * its screens change. It renders the app's `Stack`, with its options, and
+ * anything that outlives a screen; while a navigation's screen loads, it gets
+ * `navigating`, which it `use()`s inside its own `Suspense` to keep the
+ * current screen until the next arrives. The phone fetches it at
+ * `/.well-known/backtick/root-layout`, outside the app's own paths. A client
+ * with a navigator of its own never fetches it.
+ *
+ *     const RootLayout = cs`(props: RootLayoutProps) => (
+ *       <$Suspense fallback={null}>
+ *         <$HoldScreen navigating={props.navigating}><$Stack /></$HoldScreen>
+ *       </$Suspense>
+ *     )`;
+ *     app.use(backtick({ rootLayout: RootLayout }));
  */
-export function backtick(
-  options: { manifest?: Manifest } = {},
-): MiddlewareHandler {
-  const { manifest } = options;
-  const json = JSON.stringify(manifest);
+export function backtick(options: {
+  rootLayout: Client<(props: RootLayoutProps) => unknown>;
+}): MiddlewareHandler {
+  const { rootLayout } = options;
   return async (context, next) => {
     context.setRenderer(async (input) => {
       let modules: Modules;
@@ -59,9 +72,6 @@ export function backtick(
         const { code } = build.generate({ format: "cjs" });
         context.header("content-type", "text/javascript");
         context.header("cache-control", "no-store");
-        if (manifest !== undefined) {
-          context.header("x-backtick-manifest", encodeURIComponent(json));
-        }
         return context.body(code);
       } catch (error) {
         if (error instanceof BundlerError) {
@@ -73,6 +83,12 @@ export function backtick(
         throw error;
       }
     });
+    if (context.req.path === rootLayoutPath) {
+      return context.render(rootLayout);
+    }
     await next();
   };
 }
+
+// Where the phone fetches an app's root layout.
+const rootLayoutPath = "/.well-known/backtick/root-layout";

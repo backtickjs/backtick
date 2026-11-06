@@ -1,7 +1,7 @@
 import { useInk, usePaper } from "./screens";
 import { SplashView } from "./SplashView";
 
-// Backtick's own, while its home is fetched.
+// Backtick's own, while its home or an app it opens is fetched.
 export function ShellSplash() {
   return (
     <SplashView

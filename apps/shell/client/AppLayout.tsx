@@ -1,6 +1,5 @@
-import { Stack, useIsFocused, useUnstableGlobalHref } from "expo-router";
+import { useIsFocused, useUnstableGlobalHref } from "expo-router";
 import {
-  type ComponentProps,
   createContext,
   type ReactNode,
   Suspense,
@@ -8,8 +7,14 @@ import {
   useEffect,
   useState,
 } from "react";
-import { Progress } from "./Progress";
-import { fetchApp, fetchHome } from "./screens";
+import { ErrorBoundary } from "react-error-boundary";
+import { Failed } from "./Failed";
+import {
+  fetchApp,
+  fetchHome,
+  fetchRootLayout,
+  type RootLayout,
+} from "./screens";
 
 // A screen on its way.
 interface Load {
@@ -115,53 +120,76 @@ export function hrefOfRoute(params: object | undefined): string {
   return normalised(path + "?" + search);
 }
 
-// Runs one app, or Backtick's home (app null), as a browser runs a site: each
-// path navigated to is fetched from the app's server, and the screen on top
-// stays until it arrives. expo-router dispatches each navigation in a
-// transition, so this layout suspending holds what's shown; a route can't
-// hold it, since each route has a Suspense boundary of its own. The layout
-// can't see its navigator's routes, only the href on top. On a first open,
-// nothing is shown yet: `splash` is.
+// Runs one app, or Backtick's home (app null): each path navigated to is
+// fetched from the app's server, and the app's root layout gets the fetch as
+// `navigating`. expo-router dispatches each navigation in a transition, so a
+// root layout that suspends on it keeps the screen on top until the next
+// arrives; a route can't, since each route has a Suspense boundary of its own.
+// The layout can't see its navigator's routes, only the href on top. On a
+// first open, `splash` shows until the root layout and the first screen have
+// both arrived. The navigator is the app's own, its root layout's Stack: the
+// shell has none.
 export function AppLayout({
   app,
   splash,
-  screenOptions,
 }: {
   app: string | null;
   splash: ReactNode;
-  screenOptions: ComponentProps<typeof Stack>["screenOptions"];
 }) {
   const top = normalised(useUnstableGlobalHref());
   // The href on top is this navigator's only while it's on top: the home's
   // stays mounted under an app.
   const focused = useIsFocused();
   const [screens] = useState(() => new Screens(app));
+  // The root layout, once per open, fetched with the first screen: the splash
+  // stays for both.
+  const [rootLayout, setRootLayout] = useState(() => fetchRootLayout(app));
   const load = focused ? screens.navigatingTo(top) : undefined;
+  // The first screen's load: the splash stays until it has arrived too,
+  // whatever the root layout does with `navigating`. Settled after that, so
+  // it never holds again.
+  const [opening] = useState(() => load?.settled);
   // After the routes' own effects, so a route mounted twice finds its screen
   // both times.
   useEffect(() => screens.settle(top));
   return (
     <LoadedScreens value={screens}>
       <Suspense fallback={splash}>
-        <Hold until={load?.settled}>
-          <Stack screenOptions={screenOptions} />
-        </Hold>
+        <ErrorBoundary
+          resetKeys={[rootLayout]}
+          fallbackRender={({ error }) => (
+            <Failed
+              error={error}
+              retry={() => setRootLayout(fetchRootLayout(app))}
+            />
+          )}
+        >
+          <AppRoot
+            layout={rootLayout}
+            opening={opening}
+            navigating={load?.settled}
+          />
+        </ErrorBoundary>
       </Suspense>
-      {/* The navigator on top's, in its app's colour. */}
-      {focused && <Progress app={app} />}
     </LoadedScreens>
   );
 }
 
-function Hold({
-  until,
-  children,
+// The app's root layout, once loaded: its Stack, with its options, and
+// whatever it puts around it. It holds the current screen itself, by `use()`ing
+// `navigating`.
+function AppRoot({
+  layout,
+  opening,
+  navigating,
 }: {
-  until: Promise<void> | undefined;
-  children: ReactNode;
+  layout: Promise<RootLayout>;
+  opening: Promise<void> | undefined;
+  navigating: Promise<void> | undefined;
 }) {
-  if (until !== undefined) {
-    use(until);
+  const Layout = use(layout);
+  if (opening !== undefined) {
+    use(opening);
   }
-  return children;
+  return <Layout navigating={navigating} />;
 }

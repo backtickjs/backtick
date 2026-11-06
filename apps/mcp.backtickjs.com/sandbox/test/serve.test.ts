@@ -62,7 +62,7 @@ it("typechecks and checks over HTTP, file after file", async () => {
       warnings: [],
     });
     const { errors } = await post("typecheck", { file: typo });
-    assert.match(errors.join("\n"), /^App\.tsx\(31,51\): error TS2345/);
+    assert.match(errors.join("\n"), /^App\.tsx\(36,51\): error TS2345/);
     const checked = await post("check", { file: app });
     assert.deepEqual(checked.errors, []);
     assert.match(checked.compiled, /ClientVersionMismatch/);

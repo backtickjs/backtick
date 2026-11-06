@@ -13,17 +13,39 @@ The [repository's README](https://github.com/backtickjs/backtick#packages) says 
 ## Usage
 
 ```tsx
-import { backtick } from "@backtickjs/hono";
+import { cs } from "@backtickjs/core";
+import { backtick, type RootLayoutProps } from "@backtickjs/hono";
+import { Stack } from "expo-router" with { backtick: "client" };
+import { type ReactNode, Suspense, use } from "react" with {
+  backtick: "client",
+};
 import { Hono } from "hono";
 import { Home } from "./Home.js";
 
+// Keeps the screen on top until the next one arrives.
+const HoldScreen = cs`(props: { navigating?: Promise<void>; children: ReactNode }) => {
+  if (props.navigating) $use(props.navigating);
+  return props.children;
+}`;
+
+// Around every screen, as expo-router's app/_layout.tsx.
+const RootLayout = cs`(props: RootLayoutProps) => (
+  <$Suspense fallback={null}>
+    <$HoldScreen navigating={props.navigating}>
+      <$Stack />
+    </$HoldScreen>
+  </$Suspense>
+)`;
+
 const app = new Hono();
 
-app.use(backtick());
+app.use(backtick({ rootLayout: RootLayout }));
 app.get("/", (context) => context.render(<Home />));
 
 export default app;
 ```
+
+`rootLayout` is the app's root layout: a client component rendered once as the app opens, around every screen, which renders its navigator. The Backtick app fetches it at `/.well-known/backtick/root-layout`, and passes it `navigating`, the screen a navigation is loading. The root layout owns the transition between screens: `use()` it inside its own `Suspense` to keep the current screen until the next arrives, and put anything that should update meanwhile, such as a progress bar, outside it. A client with a navigator of its own never fetches it.
 
 The client sends its modules, each at its package's version, in `x-backtick-modules` (in an Expo app, `modulesOf` from `@backtickjs/core` writes them). The answer is the screen's bundle as CommonJS, `text/javascript`, for the client to run with `execRoot`.
 

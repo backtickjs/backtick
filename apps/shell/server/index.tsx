@@ -1,7 +1,14 @@
-import { backtick } from "@backtickjs/hono";
+import { cs } from "@backtickjs/core";
+import { backtick, type RootLayoutProps } from "@backtickjs/hono";
+import { Stack } from "expo-router" with { backtick: "client" };
+import { type ReactNode, Suspense, use } from "react" with {
+  backtick: "client",
+};
 import { Hono } from "hono";
 import { deleteAccount, failed, supabase, userOf } from "./account.js";
 import { Home } from "./Home.js";
+import { useColors } from "./look.js";
+import { Progress } from "./Progress.js";
 import { SignIn } from "./SignIn.js";
 import { Source } from "./Source.js";
 
@@ -11,7 +18,39 @@ export { eraseDeletedApps } from "./account.js";
 // for the user the phone's access token names.
 export const app = new Hono<{ Variables: { user: string } }>();
 
-app.use(backtick());
+// Keeps the screen on top until the next one arrives.
+const HoldScreen = cs`(props: {
+  navigating?: Promise<void>;
+  children: ReactNode;
+}) => {
+  if (props.navigating) $use(props.navigating);
+  return props.children;
+}`;
+
+// The home's root layout: a Stack without headers, on its paper, holding the
+// screen on top until the next arrives, with a progress bar outside the hold
+// while it loads. Signed out too, since it comes before the token check.
+const RootLayout = cs`(props: RootLayoutProps) => {
+  const colors = $useColors();
+  return (
+    <>
+      <$Suspense fallback={null}>
+        <$HoldScreen navigating={props.navigating}>
+          <$Stack
+            screenOptions={{
+              title: "",
+              headerShown: false,
+              contentStyle: { backgroundColor: colors.paper },
+            }}
+          />
+        </$HoldScreen>
+      </$Suspense>
+      <$Progress color={colors.ink} />
+    </>
+  );
+}`;
+
+app.use(backtick({ rootLayout: RootLayout }));
 
 // Nothing of anyone's without a token for this origin: a phone without a
 // session gets sign-in, whatever it asked for. Every route after this has the
