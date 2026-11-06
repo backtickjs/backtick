@@ -42,3 +42,7 @@ yarn-error.*
 
 # `pnpm build`: what other projects import
 build/
+
+# Local store builds (`pnpm build:android`)
+*.aab
+*.apk
