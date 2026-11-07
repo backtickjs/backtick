@@ -29,7 +29,9 @@ const runtimePath = "/.well-known/backtick/runtime";
  *     app.get("/", (context) => context.render(<Home />));
  *
  * The status is the context's, so `context.status(404)` makes a not-found
- * screen, and screens are `no-store`: each opens as its latest copy. A client
+ * screen, and screens are `no-store`, kept out of HTTP caches: a reload or
+ * a new open always gets the latest copy. (The Backtick app reuses a screen
+ * it has, in memory, for 30 seconds, as Next.js's router does.) A client
  * without a module the screen needs gets a 426, and any other refusal of the
  * bundler's a 400, each with `{ name, message }`.
  *

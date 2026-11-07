@@ -93,6 +93,9 @@ export function runtime(
   return cs`{
     // Every answer is a query, keyed by its path: what the route renders, alone.
     // A screen is several: its layouts', its loading state's and its page's.
+    // Each is reused for 30 seconds, in memory, as Next.js's router cache
+    // does: a screen's no-store keeps it out of HTTP caches, not this one.
+    const staleTime = 30000;
     const queryClient = new $QueryClient({
       defaultOptions: {
         queries: {
@@ -102,7 +105,7 @@ export function runtime(
               $modules,
               false,
             ),
-          staleTime: 30000,
+          staleTime,
           structuralSharing: false,
           retry: false,
         },
@@ -152,8 +155,32 @@ export function runtime(
     // An href's layouts and loading state, once they're in; its page fetched
     // meanwhile. Fetched again when stale, unless kept: a hold waits only for
     // what isn't in, so going back shows the screen as it was, as in Next.js.
-    const useFrame = (href: string, kept: boolean) => {
+    // A stale answer no screen shows, in before a navigation started,
+    // is dropped as the navigation reads it, so the navigation waits for a
+    // fresh one, as Next.js's does; one a screen still shows, going back to
+    // it, is kept.
+    const dropStale = (path: string, started: number) => {
+      const query = queryClient
+        .getQueryCache()
+        .find({ queryKey: [path], exact: true });
+      if (
+        query !== undefined &&
+        query.getObserversCount() === 0 &&
+        query.state.data !== undefined &&
+        query.state.dataUpdatedAt < started &&
+        query.isStaleByTime(staleTime)
+      ) {
+        queryClient.removeQueries({ queryKey: [path], exact: true });
+      }
+    };
+    const useFrame = (href: string, started?: number) => {
       const paths = pathsOf(href);
+      const kept = started !== undefined;
+      if (kept) {
+        for (const path of [paths.page, ...framesOf(paths)]) {
+          dropStale(path, started);
+        }
+      }
       $usePrefetchQuery({ queryKey: [paths.page] });
       const answers = $useSuspenseQueries({
         queries: framesOf(paths).map((key) => ({
@@ -179,7 +206,7 @@ export function runtime(
     // A screen as Next.js nests a page: inside its layouts, and, with a loading
     // state, inside a Suspense showing it.
     const Framed = (props: { href: string }) => {
-      const { page, layouts, Loading } = useFrame(props.href, false);
+      const { page, layouts, Loading } = useFrame(props.href);
       let inner: ReactNode = <Page href={page} />;
       if (Loading !== null) {
         inner = <$Suspense fallback={<Loading />}>{inner}</$Suspense>;
@@ -236,8 +263,14 @@ export function runtime(
       $useSuspenseQuery({ queryKey: [props.href], refetchOnMount: false });
       return null;
     };
+    // When the navigation to the href on top started: kept outside React, as
+    // a hold that suspends keeps no state.
+    let navigation = { href: "", started: 0 };
     const Hold = (props: { href: string }) => {
-      const { page, Loading } = useFrame(props.href, true);
+      if (navigation.href !== props.href) {
+        navigation = { href: props.href, started: Date.now() };
+      }
+      const { page, Loading } = useFrame(props.href, navigation.started);
       return Loading === null ? <PageIn href={page} /> : null;
     };
     class Quiet extends $Component<
