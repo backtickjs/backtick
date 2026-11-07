@@ -2,7 +2,6 @@ import { bundler, BundlerError, type Modules } from "@backtickjs/bundler";
 import type { Client, Spliceable, SplicesAs } from "@backtickjs/core";
 import type { ComponentType } from "react";
 import type { Hono, MiddlewareHandler } from "hono";
-import { contextStorage } from "hono/context-storage";
 import {
   capture,
   framed,
@@ -10,11 +9,10 @@ import {
   loadingFrame,
   nested,
   page,
+  pageSuffix,
 } from "./frame.js";
-import { pageSuffix } from "./route.js";
 import { runtime } from "./runtime.js";
 
-export { Route } from "./route.js";
 export type { Runtime } from "./runtime.js";
 
 declare module "hono" {
@@ -56,15 +54,13 @@ const runtimePath = "/.well-known/backtick/runtime";
  * parents', the client components their `_layout` routes render, which take
  * the screen as `children`. A route with a `_loading` route, a client
  * component without props, answers at once, with its layouts and the
- * loading state, and the phone then fetches the screen itself; a navigation
+ * loading state, and the phone then queries the screen itself; a navigation
  * to a route without one holds the current screen until the next is in. Unlike
  * Next.js's, layouts are drawn again for each screen pushed. `backtick()`
  * asks `app` for these routes, in-process, as a screen is requested, and
- * answers a route alone, as a `Route` asks for it, at its `/_page`.
+ * answers a route alone, as a query asks for it, at its `/_page`.
  */
 export function backtick(app?: Hono<any, any, any>): MiddlewareHandler {
-  // The request, for a Route among the screen's server components.
-  const storage = contextStorage();
   return async (context, next) => {
     const bundle = async (input: Spliceable) => {
       let modules: Modules;
@@ -115,25 +111,20 @@ export function backtick(app?: Hono<any, any, any>): MiddlewareHandler {
     if (app !== undefined && path.endsWith(pageSuffix)) {
       return page(app, context, path.slice(0, -pageSuffix.length) || "/");
     }
-    let response: Response | undefined;
-    await storage(context, async () => {
-      const frame = app === undefined ? undefined : await frameOf(app, context);
-      if (frame?.loading !== undefined) {
-        const { pathname, search } = new URL(context.req.url);
-        response = await bundle(
-          loadingFrame({ ...frame, loading: frame.loading }, pathname + search),
-        );
-        return;
-      }
-      if (frame !== undefined && frame.layouts.length > 0) {
-        context.setRenderer(
-          async (input) =>
-            capture(context, input) ??
-            bundle(framed(frame, input as Spliceable)),
-        );
-      }
-      await next();
-    });
-    return response;
+    const frame = app === undefined ? undefined : await frameOf(app, context);
+    if (frame?.loading !== undefined) {
+      const { pathname, search } = new URL(context.req.url);
+      return bundle(
+        loadingFrame({ ...frame, loading: frame.loading }, pathname + search),
+      );
+    }
+    if (frame !== undefined && frame.layouts.length > 0) {
+      context.setRenderer(
+        async (input) =>
+          capture(context, input) ??
+          bundle(framed(frame, input as Spliceable)),
+      );
+    }
+    await next();
   };
 }

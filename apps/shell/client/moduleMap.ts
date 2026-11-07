@@ -303,4 +303,7 @@ export const moduleMap = {
   get "react-native-worklets"() {
     return require("react-native-worklets");
   },
+  get "@tanstack/react-query"() {
+    return require("@tanstack/react-query");
+  },
 } satisfies Record<Module, unknown>;

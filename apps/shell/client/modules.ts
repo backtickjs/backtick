@@ -98,6 +98,7 @@ export const modules = [
   "expo-checkbox",
   "react-native-reanimated",
   "react-native-worklets",
+  "@tanstack/react-query",
 ] as const;
 
 export type Module = (typeof modules)[number];

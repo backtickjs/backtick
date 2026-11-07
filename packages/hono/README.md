@@ -31,20 +31,25 @@ app.get("/", (context) => context.render(<Home />));
 export default app;
 ```
 
-The Backtick app opens an app from one answer, which `backtick(app)` sends from `/.well-known/backtick/runtime`: the client code that fetches each screen and keeps it while it shows, around the app's root layout, its `/_layout` route, a client component that renders its navigator. Navigation works as in Next.js. A screen is drawn inside the layouts of its path and its parents' (`/day/_layout`): client components that take the screen as `children`, which the server renders for the path, so they can use its params. A route with a `_loading` (`/day/_loading`), a client component without props, answers at once, with its layouts and the loading state, and the phone then fetches the screen itself. A navigation to a route without one holds the current screen until the next is in, and expo-router's `unstable_useIsNavigating()` says so meanwhile, for a progress bar. `backtick(app)` asks `app` for these routes, in-process, as a screen is requested. `<Link prefetch>` fetches a route's answer ahead, so its navigation shows it at once: for a route with a `_loading`, its layouts and loading state, and the screen once it's shown. Unlike Next.js's, layouts are drawn again for each screen pushed. A client with a navigator of its own needs neither.
+The Backtick app opens an app from one answer, which `backtick(app)` sends from `/.well-known/backtick/runtime`: the client code that fetches each screen and keeps it while it shows, around the app's root layout, its `/_layout` route, a client component that renders its navigator. Navigation works as in Next.js. A screen is drawn inside the layouts of its path and its parents' (`/day/_layout`): client components that take the screen as `children`, which the server renders for the path, so they can use its params. A route with a `_loading` (`/day/_loading`), a client component without props, answers at once, with its layouts and the loading state, and the phone then queries the screen itself. A navigation to a route without one holds the current screen until the next is in, and expo-router's `unstable_useIsNavigating()` says so meanwhile, for a progress bar. `backtick(app)` asks `app` for these routes, in-process, as a screen is requested. `<Link prefetch>` fetches a route's answer ahead, so its navigation shows it at once: for a route with a `_loading`, its layouts and loading state, and the screen once it's shown. Unlike Next.js's, layouts are drawn again for each screen pushed. A client with a navigator of its own needs neither.
 
-`Route` draws another route's answer inside a screen, alone, without its layouts or loading state: for a screen whose parts load on their own. It suspends to the nearest `Suspense` while it loads, and throws to the nearest error boundary if it fails.
+The runtime gives the app a [TanStack Query](https://tanstack.com/query) client whose query keys are paths: a query of `"/cart/items"` fetches that route alone, without its layouts or loading state, and its answer is what the route renders. For a screen whose parts load on their own, each in its own `Suspense`, and refetch on their own:
 
 ```tsx
-import { Route } from "@backtickjs/hono";
+import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query" with { backtick: "client" };
 
-app.get("/cart", (context) =>
-  context.render(cs`
-    <$Suspense fallback={<$ActivityIndicator />}>
-      {${(<Route href="/cart/items" />)}}
-    </$Suspense>
-  `),
-);
+const Part = cs`(props: { path: string }) => $useSuspenseQuery({ queryKey: [props.path] }).data as ReactNode`;
+
+const Cart = cs`() => {
+  const queryClient = $useQueryClient();
+  return (
+    <>
+      <$Suspense fallback={<$ActivityIndicator />}><$Part path="/cart/items" /></$Suspense>
+      <$Button title="Refresh" onPress={() => queryClient.invalidateQueries({ queryKey: ["/cart/items"] })} />
+    </>
+  );
+}`;
+app.get("/cart", (context) => context.render(cs`<$Cart />`));
 ```
 
 The client sends its modules, each at its package's version, in `x-backtick-modules` (in an Expo app, `modulesOf` from `@backtickjs/core` writes them). The answer is the screen's bundle as CommonJS, `text/javascript`, for the client to run with `execRoot`.

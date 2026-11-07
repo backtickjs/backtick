@@ -58,6 +58,7 @@
     "@backtickjs/jsx-react": "0.2.8",
     "@backtickjs/tsc": "0.2.8",
     "@backtickjs/tspatch-plugin": "0.2.8",
+    "@tanstack/react-query": "5.104.0",
     "@types/react": "19.3.0",
     "hono": "^4.13.13",
     "prettier": "^3.6.2",

@@ -2,6 +2,9 @@
 // shown, written as client code, which `backtick()` sends from
 // `/.well-known/backtick/runtime`.
 import { type Client, cs, exec } from "@backtickjs/core";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query" with {
+  backtick: "client",
+};
 import {
   type ComponentType,
   type ReactNode,
@@ -190,11 +193,29 @@ export function runtime(
     return null;
   };
 
+  // The app's queries: a query's key is a path, whose answer, its route
+  // alone (its /_page), is run, as a screen is.
+  const pageOf = (href: string) => {
+    const query = href.indexOf("?");
+    const path = query === -1 ? href : href.slice(0, query);
+    return (path === "/" ? "" : path) + "/_page" + (query === -1 ? "" : href.slice(query));
+  };
+  const queryClient = new $QueryClient({
+    defaultOptions: {
+      queries: {
+        queryFn: (context: { queryKey: readonly unknown[] }) =>
+          $fetchAnswer(${origin} + pageOf(context.queryKey[0] as string), ${modules}),
+        structuralSharing: false,
+        retry: false,
+      },
+    },
+  });
+
   const Navigator = (props: { id?: string; href: string }) => (
-    <>
+    <$QueryClientProvider client={queryClient}>
       <Hold id={props.id} href={props.href} />
       <$RootLayout />
-    </>
+    </$QueryClientProvider>
   );
 
   const runtime: Runtime = {

@@ -3,7 +3,7 @@ import { test } from "node:test";
 import { createImport } from "@backtickjs/core";
 import { Hono } from "hono";
 import { jsx } from "@backtickjs/jsx-react/jsx-runtime";
-import { backtick, Route } from "../dist/index.js";
+import { backtick } from "../dist/index.js";
 
 const greet = createImport<(name: string) => string>({
   name: "greet",
@@ -78,6 +78,7 @@ const phone = {
   "x-backtick-modules": JSON.stringify({
     react: "19.3.0",
     "react/jsx-runtime": "19.3.0",
+    "@tanstack/react-query": "5.104.0",
   }),
 };
 
@@ -103,6 +104,8 @@ test("the runtime is at /.well-known/backtick/runtime, around the app's /_layout
   assert.match(code, /require\("react"\)/);
   assert.match(code, /\{ greet: /);
   assert.match(code, /"http:\/\/app\.test"/);
+  assert.match(code, /require\("@tanstack\/react-query"\)/);
+  assert.match(code, /"\/_page"/);
 });
 
 // An app with framed routes, and whether a page's handler ran.
@@ -132,11 +135,12 @@ const framedHeaders = {
   "x-backtick-modules": JSON.stringify({
     react: "19.3.0",
     "react/jsx-runtime": "19.3.0",
+    "@tanstack/react-query": "5.104.0",
     app: "1.0.0",
   }),
 };
 
-test("a route with a _loading answers at once: its layouts, its loading state, and a Route for it", async () => {
+test("a route with a _loading answers at once: its layouts, its loading state, and a query of its page", async () => {
   ran.length = 0;
   const response = await framedApp.request("http://server.test/item/1?tab=a", {
     headers: framedHeaders,
@@ -148,7 +152,8 @@ test("a route with a _loading answers at once: its layouts, its loading state, a
     assert.match(code, new RegExp(`\\{ ${name}: `));
   }
   assert.ok(code.indexOf("ItemsLayout") < code.indexOf("ItemLayout:"));
-  assert.match(code, /"http:\/\/server\.test\/item\/1\/_page\?tab=a"/);
+  assert.match(code, /useSuspenseQuery/);
+  assert.match(code, /"\/item\/1\?tab=a"/);
 });
 
 test("a route's /_page is the route alone", async () => {
@@ -169,23 +174,4 @@ test("a route without a _loading is drawn inside its layouts, in one answer", as
   const code = await response.text();
   assert.match(code, /\{ PlainLayout: /);
   assert.match(code, /\{ greet: /);
-});
-
-test("a Route fetches its href's /_page, from the request's origin, with its modules", async () => {
-  const framed = new Hono();
-  framed.use(backtick());
-  framed.get("/item/:id", (context) =>
-    context.render(jsx(Route, { href: "/item/1/details" })),
-  );
-  const response = await framed.request("http://server.test/item/1", {
-    headers: phone,
-  });
-  assert.equal(response.status, 200);
-  const code = await response.text();
-  assert.match(code, /"http:\/\/server\.test\/item\/1\/details\/_page"/);
-  assert.ok(code.includes(JSON.stringify(phone["x-backtick-modules"])));
-});
-
-test("a Route outside a render says where it belongs", () => {
-  assert.throws(() => Route({ href: "/" }), /under backtick\(\)/);
 });

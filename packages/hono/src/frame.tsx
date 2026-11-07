@@ -1,13 +1,24 @@
 // A screen's frame, as Next.js nests a page: inside the layouts of its path
 // and its parents' (`_layout` routes), and, with a `_loading` route, inside a
-// Suspense showing it, around a `Route` fetching the page. Composed on the
+// Suspense showing it, around a query of the page. Composed on the
 // server, from what those routes render, into the screen's one bundle.
 import { type Client, cs, type Spliceable } from "@backtickjs/core";
 import type { Context, Hono } from "hono";
+import { useSuspenseQuery } from "@tanstack/react-query" with {
+  backtick: "client",
+};
 import { type ComponentType, type ReactNode, Suspense } from "react" with {
   backtick: "client",
 };
-import { Route } from "./route.js";
+
+// Where a route answers alone, without its layouts and loading state:
+// `/cart/items/_page` for `/cart/items`.
+export const pageSuffix = "/_page";
+
+// The page of one frame's answer: its own query, so a navigation shows the
+// page as the server has it now, not as another screen fetched it.
+const Page = cs`(props: { path: string; answer: string }) =>
+  $useSuspenseQuery({ queryKey: [props.path, props.answer], gcTime: 0 }).data as ReactNode`;
 
 // The requests backtick() makes in-process: for a nested route, what it
 // renders, rather than its bundle; for a route alone (`/_page`), nothing.
@@ -130,6 +141,6 @@ export function loadingFrame(
   const Loading = frame.loading;
   return framed(
     frame,
-    cs`<$Suspense fallback={<$Loading />}>{${(<Route href={href} />)}}</$Suspense>`,
+    cs`<$Suspense fallback={<$Loading />}><$Page path={${href}} answer={${crypto.randomUUID()}} /></$Suspense>`,
   );
 }
