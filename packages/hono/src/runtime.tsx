@@ -18,7 +18,6 @@ import {
   type ReactNode,
   Suspense,
   useDeferredValue,
-  useEffect,
 } from "react" with { backtick: "client" };
 
 /**
@@ -36,9 +35,7 @@ export interface Runtime {
   Navigator?: ComponentType<{ href: string }>;
   /**
    * A route's screen: what it renders, and meanwhile what its `_loading`
-   * renders. One not `active` yet (`<Link prefetch>` mounts a route ahead of
-   * its navigation) shows nothing, and fetches ahead, as far as its loading
-   * state.
+   * renders. One not `active` yet shows nothing.
    */
   Screen?: ComponentType<{ href: string; active: boolean }>;
   /**
@@ -206,11 +203,6 @@ export function clientRuntime(
     // screen stays meanwhile.
     const Screen = (props: { href: string; active: boolean }) => {
       const href = $useDeferredValue(props.href);
-      $useEffect(() => {
-        if (!props.active) {
-          prefetch(props.href);
-        }
-      }, [props.active, props.href]);
       return props.active ? (
         <$Suspense fallback={null}>
           <PageWithLoading href={href} />

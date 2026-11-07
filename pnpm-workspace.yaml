@@ -28,6 +28,7 @@ saveWorkspaceProtocol: false # `pnpm add` writes "^2.16.9", not "workspace:^"
 verifyDepsBeforeRun: false
 allowBuilds:
   # Signs the VS Code extension when it's published to the Marketplace.
+  '@parcel/watcher': set this to true or false
   "@vscode/vsce-sign": true
   esbuild: true
   # Stores Marketplace logins in the system keychain; publishing uses tokens
@@ -54,6 +55,11 @@ packageExtensions:
     peerDependenciesMeta:
       "@types/react":
         optional: true
+  # Its preset resolves react-native without depending on it, so the shell's
+  # tests got whichever copy pnpm hoisted (0.86, from the tests' project).
+  "@react-native/jest-preset":
+    peerDependencies:
+      react-native: "*"
 # `expo-updates` has `expo-dev-client` as an optional peer, which pnpm installs
 # anyway; prebuild then applies its plugin to the shell, which doesn't use it,
 # adding the dev launcher's local network string to the store build.

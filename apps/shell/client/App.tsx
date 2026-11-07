@@ -1,7 +1,6 @@
 import type { Runtime } from "@backtickjs/hono";
 import {
   useGlobalSearchParams,
-  useIsFocused,
   useRootNavigationState,
   useRoute,
 } from "expo-router";
@@ -13,7 +12,6 @@ import {
   useEffect,
   useState,
 } from "react";
-import { internalNavigationEvents } from "expo-router/build/global-state/internalNavigationEvents";
 import { ErrorBoundary } from "react-error-boundary";
 import { isSignedIn } from "../modules/backtick-session/src";
 import { Failed } from "./Failed";
@@ -112,20 +110,6 @@ function AppRoot({
   const top = topUnder(useRootNavigationState(), useRoute().key);
   const linked = useGlobalSearchParams();
   const href = hrefOfRoute(top?.params ?? linked);
-  // Each `<Link prefetch>` of the app on top, fetched ahead by its runtime:
-  // expo-router keeps one preloaded route per navigator, but reports each.
-  const focused = useIsFocused();
-  useEffect(() => {
-    if (!focused) {
-      return;
-    }
-    return internalNavigationEvents.addListener("actionDispatched", (event) => {
-      const { path } = (event.payload ?? {}) as { path?: unknown };
-      if (event.actionType === "PRELOAD" && typeof path === "string") {
-        runtime.prefetch?.(path);
-      }
-    });
-  }, [focused, runtime]);
   // An app's first screen, once it's had a moment to draw (a game's first
   // frame included), is its preview on the home's card. Never in the way:
   // a capture that fails is only logged.
