@@ -50,9 +50,9 @@ const runtimePath = "/.well-known/backtick/runtime";
  * `children`; and, with a `_loading` route, a client component without props,
  * inside a Suspense showing it. The runtime queries each by its path, in
  * parallel, asking only for those the app has routes for, which it's sent
- * when it opens. A navigation to a route with a
- * `_loading` shows once its layouts and loading state are in, and to one
- * without, once its page is; the current screen stays meanwhile.
+ * when it opens. A navigation to a route with a `_loading` pushes at once,
+ * and shows its layouts and loading state as they come in; to one without,
+ * it shows once its page is in, and the current screen stays meanwhile.
  */
 export function backtick(app?: Hono<any, any, any>): MiddlewareHandler {
   return async (context, next) => {

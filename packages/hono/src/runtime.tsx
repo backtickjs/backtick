@@ -28,10 +28,10 @@ import {
 export interface Runtime {
   /**
    * The app's root layout, its `/_layout` route, given the href on top. A
-   * navigation holds the current screen until the next is in, as navigations
-   * are transitions (`router.setTransitionMode("always")`): a route with a
-   * `_loading` is in once its layouts and loading state are. Suspends until
-   * the first screen is in.
+   * navigation to a route with a `_loading` pushes at once; to one without,
+   * it holds the current screen until the next is in, as navigations are
+   * transitions (`router.setTransitionMode("always")`). Suspends until the
+   * first screen is in, unless it has a `_loading`.
    */
   Navigator?: ComponentType<{ href: string }>;
   /**
@@ -45,6 +45,12 @@ export interface Runtime {
    * resolves once it's in, either way.
    */
   reload?(href: string): Promise<void>;
+  /**
+   * Fetches an href ahead, as Next.js prefetches a link: its layouts and
+   * loading state, and its page only without one. For each
+   * `<Link prefetch>`, which the shell sees as it's prefetched.
+   */
+  prefetch?(href: string): void;
 }
 
 /**
@@ -256,8 +262,8 @@ export function runtime(
     };
 
     // Suspends a navigation's render, above the Stack, until the href's screen
-    // can show: its layouts and loading state, and, without one, its page. As
-    // navigations are transitions, the screen on top stays. One that fails
+    // is in, for a route without a loading state: its layouts and its page.
+    // As navigations are transitions, the screen on top stays. One that fails
     // ends the hold, for the screen to show why.
     const PageIn = (props: { href: string }) => {
       $useSuspenseQuery({ queryKey: [props.href], refetchOnMount: false });
@@ -270,8 +276,21 @@ export function runtime(
       if (navigation.href !== props.href) {
         navigation = { href: props.href, started: Date.now() };
       }
-      const { page, Loading } = useFrame(props.href, navigation.started);
-      return Loading === null ? <PageIn href={page} /> : null;
+      // A route with a loading state pushes at once: its layouts, loading
+      // state and page are fetched, and it shows each as it comes in.
+      const paths = pathsOf(props.href);
+      if (paths.loading !== undefined) {
+        for (const path of [paths.page, ...framesOf(paths)]) {
+          dropStale(path, navigation.started);
+        }
+        void queryClient.prefetchQuery({ queryKey: [paths.page] });
+        for (const path of framesOf(paths)) {
+          void queryClient.prefetchQuery(optional(path));
+        }
+        return null;
+      }
+      const { page } = useFrame(props.href, navigation.started);
+      return <PageIn href={page} />;
     };
     class Quiet extends $Component<
       { children: ReactNode },
@@ -298,6 +317,7 @@ export function runtime(
     const runtime: Runtime = {
       Navigator,
       Screen,
+      prefetch,
       // Each of its queries again: one that failed, for its screen to wait
       // for it; the others kept until the new answer is in.
       reload: async (href) => {
