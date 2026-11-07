@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createImport } from "@backtickjs/core";
 import { Hono } from "hono";
-import { backtick } from "../dist/index.js";
+import { jsx } from "@backtickjs/jsx-react/jsx-runtime";
+import { backtick, Route } from "../dist/index.js";
 
 const greet = createImport<(name: string) => string>({
   name: "greet",
@@ -92,17 +93,91 @@ test("the runtime is at /.well-known/backtick/runtime", async () => {
   assert.match(code, /require\("react"\)/);
 });
 
-test("the runtime knows the app's _layout and _loading routes, to fetch only those", async () => {
-  const nested = new Hono();
-  nested.use(backtick(nested));
-  nested.get("/item/:id/_loading", (context) => context.render(greet));
-  nested.get("/item/:id/_layout", (context) => context.render(greet));
-  nested.get("/item/:id", (context) => context.render(greet));
-  const response = await nested.request("/.well-known/backtick/runtime", {
-    headers: phone,
+// An app with framed routes, and whether a page's handler ran.
+const imported = (name: string) =>
+  createImport<unknown>({ name, from: "app", version: "1.0.0" });
+const ran: string[] = [];
+const framedApp = new Hono();
+framedApp.use(backtick(framedApp));
+framedApp.get("/item/_layout", (context) =>
+  context.render(imported("ItemsLayout")),
+);
+framedApp.get("/item/:id/_layout", (context) =>
+  context.render(imported("ItemLayout")),
+);
+framedApp.get("/item/:id/_loading", (context) =>
+  context.render(imported("ItemLoading")),
+);
+framedApp.get("/item/:id", (context) => {
+  ran.push(context.req.path);
+  return context.render(greet);
+});
+framedApp.get("/plain/_layout", (context) =>
+  context.render(imported("PlainLayout")),
+);
+framedApp.get("/plain/:id", (context) => context.render(greet));
+const framedHeaders = {
+  "x-backtick-modules": JSON.stringify({
+    react: "19.3.0",
+    "react/jsx-runtime": "19.3.0",
+    app: "1.0.0",
+  }),
+  "x-backtick-origin": "http://phone.test",
+};
+
+test("a route with a _loading answers at once: its layouts, its loading state, and a Route for it", async () => {
+  ran.length = 0;
+  const response = await framedApp.request("http://server.test/item/1?tab=a", {
+    headers: framedHeaders,
+  });
+  assert.equal(response.status, 200);
+  const code = await response.text();
+  assert.deepEqual(ran, []);
+  for (const name of ["ItemsLayout", "ItemLayout", "ItemLoading"]) {
+    assert.match(code, new RegExp(`\\{ ${name}: `));
+  }
+  assert.ok(code.indexOf("ItemsLayout") < code.indexOf("ItemLayout:"));
+  assert.match(code, /"\/item\/1\?tab=a"/);
+  assert.match(code, /"http:\/\/phone\.test"/);
+  assert.match(response.headers.get("vary") ?? "", /x-backtick-route/);
+});
+
+test("a Route's request gets the route alone", async () => {
+  ran.length = 0;
+  const response = await framedApp.request("http://server.test/item/1", {
+    headers: { ...framedHeaders, "x-backtick-route": "1" },
   });
   const code = await response.text();
-  assert.match(code, /"\/item\/:id\/_loading"/);
-  assert.match(code, /"\/item\/:id\/_layout"/);
-  assert.doesNotMatch(code, /"\/item\/:id"/);
+  assert.deepEqual(ran, ["/item/1"]);
+  assert.match(code, /\{ greet: /);
+  assert.doesNotMatch(code, /Layout|Loading/);
+});
+
+test("a route without a _loading is drawn inside its layouts, in one answer", async () => {
+  const response = await framedApp.request("http://server.test/plain/1", {
+    headers: framedHeaders,
+  });
+  const code = await response.text();
+  assert.match(code, /\{ PlainLayout: /);
+  assert.match(code, /\{ greet: /);
+});
+
+test("a Route fetches its href from the phone's origin, with its modules", async () => {
+  const framed = new Hono();
+  framed.use(backtick());
+  framed.get("/item/:id", (context) =>
+    context.render(jsx(Route, { href: "/item/1/details" })),
+  );
+  const response = await framed.request("http://server.test/item/1", {
+    headers: { ...phone, "x-backtick-origin": "http://phone.test" },
+  });
+  assert.equal(response.status, 200);
+  const code = await response.text();
+  assert.match(code, /"http:\/\/phone\.test"/);
+  assert.match(code, /"\/item\/1\/details"/);
+  assert.ok(code.includes(JSON.stringify(phone["x-backtick-modules"])));
+});
+
+test("a Route outside a render says where it belongs", () => {
+  assert.throws(() => Route({ href: "/" }), /under backtick\(\)/);
 });

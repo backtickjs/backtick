@@ -1,7 +1,7 @@
 import type { Runtime } from "@backtickjs/hono";
 import {
-  type NavigationState,
   useGlobalSearchParams,
+  useRootNavigationState,
   useRoute,
 } from "expo-router";
 import {
@@ -67,6 +67,31 @@ export function App({
   );
 }
 
+interface State {
+  index?: number;
+  routes: readonly Route[];
+}
+interface Route {
+  key?: string;
+  params?: object;
+  state?: State;
+}
+
+// The route on top of the navigator under the route `key`.
+function topUnder(state: State | undefined, key: string): Route | undefined {
+  for (const route of state?.routes ?? []) {
+    const nested = route.state;
+    if (route.key === key) {
+      return nested?.routes[nested.index ?? nested.routes.length - 1];
+    }
+    const top = topUnder(nested, key);
+    if (top !== undefined) {
+      return top;
+    }
+  }
+  return undefined;
+}
+
 function AppRoot({
   app,
   opened,
@@ -76,11 +101,13 @@ function AppRoot({
 }) {
   const { RootLayout, runtime } = use(opened);
   const { Navigator } = runtime;
-  // The route on top of this app's navigator, from its own state, so the
-  // home's stays as it was under an app; before the navigator has a route,
-  // the link's.
-  const { state } = useRoute() as { state?: NavigationState };
-  const top = state?.routes[state.index ?? state.routes.length - 1];
+  if (Navigator === undefined) {
+    throw new Error("This app needs a newer version of Backtick.");
+  }
+  // The route on top of this app's navigator, from the navigation state, in
+  // the same render as a navigation, so the home's stays as it was under an
+  // app; before the navigator has a route, the link's.
+  const top = topUnder(useRootNavigationState(), useRoute().key);
   const linked = useGlobalSearchParams();
   const href = hrefOfRoute(top?.params ?? linked);
   // An app's first screen, once it's had a moment to draw (a game's first

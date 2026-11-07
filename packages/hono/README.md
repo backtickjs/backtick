@@ -31,7 +31,21 @@ app.get("/", (context) => context.render(<Home />));
 export default app;
 ```
 
-The Backtick app opens an app with two answers, fetched together: its `/_layout` route, the app's root layout, a client component rendered once as the app opens, around every screen, which renders its navigator; and the client code that fetches each screen and keeps it while it shows, which `backtick()` sends from `/.well-known/backtick/runtime`. Navigation works as in Next.js. A route's `_loading` (`/day/_loading`), a client component, is shown the moment the route is opened, until its screen is in; a navigation to a route without one holds the current screen until the next is in, and expo-router's `unstable_useIsNavigating()` says so meanwhile, for a progress bar. A route's `_layout` (`/day/_layout`), a client component, wraps its screen, which it gets as `children`, around the `_loading`; the server renders it for the route's path, so it can use the route's params. Both are fetched when the route is first opened, or ahead of it for `<Link prefetch>`, and kept while the app is open; `backtick(app)` tells the phone which exist, so it asks only for those. Unlike Next.js's, a nested layout is drawn again for each screen pushed. A client with a navigator of its own needs neither.
+The Backtick app opens an app with two answers, fetched together: its `/_layout` route, the app's root layout, a client component rendered once as the app opens, around every screen, which renders its navigator; and the client code that fetches each screen and keeps it while it shows, which `backtick()` sends from `/.well-known/backtick/runtime`. Navigation works as in Next.js. A screen is drawn inside the layouts of its path and its parents' (`/day/_layout`): client components that take the screen as `children`, which the server renders for the path, so they can use its params. A route with a `_loading` (`/day/_loading`), a client component without props, answers at once, with its layouts and the loading state, and the phone then fetches the screen itself. A navigation to a route without one holds the current screen until the next is in, and expo-router's `unstable_useIsNavigating()` says so meanwhile, for a progress bar. `backtick(app)` asks `app` for these routes, in-process, as a screen is requested. `<Link prefetch>` fetches a route's answer ahead, so its navigation shows it at once: for a route with a `_loading`, its layouts and loading state, and the screen once it's shown. Unlike Next.js's, layouts are drawn again for each screen pushed. A client with a navigator of its own needs neither.
+
+`Route` draws another route's answer inside a screen, alone, without its layouts or loading state: for a screen whose parts load on their own. It suspends to the nearest `Suspense` while it loads, and throws to the nearest error boundary if it fails.
+
+```tsx
+import { Route } from "@backtickjs/hono";
+
+app.get("/cart", (context) =>
+  context.render(cs`
+    <$Suspense fallback={<$ActivityIndicator />}>
+      {${(<Route href="/cart/items" />)}}
+    </$Suspense>
+  `),
+);
+```
 
 The client sends its modules, each at its package's version, in `x-backtick-modules` (in an Expo app, `modulesOf` from `@backtickjs/core` writes them). The answer is the screen's bundle as CommonJS, `text/javascript`, for the client to run with `execRoot`.
 
