@@ -105,7 +105,8 @@ test("the runtime is at /.well-known/backtick/runtime, around the app's /_layout
   assert.match(code, /\{ greet: /);
   assert.match(code, /"http:\/\/app\.test"/);
   assert.match(code, /require\("@tanstack\/react-query"\)/);
-  assert.match(code, /"\/_page"/);
+  assert.match(code, /"\/_layout"/);
+  assert.match(code, /"\/_loading"/);
 });
 
 // An app with framed routes, and whether a page's handler ran.
@@ -140,38 +141,38 @@ const framedHeaders = {
   }),
 };
 
-test("a route with a _loading answers at once: its layouts, its loading state, and a query of its page", async () => {
+test("every route answers alone: a page without its layouts or loading state", async () => {
   ran.length = 0;
   const response = await framedApp.request("http://server.test/item/1?tab=a", {
     headers: framedHeaders,
   });
   assert.equal(response.status, 200);
   const code = await response.text();
-  assert.deepEqual(ran, []);
-  for (const name of ["ItemsLayout", "ItemLayout", "ItemLoading"]) {
-    assert.match(code, new RegExp(`\\{ ${name}: `));
-  }
-  assert.ok(code.indexOf("ItemsLayout") < code.indexOf("ItemLayout:"));
-  assert.match(code, /useSuspenseQuery/);
-  assert.match(code, /"\/item\/1\?tab=a"/);
-});
-
-test("a route's /_page is the route alone", async () => {
-  ran.length = 0;
-  const response = await framedApp.request("http://server.test/item/1/_page", {
-    headers: framedHeaders,
-  });
-  const code = await response.text();
   assert.deepEqual(ran, ["/item/1"]);
   assert.match(code, /\{ greet: /);
   assert.doesNotMatch(code, /Layout|Loading/);
 });
 
-test("a route without a _loading is drawn inside its layouts, in one answer", async () => {
-  const response = await framedApp.request("http://server.test/plain/1", {
-    headers: framedHeaders,
-  });
-  const code = await response.text();
-  assert.match(code, /\{ PlainLayout: /);
-  assert.match(code, /\{ greet: /);
+test("a _layout and a _loading answer what they render", async () => {
+  for (const [path, name] of [
+    ["/item/_layout", "ItemsLayout"],
+    ["/item/1/_layout", "ItemLayout"],
+    ["/item/1/_loading", "ItemLoading"],
+  ]) {
+    const response = await framedApp.request(`http://server.test${path}`, {
+      headers: framedHeaders,
+    });
+    assert.equal(response.status, 200);
+    assert.match(await response.text(), new RegExp(`\\{ ${name}: `));
+  }
+});
+
+test("a route without a _layout answers 404 for it", async () => {
+  const response = await framedApp.request(
+    "http://server.test/plain/1/_layout",
+    {
+      headers: framedHeaders,
+    },
+  );
+  assert.equal(response.status, 404);
 });

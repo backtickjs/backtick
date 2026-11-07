@@ -31,12 +31,14 @@ app.get("/", (context) => context.render(<Home />));
 export default app;
 ```
 
-The Backtick app opens an app from one answer, which `backtick(app)` sends from `/.well-known/backtick/runtime`: the client code that fetches each screen and keeps it while it shows, around the app's root layout, its `/_layout` route, a client component that renders its navigator. Navigation works as in Next.js. A screen is drawn inside the layouts of its path and its parents' (`/day/_layout`): client components that take the screen as `children`, which the server renders for the path, so they can use its params. A route with a `_loading` (`/day/_loading`), a client component without props, answers at once, with its layouts and the loading state, and the phone then queries the screen itself. A navigation to a route without one holds the current screen until the next is in, and expo-router's `unstable_useIsNavigating()` says so meanwhile, for a progress bar. `backtick(app)` asks `app` for these routes, in-process, as a screen is requested. `<Link prefetch>` fetches a route's answer ahead, so its navigation shows it at once: for a route with a `_loading`, its layouts and loading state, and the screen once it's shown. Unlike Next.js's, layouts are drawn again for each screen pushed. A client with a navigator of its own needs neither.
+The Backtick app opens an app from one answer, which `backtick(app)` sends from `/.well-known/backtick/runtime`: the client code that fetches each screen and keeps it while it shows, around the app's root layout, its `/_layout` route, a client component that renders its navigator. Navigation works as in Next.js. Every route answers alone, and the runtime fetches each as a query keyed by its path: a screen is the page, inside the layouts of its path and its parents' (`/day/_layout`), client components that take the screen as `children`, which the server renders for the path, so they can use its params; and, with a `_loading` (`/day/_loading`), a client component without props, inside a `Suspense` showing it. The runtime fetches them in parallel; a route without a layout or a loading state answers 404 for it. A navigation to a route with a `_loading` shows once its layouts and loading state are in; to one without, once its page is, and the current screen stays meanwhile, as expo-router's `unstable_useIsNavigating()` says, for a progress bar. Going back shows a screen as it was. `<Link prefetch>` fetches a route's layouts and loading state ahead, and its page only without a loading state. A client with a navigator of its own needs neither.
 
-The runtime gives the app a [TanStack Query](https://tanstack.com/query) client whose query keys are paths: a query of `"/cart/items"` fetches that route alone, without its layouts or loading state, and its answer is what the route renders. For a screen whose parts load on their own, each in its own `Suspense`, and refetch on their own:
+The runtime gives the app a [TanStack Query](https://tanstack.com/query) client whose query keys are paths: a query of `"/cart/items"` fetches that route, and its answer is what the route renders. For a screen whose parts load on their own, each in its own `Suspense`, and refetch on their own:
 
 ```tsx
-import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query" with { backtick: "client" };
+import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query" with {
+  backtick: "client",
+};
 
 const Part = cs`(props: { path: string }) => $useSuspenseQuery({ queryKey: [props.path] }).data as ReactNode`;
 

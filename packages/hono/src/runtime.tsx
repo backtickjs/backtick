@@ -2,53 +2,58 @@
 // shown, written as client code, which `backtick()` sends from
 // `/.well-known/backtick/runtime`.
 import { type Client, cs, exec } from "@backtickjs/core";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query" with {
-  backtick: "client",
-};
 import {
+  QueryClient,
+  QueryClientProvider,
+  usePrefetchQuery,
+  useSuspenseQueries,
+  useSuspenseQuery,
+} from "@tanstack/react-query" with { backtick: "client" };
+import {
+  Component,
   type ComponentType,
   type ReactNode,
-  startTransition,
   Suspense,
-  use,
+  useDeferredValue,
   useEffect,
-  useState,
 } from "react" with { backtick: "client" };
 
 /**
- * What the phone runs an app with. Routes are told apart by `id`, their
- * navigator's key: one href can be pushed twice, and a route's href can
- * change in place (`router.setParams`). A shell checks for a member before
- * using it, so a later runtime can drop one.
+ * What the phone runs an app with. A shell checks for a member before using
+ * it, so a later runtime can drop one.
  */
 export interface Runtime {
   /**
-   * The app's root layout, its `/_layout` route, given the route on top (no
-   * `id` before its navigator has a route). A navigation holds the current
-   * screen until the next is in, as navigations are transitions
-   * (`router.setTransitionMode("always")`): a route with a `_loading` answers
-   * at once, with its loading state. Suspends until the first screen is in.
+   * The app's root layout, its `/_layout` route, given the href on top. A
+   * navigation holds the current screen until the next is in, as navigations
+   * are transitions (`router.setTransitionMode("always")`): a route with a
+   * `_loading` is in once its layouts and loading state are. Suspends until
+   * the first screen is in.
    */
-  Navigator?: ComponentType<{ id?: string; href: string }>;
+  Navigator?: ComponentType<{ href: string }>;
   /**
-   * A route's screen. One not `active` yet (`<Link prefetch>` mounts a route
-   * ahead of its navigation) shows nothing, and may fetch its answer for the
-   * navigation to show at once.
+   * A route's screen: its layouts, its loading state, and its page. One not
+   * `active` yet (`<Link prefetch>` mounts a route ahead of its navigation)
+   * shows nothing, and fetches ahead, as far as its loading state.
    */
-  Screen?: ComponentType<{ id: string; href: string; active: boolean }>;
+  Screen?: ComponentType<{ href: string; active: boolean }>;
   /**
-   * Fetches a route's screen again, which stays until the new one is in:
+   * Fetches an href's screen again, which stays until the new one is in:
    * resolves once it's in, either way.
    */
-  reload?(id: string): Promise<void>;
+  reload?(href: string): Promise<void>;
 }
 
 /**
- * A route's answer, run. Any bundle is a screen, whatever its status: an
- * app's not-found screen is one. A refusal ({ name, message }) says why.
+ * A route's answer, run. Any bundle is an answer, whatever its status: an
+ * app's not-found screen is one. A refusal ({ name, message }) says why. For
+ * a route that may not exist (`optional`), a 404 is null.
  */
-export const fetchAnswer = cs`async (url: string, modules: string) => {
+export const fetchAnswer = cs`async (url: string, modules: string, optional: boolean) => {
   const response = await fetch(url, { headers: { "x-backtick-modules": modules } });
+  if (optional && response.status === 404) {
+    return null;
+  }
   const body = await response.text();
   if (!(response.headers.get("content-type") ?? "").startsWith("text/javascript")) {
     let reason = body;
@@ -57,7 +62,7 @@ export const fetchAnswer = cs`async (url: string, modules: string) => {
     } catch {}
     throw new Error("The screen couldn't be opened (" + response.status + "): " + reason);
   }
-  return $exec(body as never) as ReactNode;
+  return (await $exec(body as never)) as unknown;
 }`;
 
 /**
@@ -70,150 +75,130 @@ export function runtime(
   RootLayout: Client<ComponentType>,
 ): Client<Runtime> {
   return cs`{
-  // A promise marked as React marks one it has read, so use() reads it at
-  // once when it has settled, rather than suspending for a tick.
-  type Tracked<T> = Promise<T> & { status?: string; value?: T; reason?: unknown };
-  const track = <T,>(promise: Promise<T>): Tracked<T> => {
-    const tracked = promise as Tracked<T>;
-    tracked.status = "pending";
-    promise.then(
-      (value) => Object.assign(tracked, { status: "fulfilled", value }),
-      (reason) => Object.assign(tracked, { status: "rejected", reason }),
-    );
-    return tracked;
-  };
-
-  // An href's answer, the same never rejecting, and when it settled.
-  interface Answer {
-    href: string;
-    screen: Tracked<ReactNode>;
-    settled: Tracked<void>;
-    settledAt?: number;
-  }
-  const fetchFor = (href: string): Answer => {
-    const screen = track($fetchAnswer(${origin} + href, ${modules}));
-    const answer: Answer = { href, screen, settled: track(screen.then(() => {}, () => {})) };
-    answer.settled.then(() => {
-      answer.settledAt = Date.now();
-    });
-    return answer;
-  };
-
-  // The router's cache, as Next.js keys it, by href: answers fetched ahead of
-  // a route (by its navigation, a prefetch, or the app's opening), each for
-  // the first route to that href to claim, for 30 seconds once in, and kept
-  // until its screen mounts, as a render may not commit; and each route's
-  // own, by its key, until its screen unmounts.
-  const ahead = new Map<string, Answer>();
-  const claimed = new Map<string, Answer>();
-  const aheadOf = (href: string) => {
-    let answer = ahead.get(href);
-    if (answer === undefined || (answer.settledAt !== undefined && Date.now() - answer.settledAt > 30000)) {
-      answer = fetchFor(href);
-      ahead.set(href, answer);
-    }
-    return answer;
-  };
-  const claim = (id: string, href: string) => {
-    let answer = claimed.get(id);
-    if (answer === undefined) {
-      answer = aheadOf(href);
-      claimed.set(id, answer);
-    }
-    return answer;
-  };
-  // The routes whose screen has mounted, including one whose screen failed
-  // since. Keys aren't reused.
-  const seen = new Set<string>();
-  // Each mounted screen, for reload to show a new answer in.
-  const screens = new Map<string, (answer: Answer) => void>();
-
-  const Shown = (props: { answer: Answer }) => $use(props.answer.screen as Promise<ReactNode>);
-
-  const Claimed = (props: { id: string; href: string }) => {
-    const { id, href } = props;
-    const [current, setCurrent] = $useState(() => claim(id, href));
-    // A failure throws to the route's error boundary, so the screen never
-    // mounts: once React has shown it, it leaves the cache, for a retry or a
-    // later navigation to fetch anew, and the route waits for nothing more.
-    if (current.screen.status === "rejected") {
-      seen.add(id);
-      setTimeout(() => {
-        if (claimed.get(id) === current) claimed.delete(id);
-        if (ahead.get(current.href) === current) ahead.delete(current.href);
-      });
-    }
-    // A new answer, from reload or an href changed in place
-    // (router.setParams), shows in a transition: the screen stays until
-    // it's in.
-    const show = (answer: Answer) => {
-      claimed.set(id, answer);
-      $startTransition(() => setCurrent(answer));
-    };
-    $useEffect(() => {
-      if (current.href !== href) {
-        show(fetchFor(href));
-      }
-    }, [href]);
-    $useEffect(() => {
-      seen.add(id);
-      if (ahead.get(href) === current) {
-        ahead.delete(href);
-      }
-      screens.set(id, show);
-      return () => {
-        screens.delete(id);
-        claimed.delete(id);
-      };
-    }, [id]);
-    return (
-      <$Suspense fallback={null}>
-        <Shown answer={current} />
-      </$Suspense>
-    );
-  };
-
-  const Screen = (props: { id: string; href: string; active: boolean }) => {
-    $useEffect(() => {
-      if (!props.active) {
-        aheadOf(props.href);
-      }
-    }, [props.active, props.href]);
-    return props.active ? <Claimed id={props.id} href={props.href} /> : null;
-  };
-
-  // Suspends a navigation's render, above the Stack, until its href's answer
-  // is in: since navigations are transitions, the screen on top stays. Before
-  // the navigator has a route, the phone's splash stays instead. A route whose
-  // screen has mounted waits for nothing.
-  const Hold = (props: { id?: string; href: string }) => {
-    if (props.id === undefined || !seen.has(props.id)) {
-      $use(aheadOf(props.href).settled as Promise<void>);
-    }
-    return null;
-  };
-
-  // The app's queries: a query's key is a path, whose answer, its route
-  // alone (its /_page), is run, as a screen is.
-  const pageOf = (href: string) => {
-    const query = href.indexOf("?");
-    const path = query === -1 ? href : href.slice(0, query);
-    return (path === "/" ? "" : path) + "/_page" + (query === -1 ? "" : href.slice(query));
-  };
+  // Every answer is a query, keyed by its path: what the route renders, alone.
+  // A screen is several: its layouts', its loading state's and its page's.
   const queryClient = new $QueryClient({
     defaultOptions: {
       queries: {
-        queryFn: (context: { queryKey: readonly unknown[] }) =>
-          $fetchAnswer(${origin} + pageOf(context.queryKey[0] as string), ${modules}),
+        queryFn: async (context: { queryKey: readonly unknown[] }) =>
+          $fetchAnswer(${origin} + (context.queryKey[0] as string), ${modules}, false),
+        staleTime: 30000,
         structuralSharing: false,
         retry: false,
       },
     },
   });
+  // A layout or a loading state, which a route may not have: none if it
+  // answers 404. Its component in an object, as React Query would call a
+  // function.
+  const optional = (key: string) => ({
+    queryKey: [key],
+    queryFn: async () => ({
+      value: (await $fetchAnswer(${origin} + key, ${modules}, true)) as ComponentType<{ children?: ReactNode }> | null,
+    }),
+  });
+  // The paths of an href's screen: its layouts, outermost first, below the
+  // root's; its loading state; its page.
+  const pathsOf = (href: string) => {
+    const query = href.indexOf("?");
+    const path = query === -1 ? href : href.slice(0, query);
+    const segments = path.split("/").filter((segment) => segment !== "");
+    return {
+      layouts: segments.map((_, index) => "/" + segments.slice(0, index + 1).join("/") + "/_layout"),
+      loading: (path === "/" ? "" : path) + "/_loading",
+      page: href,
+    };
+  };
+  // An href's layouts and loading state, once they're in; its page fetched
+  // meanwhile. Fetched again when stale, unless kept: a hold waits only for
+  // what isn't in, so going back shows the screen as it was, as in Next.js.
+  const useFrame = (href: string, kept: boolean) => {
+    const paths = pathsOf(href);
+    $usePrefetchQuery({ queryKey: [paths.page] });
+    const answers = $useSuspenseQueries({
+      queries: [...paths.layouts, paths.loading].map((key) => ({ ...optional(key), refetchOnMount: !kept })),
+    });
+    return {
+      page: paths.page,
+      layouts: answers.slice(0, -1).map((answer) => answer.data.value),
+      Loading: answers[answers.length - 1]!.data.value,
+    };
+  };
 
-  const Navigator = (props: { id?: string; href: string }) => (
+  const Page = (props: { href: string }) => $useSuspenseQuery({ queryKey: [props.href] }).data as ReactNode;
+
+  // A screen as Next.js nests a page: inside its layouts, and, with a loading
+  // state, inside a Suspense showing it.
+  const Framed = (props: { href: string }) => {
+    const { page, layouts, Loading } = useFrame(props.href, false);
+    let inner: ReactNode = <Page href={page} />;
+    if (Loading !== null) {
+      inner = <$Suspense fallback={<Loading />}>{inner}</$Suspense>;
+    }
+    for (const Layout of [...layouts].reverse()) {
+      if (Layout !== null) {
+        inner = <Layout>{inner}</Layout>;
+      }
+    }
+    return inner;
+  };
+
+  // Fetches an href ahead, as Next.js prefetches: its layouts and loading
+  // state, and its page only for a route without one.
+  const prefetch = (href: string) => {
+    const paths = pathsOf(href);
+    for (const layout of paths.layouts) {
+      void queryClient.prefetchQuery(optional(layout));
+    }
+    void queryClient.fetchQuery(optional(paths.loading)).then(
+      (loading) => (loading.value === null ? queryClient.prefetchQuery({ queryKey: [paths.page] }) : undefined),
+      () => {},
+    );
+  };
+
+  // An href changed in place (router.setParams) shows once it's in: the
+  // screen stays meanwhile.
+  const Screen = (props: { href: string; active: boolean }) => {
+    const href = $useDeferredValue(props.href);
+    $useEffect(() => {
+      if (!props.active) {
+        prefetch(props.href);
+      }
+    }, [props.active, props.href]);
+    return props.active ? (
+      <$Suspense fallback={null}>
+        <Framed href={href} />
+      </$Suspense>
+    ) : null;
+  };
+
+  // Suspends a navigation's render, above the Stack, until the href's screen
+  // can show: its layouts and loading state, and, without one, its page. As
+  // navigations are transitions, the screen on top stays. One that fails
+  // ends the hold, for the screen to show why.
+  const PageIn = (props: { href: string }) => {
+    $useSuspenseQuery({ queryKey: [props.href], refetchOnMount: false });
+    return null;
+  };
+  const Hold = (props: { href: string }) => {
+    const { page, Loading } = useFrame(props.href, true);
+    return Loading === null ? <PageIn href={page} /> : null;
+  };
+  class Quiet extends $Component<{ children: ReactNode }, { failed: boolean }> {
+    state = { failed: false };
+    static getDerivedStateFromError() {
+      return { failed: true };
+    }
+    render() {
+      return this.state.failed ? null : this.props.children;
+    }
+  }
+
+  const Navigator = (props: { href: string }) => (
     <$QueryClientProvider client={queryClient}>
-      <Hold id={props.id} href={props.href} />
+      <Quiet key={props.href}>
+        <Hold href={props.href} />
+      </Quiet>
       <$RootLayout />
     </$QueryClientProvider>
   );
@@ -221,14 +206,17 @@ export function runtime(
   const runtime: Runtime = {
     Navigator,
     Screen,
-    reload: (id) => {
-      const answer = claimed.get(id);
-      if (answer === undefined) {
-        return Promise.resolve();
-      }
-      const reloaded = fetchFor(answer.href);
-      screens.get(id)?.(reloaded);
-      return reloaded.settled;
+    // Each of its queries again: one that failed, for its screen to wait
+    // for it; the others kept until the new answer is in.
+    reload: async (href) => {
+      const paths = pathsOf(href);
+      await Promise.allSettled(
+        [paths.page, ...paths.layouts, paths.loading].map((key) =>
+          queryClient.getQueryState([key])?.status === "error"
+            ? queryClient.resetQueries({ queryKey: [key], exact: true })
+            : queryClient.refetchQueries({ queryKey: [key], exact: true }),
+        ),
+      );
     },
   };
   return runtime;

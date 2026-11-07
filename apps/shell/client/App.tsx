@@ -19,7 +19,7 @@ import { savePreview } from "./preview";
 import { openApp } from "./open";
 
 // The open app's runtime, for its routes.
-export const LoadedRuntime = createContext<Runtime>(null!);
+export const RuntimeContext = createContext<Runtime>(null!);
 
 // The href of a route of a navigator: its catch-all's path, and its other
 // params as the query, without what the shell adds (`__backtick`, on an
@@ -127,8 +127,8 @@ function AppRoot({
     return () => clearTimeout(timer);
   }, [app]);
   return (
-    <LoadedRuntime value={runtime}>
-      <Navigator id={top?.key} href={href} />
-    </LoadedRuntime>
+    <RuntimeContext value={runtime}>
+      <Navigator href={href} />
+    </RuntimeContext>
   );
 }

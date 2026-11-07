@@ -4,9 +4,10 @@ export const starter = `// A Backtick app:
 // 1. Import what the client provides \`with { backtick: "client" }\`.
 // 2. A splice \`$\` marks a server value crossing into a client script cs\`...\`
 // 3. Use + over template literals: a backtick ends the client script.
-// 4. Each route is a screen, and runs on the server each time it opens. As in
-//    Next.js, a navigation holds the current screen until the next is in,
-//    unless the route has a _loading, which shows at once instead.
+// 4. Each route is a screen, and runs on the server when it opens; going back
+//    shows it as it was. As in Next.js, a navigation holds the current screen
+//    until the next is in, unless the route has a _loading, which shows at
+//    once instead.
 
 import { cs } from "@backtickjs/core";
 import { backtick } from "@backtickjs/hono";

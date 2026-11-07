@@ -1,41 +1,14 @@
-// A screen's frame, as Next.js nests a page: inside the layouts of its path
-// and its parents' (`_layout` routes), and, with a `_loading` route, inside a
-// Suspense showing it, around a query of the page. Composed on the
-// server, from what those routes render, into the screen's one bundle.
-import { type Client, cs, type Spliceable } from "@backtickjs/core";
+// The app's root layout, its `/_layout` route, which the runtime is sent
+// around: what the route renders, asked of the app in-process, rather than
+// its bundle.
 import type { Context, Hono } from "hono";
-import { useSuspenseQuery } from "@tanstack/react-query" with {
-  backtick: "client",
-};
-import { type ComponentType, type ReactNode, Suspense } from "react" with {
-  backtick: "client",
-};
 
-// Where a route answers alone, without its layouts and loading state:
-// `/cart/items/_page` for `/cart/items`.
-export const pageSuffix = "/_page";
-
-// The page of one frame's answer: its own query, so a navigation shows the
-// page as the server has it now, not as another screen fetched it.
-const Page = cs`(props: { path: string; answer: string }) =>
-  $useSuspenseQuery({ queryKey: [props.path, props.answer], gcTime: 0 }).data as ReactNode`;
-
-// The requests backtick() makes in-process: for a nested route, what it
-// renders, rather than its bundle; for a route alone (`/_page`), nothing.
+// The requests backtick() makes in-process, and what each route rendered.
 const captures = new WeakMap<Request, { input?: unknown }>();
-const alone = new WeakSet<Request>();
-
-// The same request, in-process, for `path`, with the phone's headers.
-function within(context: Context, path: string): Request {
-  return new Request(new URL(path, context.req.url), {
-    headers: context.req.raw.headers,
-  });
-}
 
 /**
- * For a request backtick() makes in-process for a nested route: keeps what
- * a `_layout` or `_loading` route renders, rather than bundling it. Any
- * other route (a catch-all, say) renders nothing.
+ * For a request backtick() makes in-process: keeps what the route renders,
+ * rather than bundling it.
  */
 export function capture(
   context: Context,
@@ -45,10 +18,7 @@ export function capture(
   if (sink === undefined) {
     return undefined;
   }
-  const route = context.req.routePath;
-  if (route.endsWith("/_layout") || route.endsWith("/_loading")) {
-    sink.input = input;
-  }
+  sink.input = input;
   return context.body(null);
 }
 
@@ -61,86 +31,14 @@ export async function nested(
   context: Context,
   path: string,
 ): Promise<unknown> {
-  const request = within(context, path);
+  const request = new Request(new URL(path, context.req.url), {
+    headers: context.req.raw.headers,
+  });
   const sink: { input?: unknown } = {};
   captures.set(request, sink);
   const response = await app.request(request, undefined, context.env);
   if (response.status !== 200 && response.status !== 404) {
-    throw new Error(`The screen's ${path} answered ${response.status}.`);
+    throw new Error(`The app's ${path} answered ${response.status}.`);
   }
-  return sink.input;
-}
-
-/** The route at `path` alone, without its layouts and loading state. */
-export async function page(
-  app: Hono<any, any, any>,
-  context: Context,
-  path: string,
-): Promise<Response> {
-  const request = within(context, path + new URL(context.req.url).search);
-  alone.add(request);
-  return app.request(request, undefined, context.env);
-}
-
-export interface Frame {
-  // Outermost first.
-  layouts: Client<ComponentType<{ children: ReactNode }>>[];
-  loading?: Client<ComponentType>;
-}
-
-/**
- * The frame of a screen request, or undefined for one that has none: a
- * nested route's own, or an in-process one. The root's `/_layout` is the
- * app's root layout, not a frame.
- */
-export async function frameOf(
-  app: Hono<any, any, any>,
-  context: Context,
-): Promise<Frame | undefined> {
-  const path = context.req.path;
-  if (
-    context.req.method !== "GET" ||
-    captures.has(context.req.raw) ||
-    alone.has(context.req.raw) ||
-    path.endsWith("/_layout") ||
-    path.endsWith("/_loading")
-  ) {
-    return undefined;
-  }
-  const segments = path.split("/").filter((segment) => segment !== "");
-  const parents = segments.map(
-    (_, index) => "/" + segments.slice(0, index + 1).join("/"),
-  );
-  const [loading, ...layouts] = await Promise.all([
-    nested(app, context, (path === "/" ? "" : path) + "/_loading"),
-    ...parents.map((parent) => nested(app, context, parent + "/_layout")),
-  ]);
-  return {
-    layouts: layouts.filter(
-      (layout) => layout !== undefined,
-    ) as Frame["layouts"],
-    loading: loading as Frame["loading"],
-  };
-}
-
-/** `inner` inside the frame's layouts. */
-export function framed(frame: Frame, inner: Spliceable): Spliceable {
-  let framed = inner;
-  for (const Layout of [...frame.layouts].reverse()) {
-    const children = framed;
-    framed = cs`<$Layout>{$children as ReactNode}</$Layout>`;
-  }
-  return framed;
-}
-
-/** The frame answered at once: its loading state until the page is in. */
-export function loadingFrame(
-  frame: Frame & { loading: Client<ComponentType> },
-  href: string,
-): Spliceable {
-  const Loading = frame.loading;
-  return framed(
-    frame,
-    cs`<$Suspense fallback={<$Loading />}><$Page path={${href}} answer={${crypto.randomUUID()}} /></$Suspense>`,
-  );
+  return response.status === 404 ? undefined : sink.input;
 }

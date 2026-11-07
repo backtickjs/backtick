@@ -2,7 +2,7 @@ import { Stack, useFocusEffect, useIsFocused, useRoute } from "expo-router";
 import { startTransition, use, useCallback, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { followStartingLink } from "./app/+native-intent";
-import { hrefOfRoute, LoadedRuntime } from "./App";
+import { hrefOfRoute, RuntimeContext } from "./App";
 import { Failed } from "./Failed";
 import { showing } from "./reload";
 
@@ -12,11 +12,11 @@ const noTitle = { title: "" };
 // A route: the runtime's screen for its href, active once it has come on
 // top (`<Link prefetch>` mounts a route ahead of its navigation). A `reload`
 // link fetches its screen again, and the current one stays until it's in. A
-// screen that fails shows why, in its route alone, and its retry mounts it
+// screen that fails shows why, in its route alone, and its retry loads it
 // again.
 export function RouteScreen() {
-  const { Screen, reload: reloadScreen } = use(LoadedRuntime);
-  // The route's key, which tells it apart, and its href, from its params.
+  const { Screen, reload: reloadScreen } = use(RuntimeContext);
+  // The route, and its href, from its params.
   const route = useRoute();
   const href = hrefOfRoute(route.params);
   const focused = useIsFocused();
@@ -24,7 +24,7 @@ export function RouteScreen() {
   if (focused && !shown) {
     setShown(true);
   }
-  // Each retry mounts the screen again, which fetches it anew.
+  // Each retry mounts the screen again, once its answers are fetched anew.
   const [retries, setRetries] = useState(0);
   const retry = useCallback(
     () => startTransition(() => setRetries((count) => count + 1)),
@@ -32,8 +32,8 @@ export function RouteScreen() {
   );
   const reload = useCallback(async () => {
     retry();
-    await reloadScreen?.(route.key);
-  }, [reloadScreen, route.key, retry]);
+    await reloadScreen?.(href);
+  }, [reloadScreen, href, retry]);
   // On top, it's the screen a `reload` link loads again.
   useFocusEffect(
     useCallback(() => {
@@ -50,9 +50,9 @@ export function RouteScreen() {
       <Stack.Screen options={noTitle} />
       <ErrorBoundary
         resetKeys={[retries]}
-        fallbackRender={({ error }) => <Failed error={error} retry={retry} />}
+        fallbackRender={({ error }) => <Failed error={error} retry={reload} />}
       >
-        <Screen id={route.key} href={href} active={shown} />
+        <Screen href={href} active={shown} />
       </ErrorBoundary>
     </>
   );

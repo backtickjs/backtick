@@ -2,15 +2,7 @@ import { bundler, BundlerError, type Modules } from "@backtickjs/bundler";
 import type { Client, Spliceable, SplicesAs } from "@backtickjs/core";
 import type { ComponentType } from "react";
 import type { Hono, MiddlewareHandler } from "hono";
-import {
-  capture,
-  framed,
-  frameOf,
-  loadingFrame,
-  nested,
-  page,
-  pageSuffix,
-} from "./frame.js";
+import { capture, nested } from "./frame.js";
 import { runtime } from "./runtime.js";
 
 export type { Runtime } from "./runtime.js";
@@ -50,15 +42,14 @@ const runtimePath = "/.well-known/backtick/runtime";
  *     const RootLayout = cs`() => <$Stack />`;
  *     app.get("/_layout", (context) => context.render(RootLayout));
  *
- * As in Next.js, a screen is drawn inside the layouts of its path and its
- * parents', the client components their `_layout` routes render, which take
- * the screen as `children`. A route with a `_loading` route, a client
- * component without props, answers at once, with its layouts and the
- * loading state, and the phone then queries the screen itself; a navigation
- * to a route without one holds the current screen until the next is in. Unlike
- * Next.js's, layouts are drawn again for each screen pushed. `backtick()`
- * asks `app` for these routes, in-process, as a screen is requested, and
- * answers a route alone, as a query asks for it, at its `/_page`.
+ * Every route answers alone, and the runtime composes a screen as Next.js
+ * nests a page: inside the layouts of its path and its parents', the client
+ * components their `_layout` routes render, which take the screen as
+ * `children`; and, with a `_loading` route, a client component without props,
+ * inside a Suspense showing it. The runtime queries each by its path, in
+ * parallel; a route without one answers 404. A navigation to a route with a
+ * `_loading` shows once its layouts and loading state are in, and to one
+ * without, once its page is; the current screen stays meanwhile.
  */
 export function backtick(app?: Hono<any, any, any>): MiddlewareHandler {
   return async (context, next) => {
@@ -106,23 +97,6 @@ export function backtick(app?: Hono<any, any, any>): MiddlewareHandler {
           context.req.header("x-backtick-modules") ?? "{}",
           RootLayout as Client<ComponentType>,
         ),
-      );
-    }
-    if (app !== undefined && path.endsWith(pageSuffix)) {
-      return page(app, context, path.slice(0, -pageSuffix.length) || "/");
-    }
-    const frame = app === undefined ? undefined : await frameOf(app, context);
-    if (frame?.loading !== undefined) {
-      const { pathname, search } = new URL(context.req.url);
-      return bundle(
-        loadingFrame({ ...frame, loading: frame.loading }, pathname + search),
-      );
-    }
-    if (frame !== undefined && frame.layouts.length > 0) {
-      context.setRenderer(
-        async (input) =>
-          capture(context, input) ??
-          bundle(framed(frame, input as Spliceable)),
       );
     }
     await next();
