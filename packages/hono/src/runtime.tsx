@@ -190,16 +190,17 @@ export function runtime(
     const prefetch = (href: string) => {
       const loading = loadingOf(href);
       if (loading === undefined) {
-        void queryClient.prefetchQuery({ queryKey: [href] });
+        void queryClient.query({ queryKey: [href] }).catch(() => {});
         return;
       }
-      void queryClient.fetchQuery(loadingQuery(loading)).then(
-        (answer) =>
+      void queryClient
+        .query(loadingQuery(loading))
+        .then((answer) =>
           answer.value === null
-            ? queryClient.prefetchQuery({ queryKey: [href] })
+            ? queryClient.query({ queryKey: [href] })
             : undefined,
-        () => {},
-      );
+        )
+        .catch(() => {});
     };
 
     // An href changed in place (router.setParams) shows once it's in: the
@@ -244,7 +245,7 @@ export function runtime(
       // in, at once if it was prefetched; its page is fetched meanwhile.
       const loading = loadingOf(props.href);
       if (loading !== undefined) {
-        void queryClient.prefetchQuery({ queryKey: [props.href] });
+        void queryClient.query({ queryKey: [props.href] }).catch(() => {});
         return <LoadingIn path={loading} />;
       }
       return <PageIn href={props.href} />;
