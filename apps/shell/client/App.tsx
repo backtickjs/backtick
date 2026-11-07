@@ -16,7 +16,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { isSignedIn } from "../modules/backtick-session/src";
 import { Failed } from "./Failed";
 import { savePreview } from "./preview";
-import { type OpenedApp, openApp } from "./open";
+import { openApp } from "./open";
 
 // The open app's runtime, for its routes.
 export const LoadedRuntime = createContext<Runtime>(null!);
@@ -97,9 +97,9 @@ function AppRoot({
   opened,
 }: {
   app: string | null;
-  opened: Promise<OpenedApp>;
+  opened: Promise<Runtime>;
 }) {
-  const { RootLayout, runtime } = use(opened);
+  const runtime = use(opened);
   const { Navigator } = runtime;
   if (Navigator === undefined) {
     throw new Error("This app needs a newer version of Backtick.");
@@ -128,7 +128,7 @@ function AppRoot({
   }, [app]);
   return (
     <LoadedRuntime value={runtime}>
-      <Navigator id={top?.key} href={href} rootLayout={RootLayout} />
+      <Navigator id={top?.key} href={href} />
     </LoadedRuntime>
   );
 }

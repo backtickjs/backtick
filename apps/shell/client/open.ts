@@ -1,8 +1,7 @@
 import { type Bundle, modulesOf } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 import { getBacktickExtra } from "@backtickjs/expo";
-import type { Runtime, RuntimeOptions } from "@backtickjs/hono";
-import type { ComponentType } from "react";
+import type { Runtime } from "@backtickjs/hono";
 import Constants from "expo-constants";
 import { moduleMap } from "./moduleMap";
 import { apps, home } from "./hosts";
@@ -17,31 +16,15 @@ function originOf(app: string | null): string {
   return app === null ? `https://${home}` : `https://${app}.${apps}`;
 }
 
-// An app as the phone opens it, or Backtick's home (app null), from its
-// server: its root layout, from its `/_layout` route, and the runtime its
-// screens come from, fetched together and given where they came from. The
-// session's token, when there is one, is attached below JavaScript. A module
-// this build lacks is named in the server's answer.
-export interface OpenedApp {
-  RootLayout: ComponentType;
-  runtime: Runtime;
-}
-
-export async function openApp(app: string | null): Promise<OpenedApp> {
-  const origin = originOf(app);
-  const [RootLayout, runtime] = await Promise.all([
-    run<ComponentType>(origin + "/_layout"),
-    run<(options: RuntimeOptions) => Runtime>(
-      origin + "/.well-known/backtick/runtime",
-    ),
-  ]);
-  return { RootLayout, runtime: runtime({ origin, modules }) };
-}
-
-async function run<T>(url: string): Promise<T> {
-  const response = await fetch(url, {
-    headers: { "x-backtick-modules": modules },
-  });
+// An app as the phone opens it, or Backtick's home (app null): the runtime
+// its server sends, with the app's root layout inside. The session's token,
+// when there is one, is attached below JavaScript. A module this build lacks
+// is named in the server's answer.
+export async function openApp(app: string | null): Promise<Runtime> {
+  const response = await fetch(
+    originOf(app) + "/.well-known/backtick/runtime",
+    { headers: { "x-backtick-modules": modules } },
+  );
   const body = await response.text();
   if (
     response.status !== 200 ||
@@ -56,5 +39,5 @@ async function run<T>(url: string): Promise<T> {
       `The app couldn't be opened (${response.status}): ${reason}`,
     );
   }
-  return execRoot(body as Bundle<T>, moduleMap);
+  return execRoot(body as Bundle<Runtime>, moduleMap);
 }

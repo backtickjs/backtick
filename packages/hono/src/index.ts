@@ -1,12 +1,21 @@
 import { bundler, BundlerError, type Modules } from "@backtickjs/bundler";
-import type { Spliceable, SplicesAs } from "@backtickjs/core";
+import type { Client, Spliceable, SplicesAs } from "@backtickjs/core";
+import type { ComponentType } from "react";
 import type { Hono, MiddlewareHandler } from "hono";
 import { contextStorage } from "hono/context-storage";
-import { capture, framed, frameOf, loadingFrame } from "./frame.js";
+import {
+  capture,
+  framed,
+  frameOf,
+  loadingFrame,
+  nested,
+  page,
+} from "./frame.js";
+import { pageSuffix } from "./route.js";
 import { runtime } from "./runtime.js";
 
 export { Route } from "./route.js";
-export type { Runtime, RuntimeOptions } from "./runtime.js";
+export type { Runtime } from "./runtime.js";
 
 declare module "hono" {
   // What `context.render` takes under `backtick()`, as
@@ -34,12 +43,11 @@ const runtimePath = "/.well-known/backtick/runtime";
  * without a module the screen needs gets a 426, and any other refusal of the
  * bundler's a 400, each with `{ name, message }`.
  *
- * The Backtick app opens an app with two answers, fetched together: the
- * app's `/_layout` route, its root layout, a client component around every
- * screen that renders the app's `Stack`; and the client code that fetches,
- * keeps and shows its screens, which `backtick()` sends from
- * `/.well-known/backtick/runtime`. A client with a navigator of its own needs
- * neither.
+ * The Backtick app opens an app from one answer, which `backtick(app)` sends
+ * from `/.well-known/backtick/runtime`: the client code that fetches, keeps
+ * and shows its screens, around the app's root layout, its `/_layout` route,
+ * a client component that renders the app's `Stack`. A client with a
+ * navigator of its own needs neither, nor `app`.
  *
  *     const RootLayout = cs`() => <$Stack />`;
  *     app.get("/_layout", (context) => context.render(RootLayout));
@@ -51,7 +59,8 @@ const runtimePath = "/.well-known/backtick/runtime";
  * loading state, and the phone then fetches the screen itself; a navigation
  * to a route without one holds the current screen until the next is in. Unlike
  * Next.js's, layouts are drawn again for each screen pushed. `backtick()`
- * asks `app` for these routes, in-process, as a screen is requested.
+ * asks `app` for these routes, in-process, as a screen is requested, and
+ * answers a route alone, as a `Route` asks for it, at its `/_page`.
  */
 export function backtick(app?: Hono<any, any, any>): MiddlewareHandler {
   // The request, for a Route among the screen's server components.
@@ -73,10 +82,6 @@ export function backtick(app?: Hono<any, any, any>): MiddlewareHandler {
         const { code } = build.generate({ format: "cjs" });
         context.header("content-type", "text/javascript");
         context.header("cache-control", "no-store");
-        context.header(
-          "vary",
-          "x-backtick-modules, x-backtick-origin, x-backtick-route",
-        );
         return context.body(code);
       } catch (error) {
         if (error instanceof BundlerError) {
@@ -91,8 +96,24 @@ export function backtick(app?: Hono<any, any, any>): MiddlewareHandler {
     context.setRenderer(
       async (input) => capture(context, input) ?? bundle(input as Spliceable),
     );
-    if (context.req.path === runtimePath) {
-      return context.render(runtime);
+    const path = context.req.path;
+    if (app !== undefined && path === runtimePath) {
+      const RootLayout = await nested(app, context, "/_layout");
+      if (RootLayout === undefined) {
+        throw new Error(
+          "The app has no /_layout route, its root layout, which renders its Stack.",
+        );
+      }
+      return context.render(
+        runtime(
+          new URL(context.req.url).origin,
+          context.req.header("x-backtick-modules") ?? "{}",
+          RootLayout as Client<ComponentType>,
+        ),
+      );
+    }
+    if (app !== undefined && path.endsWith(pageSuffix)) {
+      return page(app, context, path.slice(0, -pageSuffix.length) || "/");
     }
     let response: Response | undefined;
     await storage(context, async () => {

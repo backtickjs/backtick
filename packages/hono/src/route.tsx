@@ -7,18 +7,29 @@ import { fetchAnswer } from "./runtime.js";
 
 // Fetched as it mounts, and again when its href changes, not when its
 // Suspense shows it again, which runs its layout effects again.
-const RouteAnswer = cs`(props: { origin: string; modules: string; href: string }) => {
-  const [answer, setAnswer] = $useState(undefined as { href: string; screen: Promise<ReactNode> } | undefined);
+const RouteAnswer = cs`(props: { url: string; modules: string }) => {
+  const [answer, setAnswer] = $useState(undefined as { url: string; screen: Promise<ReactNode> } | undefined);
   $useLayoutEffect(() => {
-    if (answer?.href !== props.href) {
-      setAnswer({ href: props.href, screen: $fetchAnswer(props.origin, props.modules, props.href, true) });
+    if (answer?.url !== props.url) {
+      setAnswer({ url: props.url, screen: $fetchAnswer(props.url, props.modules) });
     }
-  }, [props.href]);
+  }, [props.url]);
   return answer === undefined ? null : $use(answer.screen);
 }`;
 
+// Where a route answers alone, without its layouts and loading state:
+// `/cart/items/_page` for `/cart/items`.
+export const pageSuffix = "/_page";
+function pageOf(href: string): string {
+  const query = href.indexOf("?");
+  const path = query === -1 ? href : href.slice(0, query);
+  const search = query === -1 ? "" : href.slice(query);
+  return (path === "/" ? "" : path) + pageSuffix + search;
+}
+
 /**
- * Another route's answer, drawn in place: a server component for a screen
+ * Another route's answer, drawn in place, alone (its `/_page`, which
+ * `backtick()` answers): a server component for a screen
  * that draws part of itself later, such as a header at once and its content
  * once it's in.
  *
@@ -36,9 +47,7 @@ export function Route(props: { href: string }): Client<ReactNode> {
       "<Route> draws for the phone a screen is rendered for: use it in a screen rendered by context.render, under backtick().",
     );
   }
-  // The phone's origin, which a proxy can hide from the server, and modules.
-  const origin =
-    context.req.header("x-backtick-origin") ?? new URL(context.req.url).origin;
+  const url = new URL(pageOf(props.href), context.req.url).href;
   const modules = context.req.header("x-backtick-modules") ?? "{}";
-  return cs`<$RouteAnswer origin={${origin}} modules={${modules}} href={${props.href}} />`;
+  return cs`<$RouteAnswer url={${url}} modules={${modules}} />`;
 }

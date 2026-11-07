@@ -16,22 +16,17 @@ import {
  * What the phone runs an app with. Routes are told apart by `id`, their
  * navigator's key: one href can be pushed twice, and a route's href can
  * change in place (`router.setParams`). A shell checks for a member before
- * using it, so a later runtime can drop one, and a later shell can pass more
- * options than an older runtime reads.
+ * using it, so a later runtime can drop one.
  */
 export interface Runtime {
   /**
-   * The app's root layout, `/_layout`'s answer, given the route on top (no
+   * The app's root layout, its `/_layout` route, given the route on top (no
    * `id` before its navigator has a route). A navigation holds the current
    * screen until the next is in, as navigations are transitions
    * (`router.setTransitionMode("always")`): a route with a `_loading` answers
    * at once, with its loading state. Suspends until the first screen is in.
    */
-  Navigator?: ComponentType<{
-    id?: string;
-    href: string;
-    rootLayout: ComponentType;
-  }>;
+  Navigator?: ComponentType<{ id?: string; href: string }>;
   /**
    * A route's screen. One not `active` yet (`<Link prefetch>` mounts a route
    * ahead of its navigation) shows nothing, and may fetch its answer for the
@@ -45,32 +40,12 @@ export interface Runtime {
   reload?(id: string): Promise<void>;
 }
 
-/** What the phone gives the runtime as it opens an app. */
-export interface RuntimeOptions {
-  /** Where the phone opened the app from. */
-  origin: string;
-  /** The modules it carries, as it sends them in `x-backtick-modules`. */
-  modules: string;
-}
-
 /**
  * A route's answer, run. Any bundle is a screen, whatever its status: an
- * app's not-found screen is one. A refusal ({ name, message }) says why. The
- * origin goes along, for the answer's `Route`s to fetch from. A `Route` asks
- * for the route alone, without its layouts and loading state.
+ * app's not-found screen is one. A refusal ({ name, message }) says why.
  */
-export const fetchAnswer = cs`async (origin: string, modules: string, href: string, route: boolean) => {
-  // x-backtick-runtime: the runtime's version, for a server to tell an
-  // outdated one to open the app again.
-  const headers: Record<string, string> = {
-    "x-backtick-modules": modules,
-    "x-backtick-origin": origin,
-    "x-backtick-runtime": "1",
-  };
-  if (route) {
-    headers["x-backtick-route"] = "1";
-  }
-  const response = await fetch(origin + href, { headers });
+export const fetchAnswer = cs`async (url: string, modules: string) => {
+  const response = await fetch(url, { headers: { "x-backtick-modules": modules } });
   const body = await response.text();
   if (!(response.headers.get("content-type") ?? "").startsWith("text/javascript")) {
     let reason = body;
@@ -82,9 +57,16 @@ export const fetchAnswer = cs`async (origin: string, modules: string, href: stri
   return $exec(body as never) as ReactNode;
 }`;
 
-/** The runtime, called once per open. */
-export const runtime: Client<(options: RuntimeOptions) => Runtime> =
-  cs`({ origin, modules }: RuntimeOptions): Runtime => {
+/**
+ * The runtime of an open: for the phone at `origin` with `modules`, around
+ * the app's root layout.
+ */
+export function runtime(
+  origin: string,
+  modules: string,
+  RootLayout: Client<ComponentType>,
+): Client<Runtime> {
+  return cs`{
   // A promise marked as React marks one it has read, so use() reads it at
   // once when it has settled, rather than suspending for a tick.
   type Tracked<T> = Promise<T> & { status?: string; value?: T; reason?: unknown };
@@ -106,7 +88,7 @@ export const runtime: Client<(options: RuntimeOptions) => Runtime> =
     settledAt?: number;
   }
   const fetchFor = (href: string): Answer => {
-    const screen = track($fetchAnswer(origin, modules, href, false));
+    const screen = track($fetchAnswer(${origin} + href, ${modules}));
     const answer: Answer = { href, screen, settled: track(screen.then(() => {}, () => {})) };
     answer.settled.then(() => {
       answer.settledAt = Date.now();
@@ -208,17 +190,14 @@ export const runtime: Client<(options: RuntimeOptions) => Runtime> =
     return null;
   };
 
-  const Navigator = (props: { id?: string; href: string; rootLayout: ComponentType }) => {
-    const RootLayout = props.rootLayout;
-    return (
-      <>
-        <Hold id={props.id} href={props.href} />
-        <RootLayout />
-      </>
-    );
-  };
+  const Navigator = (props: { id?: string; href: string }) => (
+    <>
+      <Hold id={props.id} href={props.href} />
+      <$RootLayout />
+    </>
+  );
 
-  return {
+  const runtime: Runtime = {
     Navigator,
     Screen,
     reload: (id) => {
@@ -231,4 +210,6 @@ export const runtime: Client<(options: RuntimeOptions) => Runtime> =
       return reloaded.settled;
     },
   };
+  return runtime;
 }`;
+}
