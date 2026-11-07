@@ -1,7 +1,7 @@
 import { type Bundle, modulesOf } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 import { getBacktickExtra } from "@backtickjs/expo";
-import type { Runtime } from "@backtickjs/hono";
+import type { Runtime, RuntimeOptions } from "@backtickjs/hono";
 import type { ComponentType } from "react";
 import Constants from "expo-constants";
 import { moduleMap } from "./moduleMap";
@@ -31,11 +31,11 @@ export async function openApp(app: string | null): Promise<OpenedApp> {
   const origin = originOf(app);
   const [RootLayout, runtime] = await Promise.all([
     run<ComponentType>(origin + "/_layout"),
-    run<(origin: string, modules: string) => Runtime>(
+    run<(options: RuntimeOptions) => Runtime>(
       origin + "/.well-known/backtick/runtime",
     ),
   ]);
-  return { RootLayout, runtime: runtime(origin, modules) };
+  return { RootLayout, runtime: runtime({ origin, modules }) };
 }
 
 async function run<T>(url: string): Promise<T> {
@@ -47,7 +47,14 @@ async function run<T>(url: string): Promise<T> {
     response.status !== 200 ||
     !response.headers.get("content-type")?.startsWith("text/javascript")
   ) {
-    throw new Error(`The app couldn't be opened (${response.status}): ${body}`);
+    // A refusal says why, as { name, message }.
+    let reason = body;
+    try {
+      reason = JSON.parse(body).message ?? body;
+    } catch {}
+    throw new Error(
+      `The app couldn't be opened (${response.status}): ${reason}`,
+    );
   }
   return execRoot(body as Bundle<T>, moduleMap);
 }

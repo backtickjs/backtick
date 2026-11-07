@@ -3,7 +3,7 @@ import type { Spliceable, SplicesAs } from "@backtickjs/core";
 import type { Hono, MiddlewareHandler } from "hono";
 import { runtime } from "./runtime.js";
 
-export type { Runtime } from "./runtime.js";
+export type { Runtime, RuntimeOptions } from "./runtime.js";
 
 declare module "hono" {
   // What `context.render` takes under `backtick()`, as

@@ -1,6 +1,8 @@
 import { cs } from "@backtickjs/core";
 import { backtick } from "@backtickjs/hono";
-import { Stack } from "expo-router" with { backtick: "client" };
+import { Stack, unstable_useIsNavigating } from "expo-router" with {
+  backtick: "client",
+};
 import { Hono } from "hono";
 import { deleteAccount, failed, supabase, userOf } from "./account.js";
 import { Home } from "./Home.js";
@@ -19,6 +21,7 @@ export const app = new Hono<{ Variables: { user: string } }>();
 // progress bar while a navigation waits for its screen.
 const RootLayout = cs`() => {
   const colors = $useColors();
+  const navigating = $unstable_useIsNavigating();
   return (
     <>
       <$Stack
@@ -26,6 +29,8 @@ const RootLayout = cs`() => {
           title: "",
           headerShown: false,
           contentStyle: { backgroundColor: colors.paper },
+          // No back gesture while a navigation holds: it would be undone.
+          gestureEnabled: !navigating,
         }}
       />
       <$Progress color={colors.ink} />

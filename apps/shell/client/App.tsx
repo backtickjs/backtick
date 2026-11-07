@@ -1,5 +1,9 @@
 import type { Runtime } from "@backtickjs/hono";
-import { useIsFocused, useUnstableGlobalHref } from "expo-router";
+import {
+  type NavigationState,
+  useGlobalSearchParams,
+  useRoute,
+} from "expo-router";
 import {
   createContext,
   type ReactNode,
@@ -17,24 +21,11 @@ import { type OpenedApp, openApp } from "./open";
 // The open app's runtime, for its routes.
 export const LoadedRuntime = createContext<Runtime>(null!);
 
-// An href as the shell compares it: path and query, normalised as a URL,
-// without what the shell adds (`__backtick`, on an app's navigator) or a
-// hash, which means nothing to a native screen.
-function normalised(href: string): string {
-  const url = new URL(href, "https://screen");
-  url.searchParams.delete("__backtick");
-  // Each segment encoded the same way, whoever wrote it.
-  const path = url.pathname
-    .split("/")
-    .map((segment) => encodeURIComponent(decodeURIComponent(segment)))
-    .join("/");
-  return path + url.search;
-}
-
 // The href of a route of a navigator: its catch-all's path, and its other
-// params as the query.
+// params as the query, without what the shell adds (`__backtick`, on an
+// app's navigator). Every href the shell gives the runtime is made here.
 export function hrefOfRoute(params: object | undefined): string {
-  const { backtickPath, ...query } = (params ?? {}) as Record<
+  const { backtickPath, __backtick, ...query } = (params ?? {}) as Record<
     string,
     string | string[] | undefined
   >;
@@ -46,7 +37,8 @@ export function hrefOfRoute(params: object | undefined): string {
   }
   const path =
     "/" + [backtickPath ?? []].flat().map(encodeURIComponent).join("/");
-  return normalised(path + "?" + search);
+  const searchString = search.toString();
+  return searchString === "" ? path : `${path}?${searchString}`;
 }
 
 // Runs one app, or Backtick's home (app null): its root layout, which
@@ -84,14 +76,13 @@ function AppRoot({
 }) {
   const { RootLayout, runtime } = use(opened);
   const { Navigator } = runtime;
-  // The href on top is this navigator's only while it's on top: the home's
-  // stays mounted under an app, at its own.
-  const top = normalised(useUnstableGlobalHref());
-  const focused = useIsFocused();
-  const [href, setHref] = useState(top);
-  if (focused && top !== href) {
-    setHref(top);
-  }
+  // The route on top of this app's navigator, from its own state, so the
+  // home's stays as it was under an app; before the navigator has a route,
+  // the link's.
+  const { state } = useRoute() as { state?: NavigationState };
+  const top = state?.routes[state.index ?? state.routes.length - 1];
+  const linked = useGlobalSearchParams();
+  const href = hrefOfRoute(top?.params ?? linked);
   // An app's first screen, once it's had a moment to draw (a game's first
   // frame included), is its preview on the home's card. Never in the way:
   // a capture that fails is only logged.
@@ -110,7 +101,7 @@ function AppRoot({
   }, [app]);
   return (
     <LoadedRuntime value={runtime}>
-      <Navigator href={href} rootLayout={RootLayout} />
+      <Navigator id={top?.key} href={href} rootLayout={RootLayout} />
     </LoadedRuntime>
   );
 }

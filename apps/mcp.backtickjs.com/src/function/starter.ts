@@ -71,7 +71,8 @@ const RootLayout = cs\`() => {
   const navigating = $unstable_useIsNavigating();
   return (
     <>
-      <$Stack />
+      {/* No back gesture while a navigation holds: it would be undone. */}
+      <$Stack screenOptions={{ gestureEnabled: !navigating }} />
       {navigating ? <$ActivityIndicator style={$styles.navigating} /> : null}
     </>
   );

@@ -1,4 +1,5 @@
 import type { NavigationState, useNavigationContainerRef } from "expo-router";
+import { startTransition } from "react";
 import { Alert, Linking } from "react-native";
 import { reloadShownScreen } from "../reload";
 import {
@@ -147,11 +148,15 @@ function openOverHome(path: string[], query: string, app?: string): void {
           },
         },
       ];
-  root.dispatch({
-    type: "RESET",
-    target: state.key,
-    payload: { ...state, index: routes.length - 1, routes },
-  });
+  // A transition, as navigations are, so a route waiting for its screen
+  // holds rather than suspending the whole app.
+  startTransition(() =>
+    root.dispatch({
+      type: "RESET",
+      target: state.key,
+      payload: { ...state, index: routes.length - 1, routes },
+    }),
+  );
 }
 
 // A repeated name keeps all its values, as a route's params hold them.
