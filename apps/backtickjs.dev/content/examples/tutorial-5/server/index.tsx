@@ -1,4 +1,3 @@
-import { cs } from "@backtickjs/core";
 import { reloadExpo } from "@backtickjs/expo/server";
 import { backtick } from "@backtickjs/hono";
 import { serve } from "@hono/node-server";
@@ -13,11 +12,7 @@ const app = new Hono();
 app.use(cors({ origin: "*", allowHeaders: ["x-backtick-modules"] }));
 
 // `context.render(element)` answers with the screen, bundled for the app.
-// For the Backtick app, which renders it around every screen; this project's
-// client renders its own navigator, so it's never fetched here.
-const RootLayout = cs`() => null`;
-
-app.use(backtick({ rootLayout: RootLayout }));
+app.use(backtick());
 
 // Your app's screens: add a route, and the app can fetch it. A path can
 // take parameters, `/stories/:id`, read with `context.req.param("id")`.

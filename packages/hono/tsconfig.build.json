@@ -2,6 +2,12 @@
   "extends": "../../configs/tsconfig.build.json",
   "compilerOptions": {
     "emitDeclarationOnly": false,
-    "sourceMap": true
+    "sourceMap": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "@backtickjs/jsx-react",
+    "plugins": [
+      // Built with `tspc`: the phone's runtime is scripts.
+      { "transform": "@backtickjs/tspatch-plugin" }
+    ]
   }
 }

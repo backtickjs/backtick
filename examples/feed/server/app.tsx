@@ -1,4 +1,3 @@
-import { cs } from "@backtickjs/core";
 import { backtick } from "@backtickjs/hono";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
@@ -14,11 +13,7 @@ app.use(
 );
 
 // `context.render(value)` answers with it, bundled for the app.
-// For the Backtick app, which renders it around every screen; this project's
-// client renders its own navigator, so it's never fetched here.
-const RootLayout = cs`() => null`;
-
-app.use(backtick({ rootLayout: RootLayout }));
+app.use(backtick());
 
 // The feed, and its pages, which know their items' paths only.
 app.get("/", (context) => context.render(<Feed />));

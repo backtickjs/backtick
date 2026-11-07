@@ -1527,12 +1527,33 @@ importers:
         specifier: 0.2.8
         version: link:../core
     devDependencies:
+      '@backtickjs/expo':
+        specifier: 0.2.8
+        version: link:../expo
+      '@backtickjs/jsx-react':
+        specifier: 0.2.8
+        version: link:../jsx-react
+      '@backtickjs/tsc':
+        specifier: 0.2.8
+        version: link:../tsc
+      '@backtickjs/tspatch-plugin':
+        specifier: 0.2.8
+        version: link:../tspatch-plugin
+      '@types/react':
+        specifier: 19.3.0
+        version: 19.3.0
       hono:
         specifier: ^4.13.13
         version: 4.13.13
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
+      react:
+        specifier: 19.3.0
+        version: 19.3.0
+      ts-patch:
+        specifier: 4.0.1
+        version: 4.0.1
       typescript:
         specifier: ^6.0.3
         version: 6.0.3

@@ -1,3 +1,4 @@
+import type { Runtime } from "@backtickjs/hono";
 import { useIsFocused, useUnstableGlobalHref } from "expo-router";
 import {
   createContext,
@@ -8,90 +9,13 @@ import {
   useState,
 } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { isSignedIn } from "../modules/backtick-session/src";
 import { Failed } from "./Failed";
-import {
-  fetchApp,
-  fetchHome,
-  fetchRootLayout,
-  type RootLayout,
-} from "./screens";
+import { savePreview } from "./preview";
+import { type OpenedApp, openApp } from "./open";
 
-// A screen on its way.
-interface Load {
-  screen: Promise<ReactNode>;
-  // Resolves either way, for the layout to wait on: a failure shows in the
-  // route.
-  settled: Promise<void>;
-}
-
-// The screens of one navigator's navigations, by href, so the layout can hold
-// the screen on top until the one navigated to arrives. Every navigation
-// fetches: nothing is shown that wasn't fetched for it.
-export class Screens {
-  private navigations = new Map<string, Load>();
-  private shown = new Map<string, number>();
-
-  constructor(readonly app: string | null) {}
-
-  fetch(href: string, signal?: AbortSignal): Promise<ReactNode> {
-    return this.app === null
-      ? fetchHome(href, signal)
-      : fetchApp(this.app, href, signal);
-  }
-
-  // What a navigation to `href` waits for: nothing if a route shows it
-  // already (back), else a fetch.
-  navigatingTo(href: string): Load | undefined {
-    if (this.shown.has(href)) {
-      return undefined;
-    }
-    let load = this.navigations.get(href);
-    if (load === undefined) {
-      const screen = this.fetch(href);
-      load = {
-        screen,
-        settled: screen.then(
-          () => {},
-          () => {},
-        ),
-      };
-      this.navigations.set(href, load);
-    }
-    return load;
-  }
-
-  // The screen of a route coming on top at `href`: the one its navigation
-  // waited for, or, when none did (the same path pushed again), its own.
-  screenFor(href: string): Promise<ReactNode> {
-    return this.navigations.get(href)?.screen ?? this.fetch(href);
-  }
-
-  // While a route has been shown and is mounted: going back to it shows it
-  // as it is.
-  showing(href: string): () => void {
-    this.shown.set(href, (this.shown.get(href) ?? 0) + 1);
-    return () => {
-      const count = this.shown.get(href)! - 1;
-      if (count === 0) {
-        this.shown.delete(href);
-      } else {
-        this.shown.set(href, count);
-      }
-    };
-  }
-
-  // Drops the navigations nothing waits for: one shown already, and one left
-  // before its screen arrived (back, or another navigation).
-  settle(top: string): void {
-    for (const href of this.navigations.keys()) {
-      if (href !== top || this.shown.has(href)) {
-        this.navigations.delete(href);
-      }
-    }
-  }
-}
-
-export const LoadedScreens = createContext<Screens>(null!);
+// The open app's runtime, for its routes.
+export const LoadedRuntime = createContext<Runtime>(null!);
 
 // An href as the shell compares it: path and query, normalised as a URL,
 // without what the shell adds (`__backtick`, on an app's navigator) or a
@@ -99,7 +23,12 @@ export const LoadedScreens = createContext<Screens>(null!);
 function normalised(href: string): string {
   const url = new URL(href, "https://screen");
   url.searchParams.delete("__backtick");
-  return url.pathname + url.search;
+  // Each segment encoded the same way, whoever wrote it.
+  const path = url.pathname
+    .split("/")
+    .map((segment) => encodeURIComponent(decodeURIComponent(segment)))
+    .join("/");
+  return path + url.search;
 }
 
 // The href of a route of a navigator: its catch-all's path, and its other
@@ -120,15 +49,10 @@ export function hrefOfRoute(params: object | undefined): string {
   return normalised(path + "?" + search);
 }
 
-// Runs one app, or Backtick's home (app null): each path navigated to is
-// fetched from the app's server, and the app's root layout gets the fetch as
-// `navigating`. expo-router dispatches each navigation in a transition, so a
-// root layout that suspends on it keeps the screen on top until the next
-// arrives; a route can't, since each route has a Suspense boundary of its own.
-// The layout can't see its navigator's routes, only the href on top. On a
-// first open, `splash` shows until the root layout and the first screen have
-// both arrived. The navigator is the app's own, its root layout's Stack: the
-// shell has none.
+// Runs one app, or Backtick's home (app null): its root layout, which
+// renders its navigator, inside the runtime's, given the href on top, and
+// each route the runtime's screen for its href (RouteScreen.tsx), all from its
+// server. `splash` shows until the first screen is in.
 export function App({
   app,
   splash,
@@ -136,60 +60,57 @@ export function App({
   app: string | null;
   splash: ReactNode;
 }) {
-  const top = normalised(useUnstableGlobalHref());
-  // The href on top is this navigator's only while it's on top: the home's
-  // stays mounted under an app.
-  const focused = useIsFocused();
-  const [screens] = useState(() => new Screens(app));
-  // The root layout, once per open, fetched with the first screen: the splash
-  // stays for both.
-  const [rootLayout, setRootLayout] = useState(() => fetchRootLayout(app));
-  const load = focused ? screens.navigatingTo(top) : undefined;
-  // The first screen's load: the splash stays until it has arrived too,
-  // whatever the root layout does with `navigating`. Settled after that, so
-  // it never holds again.
-  const [opening] = useState(() => load?.settled);
-  // After the routes' own effects, so a route mounted twice finds its screen
-  // both times.
-  useEffect(() => screens.settle(top));
+  const [opened, setOpened] = useState(() => openApp(app));
   return (
-    <LoadedScreens value={screens}>
-      <Suspense fallback={splash}>
-        <ErrorBoundary
-          resetKeys={[rootLayout]}
-          fallbackRender={({ error }) => (
-            <Failed
-              error={error}
-              retry={() => setRootLayout(fetchRootLayout(app))}
-            />
-          )}
-        >
-          <AppRoot
-            layout={rootLayout}
-            opening={opening}
-            navigating={load?.settled}
-          />
-        </ErrorBoundary>
-      </Suspense>
-    </LoadedScreens>
+    <Suspense fallback={splash}>
+      <ErrorBoundary
+        resetKeys={[opened]}
+        fallbackRender={({ error }) => (
+          <Failed error={error} retry={() => setOpened(openApp(app))} />
+        )}
+      >
+        <AppRoot app={app} opened={opened} />
+      </ErrorBoundary>
+    </Suspense>
   );
 }
 
-// The app's root layout, once loaded: its Stack, with its options, and
-// whatever it puts around it. It holds the current screen itself, by `use()`ing
-// `navigating`.
 function AppRoot({
-  layout,
-  opening,
-  navigating,
+  app,
+  opened,
 }: {
-  layout: Promise<RootLayout>;
-  opening: Promise<void> | undefined;
-  navigating: Promise<void> | undefined;
+  app: string | null;
+  opened: Promise<OpenedApp>;
 }) {
-  const Layout = use(layout);
-  if (opening !== undefined) {
-    use(opening);
+  const { RootLayout, runtime } = use(opened);
+  const { Navigator } = runtime;
+  // The href on top is this navigator's only while it's on top: the home's
+  // stays mounted under an app, at its own.
+  const top = normalised(useUnstableGlobalHref());
+  const focused = useIsFocused();
+  const [href, setHref] = useState(top);
+  if (focused && top !== href) {
+    setHref(top);
   }
-  return <Layout navigating={navigating} />;
+  // An app's first screen, once it's had a moment to draw (a game's first
+  // frame included), is its preview on the home's card. Never in the way:
+  // a capture that fails is only logged.
+  useEffect(() => {
+    if (app === null || !isSignedIn()) {
+      return;
+    }
+    const timer = setTimeout(
+      () =>
+        savePreview(app).catch((error) =>
+          console.warn("Saving the preview failed:", error),
+        ),
+      2000,
+    );
+    return () => clearTimeout(timer);
+  }, [app]);
+  return (
+    <LoadedRuntime value={runtime}>
+      <Navigator href={href} rootLayout={RootLayout} />
+    </LoadedRuntime>
+  );
 }

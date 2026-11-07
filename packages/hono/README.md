@@ -14,38 +14,24 @@ The [repository's README](https://github.com/backtickjs/backtick#packages) says 
 
 ```tsx
 import { cs } from "@backtickjs/core";
-import { backtick, type RootLayoutProps } from "@backtickjs/hono";
+import { backtick } from "@backtickjs/hono";
 import { Stack } from "expo-router" with { backtick: "client" };
-import { type ReactNode, Suspense, use } from "react" with {
-  backtick: "client",
-};
 import { Hono } from "hono";
 import { Home } from "./Home.js";
 
-// Keeps the screen on top until the next one arrives.
-const HoldScreen = cs`(props: { navigating?: Promise<void>; children: ReactNode }) => {
-  if (props.navigating) $use(props.navigating);
-  return props.children;
-}`;
-
-// Around every screen, as expo-router's app/_layout.tsx.
-const RootLayout = cs`(props: RootLayoutProps) => (
-  <$Suspense fallback={null}>
-    <$HoldScreen navigating={props.navigating}>
-      <$Stack />
-    </$HoldScreen>
-  </$Suspense>
-)`;
+// The root layout, around every screen: the navigator.
+const RootLayout = cs`() => <$Stack />`;
 
 const app = new Hono();
 
-app.use(backtick({ rootLayout: RootLayout }));
+app.use(backtick(app));
+app.get("/_layout", (context) => context.render(RootLayout));
 app.get("/", (context) => context.render(<Home />));
 
 export default app;
 ```
 
-`rootLayout` is the app's root layout: a client component rendered once as the app opens, around every screen, which renders its navigator. The Backtick app fetches it at `/.well-known/backtick/root-layout`, and passes it `navigating`, the screen a navigation is loading. The root layout owns the transition between screens: `use()` it inside its own `Suspense` to keep the current screen until the next arrives, and put anything that should update meanwhile, such as a progress bar, outside it. A client with a navigator of its own never fetches it.
+The Backtick app opens an app with two answers, fetched together: its `/_layout` route, the app's root layout, a client component rendered once as the app opens, around every screen, which renders its navigator; and the client code that fetches each screen and keeps it while it shows, which `backtick()` sends from `/.well-known/backtick/runtime`. Navigation works as in Next.js. A route's `_loading` (`/day/_loading`), a client component, is shown the moment the route is opened, until its screen is in; a navigation to a route without one holds the current screen until the next is in, and expo-router's `unstable_useIsNavigating()` says so meanwhile, for a progress bar. A route's `_layout` (`/day/_layout`), a client component, wraps its screen, which it gets as `children`, around the `_loading`; the server renders it for the route's path, so it can use the route's params. Both are fetched when the route is first opened, or ahead of it for `<Link prefetch>`, and kept while the app is open; `backtick(app)` tells the phone which exist, so it asks only for those. Unlike Next.js's, a nested layout is drawn again for each screen pushed. A client with a navigator of its own needs neither.
 
 The client sends its modules, each at its package's version, in `x-backtick-modules` (in an Expo app, `modulesOf` from `@backtickjs/core` writes them). The answer is the screen's bundle as CommonJS, `text/javascript`, for the client to run with `execRoot`.
 

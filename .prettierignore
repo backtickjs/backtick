@@ -7,3 +7,5 @@ packages/prettier-plugin/test/fixtures/
 tests/**/__snapshots__/
 # Written the way VS Code writes them, one entry per line.
 **/.vscode/extensions.json
+# Claude Code's local settings and agents' worktrees, full copies of the repo.
+.claude/

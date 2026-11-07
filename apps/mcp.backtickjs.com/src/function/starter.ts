@@ -4,15 +4,17 @@ export const starter = `// A Backtick app:
 // 1. Import what the client provides \`with { backtick: "client" }\`.
 // 2. A splice \`$\` marks a server value crossing into a client script cs\`...\`
 // 3. Use + over template literals: a backtick ends the client script.
-// 4. Each route is a screen, and runs on the server each time it opens.
+// 4. Each route is a screen, and runs on the server each time it opens. As in
+//    Next.js, a navigation holds the current screen until the next is in,
+//    unless the route has a _loading, which shows at once instead.
 
 import { cs } from "@backtickjs/core";
-import { backtick, type RootLayoutProps } from "@backtickjs/hono";
+import { backtick } from "@backtickjs/hono";
 import { Hono } from "hono";
-import { Link, Stack } from "expo-router" with { backtick: "client" };
+import { Link, Stack, unstable_useIsNavigating } from "expo-router" with { backtick: "client" };
 import { StatusBar } from "expo-status-bar" with { backtick: "client" };
-import { type ReactNode, Suspense, use, useState } from "react" with { backtick: "client" };
-import { Pressable, StyleSheet, Text } from "react-native" with { backtick: "client" };
+import { useState } from "react" with { backtick: "client" };
+import { ActivityIndicator, Pressable, StyleSheet, Text } from "react-native" with { backtick: "client" };
 import { SafeAreaView } from "react-native-safe-area-context" with { backtick: "client" };
 
 const styles = cs\`$StyleSheet.create({
@@ -21,6 +23,7 @@ const styles = cs\`$StyleSheet.create({
   button: { padding: 12, borderRadius: 8, backgroundColor: "#0a7ea4" },
   label: { color: "#fff", fontSize: 18 },
   link: { fontSize: 18, color: "#0a7ea4" },
+  navigating: { position: "absolute", top: 60, right: 16 },
 })\`;
 
 function Home() {
@@ -54,24 +57,31 @@ function Day() {
   \`;
 }
 
-// Keeps the screen on top until the next one arrives.
-const HoldScreen = cs\`(props: { navigating?: Promise<void>; children: ReactNode }) => {
-  if (props.navigating) $use(props.navigating);
-  return props.children;
-}\`;
-
-// Around every screen, as expo-router's app/_layout.tsx.
-const RootLayout = cs\`(props: RootLayoutProps) => (
-  <$Suspense fallback={null}>
-    <$HoldScreen navigating={props.navigating}>
-      <$Stack />
-    </$HoldScreen>
-  </$Suspense>
+// /day's loading state: shown the moment /day opens, until the screen is in.
+const DayLoading = cs\`() => (
+  <>
+    <$Stack.Screen options={{ title: "Day" }} />
+    <$ActivityIndicator style={{ marginTop: 40 }} />
+  </>
 )\`;
 
+// The root layout, around every screen: the navigator, and a spinner while a
+// navigation waits for a screen without a _loading.
+const RootLayout = cs\`() => {
+  const navigating = $unstable_useIsNavigating();
+  return (
+    <>
+      <$Stack />
+      {navigating ? <$ActivityIndicator style={$styles.navigating} /> : null}
+    </>
+  );
+}\`;
+
 const app = new Hono();
-app.use(backtick({ rootLayout: RootLayout }));
+app.use(backtick(app));
+app.get("/_layout", (context) => context.render(RootLayout));
 app.get("/", (context) => context.render(<Home />));
+app.get("/day/_loading", (context) => context.render(DayLoading));
 app.get("/day", (context) => context.render(<Day />));
 
 export default app;

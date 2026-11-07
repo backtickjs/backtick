@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createImport } from "@backtickjs/core";
 import { Hono } from "hono";
-import { backtick, type RootLayoutProps } from "../dist/index.js";
+import { backtick } from "../dist/index.js";
 
 const greet = createImport<(name: string) => string>({
   name: "greet",
@@ -10,14 +10,8 @@ const greet = createImport<(name: string) => string>({
   version: "1.0.0",
 });
 
-const layout = createImport<(props: RootLayoutProps) => unknown>({
-  name: "layout",
-  from: "app",
-  version: "1.0.0",
-});
-
 const app = new Hono();
-app.use(backtick({ rootLayout: layout }));
+app.use(backtick());
 app.get("/", (context) => context.render(greet));
 app.notFound((context) => {
   context.status(404);
@@ -78,29 +72,37 @@ test("modules that aren't JSON are a 400", async () => {
   assert.match(message, /^x-backtick-modules isn't JSON: /);
 });
 
-const home = createImport<string>({
-  name: "home",
-  from: "app",
-  version: "1.0.0",
-});
-const laidOut = new Hono();
-laidOut.use(backtick({ rootLayout: layout }));
-laidOut.get("/", (context) => context.render(home));
+// The client code the runtime is: a phone's React.
+const phone = {
+  "x-backtick-modules": JSON.stringify({
+    react: "19.3.0",
+    "react/jsx-runtime": "19.3.0",
+  }),
+};
 
-const modules = { "x-backtick-modules": JSON.stringify({ app: "1.0.0" }) };
-
-test("the root layout is at /.well-known/backtick/root-layout, bundled like a screen", async () => {
-  const response = await laidOut.request("/.well-known/backtick/root-layout", {
-    headers: modules,
-  });
+test("the runtime is at /.well-known/backtick/runtime", async () => {
+  const response = await app.request(
+    "http://app.test/.well-known/backtick/runtime",
+    { headers: phone },
+  );
   assert.equal(response.status, 200);
+  assert.equal(response.headers.get("content-type"), "text/javascript");
   assert.equal(response.headers.get("cache-control"), "no-store");
   const code = await response.text();
-  assert.match(code, /layout/);
-  assert.doesNotMatch(code, /home/);
+  assert.match(code, /require\("react"\)/);
 });
 
-test("screens are unchanged by a root layout", async () => {
-  const response = await laidOut.request("/", { headers: modules });
-  assert.match(await response.text(), /home/);
+test("the runtime knows the app's _layout and _loading routes, to fetch only those", async () => {
+  const nested = new Hono();
+  nested.use(backtick(nested));
+  nested.get("/item/:id/_loading", (context) => context.render(greet));
+  nested.get("/item/:id/_layout", (context) => context.render(greet));
+  nested.get("/item/:id", (context) => context.render(greet));
+  const response = await nested.request("/.well-known/backtick/runtime", {
+    headers: phone,
+  });
+  const code = await response.text();
+  assert.match(code, /"\/item\/:id\/_loading"/);
+  assert.match(code, /"\/item\/:id\/_layout"/);
+  assert.doesNotMatch(code, /"\/item\/:id"/);
 });

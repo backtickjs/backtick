@@ -8,14 +8,14 @@ Backtick on phones, as its own app: it signs the user in, and every screen it sh
 | `client/app/` | Its routes (expo-router, `app.json`'s `root`): `(home)/` is Backtick's screens and `(app)/` a navigator per app opened, each run by `client/App.tsx`; `+native-intent.tsx` handles every link into the shell |
 | `server/`     | Backtick's own screens: sign-in and the app list. Deployed by `apps/app.backtickjs.com`                                                                                                                      |
 
-Where a screen comes from (`client/screens.ts`):
+Where an app comes from (`client/open.ts`):
 
 | Open app              | Path          | Fetched from                             |
 | --------------------- | ------------- | ---------------------------------------- |
 | none: Backtick's home | `/`           | `https://app.backtickjs.com/`            |
 | `<id>`                | `/day?week=2` | `https://<id>.backtickjs.app/day?week=2` |
 
-The path is never changed: an app's `<Link href="/day">` is its server's `app.get("/day")`, and expo-router works in its screens as its docs say. Each app, Backtick's home included, renders its own navigator: its root layout, from `/.well-known/backtick/root-layout` (`rootLayout` in `@backtickjs/hono`), an expo-router `Stack` with the app's own options and whatever it puts around it, such as a progress bar on `unstable_useIsNavigating()`. The shell has no navigator of its own (`client/App.tsx`): it shows Backtick's splash until the root layout and the first screen have arrived, fetches each path navigated to, and passes the root layout the fetch as `navigating`. expo-router dispatches every navigation in a transition (`router.setTransitionMode("always")`), so a root layout that `use()`s it inside its own `Suspense` keeps the screen on top until the next arrives. Each route shows what was fetched for it (`client/RouteScreen.tsx`). The module map (`client/moduleMap.ts`) hands screens unmodified packages only.
+The path is never changed: an app's `<Link href="/day">` is its server's `app.get("/day")`, and expo-router works in its screens as its docs say. Each app, Backtick's home included, opens from two answers of its server, fetched together: its root layout, from its `/_layout` route, an expo-router `Stack` with the app's own options and whatever it puts around it; and the runtime `backtick()` sends from `/.well-known/backtick/runtime` (`@backtickjs/hono`), which fetches each screen and keeps it while it shows. The shell has no navigator or screen fetching of its own (`client/App.tsx`): it shows Backtick's splash until the first screen is in, renders the root layout, and gives each route the runtime's screen for its href (`client/RouteScreen.tsx`). As in Next.js, a navigation to a route with a `_loading` pushes at once and shows it; one to a route without holds the screen on top until the next is in, which needs every navigation to be a transition (`router.setTransitionMode("always")`, in `client/app/_layout.tsx`). The module map (`client/moduleMap.ts`) hands screens unmodified packages only.
 
 Links into the shell (`client/app/+native-intent.tsx`) are the Backtick app's own: `backtick://<path>`, written by `shellURL` (`server/links.ts`), and an app's own address, `https://<id>.backtickjs.app/<path>`, as a verified App Link.
 

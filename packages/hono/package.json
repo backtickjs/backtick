@@ -37,8 +37,9 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -b",
-    "dev": "tsc -b --watch",
+    "build": "tspc -b --noCheck --force",
+    "dev": "tspc -b --noCheck --watch",
+    "typecheck": "backtick-tsc -p tsconfig.build.json --noEmit",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "test": "node --test \"test/**/*.test.ts\"",
@@ -53,8 +54,21 @@
     "hono": "^4.13.13"
   },
   "devDependencies": {
+    "@backtickjs/expo": "0.2.8",
+    "@backtickjs/jsx-react": "0.2.8",
+    "@backtickjs/tsc": "0.2.8",
+    "@backtickjs/tspatch-plugin": "0.2.8",
+    "@types/react": "19.3.0",
     "hono": "^4.13.13",
     "prettier": "^3.6.2",
+    "react": "19.3.0",
+    "ts-patch": "4.0.1",
     "typescript": "^6.0.3"
+  },
+  "backtick": {
+    "plugins": [
+      "@backtickjs/jsx-react/plugin",
+      "@backtickjs/expo/plugin"
+    ]
   }
 }

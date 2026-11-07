@@ -1,6 +1,9 @@
 import { bundler, BundlerError, type Modules } from "@backtickjs/bundler";
-import type { Client, Spliceable, SplicesAs } from "@backtickjs/core";
-import type { MiddlewareHandler } from "hono";
+import type { Spliceable, SplicesAs } from "@backtickjs/core";
+import type { Hono, MiddlewareHandler } from "hono";
+import { runtime } from "./runtime.js";
+
+export type { Runtime } from "./runtime.js";
 
 declare module "hono" {
   // What `context.render` takes under `backtick()`, as
@@ -12,14 +15,18 @@ declare module "hono" {
   }
 }
 
-/** What the phone passes an app's root layout. */
-export interface RootLayoutProps {
-  /**
-   * The screen a navigation is loading, until it arrives: `use()` it to keep
-   * the current screen up meanwhile, as a transition does. Undefined when
-   * nothing is loading.
-   */
-  navigating?: Promise<void>;
+// Where the phone fetches the runtime it runs an app with.
+const runtimePath = "/.well-known/backtick/runtime";
+
+// The app's _layout and _loading routes, for the runtime to fetch only those.
+function nestedRoutes(app: Hono<any, any, any> | undefined): string[] {
+  return (app?.routes ?? [])
+    .filter(
+      ({ method, path }) =>
+        method === "GET" &&
+        (path.endsWith("/_layout") || path.endsWith("/_loading")),
+    )
+    .map(({ path }) => path);
 }
 
 /**
@@ -27,7 +34,7 @@ export interface RootLayoutProps {
  * answers with `input` bundled for the modules the client sent in
  * `x-backtick-modules`, so each route is a screen.
  *
- *     app.use(backtick({ rootLayout: RootLayout }));
+ *     app.use(backtick(app));
  *     app.get("/", (context) => context.render(<Home />));
  *
  * The status is the context's, so `context.status(404)` makes a not-found
@@ -35,26 +42,18 @@ export interface RootLayoutProps {
  * without a module the screen needs gets a 426, and any other refusal of the
  * bundler's a 400, each with `{ name, message }`.
  *
- * `rootLayout` is the app's root layout, as expo-router's `app/_layout.tsx`
- * is one: a client component rendered once as the app opens and mounted while
- * its screens change. It renders the app's `Stack`, with its options, and
- * anything that outlives a screen; while a navigation's screen loads, it gets
- * `navigating`, which it `use()`s inside its own `Suspense` to keep the
- * current screen until the next arrives. The phone fetches it at
- * `/.well-known/backtick/root-layout`, outside the app's own paths. A client
- * with a navigator of its own never fetches it.
+ * The Backtick app opens an app with two answers, fetched together: the
+ * app's `/_layout` route, its root layout, a client component around every
+ * screen that renders the app's `Stack`; and the client code that fetches,
+ * keeps and shows its screens, which `backtick()` sends from
+ * `/.well-known/backtick/runtime`, with the app's `_layout` and `_loading`
+ * routes, read from `app` as a request comes in. A client with a navigator of
+ * its own needs neither, nor `app`.
  *
- *     const RootLayout = cs`(props: RootLayoutProps) => (
- *       <$Suspense fallback={null}>
- *         <$HoldScreen navigating={props.navigating}><$Stack /></$HoldScreen>
- *       </$Suspense>
- *     )`;
- *     app.use(backtick({ rootLayout: RootLayout }));
+ *     const RootLayout = cs`() => <$Stack />`;
+ *     app.get("/_layout", (context) => context.render(RootLayout));
  */
-export function backtick(options: {
-  rootLayout: Client<(props: RootLayoutProps) => unknown>;
-}): MiddlewareHandler {
-  const { rootLayout } = options;
+export function backtick(app?: Hono<any, any, any>): MiddlewareHandler {
   return async (context, next) => {
     context.setRenderer(async (input) => {
       let modules: Modules;
@@ -83,12 +82,9 @@ export function backtick(options: {
         throw error;
       }
     });
-    if (context.req.path === rootLayoutPath) {
-      return context.render(rootLayout);
+    if (context.req.path === runtimePath) {
+      return context.render(runtime(nestedRoutes(app)));
     }
     await next();
   };
 }
-
-// Where the phone fetches an app's root layout.
-const rootLayoutPath = "/.well-known/backtick/root-layout";
