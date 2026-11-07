@@ -5,7 +5,7 @@
 // 4. Each route is a screen: <$Link href="/day"> opens the one at "/day".
 
 import { cs } from "@backtickjs/core";
-import { backtick } from "@backtickjs/hono";
+import { backtickApp } from "@backtickjs/hono";
 import { Hono } from "hono";
 import { Link, Stack } from "expo-router" with { backtick: "client" };
 import { useState } from "react" with { backtick: "client" };
@@ -21,8 +21,7 @@ const app = new Hono();
 // `context.render(element)` answers with the screen, bundled for the phone.
 const RootLayout = cs`() => <$Stack />`;
 
-app.use(backtick(app));
-app.get("/_layout", (context) => context.render(RootLayout));
+app.use(backtickApp(app, RootLayout));
 app.get("/", (context) => context.render(<Home />));
 app.get("/day", (context) => context.render(<Day />));
 

@@ -27,7 +27,7 @@ Each user gets one sandbox, `build-<user>-<snapshot>`, made from a snapshot of t
 
 An error stops the save; a warning, such as a regex escaped as if in a string, goes back with the saved version.
 
-An app is a Hono server whose routes are its screens, rendered with `@backtickjs/hono`'s `backtick()`; its default export is the server, which `save_app` checks. Each save stores the version's source and its release, the app compiled and bundled into one module (`sandbox/src/compile.ts`), in `versions.compiled`. Nothing here answers the phone: it opens an app at the app's own host, `https://<id>.backtickjs.app/<path>`, whose Worker (`apps/backtickjs.app`) runs the latest release.
+An app is a Hono server whose routes are its screens, rendered with `@backtickjs/hono`'s `backtickRenderer()`; its default export is the server, which `save_app` checks. Each save stores the version's source and its release, the app compiled and bundled into one module (`sandbox/src/compile.ts`), in `versions.compiled`. Nothing here answers the phone: it opens an app at the app's own host, `https://<id>.backtickjs.app/<path>`, whose Worker (`apps/backtickjs.app`) runs the latest release.
 
 ## Setting up
 

@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { createImport } from "@backtickjs/core";
+import { type Client, createImport } from "@backtickjs/core";
+import type { ComponentType } from "react";
 import { Hono } from "hono";
 import { jsx } from "@backtickjs/jsx-react/jsx-runtime";
-import { backtick } from "../dist/index.js";
+import { backtickApp, backtickRenderer } from "../dist/index.js";
 
 const greet = createImport<(name: string) => string>({
   name: "greet",
@@ -12,7 +13,7 @@ const greet = createImport<(name: string) => string>({
 });
 
 const app = new Hono();
-app.use(backtick());
+app.use(backtickRenderer());
 app.get("/", (context) => context.render(greet));
 app.notFound((context) => {
   context.status(404);
@@ -83,13 +84,20 @@ const phone = {
   }),
 };
 
-test("the runtime is at /.well-known/backtick/runtime, around the app's /_layout, for the phone's origin", async () => {
+// An app's root layout, as backtickApp(app, RootLayout) takes it.
+const RootLayout = createImport<ComponentType>({
+  name: "RootLayout",
+  from: "app",
+  version: "1.0.0",
+}) as Client<ComponentType>;
+
+test("the runtime is at /.well-known/backtick/runtime, around the app's root layout, for the phone's origin", async () => {
   const opened = new Hono();
-  opened.use(backtick(opened));
-  opened.get("/_layout", (context) => context.render(greet));
+  opened.use(backtickApp(opened, RootLayout));
   opened.get("/day/_loading", (context) => context.render(greet));
-  opened.get("/product/:id/_layout", (context) => context.render(greet));
-  opened.post("/form/_layout", (context) => context.render(greet));
+  opened.get("/product/:id/_loading", (context) => context.render(greet));
+  opened.post("/form/_loading", (context) => context.render(greet));
+  opened.use("/admin/_loading", async (_, next) => next());
   const response = await opened.request(
     "http://app.test/.well-known/backtick/runtime",
     {
@@ -106,29 +114,22 @@ test("the runtime is at /.well-known/backtick/runtime, around the app's /_layout
   assert.equal(response.headers.get("cache-control"), "no-store");
   const code = await response.text();
   assert.match(code, /require\("react"\)/);
-  assert.match(code, /\{ greet: /);
+  assert.match(code, /\{ RootLayout: /);
   assert.match(code, /"http:\/\/app\.test"/);
   assert.match(code, /require\("@tanstack\/react-query"\)/);
   assert.match(code, /require\("hono\/router\/pattern-router"\)/);
-  // The app's other layouts and loading states, by pattern, for a screen to
-  // ask only for those it has.
-  assert.match(code, /\["\/day\/_loading", "\/product\/:id\/_layout"\]/);
-  assert.match(code, /"\/_layout"/);
+  // The app's loading states, by pattern, for a screen to ask only for those
+  // it has.
+  assert.match(code, /\["\/day\/_loading", "\/product\/:id\/_loading"\]/);
   assert.match(code, /"\/_loading"/);
 });
 
-// An app with framed routes, and whether a page's handler ran.
+// An app with a loading state, and whether a page's handler ran.
 const imported = (name: string) =>
   createImport<unknown>({ name, from: "app", version: "1.0.0" });
 const ran: string[] = [];
 const framedApp = new Hono();
-framedApp.use(backtick(framedApp));
-framedApp.get("/item/_layout", (context) =>
-  context.render(imported("ItemsLayout")),
-);
-framedApp.get("/item/:id/_layout", (context) =>
-  context.render(imported("ItemLayout")),
-);
+framedApp.use(backtickRenderer());
 framedApp.get("/item/:id/_loading", (context) =>
   context.render(imported("ItemLoading")),
 );
@@ -136,10 +137,6 @@ framedApp.get("/item/:id", (context) => {
   ran.push(context.req.path);
   return context.render(greet);
 });
-framedApp.get("/plain/_layout", (context) =>
-  context.render(imported("PlainLayout")),
-);
-framedApp.get("/plain/:id", (context) => context.render(greet));
 const framedHeaders = {
   "x-backtick-modules": JSON.stringify({
     react: "19.3.0",
@@ -149,7 +146,7 @@ const framedHeaders = {
   }),
 };
 
-test("every route answers alone: a page without its layouts or loading state", async () => {
+test("every route answers alone: a page without its loading state", async () => {
   ran.length = 0;
   const response = await framedApp.request("http://server.test/item/1?tab=a", {
     headers: framedHeaders,
@@ -158,46 +155,58 @@ test("every route answers alone: a page without its layouts or loading state", a
   const code = await response.text();
   assert.deepEqual(ran, ["/item/1"]);
   assert.match(code, /\{ greet: /);
-  assert.doesNotMatch(code, /Layout|Loading/);
+  assert.doesNotMatch(code, /Loading/);
 });
 
-test("a _layout and a _loading answer what they render", async () => {
-  for (const [path, name] of [
-    ["/item/_layout", "ItemsLayout"],
-    ["/item/1/_layout", "ItemLayout"],
-    ["/item/1/_loading", "ItemLoading"],
-  ]) {
-    const response = await framedApp.request(`http://server.test${path}`, {
-      headers: framedHeaders,
-    });
-    assert.equal(response.status, 200);
-    assert.match(await response.text(), new RegExp(`\\{ ${name}: `));
-  }
-});
-
-test("a route without a _layout answers 404 for it", async () => {
+test("a _loading answers what it renders", async () => {
   const response = await framedApp.request(
-    "http://server.test/plain/1/_layout",
-    {
-      headers: framedHeaders,
-    },
+    "http://server.test/item/1/_loading",
+    { headers: framedHeaders },
   );
-  assert.equal(response.status, 404);
+  assert.equal(response.status, 200);
+  assert.match(await response.text(), /\{ ItemLoading: /);
 });
 
-test("a layout or a loading state written with a trailing slash is refused, by name", async () => {
+// The runtime's answer, or why it's refused, for an app with `route`.
+async function opening(route: string) {
   const opened = new Hono();
-  opened.use(backtick(opened));
-  opened.get("/_layout", (context) => context.render(greet));
-  opened.get("/day/_layout/", (context) => context.render(greet));
+  opened.use(backtickApp(opened, RootLayout));
+  opened.get(route, (context) => context.render(greet));
   opened.onError((error, context) => context.text(error.message, 500));
   const response = await opened.request(
     "http://app.test/.well-known/backtick/runtime",
     { headers: phone },
   );
-  assert.equal(response.status, 500);
-  assert.equal(
-    await response.text(),
-    "The app's /day/_layout/ route ends with a slash: write it /day/_layout.",
+  return { status: response.status, text: await response.text() };
+}
+
+test("a loading route with a trailing slash doesn't open, by name", async () => {
+  assert.deepEqual(await opening("/day/_loading/"), {
+    status: 500,
+    text: "The app's /day/_loading/ route ends with a slash: write it /day/_loading.",
+  });
+});
+
+test("a layout route doesn't open, by name", async () => {
+  const { status, text } = await opening("/day/_layout");
+  assert.equal(status, 500);
+  assert.match(
+    text,
+    /\/day\/_layout route is a layout, which a screen doesn't have/,
   );
+});
+
+test("backtickApp renders every other route, as backtickRenderer does", async () => {
+  const written = new Hono();
+  written.use(backtickApp(written, RootLayout));
+  written.get("/", (context) => context.render(greet));
+  written.notFound((context) => context.text("No such screen", 404));
+  const screen = await written.request("/", {
+    headers: { "x-backtick-modules": JSON.stringify({ app: "1.0.0" }) },
+  });
+  assert.equal(screen.status, 200);
+  assert.equal(screen.headers.get("content-type"), "text/javascript");
+  const missing = await written.request("/nowhere");
+  assert.equal(missing.status, 404);
+  assert.equal(await missing.text(), "No such screen");
 });

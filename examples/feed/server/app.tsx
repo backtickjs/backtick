@@ -1,4 +1,4 @@
-import { backtick } from "@backtickjs/hono";
+import { backtickRenderer } from "@backtickjs/hono";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { Feed, pageFor } from "./Feed.js";
@@ -13,7 +13,7 @@ app.use(
 );
 
 // `context.render(value)` answers with it, bundled for the app.
-app.use(backtick());
+app.use(backtickRenderer());
 
 // The feed, and its pages, which know their items' paths only.
 app.get("/", (context) => context.render(<Feed />));

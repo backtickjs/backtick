@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { backtick } from "@backtickjs/hono";
+import { backtickApp } from "@backtickjs/hono";
 import { Stack, unstable_useIsNavigating } from "expo-router" with {
   backtick: "client",
 };
@@ -38,10 +38,8 @@ const RootLayout = cs`() => {
   );
 }`;
 
-app.use(backtick(app));
-
 // The home as the phone opens it: signed out too, before the token check.
-app.get("/_layout", (context) => context.render(RootLayout));
+app.use(backtickApp(app, RootLayout));
 
 // Nothing of anyone's without a token for this origin: a phone without a
 // session gets sign-in, whatever it asked for. Every route after this has the

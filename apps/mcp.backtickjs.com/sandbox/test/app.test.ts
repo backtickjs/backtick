@@ -53,7 +53,7 @@ describe("typecheck", () => {
     );
     assert.match(
       typecheck(file).errors.join("\n"),
-      /^App\.tsx\(34,51\): error TS2345: Argument of type 'string'/,
+      /^App\.tsx\(33,51\): error TS2345: Argument of type 'string'/,
     );
   });
   it("reports a regex escaped as if in a string as a warning, not an error", () => {
@@ -68,7 +68,7 @@ describe("typecheck", () => {
     assert.deepEqual(errors, []);
     assert.match(
       warnings.join("\n"),
-      /^App\.tsx\(39,65\): warning TS0: `\\\\B` in this regex matches a backslash/,
+      /^App\.tsx\(38,65\): warning TS0: `\\\\B` in this regex matches a backslash/,
     );
   });
 });

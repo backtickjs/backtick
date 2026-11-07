@@ -47,7 +47,7 @@ describe("unavailable-module", () => {
       "App.tsx",
       [
         'import { Hono } from "hono";',
-        'import { backtick } from "@backtickjs/hono";',
+        'import { backtickRenderer } from "@backtickjs/hono";',
         'import type { Mesh } from "three";',
         'import { View } from "react-native" with { backtick: "client" };',
         'import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable" with { backtick: "client" };',
