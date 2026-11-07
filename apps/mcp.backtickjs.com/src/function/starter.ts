@@ -45,8 +45,17 @@ const CookedButton = cs\`() => {
   return <$Button title={cooked ? "Cooked!" : "Mark as cooked"} onPress={() => setCooked(!cooked)} />;
 }\`;
 
-// Around every screen: the navigator.
-const RootLayout = cs\`() => <$Stack />\`;
+// Every screen's options. A sheet or modal's go here too, not on its screen:
+// screenOptions as a function of route.path (and don't prefetch a link to it).
+const RootLayout = cs\`() => (
+  <$Stack
+    screenOptions={{
+      headerStyle: { backgroundColor: "#fff" },
+      headerTitleStyle: { color: "#111" },
+      statusBarStyle: "dark",
+    }}
+  />
+)\`;
 
 const app = new Hono();
 app.use(backtickApp(app, RootLayout));
