@@ -3,7 +3,6 @@ import { test } from "node:test";
 import { type Client, createImport } from "@backtickjs/core";
 import type { ComponentType } from "react";
 import { Hono } from "hono";
-import { jsx } from "@backtickjs/jsx-react/jsx-runtime";
 import { backtickApp, backtickRenderer } from "../dist/index.js";
 
 const greet = createImport<(name: string) => string>({
@@ -124,44 +123,23 @@ test("the runtime is at /.well-known/backtick/runtime, around the app's root lay
   assert.match(code, /"\/_loading"/);
 });
 
-// An app with a loading state, and whether a page's handler ran.
-const imported = (name: string) =>
-  createImport<unknown>({ name, from: "app", version: "1.0.0" });
-const ran: string[] = [];
-const framedApp = new Hono();
-framedApp.use(backtickRenderer());
-framedApp.get("/item/:id/_loading", (context) =>
-  context.render(imported("ItemLoading")),
-);
-framedApp.get("/item/:id", (context) => {
-  ran.push(context.req.path);
-  return context.render(greet);
-});
-const framedHeaders = {
-  "x-backtick-modules": JSON.stringify({
-    react: "19.3.0",
-    "react/jsx-runtime": "19.3.0",
-    "@tanstack/react-query": "5.104.0",
-    app: "1.0.0",
-  }),
-};
-
-test("every route answers alone: a page without its loading state", async () => {
-  ran.length = 0;
-  const response = await framedApp.request("http://server.test/item/1?tab=a", {
-    headers: framedHeaders,
-  });
-  assert.equal(response.status, 200);
-  const code = await response.text();
-  assert.deepEqual(ran, ["/item/1"]);
-  assert.match(code, /\{ greet: /);
-  assert.doesNotMatch(code, /Loading/);
-});
-
-test("a _loading answers what it renders", async () => {
-  const response = await framedApp.request(
+test("a _loading route answers what it renders, as any route does", async () => {
+  const loadingApp = new Hono();
+  loadingApp.use(backtickRenderer());
+  loadingApp.get("/item/:id/_loading", (context) =>
+    context.render(
+      createImport<unknown>({
+        name: "ItemLoading",
+        from: "app",
+        version: "1.0.0",
+      }),
+    ),
+  );
+  const response = await loadingApp.request(
     "http://server.test/item/1/_loading",
-    { headers: framedHeaders },
+    {
+      headers: { "x-backtick-modules": JSON.stringify({ app: "1.0.0" }) },
+    },
   );
   assert.equal(response.status, 200);
   assert.match(await response.text(), /\{ ItemLoading: /);

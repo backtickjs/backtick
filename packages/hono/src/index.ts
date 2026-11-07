@@ -2,7 +2,7 @@ import { bundler, BundlerError, type Modules } from "@backtickjs/bundler";
 import type { Client, Spliceable, SplicesAs } from "@backtickjs/core";
 import type { ComponentType } from "react";
 import type { Context, Hono, MiddlewareHandler } from "hono";
-import { runtime as clientRuntime } from "./runtime.js";
+import { clientRuntime } from "./runtime.js";
 
 export type { Runtime } from "./runtime.js";
 

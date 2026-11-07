@@ -13,8 +13,8 @@ export default function Layout() {
   // Each sign-in or sign-out, counted, so the screens are drawn afresh.
   const [sessions, setSessions] = useState(0);
   followRoot(useNavigationContainerRef());
-  // Every navigation a transition, not only preloads: a navigation to a route
-  // without a layout holds the screen on top until the next one is in.
+  // Every navigation a transition, not only preloads: a navigation holds the
+  // screen on top until the next one can show.
   useEffect(() => router.setTransitionMode("always"), []);
   useEffect(() => {
     const subscription = onSessionChange(() => setSessions((n) => n + 1));

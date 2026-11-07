@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { getErrorMessage } from "react-error-boundary";
 import { useInk, usePaper } from "./theme";
 
-// What a screen or a root layout that didn't load shows, with Retry.
+// What a screen or an app that didn't open shows, with Retry.
 // In backtickjs.com's colours (server/look.tsx): ink and paper, and its red.
 export function Failed({
   error,
@@ -22,8 +22,6 @@ export function Failed({
       </Text>
       <Pressable
         style={[styles.button, { backgroundColor: ink }]}
-        // Not `onPress={retry}`: that passes the press event to `reload`
-        // as its signal, and fetch throws calling its addEventListener.
         onPress={() => retry()}
       >
         <Text style={[styles.label, { color: paper }]}>Retry</Text>

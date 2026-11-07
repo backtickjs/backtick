@@ -27,11 +27,11 @@ import {
  */
 export interface Runtime {
   /**
-   * The app's root layout, given the href on top. A navigation holds the current screen until the next can show,
-   * as navigations are transitions (`router.setTransitionMode("always")`):
-   * a route with a `_loading` once that's in, at once if it was prefetched;
-   * one without, once its page is in. Suspends until the first screen can
-   * show.
+   * The app's root layout, given the href on top. A navigation holds the
+   * current screen until the next can show, as navigations are transitions
+   * (`router.setTransitionMode("always")`): a route with a `_loading` once
+   * that's in, at once if it was prefetched; one without, once its page is
+   * in. Suspends until the first screen can show.
    */
   Navigator?: ComponentType<{ href: string }>;
   /**
@@ -57,17 +57,17 @@ export interface Runtime {
 /**
  * A route's answer, run. Any bundle is an answer, whatever its status: an
  * app's not-found screen is one. A refusal ({ name, message }) says why. For
- * a route that may not exist (`optional`), a 404 is null.
+ * a route that may not exist (`notFoundIsNull`), a 404 is null.
  */
 export const fetchAnswer = cs`async (
   url: string,
   modules: string,
-  optional: boolean,
+  notFoundIsNull: boolean,
 ) => {
   const response = await fetch(url, {
     headers: { "x-backtick-modules": modules },
   });
-  if (optional && response.status === 404) {
+  if (notFoundIsNull && response.status === 404) {
     return null;
   }
   const body = await response.text();
@@ -90,11 +90,11 @@ export const fetchAnswer = cs`async (
  * the app's root layout, with the patterns of its `_loading` routes
  * (`/city/:id/_loading`), so a screen asks only for those it has.
  */
-export function runtime(
+export function clientRuntime(
   origin: string,
   modules: string,
   RootLayout: Client<ComponentType>,
-  loadings: readonly string[],
+  loadingPatterns: readonly string[],
 ): Client<Runtime> {
   return cs`{
     // Every answer is a query, keyed by its path: what the route renders. A
@@ -102,7 +102,8 @@ export function runtime(
     // Each is reused, in memory, as Next.js's router cache does: a page for
     // 30 seconds, a loading state for 5 minutes. A screen's no-store keeps it
     // out of HTTP caches, not this one.
-    const staleTime = 30000;
+    const pageStaleTime = 30000;
+    const loadingStaleTime = 300000;
     const queryClient = new $QueryClient({
       defaultOptions: {
         queries: {
@@ -112,16 +113,16 @@ export function runtime(
               $modules,
               false,
             ),
-          staleTime,
+          staleTime: pageStaleTime,
           structuralSharing: false,
           retry: false,
         },
       },
     });
     // A loading state: none if it answers 404, for a param it has none for.
-    const loadingQuery = (path: string) => ({
+    const loadingQueryOptions = (path: string) => ({
       queryKey: [path],
-      staleTime: 300000,
+      staleTime: loadingStaleTime,
       queryFn: async () => ({
         value: (await $fetchAnswer(
           $origin + path,
@@ -132,25 +133,23 @@ export function runtime(
     });
     // An href's loading state, if the app has a _loading route for it,
     // matched by Hono's own router.
-    const router = new $PatternRouter<true>();
-    for (const loading of $loadings) {
-      router.add("GET", loading, true);
+    const loadingRouter = new $PatternRouter<true>();
+    for (const pattern of $loadingPatterns) {
+      loadingRouter.add("GET", pattern, true);
     }
-    const loadingOf = (href: string) => {
-      const query = href.indexOf("?");
-      const path = query === -1 ? href : href.slice(0, query);
+    const loadingPathOf = (href: string) => {
+      const searchStart = href.indexOf("?");
+      const path = searchStart === -1 ? href : href.slice(0, searchStart);
       const loading = (path === "/" ? "" : path) + "/_loading";
-      return router.match("GET", loading)[0].length > 0 ? loading : undefined;
-    };
-    const pathsOf = (href: string) => {
-      const loading = loadingOf(href);
-      return loading === undefined ? [href] : [href, loading];
+      return loadingRouter.match("GET", loading)[0].length > 0
+        ? loading
+        : undefined;
     };
     // A stale answer no screen shows, in before a navigation started, is
     // dropped as the navigation reads it, so the navigation waits for a fresh
     // one, as Next.js's does; one a screen still shows, going back to it, is
     // kept.
-    const dropStale = (path: string, started: number) => {
+    const dropStaleAnswer = (path: string, startedAt: number) => {
       const query = queryClient
         .getQueryCache()
         .find({ queryKey: [path], exact: true });
@@ -158,8 +157,8 @@ export function runtime(
         query !== undefined &&
         query.getObserversCount() === 0 &&
         query.state.data !== undefined &&
-        query.state.dataUpdatedAt < started &&
-        query.isStaleByTime(staleTime)
+        query.state.dataUpdatedAt < startedAt &&
+        query.isStaleByTime(pageStaleTime)
       ) {
         queryClient.removeQueries({ queryKey: [path], exact: true });
       }
@@ -170,16 +169,16 @@ export function runtime(
 
     // A screen as Next.js shows a page: with a loading state, inside a
     // Suspense showing it; the page fetched meanwhile.
-    const Loaded = (props: { href: string }) => {
-      const loading = loadingOf(props.href);
+    const PageWithLoading = (props: { href: string }) => {
+      const loading = loadingPathOf(props.href);
       $usePrefetchQuery({ queryKey: [props.href] });
-      const queries: ReturnType<typeof loadingQuery>[] =
-        loading === undefined ? [] : [loadingQuery(loading)];
-      const answer = $useSuspenseQueries({ queries })[0];
-      return answer === undefined ? (
+      const queries: ReturnType<typeof loadingQueryOptions>[] =
+        loading === undefined ? [] : [loadingQueryOptions(loading)];
+      const loadingResult = $useSuspenseQueries({ queries })[0];
+      return loadingResult === undefined ? (
         <Page href={props.href} />
       ) : (
-        <$Suspense fallback={answer.data.value}>
+        <$Suspense fallback={loadingResult.data.value}>
           <Page href={props.href} />
         </$Suspense>
       );
@@ -188,13 +187,13 @@ export function runtime(
     // Fetches an href ahead, as Next.js prefetches: its loading state, or,
     // without one, its page.
     const prefetch = (href: string) => {
-      const loading = loadingOf(href);
+      const loading = loadingPathOf(href);
       if (loading === undefined) {
         void queryClient.query({ queryKey: [href] }).catch(() => {});
         return;
       }
       void queryClient
-        .query(loadingQuery(loading))
+        .query(loadingQueryOptions(loading))
         .then((answer) =>
           answer.value === null
             ? queryClient.query({ queryKey: [href] })
@@ -214,43 +213,40 @@ export function runtime(
       }, [props.active, props.href]);
       return props.active ? (
         <$Suspense fallback={null}>
-          <Loaded href={href} />
+          <PageWithLoading href={href} />
         </$Suspense>
       ) : null;
     };
 
-    // Suspends a navigation's render, above the Stack, until the href's
-    // loading state is in, or, without one, its page. As navigations are
-    // transitions, the screen on top stays. One that fails ends the hold, for
-    // the screen to show why.
-    const PageIn = (props: { href: string }) => {
-      $useSuspenseQuery({ queryKey: [props.href], refetchOnMount: false });
-      return null;
-    };
-    // A loading state, however old, as it's only shown until the page is in:
-    // the screen refreshes a stale one.
-    const LoadingIn = (props: { path: string }) => {
-      $useSuspenseQuery({ ...loadingQuery(props.path), refetchOnMount: false });
+    // Suspends until a query is in. One that is, however old, holds nothing:
+    // a stale page was dropped above, and a stale loading state is refreshed
+    // by the screen, as it's only shown until the page is in.
+    const AwaitQuery = (props: { query: { queryKey: string[] } }) => {
+      $useSuspenseQuery({ ...props.query, refetchOnMount: false });
       return null;
     };
     // When the navigation to the href on top started: kept outside React, as
     // a hold that suspends keeps no state.
-    let navigation = { href: "", started: 0 };
-    const Hold = (props: { href: string }) => {
-      if (navigation.href !== props.href) {
-        navigation = { href: props.href, started: Date.now() };
+    let currentNavigation = { href: "", startedAt: 0 };
+    // Suspends a navigation's render, above the Stack, until the href's
+    // loading state is in, or, without one, its page. As navigations are
+    // transitions, the screen on top stays. One that fails ends the hold, for
+    // the screen to show why.
+    const NavigationHold = (props: { href: string }) => {
+      if (currentNavigation.href !== props.href) {
+        currentNavigation = { href: props.href, startedAt: Date.now() };
       }
-      dropStale(props.href, navigation.started);
+      dropStaleAnswer(props.href, currentNavigation.startedAt);
       // A route with a loading state pushes as soon as its loading state is
       // in, at once if it was prefetched; its page is fetched meanwhile.
-      const loading = loadingOf(props.href);
+      const loading = loadingPathOf(props.href);
       if (loading !== undefined) {
         void queryClient.query({ queryKey: [props.href] }).catch(() => {});
-        return <LoadingIn path={loading} />;
+        return <AwaitQuery query={loadingQueryOptions(loading)} />;
       }
-      return <PageIn href={props.href} />;
+      return <AwaitQuery query={{ queryKey: [props.href] }} />;
     };
-    class Quiet extends $Component<
+    class SilentErrorBoundary extends $Component<
       { children: ReactNode },
       { failed: boolean }
     > {
@@ -265,9 +261,9 @@ export function runtime(
 
     const Navigator = (props: { href: string }) => (
       <$QueryClientProvider client={queryClient}>
-        <Quiet key={props.href}>
-          <Hold href={props.href} />
-        </Quiet>
+        <SilentErrorBoundary key={props.href}>
+          <NavigationHold href={props.href} />
+        </SilentErrorBoundary>
         <$RootLayout />
       </$QueryClientProvider>
     );
@@ -279,11 +275,12 @@ export function runtime(
       // Each of its queries again: one that failed, for its screen to wait
       // for it; the others kept until the new answer is in.
       reload: async (href) => {
+        const loading = loadingPathOf(href);
         await Promise.allSettled(
-          pathsOf(href).map((key) =>
-            queryClient.getQueryState([key])?.status === "error"
-              ? queryClient.resetQueries({ queryKey: [key], exact: true })
-              : queryClient.refetchQueries({ queryKey: [key], exact: true }),
+          (loading === undefined ? [href] : [href, loading]).map((path) =>
+            queryClient.getQueryState([path])?.status === "error"
+              ? queryClient.resetQueries({ queryKey: [path], exact: true })
+              : queryClient.refetchQueries({ queryKey: [path], exact: true }),
           ),
         );
       },
