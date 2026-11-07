@@ -306,4 +306,7 @@ export const moduleMap = {
   get "@tanstack/react-query"() {
     return require("@tanstack/react-query");
   },
+  get "hono/router/pattern-router"() {
+    return require("hono/router/pattern-router");
+  },
 } satisfies Record<Module, unknown>;

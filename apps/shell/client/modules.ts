@@ -99,6 +99,7 @@ export const modules = [
   "react-native-reanimated",
   "react-native-worklets",
   "@tanstack/react-query",
+  "hono/router/pattern-router",
 ] as const;
 
 export type Module = (typeof modules)[number];

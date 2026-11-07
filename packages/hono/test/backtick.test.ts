@@ -79,6 +79,7 @@ const phone = {
     react: "19.3.0",
     "react/jsx-runtime": "19.3.0",
     "@tanstack/react-query": "5.104.0",
+    "hono/router/pattern-router": "4.13.13",
   }),
 };
 
@@ -86,6 +87,9 @@ test("the runtime is at /.well-known/backtick/runtime, around the app's /_layout
   const opened = new Hono();
   opened.use(backtick(opened));
   opened.get("/_layout", (context) => context.render(greet));
+  opened.get("/day/_loading", (context) => context.render(greet));
+  opened.get("/product/:id/_layout", (context) => context.render(greet));
+  opened.post("/form/_layout", (context) => context.render(greet));
   const response = await opened.request(
     "http://app.test/.well-known/backtick/runtime",
     {
@@ -105,6 +109,10 @@ test("the runtime is at /.well-known/backtick/runtime, around the app's /_layout
   assert.match(code, /\{ greet: /);
   assert.match(code, /"http:\/\/app\.test"/);
   assert.match(code, /require\("@tanstack\/react-query"\)/);
+  assert.match(code, /require\("hono\/router\/pattern-router"\)/);
+  // The app's other layouts and loading states, by pattern, for a screen to
+  // ask only for those it has.
+  assert.match(code, /\["\/day\/_loading", "\/product\/:id\/_layout"\]/);
   assert.match(code, /"\/_layout"/);
   assert.match(code, /"\/_loading"/);
 });
@@ -175,4 +183,21 @@ test("a route without a _layout answers 404 for it", async () => {
     },
   );
   assert.equal(response.status, 404);
+});
+
+test("a layout or a loading state written with a trailing slash is refused, by name", async () => {
+  const opened = new Hono();
+  opened.use(backtick(opened));
+  opened.get("/_layout", (context) => context.render(greet));
+  opened.get("/day/_layout/", (context) => context.render(greet));
+  opened.onError((error, context) => context.text(error.message, 500));
+  const response = await opened.request(
+    "http://app.test/.well-known/backtick/runtime",
+    { headers: phone },
+  );
+  assert.equal(response.status, 500);
+  assert.equal(
+    await response.text(),
+    "The app's /day/_layout/ route ends with a slash: write it /day/_layout.",
+  );
 });

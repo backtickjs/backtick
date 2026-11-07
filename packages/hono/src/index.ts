@@ -47,7 +47,8 @@ const runtimePath = "/.well-known/backtick/runtime";
  * components their `_layout` routes render, which take the screen as
  * `children`; and, with a `_loading` route, a client component without props,
  * inside a Suspense showing it. The runtime queries each by its path, in
- * parallel; a route without one answers 404. A navigation to a route with a
+ * parallel, asking only for those the app has routes for, which it's sent
+ * when it opens. A navigation to a route with a
  * `_loading` shows once its layouts and loading state are in, and to one
  * without, once its page is; the current screen stays meanwhile.
  */
@@ -85,17 +86,39 @@ export function backtick(app?: Hono<any, any, any>): MiddlewareHandler {
     );
     const path = context.req.path;
     if (app !== undefined && path === runtimePath) {
+      // The runtime asks for a layout or a loading state without a trailing
+      // slash, which a strict app doesn't answer.
+      const slashed = app.routes.find(({ path }) =>
+        /\/_(layout|loading)\/$/.test(path),
+      );
+      if (slashed !== undefined) {
+        throw new Error(
+          `The app's ${slashed.path} route ends with a slash: write it ${slashed.path.slice(0, -1)}.`,
+        );
+      }
       const RootLayout = await nested(app, context, "/_layout");
       if (RootLayout === undefined) {
         throw new Error(
           "The app has no /_layout route, its root layout, which renders its Stack.",
         );
       }
+      // The app's other layouts and loading states, by pattern.
+      const routes = new Set(
+        app.routes
+          .filter(
+            ({ method, path }) =>
+              (method === "GET" || method === "ALL") &&
+              /\/_(layout|loading)$/.test(path) &&
+              path !== "/_layout",
+          )
+          .map(({ path }) => path),
+      );
       return context.render(
         runtime(
           new URL(context.req.url).origin,
           context.req.header("x-backtick-modules") ?? "{}",
           RootLayout as Client<ComponentType>,
+          [...routes],
         ),
       );
     }

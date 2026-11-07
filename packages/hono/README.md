@@ -40,14 +40,22 @@ import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query" with {
   backtick: "client",
 };
 
-const Part = cs`(props: { path: string }) => $useSuspenseQuery({ queryKey: [props.path] }).data as ReactNode`;
+const Part = cs`(props: { path: string }) =>
+  $useSuspenseQuery({ queryKey: [props.path] }).data as ReactNode`;
 
 const Cart = cs`() => {
   const queryClient = $useQueryClient();
   return (
     <>
-      <$Suspense fallback={<$ActivityIndicator />}><$Part path="/cart/items" /></$Suspense>
-      <$Button title="Refresh" onPress={() => queryClient.invalidateQueries({ queryKey: ["/cart/items"] })} />
+      <$Suspense fallback={<$ActivityIndicator />}>
+        <$Part path="/cart/items" />
+      </$Suspense>
+      <$Button
+        title="Refresh"
+        onPress={() =>
+          queryClient.invalidateQueries({ queryKey: ["/cart/items"] })
+        }
+      />
     </>
   );
 }`;

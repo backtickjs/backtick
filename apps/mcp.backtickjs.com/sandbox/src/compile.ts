@@ -20,8 +20,7 @@ const plugins = pluginsFrom(
 );
 
 export type Compiled =
-  | { code: string; errors?: never }
-  | { errors: string[]; code?: never };
+  { code: string; errors?: never } | { errors: string[]; code?: never };
 
 export async function compile(file: string): Promise<Compiled> {
   let code: string;
