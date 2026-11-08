@@ -1,3 +1,4 @@
+import { PrefetchProvider } from "@backtickjs/expo-router";
 import type { Runtime } from "@backtickjs/hono";
 import {
   useGlobalSearchParams,
@@ -9,6 +10,7 @@ import {
   type ReactNode,
   Suspense,
   use,
+  useCallback,
   useEffect,
   useState,
 } from "react";
@@ -39,6 +41,21 @@ export function hrefOfRoute(params: object | undefined): string {
     "/" + [backtickPath ?? []].flat().map(encodeURIComponent).join("/");
   const searchString = search.toString();
   return searchString === "" ? path : `${path}?${searchString}`;
+}
+
+// A link's href as its route's (hrefOfRoute), so what a Link fetches ahead is
+// what its screen reads.
+function hrefOfLink(href: string): string {
+  const queryStart = href.indexOf("?");
+  const path = queryStart === -1 ? href : href.slice(0, queryStart);
+  const query: Record<string, string[]> = {};
+  if (queryStart !== -1) {
+    for (const [name, value] of new URLSearchParams(href.slice(queryStart))) {
+      (query[name] ??= []).push(value);
+    }
+  }
+  const backtickPath = path.split("/").filter(Boolean).map(decodeURIComponent);
+  return hrefOfRoute({ ...query, backtickPath });
 }
 
 // Runs one app, or Backtick's home (app null): its root layout, which
@@ -126,9 +143,16 @@ function AppRoot({
     );
     return () => clearTimeout(timer);
   }, [app]);
+  const prefetchLink = useCallback(
+    (linked: string, page: boolean) =>
+      runtime.prefetch?.(hrefOfLink(linked), page),
+    [runtime],
+  );
   return (
     <RuntimeContext value={runtime}>
-      <Navigator href={href} />
+      <PrefetchProvider value={prefetchLink}>
+        <Navigator href={href} />
+      </PrefetchProvider>
     </RuntimeContext>
   );
 }

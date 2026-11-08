@@ -19,18 +19,17 @@ import { Stack } from "expo-router" with { backtick: "client" };
 import { Hono } from "hono";
 import { Home } from "./Home.js";
 
-// The root layout, around every screen: the navigator.
-const RootLayout = cs`() => <$Stack />`;
-
 const app = new Hono();
 
-app.use(backtickApp(app, RootLayout));
+app.use(backtickApp(app));
+// The root layout, around every screen: the navigator.
+app.get("/_layout", (context) => context.render(cs`() => <$Stack />`));
 app.get("/", (context) => context.render(<Home />));
 
 export default app;
 ```
 
-The Backtick app opens an app from one answer, which `backtickApp(app, RootLayout)` answers: the client code that fetches each screen and keeps it while it shows, around the app's root layout, a client component that draws its navigator, as Hono's `jsxRenderer()` takes the page's. Navigation works as in Next.js. Every route answers with what it draws, and the runtime fetches each as a query keyed by its path. A route with a `_loading` (`/day/_loading`, rendered for the path, so it can use its params) pushes as soon as that's in, at once if it was prefetched, and shows it until the route's answer is in; a navigation to one without holds the current screen until its answer is in, as expo-router's `unstable_useIsNavigating()` says, for a progress bar. Going back shows a screen as it was. `<Link prefetch>` fetches a route's loading state ahead, or its answer, without one. The root layout is the only one: what screens share is a component they draw. A client with a navigator of its own uses `backtickRenderer()` alone.
+The Backtick app opens an app from one answer, which `backtickApp(app)` answers: the client code that fetches each screen and keeps it while it shows. Navigation works as in Next.js, whose folders are routes here. `/_layout` is the root layout, a client component that draws the navigator; unlike Next.js's, it takes no `children`, as the navigator renders the screens. An app without one doesn't open. A screen is each segment's `_layout` (`/day/:id/_layout`, rendered for its path, answering a client component given `children`), around its `_loading` while what's under it loads, around the page. A loading state takes no params, as in Next.js: it's fetched once for its pattern, and reading a param throws; what depends on the path, such as the title, goes in a `_layout`. Every link fetches ahead what its screen needs to show, its layouts down to its first loading state and that loading state, as Next.js's `Link` prefetches; `<Link prefetch>` adds the page, and `router.prefetch(href)` fetches as a link does. A navigation pushes once those are in, at once if they were fetched ahead; with no loading state, it holds the current screen until all of it is in, as expo-router's `unstable_useIsNavigating()` says, for a progress bar. Going back shows a screen as it was. A client with a navigator of its own uses `backtickRenderer()` alone.
 
 The runtime gives the app a [TanStack Query](https://tanstack.com/query) client whose query keys are paths: a query of `"/cart/items"` fetches that route, and its answer is what the route renders. For a screen whose parts load on their own, each in its own `Suspense`, and refetch on their own:
 

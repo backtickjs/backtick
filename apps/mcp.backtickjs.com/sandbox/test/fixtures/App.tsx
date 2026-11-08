@@ -20,8 +20,8 @@ const app = new Hono();
 
 // `context.render(element)` answers with the screen, bundled for the phone.
 const RootLayout = cs`() => <$Stack />`;
-
-app.use(backtickApp(app, RootLayout));
+app.use(backtickApp(app));
+app.get("/_layout", (context) => context.render(RootLayout));
 app.get("/", (context) => context.render(<Home />));
 app.get("/day", (context) => context.render(<Day />));
 

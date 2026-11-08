@@ -24,8 +24,11 @@ export const moduleMap = {
   get "react-native"() {
     return require("react-native");
   },
+  // expo-router as Backtick runs it: the same API, with each Link fetching
+  // its screen ahead (packages/expo-router). The one package served as
+  // another, so an app's links prefetch without the app asking.
   get "expo-router"() {
-    return require("expo-router");
+    return require("@backtickjs/expo-router");
   },
   get "react-native-safe-area-context"() {
     return require("react-native-safe-area-context");

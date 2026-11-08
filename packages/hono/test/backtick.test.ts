@@ -83,18 +83,26 @@ const phone = {
   }),
 };
 
-// An app's root layout, as backtickApp(app, RootLayout) takes it.
+// An app's root layout, as its /_layout answers it.
 const RootLayout = createImport<ComponentType>({
   name: "RootLayout",
   from: "app",
   version: "1.0.0",
 }) as Client<ComponentType>;
 
-test("the runtime is at /.well-known/backtick/runtime, around the app's root layout, for the phone's origin", async () => {
+// An app the Backtick app opens, with its root layout.
+function openedApp() {
   const opened = new Hono();
-  opened.use(backtickApp(opened, RootLayout));
+  opened.use(backtickApp(opened));
+  opened.get("/_layout", (context) => context.render(RootLayout));
+  return opened;
+}
+
+test("the runtime is at /.well-known/backtick/runtime, for the phone's origin", async () => {
+  const opened = openedApp();
   opened.get("/day/_loading", (context) => context.render(greet));
   opened.get("/product/:id/_loading", (context) => context.render(greet));
+  opened.get("/product/:id/_layout", (context) => context.render(greet));
   opened.post("/form/_loading", (context) => context.render(greet));
   opened.use("/admin/_loading", async (_, next) => next());
   const response = await opened.request(
@@ -113,14 +121,16 @@ test("the runtime is at /.well-known/backtick/runtime, around the app's root lay
   assert.equal(response.headers.get("cache-control"), "no-store");
   const code = await response.text();
   assert.match(code, /require\("react"\)/);
-  assert.match(code, /\{ RootLayout: /);
   assert.match(code, /"http:\/\/app\.test"/);
   assert.match(code, /require\("@tanstack\/react-query"\)/);
   assert.match(code, /require\("hono\/router\/pattern-router"\)/);
-  // The app's loading states, by pattern, for a screen to ask only for those
-  // it has.
-  assert.match(code, /\["\/day\/_loading", "\/product\/:id\/_loading"\]/);
-  assert.match(code, /"\/_loading"/);
+  // The app's layouts and loading states, by pattern, for a screen to ask
+  // only for those it has.
+  assert.match(code, /layouts: \["\/_layout", "\/product\/:id\/_layout"\]/);
+  assert.match(
+    code,
+    /loadings: \["\/day\/_loading", "\/product\/:id\/_loading"\]/,
+  );
 });
 
 test("a _loading route answers what it renders, as any route does", async () => {
@@ -147,8 +157,7 @@ test("a _loading route answers what it renders, as any route does", async () => 
 
 // The runtime's answer, or why it's refused, for an app with `route`.
 async function opening(route: string) {
-  const opened = new Hono();
-  opened.use(backtickApp(opened, RootLayout));
+  const opened = openedApp();
   opened.get(route, (context) => context.render(greet));
   opened.onError((error, context) => context.text(error.message, 500));
   const response = await opened.request(
@@ -165,18 +174,69 @@ test("a loading route with a trailing slash doesn't open, by name", async () => 
   });
 });
 
-test("a layout route doesn't open, by name", async () => {
-  const { status, text } = await opening("/day/_layout");
-  assert.equal(status, 500);
-  assert.match(
-    text,
-    /\/day\/_layout route is a layout, which a screen doesn't have/,
+test("a layout route with a trailing slash doesn't open, by name", async () => {
+  assert.deepEqual(await opening("/day/_layout/"), {
+    status: 500,
+    text: "The app's /day/_layout/ route ends with a slash: write it /day/_layout.",
+  });
+});
+
+test("an app without a /_layout route doesn't open, by name", async () => {
+  const opened = new Hono();
+  opened.use(backtickApp(opened));
+  opened.onError((error, context) => context.text(error.message, 500));
+  const response = await opened.request(
+    "http://app.test/.well-known/backtick/runtime",
+    { headers: phone },
+  );
+  assert.equal(response.status, 500);
+  assert.equal(
+    await response.text(),
+    "The app has no /_layout route: it's the root layout, a client component drawing the navigator, as cs`() => <$Stack />`.",
+  );
+});
+
+test("a nested layout route opens", async () => {
+  const opened = openedApp();
+  opened.get("/day/:id/_layout", (context) => context.render(greet));
+  const response = await opened.request(
+    "http://app.test/.well-known/backtick/runtime",
+    {
+      headers: {
+        "x-backtick-modules": JSON.stringify({
+          ...JSON.parse(phone["x-backtick-modules"]),
+          app: "1.0.0",
+        }),
+      },
+    },
+  );
+  assert.equal(response.status, 200);
+});
+
+test("a loading state is fetched at its pattern, and reading a param throws", async () => {
+  const loadingApp = new Hono();
+  loadingApp.use(backtickApp(loadingApp));
+  loadingApp.get("/day/:id/_loading", (context) => context.render(greet));
+  loadingApp.get("/item/:id/_loading", (context) =>
+    context.render(context.req.param("id") === "" ? greet : greet),
+  );
+  loadingApp.onError((error, context) => context.text(error.message, 500));
+  const fetched = (path: string) =>
+    loadingApp.request(`http://app.test${path}`, {
+      headers: { "x-backtick-modules": JSON.stringify({ app: "1.0.0" }) },
+    });
+  assert.equal((await fetched("/day/:id/_loading")).status, 200);
+  const reading = await fetched("/item/:id/_loading");
+  assert.equal(reading.status, 500);
+  assert.equal(
+    await reading.text(),
+    "/item/:id/_loading reads a param: a loading state takes none, as in Next.js. What depends on the path goes in a _layout.",
   );
 });
 
 test("backtickApp renders every other route, as backtickRenderer does", async () => {
   const written = new Hono();
-  written.use(backtickApp(written, RootLayout));
+  written.use(backtickApp(written));
   written.get("/", (context) => context.render(greet));
   written.notFound((context) => context.text("No such screen", 404));
   const screen = await written.request("/", {

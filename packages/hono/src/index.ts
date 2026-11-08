@@ -1,6 +1,5 @@
 import { bundler, BundlerError, type Modules } from "@backtickjs/bundler";
-import type { Client, Spliceable, SplicesAs } from "@backtickjs/core";
-import type { ComponentType } from "react";
+import type { Spliceable, SplicesAs } from "@backtickjs/core";
 import type { Context, Hono, MiddlewareHandler } from "hono";
 import { clientRuntime } from "./runtime.js";
 
@@ -26,11 +25,11 @@ declare module "hono" {
  *
  * The status is the context's, so `context.status(404)` makes a not-found
  * screen, and screens are `no-store`, kept out of HTTP caches: a reload or
- * a new open always gets the latest copy. (The Backtick app reuses a screen
- * it has, in memory, for 30 seconds, as Next.js's router does.) A client
+ * a new open always gets the latest copy. (The Backtick app fetches a page anew
+ * for each navigation, as Next.js's router does.) A client
  * without a module the screen needs gets a 426, and any other refusal of the
  * bundler's a 400, each with `{ name, message }`. An app the Backtick app
- * opens uses `backtickApp(app, RootLayout)` instead.
+ * opens uses `backtickApp(app)` instead.
  */
 export function backtickRenderer(): MiddlewareHandler {
   return async (context, next) => {
@@ -42,54 +41,61 @@ export function backtickRenderer(): MiddlewareHandler {
 /**
  * Hono's renderer for an app the Backtick app opens, as `backtickRenderer()`,
  * which also answers the runtime the Backtick app fetches when it opens
- * `app`: the client code that fetches, keeps and shows its screens, around
- * its root layout, a client component that draws its `Stack`.
+ * `app`: the client code that fetches, keeps and shows its screens.
  *
- *     const RootLayout = cs`() => <$Stack />`;
- *     app.use(backtickApp(app, RootLayout));
+ *     app.use(backtickApp(app));
+ *     app.get("/_layout", (context) => context.render(cs`() => <$Stack />`));
  *     app.get("/", (context) => context.render(<Home />));
  *
- * Every route answers with what it draws. As in Next.js, a route with a
- * `_loading` route (`/city/:id/_loading`, rendered for the path, so it can
- * show the city's name) pushes as soon as that's in, at once if it was
- * prefetched, and shows it until the route's answer is in; a navigation to
- * one without holds the current screen until its answer is in. The runtime
- * asks only for the loading states `app` has routes for. One with a layout
- * route (a screen has none: what screens share is a component they draw), or
- * with a loading route written with a trailing slash, doesn't open.
+ * Routes nest as Next.js's folders. `/_layout` is the root layout, a client
+ * component drawing the navigator; an app without one doesn't open. A screen
+ * is each segment's `_layout` (`/city/:id/_layout`, rendered for its path,
+ * answering a client component given `children`), around its `_loading`
+ * while what's under it loads, around the page. A loading state takes no
+ * params, as in Next.js: it's fetched once for its pattern, and reading a
+ * param throws. A navigation pushes once its layouts down to its first
+ * loading state, and that loading state, are in; with none, once all of it
+ * is. Layout and loading routes written with a trailing slash are refused.
  */
-export function backtickApp(
-  app: Hono<any, any, any>,
-  RootLayout: Client<ComponentType>,
-): MiddlewareHandler {
+export function backtickApp(app: Hono<any, any, any>): MiddlewareHandler {
   const renderer = backtickRenderer();
   return async (context, next) => {
+    if (context.req.path.endsWith("/_loading")) {
+      context.req.param = () => {
+        throw new Error(
+          `${context.req.routePath} reads a param: a loading state takes none, as in Next.js. What depends on the path goes in a _layout.`,
+        );
+      };
+    }
     if (context.req.method !== "GET" || context.req.path !== runtimePath) {
       return renderer(context, next);
     }
+    const patterns = (name: string) => [
+      ...new Set(
+        app.routes
+          .filter(({ method, path }) => method === "GET" && path.endsWith(name))
+          .map(({ path }) => path),
+      ),
+    ];
     const misplaced = app.routes.find(
-      ({ path }) => path.endsWith("/_loading/") || /\/_layout\/?$/.test(path),
+      ({ path }) => path.endsWith("/_layout/") || path.endsWith("/_loading/"),
     );
     if (misplaced !== undefined) {
       throw new Error(
-        misplaced.path.endsWith("/_loading/")
-          ? `The app's ${misplaced.path} route ends with a slash: write it ${misplaced.path.slice(0, -1)}.`
-          : `The app's ${misplaced.path} route is a layout, which a screen doesn't have: the root layout is backtickApp(app, RootLayout)'s, and what screens share is a component they draw.`,
+        `The app's ${misplaced.path} route ends with a slash: write it ${misplaced.path.slice(0, -1)}.`,
       );
     }
-    // The app's loading states, by pattern.
-    const loadings = app.routes
-      .filter(
-        ({ method, path }) => method === "GET" && path.endsWith("/_loading"),
-      )
-      .map(({ path }) => path);
+    if (!patterns("/_layout").includes("/_layout")) {
+      throw new Error(
+        "The app has no /_layout route: it's the root layout, a client component drawing the navigator, as cs`() => <$Stack />`.",
+      );
+    }
     return bundled(
       context,
       clientRuntime(
         new URL(context.req.url).origin,
         context.req.header("x-backtick-modules") ?? "{}",
-        RootLayout,
-        [...new Set(loadings)],
+        { layouts: patterns("/_layout"), loadings: patterns("/_loading") },
       ),
     );
   };

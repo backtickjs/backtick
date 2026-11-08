@@ -38,8 +38,10 @@ const RootLayout = cs`() => {
   );
 }`;
 
-// The home as the phone opens it: signed out too, before the token check.
-app.use(backtickApp(app, RootLayout));
+// The home as the phone opens it, and its root layout: signed out too,
+// before the token check.
+app.use(backtickApp(app));
+app.get("/_layout", (context) => context.render(RootLayout));
 
 // Nothing of anyone's without a token for this origin: a phone without a
 // session gets sign-in, whatever it asked for. Every route after this has the

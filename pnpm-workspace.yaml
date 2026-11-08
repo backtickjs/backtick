@@ -67,6 +67,10 @@ packageExtensions:
 # adding the dev launcher's local network string to the store build.
 overrides:
   "expo-updates>expo-dev-client": "-"
+# The shell's copy of @backtickjs/expo-router is injected, so it resolves the
+# shell's expo-router (one router); a build re-syncs the copy.
+syncInjectedDepsAfterScripts:
+  - build
 # pnpm holds back versions published within its minimum release age; ours
 # are released from here, and the sandbox installs them from npm right after.
 minimumReleaseAgeExclude:

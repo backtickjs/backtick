@@ -63,7 +63,14 @@ for (const { path, file, ...resolved } of projects) {
     "optionalDependencies",
   ]) {
     for (const [name, { version }] of Object.entries(resolved[field] ?? {})) {
-      if (!versionOf.has(name) || version.startsWith("link:")) continue;
+      // linked, or injected (`file:`, a copy resolving its peers from here)
+      if (
+        !versionOf.has(name) ||
+        version.startsWith("link:") ||
+        version.startsWith("file:")
+      ) {
+        continue;
+      }
       errors.push(
         `${file.slice(root.length)}: ${field}["${name}"] resolved to ` +
           `${version} from the registry, not to the workspace's own`,
