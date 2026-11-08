@@ -386,29 +386,29 @@ importers:
   apps/mcp.backtickjs.com/sandbox:
     dependencies:
       '@backtickjs/bundler':
-        specifier: 0.3.0
-        version: 0.3.0(typescript@6.0.3)
+        specifier: 0.3.1
+        version: link:../../../packages/bundler
       '@backtickjs/compiler':
-        specifier: 0.3.0
-        version: 0.3.0(typescript@6.0.3)
+        specifier: 0.3.1
+        version: link:../../../packages/compiler
       '@backtickjs/core':
-        specifier: 0.3.0
-        version: 0.3.0(typescript@6.0.3)
+        specifier: 0.3.1
+        version: link:../../../packages/core
       '@backtickjs/expo':
-        specifier: 0.3.0
-        version: 0.3.0(expo@58.0.23)(typescript@6.0.3)
+        specifier: 0.3.1
+        version: link:../../../packages/expo
       '@backtickjs/hono':
-        specifier: 0.3.0
-        version: 0.3.0(hono@4.13.13)(typescript@6.0.3)
+        specifier: 0.3.1
+        version: link:../../../packages/hono
       '@backtickjs/jsx-react':
-        specifier: 0.3.0
-        version: 0.3.0(@types/react@19.3.0)(react@19.3.0)(typescript@6.0.3)
+        specifier: 0.3.1
+        version: link:../../../packages/jsx-react
       '@backtickjs/node-plugin':
-        specifier: 0.3.0
-        version: 0.3.0(typescript@6.0.3)
+        specifier: 0.3.1
+        version: link:../../../packages/node-plugin
       '@backtickjs/tsc':
-        specifier: 0.3.0
-        version: 0.3.0(typescript@6.0.3)
+        specifier: 0.3.1
+        version: link:../../../packages/tsc
       '@expo/ui':
         specifier: 58.0.27
         version: 58.0.27(@babel/core@7.29.7)(expo@58.0.23)(react-dom@19.3.0(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
@@ -2525,63 +2525,11 @@ packages:
     resolution: {integrity: sha512-Vj1jF3cPfxg7OAfoI7QnVKLoILlm2JF9pnVHrX8qx7AHMiYWT+NDAA7jChlNgRS4WTLc/fD1lXLmPixluj+3Gg==}
     engines: {node: '>=6.9.0'}
 
-  '@backtickjs/bundler@0.3.0':
-    resolution: {integrity: sha512-dKICWxhvRqGIhCNKeVrGXwNz4IvHdeRre+nDd+komJbNv5CfK+IlL/t6CxFgPAE7eKBxHmxYvfIHRdQHQrkRnw==}
-
-  '@backtickjs/compiler@0.3.0':
-    resolution: {integrity: sha512-xI74DMHlOuAV3hiDqGAo03laA2Xe2IQb2Tor3Bk7faXmx+BQeYvEGQUXeUT8tfUWoMrN9xowlaP+Uylf67zI1w==}
-    peerDependencies:
-      typescript: ^6.0.3
-
-  '@backtickjs/core@0.3.0':
-    resolution: {integrity: sha512-NoEfynsawetuzGDN23XcDTDQuVMmDrNiUf11V46Y6N3Q2KHucu5cou2dKUV7SwgcmJoLqfWFPuqOe0vahl5aEQ==}
-    peerDependencies:
-      typescript: ^6.0.3
-
   '@backtickjs/expo-router@file:packages/expo-router':
     resolution: {directory: packages/expo-router, type: directory}
     peerDependencies:
       expo-router: ~58.0.30
       react: '*'
-
-  '@backtickjs/expo@0.3.0':
-    resolution: {integrity: sha512-TuVEl/sxqumK0tquv1RjlFbE85BlAX1rysiBWixXoLIvM8allCthU1aa6+xo6R3VYxJpcwyzpNaGcPJCIvMH2A==}
-    peerDependencies:
-      expo: '*'
-
-  '@backtickjs/hono@0.3.0':
-    resolution: {integrity: sha512-z0SRqiDDgYTYkX99ShX1iFrDl6BEYVLw0sD0d3BeaBV4QC/tef0SHk20P3D2FOmxeTbdZSJV+XI+J6ojUlOh2Q==}
-    peerDependencies:
-      hono: ^4.13.13
-
-  '@backtickjs/jsx-react@0.3.0':
-    resolution: {integrity: sha512-uXiqFri/TMihKhom3XZVc4Qh9QyagxfWGHvKoDqZ1PPltUeAlUQY0tJa9nD8KMxgzyK/EYaO2ZbuB2r6LFuqcQ==}
-    peerDependencies:
-      '@types/react': ^19.2.18
-      react: ^19.2.3
-      typescript: ^6.0.3
-
-  '@backtickjs/language-plugin@0.3.0':
-    resolution: {integrity: sha512-JLEs5SU3yyXPhSGreAVfSNPMGho1s0EFBcviPHGE+wLyiRMuhZ4iKleLM3vWT3olRmAMjMclPJPe2d/fQvtgEQ==}
-    peerDependencies:
-      typescript: ^6.0.3
-
-  '@backtickjs/language-service@0.3.0':
-    resolution: {integrity: sha512-mxojXnFWi6jGO3Tt/IHonQFYWT7hTsgB0aMiTQu1WOaTEoU9LQF3ZrOAvsnsZqIRZmBPeTVgI7RGEEyqabWC1A==}
-    peerDependencies:
-      typescript: ^6.0.3
-
-  '@backtickjs/node-plugin@0.3.0':
-    resolution: {integrity: sha512-+YEcIONGaNB16XyDAm7fx709QNfjvYy3lynWksXMzcNvvb5OinQgz8cnf3eyVgm6iNnBagcQB1tgjrntyiRHLw==}
-    engines: {node: '>=22.15'}
-    peerDependencies:
-      typescript: ^6.0.3
-
-  '@backtickjs/tsc@0.3.0':
-    resolution: {integrity: sha512-9xNekJFtPhQDF++NrFvD4+HBFFQ+uy0FOZYmLLoByrTviCbRkqjnYF8096q4wi/qiJsGVyNAcZpNP3CM3vNRAg==}
-    hasBin: true
-    peerDependencies:
-      typescript: ^6.0.3
 
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
@@ -10791,76 +10739,10 @@ snapshots:
       '@babel/helper-string-parser': 7.29.7
       '@babel/helper-validator-identifier': 7.29.7
 
-  '@backtickjs/bundler@0.3.0(typescript@6.0.3)':
-    dependencies:
-      '@backtickjs/core': 0.3.0(typescript@6.0.3)
-      semver: 7.8.5
-    transitivePeerDependencies:
-      - typescript
-
-  '@backtickjs/compiler@0.3.0(typescript@6.0.3)':
-    dependencies:
-      '@jridgewell/gen-mapping': 0.3.13
-      '@jridgewell/remapping': 2.3.5
-      '@jridgewell/trace-mapping': 0.3.31
-      typescript: 6.0.3
-
-  '@backtickjs/core@0.3.0(typescript@6.0.3)':
-    dependencies:
-      typescript: 6.0.3
-
   '@backtickjs/expo-router@file:packages/expo-router(expo-router@58.0.30)(react@19.3.0)':
     dependencies:
       expo-router: 58.0.30(6785ba9d17be3c36ce25a309a8692cc0)
       react: 19.3.0
-
-  '@backtickjs/expo@0.3.0(expo@58.0.23)(typescript@6.0.3)':
-    dependencies:
-      '@backtickjs/core': 0.3.0(typescript@6.0.3)
-      expo: 58.0.23(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.3.0(react@19.3.0))(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native-webview@14.0.1(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
-    transitivePeerDependencies:
-      - typescript
-
-  '@backtickjs/hono@0.3.0(hono@4.13.13)(typescript@6.0.3)':
-    dependencies:
-      '@backtickjs/bundler': 0.3.0(typescript@6.0.3)
-      '@backtickjs/core': 0.3.0(typescript@6.0.3)
-      hono: 4.13.13
-    transitivePeerDependencies:
-      - typescript
-
-  '@backtickjs/jsx-react@0.3.0(@types/react@19.3.0)(react@19.3.0)(typescript@6.0.3)':
-    dependencies:
-      '@backtickjs/core': 0.3.0(typescript@6.0.3)
-      '@types/react': 19.3.0
-      react: 19.3.0
-      typescript: 6.0.3
-
-  '@backtickjs/language-plugin@0.3.0(typescript@6.0.3)':
-    dependencies:
-      '@backtickjs/compiler': 0.3.0(typescript@6.0.3)
-      '@volar/language-core': 2.4.28
-      typescript: 6.0.3
-
-  '@backtickjs/language-service@0.3.0(typescript@6.0.3)':
-    dependencies:
-      '@backtickjs/compiler': 0.3.0(typescript@6.0.3)
-      '@backtickjs/language-plugin': 0.3.0(typescript@6.0.3)
-      '@volar/language-core': 2.4.28
-      typescript: 6.0.3
-
-  '@backtickjs/node-plugin@0.3.0(typescript@6.0.3)':
-    dependencies:
-      '@backtickjs/compiler': 0.3.0(typescript@6.0.3)
-      typescript: 6.0.3
-
-  '@backtickjs/tsc@0.3.0(typescript@6.0.3)':
-    dependencies:
-      '@backtickjs/compiler': 0.3.0(typescript@6.0.3)
-      '@backtickjs/language-plugin': 0.3.0(typescript@6.0.3)
-      '@backtickjs/language-service': 0.3.0(typescript@6.0.3)
-      '@volar/typescript': 2.4.28
-      typescript: 6.0.3
 
   '@bcoe/v8-coverage@0.2.3': {}
 
