@@ -7,9 +7,10 @@ import { Text } from "react-native";
 // expo-router's navigation state holds meanwhile: no preloaded route, as the
 // fetch is data only.
 test("links and router.prefetch fetch ahead through the provider, and nothing preloads", async () => {
-  const fetched: [string, boolean][] = [];
-  const fetchAhead = (href: string, page: boolean) => {
-    fetched.push([href, page]);
+  const fetched: [string, string][] = [];
+  const fetchAhead = (href: string, options: { kind: string }) => {
+    fetched.push([href, options.kind]);
+    return () => {};
   };
   const rendered = await renderRouter({
     _layout: () => <Stack />,
@@ -27,11 +28,11 @@ test("links and router.prefetch fetch ahead through the provider, and nothing pr
     "[...backtickPath]": () => <Text>route</Text>,
   });
   expect(fetched).toEqual([
-    ["/a", false],
-    ["/b/?c=d%20e", true],
+    ["/a", "auto"],
+    ["/b/?c=d%20e", "full"],
   ]);
   act(() => router.prefetch("/d"));
-  expect(fetched.at(-1)).toEqual(["/d", false]);
+  expect(fetched.at(-1)).toEqual(["/d", "auto"]);
   const state = rendered.getRouterState();
   expect(state?.routes.length).toBe(1);
   expect(screen.getByText("A")).toBeTruthy();

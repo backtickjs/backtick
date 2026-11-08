@@ -16,7 +16,13 @@ import {
 
 export * from "expo-router";
 
-type Prefetch = (href: string, page: boolean) => void;
+// Fetches an href ahead, as Next.js's `kind` says ("full" with its page,
+// for `prefetch`; `urgent` for a pressed link), and returns a cancel, for a
+// link that goes away first.
+type Prefetch = (
+  href: string,
+  options: { kind: "auto" | "full"; urgent: boolean },
+) => () => void;
 
 // How a Link fetches its href ahead (with its page, for `prefetch`).
 const PrefetchContext = createContext<Prefetch | undefined>(undefined);
@@ -71,17 +77,17 @@ function PrefetchingLink({ prefetch, onPressIn, ...props }: LinkProps) {
   const focused = useIsFocused();
   const href = resolveHref(props.href);
   const enabled = prefetch !== false;
-  const page = prefetch === true;
+  const kind = prefetch === true ? "full" : "auto";
   useEffect(() => {
     if (enabled && focused) {
-      prefetchHref(href, page);
+      return prefetchHref(href, { kind, urgent: false });
     }
-  }, [enabled, focused, prefetchHref, href, page]);
+  }, [enabled, focused, prefetchHref, href, kind]);
   return createElement(ExpoLink, {
     ...props,
     onPressIn: (event) => {
       if (enabled) {
-        prefetchHref(href, page);
+        prefetchHref(href, { kind, urgent: true });
       }
       onPressIn?.(event);
     },
@@ -94,8 +100,9 @@ type Router = typeof expoRouter;
 
 // The router's `prefetch`, as a Link without `prefetch` prefetches: for the
 // app on top, and with none (a moment at startup), nothing. Never a preload.
-const prefetch: Router["prefetch"] = (href) =>
-  prefetchOnTop?.(resolveHref(href), false);
+const prefetch: Router["prefetch"] = (href) => {
+  prefetchOnTop?.(resolveHref(href), { kind: "auto", urgent: false });
+};
 
 // expo-router's router, with that `prefetch`. Read through on each access:
 // expo-router binds the router's methods once it renders.
@@ -112,8 +119,9 @@ export function useRouter(): ReturnType<typeof useExpoRouter> {
   return useMemo(
     () => ({
       ...actions,
-      prefetch: (href: Parameters<Router["prefetch"]>[0]) =>
-        prefetchHref(resolveHref(href), false),
+      prefetch: (href: Parameters<Router["prefetch"]>[0]) => {
+        prefetchHref(resolveHref(href), { kind: "auto", urgent: false });
+      },
     }),
     [actions, prefetchHref],
   );

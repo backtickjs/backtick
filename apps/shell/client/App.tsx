@@ -144,8 +144,8 @@ function AppRoot({
     return () => clearTimeout(timer);
   }, [app]);
   const prefetchLink = useCallback(
-    (linked: string, page: boolean) =>
-      runtime.prefetch?.(hrefOfLink(linked), page),
+    (linked: string, options: { kind: "auto" | "full"; urgent: boolean }) =>
+      runtime.prefetch?.(hrefOfLink(linked), options) ?? (() => {}),
     [runtime],
   );
   return (
