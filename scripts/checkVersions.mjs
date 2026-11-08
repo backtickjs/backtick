@@ -7,39 +7,14 @@
 // The plugins are published separately from core but are only ever compatible
 // with the core they were built against, so a version that drifts is a bug
 // users hit at runtime, not a cosmetic inconsistency.
-import { execFileSync } from "node:child_process";
-import { readFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-
-const root = new URL("..", import.meta.url).pathname;
-
-// Every project in the workspace, and how pnpm resolved each of its
-// dependencies.
-const projects = JSON.parse(
-  execFileSync("pnpm", ["ls", "-r", "--depth", "0", "--json"], {
-    cwd: root,
-    encoding: "utf8",
-    maxBuffer: 64 * 1024 * 1024,
-  }),
-).map((project) => {
-  const file = join(project.path, "package.json");
-  return { ...project, file, json: JSON.parse(readFileSync(file, "utf8")) };
-});
-const versionOf = new Map(
-  projects
-    .filter(({ name }) => name)
-    .map(({ name, version }) => [name, version]),
-);
-
-// Installed from npm where it's deployed, so held to published versions
-// instead.
-const consumers = new Set([join(root, "apps/mcp.backtickjs.com/sandbox")]);
-
-// What's released is where it lives, so a new package is checked without
-// being listed here.
-const released = projects.filter(
-  ({ path }) => dirname(path) === join(root, "packages"),
-);
+import {
+  consumers,
+  dependencyFields,
+  projects,
+  released,
+  root,
+  versionOf,
+} from "./workspace.mjs";
 
 const errors = [];
 
@@ -61,13 +36,6 @@ if (versions.size > 1) {
 }
 
 const [expected] = versions.keys();
-
-const dependencyFields = [
-  "dependencies",
-  "devDependencies",
-  "peerDependencies",
-  "optionalDependencies",
-];
 
 // One form for every reference to a workspace project: its exact version, as
 // `"@backtickjs/core": "0.1.8"`. Released together, they're installed together.

@@ -67,3 +67,7 @@ packageExtensions:
 # adding the dev launcher's local network string to the store build.
 overrides:
   "expo-updates>expo-dev-client": "-"
+# pnpm holds back versions published within its minimum release age; ours
+# are released from here, and the sandbox installs them from npm right after.
+minimumReleaseAgeExclude:
+  - "@backtickjs/*"
