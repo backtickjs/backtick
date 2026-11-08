@@ -41,4 +41,6 @@ execFileSync("node", ["scripts/checkVersions.mjs"], {
   cwd: root,
   stdio: "inherit",
 });
-console.log(`Bumped ${current} to ${next}: commit, tag v${next}, push both.`);
+console.log(
+  `Bumped ${current} to ${next}: commit, push main, then publish a GitHub release with a new tag v${next} on main.`,
+);

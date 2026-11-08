@@ -1,6 +1,7 @@
 name: Release
 
-# Pushing a tag like `v0.1.0` publishes every public package at that version.
+# A tag like `v0.1.0` publishes every public package at that version: made by
+# publishing a GitHub release with a new tag on main, its notes written there.
 on:
   push:
     tags: ["v*"]
