@@ -32,6 +32,13 @@ fetch(url, { headers: { "x-backtick-modules": modules } });
 
 A reload keeps the config the app was opened with: after upgrading a package, close the app and open it again.
 
+**With EAS Update and a fingerprint runtime version**, leave the config's `extra` out of the fingerprint, or every package upgrade (a Backtick release included) needs a new build instead of an update. An update carries its own config, so the new versions reach the app with it:
+
+```js
+// fingerprint.config.cjs
+module.exports = { sourceSkips: ["ExpoConfigExtraSection"] };
+```
+
 **Your server reloads the app** once it listens, so saving a server file shows its screens without pressing `r` in Expo's terminal:
 
 ```ts
