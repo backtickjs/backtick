@@ -1,6 +1,8 @@
 // Enforces lockstep versioning: every `@backtickjs/*` package under
 // `packages/` shares one version, and every reference to a workspace project,
-// anywhere in the workspace, is exactly its version, linked to it.
+// anywhere in the workspace, is exactly its version, linked to it. The MCP's
+// sandbox is the exception: it's deployed from npm, so it names versions
+// already published and moves to a new one after its release.
 //
 // The plugins are published separately from core but are only ever compatible
 // with the core they were built against, so a version that drifts is a bug
@@ -28,6 +30,10 @@ const versionOf = new Map(
     .filter(({ name }) => name)
     .map(({ name, version }) => [name, version]),
 );
+
+// Installed from npm where it's deployed, so held to published versions
+// instead.
+const consumers = new Set([join(root, "apps/mcp.backtickjs.com/sandbox")]);
 
 // What's released is where it lives, so a new package is checked without
 // being listed here.
@@ -65,7 +71,8 @@ const dependencyFields = [
 
 // One form for every reference to a workspace project: its exact version, as
 // `"@backtickjs/core": "0.1.8"`. Released together, they're installed together.
-for (const { file, json } of projects) {
+for (const { path, file, json } of projects) {
+  if (consumers.has(path)) continue;
   for (const field of dependencyFields) {
     for (const [name, range] of Object.entries(json[field] ?? {})) {
       if (!versionOf.has(name) || range === versionOf.get(name)) continue;
@@ -80,7 +87,8 @@ for (const { file, json } of projects) {
 // And each of those references linked to the project itself: a range the
 // local version doesn't satisfy would be installed from npm without a word,
 // and tests would run against what's published rather than what's here.
-for (const { file, ...resolved } of projects) {
+for (const { path, file, ...resolved } of projects) {
+  if (consumers.has(path)) continue;
   for (const field of [
     "dependencies",
     "devDependencies",

@@ -96,7 +96,7 @@ Don't change tables from Supabase's SQL editor: the database and `supabase/migra
 
 The sandbox installs `@backtickjs/*` from npm, so a change to them or to `sandbox/` reaches users only through a new snapshot. In this order:
 
-1. Release the `@backtickjs/*` packages, if they changed, and wait until `npm view @backtickjs/compiler version` shows the new version.
+1. Release the `@backtickjs/*` packages, if they changed, and wait until `npm view @backtickjs/compiler version` shows the new version. The sandbox names versions already on npm, not the workspace's (`scripts/checkVersions.mjs` leaves it out), so a release doesn't touch it: it moves to the new version here, by setting its `@backtickjs/*` dependencies to it.
 2. After a change to `sandbox/package.json`, write its lockfile, which the snapshot installs exactly (`npm ci`):
 
    ```sh
