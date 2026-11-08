@@ -6,7 +6,8 @@ export const starter = `// A Backtick app:
 // 3. Use + over template literals: a backtick ends the client script.
 // 4. Each route is a screen, navigated as in Next.js: /path/_loading routes
 //    and <Link prefetch>. Without a _loading, a navigation holds the current
-//    screen until the next is in.
+//    screen until the next is in. Give a _loading its page's title, so the
+//    header doesn't change.
 
 import { cs } from "@backtickjs/core";
 import { backtickApp } from "@backtickjs/hono";
@@ -39,10 +40,15 @@ function Home() {
   \`;
 }
 
-// A client component: its state lives on the phone.
-const CookedButton = cs\`() => {
+// A client component, typed as strict TypeScript: its state lives on the phone.
+const CookedButton = cs\`({ name }: { name: string }) => {
   const [cooked, setCooked] = $useState(false);
-  return <$Button title={cooked ? "Cooked!" : "Mark as cooked"} onPress={() => setCooked(!cooked)} />;
+  return (
+    <$Button
+      title={cooked ? name + " cooked!" : "Mark as cooked"}
+      onPress={() => setCooked(!cooked)}
+    />
+  );
 }\`;
 
 // Every screen's options. A sheet or modal's go here too, not on its screen:
@@ -78,7 +84,7 @@ app.get("/recipe/:id", (context) => {
     <$ScrollView contentContainerStyle={$styles.screen} contentInsetAdjustmentBehavior="automatic">
       <$Stack.Screen options={{ title: $recipe.name }} />
       <$Text style={$styles.text}>{$recipe.steps}</$Text>
-      <$CookedButton />
+      <$CookedButton name={$recipe.name} />
     </$ScrollView>
   \`);
 });
