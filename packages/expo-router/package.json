@@ -1,0 +1,56 @@
+{
+  "name": "@backtickjs/expo-router",
+  "version": "0.3.0",
+  "description": "expo-router as the Backtick app runs it: every Link fetches its screen's loading state ahead, as Next.js's does",
+  "keywords": [
+    "backtick",
+    "expo-router",
+    "react-native",
+    "server-driven-ui"
+  ],
+  "homepage": "https://backtickjs.com",
+  "bugs": {
+    "url": "https://github.com/backtickjs/backtick/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/backtickjs/backtick.git",
+    "directory": "packages/expo-router"
+  },
+  "license": "MIT",
+  "author": "Jean-François Bisson <jf@backtickjs.com>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!dist/._cache",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b --watch",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown .",
+    "clean": "rm -rf node_modules dist .turbo",
+    "prepack": "cp ../../LICENSE ."
+  },
+  "peerDependencies": {
+    "expo-router": "~58.0.30",
+    "react": "*"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "expo-router": "~58.0.30",
+    "prettier": "^3.6.2",
+    "react": "19.3.0",
+    "typescript": "^6.0.3"
+  }
+}
