@@ -272,10 +272,6 @@ export function clientRuntime(
         void queryClient.query(query).catch(() => {});
       }
     };
-    // Every loading state, as the app opens: one per pattern, for any href.
-    for (const pattern of $routes.loadings) {
-      void queryClient.query(loadingQuery(pattern)).catch(() => {});
-    }
 
     // An href changed in place (router.setParams) shows once it's in: the
     // screen stays meanwhile.
