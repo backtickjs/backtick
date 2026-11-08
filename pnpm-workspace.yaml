@@ -27,8 +27,10 @@ saveWorkspaceProtocol: false # `pnpm add` writes "^2.16.9", not "workspace:^"
 # package's install re-links the others while they are being deleted.
 verifyDepsBeforeRun: false
 allowBuilds:
+  # Jest's file watcher, for `jest --watch`, which the shell's tests don't
+  # use; its prebuilt binary comes as an optional package.
+  "@parcel/watcher": false
   # Signs the VS Code extension when it's published to the Marketplace.
-  '@parcel/watcher': set this to true or false
   "@vscode/vsce-sign": true
   esbuild: true
   # Stores Marketplace logins in the system keychain; publishing uses tokens
