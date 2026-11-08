@@ -35,7 +35,9 @@ jobs:
             exit 1
           fi
       - run: pnpm build
-      - run: pnpm test
+      # Only what's published: the sandbox's lockfile and snapshot can only be
+      # made once these versions are on npm, after the release.
+      - run: pnpm check:versions && pnpm exec turbo run test --filter=./packages/*
       # Every package in the workspace, in one pass: private packages and
       # versions already on npm are skipped.
       - run: pnpm -r publish --access public --no-git-checks
