@@ -38,7 +38,7 @@ pnpm dlx eas-cli build -p android --profile development --local
 
 Without `--local`, EAS builds it in the cloud. A build signed by EAS is the only kind that can finish signing in: `app.backtickjs.com` vouches for EAS's certificate.
 
-The store's Android build runs on this machine, `pnpm build:android`: EAS's free cloud workers run out of memory on it. Its profile, `production-local`, caps Gradle's memory (3 GB, the Kotlin compiler 1.5 GB) and runs one task at a time, and the script runs it at background priority, so the Mac stays usable; it takes longer. It's signed with EAS's keystore, like the cloud builds.
+The store's Android build runs on this machine, `pnpm build:android`: EAS's free cloud workers run out of memory on it. Its profile, `production-local`, caps Gradle's memory (3 GB, the Kotlin compiler 1.5 GB) and runs one task at a time, and the script runs it at background priority, so the Mac stays usable; it takes longer. It's signed with EAS's keystore, like the cloud builds. Gradle needs `ANDROID_HOME` (Homebrew's SDK is `/opt/homebrew/share/android-commandlinetools`) and a JDK 17 as `JAVA_HOME`, both set in the shell that runs it.
 
 For iOS, run it with `EXPO_NO_CAPABILITY_SYNC=1`: the App ID's capabilities (Sign in with Apple, Associated Domains) are set in Apple's developer console, and EAS would otherwise turn Sign in with Apple off, since the app signs in with Apple on the web rather than with its native API. Apple refuses that anyway: the sign-in Services ID, `com.backtickjs.app.signin`, depends on it.
 
