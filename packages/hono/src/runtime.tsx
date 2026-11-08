@@ -4,7 +4,6 @@
 import { type Client, cs, exec } from "@backtickjs/core";
 import {
   QueryClient,
-  QueryClientProvider,
   queryOptions,
   usePrefetchQuery,
   useSuspenseQuery,
@@ -64,9 +63,15 @@ export interface Runtime {
  * app's not-found screen is one. A refusal ({ name, message }) says why.
  */
 export const fetchAnswer = cs`async (url: string, modules: string) => {
+  // One that doesn't answer within 15 seconds fails, as a stalled
+  // connection would otherwise hold a navigation, or a prefetch's turn, for
+  // good.
+  const aborter = new AbortController();
+  const timer = setTimeout(() => aborter.abort(), 15000);
   const response = await fetch(url, {
     headers: { "x-backtick-modules": modules },
-  });
+    signal: aborter.signal,
+  }).finally(() => clearTimeout(timer));
   const body = await response.text();
   if (
     !(response.headers.get("content-type") ?? "").startsWith("text/javascript")
@@ -205,11 +210,15 @@ export function clientRuntime(
     };
     // A page or a loading state answers what it draws.
     const Page = (props: { href: string }) =>
-      $useSuspenseQuery(pageQuery(props.href)).data as ReactNode;
+      $useSuspenseQuery(pageQuery(props.href), queryClient).data as ReactNode;
     const Loading = (props: { pattern: string }) =>
-      $useSuspenseQuery(loadingQuery(props.pattern)).data as ReactNode;
+      $useSuspenseQuery(loadingQuery(props.pattern), queryClient)
+        .data as ReactNode;
     const Layout = (props: { path: string; children: ReactNode }) => {
-      const answer = $useSuspenseQuery(layoutQuery(props.path)).data;
+      const answer = $useSuspenseQuery(
+        layoutQuery(props.path),
+        queryClient,
+      ).data;
       if (typeof answer !== "function") {
         return answer as ReactNode;
       }
@@ -220,7 +229,7 @@ export function clientRuntime(
     // Suspense showing its loading state, around what's under it. The page
     // is fetched meanwhile.
     const Segments = (props: { href: string }) => {
-      $usePrefetchQuery(pageQuery(props.href));
+      $usePrefetchQuery(pageQuery(props.href), queryClient);
       let node: ReactNode = <Page href={props.href} />;
       for (const segment of segmentsOf(props.href).reverse()) {
         if (segment.loading !== undefined) {
@@ -346,17 +355,19 @@ export function clientRuntime(
         ) {
           queryClient.removeQueries({ queryKey: [props.href], exact: true });
         }
-        // Only a navigation with something to fetch suspends. One whose
-        // screen is in, as going back, renders at once: it's no transition,
-        // so a suspension would reach the app's own Suspense.
+        // Only a navigation with something to fetch suspends. Going back,
+        // to a page a screen still shows, renders at once, however old its
+        // shell: it's no transition, so a suspension would reach the app's
+        // own Suspense.
         const queries = shellOf(props.href).queries;
         hold = {
           href: props.href,
-          ready: queries.every(isIn)
-            ? undefined
-            : Promise.allSettled(
-                queries.map((query) => queryClient.query(query)),
-              ),
+          ready:
+            (page !== undefined && shown(page)) || queries.every(isIn)
+              ? undefined
+              : Promise.allSettled(
+                  queries.map((query) => queryClient.query(query)),
+                ),
         };
         void queryClient.query(pageQuery(props.href)).catch(() => {});
       }
@@ -369,11 +380,14 @@ export function clientRuntime(
     // The root layout, /_layout, which draws the navigator: fetched once per
     // open, as a new one would remount the navigator, and its screens with it.
     const RootLayout = () => {
-      const answer = $useSuspenseQuery({
-        queryKey: ["/_layout"],
-        queryFn: fetchPath("/_layout"),
-        staleTime: Infinity,
-      }).data;
+      const answer = $useSuspenseQuery(
+        {
+          queryKey: ["/_layout"],
+          queryFn: fetchPath("/_layout"),
+          staleTime: Infinity,
+        },
+        queryClient,
+      ).data;
       if (typeof answer !== "function") {
         throw new Error(
           "The app's /_layout answers no component: it's the root layout, a client component drawing the navigator (a Stack).",
@@ -383,25 +397,29 @@ export function clientRuntime(
       return <Answer />;
     };
 
+    // The runtime's hooks name its client, so an app's own React Query, with
+    // or without a provider, never shares the runtime's cache.
     const Navigator = (props: { href: string }) => (
-      <$QueryClientProvider client={queryClient}>
+      <>
         <NavigationHold href={props.href} />
         <RootLayout />
-      </$QueryClientProvider>
+      </>
     );
 
     const runtime: Runtime = {
       Navigator,
       Screen,
       prefetch,
-      // Its page and layouts again: one that failed, for its screen to wait
-      // for it; the others kept until the new answer is in.
+      // Its page, layouts and loading states again: one that failed, for
+      // its screen to wait for it; the others kept until the new answer is
+      // in.
       reload: async (href) => {
         const paths = [
           href,
-          ...segmentsOf(href).flatMap((segment) =>
-            segment.layout === undefined ? [] : [segment.layout],
-          ),
+          ...segmentsOf(href).flatMap((segment) => [
+            ...(segment.layout === undefined ? [] : [segment.layout]),
+            ...(segment.loading === undefined ? [] : [segment.loading]),
+          ]),
         ];
         await Promise.allSettled(
           paths.map((path) =>
