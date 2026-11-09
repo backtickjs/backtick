@@ -4,12 +4,7 @@ export const starter = `// A Backtick app:
 // 1. Import what the client provides \`with { backtick: "client" }\`.
 // 2. A splice \`$\` marks a server value crossing into a client script cs\`...\`
 // 3. Use + over template literals: a backtick ends the client script.
-// 4. Routes nest as in Next.js: a screen is /path/_layout (from the path,
-//    given children) around /path/_loading (no params, shown while the page
-//    loads) around the page. Put the title and header options in the
-//    _layout, not the _loading or the page. Links prefetch layouts, so a
-//    _layout never fetches data: a title it can't take from the path comes
-//    with the link's params and is read with useLocalSearchParams.
+// 4. Routes nest as in Next.js: /path/_layout around /path/_loading around the page.
 
 import { cs } from "@backtickjs/core";
 import { backtickApp } from "@backtickjs/hono";
@@ -32,14 +27,11 @@ const styles = cs\`$StyleSheet.create({
 function Home() {
   return cs\`
     <$ScrollView contentContainerStyle={$styles.screen} contentInsetAdjustmentBehavior="automatic">
+      {/* / has no _layout, so its page sets the title. */}
       <$Stack.Screen options={{ title: "Recipes" }} />
-      {$recipes.map((recipe) => (
-        <$Link
-          key={recipe.id}
-          href={{ pathname: "/recipe/" + recipe.id, params: { name: recipe.name } }}
-          style={$styles.link}
-        >
-          {recipe.name}
+      {$recipes.map(({ id, name }) => (
+        <$Link key={id} href={{ pathname: "/recipe/" + id, params: { name } }} style={$styles.link}>
+          {name}
         </$Link>
       ))}
     </$ScrollView>
@@ -49,12 +41,8 @@ function Home() {
 // A client component, typed as strict TypeScript: its state lives on the phone.
 const CookedButton = cs\`({ name }: { name: string }) => {
   const [cooked, setCooked] = $useState(false);
-  return (
-    <$Button
-      title={cooked ? name + " cooked!" : "Mark as cooked"}
-      onPress={() => setCooked(!cooked)}
-    />
-  );
+  const title = cooked ? name + " cooked!" : "Mark as cooked";
+  return <$Button title={title} onPress={() => setCooked(!cooked)} />;
 }\`;
 
 // The root layout, /_layout: it draws the navigator, with every screen's
@@ -74,8 +62,9 @@ const app = new Hono();
 app.use(backtickApp(app));
 app.get("/_layout", (context) => context.render(RootLayout));
 app.get("/", (context) => context.render(<Home />));
-// A recipe's header, shown the moment it opens, with the name its link
-// carries: no lookup here, so prefetching it costs nothing.
+// A screen's header goes in its _layout, shown the moment it opens. Links
+// prefetch layouts, so a _layout never fetches: what the path doesn't say
+// comes with the link's params (useLocalSearchParams).
 app.get("/recipe/:id/_layout", (context) =>
   context.render(cs\`({ children }: { children: ReactNode }) => {
     const { name } = $useLocalSearchParams<{ name?: string }>();
@@ -87,6 +76,7 @@ app.get("/recipe/:id/_layout", (context) =>
     );
   }\`),
 );
+// Shown while the page loads; it takes no params.
 app.get("/recipe/:id/_loading", (context) =>
   context.render(cs\`<$ActivityIndicator style={{ marginTop: 40 }} />\`),
 );
