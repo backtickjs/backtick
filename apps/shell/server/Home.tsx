@@ -203,7 +203,12 @@ export async function Home(props: { user: string; modules: string }) {
       },
       details: { marginTop: 14, marginBottom: 22, gap: 6 },
       detail: { fontSize: 15 },
-      version: { fontSize: 12, textAlign: "center" },
+      version: {
+        fontSize: 12,
+        textAlign: "center",
+        opacity: 0.6,
+        marginTop: 8,
+      },
       button: {
         borderRadius: 999,
         paddingVertical: 15,
@@ -602,43 +607,25 @@ export async function Home(props: { user: string; modules: string }) {
     // update it runs was published. A tap copies what debugging needs: its
     // runtime version (EAS's fingerprint), its update, and the modules it
     // offers apps.
-    function Version() {
-      const colors = $useColors();
+    // What the phone runs, for support: copied by a long press on the
+    // avatar in the account sheet, never shown.
+    function copyDebugInfo() {
       const update = $Constants.manifest2;
-      const label =
-        "Backtick " +
-        ($nativeApplicationVersion ?? "") +
-        (update
-          ? " · updated " +
-            new Date(update.createdAt).toLocaleDateString(undefined, {
-              month: "short",
-              day: "numeric",
-            })
-          : "");
-      const copy = () => {
-        $impactAsync($ImpactFeedbackStyle.Light);
-        void $setStringAsync(
-          JSON.stringify(
-            {
-              version: $nativeApplicationVersion,
-              build: $nativeBuildVersion,
-              runtimeVersion: update?.runtimeVersion ?? null,
-              update: update
-                ? { id: update.id, createdAt: update.createdAt }
-                : null,
-              modules: $modules,
-            },
-            null,
-            2,
-          ),
-        );
-      };
-      return (
-        <$Pressable onPress={copy} hitSlop={8}>
-          <$Text style={[styles.version, { color: colors.muted }]}>
-            {label}
-          </$Text>
-        </$Pressable>
+      $impactAsync($ImpactFeedbackStyle.Light);
+      void $setStringAsync(
+        JSON.stringify(
+          {
+            version: $nativeApplicationVersion,
+            build: $nativeBuildVersion,
+            runtimeVersion: update?.runtimeVersion ?? null,
+            update: update
+              ? { id: update.id, createdAt: update.createdAt }
+              : null,
+            modules: $modules,
+          },
+          null,
+          2,
+        ),
       );
     }
 
@@ -658,7 +645,9 @@ export async function Home(props: { user: string; modules: string }) {
       return (
         <Sheet onClose={onClose}>
           <$View style={styles.account}>
-            <Avatar size={56} />
+            <$Pressable onLongPress={copyDebugInfo}>
+              <Avatar size={56} />
+            </$Pressable>
             <$View style={{ flex: 1 }}>
               {$account.name ? (
                 <$Text
@@ -682,7 +671,6 @@ export async function Home(props: { user: string; modules: string }) {
             kind="danger"
             onPress={deleteAccount}
           />
-          <Version />
         </Sheet>
       );
     }
