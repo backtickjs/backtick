@@ -222,18 +222,27 @@ export async function Home(props: { user: string; modules: string }) {
         lineHeight: 24,
         textAlignVertical: "top",
       },
-      steps: { gap: 16, marginTop: 18, marginBottom: 24 },
-      step: { flexDirection: "row", gap: 14 },
-      stepNumber: { width: 18, fontSize: 16, fontWeight: "700" },
-      stepText: { fontSize: 16, lineHeight: 22 },
+      lede: { fontSize: 15, lineHeight: 21, marginTop: 6 },
+      steps: { gap: 18, marginTop: 22, marginBottom: 26 },
+      step: { flexDirection: "row", gap: 12 },
+      stepNumber: {
+        width: 26,
+        height: 26,
+        borderRadius: 13,
+        alignItems: "center",
+        justifyContent: "center",
+      },
+      stepDigit: { fontSize: 14, fontWeight: "700" },
+      stepText: { fontSize: 16, lineHeight: 22, paddingTop: 2 },
       server: {
         flexDirection: "row",
         alignItems: "center",
         gap: 10,
         borderWidth: 1,
         borderRadius: 10,
-        paddingHorizontal: 12,
-        paddingVertical: 10,
+        paddingLeft: 14,
+        paddingRight: 6,
+        paddingVertical: 6,
       },
       // iOS has no font named monospace.
       serverUrl: {
@@ -241,7 +250,8 @@ export async function Home(props: { user: string; modules: string }) {
         fontFamily: $Platform.select({ ios: "Menlo", default: "monospace" }),
         fontSize: 14,
       },
-      copy: { fontSize: 14, fontWeight: "600" },
+      copy: { borderRadius: 999, paddingHorizontal: 14, paddingVertical: 8 },
+      copyText: { fontSize: 14, fontWeight: "600" },
       note: { fontSize: 13, lineHeight: 19, textAlign: "center", marginTop: 4 },
     });
 
@@ -488,21 +498,28 @@ export async function Home(props: { user: string; modules: string }) {
       const steps = [
         "Open Claude's connectors.",
         "Tap +, then Add custom connector.",
-        "Name it Backtick, with this MCP server URL:",
-        "Tap Continue, then sign in and allow Backtick.",
-        "Come back here.",
+        "Name it Backtick and paste this URL:",
+        "Tap Continue, sign in, and allow Backtick.",
       ];
       return (
         <Sheet onClose={onClose}>
           <$Text style={[styles.sheetTitle, { color: colors.ink }]}>
             Connect Backtick to Claude
           </$Text>
+          <$Text style={[styles.lede, { color: colors.muted }]}>
+            One time, about a minute. Claude builds your apps, so Backtick is
+            free.
+          </$Text>
           <$View style={styles.steps}>
             {steps.map((step, index) => (
               <$View key={step} style={styles.step}>
-                <$Text style={[styles.stepNumber, { color: colors.muted }]}>
-                  {index + 1}
-                </$Text>
+                <$View
+                  style={[styles.stepNumber, { backgroundColor: colors.wash }]}
+                >
+                  <$Text style={[styles.stepDigit, { color: colors.ink }]}>
+                    {index + 1}
+                  </$Text>
+                </$View>
                 <$View style={{ flex: 1, gap: 8 }}>
                   <$Text style={[styles.stepText, { color: colors.ink }]}>
                     {step}
@@ -524,12 +541,23 @@ export async function Home(props: { user: string; modules: string }) {
                       ]}
                       accessibilityLabel="Copy the MCP server URL"
                     >
-                      <$Text style={[styles.serverUrl, { color: colors.ink }]}>
+                      <$Text
+                        numberOfLines={1}
+                        adjustsFontSizeToFit
+                        minimumFontScale={0.75}
+                        style={[styles.serverUrl, { color: colors.ink }]}
+                      >
                         {server}
                       </$Text>
-                      <$Text style={[styles.copy, { color: colors.muted }]}>
-                        {copied ? "Copied" : "Copy"}
-                      </$Text>
+                      <$View
+                        style={[styles.copy, { backgroundColor: colors.ink }]}
+                      >
+                        <$Text
+                          style={[styles.copyText, { color: colors.paper }]}
+                        >
+                          {copied ? "Copied" : "Copy"}
+                        </$Text>
+                      </$View>
                     </$Pressable>
                   ) : null}
                 </$View>
