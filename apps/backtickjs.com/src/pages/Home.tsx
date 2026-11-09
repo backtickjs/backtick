@@ -13,8 +13,8 @@ export const Home = cs`() => (
       title="Ask your assistant for an app. Open it on your phone."
       lede={
         <>
-          Ask Claude or ChatGPT for an app, a workout log or a packing list, and
-          it builds a real one with Backtick. It runs natively on your phone, in
+          Ask your assistant for an app, a workout log or a packing list, and it
+          builds a real one with Backtick. It runs natively on your phone, in
           the Backtick app, and changes each time you ask for something new.
         </>
       }

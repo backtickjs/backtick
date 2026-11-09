@@ -15,8 +15,8 @@ export const Download = cs`() => (
       title="Get Backtick on your phone."
       lede={
         <>
-          Then ask Claude for an app: it opens in Backtick, signed in with the
-          same account.
+          Then ask your assistant for an app: it opens in Backtick, signed in
+          with the same account.
         </>
       }
     >

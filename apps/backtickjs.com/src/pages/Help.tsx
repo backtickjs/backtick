@@ -14,9 +14,9 @@ export const Help = cs`() => (
       </h1>
       <div class="docs-prose">
         <p>
-          Backtick builds native apps with AI, all from your phone. You ask
-          Claude for an app, and it runs on your phone in the Backtick app. Only
-          you can open the apps you make.
+          Backtick builds native apps with AI, all from your phone. You ask your
+          assistant for an app, and it runs on your phone in the Backtick app.
+          Only you can open the apps you make. Backtick works with Claude today.
         </p>
 
         <h2>Getting started</h2>
@@ -33,9 +33,9 @@ export const Help = cs`() => (
             account as on your phone, and allow Claude to use Backtick.
           </li>
           <li>
-            <strong>Ask Claude for an app</strong>, such as "Make me a tip
-            calculator app for my phone." Claude writes it, Backtick checks and
-            saves it, and Claude gives you its link.
+            <strong>Ask your assistant for an app</strong>, such as "Make me a
+            tip calculator app for my phone." Your assistant writes it, Backtick
+            checks and saves it, and your assistant gives you its link.
           </li>
           <li>
             <strong>Open it on your phone.</strong> It's on the Backtick app's
@@ -56,15 +56,15 @@ export const Help = cs`() => (
           </li>
         </ul>
         <p>
-          Each change Claude saves is a new version of the app. Your phone opens
-          the latest one.
+          Each change your assistant saves is a new version of the app. Your
+          phone opens the latest one.
         </p>
 
-        <h2>What Claude can do with Backtick</h2>
+        <h2>What your assistant can do with Backtick</h2>
         <ul>
           <li>
-            <strong>New app</strong>: gives Claude a working app to build from.
-            It saves nothing.
+            <strong>New app</strong>: gives your assistant a working app to
+            build from. It saves nothing.
           </li>
           <li>
             <strong>Save an app</strong>: checks the app's code and, if it has
@@ -84,37 +84,38 @@ export const Help = cs`() => (
           </li>
         </ul>
         <p>
-          Claude can't delete your apps. You delete an app in the Backtick app.
+          Your assistant can't delete your apps. You delete an app in the
+          Backtick app.
         </p>
 
         <h2>Troubleshooting</h2>
         <ul>
           <li>
             <strong>The link doesn't open the app.</strong> Install Backtick and
-            sign in with the account you connected to Claude: an app opens only
-            for the account that made it. On a computer, the link shows a code
-            to scan with your phone.
+            sign in with the account you connected to your assistant: an app
+            opens only for the account that made it. On a computer, the link
+            shows a code to scan with your phone.
           </li>
           <li>
-            <strong>Claude says a save failed.</strong> Backtick checks every
-            save and tells Claude what to fix. Ask Claude to fix it and save
-            again. If the check didn't finish, ask it to try again.
+            <strong>Your assistant says a save failed.</strong> Backtick checks
+            every save and tells your assistant what to fix. Ask it to fix it
+            and save again. If the check didn't finish, ask it to try again.
           </li>
           <li>
-            <strong>Claude doesn't use Backtick.</strong> Say you want the app
-            on your phone, or with Backtick, and check that Backtick is turned
-            on in the chat's connectors.
+            <strong>Your assistant doesn't use Backtick.</strong> Say you want
+            the app on your phone, or with Backtick, and check that Backtick is
+            turned on in the chat's connectors.
           </li>
           <li>
-            <strong>An app shows an error on your phone.</strong> Tell Claude
-            what you see, with a screenshot if you can, and ask it to fix the
-            app.
+            <strong>An app shows an error on your phone.</strong> Tell your
+            assistant what you see, with a screenshot if you can, and ask it to
+            fix the app.
           </li>
         </ul>
 
         <h2>Disconnecting</h2>
         <p>
-          In Claude, open Settings → Connectors and disconnect Backtick. Claude
+          In Claude, open Settings → Connectors and disconnect Backtick. It
           loses access to your apps, and your apps stay in Backtick. To delete
           them or your account, see <a href="/support/">Support</a>.
         </p>
