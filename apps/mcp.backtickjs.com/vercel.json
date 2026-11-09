@@ -2,5 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "hono",
   "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
-  "buildCommand": "cd ../.. && pnpm exec turbo run build --filter=mcp.backtickjs.com..."
+  "buildCommand": "cd ../.. && pnpm exec turbo run build --filter=mcp.backtickjs.com...",
+  "ignoreCommand": "cd ../.. && pnpm dlx turbo@2.9.16 query affected --packages mcp.backtickjs.com --base \"${VERCEL_GIT_PREVIOUS_SHA:-HEAD^}\" --exit-code"
 }
