@@ -1,5 +1,3 @@
 # `vercel link` and `vercel env pull`
 .vercel/
 .env*.local
-# `pnpm build`: the sign-in page's script
-public/sign-in.js

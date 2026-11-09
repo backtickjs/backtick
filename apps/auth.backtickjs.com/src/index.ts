@@ -51,8 +51,9 @@ import {
   sendCode,
   type Pending,
 } from "./function/supabaseAuth.ts";
-// Compiled by `tspc` first; its script is built into public/ (scripts/page.ts).
+// Compiled by `tspc` first; its script is built by scripts/page.ts.
 import { signInHtml } from "../web/dist/html.js";
+import { signInScript } from "../web/dist/script.js";
 
 const app = new Hono();
 
@@ -106,6 +107,13 @@ const pageHeaders = {
   "referrer-policy": "no-referrer",
   "x-content-type-options": "nosniff",
 };
+
+app.get("/sign-in.js", (c) =>
+  c.body(signInScript, 200, {
+    "content-type": "text/javascript; charset=utf-8",
+    "cache-control": "no-cache",
+  }),
+);
 
 // The sign-in page, which the app opens in the system's sign-in browser with
 // an OAuth authorization request (PKCE, and `dpop_jkt`, its key's thumbprint).
