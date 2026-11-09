@@ -8,7 +8,12 @@ import { useCallback, useState } from "react" with {
 import { Link, useFocusEffect } from "expo-router" with {
   backtick: "client",
 };
+import {
+  nativeApplicationVersion,
+  nativeBuildVersion,
+} from "expo-application" with { backtick: "client" };
 import { setStringAsync } from "expo-clipboard" with { backtick: "client" };
+import Constants from "expo-constants" with { backtick: "client" };
 import { impactAsync, ImpactFeedbackStyle } from "expo-haptics" with {
   backtick: "client",
 };
@@ -48,7 +53,7 @@ const home = process.env.BACKTICK_HOME_ORIGIN!;
 // opening, editing and deleting, the avatar one with the account and signing out, and
 // + New one that asks Claude for a new app. Pulled down, it loads `/`
 // again. Only the user's own apps, and none they deleted.
-export async function Home(props: { user: string }) {
+export async function Home(props: { user: string; modules: string }) {
   // An app still at its starter, with no saved version, isn't one yet.
   const { data, error } = await supabase()
     .from("apps")
@@ -64,6 +69,11 @@ export async function Home(props: { user: string }) {
   if (profile.error) {
     throw failed(profile.error);
   }
+  // The modules the phone offers, as it sent them, for its debug info.
+  let modules: Record<string, string> = {};
+  try {
+    modules = JSON.parse(props.modules);
+  } catch {}
   const metadata = profile.data.user.user_metadata ?? {};
   const account = {
     name: String(metadata.full_name ?? metadata.name ?? ""),
@@ -192,6 +202,7 @@ export async function Home(props: { user: string }) {
       },
       details: { marginTop: 14, marginBottom: 22, gap: 6 },
       detail: { fontSize: 15 },
+      version: { fontSize: 12, textAlign: "center" },
       button: {
         borderRadius: 999,
         paddingVertical: 15,
@@ -562,6 +573,50 @@ export async function Home(props: { user: string }) {
       );
     }
 
+    // The Backtick app's version, for people: its version, and when the
+    // update it runs was published. A tap copies what debugging needs: its
+    // runtime version (EAS's fingerprint), its update, and the modules it
+    // offers apps.
+    function Version() {
+      const colors = $useColors();
+      const update = $Constants.manifest2;
+      const label =
+        "Backtick " +
+        ($nativeApplicationVersion ?? "") +
+        (update
+          ? " · updated " +
+            new Date(update.createdAt).toLocaleDateString(undefined, {
+              month: "short",
+              day: "numeric",
+            })
+          : "");
+      const copy = () => {
+        $impactAsync($ImpactFeedbackStyle.Light);
+        void $setStringAsync(
+          JSON.stringify(
+            {
+              version: $nativeApplicationVersion,
+              build: $nativeBuildVersion,
+              runtimeVersion: update?.runtimeVersion ?? null,
+              update: update
+                ? { id: update.id, createdAt: update.createdAt }
+                : null,
+              modules: $modules,
+            },
+            null,
+            2,
+          ),
+        );
+      };
+      return (
+        <$Pressable onPress={copy} hitSlop={8}>
+          <$Text style={[styles.version, { color: colors.muted }]}>
+            {label}
+          </$Text>
+        </$Pressable>
+      );
+    }
+
     // Who's signed in, signing out, and deleting the account.
     function AccountSheet(props: { onClose: () => void }) {
       const { onClose } = props;
@@ -602,6 +657,7 @@ export async function Home(props: { user: string }) {
             kind="danger"
             onPress={deleteAccount}
           />
+          <Version />
         </Sheet>
       );
     }

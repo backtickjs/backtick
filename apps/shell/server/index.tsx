@@ -56,7 +56,14 @@ app.use(async (context, next) => {
 });
 
 // The user's apps.
-app.get("/", (context) => context.render(<Home user={context.var.user} />));
+app.get("/", (context) =>
+  context.render(
+    <Home
+      user={context.var.user}
+      modules={context.req.header("x-backtick-modules") ?? "{}"}
+    />,
+  ),
+);
 
 // An app's source, from its ⋯ sheet.
 app.get("/source/:id", (context) =>
