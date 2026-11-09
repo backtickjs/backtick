@@ -5,6 +5,7 @@ import { exportJWK, SignJWT } from "jose";
 import app from "../src/index.ts";
 
 const id = "3f2a6c1e-9b4d-4e8a-a1c2-7d5e9f0b1a2c";
+const releaseId = "9c1d2e3f-4a5b-4c6d-8e7f-0a1b2c3d4e5f";
 const user = "6d1f0b2a-4c3e-4b5a-9e8d-7c6b5a4f3e2d";
 const modules = '{"react-native":"0.86.3"}';
 const issuer = "https://auth.example";
@@ -124,7 +125,7 @@ function worker(versions: Record<string, unknown>) {
 describe("an app's host", () => {
   it("answers the phone with the app's latest release, without its token", async () => {
     const { open, loaded, read } = worker({
-      version: [{ version: 3 }],
+      version: [{ version: 3, release_id: releaseId }],
       compiled: [{ compiled: "release 3" }],
     });
     const answer = await open("/day?week=2", `Bearer ${await token()}`);
@@ -136,7 +137,7 @@ describe("an app's host", () => {
       /^fetch;dur=\d+, bundle;dur=\d+, cache;desc=miss$/,
     );
     const [{ id: release, code, request }] = loaded;
-    assert.equal(release, `${id}@3`);
+    assert.equal(release, releaseId);
     assert.equal(code, "release 3");
     assert.equal(
       new URL(request.url).pathname + new URL(request.url).search,
@@ -151,7 +152,7 @@ describe("an app's host", () => {
 
   it("tells a release who's asking by an ID of this app's own", async () => {
     const { open, loaded } = worker({
-      version: [{ version: 3 }],
+      version: [{ version: 3, release_id: releaseId }],
       compiled: [{ compiled: "release 3" }],
     });
     await open("/", `Bearer ${await token()}`);
@@ -162,7 +163,7 @@ describe("an app's host", () => {
 
   it("sends a release's network through the gateway, as its app", async () => {
     const { open, loaded } = worker({
-      version: [{ version: 3 }],
+      version: [{ version: 3, release_id: releaseId }],
       compiled: [{ compiled: "release 3" }],
     });
     await open("/", `Bearer ${await token()}`);
@@ -171,7 +172,7 @@ describe("an app's host", () => {
 
   it("reads a release from Postgres once, then from the cache", async () => {
     const { open, read } = worker({
-      version: [{ version: 3 }],
+      version: [{ version: 3, release_id: releaseId }],
       compiled: [{ compiled: "release 3" }],
     });
     await open("/", `Bearer ${await token()}`);
@@ -184,9 +185,22 @@ describe("an app's host", () => {
     );
   });
 
+  it("keys a release by its release id, never by its app and version", async () => {
+    const { open, read } = worker({
+      version: [{ version: 3, release_id: releaseId }],
+      compiled: [{ compiled: "release 3" }],
+    });
+    await open("/", `Bearer ${await token()}`);
+    assert.equal(
+      new URLSearchParams(read[1]).get("release_id"),
+      `eq.${releaseId}`,
+    );
+    assert.equal(new URLSearchParams(read[1]).get("app_id"), null);
+  });
+
   it("doesn't cache a release a save cleared while opening it", async () => {
     const { open, read } = worker({
-      version: [{ version: 3 }],
+      version: [{ version: 3, release_id: releaseId }],
       compiled: [{ compiled: null }],
     });
     assert.equal((await open("/", `Bearer ${await token()}`)).status, 500);

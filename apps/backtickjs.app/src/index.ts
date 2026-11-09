@@ -69,9 +69,9 @@ async function screen(c: Context<Env>, id: string): Promise<Response> {
   let started = Date.now();
   const latest = await read(
     c,
-    `select=version,apps!inner(id)&app_id=eq.${id}&apps.owner_id=eq.${user}&apps.deleted_at=is.null&compiled=not.is.null&order=version.desc&limit=1`,
+    `select=version,release_id,apps!inner(id)&app_id=eq.${id}&apps.owner_id=eq.${user}&apps.deleted_at=is.null&compiled=not.is.null&order=version.desc&limit=1`,
   );
-  const [row] = latest as { version: number }[];
+  const [row] = latest as { version: number; release_id: string }[];
   if (row === undefined) {
     return c.notFound();
   }
@@ -80,10 +80,12 @@ async function screen(c: Context<Env>, id: string): Promise<Response> {
   // isolate starts: the read is fetching, not the app's answer.
   let miss = false;
   let reading = 0;
-  const release = c.env.LOADER.get(`${id}@${row.version}`, async () => {
+  // Keyed by the release's own id, which never repeats: an app id freed by
+  // an erase and claimed again can't reach the old owner's isolate.
+  const release = c.env.LOADER.get(row.release_id, async () => {
     miss = true;
     const begun = Date.now();
-    const code = await releaseCode(c, id, row.version);
+    const code = await releaseCode(c, row.release_id);
     reading = Date.now() - begun;
     return {
       compatibilityDate: "2026-10-01",
@@ -183,26 +185,27 @@ async function appUser(
 }
 
 // A version's release, from this data center's cache, or read the first
-// time: a release never changes, so it's kept as long as the cache will. The
-// version was read for its owner just before.
+// time: a release never changes, so it's kept as long as the cache will. It's
+// keyed by its release id, random and never reused, so no app can guess
+// another's key, and a freed app id doesn't bring back the old owner's code.
+// The version was read for its owner just before.
 async function releaseCode(
   c: Context<Env>,
-  id: string,
-  version: number,
+  releaseId: string,
 ): Promise<string> {
-  const key = new Request(`https://releases.backtickjs.app/${id}@${version}`);
+  const key = new Request(`https://releases.backtickjs.app/${releaseId}`);
   const cached = await caches.default.match(key);
   if (cached !== undefined) {
     return cached.text();
   }
   const [row] = (await read(
     c,
-    `select=compiled&app_id=eq.${id}&version=eq.${version}`,
+    `select=compiled&release_id=eq.${releaseId}`,
   )) as { compiled: string | null }[];
   // A save between the two reads clears this version's release; never cache
   // that as its code. The phone's next open gets the new version.
   if (row?.compiled == null) {
-    throw new Error(`Release ${id}@${version} was replaced while opening it`);
+    throw new Error(`Release ${releaseId} was replaced while opening it`);
   }
   c.executionCtx.waitUntil(
     caches.default.put(
