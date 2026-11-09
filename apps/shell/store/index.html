@@ -1,0 +1,262 @@
+<!doctype html>
+<!--
+  The App Store screenshots: the captures beside this file, each in a drawn
+  iPhone frame under its caption, at the size picked at the top. Serve it with
+  `pnpm screenshots` (a page opened from file:// can't export its canvases).
+  To change one, replace its capture or edit `shots` below, then download again.
+  The frame is drawn here, not Apple's device artwork, so nothing to license.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Store Screenshots</title>
+<style>
+  :root { --ink: #0e0e10; --paper: #fafafa; --muted: #6b6b76; --line: #e4e4e7; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 24px 16px 64px; font: 15px/1.5 system-ui, -apple-system, sans-serif; color: var(--ink); background: var(--paper); }
+  header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 24px; }
+  h1 { font-size: 22px; margin: 0 16px 0 0; }
+  label { display: flex; gap: 6px; align-items: center; }
+  select, button { font: inherit; }
+  select { padding: 6px; }
+  button { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); cursor: pointer; }
+  .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+  figure { margin: 0; display: grid; gap: 8px; }
+  canvas { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); }
+  figcaption { display: flex; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 13px; }
+  figcaption button { padding: 4px 10px; font-size: 13px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Store screenshots</h1>
+  <label>Size
+    <select id="size">
+      <option value="1206x2622">iPhone 6.3″ · 1206 × 2622</option>
+      <option value="1320x2868">iPhone 6.9″ · 1320 × 2868</option>
+      <option value="1290x2796">iPhone 6.7″ · 1290 × 2796</option>
+    </select>
+  </label>
+  <label>Background
+    <select id="theme">
+      <option value="light">Light</option>
+      <option value="flat">Flat</option>
+      <option value="grid">Grid</option>
+      <option value="spotlight">Spotlight</option>
+    </select>
+  </label>
+  <button id="download">Download all</button>
+</header>
+<p id="file-warning" hidden style="padding: 12px 16px; border-radius: 12px; background: #fff4e5; color: #8a4b00;">
+  Opened as a file, the page can't read the captures' pixels, so status bars stay visible and downloads fail.
+  Run <code>pnpm screenshots</code> in <code>apps/shell</code> and open <a href="http://localhost:5199">localhost:5199</a>.
+</p>
+<div class="shots" id="shots"></div>
+
+<script>
+// In App Store order. A "\n" in a caption breaks the line. Optional, as
+// fractions of the capture's height: `statusBar`, the top band painted over
+// with the color just below it (an Android capture's icons); `focus`, the
+// line above which the capture is darkened, to draw the eye below it.
+const shots = [
+  { file: "1-connect-claude.png", caption: "Connect Claude once.", statusBar: 0.075, focus: 0.42 },
+  { file: "2-new-app.png", caption: "Describe your app.", statusBar: 0.075, focus: 0.6 },
+  { file: "3-thornvale.png", caption: "Preview it instantly." },
+  { file: "4-your-apps.png", caption: "Make as many as you want.", statusBar: 0.075 },
+];
+
+// Light is the one in the store; the dark ones are kept to compare.
+// `pattern` is drawn over the fill.
+const themes = {
+  flat: { top: "#0b0b0d", bottom: "#0b0b0d", text: "#fafafa" },
+  grid: { top: "#0b0b0d", bottom: "#0b0b0d", text: "#fafafa", pattern: "grid" },
+  spotlight: { top: "#0b0b0d", bottom: "#0b0b0d", text: "#fafafa", pattern: "spotlight" },
+  light: { top: "#ffffff", bottom: "#ececf1", text: "#0e0e10" },
+};
+document.getElementById("file-warning").hidden = location.protocol !== "file:";
+const size = document.getElementById("size");
+const theme = document.getElementById("theme");
+
+for (const shot of shots) {
+  const figure = document.createElement("figure");
+  shot.canvas = document.createElement("canvas");
+  const caption = document.createElement("figcaption");
+  const name = document.createElement("span");
+  name.textContent = shot.file;
+  const save = document.createElement("button");
+  save.textContent = "Download";
+  save.addEventListener("click", () => download(shot));
+  caption.append(name, save);
+  figure.append(shot.canvas, caption);
+  document.getElementById("shots").append(figure);
+  shot.image = new Image();
+  shot.image.onload = () => draw(shot);
+  shot.image.onerror = () => { shot.image = null; draw(shot); };
+  // Never a cached copy: a replaced capture shows on the next reload.
+  shot.image.src = `${shot.file}?${Date.now()}`;
+}
+size.addEventListener("change", () => shots.forEach(draw));
+theme.addEventListener("change", () => shots.forEach(draw));
+document.getElementById("download").addEventListener("click", () => shots.forEach(download));
+
+function download(shot) {
+  if (!shot.image) return;
+  shot.canvas.toBlob((blob) => {
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = shot.file.replace(/\.[^.]+$/, `-${size.value}.png`);
+    link.click();
+  }, "image/png");
+}
+
+function draw(shot) {
+  const [width, height] = size.value.split("x").map(Number);
+  const colors = themes[theme.value];
+  const canvas = shot.canvas;
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext("2d");
+  const unit = width / 1206;
+
+  const background = ctx.createLinearGradient(0, 0, 0, height);
+  background.addColorStop(0, colors.top);
+  background.addColorStop(1, colors.bottom);
+  ctx.fillStyle = background;
+  ctx.fillRect(0, 0, width, height);
+
+  const fontSize = 84 * unit;
+  const lineHeight = fontSize * 1.15;
+  const captionTop = 150 * unit;
+  ctx.fillStyle = colors.text;
+  ctx.font = `700 ${fontSize}px -apple-system, "SF Pro Display", Inter, system-ui, sans-serif`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  const lines = shot.caption.split("\n").flatMap((line) => wrap(ctx, line, width - 160 * unit));
+  // Every caption gets two lines' room, so the phones line up across shots.
+  const captionLines = Math.max(lines.length, 2);
+  const offset = ((captionLines - lines.length) * lineHeight) / 2;
+  lines.forEach((line, i) => ctx.fillText(line, width / 2, captionTop + offset + i * lineHeight));
+
+  // The phone fills what's under the caption, at an iPhone's proportions.
+  const phoneTop = captionTop + captionLines * lineHeight + 90 * unit;
+  const phoneHeight = height - phoneTop - 60 * unit;
+  const phoneWidth = Math.min(width * 0.8, phoneHeight / 2.12);
+  const phoneX = (width - phoneWidth) / 2;
+  const scale = phoneWidth / (width * 0.8) * unit;
+  const bezel = 24 * scale;
+
+  if (colors.pattern === "grid") {
+    // Lines every 64px at 6.3", brightest at the center, gone at the edges.
+    const step = 64 * unit;
+    ctx.save();
+    const fade = ctx.createRadialGradient(width / 2, height * 0.45, 0, width / 2, height * 0.45, height * 0.6);
+    fade.addColorStop(0, "rgba(255, 255, 255, 0.09)");
+    fade.addColorStop(1, "rgba(255, 255, 255, 0)");
+    ctx.strokeStyle = fade;
+    ctx.lineWidth = 1.5 * unit;
+    ctx.beginPath();
+    for (let x = (width / 2) % step; x < width; x += step) { ctx.moveTo(x, 0); ctx.lineTo(x, height); }
+    for (let y = 0; y < height; y += step) { ctx.moveTo(0, y); ctx.lineTo(width, y); }
+    ctx.stroke();
+    ctx.restore();
+  }
+  if (colors.pattern === "spotlight") {
+    // A beam from above the top edge, narrowing as it falls on the phone.
+    const beam = ctx.createRadialGradient(width / 2, -height * 0.15, 0, width / 2, -height * 0.15, height * 0.75);
+    beam.addColorStop(0, "rgba(255, 255, 255, 0.22)");
+    beam.addColorStop(0.5, "rgba(255, 255, 255, 0.06)");
+    beam.addColorStop(1, "rgba(255, 255, 255, 0)");
+    // Squeezed sideways around the center; filled well past the edges so
+    // the beam fades out instead of ending.
+    ctx.save();
+    ctx.translate(width / 2, 0);
+    ctx.scale(0.55, 1);
+    ctx.translate(-width / 2, 0);
+    ctx.fillStyle = beam;
+    ctx.fillRect(-width, 0, width * 3, height);
+    ctx.restore();
+  }
+
+  // The body: titanium gray with a faint edge, then the black bezel inside it.
+  ctx.fillStyle = "#2a2a30";
+  ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
+  ctx.shadowBlur = 60 * unit;
+  ctx.shadowOffsetY = 20 * unit;
+  roundRect(ctx, phoneX, phoneTop, phoneWidth, phoneHeight, 150 * scale);
+  ctx.fill();
+  ctx.shadowColor = "transparent";
+  ctx.strokeStyle = "#4a4a52";
+  ctx.lineWidth = 2 * scale;
+  ctx.stroke();
+  const rim = 7 * scale;
+  ctx.fillStyle = "#000";
+  roundRect(ctx, phoneX + rim, phoneTop + rim, phoneWidth - rim * 2, phoneHeight - rim * 2, 143 * scale);
+  ctx.fill();
+
+  const screen = { x: phoneX + bezel, y: phoneTop + bezel, w: phoneWidth - bezel * 2, h: phoneHeight - bezel * 2 };
+  ctx.save();
+  roundRect(ctx, screen.x, screen.y, screen.w, screen.h, 128 * scale);
+  ctx.clip();
+  if (shot.image) {
+    // Cover: fill the screen, cropping the capture's overflow evenly.
+    const fit = Math.max(screen.w / shot.image.width, screen.h / shot.image.height);
+    const w = shot.image.width * fit;
+    const h = shot.image.height * fit;
+    const x = screen.x + (screen.w - w) / 2;
+    const y = screen.y + (screen.h - h) / 2;
+    ctx.drawImage(shot.image, x, y, w, h);
+    if (shot.statusBar) {
+      ctx.fillStyle = colorAt(shot.image, shot.statusBar);
+      ctx.fillRect(x, y, w, h * shot.statusBar);
+    }
+    if (shot.focus) {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.55)";
+      ctx.fillRect(x, y, w, h * shot.focus);
+    }
+  } else {
+    ctx.fillStyle = "#26262b";
+    ctx.fillRect(screen.x, screen.y, screen.w, screen.h);
+    ctx.fillStyle = "#a1a1aa";
+    ctx.font = `500 ${40 * unit}px system-ui, sans-serif`;
+    ctx.fillText(`Add ${shot.file}`, width / 2, screen.y + screen.h / 2);
+  }
+  ctx.restore();
+
+  ctx.fillStyle = "#000";
+  const islandWidth = 300 * scale;
+  roundRect(ctx, screen.x + (screen.w - islandWidth) / 2, screen.y + 34 * scale, islandWidth, 88 * scale, 44 * scale);
+  ctx.fill();
+}
+
+// The capture's color just below `fraction` of its height, near the left edge.
+function colorAt(image, fraction) {
+  const probe = document.createElement("canvas").getContext("2d");
+  probe.drawImage(image, 0, 0);
+  const [r, g, b] = probe.getImageData(8, Math.round(image.height * fraction) + 4, 1, 1).data;
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+function wrap(ctx, text, maxWidth) {
+  const lines = [];
+  let line = "";
+  for (const word of text.split(" ")) {
+    const next = line ? line + " " + word : word;
+    if (line && ctx.measureText(next).width > maxWidth) {
+      lines.push(line);
+      line = word;
+    } else {
+      line = next;
+    }
+  }
+  lines.push(line);
+  return lines;
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.roundRect(x, y, w, h, r);
+}
+</script>
+</body>
+</html>

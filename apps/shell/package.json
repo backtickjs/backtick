@@ -34,7 +34,8 @@
     "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
-    "test": "jest"
+    "test": "jest",
+    "screenshots": "python3 -m http.server 5199 -d store"
   },
   "dependencies": {
     "@backtickjs/core": "0.3.2",
