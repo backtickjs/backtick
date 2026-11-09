@@ -13,6 +13,7 @@ import {
   nativeBuildVersion,
 } from "expo-application" with { backtick: "client" };
 import { setStringAsync } from "expo-clipboard" with { backtick: "client" };
+import { Ionicons } from "@expo/vector-icons" with { backtick: "client" };
 import Constants from "expo-constants" with { backtick: "client" };
 import { impactAsync, ImpactFeedbackStyle } from "expo-haptics" with {
   backtick: "client",
@@ -241,7 +242,7 @@ export async function Home(props: { user: string; modules: string }) {
         borderWidth: 1,
         borderRadius: 10,
         paddingLeft: 14,
-        paddingRight: 6,
+        paddingRight: 4,
         paddingVertical: 6,
       },
       // iOS has no font named monospace.
@@ -250,8 +251,7 @@ export async function Home(props: { user: string; modules: string }) {
         fontFamily: $Platform.select({ ios: "Menlo", default: "monospace" }),
         fontSize: 14,
       },
-      copy: { borderRadius: 999, paddingHorizontal: 14, paddingVertical: 8 },
-      copyText: { fontSize: 14, fontWeight: "600" },
+      copy: { padding: 8 },
       note: { fontSize: 13, lineHeight: 19, textAlign: "center", marginTop: 4 },
     });
 
@@ -549,15 +549,12 @@ export async function Home(props: { user: string; modules: string }) {
                       >
                         {server}
                       </$Text>
-                      <$View
-                        style={[styles.copy, { backgroundColor: colors.ink }]}
-                      >
-                        <$Text
-                          style={[styles.copyText, { color: colors.paper }]}
-                        >
-                          {copied ? "Copied" : "Copy"}
-                        </$Text>
-                      </$View>
+                      <$Ionicons
+                        name={copied ? "checkmark" : "copy-outline"}
+                        size={20}
+                        color={colors.muted}
+                        style={styles.copy}
+                      />
                     </$Pressable>
                   ) : null}
                 </$View>
