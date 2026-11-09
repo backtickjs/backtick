@@ -7,12 +7,14 @@ export const starter = `// A Backtick app:
 // 4. Routes nest as in Next.js: a screen is /path/_layout (from the path,
 //    given children) around /path/_loading (no params, shown while the page
 //    loads) around the page. Put the title and header options in the
-//    _layout, not the _loading or the page. Links prefetch.
+//    _layout, not the _loading or the page. Links prefetch layouts, so a
+//    _layout never fetches data: a title it can't take from the path comes
+//    with the link's params and is read with useLocalSearchParams.
 
 import { cs } from "@backtickjs/core";
 import { backtickApp } from "@backtickjs/hono";
 import { Hono } from "hono";
-import { Link, Stack } from "expo-router" with { backtick: "client" };
+import { Link, Stack, useLocalSearchParams } from "expo-router" with { backtick: "client" };
 import { useState, type ReactNode } from "react" with { backtick: "client" };
 import { ActivityIndicator, Button, ScrollView, StyleSheet, Text } from "react-native" with { backtick: "client" };
 
@@ -32,7 +34,11 @@ function Home() {
     <$ScrollView contentContainerStyle={$styles.screen} contentInsetAdjustmentBehavior="automatic">
       <$Stack.Screen options={{ title: "Recipes" }} />
       {$recipes.map((recipe) => (
-        <$Link key={recipe.id} href={"/recipe/" + recipe.id} style={$styles.link}>
+        <$Link
+          key={recipe.id}
+          href={{ pathname: "/recipe/" + recipe.id, params: { name: recipe.name } }}
+          style={$styles.link}
+        >
           {recipe.name}
         </$Link>
       ))}
@@ -68,17 +74,19 @@ const app = new Hono();
 app.use(backtickApp(app));
 app.get("/_layout", (context) => context.render(RootLayout));
 app.get("/", (context) => context.render(<Home />));
-// A recipe's header, shown the moment it opens.
-app.get("/recipe/:id/_layout", (context) => {
-  const recipe = recipes.find((each) => each.id === context.req.param("id"));
-  if (!recipe) return context.notFound();
-  return context.render(cs\`({ children }: { children: ReactNode }) => (
-    <>
-      <$Stack.Screen options={{ title: $recipe.name }} />
-      {children}
-    </>
-  )\`);
-});
+// A recipe's header, shown the moment it opens, with the name its link
+// carries: no lookup here, so prefetching it costs nothing.
+app.get("/recipe/:id/_layout", (context) =>
+  context.render(cs\`({ children }: { children: ReactNode }) => {
+    const { name } = $useLocalSearchParams<{ name?: string }>();
+    return (
+      <>
+        <$Stack.Screen options={{ title: name ?? "" }} />
+        {children}
+      </>
+    );
+  }\`),
+);
 app.get("/recipe/:id/_loading", (context) =>
   context.render(cs\`<$ActivityIndicator style={{ marginTop: 40 }} />\`),
 );
