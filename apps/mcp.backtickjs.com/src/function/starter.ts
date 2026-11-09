@@ -6,7 +6,8 @@ export const starter = `// A Backtick app:
 // 3. Use + over template literals: a backtick ends the client script.
 // 4. Routes nest as in Next.js: a screen is /path/_layout (from the path,
 //    given children) around /path/_loading (no params, shown while the page
-//    loads) around the page. Put the title in the _layout. Links prefetch.
+//    loads) around the page. Put the title and header options in the
+//    _layout, not the _loading or the page. Links prefetch.
 
 import { cs } from "@backtickjs/core";
 import { backtickApp } from "@backtickjs/hono";
