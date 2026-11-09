@@ -44,12 +44,15 @@ app.use(backtickApp(app));
 app.get("/_layout", (context) => context.render(RootLayout));
 
 // Nothing of anyone's without a token for this origin: a phone without a
-// session gets sign-in, whatever it asked for. Every route after this has the
-// user.
+// session gets sign-in for a screen, and a 401 for anything else, so a delete
+// or an upload never looks done when it wasn't. Every route after this has
+// the user.
 app.use(async (context, next) => {
   const user = await userOf(context.req.header("authorization"));
   if (user === undefined) {
-    return context.render(<SignIn />);
+    return context.req.method === "GET"
+      ? context.render(<SignIn />)
+      : context.json({ error: "invalid_token" }, 401);
   }
   context.set("user", user);
   await next();
