@@ -79,7 +79,7 @@ claude mcp add --transport http backtick http://localhost:3000
 
 `pnpm test` checks the imports, the typecheck, the releases and the sandbox's server on this machine, with no Vercel or Supabase calls.
 
-`node --env-file=.env.local scripts/e2e.ts` runs the whole flow against `https://mcp.backtickjs.com`, or `BASE`: the tools as a host calls them, then a screen as a phone fetches it, through `https://<id>.backtickjs.app`. It signs in as `test@backtickjs.app` through `scripts/testUser.ts`: the test user signs in with a one-time link Supabase's admin API makes, sending no email, which only the service role's key can ask for. The first link makes the user.
+`node --env-file=.env.local scripts/e2e.ts` runs the whole flow against `https://mcp.backtickjs.com`, or `BASE`, checking each step and exiting 1 if one fails: the tools as a host calls them, then the screens as a phone fetches them, through `https://<id>.backtickjs.app`. Run it after a release and after a deploy. It signs in as `test@backtickjs.app` through `scripts/testUser.ts`, with a one-time code Supabase's admin API makes, sending no email, which only the service role's key can ask for; the first run makes the user, and the user keeps one app, `E2E`, saved again on every run. The phone's half needs auth.backtickjs.com's signing key, `BACKTICK_SIGNING_JWK` as Vercel has it, to make the phone's tokens; without it, it's skipped.
 
 ## Changing the schema
 
