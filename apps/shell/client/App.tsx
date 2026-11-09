@@ -12,8 +12,10 @@ import {
   use,
   useCallback,
   useEffect,
+  useRef,
   useState,
 } from "react";
+import { View } from "react-native";
 import { ErrorBoundary } from "react-error-boundary";
 import { isSignedIn } from "../modules/backtick-session/src";
 import { Failed } from "./Failed";
@@ -127,22 +129,24 @@ function AppRoot({
   const top = topUnder(useRootNavigationState(), useRoute().key);
   const linked = useGlobalSearchParams();
   const href = hrefOfRoute(top?.params ?? linked);
-  // An app's first screen, once it's had a moment to draw (a game's first
-  // frame included), is its preview on the home's card. Never in the way:
-  // a capture that fails is only logged.
-  useEffect(() => {
-    if (app === null || !isSignedIn()) {
+  // An app's first screen is its preview on the home's card: captured at the
+  // first touch, before it changes anything, or once the screen has had a
+  // moment to draw (a game's first frame included). Once per open, and never
+  // in the way: a capture that fails is only logged.
+  const captured = useRef(false);
+  const capture = useCallback(() => {
+    if (app === null || captured.current || !isSignedIn()) {
       return;
     }
-    const timer = setTimeout(
-      () =>
-        savePreview(app).catch((error) =>
-          console.warn("Saving the preview failed:", error),
-        ),
-      2000,
+    captured.current = true;
+    savePreview(app).catch((error) =>
+      console.warn("Saving the preview failed:", error),
     );
-    return () => clearTimeout(timer);
   }, [app]);
+  useEffect(() => {
+    const timer = setTimeout(capture, 2000);
+    return () => clearTimeout(timer);
+  }, [capture]);
   const prefetchLink = useCallback(
     (linked: string, options: { kind: "auto" | "full"; urgent: boolean }) =>
       runtime.prefetch?.(hrefOfLink(linked), options) ?? (() => {}),
@@ -151,7 +155,9 @@ function AppRoot({
   return (
     <RuntimeContext value={runtime}>
       <PrefetchProvider value={prefetchLink}>
-        <Navigator href={href} />
+        <View style={{ flex: 1 }} onTouchStartCapture={capture}>
+          <Navigator href={href} />
+        </View>
       </PrefetchProvider>
     </RuntimeContext>
   );
