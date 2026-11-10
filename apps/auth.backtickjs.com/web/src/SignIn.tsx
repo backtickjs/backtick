@@ -19,9 +19,12 @@ export const SignIn = cs`() => {
     expired: "That code expired. Ask for a new one.",
   };
   const message = error === null ? "" : (messages[error] ?? "");
-  const request = [...query].map(([name, value]) => (
-    <input type="hidden" name={name} value={value} />
-  ));
+  // A function, so each form gets inputs of its own: a Solid node placed
+  // twice moves.
+  const request = () =>
+    [...query].map(([name, value]) => (
+      <input type="hidden" name={name} value={value} />
+    ));
 
   return (
     <main>
@@ -32,7 +35,7 @@ export const SignIn = cs`() => {
           <p class="lede">Enter the six-digit code we sent you.</p>
           {message ? <p class="message">{message}</p> : null}
           <form method="post" action="/authorize/code">
-            {request}
+            {request()}
             <input
               class="code"
               type="text"
@@ -55,7 +58,7 @@ export const SignIn = cs`() => {
           <p class="lede">We'll email you a code to sign in. New here? This makes your account.</p>
           {message ? <p class="message">{message}</p> : null}
           <form method="post" action="/authorize/email">
-            {request}
+            {request()}
             <input
               type="email"
               name="email"
