@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "function",
 };
 // Only the bare `#` key is reserved: a plain data object is free to use keys
 // that merely start with `#`, even ones spelled like the tagged forms.

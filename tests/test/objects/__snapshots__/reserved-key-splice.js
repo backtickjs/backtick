@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 // A runtime object spliced into a script inlines as the plain data it is, so
 // it can't carry `#` — the bundle's one reserved key — either.

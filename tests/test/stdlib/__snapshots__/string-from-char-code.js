@@ -9,6 +9,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // UTF-16 code units rather than code points: a surrogate pair is two
 // arguments, where `String.fromCodePoint` takes the one code point.

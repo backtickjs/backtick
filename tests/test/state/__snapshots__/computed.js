@@ -26,6 +26,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "function",
+  scope: "function",
 };
 const $module1 = {
   id: "1ti1i2ajrs3op:56:8",
@@ -37,6 +38,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "function",
+  scope: "function",
 };
 // Each script logs where it runs, so a test counts the runs by counting the
 // logs.

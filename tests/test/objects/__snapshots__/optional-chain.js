@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "2dtorvijco8u0:12:13",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module2 = {
   id: "2dtorvijco8u0:16:14",
@@ -24,6 +26,7 @@ const $module2 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module3 = {
   id: "2dtorvijco8u0:24:4",
@@ -40,6 +43,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 // `?.` propagates null one step: a null receiver reads as null — the
 // language's absent value; `undefined` never arises. A chain spells `?.` at

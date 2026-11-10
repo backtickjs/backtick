@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "function",
 };
 const $module1 = {
   id: "1h2q1jtsjxrcw:21:11",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module2 = {
   id: "1h2q1jtsjxrcw:23:15",
@@ -24,6 +26,7 @@ const $module2 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module3 = {
   id: "1h2q1jtsjxrcw:31:4",
@@ -35,6 +38,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 // A host helper reused with different splices makes its script polymorphic:
 // every call site passes its splice as a thunk, and the body reads it at the

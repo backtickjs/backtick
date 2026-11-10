@@ -9,6 +9,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const url = "data:text/javascript,export default 42";
 // `import()` in a script is the language's, as in the same code written by

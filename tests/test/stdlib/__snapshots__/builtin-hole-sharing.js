@@ -14,6 +14,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 const $module1 = {
   id: "1xbvwys0tu8ne:13:16",
@@ -22,6 +23,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "module",
 };
 const $module2 = {
   id: "1xbvwys0tu8ne:19:4",
@@ -33,6 +35,7 @@ const $module2 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "function",
 };
 const make = (f) => cs.create($module0, [f]);
 const wrapped = cs.create($module1, [createSignal]);

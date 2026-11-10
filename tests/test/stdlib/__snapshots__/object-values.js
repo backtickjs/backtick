@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // An object's values in key order, and whether it holds a key: the check a
 // script would otherwise write as `Object.keys(o).includes(k)`.

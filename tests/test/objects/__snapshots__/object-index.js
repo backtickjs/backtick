@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "function",
 };
 // An object is reached by a string key, and the type has to admit one: this
 // record says any string names a number, so a key computed at runtime is a read

@@ -6,6 +6,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "module",
 };
 const $module1 = {
   id: "3iw6lzhko8e0n:12:20",
@@ -14,6 +15,7 @@ const $module1 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "module",
 };
 // A step is checked as TypeScript checks one: a number, in a variable that
 // isn't `const`.

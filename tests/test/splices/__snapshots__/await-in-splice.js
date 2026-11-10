@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "21r061mv5fq6m:22:4",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 const $module2 = {
   id: "21r061mv5fq6m:31:14",
@@ -24,6 +26,7 @@ const $module2 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module3 = {
   id: "21r061mv5fq6m:37:4",
@@ -35,6 +38,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module4 = {
   id: "21r061mv5fq6m:47:4",
@@ -46,6 +50,7 @@ const $module4 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module5 = {
   id: "21r061mv5fq6m:65:4",
@@ -54,6 +59,7 @@ const $module5 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module6 = {
   id: "21r061mv5fq6m:73:4",
@@ -62,6 +68,7 @@ const $module6 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "function",
 };
 const $module7 = {
   id: "21r061mv5fq6m:81:4",
@@ -70,6 +77,7 @@ const $module7 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module8 = {
   id: "21r061mv5fq6m:86:17",
@@ -78,6 +86,7 @@ const $module8 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module9 = {
   id: "21r061mv5fq6m:86:22",
@@ -86,6 +95,7 @@ const $module9 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module10 = {
   id: "21r061mv5fq6m:94:46",
@@ -94,6 +104,7 @@ const $module10 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 async function fetchGreeting() {
   return "hello";

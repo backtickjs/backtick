@@ -14,6 +14,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 // A handler is handed what the DOM hands it, and which event that is comes
 // from the DOM: `click` is a `PointerEvent`, `input` an `InputEvent`.

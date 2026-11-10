@@ -35,6 +35,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "function",
 };
 const $module1 = {
   id: "1gmxuzk9xazq9:46:8",
@@ -47,6 +48,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "function",
+  scope: "function",
 };
 const $module2 = {
   id: "1gmxuzk9xazq9:80:8",
@@ -59,6 +61,7 @@ const $module2 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "function",
+  scope: "function",
 };
 const $module3 = {
   id: "1gmxuzk9xazq9:102:8",
@@ -67,6 +70,7 @@ const $module3 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "function",
 };
 // Each script logs where it runs, so a test counts the runs by counting the
 // logs.

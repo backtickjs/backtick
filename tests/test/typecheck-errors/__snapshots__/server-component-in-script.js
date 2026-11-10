@@ -6,6 +6,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "2exh6id0qbirq:12:9",
@@ -14,6 +15,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module2 = {
   id: "2exh6id0qbirq:16:9",
@@ -22,6 +24,7 @@ const $module2 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module3 = {
   id: "2exh6id0qbirq:20:26",
@@ -30,6 +33,7 @@ const $module3 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 const $module4 = {
   id: "2exh6id0qbirq:23:22",
@@ -38,6 +42,7 @@ const $module4 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 const $module5 = {
   id: "2exh6id0qbirq:26:23",
@@ -46,6 +51,7 @@ const $module5 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 // A script's tags are client components. A server component is host code, used
 // in a splice (`{${<Row label={cs`"a"`} />}}`), and refused as a tag in a

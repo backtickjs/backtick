@@ -12,6 +12,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "function",
 };
 const $module1 = {
   id: "lgqalasy9dsb:35:29",
@@ -20,6 +21,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "capture", key: "total$lgqalasy9dsb$0" }],
   kind: "expression",
+  scope: "function",
 };
 // A fragment written under the outer `total`, carried by host code into a hole
 // inside a block that shadows it.

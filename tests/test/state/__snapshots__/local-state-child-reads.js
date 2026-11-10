@@ -25,6 +25,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "34cye697mq090:36:9",
@@ -37,6 +38,7 @@ const $module1 = {
     { kind: "splice", bindings: ["selected$34cye697mq090$0"] },
   ],
   kind: "block",
+  scope: "function",
 };
 const $module2 = {
   id: "34cye697mq090:41:28",
@@ -45,6 +47,7 @@ const $module2 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module3 = {
   id: "34cye697mq090:41:45",
@@ -53,6 +56,7 @@ const $module3 = {
   dependencies: [],
   params: [{ kind: "capture", key: "selected$34cye697mq090$0" }],
   kind: "expression",
+  scope: "function",
 };
 const $module4 = {
   id: "34cye697mq090:42:28",
@@ -61,6 +65,7 @@ const $module4 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module5 = {
   id: "34cye697mq090:42:45",
@@ -69,6 +74,7 @@ const $module5 = {
   dependencies: [],
   params: [{ kind: "capture", key: "selected$34cye697mq090$0" }],
   kind: "expression",
+  scope: "function",
 };
 // A child reading a signal it was handed, in all three positions at once: a prop,
 // a text child, and a branch deciding which elements exist. The script that

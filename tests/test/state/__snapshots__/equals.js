@@ -26,6 +26,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "function",
+  scope: "function",
 };
 const $module1 = {
   id: "11mm0lcj2dgw2:64:8",
@@ -34,6 +35,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "function",
 };
 const $module2 = {
   id: "11mm0lcj2dgw2:89:8",
@@ -42,6 +44,7 @@ const $module2 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "function",
 };
 const $module3 = {
   id: "11mm0lcj2dgw2:108:8",
@@ -50,6 +53,7 @@ const $module3 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "function",
 };
 const $module4 = {
   id: "11mm0lcj2dgw2:130:8",
@@ -58,6 +62,7 @@ const $module4 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "function",
 };
 // Each reader logs when it runs, so a test counts the runs by counting the
 // logs, and reads what was logged.

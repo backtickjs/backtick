@@ -20,6 +20,8 @@ export interface RuntimeScript {
   id: string;
   // the module's `kind`
   kind: "function" | "class" | "expression" | "block";
+  // the module's `scope`
+  scope: "module" | "function";
   // the module's `params`, an array literal of literals
   params: ts.Expression;
   // the script's `args`, an array literal of host expressions
@@ -34,7 +36,7 @@ export interface RuntimeScript {
 export function moduleDeclaration(
   ts: typeof import("typescript"),
   name: string,
-  { id, kind, params }: RuntimeScript,
+  { id, kind, scope, params }: RuntimeScript,
   { code, map, dependencies }: CompiledScript,
 ): ts.VariableStatement {
   const f = ts.factory;
@@ -58,6 +60,7 @@ export function moduleDeclaration(
               ),
               f.createPropertyAssignment("params", params),
               f.createPropertyAssignment("kind", string(kind)),
+              f.createPropertyAssignment("scope", string(scope)),
             ],
             true,
           ),
@@ -206,6 +209,21 @@ export function rewriteScript(
     return leftAsWritten(refused);
   }
 
+  // Where its `cs` is written (see `ScriptModule.scope`): in a function or a
+  // class of the host file, it may run more than once; else once, as the
+  // module loads.
+  let scope: "module" | "function" = "module";
+  for (
+    let at: ts.Node = sourceNode.parent;
+    !ts.isSourceFile(at);
+    at = at.parent
+  ) {
+    if (ts.isFunctionLike(at) || ts.isClassLike(at)) {
+      scope = "function";
+      break;
+    }
+  }
+
   // Which script this is (see `ScriptModule.id`): its line from 1, and its
   // column from 0.
   const { line, character } = sourceFile.getLineAndCharacterOfPosition(
@@ -261,7 +279,14 @@ export function rewriteScript(
   );
 
   return {
-    runtime: { id, kind, params: paramsLiteral, args: argsLiteral, emitted },
+    runtime: {
+      id,
+      kind,
+      scope,
+      params: paramsLiteral,
+      args: argsLiteral,
+      emitted,
+    },
     leftAsWritten: false,
     diagnostics: refused,
   };

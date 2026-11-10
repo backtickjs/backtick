@@ -20,6 +20,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "function",
+  scope: "function",
 };
 const $module1 = {
   id: "73v3rdnfv9c7:31:35",
@@ -28,6 +29,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "function",
 };
 // A component forwarding an optional prop it wasn't given: `undefined` reaches
 // the script, where the element takes it as JSX and TypeScript read an absent

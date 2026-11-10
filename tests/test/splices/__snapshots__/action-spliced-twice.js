@@ -9,6 +9,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "3rx3rohweax5d:19:19",
@@ -20,6 +21,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "function",
 };
 // Code run at each use is a function, called where it's used: one function,
 // spliced twice and called twice, runs twice.

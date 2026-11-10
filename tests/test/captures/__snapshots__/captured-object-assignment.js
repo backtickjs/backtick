@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: ["counter$385xpgt8q0ek2$0"] }],
   kind: "block",
+  scope: "function",
 };
 const $module1 = {
   id: "385xpgt8q0ek2:14:21",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "capture", key: "counter$385xpgt8q0ek2$0" }],
   kind: "function",
+  scope: "function",
 };
 // A nested script captures a variable's value, and an object's value is a
 // reference: assigning to a member of a captured object writes the one object

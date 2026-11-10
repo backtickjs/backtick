@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 it("constant", async (t) => {
   await snapshotCase(t, "constant", cs.create($module0, []));

@@ -16,6 +16,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 describe("execRoot, from @backtickjs/core/es", () => {
   it("runs an ES module, the page's import map answering it", async () => {

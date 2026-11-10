@@ -14,6 +14,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "2e3ek2i5ephn4:24:4",
@@ -22,6 +23,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 // An object with storage of its own, made by a client function: a signal holds
 // what it is, arrows are what may be done to it, and the object hands them over

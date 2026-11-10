@@ -15,6 +15,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "2ei948aod194:27:8",
@@ -23,6 +24,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module2 = {
   id: "2ei948aod194:46:8",
@@ -31,6 +33,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 // A script's own names and the client's globals, read where the checker sees
 // them written another way: a shorthand, a type's `typeof`, a class's

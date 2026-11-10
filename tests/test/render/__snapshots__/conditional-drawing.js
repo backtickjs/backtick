@@ -17,6 +17,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "kdjefp1ta4ua:42:27",
@@ -28,6 +29,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "module",
 };
 // A block whose drawing is a conditional, and a write that answers it.
 //

@@ -15,6 +15,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "function",
 };
 const $module1 = {
   id: "3v4w1qr8s7kvc:15:9",
@@ -26,6 +27,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 // Storage a script declares for itself, rather than one a component owns and
 // splices in. `$createSignal(...)` is an ordinary call of an imported value, and

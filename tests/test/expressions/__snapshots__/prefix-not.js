@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "function",
 };
 // `!` negates its operand.
 it("prefixNot", async (t) => {

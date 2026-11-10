@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "1xzhsy4wpo5su:12:33",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module2 = {
   id: "1xzhsy4wpo5su:21:4",
@@ -27,6 +29,7 @@ const $module2 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "function",
+  scope: "function",
 };
 // A script that returns a value may still run code that only does
 // something: a function, called.

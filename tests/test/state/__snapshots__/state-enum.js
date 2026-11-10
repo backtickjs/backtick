@@ -15,6 +15,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "272luia50ttfl:24:9",
@@ -28,6 +29,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "function",
 };
 // A signal holding an enum, handed to a function whose parameter is that enum.
 //

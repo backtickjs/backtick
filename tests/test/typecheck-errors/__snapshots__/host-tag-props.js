@@ -12,6 +12,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "3qnuyo4a6z1nh:12:23",
@@ -20,6 +21,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 const $module2 = {
   id: "3qnuyo4a6z1nh:15:21",
@@ -28,6 +30,7 @@ const $module2 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 const $module3 = {
   id: "3qnuyo4a6z1nh:18:23",
@@ -36,6 +39,7 @@ const $module3 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 const $module4 = {
   id: "3qnuyo4a6z1nh:21:26",
@@ -44,6 +48,7 @@ const $module4 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 const $module5 = {
   id: "3qnuyo4a6z1nh:24:21",
@@ -52,6 +57,7 @@ const $module5 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 // A host tag is checked as a call, and each of its errors is reported where the
 // JSX that made it is written: a prop's under the prop, a missing one and an

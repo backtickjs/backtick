@@ -18,6 +18,7 @@ const $module0 = {
     { kind: "splice", bindings: ["row$l47qabunlqhs$0"] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "l47qabunlqhs:29:30",
@@ -26,6 +27,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "capture", key: "row$l47qabunlqhs$0" }],
   kind: "expression",
+  scope: "function",
 };
 // One element template, expanded once per row on the client: the splice hole
 // sits inside a `.map` callback, so it is reached once per iteration and each

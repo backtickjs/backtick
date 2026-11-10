@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 // A key an object hasn't got reads as the language's one absent value. A
 // record's member reads as `string | null` — a record says nothing about which

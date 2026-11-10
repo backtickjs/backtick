@@ -14,6 +14,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 const $module1 = {
   id: "3a8v8m05unfqy:35:4",
@@ -22,6 +23,7 @@ const $module1 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // `typeof` answers JavaScript's names, since TypeScript narrows by them: every
 // kind of value a script can hold, a host's own value among them.

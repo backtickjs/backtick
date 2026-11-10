@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // Comments in a client script are trivia: they survive formatting but are
 // dropped from the virtual code and the bundle.

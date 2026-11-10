@@ -18,6 +18,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 // A signal a script declares, read and written by what it draws. The script
 // owns the storage, so the display and the handler are two readers of one

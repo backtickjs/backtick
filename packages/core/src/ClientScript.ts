@@ -23,10 +23,14 @@ export interface ScriptModule {
   readonly dependencies: readonly string[];
   // `params[i]` is the function's `$splice<i>` or `$capture<i>`
   readonly params: readonly Param[];
-  // What the script is written as: a function, `(props) => …`, which a splice
-  // reads as that function; a class, `class … {}`, one class for the bundle;
-  // or an expression or a block, which a splice runs.
+  // What the script is written as: a function, `(props) => …`; a class,
+  // `class … {}`; an expression; or a block, which is the function it runs.
   readonly kind: "function" | "class" | "expression" | "block";
+  // Where its `cs` is written in its host file: at the module's top level,
+  // run once, so its value is the app's, shared by every bundle of it, as a
+  // module-level `const` is; or in a function, run each call, so each value
+  // is its bundle's own.
+  readonly scope: "module" | "function";
 }
 
 // One run of a `cs`: its module, and the values that run passes it. The rest

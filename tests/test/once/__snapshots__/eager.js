@@ -11,6 +11,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "module",
 };
 const $module1 = {
   id: "ao8286wkty1p:16:18",
@@ -19,6 +20,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 // A script runs when the bundle does, at its top, as module-level code runs
 // when its module loads: once, whether or not what reads it is reached.

@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module1 = {
   id: "2g4us6n03x6jl:10:47",
@@ -19,6 +20,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 // The same `cs\`7\`` literal spliced twice is one client script, so it
 // collapses into a single function-table entry referenced twice.

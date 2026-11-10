@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "1i6s8vesd5nbi:14:15",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module2 = {
   id: "1i6s8vesd5nbi:16:20",
@@ -24,6 +26,7 @@ const $module2 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module3 = {
   id: "1i6s8vesd5nbi:24:4",
@@ -40,6 +43,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 // `?` marks an optional parameter: a caller may omit it or pass `undefined`,
 // and either way it binds `undefined`. `null` is a value of its own and not

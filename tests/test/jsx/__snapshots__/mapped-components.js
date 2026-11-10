@@ -9,6 +9,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "3muqirg3sfmdb:19:4",
@@ -17,6 +18,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const componentLabels = ["alpha", "beta", "gamma"];
 async function Row({ label }) {

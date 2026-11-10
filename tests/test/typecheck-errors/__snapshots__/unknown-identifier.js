@@ -6,6 +6,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "module",
 };
 const $module1 = {
   id: "mjlfm7rjdwqc:15:24",
@@ -14,6 +15,7 @@ const $module1 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module2 = {
   id: "mjlfm7rjdwqc:21:45",
@@ -22,6 +24,7 @@ const $module2 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 const $module3 = {
   id: "mjlfm7rjdwqc:26:22",
@@ -30,6 +33,7 @@ const $module3 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 // A name a script didn't bind is the client's global: one the project
 // declares — `window`, from the DOM's lib — reads as it is, and one it

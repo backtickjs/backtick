@@ -9,6 +9,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // A namespace static, reached the way `Math.floor` and `Array.from` are: the
 // whole of `Number.parseInt` is one name the client answers, so `Number` is a

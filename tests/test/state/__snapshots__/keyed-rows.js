@@ -27,6 +27,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "function",
 };
 // A keyed list driven by a signal. Every write hands back a new array of new
 // rows, so nothing about the list is the object it was — the keys are the only

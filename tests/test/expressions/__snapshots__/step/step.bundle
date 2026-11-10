@@ -25,6 +25,13 @@ const $require = (id) => {
   }
   return $exports[id];
 };
+const $values = new Map();
+const $value = (key, make) => {
+  if (!$values.has(key)) {
+    $values.set(key, make());
+  }
+  return $values.get(key);
+};
 const $cs0 = $require("l4vdws2hl3xc:12:4").default;
 const $value0 = $cs0();
 export default $value0;

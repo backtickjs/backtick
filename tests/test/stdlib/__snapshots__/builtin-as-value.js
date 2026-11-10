@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // A builtin is a value, not only a callee. The compiler folds `Math.floor`
 // into one whole name the client answers — there is no `Math` for a read to

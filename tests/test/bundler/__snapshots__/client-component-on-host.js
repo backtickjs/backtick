@@ -16,6 +16,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "function",
+  scope: "module",
 };
 // A client component written as a tag on the host, past the typechecker:
 // refused when bundling, as it is a tag in a script.

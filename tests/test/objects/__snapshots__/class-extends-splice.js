@@ -9,6 +9,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "class",
+  scope: "module",
 };
 const $module1 = {
   id: "qp6pfo1a5jaq:16:36",
@@ -17,6 +18,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 const $module2 = {
   id: "qp6pfo1a5jaq:28:36",
@@ -25,6 +27,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 // A class, for scripts to extend.
 const Base = cs.create($module0, []);

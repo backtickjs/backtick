@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module1 = {
   id: "26etxfakd9632:8:14",
@@ -20,6 +21,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "module",
 };
 const $module2 = {
   id: "26etxfakd9632:14:4",
@@ -32,6 +34,7 @@ const $module2 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module3 = {
   id: "26etxfakd9632:19:34",
@@ -40,6 +43,7 @@ const $module3 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module4 = {
   id: "26etxfakd9632:22:15",
@@ -48,6 +52,7 @@ const $module4 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module5 = {
   id: "26etxfakd9632:25:38",
@@ -56,6 +61,7 @@ const $module5 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 // A script splicing another is made after it, as every constant is made after
 // what it reads; one at the root is the root; a function is one value too.

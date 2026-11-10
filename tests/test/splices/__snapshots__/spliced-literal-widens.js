@@ -20,6 +20,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "function",
 };
 // What a splice hands over keeps the width the host gave it.
 //

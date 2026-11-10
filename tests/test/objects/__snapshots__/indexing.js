@@ -15,6 +15,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "3hoif4yjuofgi:12:32",
@@ -23,6 +24,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module2 = {
   id: "3hoif4yjuofgi:15:21",
@@ -31,6 +33,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module3 = {
   id: "3hoif4yjuofgi:19:21",
@@ -39,6 +42,7 @@ const $module3 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module4 = {
   id: "3hoif4yjuofgi:27:6",
@@ -47,6 +51,7 @@ const $module4 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module5 = {
   id: "3hoif4yjuofgi:28:6",
@@ -55,6 +60,7 @@ const $module5 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module6 = {
   id: "3hoif4yjuofgi:29:6",
@@ -63,6 +69,7 @@ const $module6 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module7 = {
   id: "3hoif4yjuofgi:30:6",
@@ -71,6 +78,7 @@ const $module7 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module8 = {
   id: "3hoif4yjuofgi:31:6",
@@ -79,6 +87,7 @@ const $module8 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module9 = {
   id: "3hoif4yjuofgi:34:34",
@@ -90,6 +99,7 @@ const $module9 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 // What `a[k]` does with a key of another type: what JavaScript does.
 describe("a read by key", () => {

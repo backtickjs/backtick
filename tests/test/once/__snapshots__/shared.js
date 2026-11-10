@@ -24,6 +24,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 const $module1 = {
   id: "23tqo0znkbbpj:15:14",
@@ -32,6 +33,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "module",
 };
 const $module2 = {
   id: "23tqo0znkbbpj:16:13",
@@ -43,6 +45,7 @@ const $module2 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "function",
+  scope: "module",
 };
 const $module3 = {
   id: "23tqo0znkbbpj:20:15",
@@ -55,6 +58,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "module",
 };
 const $module4 = {
   id: "23tqo0znkbbpj:31:21",
@@ -67,6 +71,7 @@ const $module4 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 // A script is one value for the bundle, made at its top: every read is that
 // value, as a module-level `const` is in plain TypeScript. A signal made once

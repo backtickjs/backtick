@@ -15,6 +15,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "2zxuhei4xobu0:22:8",
@@ -23,6 +24,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module2 = {
   id: "2zxuhei4xobu0:31:8",
@@ -31,6 +33,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 // A script may bind `undefined`, as a JavaScript function may: in its scope the
 // name is that binding, and outside it `undefined` is the value it always is.

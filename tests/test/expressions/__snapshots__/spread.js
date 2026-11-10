@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // `...xs` where an element goes: it has no value of its own, it contributes
 // however many the array it spreads has. An empty one contributes nothing, a

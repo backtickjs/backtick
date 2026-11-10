@@ -9,6 +9,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "function",
 };
 const $module1 = {
   id: "378qi1aswe42g:21:17",
@@ -17,6 +18,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 const $module2 = {
   id: "378qi1aswe42g:32:20",
@@ -25,6 +27,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module3 = {
   id: "378qi1aswe42g:39:17",
@@ -36,6 +39,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "function",
 };
 const $module4 = {
   id: "378qi1aswe42g:51:19",
@@ -47,6 +51,7 @@ const $module4 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module5 = {
   id: "378qi1aswe42g:59:17",
@@ -55,6 +60,7 @@ const $module5 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "function",
 };
 const $module6 = {
   id: "378qi1aswe42g:67:15",
@@ -63,6 +69,7 @@ const $module6 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 // A splice is read when the `cs` line runs, as a `${}` is in a template
 // literal: the script gets the value of that moment, wherever in the script

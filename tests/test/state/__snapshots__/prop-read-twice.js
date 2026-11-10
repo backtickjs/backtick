@@ -20,6 +20,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "2j1x87k2raree:17:15",
@@ -31,6 +32,7 @@ const $module1 = {
     { kind: "splice", bindings: ["count$2j1x87k2raree$0"] },
   ],
   kind: "block",
+  scope: "module",
 };
 const $module2 = {
   id: "2j1x87k2raree:19:34",
@@ -39,6 +41,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "capture", key: "count$2j1x87k2raree$0" }],
   kind: "expression",
+  scope: "module",
 };
 // A prop built from the parent's signal, read twice by the server component
 // it's handed to. In Solid, a prop is a getter, so each read runs its

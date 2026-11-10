@@ -9,6 +9,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "ve43281oi72i:11:33",
@@ -17,6 +18,7 @@ const $module1 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 const $module2 = {
   id: "ve43281oi72i:22:33",
@@ -25,6 +27,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 const pair = cs.create($module0, []);
 // `f<T>`, a function given its type arguments without a call: a value.

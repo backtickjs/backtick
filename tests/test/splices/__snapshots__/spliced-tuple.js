@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module1 = {
   id: "g51hocejus75:13:4",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 // A tuple crosses as a tuple, labels included, so a script can type it as the
 // host did. A script member arrives as what it computes, in its position.

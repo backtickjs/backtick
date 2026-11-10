@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // Within one script, an arrow assigns an enclosing binding freely — the
 // frames live and die together in a single evaluation.

@@ -11,6 +11,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "1yq6zy4ucaaxv:14:16",
@@ -19,6 +20,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "block",
+  scope: "module",
 };
 const $module2 = {
   id: "1yq6zy4ucaaxv:20:18",
@@ -27,6 +29,7 @@ const $module2 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 const $module3 = {
   id: "1yq6zy4ucaaxv:21:14",
@@ -38,6 +41,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "module",
 };
 // A host tag is a splice: its script is one value, made once for the bundle,
 // and the component it is draws where each tag stands, when it's reached.

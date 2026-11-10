@@ -24,6 +24,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "function",
 };
 async function Rows() {
   return cs.create($module0, [createSignal, For]);

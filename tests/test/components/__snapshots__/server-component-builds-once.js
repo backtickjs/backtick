@@ -20,6 +20,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "function",
 };
 const $module1 = {
   id: "1rr4l880cj76y:27:13",
@@ -34,6 +35,7 @@ const $module1 = {
     },
   ],
   kind: "block",
+  scope: "module",
 };
 const $module2 = {
   id: "1rr4l880cj76y:35:19",
@@ -45,6 +47,7 @@ const $module2 = {
     { kind: "capture", key: "builds$1rr4l880cj76y$4" },
   ],
   kind: "function",
+  scope: "module",
 };
 // A server component's script, run where its splice stands, as Solid runs a
 // component: untracked. It reads a signal of its own while it sets up, which a

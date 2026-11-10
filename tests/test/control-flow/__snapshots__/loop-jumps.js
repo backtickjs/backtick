@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // `continue` runs the update before the next turn — a loop that skipped it
 // would never end — and each jump means the loop it is written in, the inner

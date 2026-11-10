@@ -19,6 +19,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "330rusny0q2yl:20:21",
@@ -30,6 +31,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "module",
 };
 // SVG written the way it is pasted: no tag says which language it is from.
 // Where an element is drawn does — inside an `svg` it is SVG's, and a

@@ -9,6 +9,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // A namespace static taking a rest parameter, so the whole of the call crosses
 // as one name and a list of arguments — `String` is the front of the name and

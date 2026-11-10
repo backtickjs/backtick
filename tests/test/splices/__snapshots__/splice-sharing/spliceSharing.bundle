@@ -43,6 +43,13 @@ const $require = (id) => {
   }
   return $exports[id];
 };
+const $values = new Map();
+const $value = (key, make) => {
+  if (!$values.has(key)) {
+    $values.set(key, make());
+  }
+  return $values.get(key);
+};
 const $cs0 = $require("3cex0hh0qp6qz:13:4").default;
 const $cs1 = $require("3cex0hh0qp6qz:6:9").default;
 const $cs2 = $require("3cex0hh0qp6qz:14:15").default;

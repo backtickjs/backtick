@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // `i++` is not an operator in a client script, so the update is an
 // assignment.

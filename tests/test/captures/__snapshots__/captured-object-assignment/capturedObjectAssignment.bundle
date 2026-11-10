@@ -30,6 +30,13 @@ const $require = (id) => {
   }
   return $exports[id];
 };
+const $values = new Map();
+const $value = (key, make) => {
+  if (!$values.has(key)) {
+    $values.set(key, make());
+  }
+  return $values.get(key);
+};
 const $cs0 = $require("385xpgt8q0ek2:12:4").default;
 const $cs1 = $require("385xpgt8q0ek2:14:21").default;
 const $thunk0 = (counter) => $cs1(counter);

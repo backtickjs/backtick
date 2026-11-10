@@ -60,15 +60,22 @@ const $require = (id) => {
   }
   return $exports[id];
 };
+const $values = new Map();
+const $value = (key, make) => {
+  if (!$values.has(key)) {
+    $values.set(key, make());
+  }
+  return $values.get(key);
+};
 const $cs0 = $require("2dtorvijco8u0:24:4").default;
 const $cs1 = $require("2dtorvijco8u0:8:13").default;
 const $cs2 = $require("2dtorvijco8u0:12:13").default;
 const $cs3 = $require("2dtorvijco8u0:16:14").default;
-const $value0 = $cs1();
+const $value0 = $value("2dtorvijco8u0:8:13", () => $cs1());
 const $thunk1 = () => $value0;
-const $value2 = $cs2();
+const $value2 = $value("2dtorvijco8u0:12:13", () => $cs2());
 const $thunk3 = () => $value2;
-const $value4 = $cs3();
+const $value4 = $value("2dtorvijco8u0:16:14", () => $cs3());
 const $thunk5 = () => $value4;
 const $value6 = $cs0(
   $thunk1,

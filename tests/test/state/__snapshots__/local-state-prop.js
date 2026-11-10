@@ -22,6 +22,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "w805fpyn186p:28:9",
@@ -34,6 +35,7 @@ const $module1 = {
     { kind: "splice", bindings: ["size$w805fpyn186p$0"] },
   ],
   kind: "block",
+  scope: "function",
 };
 const $module2 = {
   id: "w805fpyn186p:32:33",
@@ -42,6 +44,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "capture", key: "size$w805fpyn186p$0" }],
   kind: "expression",
+  scope: "function",
 };
 const $module3 = {
   id: "w805fpyn186p:33:33",
@@ -50,6 +53,7 @@ const $module3 = {
   dependencies: [],
   params: [{ kind: "capture", key: "size$w805fpyn186p$0" }],
   kind: "expression",
+  scope: "function",
 };
 // A signal crossing a component boundary: declared once by the script that
 // draws the pair, handed to each child as a prop, so both read one storage. The

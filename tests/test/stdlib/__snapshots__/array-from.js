@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // The one thing the language cannot do for itself: produce a sequence of a
 // given length. Everything else about an array is a transformation of one

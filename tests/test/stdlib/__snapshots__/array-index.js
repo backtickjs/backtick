@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // The key is an expression, which is the point: a loop reaches every element
 // without one script per position.

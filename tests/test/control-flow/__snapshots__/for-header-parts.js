@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // Every part of the header is optional: this one declares nothing and updates
 // nothing, leaving both to the block around it and the body.

@@ -33,6 +33,13 @@ const $require = (id) => {
   }
   return $exports[id];
 };
+const $values = module.values ?? new Map();
+const $value = (key, make) => {
+  if (!$values.has(key)) {
+    $values.set(key, make());
+  }
+  return $values.get(key);
+};
 const $cs0 = $require("hjsejdj37nio:22:9").default;
 const $cs1 = $require("hjsejdj37nio:9:22").default;
 const $thunk0 = () => ($i0);
@@ -40,7 +47,7 @@ const $thunk1 = () => ($i1);
 const $thunk2 = () => ({ id: "u-7", name: "Sam" });
 const $thunk3 = () => ($i2);
 const $thunk4 = () => ($i3);
-const $value5 = $cs1($thunk3, $thunk4, $thunk1);
+const $value5 = $value("hjsejdj37nio:9:22", () => $cs1($thunk3, $thunk4, $thunk1));
 const $thunk6 = () => ($value5);
 const $thunk7 = () => ({ id: "o-1042", name: "Flat white" });
 const $value8 = $cs0($thunk0, $thunk1, $thunk2, $thunk6, $thunk7);

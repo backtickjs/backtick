@@ -23,6 +23,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "function",
 };
 const $module1 = {
   id: "2s1owk040x4df:34:8",
@@ -31,6 +32,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "function",
 };
 const $module2 = {
   id: "2s1owk040x4df:49:21",
@@ -39,6 +41,7 @@ const $module2 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "function",
+  scope: "function",
 };
 const $module3 = {
   id: "2s1owk040x4df:73:10",
@@ -50,6 +53,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "function",
+  scope: "function",
 };
 // `ref` hands a script the element it is written on.
 describe("ref", () => {

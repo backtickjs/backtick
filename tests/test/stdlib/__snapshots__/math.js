@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // The one global. What it is, is the host's to answer; which members exist
 // and what each means is the format's, which is why the list is short — only

@@ -28,6 +28,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "function",
 };
 // js-framework-benchmark's "swap rows": the second row and the second-to-last
 // change places. The rows between them stay where they are, so what moves is

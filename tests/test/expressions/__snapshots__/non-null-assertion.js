@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // A non-null assertion is the checker's alone, as `as` is: erased on the way
 // to a bundle. `find` answers `number | undefined`; the script knows a row

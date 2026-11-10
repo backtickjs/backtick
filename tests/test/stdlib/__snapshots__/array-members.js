@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // Arrays expose the curated `ClientArray` API: pure members only, none
 // producing `undefined`. Callback parameters are contextually typed.

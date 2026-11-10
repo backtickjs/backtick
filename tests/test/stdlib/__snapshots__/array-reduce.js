@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // `reduce` takes its initial value, where the standard library lets it be
 // left out: without one the first call is handed an element rather than an

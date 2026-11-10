@@ -6,6 +6,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "module",
 };
 const $module1 = {
   id: "3586xtu4la89h:12:21",
@@ -14,6 +15,7 @@ const $module1 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "module",
 };
 // Checked as TypeScript checks one: a variable that isn't `const`, and operands
 // the operator takes.

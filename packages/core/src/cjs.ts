@@ -9,11 +9,16 @@ import type { ModuleMap } from "./modulesOf.js";
  * entry an app imports is its format: a web page imports
  * `@backtickjs/core/es`.
  *
+ * Its values are kept in `values` by key, and so are those of the bundles it
+ * runs: one value per app, as a module is, however many bundles use it. A new
+ * `Map` by default, so a bundle run alone has its own.
+ *
  *     const screen = await execRoot(bundle, moduleMap);
  */
 export async function execRoot<T>(
   bundle: Bundle<T>,
   moduleMap: ModuleMap,
+  values: Map<string, unknown> = new Map(),
 ): Promise<Awaited<T>> {
   const require = (specifier: string): unknown => {
     if (!Object.hasOwn(moduleMap, specifier)) {
@@ -23,7 +28,7 @@ export async function execRoot<T>(
     }
     return moduleMap[specifier];
   };
-  const module = { exports: {} as unknown };
+  const module = { exports: {} as unknown, values };
   new Function("module", "exports", "require", bundle)(
     module,
     module.exports,

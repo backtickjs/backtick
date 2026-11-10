@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 // A tree with only static props: one script, nothing spliced into it, and the
 // nested element written in place.

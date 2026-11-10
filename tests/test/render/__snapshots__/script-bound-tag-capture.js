@@ -42,6 +42,7 @@ const $module0 = {
     },
   ],
   kind: "block",
+  scope: "module",
 };
 const $module1 = {
   id: "1pk9mk64kg7ry:19:9",
@@ -53,6 +54,7 @@ const $module1 = {
     { kind: "capture", key: "count$1pk9mk64kg7ry$0" },
   ],
   kind: "expression",
+  scope: "module",
 };
 const $module2 = {
   id: "1pk9mk64kg7ry:21:10",
@@ -65,6 +67,7 @@ const $module2 = {
     { kind: "capture", key: "count$1pk9mk64kg7ry$0" },
   ],
   kind: "block",
+  scope: "module",
 };
 const $module3 = {
   id: "1pk9mk64kg7ry:23:19",
@@ -76,6 +79,7 @@ const $module3 = {
     { kind: "capture", key: "count$1pk9mk64kg7ry$0" },
   ],
   kind: "expression",
+  scope: "module",
 };
 const $module4 = {
   id: "1pk9mk64kg7ry:26:9",
@@ -88,6 +92,7 @@ const $module4 = {
     { kind: "capture", key: "count$1pk9mk64kg7ry$0" },
   ],
   kind: "expression",
+  scope: "module",
 };
 const $module5 = {
   id: "1pk9mk64kg7ry:26:24",
@@ -99,6 +104,7 @@ const $module5 = {
     { kind: "capture", key: "count$1pk9mk64kg7ry$0" },
   ],
   kind: "expression",
+  scope: "module",
 };
 const $module6 = {
   id: "1pk9mk64kg7ry:28:10",
@@ -111,6 +117,7 @@ const $module6 = {
     { kind: "capture", key: "count$1pk9mk64kg7ry$0" },
   ],
   kind: "expression",
+  scope: "module",
 };
 // A tag naming a function an enclosing script holds. The nested script captures
 // it the way it captures any binding, and calls it as a component: once, with

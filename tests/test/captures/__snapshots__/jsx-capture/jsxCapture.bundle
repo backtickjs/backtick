@@ -35,8 +35,15 @@ const $require = (id) => {
   }
   return $exports[id];
 };
+const $values = new Map();
+const $value = (key, make) => {
+  if (!$values.has(key)) {
+    $values.set(key, make());
+  }
+  return $values.get(key);
+};
 const $cs0 = $require("njvzopgmpqpe:7:15").default;
 const $cs1 = $require("njvzopgmpqpe:9:11").default;
 const $thunk0 = (x) => $cs1(x);
-const $value1 = $cs0($thunk0);
+const $value1 = $value("njvzopgmpqpe:7:15", () => $cs0($thunk0));
 export default $value1;

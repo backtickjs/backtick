@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // `++` and `--` step a variable by one. A prefix step answers the value after
 // the step, and a postfix step the value before it — exactly, for a fraction

@@ -15,6 +15,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "2irv0nc956056:12:21",
@@ -23,6 +24,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module2 = {
   id: "2irv0nc956056:19:21",
@@ -31,6 +33,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module3 = {
   id: "2irv0nc956056:23:21",
@@ -39,6 +42,7 @@ const $module3 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module4 = {
   id: "2irv0nc956056:34:21",
@@ -53,6 +57,7 @@ const $module4 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 // `null` and `undefined` are two values, each equal only to itself.
 describe("null and undefined", () => {

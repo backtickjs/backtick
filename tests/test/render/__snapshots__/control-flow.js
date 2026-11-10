@@ -50,6 +50,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "module",
 };
 const $module1 = {
   id: "3kskox4dh8zm4:24:17",
@@ -62,6 +63,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "module",
 };
 const $module2 = {
   id: "3kskox4dh8zm4:38:16",
@@ -70,6 +72,7 @@ const $module2 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module3 = {
   id: "3kskox4dh8zm4:41:15",
@@ -81,6 +84,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "function",
+  scope: "module",
 };
 const $module4 = {
   id: "3kskox4dh8zm4:47:18",
@@ -89,6 +93,7 @@ const $module4 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "module",
 };
 const $module5 = {
   id: "3kskox4dh8zm4:53:17",
@@ -97,6 +102,7 @@ const $module5 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "module",
 };
 // Solid's control flow in a script, as Solid types and draws it.
 const rows = ["first", "second"];

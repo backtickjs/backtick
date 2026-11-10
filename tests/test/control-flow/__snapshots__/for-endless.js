@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // `for (;;)` has no condition, so `break` is the only way out.
 it("forEndless", async (t) => {

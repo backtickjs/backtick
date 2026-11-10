@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // A property literally named `...`, in a literal a spread also runs through —
 // which is the one shape where a spread and a pair holding `...` sit in the

@@ -9,6 +9,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "2l5eb0u3jx2g5:22:44",
@@ -17,6 +18,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 // Invocations nest, and each one is an instance. `Outer` renders `Inner`, which
 // renders the `Text`, so there are three entries — and `Outer`'s content is a

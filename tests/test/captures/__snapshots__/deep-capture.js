@@ -11,6 +11,7 @@ const $module0 = {
     { kind: "splice", bindings: ["outer$22sufdxid1i7s$0"] },
   ],
   kind: "block",
+  scope: "function",
 };
 const $module1 = {
   id: "22sufdxid1i7s:20:13",
@@ -22,6 +23,7 @@ const $module1 = {
     { kind: "capture", key: "outer$22sufdxid1i7s$0" },
   ],
   kind: "block",
+  scope: "function",
 };
 const $module2 = {
   id: "22sufdxid1i7s:22:24",
@@ -30,6 +32,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "capture", key: "outer$22sufdxid1i7s$0" }],
   kind: "expression",
+  scope: "function",
 };
 const $module3 = {
   id: "22sufdxid1i7s:28:39",
@@ -41,6 +44,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module4 = {
   id: "22sufdxid1i7s:28:49",
@@ -49,6 +53,7 @@ const $module4 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module5 = {
   id: "22sufdxid1i7s:28:66",
@@ -57,6 +62,7 @@ const $module5 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 // Three scripts, and the binding skips the middle one.
 //

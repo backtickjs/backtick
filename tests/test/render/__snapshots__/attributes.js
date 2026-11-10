@@ -18,6 +18,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "1j87og5k30338:48:29",
@@ -26,6 +27,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module2 = {
   id: "1j87og5k30338:67:28",
@@ -34,6 +36,7 @@ const $module2 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module3 = {
   id: "1j87og5k30338:75:28",
@@ -42,6 +45,7 @@ const $module3 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module4 = {
   id: "1j87og5k30338:92:28",
@@ -50,6 +54,7 @@ const $module4 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module5 = {
   id: "1j87og5k30338:105:28",
@@ -58,6 +63,7 @@ const $module5 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module6 = {
   id: "1j87og5k30338:114:11",
@@ -69,6 +75,7 @@ const $module6 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "function",
 };
 // How a prop lands on the element it was drawn on: as the attribute a page's
 // own markup would have written.

@@ -13,6 +13,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "1f45nannbed45:16:24",
@@ -24,6 +25,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "module",
 };
 // A client component is client code, a tag in a script. On the host it isn't
 // callable, so TypeScript refuses it as a tag: a client import, and a script

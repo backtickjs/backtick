@@ -21,6 +21,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "3eix0d6ptibv5:37:36",
@@ -29,6 +30,7 @@ const $module1 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module2 = {
   id: "3eix0d6ptibv5:43:4",
@@ -40,6 +42,7 @@ const $module2 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module3 = {
   id: "3eix0d6ptibv5:57:23",
@@ -48,6 +51,7 @@ const $module3 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 const todo = { title: "Ship 0.1.5", done: false, tags: ["release"] };
 it("interfaceSplice", async (t) => {

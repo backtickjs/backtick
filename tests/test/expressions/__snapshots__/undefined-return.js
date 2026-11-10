@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "2qb372nig0g3z:17:4",
@@ -19,6 +20,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "function",
 };
 const lying = cs.create($module0, []);
 it("undefinedReturn", async (t) => {

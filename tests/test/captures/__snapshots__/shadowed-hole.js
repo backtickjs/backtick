@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 const $module1 = {
   id: "1wiy7dknp0llv:28:4",
@@ -19,6 +20,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module2 = {
   id: "1wiy7dknp0llv:28:22",
@@ -27,6 +29,7 @@ const $module2 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module3 = {
   id: "1wiy7dknp0llv:28:48",
@@ -35,6 +38,7 @@ const $module3 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 // A hole inside a block that shadows an outer name. Two call sites make the
 // script polymorphic, so the splice arrives as a thunk rather than inlined.

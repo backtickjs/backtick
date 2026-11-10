@@ -10,6 +10,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "block",
+  scope: "function",
 };
 const $module1 = {
   id: "2iu7bt1cywglp:27:14",
@@ -18,6 +19,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // JSX a script writes as Solid code: attributes spread onto an element, and a
 // tag naming a component its own object holds.

@@ -19,6 +19,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 // A drawing read the way Testing Library reads one: by role and by text, with
 // a click a user would make.

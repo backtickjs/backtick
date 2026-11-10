@@ -11,6 +11,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 it("runtimeValues", async (t) => {
   await snapshotCase(

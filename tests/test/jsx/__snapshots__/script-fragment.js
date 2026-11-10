@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "1byndzbo89yv8:21:42",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 // A fragment a script writes: its children where it stands, and no node of its
 // own — the same `Fragment` element the tree path writes for `<>`.

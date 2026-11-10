@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // Each turn of a `for` gets its own copy of the header binding, so the arrow
 // built on the last turn reads 2 — the value that turn had — and not the 3

@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 const $module1 = {
   id: "x79h35ggz599:23:4",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // A value body that falls off the end completes with `undefined`.
 it("partialReturnScript", async (t) => {

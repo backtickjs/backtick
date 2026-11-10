@@ -24,6 +24,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "2kxoo6uz27lbk:21:6",
@@ -32,6 +33,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module2 = {
   id: "2kxoo6uz27lbk:63:8",
@@ -40,6 +42,7 @@ const $module2 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 // acme-ui 1 and 2, both installed, the second under an alias, as
 // `"acme-ui-2": "npm:acme-ui@2"` installs it: each typed against its own

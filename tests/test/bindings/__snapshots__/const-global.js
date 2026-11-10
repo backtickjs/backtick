@@ -15,6 +15,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 Object.assign(globalThis, { CLIENT_FLAG: true });
 // A host binding of the same name hides the global only where it is in scope.

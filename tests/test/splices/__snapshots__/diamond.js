@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module1 = {
   id: "1v7gwc56n71e7:11:11",
@@ -19,6 +20,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "module",
 };
 const $module2 = {
   id: "1v7gwc56n71e7:15:11",
@@ -30,6 +32,7 @@ const $module2 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "module",
 };
 const $module3 = {
   id: "1v7gwc56n71e7:19:11",
@@ -41,6 +44,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "module",
 };
 const $module4 = {
   id: "1v7gwc56n71e7:23:11",
@@ -52,6 +56,7 @@ const $module4 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "module",
 };
 // Each level splices the level below it twice, so the composition graph is a
 // diamond lattice with exponentially many root-to-leaf paths. Each splice is

@@ -16,6 +16,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "3h1vamotezc68:47:33",
@@ -27,6 +28,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module2 = {
   id: "3h1vamotezc68:52:43",
@@ -35,6 +37,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 const $module3 = {
   id: "3h1vamotezc68:57:33",
@@ -46,6 +49,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module4 = {
   id: "3h1vamotezc68:62:34",
@@ -54,6 +58,7 @@ const $module4 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module5 = {
   id: "3h1vamotezc68:63:34",
@@ -65,6 +70,7 @@ const $module5 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module6 = {
   id: "3h1vamotezc68:69:40",
@@ -73,6 +79,7 @@ const $module6 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 // What an app provides beside Solid, for a bundle to import.
 const answer = createImport({

@@ -11,6 +11,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "1y0x8hd3gch2e:20:14",
@@ -22,6 +23,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "module",
 };
 // One element, held in a variable and drawn in two places. As React's server
 // renderer does, its component runs once: one object, rendered once, and its

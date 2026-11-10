@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module1 = {
   id: "3f0us4dfufikl:13:4",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const shared = cs.create($module0, []);
 // The same script spliced twice is declared once in the bundle, and called

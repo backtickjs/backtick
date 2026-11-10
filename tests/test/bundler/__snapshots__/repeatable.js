@@ -22,6 +22,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "2y2srgo32w7hc:13:13",
@@ -30,6 +31,7 @@ const $module1 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module2 = {
   id: "2y2srgo32w7hc:16:9",
@@ -38,6 +40,7 @@ const $module2 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module3 = {
   id: "2y2srgo32w7hc:19:15",
@@ -46,6 +49,7 @@ const $module3 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module4 = {
   id: "2y2srgo32w7hc:21:19",
@@ -63,6 +67,7 @@ const $module4 = {
     { kind: "splice", bindings: ["rows$2y2srgo32w7hc$5"] },
   ],
   kind: "block",
+  scope: "function",
 };
 const $module5 = {
   id: "2y2srgo32w7hc:24:28",
@@ -71,6 +76,7 @@ const $module5 = {
   dependencies: [],
   params: [{ kind: "capture", key: "rows$2y2srgo32w7hc$5" }],
   kind: "expression",
+  scope: "function",
 };
 const $module6 = {
   id: "2y2srgo32w7hc:46:13",
@@ -79,6 +85,7 @@ const $module6 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module7 = {
   id: "2y2srgo32w7hc:47:13",
@@ -90,6 +97,7 @@ const $module7 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module8 = {
   id: "2y2srgo32w7hc:48:13",
@@ -98,6 +106,7 @@ const $module8 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 // A bundle is a function of what was spliced alone: bundling it again, or after
 // other bundles, writes the same code. Scripts are where most of the bundler's

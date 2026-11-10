@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // Where the two rules part company, pinned so a client implementer can see
 // it: `names[9]` types as `string`, because TypeScript's indexed access says

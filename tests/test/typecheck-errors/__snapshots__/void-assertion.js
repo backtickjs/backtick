@@ -6,6 +6,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "module",
 };
 const one = 1;
 // An assertion needs no check of its own: TypeScript already refuses to

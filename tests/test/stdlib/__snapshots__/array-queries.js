@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // Array members that answer a question about an array or build a new one,
 // leaving it as it was. `reduceRight` takes its starting value, as `reduce`

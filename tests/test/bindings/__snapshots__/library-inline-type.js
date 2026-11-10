@@ -20,6 +20,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "module",
 };
 // The types an import names beside its values are the library's own, for host
 // code: they reach no client.

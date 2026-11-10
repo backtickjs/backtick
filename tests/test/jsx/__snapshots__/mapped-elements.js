@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "rkwygfa87yuf:15:43",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const elementLabels = ["alpha", "beta", "gamma"];
 // A list mapped on the host. The array is host data, so the map runs while

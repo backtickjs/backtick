@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "27vkmoaboly3f:13:44",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "module",
 };
 const $module2 = {
   id: "27vkmoaboly3f:21:4",
@@ -27,6 +29,7 @@ const $module2 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "function",
 };
 // Handlers — action arrows — are values: an object carries them, and
 // storing one is not calling it.

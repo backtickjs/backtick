@@ -9,6 +9,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 // A host value that is imported and never mentioned outside a script.
 //

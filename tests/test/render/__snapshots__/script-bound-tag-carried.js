@@ -19,6 +19,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 const $module1 = {
   id: "avugs5avpuqp:30:30",
@@ -33,6 +34,7 @@ const $module1 = {
     },
   ],
   kind: "block",
+  scope: "module",
 };
 const $module2 = {
   id: "avugs5avpuqp:44:18",
@@ -44,6 +46,7 @@ const $module2 = {
     { kind: "capture", key: "count$avugs5avpuqp$2" },
   ],
   kind: "expression",
+  scope: "module",
 };
 // A host component whose script declares its own `Badge`, and draws what it was
 // handed beside it.

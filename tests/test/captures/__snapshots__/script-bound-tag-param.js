@@ -11,6 +11,7 @@ const $module0 = {
     { kind: "splice", bindings: ["Row$1cygqeaz3p044$1"] },
   ],
   kind: "block",
+  scope: "function",
 };
 const $module1 = {
   id: "1cygqeaz3p044:16:13",
@@ -19,6 +20,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "capture", key: "Row$1cygqeaz3p044$1" }],
   kind: "expression",
+  scope: "function",
 };
 const $module2 = {
   id: "1cygqeaz3p044:17:13",
@@ -27,6 +29,7 @@ const $module2 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "capture", key: "Row$1cygqeaz3p044$1" }],
   kind: "expression",
+  scope: "function",
 };
 // A tag naming a parameter of an arrow in the enclosing script. The nested
 // scripts sit inside the arrow's body, so the parameter reaches them through

@@ -11,6 +11,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "2rqwzcdfi281b:11:45",
@@ -19,6 +20,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module2 = {
   id: "2rqwzcdfi281b:11:54",
@@ -27,6 +29,7 @@ const $module2 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module3 = {
   id: "2rqwzcdfi281b:11:61",
@@ -35,6 +38,7 @@ const $module3 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 function add(lhs, rhs) {
   return cs.create($module0, [lhs, rhs]);

@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // A bare `return` exits a script early, with `undefined`.
 it("earlyReturn", async (t) => {

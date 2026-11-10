@@ -14,6 +14,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "function",
 };
 // The platform's own `fetch`: a status is failed on by throwing, and so is a
 // body that is not JSON, and either reaches the `catch`.

@@ -6,6 +6,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "19gcxn9haud8w:20:20",
@@ -14,6 +15,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module2 = {
   id: "19gcxn9haud8w:26:16",
@@ -22,6 +24,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module3 = {
   id: "19gcxn9haud8w:32:13",
@@ -30,6 +33,7 @@ const $module3 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 async function fetchGreeting() {
   return "hello";

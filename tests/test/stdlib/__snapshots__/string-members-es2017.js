@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // The string members after ES2015 that read a string without changing
 // anything: padding, trimming one end, reading by position, and replacing

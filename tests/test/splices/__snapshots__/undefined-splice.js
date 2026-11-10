@@ -19,6 +19,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "3hpmqi2t6hvr8:18:35",
@@ -30,6 +31,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module2 = {
   id: "3hpmqi2t6hvr8:25:36",
@@ -41,6 +43,7 @@ const $module2 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 // A spliced `undefined` crosses as itself, written `undefined`: alone, as an
 // object's member, its key kept, and as an array's element.

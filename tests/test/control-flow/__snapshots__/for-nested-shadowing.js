@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // Nested headers reusing a name, and a body that shadows the header's own:
 // the update still means the header's binding, because names resolve to their

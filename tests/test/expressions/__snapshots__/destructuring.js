@@ -15,6 +15,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "1fgwbqx4kdj4q:30:8",
@@ -23,6 +24,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 // Destructuring, in a declaration and in parameters, as JavaScript reads it.
 describe("destructuring", () => {

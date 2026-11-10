@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module1 = {
   id: "3hhvicr225pmx:16:14",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module2 = {
   id: "3hhvicr225pmx:21:44",
@@ -24,6 +26,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 // A container the host built holding scripts, spliced whole.
 //

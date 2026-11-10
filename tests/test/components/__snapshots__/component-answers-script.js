@@ -15,6 +15,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 const $module1 = {
   id: "1ja22vhx414j:24:4",
@@ -23,6 +24,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 // A component whose whole body is client code answers with the script rather
 // than a drawing the host made: it declares its own storage and draws from it,

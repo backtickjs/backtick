@@ -13,6 +13,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module1 = {
   id: "2illvq3pw5hjk:18:26",
@@ -21,6 +22,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module2 = {
   id: "2illvq3pw5hjk:25:25",
@@ -29,6 +31,7 @@ const $module2 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 const $module3 = {
   id: "2illvq3pw5hjk:28:25",
@@ -37,6 +40,7 @@ const $module3 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module4 = {
   id: "2illvq3pw5hjk:34:20",
@@ -45,6 +49,7 @@ const $module4 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 const $module5 = {
   id: "2illvq3pw5hjk:43:25",
@@ -53,6 +58,7 @@ const $module5 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module6 = {
   id: "2illvq3pw5hjk:47:25",
@@ -61,6 +67,7 @@ const $module6 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module7 = {
   id: "2illvq3pw5hjk:52:21",
@@ -69,6 +76,7 @@ const $module7 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 const $module8 = {
   id: "2illvq3pw5hjk:55:20",
@@ -77,6 +85,7 @@ const $module8 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module9 = {
   id: "2illvq3pw5hjk:56:22",
@@ -85,6 +94,7 @@ const $module9 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module10 = {
   id: "2illvq3pw5hjk:57:22",
@@ -93,6 +103,7 @@ const $module10 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 // What the JSX namespace admits, and what it refuses, in a script.
 //

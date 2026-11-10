@@ -9,6 +9,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 // A server component can render nothing. The invocation is still an instance —
 // it owns the cells the component declared, and a re-render can give it a child

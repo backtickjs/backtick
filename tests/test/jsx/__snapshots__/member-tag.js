@@ -11,6 +11,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "7k5q0iuij35f:14:13",
@@ -22,6 +23,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "module",
 };
 // A member of a host value as a tag: the value handed over whole, and the tag
 // read off it on the client.

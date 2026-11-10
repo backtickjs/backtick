@@ -9,6 +9,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "1nnln7r6l9rqk:33:30",
@@ -17,6 +18,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module2 = {
   id: "1nnln7r6l9rqk:54:30",
@@ -25,6 +27,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module3 = {
   id: "1nnln7r6l9rqk:59:18",
@@ -33,6 +36,7 @@ const $module3 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module4 = {
   id: "1nnln7r6l9rqk:60:30",
@@ -41,6 +45,7 @@ const $module4 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module5 = {
   id: "1nnln7r6l9rqk:66:15",
@@ -52,6 +57,7 @@ const $module5 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module6 = {
   id: "1nnln7r6l9rqk:74:30",
@@ -60,6 +66,7 @@ const $module6 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module7 = {
   id: "1nnln7r6l9rqk:83:30",
@@ -68,6 +75,7 @@ const $module7 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module8 = {
   id: "1nnln7r6l9rqk:97:30",
@@ -76,6 +84,7 @@ const $module8 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "function",
 };
 // What the typechecker accepts and the bundler refuses: each splice below
 // type-checks, and fails only when the server bundles it.

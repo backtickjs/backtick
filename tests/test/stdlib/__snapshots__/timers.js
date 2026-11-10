@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // A clock, which is the platform's rather than the language's: a script reaches
 // one by splicing the browser's `window`, the same as anything else a platform

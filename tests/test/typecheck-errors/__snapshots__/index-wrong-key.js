@@ -6,6 +6,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "module",
 };
 // TypeScript decides what may index a value: an array takes a number, and a
 // plain object takes only a key its type names. `coins["0"]` passes, because

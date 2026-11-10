@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 // `<>…</>` in a script is Solid's fragment: its children where it stands, and no
 // node of its own. Solid takes one only at the top of an expression, so a child

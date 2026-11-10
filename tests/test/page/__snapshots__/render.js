@@ -16,6 +16,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 const $module1 = {
   id: "11l1n280zt2gs:25:4",
@@ -28,6 +29,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module2 = {
   id: "11l1n280zt2gs:37:29",
@@ -36,6 +38,7 @@ const $module2 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module3 = {
   id: "11l1n280zt2gs:38:30",
@@ -44,6 +47,7 @@ const $module3 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 // Text a page's markup would end early on, were the bundle written into it.
 const text = `& < > " ' </script> <!-- -->`;

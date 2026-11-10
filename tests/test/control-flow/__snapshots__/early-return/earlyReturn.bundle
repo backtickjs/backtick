@@ -22,6 +22,13 @@ const $require = (id) => {
   }
   return $exports[id];
 };
+const $values = new Map();
+const $value = (key, make) => {
+  if (!$values.has(key)) {
+    $values.set(key, make());
+  }
+  return $values.get(key);
+};
 const $cs0 = $require("18vmcgro8q70w:10:4").default;
 const $value0 = $cs0();
 export default $value0;

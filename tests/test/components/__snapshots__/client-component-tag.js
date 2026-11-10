@@ -24,6 +24,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "1ly6b1p9zh78s:14:15",
@@ -36,6 +37,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "module",
 };
 // A client component defined on the host as a script, and used as a tag in
 // another: typed by its own signature, and drawn by the client.

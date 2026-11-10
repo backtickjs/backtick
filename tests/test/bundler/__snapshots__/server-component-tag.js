@@ -9,6 +9,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "1h21bse6vntob:15:13",
@@ -17,6 +18,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 // A server component written as a tag in a script, past the typechecker:
 // refused when bundling, pointing at the splice it belongs in.

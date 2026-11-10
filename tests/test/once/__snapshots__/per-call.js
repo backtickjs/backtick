@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "1qd6qa5k6up8j:16:35",
@@ -21,6 +22,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 // Each run of a `cs` line is one value, as each call of a host function that
 // makes an object is one object: two calls make two, and one spliced twice is

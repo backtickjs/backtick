@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // `x += y` assigns what `x + y` answers and answers it: a string concatenates
 // as `+` does. The variable is read before the value is evaluated, so an

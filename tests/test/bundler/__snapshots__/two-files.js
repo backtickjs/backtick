@@ -10,6 +10,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 // Scripts written in two host files, in one bundle: its map leads into each
 // file by its own path.

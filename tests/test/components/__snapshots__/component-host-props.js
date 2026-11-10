@@ -12,6 +12,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "29br3dsi9vwc9:29:4",
@@ -20,6 +21,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 // A component's props are the host's own. It runs while bundling and consumes
 // them there, so they never cross and need not be able to: a class instance and

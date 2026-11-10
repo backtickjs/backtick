@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: ["base$bphb1svo1jv3$0"] }],
   kind: "block",
+  scope: "function",
 };
 const $module1 = {
   id: "bphb1svo1jv3:20:13",
@@ -19,6 +20,7 @@ const $module1 = {
     { kind: "capture", key: "base$bphb1svo1jv3$0" },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module2 = {
   id: "bphb1svo1jv3:28:4",
@@ -27,6 +29,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: ["base$bphb1svo1jv3$1"] }],
   kind: "block",
+  scope: "function",
 };
 const $module3 = {
   id: "bphb1svo1jv3:30:25",
@@ -35,6 +38,7 @@ const $module3 = {
   dependencies: [],
   params: [{ kind: "capture", key: "base$bphb1svo1jv3$1" }],
   kind: "expression",
+  scope: "function",
 };
 // Two distinct captures of one entry that want the same name.
 //

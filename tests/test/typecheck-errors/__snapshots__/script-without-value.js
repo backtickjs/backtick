@@ -6,6 +6,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "module",
 };
 const $module1 = {
   id: "l2xcqm5jzb5g:13:26",
@@ -14,6 +15,7 @@ const $module1 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module2 = {
   id: "l2xcqm5jzb5g:15:22",
@@ -22,6 +24,7 @@ const $module2 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module3 = {
   id: "l2xcqm5jzb5g:19:22",
@@ -30,6 +33,7 @@ const $module3 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "module",
 };
 const $module4 = {
   id: "l2xcqm5jzb5g:24:23",
@@ -38,6 +42,7 @@ const $module4 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module5 = {
   id: "l2xcqm5jzb5g:25:22",
@@ -46,6 +51,7 @@ const $module5 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module6 = {
   id: "l2xcqm5jzb5g:29:22",
@@ -54,6 +60,7 @@ const $module6 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "module",
 };
 // A script is one value, made at load, so one that makes no value is refused
 // where it's written, a block or an expression: code that only does something

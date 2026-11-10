@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 const $module1 = {
   id: "3g7ol1xnrqdpp:33:4",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 const $module2 = {
   id: "3g7ol1xnrqdpp:46:4",
@@ -24,6 +26,7 @@ const $module2 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 const $module3 = {
   id: "3g7ol1xnrqdpp:71:4",
@@ -32,6 +35,7 @@ const $module3 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 const $module4 = {
   id: "3g7ol1xnrqdpp:89:4",
@@ -40,6 +44,7 @@ const $module4 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // Every JavaScript operator, answering what JavaScript answers.
 it("binaryOperators", async (t) => {

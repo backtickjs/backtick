@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 it("methodCall", async (t) => {
   await snapshotCase(t, "methodCall", cs.create($module0, []));

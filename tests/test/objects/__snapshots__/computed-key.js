@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // A key computed while the script runs. A literal that holds one is
 // `Object.fromEntries` over its pairs, as one a spread runs through is: its

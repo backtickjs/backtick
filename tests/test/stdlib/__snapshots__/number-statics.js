@@ -9,6 +9,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // A namespace holding a value beside its functions: `Number.EPSILON` is read
 // where `Number.isInteger` is called, and both are whole names the client

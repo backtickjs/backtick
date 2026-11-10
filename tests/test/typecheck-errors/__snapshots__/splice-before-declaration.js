@@ -6,6 +6,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "3lfkc8512rtki:17:15",
@@ -14,6 +15,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 // A splice is read when the `cs` line runs, so reading a `const` declared
 // after it is reported as TypeScript reports it for plain code. Outside a

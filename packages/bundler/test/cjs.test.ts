@@ -23,7 +23,7 @@ test("as CommonJS, the value is `module.exports`, its imports `require` calls", 
   assert.doesNotMatch(code, /^(import|export) /m);
 });
 
-test("a bundle is the same in either format but for its imports and export", async () => {
+test("a bundle is the same in either format but for its imports, its values' registry and its export", async () => {
   const bundle = await bundler.build({
     input: greet,
     modules: { app: "1.0.0" },
@@ -33,7 +33,7 @@ test("a bundle is the same in either format but for its imports and export", asy
       .split("\n")
       .filter(
         (line) =>
-          !/^(import |export |const \{.*require\(|"use strict"|module\.exports)/.test(
+          !/^(import |export |const \{.*require\(|"use strict"|module\.exports|const \$values = )/.test(
             line,
           ),
       );

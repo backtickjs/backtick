@@ -6,6 +6,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "module",
 };
 const $module1 = {
   id: "83k1lytjebk3:7:11",
@@ -14,6 +15,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: ["Badge$83k1lytjebk3$2"] }],
   kind: "block",
+  scope: "module",
 };
 const $module2 = {
   id: "83k1lytjebk3:10:13",
@@ -22,6 +24,7 @@ const $module2 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "capture", key: "Badge$83k1lytjebk3$2" }],
   kind: "expression",
+  scope: "module",
 };
 // The script between them binds `Badge` to a number, and the nearest binding is
 // the one a tag names: the innermost `<Badge />` calls a number.

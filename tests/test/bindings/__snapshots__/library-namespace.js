@@ -17,6 +17,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 const $module1 = {
   id: "2j2xcyothsjlf:17:23",
@@ -25,6 +26,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 // The library whole, its components read from it on the client.
 const saved = cs.create($module0, [Acme]);

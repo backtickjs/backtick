@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 it("coreComponents", async (t) => {
   await snapshotCase(t, "coreComponents", cs.create($module0, []));

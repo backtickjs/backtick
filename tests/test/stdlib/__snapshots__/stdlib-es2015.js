@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // The members ES2015 added that this language answers for: a search that
 // finds nothing reads as `undefined`, as a read past the end does, and

@@ -6,6 +6,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "2ybl4zwhlhjta:18:16",
@@ -14,6 +15,7 @@ const $module1 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const stored = cs.create($module0, []);
 const written = cs.create($module1, []);

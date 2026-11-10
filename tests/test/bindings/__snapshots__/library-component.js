@@ -27,6 +27,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "module",
 };
 const $module1 = {
   id: "33xjmcv6b86dd:27:28",
@@ -35,6 +36,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 // In a script, the library's component as the library types it: a handler, a
 // slot taking script JSX, and children.

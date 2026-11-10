@@ -9,6 +9,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "class",
+  scope: "module",
 };
 const $module1 = {
   id: "3n4oa1jfjgchl:10:24",
@@ -17,6 +18,7 @@ const $module1 = {
   dependencies: [],
   params: [],
   kind: "class",
+  scope: "function",
 };
 const $module2 = {
   id: "3n4oa1jfjgchl:12:42",
@@ -25,6 +27,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "class",
+  scope: "function",
 };
 const $module3 = {
   id: "3n4oa1jfjgchl:19:32",
@@ -36,6 +39,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module4 = {
   id: "3n4oa1jfjgchl:23:32",
@@ -47,6 +51,7 @@ const $module4 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module5 = {
   id: "3n4oa1jfjgchl:27:32",
@@ -55,6 +60,7 @@ const $module5 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: ["label$3n4oa1jfjgchl$4"] }],
   kind: "block",
+  scope: "function",
 };
 const $module6 = {
   id: "3n4oa1jfjgchl:29:10",
@@ -63,6 +69,7 @@ const $module6 = {
   dependencies: [],
   params: [{ kind: "capture", key: "label$3n4oa1jfjgchl$4" }],
   kind: "class",
+  scope: "function",
 };
 const $module7 = {
   id: "3n4oa1jfjgchl:39:33",
@@ -71,6 +78,7 @@ const $module7 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: ["n$3n4oa1jfjgchl$7"] }],
   kind: "block",
+  scope: "function",
 };
 const $module8 = {
   id: "3n4oa1jfjgchl:41:26",
@@ -79,6 +87,7 @@ const $module8 = {
   dependencies: [],
   params: [{ kind: "capture", key: "n$3n4oa1jfjgchl$7" }],
   kind: "expression",
+  scope: "function",
 };
 const Point = cs.create($module0, []);
 const makeClass = () => cs.create($module1, []);

@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "function",
 };
 const $module1 = {
   id: "3ucocch4sr77y:27:4",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // A negative literal is written as one, and reaches the wire as one: `-1` is
 // a prefix operator on `1` in TypeScript's AST and in this one, and a number

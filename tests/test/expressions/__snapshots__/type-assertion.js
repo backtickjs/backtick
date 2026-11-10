@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 const answered = '{"rows":["one","two"],"count":2}';
 // An assertion is the checker's alone. It is erased on the way to a bundle —

@@ -11,6 +11,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "function",
 };
 const $module1 = {
   id: "3ujapqmnmm2ra:19:4",
@@ -19,6 +20,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: ["total$3ujapqmnmm2ra$1"] }],
   kind: "block",
+  scope: "function",
 };
 const $module2 = {
   id: "3ujapqmnmm2ra:21:27",
@@ -27,6 +29,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "capture", key: "total$3ujapqmnmm2ra$1" }],
   kind: "expression",
+  scope: "function",
 };
 function addOwnTotal(lhs, rhs) {
   return cs.create($module0, [lhs, rhs]);

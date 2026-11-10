@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // A record read as pairs and built back from them: how a script makes a
 // record whose keys it only learns when it runs.

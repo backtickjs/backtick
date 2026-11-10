@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module1 = {
   id: "g29mnwu0pbnr:10:71",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "module",
 };
 const $module2 = {
   id: "g29mnwu0pbnr:27:4",
@@ -29,6 +31,7 @@ const $module2 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 // A condition narrows in the virtual code: `text !== null` narrows `text` in
 // the branch it guards and from a `&&` left operand into the right, a braced

@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 const $module1 = {
   id: "yz0kiroonaez:15:21",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "function",
 };
 // A function is never spliceable — it can't cross the host/client boundary
 // as data — but an annotation can still name a function type: the parameter

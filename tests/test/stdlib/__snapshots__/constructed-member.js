@@ -19,6 +19,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "module",
 };
 // A class reached through a member of a spliced value, as `Animated.Value`
 // is. `new` takes the member, not the splice: the splice reads as one value.

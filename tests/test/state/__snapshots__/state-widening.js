@@ -21,6 +21,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "function",
 };
 // What a signal holds is the initial widened, so a second value of the same
 // kind goes in after it. Each write is the assertion — every one is an error

@@ -18,6 +18,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "1ubgqov89id03:17:16",
@@ -29,6 +30,7 @@ const $module1 = {
     { kind: "splice", bindings: ["count$1ubgqov89id03$0"] },
   ],
   kind: "block",
+  scope: "module",
 };
 const $module2 = {
   id: "1ubgqov89id03:22:23",
@@ -37,6 +39,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "capture", key: "count$1ubgqov89id03$0" }],
   kind: "expression",
+  scope: "module",
 };
 // A server component drawing what it's handed.
 async function Label({ text }) {

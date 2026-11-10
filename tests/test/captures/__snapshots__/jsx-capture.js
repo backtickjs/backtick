@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: ["x$njvzopgmpqpe$0"] }],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "njvzopgmpqpe:9:11",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "capture", key: "x$njvzopgmpqpe$0" }],
   kind: "expression",
+  scope: "module",
 };
 // A binding declared in an enclosing script and captured by a script spliced
 // into it: the spliced script is handed `x` where it is called.

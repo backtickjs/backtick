@@ -9,6 +9,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // A whole name rather than a front, so the call crosses as the one name and
 // its argument. What a query is built from: a reserved character, a space and a

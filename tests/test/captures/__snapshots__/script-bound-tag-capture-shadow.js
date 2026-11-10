@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "38fdqkbskqqkj:16:9",
@@ -19,6 +20,7 @@ const $module1 = {
     { kind: "splice", bindings: ["Card$38fdqkbskqqkj$1"] },
   ],
   kind: "block",
+  scope: "function",
 };
 const $module2 = {
   id: "38fdqkbskqqkj:18:17",
@@ -27,6 +29,7 @@ const $module2 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "capture", key: "Card$38fdqkbskqqkj$1" }],
   kind: "expression",
+  scope: "function",
 };
 const $module3 = {
   id: "38fdqkbskqqkj:26:4",
@@ -39,6 +42,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module4 = {
   id: "38fdqkbskqqkj:29:20",
@@ -47,6 +51,7 @@ const $module4 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module5 = {
   id: "38fdqkbskqqkj:30:20",
@@ -55,6 +60,7 @@ const $module5 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module6 = {
   id: "38fdqkbskqqkj:43:4",
@@ -63,6 +69,7 @@ const $module6 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 // A client component the host holds, and a binding of the same name an
 // enclosing script holds. Scope decides: the nested script's `<Card>` is the

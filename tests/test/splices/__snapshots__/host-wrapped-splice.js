@@ -11,6 +11,7 @@ const $module0 = {
     { kind: "splice", bindings: ["outer$zqr0jsdf8ub6$0"] },
   ],
   kind: "block",
+  scope: "function",
 };
 const $module1 = {
   id: "zqr0jsdf8ub6:19:17",
@@ -22,6 +23,7 @@ const $module1 = {
     { kind: "capture", key: "outer$zqr0jsdf8ub6$0" },
   ],
   kind: "block",
+  scope: "function",
 };
 const $module2 = {
   id: "zqr0jsdf8ub6:21:29",
@@ -30,6 +32,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "capture", key: "outer$zqr0jsdf8ub6$0" }],
   kind: "expression",
+  scope: "function",
 };
 const $module3 = {
   id: "zqr0jsdf8ub6:27:9",
@@ -38,6 +41,7 @@ const $module3 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module4 = {
   id: "zqr0jsdf8ub6:38:4",
@@ -49,6 +53,7 @@ const $module4 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module5 = {
   id: "zqr0jsdf8ub6:38:14",
@@ -57,6 +62,7 @@ const $module5 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module6 = {
   id: "zqr0jsdf8ub6:38:31",
@@ -65,6 +71,7 @@ const $module6 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 // Splices that arrive through host code — the case a hole can never be resolved
 // from source, because what the compiler sees at the hole is a call expression

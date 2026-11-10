@@ -15,6 +15,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 // An element a script writes, rather than one the host wrote and the script
 // spliced in. What it lowers to is the node a tree entry builds, so the two

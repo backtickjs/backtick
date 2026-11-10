@@ -28,6 +28,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "3jt03nt4dipcm:32:22",
@@ -39,6 +40,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "module",
 };
 // The same claim as `evaluateBuildsOnce`, with no bundle in it.
 //

@@ -6,6 +6,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "2as6z5psop7u2:10:15",
@@ -14,6 +15,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "module",
 };
 const $module2 = {
   id: "2as6z5psop7u2:17:14",
@@ -22,6 +24,7 @@ const $module2 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module3 = {
   id: "2as6z5psop7u2:21:22",
@@ -30,6 +33,7 @@ const $module3 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "module",
 };
 // A call of a function that returns nothing produces no value: its `void`
 // result can't initialize a variable.

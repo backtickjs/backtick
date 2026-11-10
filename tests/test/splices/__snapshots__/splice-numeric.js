@@ -16,6 +16,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "8onavihi55vf:16:34",
@@ -27,6 +28,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module2 = {
   id: "8onavihi55vf:22:34",
@@ -38,6 +40,7 @@ const $module2 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module3 = {
   id: "8onavihi55vf:27:44",
@@ -46,6 +49,7 @@ const $module3 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 it("spliceNumeric", async (t) => {
   await snapshotCase(t, "spliceNumeric", cs.create($module0, [1]));

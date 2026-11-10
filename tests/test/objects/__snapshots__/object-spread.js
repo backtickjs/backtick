@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // A spread in an object literal, which the format cannot ship as the data it
 // spells: an object in a value slot *is* its own keys and none of them is

@@ -72,12 +72,21 @@ const $require = (id) => {
   }
   return $exports[id];
 };
+const $values = new Map();
+const $value = (key, make) => {
+  if (!$values.has(key)) {
+    $values.set(key, make());
+  }
+  return $values.get(key);
+};
 const $cs0 = $require("3jt03nt4dipcm:32:22").default;
 const $cs1 = $require("3jt03nt4dipcm:20:20").default;
 const $thunk0 = () => $i0;
 const $thunk1 = () => ["one", "two"];
 const $thunk2 = () => $i1;
-const $value3 = $cs1($thunk0, $thunk1, $thunk2);
+const $value3 = $value("3jt03nt4dipcm:20:20", () =>
+  $cs1($thunk0, $thunk1, $thunk2),
+);
 const $thunk4 = () => $value3;
-const $value5 = $cs0($thunk0, $thunk4);
+const $value5 = $value("3jt03nt4dipcm:32:22", () => $cs0($thunk0, $thunk4));
 export default $value5;

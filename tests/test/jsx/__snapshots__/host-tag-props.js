@@ -10,6 +10,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "irncup0pbj6d:25:14",
@@ -18,6 +19,7 @@ const $module1 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 // A client component the host holds, written as a tag in a script, given its
 // props in every form JSX writes them: spread, valueless, dashed, an element.

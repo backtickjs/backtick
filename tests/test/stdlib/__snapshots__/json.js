@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // Text in, value out, and back again. What round-trips is the format's to say
 // — so what is here is what every host spells the same way, and a value a

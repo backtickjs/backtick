@@ -18,6 +18,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "3mx30pdq37lyp:21:9",
@@ -29,6 +30,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 const $module2 = {
   id: "3mx30pdq37lyp:29:15",
@@ -40,6 +42,7 @@ const $module2 = {
     { kind: "splice", bindings: ["count$3mx30pdq37lyp$2"] },
   ],
   kind: "block",
+  scope: "module",
 };
 const $module3 = {
   id: "3mx30pdq37lyp:36:26",
@@ -48,6 +51,7 @@ const $module3 = {
   dependencies: [],
   params: [{ kind: "capture", key: "count$3mx30pdq37lyp$2" }],
   kind: "expression",
+  scope: "module",
 };
 // A server component handed its parent's state, drawing a client component
 // with state of its own: the title follows the parent, and the child keeps

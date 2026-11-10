@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 const $module1 = {
   id: "8up2nb5o0inm:14:9",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 const $module2 = {
   id: "8up2nb5o0inm:28:4",
@@ -24,6 +26,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: ["base$8up2nb5o0inm$2"] }],
   kind: "block",
+  scope: "function",
 };
 const $module3 = {
   id: "8up2nb5o0inm:30:25",
@@ -32,6 +35,7 @@ const $module3 = {
   dependencies: [],
   params: [{ kind: "capture", key: "base$8up2nb5o0inm$2" }],
   kind: "expression",
+  scope: "function",
 };
 function outerBase(inner) {
   return cs.create($module0, [middleBase(inner)]);

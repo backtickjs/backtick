@@ -28,6 +28,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "function",
 };
 // js-framework-benchmark's "partial update": every other row's label grows,
 // and each label is a signal of its own. Writing one is a write to that row's

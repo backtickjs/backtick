@@ -28,6 +28,13 @@ const $require = (id) => {
   }
   return $exports[id];
 };
+const $values = new Map();
+const $value = (key, make) => {
+  if (!$values.has(key)) {
+    $values.set(key, make());
+  }
+  return $values.get(key);
+};
 const $cs0 = $require("sl458m2swc6c:17:4").default;
 const $cs1 = $require("sl458m2swc6c:10:9").default;
 const $cs2 = $require("sl458m2swc6c:19:19").default;

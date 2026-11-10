@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "sl458m2swc6c:17:4",
@@ -16,6 +17,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: ["foo$$sl458m2swc6c$0"] }],
   kind: "block",
+  scope: "function",
 };
 const $module2 = {
   id: "sl458m2swc6c:19:19",
@@ -24,6 +26,7 @@ const $module2 = {
   dependencies: [],
   params: [{ kind: "capture", key: "foo$$sl458m2swc6c$0" }],
   kind: "expression",
+  scope: "function",
 };
 // A `$` inside a name is ordinary JavaScript — only the leading sigil is
 // reserved for splices — so a `$`-bearing binding survives mangling, its

@@ -18,6 +18,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "block",
+  scope: "function",
 };
 const $module1 = {
   id: "2ne2fpz7nazd:28:18",
@@ -29,6 +30,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "module",
 };
 // State belongs to the script that declares it, and a declared script is called
 // once per place that reaches it — so two `<OwnCounter />` splices are two calls

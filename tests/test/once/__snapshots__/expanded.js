@@ -17,6 +17,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "3hglixhjhta7u:17:14",
@@ -25,6 +26,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "module",
 };
 const $module2 = {
   id: "3hglixhjhta7u:18:14",
@@ -36,6 +38,7 @@ const $module2 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "module",
 };
 const $module3 = {
   id: "3hglixhjhta7u:23:33",
@@ -47,6 +50,7 @@ const $module3 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 // A server component spliced into a script: the script is one value, so the
 // component runs once however many places read the value.

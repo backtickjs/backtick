@@ -16,6 +16,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "function",
+  scope: "module",
 };
 // A host object with behaviour reaching a cell, refused where it is written.
 //

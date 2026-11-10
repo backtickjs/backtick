@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // A checker directive written in a script covers the statement below it, as it
 // does in TypeScript. The typecheck of this file is the assertion: it passes

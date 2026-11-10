@@ -9,6 +9,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "2xjp8x9bcyeyr:15:20",
@@ -17,6 +18,7 @@ const $module1 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "module",
 };
 const $module2 = {
   id: "2xjp8x9bcyeyr:16:17",
@@ -25,6 +27,7 @@ const $module2 = {
   dependencies: ["solid-js/web"],
   params: [],
   kind: "expression",
+  scope: "module",
 };
 const $module3 = {
   id: "2xjp8x9bcyeyr:20:22",
@@ -33,6 +36,7 @@ const $module3 = {
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "function",
+  scope: "module",
 };
 const $module4 = {
   id: "2xjp8x9bcyeyr:29:4",
@@ -44,6 +48,7 @@ const $module4 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 // A tree spliced into a body and bound to a name before it is used. Nothing
 // applies it at the hole and nothing draws it there — it is a value, held and

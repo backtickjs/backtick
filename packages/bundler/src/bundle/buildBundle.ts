@@ -33,7 +33,9 @@ export interface BundleTree {
   readonly modules: readonly (readonly [string, ScriptModule])[];
   // The values the bundle makes once, each under its label, in the order
   // they're finished: after what they read.
-  readonly constants: readonly (readonly [string, string])[];
+  // Each constant's label and code, and for a value an app's bundles share,
+  // its key: its script's module id.
+  readonly constants: readonly (readonly [string, string, string?])[];
   readonly root: string;
   readonly names: Names;
 }
@@ -146,7 +148,7 @@ export async function buildBundle(
   // level of a deep composition is written once per level, not once per path.
   // A thunk is the bundle's own, never the script's, so sharing one isn't
   // observable; everything is still rendered where it stands.
-  const constants: (readonly [string, string])[] = [];
+  const constants: (readonly [string, string, string?])[] = [];
   const byCode = new Map<string, string>();
   // `write` renders a thunk's code in a scope that records what it reads: a
   // constant's label if it read nothing of `scope` beyond `own`, its
@@ -201,7 +203,14 @@ export async function buildBundle(
     }
     label = `$value${constants.length}`;
     values.set(script, label);
-    constants.push([label, code]);
+    // One written at a host module's top level is the app's, under its id,
+    // shared by every bundle of it (`$value`); one written in a function is
+    // this bundle's.
+    constants.push([
+      label,
+      code,
+      script.module.scope === "module" ? script.module.id : undefined,
+    ]);
     return label;
   };
 

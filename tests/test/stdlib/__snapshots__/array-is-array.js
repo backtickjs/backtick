@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // Any value may be asked about, and only an array answers true: a string has
 // a length and indexes, and is still not one.

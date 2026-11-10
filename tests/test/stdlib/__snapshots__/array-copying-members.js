@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // The copying members: each answers with a new array and leaves the one it
 // was given alone, which is what lets an array be a value here. `sort`,

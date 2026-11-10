@@ -9,6 +9,7 @@ const $module0 = {
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
+  scope: "function",
 };
 const $module1 = {
   id: "2fakqwmh96yfj:21:4",
@@ -20,6 +21,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 // A server component's invocation is an instance boundary, so it hoists into a
 // tree entry of its own even though each `<TextLabel />` is referenced once and

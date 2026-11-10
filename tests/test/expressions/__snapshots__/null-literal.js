@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "2nnj6ebvkk8vj:20:4",
@@ -19,6 +20,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 // `null` written in the script itself — bare, compared against, and as an
 // argument — as opposed to a spliced host `null` (see `runtime-values.ts`).

@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 // A `catch` without a binding: the try node's `param` is null and the
 // handler runs with no new binding in scope.

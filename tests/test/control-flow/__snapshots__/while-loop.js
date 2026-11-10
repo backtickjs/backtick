@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "block",
+  scope: "function",
 };
 it("whileLoop", async (t) => {
   await snapshotCase(t, "whileLoop", cs.create($module0, []));

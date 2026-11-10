@@ -8,6 +8,7 @@ const $module0 = {
   dependencies: [],
   params: [],
   kind: "function",
+  scope: "module",
 };
 const $module1 = {
   id: "1pn78z89zmc5d:16:4",
@@ -20,6 +21,7 @@ const $module1 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "expression",
+  scope: "function",
 };
 // `?` on a property means omittable: an absent member reads as null — the
 // language's absent value; `undefined` never arises — and `?.` composes on

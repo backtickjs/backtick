@@ -27,6 +27,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
+  scope: "function",
 };
 // A list whose drawing reads where a member sits as well as what it is.
 //
