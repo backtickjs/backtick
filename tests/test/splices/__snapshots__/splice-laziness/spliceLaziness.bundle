@@ -1,5 +1,5 @@
 const $modules = {
-  "3jzoitmu8iit8:31:4": (module, exports, require) => {
+  "1h2q1jtsjxrcw:31:4": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $splice1) => ({
@@ -7,25 +7,25 @@ const $modules = {
       skipped: $splice1()(false),
     });
   },
-  "3jzoitmu8iit8:13:9": (module, exports, require) => {
+  "1h2q1jtsjxrcw:13:9": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0) => (flag) => {
       if (flag) {
-        return $splice0();
+        return $splice0()();
       }
       return "skipped";
     };
   },
-  "3jzoitmu8iit8:21:11": (module, exports, require) => {
+  "1h2q1jtsjxrcw:21:11": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = () => "evaluated";
+    exports.default = () => () => "evaluated";
   },
-  "3jzoitmu8iit8:23:15": (module, exports, require) => {
+  "1h2q1jtsjxrcw:23:15": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = () => {
+    exports.default = () => () => {
       throw "the guarded fragment must never evaluate";
     };
   },
@@ -40,10 +40,10 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $cs0 = $require("3jzoitmu8iit8:31:4").default;
-const $cs1 = $require("3jzoitmu8iit8:13:9").default;
-const $cs2 = $require("3jzoitmu8iit8:21:11").default;
-const $cs3 = $require("3jzoitmu8iit8:23:15").default;
+const $cs0 = $require("1h2q1jtsjxrcw:31:4").default;
+const $cs1 = $require("1h2q1jtsjxrcw:13:9").default;
+const $cs2 = $require("1h2q1jtsjxrcw:21:11").default;
+const $cs3 = $require("1h2q1jtsjxrcw:23:15").default;
 const $value0 = $cs2();
 const $thunk1 = () => $value0;
 const $value2 = $cs1($thunk1);

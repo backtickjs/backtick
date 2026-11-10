@@ -1,18 +1,4 @@
 cs.lift((() =>   → cs` [-semantic -navigation]
-{                → {
-\n               → \n  
-throw            → throw
-                 →  
-new              → new
-                 →  
-Error            → Error
-(                → (
-"boom"           → "boom"
-)                → )
-;                → ;
-\n               → \n  
-return           → return
-                 →  
 (                → (
 __cs_props       → props
 :                → :
@@ -23,14 +9,16 @@ __cs_props       → props
                  →  
 =>               → =>
                  →  
-<                → <
-b                → b
->                → >
-never            → never
-<                → <
-/                → /
-b                → b
->                → >
+{                → {
+\n               → \n  
+throw            → throw
+                 →  
+new              → new
+                 →  
+Error            → Error
+(                → (
+"boom"           → "boom"
+)                → )
 ;                → ;
 \n               → \n
 }                → }

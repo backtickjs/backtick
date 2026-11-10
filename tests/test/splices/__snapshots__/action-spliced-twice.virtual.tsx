@@ -3,13 +3,13 @@ import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { evaluate } from "../evaluate.ts";
 
-// An action spliced twice as a statement runs twice: each `$log;` is the
-// action's code, run where it stands.
-const log = cs.lift((() => {
+// Code run at each use is a function, called where it's used: one function,
+// spliced twice and called twice, runs twice.
+const log = cs.lift((() => () => {
   window.console.log("logged");
 })());
 
-it("an action spliced twice runs twice", async () => {
+it("a function spliced twice and called twice runs twice", async () => {
   const seen: unknown[] = [];
   const consoleLog = window.console.log;
   window.console.log = (...args: unknown[]) => {
@@ -17,8 +17,8 @@ it("an action spliced twice runs twice", async () => {
   };
   try {
     await evaluate(cs.lift((() => {
-      (cs.splice((log)));
-      (cs.splice((log)));
+      (cs.splice((log)))();
+      (cs.splice((log)))();
     })()));
   } finally {
     window.console.log = consoleLog;

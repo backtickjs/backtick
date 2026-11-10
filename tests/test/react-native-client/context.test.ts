@@ -4,11 +4,8 @@ import { drawReactNative } from "./drawReactNative.ts";
 
 // A context made in a script, provided by one client component and read by
 // another, as a theme is. In plain React, `createContext` runs once at module
-// level, and the provider and the consumer share that one context: `once` is
-// that, one value for the bundle. Written as an expression, the script is
-// code run at each read: the provider's read makes one context and
-// `useContext`'s read another, so the consumer never finds the provider and
-// gets the default.
+// level, and the provider and the consumer share that one context. A script
+// is that, one value for the bundle, written as an expression or with `once`.
 const source = (made: string) => `
 import { cs, once } from "@backtickjs/core";
 import { createContext, useContext } from "react" with { backtick: "client" };
@@ -41,11 +38,11 @@ it("a context made once reaches its consumers", async () => {
   await unmount();
 });
 
-it("a context made at each read is another context at each", async () => {
+it("a context written as an expression reaches its consumers", async () => {
   const { container, unmount } = await drawReactNative(
     "context-expression",
     source('cs`$createContext("light")`'),
   );
-  assert.equal(container.textContent, "light");
+  assert.equal(container.textContent, "dark");
   await unmount();
 });

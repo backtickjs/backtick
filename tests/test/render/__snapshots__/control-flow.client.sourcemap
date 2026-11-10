@@ -119,103 +119,117 @@ $splice0()                           → 25:4 $Switch…
 )                                    → 32:13 …
 );                                   → 33:2 `;…
 
-// 35:16
-($splice0, $splice1) => ($ErrorBoundary => <  → 35:19 <$ErrorBoundary…
-$ErrorBoundary                                → 35:20 $ErrorBoundary
-fallback                                      → 35:35 fallback
-=                                             → 35:43 =
-{                                             → 35:44 {
-<                                             → 35:45 <
-p                                             → 35:46 p
->                                             → 35:47 >
-caught                                        → 35:48 caught
-</                                            → 35:54 </
-p                                             → 35:56 p
->                                             → 35:57 >
-}                                             → 35:58 }
->                                             → 35:59 >
-{                                             → 35:60 {
-$splice1()                                    → 36:5 ${cs`{…
-}                                             → 39:3 }
-</                                            → 39:4 </
-$ErrorBoundary                                → 39:6 $ErrorBoundary
->                                             → 39:20 >
-)(                                            → 39:21 `;…
-$splice0()                                    → 35:20 $ErrorBoundary…
-)                                             → 35:34  fallback={<p>caught</p>}>{…
-);                                            → 39:21 `;…
+// 38:17
+() => ()       → 38:20 ()…
+=>             → 38:23 =>
+ {             → 38:25  {
+throw          → 39:3 throw 
+"drawn wrong"  → 39:9 "drawn wrong"
+;              → 39:22 ;
+}              → 40:1 }
+);             → 40:2 `;…
 
-// 36:7
-() => {        → 36:10 {…
-throw          → 37:7 throw 
-"drawn wrong"  → 37:13 "drawn wrong"
-;              → 37:26 ;
-}              → 38:5 }
-);             → 38:6 `}…
+// 41:16
+($splice0, $splice1) => ()   → 41:19 ()…
+=>                           → 41:22 =>
+(                            → 41:25 (
+($ErrorBoundary => <         → 42:3 <$ErrorBoundary…
+$ErrorBoundary               → 42:4 $ErrorBoundary
+fallback                     → 42:19 fallback
+=                            → 42:27 =
+{                            → 42:28 {
+<                            → 42:29 <
+p                            → 42:30 p
+>                            → 42:31 >
+caught                       → 42:32 caught
+</                           → 42:38 </
+p                            → 42:40 p
+>                            → 42:41 >
+}                            → 42:42 }
+>                            → 42:43 >
+{($Thrower => <              → 43:5 <$Thrower…
+$Thrower                     → 43:6 $Thrower
+/>                           → 43:14  />…
+)(                           → 43:17 …
+$splice1()                   → 43:6 $Thrower…
+)                            → 43:14  />…
+}                            → 44:3 </$ErrorBoundary>…
+</                           → 44:3 </
+$ErrorBoundary               → 44:5 $ErrorBoundary
+>                            → 44:19 >
+)(                           → 44:20 …
+$splice0()                   → 42:4 $ErrorBoundary…
+)                            → 42:18  fallback={<p>caught</p>}>…
+)                            → 44:20 …
+);                           → 45:2 `;…
 
-// 41:19
-($splice0) => (  → 41:22 (…
-($Suspense => <  → 42:3 <$Suspense…
-$Suspense        → 42:4 $Suspense
-fallback         → 42:14 fallback
-=                → 42:22 =
-{                → 42:23 {
-<                → 42:24 <
-p                → 42:25 p
->                → 42:26 >
-loading          → 42:27 loading
-</               → 42:34 </
-p                → 42:36 p
->                → 42:37 >
-}                → 42:38 }
->                → 42:39 >
-<                → 43:5 <
-p                → 43:6 p
->                → 43:7 >
-loaded           → 43:8 loaded
-</               → 43:14 </
-p                → 43:16 p
->                → 43:17 >
-</               → 44:3 </
-$Suspense        → 44:5 $Suspense
->                → 44:14 >
-)(               → 44:15 …
-$splice0()       → 42:4 $Suspense…
-)                → 42:13  fallback={<p>loading</p>}>…
-)                → 44:15 …
-);               → 45:2 `;…
+// 47:19
+($splice0) => ()   → 47:22 ()…
+=>                 → 47:25 =>
+(                  → 47:28 (
+($Suspense => <    → 48:3 <$Suspense…
+$Suspense          → 48:4 $Suspense
+fallback           → 48:14 fallback
+=                  → 48:22 =
+{                  → 48:23 {
+<                  → 48:24 <
+p                  → 48:25 p
+>                  → 48:26 >
+loading            → 48:27 loading
+</                 → 48:34 </
+p                  → 48:36 p
+>                  → 48:37 >
+}                  → 48:38 }
+>                  → 48:39 >
+<                  → 49:5 <
+p                  → 49:6 p
+>                  → 49:7 >
+loaded             → 49:8 loaded
+</                 → 49:14 </
+p                  → 49:16 p
+>                  → 49:17 >
+</                 → 50:3 </
+$Suspense          → 50:5 $Suspense
+>                  → 50:14 >
+)(                 → 50:15 …
+$splice0()         → 48:4 $Suspense…
+)                  → 48:13  fallback={<p>loading</p>}>…
+)                  → 50:15 …
+);                 → 51:2 `;…
 
-// 47:18
-($splice0) => (  → 47:21 (…
-<                → 48:3 <
-div              → 48:4 div
->                → 48:7 >
-<                → 49:5 <
-p                → 49:6 p
->                → 49:7 >
-here             → 49:8 here
-</               → 49:12 </
-p                → 49:14 p
->                → 49:15 >
-{($Portal => <   → 50:5 <$Portal>…
-$Portal          → 50:6 $Portal
->                → 50:13 >
-<                → 51:7 <
-p                → 51:8 p
->                → 51:9 >
-elsewhere        → 51:10 elsewhere
-</               → 51:19 </
-p                → 51:21 p
->                → 51:22 >
-</               → 52:5 </
-$Portal          → 52:7 $Portal
->                → 52:14 >
-)(               → 52:15 …
-$splice0()       → 50:6 $Portal>…
-)                → 50:13 >…
-}                → 53:3 </div>…
-</               → 53:3 </
-div              → 53:5 div
->                → 53:8 >
-)                → 53:9 …
-);               → 54:2 `;…
+// 53:18
+($splice0) => ()   → 53:21 ()…
+=>                 → 53:24 =>
+(                  → 53:27 (
+<                  → 54:3 <
+div                → 54:4 div
+>                  → 54:7 >
+<                  → 55:5 <
+p                  → 55:6 p
+>                  → 55:7 >
+here               → 55:8 here
+</                 → 55:12 </
+p                  → 55:14 p
+>                  → 55:15 >
+{($Portal => <     → 56:5 <$Portal>…
+$Portal            → 56:6 $Portal
+>                  → 56:13 >
+<                  → 57:7 <
+p                  → 57:8 p
+>                  → 57:9 >
+elsewhere          → 57:10 elsewhere
+</                 → 57:19 </
+p                  → 57:21 p
+>                  → 57:22 >
+</                 → 58:5 </
+$Portal            → 58:7 $Portal
+>                  → 58:14 >
+)(                 → 58:15 …
+$splice0()         → 56:6 $Portal>…
+)                  → 56:13 >…
+}                  → 59:3 </div>…
+</                 → 59:3 </
+div                → 59:5 div
+>                  → 59:8 >
+)                  → 59:9 …
+);                 → 60:2 `;…

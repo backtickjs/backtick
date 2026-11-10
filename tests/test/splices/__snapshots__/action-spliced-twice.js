@@ -3,17 +3,17 @@ import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { evaluate } from "../evaluate.ts";
 const $module0 = {
-  id: "277pr9nok10br:8:12",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    window.console.log("logged");\n};\n}',
+  id: "2lp1d0051wiq:8:12",
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => () => {\n    window.console.log("logged");\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAOe;IACbA,MAAM,CAACC,OAAO,CAACC,GAAG,CAAC,QAAQ,CAAC;AAC9B,CAAC","names":["window","console","log"],"ignoreList":[],"sources":["splices/action-spliced-twice.test.tsx"]}',
   dependencies: [],
   params: [],
-  kind: "block",
+  kind: "function",
 };
 const $module1 = {
-  id: "277pr9nok10br:19:19",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => {\n    $splice0();\n    $splice1();\n};\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkBsB,CAAAA,QAAA,EAAAC,QAAA;IAChBD,QAAA,EAAI;IACJC,QAAA,EAAI;AACN,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/action-spliced-twice.test.tsx"]}',
+  id: "2lp1d0051wiq:19:19",
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => {\n    $splice0()();\n    $splice1()();\n};\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkBsB,CAAAA,QAAA,EAAAC,QAAA;IAChBD,QAAA,EAAI,EAAE;IACNC,QAAA,EAAI,EAAE;AACR,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/action-spliced-twice.test.tsx"]}',
   dependencies: [],
   params: [
     { kind: "splice", bindings: [] },
@@ -21,10 +21,10 @@ const $module1 = {
   ],
   kind: "block",
 };
-// An action spliced twice as a statement runs twice: each `$log;` is the
-// action's code, run where it stands.
+// Code run at each use is a function, called where it's used: one function,
+// spliced twice and called twice, runs twice.
 const log = cs.create($module0, []);
-it("an action spliced twice runs twice", async () => {
+it("a function spliced twice and called twice runs twice", async () => {
   const seen = [];
   const consoleLog = window.console.log;
   window.console.log = (...args) => {

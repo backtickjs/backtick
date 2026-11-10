@@ -9,8 +9,9 @@ flag             → 14:9 flag
 )                → 14:13 ) 
 {                → 14:15 {
 return           → 15:7 return 
-$splice0()       → 15:14 $fragment;…
-;                → 15:23 ;
+$splice0()       → 15:14 $fragment();…
+()               → 15:23 ()
+;                → 15:25 ;
 }                → 16:5 }
 return           → 17:5 return 
 "skipped"        → 17:12 "skipped"
@@ -19,11 +20,15 @@ return           → 17:5 return
 );               → 18:4 `;…
 
 // 21:12
-() => "evaluated"  → 21:15 "evaluated"`;…
-);                 → 21:26 `;…
+() => ()     → 21:15 ()…
+=>           → 21:18 =>
+"evaluated"  → 21:21 "evaluated"
+);           → 21:32 `;…
 
 // 23:16
-() => {                                     → 23:19 {…
+() => ()                                    → 23:19 ()…
+=>                                          → 23:22 =>
+ {                                          → 23:24  {
 throw                                       → 24:3 throw 
 "the guarded fragment must never evaluate"  → 24:9 "the guarded fragment must never evaluate"
 ;                                           → 24:51 ;

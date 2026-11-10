@@ -2,12 +2,9 @@ import assert from "node:assert/strict";
 import { it } from "node:test";
 import { drawReactNative } from "./drawReactNative.ts";
 
-// A footgun, though sound: a component made by an expression, `memo(…)`,
-// with state of its own, drawn by a parent that re-renders. An expression is
-// code, run at each read, so each render makes a new `memo` component, as
-// `memo(…)` written inside a render function would, and React remounts it.
-// Written as a function, `cs\`() => …\``, it keeps its state. A lint could
-// flag a call that returns a component.
+// A component made by an expression, `memo(…)`, with state of its own, drawn
+// by a parent that re-renders. An expression is a value, as `memo(…)` at
+// module level is: one component for the bundle, which keeps its state.
 const source = `
 import { cs } from "@backtickjs/core";
 import { memo, useState } from "react" with { backtick: "client" };
@@ -37,7 +34,7 @@ const Parent = cs\`() => {
 export const screen = cs\`<$Parent />\`;
 `;
 
-it("a memo component is made again when its parent re-renders", async () => {
+it("a memo component keeps its state when its parent re-renders", async () => {
   const { container, press, unmount } = await drawReactNative(
     "memo-state",
     source,
@@ -45,7 +42,7 @@ it("a memo component is made again when its parent re-renders", async () => {
   await press("row");
   assert.equal(container.textContent, "parent 0row 1");
   await press("parent");
-  assert.equal(container.textContent, "parent 1row 0");
+  assert.equal(container.textContent, "parent 1row 1");
   await unmount();
 });
 

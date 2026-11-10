@@ -5,11 +5,10 @@ import { render } from "@solidjs/testing-library";
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 
-// A host tag is a splice: its script is evaluated where the tag stands, each
-// time it is reached, as a value splice is.
-const Boom = cs.lift((() => {
+// A host tag is a splice: its script is one value, made once for the bundle,
+// and the component it is draws where each tag stands, when it's reached.
+const Boom = cs.lift((() => (__cs_props: {}) => {
   throw new Error("boom");
-  return (__cs_props: {}) => <b>never</b>;
 })());
 
 const Counted = cs.lift((() => {
@@ -31,16 +30,16 @@ it("hostTagEvaluation", async (t) => {
 });
 
 describe("a host tag", () => {
-  it("is not evaluated where it isn't reached", async () => {
+  it("is not drawn where it isn't reached", async () => {
     const { container } = render(await evaluate(() => unreached));
     assert.equal(container.textContent, "ok");
   });
 
-  it("is evaluated each time it is reached", async () => {
+  it("is made once, and drawn each time it is reached", async () => {
     const counter = globalThis as unknown as { evaluations?: number };
     counter.evaluations = 0;
     const { container } = render(await evaluate(() => twice));
     assert.equal(container.textContent?.replace(/\s/g, ""), "countedcounted");
-    assert.equal(counter.evaluations, 2);
+    assert.equal(counter.evaluations, 1);
   });
 });

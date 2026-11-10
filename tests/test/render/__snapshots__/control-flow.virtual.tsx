@@ -30,19 +30,25 @@ const switched = cs.lift((() => (
   </$Switch>)(cs.splice((Switch))))
 ))());
 
-const caught = cs.lift((() => (void (ErrorBoundary), (($ErrorBoundary) => <$ErrorBoundary fallback={<p>caught</p>}>{
-    (cs.splice(cs.lift((() => {
-      throw "drawn wrong";
-    })())))
-  }</$ErrorBoundary>)(cs.splice((ErrorBoundary)))))());
+// A boundary, a portal and what they hold are components, drawn where they're
+// placed, as in plain Solid: made at load, they'd have no owner to catch,
+// suspend or clean up in.
+const Thrower = cs.lift((() => () => {
+  throw "drawn wrong";
+})());
+const caught = cs.lift((() => () => (
+  (void (ErrorBoundary), (($ErrorBoundary) => <$ErrorBoundary fallback={<p>caught</p>}>
+    {(($Thrower) => <$Thrower />)(cs.splice((Thrower)))}
+  </$ErrorBoundary>)(cs.splice((ErrorBoundary))))
+))());
 
-const suspended = cs.lift((() => (
+const suspended = cs.lift((() => () => (
   (void (Suspense), (($Suspense) => <$Suspense fallback={<p>loading</p>}>
     <p>loaded</p>
   </$Suspense>)(cs.splice((Suspense))))
 ))());
 
-const portaled = cs.lift((() => (
+const portaled = cs.lift((() => () => (
   <div>
     <p>here</p>
     {(void (Portal), (($Portal) => <$Portal>
@@ -67,19 +73,19 @@ describe("control flow in a script", () => {
   });
 
   it("draws the fallback of an ErrorBoundary around a script that throws", async () => {
-    render(await evaluate(() => caught));
+    render(await evaluate(caught));
     assert.ok(screen.getByText("caught"));
   });
 
   it("draws a Portal's children outside where it stands", async () => {
-    const { container } = render(await evaluate(() => portaled));
+    const { container } = render(await evaluate(portaled));
     assert.ok(container.textContent?.includes("here"));
     assert.ok(!container.textContent?.includes("elsewhere"));
     assert.ok(screen.getByText("elsewhere"));
   });
 
   it("draws Suspense's children when nothing is pending", async () => {
-    render(await evaluate(() => suspended));
+    render(await evaluate(suspended));
     assert.ok(screen.getByText("loaded"));
   });
 });

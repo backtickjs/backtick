@@ -152,6 +152,28 @@ $Switch          → $Switch [-semantic -navigation]
 )                → )
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n  
+throw            → throw
+                 →  
+"drawn wrong"    → "drawn wrong"
+;                → ;
+\n               → \n
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+(                → (
+\n               → \n  
 (ErrorBoundary)  → $ErrorBoundary [-highlight]
 $ErrorBoundary   → $ErrorBoundary [-semantic -navigation]
 fallback         → fallback
@@ -167,28 +189,25 @@ p                → p
 >                → >
 }                → }
 >                → >
-{                → {
 \n               → \n    
-(cs.splice(      →  [-semantic -navigation]
-cs.lift((() =>   → cs` [-semantic -navigation]
-{                → {
-\n               → \n      
-throw            → throw
-                 →  
-"drawn wrong"    → "drawn wrong"
-;                → ;
-\n               → \n    
-}                → }
-)())             → ` [-semantic -navigation]
+$Thrower         → $Thrower [-semantic -navigation]
+)(cs.splice(     →  [-semantic -navigation]
+(Thrower)        → $Thrower [-highlight]
 ))               →  [-semantic -navigation]
 \n               → \n  
-}                → }
 $ErrorBoundary   → $ErrorBoundary [-semantic -navigation]
 )(cs.splice(     →  [-semantic -navigation]
 (ErrorBoundary)  → $ErrorBoundary [-highlight]
 ))               →  [-semantic -navigation]
+\n               → \n
+)                → )
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
 (                → (
 \n               → \n  
 (Suspense)       → $Suspense [-highlight]
@@ -224,6 +243,11 @@ $Suspense        → $Suspense [-semantic -navigation]
 )                → )
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
 (                → (
 \n               → \n  
 <                → <

@@ -23,6 +23,8 @@ return                                    → return
 (cs.splice(                               →  [-semantic -navigation]
 (fragment)                                → $fragment
 ))                                        →  [-semantic -navigation]
+(                                         → (
+)                                         → )
 ;                                         → ;
 \n                                        → \n    
 }                                         → }
@@ -35,9 +37,19 @@ return                                    → return
 }                                         → }
 )())                                      → ` [-semantic -navigation]
 cs.lift((() =>                            → cs` [-semantic -navigation]
+(                                         → (
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
 "evaluated"                               → "evaluated"
 )())                                      → ` [-semantic -navigation]
 cs.lift((() =>                            → cs` [-semantic -navigation]
+(                                         → (
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
 {                                         → {
 \n                                        → \n  
 throw                                     → throw

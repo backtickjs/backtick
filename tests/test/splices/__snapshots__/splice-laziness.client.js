@@ -4,7 +4,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0) => (flag) => {
     if (flag) {
-        return $splice0();
+        return $splice0()();
     }
     return "skipped";
 });
@@ -14,14 +14,14 @@ exports.default = (($splice0) => (flag) => {
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (() => "evaluated");
+exports.default = (() => () => "evaluated");
 }
 
 // 23:16
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (() => {
+exports.default = (() => () => {
     throw "the guarded fragment must never evaluate";
 });
 }

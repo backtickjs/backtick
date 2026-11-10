@@ -5,33 +5,33 @@ import { render } from "@solidjs/testing-library";
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 const $module0 = {
-  id: "oeocksjd9384:10:13",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<b>never`);\nexports.default = () => {\n    throw new Error("boom");\n    return props => _tmpl$();\n};\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBASgB;IACd,MAAM,IAAIA,KAAK,CAAC,MAAM,CAAC;IACvB,OAAQC,KAAS,IAAAC,MAAA,EAAiB;AACpC,CAAC","names":["Error","props","_tmpl$"],"ignoreList":[],"sources":["jsx/host-tag-evaluation.test.tsx"]}',
-  dependencies: ["solid-js/web"],
+  id: "1yq6zy4ucaaxv:10:13",
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => props => {\n    throw new Error("boom");\n};\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBASgB,MAACA,KAAS;IACxB,MAAM,IAAIC,KAAK,CAAC,MAAM,CAAC;AACzB,CAAC","names":["props","Error"],"ignoreList":[],"sources":["jsx/host-tag-evaluation.test.tsx"]}',
+  dependencies: [],
   params: [],
-  kind: "block",
+  kind: "function",
 };
 const $module1 = {
-  id: "oeocksjd9384:15:16",
+  id: "1yq6zy4ucaaxv:14:16",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<b>counted`);\nexports.default = () => {\n    const counter = globalThis;\n    counter.evaluations = (counter.evaluations ?? 0) + 1;\n    return props => _tmpl$();\n};\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAcmB;IACjB,MAAMA,OAAO,GAAGC,UAAiD;IACjED,OAAO,CAACE,WAAW,GAAG,CAACF,OAAO,CAACE,WAAW,IAAI,CAAC,IAAI,CAAC;IACpD,OAAQC,KAAS,IAAAC,MAAA,EAAmB;AACtC,CAAC","names":["counter","globalThis","evaluations","props","_tmpl$"],"ignoreList":[],"sources":["jsx/host-tag-evaluation.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAamB;IACjB,MAAMA,OAAO,GAAGC,UAAiD;IACjED,OAAO,CAACE,WAAW,GAAG,CAACF,OAAO,CAACE,WAAW,IAAI,CAAC,IAAI,CAAC;IACpD,OAAQC,KAAS,IAAAC,MAAA,EAAmB;AACtC,CAAC","names":["counter","globalThis","evaluations","props","_tmpl$"],"ignoreList":[],"sources":["jsx/host-tag-evaluation.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [],
   kind: "block",
 };
 const $module2 = {
-  id: "oeocksjd9384:21:18",
+  id: "1yq6zy4ucaaxv:20:18",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>ok`);\nexports.default = $splice0 => _tmpl$();\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAoBqBA,QAAA,IAAAC,MAAA,EAAiC","names":["$splice0","_tmpl$"],"ignoreList":[],"sources":["jsx/host-tag-evaluation.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;kBAmBqBA,QAAA,IAAAC,MAAA,EAAiC","names":["$splice0","_tmpl$"],"ignoreList":[],"sources":["jsx/host-tag-evaluation.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
 };
 const $module3 = {
-  id: "oeocksjd9384:22:14",
+  id: "1yq6zy4ucaaxv:21:14",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>`);\nexports.default = ($splice0, $splice1) => (() => {\n    var _el$ = _tmpl$();\n    (0, web_3.insert)(_el$, () => ($Counted => (0, web_2.createComponent)($Counted, {}))($splice0()), null);\n    (0, web_3.insert)(_el$, () => ($Counted => (0, web_2.createComponent)($Counted, {}))($splice1()), null);\n    return _el$;\n})();\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAqBiB,CAAAA,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAEb,CAAAG,QAAA,IAAAC,yBAAA,EAACD,QAAQ,KAAG,EAAXL,QAAA,EAAQ,CACT;IAAAI,gBAAA,EAAAF,IAAA,SAAAG,QAAA,IAAAC,yBAAA,EAACD,QAAQ,KAAG,EAAXJ,QAAA,EAAQ,CACX;IAAA,OAAAC,IAAA;AAAA,IACD","names":["$splice0","$splice1","_el$","_tmpl$","_$insert","$Counted","_$createComponent"],"ignoreList":[],"sources":["jsx/host-tag-evaluation.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAoBiB,CAAAA,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAEb,CAAAG,QAAA,IAAAC,yBAAA,EAACD,QAAQ,KAAG,EAAXL,QAAA,EAAQ,CACT;IAAAI,gBAAA,EAAAF,IAAA,SAAAG,QAAA,IAAAC,yBAAA,EAACD,QAAQ,KAAG,EAAXJ,QAAA,EAAQ,CACX;IAAA,OAAAC,IAAA;AAAA,IACD","names":["$splice0","$splice1","_el$","_tmpl$","_$insert","$Counted","_$createComponent"],"ignoreList":[],"sources":["jsx/host-tag-evaluation.test.tsx"]}',
   dependencies: ["solid-js/web"],
   params: [
     { kind: "splice", bindings: [] },
@@ -39,8 +39,8 @@ const $module3 = {
   ],
   kind: "expression",
 };
-// A host tag is a splice: its script is evaluated where the tag stands, each
-// time it is reached, as a value splice is.
+// A host tag is a splice: its script is one value, made once for the bundle,
+// and the component it is draws where each tag stands, when it's reached.
 const Boom = cs.create($module0, []);
 const Counted = cs.create($module1, []);
 const unreached = cs.create($module2, [Boom]);
@@ -49,15 +49,15 @@ it("hostTagEvaluation", async (t) => {
   await snapshotCase(t, "hostTagEvaluation", { unreached, twice });
 });
 describe("a host tag", () => {
-  it("is not evaluated where it isn't reached", async () => {
+  it("is not drawn where it isn't reached", async () => {
     const { container } = render(await evaluate(() => unreached));
     assert.equal(container.textContent, "ok");
   });
-  it("is evaluated each time it is reached", async () => {
+  it("is made once, and drawn each time it is reached", async () => {
     const counter = globalThis;
     counter.evaluations = 0;
     const { container } = render(await evaluate(() => twice));
     assert.equal(container.textContent?.replace(/\s/g, ""), "countedcounted");
-    assert.equal(counter.evaluations, 2);
+    assert.equal(counter.evaluations, 1);
   });
 });

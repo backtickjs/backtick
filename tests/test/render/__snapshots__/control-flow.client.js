@@ -23,36 +23,38 @@ exports.default = (($splice0, $splice1, $splice2) => (($Switch => <$Switch fallb
   </$Switch>)($splice0())));
 }
 
-// 35:16
+// 38:17
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $splice1) => ($ErrorBoundary => <$ErrorBoundary fallback={<p>caught</p>}>{$splice1()}</$ErrorBoundary>)($splice0()));
-}
-
-// 36:7
-(module, exports, require) => {
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (() => {
+exports.default = (() => () => {
     throw "drawn wrong";
 });
 }
 
-// 41:19
+// 41:16
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0) => (($Suspense => <$Suspense fallback={<p>loading</p>}>
+exports.default = (($splice0, $splice1) => () => (($ErrorBoundary => <$ErrorBoundary fallback={<p>caught</p>}>
+    {($Thrower => <$Thrower />)($splice1())}
+  </$ErrorBoundary>)($splice0())));
+}
+
+// 47:19
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => () => (($Suspense => <$Suspense fallback={<p>loading</p>}>
     <p>loaded</p>
   </$Suspense>)($splice0())));
 }
 
-// 47:18
+// 53:18
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0) => (<div>
+exports.default = (($splice0) => () => (<div>
     <p>here</p>
     {($Portal => <$Portal>
       <p>elsewhere</p>

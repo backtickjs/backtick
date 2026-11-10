@@ -32,19 +32,25 @@ const switched = cs`(
   </$Switch>
 )`;
 
-const caught = cs`<$ErrorBoundary fallback={<p>caught</p>}>{
-    ${cs`{
-      throw "drawn wrong";
-    }`}
-  }</$ErrorBoundary>`;
+// A boundary, a portal and what they hold are components, drawn where they're
+// placed, as in plain Solid: made at load, they'd have no owner to catch,
+// suspend or clean up in.
+const Thrower = cs`() => {
+  throw "drawn wrong";
+}`;
+const caught = cs`() => (
+  <$ErrorBoundary fallback={<p>caught</p>}>
+    <$Thrower />
+  </$ErrorBoundary>
+)`;
 
-const suspended = cs`(
+const suspended = cs`() => (
   <$Suspense fallback={<p>loading</p>}>
     <p>loaded</p>
   </$Suspense>
 )`;
 
-const portaled = cs`(
+const portaled = cs`() => (
   <div>
     <p>here</p>
     <$Portal>
@@ -69,19 +75,19 @@ describe("control flow in a script", () => {
   });
 
   it("draws the fallback of an ErrorBoundary around a script that throws", async () => {
-    render(await evaluate(() => caught));
+    render(await evaluate(caught));
     assert.ok(screen.getByText("caught"));
   });
 
   it("draws a Portal's children outside where it stands", async () => {
-    const { container } = render(await evaluate(() => portaled));
+    const { container } = render(await evaluate(portaled));
     assert.ok(container.textContent?.includes("here"));
     assert.ok(!container.textContent?.includes("elsewhere"));
     assert.ok(screen.getByText("elsewhere"));
   });
 
   it("draws Suspense's children when nothing is pending", async () => {
-    render(await evaluate(() => suspended));
+    render(await evaluate(suspended));
     assert.ok(screen.getByText("loaded"));
   });
 });

@@ -2,7 +2,7 @@
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (() => {
+exports.default = (() => () => {
     window.console.log("logged");
 });
 }
@@ -12,7 +12,7 @@ exports.default = (() => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0, $splice1) => {
-    $splice0();
-    $splice1();
+    $splice0()();
+    $splice1()();
 });
 }
