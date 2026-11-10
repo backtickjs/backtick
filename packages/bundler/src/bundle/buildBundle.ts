@@ -10,7 +10,7 @@ import {
 
 import { BundlerError } from "../errors.js";
 import { expandServerComponents } from "./expandServerComponents.js";
-import { bindingsOf, capturesOf, isValue } from "./params.js";
+import { bindingsOf, capturesOf } from "./params.js";
 import { sourceName } from "./bindingKey.js";
 import {
   array,
@@ -177,15 +177,15 @@ export async function buildBundle(
     return label;
   };
 
-  // A function, a class and a `once` script are each one value (see
-  // `isValue`): its code run at the top of the bundle, where nothing encloses
-  // it, and every read is that constant. One per script, not per code: two
-  // runs of a host function that each make a function are two functions, and
-  // two that each make a context two contexts, as in plain TypeScript.
+  // A script is one value, as a module-level `const` is: its code run at the
+  // top of the bundle, where nothing encloses it, and every read is that
+  // constant. One per script, not per code: two runs of a host function that
+  // each make a function are two functions, and two that each make a context
+  // two contexts, as in plain TypeScript.
   //
-  // A function or a class that reads a variable of the scope it's read in,
-  // itself or through what it's handed, is made there instead, as one
-  // declared in a function is. A `once` script that does is refused.
+  // A script that reads a variable of the scope it's read in, itself or
+  // through what it's handed, is made there instead, as one declared in a
+  // function is. A `once` script that does is refused.
   const values = new Map<ClientScript, string>();
   const valueOf = (script: ClientScript, scope: Scope): string => {
     let label = values.get(script);
@@ -214,13 +214,7 @@ export async function buildBundle(
   // reached each script. Expansion has refused cycles, so it ends.
   const render = (spliceable: unknown, scope: Scope = rootScope()): string => {
     if (isClientScript(spliceable)) {
-      if (isValue(spliceable)) {
-        return valueOf(spliceable, scope);
-      }
-      return call(
-        labelOf(scriptFor(spliceable)),
-        exprCallArgs(spliceable, scope),
-      );
+      return valueOf(spliceable, scope);
     }
     if (isJsxElement(spliceable)) {
       return renderJsx(spliceable);

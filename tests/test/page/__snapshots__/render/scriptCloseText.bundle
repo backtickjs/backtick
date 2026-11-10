@@ -28,4 +28,5 @@ const $require = (id) => {
 };
 const $cs0 = $require("11l1n280zt2gs:11:24").default;
 const $thunk0 = () => "& \u003c > \" ' \u003c/script> \u003c!-- -->";
-export default $cs0($thunk0);
+const $value1 = $cs0($thunk0);
+export default $value1;

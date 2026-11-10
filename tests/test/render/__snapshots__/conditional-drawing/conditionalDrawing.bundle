@@ -67,4 +67,5 @@ const $cs1 = $require("kdjefp1ta4ua:30:13").default;
 const $thunk0 = () => $i0;
 const $value1 = $cs1($thunk0);
 const $thunk2 = () => $value1;
-export default $cs0($thunk0, $thunk2);
+const $value3 = $cs0($thunk0, $thunk2);
+export default $value3;

@@ -23,4 +23,5 @@ const $require = (id) => {
 const $cs0 = $require("3eix0d6ptibv5:28:4").default;
 const $thunk0 = () => $i0;
 const $thunk1 = () => ({ title: "Ship 0.1.5", done: false, tags: ["release"] });
-export default $cs0($thunk0, $thunk1, $thunk1, $thunk1);
+const $value2 = $cs0($thunk0, $thunk1, $thunk1, $thunk1);
+export default $value2;

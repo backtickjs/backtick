@@ -87,4 +87,5 @@ const $value3 = $cs1($thunk2);
 const $thunk4 = () => $value3;
 const $value5 = $cs3($thunk2, $thunk2);
 const $thunk6 = () => $value5;
-export default $cs0($thunk4, $thunk4, $thunk6);
+const $value7 = $cs0($thunk4, $thunk4, $thunk6);
+export default $value7;

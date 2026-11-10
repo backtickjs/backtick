@@ -5,7 +5,6 @@ import {
   isJsxElement,
 } from "@backtickjs/core";
 import { BundlerError } from "../errors.js";
-import { isValue } from "./params.js";
 
 const CYCLE_ERROR =
   "Can't splice a value that contains itself: a bundle writes each value " +
@@ -31,15 +30,15 @@ const contains = (ancestors: Ancestors | null, value: object): boolean => {
 // each element of one replaced by what its component drew, expanded in turn.
 // Siblings expand at once, so two components awaiting data wait together.
 //
-// A component runs each time its element is drawn, as React renders an element
-// each place it stands: the component itself never leaves the host, and only
-// the client code it bottoms out in reaches the bundle. A value holding no
-// server component comes back as the same object.
+// A component runs once per element, as React's server renderer runs one: the
+// component itself never leaves the host, and only the client code it bottoms
+// out in reaches the bundle. A value holding no server component comes back as
+// the same object.
 //
-// A function, a class and a `once` script are each one value (see `isValue`),
-// so what one splices is expanded once, however many places read it: a server
-// component inside it runs once. `values` holds
-// each one's expansion for the call.
+// A script is one value, so what one splices is expanded once, however many
+// places read it: a server component inside it runs once, as React's server
+// renderer runs one element once wherever it's placed. `values` holds each
+// one's expansion for the call.
 export async function expandServerComponents(
   spliceable: unknown,
   ancestors: Ancestors | null = null,
@@ -76,9 +75,6 @@ export async function expandServerComponents(
         ? spliceable
         : { ...spliceable, args };
     };
-    if (!isValue(spliceable)) {
-      return expanded();
-    }
     let made = values.get(spliceable);
     if (made === undefined) {
       made = expanded();

@@ -50,14 +50,17 @@ const $cs1 = $require("25mdzlh7035ld:352:9").default;
 const $cs2 = $require("3muqirg3sfmdb:8:9").default;
 const $thunk0 = () => $i0;
 const $thunk1 = () => "alpha";
-const $thunk2 = () => $cs2($thunk1);
-const $thunk3 = () => "beta";
-const $thunk4 = () => $cs2($thunk3);
-const $thunk5 = () => "gamma";
-const $thunk6 = () => $cs2($thunk5);
-const $thunk7 = () => [
-  $cs1($thunk0, $thunk2),
-  $cs1($thunk0, $thunk4),
-  $cs1($thunk0, $thunk6),
-];
-export default $cs0($thunk7);
+const $value2 = $cs2($thunk1);
+const $thunk3 = () => $value2;
+const $value4 = $cs1($thunk0, $thunk3);
+const $thunk5 = () => "beta";
+const $value6 = $cs2($thunk5);
+const $thunk7 = () => $value6;
+const $value8 = $cs1($thunk0, $thunk7);
+const $thunk9 = () => "gamma";
+const $value10 = $cs2($thunk9);
+const $thunk11 = () => $value10;
+const $value12 = $cs1($thunk0, $thunk11);
+const $thunk13 = () => [$value4, $value8, $value12];
+const $value14 = $cs0($thunk13);
+export default $value14;

@@ -129,4 +129,5 @@ const $thunk4 = (Badge, count) => $cs5(Badge, count);
 const $thunk5 = (count, Badge) => $cs4($thunk4, Badge, count);
 const $thunk6 = (Badge, count) => $i1;
 const $thunk7 = (count, Badge) => $cs6($thunk6, Badge, count);
-export default $cs0($thunk0, $thunk1, $thunk3, $thunk5, $thunk7);
+const $value8 = $cs0($thunk0, $thunk1, $thunk3, $thunk5, $thunk7);
+export default $value8;

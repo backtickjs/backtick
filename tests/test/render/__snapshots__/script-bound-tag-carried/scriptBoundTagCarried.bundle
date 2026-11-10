@@ -103,4 +103,5 @@ const $thunk0 = () => $i0;
 const $thunk1 = () => $i1;
 const $thunk2 = (count, Badge) =>
   $cs1($thunk1, () => $cs2(() => ({ body: $cs3(Badge, count) })));
-export default $cs0($thunk0, $thunk2);
+const $value3 = $cs0($thunk0, $thunk2);
+export default $value3;

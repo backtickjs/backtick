@@ -38,4 +38,5 @@ const $require = (id) => {
   return $exports[id];
 };
 const $cs0 = $require("1nb9j9gha9a2e:12:4").default;
-export default $cs0();
+const $value0 = $cs0();
+export default $value0;

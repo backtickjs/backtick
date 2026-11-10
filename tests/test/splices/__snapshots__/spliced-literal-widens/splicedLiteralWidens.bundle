@@ -26,4 +26,5 @@ const $thunk0 = () => $i0;
 const $thunk1 = () => 5;
 const $thunk2 = () => 0;
 const $thunk3 = () => 1;
-export default $cs0($thunk0, $thunk1, $thunk0, $thunk2, $thunk3);
+const $value4 = $cs0($thunk0, $thunk1, $thunk0, $thunk2, $thunk3);
+export default $value4;

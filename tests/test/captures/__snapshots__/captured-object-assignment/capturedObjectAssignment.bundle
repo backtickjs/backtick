@@ -33,4 +33,5 @@ const $require = (id) => {
 const $cs0 = $require("385xpgt8q0ek2:12:4").default;
 const $cs1 = $require("385xpgt8q0ek2:14:21").default;
 const $thunk0 = (counter) => $cs1(counter);
-export default $cs0($thunk0);
+const $value1 = $cs0($thunk0);
+export default $value1;

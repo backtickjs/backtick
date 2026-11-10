@@ -23,5 +23,7 @@ const $require = (id) => {
 const $cs0 = $require("21r061mv5fq6m:86:17").default;
 const $cs1 = $require("21r061mv5fq6m:86:22").default;
 const $thunk0 = () => "hello";
-const $thunk1 = () => $cs1($thunk0);
-export default $cs0($thunk1);
+const $value1 = $cs1($thunk0);
+const $thunk2 = () => $value1;
+const $value3 = $cs0($thunk2);
+export default $value3;

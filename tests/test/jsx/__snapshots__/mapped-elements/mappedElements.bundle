@@ -42,7 +42,11 @@ const $require = (id) => {
 const $cs0 = $require("rkwygfa87yuf:15:4").default;
 const $cs1 = $require("rkwygfa87yuf:15:43").default;
 const $thunk0 = () => "alpha";
-const $thunk1 = () => "beta";
-const $thunk2 = () => "gamma";
-const $thunk3 = () => [$cs1($thunk0), $cs1($thunk1), $cs1($thunk2)];
-export default $cs0($thunk3);
+const $value1 = $cs1($thunk0);
+const $thunk2 = () => "beta";
+const $value3 = $cs1($thunk2);
+const $thunk4 = () => "gamma";
+const $value5 = $cs1($thunk4);
+const $thunk6 = () => [$value1, $value3, $value5];
+const $value7 = $cs0($thunk6);
+export default $value7;

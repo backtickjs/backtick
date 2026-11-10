@@ -20,4 +20,5 @@ const $require = (id) => {
 };
 const $cs0 = $require("3amzui83z49rq:19:4").default;
 const $thunk0 = () => '{"rows":["one","two"],"count":2}';
-export default $cs0($thunk0);
+const $value1 = $cs0($thunk0);
+export default $value1;

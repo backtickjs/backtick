@@ -4,9 +4,11 @@ import { cs } from "@backtickjs/core";
 import { render } from "@solidjs/testing-library";
 import { evaluate } from "../evaluate.ts";
 
-// One element, held in a variable and drawn in two places. As React renders
-// an element each place it stands, its component runs once per place, and
-// each place draws what its own run returned.
+// One element, held in a variable and drawn in two places. As React's server
+// renderer does, its component runs once: one object, rendered once, and its
+// result referenced in each place. Two elements, <Stamp /> written twice, run
+// twice. Drawn by Solid, that result is one node, which moves when it's placed
+// again, so it shows once.
 let runs = 0;
 
 async function Stamp() {
@@ -22,9 +24,9 @@ const twice = cs`(
   </p>
 )`;
 
-it("an element drawn twice runs its component twice", async () => {
+it("an element drawn twice runs its component once", async () => {
   runs = 0;
   const { container } = render(await evaluate(() => twice));
-  assert.equal(runs, 2);
-  assert.equal(container.textContent, "12");
+  assert.equal(runs, 1);
+  assert.equal(container.textContent, "1");
 });

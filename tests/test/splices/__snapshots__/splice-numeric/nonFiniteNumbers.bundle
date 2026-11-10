@@ -24,4 +24,5 @@ const $thunk0 = () => [
   12345678901234567890n,
   -1n,
 ];
-export default $cs0($thunk0);
+const $value1 = $cs0($thunk0);
+export default $value1;

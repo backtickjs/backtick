@@ -41,4 +41,5 @@ const $cs1 = $require("bphb1svo1jv3:18:9").default;
 const $cs2 = $require("bphb1svo1jv3:20:13").default;
 const $cs3 = $require("bphb1svo1jv3:30:25").default;
 const $thunk0 = (base) => $cs1((base2) => $cs2((base2) => $cs3(base), base2));
-export default $cs0($thunk0);
+const $value1 = $cs0($thunk0);
+export default $value1;

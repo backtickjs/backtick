@@ -129,4 +129,5 @@ const $thunk1 = () => [
     total: 49.23,
   },
 ];
-export default $cs0($thunk0, $thunk1, $thunk0);
+const $value2 = $cs0($thunk0, $thunk1, $thunk0);
+export default $value2;

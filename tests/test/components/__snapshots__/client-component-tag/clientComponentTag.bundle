@@ -69,4 +69,5 @@ const $thunk0 = () => $i0;
 const $thunk1 = () => $i1;
 const $value2 = $cs1();
 const $thunk3 = () => $value2;
-export default $cs0($thunk0, $thunk1, $thunk3);
+const $value4 = $cs0($thunk0, $thunk1, $thunk3);
+export default $value4;

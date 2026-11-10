@@ -52,4 +52,5 @@ const $cs1 = $require("2e3ek2i5ephn4:10:16").default;
 const $thunk0 = () => $i0;
 const $value1 = $cs1($thunk0);
 const $thunk2 = () => $value1;
-export default $cs0($thunk2);
+const $value3 = $cs0($thunk2);
+export default $value3;

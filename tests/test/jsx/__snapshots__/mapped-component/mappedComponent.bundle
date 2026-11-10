@@ -54,4 +54,5 @@ const $cs1 = $require("l47qabunlqhs:29:30").default;
 const $thunk0 = () => $i0;
 const $thunk1 = () => [1, 2, 3];
 const $thunk2 = (row) => $cs1(row);
-export default $cs0($thunk0, $thunk1, $thunk2);
+const $value3 = $cs0($thunk0, $thunk1, $thunk2);
+export default $value3;

@@ -90,5 +90,7 @@ const $thunk3 = (size) =>
       () => $cs4(size),
     ),
   );
-const $thunk4 = () => $cs1($thunk1, $thunk2, $thunk3);
-export default $cs0($thunk0, $thunk4);
+const $value4 = $cs1($thunk1, $thunk2, $thunk3);
+const $thunk5 = () => $value4;
+const $value6 = $cs0($thunk0, $thunk5);
+export default $value6;

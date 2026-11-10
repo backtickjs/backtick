@@ -60,4 +60,5 @@ const $cs1 = $require("1cygqeaz3p044:16:13").default;
 const $cs2 = $require("1cygqeaz3p044:17:13").default;
 const $thunk0 = (Row) => $cs1(Row);
 const $thunk1 = (Row) => $cs2(Row);
-export default $cs0($thunk0, $thunk1);
+const $value2 = $cs0($thunk0, $thunk1);
+export default $value2;
