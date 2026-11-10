@@ -12,7 +12,7 @@ import { applyEdits } from "./applyEdits.ts";
 import { card, cardHtml, cardScriptOrigin, cardUri } from "./card.ts";
 import { diagnose } from "./diagnostics/index.ts";
 import { phoneModules, phoneVersions, serverModules } from "./modules.ts";
-import { checkInSandbox, snapshotId, typecheckInSandbox } from "./sandbox.ts";
+import { checkInSandbox, snapshotId, warmSandbox } from "./sandbox.ts";
 import { starter } from "./starter.ts";
 import {
   type Check,
@@ -58,7 +58,7 @@ export function tools(owner: string): McpServer {
     },
     async () => {
       const id = randomUUID();
-      warmSandbox();
+      warmSandbox(owner, snapshotId());
       return text(
         `${JSON.stringify({ id })}\n\n` +
           `\`\`\`tsx\n${starter}\`\`\`\n\n` +
@@ -88,7 +88,7 @@ export function tools(owner: string): McpServer {
       if (latest === undefined) {
         return failed(`No saved app ${id}.`);
       }
-      warmSandbox();
+      warmSandbox(owner, snapshotId());
       return text(
         `${JSON.stringify({ id, version: latest.version })}\n\n` +
           `\`\`\`tsx\n${latest.source}\`\`\``,
@@ -197,16 +197,6 @@ export function tools(owner: string): McpServer {
       return save(id, latest.title, edited.code);
     },
   );
-
-  // A save is coming: the sandbox is made and warmed while the model writes
-  // the code, so the save finds it ready.
-  function warmSandbox(): void {
-    waitUntil(
-      typecheckInSandbox(owner, starter, snapshotId()).catch((error) =>
-        console.error("Warming the sandbox failed:", error),
-      ),
-    );
-  }
 
   async function save(
     id: string,

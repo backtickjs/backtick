@@ -1,14 +1,16 @@
 // The function's side: each call writes the app's file into the owner's
 // sandbox and asks its server. The first call creates the sandbox from the
-// base snapshot and starts the server; each call keeps it another `warm`.
+// base snapshot and starts the server; each call extends it to `lifetime`.
 import { createHash, randomUUID } from "node:crypto";
+import { waitUntil } from "@vercel/functions";
 import { Sandbox } from "@vercel/sandbox";
 import type { Typechecked } from "../../sandbox/src/typecheck.ts";
 import snapshot from "../../snapshot.json" with { type: "json" };
+import { starter } from "./starter.ts";
 
 // Where `scripts/snapshot.ts` installs the sandbox package (sandbox/).
 const app = "/vercel/backtickjs.app";
-const warm = 10 * 60 * 1000;
+const lifetime = 10 * 60 * 1000;
 // A check takes 1–11 s, a new sandbox about 7 s more: past this, the sandbox
 // is taken as stuck.
 const patience = 30 * 1000;
@@ -68,7 +70,7 @@ async function sandboxOf(
     // Nothing in it outlives the server's cache.
     persistent: false,
     resources: { vcpus: 1 },
-    timeout: warm,
+    timeout: lifetime,
     networkPolicy: "deny-all",
     onCreate: (sandbox) => start(sandbox, signal),
     signal,
@@ -147,21 +149,31 @@ async function askWithin<T>(
   if (answer === undefined) {
     throw new Error("The sandbox's server didn't answer.");
   }
-  await keepWarm(sandbox);
+  waitUntil(extendSandbox(sandbox));
   return JSON.parse(answer) as T;
 }
 
+// A save is coming: the owner's sandbox is made, and its typechecker loaded
+// with the starter's types, while the model writes the code, so the save finds
+// it ready. Runs after the answer, and a failure is only logged.
+export function warmSandbox(user: string, snapshotId: string): void {
+  waitUntil(
+    typecheckInSandbox(user, starter, snapshotId).catch((error) =>
+      console.error("Warming the sandbox failed:", error),
+    ),
+  );
+}
+
 // Vercel extends by a second at least; a minute keeps the calls few. Only
-// for the next call's speed, so it never fails this one: a sandbox at Vercel's
-// longest lifetime can't be extended, and stops; the next call gets a new one.
-async function keepWarm(sandbox: Sandbox): Promise<void> {
+// for the next call's speed, so it runs after the answer and never fails it: a
+// sandbox at Vercel's longest lifetime can't be extended, and stops; the next
+// call gets a new one.
+async function extendSandbox(sandbox: Sandbox): Promise<void> {
   const left = (sandbox.expiresAt?.getTime() ?? 0) - Date.now();
-  if (warm - left >= 60 * 1000) {
+  if (lifetime - left >= 60 * 1000) {
     await sandbox
-      .extendTimeout(warm - left)
-      .catch((error) =>
-        console.error("Keeping the sandbox warm failed:", error),
-      );
+      .extendTimeout(lifetime - left)
+      .catch((error) => console.error("Extending the sandbox failed:", error));
   }
 }
 
