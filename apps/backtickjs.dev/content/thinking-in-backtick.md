@@ -150,8 +150,9 @@ Server and client components compose in both directions, in one file:
   `children` is a `JSX.Element` when it's handed a server element, as here,
   and a `Client<JSX.Element>` when it's handed a script.
 
-A server component runs once per place it's drawn, as React renders an
-element at each place it stands. If two places need the same data, fetch it
+A server component runs once per element, as React's server components do:
+`<Reviews />` written twice runs twice, and one element held in a variable
+and drawn in two places runs once. If two places need the same data, fetch it
 once and pass it down.
 
 ## Where code goes
@@ -163,5 +164,5 @@ once and pass it down.
 | A server value on the phone                                   | A splice: `$name`, or `${expression}`                           |
 | A piece of UI with its own props and state                    | A client component: `` cs`(props) => …` ``, used as `<$Name />` |
 | A function the phone calls                                    | A client function: `` cs`(n: number) => …` ``                   |
-| A value every client component shares, like a context         | A `once` script: ``once(cs`…`)``                                |
+| A value every client component shares, like a context         | A script: `` cs`…` ``, one value for the bundle                 |
 | A piece of UI built on your server, inside a script           | A server component, spliced: `{${<Name />}}`                    |

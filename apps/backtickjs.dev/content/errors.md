@@ -12,6 +12,14 @@ The splice holds something that can't cross: a function, a class instance, a
 client function, `` cs`(n: number) => …` ``. See
 [what can cross](/docs/thinking-in-backtick/#splices).
 
+### Argument of type 'void' is not assignable to parameter of type '"a script that makes no value: …"'
+
+A script makes no value: a block that returns nothing, or an expression that
+calls a function returning nothing. A script is one value, made when the
+bundle loads, so code that only does something is a function, called where it
+runs: `` cs`() => …` ``, then `$log()`. See
+[reading a script](/docs/scripts-in-depth/#reading-a-script).
+
 ### Cannot find name '…'
 
 A script used a name from your server without a `$`, or a name nothing
@@ -83,16 +91,9 @@ one: `` cs`<$View>…</$View>` ``.
 
 ## From the bundler
 
-Thrown by `bundler.build`, for the screen it was building, and by `once` and
-`supports`, where they're called. Each is a `BundlerError`; an error your
+Thrown by `bundler.build`, for the screen it was building, and by `supports`,
+where it's called. Each is a `BundlerError`; an error your
 server component throws passes through as it is.
-
-### Can't make this script `once`: it reads `…` from the script around it
-
-A `once` script was written inside another script, reading one of its
-variables. A `once` value is made at the top of the bundle, outside every
-script, so it can't. Make it outside the script, and splice it in. See
-[reading a script](/docs/scripts-in-depth/#reading-a-script).
 
 ### Can't import `…` from "…": the client provides …
 

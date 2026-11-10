@@ -38,7 +38,7 @@ it("four shapes: a script built from another", async () => {
   assert.equal(await drawScreen(total), "$8.50");
 });
 
-it("reading a script: a block runs at each read, a function at each call", async () => {
+it("reading a script: a function runs at each call", async () => {
   const logged: string[] = [];
   const log = console.log;
   console.log = (line: string) => logged.push(line);
@@ -50,7 +50,7 @@ it("reading a script: a block runs at each read, a function at each call", async
   assert.deepEqual(logged, ["visit", "visit", "tap a", "tap b"]);
 });
 
-it("reading a script: a memo component made once keeps its state", async () => {
+it("reading a script: a memo component is one value, which keeps its state", async () => {
   render(await drawScreen(<RowsHome />));
   await userEvent.click(screen.getByText("row 0"));
   await userEvent.click(screen.getByText("list 0"));
@@ -58,7 +58,7 @@ it("reading a script: a memo component made once keeps its state", async () => {
   assert.ok(screen.getByText("row 1"));
 });
 
-it("reading a script: a once script is one value, which its consumers find", async () => {
+it("reading a script: a context is one value, which its consumers find", async () => {
   render(await drawScreen(<ThemeHome dark />));
   assert.ok(screen.getByText("dark"));
 });

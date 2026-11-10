@@ -11,7 +11,8 @@ something you didn't expect.
 A script is an expression, a block of statements, a function, or a class. An
 expression is a `Client` of its value; a block, of what it returns; a
 function, of the function itself; a class, of the class. A function that
-returns JSX is a client component. TypeScript infers each type; the annotations above only show
+returns JSX is a client component. A script makes a value: one that makes
+none, a block that returns nothing, is refused where it's written. TypeScript infers each type; the annotations above only show
 them.
 
 Your server can't read the `T`, which doesn't exist until the phone runs the
@@ -25,52 +26,40 @@ from a server component. Annotate a function that builds scripts with
 
 ## Reading a script
 
-How a splice of a script behaves follows from how it's written, as the same
-code written by hand in TypeScript would:
+A script is one value, made when the bundle loads, as a module-level `const`
+is in TypeScript: every splice of it reads that value.
 
 - **A function is one function.** `$logTap` is the same function at every
-  read, and its body runs each time it's called.
-- **A class is one class.** `` cs`class … {}` `` is the same class at every
-  read, as a module-level class is, unless it reads a variable of the script
-  around it: then it's made each time that script runs, as a class declared
-  in a function is.
-- **An expression or a block is code, run each time it's read.** Reading
-  `$logVisit` twice runs it twice.
-- **A `once` script is one value.** `once(cs`…`)` runs its code once, at the
-  top of the bundle, and every read is that value, as a module-level `const`
-  is.
+  read, and its body runs each time it's called. Code that runs each time
+  it's used is written this way, and called: `$logVisit()`.
+- **A class is one class**, as a module-level class is.
+- **An expression or a block is its value**, made once: a store, a context or
+  styles every component shares.
+- **A script that reads a variable of the script around it** is made each
+  time that script runs, as code written in a function is.
 
 ```tsx file=scripts-in-depth/server/Log.tsx
 
 ```
 
-This is why a client component is written as a function: one function for the
-bundle, so React sees the same component on every render and keeps its
-state. A component made by an expression or a block is new code at each read,
-so React remounts it on every render of its parent, as it would one defined
-inside a render function.
-
-A component made by a call, such as `memo(…)`, is made once where React would
-make it, in `useMemo`:
+A client component is one function for the bundle, so React sees the same
+component on every render and keeps its state. A component made by a call,
+such as `memo(…)`, is one value too, as at module level:
 
 ```tsx file=scripts-in-depth/server/Rows.tsx
 
 ```
 
-What every component shares, a context or a store, is made with `once`.
+What every component shares, a context or a store, is written the same way.
 `ThemeContext` is one context for the bundle, as `createContext` at module
-level is one, so the provider and the consumer find each other. Written as an
-expression, the script would make a context at the provider's read and
-another at the consumer's, and the consumer would get the default.
+level is one, so the provider and the consumer find each other.
 
 ```tsx file=scripts-in-depth/server/Theme.tsx
 
 ```
 
-Each call of `once` is one value: a server component calling it makes one per
-request. A `once` script can't read a variable of the script around it, since
-nothing encloses the top of the bundle; your server refuses it where it's
-made.
+Each run of a `cs` line is one value: a server component that makes a
+script makes one per request.
 
 ## No template literals inside a script
 

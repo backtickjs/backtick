@@ -43,4 +43,5 @@ const $thunk4 = () => ($i3);
 const $value5 = $cs1($thunk3, $thunk4, $thunk1);
 const $thunk6 = () => ($value5);
 const $thunk7 = () => ({ id: "o-1042", name: "Flat white" });
-module.exports = ($cs0($thunk0, $thunk1, $thunk2, $thunk6, $thunk7));
+const $value8 = $cs0($thunk0, $thunk1, $thunk2, $thunk6, $thunk7);
+module.exports = ($value8);

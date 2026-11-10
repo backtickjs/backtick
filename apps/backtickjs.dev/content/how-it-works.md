@@ -80,9 +80,10 @@ From the top:
 - **The bundle's constants.** Each splice is a small function, `$thunk<n>`,
   that the script calls when it reads the splice: Sam's name and order are
   there, as data. `ReorderButton` is `$value5`, made once for the whole
-  bundle, so React keeps its state across renders. Every function, class and
-  `once` script is a `$value<n>`, made once the same way.
-- **The root:** the screen, as the call of its script.
+  bundle, so React keeps its state across renders. Every script is a
+  `$value<n>`, made once the same way, unless it reads a variable of the
+  script around it.
+- **The root:** the screen, a value made the same way, `$value8`.
 
 Nothing of `Home` is in the bundle, and `db` isn't either: the phone gets
 results, never the code that produced them. Only what a request drew is in

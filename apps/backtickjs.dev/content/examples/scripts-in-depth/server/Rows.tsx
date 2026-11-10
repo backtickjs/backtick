@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { memo, useMemo, useState } from "react" with { backtick: "client" };
+import { memo, useState } from "react" with { backtick: "client" };
 import { Pressable, Text, View } from "react-native" with {
   backtick: "client",
 };
@@ -16,16 +16,17 @@ const Row = cs`(props: { label: string }) => {
   );
 }`;
 
+// memo(…) is a call, and a script is one value: one component for the bundle.
+const MemoRow = cs`$memo($Row)`;
+
 export const List = cs`() => {
-  // memo(…) is a call: made once per list, so it is one component too.
-  const MemoRow = $useMemo(() => $memo($Row), []);
   const [taps, setTaps] = $useState(0);
   return (
     <$View>
       <$Pressable onPress={() => setTaps(taps + 1)}>
         <$Text>list {taps}</$Text>
       </$Pressable>
-      <MemoRow label="row" />
+      <$MemoRow label="row" />
     </$View>
   );
 }`;
