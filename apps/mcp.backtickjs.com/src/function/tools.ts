@@ -45,8 +45,9 @@ export function tools(owner: string): McpServer {
     {
       title: "New app",
       description:
-        "A new native app for the user's phone: its id and a starter " +
-        "App.tsx to edit, then save with save_app.",
+        "A new app's id and starter code, with nothing saved yet. " +
+        "Save the first version with save_app, then change it with " +
+        "update_app.",
       inputSchema: z.object({}),
       annotations: {
         title: "New app",
@@ -59,7 +60,7 @@ export function tools(owner: string): McpServer {
       const id = randomUUID();
       warmSandbox();
       return text(
-        `${JSON.stringify({ id, file: "App.tsx" })}\n\n` +
+        `${JSON.stringify({ id })}\n\n` +
           `\`\`\`tsx\n${starter}\`\`\`\n\n` +
           `The phone provides these client modules, and only these, each at exactly this version: ` +
           `${phoneModules.map((specifier) => `${specifier}@${phoneVersions[specifier]}`).join(", ")}. ` +
@@ -73,7 +74,7 @@ export function tools(owner: string): McpServer {
     "get_app",
     {
       title: "Get an app",
-      description: "An app's latest App.tsx and version, to change it.",
+      description: "An app's latest code and version, to change it.",
       inputSchema: z.object({ id: z.uuid() }),
       annotations: {
         title: "Get an app",
@@ -136,9 +137,10 @@ export function tools(owner: string): McpServer {
     {
       title: "Save an app",
       description:
-        "Checks App.tsx and, if it has no errors, saves it as the app's " +
-        "next version, which the phone opens. Returns the errors to fix, " +
-        "or the app's link to give the user.",
+        "Typechecks and compiles an app's complete code; if it passes, " +
+        "saves it as the app's latest version and returns its link, which " +
+        "opens it in Backtick on the user's phone. If not, nothing is " +
+        "saved.",
       inputSchema: z.object({
         id: z.uuid(),
         title: z.string(),
@@ -164,9 +166,9 @@ export function tools(owner: string): McpServer {
     {
       title: "Update an app",
       description:
-        "Edits an app's latest App.tsx, in order, then saves it as " +
-        "save_app does. Each old_str must match exactly once, or nothing " +
-        "is saved. Put every edit for a change in one call.",
+        "Edits an app's last saved code and saves it as save_app does; " +
+        "each old_str must match exactly once. Put every edit for a change " +
+        "in one call: a failed call saves nothing.",
       inputSchema: z.object({
         id: z.uuid(),
         edits: z
@@ -184,7 +186,9 @@ export function tools(owner: string): McpServer {
     async ({ id, edits }) => {
       const latest = await latestVersion(id, owner);
       if (latest === undefined) {
-        return failed(`No saved app ${id}.`);
+        return failed(
+          `App ${id} has no saved version to edit: save it with save_app.`,
+        );
       }
       const edited = applyEdits(latest.source, edits);
       if ("error" in edited) {
@@ -242,7 +246,13 @@ export function tools(owner: string): McpServer {
         warnings,
         durationMs,
       });
-      return failed([...errors, ...warnings].join("\n"));
+      return failed(
+        [
+          "Nothing was saved. Fix these errors and try again.",
+          ...errors,
+          ...warnings,
+        ].join("\n"),
+      );
     }
     const version = await saveVersion(
       id,
