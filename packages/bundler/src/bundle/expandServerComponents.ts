@@ -3,6 +3,7 @@ import {
   isClientImport,
   isClientScript,
   isJsxElement,
+  type JsxElement,
 } from "@backtickjs/core";
 import { BundlerError } from "../errors.js";
 
@@ -30,19 +31,19 @@ const contains = (ancestors: Ancestors | null, value: object): boolean => {
 // each element of one replaced by what its component drew, expanded in turn.
 // Siblings expand at once, so two components awaiting data wait together.
 //
-// A component runs once per element, as React's server renderer runs one: the
+// A component runs once per element, as React's server renderer runs one: one
+// element drawn in two places runs once, and two elements run twice. The
 // component itself never leaves the host, and only the client code it bottoms
 // out in reaches the bundle. A value holding no server component comes back as
 // the same object.
 //
 // A script is one value, so what one splices is expanded once, however many
-// places read it: a server component inside it runs once, as React's server
-// renderer runs one element once wherever it's placed. `values` holds each
-// one's expansion for the call.
+// places read it. `shared` holds each element's and each script's expansion
+// for the call.
 export async function expandServerComponents(
   spliceable: unknown,
   ancestors: Ancestors | null = null,
-  values = new Map<ClientScript, Promise<unknown>>(),
+  shared = new Map<JsxElement | ClientScript, Promise<unknown>>(),
 ): Promise<unknown> {
   if (typeof spliceable !== "object" || spliceable === null) {
     return spliceable;
@@ -53,8 +54,21 @@ export async function expandServerComponents(
   const inside: Ancestors = { value: spliceable, parent: ancestors };
   const all = (entries: readonly unknown[]) =>
     Promise.all(
-      entries.map((entry) => expandServerComponents(entry, inside, values)),
+      entries.map((entry) => expandServerComponents(entry, inside, shared)),
     );
+
+  // Each element and each script once, its expansion shared.
+  const once = (
+    key: JsxElement | ClientScript,
+    expand: () => Promise<unknown>,
+  ): Promise<unknown> => {
+    let made = shared.get(key);
+    if (made === undefined) {
+      made = expand();
+      shared.set(key, made);
+    }
+    return made;
+  };
 
   if (isJsxElement(spliceable)) {
     const { type } = spliceable;
@@ -62,25 +76,21 @@ export async function expandServerComponents(
     if (typeof type !== "function" || isClientImport(type)) {
       return spliceable;
     }
-    return expandServerComponents(
-      await type(spliceable.props as never),
-      inside,
-      values,
+    return once(spliceable, async () =>
+      expandServerComponents(
+        await type(spliceable.props as never),
+        inside,
+        shared,
+      ),
     );
   }
   if (isClientScript(spliceable)) {
-    const expanded = async (): Promise<unknown> => {
+    return once(spliceable, async () => {
       const args = await all(spliceable.args);
       return args.every((arg, index) => arg === spliceable.args[index])
         ? spliceable
         : { ...spliceable, args };
-    };
-    let made = values.get(spliceable);
-    if (made === undefined) {
-      made = expanded();
-      values.set(spliceable, made);
-    }
-    return made;
+    });
   }
   if (Array.isArray(spliceable)) {
     const elements = await all(spliceable);
