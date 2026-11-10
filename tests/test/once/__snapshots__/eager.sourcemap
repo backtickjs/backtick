@@ -17,7 +17,7 @@ as               → as
                  →  
 {                → {
                  →  
-onceRuns         → onceRuns
+scriptRuns       → scriptRuns
 ?                → ?
 :                → :
                  →  
@@ -28,14 +28,14 @@ number           → number
 \n               → \n  
 __cs_counter     → counter
 .                → .
-onceRuns         → onceRuns
+scriptRuns       → scriptRuns
                  →  
 =                → =
                  →  
 (                → (
 __cs_counter     → counter
 .                → .
-onceRuns         → onceRuns
+scriptRuns       → scriptRuns
                  →  
 ??               → ??
                  →  

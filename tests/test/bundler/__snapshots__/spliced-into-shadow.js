@@ -3,22 +3,22 @@ import { it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
 const $module0 = {
-  id: "2763im39k8e8o:33:13",
+  id: "lgqalasy9dsb:33:13",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => {\n    const total = 1;\n    const first = $splice0(total);\n    {\n        const total = 2;\n        return first + total + $splice1();\n    }\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAgCgB,CAAAA,QAAA,EAAAC,QAAA;IACR,MAAMC,KAAK,GAAG,CAAC;IACf,MAAMC,KAAK,GAAGH,QAAA,CAAAE,KAAA,CAAkB;IAChC;QACE,MAAMA,KAAK,GAAG,CAAC;QACf,OAAOC,KAAK,GAAGD,KAAK,GAAGD,QAAA,EAAU;IACnC;AACF,CAAC","names":["$splice0","$splice1","total","first"],"ignoreList":[],"sources":["bundler/spliced-into-shadow.test.tsx"]}',
   dependencies: [],
   params: [
-    { kind: "splice", bindings: ["total$2763im39k8e8o$0"] },
+    { kind: "splice", bindings: ["total$lgqalasy9dsb$0"] },
     { kind: "splice", bindings: [] },
   ],
   kind: "block",
 };
 const $module1 = {
-  id: "2763im39k8e8o:35:29",
+  id: "lgqalasy9dsb:35:29",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $capture0 => $capture0;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkCgCA,SAAA,IAAAA,SAAK","names":["$capture0"],"ignoreList":[],"sources":["bundler/spliced-into-shadow.test.tsx"]}',
   dependencies: [],
-  params: [{ kind: "capture", key: "total$2763im39k8e8o$0" }],
+  params: [{ kind: "capture", key: "total$lgqalasy9dsb$0" }],
   kind: "expression",
 };
 // A fragment written under the outer `total`, carried by host code into a hole
@@ -50,7 +50,7 @@ it("refuses a capture spliced where it is shadowed", async () => {
     }),
     {
       message:
-        "Can't thread the capture `total`: nothing encloses this reference to supply it. A fragment carries the bindings it was written under, so this is also what happens when one is spliced somewhere another `total` shadows it: the binding is still there, but no longer reachable by name, and naming it anyway would mean emitting what the source couldn't say. A `once` script is made at the top of the bundle, outside every script, so a fragment spliced into one can't reach its binding either.",
+        "Can't thread the capture `total`: nothing encloses this reference to supply it. A fragment carries the bindings it was written under, so this is also what happens when one is spliced somewhere another `total` shadows it: the binding is still there, but no longer reachable by name, and naming it anyway would mean emitting what the source couldn't say.",
     },
   );
 });

@@ -1,42 +1,42 @@
-// 11:22
-() => {     → 11:25 {…
-const       → 12:3 const 
-counter     → 12:9 counter
- =          → 12:16  = 
-globalThis  → 12:19 globalThis
-;           → 12:65 ;
-counter     → 13:3 counter
-.           → 13:10 .
-onceRuns    → 13:11 onceRuns
- =          → 13:19  = 
-(           → 13:22 (
-counter     → 13:23 counter
-.           → 13:30 .
-onceRuns    → 13:31 onceRuns
- ??         → 13:39  ?? 
-0           → 13:43 0
-)           → 13:44 )
- +          → 13:45  + 
-1           → 13:48 1
-;           → 13:49 ;
-return      → 14:3 return 
-"counted"   → 14:10 "counted"
-;           → 14:19 ;
-}           → 15:1 }
-);          → 15:2 `);…
+// 10:17
+() => {     → 10:20 {…
+const       → 11:3 const 
+counter     → 11:9 counter
+ =          → 11:16  = 
+globalThis  → 11:19 globalThis
+;           → 11:67 ;
+counter     → 12:3 counter
+.           → 12:10 .
+scriptRuns  → 12:11 scriptRuns
+ =          → 12:21  = 
+(           → 12:24 (
+counter     → 12:25 counter
+.           → 12:32 .
+scriptRuns  → 12:33 scriptRuns
+ ??         → 12:43  ?? 
+0           → 12:47 0
+)           → 12:48 )
+ +          → 12:49  + 
+1           → 12:52 1
+;           → 12:53 ;
+return      → 13:3 return 
+"counted"   → 13:10 "counted"
+;           → 13:19 ;
+}           → 14:1 }
+);          → 14:2 `;…
 
-// 17:19
-($splice0) => <  → 17:22 <p>{false…
-p                → 17:23 p
->                → 17:24 >
-{                → 17:25 {
-false            → 17:26 false
-?                → 17:32 ?
-$splice0()       → 17:34 $counted…
-:                → 17:43 :
-"ok"             → 17:45 "ok"
-}                → 17:49 }
-</               → 17:50 </
-p                → 17:52 p
->                → 17:53 >
-);               → 17:54 `;…
+// 16:19
+($splice0) => <  → 16:22 <p>{false…
+p                → 16:23 p
+>                → 16:24 >
+{                → 16:25 {
+false            → 16:26 false
+?                → 16:32 ?
+$splice0()       → 16:34 $counted…
+:                → 16:43 :
+"ok"             → 16:45 "ok"
+}                → 16:49 }
+</               → 16:50 </
+p                → 16:52 p
+>                → 16:53 >
+);               → 16:54 `;…

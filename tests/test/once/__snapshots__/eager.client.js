@@ -1,15 +1,15 @@
-// 11:22
+// 10:17
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (() => {
     const counter = globalThis;
-    counter.onceRuns = (counter.onceRuns ?? 0) + 1;
+    counter.scriptRuns = (counter.scriptRuns ?? 0) + 1;
     return "counted";
 });
 }
 
-// 17:19
+// 16:19
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });

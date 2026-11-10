@@ -1,13 +1,12 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, once } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
 declare const { createRoot }: import("@backtickjs/core").ClientModule<typeof import("solid-js")>;
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 
-// A server component spliced into a `once` script: the script is one value,
-// so the component runs once however many places read the value, where an
-// element drawn in two places runs its component twice.
+// A server component spliced into a script: the script is one value, so the
+// component runs once however many places read the value.
 let runs = 0;
 
 async function Default() {
@@ -15,10 +14,10 @@ async function Default() {
   return cs.lift((() => "default")());
 }
 
-const theme = once(cs.lift((() => ({ fallback: (cs.splice((<Default />))) }))()));
+const theme = cs.lift((() => ({ fallback: (cs.splice((<Default />))) }))());
 const twice = cs.lift((() => [(cs.splice((theme))), (cs.splice((theme)))])());
 
-describe("a server component in a once script", () => {
+describe("a server component in a script", () => {
   it("runs once for the bundle", async () => {
     runs = 0;
     const pair = (await evaluate(cs.lift((() => (cs.splice((createRoot)))(() => (cs.splice((twice)))))()))) as unknown as [

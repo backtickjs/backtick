@@ -31,8 +31,8 @@ import type { Modules } from "../modules.js";
  */
 export interface BundleTree {
   readonly modules: readonly (readonly [string, ScriptModule])[];
-  // The functions and `once` values the bundle makes once, each under its
-  // label, in the order they're finished: after what they read.
+  // The values the bundle makes once, each under its label, in the order
+  // they're finished: after what they read.
   readonly constants: readonly (readonly [string, string])[];
   readonly root: string;
   readonly names: Names;
@@ -185,16 +185,14 @@ export async function buildBundle(
   //
   // A script that reads a variable of the scope it's read in, itself or
   // through what it's handed, is made there instead, as one declared in a
-  // function is. A `once` script that does is refused.
+  // function is.
   const values = new Map<ClientScript, string>();
   const valueOf = (script: ClientScript, scope: Scope): string => {
     let label = values.get(script);
     if (label !== undefined) {
       return label;
     }
-    const at: Scope = script.once
-      ? rootScope()
-      : { bindings: scope.bindings, read: new Set() };
+    const at: Scope = { bindings: scope.bindings, read: new Set() };
     const code = call(labelOf(scriptFor(script)), exprCallArgs(script, at));
     const outside = [...at.read].filter((key) => scope.bindings.has(key));
     if (outside.length > 0) {
@@ -301,9 +299,7 @@ export async function buildBundle(
         sourceName(key) +
         "` shadows it: the binding is still there, but no longer reachable by " +
         "name, and naming it anyway would mean emitting what the source " +
-        "couldn't say. A `once` script is made at the top of the bundle, " +
-        "outside every script, so a fragment spliced into one can't reach " +
-        "its binding either.",
+        "couldn't say.",
     );
   };
 

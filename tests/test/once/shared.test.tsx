@@ -1,16 +1,16 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, once } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
 import { createRoot, createSignal } from "solid-js" with { backtick: "client" };
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 
-// A `once` script is one value for the bundle, made at its top: every read is
-// that value, as a module-level `const` is in plain TypeScript. A signal made
-// once is one signal, which every component reading it shares.
-const count = once(cs`$createSignal(0)`);
+// A script is one value for the bundle, made at its top: every read is that
+// value, as a module-level `const` is in plain TypeScript. A signal made once
+// is one signal, which every component reading it shares.
+const count = cs`$createSignal(0)`;
 
 const Shown = cs`() => <span>{"count " + $count[0]()}</span>`;
 const Bump = cs`() => (
@@ -25,7 +25,7 @@ const shared = cs`(
   </div>
 )`;
 
-describe("a once script", () => {
+describe("a script", () => {
   it("is one value at every read", async () => {
     assert.equal(
       await evaluate(cs`$createRoot(() => {

@@ -7,7 +7,6 @@
 // a script as one value for the bundle.
 export { cs } from "./cs.js";
 export type { Client } from "./Client.js";
-export { once } from "./once.js";
 
 // What a host may hand a client: data, a script, or an export of a module the
 // client provides.

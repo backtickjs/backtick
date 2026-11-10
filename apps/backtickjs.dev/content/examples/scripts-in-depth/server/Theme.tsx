@@ -1,9 +1,9 @@
-import { cs, once } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
 import { createContext, useContext } from "react" with { backtick: "client" };
 import { Text, View } from "react-native" with { backtick: "client" };
 
 // One context for the bundle, as `createContext` at module level is one.
-const ThemeContext = once(cs`$createContext("light")`);
+const ThemeContext = cs`$createContext("light")`;
 
 const Label = cs`() => {
   const theme = $useContext($ThemeContext);

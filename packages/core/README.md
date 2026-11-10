@@ -38,13 +38,13 @@ export async function Home() {
 
 `$node` and `$Counter` are splices: `node` is a server variable, written into the bundle as data; `Counter` is a script. `$useState` is a splice too, of an export the client provides. What can be spliced is `Spliceable`: data, and scripts. [Thinking in Backtick](https://backtickjs.dev/docs/thinking-in-backtick/) has what can cross, what can't, and how server and client components compose.
 
-A script every component shares, like a context or a store, is made once with `once`: one value for the bundle, where an expression script would run again at each read.
+A script is one value for the bundle, made when it loads, as a module-level `const` is: a context or a store every component shares is written as one. Code that runs at each use is a function, called where it's used.
 
 ```tsx
-import { cs, once } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
 import { createContext, useContext } from "react" with { backtick: "client" };
 
-const ThemeContext = once(cs`$createContext("light")`);
+const ThemeContext = cs`$createContext("light")`;
 const Label = cs`() => <p>{$useContext($ThemeContext)}</p>`;
 // In a script: <$ThemeContext.Provider value="dark"><$Label /></$ThemeContext.Provider>
 ```
@@ -112,7 +112,6 @@ A test draws a screen with a module map of its own, stand-ins included; its modu
 
 - `cs`: the tag for client scripts. Compiled at build time; throws if called uncompiled.
 - `Client<T>`: the type of a script that stands for a `T` on the client.
-- `once(script)`: the script as one value for the bundle, made at its top; each call is one value. Refused for a script that reads a variable of the script around it.
 - `Spliceable`: what a server may splice into a script.
 - `Spliced<T>`: what a spliceable value becomes on the client (`Client<U>` becomes `U`; arrays and objects map member by member).
 - `createImport<T>({ name, from, version })`: an export of a module the client provides, as a value a script can splice.

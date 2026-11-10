@@ -38,9 +38,6 @@ export interface ClientScript {
   readonly module: ScriptModule;
   // one per splice, in parameter order
   readonly args: readonly Spliceable[];
-  // one value for the bundle, made at its top, rather than code run at each
-  // read: see `once`
-  readonly once?: true;
 }
 
 export function isClientScript(value: unknown): value is ClientScript {
