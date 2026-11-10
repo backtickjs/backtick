@@ -3,7 +3,7 @@ import {
   cs,
   type Client,
   type JsxElementOf,
-  type JsxElementTypeOf,
+  type ServerComponent,
   type Spliceable,
 } from "@backtickjs/core";
 import type { JSX as React, ReactElement, ReactNode } from "react";
@@ -16,7 +16,11 @@ import { createElement, Fragment as ReactFragment } from "react" with {
 // server component, which answers a script.
 export declare namespace JSX {
   export type Element = JsxElementOf<React.Element>;
-  export type ElementType = JsxElementTypeOf<ReactNode> | React.ElementType;
+  export type ElementType =
+    | string
+    | ((props: never) => ReactNode)
+    | ServerComponent<ReactNode>
+    | React.ElementType;
   export type ElementClass = React.ElementClass;
   export type ElementAttributesProperty = React.ElementAttributesProperty;
   export type ElementChildrenAttribute = React.ElementChildrenAttribute;

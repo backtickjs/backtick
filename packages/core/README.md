@@ -125,7 +125,7 @@ A test draws a screen with a module map of its own, stand-ins included; its modu
 - `exec`: in a script, `$exec(bundle)` runs another bundle as the script's own was run, with the same modules, to a promise of its value.
 - `isClientExec`, `ClientExec`: its check and type.
 - `SplicesAs<T>`: `T` as a splice checks it, member by member. Used by the bundler to check its input.
-- `createJsxElement`, `isJsxElement`, `JsxElement`, `JsxElementOf`, `JsxElementTypeOf`: what a server-side JSX tag evaluates to before bundling. Used by the JSX packages' runtimes.
+- `createJsxElement`, `isJsxElement`, `JsxElement`, `JsxElementOf`, `ServerComponent`: what a server-side JSX tag evaluates to before bundling, and what a server component answers. Used by the JSX packages' runtimes.
 - `create`, `isClientScript`, `ClientScript`, `ScriptModule`, `Param`: the compiled form of a script, written by the compiler and read by the bundler. Not for application code.
 
 ## Related

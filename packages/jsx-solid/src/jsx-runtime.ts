@@ -3,7 +3,7 @@ import {
   cs,
   type Client,
   type JsxElementOf,
-  type JsxElementTypeOf,
+  type ServerComponent,
 } from "@backtickjs/core";
 import type { JSX as Solid } from "solid-js";
 import { createComponent } from "solid-js" with { backtick: "client" };
@@ -12,7 +12,10 @@ export declare namespace JSX {
   export type FunctionMaybe<T = unknown> = Solid.FunctionMaybe<T>;
   export type FunctionElement = Solid.FunctionElement;
   export type Element = JsxElementOf<Solid.Element>;
-  export type ElementType = JsxElementTypeOf<Solid.Element>;
+  export type ElementType =
+    | string
+    | ((props: never) => Solid.Element)
+    | ServerComponent<Solid.Element | (() => Solid.Element)>;
   export type ArrayElement = Solid.ArrayElement;
   export type ElementClass = Solid.ElementClass;
   export type ElementAttributesProperty = Solid.ElementAttributesProperty;

@@ -15,7 +15,8 @@ async function Pill({
   label: string;
   ref?: Client<(element: HTMLButtonElement) => void>;
 }) {
-  return cs.lift((() => <button ref={(cs.splice((ref)))}>{(cs.splice((label)))}</button>)());
+  // A component, drawn where the element stands, as its ref acts on mount.
+  return cs.lift((() => () => <button ref={(cs.splice((ref)))}>{(cs.splice((label)))}</button>)());
 }
 
 describe("an undefined prop", () => {

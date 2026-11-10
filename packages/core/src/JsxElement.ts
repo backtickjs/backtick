@@ -42,12 +42,9 @@ export function createJsxElement(
 export type JsxElementOf<T> = T & Client<T>;
 
 /**
- * What a tag may name: an intrinsic element; a component as a script sees it,
- * answering what the framework draws (a client component, or a server
- * component lowered); or a server component on the host, answering a script
- * that draws, or nothing.
+ * A server component on the host: it answers a script that draws a `T`, or
+ * nothing, which the bundler expands where its element stands.
  */
-export type JsxElementTypeOf<T> =
-  | string
-  | ((props: never) => T)
-  | ((props: never) => Client<T> | null | Promise<Client<T> | null>);
+export type ServerComponent<T> = (
+  props: never,
+) => Client<T> | null | Promise<Client<T> | null>;

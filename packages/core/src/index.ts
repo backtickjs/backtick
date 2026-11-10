@@ -31,7 +31,7 @@ export {
   isJsxElement,
   type JsxElement,
   type JsxElementOf,
-  type JsxElementTypeOf,
+  type ServerComponent,
 } from "./JsxElement.js";
 
 // What a template compiles to: the compiler writes one and the bundler reads
