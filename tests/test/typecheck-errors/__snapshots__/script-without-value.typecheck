@@ -1,0 +1,2 @@
+8:25 error TS2345: Argument of type 'void' is not assignable to parameter of type '"a script that makes no value: a script is one value, made at load. To run code where it's used, make it a function, cs`() => …`, and call it"'.
+13:30 error TS2345: Argument of type 'void' is not assignable to parameter of type '"a script that makes no value: a script is one value, made at load. To run code where it's used, make it a function, cs`() => …`, and call it"'.

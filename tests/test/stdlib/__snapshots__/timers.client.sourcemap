@@ -42,5 +42,8 @@ setTimeout     → 29:34 setTimeout
 )              → 29:58 )
 )              → 29:59 )
 ;              → 29:60 ;
-}              → 30:5 }
-);             → 30:6 `,…
+return         → 30:7 return 
+repeating      → 30:14 repeating
+;              → 30:23 ;
+}              → 31:5 }
+);             → 31:6 `,…

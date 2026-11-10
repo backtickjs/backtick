@@ -2,9 +2,8 @@
 // Solid. Solid and Supabase's client come from a CDN, at the versions the
 // bundle is built for.
 import { bundler } from "@backtickjs/bundler";
-import { type Client, cs } from "@backtickjs/core";
+import type { Client } from "@backtickjs/core";
 import type { JSX } from "@backtickjs/jsx-solid/jsx-runtime";
-import { render } from "solid-js/web" with { backtick: "client" };
 import { style } from "./style.ts";
 
 const solid = "1.9.17";
@@ -15,7 +14,9 @@ export async function toHtml(
   Page: Client<() => JSX.Element>,
 ): Promise<string> {
   const bundle = await bundler.build({
-    input: cs`{ $render($Page, document.getElementById("app")!); }`,
+    // The page's component, which the document's entry draws, as Solid's
+    // `render` takes it.
+    input: Page,
     modules: {
       "solid-js": solid,
       "solid-js/web": solid,
@@ -47,7 +48,11 @@ export async function toHtml(
 </head>
 <body>
 <div id="app"></div>
-<script type="module" src="data:text/javascript,${encodeURIComponent(code)}"></script>
+<script type="module">
+import { render } from "solid-js/web";
+import Page from "data:text/javascript,${encodeURIComponent(code)}";
+render(Page, document.getElementById("app"));
+</script>
 </body>
 </html>`;
 }

@@ -1,6 +1,6 @@
 import { createSignal as $i0 } from "solid-js";
 const $modules = {
-  "nr6ia3gm38io:28:4": (module, exports, require) => {
+  "hqxpelakn6j0:28:4": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $splice1, $splice2, $splice3, $splice4) => {
@@ -8,6 +8,7 @@ const $modules = {
       setN(6);
       const [c, setC] = $splice2()($splice3());
       setC($splice4());
+      return [n(), c()];
     };
   },
 };
@@ -21,7 +22,7 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $cs0 = $require("nr6ia3gm38io:28:4").default;
+const $cs0 = $require("hqxpelakn6j0:28:4").default;
 const $thunk0 = () => $i0;
 const $thunk1 = () => 5;
 const $thunk2 = () => 0;

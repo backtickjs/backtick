@@ -1,4 +1,9 @@
 cs.lift((() =>                            → cs` [-semantic -navigation]
+(                                         → (
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
 {                                         → {
 \n  // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.\n  → \n  // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.\n  
 const                                     → const

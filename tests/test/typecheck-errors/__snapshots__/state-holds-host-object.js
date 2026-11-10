@@ -6,8 +6,8 @@ const createSignal = {
   version: "1.9.14",
 };
 const $module0 = {
-  id: "38thoopt3w7gl:16:15",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2) => {\n    const [held, setHeld] = $splice0()($splice1());\n    setHeld($splice2());\n};\n}',
+  id: "1u3g6ep3eabqv:16:15",
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2) => () => {\n    const [held, setHeld] = $splice0()($splice1());\n    setHeld($splice2());\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAekB,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA;IAEhB,MAAM,CAACC,IAAI,EAAEC,OAAO,CAAC,GAAGJ,QAAA,EAAa,CAACC,QAAA,EAAK,CAAC;IAE5CG,OAAO,CAACF,QAAA,EAAK,CAAC;AAChB,CAAC","names":["$splice0","$splice1","$splice2","held","setHeld"],"ignoreList":[],"sources":["typecheck-errors/state-holds-host-object.test.tsx"]}',
   dependencies: [],
   params: [
@@ -15,7 +15,7 @@ const $module0 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
-  kind: "block",
+  kind: "function",
 };
 // A host object with behaviour reaching a cell, refused where it is written.
 //

@@ -1,6 +1,6 @@
 import { cs } from "@backtickjs/core";
 const $module0 = {
-  id: "nltlflmc2gim:10:20",
+  id: "mjlfm7rjdwqc:10:20",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    return hostValue + 1;\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBASuB;IAErB,OAAOA,SAAS,GAAG,CAAC;AACtB,CAAC","names":["hostValue"],"ignoreList":[],"sources":["typecheck-errors/unknown-identifier.test.tsx"]}',
   dependencies: [],
@@ -8,15 +8,15 @@ const $module0 = {
   kind: "block",
 };
 const $module1 = {
-  id: "nltlflmc2gim:15:24",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    count = 1;\n};\n}',
+  id: "mjlfm7rjdwqc:15:24",
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => () => {\n    count = 1;\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAc2B;IAEzBA,KAAK,GAAG,CAAC;AACX,CAAC","names":["count"],"ignoreList":[],"sources":["typecheck-errors/unknown-identifier.test.tsx"]}',
   dependencies: [],
   params: [],
-  kind: "block",
+  kind: "function",
 };
 const $module2 = {
-  id: "nltlflmc2gim:21:45",
+  id: "mjlfm7rjdwqc:21:45",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    return hostParam;\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAoBgD;IAE9C,OAAOA,SAAS;AAClB,CAAC","names":["hostParam"],"ignoreList":[],"sources":["typecheck-errors/unknown-identifier.test.tsx"]}',
   dependencies: [],
@@ -24,7 +24,7 @@ const $module2 = {
   kind: "block",
 };
 const $module3 = {
-  id: "nltlflmc2gim:26:22",
+  id: "mjlfm7rjdwqc:26:22",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => window.location.href;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAyByB,MAAAA,MAAM,CAACC,QAAQ,CAACC,IAAI","names":["window","location","href"],"ignoreList":[],"sources":["typecheck-errors/unknown-identifier.test.tsx"]}',
   dependencies: [],

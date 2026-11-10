@@ -12,7 +12,7 @@ export const host = cs`{
   return hostValue + 1;
 }`;
 
-export const assigned = cs`{
+export const assigned = cs`() => {
   // @ts-expect-error: Cannot find name 'count'.
   count = 1;
 }`;

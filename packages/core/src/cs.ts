@@ -2,8 +2,21 @@ import type { Client } from "./Client.js";
 import { create } from "./ClientScript.js";
 import type { Spliceable, SplicesAs, Spliced } from "./Spliceable.js";
 
+// A string, so the error says it: `void` has no properties for TypeScript to
+// name as missing.
+type NoValue =
+  "a script that makes no value: a script is one value, made at load. To run code where it's used, make it a function, cs`() => …`, and call it";
+
 // The root of a script
-function lift<T>(_: T): Client<T> {
+function lift<
+  // Whether `T` is exactly `void`: two such functions are the same type only
+  // when `T` and `void` are, so `never`, `any` and `undefined` pass.
+  T extends (<U>() => U extends T ? 1 : 2) extends <U>() => U extends void
+    ? 1
+    : 2
+    ? NoValue
+    : unknown,
+>(_: T): Client<T> {
   throw new Error(
     "Don't call `cs.lift` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",

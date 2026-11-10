@@ -13,6 +13,11 @@ __cs_hostValue                            → hostValue
 }                                         → }
 )())                                      → ` [-semantic -navigation]
 cs.lift((() =>                            → cs` [-semantic -navigation]
+(                                         → (
+)                                         → )
+                                          →  
+=>                                        → =>
+                                          →  
 {                                         → {
 \n  // @ts-expect-error: Cannot find name 'count'.\n  → \n  // @ts-expect-error: Cannot find name 'count'.\n  
 count                                     → count

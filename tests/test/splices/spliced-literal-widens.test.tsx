@@ -30,6 +30,7 @@ it("splicedLiteralWidens", async (t) => {
       setN(6);
       const [c, setC] = $createSignal(${Color.Red});
       setC(${Color.Blue});
+      return [n(), c()];
     }`,
   );
 });

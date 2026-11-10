@@ -48,24 +48,6 @@ return                                    → return
 }                                         → }
 )())                                      → ` [-semantic -navigation]
 cs.lift((() =>                            → cs` [-semantic -navigation]
-{                                         → {
-\n                                        → \n  
-const                                     → const
-                                          →  
-__cs_x                                    → x
-                                          →  
-=                                         → =
-                                          →  
-(cs.splice(                               →  [-semantic -navigation]
-(ping)                                    → $ping
-))                                        →  [-semantic -navigation]
-(                                         → (
-)                                         → )
-;                                         → ;
-\n                                        → \n
-}                                         → }
-)())                                      → ` [-semantic -navigation]
-cs.lift((() =>                            → cs` [-semantic -navigation]
 (                                         → (
 __cs_text                                 → text
 :                                         → :

@@ -1,6 +1,4 @@
 import { bundler } from "@backtickjs/bundler";
-import { cs } from "@backtickjs/core";
-import { render } from "solid-js/web" with { backtick: "client" };
 import { readFile } from "node:fs/promises";
 import { type Page, urlOf } from "./pages.js";
 
@@ -19,12 +17,9 @@ export async function toHtml({
   description,
 }: Page): Promise<string> {
   const bundle = await bundler.build({
-    // Cleared first: `render` adds to what's there, and draws the same page.
-    input: cs`{
-      const app = document.getElementById("app")!;
-      app.textContent = "";
-      $render($Page, app);
-    }`,
+    // The page's component, which the document's entry draws, as Solid's
+    // `render` takes it.
+    input: Page,
     modules: {
       "solid-js": "1.9.17",
       "solid-js/store": "1.9.17",
@@ -72,7 +67,14 @@ export async function toHtml({
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="data:text/javascript,${encodeURIComponent(code)}"></script>
+    <script type="module">
+      import { render } from "solid-js/web";
+      import Page from "data:text/javascript,${encodeURIComponent(code)}";
+      // Cleared first: \`render\` adds to what's there.
+      const app = document.getElementById("app");
+      app.textContent = "";
+      render(Page, app);
+    </script>
   </body>
 </html>`;
 }

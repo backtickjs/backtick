@@ -34,6 +34,11 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 (                → (
 )                → )
 ;                → ;
+\n               → \n      
+return           → return
+                 →  
+"logged"         → "logged"
+;                → ;
 \n               → \n    
 }                → }
 )())             → ` [-semantic -navigation]

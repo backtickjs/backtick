@@ -3,7 +3,7 @@ import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { evaluate } from "../evaluate.ts";
 const $module0 = {
-  id: "2lp1d0051wiq:8:12",
+  id: "3rx3rohweax5d:8:12",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => () => {\n    window.console.log("logged");\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAOe;IACbA,MAAM,CAACC,OAAO,CAACC,GAAG,CAAC,QAAQ,CAAC;AAC9B,CAAC","names":["window","console","log"],"ignoreList":[],"sources":["splices/action-spliced-twice.test.tsx"]}',
   dependencies: [],
@@ -11,9 +11,9 @@ const $module0 = {
   kind: "function",
 };
 const $module1 = {
-  id: "2lp1d0051wiq:19:19",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => {\n    $splice0()();\n    $splice1()();\n};\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkBsB,CAAAA,QAAA,EAAAC,QAAA;IAChBD,QAAA,EAAI,EAAE;IACNC,QAAA,EAAI,EAAE;AACR,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/action-spliced-twice.test.tsx"]}',
+  id: "3rx3rohweax5d:19:19",
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => {\n    $splice0()();\n    $splice1()();\n    return "logged";\n};\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkBsB,CAAAA,QAAA,EAAAC,QAAA;IAChBD,QAAA,EAAI,EAAE;IACNC,QAAA,EAAI,EAAE;IACN,OAAO,QAAQ;AACjB,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/action-spliced-twice.test.tsx"]}',
   dependencies: [],
   params: [
     { kind: "splice", bindings: [] },

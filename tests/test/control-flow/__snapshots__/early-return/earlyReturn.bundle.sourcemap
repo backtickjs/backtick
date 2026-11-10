@@ -17,5 +17,8 @@ n        → control-flow/early-return.test.tsx 15:7 n
  =       → control-flow/early-return.test.tsx 15:8  = 
 1        → control-flow/early-return.test.tsx 15:11 1
 ;        → control-flow/early-return.test.tsx 15:12 ;
-}        → control-flow/early-return.test.tsx 16:5 }
-;        → control-flow/early-return.test.tsx 16:6 `,…
+return   → control-flow/early-return.test.tsx 16:7 return 
+n        → control-flow/early-return.test.tsx 16:14 n
+;        → control-flow/early-return.test.tsx 16:15 ;
+}        → control-flow/early-return.test.tsx 17:5 }
+;        → control-flow/early-return.test.tsx 17:6 `,…

@@ -30,6 +30,7 @@ it("splicedLiteralWidens", async (t) => {
       __cs_setN(6);
       const [__cs_c, __cs_setC] = (cs.splice((createSignal)))((cs.splice(Color.Red)));
       __cs_setC((cs.splice(Color.Blue)));
+      return [__cs_n(), __cs_c()];
     })()),
   );
 });

@@ -7,5 +7,6 @@ exports.default = (($splice0, $splice1, $splice2, $splice3, $splice4) => {
     setN(6);
     const [c, setC] = $splice2()($splice3());
     setC($splice4());
+    return [n(), c()];
 });
 }

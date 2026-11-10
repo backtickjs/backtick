@@ -49,5 +49,14 @@ $splice4  → splices/spliced-literal-widens.test.tsx 32:12 ${Color.Blue});…
 ()        → splices/spliced-literal-widens.test.tsx 32:12 ${Color.Blue});…
 )         → splices/spliced-literal-widens.test.tsx 32:25 )
 ;         → splices/spliced-literal-widens.test.tsx 32:26 ;
-}         → splices/spliced-literal-widens.test.tsx 33:5 }
-;         → splices/spliced-literal-widens.test.tsx 33:6 `,…
+return    → splices/spliced-literal-widens.test.tsx 33:7 return 
+[         → splices/spliced-literal-widens.test.tsx 33:14 [
+n         → splices/spliced-literal-widens.test.tsx 33:15 n
+()        → splices/spliced-literal-widens.test.tsx 33:16 ()
+,         → splices/spliced-literal-widens.test.tsx 33:18 , 
+c         → splices/spliced-literal-widens.test.tsx 33:20 c
+()        → splices/spliced-literal-widens.test.tsx 33:21 ()
+]         → splices/spliced-literal-widens.test.tsx 33:23 ]
+;         → splices/spliced-literal-widens.test.tsx 33:24 ;
+}         → splices/spliced-literal-widens.test.tsx 34:5 }
+;         → splices/spliced-literal-widens.test.tsx 34:6 `,…

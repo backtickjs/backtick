@@ -27,6 +27,7 @@ it("timers", async (t) => {
       const __cs_repeating = window.setInterval(() => 0, 1000);
       __cs_stop(__cs_repeating);
       window.clearTimeout(window.setTimeout(() => 0, 1000));
+      return __cs_repeating;
     })()),
   );
 });

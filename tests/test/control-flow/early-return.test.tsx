@@ -2,7 +2,7 @@ import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 
-// A bare `return` exits an action early; the completion is null either way.
+// A bare `return` exits a script early, with `undefined`.
 it("earlyReturn", async (t) => {
   await snapshotCase(
     t,
@@ -13,6 +13,7 @@ it("earlyReturn", async (t) => {
         return;
       }
       n = 1;
+      return n;
     }`,
   );
 });

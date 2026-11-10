@@ -60,6 +60,20 @@ Blue             → Blue
 ))               →  [-semantic -navigation]
 )                → )
 ;                → ;
+\n               → \n      
+return           → return
+                 →  
+[                → [
+__cs_n           → n
+(                → (
+)                → )
+,                → ,
+                 →  
+__cs_c           → c
+(                → (
+)                → )
+]                → ]
+;                → ;
 \n               → \n    
 }                → }
 )())             → ` [-semantic -navigation]

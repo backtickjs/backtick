@@ -11,7 +11,7 @@ exports.default = (() => {
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (() => {
+exports.default = (() => () => {
     count = 1;
 });
 }

@@ -1,7 +1,7 @@
 import { cs } from "@backtickjs/core";
 
-// An action call produces no value: its `void` result can't initialize a
-// variable — in a value script or an action.
+// A call of a function that returns nothing produces no value: its `void`
+// result can't initialize a variable.
 const ping = cs`() => {
   let n = 0;
   n = 1;
@@ -10,10 +10,6 @@ const ping = cs`() => {
 const script = cs`{
   const x = $ping();
   return 1;
-}`;
-
-const action = cs`{
-  const x = $ping();
 }`;
 
 // An error inside a checked initializer reports once: the duplicate copy

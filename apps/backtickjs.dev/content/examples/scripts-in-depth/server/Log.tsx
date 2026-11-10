@@ -1,18 +1,16 @@
 import { cs } from "@backtickjs/core";
 import { Text } from "react-native" with { backtick: "client" };
 
-// A block: its code runs each time it's read.
-const logVisit = cs`{
-  console.log("visit");
-}`;
+// Code that runs each time it's used is a function, called where it runs.
+const logVisit = cs`() => console.log("visit")`;
 
-// A function: one function, whose body runs each time it's called.
+// A function with a parameter: one function, whose body runs each call.
 const logTap = cs`(what: string) => console.log("tap " + what)`;
 
 export async function Home() {
   return cs`{
-    $logVisit;
-    $logVisit;
+    $logVisit();
+    $logVisit();
     $logTap("a");
     $logTap("b");
     return <$Text>Logged</$Text>;

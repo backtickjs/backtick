@@ -18,16 +18,7 @@ exports.default = (($splice0) => {
 });
 }
 
-// 15:16
-(module, exports, require) => {
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0) => {
-    const x = $splice0()();
-});
-}
-
-// 21:15
+// 17:15
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -36,7 +27,7 @@ exports.default = (() => (text) => {
 });
 }
 
-// 25:23
+// 21:23
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });

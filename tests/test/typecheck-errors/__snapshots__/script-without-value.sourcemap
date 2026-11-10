@@ -1,0 +1,88 @@
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n  
+window           → window
+.                → .
+console          → console
+.                → .
+log              → log
+(                → (
+"logged"         → "logged"
+)                → )
+;                → ;
+\n               → \n
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+window           → window
+.                → .
+console          → console
+.                → .
+log              → log
+(                → (
+"logged"         → "logged"
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n  
+window           → window
+.                → .
+console          → console
+.                → .
+log              → log
+(                → (
+"logged"         → "logged"
+)                → )
+;                → ;
+\n               → \n
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
+{                → {
+\n               → \n  
+(cs.splice(      →  [-semantic -navigation]
+(logged)         → $logged
+))               →  [-semantic -navigation]
+(                → (
+)                → )
+;                → ;
+\n               → \n
+}                → }
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+undefined        → undefined
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+JSON             → JSON
+.                → .
+parse            → parse
+(                → (
+"{}"             → "{}"
+)                → )
+)())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+{                → {
+\n               → \n  
+throw            → throw
+                 →  
+new              → new
+                 →  
+Error            → Error
+(                → (
+"thrown"         → "thrown"
+)                → )
+;                → ;
+\n               → \n
+}                → }
+)())             → ` [-semantic -navigation]

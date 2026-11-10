@@ -6,12 +6,33 @@ import { writeFile } from "node:fs/promises";
 import { build } from "esbuild";
 import { signInScript } from "../web/dist/page.js";
 
+// The page's entry, as Solid's: the component drawn into the page. The
+// component's bundle is a module of its own, which the entry imports.
+const component = await signInScript();
 const { outputFiles } = await build({
   stdin: {
-    contents: await signInScript(),
+    contents: `import { render } from "solid-js/web";
+import SignIn from "sign-in";
+render(SignIn, document.getElementById("app"));`,
     resolveDir: new URL("..", import.meta.url).pathname,
     loader: "js",
   },
+  plugins: [
+    {
+      name: "sign-in",
+      setup(build) {
+        build.onResolve({ filter: /^sign-in$/ }, () => ({
+          path: "sign-in",
+          namespace: "sign-in",
+        }));
+        build.onLoad({ filter: /.*/, namespace: "sign-in" }, () => ({
+          contents: component,
+          resolveDir: new URL("..", import.meta.url).pathname,
+          loader: "js",
+        }));
+      },
+    },
+  ],
   bundle: true,
   format: "esm",
   platform: "browser",

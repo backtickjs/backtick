@@ -19,6 +19,7 @@ it("a function spliced twice and called twice runs twice", async () => {
     await evaluate(cs.lift((() => {
       (cs.splice((log)))();
       (cs.splice((log)))();
+      return "logged";
     })()));
   } finally {
     window.console.log = consoleLog;

@@ -12,7 +12,7 @@ export const host = cs.lift((() => {
   return __cs_hostValue + 1;
 })());
 
-export const assigned = cs.lift((() => {
+export const assigned = cs.lift((() => () => {
   // @ts-expect-error: Cannot find name 'count'.
   count = 1;
 })());

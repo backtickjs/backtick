@@ -60,6 +60,11 @@ setTimeout       → setTimeout
 )                → )
 )                → )
 ;                → ;
+\n               → \n      
+return           → return
+                 →  
+__cs_repeating   → repeating
+;                → ;
 \n               → \n    
 }                → }
 )())             → ` [-semantic -navigation]

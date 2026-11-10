@@ -1,4 +1,9 @@
 cs.lift((() =>        → cs` [-semantic -navigation]
+(                     → (
+)                     → )
+                      →  
+=>                    → =>
+                      →  
 {                     → {
 \n                    → \n  
 const                 → const
@@ -62,6 +67,8 @@ __cs_n                → n
 (cs.splice(           →  [-semantic -navigation]
 (valueScriptEffects)  → $valueScriptEffects
 ))                    →  [-semantic -navigation]
+(                     → (
+)                     → )
 ;                     → ;
 \n                    → \n      
 if                    → if

@@ -8,9 +8,9 @@ const createSignal = {
 };
 import { snapshotCase } from "../snapshotCase.ts";
 const $module0 = {
-  id: "nr6ia3gm38io:28:4",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2, $splice3, $splice4) => {\n    const [n, setN] = $splice0()($splice1());\n    setN(6);\n    const [c, setC] = $splice2()($splice3());\n    setC($splice4());\n};\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2BO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA;IACD,MAAM,CAACC,CAAC,EAAEC,IAAI,CAAC,GAAGN,QAAA,EAAa,CAACC,QAAA,EAAK,CAAC;IACtCK,IAAI,CAAC,CAAC,CAAC;IACP,MAAM,CAACC,CAAC,EAAEC,IAAI,CAAC,GAAGN,QAAA,EAAa,CAACC,QAAA,EAAY,CAAC;IAC7CK,IAAI,CAACJ,QAAA,EAAa,CAAC;AACrB,CAAC","names":["$splice0","$splice1","$splice2","$splice3","$splice4","n","setN","c","setC"],"ignoreList":[],"sources":["splices/spliced-literal-widens.test.tsx"]}',
+  id: "hqxpelakn6j0:28:4",
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2, $splice3, $splice4) => {\n    const [n, setN] = $splice0()($splice1());\n    setN(6);\n    const [c, setC] = $splice2()($splice3());\n    setC($splice4());\n    return [n(), c()];\n};\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2BO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA;IACD,MAAM,CAACC,CAAC,EAAEC,IAAI,CAAC,GAAGN,QAAA,EAAa,CAACC,QAAA,EAAK,CAAC;IACtCK,IAAI,CAAC,CAAC,CAAC;IACP,MAAM,CAACC,CAAC,EAAEC,IAAI,CAAC,GAAGN,QAAA,EAAa,CAACC,QAAA,EAAY,CAAC;IAC7CK,IAAI,CAACJ,QAAA,EAAa,CAAC;IACnB,OAAO,CAACC,CAAC,EAAE,EAAEE,CAAC,EAAE,CAAC;AACnB,CAAC","names":["$splice0","$splice1","$splice2","$splice3","$splice4","n","setN","c","setC"],"ignoreList":[],"sources":["splices/spliced-literal-widens.test.tsx"]}',
   dependencies: [],
   params: [
     { kind: "splice", bindings: [] },

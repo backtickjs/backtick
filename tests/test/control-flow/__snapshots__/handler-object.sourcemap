@@ -1,4 +1,9 @@
 cs.lift((() =>   → cs` [-semantic -navigation]
+(                → (
+)                → )
+                 →  
+=>               → =>
+                 →  
 {                → {
 \n               → \n  
 let              → let
@@ -34,6 +39,8 @@ number           → number
 (cs.splice(      →  [-semantic -navigation]
 (beep)           → $beep
 ))               →  [-semantic -navigation]
+(                → (
+)                → )
 ;                → ;
 \n               → \n
 }                → }

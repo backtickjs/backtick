@@ -2,9 +2,9 @@ import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 const $module0 = {
-  id: "24wbmcspf2ydv:25:4",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const stop = window.clearInterval;\n    const repeating = window.setInterval(() => 0, 1000);\n    stop(repeating);\n    window.clearTimeout(window.setTimeout(() => 0, 1000));\n};\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAwBO;IACD,MAAMA,IAAI,GAAGC,MAAM,CAACC,aAAa;IACjC,MAAMC,SAAS,GAAGF,MAAM,CAACG,WAAW,CAAC,MAAM,CAAC,EAAE,IAAI,CAAC;IACnDJ,IAAI,CAACG,SAAS,CAAC;IACfF,MAAM,CAACI,YAAY,CAACJ,MAAM,CAACK,UAAU,CAAC,MAAM,CAAC,EAAE,IAAI,CAAC,CAAC;AACvD,CAAC","names":["stop","window","clearInterval","repeating","setInterval","clearTimeout","setTimeout"],"ignoreList":[],"sources":["stdlib/timers.test.tsx"]}',
+  id: "6o5v1euw8lol:25:4",
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const stop = window.clearInterval;\n    const repeating = window.setInterval(() => 0, 1000);\n    stop(repeating);\n    window.clearTimeout(window.setTimeout(() => 0, 1000));\n    return repeating;\n};\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAwBO;IACD,MAAMA,IAAI,GAAGC,MAAM,CAACC,aAAa;IACjC,MAAMC,SAAS,GAAGF,MAAM,CAACG,WAAW,CAAC,MAAM,CAAC,EAAE,IAAI,CAAC;IACnDJ,IAAI,CAACG,SAAS,CAAC;IACfF,MAAM,CAACI,YAAY,CAACJ,MAAM,CAACK,UAAU,CAAC,MAAM,CAAC,EAAE,IAAI,CAAC,CAAC;IACrD,OAAOH,SAAS;AAClB,CAAC","names":["stop","window","clearInterval","repeating","setInterval","clearTimeout","setTimeout"],"ignoreList":[],"sources":["stdlib/timers.test.tsx"]}',
   dependencies: [],
   params: [],
   kind: "block",

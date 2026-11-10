@@ -3,8 +3,9 @@ import { cs } from "@backtickjs/core";
 import type { Client } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 
-// A script that returns a value may still run an action.
-const valueScriptEffects: Client<void> = cs`{
+// A script that returns a value may still run code that only does
+// something: a function, called.
+const valueScriptEffects: Client<() => void> = cs`() => {
   const x = 1;
 }`;
 
@@ -19,7 +20,7 @@ it("actionInValueScript", async (t) => {
     "actionInValueScript",
     cs`(b: boolean) => {
       let n = 0;
-      $valueScriptEffects;
+      $valueScriptEffects();
       if (b) {
         $ping();
         n = 1;

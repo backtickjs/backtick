@@ -1,22 +1,22 @@
 const $modules = {
-  "3q2gz79xhvvfp:20:4": (module, exports, require) => {
+  "1ownu51n7sgt:20:4": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = ($splice0) => {
-      $splice0();
+    exports.default = ($splice0) => () => {
+      $splice0()();
     };
   },
-  "3q2gz79xhvvfp:12:31": (module, exports, require) => {
+  "1ownu51n7sgt:12:37": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = ($splice0) => {
-      $splice0();
+    exports.default = ($splice0) => () => {
+      $splice0()();
     };
   },
-  "3q2gz79xhvvfp:8:30": (module, exports, require) => {
+  "1ownu51n7sgt:8:36": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = () => {
+    exports.default = () => () => {
       const x = 1;
     };
   },
@@ -31,9 +31,9 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $cs0 = $require("3q2gz79xhvvfp:20:4").default;
-const $cs1 = $require("3q2gz79xhvvfp:12:31").default;
-const $cs2 = $require("3q2gz79xhvvfp:8:30").default;
+const $cs0 = $require("1ownu51n7sgt:20:4").default;
+const $cs1 = $require("1ownu51n7sgt:12:37").default;
+const $cs2 = $require("1ownu51n7sgt:8:36").default;
 const $value0 = $cs2();
 const $thunk1 = () => $value0;
 const $value2 = $cs1($thunk1);

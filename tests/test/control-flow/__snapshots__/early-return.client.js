@@ -8,5 +8,6 @@ exports.default = (() => {
         return;
     }
     n = 1;
+    return n;
 });
 }

@@ -1,8 +1,8 @@
-// 8:28
+// 8:34
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (() => {
+exports.default = (() => () => {
     let n = 0;
     n = 1;
 });
@@ -13,7 +13,7 @@ exports.default = (() => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (($splice0) => (id) => {
-    $splice0();
+    $splice0()();
 });
 }
 
