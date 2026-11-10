@@ -33,6 +33,12 @@ const hostnames = [
 
 const app = new Hono();
 
+// OpenAI's proof that Backtick owns this domain, for its plugin directory: the
+// token alone, as plain text.
+app.get("/.well-known/openai-apps-challenge", (c) =>
+  c.text("_WJGQ_PhZ95I9ijCjlLSJ3UiEwfZtP768Ezmb8D62Hw"),
+);
+
 // Where a host finds out how to sign in: this endpoint is a resource whose
 // tokens Supabase's OAuth server issues.
 app.get(
