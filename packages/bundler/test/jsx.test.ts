@@ -33,10 +33,10 @@ test("a client module's component is not a tag on the host", async () => {
   );
 });
 
-test("a component runs each place its element is drawn", async () => {
-  // As React renders an element each place it stands, in every bundle: an
-  // element held at module level is the same object in each, and what its
-  // component drew for one request is never the next one's.
+test("a component runs once per element in each bundle", async () => {
+  // As React's server renderer runs one: an element drawn in two places runs
+  // once. An element held at module level is the same object in every bundle,
+  // and what its component drew for one request is never the next one's.
   let runs = 0;
   const Counted = () => {
     runs += 1;
@@ -44,9 +44,9 @@ test("a component runs each place its element is drawn", async () => {
   };
   const element = createJsxElement(Counted, {});
   await es([element, element]);
-  assert.equal(runs, 2);
+  assert.equal(runs, 1);
   await es(element);
-  assert.equal(runs, 3);
+  assert.equal(runs, 2);
 });
 
 test("sibling components expand at once", async () => {
