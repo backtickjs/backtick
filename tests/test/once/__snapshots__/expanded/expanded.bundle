@@ -1,4 +1,4 @@
-import { createComponent as $i0 } from "solid-js";
+import { untrack as $i0 } from "solid-js";
 const $modules = {
   "3hglixhjhta7u:18:14": (module, exports, require) => {
     "use strict";
@@ -12,10 +12,10 @@ const $modules = {
       fallback: $splice0(),
     });
   },
-  "f4q3wzmi8oru:355:9": (module, exports, require) => {
+  "o9e7zz7zzcul:356:9": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
+    exports.default = ($splice0, $splice1) => $splice0()(() => $splice1());
   },
   "3hglixhjhta7u:14:9": (module, exports, require) => {
     "use strict";
@@ -35,7 +35,7 @@ const $require = (id) => {
 };
 const $cs0 = $require("3hglixhjhta7u:18:14").default;
 const $cs1 = $require("3hglixhjhta7u:17:14").default;
-const $cs2 = $require("f4q3wzmi8oru:355:9").default;
+const $cs2 = $require("o9e7zz7zzcul:356:9").default;
 const $cs3 = $require("3hglixhjhta7u:14:9").default;
 const $thunk0 = () => $i0;
 const $value1 = $cs3();

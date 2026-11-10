@@ -6,7 +6,7 @@ import {
   type ServerComponent,
 } from "@backtickjs/core";
 import type { JSX as Solid } from "solid-js";
-import { createComponent } from "solid-js" with { backtick: "client" };
+import { untrack } from "solid-js" with { backtick: "client" };
 
 export declare namespace JSX {
   export type FunctionMaybe<T = unknown> = Solid.FunctionMaybe<T>;
@@ -343,16 +343,17 @@ export function Fragment(props: { children?: unknown }): Client<Solid.Element> {
   return [props.children] as unknown as Client<Solid.Element>;
 }
 
-// A component, run on the client as Solid runs one, through `createComponent`:
-// untracked, so what it reads while it sets up doesn't build it again where it
-// stands.
+// A server component's element: what it answers, read untracked, as Solid runs
+// a component, so what it reads while it sets up doesn't build it again where
+// it stands. `untrack` rather than `createComponent`, which would make a
+// computation where the answer is made at load, outside every root.
 export function jsx(
   type: JSX.ElementType,
   props: unknown,
 ): Client<Solid.Element> {
   // Core's element, as this package types it: a stand-in for a Solid element.
   const element = createJsxElement(type, props) as Client<Solid.Element>;
-  return cs`$createComponent(() => $element, {})`;
+  return cs`$untrack(() => $element)`;
 }
 
 export const jsxs = jsx;

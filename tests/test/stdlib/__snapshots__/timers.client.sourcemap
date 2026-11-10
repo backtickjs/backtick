@@ -43,7 +43,7 @@ setTimeout     → 29:34 setTimeout
 )              → 29:59 )
 ;              → 29:60 ;
 return         → 30:7 return 
-repeating      → 30:14 repeating
+"cleared"      → 30:14 "cleared"
 ;              → 30:23 ;
 }              → 31:5 }
 );             → 31:6 `,…

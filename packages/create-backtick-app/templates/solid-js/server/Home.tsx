@@ -8,7 +8,9 @@ export async function Home() {
   const node = process.version;
   const assembledAt = new Date().toLocaleTimeString();
 
-  return cs`{
+  // A component, which Solid draws where it's placed: its client components'
+  // onMount and refs run once it's in the page.
+  return cs`() => {
     const styles = {
       page: {
         "max-width": "640px",

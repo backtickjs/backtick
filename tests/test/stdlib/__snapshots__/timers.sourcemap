@@ -63,7 +63,7 @@ setTimeout       → setTimeout
 \n               → \n      
 return           → return
                  →  
-__cs_repeating   → repeating
+"cleared"        → "cleared"
 ;                → ;
 \n               → \n    
 }                → }

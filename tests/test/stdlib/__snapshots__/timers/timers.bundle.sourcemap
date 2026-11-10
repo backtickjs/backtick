@@ -41,7 +41,7 @@ setTimeout     → stdlib/timers.test.tsx 29:34 setTimeout
 )              → stdlib/timers.test.tsx 29:59 )
 ;              → stdlib/timers.test.tsx 29:60 ;
 return         → stdlib/timers.test.tsx 30:7 return 
-repeating      → stdlib/timers.test.tsx 30:14 repeating
+"cleared"      → stdlib/timers.test.tsx 30:14 "cleared"
 ;              → stdlib/timers.test.tsx 30:23 ;
 }              → stdlib/timers.test.tsx 31:5 }
 ;              → stdlib/timers.test.tsx 31:6 `,…

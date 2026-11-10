@@ -1,6 +1,4 @@
 import { bundler } from "@backtickjs/bundler";
-import { cs } from "@backtickjs/core";
-import { render } from "solid-js/web" with { backtick: "client" };
 import type { JSX } from "@backtickjs/jsx-solid/jsx-runtime";
 
 // The version of Solid the page loads, below: what each page is bundled for.
@@ -13,12 +11,10 @@ const modules = {
 // Development unless NODE_ENV says production, as hosts set it for a deploy.
 const development = process.env.NODE_ENV !== "production";
 
-// A page: the element, bundled for the browser, and Solid from a CDN.
+// A page: its component, bundled for the browser, which the page's entry
+// draws with Solid's `render`, and Solid from a CDN.
 export async function toHtml(element: JSX.Element): Promise<string> {
-  const bundle = await bundler.build({
-    input: cs`$render(() => $element, document.getElementById("app")!)`,
-    modules,
-  });
+  const bundle = await bundler.build({ input: element, modules });
   // In development, a map back to the files you wrote, for the browser's
   // devtools.
   const { code } = bundle.generate({
@@ -44,7 +40,11 @@ export async function toHtml(element: JSX.Element): Promise<string> {
   </head>
   <body style="margin: 0">
     <div id="app"></div>
-    <script type="module" src="data:text/javascript,${encodeURIComponent(code)}"></script>
+    <script type="module">
+      import { render } from "solid-js/web";
+      import Page from "data:text/javascript,${encodeURIComponent(code)}";
+      render(Page, document.getElementById("app"));
+    </script>
   </body>
 </html>`;
 }

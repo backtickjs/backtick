@@ -1,6 +1,4 @@
 import { bundler } from "@backtickjs/bundler";
-import { cs } from "@backtickjs/core";
-import { createRoot } from "react-dom/client" with { backtick: "client" };
 import type { JSX } from "@backtickjs/jsx-react/jsx-runtime";
 
 // The versions of React the page loads, below: what each page is bundled for.
@@ -13,12 +11,10 @@ const modules = {
 // Development unless NODE_ENV says production, as hosts set it for a deploy.
 const development = process.env.NODE_ENV !== "production";
 
-// A page: the element, bundled for the browser, and React from a CDN.
+// A page: its element, bundled for the browser, which the page's entry draws
+// with React's `createRoot`, and React from a CDN.
 export async function toHtml(element: JSX.Element): Promise<string> {
-  const bundle = await bundler.build({
-    input: cs`$createRoot(document.getElementById("app")!).render($element)`,
-    modules,
-  });
+  const bundle = await bundler.build({ input: element, modules });
   // In development, a map back to the files you wrote, for the browser's
   // devtools.
   const { code } = bundle.generate({
@@ -44,7 +40,11 @@ export async function toHtml(element: JSX.Element): Promise<string> {
   </head>
   <body style="margin: 0">
     <div id="app"></div>
-    <script type="module" src="data:text/javascript,${encodeURIComponent(code)}"></script>
+    <script type="module">
+      import { createRoot } from "react-dom/client";
+      import page from "data:text/javascript,${encodeURIComponent(code)}";
+      createRoot(document.getElementById("app")).render(page);
+    </script>
   </body>
 </html>`;
 }

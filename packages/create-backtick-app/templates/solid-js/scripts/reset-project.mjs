@@ -6,7 +6,7 @@ writeFileSync(
   `import { cs } from "@backtickjs/core";
 
 export async function Home() {
-  return cs\`(
+  return cs\`() => (
     <main style={{ padding: "24px", "font-family": "system-ui, sans-serif" }}>
       <p>Edit server/Home.tsx to edit this page.</p>
     </main>
