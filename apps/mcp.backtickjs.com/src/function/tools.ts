@@ -51,6 +51,7 @@ export function tools(owner: string): McpServer {
       annotations: {
         title: "New app",
         readOnlyHint: true,
+        destructiveHint: false,
         openWorldHint: false,
       },
     },
@@ -77,6 +78,7 @@ export function tools(owner: string): McpServer {
       annotations: {
         title: "Get an app",
         readOnlyHint: true,
+        destructiveHint: false,
         openWorldHint: false,
       },
     },
@@ -103,6 +105,7 @@ export function tools(owner: string): McpServer {
       annotations: {
         title: "List apps",
         readOnlyHint: true,
+        destructiveHint: false,
         openWorldHint: false,
       },
     },
