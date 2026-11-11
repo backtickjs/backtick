@@ -51,16 +51,16 @@ importers:
   apps/auth.backtickjs.com:
     dependencies:
       '@backtickjs/bundler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/bundler
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/core
       '@backtickjs/jsx-solid':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/jsx-solid
       '@backtickjs/tsc':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/tsc
       '@hono/node-server':
         specifier: ^2.1.4
@@ -85,7 +85,7 @@ importers:
         version: 6.0.3
     devDependencies:
       '@backtickjs/tspatch-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/tspatch-plugin
       esbuild:
         specifier: 0.28.0
@@ -110,7 +110,7 @@ importers:
         version: 6.0.3
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/prettier-plugin
       '@cloudflare/workers-types':
         specifier: 5.20261018.1
@@ -131,13 +131,13 @@ importers:
   apps/backtickjs.com:
     dependencies:
       '@backtickjs/bundler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/bundler
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/core
       '@backtickjs/jsx-solid':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/jsx-solid
       '@tailwindcss/node':
         specifier: ^4.3.3
@@ -159,13 +159,13 @@ importers:
         version: 6.0.3
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/tsc
       '@backtickjs/tspatch-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/tspatch-plugin
       '@hono/node-server':
         specifier: ^2.1.4
@@ -186,22 +186,22 @@ importers:
   apps/backtickjs.dev:
     dependencies:
       '@backtickjs/bundler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/bundler
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/core
       '@backtickjs/expo':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/expo
       '@backtickjs/hono':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/hono
       '@backtickjs/jsx-solid':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/jsx-solid
       '@backtickjs/vscode-extension':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../vscode-extension
       '@shikijs/colorized-brackets':
         specifier: ^4.5.0
@@ -241,19 +241,19 @@ importers:
         version: 6.0.3
     devDependencies:
       '@backtickjs/jsx-react':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/jsx-react
       '@backtickjs/node-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/node-plugin
       '@backtickjs/prettier-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/tsc
       '@backtickjs/tspatch-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/tspatch-plugin
       '@hono/node-server':
         specifier: ^2.1.4
@@ -316,16 +316,16 @@ importers:
   apps/mcp.backtickjs.com:
     dependencies:
       '@backtickjs/bundler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/bundler
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/core
       '@backtickjs/jsx-solid':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/jsx-solid
       '@backtickjs/tsc':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/tsc
       '@hono/node-server':
         specifier: ^2.1.4
@@ -371,7 +371,7 @@ importers:
         version: 4.6.7
     devDependencies:
       '@backtickjs/tspatch-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/tspatch-plugin
       '@types/qrcode':
         specifier: ^1.5.6
@@ -387,28 +387,28 @@ importers:
     dependencies:
       '@backtickjs/bundler':
         specifier: 0.5.1
-        version: link:../../../packages/bundler
+        version: 0.5.1(typescript@6.0.3)
       '@backtickjs/compiler':
         specifier: 0.5.1
-        version: link:../../../packages/compiler
+        version: 0.5.1(typescript@6.0.3)
       '@backtickjs/core':
         specifier: 0.5.1
-        version: link:../../../packages/core
+        version: 0.5.1(typescript@6.0.3)
       '@backtickjs/expo':
         specifier: 0.5.1
-        version: link:../../../packages/expo
+        version: 0.5.1(expo@58.0.23)(typescript@6.0.3)
       '@backtickjs/hono':
         specifier: 0.5.1
-        version: link:../../../packages/hono
+        version: 0.5.1(hono@4.13.13)(typescript@6.0.3)
       '@backtickjs/jsx-react':
         specifier: 0.5.1
-        version: link:../../../packages/jsx-react
+        version: 0.5.1(@types/react@19.3.0)(react@19.3.0)(typescript@6.0.3)
       '@backtickjs/node-plugin':
         specifier: 0.5.1
-        version: link:../../../packages/node-plugin
+        version: 0.5.1(typescript@6.0.3)
       '@backtickjs/tsc':
         specifier: 0.5.1
-        version: link:../../../packages/tsc
+        version: 0.5.1(typescript@6.0.3)
       '@expo/ui':
         specifier: 58.0.27
         version: 58.0.27(@babel/core@7.29.7)(expo@58.0.23)(react-dom@19.3.0(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
@@ -681,22 +681,22 @@ importers:
   apps/shell:
     dependencies:
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/core
       '@backtickjs/expo':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/expo
       '@backtickjs/expo-router':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: file:packages/expo-router(expo-router@58.0.30)(react@19.3.0)
       '@backtickjs/hono':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/hono
       '@backtickjs/jsx-react':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/jsx-react
       '@backtickjs/vscode-extension':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../vscode-extension
       '@expo/ui':
         specifier: ~58.0.27
@@ -970,13 +970,13 @@ importers:
         injected: true
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/tsc
       '@backtickjs/tspatch-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/tspatch-plugin
       '@testing-library/react-native':
         specifier: 14.1.0
@@ -1003,11 +1003,11 @@ importers:
   apps/vscode-extension:
     dependencies:
       '@backtickjs/typescript-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/typescript-plugin
     devDependencies:
       '@backtickjs/language-server':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/language-server
       '@types/vscode':
         specifier: ^1.120.0
@@ -1043,19 +1043,19 @@ importers:
   examples/doom:
     dependencies:
       '@backtickjs/bundler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/bundler
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/core
       '@backtickjs/expo':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/expo
       '@backtickjs/jsx-react':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/jsx-react
       '@backtickjs/node-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/node-plugin
       '@hono/node-server':
         specifier: ^2.1.4
@@ -1107,10 +1107,10 @@ importers:
         version: 6.0.3
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/tsc
       '@react-three/test-renderer':
         specifier: 9.1.1
@@ -1140,22 +1140,22 @@ importers:
   examples/feed:
     dependencies:
       '@backtickjs/bundler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/bundler
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/core
       '@backtickjs/expo':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/expo
       '@backtickjs/hono':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/hono
       '@backtickjs/jsx-react':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/jsx-react
       '@backtickjs/node-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/node-plugin
       '@hono/node-server':
         specifier: ^2.1.4
@@ -1198,10 +1198,10 @@ importers:
         version: 6.0.3
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/tsc
       '@testing-library/react':
         specifier: ^16.3.3
@@ -1237,11 +1237,11 @@ importers:
   packages/bun-plugin:
     dependencies:
       '@backtickjs/compiler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../compiler
     devDependencies:
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../core
       '@types/bun':
         specifier: ^1.3.14
@@ -1256,7 +1256,7 @@ importers:
   packages/bundler:
     dependencies:
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../core
       semver:
         specifier: ^7.8.1
@@ -1285,7 +1285,7 @@ importers:
         version: 0.3.31
     devDependencies:
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../core
       prettier:
         specifier: ^3.6.2
@@ -1325,16 +1325,16 @@ importers:
   packages/create-backtick-app/templates/react:
     dependencies:
       '@backtickjs/bundler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../bundler
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../core
       '@backtickjs/jsx-react':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../jsx-react
       '@backtickjs/node-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../node-plugin
       '@hono/node-server':
         specifier: ^2.1.4
@@ -1353,10 +1353,10 @@ importers:
         version: 6.0.3
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../prettier-plugin
       '@backtickjs/tsc':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../tsc
       '@types/node':
         specifier: ^25.9.1
@@ -1380,22 +1380,22 @@ importers:
   packages/create-backtick-app/templates/react-native:
     dependencies:
       '@backtickjs/bundler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../bundler
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../core
       '@backtickjs/expo':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../expo
       '@backtickjs/hono':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../hono
       '@backtickjs/jsx-react':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../jsx-react
       '@backtickjs/node-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../node-plugin
       '@hono/node-server':
         specifier: ^2.1.4
@@ -1432,10 +1432,10 @@ importers:
         version: 6.0.3
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../prettier-plugin
       '@backtickjs/tsc':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../tsc
       '@testing-library/react':
         specifier: ^16.3.3
@@ -1471,16 +1471,16 @@ importers:
   packages/create-backtick-app/templates/solid-js:
     dependencies:
       '@backtickjs/bundler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../bundler
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../core
       '@backtickjs/jsx-solid':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../jsx-solid
       '@backtickjs/node-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../node-plugin
       '@hono/node-server':
         specifier: ^2.1.4
@@ -1496,10 +1496,10 @@ importers:
         version: 6.0.3
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../prettier-plugin
       '@backtickjs/tsc':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../../tsc
       '@types/node':
         specifier: ^25.9.1
@@ -1517,7 +1517,7 @@ importers:
   packages/expo:
     dependencies:
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../core
     devDependencies:
       '@types/node':
@@ -1560,26 +1560,26 @@ importers:
   packages/hono:
     dependencies:
       '@backtickjs/bundler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../bundler
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../core
     devDependencies:
       '@backtickjs/expo':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../expo
       '@backtickjs/jsx-react':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../jsx-react
       '@backtickjs/prettier-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../prettier-plugin
       '@backtickjs/tsc':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../tsc
       '@backtickjs/tspatch-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../tspatch-plugin
       '@tanstack/react-query':
         specifier: 5.104.0
@@ -1609,23 +1609,23 @@ importers:
   packages/jsx-react:
     dependencies:
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../core
     devDependencies:
       '@backtickjs/bundler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../bundler
       '@backtickjs/compiler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../compiler
       '@backtickjs/prettier-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../prettier-plugin
       '@backtickjs/tsc':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../tsc
       '@backtickjs/tspatch-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../tspatch-plugin
       '@types/react':
         specifier: 19.2.18
@@ -1661,20 +1661,20 @@ importers:
         specifier: ^7.29.7
         version: 7.29.7
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../core
       babel-preset-solid:
         specifier: 1.9.12
         version: 1.9.12(@babel/core@7.29.7)(solid-js@1.9.14)
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../prettier-plugin
       '@backtickjs/tsc':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../tsc
       '@backtickjs/tspatch-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../tspatch-plugin
       '@types/babel__core':
         specifier: ^7.20.5
@@ -1695,7 +1695,7 @@ importers:
   packages/language-plugin:
     dependencies:
       '@backtickjs/compiler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../compiler
       '@volar/language-core':
         specifier: ^2.4.28
@@ -1714,7 +1714,7 @@ importers:
   packages/language-server:
     dependencies:
       '@backtickjs/language-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../language-plugin
       '@volar/language-server':
         specifier: ^2.4.28
@@ -1730,10 +1730,10 @@ importers:
   packages/language-service:
     dependencies:
       '@backtickjs/compiler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../compiler
       '@backtickjs/language-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../language-plugin
       '@volar/language-core':
         specifier: ^2.4.28
@@ -1749,11 +1749,11 @@ importers:
   packages/node-plugin:
     dependencies:
       '@backtickjs/compiler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../compiler
     devDependencies:
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../core
       '@types/node':
         specifier: ^25.9.1
@@ -1768,7 +1768,7 @@ importers:
   packages/prettier-plugin:
     dependencies:
       '@backtickjs/compiler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../compiler
     devDependencies:
       '@types/estree':
@@ -1787,13 +1787,13 @@ importers:
   packages/tsc:
     dependencies:
       '@backtickjs/compiler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../compiler
       '@backtickjs/language-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../language-plugin
       '@backtickjs/language-service':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../language-service
       '@volar/typescript':
         specifier: ^2.4.28
@@ -1809,7 +1809,7 @@ importers:
   packages/tspatch-plugin:
     dependencies:
       '@backtickjs/compiler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../compiler
     devDependencies:
       prettier:
@@ -1825,10 +1825,10 @@ importers:
   packages/typescript-plugin:
     dependencies:
       '@backtickjs/language-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../language-plugin
       '@backtickjs/language-service':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../language-service
       '@volar/language-core':
         specifier: ^2.4.28
@@ -1838,10 +1838,10 @@ importers:
         version: 2.4.28
     devDependencies:
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../core
       '@backtickjs/jsx-solid':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../jsx-solid
       prettier:
         specifier: ^3.6.2
@@ -1856,25 +1856,25 @@ importers:
   tests:
     devDependencies:
       '@backtickjs/bundler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../packages/bundler
       '@backtickjs/compiler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../packages/compiler
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../packages/core
       '@backtickjs/jsx-react':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../packages/jsx-react
       '@backtickjs/jsx-solid':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../packages/jsx-solid
       '@backtickjs/prettier-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../packages/tsc
       '@jridgewell/trace-mapping':
         specifier: ^0.3.31
@@ -1928,13 +1928,13 @@ importers:
   tests/conformance:
     dependencies:
       '@backtickjs/bundler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/bundler
       '@backtickjs/compiler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/compiler
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/core
       typescript:
         specifier: ^6.0.3
@@ -1944,7 +1944,7 @@ importers:
         version: 2.9.1
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/prettier-plugin
       '@types/node':
         specifier: ^25.9.1
@@ -1962,26 +1962,26 @@ importers:
   tests/js-framework-benchmark:
     dependencies:
       '@backtickjs/bundler':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/bundler
       '@backtickjs/core':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/core
       '@backtickjs/jsx-solid':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/jsx-solid
       '@backtickjs/tspatch-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/tspatch-plugin
       solid-js:
         specifier: 1.9.17
         version: 1.9.17
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: 0.5.1
+        specifier: 0.5.2
         version: link:../../packages/tsc
       ts-patch:
         specifier: ^4.0.1
@@ -2528,11 +2528,63 @@ packages:
     resolution: {integrity: sha512-Vj1jF3cPfxg7OAfoI7QnVKLoILlm2JF9pnVHrX8qx7AHMiYWT+NDAA7jChlNgRS4WTLc/fD1lXLmPixluj+3Gg==}
     engines: {node: '>=6.9.0'}
 
+  '@backtickjs/bundler@0.5.1':
+    resolution: {integrity: sha512-Wr57V6MSoRpcI7SthpnFnh1dAQpng6I53mNdIJ2jLAbMKrQUZPZF75G0PNDBRVBmZGPHdeoALWnDpiswEtf8CA==}
+
+  '@backtickjs/compiler@0.5.1':
+    resolution: {integrity: sha512-lvR8Ursf4GoYhXA8+SCWT2XugaPh1VwrjI9fukAR54VYSXGdNBRuKA965AIioqSMlNdjqDbhJj/15/sy8zY1bw==}
+    peerDependencies:
+      typescript: ^6.0.3
+
+  '@backtickjs/core@0.5.1':
+    resolution: {integrity: sha512-Sie7C4qQ3ld0cU2l1AJm282+A+EWn7ZJezudMHVQA9Tb4xWVrywMDTTLTrM2xoHJEYqJKLN/MZQlwvjwlvH16Q==}
+    peerDependencies:
+      typescript: ^6.0.3
+
   '@backtickjs/expo-router@file:packages/expo-router':
     resolution: {directory: packages/expo-router, type: directory}
     peerDependencies:
       expo-router: ~58.0.30
       react: '*'
+
+  '@backtickjs/expo@0.5.1':
+    resolution: {integrity: sha512-jwpPR7pJw+l8qhfTiZz0hwCH/Zdu0/ARU2dcasq6qMIDPI/ZG2LAzsHy5Kkur3PAKLrfAYVv6Oh8QOXaJiKynQ==}
+    peerDependencies:
+      expo: '*'
+
+  '@backtickjs/hono@0.5.1':
+    resolution: {integrity: sha512-sqsbEojgFQiuLEMQDOiByScc6ojEeBFWtz0d+7/YP6HSoVnHviy2RayZ3u0PABvMK3fbhmJbUAKCNKLfxEEsKQ==}
+    peerDependencies:
+      hono: ^4.13.13
+
+  '@backtickjs/jsx-react@0.5.1':
+    resolution: {integrity: sha512-ZwWYibag0RsFzfVQXmjTzcIprs6rgdnUfF0b+70V9epPeVMccoiTA1GxDY8wa2fFm+Sixz6JfwszZRB9ppRIoA==}
+    peerDependencies:
+      '@types/react': ^19.2.18
+      react: ^19.2.3
+      typescript: ^6.0.3
+
+  '@backtickjs/language-plugin@0.5.1':
+    resolution: {integrity: sha512-0jD+Mn8TLQVfRK1bCLEN+UUpnW/Cc/T3eWt9Z9iNCocBosVS30MfONTsHfmWwCW48vyxugOANzVd0nPg4bfy2g==}
+    peerDependencies:
+      typescript: ^6.0.3
+
+  '@backtickjs/language-service@0.5.1':
+    resolution: {integrity: sha512-WNc2DXVX0Ht92ubxPCvzM69TSGcjcVlfsKUXdOeOCcsBElkz/31o3In4+HaVd2TY0m6EpBoqxlcat0dg7+VZZA==}
+    peerDependencies:
+      typescript: ^6.0.3
+
+  '@backtickjs/node-plugin@0.5.1':
+    resolution: {integrity: sha512-qYum4iGwrtJgQs33xIgEwLyTHbyhXc7wbiLFnICIlBRzqVrKbBwuGxlUTEhg9e54G9sj9Mta+9jEmV4NJ85sHA==}
+    engines: {node: '>=22.15'}
+    peerDependencies:
+      typescript: ^6.0.3
+
+  '@backtickjs/tsc@0.5.1':
+    resolution: {integrity: sha512-N0Fxe03qdJ/XUxue2FbLCs2Iu1F01ShKKwOWrO3wbv17ERgaUHON9w+CEFl5wutiNAqgcgc8UjfdbF2K8rdGTA==}
+    hasBin: true
+    peerDependencies:
+      typescript: ^6.0.3
 
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
@@ -10742,10 +10794,76 @@ snapshots:
       '@babel/helper-string-parser': 7.29.7
       '@babel/helper-validator-identifier': 7.29.7
 
+  '@backtickjs/bundler@0.5.1(typescript@6.0.3)':
+    dependencies:
+      '@backtickjs/core': 0.5.1(typescript@6.0.3)
+      semver: 7.8.5
+    transitivePeerDependencies:
+      - typescript
+
+  '@backtickjs/compiler@0.5.1(typescript@6.0.3)':
+    dependencies:
+      '@jridgewell/gen-mapping': 0.3.13
+      '@jridgewell/remapping': 2.3.5
+      '@jridgewell/trace-mapping': 0.3.31
+      typescript: 6.0.3
+
+  '@backtickjs/core@0.5.1(typescript@6.0.3)':
+    dependencies:
+      typescript: 6.0.3
+
   '@backtickjs/expo-router@file:packages/expo-router(expo-router@58.0.30)(react@19.3.0)':
     dependencies:
       expo-router: 58.0.30(6785ba9d17be3c36ce25a309a8692cc0)
       react: 19.3.0
+
+  '@backtickjs/expo@0.5.1(expo@58.0.23)(typescript@6.0.3)':
+    dependencies:
+      '@backtickjs/core': 0.5.1(typescript@6.0.3)
+      expo: 58.0.23(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.3.0(react@19.3.0))(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native-webview@14.0.1(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
+    transitivePeerDependencies:
+      - typescript
+
+  '@backtickjs/hono@0.5.1(hono@4.13.13)(typescript@6.0.3)':
+    dependencies:
+      '@backtickjs/bundler': 0.5.1(typescript@6.0.3)
+      '@backtickjs/core': 0.5.1(typescript@6.0.3)
+      hono: 4.13.13
+    transitivePeerDependencies:
+      - typescript
+
+  '@backtickjs/jsx-react@0.5.1(@types/react@19.3.0)(react@19.3.0)(typescript@6.0.3)':
+    dependencies:
+      '@backtickjs/core': 0.5.1(typescript@6.0.3)
+      '@types/react': 19.3.0
+      react: 19.3.0
+      typescript: 6.0.3
+
+  '@backtickjs/language-plugin@0.5.1(typescript@6.0.3)':
+    dependencies:
+      '@backtickjs/compiler': 0.5.1(typescript@6.0.3)
+      '@volar/language-core': 2.4.28
+      typescript: 6.0.3
+
+  '@backtickjs/language-service@0.5.1(typescript@6.0.3)':
+    dependencies:
+      '@backtickjs/compiler': 0.5.1(typescript@6.0.3)
+      '@backtickjs/language-plugin': 0.5.1(typescript@6.0.3)
+      '@volar/language-core': 2.4.28
+      typescript: 6.0.3
+
+  '@backtickjs/node-plugin@0.5.1(typescript@6.0.3)':
+    dependencies:
+      '@backtickjs/compiler': 0.5.1(typescript@6.0.3)
+      typescript: 6.0.3
+
+  '@backtickjs/tsc@0.5.1(typescript@6.0.3)':
+    dependencies:
+      '@backtickjs/compiler': 0.5.1(typescript@6.0.3)
+      '@backtickjs/language-plugin': 0.5.1(typescript@6.0.3)
+      '@backtickjs/language-service': 0.5.1(typescript@6.0.3)
+      '@volar/typescript': 2.4.28
+      typescript: 6.0.3
 
   '@bcoe/v8-coverage@0.2.3': {}
 
@@ -10999,7 +11117,7 @@ snapshots:
 
   '@expo-google-fonts/material-symbols@0.4.52': {}
 
-  '@expo/cli@57.0.27(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-constants@57.0.22(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3)))(expo-font@57.0.4(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(expo-router@58.0.30)(expo@57.0.26)(react-dom@19.2.3(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)':
+  '@expo/cli@57.0.27(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-constants@57.0.22(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3)))(expo-font@57.0.4)(expo-router@58.0.30)(expo@57.0.26)(react-dom@19.2.3(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)':
     dependencies:
       '@expo/code-signing-certificates': 0.0.6
       '@expo/config': 57.0.9(typescript@6.0.3)
@@ -11018,7 +11136,7 @@ snapshots:
       '@expo/plist': 0.8.1
       '@expo/prebuild-config': 57.0.16(typescript@6.0.3)
       '@expo/require-utils': 57.0.6(typescript@6.0.3)
-      '@expo/router-server': 57.0.11(@expo/metro-runtime@57.0.17)(expo-constants@57.0.22(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3)))(expo-font@57.0.4(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(expo-router@58.0.30)(expo-server@57.0.3)(expo@57.0.26)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@expo/router-server': 57.0.11(@expo/metro-runtime@57.0.17)(expo-constants@57.0.22(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3)))(expo-font@57.0.4)(expo-router@58.0.30)(expo-server@57.0.3)(expo@57.0.26)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@expo/schema-utils': 57.0.2
       '@expo/spawn-async': 1.8.0
       '@expo/ws-tunnel': 2.0.1(ws@8.22.0)
@@ -11077,7 +11195,7 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@expo/cli@57.0.27(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-constants@57.0.22)(expo-font@57.0.4)(expo-router@58.0.30)(expo@57.0.26)(react-dom@19.3.0(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)':
+  '@expo/cli@57.0.27(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-constants@57.0.22(expo@57.0.26)(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0)))(expo-font@57.0.4(expo@57.0.26)(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(expo-router@58.0.30)(expo@57.0.26)(react-dom@19.3.0(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)':
     dependencies:
       '@expo/code-signing-certificates': 0.0.6
       '@expo/config': 57.0.9(typescript@6.0.3)
@@ -11096,7 +11214,7 @@ snapshots:
       '@expo/plist': 0.8.1
       '@expo/prebuild-config': 57.0.16(typescript@6.0.3)
       '@expo/require-utils': 57.0.6(typescript@6.0.3)
-      '@expo/router-server': 57.0.11(@expo/metro-runtime@57.0.17)(expo-constants@57.0.22)(expo-font@57.0.4)(expo-router@58.0.30)(expo-server@57.0.3)(expo@57.0.26)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@expo/router-server': 57.0.11(@expo/metro-runtime@57.0.17)(expo-constants@57.0.22(expo@57.0.26)(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0)))(expo-font@57.0.4(expo@57.0.26)(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(expo-router@58.0.30)(expo-server@57.0.3)(expo@57.0.26)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@expo/schema-utils': 57.0.2
       '@expo/spawn-async': 1.8.0
       '@expo/ws-tunnel': 2.0.1(ws@8.22.0)
@@ -11140,7 +11258,7 @@ snapshots:
       ws: 8.22.0
       zod: 3.25.76
     optionalDependencies:
-      expo-router: 58.0.30(3c8313792f180f8cd73a84dc9a0b3b52)
+      expo-router: 58.0.30(58794290594d7cd572a783a1268b6ffd)
       react-native: 0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0)
     transitivePeerDependencies:
       - '@expo/dom-webview'
@@ -11302,7 +11420,7 @@ snapshots:
       wrap-ansi: 7.0.0
       ws: 8.22.0
     optionalDependencies:
-      expo-router: 58.0.30(0aa32ce209295ddad0b34863d48109af)
+      expo-router: 58.0.30(6785ba9d17be3c36ce25a309a8692cc0)
       react-native: 0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0)
     transitivePeerDependencies:
       - '@expo/dom-webview'
@@ -11643,7 +11761,7 @@ snapshots:
       postcss: 8.5.28
       resolve-from: 5.0.0
     optionalDependencies:
-      expo: 57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.3.0(react@19.3.0))(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native-webview@14.0.1(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
+      expo: 57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native-webview@14.0.1(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -11681,7 +11799,7 @@ snapshots:
       resolve-from: 5.0.0
       tinyglobby: 0.2.17
     optionalDependencies:
-      expo: 58.0.23(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.3.0(react@19.3.0))(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native-webview@14.0.1(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
+      expo: 58.0.23(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native-webview@14.0.1(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -11910,7 +12028,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@expo/router-server@57.0.11(@expo/metro-runtime@57.0.17)(expo-constants@57.0.22(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3)))(expo-font@57.0.4(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(expo-router@58.0.30)(expo-server@57.0.3)(expo@57.0.26)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+  '@expo/router-server@57.0.11(@expo/metro-runtime@57.0.17)(expo-constants@57.0.22(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3)))(expo-font@57.0.4)(expo-router@58.0.30)(expo-server@57.0.3)(expo@57.0.26)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
     dependencies:
       debug: 4.4.3(supports-color@5.5.0)
       expo: 57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native-webview@14.0.1(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)
@@ -11925,7 +12043,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@expo/router-server@57.0.11(@expo/metro-runtime@57.0.17)(expo-constants@57.0.22)(expo-font@57.0.4)(expo-router@58.0.30)(expo-server@57.0.3)(expo@57.0.26)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
+  '@expo/router-server@57.0.11(@expo/metro-runtime@57.0.17)(expo-constants@57.0.22(expo@57.0.26)(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0)))(expo-font@57.0.4(expo@57.0.26)(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(expo-router@58.0.30)(expo-server@57.0.3)(expo@57.0.26)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:
       debug: 4.4.3(supports-color@5.5.0)
       expo: 57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.3.0(react@19.3.0))(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native-webview@14.0.1(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
@@ -11935,7 +12053,7 @@ snapshots:
       react: 19.3.0
     optionalDependencies:
       '@expo/metro-runtime': 57.0.17(expo@57.0.26)(react-dom@19.3.0(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
-      expo-router: 58.0.30(3c8313792f180f8cd73a84dc9a0b3b52)
+      expo-router: 58.0.30(58794290594d7cd572a783a1268b6ffd)
       react-dom: 19.3.0(react@19.3.0)
     transitivePeerDependencies:
       - supports-color
@@ -11965,7 +12083,7 @@ snapshots:
       react: 19.3.0
     optionalDependencies:
       '@expo/metro-runtime': 57.0.17(@expo/log-box@58.0.15)(expo@58.0.23)(react-dom@19.3.0(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
-      expo-router: 58.0.30(0aa32ce209295ddad0b34863d48109af)
+      expo-router: 58.0.30(6785ba9d17be3c36ce25a309a8692cc0)
       react-dom: 19.3.0(react@19.3.0)
     transitivePeerDependencies:
       - supports-color
@@ -14541,7 +14659,7 @@ snapshots:
       react-refresh: 0.14.2
     optionalDependencies:
       '@babel/runtime': 7.29.7
-      expo: 57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.3.0(react@19.3.0))(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native-webview@14.0.1(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
+      expo: 57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native-webview@14.0.1(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)
     transitivePeerDependencies:
       - '@babel/core'
       - supports-color
@@ -14593,7 +14711,7 @@ snapshots:
       react-refresh: 0.14.2
     optionalDependencies:
       '@babel/runtime': 7.29.7
-      expo: 58.0.23(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.3.0(react@19.3.0))(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native-webview@14.0.1(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
+      expo: 58.0.23(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native-webview@14.0.1(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)
     transitivePeerDependencies:
       - '@babel/core'
       - supports-color
@@ -15597,11 +15715,11 @@ snapshots:
       react: 19.3.0
       react-native: 0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0)
 
-  expo-font@58.0.11(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3):
+  expo-font@58.0.11(expo@57.0.26)(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0):
     dependencies:
-      expo: 57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native-webview@14.0.1(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)
-      react: 19.2.3
-      react-native: 0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3)
+      expo: 57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.3.0(react@19.3.0))(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native-webview@14.0.1(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
+      react: 19.3.0
+      react-native: 0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0)
     optional: true
 
   expo-font@58.0.11(expo@58.0.23)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3):
@@ -15983,7 +16101,7 @@ snapshots:
       - '@types/react'
       - '@types/react-dom'
 
-  expo-router@58.0.30(3c8313792f180f8cd73a84dc9a0b3b52):
+  expo-router@58.0.30(58794290594d7cd572a783a1268b6ffd):
     dependencies:
       '@expo/metro-runtime': 57.0.17(expo@57.0.26)(react-dom@19.3.0(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       '@expo/schema-utils': 58.0.3
@@ -15993,7 +16111,7 @@ snapshots:
       '@react-native/normalize-colors': 0.88.1
       client-only: 0.0.1
       expo: 57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.3.0(react@19.3.0))(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native-webview@14.0.1(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
-      expo-constants: 57.0.22(expo@57.0.26)(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))
+      expo-constants: 58.0.15(expo@57.0.26)(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(typescript@6.0.3)
       expo-glass-effect: 58.0.5(expo@57.0.26)(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       expo-linking: 58.0.16(expo@57.0.26)(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
       expo-server: 58.0.6
@@ -16012,7 +16130,7 @@ snapshots:
     optionalDependencies:
       '@expo/ui': 58.0.27(@babel/core@7.29.7)(expo@57.0.26)(react-dom@19.3.0(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       '@testing-library/react-native': 14.1.0(jest@30.5.2(@types/node@25.9.1))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(test-renderer@1.3.0(@types/react@19.3.0)(react@19.3.0))
-      expo-symbols: 58.0.4(expo-font@57.0.4)(expo@57.0.26)(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
+      expo-symbols: 58.0.4(expo-font@58.0.11)(expo@57.0.26)(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       react-dom: 19.3.0(react@19.3.0)
       react-native-gesture-handler: 3.4.0(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
       react-native-reanimated: 4.7.1(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
@@ -16133,7 +16251,7 @@ snapshots:
     optionalDependencies:
       '@expo/ui': 58.0.27(@babel/core@7.29.7)(expo@57.0.26)(react-dom@19.2.3(react@19.2.3))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
       '@testing-library/react-native': 14.1.0(jest@30.5.2(@types/node@25.9.1))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(test-renderer@1.3.0(@types/react@19.2.18)(react@19.2.3))
-      expo-symbols: 58.0.4(expo-font@58.0.11)(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
+      expo-symbols: 58.0.4(expo-font@57.0.4)(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
       react-dom: 19.2.3(react@19.2.3)
       react-native-gesture-handler: 3.4.0(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
       react-native-reanimated: 4.7.1(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
@@ -16235,23 +16353,23 @@ snapshots:
 
   expo-structured-headers@58.0.1: {}
 
-  expo-symbols@58.0.4(expo-font@57.0.4)(expo@57.0.26)(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0):
-    dependencies:
-      '@expo-google-fonts/material-symbols': 0.4.52
-      expo: 57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.3.0(react@19.3.0))(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native-webview@14.0.1(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
-      expo-font: 57.0.4(expo@57.0.26)(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
-      react: 19.3.0
-      react-native: 0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0)
-      sf-symbols-typescript: 2.2.0
-    optional: true
-
-  expo-symbols@58.0.4(expo-font@58.0.11)(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3):
+  expo-symbols@58.0.4(expo-font@57.0.4)(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3):
     dependencies:
       '@expo-google-fonts/material-symbols': 0.4.52
       expo: 57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native-webview@14.0.1(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)
-      expo-font: 58.0.11(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
+      expo-font: 57.0.4(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
       react: 19.2.3
       react-native: 0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3)
+      sf-symbols-typescript: 2.2.0
+    optional: true
+
+  expo-symbols@58.0.4(expo-font@58.0.11)(expo@57.0.26)(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0):
+    dependencies:
+      '@expo-google-fonts/material-symbols': 0.4.52
+      expo: 57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.3.0(react@19.3.0))(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native-webview@14.0.1(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
+      expo-font: 58.0.11(expo@57.0.26)(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
+      react: 19.3.0
+      react-native: 0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0)
       sf-symbols-typescript: 2.2.0
     optional: true
 
@@ -16327,7 +16445,7 @@ snapshots:
   expo@57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native-webview@14.0.1(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3):
     dependencies:
       '@babel/runtime': 7.29.7
-      '@expo/cli': 57.0.27(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-constants@57.0.22(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3)))(expo-font@57.0.4(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3))(expo-router@58.0.30)(expo@57.0.26)(react-dom@19.2.3(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)
+      '@expo/cli': 57.0.27(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-constants@57.0.22(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3)))(expo-font@57.0.4)(expo-router@58.0.30)(expo@57.0.26)(react-dom@19.2.3(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)(typescript@6.0.3)
       '@expo/config': 57.0.9(typescript@6.0.3)
       '@expo/config-plugins': 57.0.9(typescript@6.0.3)
       '@expo/devtools': 57.0.1(react-native@0.86.3(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)
@@ -16370,7 +16488,7 @@ snapshots:
   expo@57.0.26(@babel/core@7.29.7)(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-router@58.0.30)(react-dom@19.3.0(react@19.3.0))(react-native-web@0.21.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-native-webview@14.0.1(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native-worklets@0.13.0(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3):
     dependencies:
       '@babel/runtime': 7.29.7
-      '@expo/cli': 57.0.27(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-constants@57.0.22)(expo-font@57.0.4)(expo-router@58.0.30)(expo@57.0.26)(react-dom@19.3.0(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
+      '@expo/cli': 57.0.27(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.17)(expo-constants@57.0.22(expo@57.0.26)(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0)))(expo-font@57.0.4(expo@57.0.26)(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0))(expo-router@58.0.30)(expo@57.0.26)(react-dom@19.3.0(react@19.3.0))(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
       '@expo/config': 57.0.9(typescript@6.0.3)
       '@expo/config-plugins': 57.0.9(typescript@6.0.3)
       '@expo/devtools': 57.0.1(react-native@0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0))(react@19.3.0)
