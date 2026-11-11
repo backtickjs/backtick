@@ -1,15 +1,48 @@
 import { bundler, BundlerError, type Modules } from "@backtickjs/bundler";
-import type { Spliceable, SplicesAs } from "@backtickjs/core";
+import type { Client, Spliceable, SplicesAs } from "@backtickjs/core";
 import type { Context, Hono, MiddlewareHandler } from "hono";
 import { clientRuntime } from "./runtime.js";
 
 export type { Runtime } from "./runtime.js";
 
+// Strings, so the error says them.
+type RootLayoutTakesAComponentWithNoProps =
+  "the root /_layout is a component that takes no props, cs`() => <$Stack />`: it draws the navigator, which renders the screens";
+type NestedLayoutTakesAComponentWithChildren =
+  "a _layout answers a component, cs`({ children }) => …`, drawn around the screens under it: not an element";
+type LoadingTakesAnElement =
+  "a _loading answers what it draws, an element like cs`<$ActivityIndicator />`: not a component";
+
 declare module "hono" {
   // What `context.render` takes under `backtickRenderer()`, as
-  // `jsxRenderer()` types its own.
+  // `jsxRenderer()` types its own, by the route's path, which Hono gives the
+  // handler's context: a layout is a component, the root one drawn with no
+  // props; a loading state isn't a component, whichever it may be. A
+  // sub-app's routes are typed by its own paths, so a nested layout goes on
+  // the app at its full path.
   interface ContextRenderer {
-    <T extends [T] extends [SplicesAs<T>] ? unknown : Spliceable>(
+    <
+      P extends string,
+      T extends P extends "/_layout"
+        ? [T] extends [Client<(props: {}) => unknown>]
+          ? unknown
+          : RootLayoutTakesAComponentWithNoProps
+        : P extends `${string}/_layout`
+          ? [T] extends [Client<(...args: never) => unknown>]
+            ? unknown
+            : NestedLayoutTakesAComponentWithChildren
+          : P extends `${string}/_loading`
+            ? [Extract<T, Client<(...args: never) => unknown>>] extends [never]
+              ? [T] extends [SplicesAs<T>]
+                ? unknown
+                : Spliceable
+              : LoadingTakesAnElement
+            : [T] extends [SplicesAs<T>]
+              ? unknown
+              : Spliceable,
+    >(
+      // Destructured, `render` has no context: the path is any route's.
+      this: Context<any, P, any> | void,
       input: T,
     ): Promise<Response>;
   }

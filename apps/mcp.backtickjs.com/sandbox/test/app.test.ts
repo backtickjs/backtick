@@ -86,6 +86,121 @@ describe("typecheck's default export", () => {
   });
 });
 
+// An app rendering `layout` at its root layout, `nested` at a nested one and
+// `loading` at a loading state.
+const nesting = ({
+  layout,
+  nested,
+  loading,
+}: Record<"layout" | "nested" | "loading", string>) =>
+  `import { cs } from "@backtickjs/core";
+import { backtickApp } from "@backtickjs/hono";
+import { Hono } from "hono";
+import { Stack } from "expo-router" with { backtick: "client" };
+import { type ReactNode } from "react" with { backtick: "client" };
+import { ActivityIndicator, Text } from "react-native" with { backtick: "client" };
+
+const app = new Hono();
+app.use(backtickApp(app));
+app.get("/_layout", (context) => context.render(${layout}));
+app.get("/day/_layout", (context) => context.render(${nested}));
+app.get("/day/_loading", (context) => context.render(${loading}));
+app.get("/day", (context) => context.render(cs\`<$Text>Today</$Text>\`));
+
+export default app;
+`;
+const wellFormed = {
+  layout: "cs`() => <$Stack />`",
+  nested: "cs`({ children }: { children: ReactNode }) => <>{children}</>`",
+  loading: "cs`<$ActivityIndicator />`",
+};
+
+describe("typecheck's layouts and loading states", () => {
+  it("takes a layout that's a component and a loading state that isn't", () => {
+    for (const [name, routes] of [
+      ["", wellFormed],
+      [
+        "-optional-children",
+        {
+          ...wellFormed,
+          layout:
+            "cs`({ children }: { children?: ReactNode }) => <$Stack>{children}</$Stack>`",
+        },
+      ],
+    ] as const) {
+      assert.deepEqual(typecheck(write(`nesting${name}`, nesting(routes))), {
+        errors: [],
+        warnings: [],
+      });
+    }
+  });
+
+  it("refuses a root layout that isn't a component taking no props", () => {
+    for (const [name, layout] of [
+      ["element", "cs`<$Stack />`"],
+      [
+        "children",
+        "cs`({ children }: { children: ReactNode }) => <$Stack>{children}</$Stack>`",
+      ],
+    ]) {
+      assert.match(
+        typecheck(
+          write(
+            `nesting-root-${name}`,
+            nesting({ ...wellFormed, layout: layout! }),
+          ),
+        ).errors.join("\n"),
+        /the root \/_layout is a component that takes no props/,
+        name,
+      );
+    }
+  });
+
+  it("refuses an element at a nested layout", () => {
+    assert.match(
+      typecheck(
+        write(
+          "nesting-nested",
+          nesting({ ...wellFormed, nested: "cs`<$Text>Day</$Text>`" }),
+        ),
+      ).errors.join("\n"),
+      /a _layout answers a component, cs`\(\{ children \}\) => …`/,
+    );
+  });
+
+  it("refuses a component at a loading state, even one it only may be", () => {
+    for (const [name, loading] of [
+      ["component", "cs`() => <$ActivityIndicator />`"],
+      [
+        "either",
+        "Math.random() > 0.5 ? cs`<$ActivityIndicator />` : cs`() => <$ActivityIndicator />`",
+      ],
+    ]) {
+      assert.match(
+        typecheck(
+          write(
+            `nesting-loading-${name}`,
+            nesting({ ...wellFormed, loading: loading! }),
+          ),
+        ).errors.join("\n"),
+        /a _loading answers what it draws, an element/,
+        name,
+      );
+    }
+  });
+
+  it("takes render destructured from the context, which has no path to check", () => {
+    const source = nesting(wellFormed).replace(
+      'app.get("/day", (context) => context.render(',
+      'app.get("/day", ({ render }) => render(',
+    );
+    assert.deepEqual(typecheck(write("nesting-destructured", source)), {
+      errors: [],
+      warnings: [],
+    });
+  });
+});
+
 // What the runtime runs: the release, imported on its own, answering a
 // phone's request.
 async function release(source: string, name: string) {
