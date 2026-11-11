@@ -209,9 +209,25 @@ export function clientRuntime(
       queries.push(pageQuery(href));
       return { queries, loads: false };
     };
-    // A page or a loading state answers what it draws.
-    const Page = (props: { href: string }) =>
-      $useSuspenseQuery(pageQuery(props.href), queryClient).data as ReactNode;
+    // A page or a loading state answers what it draws. A page may answer a
+    // component, as Next.js's and Expo Router's are, drawn with no props; one
+    // that takes props can't be given them, so it's refused rather than drawn
+    // without. A route app code fetches and calls with props is never drawn.
+    const Page = (props: { href: string }) => {
+      const answer = $useSuspenseQuery(pageQuery(props.href), queryClient).data;
+      if (typeof answer !== "function") {
+        return answer as ReactNode;
+      }
+      if (answer.length > 0) {
+        throw new Error(
+          "The page at " +
+            props.href +
+            " answers a component that takes props, which a page can't be given: answer an element with them, such as <Game level={1} />.",
+        );
+      }
+      const Answer = answer as ComponentType;
+      return <Answer />;
+    };
     const Loading = (props: { pattern: string }) =>
       $useSuspenseQuery(loadingQuery(props.pattern), queryClient)
         .data as ReactNode;
