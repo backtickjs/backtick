@@ -46,8 +46,8 @@ const CookedButton = cs\`({ name }: { name: string }) => {
 }\`;
 
 // The root layout, /_layout: it draws the navigator, with every screen's
-// options. A sheet or modal's go here too, not on its screen: screenOptions
-// as a function of route.path.
+// options (optional: without it, a plain Stack). A sheet or modal's go here
+// too, not on its screen: screenOptions as a function of route.path.
 const RootLayout = cs\`() => (
   <$Stack
     screenOptions={{
