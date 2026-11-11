@@ -81,7 +81,8 @@ export function backtickRenderer(): MiddlewareHandler {
  *     app.get("/", (context) => context.render(<Home />));
  *
  * Routes nest as Next.js's folders. `/_layout` is the root layout, a client
- * component drawing the navigator; an app without one doesn't open. A screen
+ * component drawing the navigator; an app without one gets a plain Stack,
+ * cs`() => <$Stack />`, as every other layout is optional. A screen
  * is each segment's `_layout` (`/city/:id/_layout`, rendered for its path,
  * answering a client component given `children`), around its `_loading`
  * while what's under it loads, around the page. A loading state takes no
@@ -116,11 +117,6 @@ export function backtickApp(app: Hono<any, any, any>): MiddlewareHandler {
     if (misplaced !== undefined) {
       throw new Error(
         `The app's ${misplaced.path} route ends with a slash: write it ${misplaced.path.slice(0, -1)}.`,
-      );
-    }
-    if (!patterns("/_layout").includes("/_layout")) {
-      throw new Error(
-        "The app has no /_layout route: it's the root layout, a client component drawing the navigator, as cs`() => <$Stack />`.",
       );
     }
     return bundled(

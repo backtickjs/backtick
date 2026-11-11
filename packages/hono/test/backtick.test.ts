@@ -80,6 +80,7 @@ const phone = {
     "react/jsx-runtime": "19.3.0",
     "@tanstack/react-query": "5.104.0",
     "hono/router/pattern-router": "4.13.13",
+    "expo-router": "58.0.30",
   }),
 };
 
@@ -181,19 +182,17 @@ test("a layout route with a trailing slash doesn't open, by name", async () => {
   });
 });
 
-test("an app without a /_layout route doesn't open, by name", async () => {
+test("an app without a /_layout route opens with a plain Stack", async () => {
   const opened = new Hono();
   opened.use(backtickApp(opened));
-  opened.onError((error, context) => context.text(error.message, 500));
   const response = await opened.request(
     "http://app.test/.well-known/backtick/runtime",
     { headers: phone },
   );
-  assert.equal(response.status, 500);
-  assert.equal(
-    await response.text(),
-    "The app has no /_layout route: it's the root layout, a client component drawing the navigator, as cs`() => <$Stack />`.",
-  );
+  assert.equal(response.status, 200);
+  const code = await response.text();
+  assert.match(code, /require\("expo-router"\)/);
+  assert.match(code, /layouts: \[\]/);
 });
 
 test("a nested layout route opens", async () => {

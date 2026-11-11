@@ -8,6 +8,7 @@ import {
   usePrefetchQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query" with { backtick: "client" };
+import { Stack } from "expo-router" with { backtick: "client" };
 import { PatternRouter } from "hono/router/pattern-router" with {
   backtick: "client",
 };
@@ -379,7 +380,9 @@ export function clientRuntime(
 
     // The root layout, /_layout, which draws the navigator: fetched once per
     // open, as a new one would remount the navigator, and its screens with it.
-    const RootLayout = () => {
+    // An app without one gets a plain Stack, as every other layout is
+    // optional.
+    const FetchedRootLayout = () => {
       const answer = $useSuspenseQuery(
         {
           queryKey: ["/_layout"],
@@ -396,6 +399,9 @@ export function clientRuntime(
       const Answer = answer as ComponentType;
       return <Answer />;
     };
+    const RootLayout = $routes.layouts.includes("/_layout")
+      ? FetchedRootLayout
+      : () => <$Stack />;
 
     // The runtime's hooks name its client, so an app's own React Query, with
     // or without a provider, never shares the runtime's cache.
