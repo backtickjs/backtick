@@ -10,16 +10,17 @@ type RootLayoutTakesAComponentWithNoProps =
   "the root /_layout is a component that takes no props, cs`() => <$Stack />`: it draws the navigator, which renders the screens";
 type NestedLayoutTakesAComponentWithChildren =
   "a _layout answers a component, cs`({ children }) => …`, drawn around the screens under it: not an element";
-type LoadingTakesAnElement =
-  "a _loading answers what it draws, an element like cs`<$ActivityIndicator />`: not a component";
+type LoadingTakesAnElementOrAComponentWithNoProps =
+  "a _loading answers what it draws, an element like cs`<$ActivityIndicator />`, or a component that takes no props";
 
 declare module "hono" {
   // What `context.render` takes under `backtickRenderer()`, as
   // `jsxRenderer()` types its own, by the route's path, which Hono gives the
   // handler's context: a layout is a component, the root one drawn with no
-  // props; a loading state isn't a component, whichever it may be. A
-  // sub-app's routes are typed by its own paths, so a nested layout goes on
-  // the app at its full path.
+  // props; a loading state is drawn with no props too, so it isn't a
+  // component that takes some, whichever it may be. A sub-app's routes are
+  // typed by its own paths, so a nested layout goes on the app at its full
+  // path.
   interface ContextRenderer {
     <
       P extends string,
@@ -32,11 +33,13 @@ declare module "hono" {
             ? unknown
             : NestedLayoutTakesAComponentWithChildren
           : P extends `${string}/_loading`
-            ? [Extract<T, Client<(...args: never) => unknown>>] extends [never]
+            ? [Extract<T, Client<(...args: never) => unknown>>] extends [
+                Client<(props: {}) => unknown>,
+              ]
               ? [T] extends [SplicesAs<T>]
                 ? unknown
                 : Spliceable
-              : LoadingTakesAnElement
+              : LoadingTakesAnElementOrAComponentWithNoProps
             : [T] extends [SplicesAs<T>]
               ? unknown
               : Spliceable,
