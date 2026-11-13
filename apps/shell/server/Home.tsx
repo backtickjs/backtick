@@ -25,6 +25,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context" with {
 import {
   Alert,
   Animated,
+  AppState,
   FlatList,
   Image,
   KeyboardAvoidingView,
@@ -493,6 +494,10 @@ export async function Home(props: { user: string; modules: string }) {
       );
     }
 
+    // Set when the connect sheet opens Claude, for the home to load again on
+    // the way back. A reload starts a new home, with it unset.
+    let connecting = false;
+
     // How to connect Backtick to Claude, as Claude's app asks it
     // (2026-10-24), and the button to its Connectors screen.
     function ConnectSheet(props: { onClose: () => void }) {
@@ -570,6 +575,7 @@ export async function Home(props: { user: string; modules: string }) {
             label="Open Claude's connectors"
             kind="filled"
             onPress={() => {
+              connecting = true;
               onClose();
               $Linking.openURL("https://claude.ai/settings/connectors");
             }}
@@ -744,6 +750,23 @@ export async function Home(props: { user: string; modules: string }) {
         setRefreshing(true);
         $Linking.openURL($shellURL("reload"));
       };
+      // Back from Claude after the connect sheet sent the user there: load the
+      // home again, which reads the connection anew. Only from the background
+      // (not Control Center or Face ID), once, and only while the home is on
+      // top, as a reload link loads whichever screen is.
+      $useFocusEffect(
+        $useCallback(() => {
+          let last = $AppState.currentState;
+          const subscription = $AppState.addEventListener("change", (state) => {
+            if (connecting && last === "background" && state === "active") {
+              connecting = false;
+              $Linking.openURL($shellURL("reload"));
+            }
+            last = state;
+          });
+          return () => subscription.remove();
+        }, []),
+      );
       const [asking, setAsking] = $useState<Ask | null>(null);
       const newApp = () =>
         setAsking({
