@@ -69,10 +69,6 @@ body {
 .eyebrow, h2, .display, .t2, .lede6, .count { text-box: trim-both cap alphabetic; }
 aside.notes { display: none !important; }
 
-.shine {
-  background: linear-gradient(90deg, var(--react), var(--brand));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-}
 .eyebrow {
   font-family: var(--font-mono); font-size: 24px; letter-spacing: 0.12em;
   text-transform: uppercase; color: var(--react);
@@ -248,6 +244,8 @@ pre.gutter .m-warn { background: rgb(251 191 36 / 0.05); box-shadow: inset 10px 
 .run-head { display: flex; flex-direction: column; gap: 22px; }
 .run-sub { font-size: 34px; color: var(--muted); }
 .credit { position: absolute; left: var(--side); bottom: 150px; font-family: var(--font-mono); font-size: 16px; color: var(--muted); }
+.slide.demo { align-items: center; justify-content: center; padding: 40px; }
+.demo-video { height: 100%; border-radius: 36px; box-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.45); background: #000; }
 .nav-wrap { position: relative; margin-top: -84px; }
 .nav-phone .screen { background: #000; }
 .nav-phone video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -386,8 +384,8 @@ html.notes-mode #notes {
 <!-- 1 -->
 <section class="slide v6title" data-title="Title and intro" data-at="0:00" data-for="25">
   <div class="stack">
-    <h1 class="display in" style="--i:1">Vibe code <span class="shine">React Native</span> apps<br>from your phone.</h1>
-    <p class="t2 in" style="--i:2">No computer needed.</p>
+    <h1 class="display in" style="--i:1">Next.js for mobile.</h1>
+    <p class="t2 in" style="--i:2">Fully server-driven React Native.</p>
     <p class="lede6 in" style="--i:3">Jean-François Bisson · React Summit 2026</p>
   </div>
 </section>
@@ -422,11 +420,12 @@ html.notes-mode #notes {
 </section>
 
 <!-- 3 -->
-<section class="slide" data-title="Demo" data-at="0:55" data-for="120" data-bare>
+<section class="slide demo" data-title="Demo" data-at="0:55" data-for="71" data-bare>
+  <video class="demo-video" src="demo.mp4" controls controlslist="nodownload noremoteplayback" disablepictureinpicture muted playsinline preload="auto"></video>
 </section>
 
 <!-- 4 -->
-<section class="slide" data-title="A Backtick app" data-at="2:55" data-for="10">
+<section class="slide" data-title="A Backtick app" data-at="2:06" data-for="10">
   <h2>A Backtick app.</h2>
   <div class="sbs" style="grid-template-columns: max-content 1fr; gap: 28px; align-items: center; margin-top: 8px">
     <div class="panel"><div class="bar"><span>server/App.tsx</span><span class="tag">Simplified</span></div><pre class="gutter" style="font-size: 26px"><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "@backtickjs/core"</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react-native"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#FFD700">(</span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from </span><span style="color:#DA70D6">}</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">number</span><span style="color:#DA70D6"> }</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">$</span><span style="color:#DCDCAA">useState</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> onPress</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">()</span><span style="color:#569CD6"> =&gt;</span><span style="color:#DCDCAA"> setCount</span><span style="color:#DA70D6">(</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4"> + </span><span style="color:#B5CEA8">1</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#9CDCFE"> onPress</span><span style="color:#D4D4D4">=</span><span style="color:#DA70D6">{</span><span style="color:#DCDCAA">onPress</span><span style="color:#DA70D6">}</span><span style="color:#808080">&gt;</span><span style="color:#DA70D6">{</span><span style="color:#4FC1FF">count</span><span style="color:#DA70D6">}</span><span style="color:#808080">&lt;/</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#CE9178">`</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#9CDCFE">app</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">get</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"/:from"</span><span style="color:#D4D4D4">, </span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">c</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> from</span><span style="color:#D4D4D4"> = </span><span style="color:#4EC9B0">Number</span><span style="color:#179FFF">(</span><span style="color:#9CDCFE">c</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">req</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">param</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"from"</span><span style="color:#FFD700">)</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#9CDCFE"> c</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">render</span><span style="color:#179FFF">(</span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#808080">&lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Counter</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">=</span><span style="color:#FFD700">{</span><span style="color:#569CD6">$</span><span style="color:#4FC1FF">from</span><span style="color:#FFD700">}</span><span style="color:#808080"> /&gt;</span><span style="color:#CE9178">`</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#DA70D6">}</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div></pre></div>
@@ -439,7 +438,7 @@ html.notes-mode #notes {
 </section>
 
 <!-- 5 -->
-<section class="slide lines-focus" data-title="A Backtick app: the script" data-at="3:05" data-for="10">
+<section class="slide lines-focus" data-title="A Backtick app: the script" data-at="2:16" data-for="10">
   <h2>A Backtick app.</h2>
   <div class="sbs" style="grid-template-columns: max-content 1fr; gap: 28px; align-items: center; margin-top: 8px">
     <div class="panel"><div class="bar"><span>server/App.tsx</span><span class="tag">Simplified</span></div><pre class="gutter" style="font-size: 26px"><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "@backtickjs/core"</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react-native"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln key"></div><div class="ln key"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#FFD700">(</span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from </span><span style="color:#DA70D6">}</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">number</span><span style="color:#DA70D6"> }</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln key"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">$</span><span style="color:#DCDCAA">useState</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> onPress</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">()</span><span style="color:#569CD6"> =&gt;</span><span style="color:#DCDCAA"> setCount</span><span style="color:#DA70D6">(</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4"> + </span><span style="color:#B5CEA8">1</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#9CDCFE"> onPress</span><span style="color:#D4D4D4">=</span><span style="color:#DA70D6">{</span><span style="color:#DCDCAA">onPress</span><span style="color:#DA70D6">}</span><span style="color:#808080">&gt;</span><span style="color:#DA70D6">{</span><span style="color:#4FC1FF">count</span><span style="color:#DA70D6">}</span><span style="color:#808080">&lt;/</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#CE9178">`</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#9CDCFE">app</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">get</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"/:from"</span><span style="color:#D4D4D4">, </span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">c</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> from</span><span style="color:#D4D4D4"> = </span><span style="color:#4EC9B0">Number</span><span style="color:#179FFF">(</span><span style="color:#9CDCFE">c</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">req</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">param</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"from"</span><span style="color:#FFD700">)</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#9CDCFE"> c</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">render</span><span style="color:#179FFF">(</span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#808080">&lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Counter</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">=</span><span style="color:#FFD700">{</span><span style="color:#569CD6">$</span><span style="color:#4FC1FF">from</span><span style="color:#FFD700">}</span><span style="color:#808080"> /&gt;</span><span style="color:#CE9178">`</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#DA70D6">}</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div></pre></div>
@@ -452,7 +451,7 @@ html.notes-mode #notes {
 </section>
 
 <!-- 6 -->
-<section class="slide" data-title="How a screen is made" data-at="3:15" data-for="15">
+<section class="slide" data-title="How a screen is made" data-at="2:26" data-for="15">
   <h2>How a screen is made.</h2>
   <div class="pipe2">
       <div class="pstep" style="grid-column:1"><span class="n">1</span>Typecheck<span class="when">build time</span></div><span class="pjoint" style="grid-column:2"></span>
@@ -465,7 +464,7 @@ html.notes-mode #notes {
 </section>
 
 <!-- 7 -->
-<section class="slide stepped typecheck-only focus" data-step="1" data-title="Typecheck" data-at="3:30" data-for="20">
+<section class="slide stepped typecheck-only focus" data-step="1" data-title="Typecheck" data-at="2:41" data-for="20">
   <div class="build">
     <div class="src">
       <h2 class="build-title">Typechecked and<br>compiled, once.</h2>
@@ -484,7 +483,7 @@ html.notes-mode #notes {
 </section>
 
 <!-- 8 -->
-<section class="slide stepped focus" data-step="2" data-title="Compile" data-at="3:50" data-for="20">
+<section class="slide stepped focus" data-step="2" data-title="Compile" data-at="3:01" data-for="20">
   <div class="build">
     <div class="src">
       <h2 class="build-title">Typechecked and<br>compiled, once.</h2>
@@ -503,7 +502,7 @@ html.notes-mode #notes {
 </section>
 
 <!-- 9 -->
-<section class="slide stepped tight" data-step="3" data-title="Bundle" data-at="4:10" data-for="35">
+<section class="slide stepped tight" data-step="3" data-title="Bundle" data-at="3:21" data-for="35">
   <h2>Bundled per request.</h2>
   <div class="sbs" style="grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 8px; align-items: start">
     <div style="display:flex; flex-direction:column; gap:14px">
@@ -514,7 +513,7 @@ html.notes-mode #notes {
 </section>
 
 <!-- 10 -->
-<section class="slide stepped" data-step="4" data-title="Run" data-at="4:45" data-for="8">
+<section class="slide stepped" data-step="4" data-title="Run" data-at="3:56" data-for="8">
   <div class="run-head"><h2>Fetched fresh on every open.</h2><p class="run-sub">Layouts and loading screens are prefetched, so it still feels instant.</p></div>
   <div class="sbs" style="grid-template-columns: 1fr 316px; gap: 90px">
     <div style="display:flex;flex-direction:column;gap:44px;padding-top:0">
@@ -525,7 +524,7 @@ html.notes-mode #notes {
 </section>
 
 <!-- 11 -->
-<section class="slide stepped lines-focus fetch-demo" data-step="4" data-title="Run: fetch and evaluate" data-at="4:53" data-for="7">
+<section class="slide stepped lines-focus fetch-demo" data-step="4" data-title="Run: fetch and evaluate" data-at="4:04" data-for="7">
   <div class="run-head"><h2>Fetched fresh on every open.</h2><p class="run-sub">Layouts and loading screens are prefetched, so it still feels instant.</p></div>
   <div class="sbs" style="grid-template-columns: 1fr 316px; gap: 90px">
     <div style="display:flex;flex-direction:column;gap:44px;padding-top:0">
@@ -537,7 +536,7 @@ html.notes-mode #notes {
 </section>
 
 <!-- 12 -->
-<section class="slide" data-title="Your app is a link" data-at="5:00" data-for="20">
+<section class="slide" data-title="Your app is a link" data-at="4:11" data-for="20">
   <div class="home-slide">
     <div class="home-copy">
       <h2>Your app is a link.</h2>
@@ -558,7 +557,7 @@ html.notes-mode #notes {
 </section>
 
 <!-- 13 -->
-<section class="slide" data-title="Dig in if" data-at="5:20" data-for="25">
+<section class="slide" data-title="Dig in if" data-at="4:31" data-for="25">
   <h2>Dig in if…</h2>
   <div class="dig-list">
     <div class="dig-row" style="--c:#0e7490"><svg class="dig-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg><p class="dig-line">You want to ship at the speed of the web.</p><span class="dig-tag">Release speed</span></div>
@@ -568,7 +567,7 @@ html.notes-mode #notes {
 </section>
 
 <!-- 14 -->
-<section class="slide" data-title="Thank you" data-at="5:45" data-for="20">
+<section class="slide" data-title="Thank you" data-at="4:56" data-for="20">
   <h2>Thank you.</h2>
   <div class="join3">
     <div class="jcol">
@@ -667,6 +666,7 @@ html.notes-mode #notes {
     applyTheme(); share();
   }
 
+  let lastSlide = null;
   function render() {
     const slide = slides[state.n - 1];
     slides.forEach((s) => s.classList.toggle("on", s === slide));
@@ -681,8 +681,15 @@ html.notes-mode #notes {
     });
     num.textContent = state.n + " / " + count;
     history.replaceState(null, "", location.pathname + location.search + "#" + state.n);
+    // Videos play while their slide is up; the demo waits, from the start, each time its slide is entered.
+    const entered = slide !== lastSlide;
+    lastSlide = slide;
     document.querySelectorAll("video").forEach((v) => {
-      if (!NOTES && slide.contains(v)) { const p = v.play(); p && p.catch(() => {}); } else v.pause();
+      if (!NOTES && slide.contains(v)) {
+        // The demo waits on its first frame for a click (or space); the rest play.
+        if (v.classList.contains("demo-video")) { if (entered) { v.pause(); v.currentTime = 0; } return; }
+        const p = v.play(); p && p.catch(() => {});
+      } else v.pause();
     });
     renderNotes();
   }
@@ -739,6 +746,17 @@ html.notes-mode #notes {
         break;
       case "t": toggleTheme(); break;
       case "r": state.start = null; state.startAt = null; share(); tick(); break;
+      // The demo video, on its slide: space or k plays and pauses, 0 starts over, j and l jump 5 s.
+      case " ": case "k": case "0": case "j": case "l": {
+        const v = slides[state.n - 1].querySelector(".demo-video");
+        if (!v || (e.key === " " && e.target === v)) break;
+        e.preventDefault();
+        if (e.key === "0") { v.currentTime = 0; v.play().catch(() => {}); }
+        else if (e.key === "j") v.currentTime = Math.max(0, v.currentTime - 5);
+        else if (e.key === "l") v.currentTime = Math.min(v.duration || Infinity, v.currentTime + 5);
+        else if (v.paused) v.play().catch(() => {}); else v.pause();
+        break;
+      }
       case "n":
         if (!NOTES) {
           peer = window.open(location.pathname + "?notes#" + state.n, "backtick-v9-notes", "width=1200,height=800");
