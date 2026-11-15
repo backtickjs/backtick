@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Backtick at React Summit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+/* The site's tokens (apps/backtickjs.dev/src/styles.css), themed with
+   light-dark() as the site does; `t` flips color-scheme. */
+:root {
+  /* The side margin; ?side=110 tries another, for the room's projector. */
+  --side: 0px;
+  color-scheme: light dark;
+  --font-sans: "Inter", "Helvetica Neue", Helvetica, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  --font-ios: -apple-system, "SF Pro Text", "Inter", system-ui, sans-serif;
+  --ink: light-dark(#0e0e10, #fafafa);
+  --paper: light-dark(#ffffff, #0a0a0c);
+  --muted: light-dark(#6b6b76, #a1a1aa);
+  --line: light-dark(#e4e4e7, #26262b);
+  --wash: light-dark(#f7f7f8, #121215);
+  --brand: light-dark(#7c3aed, #a78bfa);
+  --react: light-dark(#0891b2, #61dafb);
+  --warn: light-dark(#d97706, #fbbf24);
+  --code: #1e1e1e;
+  --code-line: #2d2d2d;
+  --code-muted: #858585;
+  --code-ink: #d4d4d4;
+  --added: #3fb950;
+  --gap: 64px;
+}
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+::selection { background: rgb(97 218 251 / 0.35); }
+
+/* The stage: 1920×1080, scaled to the window. */
+#stage {
+  position: absolute; left: 50%; top: 50%;
+  width: 1920px; height: 1080px;
+  transform-origin: 50% 50%;
+  background: var(--paper);
+  overflow: hidden;
+}
+/* v6's layout: one padding, one visible gap between a slide's elements. */
+.slide {
+  position: absolute; inset: 0;
+  padding: 96px var(--side) 120px;
+  display: flex; flex-direction: column; justify-content: flex-start; gap: var(--gap);
+  opacity: 0; visibility: hidden;
+}
+.slide.on { opacity: 1; visibility: visible; }
+.slide.centered { justify-content: center; }
+.slide.stepped { padding-top: 196px; }
+.stack { display: flex; flex-direction: column; gap: var(--gap); }
+.eyebrow, h2, .display, .t2, .lede6, .count { text-box: trim-both cap alphabetic; }
+aside.notes { display: none !important; }
+
+.shine {
+  background: linear-gradient(90deg, var(--react), var(--brand));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.eyebrow {
+  font-family: var(--font-mono); font-size: 24px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--react);
+}
+h2 {
+  font-size: 104px; line-height: 1.05; font-weight: 800; letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+.stepped h2 { font-size: 88px; }
+.lede { font-size: 44px; line-height: 1.45; color: var(--muted); max-width: 1400px; }
+.muted { color: var(--muted); }
+.mono { font-family: var(--font-mono); }
+.chip {
+  display: inline-block; padding: 4px 14px; border: 1px solid var(--line);
+  border-radius: 12px; font-family: var(--font-mono); font-size: 0.82em; color: var(--ink);
+  background: var(--wash);
+}
+.logo { display: block; height: auto; }
+
+/* Footer chrome. */
+#footer {
+  position: absolute; left: var(--side); right: var(--side); bottom: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  color: var(--muted); font-size: 20px; pointer-events: none;
+}
+#footer .logo { width: 161px; color: var(--ink); opacity: 0.85; }
+#footer .num { font-family: var(--font-mono); font-size: 20px; }
+#stage.bare #footer, #stage.bare #stepper { display: none; }
+
+/* The stepper, fixed across slides 6–10: v8's pills joined by lines. */
+#stepper {
+  position: absolute; top: 52px; left: var(--side); right: var(--side); height: 76px;
+  display: none; align-items: center; z-index: 5;
+}
+#stage.stepped #stepper { display: flex; }
+#stepper .step {
+  flex: 0 0 auto; display: flex; align-items: center; gap: 14px; height: 64px;
+  padding: 0 28px 0 12px; border: 1.5px solid var(--line); border-radius: 999px;
+  font-size: 27px; font-weight: 600; color: var(--muted); background: var(--paper);
+}
+#stepper .step .n {
+  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%;
+  font-family: var(--font-mono); font-size: 19px; font-weight: 500; border: 1.5px solid var(--line);
+}
+#stepper .step .when { font-family: var(--font-mono); font-size: 18px; font-weight: 400; color: var(--muted); }
+#stepper .joint { flex: 1 1 auto; height: 1.5px; background: var(--line); margin: 0 14px; }
+#stepper .step.cur {
+  color: var(--ink);
+  border-color: color-mix(in srgb, var(--react) 55%, transparent);
+  background: color-mix(in srgb, var(--react) 12%, var(--paper));
+  box-shadow: 0 20px 50px -30px var(--react);
+}
+#stepper .step.cur .n { background: var(--react); border-color: var(--react); color: var(--paper); }
+#stepper .step.done { color: var(--ink); }
+#stepper .step.done .n { border-color: var(--ink); }
+
+/* Code panels, as CodePanel.tsx draws them, scaled for a stage. */
+.panel {
+  min-width: 0; overflow: hidden; border-radius: 28px;
+  border: 1px solid var(--code-line); background: var(--code); color: var(--code-ink);
+}
+.panel .bar {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  border-bottom: 1px solid var(--code-line); padding: 18px 32px;
+  font-family: var(--font-mono); font-size: 22px; color: var(--code-muted);
+}
+.panel .tag {
+  font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase;
+  border: 1px solid #3a3a3a; border-radius: 999px; padding: 3px 12px; color: #a1a1aa;
+}
+.panel pre {
+  font-family: var(--font-mono); font-size: 28px; line-height: 1.35; padding: 22px 0;
+  white-space: pre; overflow: hidden;
+}
+.panel pre.sm { font-size: 24px; }
+.ln { min-height: 1lh; padding-inline: 40px; }
+.m-warn { background: rgb(251 191 36 / 0.13); box-shadow: inset 6px 0 0 #fbbf24; }
+.m-react { background: rgb(97 218 251 / 0.08); box-shadow: inset 6px 0 0 #61dafb; }
+.m-brand { background: rgb(167 139 250 / 0.09); box-shadow: inset 6px 0 0 #a78bfa; }
+.squiggle {
+  text-decoration: underline wavy #f14c4c; text-decoration-thickness: 2px;
+  text-underline-offset: 6px; text-decoration-skip-ink: none;
+}
+.legend { display: flex; flex-direction: column; gap: 14px; font-size: 25px; color: var(--muted); }
+.legend div { display: flex; align-items: center; gap: 16px; }
+.legend .sw { width: 10px; height: 32px; border-radius: 4px; flex: none; }
+.sw.react { background: #61dafb; } .sw.brand { background: #a78bfa; } .sw.warn { background: #fbbf24; }
+
+/* Cards, as the site's Pair and TradeOffs panels. */
+.card {
+  border: 1px solid var(--line); background: var(--wash); border-radius: 28px; padding: 34px 38px;
+}
+.label {
+  font-family: var(--font-mono); font-size: 19px; letter-spacing: 0.12em; text-transform: uppercase;
+}
+
+/* The phone, as LiveDemo.tsx draws it. */
+.phone {
+  position: relative; width: 316px; height: 660px; border-radius: 52px; background: #1c1c1f; padding: 11px;
+  box-shadow: inset 0 0 0 1px #3f3f46, inset 0 0 0 5px #0b0b0d, 0 30px 60px -20px rgb(0 0 0 / 0.55);
+  flex: none;
+}
+.phone::before {
+  content: ""; position: absolute; top: 22px; left: 50%; z-index: 3; width: 92px; height: 26px;
+  transform: translateX(-50%); border-radius: 999px; background: #000;
+}
+.phone .screen {
+  position: relative; height: 100%; overflow: hidden; border-radius: 41px;
+  background: #f6f5f2; color: #111; font-family: var(--font-ios);
+}
+
+/* Slide 1, from v6. */
+.v6title { justify-content: center; }
+.v6title .display { font-size: 120px; line-height: 1.02; font-weight: 800; letter-spacing: -0.045em; }
+.v6title .t2 { font-size: 64px; line-height: 1.05; font-weight: 800; letter-spacing: -0.04em; color: var(--muted); }
+.v6title .lede6 { font-size: 44px; line-height: 1.4; color: var(--muted); }
+
+/* Slide 2: the web and mobile, in parallel. Every row has a fixed height, so the
+   two columns line up whatever the content. */
+.par { display: grid; grid-template-columns: 1fr 1fr; flex: 1; min-height: 0; }
+.p-col { display: flex; flex-direction: column; align-items: center; justify-content: center; padding-right: 80px; --c: var(--muted); }
+.p-col + .p-col { padding: 0 0 0 80px; border-left: 1px solid var(--line); }
+.p-col.bt { --c: var(--react); }
+.p-label { height: 48px; line-height: 48px; font-size: 38px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); text-align: center; white-space: nowrap; }
+.p-col.bt .p-label { color: var(--react); }
+.p-tree { display: grid; grid-template-rows: 108px 80px 36px 184px 52px; justify-items: center; width: 600px; margin-top: 36px; }
+.p-box { width: 400px; height: 108px; padding: 0 24px; border: 2px solid var(--muted); border-radius: 16px; background: var(--wash); text-align: center; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+.p-box code { font-family: var(--font-mono); font-size: 28px; font-weight: 600; line-height: 1.2; color: var(--ink); }
+.p-box span { font-size: 22px; line-height: 1.2; color: var(--muted); }
+.p-arrow { position: relative; width: 24px; height: 80px; }
+.p-arrow svg { width: 24px; height: 80px; display: block; overflow: visible; }
+.p-arrow line, .p-arrow polyline { stroke: var(--c); stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.p-arrow span { position: absolute; left: 40px; top: 22px; line-height: 24px; font-family: var(--font-mono); font-size: 20px; color: var(--c); white-space: nowrap; }
+.p-split { width: 600px; height: 36px; display: block; }
+.p-split path { stroke: var(--c); stroke-width: 2.5; fill: none; vector-effect: non-scaling-stroke; }
+.p-devices { position: relative; display: grid; grid-template-columns: repeat(3, 200px); width: 600px; height: 184px; }
+.p-devices > div { position: relative; height: 184px; }
+.p-leg { position: absolute; top: 0; left: 50%; width: 2.5px; margin-left: -1.25px; background: var(--c); }
+.p-browser, .p-phone { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); }
+.p-leg.long { height: 52px; }
+.p-browser { width: 180px; height: 132px; border: 2.5px solid var(--muted); border-radius: 12px; background: var(--paper); overflow: hidden; display: flex; flex-direction: column; }
+.p-browser b { display: flex; gap: 6px; align-items: center; height: 24px; padding: 0 10px; border-bottom: 2px solid var(--line); }
+.p-browser b i { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); opacity: 0.7; }
+.p-lines { display: flex; flex-direction: column; gap: 9px; padding: 16px; }
+.p-lines u, .p-screen u { display: block; height: 6px; width: 100%; border-radius: 3px; background: var(--c); opacity: 0.4; }
+.p-lines u.s, .p-screen u.s { width: 60%; }
+.p-phone { width: 104px; height: 184px; border: 3px solid var(--muted); border-radius: 18px; background: var(--paper); padding: 26px 9px 12px; display: flex; }
+.p-phone::before { content: ""; position: absolute; top: 9px; left: 50%; width: 26px; height: 6px; margin-left: -13px; border-radius: 3px; background: var(--muted); opacity: 0.6; }
+.p-screen { flex: 1; border: 2px solid var(--react); border-radius: 7px; background: color-mix(in srgb, var(--react) 20%, var(--paper)); display: flex; flex-direction: column; gap: 9px; padding: 14px 10px; }
+.p-caption { align-self: end; height: 30px; line-height: 30px; margin: 0; font-family: var(--font-mono); font-size: 20px; color: var(--muted); white-space: nowrap; }
+.p-col.bt .p-caption { color: var(--react); }
+.p-tag { margin-top: 36px; height: 48px; line-height: 48px; font-size: 38px; font-weight: 700; letter-spacing: -0.02em; white-space: nowrap; }
+
+/* Slides 6–10 */
+.sbs { display: grid; gap: 36px; align-items: start; }
+.legend code, .note code {
+  font-family: var(--font-mono); font-size: 0.88em; color: var(--ink);
+  border: 1px solid var(--line); border-radius: 8px; padding: 1px 8px; background: var(--wash);
+}
+.err {
+  margin-top: 20px; border-radius: 18px; border: 1px solid #5a2a2a; background: #1e1e1e;
+  padding: 18px 26px; font-family: var(--font-mono); font-size: 20px; line-height: 1.55; color: #d4d4d4;
+}
+.err .file { color: #4ec9b0; } .err .e { color: #f14c4c; font-weight: 600; }
+.note { font-size: 26px; color: var(--muted); line-height: 1.45; }
+.panel pre.gutter { font-size: 22px; }
+pre.gutter .ln { padding-left: 44px; padding-right: 16px; }
+pre.gutter .m-brand { background: rgb(167 139 250 / 0.045); box-shadow: inset 10px 0 0 #a78bfa; }
+pre.gutter .m-react { background: rgb(97 218 251 / 0.035); box-shadow: inset 10px 0 0 #61dafb; }
+pre.gutter .m-warn { background: rgb(251 191 36 / 0.05); box-shadow: inset 10px 0 0 #fbbf24; }
+.legend code { white-space: nowrap; }
+/* Slides 9–10: the real app, navigating; each tap fetches a screen. */
+.run-head { display: flex; flex-direction: column; gap: 22px; }
+.run-sub { font-size: 34px; color: var(--muted); }
+.credit { position: absolute; left: var(--side); bottom: 150px; font-family: var(--font-mono); font-size: 16px; color: var(--muted); }
+.nav-wrap { position: relative; margin-top: -84px; }
+.nav-phone .screen { background: #000; }
+.nav-phone video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.fetch-toast { position: absolute; left: 50%; bottom: calc(100% + 18px); transform: translateX(-50%) translateY(-8px); display: flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 999px; background: #0891b2; color: #fff; font-family: var(--font-mono); font-size: 17px; white-space: nowrap; box-shadow: 0 10px 30px -8px rgb(8 145 178 / 0.7); opacity: 0; transition: opacity 0.12s, transform 0.12s; z-index: 4; }
+.fetching .fetch-toast { opacity: 1; transform: translateX(-50%) translateY(0); }
+.fetch-toast .spin { width: 14px; height: 14px; border-radius: 50%; border: 2.5px solid rgb(255 255 255 / 0.35); border-top-color: #fff; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.fetching .ln.k-fetch { background: rgb(8 145 178 / 0.18); box-shadow: inset 6px 0 0 #0891b2; }
+/* The pipeline at a glance, drawn as the stepper of the slides after it, with what each part takes. */
+.pipe2 { display: grid; grid-template-columns: auto 1fr auto 1fr auto 1fr auto; grid-template-rows: auto auto; row-gap: 34px; align-items: center; margin-block: auto; }
+.pstep { grid-row: 1; display: flex; align-items: center; gap: 18px; height: 84px; padding: 0 36px 0 16px; border: 1.5px solid color-mix(in srgb, var(--react) 55%, transparent); border-radius: 999px; background: color-mix(in srgb, var(--react) 10%, var(--paper)); font-size: 36px; font-weight: 600; color: var(--ink); }
+.pstep .n { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: var(--react); color: var(--paper); font-family: var(--font-mono); font-size: 24px; font-weight: 500; }
+.pstep .when { font-family: var(--font-mono); font-size: 22px; font-weight: 400; color: var(--muted); }
+.pjoint { grid-row: 1; height: 2px; background: var(--line); margin: 0 16px; }
+.ptime { grid-row: 2; align-self: start; position: relative; padding: 36px 8px 0; }
+.pbracket { position: absolute; top: 0; left: 0; right: 0; height: 16px; border: 2.5px solid var(--line); border-top: none; border-radius: 0 0 12px 12px; }
+.pt { font-size: 88px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+.pt.pending { color: var(--warn); font-size: 56px; }
+.pu { margin-top: 14px; font-size: 30px; font-weight: 600; }
+.ps { margin-top: 8px; font-family: var(--font-mono); font-size: 20px; color: var(--muted); }
+.lines-focus pre .ln:not(.key) { opacity: 0.22; }
+.boundary { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.boundary .b-old { font-family: var(--font-mono); font-size: 40px; color: var(--muted); text-decoration: line-through; text-decoration-thickness: 2px; }
+.legend-row { flex-direction: row; gap: 56px; }
+/* The merged build slide: one source, two outputs. */
+.build { display: grid; grid-template-columns: max-content 150px 1fr; grid-template-rows: auto auto; column-gap: 0; row-gap: 10px; align-items: center; margin-top: -56px; }
+.build .src { grid-row: 1 / span 2; grid-column: 1; align-self: stretch; display: flex; flex-direction: column; justify-content: space-between; }
+.build .build-title { line-height: 1.05; margin: 56px 0 28px; }
+.build .flow { grid-row: 1 / span 2; grid-column: 2; width: 150px; height: 100%; overflow: visible; }
+.build .panel .bar { padding-top: 14px; padding-bottom: 14px; }
+.build .panel pre { padding: 16px 0; }
+.build .flow path { stroke: var(--muted); stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.build .flow text { font-family: var(--font-mono); font-size: 17px; fill: var(--muted); text-anchor: middle; }
+.tight .panel .bar { padding-top: 14px; padding-bottom: 14px; }
+.tight .panel pre { padding: 16px 0; }
+.typecheck-only .build .o2, .typecheck-only .build .flow .compile { visibility: hidden; }
+/* Slides 5 and 6: the splice, and what backtick-tsc turns it into, in focus. */
+.focus .build .src pre .ln:not(.key), .focus .build .o1 pre .ln:not(.key) { opacity: 0.22; }
+.focus .build .o2 pre .ln.dim { opacity: 0.22; }
+.build .o1 { grid-row: 1; grid-column: 3; } .build .o2 { grid-row: 2; grid-column: 3; }
+
+
+/* The Hacker News screen in the phone, illustrative. */
+.hn .status { display: flex; justify-content: space-between; padding: 18px 28px 0; font-size: 14px; font-weight: 600; }
+.hn .bat { width: 24px; height: 11px; border-radius: 3px; background: #111; margin-top: 3px; }
+.hn h3 { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; padding: 30px 18px 12px; }
+.hn .row { margin: 0 12px 10px; background: #fff; border-radius: 16px; padding: 12px 14px; box-shadow: 0 1px 2px rgb(0 0 0 / 0.06); }
+.hn .row p { font-size: 15px; font-weight: 600; line-height: 1.3; }
+.hn .row span { display: block; margin-top: 5px; font-size: 12px; color: #8a8a8e; }
+.hn .row span b { color: #ff6600; font-weight: 600; }
+
+/* Slide 12 */
+
+/* The Backtick home, every card labelled with its URL. */
+.home-slide { display: block; }
+.home-copy { align-self: start; }
+.home-copy h2 { white-space: nowrap; }
+.home-lede { margin-top: 56px; font-size: 34px; line-height: 1.35; color: var(--muted); max-width: 720px; }
+.home-phone { position: absolute; left: 50%; top: 233px; transform: translateX(-50%); width: 320px; height: 713px; padding: 0; border-radius: 40px; background: none; box-shadow: none; }
+.home-phone::before { display: none; }
+.callout { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.callout line { stroke: #0ea5e9; stroke-width: 3; }
+.callout circle { fill: #0ea5e9; stroke: #fff; stroke-width: 3; }
+.callout text { font-family: var(--font-mono); font-size: 28px; fill: var(--ink); }
+.home-shot { padding: 0; background: #0b0b0d; border-radius: 40px; }
+.home-shot img { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+/* Slide 14 */
+
+/* Slide 14 */
+.ideas { list-style: none; display: grid; gap: 0; counter-reset: idea; }
+.ideas li {
+  counter-increment: idea; display: grid; grid-template-columns: 90px 1fr; align-items: baseline;
+  padding: 22px 0; border-top: 1px solid var(--line); font-size: 38px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.3;
+}
+.ideas li:last-child { border-bottom: 1px solid var(--line); }
+.ideas li::before { content: "0" counter(idea); font-family: var(--font-mono); font-size: 24px; font-weight: 500; color: var(--brand); }
+.ideas li b { font-weight: 700; }
+.ideas li span { font-weight: 400; color: var(--muted); }
+.ideas li span b { color: var(--ink); }
+.dig-list { display: flex; flex-direction: column; margin-top: 24px; border-bottom: 1px solid var(--line); }
+.dig-row { display: grid; grid-template-columns: 56px 1fr auto; column-gap: 32px; align-items: center; height: 150px; border-top: 1px solid var(--line); }
+.dig-ic { width: 44px; height: 44px; fill: none; stroke: var(--c); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.dig-line { font-size: 50px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; color: var(--ink); white-space: nowrap; }
+.dig-tag { font-family: var(--font-mono); font-size: 20px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+/* Slide 14 */
+/* Join me: three columns, each one visual and one label. */
+.join3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 80px; flex: 1; align-items: center; justify-items: center; }
+.jcol { display: flex; flex-direction: column; align-items: center; gap: 36px; align-self: start; padding-top: 80px; }
+.jtile { position: relative; width: 420px; height: 420px; border-radius: 36px; overflow: hidden; }
+.qr-wrap { background: #fff; border: 1px solid var(--line); padding: 30px; }
+.qr-code img, .qr-code canvas { display: block; width: 360px !important; height: 360px !important; }
+.qr-logo { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 96px; height: 96px; border-radius: 22px; display: grid; place-items: center; box-shadow: 0 0 0 10px #fff; }
+.qr-logo.gh { background: #fff; }
+.qr-logo.gh svg { width: 84px; height: 84px; fill: #0e0e10; }
+.qr-logo.app { background: #0e0e10; }
+.qr-logo.app svg { width: 46px; height: 60px; fill: #fff; }
+.jtile.photo img { width: 100%; height: 100%; object-fit: cover; }
+.jlabel { font-size: 44px; font-weight: 700; letter-spacing: -0.02em; }
+.jsub { margin-top: -22px; font-family: var(--font-mono); font-size: 26px; color: var(--muted); }
+
+/* The notes window (?notes). */
+#notes { display: none; }
+html.notes-mode body { overflow: auto; }
+html.notes-mode #stage { display: none; }
+html.notes-mode #notes {
+  display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: 100vh; padding: 28px 40px; gap: 24px;
+  font-size: 18px;
+}
+#notes header { display: flex; align-items: center; gap: 36px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 20px; }
+#notes .clock { font-family: var(--font-mono); font-size: 64px; font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+#notes .clock.idle { color: var(--muted); }
+#notes .meta { display: grid; gap: 4px; }
+#notes .meta .k { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+#notes .meta .v { font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums; }
+#notes .delta.over { color: var(--warn); } #notes .delta.under { color: var(--react); }
+#notes .cur { margin-left: auto; text-align: right; }
+#notes .body { overflow: auto; padding-right: 12px; font-size: 28px; line-height: 1.5; max-width: 1100px; }
+#notes .body p + p, #notes .body div + p, #notes .body p + div, #notes .body h4 + p { margin-top: 16px; }
+#notes .body .do {
+  font-size: 22px; color: var(--muted); font-style: italic; font-family: var(--font-mono);
+  border-left: 3px solid var(--brand); padding-left: 16px;
+}
+#notes .body .verbatim { border: 1px solid var(--line); background: var(--wash); border-radius: 14px; padding: 18px 22px; }
+#notes .body .verbatim .vt { font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand); display: block; margin-bottom: 8px; font-style: normal; }
+#notes .body h4 { margin-top: 28px; font-size: 16px; font-family: var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--react); }
+#notes .body code { font-family: var(--font-mono); font-size: 0.85em; }
+#notes footer { display: flex; justify-content: space-between; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; font-size: 20px; }
+#notes footer b { color: var(--ink); font-weight: 600; }
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- 1 -->
+<section class="slide v6title" data-title="Title and intro" data-at="0:00" data-for="25">
+  <div class="stack">
+    <h1 class="display in" style="--i:1">Vibe code <span class="shine">React Native</span> apps<br>from your phone.</h1>
+    <p class="t2 in" style="--i:2">No computer needed.</p>
+    <p class="lede6 in" style="--i:3">Jean-François Bisson · React Summit 2026</p>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="slide" data-title="Next.js for mobile" data-at="0:25" data-for="30">
+  <div class="stack"><h2>The goal: Next.js for mobile.</h2></div>
+  <div class="par">
+    <div class="p-col web">
+      <p class="p-label">Next.js</p>
+      <div class="p-tree">
+        <div class="p-box"><code>app/page.tsx</code><span>React, on your server</span></div>
+        <div class="p-arrow"><svg viewBox="0 0 24 80" aria-hidden="true"><line x1="12" y1="0" x2="12" y2="76"/><polyline points="4,66 12,76 20,66"/></svg><span>one deploy</span></div>
+        <svg class="p-split" viewBox="0 0 600 36" preserveAspectRatio="none" aria-hidden="true"><path d="M300 0 V18 M100 36 V18 H500 V36 M300 18 V36"/></svg>
+        <div class="p-devices"><div><i class="p-leg long"></i><span class="p-browser"><b><i></i><i></i></b><span class="p-lines"><u></u><u></u><u class="s"></u></span></span></div><div><i class="p-leg long"></i><span class="p-browser"><b><i></i><i></i></b><span class="p-lines"><u></u><u></u><u class="s"></u></span></span></div><div><i class="p-leg long"></i><span class="p-browser"><b><i></i><i></i></b><span class="p-lines"><u></u><u></u><u class="s"></u></span></span></div></div>
+        <p class="p-caption">every browser, next load</p>
+      </div>
+      <p class="p-tag">Edit. Deploy. Everyone has it.</p>
+    </div>
+    <div class="p-col bt">
+      <p class="p-label">Backtick</p>
+      <div class="p-tree">
+        <div class="p-box"><code>server/Home.tsx</code><span>React Native, on your server</span></div>
+        <div class="p-arrow"><svg viewBox="0 0 24 80" aria-hidden="true"><line x1="12" y1="0" x2="12" y2="76"/><polyline points="4,66 12,76 20,66"/></svg><span>one deploy</span></div>
+        <svg class="p-split" viewBox="0 0 600 36" preserveAspectRatio="none" aria-hidden="true"><path d="M300 0 V18 M100 36 V18 H500 V36 M300 18 V36"/></svg>
+        <div class="p-devices"><div><span class="p-phone"><span class="p-screen"><u></u><u></u><u class="s"></u></span></span></div><div><span class="p-phone"><span class="p-screen"><u></u><u></u><u class="s"></u></span></span></div><div><span class="p-phone"><span class="p-screen"><u></u><u></u><u class="s"></u></span></span></div></div>
+        <p class="p-caption">every phone, next open</p>
+      </div>
+      <p class="p-tag">Edit. Deploy. Everyone has it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="slide" data-title="Demo" data-at="0:55" data-for="120" data-bare>
+</section>
+
+<!-- 4 -->
+<section class="slide" data-title="A Backtick app" data-at="2:55" data-for="10">
+  <h2>A Backtick app.</h2>
+  <div class="sbs" style="grid-template-columns: max-content 1fr; gap: 28px; align-items: center; margin-top: 8px">
+    <div class="panel"><div class="bar"><span>server/App.tsx</span><span class="tag">Simplified</span></div><pre class="gutter" style="font-size: 26px"><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "@backtickjs/core"</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react-native"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#FFD700">(</span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from </span><span style="color:#DA70D6">}</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">number</span><span style="color:#DA70D6"> }</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">$</span><span style="color:#DCDCAA">useState</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> onPress</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">()</span><span style="color:#569CD6"> =&gt;</span><span style="color:#DCDCAA"> setCount</span><span style="color:#DA70D6">(</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4"> + </span><span style="color:#B5CEA8">1</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#9CDCFE"> onPress</span><span style="color:#D4D4D4">=</span><span style="color:#DA70D6">{</span><span style="color:#DCDCAA">onPress</span><span style="color:#DA70D6">}</span><span style="color:#808080">&gt;</span><span style="color:#DA70D6">{</span><span style="color:#4FC1FF">count</span><span style="color:#DA70D6">}</span><span style="color:#808080">&lt;/</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#CE9178">`</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#9CDCFE">app</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">get</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"/:from"</span><span style="color:#D4D4D4">, </span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">c</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> from</span><span style="color:#D4D4D4"> = </span><span style="color:#4EC9B0">Number</span><span style="color:#179FFF">(</span><span style="color:#9CDCFE">c</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">req</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">param</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"from"</span><span style="color:#FFD700">)</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#9CDCFE"> c</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">render</span><span style="color:#179FFF">(</span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#808080">&lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Counter</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">=</span><span style="color:#FFD700">{</span><span style="color:#569CD6">$</span><span style="color:#4FC1FF">from</span><span style="color:#FFD700">}</span><span style="color:#808080"> /&gt;</span><span style="color:#CE9178">`</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#DA70D6">}</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div></pre></div>
+    <div>
+      <div class="boundary">
+        <code class="b-old">"use client"</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="slide lines-focus" data-title="A Backtick app: the script" data-at="3:05" data-for="10">
+  <h2>A Backtick app.</h2>
+  <div class="sbs" style="grid-template-columns: max-content 1fr; gap: 28px; align-items: center; margin-top: 8px">
+    <div class="panel"><div class="bar"><span>server/App.tsx</span><span class="tag">Simplified</span></div><pre class="gutter" style="font-size: 26px"><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "@backtickjs/core"</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react-native"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln key"></div><div class="ln key"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#FFD700">(</span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from </span><span style="color:#DA70D6">}</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">number</span><span style="color:#DA70D6"> }</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln key"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">$</span><span style="color:#DCDCAA">useState</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> onPress</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">()</span><span style="color:#569CD6"> =&gt;</span><span style="color:#DCDCAA"> setCount</span><span style="color:#DA70D6">(</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4"> + </span><span style="color:#B5CEA8">1</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#9CDCFE"> onPress</span><span style="color:#D4D4D4">=</span><span style="color:#DA70D6">{</span><span style="color:#DCDCAA">onPress</span><span style="color:#DA70D6">}</span><span style="color:#808080">&gt;</span><span style="color:#DA70D6">{</span><span style="color:#4FC1FF">count</span><span style="color:#DA70D6">}</span><span style="color:#808080">&lt;/</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#CE9178">`</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#9CDCFE">app</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">get</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"/:from"</span><span style="color:#D4D4D4">, </span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">c</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> from</span><span style="color:#D4D4D4"> = </span><span style="color:#4EC9B0">Number</span><span style="color:#179FFF">(</span><span style="color:#9CDCFE">c</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">req</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">param</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"from"</span><span style="color:#FFD700">)</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#9CDCFE"> c</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">render</span><span style="color:#179FFF">(</span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#808080">&lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Counter</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">=</span><span style="color:#FFD700">{</span><span style="color:#569CD6">$</span><span style="color:#4FC1FF">from</span><span style="color:#FFD700">}</span><span style="color:#808080"> /&gt;</span><span style="color:#CE9178">`</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#DA70D6">}</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div></pre></div>
+    <div>
+      <div class="boundary">
+        <code class="b-old">"use client"</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="slide" data-title="How a screen is made" data-at="3:15" data-for="15">
+  <h2>How a screen is made.</h2>
+  <div class="pipe2">
+      <div class="pstep" style="grid-column:1"><span class="n">1</span>Typecheck<span class="when">build time</span></div><span class="pjoint" style="grid-column:2"></span>
+      <div class="pstep" style="grid-column:3"><span class="n">2</span>Compile<span class="when">build time</span></div><span class="pjoint" style="grid-column:4"></span>
+      <div class="pstep" style="grid-column:5"><span class="n">3</span>Bundle<span class="when">request time</span></div><span class="pjoint" style="grid-column:6"></span>
+      <div class="pstep" style="grid-column:7"><span class="n">4</span>Run<span class="when">on the phone</span></div>
+      <div class="ptime" style="grid-column:1 / 4"><span class="pbracket"></span><p class="pt">~1 s</p><p class="pu">per save, warm</p><p class="ps">typecheck and compile, together</p></div>
+      <div class="ptime" style="grid-column:5 / 8"><span class="pbracket"></span><p class="pt">~200 ms</p><p class="pu">per open, tap to first frame</p><p class="ps">median · network included</p></div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="slide stepped typecheck-only focus" data-step="1" data-title="Typecheck" data-at="3:30" data-for="20">
+  <div class="build">
+    <div class="src">
+      <h2 class="build-title">Typechecked and<br>compiled, once.</h2>
+    <div class="panel"><div class="bar"><span>server/App.tsx</span></div><pre class="gutter"><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react-native"</span><span style="color:#C586C0"> with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> };</span></div><div class="ln key"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react"</span><span style="color:#C586C0"> with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> };</span></div><div class="ln"></div><div class="ln key"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span class="tok"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#FFD700">(</span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from </span><span style="color:#DA70D6">}</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">number</span><span style="color:#DA70D6"> }</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln key"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span class="tok"><span style="color:#569CD6">$</span><span style="color:#DCDCAA">useState</span></span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> onPress</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">()</span><span style="color:#569CD6"> =&gt;</span><span style="color:#DCDCAA"> setCount</span><span style="color:#DA70D6">(</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4"> + </span><span style="color:#B5CEA8">1</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#9CDCFE"> onPress</span><span style="color:#D4D4D4">=</span><span style="color:#DA70D6">{</span><span style="color:#DCDCAA">onPress</span><span style="color:#DA70D6">}</span><span style="color:#808080">&gt;</span><span style="color:#DA70D6">{</span><span style="color:#4FC1FF">count</span><span style="color:#DA70D6">}</span><span style="color:#808080">&lt;/</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#CE9178">`</span><span style="color:#D4D4D4">;</span></div></pre></div>
+    </div>
+    <svg class="flow" viewBox="0 0 150 767" aria-hidden="true">
+      <defs><marker id="flow-head-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M1,1 L9,5 L1,9"/></marker></defs>
+      <path d="M8,520 L140,170" marker-end="url(#flow-head-a)"/>
+      <path class="compile" d="M8,520 L140,560" marker-end="url(#flow-head-a)"/>
+      <text class="typecheck" x="65" y="341" transform="rotate(-69 65 341)">typecheck</text>
+      <text class="compile" x="77" y="530" transform="rotate(17 77 530)">compile</text>
+    </svg>
+    <div class="panel o1"><div class="bar"><span>server/App.tsx · virtual code</span><span class="tag">Simplified</span></div><pre class="gutter"><div class="ln"><span style="color:#569CD6">declare const</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> }: </span><span style="color:#569CD6">typeof</span><span style="color:#C586C0"> import</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"react-native"</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#569CD6">declare const</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> }: </span><span style="color:#569CD6">typeof</span><span style="color:#C586C0"> import</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"react"</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln key"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span class="tok"><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">lift</span></span><span style="color:#FFD700">(</span><span style="color:#DA70D6">(</span><span style="color:#179FFF">{</span><span style="color:#9CDCFE"> from </span><span style="color:#179FFF">}</span><span style="color:#D4D4D4">: </span><span style="color:#179FFF">{</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">number</span><span style="color:#179FFF"> }</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">{</span></div><div class="ln key"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#179FFF">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#179FFF">]</span><span style="color:#D4D4D4"> = </span><span class="tok"><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">splice</span><span style="color:#179FFF">(</span><span style="color:#4FC1FF">useState</span><span style="color:#179FFF">)</span></span><span style="color:#179FFF">(</span><span style="color:#9CDCFE">from</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> onPress</span><span style="color:#D4D4D4"> = </span><span style="color:#179FFF">()</span><span style="color:#569CD6"> =&gt;</span><span style="color:#DCDCAA"> setCount</span><span style="color:#179FFF">(</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4"> + </span><span style="color:#B5CEA8">1</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#4EC9B0">Text</span><span style="color:#9CDCFE"> onPress</span><span style="color:#D4D4D4">=</span><span style="color:#179FFF">{</span><span style="color:#DCDCAA">onPress</span><span style="color:#179FFF">}</span><span style="color:#808080">&gt;</span><span style="color:#179FFF">{</span><span style="color:#4FC1FF">count</span><span style="color:#179FFF">}</span><span style="color:#808080">&lt;/</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#DA70D6">}</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div></pre></div>
+    <div class="panel o2"><div class="bar"><span>server/App.js · compiled code</span><span class="tag">Simplified</span></div><pre class="gutter"><div class="ln dim"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Text</span><span style="color:#D4D4D4"> = { </span><span style="color:#9CDCFE">from</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"react-native"</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">name</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"Text"</span><span style="color:#D4D4D4"> };</span></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> useState</span><span style="color:#D4D4D4"> = { </span><span style="color:#9CDCFE">from</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"react"</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">name</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"useState"</span><span style="color:#D4D4D4"> };</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span style="color:#FFD700">{</span></div><div class="ln"><span style="color:#9CDCFE">  code</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">`(useState, Text) =&gt; ({ from }) =&gt; {</span></div><div class="ln"><span style="color:#CE9178">    const [count, setCount] = useState(from);</span></div><div class="ln dim"><span style="color:#CE9178">    const onPress = () =&gt; setCount(count + 1);</span></div><div class="ln dim"><span style="color:#CE9178">    return jsx(Text, { onPress, children: count });</span></div><div class="ln"><span style="color:#CE9178">  }`</span><span style="color:#D4D4D4">,</span></div><div class="ln"><span style="color:#9CDCFE">  args</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">[</span><span style="color:#9CDCFE">useState</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">Text</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4">,</span></div><div class="ln dim"><span style="color:#9CDCFE">  map</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"AAAA;MAAM,CAAC…"</span><span style="color:#D4D4D4">,</span><span style="color:#6A9955"> // back to App.tsx</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#D4D4D4">;</span></div></pre></div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="slide stepped focus" data-step="2" data-title="Compile" data-at="3:50" data-for="20">
+  <div class="build">
+    <div class="src">
+      <h2 class="build-title">Typechecked and<br>compiled, once.</h2>
+    <div class="panel"><div class="bar"><span>server/App.tsx</span></div><pre class="gutter"><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react-native"</span><span style="color:#C586C0"> with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> };</span></div><div class="ln key"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react"</span><span style="color:#C586C0"> with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> };</span></div><div class="ln"></div><div class="ln key"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span class="tok"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#FFD700">(</span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from </span><span style="color:#DA70D6">}</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">number</span><span style="color:#DA70D6"> }</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln key"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span class="tok"><span style="color:#569CD6">$</span><span style="color:#DCDCAA">useState</span></span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> onPress</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">()</span><span style="color:#569CD6"> =&gt;</span><span style="color:#DCDCAA"> setCount</span><span style="color:#DA70D6">(</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4"> + </span><span style="color:#B5CEA8">1</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#9CDCFE"> onPress</span><span style="color:#D4D4D4">=</span><span style="color:#DA70D6">{</span><span style="color:#DCDCAA">onPress</span><span style="color:#DA70D6">}</span><span style="color:#808080">&gt;</span><span style="color:#DA70D6">{</span><span style="color:#4FC1FF">count</span><span style="color:#DA70D6">}</span><span style="color:#808080">&lt;/</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#CE9178">`</span><span style="color:#D4D4D4">;</span></div></pre></div>
+    </div>
+    <svg class="flow" viewBox="0 0 150 767" aria-hidden="true">
+      <defs><marker id="flow-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M1,1 L9,5 L1,9"/></marker></defs>
+      <path d="M8,520 L140,170" marker-end="url(#flow-head)"/>
+      <path class="compile" d="M8,520 L140,560" marker-end="url(#flow-head)"/>
+      <text class="typecheck" x="65" y="341" transform="rotate(-69 65 341)">typecheck</text>
+      <text class="compile" x="77" y="530" transform="rotate(17 77 530)">compile</text>
+    </svg>
+    <div class="panel o1"><div class="bar"><span>server/App.tsx · virtual code</span><span class="tag">Simplified</span></div><pre class="gutter"><div class="ln"><span style="color:#569CD6">declare const</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> }: </span><span style="color:#569CD6">typeof</span><span style="color:#C586C0"> import</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"react-native"</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#569CD6">declare const</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> }: </span><span style="color:#569CD6">typeof</span><span style="color:#C586C0"> import</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"react"</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln key"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span class="tok"><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">lift</span></span><span style="color:#FFD700">(</span><span style="color:#DA70D6">(</span><span style="color:#179FFF">{</span><span style="color:#9CDCFE"> from </span><span style="color:#179FFF">}</span><span style="color:#D4D4D4">: </span><span style="color:#179FFF">{</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">number</span><span style="color:#179FFF"> }</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">{</span></div><div class="ln key"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#179FFF">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#179FFF">]</span><span style="color:#D4D4D4"> = </span><span class="tok"><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">splice</span><span style="color:#179FFF">(</span><span style="color:#4FC1FF">useState</span><span style="color:#179FFF">)</span></span><span style="color:#179FFF">(</span><span style="color:#9CDCFE">from</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> onPress</span><span style="color:#D4D4D4"> = </span><span style="color:#179FFF">()</span><span style="color:#569CD6"> =&gt;</span><span style="color:#DCDCAA"> setCount</span><span style="color:#179FFF">(</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4"> + </span><span style="color:#B5CEA8">1</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#4EC9B0">Text</span><span style="color:#9CDCFE"> onPress</span><span style="color:#D4D4D4">=</span><span style="color:#179FFF">{</span><span style="color:#DCDCAA">onPress</span><span style="color:#179FFF">}</span><span style="color:#808080">&gt;</span><span style="color:#179FFF">{</span><span style="color:#4FC1FF">count</span><span style="color:#179FFF">}</span><span style="color:#808080">&lt;/</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#DA70D6">}</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div></pre></div>
+    <div class="panel o2"><div class="bar"><span>server/App.js · compiled code</span><span class="tag">Simplified</span></div><pre class="gutter"><div class="ln dim"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Text</span><span style="color:#D4D4D4"> = { </span><span style="color:#9CDCFE">from</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"react-native"</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">name</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"Text"</span><span style="color:#D4D4D4"> };</span></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> useState</span><span style="color:#D4D4D4"> = { </span><span style="color:#9CDCFE">from</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"react"</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">name</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"useState"</span><span style="color:#D4D4D4"> };</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span style="color:#FFD700">{</span></div><div class="ln"><span style="color:#9CDCFE">  code</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">`(useState, Text) =&gt; ({ from }) =&gt; {</span></div><div class="ln"><span style="color:#CE9178">    const [count, setCount] = useState(from);</span></div><div class="ln dim"><span style="color:#CE9178">    const onPress = () =&gt; setCount(count + 1);</span></div><div class="ln dim"><span style="color:#CE9178">    return jsx(Text, { onPress, children: count });</span></div><div class="ln"><span style="color:#CE9178">  }`</span><span style="color:#D4D4D4">,</span></div><div class="ln"><span style="color:#9CDCFE">  args</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">[</span><span style="color:#9CDCFE">useState</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">Text</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4">,</span></div><div class="ln dim"><span style="color:#9CDCFE">  map</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"AAAA;MAAM,CAAC…"</span><span style="color:#D4D4D4">,</span><span style="color:#6A9955"> // back to App.tsx</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#D4D4D4">;</span></div></pre></div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="slide stepped tight" data-step="3" data-title="Bundle" data-at="4:10" data-for="35">
+  <h2>Bundled per request.</h2>
+  <div class="sbs" style="grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 8px; align-items: start">
+    <div style="display:flex; flex-direction:column; gap:14px">
+      <div class="panel"><div class="bar"><span>The request</span></div><pre class="gutter"><div class="ln"><span style="color:#569CD6">GET</span><span style="color:#D4D4D4"> </span><span style="color:#CE9178">/5</span></div><div class="ln"><span style="color:#9CDCFE">x-backtick-modules</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">{"react-native":"0.88.4", …}</span></div></pre></div>
+    </div>
+    <div class="panel"><div class="bar"><span>The response</span><span class="tag">Simplified</span></div><pre class="gutter"><div class="ln"><span style="color:#CE9178">"use strict"</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> } = </span><span style="color:#DCDCAA">require</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"react"</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> } = </span><span style="color:#DCDCAA">require</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"react-native"</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> modules</span><span style="color:#D4D4D4"> = </span><span style="color:#FFD700">{</span></div><div class="ln"><span style="color:#6A9955">  // cs`&lt;$Counter from={$from} /&gt;`</span></div><div class="ln"><span style="color:#CE9178">  "18y3…:12:9"</span><span style="color:#D4D4D4">: </span><span style="color:#FFD700">(</span><span style="color:#9CDCFE">module</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">exports</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">require</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span><span style="color:#D4D4D4"> … </span><span style="color:#FFD700">}</span><span style="color:#D4D4D4">,</span></div><div class="ln"><span style="color:#6A9955">  // cs`({ from }) =&gt; { … }`</span></div><div class="ln"><span style="color:#CE9178">  "18y3…:5:16"</span><span style="color:#D4D4D4">: </span><span style="color:#FFD700">(</span><span style="color:#9CDCFE">module</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">exports</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">require</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span><span style="color:#D4D4D4"> … </span><span style="color:#FFD700">}</span><span style="color:#D4D4D4">,</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> cs0</span><span style="color:#D4D4D4"> = </span><span style="color:#DCDCAA">require</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"18y3…:12:9"</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">default</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> cs1</span><span style="color:#D4D4D4"> = </span><span style="color:#DCDCAA">require</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"18y3…:5:16"</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">default</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span style="color:#DCDCAA">cs1</span><span style="color:#FFD700">(</span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">Text</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#9CDCFE">module</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">exports</span><span style="color:#D4D4D4"> = </span><span style="color:#DCDCAA">cs0</span><span style="color:#FFD700">(</span><span style="color:#4FC1FF">Counter</span><span style="color:#D4D4D4">, </span><span style="color:#B5CEA8">5</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div></pre></div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="slide stepped" data-step="4" data-title="Run" data-at="4:45" data-for="8">
+  <div class="run-head"><h2>Fetched fresh on every open.</h2><p class="run-sub">Layouts and loading screens are prefetched, so it still feels instant.</p></div>
+  <div class="sbs" style="grid-template-columns: 1fr 316px; gap: 90px">
+    <div style="display:flex;flex-direction:column;gap:44px;padding-top:0">
+      <div class="panel"><div class="bar"><span>client/App.tsx</span><span class="tag">Simplified</span></div><pre style="font-size:26px"><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> moduleMap</span><span style="color:#D4D4D4"> = </span><span style="color:#FFD700">{</span><span style="color:#CE9178"> "react"</span><span style="color:#D4D4D4">: </span><span style="color:#9CDCFE">React</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"react-native"</span><span style="color:#D4D4D4">: </span><span style="color:#9CDCFE">ReactNative</span><span style="color:#FFD700"> }</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> headers</span><span style="color:#D4D4D4"> = </span><span style="color:#FFD700">{</span><span style="color:#CE9178"> "x-backtick-modules"</span><span style="color:#D4D4D4">: </span><span style="color:#DCDCAA">modulesOf</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">moduleMap</span><span style="color:#DA70D6">)</span><span style="color:#FFD700"> }</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">async</span><span style="color:#569CD6"> function</span><span style="color:#DCDCAA"> fetchScreen</span><span style="color:#FFD700">(</span><span style="color:#9CDCFE">path</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> response</span><span style="color:#D4D4D4"> = </span><span style="color:#C586C0">await</span><span style="color:#DCDCAA"> fetch</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">server</span><span style="color:#D4D4D4"> + </span><span style="color:#9CDCFE">path</span><span style="color:#D4D4D4">, </span><span style="color:#179FFF">{</span><span style="color:#9CDCFE"> headers</span><span style="color:#179FFF"> }</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> bundle</span><span style="color:#D4D4D4"> = </span><span style="color:#C586C0">await</span><span style="color:#9CDCFE"> response</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">text</span><span style="color:#DA70D6">()</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> module</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> exports</span><span style="color:#D4D4D4">: </span><span style="color:#179FFF">{}</span><span style="color:#DA70D6"> }</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> require</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">name</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#9CDCFE"> moduleMap</span><span style="color:#DA70D6">[</span><span style="color:#9CDCFE">name</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  new</span><span style="color:#4EC9B0"> Function</span><span style="color:#DA70D6">(</span><span style="color:#CE9178">"module"</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"exports"</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"require"</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">bundle</span><span style="color:#DA70D6">)</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">module</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">module</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">exports</span><span style="color:#D4D4D4">, </span><span style="color:#DCDCAA">require</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#9CDCFE"> module</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">exports</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span></div></pre></div>
+    </div>
+    <div class="nav-wrap" style="visibility: hidden"><div class="phone nav-phone"><div class="screen"><video src="nav.mp4" muted loop playsinline preload="auto"></video></div></div></div>
+  </div>
+</section>
+
+<!-- 11 -->
+<section class="slide stepped lines-focus fetch-demo" data-step="4" data-title="Run: fetch and evaluate" data-at="4:53" data-for="7">
+  <div class="run-head"><h2>Fetched fresh on every open.</h2><p class="run-sub">Layouts and loading screens are prefetched, so it still feels instant.</p></div>
+  <div class="sbs" style="grid-template-columns: 1fr 316px; gap: 90px">
+    <div style="display:flex;flex-direction:column;gap:44px;padding-top:0">
+      <div class="panel"><div class="bar"><span>client/App.tsx</span><span class="tag">Simplified</span></div><pre style="font-size:26px"><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> moduleMap</span><span style="color:#D4D4D4"> = </span><span style="color:#FFD700">{</span><span style="color:#CE9178"> "react"</span><span style="color:#D4D4D4">: </span><span style="color:#9CDCFE">React</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"react-native"</span><span style="color:#D4D4D4">: </span><span style="color:#9CDCFE">ReactNative</span><span style="color:#FFD700"> }</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> headers</span><span style="color:#D4D4D4"> = </span><span style="color:#FFD700">{</span><span style="color:#CE9178"> "x-backtick-modules"</span><span style="color:#D4D4D4">: </span><span style="color:#DCDCAA">modulesOf</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">moduleMap</span><span style="color:#DA70D6">)</span><span style="color:#FFD700"> }</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">async</span><span style="color:#569CD6"> function</span><span style="color:#DCDCAA"> fetchScreen</span><span style="color:#FFD700">(</span><span style="color:#9CDCFE">path</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln key k-fetch"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> response</span><span style="color:#D4D4D4"> = </span><span style="color:#C586C0">await</span><span style="color:#DCDCAA"> fetch</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">server</span><span style="color:#D4D4D4"> + </span><span style="color:#9CDCFE">path</span><span style="color:#D4D4D4">, </span><span style="color:#179FFF">{</span><span style="color:#9CDCFE"> headers</span><span style="color:#179FFF"> }</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> bundle</span><span style="color:#D4D4D4"> = </span><span style="color:#C586C0">await</span><span style="color:#9CDCFE"> response</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">text</span><span style="color:#DA70D6">()</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> module</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> exports</span><span style="color:#D4D4D4">: </span><span style="color:#179FFF">{}</span><span style="color:#DA70D6"> }</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> require</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">name</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#9CDCFE"> moduleMap</span><span style="color:#DA70D6">[</span><span style="color:#9CDCFE">name</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#569CD6">  new</span><span style="color:#4EC9B0"> Function</span><span style="color:#DA70D6">(</span><span style="color:#CE9178">"module"</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"exports"</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"require"</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">bundle</span><span style="color:#DA70D6">)</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">module</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">module</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">exports</span><span style="color:#D4D4D4">, </span><span style="color:#DCDCAA">require</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#9CDCFE"> module</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">exports</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span></div></pre></div>
+    </div>
+    <div class="nav-wrap"><div class="fetch-toast"><span class="spin"></span>Fetching screen</div><div class="phone nav-phone"><div class="screen"><video src="nav.mp4" muted loop playsinline preload="auto"></video></div></div></div>
+  </div>
+  <p class="credit">Data: TVmaze (CC BY-SA)</p>
+</section>
+
+<!-- 12 -->
+<section class="slide" data-title="Your app is a link" data-at="5:00" data-for="20">
+  <div class="home-slide">
+    <div class="home-copy">
+      <h2>Your app is a link.</h2>
+      <p class="home-lede">Every screen is a route.</p>
+    </div>
+    <div class="phone home-phone"><div class="screen home-shot">
+      <img src="home.png" alt="The Backtick home: Your apps">
+    </div></div>
+  </div>
+  <svg class="callout" viewBox="0 0 1920 1080" aria-hidden="true">
+    <line x1="712" y1="522" x2="886" y2="522"/>
+    <circle cx="886" cy="522" r="7"/>
+    <text x="700" y="530" text-anchor="end">thornvale.backtickjs.app</text>
+    <line x1="1034" y1="522" x2="1208" y2="522"/>
+    <circle cx="1034" cy="522" r="7"/>
+    <text x="1220" y="530">habits.backtickjs.app</text>
+  </svg>
+</section>
+
+<!-- 13 -->
+<section class="slide" data-title="Dig in if" data-at="5:20" data-for="25">
+  <h2>Dig in if…</h2>
+  <div class="dig-list">
+    <div class="dig-row" style="--c:#0e7490"><svg class="dig-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg><p class="dig-line">You want to ship at the speed of the web.</p><span class="dig-tag">Release speed</span></div>
+    <div class="dig-row" style="--c:#7c3aed"><svg class="dig-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 3v4M17 5h4"/></svg><p class="dig-line">Your WebView screens don't feel native.</p><span class="dig-tag">UX quality</span></div>
+    <div class="dig-row" style="--c:#b45309"><svg class="dig-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg><p class="dig-line">Your server-driven UI keeps hitting limits.</p><span class="dig-tag">UI expressiveness</span></div>
+  </div>
+</section>
+
+<!-- 14 -->
+<section class="slide" data-title="Thank you" data-at="5:45" data-for="20">
+  <h2>Thank you.</h2>
+  <div class="join3">
+    <div class="jcol">
+      <div class="jtile qr-wrap"><div id="qr-gh" class="qr-code"></div><span class="qr-logo gh"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></span></div>
+      <p class="jlabel">Read the code</p>
+    </div>
+    <div class="jcol">
+      <div class="jtile photo"><img src="me.jpg" alt="Jean-François Bisson"></div>
+      <p class="jlabel">Say hi</p>
+      <p class="jsub">linkedin.com/in/jfbisson</p>
+    </div>
+    <div class="jcol">
+      <div class="jtile qr-wrap"><div id="qr-app" class="qr-code"></div><span class="qr-logo app"><svg viewBox="176 -3 33 43" aria-hidden="true"><path d="M205 36H198.161L180 1H194.773L205 36Z"/></svg></span></div>
+      <p class="jlabel">Try the iOS app</p>
+    </div>
+  </div>
+</section>
+
+<nav id="stepper" aria-label="How a screen is made">
+  <div class="step" data-n="1"><span class="n">1</span>Typecheck<span class="when">build time</span></div><span class="joint"></span>
+  <div class="step" data-n="2"><span class="n">2</span>Compile<span class="when">build time</span></div><span class="joint"></span>
+  <div class="step" data-n="3"><span class="n">3</span>Bundle<span class="when">request time</span></div><span class="joint"></span>
+  <div class="step" data-n="4"><span class="n">4</span>Run<span class="when">on the phone</span></div>
+</nav>
+<div id="footer"><svg class="logo" viewBox="0 0 279 38" fill="currentColor" aria-label="Backtick"><path d="M3.03409 36V1.09091H17.0114C19.5795 1.09091 21.7216 1.47159 23.4375 2.23295C25.1534 2.99432 26.4432 4.05114 27.3068 5.40341C28.1705 6.74432 28.6023 8.28977 28.6023 10.0398C28.6023 11.4034 28.3295 12.6023 27.7841 13.6364C27.2386 14.6591 26.4886 15.5 25.5341 16.1591C24.5909 16.8068 23.5114 17.267 22.2955 17.5398V17.8807C23.625 17.9375 24.8693 18.3125 26.0284 19.0057C27.1989 19.6989 28.1477 20.6705 28.875 21.9205C29.6023 23.1591 29.9659 24.6364 29.9659 26.3523C29.9659 28.2045 29.5057 29.858 28.5852 31.3125C27.6761 32.7557 26.3295 33.8977 24.5455 34.7386C22.7614 35.5795 20.5625 36 17.9489 36H3.03409ZM10.4148 29.9659H16.4318C18.4886 29.9659 19.9886 29.5739 20.9318 28.7898C21.875 27.9943 22.3466 26.9375 22.3466 25.6193C22.3466 24.6534 22.1136 23.8011 21.6477 23.0625C21.1818 22.3239 20.517 21.7443 19.6534 21.3239C18.8011 20.9034 17.7841 20.6932 16.6023 20.6932H10.4148V29.9659ZM10.4148 15.6989H15.8864C16.8977 15.6989 17.7955 15.5227 18.5795 15.1705C19.375 14.8068 20 14.2955 20.4545 13.6364C20.9205 12.9773 21.1534 12.1875 21.1534 11.267C21.1534 10.0057 20.7045 8.98864 19.8068 8.21591C18.9205 7.44318 17.6591 7.05682 16.0227 7.05682H10.4148V15.6989ZM43.2555 36H35.3464L47.3976 1.09091H56.9089L68.943 36H61.0339L52.2896 9.06818H52.0169L43.2555 36ZM42.7612 22.2784H61.443V28.0398H42.7612V22.2784ZM104.775 13.3125H97.3093C97.173 12.3466 96.8945 11.4886 96.4741 10.7386C96.0536 9.97727 95.5139 9.32954 94.8548 8.79545C94.1957 8.26136 93.4343 7.85227 92.5707 7.56818C91.7184 7.28409 90.7923 7.14205 89.7923 7.14205C87.9855 7.14205 86.4116 7.59091 85.0707 8.48864C83.7298 9.375 82.69 10.6705 81.9514 12.375C81.2127 14.0682 80.8434 16.125 80.8434 18.5455C80.8434 21.0341 81.2127 23.125 81.9514 24.8182C82.7014 26.5114 83.7468 27.7898 85.0877 28.6534C86.4286 29.517 87.9798 29.9489 89.7411 29.9489C90.7298 29.9489 91.6445 29.8182 92.4855 29.5568C93.3377 29.2955 94.0934 28.9148 94.7525 28.4148C95.4116 27.9034 95.957 27.2841 96.3889 26.5568C96.832 25.8295 97.1389 25 97.3093 24.0682L104.775 24.1023C104.582 25.7045 104.099 27.25 103.326 28.7386C102.565 30.2159 101.537 31.5398 100.241 32.7102C98.957 33.8693 97.423 34.7898 95.6389 35.4716C93.8661 36.142 91.8605 36.4773 89.6218 36.4773C86.5082 36.4773 83.7241 35.7727 81.2695 34.3636C78.8264 32.9545 76.8945 30.9148 75.4741 28.2443C74.065 25.5739 73.3605 22.3409 73.3605 18.5455C73.3605 14.7386 74.0764 11.5 75.5082 8.82955C76.94 6.15909 78.8832 4.125 81.3377 2.72727C83.7923 1.31818 86.5536 0.613635 89.6218 0.613635C91.6445 0.613635 93.5195 0.897726 95.2468 1.46591C96.9855 2.03409 98.5252 2.86364 99.8661 3.95454C101.207 5.03409 102.298 6.35795 103.139 7.92614C103.991 9.49432 104.537 11.2898 104.775 13.3125ZM112.538 36V1.09091H119.919V16.483H120.379L132.941 1.09091H141.788L128.833 16.7216L141.941 36H133.112L123.549 21.6477L119.919 26.0795V36H112.538ZM146.772 7.17614V1.09091H175.443V7.17614H164.755V36H157.46V7.17614H146.772Z" /><path d="M205 36H198.161L180 1H194.773L205 36Z" /><path d="M240.835 13.3125H233.369C233.233 12.3466 232.955 11.4886 232.534 10.7386C232.114 9.97727 231.574 9.32954 230.915 8.79545C230.256 8.26136 229.494 7.85227 228.631 7.56818C227.778 7.28409 226.852 7.14205 225.852 7.14205C224.045 7.14205 222.472 7.59091 221.131 8.48864C219.79 9.375 218.75 10.6705 218.011 12.375C217.273 14.0682 216.903 16.125 216.903 18.5455C216.903 21.0341 217.273 23.125 218.011 24.8182C218.761 26.5114 219.807 27.7898 221.148 28.6534C222.489 29.517 224.04 29.9489 225.801 29.9489C226.79 29.9489 227.705 29.8182 228.545 29.5568C229.398 29.2955 230.153 28.9148 230.812 28.4148C231.472 27.9034 232.017 27.2841 232.449 26.5568C232.892 25.8295 233.199 25 233.369 24.0682L240.835 24.1023C240.642 25.7045 240.159 27.25 239.386 28.7386C238.625 30.2159 237.597 31.5398 236.301 32.7102C235.017 33.8693 233.483 34.7898 231.699 35.4716C229.926 36.142 227.92 36.4773 225.682 36.4773C222.568 36.4773 219.784 35.7727 217.33 34.3636C214.886 32.9545 212.955 30.9148 211.534 28.2443C210.125 25.5739 209.42 22.3409 209.42 18.5455C209.42 14.7386 210.136 11.5 211.568 8.82955C213 6.15909 214.943 4.125 217.398 2.72727C219.852 1.31818 222.614 0.613635 225.682 0.613635C227.705 0.613635 229.58 0.897726 231.307 1.46591C233.045 2.03409 234.585 2.86364 235.926 3.95454C237.267 5.03409 238.358 6.35795 239.199 7.92614C240.051 9.49432 240.597 11.2898 240.835 13.3125ZM248.598 36V1.09091H255.979V16.483H256.439L269.001 1.09091H277.848L264.893 16.7216L278.001 36H269.172L259.609 21.6477L255.979 26.0795V36H248.598Z" /></svg><span class="num"></span></div>
+</div>
+
+<div id="notes">
+  <header>
+    <span class="clock idle">0:00</span>
+    <div class="meta"><span class="k">Plan</span><span class="v target"></span></div>
+    <div class="meta"><span class="k">Against plan</span><span class="v delta"></span></div>
+    <div class="meta cur"><span class="k">Now</span><span class="v now"></span></div>
+  </header>
+  <div class="body"></div>
+  <footer><span>Next: <b class="next"></b></span><span class="mono">← → move · r reset clock · t theme</span></footer>
+</div>
+
+<script>
+(() => {
+  const NOTES = new URLSearchParams(location.search).has("notes");
+  const SIDE = new URLSearchParams(location.search).get("side");
+  if (SIDE) document.documentElement.style.setProperty("--side", SIDE + "px");
+  const root = document.documentElement;
+  const stage = document.getElementById("stage");
+  const slides = [...document.querySelectorAll(".slide")];
+  const count = slides.length;
+  const steps = [...document.querySelectorAll("#stepper .step")];
+  const num = document.querySelector("#footer .num");
+  const secs = (s) => { const [m, x] = s.split(":").map(Number); return m * 60 + x; };
+  const fmt = (t) => { const a = Math.abs(Math.round(t)); return Math.floor(a / 60) + ":" + String(a % 60).padStart(2, "0"); };
+
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+    set(k, v) { try { v === null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch {} },
+  };
+
+  // State shared by both windows: the slide, when the clock started and from
+  // which slide, and the theme.
+  const state = { n: 1, start: null, startAt: null, theme: store.get("v9-theme") };
+  const fromHash = parseInt(location.hash.slice(1), 10);
+  if (fromHash >= 1 && fromHash <= count) state.n = fromHash;
+
+  // Sync: BroadcastChannel, plus direct window messages for file:// pages,
+  // plus storage events as a last resort.
+  const id = Math.random().toString(36).slice(2);
+  let channel = null;
+  try { channel = new BroadcastChannel("backtick-v9"); channel.onmessage = (e) => receive(e.data); } catch {}
+  let peer = NOTES ? window.opener : null;
+  function send(msg) {
+    msg = { ...msg, from: id };
+    try { channel && channel.postMessage(msg); } catch {}
+    try { peer && !peer.closed && peer.postMessage(msg, "*"); } catch {}
+    store.set("v9-sync", JSON.stringify({ ...msg, stamp: Date.now() }));
+  }
+  window.addEventListener("message", (e) => receive(e.data));
+  window.addEventListener("storage", (e) => { if (e.key === "v9-sync" && e.newValue) { try { receive(JSON.parse(e.newValue)); } catch {} } });
+  function receive(msg) {
+    if (!msg || msg.from === id || msg.deck !== "v9") return;
+    if (msg.type === "hello") { share(); return; }
+    if (msg.type === "state") {
+      state.start = msg.start; state.startAt = msg.startAt;
+      if (msg.theme !== state.theme) { state.theme = msg.theme; applyTheme(); }
+      if (msg.n !== state.n) { state.n = msg.n; render(); } else renderNotes();
+    }
+  }
+  const share = () => send({ deck: "v9", type: "state", n: state.n, start: state.start, startAt: state.startAt, theme: state.theme });
+
+  function applyTheme() {
+    if (state.theme) root.dataset.theme = state.theme; else delete root.dataset.theme;
+  }
+  function toggleTheme() {
+    const dark = state.theme ? state.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    state.theme = dark ? "light" : "dark";
+    store.set("v9-theme", state.theme);
+    applyTheme(); share();
+  }
+
+  function render() {
+    const slide = slides[state.n - 1];
+    slides.forEach((s) => s.classList.toggle("on", s === slide));
+    stage.classList.toggle("bare", slide.hasAttribute("data-bare"));
+    // One step, "2", or a range, "1-2", for a slide that covers both.
+    const [first, last = first] = (slide.dataset.step || "0").split("-").map(Number);
+    stage.classList.toggle("stepped", first > 0);
+    steps.forEach((s) => {
+      const k = Number(s.dataset.n);
+      s.classList.toggle("cur", k >= first && k <= last);
+      s.classList.toggle("done", k < first);
+    });
+    num.textContent = state.n + " / " + count;
+    history.replaceState(null, "", location.pathname + location.search + "#" + state.n);
+    document.querySelectorAll("video").forEach((v) => {
+      if (!NOTES && slide.contains(v)) { const p = v.play(); p && p.catch(() => {}); } else v.pause();
+    });
+    renderNotes();
+  }
+
+  function go(n) {
+    n = Math.max(1, Math.min(count, n));
+    if (n === state.n) return;
+    if (state.start === null) { state.start = Date.now(); state.startAt = n; }
+    state.n = n;
+    render(); share();
+  }
+
+  // The notes window.
+  const nb = document.querySelector("#notes .body");
+  function renderNotes() {
+    if (!NOTES) return;
+    const slide = slides[state.n - 1];
+    const aside = slide.querySelector("aside.notes");
+    nb.innerHTML = aside ? aside.innerHTML : "";
+    document.querySelector("#notes .target").textContent = slide.dataset.at + " · " + slide.dataset.for + " s";
+    document.querySelector("#notes .now").textContent = state.n + " / " + count + " · " + slide.dataset.title;
+    const next = slides[state.n];
+    document.querySelector("#notes .next").textContent = next ? next.dataset.title : "End";
+    document.title = "Notes · " + state.n + " " + slide.dataset.title;
+    tick();
+  }
+  function tick() {
+    if (!NOTES) return;
+    const clock = document.querySelector("#notes .clock");
+    const delta = document.querySelector("#notes .delta");
+    if (state.start === null) {
+      clock.textContent = "0:00"; clock.classList.add("idle");
+      delta.textContent = "starts on the first advance"; delta.className = "v delta"; return;
+    }
+    const el = (Date.now() - state.start) / 1000;
+    clock.textContent = fmt(el); clock.classList.remove("idle");
+    // The clock started when slide `startAt` began, so it reads plan time
+    // minus that slide's start.
+    const plan = secs(slides[state.n - 1].dataset.at) - secs(slides[state.startAt - 1].dataset.at);
+    const end = plan + Number(slides[state.n - 1].dataset.for);
+    let d = 0;
+    if (el < plan) d = el - plan; else if (el > end) d = el - end;
+    delta.textContent = Math.abs(d) < 3 ? "on plan" : (d > 0 ? "+" + fmt(d) + " over" : fmt(d) + " ahead");
+    delta.className = "v delta" + (Math.abs(d) < 3 ? "" : d > 0 ? " over" : " under");
+  }
+
+  window.addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    switch (e.key) {
+      case "ArrowRight": case "ArrowDown": e.preventDefault(); go(state.n + 1); break;
+      case "ArrowLeft": case "ArrowUp": e.preventDefault(); go(state.n - 1); break;
+      case "f":
+        if (document.fullscreenElement) document.exitFullscreen(); else root.requestFullscreen().catch(() => {});
+        break;
+      case "t": toggleTheme(); break;
+      case "r": state.start = null; state.startAt = null; share(); tick(); break;
+      case "n":
+        if (!NOTES) {
+          peer = window.open(location.pathname + "?notes#" + state.n, "backtick-v9-notes", "width=1200,height=800");
+          setTimeout(share, 400);
+        }
+        break;
+    }
+  });
+
+  function fit() {
+    const s = Math.min(innerWidth / 1920, innerHeight / 1080);
+    stage.style.transform = "translate(-50%, -50%) scale(" + s + ")";
+  }
+  window.addEventListener("resize", fit);
+
+  // v6's entrance: each block of a slide arrives in turn.
+  slides.forEach((slide) => {
+    if (slide.querySelector(".in")) return;
+    const blocks = [];
+    for (const el of slide.children) {
+      if (el.matches("aside, svg")) continue;
+      if (el.matches(".stack")) blocks.push(...el.children);
+      else if (el.matches(".join3")) blocks.push(...el.children);
+      else blocks.push(el);
+    }
+    blocks.forEach((el, i) => { el.classList.add("in"); el.style.setProperty("--i", i); });
+  });
+
+  [["qr-gh", "https://github.com/backtickjs/backtick"], ["qr-app", "https://apps.apple.com/us/app/backtick-make-apps-with-ai/id6830867621"]].forEach(([id, text]) => {
+    try {
+      new QRCode(document.getElementById(id), { text, width: 360, height: 360, colorDark: "#0e0e10", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H });
+    } catch {
+      document.getElementById(id).textContent = text;
+    }
+  });
+
+
+  // Slide 10: while the recording fetches a screen, show it on the phone and in the code.
+  const fetchWindows = [[2.0, 3.4], [5.0, 6.2], [8.1, 8.8]];
+  // Loop the recordings even where the loop attribute is ignored.
+  document.querySelectorAll(".nav-phone video").forEach((v) => {
+    v.loop = true;
+    v.addEventListener("ended", () => { v.currentTime = 0; v.play().catch(() => {}); });
+  });
+  document.querySelectorAll(".fetch-demo video").forEach((v) => {
+    const slide = v.closest(".slide");
+    v.addEventListener("timeupdate", () => {
+      const t = v.currentTime;
+      slide.classList.toggle("fetching", fetchWindows.some(([a, b]) => t >= a && t <= b));
+    });
+  });
+
+  if (NOTES) { root.classList.add("notes-mode"); setInterval(tick, 500); send({ deck: "v9", type: "hello" }); }
+  applyTheme(); fit(); render();
+})();
+</script>
+</body>
+</html>
