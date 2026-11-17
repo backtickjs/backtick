@@ -4,14 +4,30 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Backtick at React Summit</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
+      /* Inter, saved locally (fonts/OFL.txt) so the deck works offline. */
+      @font-face {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 400 800;
+        font-display: swap;
+        src: url("fonts/inter-latin.woff2") format("woff2");
+        unicode-range:
+          U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+          U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 400 800;
+        font-display: swap;
+        src: url("fonts/inter-latin-ext.woff2") format("woff2");
+        unicode-range:
+          U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+          U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+          U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
       /* The site's tokens (apps/backtickjs.dev/src/styles.css), themed with
    light-dark() as the site does; `t` flips color-scheme. */
       :root {
@@ -66,6 +82,9 @@
       }
 
       /* The stage: 1920×1080, scaled to the window. */
+      #stage:focus {
+        outline: none;
+      }
       #stage {
         position: absolute;
         left: 50%;
@@ -405,8 +424,7 @@
       .par {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        flex: 1;
-        min-height: 0;
+        margin-block: auto;
       }
       .p-col {
         display: flex;
@@ -915,6 +933,14 @@
         gap: 44px;
         align-items: start;
       }
+      /* Slides 10–11: the source takes only its width, so the wider output fits at full size. */
+      .pair.fit {
+        grid-template-columns: max-content 1fr;
+        gap: 28px;
+      }
+      .pair.fit .ln {
+        padding-right: 24px;
+      }
       .run-sub code {
         font-family: var(--font-mono);
         font-size: 0.9em;
@@ -977,17 +1003,10 @@
       .home-copy h2 {
         white-space: nowrap;
       }
-      .home-lede {
-        margin-top: 56px;
-        font-size: 34px;
-        line-height: 1.35;
-        color: var(--muted);
-        max-width: 720px;
-      }
       .home-phone {
         position: absolute;
         left: 50%;
-        top: 233px;
+        top: 303px;
         transform: translateX(-50%);
         width: 320px;
         height: 713px;
@@ -1110,6 +1129,7 @@
         font-size: 20px;
         letter-spacing: 0.12em;
         text-transform: uppercase;
+        font-weight: 600;
         color: var(--muted);
       }
 
@@ -1143,8 +1163,7 @@
         border: 1px solid var(--line);
         padding: 30px;
       }
-      .qr-code img,
-      .qr-code canvas {
+      .qr-code img {
         display: block;
         width: 360px !important;
         height: 360px !important;
@@ -1329,8 +1348,8 @@
         data-for="25"
       >
         <div class="stack">
-          <h1 class="display in" style="--i: 1">Next.js for mobile.</h1>
-          <p class="t2 in" style="--i: 2">Fully server-driven React Native.</p>
+          <h1 class="display in" style="--i: 1">Next.js for Mobile</h1>
+          <p class="t2 in" style="--i: 2">Server-Driven React Native</p>
           <p class="lede6 in" style="--i: 3">
             Jean-François Bisson · React Summit 2026
           </p>
@@ -1340,11 +1359,15 @@
       <!-- 2 -->
       <section
         class="slide"
-        data-title="Next.js for mobile"
+        data-title="Backtick: Next.js for mobile"
+        style="gap: 28px"
         data-at="0:25"
         data-for="30"
       >
-        <div class="stack"><h2>The goal: Next.js for mobile.</h2></div>
+        <div class="run-head">
+          <h2>Backtick: Next.js for mobile</h2>
+          <p class="run-sub">Open source, MIT licensed.</p>
+        </div>
         <div class="par">
           <div class="p-col web">
             <p class="p-label">Next.js</p>
@@ -1443,9 +1466,41 @@
 
       <!-- 3 -->
       <section
+        class="slide"
+        data-title="Showcase app"
+        data-at="0:55"
+        data-for="20"
+      >
+        <div class="home-slide">
+          <div class="home-copy run-head">
+            <h2>Showcase app</h2>
+            <p class="run-sub">
+              Every screen is native. Every screen comes from your server.
+            </p>
+          </div>
+          <div class="phone home-phone">
+            <div class="screen home-shot">
+              <img src="home.png" alt="The Backtick home: Your apps" />
+            </div>
+          </div>
+        </div>
+        <svg class="callout" viewBox="0 0 1920 1080" aria-hidden="true">
+          <line x1="712" y1="592" x2="886" y2="592" />
+          <circle cx="886" cy="592" r="7" />
+          <text x="700" y="600" text-anchor="end">
+            thornvale.backtickjs.app
+          </text>
+          <line x1="1034" y1="592" x2="1208" y2="592" />
+          <circle cx="1034" cy="592" r="7" />
+          <text x="1220" y="600">habits.backtickjs.app</text>
+        </svg>
+      </section>
+
+      <!-- 4 -->
+      <section
         class="slide demo"
         data-title="Demo"
-        data-at="0:55"
+        data-at="1:15"
         data-for="71"
         data-bare
       >
@@ -1461,14 +1516,14 @@
         ></video>
       </section>
 
-      <!-- 4 -->
+      <!-- 5 -->
       <section
         class="slide"
         data-title="A Backtick app"
-        data-at="2:06"
+        data-at="2:26"
         data-for="10"
       >
-        <h2>A Backtick app.</h2>
+        <h2>A Backtick app</h2>
         <div
           class="sbs"
           style="
@@ -1487,22 +1542,17 @@
               style="font-size: 26px"
             ><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "@backtickjs/core"</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react-native"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#FFD700">(</span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from </span><span style="color:#DA70D6">}</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">number</span><span style="color:#DA70D6"> }</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">$</span><span style="color:#DCDCAA">useState</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> onPress</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">()</span><span style="color:#569CD6"> =&gt;</span><span style="color:#DCDCAA"> setCount</span><span style="color:#DA70D6">(</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4"> + </span><span style="color:#B5CEA8">1</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#9CDCFE"> onPress</span><span style="color:#D4D4D4">=</span><span style="color:#DA70D6">{</span><span style="color:#DCDCAA">onPress</span><span style="color:#DA70D6">}</span><span style="color:#808080">&gt;</span><span style="color:#DA70D6">{</span><span style="color:#4FC1FF">count</span><span style="color:#DA70D6">}</span><span style="color:#808080">&lt;/</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#CE9178">`</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#9CDCFE">app</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">get</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"/:from"</span><span style="color:#D4D4D4">, </span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">c</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> from</span><span style="color:#D4D4D4"> = </span><span style="color:#4EC9B0">Number</span><span style="color:#179FFF">(</span><span style="color:#9CDCFE">c</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">req</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">param</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"from"</span><span style="color:#FFD700">)</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#9CDCFE"> c</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">render</span><span style="color:#179FFF">(</span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#808080">&lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Counter</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">=</span><span style="color:#FFD700">{</span><span style="color:#569CD6">$</span><span style="color:#4FC1FF">from</span><span style="color:#FFD700">}</span><span style="color:#808080"> /&gt;</span><span style="color:#CE9178">`</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#DA70D6">}</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div></pre>
           </div>
-          <div>
-            <div class="boundary">
-              <code class="b-old">"use client"</code>
-            </div>
-          </div>
         </div>
       </section>
 
-      <!-- 5 -->
+      <!-- 6 -->
       <section
         class="slide lines-focus"
         data-title="A Backtick app: the imports"
-        data-at="2:16"
+        data-at="2:36"
         data-for="3"
       >
-        <h2>A Backtick app.</h2>
+        <h2>A Backtick app</h2>
         <div
           class="sbs"
           style="
@@ -1521,22 +1571,17 @@
               style="font-size: 26px"
             ><div class="ln key"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "@backtickjs/core"</span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react-native"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#FFD700">(</span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from </span><span style="color:#DA70D6">}</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">number</span><span style="color:#DA70D6"> }</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">$</span><span style="color:#DCDCAA">useState</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> onPress</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">()</span><span style="color:#569CD6"> =&gt;</span><span style="color:#DCDCAA"> setCount</span><span style="color:#DA70D6">(</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4"> + </span><span style="color:#B5CEA8">1</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#9CDCFE"> onPress</span><span style="color:#D4D4D4">=</span><span style="color:#DA70D6">{</span><span style="color:#DCDCAA">onPress</span><span style="color:#DA70D6">}</span><span style="color:#808080">&gt;</span><span style="color:#DA70D6">{</span><span style="color:#4FC1FF">count</span><span style="color:#DA70D6">}</span><span style="color:#808080">&lt;/</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#CE9178">`</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#9CDCFE">app</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">get</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"/:from"</span><span style="color:#D4D4D4">, </span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">c</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> from</span><span style="color:#D4D4D4"> = </span><span style="color:#4EC9B0">Number</span><span style="color:#179FFF">(</span><span style="color:#9CDCFE">c</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">req</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">param</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"from"</span><span style="color:#FFD700">)</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#9CDCFE"> c</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">render</span><span style="color:#179FFF">(</span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#808080">&lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Counter</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">=</span><span style="color:#FFD700">{</span><span style="color:#569CD6">$</span><span style="color:#4FC1FF">from</span><span style="color:#FFD700">}</span><span style="color:#808080"> /&gt;</span><span style="color:#CE9178">`</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#DA70D6">}</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div></pre>
           </div>
-          <div>
-            <div class="boundary">
-              <code class="b-old">"use client"</code>
-            </div>
-          </div>
         </div>
       </section>
 
-      <!-- 6 -->
+      <!-- 7 -->
       <section
         class="slide lines-focus"
         data-title="A Backtick app: the script"
-        data-at="2:19"
+        data-at="2:39"
         data-for="4"
       >
-        <h2>A Backtick app.</h2>
+        <h2>A Backtick app</h2>
         <div
           class="sbs"
           style="
@@ -1563,14 +1608,14 @@
         </div>
       </section>
 
-      <!-- 7 -->
+      <!-- 8 -->
       <section
         class="slide lines-focus"
         data-title="A Backtick app: the route"
-        data-at="2:23"
+        data-at="2:43"
         data-for="3"
       >
-        <h2>A Backtick app.</h2>
+        <h2>A Backtick app</h2>
         <div
           class="sbs"
           style="
@@ -1589,22 +1634,17 @@
               style="font-size: 26px"
             ><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "@backtickjs/core"</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react-native"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#FFD700">(</span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from </span><span style="color:#DA70D6">}</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">number</span><span style="color:#DA70D6"> }</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">$</span><span style="color:#DCDCAA">useState</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> onPress</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">()</span><span style="color:#569CD6"> =&gt;</span><span style="color:#DCDCAA"> setCount</span><span style="color:#DA70D6">(</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4"> + </span><span style="color:#B5CEA8">1</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#9CDCFE"> onPress</span><span style="color:#D4D4D4">=</span><span style="color:#DA70D6">{</span><span style="color:#DCDCAA">onPress</span><span style="color:#DA70D6">}</span><span style="color:#808080">&gt;</span><span style="color:#DA70D6">{</span><span style="color:#4FC1FF">count</span><span style="color:#DA70D6">}</span><span style="color:#808080">&lt;/</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#CE9178">`</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln key"><span style="color:#9CDCFE">app</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">get</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"/:from"</span><span style="color:#D4D4D4">, </span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">c</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">{</span></div><div class="ln key"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> from</span><span style="color:#D4D4D4"> = </span><span style="color:#4EC9B0">Number</span><span style="color:#179FFF">(</span><span style="color:#9CDCFE">c</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">req</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">param</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"from"</span><span style="color:#FFD700">)</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#C586C0">  return</span><span style="color:#9CDCFE"> c</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">render</span><span style="color:#179FFF">(</span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#808080">&lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Counter</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">=</span><span style="color:#FFD700">{</span><span style="color:#569CD6">$</span><span style="color:#4FC1FF">from</span><span style="color:#FFD700">}</span><span style="color:#808080"> /&gt;</span><span style="color:#CE9178">`</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#DA70D6">}</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div></pre>
           </div>
-          <div>
-            <div class="boundary">
-              <code class="b-old">"use client"</code>
-            </div>
-          </div>
         </div>
       </section>
 
-      <!-- 8 -->
+      <!-- 9 -->
       <section
         class="slide"
         data-title="How a screen is made"
-        data-at="2:26"
+        data-at="2:46"
         data-for="15"
       >
-        <h2>How a screen is made.</h2>
+        <h2>How a screen is made</h2>
         <div class="pipe2">
           <div class="pwhen" style="grid-column: 1 / 4">
             Build time<span>on save</span>
@@ -1626,26 +1666,26 @@
         </div>
       </section>
 
-      <!-- 9 -->
+      <!-- 10 -->
       <section
         class="slide stepped"
         data-step="1"
         data-title="Typecheck"
-        data-at="2:41"
+        data-at="3:01"
         data-for="20"
       >
         <div class="run-head">
-          <h2>Typechecked at build time.</h2>
+          <h2>Typechecked at build time</h2>
           <p class="run-sub">
             TypeScript checks every <code>$</code> against the real types.
           </p>
         </div>
-        <div class="run-col">
+        <div class="pair fit">
           <div class="panel">
             <div class="bar"><span>server/App.tsx</span></div>
             <pre
-              style="font-size: 28px"
-            ><div class="ln"><span style="color:#569CD6">const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">$</span><span style="color:#DCDCAA">useState</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div></pre>
+              style="font-size: 26px"
+            ><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span><span style="color:#FFD700">(</span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from </span><span style="color:#DA70D6">}</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">$</span><span style="color:#DCDCAA">useState</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#DA70D6">{</span><span style="color:#4FC1FF">count</span><span style="color:#DA70D6">}</span><span style="color:#808080">&lt;/</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#CE9178">`</span><span style="color:#D4D4D4">;</span></div></pre>
           </div>
           <div class="panel">
             <div class="bar">
@@ -1653,28 +1693,28 @@
               ><span class="tag">Simplified</span>
             </div>
             <pre
-              style="font-size: 28px"
-            ><div class="ln"><span style="color:#569CD6">const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">splice</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">useState</span><span style="color:#DA70D6">)</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div></pre>
+              style="font-size: 26px"
+            ><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">lift</span><span style="color:#FFD700">(</span><span style="color:#DA70D6">(</span><span style="color:#179FFF">{</span><span style="color:#9CDCFE"> from </span><span style="color:#179FFF">}</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#179FFF">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#179FFF">]</span><span style="color:#D4D4D4"> = </span><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">splice</span><span style="color:#179FFF">(</span><span style="color:#9CDCFE">useState</span><span style="color:#179FFF">)</span><span style="color:#179FFF">(</span><span style="color:#9CDCFE">from</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#179FFF">{</span><span style="color:#4FC1FF">count</span><span style="color:#179FFF">}</span><span style="color:#808080">&lt;/</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#DA70D6">}</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div></pre>
           </div>
         </div>
       </section>
 
-      <!-- 10 -->
+      <!-- 11 -->
       <section
         class="slide stepped"
         data-step="2"
         data-title="Compile"
-        data-at="3:01"
+        data-at="3:21"
         data-for="20"
       >
         <div class="run-head">
-          <h2>Compiled at build time.</h2>
+          <h2>Compiled at build time</h2>
           <p class="run-sub">
             The script becomes a string. Each <code>$</code> becomes a
             parameter, filled in from <code>args</code>.
           </p>
         </div>
-        <div class="pair">
+        <div class="pair fit">
           <div class="panel">
             <div class="bar"><span>server/App.tsx</span></div>
             <pre
@@ -1692,16 +1732,16 @@
         </div>
       </section>
 
-      <!-- 11 -->
+      <!-- 12 -->
       <section
         class="slide stepped"
         data-step="3"
         data-title="Bundle"
-        data-at="3:21"
+        data-at="3:41"
         data-for="35"
       >
         <div class="run-head">
-          <h2>Bundled at request time.</h2>
+          <h2>Bundled at request time</h2>
           <p class="run-sub">
             Each request gets one bundle with only that screen's code.
           </p>
@@ -1729,18 +1769,19 @@
         </div>
       </section>
 
-      <!-- 12 -->
+      <!-- 13 -->
       <section
         class="slide stepped lines-focus fetch-demo"
         data-step="4"
         data-title="Run: fetch and evaluate"
-        data-at="3:56"
+        data-at="4:16"
         data-for="15"
       >
         <div class="run-head">
-          <h2>Fetched on every open.</h2>
+          <h2>Fetched on every open</h2>
           <p class="run-sub">
-            Layouts and loading screens are prefetched, so it feels instant.
+            Layouts and loading screens are prefetched, so navigation feels
+            instant.
           </p>
         </div>
         <div class="sbs" style="grid-template-columns: 1fr 316px; gap: 64px">
@@ -1799,44 +1840,14 @@
         <p class="credit">Data: TVmaze (CC BY-SA)</p>
       </section>
 
-      <!-- 13 -->
-      <section
-        class="slide"
-        data-title="Your app is a link"
-        data-at="4:11"
-        data-for="20"
-      >
-        <div class="home-slide">
-          <div class="home-copy">
-            <h2>Your app is a link.</h2>
-            <p class="home-lede">Every screen is a route.</p>
-          </div>
-          <div class="phone home-phone">
-            <div class="screen home-shot">
-              <img src="home.png" alt="The Backtick home: Your apps" />
-            </div>
-          </div>
-        </div>
-        <svg class="callout" viewBox="0 0 1920 1080" aria-hidden="true">
-          <line x1="712" y1="522" x2="886" y2="522" />
-          <circle cx="886" cy="522" r="7" />
-          <text x="700" y="530" text-anchor="end">
-            thornvale.backtickjs.app
-          </text>
-          <line x1="1034" y1="522" x2="1208" y2="522" />
-          <circle cx="1034" cy="522" r="7" />
-          <text x="1220" y="530">habits.backtickjs.app</text>
-        </svg>
-      </section>
-
       <!-- 14 -->
       <section
         class="slide"
-        data-title="Dig in if"
+        data-title="Backtick might be for you if"
         data-at="4:31"
         data-for="25"
       >
-        <h2>Dig in if…</h2>
+        <h2>Backtick might be for you if…</h2>
         <div class="dig-list">
           <div class="dig-row" style="--c: #0e7490">
             <svg class="dig-ic" viewBox="0 0 24 24" aria-hidden="true">
@@ -1872,11 +1883,16 @@
         data-at="4:56"
         data-for="20"
       >
-        <h2>Thank you.</h2>
+        <h2>Thank you</h2>
         <div class="join3">
           <div class="jcol">
             <div class="jtile qr-wrap">
-              <div id="qr-gh" class="qr-code"></div>
+              <div class="qr-code">
+                <img
+                  src="qr-github.svg"
+                  alt="QR code: github.com/backtickjs/backtick"
+                />
+              </div>
               <span class="qr-logo gh"
                 ><svg viewBox="0 0 16 16" aria-hidden="true">
                   <path
@@ -1895,7 +1911,12 @@
           </div>
           <div class="jcol">
             <div class="jtile qr-wrap">
-              <div id="qr-app" class="qr-code"></div>
+              <div class="qr-code">
+                <img
+                  src="qr-app-store.svg"
+                  alt="QR code: Backtick on the App Store"
+                />
+              </div>
               <span class="qr-logo app"
                 ><svg viewBox="176 -3 33 43" aria-hidden="true">
                   <path d="M205 36H198.161L180 1H194.773L205 36Z" /></svg
@@ -2180,6 +2201,12 @@
             "v delta" + (Math.abs(d) < 3 ? "" : d > 0 ? " over" : " under");
         }
 
+        // A clicked video control keeps focus and takes every key before the page sees it, so focus goes back to the stage.
+        stage.tabIndex = -1;
+        document.addEventListener("focusin", (e) => {
+          if (e.target instanceof HTMLVideoElement)
+            setTimeout(() => stage.focus({ preventScroll: true }));
+        });
         window.addEventListener("keydown", (e) => {
           if (e.metaKey || e.ctrlKey || e.altKey) return;
           switch (e.key) {
@@ -2262,27 +2289,6 @@
             el.classList.add("in");
             el.style.setProperty("--i", i);
           });
-        });
-
-        [
-          ["qr-gh", "https://github.com/backtickjs/backtick"],
-          [
-            "qr-app",
-            "https://apps.apple.com/us/app/backtick-make-apps-with-ai/id6830867621",
-          ],
-        ].forEach(([id, text]) => {
-          try {
-            new QRCode(document.getElementById(id), {
-              text,
-              width: 360,
-              height: 360,
-              colorDark: "#0e0e10",
-              colorLight: "#ffffff",
-              correctLevel: QRCode.CorrectLevel.H,
-            });
-          } catch {
-            document.getElementById(id).textContent = text;
-          }
         });
 
         // Slide 10: while the recording fetches a screen, show it on the phone and in the code.
