@@ -813,6 +813,11 @@
         content: "200";
         color: var(--added);
       }
+      .netlog .req.res em {
+        margin-left: 24px;
+        font-style: normal;
+        color: var(--code-muted);
+      }
       /* The pipeline at a glance, drawn as the stepper of the slides after it, with what each part takes. */
       .pipe2 {
         display: grid;
@@ -897,82 +902,23 @@
         flex-direction: row;
         gap: 56px;
       }
-      /* The merged build slide: one source, two outputs. */
-      .build {
-        display: grid;
-        grid-template-columns: max-content 150px 1fr;
-        grid-template-rows: auto auto;
-        column-gap: 0;
-        row-gap: 10px;
-        align-items: center;
-        margin-top: -56px;
-      }
-      .build .src {
-        grid-row: 1 / span 2;
-        grid-column: 1;
-        align-self: stretch;
+      /* Slides 9–12: the stage's code, stacked, as wide as slide 12's. */
+      .run-col {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        gap: 44px;
+        max-width: 1320px;
       }
-      .build .build-title {
-        line-height: 1.05;
-        margin: 56px 0 28px;
+      .pair {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 44px;
+        align-items: start;
       }
-      .build .flow {
-        grid-row: 1 / span 2;
-        grid-column: 2;
-        width: 150px;
-        height: 100%;
-        overflow: visible;
-      }
-      .build .panel .bar {
-        padding-top: 14px;
-        padding-bottom: 14px;
-      }
-      .build .panel pre {
-        padding: 16px 0;
-        font-size: 19px;
-      }
-      .build .flow path {
-        stroke: var(--muted);
-        stroke-width: 2.5;
-        fill: none;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-      }
-      .build .flow text {
+      .run-sub code {
         font-family: var(--font-mono);
-        font-size: 17px;
-        fill: var(--muted);
-        text-anchor: middle;
-      }
-      .tight .panel .bar {
-        padding-top: 14px;
-        padding-bottom: 14px;
-      }
-      .tight .panel pre {
-        padding: 16px 0;
-      }
-      .typecheck-only .build .o2,
-      .typecheck-only .build .flow .compile {
-        visibility: hidden;
-      }
-      /* Slides 5 and 6: the splice, and what backtick-tsc turns it into, in focus. */
-      .focus .build .src pre .ln:not(.key),
-      .focus .build .o1 pre .ln:not(.key) {
-        opacity: 0.22;
-      }
-      .focus .build .o2 pre .ln.dim {
-        opacity: 0.22;
-      }
-      .build .o1 {
-        grid-row: 1;
-        grid-column: 3;
-      }
-      .build .o2 {
-        grid-row: 2;
-        grid-column: 3;
+        font-size: 0.9em;
+        color: var(--ink);
       }
 
       /* The Hacker News screen in the phone, illustrative. */
@@ -1682,179 +1628,104 @@
 
       <!-- 9 -->
       <section
-        class="slide stepped typecheck-only focus"
+        class="slide stepped"
         data-step="1"
         data-title="Typecheck"
         data-at="2:41"
         data-for="20"
       >
-        <div class="build">
-          <div class="src">
-            <h2 class="build-title">Typechecked and<br />compiled, once.</h2>
-            <div class="panel">
-              <div class="bar"><span>server/App.tsx</span></div>
-              <pre
-                class="gutter"
-              ><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react-native"</span><span style="color:#C586C0"> with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> };</span></div><div class="ln key"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react"</span><span style="color:#C586C0"> with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> };</span></div><div class="ln"></div><div class="ln key"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span class="tok"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#FFD700">(</span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from </span><span style="color:#DA70D6">}</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">number</span><span style="color:#DA70D6"> }</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln key"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span class="tok"><span style="color:#569CD6">$</span><span style="color:#DCDCAA">useState</span></span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> onPress</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">()</span><span style="color:#569CD6"> =&gt;</span><span style="color:#DCDCAA"> setCount</span><span style="color:#DA70D6">(</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4"> + </span><span style="color:#B5CEA8">1</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#9CDCFE"> onPress</span><span style="color:#D4D4D4">=</span><span style="color:#DA70D6">{</span><span style="color:#DCDCAA">onPress</span><span style="color:#DA70D6">}</span><span style="color:#808080">&gt;</span><span style="color:#DA70D6">{</span><span style="color:#4FC1FF">count</span><span style="color:#DA70D6">}</span><span style="color:#808080">&lt;/</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#CE9178">`</span><span style="color:#D4D4D4">;</span></div></pre>
-            </div>
+        <div class="run-head">
+          <h2>Typechecked at build time.</h2>
+          <p class="run-sub">
+            TypeScript checks every <code>$</code> against the real React types.
+          </p>
+        </div>
+        <div class="run-col">
+          <div class="panel">
+            <div class="bar"><span>server/App.tsx</span></div>
+            <pre
+              style="font-size: 28px"
+            ><div class="ln"><span style="color:#569CD6">const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">$</span><span style="color:#DCDCAA">useState</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div></pre>
           </div>
-          <svg class="flow" viewBox="0 0 150 767" aria-hidden="true">
-            <defs>
-              <marker
-                id="flow-head-a"
-                viewBox="0 0 10 10"
-                refX="9"
-                refY="5"
-                markerWidth="9"
-                markerHeight="9"
-                orient="auto-start-reverse"
-              >
-                <path d="M1,1 L9,5 L1,9" />
-              </marker>
-            </defs>
-            <path d="M8,520 L140,170" marker-end="url(#flow-head-a)" />
-            <path
-              class="compile"
-              d="M8,520 L140,560"
-              marker-end="url(#flow-head-a)"
-            />
-            <text
-              class="typecheck"
-              x="65"
-              y="341"
-              transform="rotate(-69 65 341)"
-            >
-              typecheck
-            </text>
-            <text class="compile" x="77" y="530" transform="rotate(17 77 530)">
-              compile
-            </text>
-          </svg>
-          <div class="panel o1">
+          <div class="panel">
             <div class="bar">
-              <span>server/App.tsx · virtual code</span
+              <span>What TypeScript sees</span
               ><span class="tag">Simplified</span>
             </div>
             <pre
-              class="gutter"
-            ><div class="ln"><span style="color:#569CD6">declare const</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> }: </span><span style="color:#569CD6">typeof</span><span style="color:#C586C0"> import</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"react-native"</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#569CD6">declare const</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> }: </span><span style="color:#569CD6">typeof</span><span style="color:#C586C0"> import</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"react"</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln key"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span class="tok"><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">lift</span></span><span style="color:#FFD700">(</span><span style="color:#DA70D6">(</span><span style="color:#179FFF">{</span><span style="color:#9CDCFE"> from </span><span style="color:#179FFF">}</span><span style="color:#D4D4D4">: </span><span style="color:#179FFF">{</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">number</span><span style="color:#179FFF"> }</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">{</span></div><div class="ln key"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#179FFF">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#179FFF">]</span><span style="color:#D4D4D4"> = </span><span class="tok"><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">splice</span><span style="color:#179FFF">(</span><span style="color:#4FC1FF">useState</span><span style="color:#179FFF">)</span></span><span style="color:#179FFF">(</span><span style="color:#9CDCFE">from</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> onPress</span><span style="color:#D4D4D4"> = </span><span style="color:#179FFF">()</span><span style="color:#569CD6"> =&gt;</span><span style="color:#DCDCAA"> setCount</span><span style="color:#179FFF">(</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4"> + </span><span style="color:#B5CEA8">1</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#4EC9B0">Text</span><span style="color:#9CDCFE"> onPress</span><span style="color:#D4D4D4">=</span><span style="color:#179FFF">{</span><span style="color:#DCDCAA">onPress</span><span style="color:#179FFF">}</span><span style="color:#808080">&gt;</span><span style="color:#179FFF">{</span><span style="color:#4FC1FF">count</span><span style="color:#179FFF">}</span><span style="color:#808080">&lt;/</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#DA70D6">}</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div></pre>
-          </div>
-          <div class="panel o2">
-            <div class="bar">
-              <span>server/App.js · compiled code</span
-              ><span class="tag">Simplified</span>
-            </div>
-            <pre
-              class="gutter"
-            ><div class="ln dim"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Text</span><span style="color:#D4D4D4"> = { </span><span style="color:#9CDCFE">from</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"react-native"</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">name</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"Text"</span><span style="color:#D4D4D4"> };</span></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> useState</span><span style="color:#D4D4D4"> = { </span><span style="color:#9CDCFE">from</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"react"</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">name</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"useState"</span><span style="color:#D4D4D4"> };</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span style="color:#FFD700">{</span></div><div class="ln"><span style="color:#9CDCFE">  code</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">`(useState, Text) =&gt; ({ from }) =&gt; {</span></div><div class="ln"><span style="color:#CE9178">    const [count, setCount] = useState(from);</span></div><div class="ln dim"><span style="color:#CE9178">    const onPress = () =&gt; setCount(count + 1);</span></div><div class="ln dim"><span style="color:#CE9178">    return jsx(Text, { onPress, children: count });</span></div><div class="ln"><span style="color:#CE9178">  }`</span><span style="color:#D4D4D4">,</span></div><div class="ln"><span style="color:#9CDCFE">  args</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">[</span><span style="color:#9CDCFE">useState</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">Text</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4">,</span></div><div class="ln dim"><span style="color:#9CDCFE">  map</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"AAAA;MAAM,CAAC…"</span><span style="color:#D4D4D4">,</span><span style="color:#6A9955"> // back to App.tsx</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#D4D4D4">;</span></div></pre>
+              style="font-size: 28px"
+            ><div class="ln"><span style="color:#569CD6">const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">splice</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">useState</span><span style="color:#DA70D6">)</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div></pre>
           </div>
         </div>
       </section>
 
       <!-- 10 -->
       <section
-        class="slide stepped focus"
+        class="slide stepped"
         data-step="2"
         data-title="Compile"
         data-at="3:01"
         data-for="20"
       >
-        <div class="build">
-          <div class="src">
-            <h2 class="build-title">Typechecked and<br />compiled, once.</h2>
-            <div class="panel">
-              <div class="bar"><span>server/App.tsx</span></div>
-              <pre
-                class="gutter"
-              ><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react-native"</span><span style="color:#C586C0"> with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> };</span></div><div class="ln key"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react"</span><span style="color:#C586C0"> with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> };</span></div><div class="ln"></div><div class="ln key"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span class="tok"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#FFD700">(</span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from </span><span style="color:#DA70D6">}</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">number</span><span style="color:#DA70D6"> }</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln key"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span class="tok"><span style="color:#569CD6">$</span><span style="color:#DCDCAA">useState</span></span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> onPress</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">()</span><span style="color:#569CD6"> =&gt;</span><span style="color:#DCDCAA"> setCount</span><span style="color:#DA70D6">(</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4"> + </span><span style="color:#B5CEA8">1</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#9CDCFE"> onPress</span><span style="color:#D4D4D4">=</span><span style="color:#DA70D6">{</span><span style="color:#DCDCAA">onPress</span><span style="color:#DA70D6">}</span><span style="color:#808080">&gt;</span><span style="color:#DA70D6">{</span><span style="color:#4FC1FF">count</span><span style="color:#DA70D6">}</span><span style="color:#808080">&lt;/</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#CE9178">`</span><span style="color:#D4D4D4">;</span></div></pre>
-            </div>
+        <div class="run-head">
+          <h2>Compiled at build time.</h2>
+          <p class="run-sub">
+            The script becomes a string. Each <code>$</code> becomes a
+            parameter, filled in from <code>args</code>.
+          </p>
+        </div>
+        <div class="pair">
+          <div class="panel">
+            <div class="bar"><span>server/App.tsx</span></div>
+            <pre
+              style="font-size: 26px"
+            ><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span><span style="color:#FFD700">(</span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from </span><span style="color:#DA70D6">}</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">$</span><span style="color:#DCDCAA">useState</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#DA70D6">{</span><span style="color:#4FC1FF">count</span><span style="color:#DA70D6">}</span><span style="color:#808080">&lt;/</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#CE9178">`</span><span style="color:#D4D4D4">;</span></div></pre>
           </div>
-          <svg class="flow" viewBox="0 0 150 767" aria-hidden="true">
-            <defs>
-              <marker
-                id="flow-head"
-                viewBox="0 0 10 10"
-                refX="9"
-                refY="5"
-                markerWidth="9"
-                markerHeight="9"
-                orient="auto-start-reverse"
-              >
-                <path d="M1,1 L9,5 L1,9" />
-              </marker>
-            </defs>
-            <path d="M8,520 L140,170" marker-end="url(#flow-head)" />
-            <path
-              class="compile"
-              d="M8,520 L140,560"
-              marker-end="url(#flow-head)"
-            />
-            <text
-              class="typecheck"
-              x="65"
-              y="341"
-              transform="rotate(-69 65 341)"
-            >
-              typecheck
-            </text>
-            <text class="compile" x="77" y="530" transform="rotate(17 77 530)">
-              compile
-            </text>
-          </svg>
-          <div class="panel o1">
+          <div class="panel">
             <div class="bar">
-              <span>server/App.tsx · virtual code</span
-              ><span class="tag">Simplified</span>
+              <span>server/App.js</span><span class="tag">Simplified</span>
             </div>
             <pre
-              class="gutter"
-            ><div class="ln"><span style="color:#569CD6">declare const</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> }: </span><span style="color:#569CD6">typeof</span><span style="color:#C586C0"> import</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"react-native"</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#569CD6">declare const</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> }: </span><span style="color:#569CD6">typeof</span><span style="color:#C586C0"> import</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"react"</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln key"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span class="tok"><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">lift</span></span><span style="color:#FFD700">(</span><span style="color:#DA70D6">(</span><span style="color:#179FFF">{</span><span style="color:#9CDCFE"> from </span><span style="color:#179FFF">}</span><span style="color:#D4D4D4">: </span><span style="color:#179FFF">{</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">number</span><span style="color:#179FFF"> }</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">{</span></div><div class="ln key"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#179FFF">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#179FFF">]</span><span style="color:#D4D4D4"> = </span><span class="tok"><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">splice</span><span style="color:#179FFF">(</span><span style="color:#4FC1FF">useState</span><span style="color:#179FFF">)</span></span><span style="color:#179FFF">(</span><span style="color:#9CDCFE">from</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> onPress</span><span style="color:#D4D4D4"> = </span><span style="color:#179FFF">()</span><span style="color:#569CD6"> =&gt;</span><span style="color:#DCDCAA"> setCount</span><span style="color:#179FFF">(</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4"> + </span><span style="color:#B5CEA8">1</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#4EC9B0">Text</span><span style="color:#9CDCFE"> onPress</span><span style="color:#D4D4D4">=</span><span style="color:#179FFF">{</span><span style="color:#DCDCAA">onPress</span><span style="color:#179FFF">}</span><span style="color:#808080">&gt;</span><span style="color:#179FFF">{</span><span style="color:#4FC1FF">count</span><span style="color:#179FFF">}</span><span style="color:#808080">&lt;/</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#DA70D6">}</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div></pre>
-          </div>
-          <div class="panel o2">
-            <div class="bar">
-              <span>server/App.js · compiled code</span
-              ><span class="tag">Simplified</span>
-            </div>
-            <pre
-              class="gutter"
-            ><div class="ln dim"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Text</span><span style="color:#D4D4D4"> = { </span><span style="color:#9CDCFE">from</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"react-native"</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">name</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"Text"</span><span style="color:#D4D4D4"> };</span></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> useState</span><span style="color:#D4D4D4"> = { </span><span style="color:#9CDCFE">from</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"react"</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">name</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"useState"</span><span style="color:#D4D4D4"> };</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span style="color:#FFD700">{</span></div><div class="ln"><span style="color:#9CDCFE">  code</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">`(useState, Text) =&gt; ({ from }) =&gt; {</span></div><div class="ln"><span style="color:#CE9178">    const [count, setCount] = useState(from);</span></div><div class="ln dim"><span style="color:#CE9178">    const onPress = () =&gt; setCount(count + 1);</span></div><div class="ln dim"><span style="color:#CE9178">    return jsx(Text, { onPress, children: count });</span></div><div class="ln"><span style="color:#CE9178">  }`</span><span style="color:#D4D4D4">,</span></div><div class="ln"><span style="color:#9CDCFE">  args</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">[</span><span style="color:#9CDCFE">useState</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">Text</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4">,</span></div><div class="ln dim"><span style="color:#9CDCFE">  map</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"AAAA;MAAM,CAAC…"</span><span style="color:#D4D4D4">,</span><span style="color:#6A9955"> // back to App.tsx</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#D4D4D4">;</span></div></pre>
+              style="font-size: 26px"
+            ><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span style="color:#FFD700">{</span></div><div class="ln"><span style="color:#9CDCFE">  code</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">`(</span><span style="color:#CE9178">useState</span><span style="color:#CE9178">, </span><span style="color:#CE9178">Text</span><span style="color:#CE9178">) =&gt; ({ from }) =&gt; {</span></div><div class="ln"><span style="color:#CE9178">    const [count, setCount] = </span><span style="color:#CE9178">useState</span><span style="color:#CE9178">(from);</span></div><div class="ln"><span style="color:#CE9178">    return jsx(</span><span style="color:#CE9178">Text</span><span style="color:#CE9178">, { children: count });</span></div><div class="ln"><span style="color:#CE9178">  }`</span><span style="color:#D4D4D4">,</span></div><div class="ln"><span style="color:#9CDCFE">  args</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">[</span><span style="color:#9CDCFE">useState</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">Text</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4">,</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#D4D4D4">;</span></div></pre>
           </div>
         </div>
       </section>
 
       <!-- 11 -->
       <section
-        class="slide stepped tight"
+        class="slide stepped"
         data-step="3"
         data-title="Bundle"
         data-at="3:21"
         data-for="35"
       >
-        <h2>Bundled per request.</h2>
-        <div
-          class="sbs"
-          style="
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-top: 8px;
-            align-items: start;
-          "
-        >
-          <div style="display: flex; flex-direction: column; gap: 14px">
-            <div class="panel">
-              <div class="bar"><span>The request</span></div>
-              <pre
-                class="gutter"
-              ><div class="ln"><span style="color:#569CD6">GET</span><span style="color:#D4D4D4"> </span><span style="color:#CE9178">/5</span></div><div class="ln"><span style="color:#9CDCFE">x-backtick-modules</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">{"react-native":"0.88.4", …}</span></div></pre>
-            </div>
-          </div>
+        <div class="run-head">
+          <h2>Bundled at request time.</h2>
+          <p class="run-sub">
+            The phone says which libraries it has. The server sends this
+            screen's scripts, not the libraries.
+          </p>
+        </div>
+        <div class="run-col">
           <div class="panel">
-            <div class="bar">
-              <span>The response</span><span class="tag">Simplified</span>
-            </div>
+            <div class="bar"><span>server/App.tsx</span></div>
             <pre
-              class="gutter"
-            ><div class="ln"><span style="color:#CE9178">"use strict"</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> } = </span><span style="color:#DCDCAA">require</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"react"</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> } = </span><span style="color:#DCDCAA">require</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"react-native"</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> modules</span><span style="color:#D4D4D4"> = </span><span style="color:#FFD700">{</span></div><div class="ln"><span style="color:#6A9955">  // cs`&lt;$Counter from={$from} /&gt;`</span></div><div class="ln"><span style="color:#CE9178">  "18y3…:12:9"</span><span style="color:#D4D4D4">: </span><span style="color:#FFD700">(</span><span style="color:#9CDCFE">module</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">exports</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">require</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span><span style="color:#D4D4D4"> … </span><span style="color:#FFD700">}</span><span style="color:#D4D4D4">,</span></div><div class="ln"><span style="color:#6A9955">  // cs`({ from }) =&gt; { … }`</span></div><div class="ln"><span style="color:#CE9178">  "18y3…:5:16"</span><span style="color:#D4D4D4">: </span><span style="color:#FFD700">(</span><span style="color:#9CDCFE">module</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">exports</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">require</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span><span style="color:#D4D4D4"> … </span><span style="color:#FFD700">}</span><span style="color:#D4D4D4">,</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> cs0</span><span style="color:#D4D4D4"> = </span><span style="color:#DCDCAA">require</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"18y3…:12:9"</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">default</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> cs1</span><span style="color:#D4D4D4"> = </span><span style="color:#DCDCAA">require</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"18y3…:5:16"</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">default</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span style="color:#DCDCAA">cs1</span><span style="color:#FFD700">(</span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">Text</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#9CDCFE">module</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">exports</span><span style="color:#D4D4D4"> = </span><span style="color:#DCDCAA">cs0</span><span style="color:#FFD700">(</span><span style="color:#4FC1FF">Counter</span><span style="color:#D4D4D4">, </span><span style="color:#B5CEA8">5</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div></pre>
+              style="font-size: 28px"
+            ><div class="ln"><span style="color:#9CDCFE">app</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">get</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"/:from"</span><span style="color:#D4D4D4">, </span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">c</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#9CDCFE"> c</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">render</span><span style="color:#DA70D6">(</span><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span><span style="color:#808080">&lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Counter</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">=</span><span style="color:#FFD700">{</span><span style="color:#569CD6">$</span><span style="color:#4FC1FF">from</span><span style="color:#FFD700">}</span><span style="color:#808080"> /&gt;</span><span style="color:#CE9178">`</span><span style="color:#DA70D6">)</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div></pre>
+          </div>
+          <div class="panel netlog">
+            <div class="bar"><span>Network</span></div>
+            <div class="reqs">
+              <div class="req shown done">
+                <span class="m">GET</span><span class="p">/5</span
+                ><span class="s"></span>
+              </div>
+              <div class="req shown res">
+                <span></span
+                ><span class="p">bundle.js<em>2 scripts · from = 5</em></span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -1868,10 +1739,9 @@
         data-for="15"
       >
         <div class="run-head">
-          <h2>Fetched fresh on every open.</h2>
+          <h2>Fetched on every open.</h2>
           <p class="run-sub">
-            Layouts and loading screens are prefetched, so it still feels
-            instant.
+            Layouts and loading screens are prefetched, so it feels instant.
           </p>
         </div>
         <div class="sbs" style="grid-template-columns: 1fr 316px; gap: 64px">
