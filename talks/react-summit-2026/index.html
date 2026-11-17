@@ -16,7 +16,7 @@
    light-dark() as the site does; `t` flips color-scheme. */
       :root {
         /* The side margin; ?side=110 tries another, for the room's projector. */
-        --side: 0px;
+        --side: 110px;
         color-scheme: light dark;
         --font-sans:
           "Inter", "Helvetica Neue", Helvetica, system-ui, sans-serif;
@@ -186,53 +186,43 @@
         display: none;
       }
 
-      /* The stepper, fixed across slides 6–10: v8's pills joined by lines. */
+      /* The stepper, fixed across the stepped slides: slide 8's pipeline, smaller. */
       #stepper {
         position: absolute;
         top: 52px;
         left: var(--side);
         right: var(--side);
-        height: 76px;
         display: none;
+        grid-template-columns: auto 1fr auto 1fr auto 1fr auto;
         align-items: center;
         z-index: 5;
       }
       #stage.stepped #stepper {
-        display: flex;
+        display: grid;
       }
       #stepper .step {
-        flex: 0 0 auto;
+        grid-row: 1;
         display: flex;
         align-items: center;
         gap: 14px;
-        height: 64px;
-        padding: 0 28px 0 12px;
+        height: 60px;
+        padding: 0 26px;
         border: 1.5px solid var(--line);
         border-radius: 999px;
         font-size: 27px;
         font-weight: 600;
         color: var(--muted);
         background: var(--paper);
+        white-space: nowrap;
       }
-      #stepper .step .n {
-        display: grid;
-        place-items: center;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        font-family: var(--font-mono);
-        font-size: 19px;
-        font-weight: 500;
-        border: 1.5px solid var(--line);
-      }
-      #stepper .step .when {
+      #stepper .step .where {
         font-family: var(--font-mono);
         font-size: 18px;
         font-weight: 400;
         color: var(--muted);
       }
       #stepper .joint {
-        flex: 1 1 auto;
+        grid-row: 1;
         height: 1.5px;
         background: var(--line);
         margin: 0 14px;
@@ -243,16 +233,8 @@
         background: color-mix(in srgb, var(--react) 12%, var(--paper));
         box-shadow: 0 20px 50px -30px var(--react);
       }
-      #stepper .step.cur .n {
-        background: var(--react);
-        border-color: var(--react);
-        color: var(--paper);
-      }
       #stepper .step.done {
         color: var(--ink);
-      }
-      #stepper .step.done .n {
-        border-color: var(--ink);
       }
 
       /* Code panels, as CodePanel.tsx draws them, scaled for a stage. */
@@ -809,80 +791,60 @@
         align-items: center;
         margin-block: auto;
       }
-      .pstep {
+      .pwhen {
         grid-row: 1;
+        position: relative;
+        padding: 0 8px 30px;
+        font-family: var(--font-mono);
+        font-size: 24px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--react);
+        white-space: nowrap;
+      }
+      .pwhen span {
+        margin-left: 18px;
+        letter-spacing: 0;
+        text-transform: none;
+        color: var(--muted);
+      }
+      .pwhen::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 16px;
+        border: 2.5px solid var(--line);
+        border-bottom: none;
+        border-radius: 12px 12px 0 0;
+      }
+      .pstep {
+        grid-row: 2;
         display: flex;
         align-items: center;
         gap: 18px;
         height: 84px;
-        padding: 0 36px 0 16px;
+        padding: 0 36px;
         border: 1.5px solid color-mix(in srgb, var(--react) 55%, transparent);
         border-radius: 999px;
         background: color-mix(in srgb, var(--react) 10%, var(--paper));
         font-size: 36px;
         font-weight: 600;
         color: var(--ink);
+        white-space: nowrap;
       }
-      .pstep .n {
-        display: grid;
-        place-items: center;
-        width: 54px;
-        height: 54px;
-        border-radius: 50%;
-        background: var(--react);
-        color: var(--paper);
-        font-family: var(--font-mono);
-        font-size: 24px;
-        font-weight: 500;
-      }
-      .pstep .when {
+      .pstep .where {
         font-family: var(--font-mono);
         font-size: 22px;
         font-weight: 400;
         color: var(--muted);
       }
       .pjoint {
-        grid-row: 1;
+        grid-row: 2;
         height: 2px;
         background: var(--line);
         margin: 0 16px;
-      }
-      .ptime {
-        grid-row: 2;
-        align-self: start;
-        position: relative;
-        padding: 36px 8px 0;
-      }
-      .pbracket {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 16px;
-        border: 2.5px solid var(--line);
-        border-top: none;
-        border-radius: 0 0 12px 12px;
-      }
-      .pt {
-        font-size: 88px;
-        font-weight: 800;
-        letter-spacing: -0.04em;
-        line-height: 1;
-      }
-      .pt.pending {
-        color: var(--warn);
-        font-size: 56px;
-      }
-      .pu {
-        margin-top: 14px;
-        font-size: 30px;
-        font-weight: 600;
-      }
-      .ps {
-        margin-top: 8px;
-        font-family: var(--font-mono);
-        font-size: 20px;
-        color: var(--muted);
       }
       .lines-focus pre .ln:not(.key) {
         opacity: 0.22;
@@ -939,6 +901,7 @@
       }
       .build .panel pre {
         padding: 16px 0;
+        font-size: 19px;
       }
       .build .flow path {
         stroke: var(--muted);
@@ -1558,9 +1521,9 @@
       <!-- 5 -->
       <section
         class="slide lines-focus"
-        data-title="A Backtick app: the script"
+        data-title="A Backtick app: the imports"
         data-at="2:16"
-        data-for="10"
+        data-for="3"
       >
         <h2>A Backtick app.</h2>
         <div
@@ -1579,7 +1542,7 @@
             <pre
               class="gutter"
               style="font-size: 26px"
-            ><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "@backtickjs/core"</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react-native"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln key"></div><div class="ln key"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#FFD700">(</span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from </span><span style="color:#DA70D6">}</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">number</span><span style="color:#DA70D6"> }</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln key"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">$</span><span style="color:#DCDCAA">useState</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> onPress</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">()</span><span style="color:#569CD6"> =&gt;</span><span style="color:#DCDCAA"> setCount</span><span style="color:#DA70D6">(</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4"> + </span><span style="color:#B5CEA8">1</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#9CDCFE"> onPress</span><span style="color:#D4D4D4">=</span><span style="color:#DA70D6">{</span><span style="color:#DCDCAA">onPress</span><span style="color:#DA70D6">}</span><span style="color:#808080">&gt;</span><span style="color:#DA70D6">{</span><span style="color:#4FC1FF">count</span><span style="color:#DA70D6">}</span><span style="color:#808080">&lt;/</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#CE9178">`</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#9CDCFE">app</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">get</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"/:from"</span><span style="color:#D4D4D4">, </span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">c</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> from</span><span style="color:#D4D4D4"> = </span><span style="color:#4EC9B0">Number</span><span style="color:#179FFF">(</span><span style="color:#9CDCFE">c</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">req</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">param</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"from"</span><span style="color:#FFD700">)</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#9CDCFE"> c</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">render</span><span style="color:#179FFF">(</span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#808080">&lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Counter</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">=</span><span style="color:#FFD700">{</span><span style="color:#569CD6">$</span><span style="color:#4FC1FF">from</span><span style="color:#FFD700">}</span><span style="color:#808080"> /&gt;</span><span style="color:#CE9178">`</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#DA70D6">}</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div></pre>
+            ><div class="ln key"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "@backtickjs/core"</span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react-native"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#FFD700">(</span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from </span><span style="color:#DA70D6">}</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">number</span><span style="color:#DA70D6"> }</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">$</span><span style="color:#DCDCAA">useState</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> onPress</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">()</span><span style="color:#569CD6"> =&gt;</span><span style="color:#DCDCAA"> setCount</span><span style="color:#DA70D6">(</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4"> + </span><span style="color:#B5CEA8">1</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#9CDCFE"> onPress</span><span style="color:#D4D4D4">=</span><span style="color:#DA70D6">{</span><span style="color:#DCDCAA">onPress</span><span style="color:#DA70D6">}</span><span style="color:#808080">&gt;</span><span style="color:#DA70D6">{</span><span style="color:#4FC1FF">count</span><span style="color:#DA70D6">}</span><span style="color:#808080">&lt;/</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#CE9178">`</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#9CDCFE">app</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">get</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"/:from"</span><span style="color:#D4D4D4">, </span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">c</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> from</span><span style="color:#D4D4D4"> = </span><span style="color:#4EC9B0">Number</span><span style="color:#179FFF">(</span><span style="color:#9CDCFE">c</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">req</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">param</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"from"</span><span style="color:#FFD700">)</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#9CDCFE"> c</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">render</span><span style="color:#179FFF">(</span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#808080">&lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Counter</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">=</span><span style="color:#FFD700">{</span><span style="color:#569CD6">$</span><span style="color:#4FC1FF">from</span><span style="color:#FFD700">}</span><span style="color:#808080"> /&gt;</span><span style="color:#CE9178">`</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#DA70D6">}</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div></pre>
           </div>
           <div>
             <div class="boundary">
@@ -1591,6 +1554,74 @@
 
       <!-- 6 -->
       <section
+        class="slide lines-focus"
+        data-title="A Backtick app: the script"
+        data-at="2:19"
+        data-for="4"
+      >
+        <h2>A Backtick app.</h2>
+        <div
+          class="sbs"
+          style="
+            grid-template-columns: max-content 1fr;
+            gap: 28px;
+            align-items: center;
+            margin-top: 8px;
+          "
+        >
+          <div class="panel">
+            <div class="bar">
+              <span>server/App.tsx</span><span class="tag">Simplified</span>
+            </div>
+            <pre
+              class="gutter"
+              style="font-size: 26px"
+            ><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "@backtickjs/core"</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react-native"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln key"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#FFD700">(</span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from </span><span style="color:#DA70D6">}</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">number</span><span style="color:#DA70D6"> }</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln key"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">$</span><span style="color:#DCDCAA">useState</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> onPress</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">()</span><span style="color:#569CD6"> =&gt;</span><span style="color:#DCDCAA"> setCount</span><span style="color:#DA70D6">(</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4"> + </span><span style="color:#B5CEA8">1</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#9CDCFE"> onPress</span><span style="color:#D4D4D4">=</span><span style="color:#DA70D6">{</span><span style="color:#DCDCAA">onPress</span><span style="color:#DA70D6">}</span><span style="color:#808080">&gt;</span><span style="color:#DA70D6">{</span><span style="color:#4FC1FF">count</span><span style="color:#DA70D6">}</span><span style="color:#808080">&lt;/</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#FFD700">}</span><span style="color:#CE9178">`</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#9CDCFE">app</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">get</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"/:from"</span><span style="color:#D4D4D4">, </span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">c</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> from</span><span style="color:#D4D4D4"> = </span><span style="color:#4EC9B0">Number</span><span style="color:#179FFF">(</span><span style="color:#9CDCFE">c</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">req</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">param</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"from"</span><span style="color:#FFD700">)</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#9CDCFE"> c</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">render</span><span style="color:#179FFF">(</span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#808080">&lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Counter</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">=</span><span style="color:#FFD700">{</span><span style="color:#569CD6">$</span><span style="color:#4FC1FF">from</span><span style="color:#FFD700">}</span><span style="color:#808080"> /&gt;</span><span style="color:#CE9178">`</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#DA70D6">}</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div></pre>
+          </div>
+          <div>
+            <div class="boundary">
+              <code class="b-old">"use client"</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7 -->
+      <section
+        class="slide lines-focus"
+        data-title="A Backtick app: the route"
+        data-at="2:23"
+        data-for="3"
+      >
+        <h2>A Backtick app.</h2>
+        <div
+          class="sbs"
+          style="
+            grid-template-columns: max-content 1fr;
+            gap: 28px;
+            align-items: center;
+            margin-top: 8px;
+          "
+        >
+          <div class="panel">
+            <div class="bar">
+              <span>server/App.tsx</span><span class="tag">Simplified</span>
+            </div>
+            <pre
+              class="gutter"
+              style="font-size: 26px"
+            ><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">cs</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "@backtickjs/core"</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">Text</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react-native"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">import</span><span style="color:#D4D4D4"> { </span><span style="color:#4FC1FF">useState</span><span style="color:#D4D4D4"> } </span><span style="color:#C586C0">from</span><span style="color:#CE9178"> "react"</span><span style="color:#D4D4D4"> </span><span class="pill"><span style="color:#C586C0">with</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">backtick</span><span style="color:#D4D4D4">: </span><span style="color:#CE9178">"client"</span><span style="color:#D4D4D4"> }</span></span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> Counter</span><span style="color:#D4D4D4"> = </span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#FFD700">(</span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from </span><span style="color:#DA70D6">}</span><span style="color:#D4D4D4">: </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">: </span><span style="color:#4EC9B0">number</span><span style="color:#DA70D6"> }</span><span style="color:#FFD700">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">[</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4">, </span><span style="color:#4FC1FF">setCount</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4"> = </span><span style="color:#569CD6">$</span><span style="color:#DCDCAA">useState</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">from</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> onPress</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">()</span><span style="color:#569CD6"> =&gt;</span><span style="color:#DCDCAA"> setCount</span><span style="color:#DA70D6">(</span><span style="color:#4FC1FF">count</span><span style="color:#D4D4D4"> + </span><span style="color:#B5CEA8">1</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#808080"> &lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#9CDCFE"> onPress</span><span style="color:#D4D4D4">=</span><span style="color:#DA70D6">{</span><span style="color:#DCDCAA">onPress</span><span style="color:#DA70D6">}</span><span style="color:#808080">&gt;</span><span style="color:#DA70D6">{</span><span style="color:#4FC1FF">count</span><span style="color:#DA70D6">}</span><span style="color:#808080">&lt;/</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Text</span><span style="color:#808080">&gt;</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span><span style="color:#CE9178">`</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln key"><span style="color:#9CDCFE">app</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">get</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"/:from"</span><span style="color:#D4D4D4">, </span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">c</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#D4D4D4"> </span><span style="color:#DA70D6">{</span></div><div class="ln key"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> from</span><span style="color:#D4D4D4"> = </span><span style="color:#4EC9B0">Number</span><span style="color:#179FFF">(</span><span style="color:#9CDCFE">c</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">req</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">param</span><span style="color:#FFD700">(</span><span style="color:#CE9178">"from"</span><span style="color:#FFD700">)</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#C586C0">  return</span><span style="color:#9CDCFE"> c</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">render</span><span style="color:#179FFF">(</span><span class="pill"><span style="color:#DCDCAA">cs</span><span style="color:#CE9178">`</span></span><span style="color:#808080">&lt;</span><span style="color:#569CD6">$</span><span style="color:#4EC9B0">Counter</span><span style="color:#9CDCFE"> from</span><span style="color:#D4D4D4">=</span><span style="color:#FFD700">{</span><span style="color:#569CD6">$</span><span style="color:#4FC1FF">from</span><span style="color:#FFD700">}</span><span style="color:#808080"> /&gt;</span><span style="color:#CE9178">`</span><span style="color:#179FFF">)</span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#DA70D6">}</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4">;</span></div></pre>
+          </div>
+          <div>
+            <div class="boundary">
+              <code class="b-old">"use client"</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8 -->
+      <section
         class="slide"
         data-title="How a screen is made"
         data-at="2:26"
@@ -1598,39 +1629,27 @@
       >
         <h2>How a screen is made.</h2>
         <div class="pipe2">
-          <div class="pstep" style="grid-column: 1">
-            <span class="n">1</span>Typecheck<span class="when"
-              >build time</span
-            >
+          <div class="pwhen" style="grid-column: 1 / 4">
+            Build time<span>on save</span>
           </div>
+          <div class="pwhen" style="grid-column: 5 / 8">
+            Request time<span>on every open</span>
+          </div>
+          <div class="pstep" style="grid-column: 1">Typecheck</div>
           <span class="pjoint" style="grid-column: 2"></span>
-          <div class="pstep" style="grid-column: 3">
-            <span class="n">2</span>Compile<span class="when">build time</span>
-          </div>
+          <div class="pstep" style="grid-column: 3">Compile</div>
           <span class="pjoint" style="grid-column: 4"></span>
           <div class="pstep" style="grid-column: 5">
-            <span class="n">3</span>Bundle<span class="when">request time</span>
+            Bundle<span class="where">on the server</span>
           </div>
           <span class="pjoint" style="grid-column: 6"></span>
           <div class="pstep" style="grid-column: 7">
-            <span class="n">4</span>Run<span class="when">on the phone</span>
-          </div>
-          <div class="ptime" style="grid-column: 1 / 4">
-            <span class="pbracket"></span>
-            <p class="pt">~1 s</p>
-            <p class="pu">per save, warm</p>
-            <p class="ps">typecheck and compile, together</p>
-          </div>
-          <div class="ptime" style="grid-column: 5 / 8">
-            <span class="pbracket"></span>
-            <p class="pt">~200 ms</p>
-            <p class="pu">per open, tap to first frame</p>
-            <p class="ps">median · network included</p>
+            Run<span class="where">on the phone</span>
           </div>
         </div>
       </section>
 
-      <!-- 7 -->
+      <!-- 9 -->
       <section
         class="slide stepped typecheck-only focus"
         data-step="1"
@@ -1701,7 +1720,7 @@
         </div>
       </section>
 
-      <!-- 8 -->
+      <!-- 10 -->
       <section
         class="slide stepped focus"
         data-step="2"
@@ -1772,7 +1791,7 @@
         </div>
       </section>
 
-      <!-- 9 -->
+      <!-- 11 -->
       <section
         class="slide stepped tight"
         data-step="3"
@@ -1809,7 +1828,7 @@
         </div>
       </section>
 
-      <!-- 10 -->
+      <!-- 12 -->
       <section
         class="slide stepped"
         data-step="4"
@@ -1824,7 +1843,7 @@
             instant.
           </p>
         </div>
-        <div class="sbs" style="grid-template-columns: 1fr 316px; gap: 90px">
+        <div class="sbs" style="grid-template-columns: 1fr 316px; gap: 64px">
           <div
             style="
               display: flex;
@@ -1838,7 +1857,7 @@
                 <span>client/App.tsx</span><span class="tag">Simplified</span>
               </div>
               <pre
-                style="font-size: 26px"
+                style="font-size: 23px"
               ><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> moduleMap</span><span style="color:#D4D4D4"> = </span><span style="color:#FFD700">{</span><span style="color:#CE9178"> "react"</span><span style="color:#D4D4D4">: </span><span style="color:#9CDCFE">React</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"react-native"</span><span style="color:#D4D4D4">: </span><span style="color:#9CDCFE">ReactNative</span><span style="color:#FFD700"> }</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> headers</span><span style="color:#D4D4D4"> = </span><span style="color:#FFD700">{</span><span style="color:#CE9178"> "x-backtick-modules"</span><span style="color:#D4D4D4">: </span><span style="color:#DCDCAA">modulesOf</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">moduleMap</span><span style="color:#DA70D6">)</span><span style="color:#FFD700"> }</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">async</span><span style="color:#569CD6"> function</span><span style="color:#DCDCAA"> fetchScreen</span><span style="color:#FFD700">(</span><span style="color:#9CDCFE">path</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> response</span><span style="color:#D4D4D4"> = </span><span style="color:#C586C0">await</span><span style="color:#DCDCAA"> fetch</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">server</span><span style="color:#D4D4D4"> + </span><span style="color:#9CDCFE">path</span><span style="color:#D4D4D4">, </span><span style="color:#179FFF">{</span><span style="color:#9CDCFE"> headers</span><span style="color:#179FFF"> }</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> bundle</span><span style="color:#D4D4D4"> = </span><span style="color:#C586C0">await</span><span style="color:#9CDCFE"> response</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">text</span><span style="color:#DA70D6">()</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> module</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> exports</span><span style="color:#D4D4D4">: </span><span style="color:#179FFF">{}</span><span style="color:#DA70D6"> }</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> require</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">name</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#9CDCFE"> moduleMap</span><span style="color:#DA70D6">[</span><span style="color:#9CDCFE">name</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  new</span><span style="color:#4EC9B0"> Function</span><span style="color:#DA70D6">(</span><span style="color:#CE9178">"module"</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"exports"</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"require"</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">bundle</span><span style="color:#DA70D6">)</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">module</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">module</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">exports</span><span style="color:#D4D4D4">, </span><span style="color:#DCDCAA">require</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#9CDCFE"> module</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">exports</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span></div></pre>
             </div>
           </div>
@@ -1858,7 +1877,7 @@
         </div>
       </section>
 
-      <!-- 11 -->
+      <!-- 13 -->
       <section
         class="slide stepped lines-focus fetch-demo"
         data-step="4"
@@ -1873,7 +1892,7 @@
             instant.
           </p>
         </div>
-        <div class="sbs" style="grid-template-columns: 1fr 316px; gap: 90px">
+        <div class="sbs" style="grid-template-columns: 1fr 316px; gap: 64px">
           <div
             style="
               display: flex;
@@ -1887,7 +1906,7 @@
                 <span>client/App.tsx</span><span class="tag">Simplified</span>
               </div>
               <pre
-                style="font-size: 26px"
+                style="font-size: 23px"
               ><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> moduleMap</span><span style="color:#D4D4D4"> = </span><span style="color:#FFD700">{</span><span style="color:#CE9178"> "react"</span><span style="color:#D4D4D4">: </span><span style="color:#9CDCFE">React</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"react-native"</span><span style="color:#D4D4D4">: </span><span style="color:#9CDCFE">ReactNative</span><span style="color:#FFD700"> }</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> headers</span><span style="color:#D4D4D4"> = </span><span style="color:#FFD700">{</span><span style="color:#CE9178"> "x-backtick-modules"</span><span style="color:#D4D4D4">: </span><span style="color:#DCDCAA">modulesOf</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">moduleMap</span><span style="color:#DA70D6">)</span><span style="color:#FFD700"> }</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">async</span><span style="color:#569CD6"> function</span><span style="color:#DCDCAA"> fetchScreen</span><span style="color:#FFD700">(</span><span style="color:#9CDCFE">path</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln key k-fetch"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> response</span><span style="color:#D4D4D4"> = </span><span style="color:#C586C0">await</span><span style="color:#DCDCAA"> fetch</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">server</span><span style="color:#D4D4D4"> + </span><span style="color:#9CDCFE">path</span><span style="color:#D4D4D4">, </span><span style="color:#179FFF">{</span><span style="color:#9CDCFE"> headers</span><span style="color:#179FFF"> }</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> bundle</span><span style="color:#D4D4D4"> = </span><span style="color:#C586C0">await</span><span style="color:#9CDCFE"> response</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">text</span><span style="color:#DA70D6">()</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> module</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> exports</span><span style="color:#D4D4D4">: </span><span style="color:#179FFF">{}</span><span style="color:#DA70D6"> }</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> require</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">name</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#9CDCFE"> moduleMap</span><span style="color:#DA70D6">[</span><span style="color:#9CDCFE">name</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#569CD6">  new</span><span style="color:#4EC9B0"> Function</span><span style="color:#DA70D6">(</span><span style="color:#CE9178">"module"</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"exports"</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"require"</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">bundle</span><span style="color:#DA70D6">)</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">module</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">module</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">exports</span><span style="color:#D4D4D4">, </span><span style="color:#DCDCAA">require</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#9CDCFE"> module</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">exports</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span></div></pre>
             </div>
           </div>
@@ -1911,7 +1930,7 @@
         <p class="credit">Data: TVmaze (CC BY-SA)</p>
       </section>
 
-      <!-- 12 -->
+      <!-- 14 -->
       <section
         class="slide"
         data-title="Your app is a link"
@@ -1941,7 +1960,7 @@
         </svg>
       </section>
 
-      <!-- 13 -->
+      <!-- 15 -->
       <section
         class="slide"
         data-title="Dig in if"
@@ -1977,7 +1996,7 @@
         </div>
       </section>
 
-      <!-- 14 -->
+      <!-- 16 -->
       <section
         class="slide"
         data-title="Thank you"
@@ -2019,20 +2038,16 @@
       </section>
 
       <nav id="stepper" aria-label="How a screen is made">
-        <div class="step" data-n="1">
-          <span class="n">1</span>Typecheck<span class="when">build time</span>
+        <div class="step" data-n="1" style="grid-column: 1">Typecheck</div>
+        <span class="joint" style="grid-column: 2"></span>
+        <div class="step" data-n="2" style="grid-column: 3">Compile</div>
+        <span class="joint" style="grid-column: 4"></span>
+        <div class="step" data-n="3" style="grid-column: 5">
+          Bundle<span class="where">on the server</span>
         </div>
-        <span class="joint"></span>
-        <div class="step" data-n="2">
-          <span class="n">2</span>Compile<span class="when">build time</span>
-        </div>
-        <span class="joint"></span>
-        <div class="step" data-n="3">
-          <span class="n">3</span>Bundle<span class="when">request time</span>
-        </div>
-        <span class="joint"></span>
-        <div class="step" data-n="4">
-          <span class="n">4</span>Run<span class="when">on the phone</span>
+        <span class="joint" style="grid-column: 6"></span>
+        <div class="step" data-n="4" style="grid-column: 7">
+          Run<span class="where">on the phone</span>
         </div>
       </nav>
       <div id="footer">
