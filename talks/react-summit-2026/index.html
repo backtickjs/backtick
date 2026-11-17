@@ -700,7 +700,7 @@
       .run-head {
         display: flex;
         flex-direction: column;
-        gap: 22px;
+        gap: 40px;
       }
       .run-sub {
         font-size: 34px;
@@ -725,9 +725,12 @@
         box-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.45);
         background: #000;
       }
+      /* Centred on the slide, beside the code. */
       .nav-wrap {
-        position: relative;
-        margin-top: -84px;
+        position: absolute;
+        right: var(--side);
+        top: 50%;
+        transform: translateY(-50%);
       }
       .nav-phone .screen {
         background: #000;
@@ -781,6 +784,34 @@
       .fetching .ln.k-fetch {
         background: rgb(8 145 178 / 0.18);
         box-shadow: inset 6px 0 0 #0891b2;
+      }
+      /* Slide 13's network log: a row per fetch, in step with the recording. */
+      .netlog .reqs {
+        padding: 14px 0;
+        font-family: var(--font-mono);
+        font-size: 24px;
+        line-height: 1.75;
+        color: var(--code-ink);
+      }
+      .netlog .req {
+        display: grid;
+        grid-template-columns: 90px 1fr auto;
+        padding: 0 34px;
+        visibility: hidden;
+      }
+      .netlog .req.shown {
+        visibility: visible;
+      }
+      .netlog .m {
+        color: #569cd6;
+      }
+      .netlog .s::after {
+        content: "pending";
+        color: var(--code-muted);
+      }
+      .netlog .req.done .s::after {
+        content: "200";
+        color: var(--added);
       }
       /* The pipeline at a glance, drawn as the stepper of the slides after it, with what each part takes. */
       .pipe2 {
@@ -1830,60 +1861,11 @@
 
       <!-- 12 -->
       <section
-        class="slide stepped"
-        data-step="4"
-        data-title="Run"
-        data-at="3:56"
-        data-for="8"
-      >
-        <div class="run-head">
-          <h2>Fetched fresh on every open.</h2>
-          <p class="run-sub">
-            Layouts and loading screens are prefetched, so it still feels
-            instant.
-          </p>
-        </div>
-        <div class="sbs" style="grid-template-columns: 1fr 316px; gap: 64px">
-          <div
-            style="
-              display: flex;
-              flex-direction: column;
-              gap: 44px;
-              padding-top: 0;
-            "
-          >
-            <div class="panel">
-              <div class="bar">
-                <span>client/App.tsx</span><span class="tag">Simplified</span>
-              </div>
-              <pre
-                style="font-size: 23px"
-              ><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> moduleMap</span><span style="color:#D4D4D4"> = </span><span style="color:#FFD700">{</span><span style="color:#CE9178"> "react"</span><span style="color:#D4D4D4">: </span><span style="color:#9CDCFE">React</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"react-native"</span><span style="color:#D4D4D4">: </span><span style="color:#9CDCFE">ReactNative</span><span style="color:#FFD700"> }</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> headers</span><span style="color:#D4D4D4"> = </span><span style="color:#FFD700">{</span><span style="color:#CE9178"> "x-backtick-modules"</span><span style="color:#D4D4D4">: </span><span style="color:#DCDCAA">modulesOf</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">moduleMap</span><span style="color:#DA70D6">)</span><span style="color:#FFD700"> }</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">async</span><span style="color:#569CD6"> function</span><span style="color:#DCDCAA"> fetchScreen</span><span style="color:#FFD700">(</span><span style="color:#9CDCFE">path</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> response</span><span style="color:#D4D4D4"> = </span><span style="color:#C586C0">await</span><span style="color:#DCDCAA"> fetch</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">server</span><span style="color:#D4D4D4"> + </span><span style="color:#9CDCFE">path</span><span style="color:#D4D4D4">, </span><span style="color:#179FFF">{</span><span style="color:#9CDCFE"> headers</span><span style="color:#179FFF"> }</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> bundle</span><span style="color:#D4D4D4"> = </span><span style="color:#C586C0">await</span><span style="color:#9CDCFE"> response</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">text</span><span style="color:#DA70D6">()</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> module</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> exports</span><span style="color:#D4D4D4">: </span><span style="color:#179FFF">{}</span><span style="color:#DA70D6"> }</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> require</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">name</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#9CDCFE"> moduleMap</span><span style="color:#DA70D6">[</span><span style="color:#9CDCFE">name</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  new</span><span style="color:#4EC9B0"> Function</span><span style="color:#DA70D6">(</span><span style="color:#CE9178">"module"</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"exports"</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"require"</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">bundle</span><span style="color:#DA70D6">)</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">module</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">module</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">exports</span><span style="color:#D4D4D4">, </span><span style="color:#DCDCAA">require</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#9CDCFE"> module</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">exports</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span></div></pre>
-            </div>
-          </div>
-          <div class="nav-wrap" style="visibility: hidden">
-            <div class="phone nav-phone">
-              <div class="screen">
-                <video
-                  src="nav.mp4"
-                  muted
-                  loop
-                  playsinline
-                  preload="auto"
-                ></video>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 13 -->
-      <section
         class="slide stepped lines-focus fetch-demo"
         data-step="4"
         data-title="Run: fetch and evaluate"
-        data-at="4:04"
-        data-for="7"
+        data-at="3:56"
+        data-for="15"
       >
         <div class="run-head">
           <h2>Fetched fresh on every open.</h2>
@@ -1906,8 +1888,26 @@
                 <span>client/App.tsx</span><span class="tag">Simplified</span>
               </div>
               <pre
-                style="font-size: 23px"
-              ><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> moduleMap</span><span style="color:#D4D4D4"> = </span><span style="color:#FFD700">{</span><span style="color:#CE9178"> "react"</span><span style="color:#D4D4D4">: </span><span style="color:#9CDCFE">React</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"react-native"</span><span style="color:#D4D4D4">: </span><span style="color:#9CDCFE">ReactNative</span><span style="color:#FFD700"> }</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> headers</span><span style="color:#D4D4D4"> = </span><span style="color:#FFD700">{</span><span style="color:#CE9178"> "x-backtick-modules"</span><span style="color:#D4D4D4">: </span><span style="color:#DCDCAA">modulesOf</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">moduleMap</span><span style="color:#DA70D6">)</span><span style="color:#FFD700"> }</span><span style="color:#D4D4D4">;</span></div><div class="ln"></div><div class="ln"><span style="color:#569CD6">async</span><span style="color:#569CD6"> function</span><span style="color:#DCDCAA"> fetchScreen</span><span style="color:#FFD700">(</span><span style="color:#9CDCFE">path</span><span style="color:#FFD700">)</span><span style="color:#D4D4D4"> </span><span style="color:#FFD700">{</span></div><div class="ln key k-fetch"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> response</span><span style="color:#D4D4D4"> = </span><span style="color:#C586C0">await</span><span style="color:#DCDCAA"> fetch</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">server</span><span style="color:#D4D4D4"> + </span><span style="color:#9CDCFE">path</span><span style="color:#D4D4D4">, </span><span style="color:#179FFF">{</span><span style="color:#9CDCFE"> headers</span><span style="color:#179FFF"> }</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> bundle</span><span style="color:#D4D4D4"> = </span><span style="color:#C586C0">await</span><span style="color:#9CDCFE"> response</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">text</span><span style="color:#DA70D6">()</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#4FC1FF"> module</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">{</span><span style="color:#9CDCFE"> exports</span><span style="color:#D4D4D4">: </span><span style="color:#179FFF">{}</span><span style="color:#DA70D6"> }</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#569CD6">  const</span><span style="color:#DCDCAA"> require</span><span style="color:#D4D4D4"> = </span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">name</span><span style="color:#DA70D6">)</span><span style="color:#569CD6"> =&gt;</span><span style="color:#9CDCFE"> moduleMap</span><span style="color:#DA70D6">[</span><span style="color:#9CDCFE">name</span><span style="color:#DA70D6">]</span><span style="color:#D4D4D4">;</span></div><div class="ln key"><span style="color:#569CD6">  new</span><span style="color:#4EC9B0"> Function</span><span style="color:#DA70D6">(</span><span style="color:#CE9178">"module"</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"exports"</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"require"</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">bundle</span><span style="color:#DA70D6">)</span><span style="color:#DA70D6">(</span><span style="color:#9CDCFE">module</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">module</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">exports</span><span style="color:#D4D4D4">, </span><span style="color:#DCDCAA">require</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#C586C0">  return</span><span style="color:#9CDCFE"> module</span><span style="color:#D4D4D4">.</span><span style="color:#9CDCFE">exports</span><span style="color:#D4D4D4">;</span></div><div class="ln"><span style="color:#FFD700">}</span></div></pre>
+                style="font-size: 28px"
+              ><div class="ln key k-fetch"><span style="color:#569CD6">const</span><span style="color:#4FC1FF"> response</span><span style="color:#D4D4D4"> = </span><span style="color:#C586C0">await</span><span style="color:#DCDCAA"> fetch</span><span style="color:#DA70D6">(</span><span style="color:#CE9178">"tvshows.backtickjs.app"</span><span style="color:#D4D4D4"> + </span><span style="color:#9CDCFE">path</span><span style="color:#DA70D6">)</span><span style="color:#D4D4D4">;</span></div></pre>
+            </div>
+            <div class="panel netlog">
+              <div class="bar"><span>Network</span></div>
+              <div class="reqs">
+                <div class="req">
+                  <span class="m">GET</span><span class="p">/</span
+                  ><span class="s"></span>
+                </div>
+                <div class="req">
+                  <span class="m">GET</span><span class="p">/show/82</span
+                  ><span class="s"></span>
+                </div>
+                <div class="req">
+                  <span class="m">GET</span
+                  ><span class="p">/person/14072?name=Peter%20Dinklage</span
+                  ><span class="s"></span>
+                </div>
+              </div>
             </div>
           </div>
           <div class="nav-wrap">
@@ -1930,7 +1930,7 @@
         <p class="credit">Data: TVmaze (CC BY-SA)</p>
       </section>
 
-      <!-- 14 -->
+      <!-- 13 -->
       <section
         class="slide"
         data-title="Your app is a link"
@@ -1960,7 +1960,7 @@
         </svg>
       </section>
 
-      <!-- 15 -->
+      <!-- 14 -->
       <section
         class="slide"
         data-title="Dig in if"
@@ -1996,7 +1996,7 @@
         </div>
       </section>
 
-      <!-- 16 -->
+      <!-- 15 -->
       <section
         class="slide"
         data-title="Thank you"
@@ -2432,12 +2432,17 @@
         });
         document.querySelectorAll(".fetch-demo video").forEach((v) => {
           const slide = v.closest(".slide");
+          const reqs = [...slide.querySelectorAll(".netlog .req")];
           v.addEventListener("timeupdate", () => {
             const t = v.currentTime;
             slide.classList.toggle(
               "fetching",
               fetchWindows.some(([a, b]) => t >= a && t <= b),
             );
+            reqs.forEach((r, i) => {
+              r.classList.toggle("shown", t >= fetchWindows[i][0]);
+              r.classList.toggle("done", t > fetchWindows[i][1]);
+            });
           });
         });
 
