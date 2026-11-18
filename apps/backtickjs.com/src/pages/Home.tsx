@@ -40,7 +40,7 @@ export const Home = cs`() => (
             // The App Store badge's shape and layout, dashed for "not yet".
             // The Android robot is free to use with credit (on the terms
             // page); no Google Play badge until the app is on Google Play.
-            <span class="inline-flex h-[52px] w-[156px] items-center gap-2.5 rounded-[10px] border border-dashed border-line px-3.5 leading-none text-muted/70 select-none">
+            <span class="inline-flex h-[52px] w-[156px] items-center gap-2.5 rounded-[10px] border border-dashed border-[light-dark(#c9c9cf,#4a4a52)] px-3.5 leading-none text-muted select-none">
               <svg
                 viewBox="0 0 24 14"
                 aria-hidden="true"
@@ -89,21 +89,22 @@ export const Home = cs`() => (
           </figcaption>
           {/* A Claude chat, drawn here rather than captured, laid out as
               Claude's mobile app shows a Backtick update: the request, the
-              tool call, its card, then Claude's reply. Sized like the game
-              screenshot beside it, with text in container units so it
-              scales with the phone. */}
+              tool call, its card, then Claude's reply. In Claude's light theme on
+              the light page and its dark theme on the dark one, so it sits in
+              the page rather than standing out. Sized like the game screenshot beside
+              it, with text in container units so it scales with the phone. */}
           <div
             role="img"
             aria-label="A Claude chat: Claude updated Thornvale with Backtick, version 3 published, with an Open in Backtick button"
-            class="@container relative flex aspect-[898/2000] w-full flex-col overflow-hidden rounded-[clamp(14px,2.2vw,30px)] border-[clamp(3px,0.4vw,5px)] border-[#1b1b1f] bg-[#1c1c1b] text-[#ecebe6] shadow-2xl select-none md:h-[min(580px,calc(100svh-230px))] md:w-auto"
+            class="@container relative flex aspect-[898/2000] w-full flex-col overflow-hidden rounded-[clamp(14px,2.2vw,30px)] border-[clamp(3px,0.4vw,5px)] border-[light-dark(#1b1b1f,#000000)] ring-1 ring-[color:light-dark(transparent,rgb(255_255_255/0.12))] bg-[light-dark(#f8f8f6,#1c1c1b)] text-[light-dark(#141413,#ecebe6)] shadow-2xl select-none md:h-[min(580px,calc(100svh-230px))] md:w-auto"
           >
             <div class="flex items-center justify-between px-[9cqw] pt-[5cqw] text-[4cqw] font-semibold">
               <span>9:41</span>
               <span class="flex items-center gap-[1.5cqw]">
-                <span class="h-[2.4cqw] w-[4.5cqw] rounded-[0.6cqw] bg-[#ecebe6]" />
+                <span class="h-[2.4cqw] w-[4.5cqw] rounded-[0.6cqw] bg-[light-dark(#141413,#ecebe6)]" />
               </span>
             </div>
-            <div class="flex items-center gap-[4cqw] px-[4cqw] pt-[7cqw] pb-[4cqw] text-[#ecebe6]">
+            <div class="flex items-center gap-[4cqw] px-[4cqw] pt-[7cqw] pb-[4cqw] text-[light-dark(#141413,#ecebe6)]">
               <svg
                 viewBox="0 0 20 20"
                 class="size-[5.5cqw] shrink-0"
@@ -140,23 +141,25 @@ export const Home = cs`() => (
               </svg>
             </div>
             <div class="flex flex-1 flex-col gap-[4.5cqw] px-[5cqw] pt-[2cqw] text-[4.2cqw] leading-[1.4]">
-              <p class="ml-[6cqw] rounded-[3cqw] border border-[#2f2f2d] bg-[#2a2a28] px-[3.5cqw] py-[3cqw]">
+              <p class="ml-[6cqw] rounded-[3cqw] border border-[light-dark(#dddcd7,#2f2f2d)] bg-[light-dark(#ececea,#2a2a28)] px-[3.5cqw] py-[3cqw]">
                 Edit Backtick app Thornvale: add a quest to find a key
               </p>
-              <p class="ml-[2cqw] flex items-center gap-[2.5cqw] text-[4cqw] text-[#9c9a94]">
-                <svg
-                  viewBox="178 0 29 37"
-                  class="h-[3.4cqw] w-auto text-[#ecebe6]"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M205 36H198.161L180 1H194.773L205 36Z" />
-                </svg>
+              <p class="ml-[2cqw] flex items-center gap-[2.5cqw] text-[4cqw] text-[light-dark(#73726c,#9c9a94)]">
+                <span class="grid size-[5cqw] shrink-0 place-items-center rounded-[0.8cqw] bg-[light-dark(#141413,transparent)] text-[light-dark(#ffffff,#ecebe6)]">
+                  <svg
+                    viewBox="178 0 29 37"
+                    class="h-[3cqw] w-auto"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M205 36H198.161L180 1H194.773L205 36Z" />
+                  </svg>
+                </span>
                 Used Backtick ›
               </p>
               <div>
                 <p class="mb-[2cqw] flex items-center gap-[2cqw] text-[4cqw]">
-                  <span class="grid size-[6cqw] shrink-0 place-items-center rounded-[1.3cqw] border-[0.4cqw] border-[#ecebe6]">
+                  <span class="grid size-[6cqw] shrink-0 place-items-center rounded-[1.3cqw] border-[0.4cqw] border-[light-dark(#141413,#ecebe6)] bg-[light-dark(#141413,transparent)] text-[light-dark(#ffffff,#ecebe6)]">
                     <svg
                       viewBox="178 0 29 37"
                       class="h-[3cqw] w-auto"
@@ -167,12 +170,16 @@ export const Home = cs`() => (
                     </svg>
                   </span>
                   <span class="font-semibold">Update an app</span>
-                  <span class="text-[#9c9a94]">• Backtick</span>
-                  <span class="ml-auto text-[#9c9a94]">›</span>
+                  <span class="text-[light-dark(#73726c,#9c9a94)]">
+                    • Backtick
+                  </span>
+                  <span class="ml-auto text-[light-dark(#73726c,#9c9a94)]">
+                    ›
+                  </span>
                 </p>
-                <div class="rounded-[2.5cqw] border border-[#3a3a37] bg-[#212422] px-[4cqw] py-[4cqw]">
+                <div class="rounded-[2.5cqw] border border-[light-dark(#d9d8d2,#3a3a37)] bg-[light-dark(#ffffff,#212422)] px-[4cqw] py-[4cqw] shadow-[0_1px_3px_light-dark(#0000001a,#0000)]">
                   <p class="text-[4.8cqw] leading-tight font-bold">Thornvale</p>
-                  <p class="mt-[1cqw] text-[4cqw] text-[#a3a19b]">
+                  <p class="mt-[1cqw] text-[4cqw] text-[light-dark(#73726c,#a3a19b)]">
                     Version 3 · published
                   </p>
                   <span class="mt-[3cqw] inline-block rounded-[1.8cqw] bg-[#1f7f55] px-[4cqw] py-[2.2cqw] text-[4cqw] font-bold text-white">
@@ -180,22 +187,21 @@ export const Home = cs`() => (
                   </span>
                 </div>
               </div>
-              <p class="font-serif text-[4.8cqw] leading-[1.45] text-[#ecebe6] antialiased">
+              <p class="font-serif text-[4.8cqw] leading-[1.45] text-[light-dark(#141413,#ecebe6)] antialiased">
                 Thornvale now has a quest: find the Warden Key hidden to the
                 east, then head north to the old keep.
               </p>
             </div>
-            <div class="mx-[4cqw] mb-[7cqw] flex items-center gap-[2.5cqw] rounded-full border border-[#3a3a37] bg-[#262624] p-[1.8cqw] text-[4.2cqw] text-[#8f8d87]">
-              <span class="grid size-[8cqw] place-items-center rounded-full bg-[#323230] text-[5cqw] leading-none text-[#ecebe6]">
+            <div class="mx-[4cqw] mb-[7cqw] flex items-center gap-[2.5cqw] rounded-full border border-[light-dark(#e6e5e0,#3a3a37)] bg-[light-dark(#ffffff,#262624)] shadow-[0_2px_8px_light-dark(#00000014,#0000)] p-[1.8cqw] text-[4.2cqw] text-[light-dark(#8a8880,#8f8d87)]">
+              <span class="grid size-[8cqw] place-items-center rounded-full bg-[light-dark(#ececea,#323230)] text-[5cqw] leading-none text-[light-dark(#141413,#ecebe6)]">
                 +
               </span>
               <span class="flex-1">Reply or hold to talk</span>
-              <span class="grid size-[8cqw] place-items-center rounded-full bg-[#323230]">
+              <span class="grid size-[8cqw] place-items-center rounded-full bg-[light-dark(#ececea,#323230)]">
                 <svg
+                  class="size-[4.2cqw] stroke-[light-dark(#141413,#ecebe6)]"
                   viewBox="0 0 20 20"
-                  class="size-[4.2cqw]"
                   fill="none"
-                  stroke="#ecebe6"
                   stroke-width="1.6"
                   stroke-linecap="round"
                 >
@@ -203,12 +209,11 @@ export const Home = cs`() => (
                   <path d="M4.5 9.5a5.5 5.5 0 0 0 11 0M10 15v2.5" />
                 </svg>
               </span>
-              <span class="grid size-[9cqw] place-items-center rounded-full bg-[#ecebe6]">
+              <span class="grid size-[9cqw] place-items-center rounded-full bg-[light-dark(#141413,#ecebe6)]">
                 <svg
+                  class="size-[4.5cqw] stroke-[light-dark(#ffffff,#1c1c1b)]"
                   viewBox="0 0 20 20"
-                  class="size-[4.5cqw]"
                   fill="none"
-                  stroke="#1c1c1b"
                   stroke-width="1.6"
                   stroke-linecap="round"
                 >
@@ -216,7 +221,7 @@ export const Home = cs`() => (
                 </svg>
               </span>
             </div>
-            <span class="absolute bottom-[2.5cqw] left-1/2 h-[0.8cqw] w-[27cqw] -translate-x-1/2 rounded-full bg-[#ecebe6]" />
+            <span class="absolute bottom-[2.5cqw] left-1/2 h-[0.8cqw] w-[27cqw] -translate-x-1/2 rounded-full bg-[light-dark(#141413,#ecebe6)]" />
           </div>
         </figure>
         {/* The loop between them: Claude's build opens in Backtick, and a
@@ -229,10 +234,10 @@ export const Home = cs`() => (
             <svg
               viewBox="0 0 150 34"
               aria-hidden="true"
-              class="w-full text-[light-dark(#b8b8bf,#4a4a52)]"
+              class="w-full text-muted"
               fill="none"
               stroke="currentColor"
-              stroke-width="2.5"
+              stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
             >
@@ -251,7 +256,7 @@ export const Home = cs`() => (
                     d="M3 2 10 7 3 12"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="2.5"
+                    stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   />
@@ -259,7 +264,8 @@ export const Home = cs`() => (
               </defs>
               <path
                 d="M6 30Q75-4 142 26"
-                stroke-dasharray="2 10"
+                stroke-dasharray="6 6"
+                stroke-linecap="butt"
                 marker-end="url(#arrow-open)"
               />
             </svg>
@@ -268,10 +274,10 @@ export const Home = cs`() => (
             <svg
               viewBox="0 0 150 34"
               aria-hidden="true"
-              class="w-full text-[light-dark(#b8b8bf,#4a4a52)]"
+              class="w-full text-muted"
               fill="none"
               stroke="currentColor"
-              stroke-width="2.5"
+              stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
             >
@@ -290,7 +296,7 @@ export const Home = cs`() => (
                     d="M3 2 10 7 3 12"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="2.5"
+                    stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   />
@@ -298,7 +304,8 @@ export const Home = cs`() => (
               </defs>
               <path
                 d="M144 4Q75 38 8 8"
-                stroke-dasharray="2 10"
+                stroke-dasharray="6 6"
+                stroke-linecap="butt"
                 marker-end="url(#arrow-ask)"
               />
             </svg>
@@ -319,7 +326,7 @@ export const Home = cs`() => (
           <img
             src="/thornvale.webp"
             alt="Thornvale, the 3D adventure game Claude built, running in Backtick"
-            class="block aspect-[898/2000] w-full rounded-[clamp(14px,2.2vw,30px)] border-[clamp(3px,0.4vw,5px)] border-[#1b1b1f] bg-[#0b0b0d] shadow-2xl md:h-[min(580px,calc(100svh-230px))] md:w-auto"
+            class="block aspect-[898/2000] w-full rounded-[clamp(14px,2.2vw,30px)] border-[clamp(3px,0.4vw,5px)] border-[light-dark(#1b1b1f,#000000)] ring-1 ring-[color:light-dark(transparent,rgb(255_255_255/0.12))] bg-[#0b0b0d] shadow-2xl md:h-[min(580px,calc(100svh-230px))] md:w-auto"
           />
         </figure>
       </div>
