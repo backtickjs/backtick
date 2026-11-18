@@ -2,14 +2,12 @@
 
 Backtick's own site, at `https://backtickjs.com`: what the Backtick app is, where to get it, and what the stores and the connector directory link to. One of the hosts in `apps/` (see `apps/README.md`). The framework's site is `backtickjs.dev`.
 
-| Path         | Page                                                                                 |
-| ------------ | ------------------------------------------------------------------------------------ |
-| `/`          | What Backtick is and how it works; the home page Google's sign-in names              |
-| `/download/` | Where each phone installs Backtick from (`src/pages/Download.tsx` names the links)   |
-| `/support/`  | Help, and the contact address                                                        |
-| `/privacy/`  | The privacy policy                                                                   |
-| `/terms/`    | The terms of service                                                                 |
-| `/docs/*`    | A redirect to the same path on backtickjs.dev, where the docs moved, as `/llms*.txt` |
+| Path        | Page                                                                                     |
+| ----------- | ---------------------------------------------------------------------------------------- |
+| `/`         | What Backtick is, how it works and where to get it; the home page Google's sign-in names |
+| `/support/` | Getting started, troubleshooting, contact and account deletion                           |
+| `/privacy/` | The privacy policy                                                                       |
+| `/terms/`   | The terms of service                                                                     |
 
 It's built as backtickjs.dev is: Hono routes (`src/app.tsx`) whose pages are Solid scripts. `pnpm build` compiles `src/` into `dist/` with `tspc` and writes the CSS (`src/css.ts`); `server.ts` is the Vercel Function; Vercel serves `public/` from its CDN, and keeps each page until the next deploy. `pnpm start` serves it on `http://localhost:4321`, again on each save.
 

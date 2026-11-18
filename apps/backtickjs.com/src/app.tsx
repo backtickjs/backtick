@@ -1,8 +1,7 @@
 import { Hono } from "hono";
+import { appendTrailingSlash } from "hono/trailing-slash";
 import { toHtml } from "./html.js";
-import { NOT_FOUND, urlOf } from "./pages.js";
-import { Download } from "./pages/Download.js";
-import { Help } from "./pages/Help.js";
+import { IPHONE, NOT_FOUND, urlOf } from "./pages.js";
 import { Home } from "./pages/Home.js";
 import { Privacy } from "./pages/Privacy.js";
 import { Support } from "./pages/Support.js";
@@ -18,39 +17,48 @@ app.use(async (context, next) => {
   context.header("cache-control", "public, max-age=0, s-maxage=31536000");
 });
 
+// Every page's address ends in a slash: one without it, which would be a
+// 404, redirects to the page.
+app.use(appendTrailingSlash());
+
+// What search engines read about Backtick as data: the company, and the free
+// iPhone app it makes. backtickjs.dev, the framework's site, is the same
+// company.
+const ORGANIZATION = urlOf("/#organization");
+const STRUCTURED_DATA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": ORGANIZATION,
+      name: "Backtick",
+      url: urlOf("/"),
+      logo: urlOf("/apple-touch-icon.png"),
+      sameAs: ["https://backtickjs.dev/", IPHONE],
+    },
+    {
+      "@type": "MobileApplication",
+      name: "Backtick: Make Apps with AI",
+      operatingSystem: "iOS",
+      applicationCategory: "DeveloperApplication",
+      publisher: { "@id": ORGANIZATION },
+      installUrl: IPHONE,
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    },
+  ],
+};
+
 app.get("/", async (context) =>
   context.html(
     await toHtml({
       path: "/",
       Page: Home,
-      title: "Backtick · Build native apps with AI, all from your phone",
+      structuredData: STRUCTURED_DATA,
+      preloadImage: "/thornvale.webp",
+      title: "Backtick · Build React Native apps with AI",
       description:
-        "Ask Claude for an app, and it runs natively on your phone, in the" +
-        " Backtick app.",
-    }),
-  ),
-);
-
-app.get("/download/", async (context) =>
-  context.html(
-    await toHtml({
-      path: "/download/",
-      Page: Download,
-      title: "Backtick · Download",
-      description: "Get the Backtick app for iPhone and Android.",
-    }),
-  ),
-);
-
-app.get("/help/", async (context) =>
-  context.html(
-    await toHtml({
-      path: "/help/",
-      Page: Help,
-      title: "Backtick · Help",
-      description:
-        "How to make apps with Claude and Backtick, and what to do when" +
-        " something doesn't work.",
+        "Claude builds a React Native app. Backtick runs it on your" +
+        " phone. Free: no subscription, no credits.",
     }),
   ),
 );
@@ -61,10 +69,17 @@ app.get("/support/", async (context) =>
       path: "/support/",
       Page: Support,
       title: "Backtick · Support",
-      description: "Help with the Backtick app and the apps you make with it.",
+      description:
+        "How to make apps with Claude and Backtick, what to do when" +
+        " something doesn't work, and how to reach us.",
     }),
   ),
 );
+
+// Help was its own page, which the Claude connector's listing links to. As
+// `all`, not `get`, so the sitemap, which lists GET routes, leaves it out.
+app.all("/help/", (context) => context.redirect("/support/", 301));
+app.all("/help", (context) => context.redirect("/support/", 301));
 
 app.get("/privacy/", async (context) =>
   context.html(
@@ -106,6 +121,28 @@ ${urls.join("\n")}
     { "content-type": "application/xml" },
   );
 });
+
+// What AI assistants read about Backtick, as llmstxt.org describes.
+app.get("/llms.txt", (context) =>
+  context.text(`# Backtick
+
+> Build React Native apps with AI. Describe an app to Claude, and it builds a real React Native app that runs natively on your iPhone in the Backtick app. Free: no subscription, no credits; the building happens in your own Claude account.
+
+## How it works
+
+1. Install Backtick on your iPhone (${IPHONE}) and sign in.
+2. Connect Backtick to Claude: in Claude's settings, Connectors, add a custom connector named Backtick with the URL https://mcp.backtickjs.com, then sign in with the same account.
+3. Tap + New in Backtick, describe your app, and tap Ask Claude. Claude writes the app, and Backtick checks and saves each version.
+4. Tap Open in Backtick in the chat. To change the app, ask Claude in the same chat, or tap Edit in Backtick.
+
+## Links
+
+- [Support](${urlOf("/support/")}): getting started, troubleshooting, contact and account deletion
+- [Privacy policy](${urlOf("/privacy/")})
+- [Terms of service](${urlOf("/terms/")})
+- [Backtick.js](https://backtickjs.dev/): the open-source framework Backtick apps are built with
+`),
+);
 
 app.get("/robots.txt", (context) =>
   context.text(`User-agent: *

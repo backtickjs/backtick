@@ -1,6 +1,6 @@
 import { bundler } from "@backtickjs/bundler";
 import { readFile } from "node:fs/promises";
-import { type Page, urlOf } from "./pages.js";
+import { type Page, PREVIEW_IMAGE, urlOf } from "./pages.js";
 
 // In development, a map into the host files in each bundle, for devtools.
 const sourcemap = process.env.NODE_ENV === "production" ? undefined : "inline";
@@ -15,6 +15,8 @@ export async function toHtml({
   Page,
   title,
   description,
+  structuredData,
+  preloadImage,
 }: Page): Promise<string> {
   const bundle = await bundler.build({
     // The page's component, which the document's entry draws, as Solid's
@@ -46,12 +48,25 @@ export async function toHtml({
     <meta property="og:site_name" content="Backtick">
     <meta property="og:title" content="${title}">
     <meta property="og:description" content="${description}">
+    ${path === null ? "" : `<meta property="og:url" content="${urlOf(path)}">`}
+    <meta property="og:image" content="${PREVIEW_IMAGE.url}">
+    <meta property="og:image:width" content="${PREVIEW_IMAGE.width}">
+    <meta property="og:image:height" content="${PREVIEW_IMAGE.height}">
+    <meta property="og:image:alt" content="${PREVIEW_IMAGE.alt}">
+    <meta name="twitter:card" content="summary_large_image">
+    ${
+      structuredData === undefined
+        ? ""
+        : // "<" escaped, so nothing in the data can close the script.
+          `<script type="application/ld+json">${JSON.stringify(structuredData).replaceAll("<", "\\u003c")}</script>`
+    }
+    ${preloadImage === undefined ? "" : `<link rel="preload" as="image" href="${preloadImage}" fetchpriority="high">`}
     <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400&display=swap">
     <style>${STYLE}</style>
     <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
     <script defer src="/_vercel/insights/script.js"></script>

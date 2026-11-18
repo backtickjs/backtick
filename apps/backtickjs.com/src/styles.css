@@ -4,6 +4,9 @@
    from the page's head, so a class like `text-muted` needs no `dark:` twin. */
 @theme {
   --font-sans: "Inter", "Helvetica Neue", Helvetica, system-ui, sans-serif;
+  /* Claude's replies in the home page's chat, set in a serif as Claude
+     sets them. */
+  --font-serif: "Source Serif 4", Georgia, serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
   /* The phone in the demo, set the way iOS sets it. */
   --font-ios: -apple-system, "SF Pro Text", "Inter", system-ui, sans-serif;
@@ -198,6 +201,11 @@
 }
 
 @layer base {
+  /* The scrollbar's space kept on every page, so the centered column stays
+     put between a page that fits the screen and one that scrolls. */
+  html {
+    scrollbar-gutter: stable;
+  }
   body {
     @apply bg-paper font-sans text-ink antialiased;
   }
