@@ -140,7 +140,7 @@ app.get("/llms.txt", (context) =>
 - [Support](${urlOf("/support/")}): getting started, troubleshooting, contact and account deletion
 - [Privacy policy](${urlOf("/privacy/")})
 - [Terms of service](${urlOf("/terms/")})
-- [Backtick.js](https://backtickjs.dev/): the open-source framework Backtick apps are built with
+- [Backtick](https://backtickjs.dev/): the open-source framework Backtick apps are built with
 `),
 );
 
