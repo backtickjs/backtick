@@ -63,7 +63,7 @@ declare module "hono" {
  * screen, and screens are `no-store`, kept out of HTTP caches: a reload or
  * a new open always gets the latest copy. (The Backtick app fetches a page anew
  * for each navigation, as Next.js's router does.) A client
- * without a module the screen needs gets a 426, and any other refusal of the
+ * without a module the screen needs gets a 406, and any other refusal of the
  * bundler's a 400, each with `{ name, message }`. An app the Backtick app
  * opens uses `backtickApp(app)` instead.
  */

@@ -57,9 +57,9 @@ for (const [path, status] of [
   });
 }
 
-test("a client without a module the screen needs gets a 426 naming it", async () => {
-  const response = await request();
-  assert.equal(response.status, 426);
+test("a client without a module the screen needs gets a 406 naming it", async () => {
+  const response = await request("{}");
+  assert.equal(response.status, 406);
   const { name, message } = await response.json();
   assert.equal(name, "ClientVersionMismatch");
   assert.match(message, /greet/);

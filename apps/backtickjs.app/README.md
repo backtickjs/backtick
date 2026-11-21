@@ -14,7 +14,7 @@ Users' code runs on this domain: the Worker's secrets stay in its own environmen
 
 1. It checks the phone's access token: issued by `auth.backtickjs.com` (signed with a key it publishes), for this app's own origin, `https://<id>.backtickjs.app`, and not expired. Anything else is the phone's 401. It then reads the app's latest version from Supabase with its own key, only if the app is the token's user's and not deleted.
 2. It loads that version's release (`versions.compiled`, which `save_app` writes) with the Dynamic Worker Loader, as `<id>@<version>`, into an isolate of its own. The code comes from this data center's Cache API, or from Supabase the first time, and is kept: a release never changes.
-3. It hands the release the path, `x-backtick-modules` and `x-backtick-user`, the user's ID for this app alone (an HMAC of the app and the user, so two apps can't match their users), never the token or the account's ID. The release's Hono server answers: the screen, a 426 for a module the phone lacks, a 404 for a path with no route. Its `fetch()` reaches the internet through `OutboundGateway` (`src/worker.ts`), which logs each call's app and host.
+3. It hands the release the path, `x-backtick-modules` and `x-backtick-user`, the user's ID for this app alone (an HMAC of the app and the user, so two apps can't match their users), never the token or the account's ID. The release's Hono server answers: the screen, a 406 for a module the phone lacks, a 404 for a path with no route. Its `fetch()` reaches the internet through `OutboundGateway` (`src/worker.ts`), which logs each call's app and host.
 
 `backtickjs.app` goes on the Public Suffix List, so each app is its own site in a browser, apart from the others and from Backtick's sign-in.
 

@@ -71,15 +71,25 @@ test("the route's headers win over a render's own", async () => {
   assert.equal(response.headers.get("content-type"), "text/javascript");
 });
 
-test("a client without a module the bundle needs gets a 426 naming it", async () => {
+test("a request that doesn't say what the app has is a 400", async () => {
   const error = await render(request(), greet).then(
     () => assert.fail("rendered"),
     (error: unknown) => error,
   );
+  assert.ok(error instanceof BundlerError);
+  assert.equal(error.status, 400);
+  assert.match(error.message, /^x-backtick-modules is missing/);
+});
+
+test("a client without a module the bundle needs gets a 406 naming it", async () => {
+  const error = await render(request("{}"), greet).then(
+    () => assert.fail("rendered"),
+    (error: unknown) => error,
+  );
   assert.ok(error instanceof ClientVersionMismatch);
-  assert.equal(error.status, 426);
+  assert.equal(error.status, 406);
   const response = error.getResponse();
-  assert.equal(response.status, 426);
+  assert.equal(response.status, 406);
   const { name, message } = await response.json();
   assert.equal(name, "ClientVersionMismatch");
   assert.match(message, /greet/);

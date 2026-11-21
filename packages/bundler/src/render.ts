@@ -16,7 +16,8 @@ export interface BundleResponse<T> extends Response {
  *     app.get("/", (c) => render(c.req.raw, <Home />));
  *     return render(c.req.raw, <NotFound />, { status: 404 });
  *
- * Throws a `BundlerError` (a 426 or a 400) when the app can't run it.
+ * Throws a `BundlerError` (a 406 or a 400) when the app can't run it, or
+ * when the request doesn't say what the app has.
  */
 export async function render<T>(
   request: Request,
@@ -30,9 +31,15 @@ export async function render<T>(
       `x-backtick-format must be "cjs" or "es", not "${format}".`,
     );
   }
+  const modulesHeader = request.headers.get("x-backtick-modules");
+  if (modulesHeader === null) {
+    throw new BundlerError(
+      "x-backtick-modules is missing: a Backtick route needs the modules the app provides, as { specifier: version }.",
+    );
+  }
   let modules: Modules;
   try {
-    modules = JSON.parse(request.headers.get("x-backtick-modules") ?? "{}");
+    modules = JSON.parse(modulesHeader);
   } catch (error) {
     throw new BundlerError(
       `x-backtick-modules isn't JSON: ${(error as SyntaxError).message}`,

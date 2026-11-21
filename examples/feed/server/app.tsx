@@ -39,7 +39,7 @@ app.post(commentsPath(":id"), async (context) => {
   return render(context.req.raw, commentFor(context.req.param("id"), text));
 });
 
-// A screen the app can't run answers itself (426); anything else is a 500.
+// A screen the app can't run answers itself (406); anything else is a 500.
 app.onError((error, context) => {
   if ("getResponse" in error) {
     return error.getResponse();

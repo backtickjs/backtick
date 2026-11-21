@@ -19,7 +19,7 @@ app.use(
 // parameters, `/stories/:id`, read with `context.req.param("id")`.
 app.get("/", (context) => render(context.req.raw, <Home />));
 
-// A screen the app can't run answers itself (426); anything else is a 500.
+// A screen the app can't run answers itself (406); anything else is a 500.
 app.onError((error, context) => {
   if ("getResponse" in error) {
     return error.getResponse();

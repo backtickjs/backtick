@@ -8,7 +8,7 @@ import type { Modules } from "./modules.js";
  * default error handler calls it for you.
  */
 export class BundlerError extends Error {
-  readonly status: 400 | 426 = 400;
+  readonly status: 400 | 406 = 400;
 
   constructor(message: string, options?: ErrorOptions) {
     super(message, options);
@@ -30,11 +30,11 @@ export class BundlerError extends Error {
  * `provided`, a version the import isn't typed for (an earlier one, or
  * another major), or doesn't provide it at all. The client can't change, so
  * the server draws it something else: it catches this to answer differently,
- * or branches with `supports` before drawing. Answered as a 426.
+ * or branches with `supports` before drawing. Answered as a 406.
  */
 export class ClientVersionMismatch extends BundlerError {
-  // Upgrade Required: the app has to update.
-  override readonly status = 426;
+  // Not Acceptable: no bundle the app can run, so it has to update.
+  override readonly status = 406;
 
   constructor(
     readonly from: string,

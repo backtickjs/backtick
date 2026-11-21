@@ -75,7 +75,7 @@ draw for two majors of a package, install the second under an alias,
 typed against its own version.
 
 A build that can't run a screen at all gets a `ClientVersionMismatch` from
-the bundler, instead of a screen. Catch it, answer `426`, and have the app
+the bundler, instead of a screen. Catch it, answer `406`, and have the app
 draw its own screen asking its users to update: one the server bundled would
 need the same modules the build lacks.
 [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core#every-build-in-users-hands)
