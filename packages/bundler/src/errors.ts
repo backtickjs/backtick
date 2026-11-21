@@ -1,13 +1,11 @@
 import type { Modules } from "./modules.js";
 
 /**
- * What the bundler throws when it refuses its input: a value it can't
- * splice, a tag it can't draw, an import the client can't run. An error a
- * server component throws while the bundler runs it passes through as it is.
+ * What the bundler throws when it refuses its input, such as a value it can't
+ * splice. An error a server component throws passes through unchanged.
  *
- * `getResponse()` answers it as JSON `{ name, message }` at its `status`, a
- * 400: Hono's default error handler calls it on its own; elsewhere, the
- * app's error handler returns it.
+ * `getResponse()` turns it into a JSON response at its `status` (400). Hono's
+ * default error handler calls it for you.
  */
 export class BundlerError extends Error {
   readonly status: 400 | 426 = 400;
@@ -35,7 +33,7 @@ export class BundlerError extends Error {
  * or branches with `supports` before drawing. Answered as a 426.
  */
 export class ClientVersionMismatch extends BundlerError {
-  // Upgrade Required: the client, not the request, has to change.
+  // Upgrade Required: the app has to update.
   override readonly status = 426;
 
   constructor(

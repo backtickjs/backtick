@@ -1,4 +1,4 @@
-import { backtickRenderer } from "@backtickjs/hono";
+import { render } from "@backtickjs/bundler";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { Feed, pageFor } from "./Feed.js";
@@ -12,35 +12,35 @@ app.use(
   cors({ origin: "*", allowHeaders: ["x-backtick-modules", "content-type"] }),
 );
 
-// `context.render(value)` answers with it, bundled for the app.
-app.use(backtickRenderer());
-
 // The feed, and its pages, which know their items' paths only.
-app.get("/", (context) => context.render(<Feed />));
+app.get("/", (context) => render(context.req.raw, <Feed />));
 app.get(pagePath(":page"), (context) =>
-  context.render(pageFor(Number(context.req.param("page")))),
+  render(context.req.raw, pageFor(Number(context.req.param("page")))),
 );
 
 // Each item, which the phone queries by its path, answered with the
 // component that draws it; and a like, a POST, answered with the new count.
 app.get(itemPath(":id"), (context) =>
-  context.render(itemFor(context.req.param("id"))),
+  render(context.req.raw, itemFor(context.req.param("id"))),
 );
 app.post(likesPath(":id"), (context) =>
-  context.render(likeFor(context.req.param("id"))),
+  render(context.req.raw, likeFor(context.req.param("id"))),
 );
 
 // An item's comments, and a new one, a POST to the same path.
 app.get(commentsPath(":id"), (context) =>
-  context.render(commentsFor(context.req.param("id"))),
+  render(context.req.raw, commentsFor(context.req.param("id"))),
 );
 app.post(commentsPath(":id"), async (context) => {
   const { text } = await context.req.json<{ text: string }>();
-  return context.render(commentFor(context.req.param("id"), text));
+  return render(context.req.raw, commentFor(context.req.param("id"), text));
 });
 
-// Answered rather than crashed on, so the app can show why.
+// A screen the app can't run answers itself (426); anything else is a 500.
 app.onError((error, context) => {
+  if ("getResponse" in error) {
+    return error.getResponse();
+  }
   console.error(error);
   return context.text(String(error), 500);
 });

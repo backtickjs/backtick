@@ -1,5 +1,5 @@
 import { reloadExpo } from "@backtickjs/expo/server";
-import { backtickRenderer } from "@backtickjs/hono";
+import { render } from "@backtickjs/bundler";
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
@@ -10,15 +10,15 @@ const app = new Hono();
 // `npm run web` serves the app from another origin.
 app.use(cors({ origin: "*", allowHeaders: ["x-backtick-modules"] }));
 
-// `context.render(element)` answers with the screen, bundled for the app.
-app.use(backtickRenderer());
+// Your app's screens: `render` bundles each one for the app. A path can take
+// parameters, `/stories/:id`, read with `context.req.param("id")`.
+app.get("/", (context) => render(context.req.raw, <Home />));
 
-// Your app's screens: add a route, and the app can fetch it. A path can
-// take parameters, `/stories/:id`, read with `context.req.param("id")`.
-app.get("/", (context) => context.render(<Home />));
-
-// Answered rather than crashed on, so the app can show why.
+// A screen the app can't run answers itself (426); anything else is a 500.
 app.onError((error, context) => {
+  if ("getResponse" in error) {
+    return error.getResponse();
+  }
   console.error(error);
   return context.text(String(error), 500);
 });

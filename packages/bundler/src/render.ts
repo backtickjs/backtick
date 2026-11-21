@@ -3,22 +3,19 @@ import { bundler } from "./bundler.js";
 import { BundlerError } from "./errors.js";
 import type { Modules } from "./modules.js";
 
-/** A `Response` whose body is a bundle: the client runs it to a `T`. */
+/** A `Response` whose body is a `Bundle<T>`: the app runs it to a `T`. */
 export interface BundleResponse<T> extends Response {
   text(): Promise<Bundle<T>>;
 }
 
 /**
- * `input` bundled for the modules the request's `x-backtick-modules` says the
- * client provides, as a `Response`: CommonJS, which a React Native app runs
- * with `execRoot`, never stored, with `init`'s status and headers.
+ * Answers `request` with `input` bundled for the app that sent it: CommonJS,
+ * never cached, with `init`'s status and headers.
  *
  *     app.get("/", (c) => render(c.req.raw, <Home />));
  *     return render(c.req.raw, <NotFound />, { status: 404 });
  *
- * A bundle it can't make throws a `BundlerError`, whose `getResponse()` is a
- * 426 or a 400. Any other error, as a server component throws one, passes
- * through as it is.
+ * Throws a `BundlerError` (a 426 or a 400) when the app can't run it.
  */
 export async function render<T>(
   request: Request,
