@@ -12,7 +12,7 @@ const app = new Hono();
 app.use(
   cors({
     origin: "*",
-    allowHeaders: ["x-backtick-modules", "x-backtick-format"],
+    allowHeaders: ["x-backtick-modules"],
   }),
 );
 

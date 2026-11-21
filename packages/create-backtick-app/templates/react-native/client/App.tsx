@@ -24,7 +24,7 @@ const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
 // app's modules. Your fetch to shape: headers, auth, caching.
 async function fetchScreen(path: string): Promise<ReactNode> {
   const response = await fetch(`${server}${path}`, {
-    headers: { "x-backtick-modules": modules, "x-backtick-format": "cjs" },
+    headers: { "x-backtick-modules": modules },
   });
   if (!response.ok) {
     throw new Error(`${path} answered ${response.status}.`);

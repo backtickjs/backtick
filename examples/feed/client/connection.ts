@@ -26,7 +26,6 @@ export async function fetchBundle(
     ...init,
     headers: {
       "x-backtick-modules": modules,
-      "x-backtick-format": "cjs",
       "content-type": "application/json",
       ...init.headers,
     },

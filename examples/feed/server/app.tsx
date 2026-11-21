@@ -11,7 +11,7 @@ export const app = new Hono();
 app.use(
   cors({
     origin: "*",
-    allowHeaders: ["x-backtick-modules", "x-backtick-format", "content-type"],
+    allowHeaders: ["x-backtick-modules", "content-type"],
   }),
 );
 

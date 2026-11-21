@@ -70,7 +70,7 @@ export const fetchAnswer = cs`async (url: string, modules: string) => {
   const aborter = new AbortController();
   const timer = setTimeout(() => aborter.abort(), 15000);
   const response = await fetch(url, {
-    headers: { "x-backtick-modules": modules, "x-backtick-format": "cjs" },
+    headers: { "x-backtick-modules": modules },
     signal: aborter.signal,
   }).finally(() => clearTimeout(timer));
   const body = await response.text();
