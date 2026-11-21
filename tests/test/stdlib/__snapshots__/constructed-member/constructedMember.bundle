@@ -1,5 +1,6 @@
-import { createRoot as $i0 } from "solid-js";
-import { geometry as $i1 } from "app";
+"use strict";
+const { createRoot: $i0 } = require("solid-js");
+const { geometry: $i1 } = require("app");
 const $modules = {
   "3lrzh9pxuc0as:14:17": (module, exports, require) => {
     "use strict";
@@ -18,7 +19,7 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $values = new Map();
+const $values = module.values ?? new Map();
 const $value = (key, make) => {
   if (!$values.has(key)) {
     $values.set(key, make());
@@ -29,4 +30,4 @@ const $cs0 = $require("3lrzh9pxuc0as:14:17").default;
 const $thunk0 = () => $i0;
 const $thunk1 = () => $i1;
 const $value2 = $value("3lrzh9pxuc0as:14:17", () => $cs0($thunk0, $thunk1));
-export default $value2;
+module.exports = $value2;

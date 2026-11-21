@@ -1,6 +1,6 @@
 cs.lift((() =>   → cs` [-semantic -navigation]
 {                → {
-\n               → \n      
+\n               → \n        
 const            → const
                  →  
 [                → [
@@ -19,7 +19,7 @@ __cs_setCount    → setCount
 1                → 1
 )                → )
 ;                → ;
-\n               → \n      
+\n               → \n        
 __cs_setCount    → setCount
 (                → (
 __cs_count       → count
@@ -31,13 +31,13 @@ __cs_count       → count
 1                → 1
 )                → )
 ;                → ;
-\n               → \n      
+\n               → \n        
 return           → return
                  →  
 __cs_count       → count
 (                → (
 )                → )
 ;                → ;
-\n               → \n    
+\n               → \n      
 }                → }
 )())             → ` [-semantic -navigation]

@@ -1,7 +1,18 @@
 import { bundler } from "@backtickjs/bundler";
-import type { Bundle, Client, Spliceable, Spliced } from "@backtickjs/core";
+import {
+  type Bundle,
+  type Client,
+  createRuntime,
+  type Spliceable,
+  type Spliced,
+} from "@backtickjs/core";
 import type { JSX } from "@backtickjs/jsx-solid/jsx-runtime";
+import * as AcmeUi from "acme-ui";
 import type { JSXElement } from "solid-js";
+import * as SolidJs from "solid-js";
+import * as SolidJsStore from "solid-js/store";
+import * as SolidJsWeb from "solid-js/web";
+import * as App from "./stdlib/app.ts";
 import { drawing } from "./drawing.tsx";
 
 /**
@@ -18,31 +29,39 @@ export type Evaluated<T> = T extends JSX.Element
         ) => Evaluated<Returned>
       : T;
 
+// The modules the client provides: Solid's, the one an app adds beside them
+// (see `stdlib/target-builtins.test.tsx`), and a library it installs (see
+// `bindings/library-component.test.tsx`).
+const modules = {
+  "solid-js": "1.9.14",
+  "solid-js/store": "1.9.14",
+  "solid-js/web": "1.9.14",
+  app: "1.0.0",
+  "acme-ui": "1.0.0",
+};
+const moduleMap = {
+  "solid-js": SolidJs,
+  "solid-js/store": SolidJsStore,
+  "solid-js/web": SolidJsWeb,
+  app: App,
+  "acme-ui": AcmeUi,
+};
+
 /**
- * A value as the module a page imports, its scripts compiled by Solid when the
- * test file was, against the modules a page's import map provides — Solid's,
- * and the one an app adds beside them (see `stdlib/target-builtins.test.tsx`).
+ * A value as the client gets it, its scripts compiled by Solid when the test
+ * file was, against the modules the client provides.
  */
 export async function bundle<T>(
   value: Client<T>,
 ): Promise<{ code: Bundle<T>; map: string }> {
-  const built = await bundler.build({
-    input: value,
-    modules: {
-      "solid-js": "1.9.14",
-      "solid-js/store": "1.9.14",
-      "solid-js/web": "1.9.14",
-      app: "1.0.0",
-      "acme-ui": "1.0.0",
-    },
-  });
-  const { code, map } = built.generate({ format: "es", sourcemap: "hidden" });
+  const built = await bundler.build({ input: value, modules });
+  const { code, map } = built.generate({ format: "cjs", sourcemap: "hidden" });
   return { code, map: map! };
 }
 
 /**
- * A value as the client runs it: bundled, and imported from a `data:` URL,
- * its imports resolved as a page's import map resolves them. Run a drawing the
+ * A value as the client runs it: bundled, and run by a runtime with the
+ * modules the client provides. Run a drawing the
  * way Solid does, as a function it calls, which the client gets as one:
  *
  *     render(await evaluate(() => <Counter from={0} />));
@@ -53,13 +72,7 @@ export async function evaluate<T extends Client<unknown> | (() => Spliceable)>(
   const { code } = await bundle(
     typeof value === "function" ? drawing(value()) : value,
   );
-  // A module is evaluated once per URL, so each call's is its own: the same
-  // bundle twice still runs twice, as two page loads would.
-  const evaluation = `\n// evaluation ${evaluations++}`;
-  const module = (await import(
-    `data:text/javascript,${encodeURIComponent(code + evaluation)}`
-  )) as { default: Evaluated<T> };
-  return module.default;
+  // A runtime of its own each time, as each page load has: the same bundle
+  // twice still runs twice.
+  return createRuntime(moduleMap).exec(code) as Promise<Evaluated<T>>;
 }
-
-let evaluations = 0;

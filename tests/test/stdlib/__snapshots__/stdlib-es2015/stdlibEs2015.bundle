@@ -1,3 +1,4 @@
+"use strict";
 const $modules = {
   "s2q4937fji9l:12:4": (module, exports, require) => {
     "use strict";
@@ -33,7 +34,7 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $values = new Map();
+const $values = module.values ?? new Map();
 const $value = (key, make) => {
   if (!$values.has(key)) {
     $values.set(key, make());
@@ -42,4 +43,4 @@ const $value = (key, make) => {
 };
 const $cs0 = $require("s2q4937fji9l:12:4").default;
 const $value0 = $cs0();
-export default $value0;
+module.exports = $value0;

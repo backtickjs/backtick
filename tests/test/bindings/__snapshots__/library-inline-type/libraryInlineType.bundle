@@ -1,5 +1,6 @@
-import { Button as $i0 } from "acme-ui";
-import * as $module0 from "solid-js/web";
+"use strict";
+const { Button: $i0 } = require("acme-ui");
+const $module0 = require("solid-js/web");
 const $modules = {
   "30to2gbd5zcf7:19:14": (module, exports, require) => {
     "use strict";
@@ -28,7 +29,7 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $values = new Map();
+const $values = module.values ?? new Map();
 const $value = (key, make) => {
   if (!$values.has(key)) {
     $values.set(key, make());
@@ -39,4 +40,4 @@ const $cs0 = $require("30to2gbd5zcf7:19:14").default;
 const $thunk0 = () => $i0;
 const $thunk1 = () => "ghost";
 const $value2 = $value("30to2gbd5zcf7:19:14", () => $cs0($thunk0, $thunk1));
-export default $value2;
+module.exports = $value2;

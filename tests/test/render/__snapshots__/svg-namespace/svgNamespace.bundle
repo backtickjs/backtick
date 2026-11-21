@@ -1,6 +1,7 @@
-import { untrack as $i0 } from "solid-js";
-import { For as $i1 } from "solid-js";
-import * as $module0 from "solid-js/web";
+"use strict";
+const { untrack: $i0 } = require("solid-js");
+const { For: $i1 } = require("solid-js");
+const $module0 = require("solid-js/web");
 const $modules = {
   "330rusny0q2yl:20:21": (module, exports, require) => {
     "use strict";
@@ -81,7 +82,7 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $values = new Map();
+const $values = module.values ?? new Map();
 const $value = (key, make) => {
   if (!$values.has(key)) {
     $values.set(key, make());
@@ -98,4 +99,4 @@ const $value3 = $cs1($thunk0, $thunk2);
 const $thunk4 = () => $value3;
 const $thunk5 = () => $i1;
 const $value6 = $value("330rusny0q2yl:20:21", () => $cs0($thunk4, $thunk5));
-export default $value6;
+module.exports = $value6;

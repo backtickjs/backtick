@@ -18,7 +18,7 @@ const Button2 = {
 };
 import { evaluate } from "../evaluate.ts";
 const $module0 = {
-  id: "2qwj9ceqzna8o:16:6",
+  id: "1nbkozn3ddlek:16:6",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $splice0 => ($Button2 => (0, web_1.createComponent)($Button2, {\n    tone: "primary",\n    onClick: () => { },\n    children: "Save"\n}))($splice0());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAeSA,QAAA,IACD,CAAAC,QAAA,IAAAC,yBAAA,EAACD,QAAQ;IAACE,IAAI;IAAWC,OAAO,EAAEA,GAAA,KAAO,CAAC;IAAAC,QAAA;CAAA,CAE/B,EAFVL,QAAA,EAAQ,CAGV","names":["$splice0","$Button2","_$createComponent","tone","onClick","children"],"ignoreList":[],"sources":["bindings/library-versions.test.tsx"]}',
   dependencies: ["solid-js/web"],
@@ -27,7 +27,7 @@ const $module0 = {
   scope: "function",
 };
 const $module1 = {
-  id: "2qwj9ceqzna8o:21:6",
+  id: "1nbkozn3ddlek:21:6",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $splice0 => ($Button => (0, web_1.createComponent)($Button, {\n    variant: "primary",\n    onClick: () => { },\n    children: "Save"\n}))($splice0());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAoBSA,QAAA,IACD,CAAAC,OAAA,IAAAC,yBAAA,EAACD,OAAO;IAACE,OAAO;IAAWC,OAAO,EAAEA,GAAA,KAAO,CAAC;IAAAC,QAAA;CAAA,CAElC,EAFTL,QAAA,EAAO,CAGT","names":["$splice0","$Button","_$createComponent","variant","onClick","children"],"ignoreList":[],"sources":["bindings/library-versions.test.tsx"]}',
   dependencies: ["solid-js/web"],
@@ -36,7 +36,7 @@ const $module1 = {
   scope: "function",
 };
 const $module2 = {
-  id: "2qwj9ceqzna8o:63:8",
+  id: "1nbkozn3ddlek:63:8",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $splice0 => ($Button2 => (0, web_1.createComponent)($Button2, {\n    tone: "primary",\n    onClick: () => { },\n    children: "Save"\n}))($splice0());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBA8DWA,QAAA,IACD,CAAAC,QAAA,IAAAC,yBAAA,EAACD,QAAQ;IAACE,IAAI;IAAWC,OAAO,EAAEA,GAAA,KAAO,CAAC;IAAAC,QAAA;CAAA,CAE/B,EAFVL,QAAA,EAAQ,CAGV","names":["$splice0","$Button2","_$createComponent","tone","onClick","children"],"ignoreList":[],"sources":["bindings/library-versions.test.tsx"]}',
   dependencies: ["solid-js/web"],
@@ -63,7 +63,7 @@ async function bundleFor(input, acme) {
     input,
     modules: { ...solid, "acme-ui": acme },
   });
-  return built.generate({ format: "es" }).code;
+  return built.generate({ format: "cjs" }).code;
 }
 describe("two installed versions of one package", () => {
   it("import from the module clients provide, each at its own version", () => {
@@ -75,10 +75,10 @@ describe("two installed versions of one package", () => {
   });
   it("bundle each client the version it provides", async () => {
     const one = await bundleFor(_jsx(Save, {}), "1.0.0");
-    assert.match(one, /from "acme-ui"/);
+    assert.match(one, /require\("acme-ui"\)/);
     assert.match(one, /variant: "primary"/);
     const two = await bundleFor(_jsx(Save, {}), "2.1.0");
-    assert.match(two, /from "acme-ui"/);
+    assert.match(two, /require\("acme-ui"\)/);
     assert.match(two, /tone: "primary"/);
   });
   it("refuse a client the other version's import", async () => {

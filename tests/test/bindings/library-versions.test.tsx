@@ -36,7 +36,7 @@ async function bundleFor(input: Client<unknown>, acme: string) {
     input,
     modules: { ...solid, "acme-ui": acme },
   });
-  return built.generate({ format: "es" }).code;
+  return built.generate({ format: "cjs" }).code;
 }
 
 describe("two installed versions of one package", () => {
@@ -50,10 +50,10 @@ describe("two installed versions of one package", () => {
 
   it("bundle each client the version it provides", async () => {
     const one = await bundleFor(<Save />, "1.0.0");
-    assert.match(one, /from "acme-ui"/);
+    assert.match(one, /require\("acme-ui"\)/);
     assert.match(one, /variant: "primary"/);
     const two = await bundleFor(<Save />, "2.1.0");
-    assert.match(two, /from "acme-ui"/);
+    assert.match(two, /require\("acme-ui"\)/);
     assert.match(two, /tone: "primary"/);
   });
 

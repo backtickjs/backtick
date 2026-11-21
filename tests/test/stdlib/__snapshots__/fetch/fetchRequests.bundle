@@ -1,4 +1,5 @@
-import { createSignal as $i0 } from "solid-js";
+"use strict";
+const { createSignal: $i0 } = require("solid-js");
 const $modules = {
   "3ab14byrnj401:15:4": (module, exports, require) => {
     "use strict";
@@ -55,7 +56,7 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $values = new Map();
+const $values = module.values ?? new Map();
 const $value = (key, make) => {
   if (!$values.has(key)) {
     $values.set(key, make());
@@ -65,4 +66,4 @@ const $value = (key, make) => {
 const $cs0 = $require("3ab14byrnj401:15:4").default;
 const $thunk0 = () => $i0;
 const $value1 = $cs0($thunk0);
-export default $value1;
+module.exports = $value1;
