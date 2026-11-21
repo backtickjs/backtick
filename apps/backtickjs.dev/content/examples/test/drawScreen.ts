@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFileSync, writeFileSync } from "node:fs";
 import { bundler } from "@backtickjs/bundler";
-import type { Spliceable } from "@backtickjs/core";
+import type { Client } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
@@ -10,10 +10,7 @@ import * as ReactNativeWeb from "react-native-web";
 // A screen as the app draws it: bundled as the server bundles it, then run
 // with React Native's web build standing in for React Native. `modules` are
 // what else the app provides, each by specifier, at a version.
-export async function drawScreen<T extends Spliceable>(
-  input: T,
-  modules: Provided = {},
-) {
+export async function drawScreen<T>(input: Client<T>, modules: Provided = {}) {
   const { code } = await bundleScreen(input, modules);
   return execRoot(code, {
     react: React,
@@ -28,8 +25,8 @@ export async function drawScreen<T extends Spliceable>(
 type Provided = Record<string, { version: string; module: unknown }>;
 
 // The bundle the server sends for a screen.
-export async function bundleScreen<T extends Spliceable>(
-  input: T,
+export async function bundleScreen<T>(
+  input: Client<T>,
   modules: Provided = {},
 ) {
   const bundle = await bundler.build({
@@ -50,7 +47,7 @@ export async function bundleScreen<T extends Spliceable>(
 // written with `UPDATE=1`, checked otherwise.
 export async function assertBundle(
   file: URL,
-  input: Spliceable,
+  input: Client<unknown>,
 ): Promise<string> {
   const { code } = await bundleScreen(input);
   if (process.env.UPDATE) {

@@ -18,7 +18,7 @@ const Button2 = {
 };
 import { evaluate } from "../evaluate.ts";
 const $module0 = {
-  id: "2kxoo6uz27lbk:16:6",
+  id: "2qwj9ceqzna8o:16:6",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $splice0 => ($Button2 => (0, web_1.createComponent)($Button2, {\n    tone: "primary",\n    onClick: () => { },\n    children: "Save"\n}))($splice0());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAeSA,QAAA,IACD,CAAAC,QAAA,IAAAC,yBAAA,EAACD,QAAQ;IAACE,IAAI;IAAWC,OAAO,EAAEA,GAAA,KAAO,CAAC;IAAAC,QAAA;CAAA,CAE/B,EAFVL,QAAA,EAAQ,CAGV","names":["$splice0","$Button2","_$createComponent","tone","onClick","children"],"ignoreList":[],"sources":["bindings/library-versions.test.tsx"]}',
   dependencies: ["solid-js/web"],
@@ -27,7 +27,7 @@ const $module0 = {
   scope: "function",
 };
 const $module1 = {
-  id: "2kxoo6uz27lbk:21:6",
+  id: "2qwj9ceqzna8o:21:6",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $splice0 => ($Button => (0, web_1.createComponent)($Button, {\n    variant: "primary",\n    onClick: () => { },\n    children: "Save"\n}))($splice0());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBAoBSA,QAAA,IACD,CAAAC,OAAA,IAAAC,yBAAA,EAACD,OAAO;IAACE,OAAO;IAAWC,OAAO,EAAEA,GAAA,KAAO,CAAC;IAAAC,QAAA;CAAA,CAElC,EAFTL,QAAA,EAAO,CAGT","names":["$splice0","$Button","_$createComponent","variant","onClick","children"],"ignoreList":[],"sources":["bindings/library-versions.test.tsx"]}',
   dependencies: ["solid-js/web"],
@@ -36,7 +36,7 @@ const $module1 = {
   scope: "function",
 };
 const $module2 = {
-  id: "2kxoo6uz27lbk:63:8",
+  id: "2qwj9ceqzna8o:63:8",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $splice0 => ($Button2 => (0, web_1.createComponent)($Button2, {\n    tone: "primary",\n    onClick: () => { },\n    children: "Save"\n}))($splice0());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;;kBA8DWA,QAAA,IACD,CAAAC,QAAA,IAAAC,yBAAA,EAACD,QAAQ;IAACE,IAAI;IAAWC,OAAO,EAAEA,GAAA,KAAO,CAAC;IAAAC,QAAA;CAAA,CAE/B,EAFVL,QAAA,EAAQ,CAGV","names":["$splice0","$Button2","_$createComponent","tone","onClick","children"],"ignoreList":[],"sources":["bindings/library-versions.test.tsx"]}',
   dependencies: ["solid-js/web"],

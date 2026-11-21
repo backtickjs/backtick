@@ -1,13 +1,14 @@
-import type { Bundle, Spliceable, Spliced, SplicesAs } from "@backtickjs/core";
+import type { Bundle, Client } from "@backtickjs/core";
 import { buildBundle } from "./bundle/buildBundle.js";
 import { BundlerError } from "./errors.js";
 import { buildingFor } from "./supports.js";
 import { isModules, type Modules } from "./modules.js";
 import { printBundle } from "./print/printBundle.js";
 
-export interface BuildOptions<T = Spliceable> {
-  // What to bundle: what a splice could carry, checked as a splice checks it.
-  readonly input: T;
+export interface BuildOptions<T = unknown> {
+  // What to bundle: a value the client computes as a `T`, an element or a
+  // script. Plain data goes in a script: cs`${value}`.
+  readonly input: Client<T>;
   // The modules the client provides, by specifier, each at its package's
   // exact version: left out of the bundle, which requires them. A script's
   // import from any other, or needing a version it doesn't have, throws.
@@ -52,10 +53,7 @@ export interface Build<T = unknown> {
  * stays a name a caller can give what comes back.
  */
 export const bundler = {
-  async build<T extends [T] extends [SplicesAs<T>] ? unknown : Spliceable>({
-    input,
-    modules,
-  }: BuildOptions<T>): Promise<Build<Spliced<T>>> {
+  async build<T>({ input, modules }: BuildOptions<T>): Promise<Build<T>> {
     if (!isModules(modules)) {
       throw new BundlerError(
         `The modules aren't { specifier: version }: ${JSON.stringify(modules)?.slice(0, 80)}`,
@@ -67,7 +65,7 @@ export const bundler = {
     return {
       generate: ({ format, sourcemap = false }) => {
         const printed = printBundle(tree, format);
-        const code = printed.code as Bundle<Spliced<T>>;
+        const code = printed.code as Bundle<T>;
         const map = printed.map;
         if (sourcemap === false) {
           return { code, map: null };
@@ -77,7 +75,7 @@ export const bundler = {
         }
         const url = `data:application/json;charset=utf-8,${encodeURIComponent(map)}`;
         return {
-          code: `${code}\n//# sourceMappingURL=${url}` as Bundle<Spliced<T>>,
+          code: `${code}\n//# sourceMappingURL=${url}` as Bundle<T>,
           map,
         };
       },

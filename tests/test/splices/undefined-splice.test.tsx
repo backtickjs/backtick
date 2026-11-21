@@ -31,7 +31,7 @@ describe("a spliced undefined", () => {
 
   it("is written as `undefined`", async () => {
     const bundle = await bundler.build({
-      input: [undefined],
+      input: cs`${[undefined]}`,
       modules: {},
     });
     const { code } = bundle.generate({ format: "es" });

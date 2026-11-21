@@ -10,7 +10,7 @@ const createRoot = {
   version: "1.9.14",
 };
 const $module0 = {
-  id: "3hpmqi2t6hvr8:13:32",
+  id: "24tvs53cleooi:13:32",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => $splice1());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAYmC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAQ,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/undefined-splice.test.tsx"]}',
   dependencies: [],
@@ -22,7 +22,7 @@ const $module0 = {
   scope: "function",
 };
 const $module1 = {
-  id: "3hpmqi2t6hvr8:18:35",
+  id: "24tvs53cleooi:18:35",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => $splice1());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAiBsC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAK,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/undefined-splice.test.tsx"]}',
   dependencies: [],
@@ -34,7 +34,7 @@ const $module1 = {
   scope: "function",
 };
 const $module2 = {
-  id: "3hpmqi2t6hvr8:25:36",
+  id: "24tvs53cleooi:25:36",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => $splice1());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAwBuC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAK,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/undefined-splice.test.tsx"]}',
   dependencies: [],
@@ -42,6 +42,15 @@ const $module2 = {
     { kind: "splice", bindings: [] },
     { kind: "splice", bindings: [] },
   ],
+  kind: "expression",
+  scope: "function",
+};
+const $module3 = {
+  id: "24tvs53cleooi:34:13",
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0();\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAiCgBA,QAAA,IAAAA,QAAA,EAAc","names":["$splice0"],"ignoreList":[],"sources":["splices/undefined-splice.test.tsx"]}',
+  dependencies: [],
+  params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
   scope: "function",
 };
@@ -71,7 +80,7 @@ describe("a spliced undefined", () => {
   });
   it("is written as `undefined`", async () => {
     const bundle = await bundler.build({
-      input: [undefined],
+      input: cs.create($module3, [[undefined]]),
       modules: {},
     });
     const { code } = bundle.generate({ format: "es" });

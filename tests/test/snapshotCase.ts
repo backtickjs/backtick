@@ -1,7 +1,7 @@
 import { mkdirSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 import type { TestContext } from "node:test";
-import type { Spliceable } from "@backtickjs/core";
+import type { Client } from "@backtickjs/core";
 import prettier from "prettier";
 import { isNode } from "./node.ts";
 import { renderBundleMappings } from "./renderBundleMappings.ts";
@@ -25,7 +25,7 @@ const verbatim = [(value: unknown) => value as string];
 export async function snapshotCase(
   t: TestContext,
   name: string,
-  value: Spliceable,
+  value: Client<unknown>,
 ): Promise<void> {
   const file = t.filePath!;
   const dir = join(

@@ -43,7 +43,7 @@
     "dev": "tsc -b --watch",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
-    "test": "node --test \"test/**/*.test.ts\"",
+    "test": "node --enable-source-maps --import @backtickjs/node-plugin --test \"test/**/*.test.ts\"",
     "clean": "rm -rf node_modules dist .turbo",
     "prepack": "cp ../../LICENSE ."
   },
@@ -52,6 +52,7 @@
     "semver": "^7.8.1"
   },
   "devDependencies": {
+    "@backtickjs/node-plugin": "0.5.2",
     "@types/semver": "^7.8.0",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"

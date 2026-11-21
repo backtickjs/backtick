@@ -1262,6 +1262,9 @@ importers:
         specifier: ^7.8.1
         version: 7.8.1
     devDependencies:
+      '@backtickjs/node-plugin':
+        specifier: 0.5.2
+        version: link:../node-plugin
       '@types/semver':
         specifier: ^7.8.0
         version: 7.8.0

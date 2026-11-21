@@ -5,7 +5,9 @@ import { bundler } from "@backtickjs/bundler";
 import { transpile } from "@backtickjs/compiler";
 import react from "@backtickjs/jsx-react/plugin";
 import { execRoot } from "@backtickjs/core/cjs";
+import type { Client } from "@backtickjs/core";
 import * as React from "react";
+import type { ReactNode } from "react";
 import { act } from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import { createRoot } from "react-dom/client";
@@ -37,7 +39,7 @@ export async function drawReactNative(name: string, source: string) {
   const file = join(import.meta.dirname, `${name}.host.tmp.mjs`);
   writeFileSync(file, host);
   written.push(file);
-  const { screen } = await import(file);
+  const { screen } = (await import(file)) as { screen: Client<ReactNode> };
   const built = await bundler.build({
     input: screen,
     modules: {

@@ -26,7 +26,7 @@ const twice = cs.lift((() => (
 ))());
 
 it("hostTagEvaluation", async (t) => {
-  await snapshotCase(t, "hostTagEvaluation", { unreached, twice });
+  await snapshotCase(t, "hostTagEvaluation", cs.lift((() => (cs.splice({ unreached, twice })))()));
 });
 
 describe("a host tag", () => {

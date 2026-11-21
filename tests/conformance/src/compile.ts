@@ -56,7 +56,8 @@ export async function compile(test: Test): Promise<Compiled> {
       }),
   );
   await module.evaluate();
-  const script = (module.namespace as { default: core.Spliceable }).default;
+  const script = (module.namespace as { default: core.Client<unknown> })
+    .default;
 
   const built = await bundler.build({
     input: script,

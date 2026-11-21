@@ -43,3 +43,10 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 ))               →  [-semantic -navigation]
 )                → )
 )())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+[                → [
+undefined        → undefined
+]                → ]
+))               →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { createImport, createJsxElement } from "@backtickjs/core";
+import { createImport, createJsxElement, cs } from "@backtickjs/core";
 import {
   BundlerError,
   bundler,
@@ -9,25 +9,25 @@ import {
 } from "../dist/index.js";
 
 test("the output is a module whose default export is the value", async () => {
-  const bundle = await bundler.build({ input: 42, modules: {} });
+  const bundle = await bundler.build({ input: cs`${42}`, modules: {} });
   // After the module table, empty, and its `require`.
   assert.match(
     bundle.generate({ format: "es" }).code,
-    /\nexport default \(42\);$/,
+    /\nconst \$thunk0 = \(\) => \(42\);\n/,
   );
 });
 
 test("the modules are { specifier: version }, as a client sends them", async () => {
   for (const modules of [null, [], { react: 19 }]) {
     await assert.rejects(
-      () => bundler.build({ input: 42, modules: modules as never }),
+      () => bundler.build({ input: cs`${42}`, modules: modules as never }),
       /The modules aren't \{ specifier: version \}/,
     );
   }
 });
 
 test("a map is written only where one is asked for", async () => {
-  const bundle = await bundler.build({ input: 42, modules: {} });
+  const bundle = await bundler.build({ input: cs`${42}`, modules: {} });
   const { code } = bundle.generate({ format: "es" });
   assert.deepEqual(bundle.generate({ format: "es" }), { code, map: null });
   assert.deepEqual(bundle.generate({ format: "es", sourcemap: false }), {
@@ -103,7 +103,7 @@ test("a module is provided by its own specifier, not its package", async () => {
     version: "1.0.0",
   });
   const bundle = await bundler.build({
-    input: [Portal, button],
+    input: cs`${[Portal, button]}`,
     modules: { "solid-js/web": "1.9.14", "@scope/ui/button": "1.2.0" },
   });
   const { code } = bundle.generate({ format: "es" });

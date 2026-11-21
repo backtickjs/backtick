@@ -3,11 +3,10 @@ import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import {
   type Bundle,
+  type Client,
   createImport,
   cs,
   exec,
-  type Spliceable,
-  type Spliced,
 } from "@backtickjs/core";
 import { createSignal } from "solid-js" with { backtick: "client" };
 import { bundle, evaluate } from "../evaluate.ts";
@@ -21,9 +20,7 @@ const answer = createImport<number>({
 
 // A bundle as CommonJS, run as a React Native app runs one: handed a
 // `require` answering what the app provides.
-async function bundleCjs<T extends Spliceable>(
-  value: T,
-): Promise<Bundle<Spliced<T>>> {
+async function bundleCjs<T>(value: Client<T>): Promise<Bundle<T>> {
   const built = await bundler.build({
     input: value,
     modules: { app: "1.0.0" },

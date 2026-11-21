@@ -4,45 +4,45 @@ import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 const $module0 = {
-  id: "1zx5f1mxuxz9c:17:14",
+  id: "2nfsva5crfxiq:20:14",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => ({\n    count: 0\n});\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAgBiB,OAAC;IAAEA,KAAK,EAAE;CAAG,CAAC","names":["count"],"ignoreList":[],"sources":["once/across-bundles.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAmBiB,OAAC;IAAEA,KAAK,EAAE;CAAG,CAAC","names":["count"],"ignoreList":[],"sources":["once/across-bundles.test.tsx"]}',
   dependencies: [],
   params: [],
   kind: "expression",
   scope: "module",
 };
 const $module1 = {
-  id: "1zx5f1mxuxz9c:18:13",
+  id: "2nfsva5crfxiq:21:13",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0();\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAiBgBA,QAAA,IAAAA,QAAA,EAAM","names":["$splice0"],"ignoreList":[],"sources":["once/across-bundles.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAoBgBA,QAAA,IAAAA,QAAA,EAAM","names":["$splice0"],"ignoreList":[],"sources":["once/across-bundles.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
   scope: "module",
 };
 const $module2 = {
-  id: "1zx5f1mxuxz9c:19:16",
+  id: "2nfsva5crfxiq:22:16",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0();\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkBmBA,QAAA,IAAAA,QAAA,EAAM","names":["$splice0"],"ignoreList":[],"sources":["once/across-bundles.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAqBmBA,QAAA,IAAAA,QAAA,EAAM","names":["$splice0"],"ignoreList":[],"sources":["once/across-bundles.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
   scope: "module",
 };
 const $module3 = {
-  id: "1zx5f1mxuxz9c:35:9",
+  id: "2nfsva5crfxiq:38:9",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => ({\n    label: "box"\n});\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkCY,OAAC;IAAEA,KAAK,EAAE;CAAO,CAAC","names":["label"],"ignoreList":[],"sources":["once/across-bundles.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAqCY,OAAC;IAAEA,KAAK,EAAE;CAAO,CAAC","names":["label"],"ignoreList":[],"sources":["once/across-bundles.test.tsx"]}',
   dependencies: [],
   params: [],
   kind: "expression",
   scope: "function",
 };
 const $module4 = {
-  id: "1zx5f1mxuxz9c:42:37",
+  id: "2nfsva5crfxiq:45:36",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => [$splice0(), $splice1()];\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAyCwC,CAAAA,QAAA,EAAAC,QAAA,MAACD,QAAA,EAAE,EAAEC,QAAA,EAAE,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["once/across-bundles.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA4CuC,CAAAA,QAAA,EAAAC,QAAA,MAACD,QAAA,EAAE,EAAEC,QAAA,EAAE,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["once/across-bundles.test.tsx"]}',
   dependencies: [],
   params: [
     { kind: "splice", bindings: [] },
@@ -52,9 +52,9 @@ const $module4 = {
   scope: "function",
 };
 const $module5 = {
-  id: "1zx5f1mxuxz9c:44:29",
+  id: "2nfsva5crfxiq:47:28",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => [$splice0()];\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2CgCA,QAAA,KAACA,QAAA,EAAE,CAAC","names":["$splice0"],"ignoreList":[],"sources":["once/across-bundles.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA8C+BA,QAAA,KAACA,QAAA,EAAE,CAAC","names":["$splice0"],"ignoreList":[],"sources":["once/across-bundles.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",

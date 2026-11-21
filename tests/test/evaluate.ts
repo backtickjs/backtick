@@ -23,9 +23,9 @@ export type Evaluated<T> = T extends JSX.Element
  * test file was, against the modules a page's import map provides — Solid's,
  * and the one an app adds beside them (see `stdlib/target-builtins.test.tsx`).
  */
-export async function bundle<T extends Spliceable>(
-  value: T,
-): Promise<{ code: Bundle<Spliced<T>>; map: string }> {
+export async function bundle<T>(
+  value: Client<T>,
+): Promise<{ code: Bundle<T>; map: string }> {
   const built = await bundler.build({
     input: value,
     modules: {
@@ -47,7 +47,7 @@ export async function bundle<T extends Spliceable>(
  *
  *     render(await evaluate(() => <Counter from={0} />));
  */
-export async function evaluate<T extends Spliceable | (() => Spliceable)>(
+export async function evaluate<T extends Client<unknown> | (() => Spliceable)>(
   value: T,
 ): Promise<Evaluated<T>> {
   const { code } = await bundle(

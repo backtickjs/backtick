@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { createJsxElement, type Spliceable } from "@backtickjs/core";
+import { createJsxElement, cs, type Spliceable } from "@backtickjs/core";
 import { es } from "./es.ts";
 
 // A bundle is a function of what was spliced alone: bundling it again, or after
@@ -22,14 +22,17 @@ const values: Record<string, Spliceable> = {
   ],
 };
 
+// One script for every bundle, so they differ only in what it splices.
+const bundled = (value: Spliceable) => es(cs`${value}`);
+
 for (const [name, value] of Object.entries(values)) {
   test(`${name} bundles the same every time`, async () => {
-    const first = await es(value);
-    assert.equal(await es(value), first);
+    const first = await bundled(value);
+    assert.equal(await bundled(value), first);
     // Other bundles in between, including of the same functions.
     for (const other of Object.values(values)) {
-      await es(other);
+      await bundled(other);
     }
-    assert.equal(await es(value), first);
+    assert.equal(await bundled(value), first);
   });
 }

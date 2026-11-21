@@ -1,17 +1,20 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { cs, type Client, type Spliceable } from "@backtickjs/core";
+import { cs, type Client } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 
 // An app's bundles share the values of its module-level scripts, as an app's
 // chunks share its modules: two routes that splice one module-level store get
 // one store, as the runtime runs them, with one registry. A bundle run alone
 // has its own.
-async function run(input: Spliceable, values?: Map<string, unknown>) {
+async function run<T>(
+  input: Client<T>,
+  values?: Map<string, unknown>,
+): Promise<T> {
   const bundle = await bundler.build({ input, modules: {} });
   const { code } = bundle.generate({ format: "cjs" });
-  return execRoot(code as never, {}, values);
+  return execRoot(code, {}, values);
 }
 
 const store = cs.lift((() => ({ count: 0 }))());
@@ -39,8 +42,8 @@ const b = box();
 
 it("a value made in a function is each bundle's own", async () => {
   const values = new Map<string, unknown>();
-  const [first, second] = (await run(cs.lift((() => [(cs.splice((a))), (cs.splice((b)))])()), values)) as unknown[];
+  const [first, second] = await run(cs.lift((() => [(cs.splice((a))), (cs.splice((b)))])()), values);
   assert.notEqual(first, second);
-  const [again] = (await run(cs.lift((() => [(cs.splice((a)))])()), values)) as unknown[];
+  const [again] = await run(cs.lift((() => [(cs.splice((a)))])()), values);
   assert.notEqual(again, first);
 });

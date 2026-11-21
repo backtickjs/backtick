@@ -67,9 +67,9 @@ export const checkedMethod = withMethod satisfies SplicesAs<WithMethod>;
 // @ts-expect-error: Type 'Todo' does not satisfy the expected type 'Spliceable'.
 export const unchecked = todo satisfies Spliceable;
 
-// The bundler takes what a splice takes.
-it("bundles an interface as input", async () => {
-  const bundle = await bundler.build({ input: todo, modules: {} });
+// A script takes what a splice takes.
+it("bundles an interface spliced into a script", async () => {
+  const bundle = await bundler.build({ input: cs`$todo`, modules: {} });
   assert.match(bundle.generate({ format: "es" }).code, /"Ship 0\.1\.5"/);
 });
 

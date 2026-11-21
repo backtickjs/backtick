@@ -1,5 +1,5 @@
 import { bundler, BundlerError, type Modules } from "@backtickjs/bundler";
-import type { Client, Spliceable, SplicesAs } from "@backtickjs/core";
+import type { Client } from "@backtickjs/core";
 import type { Context, Hono, MiddlewareHandler } from "hono";
 import { clientRuntime } from "./runtime.js";
 
@@ -36,13 +36,13 @@ declare module "hono" {
             ? [Extract<T, Client<(...args: never) => unknown>>] extends [
                 Client<(props: {}) => unknown>,
               ]
-              ? [T] extends [SplicesAs<T>]
+              ? [T] extends [Client<unknown>]
                 ? unknown
-                : Spliceable
+                : Client<unknown>
               : LoadingTakesAnElementOrAComponentWithNoProps
-            : [T] extends [SplicesAs<T>]
+            : [T] extends [Client<unknown>]
               ? unknown
-              : Spliceable,
+              : Client<unknown>,
     >(
       // Destructured, `render` has no context: the path is any route's.
       this: Context<any, P, any> | void,
@@ -69,7 +69,9 @@ declare module "hono" {
  */
 export function backtickRenderer(): MiddlewareHandler {
   return async (context, next) => {
-    context.setRenderer(async (input) => bundled(context, input as Spliceable));
+    context.setRenderer(async (input) =>
+      bundled(context, input as Client<unknown>),
+    );
     await next();
   };
 }
@@ -137,7 +139,10 @@ export function backtickApp(app: Hono<any, any, any>): MiddlewareHandler {
 const runtimePath = "/.well-known/backtick/runtime";
 
 // `input` bundled for the modules the client sent, as the answer.
-async function bundled(context: Context, input: Spliceable): Promise<Response> {
+async function bundled(
+  context: Context,
+  input: Client<unknown>,
+): Promise<Response> {
   let modules: Modules;
   try {
     modules = JSON.parse(context.req.header("x-backtick-modules") ?? "{}");

@@ -143,3 +143,12 @@ p                → p
 \n               → \n
 )                → )
 )())             → ` [-semantic -navigation]
+cs.lift((() =>   → cs` [-semantic -navigation]
+(cs.splice(      →  [-semantic -navigation]
+{                → { 
+unreached        → unreached
+,                → , 
+twice            → twice
+ }               →  }
+))               →  [-semantic -navigation]
+)())             → ` [-semantic -navigation]

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { createImport } from "@backtickjs/core";
+import { createImport, cs } from "@backtickjs/core";
 import { bundler } from "../dist/index.js";
 
 const greet = createImport<(name: string) => string>({
@@ -47,7 +47,7 @@ test("a bundle is the same in either format but for its imports, its values' reg
 // own packages by name, and read what it exports.
 test("a CommonJS bundle runs with the `require` its client hands it", async () => {
   const bundle = await bundler.build({
-    input: { greet, name: "world" },
+    input: cs`${{ greet, name: "world" }}`,
     modules: { app: "1.0.0" },
   });
   const { code } = bundle.generate({ format: "cjs" });

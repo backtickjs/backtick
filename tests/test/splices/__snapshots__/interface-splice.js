@@ -10,7 +10,7 @@ const createRoot = {
 };
 import { snapshotCase } from "../snapshotCase.ts";
 const $module0 = {
-  id: "3eix0d6ptibv5:28:4",
+  id: "1rl1yd1xiyj96:28:4",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2, $splice3) => $splice0()(() => $splice1().title + " " + $splice2().done + " " + $splice3().tags[0]);\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2BO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,KAAAH,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAK,CAACG,KAAK,GAAG,GAAG,GAAGF,QAAA,EAAK,CAACG,IAAI,GAAG,GAAG,GAAGF,QAAA,EAAK,CAACG,IAAI,CAAC,CAAC,CAAC,CAAC","names":["$splice0","$splice1","$splice2","$splice3","title","done","tags"],"ignoreList":[],"sources":["splices/interface-splice.test.tsx"]}',
   dependencies: [],
@@ -24,7 +24,7 @@ const $module0 = {
   scope: "function",
 };
 const $module1 = {
-  id: "3eix0d6ptibv5:37:36",
+  id: "1rl1yd1xiyj96:37:36",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => "computed";\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAoCuC,gBAAU","names":[],"ignoreList":[],"sources":["splices/interface-splice.test.tsx"]}',
   dependencies: [],
@@ -33,7 +33,7 @@ const $module1 = {
   scope: "module",
 };
 const $module2 = {
-  id: "3eix0d6ptibv5:43:4",
+  id: "1rl1yd1xiyj96:43:4",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => $splice1().label.toUpperCase());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA0CO,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAS,CAACC,KAAK,CAACC,WAAW,EAAE,CAAC","names":["$splice0","$splice1","label","toUpperCase"],"ignoreList":[],"sources":["splices/interface-splice.test.tsx"]}',
   dependencies: [],
@@ -45,13 +45,22 @@ const $module2 = {
   scope: "function",
 };
 const $module3 = {
-  id: "3eix0d6ptibv5:57:23",
+  id: "1rl1yd1xiyj96:57:23",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0().title;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAwD0BA,QAAA,IAAAA,QAAA,EAAW,CAACC,KAAK","names":["$splice0","title"],"ignoreList":[],"sources":["splices/interface-splice.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
   scope: "module",
+};
+const $module4 = {
+  id: "1rl1yd1xiyj96:72:46",
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0();\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAuEiDA,QAAA,IAAAA,QAAA,EAAK","names":["$splice0"],"ignoreList":[],"sources":["splices/interface-splice.test.tsx"]}',
+  dependencies: [],
+  params: [{ kind: "splice", bindings: [] }],
+  kind: "expression",
+  scope: "function",
 };
 const todo = { title: "Ship 0.1.5", done: false, tags: ["release"] };
 it("interfaceSplice", async (t) => {
@@ -81,9 +90,12 @@ export const checkedMethod = withMethod;
 // TypeScript never gives an interface.
 // @ts-expect-error: Type 'Todo' does not satisfy the expected type 'Spliceable'.
 export const unchecked = todo;
-// The bundler takes what a splice takes.
-it("bundles an interface as input", async () => {
-  const bundle = await bundler.build({ input: todo, modules: {} });
+// A script takes what a splice takes.
+it("bundles an interface spliced into a script", async () => {
+  const bundle = await bundler.build({
+    input: cs.create($module4, [todo]),
+    modules: {},
+  });
   assert.match(bundle.generate({ format: "es" }).code, /"Ship 0\.1\.5"/);
 });
 // Never called: refused by the types, it would be refused when bundling too.

@@ -4,36 +4,36 @@ import { bundler } from "@backtickjs/bundler";
 import { createImport, cs, exec } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 const $module0 = {
-  id: "2xg1f7ymi5o4k:33:33",
+  id: "1xnve6tyb7jqj:30:33",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + 1;\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAgCoCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA6BoCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
   scope: "function",
 };
 const $module1 = {
-  id: "2xg1f7ymi5o4k:38:33",
+  id: "1xnve6tyb7jqj:35:33",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + 1;\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAqCoCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkCoCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
   scope: "function",
 };
 const $module2 = {
-  id: "2xg1f7ymi5o4k:46:34",
+  id: "1xnve6tyb7jqj:43:34",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + 1;\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA6CqCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA0CqCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
   scope: "function",
 };
 const $module3 = {
-  id: "2xg1f7ymi5o4k:47:33",
+  id: "1xnve6tyb7jqj:44:33",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()($splice1());\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA8CoC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAK,CAACC,QAAA,EAAM,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2CoC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAK,CAACC,QAAA,EAAM,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
   dependencies: [],
   params: [
     { kind: "splice", bindings: [] },
@@ -43,18 +43,18 @@ const $module3 = {
   scope: "function",
 };
 const $module4 = {
-  id: "2xg1f7ymi5o4k:53:34",
+  id: "1xnve6tyb7jqj:50:34",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + 1;\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAoDqCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAiDqCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
   dependencies: [],
   params: [{ kind: "splice", bindings: [] }],
   kind: "expression",
   scope: "function",
 };
 const $module5 = {
-  id: "2xg1f7ymi5o4k:54:33",
+  id: "1xnve6tyb7jqj:51:33",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()($splice1());\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAqDoC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAK,CAACC,QAAA,EAAM,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkDoC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAK,CAACC,QAAA,EAAM,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
   dependencies: [],
   params: [
     { kind: "splice", bindings: [] },

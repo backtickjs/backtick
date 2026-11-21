@@ -1,20 +1,25 @@
 import * as $module0 from "solid-js/web";
 const $modules = {
-  "1yq6zy4ucaaxv:20:18": (module, exports, require) => {
+  "2l25dwu0ag1gh:29:45": (module, exports, require) => {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = ($splice0) => $splice0();
+  },
+  "2l25dwu0ag1gh:20:18": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
     var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>ok`);
     exports.default = ($splice0) => _tmpl$();
   },
-  "1yq6zy4ucaaxv:10:13": (module, exports, require) => {
+  "2l25dwu0ag1gh:10:13": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = () => (props) => {
       throw new Error("boom");
     };
   },
-  "1yq6zy4ucaaxv:21:14": (module, exports, require) => {
+  "2l25dwu0ag1gh:21:14": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -43,7 +48,7 @@ const $modules = {
         return _el$;
       })();
   },
-  "1yq6zy4ucaaxv:14:16": (module, exports, require) => {
+  "2l25dwu0ag1gh:14:16": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const web_1 = require("solid-js/web");
@@ -74,14 +79,17 @@ const $value = (key, make) => {
   }
   return $values.get(key);
 };
-const $cs0 = $require("1yq6zy4ucaaxv:20:18").default;
-const $cs1 = $require("1yq6zy4ucaaxv:10:13").default;
-const $cs2 = $require("1yq6zy4ucaaxv:21:14").default;
-const $cs3 = $require("1yq6zy4ucaaxv:14:16").default;
-const $value0 = $value("1yq6zy4ucaaxv:10:13", () => $cs1());
+const $cs0 = $require("2l25dwu0ag1gh:29:45").default;
+const $cs1 = $require("2l25dwu0ag1gh:20:18").default;
+const $cs2 = $require("2l25dwu0ag1gh:10:13").default;
+const $cs3 = $require("2l25dwu0ag1gh:21:14").default;
+const $cs4 = $require("2l25dwu0ag1gh:14:16").default;
+const $value0 = $value("2l25dwu0ag1gh:10:13", () => $cs2());
 const $thunk1 = () => $value0;
-const $value2 = $value("1yq6zy4ucaaxv:20:18", () => $cs0($thunk1));
-const $value3 = $value("1yq6zy4ucaaxv:14:16", () => $cs3());
+const $value2 = $value("2l25dwu0ag1gh:20:18", () => $cs1($thunk1));
+const $value3 = $value("2l25dwu0ag1gh:14:16", () => $cs4());
 const $thunk4 = () => $value3;
-const $value5 = $value("1yq6zy4ucaaxv:21:14", () => $cs2($thunk4, $thunk4));
-export default { unreached: $value2, twice: $value5 };
+const $value5 = $value("2l25dwu0ag1gh:21:14", () => $cs3($thunk4, $thunk4));
+const $thunk6 = () => ({ unreached: $value2, twice: $value5 });
+const $value7 = $cs0($thunk6);
+export default $value7;

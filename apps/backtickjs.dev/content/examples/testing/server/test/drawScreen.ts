@@ -1,6 +1,6 @@
 import { fileURLToPath } from "node:url";
 import { bundler } from "@backtickjs/bundler";
-import { modulesOf, type Spliceable } from "@backtickjs/core";
+import { type Client, modulesOf } from "@backtickjs/core";
 import { installedPackages } from "@backtickjs/core/node";
 import { execRoot } from "@backtickjs/core/cjs";
 import * as React from "react";
@@ -23,7 +23,7 @@ const modules = modulesOf(
 
 // A screen, bundled as your server bundles it and run as your app runs it,
 // for Testing Library to draw.
-export async function drawScreen<T extends Spliceable>(input: T) {
+export async function drawScreen<T>(input: Client<T>) {
   const bundle = await bundler.build({ input, modules });
   const { code } = bundle.generate({ format: "cjs" });
   return execRoot(code, moduleMap);

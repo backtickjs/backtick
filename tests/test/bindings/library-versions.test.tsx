@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bundler, ClientVersionMismatch, supports } from "@backtickjs/bundler";
-import { type ClientImport, cs, type Spliceable } from "@backtickjs/core";
+import { type Client, type ClientImport, cs } from "@backtickjs/core";
 import { render, screen } from "@solidjs/testing-library";
 import { Button } from "acme-ui" with { backtick: "client" };
 import { Button as Button2 } from "acme-ui-2" with { backtick: "client" };
@@ -31,7 +31,7 @@ const solid = {
   "solid-js/web": "1.9.14",
 };
 
-async function bundleFor(input: Spliceable, acme: string) {
+async function bundleFor(input: Client<unknown>, acme: string) {
   const built = await bundler.build({
     input,
     modules: { ...solid, "acme-ui": acme },

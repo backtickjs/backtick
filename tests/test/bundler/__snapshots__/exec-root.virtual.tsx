@@ -3,11 +3,10 @@ import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import {
   type Bundle,
+  type Client,
   createImport,
   cs,
   exec,
-  type Spliceable,
-  type Spliced,
 } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 
@@ -18,9 +17,7 @@ const answer = createImport<number>({
   version: "1.0.0",
 });
 
-async function bundleCjs<T extends Spliceable>(
-  value: T,
-): Promise<Bundle<Spliced<T>>> {
+async function bundleCjs<T>(value: Client<T>): Promise<Bundle<T>> {
   const built = await bundler.build({
     input: value,
     modules: { app: "1.0.0" },
