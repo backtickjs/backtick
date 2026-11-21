@@ -1,4 +1,4 @@
-import { bundler, BundlerError, type Modules } from "@backtickjs/bundler";
+import { BundlerError, render } from "@backtickjs/bundler";
 import type { Client } from "@backtickjs/core";
 import type { Context, Hono, MiddlewareHandler } from "hono";
 import { clientRuntime } from "./runtime.js";
@@ -138,33 +138,22 @@ export function backtickApp(app: Hono<any, any, any>): MiddlewareHandler {
 // Where the Backtick app fetches the runtime it opens an app with.
 const runtimePath = "/.well-known/backtick/runtime";
 
-// `input` bundled for the modules the client sent, as the answer.
+// `input` rendered for the client that asked, with the context's status: a
+// refusal answered as `render` words it, as JSON.
 async function bundled(
   context: Context,
   input: Client<unknown>,
 ): Promise<Response> {
-  let modules: Modules;
   try {
-    modules = JSON.parse(context.req.header("x-backtick-modules") ?? "{}");
-  } catch (error) {
-    const { name, message } = error as SyntaxError;
-    return context.json(
-      { name, message: `x-backtick-modules isn't JSON: ${message}` },
-      400,
+    const response = await render(context.req.raw, input);
+    return context.body(
+      await response.text(),
+      undefined,
+      Object.fromEntries(response.headers),
     );
-  }
-  try {
-    const build = await bundler.build({ input, modules });
-    const { code } = build.generate({ format: "cjs" });
-    context.header("content-type", "text/javascript");
-    context.header("cache-control", "no-store");
-    return context.body(code);
   } catch (error) {
     if (error instanceof BundlerError) {
-      return context.json(
-        { name: error.name, message: error.message },
-        error.name === "ClientVersionMismatch" ? 426 : 400,
-      );
+      return error.getResponse();
     }
     throw error;
   }

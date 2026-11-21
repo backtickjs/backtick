@@ -84,8 +84,16 @@ Spliced values are written into the bundle as data, never as code. What can't cr
 - `bundler.build({ input, modules })`: runs the server components in `input` and returns a `Build`. Async. `input` is a `Client<T>`: an element, as `<Home />`, or a script. Plain data is sent as a script, `` cs`${value}` ``.
 - `Build.generate({ format, sourcemap })`: writes the bundle; returns `{ code, map }`, where `code` is a `Bundle<T>` (from `@backtickjs/core`) for an `input` of `Client<T>`, which the client runs to a `T`, and `map` is `null` without a source map.
 - `supports(specifier, range)`: in a server component, whether the client being drawn for provides `specifier` at a version in `range`.
-- `BundlerError`: what `build` throws when it refuses its input, such as a value it can't splice. An error a server component throws passes through as it is.
-- `ClientVersionMismatch`, a `BundlerError`: what `build` throws for a script's import the client can't run.
+- `BundlerError`: what `build` throws when it refuses its input, such as a value it can't splice. An error a server component throws passes through as it is. `getResponse()` answers it as JSON `{ name, message }` at its `status`, a 400: Hono's default error handler calls it on its own; elsewhere, the app's error handler returns it.
+- `ClientVersionMismatch`, a `BundlerError`: what `build` throws for a script's import the client can't run. Its `status` is 426.
+- `render(request, input, init?)`, for a server that speaks the Fetch API's `Request` and `Response`, as Hono, Next.js route handlers and Workers do: `input`, a `Client<T>`, bundled for the modules the request's `x-backtick-modules` header lists, as a `BundleResponse<T>`: CommonJS, `text/javascript`, `no-store`, with `init`'s status and headers, which win over its own. A bundle it can't make throws a `BundlerError`, a header that isn't JSON among them.
+
+  ```tsx
+  app.get("/", (c) => render(c.req.raw, <Home />));
+  if (!show) return render(c.req.raw, <NotFound />, { status: 404 });
+  ```
+
+- `BundleResponse<T>`: a `Response` whose `text()` is the `Bundle<T>`.
 - Types: `BuildOptions`, `OutputOptions`, `OutputChunk`, `Build`, `Modules`.
 
 ## Related

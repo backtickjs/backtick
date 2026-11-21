@@ -6,5 +6,6 @@ export {
   type OutputOptions,
 } from "./bundler.js";
 export { BundlerError, ClientVersionMismatch } from "./errors.js";
+export { type BundleResponse, render } from "./render.js";
 export type { Modules } from "./modules.js";
 export { supports } from "./supports.js";

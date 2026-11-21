@@ -69,7 +69,7 @@ test("modules that aren't JSON are a 400", async () => {
   const response = await request("{");
   assert.equal(response.status, 400);
   const { name, message } = await response.json();
-  assert.equal(name, "SyntaxError");
+  assert.equal(name, "BundlerError");
   assert.match(message, /^x-backtick-modules isn't JSON: /);
 });
 
