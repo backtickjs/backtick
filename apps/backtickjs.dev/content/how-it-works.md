@@ -104,9 +104,9 @@ has every option.
 
 ## 4. Run by your app
 
-Your app fetches the bundle like any request, and runs it with `execRoot` from
-`@backtickjs/core/cjs`, handing it its module map: the packages it
-ships, imported as it starts. What the bundle exports is the screen, a React
+Your app fetches the bundle like any request, and runs it with a runtime from
+`createRuntime`, in `@backtickjs/core`, made once from its module map: the
+packages it ships, imported as it starts. What the bundle exports is the screen, a React
 node the app draws:
 
 ```tsx file=thinking/client/App.tsx
@@ -115,7 +115,7 @@ node the app draws:
 
 Both files are what `create-backtick-app` sets up, without its development
 extras. Fetching is your app's, and so is when: on launch, on focus, on a pull
-to refresh. `execRoot` runs the code it's given, as `eval` does, so fetch
+to refresh. `runtime.exec` runs the code it's given, as `eval` does, so fetch
 bundles only from your own server, over HTTPS.
 
 Because the phone runs code your server wrote, a deploy of your server is a
@@ -125,14 +125,14 @@ release of the screen: the next time someone opens it, they get the new one.
 
 What a React Native project uses, each linked to its README:
 
-| Package                                                                                                    | What it is                                      |
-| ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core)                       | The `cs` tag, and `execRoot` to run a bundle    |
-| [`@backtickjs/jsx-react`](https://github.com/backtickjs/backtick/tree/main/packages/jsx-react)             | React's JSX, and its compile step for scripts   |
-| [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler)                 | Runs server components and bundles a screen     |
-| [`@backtickjs/node-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/node-plugin)         | Compiles scripts as your Node server loads them |
-| [`@backtickjs/tsc`](https://github.com/backtickjs/backtick/tree/main/packages/tsc)                         | `backtick-tsc`: type-checks scripts and splices |
-| [`@backtickjs/prettier-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/prettier-plugin) | Formats the code inside scripts                 |
+| Package                                                                                                    | What it is                                        |
+| ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core)                       | The `cs` tag, and `createRuntime` to run a bundle |
+| [`@backtickjs/jsx-react`](https://github.com/backtickjs/backtick/tree/main/packages/jsx-react)             | React's JSX, and its compile step for scripts     |
+| [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler)                 | Runs server components and bundles a screen       |
+| [`@backtickjs/node-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/node-plugin)         | Compiles scripts as your Node server loads them   |
+| [`@backtickjs/tsc`](https://github.com/backtickjs/backtick/tree/main/packages/tsc)                         | `backtick-tsc`: type-checks scripts and splices   |
+| [`@backtickjs/prettier-plugin`](https://github.com/backtickjs/backtick/tree/main/packages/prettier-plugin) | Formats the code inside scripts                   |
 
 The [repository's README](https://github.com/backtickjs/backtick#packages)
 lists them all, Solid's JSX and Bun included.

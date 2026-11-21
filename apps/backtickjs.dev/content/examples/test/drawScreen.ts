@@ -1,8 +1,7 @@
 import assert from "node:assert/strict";
 import { readFileSync, writeFileSync } from "node:fs";
 import { bundler } from "@backtickjs/bundler";
-import type { Client } from "@backtickjs/core";
-import { execRoot } from "@backtickjs/core/cjs";
+import { type Client, createRuntime } from "@backtickjs/core";
 import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNativeWeb from "react-native-web";
@@ -12,14 +11,14 @@ import * as ReactNativeWeb from "react-native-web";
 // what else the app provides, each by specifier, at a version.
 export async function drawScreen<T>(input: Client<T>, modules: Provided = {}) {
   const { code } = await bundleScreen(input, modules);
-  return execRoot(code, {
+  return createRuntime({
     react: React,
     "react/jsx-runtime": JSXRuntime,
     "react-native": ReactNativeWeb,
     ...Object.fromEntries(
       Object.entries(modules).map(([name, { module }]) => [name, module]),
     ),
-  });
+  }).exec(code);
 }
 
 type Provided = Record<string, { version: string; module: unknown }>;

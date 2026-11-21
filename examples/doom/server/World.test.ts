@@ -5,8 +5,7 @@ import { installedPackages } from "@backtickjs/core/node";
 import { bundler } from "@backtickjs/bundler";
 import * as Fiber from "@react-three/fiber";
 import ReactThreeTestRenderer from "@react-three/test-renderer";
-import { modulesOf } from "@backtickjs/core";
-import { execRoot } from "@backtickjs/core/cjs";
+import { modulesOf, createRuntime } from "@backtickjs/core";
 import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import { readLevel, readLevels } from "./levels.js";
@@ -31,9 +30,8 @@ const modules = modulesOf(
 
 // `World` as the phone gets it: bundled by the server, run by the app.
 const bundle = await bundler.build({ input: World, modules });
-const PlayedWorld = await execRoot(
+const PlayedWorld = await createRuntime(moduleMap).exec(
   bundle.generate({ format: "cjs" }).code,
-  moduleMap,
 );
 
 const start: Stats = { health: 100, ammo: 24, kills: 0, shots: 0, wounds: 0 };

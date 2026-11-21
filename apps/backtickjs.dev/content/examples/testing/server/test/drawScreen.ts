@@ -1,8 +1,7 @@
 import { fileURLToPath } from "node:url";
 import { bundler } from "@backtickjs/bundler";
-import { type Client, modulesOf } from "@backtickjs/core";
+import { type Client, modulesOf, createRuntime } from "@backtickjs/core";
 import { installedPackages } from "@backtickjs/core/node";
-import { execRoot } from "@backtickjs/core/cjs";
 import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNativeWeb from "react-native-web";
@@ -26,5 +25,5 @@ const modules = modulesOf(
 export async function drawScreen<T>(input: Client<T>) {
   const bundle = await bundler.build({ input, modules });
   const { code } = bundle.generate({ format: "cjs" });
-  return execRoot(code, moduleMap);
+  return createRuntime(moduleMap).exec(code);
 }

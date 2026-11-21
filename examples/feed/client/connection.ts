@@ -1,5 +1,4 @@
-import { type Bundle, modulesOf } from "@backtickjs/core";
-import { execRoot } from "@backtickjs/core/cjs";
+import { type Bundle, createRuntime, modulesOf } from "@backtickjs/core";
 import { getBacktickExtra } from "@backtickjs/expo";
 import { QueryClient } from "@tanstack/react-query";
 import Constants from "expo-constants";
@@ -12,6 +11,9 @@ const server = `http://${host}:3000`;
 // The modules this build carries, at the versions app.json's plugin records.
 const { installedPackages } = getBacktickExtra(Constants.expoConfig);
 const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
+// What runs the screens the server sends, with the modules the app provides:
+// one per app, so what a screen makes once stays made.
+const runtime = createRuntime(moduleMap);
 
 /**
  * What your server answers at `path`: its bundle, fetched with this build's
@@ -37,7 +39,7 @@ export async function fetchBundle(
     );
   }
   const bundle = (await response.text()) as Bundle<unknown>;
-  return execRoot(bundle, moduleMap);
+  return runtime.exec(bundle);
 }
 
 /**

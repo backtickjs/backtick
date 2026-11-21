@@ -36,7 +36,7 @@ has to be in two places:
 ```
 
 **2. Your app's module map,** the modules a screen may require, which the app
-hands to `execRoot`:
+hands to `createRuntime`:
 
 ```ts file=react-native-and-packages/client/moduleMap.ts
 

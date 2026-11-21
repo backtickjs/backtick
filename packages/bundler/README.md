@@ -10,7 +10,7 @@ npm install @backtickjs/bundler @backtickjs/core
 
 ## Usage
 
-For React Native, write CommonJS and serve it; the app fetches it and runs it with `execRoot` from `@backtickjs/core/cjs`:
+For React Native, write CommonJS and serve it; the app fetches it and runs it with a runtime from `createRuntime`, in `@backtickjs/core`:
 
 ```tsx
 import { bundler } from "@backtickjs/bundler";
@@ -75,7 +75,7 @@ Spliced values are written into the bundle as data, never as code. What can't cr
 ### Formats
 
 - `"es"`: an ES module, for a web page. Packages are imported by specifier, which the page's import map resolves.
-- `"cjs"`: CommonJS, for a client that provides `require` itself, as a React Native app does through `execRoot`.
+- `"cjs"`: CommonJS, for a client that provides `require` itself, as a React Native app does through `createRuntime`.
 
 ### Source maps
 
@@ -100,7 +100,7 @@ Spliced values are written into the bundle as data, never as code. What can't cr
 
 ## Related
 
-- [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): the `cs` tag, and `execRoot`, which runs a bundle in the app
+- [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): the `cs` tag, and `createRuntime`, which runs bundles in the app
 - [`@backtickjs/jsx-react`](https://github.com/backtickjs/backtick/tree/main/packages/jsx-react), [`@backtickjs/jsx-solid`](https://github.com/backtickjs/backtick/tree/main/packages/jsx-solid): each framework's JSX
 - [How it works](https://backtickjs.dev/docs/how-it-works/)
 - [Errors](https://backtickjs.dev/docs/errors/)

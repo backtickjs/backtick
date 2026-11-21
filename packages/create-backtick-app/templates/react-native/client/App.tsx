@@ -1,5 +1,4 @@
-import { type Bundle, modulesOf } from "@backtickjs/core";
-import { execRoot } from "@backtickjs/core/cjs";
+import { type Bundle, createRuntime, modulesOf } from "@backtickjs/core";
 import { getBacktickExtra } from "@backtickjs/expo";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
@@ -19,6 +18,9 @@ const server = `http://${host}:3000`;
 // The modules this build carries, at the versions app.json's plugin records.
 const { installedPackages } = getBacktickExtra(Constants.expoConfig);
 const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
+// What runs the screens the server sends, with the modules the app provides:
+// one per app, so what a screen makes once stays made.
+const runtime = createRuntime(moduleMap);
 
 // The screen at `path` on your server: its bundle, fetched and run with the
 // app's modules. Your fetch to shape: headers, auth, caching.
@@ -30,7 +32,7 @@ async function fetchScreen(path: string): Promise<ReactNode> {
     throw new Error(`${path} answered ${response.status}.`);
   }
   const bundle = (await response.text()) as Bundle<ReactNode>;
-  return execRoot(bundle, moduleMap);
+  return runtime.exec(bundle);
 }
 
 export default function App() {

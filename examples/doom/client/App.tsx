@@ -1,5 +1,4 @@
-import { type Bundle, modulesOf } from "@backtickjs/core";
-import { execRoot } from "@backtickjs/core/cjs";
+import { type Bundle, createRuntime, modulesOf } from "@backtickjs/core";
 import { getBacktickExtra } from "@backtickjs/expo";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
@@ -26,6 +25,9 @@ const server = `http://${host}:3000`;
 // The modules this build carries, at the versions app.json's plugin records.
 const { installedPackages } = getBacktickExtra(Constants.expoConfig);
 const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
+// What runs the screens the server sends, with the modules the app provides:
+// one per app, so what a screen makes once stays made.
+const runtime = createRuntime(moduleMap);
 
 // A screen as fetched, with what each stage of getting it cost so far:
 // `Screen` adds the render and logs the whole pipeline.
@@ -55,7 +57,7 @@ async function fetchScreen(path: string): Promise<Fetched> {
   }
   const bundle = (await response.text()) as Bundle<ReactNode>;
   const downloaded = performance.now();
-  const node = await execRoot(bundle, moduleMap);
+  const node = await runtime.exec(bundle);
   const evaluated = performance.now();
   return {
     path,

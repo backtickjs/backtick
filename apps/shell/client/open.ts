@@ -1,5 +1,4 @@
-import { type Bundle, modulesOf } from "@backtickjs/core";
-import { execRoot } from "@backtickjs/core/cjs";
+import { type Bundle, createRuntime, modulesOf } from "@backtickjs/core";
 import { getBacktickExtra } from "@backtickjs/expo";
 import type { Runtime } from "@backtickjs/hono";
 import Constants from "expo-constants";
@@ -54,5 +53,6 @@ async function fetchRuntime(app: string | null): Promise<Runtime> {
       `The app couldn't be opened (${response.status}): ${reason}`,
     );
   }
-  return execRoot(body as Bundle<Runtime>, moduleMap);
+  // A runtime of its own for each app opened, so no two share what they make.
+  return createRuntime(moduleMap).exec(body as Bundle<Runtime>);
 }

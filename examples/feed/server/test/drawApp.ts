@@ -1,7 +1,6 @@
 import { fileURLToPath } from "node:url";
-import { type Bundle, modulesOf } from "@backtickjs/core";
+import { type Bundle, modulesOf, createRuntime } from "@backtickjs/core";
 import { installedPackages } from "@backtickjs/core/node";
-import { execRoot } from "@backtickjs/core/cjs";
 import * as ReactQuery from "@tanstack/react-query";
 import { render } from "@testing-library/react";
 import * as React from "react";
@@ -52,7 +51,7 @@ export async function fetchBundle(
 ) {
   if (failing.has(path)) throw new Error("unreachable");
   const bundle = await answer(init.method ?? "GET", path, init.body);
-  return execRoot(bundle, moduleMap);
+  return createRuntime(moduleMap).exec(bundle);
 }
 
 /**
