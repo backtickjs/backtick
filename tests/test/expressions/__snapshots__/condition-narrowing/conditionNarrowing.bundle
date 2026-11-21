@@ -39,19 +39,19 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $values = module.values ?? new Map();
-const $value = (key, make) => {
-  if (!$values.has(key)) {
-    $values.set(key, make());
+const $cache = module.cache ?? new Map();
+const $cached = (key, make) => {
+  if (!$cache.has(key)) {
+    $cache.set(key, make());
   }
-  return $values.get(key);
+  return $cache.get(key);
 };
 const $cs0 = $require("g29mnwu0pbnr:27:4").default;
 const $cs1 = $require("g29mnwu0pbnr:10:71").default;
 const $cs2 = $require("g29mnwu0pbnr:8:24").default;
-const $value0 = $value("g29mnwu0pbnr:8:24", () => $cs2());
+const $value0 = $cached("g29mnwu0pbnr:8:24", () => $cs2());
 const $thunk1 = () => $value0;
-const $value2 = $value("g29mnwu0pbnr:10:71", () => $cs1($thunk1));
+const $value2 = $cached("g29mnwu0pbnr:10:71", () => $cs1($thunk1));
 const $thunk3 = () => $value2;
 const $value4 = $cs0($thunk3, $thunk3, $thunk3, $thunk3);
 module.exports = $value4;

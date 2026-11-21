@@ -1,20 +1,19 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { cs, type Client } from "@backtickjs/core";
-import { execRoot } from "@backtickjs/core/cjs";
+import { cs, type Client, createRuntime, type Runtime } from "@backtickjs/core";
 
-// An app's bundles share the values of its module-level scripts, as an app's
+// An app's bundles share what its module-level scripts make, as an app's
 // chunks share its modules: two routes that splice one module-level store get
-// one store, as the runtime runs them, with one registry. A bundle run alone
-// has its own.
+// one store, as one runtime runs them, with one cache. A bundle run by a
+// runtime of its own has its own.
 async function run<T>(
   input: Client<T>,
-  values?: Map<string, unknown>,
+  runtime: Runtime = createRuntime({}),
 ): Promise<T> {
   const bundle = await bundler.build({ input, modules: {} });
   const { code } = bundle.generate({ format: "cjs" });
-  return execRoot(code, {}, values);
+  return runtime.exec(code) as Promise<T>;
 }
 
 const store = cs.lift((() => ({ count: 0 }))());
@@ -22,9 +21,9 @@ const home = cs.lift((() => (cs.splice((store))))());
 const details = cs.lift((() => (cs.splice((store))))());
 
 it("two bundles of an app share a value", async () => {
-  const values = new Map<string, unknown>();
-  const homeStore = await run(home, values);
-  const detailsStore = await run(details, values);
+  const runtime = createRuntime({});
+  const homeStore = await run(home, runtime);
+  const detailsStore = await run(details, runtime);
   assert.equal(homeStore, detailsStore);
 });
 
@@ -32,7 +31,7 @@ it("a bundle run alone has its own", async () => {
   assert.notEqual(await run(home), await run(details));
 });
 
-// A `cs` written in a function runs each call: its values are each bundle's
+// A `cs` written in a function runs each call: what it makes is each bundle's
 // own, as a function's locals are each call's.
 function box(): Client<{ label: string }> {
   return cs.lift((() => ({ label: "box" }))());
@@ -41,9 +40,9 @@ const a = box();
 const b = box();
 
 it("a value made in a function is each bundle's own", async () => {
-  const values = new Map<string, unknown>();
-  const [first, second] = await run(cs.lift((() => [(cs.splice((a))), (cs.splice((b)))])()), values);
+  const runtime = createRuntime({});
+  const [first, second] = await run(cs.lift((() => [(cs.splice((a))), (cs.splice((b)))])()), runtime);
   assert.notEqual(first, second);
-  const [again] = await run(cs.lift((() => [(cs.splice((a)))])()), values);
+  const [again] = await run(cs.lift((() => [(cs.splice((a)))])()), runtime);
   assert.notEqual(again, first);
 });

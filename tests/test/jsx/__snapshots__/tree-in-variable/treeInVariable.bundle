@@ -64,12 +64,12 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $values = module.values ?? new Map();
-const $value = (key, make) => {
-  if (!$values.has(key)) {
-    $values.set(key, make());
+const $cache = module.cache ?? new Map();
+const $cached = (key, make) => {
+  if (!$cache.has(key)) {
+    $cache.set(key, make());
   }
-  return $values.get(key);
+  return $cache.get(key);
 };
 const $cs0 = $require("2xjp8x9bcyeyr:29:4").default;
 const $cs1 = $require("2xjp8x9bcyeyr:15:20").default;
@@ -77,16 +77,16 @@ const $cs2 = $require("2xjp8x9bcyeyr:16:17").default;
 const $cs3 = $require("2xjp8x9bcyeyr:20:22").default;
 const $cs4 = $require("o9e7zz7zzcul:356:9").default;
 const $cs5 = $require("2xjp8x9bcyeyr:13:28").default;
-const $value0 = $value("2xjp8x9bcyeyr:16:17", () => $cs2());
+const $value0 = $cached("2xjp8x9bcyeyr:16:17", () => $cs2());
 const $thunk1 = () => $value0;
-const $value2 = $value("2xjp8x9bcyeyr:15:20", () => $cs1($thunk1));
+const $value2 = $cached("2xjp8x9bcyeyr:15:20", () => $cs1($thunk1));
 const $thunk3 = () => $value2;
 const $thunk4 = () => $i0;
 const $value5 = $cs5();
 const $thunk6 = () => $value5;
 const $value7 = $cs4($thunk4, $thunk6);
 const $thunk8 = () => $value7;
-const $value9 = $value("2xjp8x9bcyeyr:20:22", () => $cs3($thunk8));
+const $value9 = $cached("2xjp8x9bcyeyr:20:22", () => $cs3($thunk8));
 const $thunk10 = () => $value9;
 const $value11 = $cs0($thunk3, $thunk10);
 module.exports = $value11;

@@ -20,23 +20,24 @@ const RUNTIME = `const $require = (id) => {
 // `require` this bundle was: inside the module table, `require` is the
 // table's own.
 const EXEC_CJS = `const $exec = async (bundle) => {
-  const module = { exports: {}, values: $values };
+  const module = { exports: {}, cache: $cache };
   new Function("module", "exports", "require", bundle)(module, module.exports, require);
   return module.exports;
 };`;
 
-// The values an app's bundles share, by key, as a module's are shared by every
-// chunk that imports it: made by the first bundle that needs one. As CommonJS,
-// handed by whatever runs the bundle, which `$exec` passes on, or the bundle's
-// own; as an ES module, the bundle's own.
-const VALUE = `const $value = (key, make) => {
-  if (!$values.has(key)) {
-    $values.set(key, make());
+// The cache an app's bundles share: each value a script makes once, by key,
+// as a module's exports are shared by every chunk that imports it, made by the
+// first bundle that needs it. As CommonJS, handed by whatever runs the bundle,
+// which `$exec` passes on, or the bundle's own; as an ES module, the bundle's
+// own.
+const CACHED = `const $cached = (key, make) => {
+  if (!$cache.has(key)) {
+    $cache.set(key, make());
   }
-  return $values.get(key);
+  return $cache.get(key);
 };`;
-const VALUES_CJS = `const $values = module.values ?? new Map();\n${VALUE}`;
-const VALUES_ES = `const $values = new Map();\n${VALUE}`;
+const CACHE_CJS = `const $cache = module.cache ?? new Map();\n${CACHED}`;
+const CACHE_ES = `const $cache = new Map();\n${CACHED}`;
 
 // As an ES module, imported whole, the page's import map answering its
 // imports as it answers this bundle's.
@@ -103,7 +104,7 @@ export function printBundle(
   );
   module.line("};");
   module.line(RUNTIME);
-  module.line(format === "es" ? VALUES_ES : VALUES_CJS);
+  module.line(format === "es" ? CACHE_ES : CACHE_CJS);
   for (const [label, entry] of tree.modules) {
     module.line(`const ${label} = $require(${string(entry.id)}).default;`);
   }
@@ -111,7 +112,7 @@ export function printBundle(
     module.line(
       key === undefined
         ? `const ${label} = ${code};`
-        : `const ${label} = $value(${string(key)}, () => ${code});`,
+        : `const ${label} = $cached(${string(key)}, () => ${code});`,
     );
   }
   // Parenthesized, so a root that is a function isn't a declaration.

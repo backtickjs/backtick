@@ -19,15 +19,15 @@ const $require = (id) => {
   }
   return $exports[id];
 };
-const $values = module.values ?? new Map();
-const $value = (key, make) => {
-  if (!$values.has(key)) {
-    $values.set(key, make());
+const $cache = module.cache ?? new Map();
+const $cached = (key, make) => {
+  if (!$cache.has(key)) {
+    $cache.set(key, make());
   }
-  return $values.get(key);
+  return $cache.get(key);
 };
 const $cs0 = $require("3lrzh9pxuc0as:14:17").default;
 const $thunk0 = () => $i0;
 const $thunk1 = () => $i1;
-const $value2 = $value("3lrzh9pxuc0as:14:17", () => $cs0($thunk0, $thunk1));
+const $value2 = $cached("3lrzh9pxuc0as:14:17", () => $cs0($thunk0, $thunk1));
 module.exports = $value2;

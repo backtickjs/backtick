@@ -33,7 +33,7 @@ test("a bundle is the same in either format but for its imports, its values' reg
       .split("\n")
       .filter(
         (line) =>
-          !/^(import |export |const \{.*require\(|"use strict"|module\.exports|const \$values = )/.test(
+          !/^(import |export |const \{.*require\(|"use strict"|module\.exports|const \$cache = )/.test(
             line,
           ),
       );
