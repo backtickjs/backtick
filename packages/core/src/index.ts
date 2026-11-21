@@ -22,6 +22,8 @@ export type { ClientModule } from "./ClientModule.js";
 // `@backtickjs/core/cjs` or `@backtickjs/core/es`.
 export type { Bundle } from "./Bundle.js";
 export { exec, isClientExec, type ClientExec } from "./exec.js";
+// What runs an app's bundles, with the modules it provides.
+export { createRuntime, type Runtime } from "./createRuntime.js";
 
 // A drawing as a host builds one: what a JSX package's runtime makes, and
 // what the bundler expands.

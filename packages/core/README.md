@@ -117,6 +117,7 @@ A test draws a screen with a module map of its own, stand-ins included; its modu
 - `createImport<T>({ name, from, version })`: an export of a module the client provides, as a value a script can splice.
 - `isClientImport`, `ClientImport`: its check and type.
 - `Bundle<T>`: a bundle's code, branded with what it runs to. `bundler.build(…).generate(…)` writes one.
+- `createRuntime(moduleMap)`: what runs an app's bundles, a `Runtime`. `runtime.exec(bundle)` runs a CommonJS bundle to its value, as a promise, with `require` answered from `moduleMap`; the bundles it runs with `$exec` get the same modules, and they all share the runtime's values, each made once per runtime.
 - `execRoot(bundle, moduleMap)`, from `@backtickjs/core/cjs`: in a React Native app, runs the CommonJS bundle it starts from to its value, as a promise, with `require` answered from `moduleMap`, a `ModuleMap`: the modules the app provides, by specifier.
 - `execRoot(bundle)`, from `@backtickjs/core/es`: in a web page, imports the ES bundle it starts from and resolves to its value, the page's import map answering its imports. Each format has its own entry, so a React Native app's bundler never reads the ES one's `import()`.
 - `modulesOf(moduleMap, installedPackages)`: the modules `moduleMap`, a `ModuleMap`, offers, each at its package's version in `installedPackages`, for the app to send its server.
