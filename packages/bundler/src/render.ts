@@ -9,8 +9,9 @@ export interface BundleResponse<T> extends Response {
 }
 
 /**
- * Answers `request` with `input` bundled for the app that sent it: CommonJS,
- * never cached, with `init`'s status and headers.
+ * Answers `request` with `input` bundled for the app that sent it, in the
+ * format its `x-backtick-format` asks for (`cjs` when it doesn't say), never
+ * cached, with `init`'s status and headers.
  *
  *     app.get("/", (c) => render(c.req.raw, <Home />));
  *     return render(c.req.raw, <NotFound />, { status: 404 });
@@ -22,6 +23,13 @@ export async function render<T>(
   input: Client<T>,
   init?: ResponseInit,
 ): Promise<BundleResponse<T>> {
+  // React Native runs CommonJS, a web page ES modules.
+  const format = request.headers.get("x-backtick-format") ?? "cjs";
+  if (format !== "cjs" && format !== "es") {
+    throw new BundlerError(
+      `x-backtick-format must be "cjs" or "es", not "${format}".`,
+    );
+  }
   let modules: Modules;
   try {
     modules = JSON.parse(request.headers.get("x-backtick-modules") ?? "{}");
@@ -32,7 +40,7 @@ export async function render<T>(
     );
   }
   const build = await bundler.build({ input, modules });
-  const { code } = build.generate({ format: "cjs" });
+  const { code } = build.generate({ format });
   // The route's headers win over these.
   const headers = new Headers({
     "content-type": "text/javascript",

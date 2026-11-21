@@ -9,7 +9,10 @@ export const app = new Hono();
 
 // `npm run web` serves the app from another origin.
 app.use(
-  cors({ origin: "*", allowHeaders: ["x-backtick-modules", "content-type"] }),
+  cors({
+    origin: "*",
+    allowHeaders: ["x-backtick-modules", "x-backtick-format", "content-type"],
+  }),
 );
 
 // The feed, and its pages, which know their items' paths only.

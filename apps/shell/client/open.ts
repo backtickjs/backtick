@@ -38,7 +38,7 @@ export function openApp(app: string | null): Promise<Runtime> {
 async function fetchRuntime(app: string | null): Promise<Runtime> {
   const response = await fetch(
     originOf(app) + "/.well-known/backtick/runtime",
-    { headers: { "x-backtick-modules": modules } },
+    { headers: { "x-backtick-modules": modules, "x-backtick-format": "cjs" } },
   );
   const body = await response.text();
   if (

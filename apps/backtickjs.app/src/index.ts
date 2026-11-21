@@ -102,6 +102,7 @@ async function screen(c: Context<Env>, id: string): Promise<Response> {
     new Request(c.req.url, {
       headers: {
         "x-backtick-modules": c.req.header("x-backtick-modules")!,
+        "x-backtick-format": c.req.header("x-backtick-format") ?? "cjs",
         "x-backtick-user": await appUser(c, id, user),
       },
     }),

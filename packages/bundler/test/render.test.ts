@@ -9,11 +9,13 @@ const greet = createImport<(name: string) => string>({
   version: "1.0.0",
 });
 
-const request = (modules?: string) =>
-  new Request(
-    "http://app.test/",
-    modules === undefined ? {} : { headers: { "x-backtick-modules": modules } },
-  );
+const request = (modules?: string, format?: string) =>
+  new Request("http://app.test/", {
+    headers: {
+      ...(modules === undefined ? {} : { "x-backtick-modules": modules }),
+      ...(format === undefined ? {} : { "x-backtick-format": format }),
+    },
+  });
 
 const phone = JSON.stringify({ app: "1.0.0" });
 
@@ -22,6 +24,31 @@ test("a render is its input bundled as CommonJS for the client's modules", async
   assert.equal(response.status, 200);
   assert.equal(response.headers.get("content-type"), "text/javascript");
   assert.match(await response.text(), /require\("app"\)/);
+});
+
+test("a render is an ES module for a client that asks for one", async () => {
+  const response = await render(request(phone, "es"), cs`$greet("world")`);
+  const code = await response.text();
+  assert.match(code, /from "app"/);
+  assert.match(code, /export default /);
+});
+
+test("a render is CommonJS for a client that asks for it", async () => {
+  const response = await render(request(phone, "cjs"), greet);
+  assert.match(await response.text(), /require\("app"\)/);
+});
+
+test("a format that isn't cjs or es is a 400", async () => {
+  const error = await render(request(phone, "umd"), greet).then(
+    () => assert.fail("rendered"),
+    (error: unknown) => error,
+  );
+  assert.ok(error instanceof BundlerError);
+  assert.equal(error.status, 400);
+  assert.match(
+    error.message,
+    /^x-backtick-format must be "cjs" or "es", not "umd"\.$/,
+  );
 });
 
 test("renders are never stored", async () => {

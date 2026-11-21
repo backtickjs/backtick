@@ -9,7 +9,12 @@ import { saveOrder } from "./orders.js";
 const app = new Hono();
 
 // `npm run web` serves the app from another origin.
-app.use(cors({ origin: "*", allowHeaders: ["x-backtick-modules"] }));
+app.use(
+  cors({
+    origin: "*",
+    allowHeaders: ["x-backtick-modules", "x-backtick-format"],
+  }),
+);
 
 // Your app's screens: `render` bundles each one for the app. A path can take
 // parameters, `/stories/:id`, read with `context.req.param("id")`.
