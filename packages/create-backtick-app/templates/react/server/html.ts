@@ -11,14 +11,14 @@ const modules = {
 // Development unless NODE_ENV says production, as hosts set it for a deploy.
 const development = process.env.NODE_ENV !== "production";
 
-// A page: its element, bundled for the browser, which the page's entry draws
-// with React's `createRoot`, and React from a CDN.
+// A page: its element, bundled for the browser, which the page's script runs
+// with React from a CDN and draws with `createRoot`.
 export async function toHtml(element: JSX.Element): Promise<string> {
   const bundle = await bundler.build({ input: element, modules });
   // In development, a map back to the files you wrote, for the browser's
   // devtools.
   const { code } = bundle.generate({
-    format: "es",
+    format: "cjs",
     sourcemap: development ? "inline" : false,
   });
 
@@ -40,10 +40,27 @@ export async function toHtml(element: JSX.Element): Promise<string> {
   </head>
   <body style="margin: 0">
     <div id="app"></div>
+    <script type="text/plain" id="bundle">${code}</script>
     <script type="module">
+      import * as React from "react";
+      import * as JSXRuntime from "react/jsx-runtime";
       import { createRoot } from "react-dom/client";
-      import page from "data:text/javascript,${encodeURIComponent(code)}";
-      createRoot(document.getElementById("app")).render(page);
+
+      const moduleMap = {
+        react: React,
+        "react/jsx-runtime": JSXRuntime,
+      };
+
+      const bundle = document.getElementById("bundle").textContent;
+      const module = { exports: {} };
+      new Function("module", "exports", "require", bundle)(
+        module,
+        module.exports,
+        (name) => moduleMap[name],
+      );
+
+      const app = document.getElementById("app");
+      createRoot(app).render(module.exports);
     </script>
   </body>
 </html>`;
