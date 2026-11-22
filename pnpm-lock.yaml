@@ -1774,6 +1774,40 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
+  packages/react-query:
+    dependencies:
+      '@backtickjs/core':
+        specifier: 0.5.2
+        version: link:../core
+    devDependencies:
+      '@tanstack/react-query':
+        specifier: 5.104.0
+        version: 5.104.0(react@19.2.3)
+      '@types/react':
+        specifier: 19.2.18
+        version: 19.2.18
+      '@types/react-dom':
+        specifier: 19.2.7
+        version: 19.2.7(@types/react@19.2.18)
+      global-jsdom:
+        specifier: ^30.0.0
+        version: 30.0.0(jsdom@30.0.1(@noble/hashes@1.8.0))
+      jsdom:
+        specifier: ^30.0.1
+        version: 30.0.1(@noble/hashes@1.8.0)
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      react:
+        specifier: 19.2.3
+        version: 19.2.3
+      react-dom:
+        specifier: 19.2.3
+        version: 19.2.3(react@19.2.3)
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   packages/tsc:
     dependencies:
       '@backtickjs/compiler':

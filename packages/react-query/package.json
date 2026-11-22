@@ -1,0 +1,65 @@
+{
+  "name": "@backtickjs/react-query",
+  "version": "0.5.2",
+  "description": "Backtick in a React or React Native app: <Backtick href> draws what your server renders at a path, inside your own screens, on TanStack Query",
+  "keywords": [
+    "backtick",
+    "react-native",
+    "server-driven-ui",
+    "react",
+    "tanstack-query"
+  ],
+  "homepage": "https://backtickjs.com",
+  "bugs": {
+    "url": "https://github.com/backtickjs/backtick/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/backtickjs/backtick.git",
+    "directory": "packages/react-query"
+  },
+  "license": "MIT",
+  "author": "Jean-François Bisson <jf@backtickjs.com>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!dist/._cache",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b --watch",
+    "test": "node --test \"test/**/*.test.ts\"",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown .",
+    "clean": "rm -rf node_modules dist .turbo",
+    "prepack": "cp ../../LICENSE ."
+  },
+  "dependencies": {
+    "@backtickjs/core": "0.5.2"
+  },
+  "peerDependencies": {
+    "@tanstack/react-query": "^5.104.0",
+    "react": "^19.2.3"
+  },
+  "devDependencies": {
+    "@tanstack/react-query": "5.104.0",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.7",
+    "global-jsdom": "^30.0.0",
+    "jsdom": "^30.0.1",
+    "prettier": "^3.6.2",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "typescript": "^6.0.3"
+  }
+}
