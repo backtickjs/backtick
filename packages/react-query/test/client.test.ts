@@ -294,3 +294,24 @@ test("useBacktickClient names the provider it needs", async () => {
   assert.match(String(caught), /needs a <BacktickProvider> above it/);
   await act(async () => root.unmount());
 });
+
+test("BacktickProvider names the QueryClientProvider it needs", async () => {
+  const { fetch } = server({});
+  const container = document.createElement("div");
+  // the boundary shows the error; React needn't log it too
+  const root = createRoot(container, { onCaughtError: () => {} });
+  await act(async () =>
+    root.render(
+      createElement(
+        Boundary,
+        null,
+        createElement(BacktickProvider, { client: client(fetch) }),
+      ),
+    ),
+  );
+  assert.match(
+    container.textContent!,
+    /needs a <QueryClientProvider> above it/,
+  );
+  await act(async () => root.unmount());
+});

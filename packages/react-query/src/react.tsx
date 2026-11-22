@@ -1,14 +1,23 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { QueryClientContext, useSuspenseQuery } from "@tanstack/react-query";
 import { createContext, type ReactNode, use } from "react";
 import type { BacktickClient } from "./client.js";
 
 const BacktickContext = createContext<BacktickClient | null>(null);
 
-/** The client every `<Backtick>` and `useBacktickClient()` under it uses. */
+/**
+ * The client every `<Backtick>` and `useBacktickClient()` under it uses,
+ * inside the app's `QueryClientProvider`, whose `QueryClient` keeps the
+ * answers.
+ */
 export function BacktickProvider(props: {
   client: BacktickClient;
   children?: ReactNode;
 }): ReactNode {
+  if (use(QueryClientContext) === undefined) {
+    throw new Error(
+      "<BacktickProvider> needs a <QueryClientProvider> above it, from @tanstack/react-query.",
+    );
+  }
   return (
     <BacktickContext value={props.client}>{props.children}</BacktickContext>
   );
