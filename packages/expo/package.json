@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/expo",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "Backtick for Expo apps: scripts compiled as Expo compiles the app, and reloading apps when the server restarts",
   "keywords": [
     "backtick",

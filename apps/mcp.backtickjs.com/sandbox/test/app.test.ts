@@ -141,7 +141,7 @@ describe("compile", () => {
       .statements.filter(ts.isImportDeclaration)
       .map(({ moduleSpecifier }) => (moduleSpecifier as ts.StringLiteral).text);
     assert.deepEqual([...new Set(imports)], ["node:async_hooks"]);
-    assert.match(code!, /UnsupportedImportError/);
+    assert.match(code!, /ClientVersionMismatch/);
     assert.ok(code!.length < 100_000, `${code!.length} bytes`);
   });
 });
