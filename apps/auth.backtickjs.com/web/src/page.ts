@@ -12,5 +12,5 @@ export async function signInScript(): Promise<string> {
       "solid-js/store": "1.9.17",
     },
   });
-  return bundle.generate({ format: "es" }).code;
+  return bundle.generate({ format: "cjs" }).code;
 }

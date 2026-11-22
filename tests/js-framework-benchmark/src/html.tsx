@@ -12,7 +12,7 @@ const bundle = await bundler.build({
   },
 });
 
-const { code } = bundle.generate({ format: "es" });
+const { code } = bundle.generate({ format: "cjs" });
 
 export const html = `<!doctype html>
 <html>
@@ -32,7 +32,27 @@ export const html = `<!doctype html>
   </head>
   <body>
     <div id="main"></div>
-    <script type="module" src="data:text/javascript,${encodeURIComponent(code)}"></script>
+    <script type="text/plain" id="bundle">${code}</script>
+    <script type="module">
+      import * as Solid from "solid-js";
+      import * as SolidStore from "solid-js/store";
+      import * as SolidWeb from "solid-js/web";
+
+      const moduleMap = {
+        "solid-js": Solid,
+        "solid-js/store": SolidStore,
+        "solid-js/web": SolidWeb,
+      };
+
+      // The bundle draws the page itself.
+      const bundle = document.getElementById("bundle").textContent;
+      const module = { exports: {} };
+      new Function("module", "exports", "require", bundle)(
+        module,
+        module.exports,
+        (name) => moduleMap[name],
+      );
+    </script>
   </body>
 </html>
 `;

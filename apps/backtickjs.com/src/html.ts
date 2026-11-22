@@ -19,7 +19,7 @@ export async function toHtml({
   preloadImage,
 }: Page): Promise<string> {
   const bundle = await bundler.build({
-    // The page's component, which the document's entry draws, as Solid's
+    // The page's component, which the document's script draws, as Solid's
     // `render` takes it.
     input: Page,
     modules: {
@@ -29,7 +29,7 @@ export async function toHtml({
     },
   });
 
-  const { code } = bundle.generate({ format: "es", sourcemap });
+  const { code } = bundle.generate({ format: "cjs", sourcemap });
 
   return `<!doctype html>
 <html lang="en">
@@ -82,13 +82,30 @@ export async function toHtml({
   </head>
   <body>
     <div id="app"></div>
+    <script type="text/plain" id="bundle">${code}</script>
     <script type="module">
-      import { render } from "solid-js/web";
-      import Page from "data:text/javascript,${encodeURIComponent(code)}";
+      import * as Solid from "solid-js";
+      import * as SolidStore from "solid-js/store";
+      import * as SolidWeb from "solid-js/web";
+
+      const moduleMap = {
+        "solid-js": Solid,
+        "solid-js/store": SolidStore,
+        "solid-js/web": SolidWeb,
+      };
+
+      const bundle = document.getElementById("bundle").textContent;
+      const module = { exports: {} };
+      new Function("module", "exports", "require", bundle)(
+        module,
+        module.exports,
+        (name) => moduleMap[name],
+      );
+
       // Cleared first: \`render\` adds to what's there.
       const app = document.getElementById("app");
       app.textContent = "";
-      render(Page, app);
+      SolidWeb.render(module.exports, app);
     </script>
   </body>
 </html>`;

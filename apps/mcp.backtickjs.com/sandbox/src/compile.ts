@@ -35,7 +35,7 @@ export async function compile(file: string): Promise<Compiled> {
     return { errors: [String((error as Error).message)] };
   }
   // As a Worker runs it: Node's built-ins, `nodejs_compat`'s, left out.
-  // Class names kept, so errors keep their names (`UnsupportedImportError`).
+  // Class names kept, so errors keep their names (`ClientVersionMismatch`).
   const { outputFiles } = await build({
     stdin: { contents: code, resolveDir: dirname(file), sourcefile: "App.js" },
     bundle: true,
