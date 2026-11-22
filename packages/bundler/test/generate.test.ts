@@ -4,7 +4,7 @@ import { createImport, createJsxElement, cs } from "@backtickjs/core";
 import {
   BundlerError,
   bundler,
-  ClientVersionMismatch,
+  UnsupportedImportError,
   supports,
 } from "../dist/index.js";
 
@@ -55,9 +55,9 @@ test("a script's import from a module the client doesn't provide is refused", as
         modules: { "solid-js": "1.9.14" },
       }),
     (error) =>
-      error instanceof ClientVersionMismatch &&
+      error instanceof UnsupportedImportError &&
       error instanceof BundlerError &&
-      error.name === "ClientVersionMismatch" &&
+      error.name === "UnsupportedImportError" &&
       error.from === "app" &&
       error.imported === "greet" &&
       error.version === "1.0.0" &&
@@ -81,7 +81,7 @@ test("a script's import needing a version the client doesn't have is refused", a
         modules: { "solid-js/web": "1.9.14" },
       }),
     (error) =>
-      error instanceof ClientVersionMismatch &&
+      error instanceof UnsupportedImportError &&
       error.imported === "Portal" &&
       error.version === "2.0.0" &&
       error.provided === "1.9.14" &&

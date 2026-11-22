@@ -100,7 +100,7 @@ server component throws passes through as it is.
 A script uses a module the app that asked doesn't provide. Add it to the
 app's module map, and install it in the app. An app built before then doesn't
 have it: draw it that screen differently, with `supports`, as the message
-says, or catch the error, a `ClientVersionMismatch`, and answer it as
+says, or catch the error, an `UnsupportedImportError`, and answer it as
 [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler#modules)
 shows. See
 [where a package goes](/docs/react-native-and-packages/#any-package-your-app-ships).
@@ -115,7 +115,7 @@ with `curl` say, send them there:
 The app was built with a version of the package the server's code isn't typed
 against: an earlier one, or another major. Install the app's version on the
 server, or serve that app a screen that doesn't use it: branch with
-`supports`, as the message says, or catch the `ClientVersionMismatch`.
+`supports`, as the message says, or catch the `UnsupportedImportError`.
 
 ### supports("…", "…") asks about the client a build is for
 

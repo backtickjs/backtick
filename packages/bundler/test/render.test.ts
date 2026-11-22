@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createImport, createJsxElement, cs } from "@backtickjs/core";
-import { BundlerError, ClientVersionMismatch, render } from "../dist/index.js";
+import { BundlerError, UnsupportedImportError, render } from "../dist/index.js";
 
 const greet = createImport<(name: string) => string>({
   name: "greet",
@@ -58,12 +58,12 @@ test("a client without a module the bundle needs gets a 406 naming it", async ()
     () => assert.fail("rendered"),
     (error: unknown) => error,
   );
-  assert.ok(error instanceof ClientVersionMismatch);
+  assert.ok(error instanceof UnsupportedImportError);
   assert.equal(error.status, 406);
   const response = error.getResponse();
   assert.equal(response.status, 406);
   const { name, message } = await response.json();
-  assert.equal(name, "ClientVersionMismatch");
+  assert.equal(name, "UnsupportedImportError");
   assert.match(message, /greet/);
 });
 
@@ -94,12 +94,12 @@ test("an error a server component throws passes through as it is", async () => {
 
 test("an error keeps its name when a minifier renames its class", async () => {
   // as a minifier leaves it: the class's own name shortened
-  Object.defineProperty(ClientVersionMismatch, "name", { value: "t" });
+  Object.defineProperty(UnsupportedImportError, "name", { value: "t" });
   const error = await render(request("{}"), greet).then(
     () => assert.fail("rendered"),
     (error: unknown) => error,
   );
-  assert.ok(error instanceof ClientVersionMismatch);
+  assert.ok(error instanceof UnsupportedImportError);
   const { name } = await error.getResponse().json();
-  assert.equal(name, "ClientVersionMismatch");
+  assert.equal(name, "UnsupportedImportError");
 });

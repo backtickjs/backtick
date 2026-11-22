@@ -55,13 +55,13 @@ The modules the client provides, by specifier, each at the exact version of the 
 
 `supports(specifier, range)` makes the same check, for a server component choosing what to draw for the client the bundler is drawing for: `supports("expo-haptics", "^15")`. It asks about the modules of the build in progress, so it's called in a server component, while `build` runs it; outside one, it throws.
 
-A refused import throws `ClientVersionMismatch`, carrying the module (`from`), the export (`imported`), the version it's typed against (`version`) and the one the client provides (`provided`, or `undefined` for none). The client can't change, so a server catches it to answer that client differently, such as with the 406 its `getResponse()` makes, which its app answers with a screen asking to update:
+A refused import throws `UnsupportedImportError`, carrying the module (`from`), the export (`imported`), the version it's typed against (`version`) and the one the client provides (`provided`, or `undefined` for none). The client can't change, so a server catches it to answer that client differently, such as with the 406 its `getResponse()` makes, which its app answers with a screen asking to update:
 
 ```ts
 try {
   bundle = await bundler.build({ input, modules });
 } catch (error) {
-  if (!(error instanceof ClientVersionMismatch)) {
+  if (!(error instanceof UnsupportedImportError)) {
     throw error;
   }
   return error.getResponse();
@@ -87,7 +87,7 @@ Spliced values are written into the bundle as data, never as code. What can't cr
 - `Build.generate({ format, sourcemap })`: writes the bundle; returns `{ code, map }`, where `code` is a `Bundle<T>` (from `@backtickjs/core`) for an `input` of `Client<T>`, which the client runs to a `T`, and `map` is `null` without a source map.
 - `supports(specifier, range)`: in a server component, whether the client being drawn for provides `specifier` at a version in `range`.
 - `BundlerError`: what `build` throws when it refuses its input, such as a value it can't splice. An error a server component throws passes through as it is. `getResponse()` answers it as JSON `{ name, message }` at its `status`, a 400: Hono's default error handler calls it on its own; elsewhere, the app's error handler returns it.
-- `ClientVersionMismatch`, a `BundlerError`: what `build` throws for a script's import the client can't run. Its `status` is 406.
+- `UnsupportedImportError`, a `BundlerError`: what `build` throws for a script's import the client can't run. Its `status` is 406.
 - `render(request, input, init?)`, for a server that speaks the Fetch API's `Request` and `Response`, as Hono, Next.js route handlers and Workers do: `input`, a `Client<T>`, bundled for the modules the request's `x-backtick-modules` header lists, as CommonJS, which an app runs against its own modules on every platform, as a `BundleResponse<T>`: `text/javascript`, `no-store`, with `init`'s status and headers, which win over its own. A bundle it can't make throws a `BundlerError`, a missing or unreadable `x-backtick-modules` among them.
 
   ```tsx

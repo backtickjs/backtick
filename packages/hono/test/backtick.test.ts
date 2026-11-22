@@ -61,7 +61,7 @@ test("a client without a module the screen needs gets a 406 naming it", async ()
   const response = await request("{}");
   assert.equal(response.status, 406);
   const { name, message } = await response.json();
-  assert.equal(name, "ClientVersionMismatch");
+  assert.equal(name, "UnsupportedImportError");
   assert.match(message, /greet/);
 });
 

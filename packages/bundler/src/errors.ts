@@ -27,8 +27,8 @@ export class BundlerError extends Error {
  * the server draws it something else: it catches this to answer differently,
  * or branches with `supports` before drawing. Answered as a 406.
  */
-export class ClientVersionMismatch extends BundlerError {
-  override name = "ClientVersionMismatch";
+export class UnsupportedImportError extends BundlerError {
+  override name = "UnsupportedImportError";
   // Not Acceptable: no bundle the app can run, so it has to update.
   override readonly status = 406;
 

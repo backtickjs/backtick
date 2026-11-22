@@ -1,5 +1,5 @@
 import type { ClientImport } from "@backtickjs/core";
-import { ClientVersionMismatch } from "../errors.js";
+import { UnsupportedImportError } from "../errors.js";
 import semver from "semver";
 import type { Modules } from "../modules.js";
 
@@ -92,7 +92,7 @@ export function imported(
   // works with a later one of the same major.
   const provided = names.modules[from];
   if (provided === undefined || !semver.satisfies(provided, `^${version}`)) {
-    throw new ClientVersionMismatch(from, name, version, names.modules);
+    throw new UnsupportedImportError(from, name, version, names.modules);
   }
   const key = `${from}\0${name}`;
   let entry = names.imports.get(key);

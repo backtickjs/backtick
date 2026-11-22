@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { bundler, ClientVersionMismatch, supports } from "@backtickjs/bundler";
+import { bundler, UnsupportedImportError, supports } from "@backtickjs/bundler";
 import { type Client, type ClientImport, cs } from "@backtickjs/core";
 import { render, screen } from "@solidjs/testing-library";
 declare const { Button }: import("@backtickjs/core").ClientModule<typeof import("acme-ui")>;
@@ -67,7 +67,7 @@ describe("two installed versions of one package", () => {
         ))()),
         "1.0.0",
       ),
-      ClientVersionMismatch,
+      UnsupportedImportError,
     );
   });
 

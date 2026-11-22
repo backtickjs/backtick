@@ -75,7 +75,7 @@ draw for two majors of a package, install the second under an alias,
 `"acme-ui-2": "npm:acme-ui@2"`: imports from either are of `acme-ui`, each
 typed against its own version.
 
-A build that can't run a screen at all gets a `ClientVersionMismatch` from
+A build that can't run a screen at all gets an `UnsupportedImportError` from
 the bundler, instead of a screen. Catch it, answer `406`, and have the app
 draw its own screen asking its users to update: one the server bundled would
 need the same modules the build lacks.
