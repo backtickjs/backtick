@@ -100,9 +100,7 @@ export async function toHtml({
         (name) => moduleMap[name],
       );
 
-      // Cleared first: \`render\` adds to what's there.
       const app = document.getElementById("app");
-      app.textContent = "";
       SolidWeb.render(module.exports, app);
     </script>
   </body>
