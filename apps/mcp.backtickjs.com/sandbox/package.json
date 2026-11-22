@@ -5,6 +5,7 @@
   "type": "module",
   "description": "What each user's sandbox runs: a server that typechecks and bundles apps, with the packages apps are checked against, the phone's (apps/shell) at its versions",
   "scripts": {
+    "postinstall": "backtick-installed-packages > installed-packages.json",
     "typecheck": "tsc --noEmit",
     "test": "node --import @backtickjs/node-plugin --test \"test/**/*.test.ts\"",
     "format": "prettier --write src test",

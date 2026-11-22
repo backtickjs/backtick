@@ -32,3 +32,17 @@ it("prints each dependency's installed version, as JSON", () => {
   });
   assert.deepEqual(JSON.parse(printed), { react: "19.2.3" });
 });
+
+it("finds a package above the app, as a workspace hoists it", () => {
+  const root = join(app(), "apps", "app");
+  mkdirSync(root, { recursive: true });
+  writeFileSync(
+    join(root, "package.json"),
+    JSON.stringify({ dependencies: { react: "*" } }),
+  );
+  const printed = execFileSync(process.execPath, [bin], {
+    cwd: root,
+    encoding: "utf8",
+  });
+  assert.deepEqual(JSON.parse(printed), { react: "19.2.3" });
+});

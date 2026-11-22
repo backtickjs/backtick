@@ -5,10 +5,9 @@
 // The test user keeps one app, "E2E", saved again on every run.
 // The phone's half needs auth.backtickjs.com's signing key (BACKTICK_SIGNING_JWK,
 // as Vercel has it) to make the phone's tokens; without it, it's skipped.
-import { join } from "node:path";
 import { importJWK, SignJWT, type JWK } from "jose";
-import { installedPackages } from "@backtickjs/core/node";
 import { modules } from "shell/modules";
+import installedPackages from "../sandbox/installed-packages.json" with { type: "json" };
 import { starter } from "../src/function/starter.ts";
 import { testUser } from "./testUser.ts";
 
@@ -17,7 +16,7 @@ const auth = "https://auth.backtickjs.com";
 const { token, id: user } = await testUser();
 // What the phone sends: each of its modules at its package's version, which
 // the sandbox installs too.
-const installed = installedPackages(join(import.meta.dirname, "../sandbox"));
+const installed: Record<string, string> = installedPackages;
 const packageOf = (specifier: string) =>
   specifier
     .split("/")

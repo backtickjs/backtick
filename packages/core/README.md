@@ -120,7 +120,6 @@ A test draws a screen with a module map of its own, stand-ins included; its modu
 - `Bundle<T>`: a bundle's code, branded with what it runs to. `bundler.build(…).generate(…)` writes one.
 - `createRuntime({ moduleMap, installedPackages, fetch? })`: what runs an app's bundles, a `Runtime`. `runtime.fetch(url, init?)` is `fetch` with the `x-backtick-modules` header the server bundles for. `runtime.exec(bundle)` runs a bundle to its value, as a promise, with `require` answered from `moduleMap`; the bundles it runs with `$exec` get the same modules, and they all share the runtime's cache: what a script makes once, made once per runtime.
 - `modulesOf(moduleMap, installedPackages)`: the modules `moduleMap`, a `ModuleMap`, offers, each at its package's version in `installedPackages`, for the app to send its server.
-- `installedPackages(projectRoot)`, from `@backtickjs/core/node`: the installed version of each of the app's dependencies, read from `node_modules` as Metro finds packages by default. A `metro.config.js` that aliases or redirects packages needs its own versions. Node only.
 - `exec`: in a script, `$exec(bundle)` runs another bundle as the script's own was run, with the same modules, to a promise of its value.
 - `isClientExec`, `ClientExec`: its check and type.
 - `SplicesAs<T>`: `T` as a splice checks it, member by member. Used by the bundler to check its input.

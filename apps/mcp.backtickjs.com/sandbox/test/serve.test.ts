@@ -3,7 +3,7 @@ import { spawn } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { it } from "node:test";
-import { installedPackages } from "@backtickjs/core/node";
+import installed from "../installed-packages.json" with { type: "json" };
 
 // A counter app, as a model writes one from the service's starter.
 const counter = readFileSync(
@@ -67,7 +67,7 @@ it("typechecks and checks over HTTP, file after file", async () => {
     assert.deepEqual(checked.errors, []);
     assert.match(checked.compiled, /UnsupportedImportError/);
     // what it was built with, at the versions installed
-    assert.equal(checked.packages.hono, installedPackages(root).hono);
+    assert.equal(checked.packages.hono, installed.hono);
     assert.match(checked.packages["@backtickjs/core"], /^\d+\.\d+\.\d+$/);
     const refusedCheck = await post("check", { file: typo });
     assert.equal(refusedCheck.compiled, undefined);

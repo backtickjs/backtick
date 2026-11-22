@@ -3,9 +3,9 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, it } from "node:test";
 import ts from "typescript";
-import { installedPackages } from "@backtickjs/core/node";
 import { compile } from "../src/compile.ts";
 import { typecheck } from "../src/typecheck.ts";
+import installed from "../installed-packages.json" with { type: "json" };
 
 // A counter app, as a model writes one from the service's starter.
 const counter = readFileSync(
@@ -16,7 +16,6 @@ const counter = readFileSync(
 const root = join(import.meta.dirname, "..");
 
 // What a phone carrying the versions installed here sends.
-const installed = installedPackages(root);
 const phone = JSON.stringify({
   react: installed.react!,
   "react/jsx-runtime": installed.react!,
