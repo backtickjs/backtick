@@ -1,10 +1,7 @@
-import { type Bundle, createRuntime, modulesOf } from "@backtickjs/core";
+import { createRuntime } from "@backtickjs/core";
 import type { Runtime } from "@backtickjs/hono";
 import { installedPackages, moduleMap } from "./backtick";
 import { apps, home } from "./hosts";
-
-// The modules this build carries, at their versions.
-const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
 
 // Where an app is: its own host, or Backtick's for the home (app null). An
 // app's paths are its server's, unchanged.
@@ -31,25 +28,9 @@ export function openApp(app: string | null): Promise<Runtime> {
   return opened;
 }
 
-async function fetchRuntime(app: string | null): Promise<Runtime> {
-  const response = await fetch(
-    originOf(app) + "/.well-known/backtick/runtime",
-    { headers: { "x-backtick-modules": modules } },
-  );
-  const body = await response.text();
-  if (
-    response.status !== 200 ||
-    !response.headers.get("content-type")?.startsWith("text/javascript")
-  ) {
-    // A refusal says why, as { name, message }.
-    let reason = body;
-    try {
-      reason = JSON.parse(body).message ?? body;
-    } catch {}
-    throw new Error(
-      `The app couldn't be opened (${response.status}): ${reason}`,
-    );
-  }
-  // A runtime of its own for each app opened, so no two share what they make.
-  return createRuntime(moduleMap).exec(body as Bundle<Runtime>);
+// A runtime of its own for each app opened, so no two share what they make.
+function fetchRuntime(app: string | null): Promise<Runtime> {
+  return createRuntime({ moduleMap, installedPackages }).fetch(
+    `${originOf(app)}/.well-known/backtick/runtime`,
+  ) as Promise<Runtime>;
 }

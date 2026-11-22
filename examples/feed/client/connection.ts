@@ -1,4 +1,4 @@
-import { type Bundle, createRuntime, modulesOf } from "@backtickjs/core";
+import { createRuntime } from "@backtickjs/core";
 import { QueryClient } from "@tanstack/react-query";
 import Constants from "expo-constants";
 import { installedPackages, moduleMap } from "./backtick";
@@ -7,37 +7,25 @@ import { installedPackages, moduleMap } from "./backtick";
 const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
 
-// The modules this build carries, at their versions.
-const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
-// What runs the screens the server sends, with the modules the app provides:
-// one per app, so what a screen makes once stays made.
-const runtime = createRuntime(moduleMap);
+// What fetches and runs the screens the server sends, with the modules the
+// app provides at their versions: one per app, so what a screen makes once
+// stays made.
+const runtime = createRuntime({ moduleMap, installedPackages });
 
 /**
  * What your server answers at `path`: its bundle, fetched with this build's
  * modules and run with the app's modules. A screen, an item, a like's count. Your
  * fetch to shape: headers, auth, caching.
  */
-export async function fetchBundle(
+export function fetchBundle(
   path: string,
   init: RequestInit = {},
 ): Promise<unknown> {
-  const response = await fetch(`${server}${path}`, {
-    ...init,
-    headers: {
-      "x-backtick-modules": modules,
-      "content-type": "application/json",
-      ...init.headers,
-    },
-  });
-  // Why, as the server says it.
-  if (!response.ok) {
-    throw new Error(
-      `${path} answered ${response.status}: ${await response.text()}`,
-    );
+  const headers = new Headers(init.headers);
+  if (!headers.has("content-type")) {
+    headers.set("content-type", "application/json");
   }
-  const bundle = (await response.text()) as Bundle<unknown>;
-  return runtime.exec(bundle);
+  return runtime.fetch(`${server}${path}`, { ...init, headers });
 }
 
 /**

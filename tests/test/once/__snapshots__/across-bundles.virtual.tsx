@@ -9,7 +9,7 @@ import { cs, type Client, createRuntime, type Runtime } from "@backtickjs/core";
 // runtime of its own has its own.
 async function run<T>(
   input: Client<T>,
-  runtime: Runtime = createRuntime({}),
+  runtime: Runtime = createRuntime({ moduleMap: {}, installedPackages: {} }),
 ): Promise<T> {
   const bundle = await bundler.build({ input, modules: {} });
   const { code } = bundle.generate({ format: "cjs" });
@@ -21,7 +21,7 @@ const home = cs.lift((() => (cs.splice((store))))());
 const details = cs.lift((() => (cs.splice((store))))());
 
 it("two bundles of an app share a value", async () => {
-  const runtime = createRuntime({});
+  const runtime = createRuntime({ moduleMap: {}, installedPackages: {} });
   const homeStore = await run(home, runtime);
   const detailsStore = await run(details, runtime);
   assert.equal(homeStore, detailsStore);
@@ -40,7 +40,7 @@ const a = box();
 const b = box();
 
 it("a value made in a function is each bundle's own", async () => {
-  const runtime = createRuntime({});
+  const runtime = createRuntime({ moduleMap: {}, installedPackages: {} });
   const [first, second] = await run(cs.lift((() => [(cs.splice((a))), (cs.splice((b)))])()), runtime);
   assert.notEqual(first, second);
   const [again] = await run(cs.lift((() => [(cs.splice((a)))])()), runtime);

@@ -1,4 +1,4 @@
-import { type Bundle, createRuntime, modulesOf } from "@backtickjs/core";
+import { createRuntime } from "@backtickjs/core";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
 import { type ReactNode, Suspense, use, useState } from "react";
@@ -14,29 +14,17 @@ import { installedPackages, moduleMap } from "./backtick";
 const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
 
-// The modules this build carries, at their versions.
-const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
-// What runs the screens the server sends, with the modules the app provides:
-// one per app, so what a screen makes once stays made.
-const runtime = createRuntime(moduleMap);
-
-// The screen at `path` on your server: its bundle, fetched and run with the
-// app's modules. Your fetch to shape: headers, auth, caching.
-async function fetchScreen(path: string): Promise<ReactNode> {
-  const response = await fetch(`${server}${path}`, {
-    headers: { "x-backtick-modules": modules },
-  });
-  if (!response.ok) {
-    throw new Error(`${path} answered ${response.status}.`);
-  }
-  const bundle = (await response.text()) as Bundle<ReactNode>;
-  return runtime.exec(bundle);
-}
+// What fetches and runs the screens your server sends, with the modules the
+// app provides at their versions: one per app, so what a screen makes once
+// stays made.
+const runtime = createRuntime({ moduleMap, installedPackages });
 
 export default function App() {
   // Held here, which doesn't suspend, so the request outlives the render
   // that waits for it.
-  const [screen] = useState(() => fetchScreen("/"));
+  const [screen] = useState(
+    () => runtime.fetch(`${server}/`) as Promise<ReactNode>,
+  );
   // The whole screen, its layout included, comes from the server: see
   // server/Home.tsx.
   return (

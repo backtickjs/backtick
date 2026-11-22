@@ -21,5 +21,5 @@ const modules = modulesOf(moduleMap, installedPackages);
 export async function drawScreen<T>(input: Client<T>) {
   const bundle = await bundler.build({ input, modules });
   const { code } = bundle.generate({ format: "cjs" });
-  return createRuntime(moduleMap).exec(code);
+  return createRuntime({ moduleMap, installedPackages }).exec(code);
 }

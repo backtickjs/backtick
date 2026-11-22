@@ -16,12 +16,18 @@ async function generate(input: Parameters<typeof bundler.build>[0]["input"]) {
 test("spliced text never closes a page's script, and still arrives as written", async () => {
   const code = await generate(cs`${hostile}`);
   assert.doesNotMatch(code, closing);
-  assert.equal(await createRuntime({}).exec(code), hostile);
+  assert.equal(
+    await createRuntime({ moduleMap: {}, installedPackages: {} }).exec(code),
+    hostile,
+  );
 });
 
 test("a spliced object's keys never close a page's script either", async () => {
   const value = { [hostile]: hostile };
   const code = await generate(cs`${value}`);
   assert.doesNotMatch(code, closing);
-  assert.deepEqual(await createRuntime({}).exec(code), value);
+  assert.deepEqual(
+    await createRuntime({ moduleMap: {}, installedPackages: {} }).exec(code),
+    value,
+  );
 });

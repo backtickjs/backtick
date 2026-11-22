@@ -25,7 +25,7 @@ const server = `http://${host}:3000`;
 const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
 // What runs the screens the server sends, with the modules the app provides:
 // one per app, so what a screen makes once stays made.
-const runtime = createRuntime(moduleMap);
+const runtime = createRuntime({ moduleMap, installedPackages });
 
 // A screen as fetched, with what each stage of getting it cost so far:
 // `Screen` adds the render and logs the whole pipeline.

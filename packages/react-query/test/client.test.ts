@@ -9,7 +9,6 @@ import * as BacktickReactQuery from "../dist/index.js";
 import {
   Backtick,
   BacktickClient,
-  BacktickError,
   BacktickProvider,
   useBacktickClient,
 } from "../dist/index.js";
@@ -104,49 +103,6 @@ test("fetch sends what the app can run to the href under the origin", async () =
   assert.deepEqual(
     JSON.parse(requests[0]!.headers.get("x-backtick-modules")!),
     installedPackages,
-  );
-});
-
-test("a refusal is a BacktickError with the server's name and message", async () => {
-  const refused = Response.json(
-    { name: "ClientVersionMismatch", message: "Can't import `Image`" },
-    { status: 406 },
-  );
-  await assert.rejects(
-    client(async () => refused).fetch("/"),
-    (error) =>
-      error instanceof BacktickError &&
-      error.name === "ClientVersionMismatch" &&
-      error.response?.status === 406 &&
-      /406: Can't import `Image`/.test(error.message),
-  );
-});
-
-test("what isn't a bundle is a NotABundle", async () => {
-  const page = new Response("<html></html>", {
-    headers: { "content-type": "text/html" },
-  });
-  await assert.rejects(
-    client(async () => page).fetch("/"),
-    (error) =>
-      error instanceof BacktickError &&
-      error.name === "NotABundle" &&
-      /answered text\/html, not a bundle: is it a Backtick route\?/.test(
-        error.message,
-      ),
-  );
-});
-
-test("a server it can't reach is a BacktickError without a response", async () => {
-  const down = new TypeError("fetch failed");
-  await assert.rejects(
-    client(async () => {
-      throw down;
-    }).fetch("/"),
-    (error) =>
-      error instanceof BacktickError &&
-      error.response === undefined &&
-      error.cause === down,
   );
 });
 

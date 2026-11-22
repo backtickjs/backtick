@@ -1,6 +1,3 @@
-export {
-  BacktickClient,
-  type BacktickClientOptions,
-  BacktickError,
-} from "./client.js";
+export { BundleFetchError, isBundleFetchError } from "@backtickjs/core";
+export { BacktickClient, type BacktickClientOptions } from "./client.js";
 export { Backtick, BacktickProvider, useBacktickClient } from "./react.js";

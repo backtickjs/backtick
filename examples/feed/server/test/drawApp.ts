@@ -1,4 +1,4 @@
-import { type Bundle, modulesOf, createRuntime } from "@backtickjs/core";
+import { createRuntime } from "@backtickjs/core";
 import * as ReactQuery from "@tanstack/react-query";
 import { render } from "@testing-library/react";
 import * as React from "react";
@@ -20,22 +20,15 @@ const moduleMap = {
   "react-error-boundary": ReactErrorBoundary,
   "react-native-safe-area-context": { SafeAreaView: ReactNativeWeb.View },
 };
-const modules = modulesOf(moduleMap, installedPackages);
-const headers = { "x-backtick-modules": JSON.stringify(modules) };
+// One for the test, as the app has one, answered by the server itself.
+const runtime = createRuntime({
+  moduleMap,
+  installedPackages,
+  fetch: (request) => app.fetch(request),
+});
 
 /** The requests the app made, in order: `GET /`, `GET /pages/1`… */
 export const requests: string[] = [];
-
-async function answer(method: string, path: string, body?: unknown) {
-  requests.push(`${method} ${path}${body ? " " + JSON.stringify(body) : ""}`);
-  const response = await app.request(path, {
-    method,
-    headers: { ...headers, "content-type": "application/json" },
-    body: body === undefined ? undefined : JSON.stringify(body),
-  });
-  if (!response.ok) throw new Error(await response.text());
-  return (await response.text()) as Bundle<unknown>;
-}
 
 /** Paths whose requests fail, as a server that's down for them would. */
 export const failing = new Set<string>();
@@ -45,9 +38,15 @@ export async function fetchBundle(
   path: string,
   init: { method?: string; body?: unknown } = {},
 ) {
+  const method = init.method ?? "GET";
+  const { body } = init;
   if (failing.has(path)) throw new Error("unreachable");
-  const bundle = await answer(init.method ?? "GET", path, init.body);
-  return createRuntime(moduleMap).exec(bundle);
+  requests.push(`${method} ${path}${body ? " " + JSON.stringify(body) : ""}`);
+  return runtime.fetch(`http://localhost${path}`, {
+    method,
+    headers: { "content-type": "application/json" },
+    body: body === undefined ? undefined : JSON.stringify(body),
+  });
 }
 
 /**

@@ -74,5 +74,7 @@ export async function evaluate<T extends Client<unknown> | (() => Spliceable)>(
   );
   // A runtime of its own each time, as each page load has: the same bundle
   // twice still runs twice.
-  return createRuntime(moduleMap).exec(code) as Promise<Evaluated<T>>;
+  return createRuntime({ moduleMap, installedPackages: modules }).exec(
+    code,
+  ) as Promise<Evaluated<T>>;
 }
