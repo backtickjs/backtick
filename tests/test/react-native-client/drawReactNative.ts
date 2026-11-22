@@ -4,8 +4,7 @@ import { after } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { transpile } from "@backtickjs/compiler";
 import react from "@backtickjs/jsx-react/plugin";
-import { execRoot } from "@backtickjs/core/cjs";
-import type { Client } from "@backtickjs/core";
+import { type Client, createRuntime } from "@backtickjs/core";
 import * as React from "react";
 import type { ReactNode } from "react";
 import { act } from "react";
@@ -48,11 +47,14 @@ export async function drawReactNative(name: string, source: string) {
       "react-native": "0.86.3",
     },
   });
-  const drawn = await execRoot(built.generate().code, {
-    react: React,
-    "react/jsx-runtime": JSXRuntime,
-    "react-native": ReactNativeWeb,
-  });
+  const drawn = await createRuntime({
+    moduleMap: {
+      react: React,
+      "react/jsx-runtime": JSXRuntime,
+      "react-native": ReactNativeWeb,
+    },
+    installedPackages: { react: "19.2.3", "react-native": "0.86.3" },
+  }).exec(built.generate().code);
 
   const container = document.createElement("div");
   const root = createRoot(container);

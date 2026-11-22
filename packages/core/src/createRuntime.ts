@@ -1,5 +1,4 @@
 import type { Bundle } from "./Bundle.js";
-import { execRoot } from "./cjs.js";
 import { type ModuleMap, modulesOf } from "./modulesOf.js";
 
 export interface RuntimeOptions {
@@ -40,9 +39,25 @@ export function createRuntime(options: RuntimeOptions): Runtime {
   const cache = new Map<string, unknown>();
   const modules = modulesOf(moduleMap, options.installedPackages);
   const transport = options.fetch ?? ((request) => globalThis.fetch(request));
+  const require = (specifier: string): unknown => {
+    if (!Object.hasOwn(moduleMap, specifier)) {
+      throw new Error(
+        `The bundle requires "${specifier}", which this app doesn't provide.`,
+      );
+    }
+    return moduleMap[specifier];
+  };
 
   return {
-    exec: (bundle) => execRoot(bundle, moduleMap, cache),
+    async exec<T>(bundle: Bundle<T>): Promise<Awaited<T>> {
+      const module = { exports: {} as unknown, cache };
+      new Function("module", "exports", "require", bundle)(
+        module,
+        module.exports,
+        require,
+      );
+      return module.exports as Awaited<T>;
+    },
     async fetch(input, init) {
       const request = new Request(input, init);
       request.headers.set("x-backtick-modules", JSON.stringify(modules));

@@ -29,10 +29,6 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./cjs": {
-      "types": "./dist/cjs.d.ts",
-      "default": "./dist/cjs.js"
-    },
     "./node": {
       "types": "./dist/node.d.ts",
       "default": "./dist/node.js"

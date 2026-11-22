@@ -3,12 +3,11 @@ import { rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { after, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { execRoot } from "@backtickjs/core/cjs";
 import { transpile } from "@backtickjs/compiler";
 import react from "@backtickjs/jsx-react/plugin";
 import * as React from "react";
 import type { ReactNode } from "react";
-import type { Client } from "@backtickjs/core";
+import { type Client, createRuntime } from "@backtickjs/core";
 import { act } from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import { createRoot } from "react-dom/client";
@@ -71,11 +70,14 @@ it("draws a server's screen with the app's React Native", async () => {
 
   // The app: the bundle run with its packages, `react-native-web` standing in
   // for React Native, and drawn.
-  const drawn = await execRoot(code, {
-    react: React,
-    "react/jsx-runtime": JSXRuntime,
-    "react-native": ReactNativeWeb,
-  });
+  const drawn = await createRuntime({
+    moduleMap: {
+      react: React,
+      "react/jsx-runtime": JSXRuntime,
+      "react-native": ReactNativeWeb,
+    },
+    installedPackages: { react: "19.2.3", "react-native": "0.86.3" },
+  }).exec(code);
   const errors: unknown[] = [];
   const error = console.error;
   console.error = (...args: unknown[]) => errors.push(String(args[0]));
