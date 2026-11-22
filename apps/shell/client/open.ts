@@ -1,4 +1,4 @@
-import { createRuntime } from "@backtickjs/core";
+import { type Bundle, createRuntime } from "@backtickjs/core";
 import type { Runtime } from "@backtickjs/hono";
 import { installedPackages, moduleMap } from "./backtick";
 import { apps, home } from "./hosts";
@@ -28,9 +28,11 @@ export function openApp(app: string | null): Promise<Runtime> {
   return opened;
 }
 
-// A runtime of its own for each app opened, so no two share what they make.
-function fetchRuntime(app: string | null): Promise<Runtime> {
-  return createRuntime({ moduleMap, installedPackages }).fetch(
+async function fetchRuntime(app: string | null): Promise<Runtime> {
+  // A runtime of its own for each app opened, so no two share what they make.
+  const runtime = createRuntime({ moduleMap, installedPackages });
+  const response = await runtime.fetch(
     `${originOf(app)}/.well-known/backtick/runtime`,
-  ) as Promise<Runtime>;
+  );
+  return runtime.exec((await response.text()) as Bundle<Runtime>);
 }

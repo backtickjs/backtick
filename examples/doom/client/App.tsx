@@ -1,4 +1,4 @@
-import { type Bundle, createRuntime, modulesOf } from "@backtickjs/core";
+import { type Bundle, createRuntime } from "@backtickjs/core";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
 import {
@@ -21,8 +21,6 @@ import { installedPackages, moduleMap } from "./backtick";
 const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
 
-// The modules this build carries, at their versions.
-const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
 // What runs the screens the server sends, with the modules the app provides:
 // one per app, so what a screen makes once stays made.
 const runtime = createRuntime({ moduleMap, installedPackages });
@@ -46,13 +44,8 @@ type Fetched = {
 async function fetchScreen(path: string): Promise<Fetched> {
   const heap = { started: readHeap() };
   const started = performance.now();
-  const response = await fetch(`${server}${path}`, {
-    headers: { "x-backtick-modules": modules },
-  });
+  const response = await runtime.fetch(`${server}${path}`);
   const firstByte = performance.now();
-  if (!response.ok) {
-    throw new Error(`${path} answered ${response.status}.`);
-  }
   const bundle = (await response.text()) as Bundle<ReactNode>;
   const downloaded = performance.now();
   const node = await runtime.exec(bundle);

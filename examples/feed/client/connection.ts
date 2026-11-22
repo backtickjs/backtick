@@ -1,4 +1,4 @@
-import { createRuntime } from "@backtickjs/core";
+import { type Bundle, createRuntime } from "@backtickjs/core";
 import { QueryClient } from "@tanstack/react-query";
 import Constants from "expo-constants";
 import { installedPackages, moduleMap } from "./backtick";
@@ -17,7 +17,7 @@ const runtime = createRuntime({ moduleMap, installedPackages });
  * modules and run with the app's modules. A screen, an item, a like's count. Your
  * fetch to shape: headers, auth, caching.
  */
-export function fetchBundle(
+export async function fetchBundle(
   path: string,
   init: RequestInit = {},
 ): Promise<unknown> {
@@ -25,7 +25,11 @@ export function fetchBundle(
   if (!headers.has("content-type")) {
     headers.set("content-type", "application/json");
   }
-  return runtime.fetch(`${server}${path}`, { ...init, headers });
+  const response = await runtime.fetch(`${server}${path}`, {
+    ...init,
+    headers,
+  });
+  return runtime.exec((await response.text()) as Bundle<unknown>);
 }
 
 /**

@@ -1,4 +1,4 @@
-import { createRuntime } from "@backtickjs/core";
+import { type Bundle, createRuntime } from "@backtickjs/core";
 import * as ReactQuery from "@tanstack/react-query";
 import { render } from "@testing-library/react";
 import * as React from "react";
@@ -42,11 +42,12 @@ export async function fetchBundle(
   const { body } = init;
   if (failing.has(path)) throw new Error("unreachable");
   requests.push(`${method} ${path}${body ? " " + JSON.stringify(body) : ""}`);
-  return runtime.fetch(`http://localhost${path}`, {
+  const response = await runtime.fetch(`http://localhost${path}`, {
     method,
     headers: { "content-type": "application/json" },
     body: body === undefined ? undefined : JSON.stringify(body),
   });
+  return runtime.exec((await response.text()) as Bundle<unknown>);
 }
 
 /**

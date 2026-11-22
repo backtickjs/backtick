@@ -1,11 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import {
-  BundleFetchError,
-  type Bundle,
-  createRuntime,
-  isBundleFetchError,
-} from "../dist/index.js";
+import { type Bundle, createRuntime } from "../dist/index.js";
 
 // Bundles written out as the bundler writes them: CommonJS, `$cached`
 // reading `module.cache` as its runtime hands it.
@@ -55,8 +50,7 @@ test("a module from a package without a version throws as the app starts", () =>
   );
 });
 
-// A runtime whose requests `answer` answers, keeping them: what a server
-// answers, written out.
+// A runtime whose requests `answer` answers, keeping them.
 function serve(answer: (request: Request) => Response | Promise<Response>) {
   const requests: Request[] = [];
   const runtime = createRuntime({
@@ -69,177 +63,49 @@ function serve(answer: (request: Request) => Response | Promise<Response>) {
   });
   return { requests, runtime };
 }
-const javascript = (code: string, init?: ResponseInit) =>
-  new Response(code, {
-    ...init,
-    headers: { "content-type": "text/javascript" },
+
+test("fetch sends the modules the runtime provides, always its own", async () => {
+  const { requests, runtime } = serve(() => new Response("ok"));
+  await runtime.fetch("https://api.test/answer", {
+    method: "POST",
+    headers: { "x-backtick-modules": "{}", "x-other": "kept" },
   });
-
-test("fetch sends the modules it provides, and runs what comes back", async () => {
-  const { requests, runtime } = serve(() =>
-    javascript('module.exports = require("app").answer + 1;'),
-  );
-  assert.equal(
-    await runtime.fetch("https://api.test/answer", {
-      headers: { "x-backtick-modules": "{}" },
-    }),
-    42,
-  );
-  assert.equal(requests[0]!.url, "https://api.test/answer");
-  // the runtime's, whatever the caller sets
-  assert.deepEqual(
-    JSON.parse(requests[0]!.headers.get("x-backtick-modules")!),
-    { app: "1.0.0", "app/extra": "1.0.0" },
-  );
+  const [request] = requests;
+  assert.equal(request!.url, "https://api.test/answer");
+  assert.equal(request!.method, "POST");
+  assert.equal(request!.headers.get("x-other"), "kept");
+  assert.deepEqual(JSON.parse(request!.headers.get("x-backtick-modules")!), {
+    app: "1.0.0",
+    "app/extra": "1.0.0",
+  });
 });
 
-test("a bundle is run whatever its status, as a not-found screen", async () => {
-  const { runtime } = serve(() =>
-    javascript('module.exports = "not found";', { status: 404 }),
-  );
-  assert.equal(await runtime.fetch("https://api.test/missing"), "not found");
+test("fetch answers as fetch does, whatever the status, its body unread", async () => {
+  const refused = new Response("update the app", { status: 406 });
+  const { runtime } = serve(() => refused);
+  const response = await runtime.fetch("https://api.test/");
+  assert.equal(response, refused);
+  assert.equal(response.bodyUsed, false);
 });
 
-test("a bundle's type is matched whatever its case", async () => {
-  const { runtime } = serve(
-    () =>
-      new Response("module.exports = 1;", {
-        headers: { "content-type": "Text/JavaScript; charset=utf-8" },
-      }),
-  );
-  assert.equal(await runtime.fetch("https://api.test/"), 1);
-});
-
-test("a refusal is a BundleFetchError, its code the server's", async () => {
-  const { runtime } = serve(() =>
-    Response.json(
-      { name: "ClientVersionMismatch", message: "Can't import `Image`" },
-      { status: 406 },
-    ),
-  );
-  await assert.rejects(
-    runtime.fetch("https://api.test/"),
-    (error) =>
-      error instanceof BundleFetchError &&
-      isBundleFetchError(error) &&
-      error.name === "BundleFetchError" &&
-      error.code === "ClientVersionMismatch" &&
-      error.response?.status === 406 &&
-      error.response.bodyUsed === false &&
-      /406: Can't import `Image`/.test(error.message),
-  );
-});
-
-test("a server's error name never passes for the caller's abort", async () => {
-  const { runtime } = serve(() =>
-    Response.json({ name: "AbortError" }, { status: 502 }),
-  );
-  await assert.rejects(
-    runtime.fetch("https://api.test/"),
-    (error) =>
-      isBundleFetchError(error) &&
-      error.name === "BundleFetchError" &&
-      error.code === "AbortError",
-  );
-});
-
-test("a refusal that isn't JSON is its own message", async () => {
-  const { runtime } = serve(
-    () => new Response("Internal Server Error", { status: 500 }),
-  );
-  await assert.rejects(
-    runtime.fetch("https://api.test/"),
-    (error) =>
-      isBundleFetchError(error) &&
-      error.code === undefined &&
-      error.response?.status === 500 &&
-      /answered 500: Internal Server Error/.test(error.message),
-  );
-});
-
-test("a refusal whose JSON names nothing is still a BundleFetchError", async () => {
-  const { runtime } = serve(() => Response.json(null, { status: 502 }));
-  await assert.rejects(
-    runtime.fetch("https://api.test/"),
-    (error) =>
-      isBundleFetchError(error) &&
-      error.code === undefined &&
-      /answered 502: null/.test(error.message),
-  );
-});
-
-test("what isn't a bundle is a NotABundle, its body unread", async () => {
-  const { runtime } = serve(
-    () =>
-      new Response("<html></html>", {
-        headers: { "content-type": "text/html" },
-      }),
-  );
-  await assert.rejects(
-    runtime.fetch("https://api.test/"),
-    (error) =>
-      isBundleFetchError(error) &&
-      error.code === "NotABundle" &&
-      error.response?.bodyUsed === false &&
-      /answered text\/html, not a bundle: is it a Backtick route\?/.test(
-        error.message,
-      ),
-  );
-});
-
-test("a server it can't reach is a BundleFetchError without a response", async () => {
-  const down = new TypeError("fetch failed");
+test("fetch's own errors pass through", async () => {
+  const down = new TypeError("Network request failed");
   const { runtime } = serve(() => {
     throw down;
   });
   await assert.rejects(
     runtime.fetch("https://api.test/"),
-    (error) =>
-      isBundleFetchError(error) &&
-      error.response === undefined &&
-      error.cause === down &&
-      /couldn't be reached: fetch failed/.test(error.message),
+    (error) => error === down,
   );
 });
 
-test("an answer cut off as it downloads is a BundleFetchError too", async () => {
-  const cut = new ReadableStream({
-    pull: (controller) => controller.error(new TypeError("terminated")),
-  });
+test("what fetch answers runs with exec", async () => {
   const { runtime } = serve(
-    () => new Response(cut, { headers: { "content-type": "text/javascript" } }),
+    () => new Response('module.exports = require("app").answer + 1;'),
   );
-  await assert.rejects(
-    runtime.fetch("https://api.test/"),
-    (error) =>
-      isBundleFetchError(error) &&
-      error.response === undefined &&
-      /terminated/.test(error.message),
-  );
-});
-
-test("an aborted fetch doesn't run what arrives after", async () => {
-  const controller = new AbortController();
-  const { runtime } = serve(() => {
-    controller.abort();
-    return javascript('globalThis.ran = true; module.exports = "ran";');
-  });
-  await assert.rejects(
-    runtime.fetch("https://api.test/", { signal: controller.signal }),
-    (error) => (error as Error).name === "AbortError",
-  );
-  assert.equal((globalThis as { ran?: boolean }).ran, undefined);
-});
-
-test("a fetch the caller aborts fails with the caller's own error", async () => {
-  const controller = new AbortController();
-  const aborted = Object.assign(new Error("aborted"), { name: "AbortError" });
-  const { runtime } = serve(() => {
-    controller.abort();
-    throw aborted;
-  });
-  await assert.rejects(
-    runtime.fetch("https://api.test/", { signal: controller.signal }),
-    (error) => error === aborted,
+  const response = await runtime.fetch("https://api.test/");
+  assert.equal(
+    await runtime.exec((await response.text()) as Bundle<number>),
+    42,
   );
 });

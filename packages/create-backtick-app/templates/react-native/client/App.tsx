@@ -1,5 +1,4 @@
-import { createRuntime } from "@backtickjs/core";
-import Constants from "expo-constants";
+import type { Bundle } from "@backtickjs/core";
 import { StatusBar } from "expo-status-bar";
 import { type ReactNode, Suspense, use, useState } from "react";
 import { ActivityIndicator, Text } from "react-native";
@@ -8,23 +7,18 @@ import {
   type FallbackProps,
   getErrorMessage,
 } from "react-error-boundary";
-import { installedPackages, moduleMap } from "./backtick";
+import { backtick, origin } from "./backtick";
 
-// Your Backtick server runs on the computer Expo was started from.
-const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
-const server = `http://${host}:3000`;
-
-// What fetches and runs the screens your server sends, with the modules the
-// app provides at their versions: one per app, so what a screen makes once
-// stays made.
-const runtime = createRuntime({ moduleMap, installedPackages });
+// The screen at `path` on your server, run with the app's modules.
+async function fetchScreen(path: string): Promise<ReactNode> {
+  const response = await backtick.fetch(`${origin}${path}`);
+  return backtick.exec((await response.text()) as Bundle<ReactNode>);
+}
 
 export default function App() {
   // Held here, which doesn't suspend, so the request outlives the render
   // that waits for it.
-  const [screen] = useState(
-    () => runtime.fetch(`${server}/`) as Promise<ReactNode>,
-  );
+  const [screen] = useState(() => fetchScreen("/"));
   // The whole screen, its layout included, comes from the server: see
   // server/Home.tsx.
   return (

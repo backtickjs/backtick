@@ -24,9 +24,7 @@ export type { Bundle } from "./Bundle.js";
 export { exec, isClientExec, type ClientExec } from "./exec.js";
 // What runs an app's bundles, with the modules it provides.
 export {
-  BundleFetchError,
   createRuntime,
-  isBundleFetchError,
   type Runtime,
   type RuntimeOptions,
 } from "./createRuntime.js";

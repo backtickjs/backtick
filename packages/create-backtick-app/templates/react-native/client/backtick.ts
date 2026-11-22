@@ -1,17 +1,22 @@
+import { createRuntime } from "@backtickjs/core";
+import Constants from "expo-constants";
 import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNative from "react-native";
+import installedPackages from "../installed-packages.json";
 
-// What a screen may require, as your app imports it: the packages it's built
-// with. Add one when a screen uses another package, from package.json's
-// dependencies. A platform that differs gets its own file, as Metro picks
-// files: backtick.web.ts, backtick.ios.ts.
-export const moduleMap = {
-  react: React,
-  "react/jsx-runtime": JSXRuntime,
-  "react-native": ReactNative,
-};
+// Your server, on the computer running Expo.
+const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
+export const origin = `http://${host}:3000`;
 
-// Their versions, as installed: what the app sends your server, so it never
-// sends a screen the app can't run. Written by `npm install`.
-export { default as installedPackages } from "../installed-packages.json";
+// Fetches and runs your server's screens.
+export const backtick = createRuntime({
+  // The packages a screen may use. Add one here when a screen imports it.
+  moduleMap: {
+    react: React,
+    "react/jsx-runtime": JSXRuntime,
+    "react-native": ReactNative,
+  },
+  // Their versions, written by `npm install`.
+  installedPackages,
+});

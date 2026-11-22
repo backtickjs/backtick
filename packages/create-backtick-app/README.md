@@ -50,7 +50,7 @@ Every template has:
 
 ### `react-native`
 
-An Expo app (SDK 57) with the Backtick server beside it in `server/`. `client/App.tsx` fetches the screen at `/` and runs it with a runtime from `createRuntime`, in [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core), offering screens what `client/backtick.ts` lists.
+An Expo app (SDK 57) with the Backtick server beside it in `server/`. `client/backtick.ts` makes the app's runtime with `createRuntime`, from [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core): where your server is, and what screens may require. `client/App.tsx` draws the screen at `/` with `backtick.fetch`.
 
 Each build of the app sends the modules it carries: those `client/backtick.ts` offers, at the versions in `installed-packages.json`, which `npm install` writes. The server bundles each screen for those modules ([more](https://github.com/backtickjs/backtick/tree/main/packages/core#every-build-in-users-hands)), so a build in users' hands keeps working as the app moves on, with nothing to record before it ships.
 
