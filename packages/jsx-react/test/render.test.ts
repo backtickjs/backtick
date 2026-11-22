@@ -4,8 +4,12 @@ import { rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { after, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
+import { type Bundle, createRuntime } from "@backtickjs/core";
 import { transpile } from "@backtickjs/compiler";
+import * as React from "react";
 import { act } from "react";
+import * as JSXRuntime from "react/jsx-runtime";
+import * as ReactDomClient from "react-dom/client";
 import { createRoot } from "react-dom/client";
 import ts from "typescript";
 import react from "../dist/plugin.js";
@@ -65,6 +69,18 @@ function Row({ name }: { name: string }) {
 export const list = cs\`<ul>{\${["a", "b"].map((name) => ${row})}}</ul>\`;
 `;
 
+// A bundle, run as an app runs it, with React and React DOM.
+function run(code: string) {
+  return createRuntime({
+    moduleMap: {
+      react: React,
+      "react/jsx-runtime": JSXRuntime,
+      "react-dom/client": ReactDomClient,
+    },
+    installedPackages: { react: "19.2.3", "react-dom": "19.2.3" },
+  }).exec(code as Bundle<React.ReactNode>);
+}
+
 for (const [what, row] of [
   ["a keyed server component", "<Row key={name} name={name} />"],
   [
@@ -90,10 +106,7 @@ for (const [what, row] of [
         "react-dom/client": "19.2.3",
       },
     });
-    const { code } = built.generate({ format: "es" });
-    const { default: drawn } = await import(
-      write(`${what}.client.tmp.mjs`, code)
-    );
+    const drawn = await run(built.generate({ format: "cjs" }).code);
 
     const errors: unknown[] = [];
     const error = console.error;
@@ -129,8 +142,7 @@ it("draws a page with React, its state React's", async () => {
       "react-dom/client": "19.2.3",
     },
   });
-  const { code } = built.generate({ format: "es" });
-  const { default: drawn } = await import(write("page.client.tmp.mjs", code));
+  const drawn = await run(built.generate({ format: "cjs" }).code);
 
   const errors: unknown[] = [];
   const error = console.error;

@@ -34,7 +34,7 @@ describe("a spliced undefined", () => {
       input: cs`${[undefined]}`,
       modules: {},
     });
-    const { code } = bundle.generate({ format: "es" });
+    const { code } = bundle.generate({ format: "cjs" });
     assert.match(code, /\[undefined\]/);
   });
 });

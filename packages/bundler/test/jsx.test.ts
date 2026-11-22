@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createImport, createJsxElement, cs } from "@backtickjs/core";
-import { es } from "./es.ts";
+import { bundled } from "./bundled.ts";
 
 // A host element: a server component's, run while bundling, and nothing the
 // client draws, which is written in a script.
@@ -10,7 +10,7 @@ async function printed(
   type: Parameters<typeof createJsxElement>[0],
   props: { [key: string]: unknown },
 ): Promise<string> {
-  return await es(cs`${createJsxElement(type, props)}`);
+  return await bundled(cs`${createJsxElement(type, props)}`);
 }
 
 test("an intrinsic element is not a tag on the host", async () => {
@@ -43,9 +43,9 @@ test("a component runs once per element in each bundle", async () => {
     return "drawn";
   };
   const element = createJsxElement(Counted, {});
-  await es(cs`${[element, element]}`);
+  await bundled(cs`${[element, element]}`);
   assert.equal(runs, 1);
-  await es(cs`${element}`);
+  await bundled(cs`${element}`);
   assert.equal(runs, 2);
 });
 
@@ -64,7 +64,7 @@ test("sibling components expand at once", async () => {
     return "drawn";
   };
   const code = await Promise.race([
-    es(cs`${[createJsxElement(Waits, {}), createJsxElement(Waits, {})]}`),
+    bundled(cs`${[createJsxElement(Waits, {}), createJsxElement(Waits, {})]}`),
     new Promise<never>((_, reject) =>
       setTimeout(() => reject(new Error("expanded one at a time")), 1000),
     ),
@@ -76,21 +76,21 @@ test("what a component draws is expanded in turn", async () => {
   const Inner = async () => ({ label: "inner" });
   const Outer = () => ({ child: createJsxElement(Inner, {}) });
   assert.match(
-    await es(cs`${createJsxElement(Outer, {})}`),
+    await bundled(cs`${createJsxElement(Outer, {})}`),
     /^const \$thunk0 = \(\) => \(\{ child: \{ label: "inner" \} \}\);$/m,
   );
 });
 
 test("a component that draws its own element is a cycle", async () => {
   const element = createJsxElement(() => [element], {});
-  await assert.rejects(() => es(cs`${element}`), /contains itself/);
+  await assert.rejects(() => bundled(cs`${element}`), /contains itself/);
 });
 
 test("a `__proto__` key next to a component stays a key", async () => {
   const value = JSON.parse('{"__proto__": {"admin": true}}');
   value.drawn = createJsxElement(() => "drawn", {});
   assert.match(
-    await es(cs`${value}`),
+    await bundled(cs`${value}`),
     /^const \$thunk0 = \(\) => \(\{ \["__proto__"\]: \{ admin: true \}, drawn: "drawn" \}\);$/m,
   );
 });

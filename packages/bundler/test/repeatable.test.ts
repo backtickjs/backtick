@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createJsxElement, cs, type Spliceable } from "@backtickjs/core";
-import { es } from "./es.ts";
+import { bundled } from "./bundled.ts";
 
 // A bundle is a function of what was spliced alone: bundling it again, or after
 // other bundles, writes the same code. Nothing the bundler keeps while bundling
@@ -22,17 +22,18 @@ const values: Record<string, Spliceable> = {
   ],
 };
 
-// One script for every bundle, so they differ only in what it splices.
-const bundled = (value: Spliceable) => es(cs`${value}`);
+// A value lifted into a script, and bundled: one script for every bundle, so
+// they differ only in what it splices.
+const lift = (value: Spliceable) => bundled(cs`${value}`);
 
 for (const [name, value] of Object.entries(values)) {
   test(`${name} bundles the same every time`, async () => {
-    const first = await bundled(value);
-    assert.equal(await bundled(value), first);
+    const first = await lift(value);
+    assert.equal(await lift(value), first);
     // Other bundles in between, including of the same functions.
     for (const other of Object.values(values)) {
-      await bundled(other);
+      await lift(other);
     }
-    assert.equal(await bundled(value), first);
+    assert.equal(await lift(value), first);
   });
 }

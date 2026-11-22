@@ -1,7 +1,7 @@
 "use strict";
 const { createRoot: $i0 } = require("solid-js");
 const $modules = {
-  "1rl1yd1xiyj96:28:4": (module, exports, require) => {
+  "33xwsd1ig5p78:28:4": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $splice1, $splice2, $splice3) =>
@@ -28,7 +28,7 @@ const $cached = (key, make) => {
   }
   return $cache.get(key);
 };
-const $cs0 = $require("1rl1yd1xiyj96:28:4").default;
+const $cs0 = $require("33xwsd1ig5p78:28:4").default;
 const $thunk0 = () => $i0;
 const $thunk1 = () => ({ title: "Ship 0.1.5", done: false, tags: ["release"] });
 const $value2 = $cs0($thunk0, $thunk1, $thunk1, $thunk1);

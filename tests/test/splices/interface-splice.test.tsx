@@ -70,7 +70,7 @@ export const unchecked = todo satisfies Spliceable;
 // A script takes what a splice takes.
 it("bundles an interface spliced into a script", async () => {
   const bundle = await bundler.build({ input: cs`$todo`, modules: {} });
-  assert.match(bundle.generate({ format: "es" }).code, /"Ship 0\.1\.5"/);
+  assert.match(bundle.generate({ format: "cjs" }).code, /"Ship 0\.1\.5"/);
 });
 
 // Never called: refused by the types, it would be refused when bundling too.
