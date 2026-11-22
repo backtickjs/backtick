@@ -91,3 +91,15 @@ test("an error a server component throws passes through as it is", async () => {
     (error) => error === broken,
   );
 });
+
+test("an error keeps its name when a minifier renames its class", async () => {
+  // as a minifier leaves it: the class's own name shortened
+  Object.defineProperty(ClientVersionMismatch, "name", { value: "t" });
+  const error = await render(request("{}"), greet).then(
+    () => assert.fail("rendered"),
+    (error: unknown) => error,
+  );
+  assert.ok(error instanceof ClientVersionMismatch);
+  const { name } = await error.getResponse().json();
+  assert.equal(name, "ClientVersionMismatch");
+});

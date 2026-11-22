@@ -8,13 +8,8 @@ import type { Modules } from "./modules.js";
  * default error handler calls it for you.
  */
 export class BundlerError extends Error {
+  override name: string = "BundlerError";
   readonly status: 400 | 406 = 400;
-
-  constructor(message: string, options?: ErrorOptions) {
-    super(message, options);
-    // as the class it is, in logs: `ClientVersionMismatch: Can't import …`
-    this.name = new.target.name;
-  }
 
   getResponse(): Response {
     return Response.json(
@@ -33,6 +28,7 @@ export class BundlerError extends Error {
  * or branches with `supports` before drawing. Answered as a 406.
  */
 export class ClientVersionMismatch extends BundlerError {
+  override name = "ClientVersionMismatch";
   // Not Acceptable: no bundle the app can run, so it has to update.
   override readonly status = 406;
 
