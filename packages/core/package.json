@@ -42,7 +42,11 @@
       "default": "./dist/node.js"
     }
   },
+  "bin": {
+    "backtick-installed-packages": "./bin/backtick-installed-packages.js"
+  },
   "files": [
+    "bin",
     "dist",
     "!dist/._cache",
     "src"
