@@ -11,10 +11,7 @@ import {
 test("the output is a module whose default export is the value", async () => {
   const bundle = await bundler.build({ input: cs`${42}`, modules: {} });
   // After the module table, empty, and its `require`.
-  assert.match(
-    bundle.generate({ format: "cjs" }).code,
-    /\nconst \$thunk0 = \(\) => \(42\);\n/,
-  );
+  assert.match(bundle.generate().code, /\nconst \$thunk0 = \(\) => \(42\);\n/);
 });
 
 test("the modules are { specifier: version }, as a client sends them", async () => {
@@ -28,19 +25,19 @@ test("the modules are { specifier: version }, as a client sends them", async () 
 
 test("a map is written only where one is asked for", async () => {
   const bundle = await bundler.build({ input: cs`${42}`, modules: {} });
-  const { code } = bundle.generate({ format: "cjs" });
-  assert.deepEqual(bundle.generate({ format: "cjs" }), { code, map: null });
-  assert.deepEqual(bundle.generate({ format: "cjs", sourcemap: false }), {
+  const { code } = bundle.generate();
+  assert.deepEqual(bundle.generate(), { code, map: null });
+  assert.deepEqual(bundle.generate({ sourcemap: false }), {
     code,
     map: null,
   });
-  const { map } = bundle.generate({ format: "cjs", sourcemap: "hidden" });
+  const { map } = bundle.generate({ sourcemap: "hidden" });
   assert.equal(JSON.parse(map!).version, 3);
-  assert.deepEqual(bundle.generate({ format: "cjs", sourcemap: "hidden" }), {
+  assert.deepEqual(bundle.generate({ sourcemap: "hidden" }), {
     code,
     map,
   });
-  assert.deepEqual(bundle.generate({ format: "cjs", sourcemap: "inline" }), {
+  assert.deepEqual(bundle.generate({ sourcemap: "inline" }), {
     code: `${code}\n//# sourceMappingURL=data:application/json;charset=utf-8,${encodeURIComponent(map!)}`,
     map,
   });
@@ -143,7 +140,7 @@ test("a module is provided by its own specifier, not its package", async () => {
     input: cs`${[Portal, button]}`,
     modules: { "solid-js/web": "1.9.14", "@scope/ui/button": "1.2.0" },
   });
-  const { code } = bundle.generate({ format: "cjs" });
+  const { code } = bundle.generate();
   assert.match(code, /require\("solid-js\/web"\)/);
   assert.match(code, /require\("@scope\/ui\/button"\)/);
   // its package alone isn't the module
@@ -183,7 +180,7 @@ test("supports answers for the client a build is for, in a server component", as
   const drawn = async (modules: Record<string, string>) =>
     (
       await bundler.build({ input: createJsxElement(Haptics, {}), modules })
-    ).generate({ format: "cjs" }).code;
+    ).generate().code;
   // at once, as a server answering three clients: each build its own
   const [newer, older, without] = await Promise.all([
     drawn({ "expo-haptics": "15.0.1" }),

@@ -27,7 +27,7 @@ const modules = modulesOf(moduleMap, installedPackages);
 // `World` as the phone gets it: bundled by the server, run by the app.
 const bundle = await bundler.build({ input: World, modules });
 const PlayedWorld = await createRuntime({ moduleMap, installedPackages }).exec(
-  bundle.generate({ format: "cjs" }).code,
+  bundle.generate().code,
 );
 
 const start: Stats = { health: 100, ammo: 24, kills: 0, shots: 0, wounds: 0 };

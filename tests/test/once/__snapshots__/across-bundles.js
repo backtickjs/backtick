@@ -3,7 +3,7 @@ import { it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { cs, createRuntime } from "@backtickjs/core";
 const $module0 = {
-  id: "1xnm6q4q6rprz:19:14",
+  id: "p1qv9r6dbd9c:19:14",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => ({\n    count: 0\n});\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkBiB,OAAC;IAAEA,KAAK,EAAE;CAAG,CAAC","names":["count"],"ignoreList":[],"sources":["once/across-bundles.test.tsx"]}',
   dependencies: [],
@@ -12,7 +12,7 @@ const $module0 = {
   scope: "module",
 };
 const $module1 = {
-  id: "1xnm6q4q6rprz:20:13",
+  id: "p1qv9r6dbd9c:20:13",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAmBgBA,QAAA,IAAAA,QAAA,EAAM","names":["$splice0"],"ignoreList":[],"sources":["once/across-bundles.test.tsx"]}',
   dependencies: [],
@@ -21,7 +21,7 @@ const $module1 = {
   scope: "module",
 };
 const $module2 = {
-  id: "1xnm6q4q6rprz:21:16",
+  id: "p1qv9r6dbd9c:21:16",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAoBmBA,QAAA,IAAAA,QAAA,EAAM","names":["$splice0"],"ignoreList":[],"sources":["once/across-bundles.test.tsx"]}',
   dependencies: [],
@@ -30,7 +30,7 @@ const $module2 = {
   scope: "module",
 };
 const $module3 = {
-  id: "1xnm6q4q6rprz:37:9",
+  id: "p1qv9r6dbd9c:37:9",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => ({\n    label: "box"\n});\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAoCY,OAAC;IAAEA,KAAK,EAAE;CAAO,CAAC","names":["label"],"ignoreList":[],"sources":["once/across-bundles.test.tsx"]}',
   dependencies: [],
@@ -39,7 +39,7 @@ const $module3 = {
   scope: "function",
 };
 const $module4 = {
-  id: "1xnm6q4q6rprz:44:36",
+  id: "p1qv9r6dbd9c:44:36",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => [$splice0(), $splice1()];\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2CuC,CAAAA,QAAA,EAAAC,QAAA,MAACD,QAAA,EAAE,EAAEC,QAAA,EAAE,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["once/across-bundles.test.tsx"]}',
   dependencies: [],
@@ -51,7 +51,7 @@ const $module4 = {
   scope: "function",
 };
 const $module5 = {
-  id: "1xnm6q4q6rprz:46:28",
+  id: "p1qv9r6dbd9c:46:28",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => [$splice0()];\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA6C+BA,QAAA,KAACA,QAAA,EAAE,CAAC","names":["$splice0"],"ignoreList":[],"sources":["once/across-bundles.test.tsx"]}',
   dependencies: [],
@@ -68,7 +68,7 @@ async function run(
   runtime = createRuntime({ moduleMap: {}, installedPackages: {} }),
 ) {
   const bundle = await bundler.build({ input, modules: {} });
-  const { code } = bundle.generate({ format: "cjs" });
+  const { code } = bundle.generate();
   return runtime.exec(code);
 }
 const store = cs.create($module0, []);

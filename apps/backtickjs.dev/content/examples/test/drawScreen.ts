@@ -47,7 +47,7 @@ export async function bundleScreen<T>(
     input,
     modules: { "react/jsx-runtime": "19.2.3", ...versionsOf(modules) },
   });
-  return bundle.generate({ format: "cjs" });
+  return bundle.generate();
 }
 
 // The bundle a page shows beside its example is the one the bundler writes:

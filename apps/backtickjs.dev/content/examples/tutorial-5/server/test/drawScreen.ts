@@ -20,6 +20,6 @@ const modules = modulesOf(moduleMap, installedPackages);
 // for Testing Library to draw.
 export async function drawScreen<T>(input: Client<T>) {
   const bundle = await bundler.build({ input, modules });
-  const { code } = bundle.generate({ format: "cjs" });
+  const { code } = bundle.generate();
   return createRuntime({ moduleMap, installedPackages }).exec(code);
 }

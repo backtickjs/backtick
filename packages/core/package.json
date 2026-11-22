@@ -33,10 +33,6 @@
       "types": "./dist/cjs.d.ts",
       "default": "./dist/cjs.js"
     },
-    "./es": {
-      "types": "./dist/es.d.ts",
-      "default": "./dist/es.js"
-    },
     "./node": {
       "types": "./dist/node.d.ts",
       "default": "./dist/node.js"

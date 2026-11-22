@@ -18,7 +18,6 @@ export async function toHtml(element: JSX.Element): Promise<string> {
   // In development, a map back to the files you wrote, for the browser's
   // devtools.
   const { code } = bundle.generate({
-    format: "cjs",
     sourcemap: development ? "inline" : false,
   });
 

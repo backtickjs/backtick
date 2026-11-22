@@ -67,7 +67,7 @@ it("draws a server's screen with the app's React Native", async () => {
       "react-native": "0.86.3",
     },
   });
-  const { code } = built.generate({ format: "cjs" });
+  const { code } = built.generate();
 
   // The app: the bundle run with its packages, `react-native-web` standing in
   // for React Native, and drawn.

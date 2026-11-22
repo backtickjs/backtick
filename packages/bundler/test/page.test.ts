@@ -10,7 +10,7 @@ const hostile = `</script><script>steal()</script> </SCRIPT <!-- --> & "'`;
 
 async function generate(input: Parameters<typeof bundler.build>[0]["input"]) {
   const built = await bundler.build({ input, modules: {} });
-  return built.generate({ format: "cjs" }).code;
+  return built.generate().code;
 }
 
 test("spliced text never closes a page's script, and still arrives as written", async () => {

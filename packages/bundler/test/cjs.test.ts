@@ -9,38 +9,18 @@ const greet = createImport<(name: string) => string>({
   version: "1.0.0",
 });
 
-test("as CommonJS, the value is `module.exports`, its imports `require` calls", async () => {
+test("the value is `module.exports`, its imports `require` calls", async () => {
   const bundle = await bundler.build({
     input: greet,
     modules: { app: "1.0.0" },
   });
-  const { code } = bundle.generate({ format: "cjs" });
+  const { code } = bundle.generate();
   assert.match(
     code,
     /^"use strict";\nconst \{ greet: \$i0 \} = require\("app"\);\n/,
   );
   assert.match(code, /\nmodule\.exports = \(\$i0\);$/);
   assert.doesNotMatch(code, /^(import|export) /m);
-});
-
-test("a bundle is the same in either format but for its imports, its values' registry and its export", async () => {
-  const bundle = await bundler.build({
-    input: greet,
-    modules: { app: "1.0.0" },
-  });
-  const body = (code: string) =>
-    code
-      .split("\n")
-      .filter(
-        (line) =>
-          !/^(import |export |const \{.*require\(|"use strict"|module\.exports|const \$cache = )/.test(
-            line,
-          ),
-      );
-  assert.deepEqual(
-    body(bundle.generate({ format: "cjs" }).code),
-    body(bundle.generate({ format: "es" }).code),
-  );
 });
 
 // What a client that isn't a browser does with one: hand it `require`, its
@@ -50,7 +30,7 @@ test("a CommonJS bundle runs with the `require` its client hands it", async () =
     input: cs`${{ greet, name: "world" }}`,
     modules: { app: "1.0.0" },
   });
-  const { code } = bundle.generate({ format: "cjs" });
+  const { code } = bundle.generate();
   const module = { exports: {} as unknown };
   const require = (specifier: string) => {
     assert.equal(specifier, "app");

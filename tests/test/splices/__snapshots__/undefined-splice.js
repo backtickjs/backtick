@@ -10,7 +10,7 @@ const createRoot = {
   version: "1.9.14",
 };
 const $module0 = {
-  id: "rjd8fuzviz4m:13:32",
+  id: "3477fiksrpn1f:13:32",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => $splice1());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAYmC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAQ,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/undefined-splice.test.tsx"]}',
   dependencies: [],
@@ -22,7 +22,7 @@ const $module0 = {
   scope: "function",
 };
 const $module1 = {
-  id: "rjd8fuzviz4m:18:35",
+  id: "3477fiksrpn1f:18:35",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => $splice1());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAiBsC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAK,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/undefined-splice.test.tsx"]}',
   dependencies: [],
@@ -34,7 +34,7 @@ const $module1 = {
   scope: "function",
 };
 const $module2 = {
-  id: "rjd8fuzviz4m:25:36",
+  id: "3477fiksrpn1f:25:36",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(() => $splice1());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAwBuC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAW,CAAC,MAAMC,QAAA,EAAK,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/undefined-splice.test.tsx"]}',
   dependencies: [],
@@ -46,7 +46,7 @@ const $module2 = {
   scope: "function",
 };
 const $module3 = {
-  id: "rjd8fuzviz4m:34:13",
+  id: "3477fiksrpn1f:34:13",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAiCgBA,QAAA,IAAAA,QAAA,EAAc","names":["$splice0"],"ignoreList":[],"sources":["splices/undefined-splice.test.tsx"]}',
   dependencies: [],
@@ -83,7 +83,7 @@ describe("a spliced undefined", () => {
       input: cs.create($module3, [[undefined]]),
       modules: {},
     });
-    const { code } = bundle.generate({ format: "cjs" });
+    const { code } = bundle.generate();
     assert.match(code, /\[undefined\]/);
   });
 });

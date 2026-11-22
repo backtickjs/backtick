@@ -10,7 +10,7 @@ const app = new Hono();
 app.get("/", async (context) => {
   const modules = JSON.parse(context.req.header("x-backtick-modules") ?? "{}");
   const bundle = await bundler.build({ input: <Home />, modules });
-  const { code } = bundle.generate({ format: "cjs" });
+  const { code } = bundle.generate();
   return context.body(code, 200, { "content-type": "text/javascript" });
 });
 

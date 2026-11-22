@@ -10,7 +10,7 @@ const bundle = await bundler.build({
   },
 });
 
-const { code } = bundle.generate({ format: "cjs" });
+const { code } = bundle.generate();
 
 export const html = `<!doctype html>
 <html>

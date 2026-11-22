@@ -22,7 +22,7 @@ async function bundleCjs<T>(value: Client<T>): Promise<Bundle<T>> {
     input: value,
     modules: { app: "1.0.0" },
   });
-  return built.generate({ format: "cjs" }).code;
+  return built.generate().code;
 }
 
 describe("execRoot, from @backtickjs/core/cjs", () => {

@@ -63,5 +63,5 @@ export async function compile(test: Test): Promise<Compiled> {
     input: script,
     modules: { test262: "1.0.0" },
   });
-  return { bundle: built.generate({ format: "cjs" }).code, imports };
+  return { bundle: built.generate().code, imports };
 }

@@ -55,7 +55,7 @@ export async function bundle<T>(
   value: Client<T>,
 ): Promise<{ code: Bundle<T>; map: string }> {
   const built = await bundler.build({ input: value, modules });
-  const { code, map } = built.generate({ format: "cjs", sourcemap: "hidden" });
+  const { code, map } = built.generate({ sourcemap: "hidden" });
   return { code, map: map! };
 }
 

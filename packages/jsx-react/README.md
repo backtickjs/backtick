@@ -83,7 +83,7 @@ const bundle = await bundler.build({
     "react-dom/client": "19.2.3",
   },
 });
-const { code } = bundle.generate({ format: "es" });
+const { code } = bundle.generate();
 ```
 
 ## What it exports

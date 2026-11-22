@@ -1,13 +1,13 @@
 "use strict";
 const { createRoot: $i0 } = require("solid-js");
 const $modules = {
-  "33xwsd1ig5p78:43:4": (module, exports, require) => {
+  "e7lkecpooul9:43:4": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = ($splice0, $splice1) =>
       $splice0()(() => $splice1().label.toUpperCase());
   },
-  "33xwsd1ig5p78:37:36": (module, exports, require) => {
+  "e7lkecpooul9:37:36": (module, exports, require) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = () => "computed";
@@ -30,10 +30,10 @@ const $cached = (key, make) => {
   }
   return $cache.get(key);
 };
-const $cs0 = $require("33xwsd1ig5p78:43:4").default;
-const $cs1 = $require("33xwsd1ig5p78:37:36").default;
+const $cs0 = $require("e7lkecpooul9:43:4").default;
+const $cs1 = $require("e7lkecpooul9:37:36").default;
 const $thunk0 = () => $i0;
-const $value1 = $cached("33xwsd1ig5p78:37:36", () => $cs1());
+const $value1 = $cached("e7lkecpooul9:37:36", () => $cs1());
 const $thunk2 = () => ({ label: $value1 });
 const $value3 = $cs0($thunk0, $thunk2);
 module.exports = $value3;

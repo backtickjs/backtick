@@ -10,7 +10,7 @@ const createSignal = {
 };
 import { bundle, evaluate } from "../evaluate.ts";
 const $module0 = {
-  id: "64fh5r3jen4x:43:42",
+  id: "2dwtl4alj6dak:43:42",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 40 + 2;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA0C6C,QAAE,GAAG,CAAC","names":[],"ignoreList":[],"sources":["bundler/exec.test.tsx"]}',
   dependencies: [],
@@ -19,7 +19,7 @@ const $module0 = {
   scope: "function",
 };
 const $module1 = {
-  id: "64fh5r3jen4x:44:33",
+  id: "2dwtl4alj6dak:44:33",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()($splice1());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2CoC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAK,CAACC,QAAA,EAAO,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["bundler/exec.test.tsx"]}',
   dependencies: [],
@@ -31,7 +31,7 @@ const $module1 = {
   scope: "function",
 };
 const $module2 = {
-  id: "64fh5r3jen4x:49:43",
+  id: "2dwtl4alj6dak:49:43",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const [count, setCount] = $splice0()(1);\n    setCount(count() + 1);\n    return count();\n};\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAgD8CA,QAAA;IACxC,MAAM,CAACC,KAAK,EAAEC,QAAQ,CAAC,GAAGF,QAAA,EAAa,CAAC,CAAC,CAAC;IAC1CE,QAAQ,CAACD,KAAK,EAAE,GAAG,CAAC,CAAC;IACrB,OAAOA,KAAK,EAAE;AAChB,CAAC","names":["$splice0","count","setCount"],"ignoreList":[],"sources":["bundler/exec.test.tsx"]}',
   dependencies: [],
@@ -40,7 +40,7 @@ const $module2 = {
   scope: "function",
 };
 const $module3 = {
-  id: "64fh5r3jen4x:54:33",
+  id: "2dwtl4alj6dak:54:33",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()($splice1());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAqDoC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAK,CAACC,QAAA,EAAQ,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["bundler/exec.test.tsx"]}',
   dependencies: [],
@@ -52,7 +52,7 @@ const $module3 = {
   scope: "function",
 };
 const $module4 = {
-  id: "64fh5r3jen4x:59:34",
+  id: "2dwtl4alj6dak:59:34",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + 1;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA0DqCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/exec.test.tsx"]}',
   dependencies: [],
@@ -61,7 +61,7 @@ const $module4 = {
   scope: "function",
 };
 const $module5 = {
-  id: "64fh5r3jen4x:60:34",
+  id: "2dwtl4alj6dak:60:34",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()($splice1());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2DqC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAK,CAACC,QAAA,EAAM,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["bundler/exec.test.tsx"]}',
   dependencies: [],
@@ -73,7 +73,7 @@ const $module5 = {
   scope: "function",
 };
 const $module6 = {
-  id: "64fh5r3jen4x:66:40",
+  id: "2dwtl4alj6dak:66:40",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 1;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAiE2C,OAAC","names":[],"ignoreList":[],"sources":["bundler/exec.test.tsx"]}',
   dependencies: [],
@@ -94,7 +94,7 @@ async function bundleCjs(value) {
     input: value,
     modules: { app: "1.0.0" },
   });
-  return built.generate({ format: "cjs" }).code;
+  return built.generate().code;
 }
 function runCjs(code, provided) {
   const module = { exports: {} };

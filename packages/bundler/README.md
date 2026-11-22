@@ -24,7 +24,7 @@ const modules = {
 
 // In a request handler:
 const build = await bundler.build({ input: <Home />, modules });
-const { code } = build.generate({ format: "cjs" });
+const { code } = build.generate();
 response.setHeader("content-type", "text/javascript");
 response.end(code);
 ```
@@ -46,12 +46,12 @@ const build = await bundler.build({
     "react-dom/client": "19.2.3",
   },
 });
-const { code } = build.generate({ format: "es", sourcemap: "inline" });
+const { code } = build.generate({ sourcemap: "inline" });
 ```
 
 ### `modules`
 
-The modules the client provides, by specifier, each at the exact version of the package it comes from: `"react-dom/client": "19.2.3"`. The server decides which to bundle for: one app version, or the ones each build sends, as [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core#every-build-in-users-hands) puts them together. Those modules are left out of the bundle, which imports (`es`) or requires (`cjs`) them. `build` rejects a script that imports from any other module, or whose import is typed against a version the one given isn't compatible with: an earlier one, or another major. `19.2.3` for `react` takes any later 19.x.
+The modules the client provides, by specifier, each at the exact version of the package it comes from: `"react-dom/client": "19.2.3"`. The server decides which to bundle for: one app version, or the ones each build sends, as [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core#every-build-in-users-hands) puts them together. Those modules are left out of the bundle, which requires them. `build` rejects a script that imports from any other module, or whose import is typed against a version the one given isn't compatible with: an earlier one, or another major. `19.2.3` for `react` takes any later 19.x.
 
 `supports(specifier, range)` makes the same check, for a server component choosing what to draw for the client the bundler is drawing for: `supports("expo-haptics", "^15")`. It asks about the modules of the build in progress, so it's called in a server component, while `build` runs it; outside one, it throws.
 
@@ -72,10 +72,9 @@ try {
 
 Spliced values are written into the bundle as data, never as code. What can't cross, `build` rejects before anything reaches the client; [Errors](https://backtickjs.dev/docs/errors/#from-the-bundler) has each message and its fix.
 
-### Formats
+### What a bundle is
 
-- `"es"`: an ES module, for a web page. Packages are imported by specifier, which the page's import map resolves.
-- `"cjs"`: CommonJS, for a client that provides `require` itself, as a React Native app does through `createRuntime`.
+The body of a function of `module`, `exports` and `require`, whose `module.exports` is the value: whatever runs it hands it `require`, as a React Native app does through `createRuntime`, or a page with the modules its import map loads.
 
 ### Source maps
 
@@ -84,7 +83,7 @@ Spliced values are written into the bundle as data, never as code. What can't cr
 ## API
 
 - `bundler.build({ input, modules })`: runs the server components in `input` and returns a `Build`. Async. `input` is a `Client<T>`: an element, as `<Home />`, or a script. Plain data is sent as a script, `` cs`${value}` ``.
-- `Build.generate({ format, sourcemap })`: writes the bundle; returns `{ code, map }`, where `code` is a `Bundle<T>` (from `@backtickjs/core`) for an `input` of `Client<T>`, which the client runs to a `T`, and `map` is `null` without a source map.
+- `Build.generate({ sourcemap })`: writes the bundle; returns `{ code, map }`, where `code` is a `Bundle<T>` (from `@backtickjs/core`) for an `input` of `Client<T>`, which the client runs to a `T`, and `map` is `null` without a source map.
 - `supports(specifier, range)`: in a server component, whether the client being drawn for provides `specifier` at a version in `range`.
 - `BundlerError`: what `build` throws when it refuses its input, such as a value it can't splice. An error a server component throws passes through as it is. `getResponse()` answers it as JSON `{ name, message }` at its `status`, a 400: Hono's default error handler calls it on its own; elsewhere, the app's error handler returns it.
 - `UnsupportedImportError`, a `BundlerError`: what `build` throws for a script's import the client can't run. Its `status` is 406.

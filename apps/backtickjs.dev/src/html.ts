@@ -29,7 +29,7 @@ export async function toHtml({
     },
   });
 
-  const { code } = bundle.generate({ format: "cjs", sourcemap });
+  const { code } = bundle.generate({ sourcemap });
 
   return `<!doctype html>
 <html lang="en">

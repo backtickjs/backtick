@@ -36,7 +36,7 @@ async function bundleFor(input: Client<unknown>, acme: string) {
     input,
     modules: { ...solid, "acme-ui": acme },
   });
-  return built.generate({ format: "cjs" }).code;
+  return built.generate().code;
 }
 
 describe("two installed versions of one package", () => {

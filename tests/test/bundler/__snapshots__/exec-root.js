@@ -4,7 +4,7 @@ import { bundler } from "@backtickjs/bundler";
 import { createImport, cs, exec } from "@backtickjs/core";
 import { execRoot } from "@backtickjs/core/cjs";
 const $module0 = {
-  id: "1xnve6tyb7jqj:30:33",
+  id: "wn7m1ov8mfny:30:33",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + 1;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA6BoCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
   dependencies: [],
@@ -13,7 +13,7 @@ const $module0 = {
   scope: "function",
 };
 const $module1 = {
-  id: "1xnve6tyb7jqj:35:33",
+  id: "wn7m1ov8mfny:35:33",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + 1;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkCoCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
   dependencies: [],
@@ -22,7 +22,7 @@ const $module1 = {
   scope: "function",
 };
 const $module2 = {
-  id: "1xnve6tyb7jqj:43:34",
+  id: "wn7m1ov8mfny:43:34",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + 1;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA0CqCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
   dependencies: [],
@@ -31,7 +31,7 @@ const $module2 = {
   scope: "function",
 };
 const $module3 = {
-  id: "1xnve6tyb7jqj:44:33",
+  id: "wn7m1ov8mfny:44:33",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()($splice1());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2CoC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAK,CAACC,QAAA,EAAM,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
   dependencies: [],
@@ -43,7 +43,7 @@ const $module3 = {
   scope: "function",
 };
 const $module4 = {
-  id: "1xnve6tyb7jqj:50:34",
+  id: "wn7m1ov8mfny:50:34",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + 1;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAiDqCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
   dependencies: [],
@@ -52,7 +52,7 @@ const $module4 = {
   scope: "function",
 };
 const $module5 = {
-  id: "1xnve6tyb7jqj:51:33",
+  id: "wn7m1ov8mfny:51:33",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()($splice1());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkDoC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAK,CAACC,QAAA,EAAM,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["bundler/exec-root.test.tsx"]}',
   dependencies: [],
@@ -74,7 +74,7 @@ async function bundleCjs(value) {
     input: value,
     modules: { app: "1.0.0" },
   });
-  return built.generate({ format: "cjs" }).code;
+  return built.generate().code;
 }
 describe("execRoot, from @backtickjs/core/cjs", () => {
   it("runs CommonJS with require answered from the module map", async () => {

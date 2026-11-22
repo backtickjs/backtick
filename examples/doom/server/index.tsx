@@ -25,7 +25,7 @@ app.get("/game", async (context) => {
   const modules = JSON.parse(context.req.header("x-backtick-modules") ?? "{}");
   const bundle = await bundler.build({ input: <Game />, modules });
   const built = performance.now();
-  const { code } = bundle.generate({ format: "cjs" });
+  const { code } = bundle.generate();
   const generated = performance.now();
   const { heapUsed, rss } = process.memoryUsage();
   console.log(

@@ -40,7 +40,7 @@ export async function render<T>(
     );
   }
   const build = await bundler.build({ input, modules });
-  const { code } = build.generate({ format: "cjs" });
+  const { code } = build.generate();
   // The route's headers win over these.
   const headers = new Headers({
     "content-type": "text/javascript",

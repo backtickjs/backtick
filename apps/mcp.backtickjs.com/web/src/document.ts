@@ -22,7 +22,7 @@ export async function toHtml(
       "@supabase/supabase-js": supabase,
     },
   });
-  const { code } = bundle.generate({ format: "cjs" });
+  const { code } = bundle.generate();
   return `<!doctype html>
 <html lang="en">
 <head>

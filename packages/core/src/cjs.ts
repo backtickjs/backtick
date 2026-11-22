@@ -5,9 +5,7 @@ import type { ModuleMap } from "./modulesOf.js";
  * Executes a CommonJS bundle an app starts from, the one nothing else runs,
  * to its value, with `require` answered from `moduleMap`: how a React Native
  * app runs what its server answers. The bundles it runs in turn, with `exec`,
- * get the same modules. Fetching the bundle, and when, is the app's. The
- * entry an app imports is its format: a web page imports
- * `@backtickjs/core/es`.
+ * get the same modules. Fetching the bundle, and when, is the app's.
  *
  * What its scripts make once is kept in `cache` by key, and so is what the
  * bundles it runs make: one value per app, as a module is, however many

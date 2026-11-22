@@ -12,7 +12,7 @@ async function run<T>(
   runtime: Runtime = createRuntime({ moduleMap: {}, installedPackages: {} }),
 ): Promise<T> {
   const bundle = await bundler.build({ input, modules: {} });
-  const { code } = bundle.generate({ format: "cjs" });
+  const { code } = bundle.generate();
   return runtime.exec(code) as Promise<T>;
 }
 

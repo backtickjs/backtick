@@ -85,7 +85,7 @@ const bundle = await bundler.build({
     "solid-js/web": "1.9.17",
   },
 });
-const { code } = bundle.generate({ format: "es" });
+const { code } = bundle.generate();
 ```
 
 ## What it exports

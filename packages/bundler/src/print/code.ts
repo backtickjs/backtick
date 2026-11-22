@@ -103,20 +103,8 @@ export function imported(
   return entry.local;
 }
 
-/** An import declaration of one export, or the namespace (`*`), by its local name. */
-export function importDeclaration(
-  from: string,
-  name: string,
-  local: string,
-): string {
-  if (name === "*") {
-    return `import * as ${local} from ${string(from)};`;
-  }
-  const exported = IDENTIFIER.test(name) ? name : string(name);
-  return `import { ${exported} as ${local} } from ${string(from)};`;
-}
-
-// The same import as CommonJS writes it: `const { name: local } = require(…);`.
+// An import of one export, or the namespace (`*`), by its local name, as a
+// bundle writes it: `const { name: local } = require(…);`.
 export function requireDeclaration(
   from: string,
   name: string,

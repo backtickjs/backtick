@@ -25,7 +25,7 @@ async function bundleCjs<T>(value: Client<T>): Promise<Bundle<T>> {
     input: value,
     modules: { app: "1.0.0" },
   });
-  return built.generate({ format: "cjs" }).code;
+  return built.generate().code;
 }
 function runCjs(code: string, provided: Record<string, unknown>): unknown {
   const module = { exports: {} as unknown };

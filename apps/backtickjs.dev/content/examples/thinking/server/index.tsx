@@ -12,7 +12,7 @@ app.get("/", async (context) => {
   const user = await db.userFor(context.req.header("authorization"));
   const modules = JSON.parse(context.req.header("x-backtick-modules") ?? "{}");
   const bundle = await bundler.build({ input: <Home user={user} />, modules });
-  const { code } = bundle.generate({ format: "cjs" });
+  const { code } = bundle.generate();
   return context.body(code, 200, { "content-type": "text/javascript" });
 });
 

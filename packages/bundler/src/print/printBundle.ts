@@ -1,6 +1,6 @@
 import type { BundleTree } from "../bundle/buildBundle.js";
 import type { ScriptModule } from "@backtickjs/core";
-import { importDeclaration, requireDeclaration, string } from "./code.js";
+import { requireDeclaration, string } from "./code.js";
 
 const MODULE_ID = "bundle.js";
 
@@ -16,10 +16,9 @@ const RUNTIME = `const $require = (id) => {
   return $exports[id];
 };`;
 
-// Another bundle, executed as this one is, to its value. As CommonJS, handed the
-// `require` this bundle was: inside the module table, `require` is the
-// table's own.
-const EXEC_CJS = `const $exec = async (bundle) => {
+// Another bundle, executed as this one is, to its value, handed the `require`
+// this bundle was: inside the module table, `require` is the table's own.
+const EXEC = `const $exec = async (bundle) => {
   const module = { exports: {}, cache: $cache };
   new Function("module", "exports", "require", bundle)(module, module.exports, require);
   return module.exports;
@@ -27,55 +26,40 @@ const EXEC_CJS = `const $exec = async (bundle) => {
 
 // The cache an app's bundles share: each value a script makes once, by key,
 // as a module's exports are shared by every chunk that imports it, made by the
-// first bundle that needs it. As CommonJS, handed by whatever runs the bundle,
-// which `$exec` passes on, or the bundle's own; as an ES module, the bundle's
-// own.
+// first bundle that needs it: handed by whatever runs the bundle, which `$exec`
+// passes on, or the bundle's own.
 const CACHED = `const $cached = (key, make) => {
   if (!$cache.has(key)) {
     $cache.set(key, make());
   }
   return $cache.get(key);
 };`;
-const CACHE_CJS = `const $cache = module.cache ?? new Map();\n${CACHED}`;
-const CACHE_ES = `const $cache = new Map();\n${CACHED}`;
-
-// As an ES module, imported whole, the page's import map answering its
-// imports as it answers this bundle's.
-const EXEC_ES = `const $exec = async (bundle) => {
-  const module = await import("data:text/javascript," + encodeURIComponent(bundle));
-  return module.default;
-};`;
+const CACHE = `const $cache = module.cache ?? new Map();\n${CACHED}`;
 
 /**
- * A bundle tree as a module whose default export is the tree's root: the value
- * bundled, as its scripts wrote it.
+ * A bundle tree as the body of a function of `module`, `exports` and
+ * `require`, whose `module.exports` is the tree's root: the value bundled, as
+ * its scripts wrote it.
  *
- * The module is its imports, a module table of its scripts, each compiled for
- * its framework when its host was built, and the root. Its imports are the
- * client's to resolve. As an ES module (`"es"`), a page resolves them through
- * an import map; as CommonJS (`"cjs"`), whatever runs it hands it `require`,
- * as a React Native app does for the packages it was built with.
+ * The bundle is its requires, a module table of its scripts, each compiled for
+ * its framework when its host was built, and the root. Whatever runs it hands
+ * it `require`, as a React Native app does for the packages it was built
+ * with.
  *
  * Its map leads into the host files its scripts were written in: an index
  * map, each script's own map a section where the script stands. What the
  * bundler wrote around the scripts maps to nothing, since no source wrote it.
  */
-export function printBundle(
-  tree: BundleTree,
-  format: "es" | "cjs",
-): { code: string; map: string } {
+export function printBundle(tree: BundleTree): { code: string; map: string } {
   const { names } = tree;
   const module = new ModuleWriter();
-  if (format === "cjs") {
-    // An ES module is strict code, and so are the scripts; CommonJS isn't.
-    module.line('"use strict";');
-  }
-  const declaration = format === "es" ? importDeclaration : requireDeclaration;
+  // Strict, as the scripts are.
+  module.line('"use strict";');
   for (const { from, name, local } of names.imports.values()) {
-    module.line(declaration(from, name, local));
+    module.line(requireDeclaration(from, name, local));
   }
   if (names.exec) {
-    module.line(format === "es" ? EXEC_ES : EXEC_CJS);
+    module.line(EXEC);
   }
   // Each script a module table's entry, as webpack's and Metro's are: its body
   // under its id, run once by `$require`. The modules they require are the
@@ -85,11 +69,7 @@ export function printBundle(
     ...new Set([...modules.values()].flatMap((entry) => entry.dependencies)),
   ];
   dependencies.forEach((specifier, index) =>
-    module.line(
-      format === "es"
-        ? `import * as $module${index} from ${string(specifier)};`
-        : `const $module${index} = require(${string(specifier)});`,
-    ),
+    module.line(`const $module${index} = require(${string(specifier)});`),
   );
   module.line("const $modules = {");
   for (const [id, entry] of modules) {
@@ -104,7 +84,7 @@ export function printBundle(
   );
   module.line("};");
   module.line(RUNTIME);
-  module.line(format === "es" ? CACHE_ES : CACHE_CJS);
+  module.line(CACHE);
   for (const [label, entry] of tree.modules) {
     module.line(`const ${label} = $require(${string(entry.id)}).default;`);
   }
@@ -116,11 +96,7 @@ export function printBundle(
     );
   }
   // Parenthesized, so a root that is a function isn't a declaration.
-  module.write(
-    format === "es"
-      ? `export default (${tree.root});`
-      : `module.exports = (${tree.root});`,
-  );
+  module.write(`module.exports = (${tree.root});`);
 
   return { code: module.code, map: module.map() };
 }

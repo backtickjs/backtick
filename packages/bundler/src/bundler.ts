@@ -16,9 +16,6 @@ export interface BuildOptions<T = unknown> {
 }
 
 export interface OutputOptions {
-  // `"es"`, an ES module, for a page; `"cjs"`, CommonJS, for a client that
-  // hands the bundle `require` itself, as a React Native app does.
-  readonly format: "es" | "cjs";
   // A map into the host files, as Rollup's: `"inline"` appends the map to the
   // code as a `data:` URL, and `"hidden"` answers it alone. None by default.
   // It carries host files' names and lines, not their content, which stays
@@ -38,7 +35,7 @@ export interface OutputChunk<T = unknown> {
 /** What `build` makes of a value that is a `T` on the client, written out by
  * `generate`. */
 export interface Build<T = unknown> {
-  generate(options: OutputOptions): OutputChunk<T>;
+  generate(options?: OutputOptions): OutputChunk<T>;
 }
 
 /**
@@ -46,10 +43,10 @@ export interface Build<T = unknown> {
  * is: a build, then output from it.
  *
  *     const build = await bundler.build({ input: <Home />, modules });
- *     const { code, map } = build.generate({ format: "es", sourcemap: "hidden" });
+ *     const { code, map } = build.generate({ sourcemap: "hidden" });
  *
- * `code` is the bundle, a module whose default export is the value (CommonJS:
- * `module.exports`). A namespace rather than a bare function, so `build`
+ * `code` is the bundle, the body of a function of `module`, `exports` and
+ * `require`, whose `module.exports` is the value. A namespace rather than a bare function, so `build`
  * stays a name a caller can give what comes back.
  */
 export const bundler = {
@@ -63,8 +60,8 @@ export const bundler = {
     // the bundle is only put together: nothing is compiled or parsed here.
     const tree = await buildingFor(modules, () => buildBundle(input, modules));
     return {
-      generate: ({ format, sourcemap = false }) => {
-        const printed = printBundle(tree, format);
+      generate: ({ sourcemap = false } = {}) => {
+        const printed = printBundle(tree);
         const code = printed.code as Bundle<T>;
         const map = printed.map;
         if (sourcemap === false) {

@@ -48,7 +48,7 @@ export async function drawReactNative(name: string, source: string) {
       "react-native": "0.86.3",
     },
   });
-  const drawn = await execRoot(built.generate({ format: "cjs" }).code, {
+  const drawn = await execRoot(built.generate().code, {
     react: React,
     "react/jsx-runtime": JSXRuntime,
     "react-native": ReactNativeWeb,

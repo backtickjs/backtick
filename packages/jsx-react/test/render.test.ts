@@ -106,7 +106,7 @@ for (const [what, row] of [
         "react-dom/client": "19.2.3",
       },
     });
-    const drawn = await run(built.generate({ format: "cjs" }).code);
+    const drawn = await run(built.generate().code);
 
     const errors: unknown[] = [];
     const error = console.error;
@@ -142,7 +142,7 @@ it("draws a page with React, its state React's", async () => {
       "react-dom/client": "19.2.3",
     },
   });
-  const drawn = await run(built.generate({ format: "cjs" }).code);
+  const drawn = await run(built.generate().code);
 
   const errors: unknown[] = [];
   const error = console.error;

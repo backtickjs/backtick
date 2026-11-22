@@ -8,5 +8,5 @@ export async function bundled(input: Client<unknown>): Promise<string> {
     input,
     modules: { "solid-js": "1.9.14" },
   });
-  return bundle.generate({ format: "cjs" }).code;
+  return bundle.generate().code;
 }
