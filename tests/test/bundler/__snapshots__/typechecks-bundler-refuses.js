@@ -3,7 +3,7 @@ import { it } from "node:test";
 import { cs, createImport } from "@backtickjs/core";
 import { bundle } from "../evaluate.ts";
 const $module0 = {
-  id: "1nnln7r6l9rqk:19:30",
+  id: "3qv4bxyd0fpkm:19:30",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0().title;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkBiCA,QAAA,IAAAA,QAAA,EAAK,CAACC,KAAK","names":["$splice0","title"],"ignoreList":[],"sources":["bundler/typechecks-bundler-refuses.test.tsx"]}',
   dependencies: [],
@@ -12,7 +12,7 @@ const $module0 = {
   scope: "function",
 };
 const $module1 = {
-  id: "1nnln7r6l9rqk:33:30",
+  id: "3qv4bxyd0fpkm:33:30",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0().title;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAgCiCA,QAAA,IAAAA,QAAA,EAAK,CAACC,KAAK","names":["$splice0","title"],"ignoreList":[],"sources":["bundler/typechecks-bundler-refuses.test.tsx"]}',
   dependencies: [],
@@ -21,7 +21,7 @@ const $module1 = {
   scope: "function",
 };
 const $module2 = {
-  id: "1nnln7r6l9rqk:54:30",
+  id: "3qv4bxyd0fpkm:54:30",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0().name;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAqDiCA,QAAA,IAAAA,QAAA,EAAK,CAACC,IAAI","names":["$splice0","name"],"ignoreList":[],"sources":["bundler/typechecks-bundler-refuses.test.tsx"]}',
   dependencies: [],
@@ -30,7 +30,7 @@ const $module2 = {
   scope: "function",
 };
 const $module3 = {
-  id: "1nnln7r6l9rqk:59:18",
+  id: "3qv4bxyd0fpkm:59:18",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => String($splice0());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA0DqBA,QAAA,IAAAC,MAAM,CAACD,QAAA,EAAO,CAAC","names":["$splice0","String"],"ignoreList":[],"sources":["bundler/typechecks-bundler-refuses.test.tsx"]}',
   dependencies: [],
@@ -39,7 +39,7 @@ const $module3 = {
   scope: "function",
 };
 const $module4 = {
-  id: "1nnln7r6l9rqk:60:30",
+  id: "3qv4bxyd0fpkm:60:30",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => String($splice0());\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2DiCA,QAAA,IAAAC,MAAM,CAACD,QAAA,EAAO,CAAC","names":["$splice0","String"],"ignoreList":[],"sources":["bundler/typechecks-bundler-refuses.test.tsx"]}',
   dependencies: [],
@@ -48,7 +48,7 @@ const $module4 = {
   scope: "function",
 };
 const $module5 = {
-  id: "1nnln7r6l9rqk:66:15",
+  id: "3qv4bxyd0fpkm:66:15",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0().first.name + $splice1().second.name;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAiEkB,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAK,CAACE,KAAK,CAACC,IAAI,GAAGF,QAAA,EAAK,CAACG,MAAM,CAACD,IAAI","names":["$splice0","$splice1","first","name","second"],"ignoreList":[],"sources":["bundler/typechecks-bundler-refuses.test.tsx"]}',
   dependencies: [],
@@ -60,7 +60,7 @@ const $module5 = {
   scope: "function",
 };
 const $module6 = {
-  id: "1nnln7r6l9rqk:74:30",
+  id: "3qv4bxyd0fpkm:74:30",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0()();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAyEiCA,QAAA,IAAAA,QAAA,EAAO,EAAE","names":["$splice0"],"ignoreList":[],"sources":["bundler/typechecks-bundler-refuses.test.tsx"]}',
   dependencies: [],
@@ -69,7 +69,7 @@ const $module6 = {
   scope: "function",
 };
 const $module7 = {
-  id: "1nnln7r6l9rqk:83:30",
+  id: "3qv4bxyd0fpkm:83:30",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAkFiCA,QAAA,IAAAA,QAAA,EAAI","names":["$splice0"],"ignoreList":[],"sources":["bundler/typechecks-bundler-refuses.test.tsx"]}',
   dependencies: [],
@@ -78,7 +78,7 @@ const $module7 = {
   scope: "function",
 };
 const $module8 = {
-  id: "1nnln7r6l9rqk:97:30",
+  id: "3qv4bxyd0fpkm:97:30",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => () => $splice0()();\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAgGiCA,QAAA,UAAMA,QAAA,EAAQ,EAAE","names":["$splice0"],"ignoreList":[],"sources":["bundler/typechecks-bundler-refuses.test.tsx"]}',
   dependencies: [],
@@ -153,7 +153,10 @@ it("an import from a package the app doesn't provide", async () => {
     version: "1.0.0",
   });
   await assert.rejects(bundle(cs.create($module8, [missing])), {
-    message:
-      'Can\'t import `track` from "analytics": the client provides solid-js@1.9.14, solid-js/store@1.9.14, solid-js/web@1.9.14, app@1.0.0, acme-ui@1.0.0. Check `supports("analytics", "^1.0.0")` first.',
+    message: [
+      'Can\'t import `track` from "analytics": this app doesn\'t have "analytics".',
+      "It has solid-js@1.9.14, solid-js/store@1.9.14, solid-js/web@1.9.14, app@1.0.0, acme-ui@1.0.0.",
+      'Add "analytics" to the app\'s module map for future builds. For builds already out, check `supports("analytics", "^1.0.0")` and render a fallback.',
+    ].join("\n"),
   });
 });

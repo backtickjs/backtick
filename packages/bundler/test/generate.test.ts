@@ -62,9 +62,12 @@ test("a script's import from a module the client doesn't provide is refused", as
       error.imported === "greet" &&
       error.version === "1.0.0" &&
       error.provided === undefined &&
-      /Can't import `greet` from "app": the client provides solid-js@1\.9\.14\./.test(
-        error.message,
-      ),
+      error.message ===
+        [
+          'Can\'t import `greet` from "app": this app doesn\'t have "app".',
+          "It has solid-js@1.9.14.",
+          'Add "app" to the app\'s module map for future builds. For builds already out, check `supports("app", "^1.0.0")` and render a fallback.',
+        ].join("\n"),
   );
 });
 
@@ -85,9 +88,43 @@ test("a script's import needing a version the client doesn't have is refused", a
       error.imported === "Portal" &&
       error.version === "2.0.0" &&
       error.provided === "1.9.14" &&
-      /Can't import `Portal` from "solid-js\/web": it's typed against 2\.0\.0, and the client provides solid-js\/web@1\.9\.14\. Check `supports\("solid-js\/web", "\^2\.0\.0"\)` first\.$/.test(
-        error.message,
-      ),
+      error.message ===
+        [
+          'Can\'t import `Portal` from "solid-js/web": this app has an older version.',
+          "The server is typed against solid-js/web@2.0.0; this app has 1.9.14.",
+          'Check `supports("solid-js/web", "^2.0.0")` and render a fallback. Don\'t downgrade the server: newer builds would break.',
+        ].join("\n"),
+  );
+});
+
+test("an app a major ahead of the server is told to upgrade the server", async () => {
+  const Portal = createImport({
+    name: "Portal",
+    from: "solid-js/web",
+    version: "1.9.0",
+  });
+  await assert.rejects(
+    () =>
+      bundler.build({ input: Portal, modules: { "solid-js/web": "2.1.0" } }),
+    (error) =>
+      error instanceof UnsupportedImportError &&
+      error.message ===
+        [
+          'Can\'t import `Portal` from "solid-js/web": this app has a newer major.',
+          "The server is typed against solid-js/web@1.9.0; this app has 2.1.0.",
+          'If every build in use has solid-js@^2, upgrade solid-js on the server. Otherwise, check `supports("solid-js/web", "^1.9.0")` and render a fallback.',
+        ].join("\n"),
+  );
+});
+
+test("a request that lists no modules is told so", async () => {
+  const greet = createImport({ name: "greet", from: "app", version: "1.0.0" });
+  await assert.rejects(
+    () => bundler.build({ input: greet, modules: {} }),
+    (error) =>
+      error instanceof UnsupportedImportError &&
+      error.message ===
+        "Can't import `greet` from \"app\": the request lists no modules.\nThe app probably didn't send the x-backtick-modules header.",
   );
 });
 
@@ -112,7 +149,7 @@ test("a module is provided by its own specifier, not its package", async () => {
   // its package alone isn't the module
   await assert.rejects(
     () => bundler.build({ input: Portal, modules: { "solid-js": "1.9.14" } }),
-    /Can't import `Portal` from "solid-js\/web": the client provides solid-js@1\.9\.14\./,
+    /Can't import `Portal` from "solid-js\/web": this app doesn't have "solid-js\/web"\.\nIt has solid-js@1\.9\.14\./,
   );
 });
 

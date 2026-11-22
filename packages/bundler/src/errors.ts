@@ -1,3 +1,4 @@
+import semver from "semver";
 import type { Modules } from "./modules.js";
 
 /**
@@ -38,22 +39,59 @@ export class UnsupportedImportError extends BundlerError {
     readonly version: string,
     modules: Modules,
   ) {
-    const provided = modules[from];
-    const listed = Object.entries(modules)
-      .map(([specifier, at]) => `${specifier}@${at}`)
-      .join(", ");
-    const problem =
-      provided === undefined
-        ? `the client provides ${listed || "no modules"}`
-        : `it's typed against ${version}, and the client provides ${from}@${provided}`;
-    const fix = `supports("${from}", "^${version}")`;
-    super(
-      `Can't import \`${imported}\` from "${from}": ${problem}. ` +
-        `Check \`${fix}\` first.`,
-    );
-    this.provided = provided;
+    super(unsupported(from, imported, version, modules));
+    this.provided = modules[from];
   }
 
   // the version the client provides, or none
   readonly provided: string | undefined;
+}
+
+// What an unsupported import's message says: the cause, what the app has,
+// then the fix, which depends on the builds in use, which only the developer
+// knows, so each way is said.
+function unsupported(
+  from: string,
+  imported: string,
+  version: string,
+  modules: Modules,
+): string {
+  const provided = modules[from];
+  const lines = [`Can't import \`${imported}\` from "${from}": `];
+  const fallback = `check \`supports("${from}", "^${version}")\` and render a fallback`;
+  if (provided === undefined) {
+    const listed = Object.entries(modules).map(
+      ([specifier, at]) => `${specifier}@${at}`,
+    );
+    if (listed.length === 0) {
+      lines[0] += "the request lists no modules.";
+      lines.push("The app probably didn't send the x-backtick-modules header.");
+    } else {
+      lines[0] += `this app doesn't have "${from}".`;
+      lines.push(
+        `It has ${listed.join(", ")}.`,
+        `Add "${from}" to the app's module map for future builds. For builds already out, ${fallback}.`,
+      );
+    }
+  } else if (semver.major(provided) > semver.major(version)) {
+    const installed = packageOf(from);
+    lines[0] += "this app has a newer major.";
+    lines.push(
+      `The server is typed against ${from}@${version}; this app has ${provided}.`,
+      `If every build in use has ${installed}@^${semver.major(provided)}, upgrade ${installed} on the server. Otherwise, ${fallback}.`,
+    );
+  } else {
+    lines[0] += "this app has an older version.";
+    lines.push(
+      `The server is typed against ${from}@${version}; this app has ${provided}.`,
+      `Check \`supports("${from}", "^${version}")\` and render a fallback. Don't downgrade the server: newer builds would break.`,
+    );
+  }
+  return lines.join("\n");
+}
+
+// The package a module specifier is in: `solid-js` for `solid-js/web`.
+function packageOf(specifier: string): string {
+  const segments = specifier.split("/");
+  return segments.slice(0, specifier.startsWith("@") ? 2 : 1).join("/");
 }

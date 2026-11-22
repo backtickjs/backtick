@@ -95,27 +95,34 @@ Thrown by `bundler.build`, for the screen it was building, and by `supports`,
 where it's called. Each is a `BundlerError`; an error your
 server component throws passes through as it is.
 
-### Can't import `…` from "…": the client provides …
+### Can't import `…` from "…": this app doesn't have "…"
 
-A script uses a module the app that asked doesn't provide. Add it to the
-app's module map, and install it in the app. An app built before then doesn't
-have it: draw it that screen differently, with `supports`, as the message
-says, or catch the error, an `UnsupportedImportError`, and answer it as
+A screen uses a module the app that asked doesn't provide. For future builds,
+add it to the app's module map and install it in the app. Builds already in
+users' hands don't have it: draw them something else with `supports`, as the
+message says, or catch the `UnsupportedImportError` and answer it as
 [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler#modules)
 shows. See
 [where a package goes](/docs/react-native-and-packages/#any-package-your-app-ships).
 
-"No modules" means the request didn't say what the app carries: check it sends
-what `modulesOf` gives it in `x-backtick-modules`. To fetch a screen yourself,
-with `curl` say, send them there:
+### Can't import `…` from "…": the request lists no modules
+
+The request didn't say what the app carries: check it sends what `modulesOf`
+gives it in `x-backtick-modules`. To fetch a screen yourself, with `curl` say,
+send them there:
 `{"react":"19.2.3","react/jsx-runtime":"19.2.3","react-native":"0.86.3"}`.
 
-### Can't import `…` from "…": it's typed against …, and the client provides …
+### Can't import `…` from "…": this app has an older version
 
-The app was built with a version of the package the server's code isn't typed
-against: an earlier one, or another major. Install the app's version on the
-server, or serve that app a screen that doesn't use it: branch with
-`supports`, as the message says, or catch the `UnsupportedImportError`.
+The server is typed against a later version than the app was built with.
+Builds like it are in users' hands, so draw them something else with
+`supports`. Downgrading the server would break newer builds.
+
+### Can't import `…` from "…": this app has a newer major
+
+The app was built with a later major than the server has. If every build in
+use has it, upgrade the package on the server; otherwise draw older builds
+something else with `supports`.
 
 ### supports("…", "…") asks about the client a build is for
 

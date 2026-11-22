@@ -59,7 +59,7 @@ A client import records the version of the package your server has installed,
 the one its types were checked against. When a screen is bundled, the bundler
 checks the requesting build carries that version or a later one of the same
 major, and refuses a screen that build can't run, before anything reaches the
-phone. [Errors](/docs/errors/#cant-import--from--the-client-provides-)
+phone. [Errors](/docs/errors/#cant-import--from--this-app-doesnt-have-)
 has the messages.
 
 ## Every build in users' hands
@@ -75,10 +75,10 @@ draw for two majors of a package, install the second under an alias,
 `"acme-ui-2": "npm:acme-ui@2"`: imports from either are of `acme-ui`, each
 typed against its own version.
 
-A build that can't run a screen at all gets an `UnsupportedImportError` from
-the bundler, instead of a screen. Catch it, answer `406`, and have the app
-draw its own screen asking its users to update: one the server bundled would
-need the same modules the build lacks.
+A build that can't run a screen at all gets a `406` instead, the bundler's
+`UnsupportedImportError`, whose body says why. Have the app draw its own
+screen asking its users to update: one the server bundled would need the same
+modules the build lacks.
 [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core#every-build-in-users-hands)
 and [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler#modules)
 have the details.
