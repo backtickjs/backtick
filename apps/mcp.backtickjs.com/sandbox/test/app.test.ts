@@ -112,7 +112,7 @@ describe("a release", () => {
     }
   });
 
-  it("answers 426 for a module the phone doesn't provide", async () => {
+  it("answers 406 for a module the phone doesn't provide", async () => {
     const open = await release(
       `import { isRunningInExpoGo } from "expo" with { backtick: "client" };\n` +
         counter.replace(
@@ -122,7 +122,7 @@ describe("a release", () => {
       "release-import",
     );
     const answer = await open("/", phone);
-    assert.equal(answer.status, 426);
+    assert.equal(answer.status, 406);
     assert.match((await answer.json()).message, /expo/);
   });
 
@@ -141,7 +141,7 @@ describe("compile", () => {
       .statements.filter(ts.isImportDeclaration)
       .map(({ moduleSpecifier }) => (moduleSpecifier as ts.StringLiteral).text);
     assert.deepEqual([...new Set(imports)], ["node:async_hooks"]);
-    assert.match(code!, /ClientVersionMismatch/);
+    assert.match(code!, /UnsupportedImportError/);
     assert.ok(code!.length < 100_000, `${code!.length} bytes`);
   });
 });

@@ -65,7 +65,7 @@ it("typechecks and checks over HTTP, file after file", async () => {
     assert.match(errors.join("\n"), /^App\.tsx\(33,51\): error TS2345/);
     const checked = await post("check", { file: app });
     assert.deepEqual(checked.errors, []);
-    assert.match(checked.compiled, /ClientVersionMismatch/);
+    assert.match(checked.compiled, /UnsupportedImportError/);
     // what it was built with, at the versions installed
     assert.equal(checked.packages.hono, installedPackages(root).hono);
     assert.match(checked.packages["@backtickjs/core"], /^\d+\.\d+\.\d+$/);

@@ -6,7 +6,7 @@ import { modules } from "../../../shell/client/modules.ts";
 
 // npm in the snapshot ignores pnpm's lockfile and takes the newest version a
 // range allows, so a range here drifts from what phones carry, and a screen
-// typed against the newer one is a 426 on every phone.
+// typed against the newer one is a 406 on every phone.
 it("names each of the phone's packages at the shell's exact version", () => {
   const root = join(import.meta.dirname, "../../..");
   const { dependencies } = JSON.parse(

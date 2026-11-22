@@ -183,7 +183,7 @@ if (signingKey === undefined) {
   await open("a screen's loading state", id, "/recipe/:id/_loading", 200);
   await open("a screen", id, "/recipe/pancakes", 200);
   await open("a missing screen", id, "/recipe/nowhere", 404);
-  await open("a phone without the modules", id, "/", 426, { modules: {} });
+  await open("a phone without the modules", id, "/", 406, { modules: {} });
   await open("no token", id, "/", 401, { signed: false });
   await open(
     "an app that isn't there",
