@@ -27,7 +27,7 @@ npm start
 - `server/cache.ts`: `cacheOf(answers)`, answers the server already has, by path, as React Query's cache holds them. The screen hands them to `<$HydrationBoundary>`, so they draw without a request.
 - `server/Feed.tsx`: the feed. The screen at `/` comes with the first page, its items and a post's comments already answered, by the same functions as their routes, so the first screen is one request. On the phone, `$useSuspenseInfiniteQuery($feedQuery)` reads its pages, each fetched at the path the last one named. Each item is `$useSuspenseQuery($itemQuery(item.path))`, suspended until its route answers, then drawn with the feed's props: whether it's liked, how many likes, and what a tap does. An item that couldn't load shows its own error, and the others still draw.
 - `client/connection.ts`: how the app talks to the server. `fetchBundle(path)` fetches a path with this build's id, so the server bundles for the modules the build carries, and runs the answer with the app's runtime. `createQueryClient()` makes it the default for every query, by its key's path or its page's, and for every mutation, which is sent a path and a body to POST.
-- `client/moduleMap.ts`: `@tanstack/react-query` is listed, so the screen and every answer use the app's one copy, and so its one `QueryClient`.
+- `client/backtick.ts`: `@tanstack/react-query` is listed, so the screen and every answer use the app's one copy, and so its one `QueryClient`.
 
 ## Tests
 

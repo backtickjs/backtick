@@ -13,5 +13,5 @@
     "types": ["node"],
     "jsx": "react-jsx"
   },
-  "include": ["*/client/App.tsx", "*/client/moduleMap.ts"]
+  "include": ["*/client/App.tsx", "*/client/backtick.ts"]
 }

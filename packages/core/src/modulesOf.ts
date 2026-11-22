@@ -25,9 +25,9 @@ function packageOf(specifier: string): string {
  * The modules `moduleMap` offers, each at the version in `installedPackages`
  * of the package it comes from: what the app sends however it reaches its
  * server, a header, a GraphQL variable, for the server to bundle screens it
- * can run. The app's build records them, with `installedPackages` from
- * `@backtickjs/core/node`. Throws as the app starts for a module from a
- * package that isn't a dependency.
+ * can run. The app records them on install, in `installed-packages.json`,
+ * with `backtick-installed-packages`. Throws as the app starts for a module
+ * from a package that isn't a dependency.
  *
  *     const modules = modulesOf(moduleMap, installedPackages);
  */

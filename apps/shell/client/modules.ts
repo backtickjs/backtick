@@ -1,5 +1,5 @@
 // The modules a screen may import from the phone, by specifier: the names
-// of the module map (moduleMap.ts), which must have exactly these. Plain
+// of the module map (backtick.ts), which must have exactly these. Plain
 // data, so a server can read it without the modules.
 export const modules = [
   "react",

@@ -9,7 +9,7 @@ import * as SafeArea from "react-native-safe-area-context";
 // with. Add one when a screen uses another package, from package.json's
 // dependencies: the app sends your server what it offers, at the versions
 // it's built with. A platform that differs gets its own file, as
-// Metro picks files: moduleMap.web.ts, moduleMap.ios.ts.
+// Metro picks files: backtick.web.ts, backtick.ios.ts.
 export const moduleMap = {
   react: React,
   "react/jsx-runtime": JSXRuntime,
@@ -18,3 +18,7 @@ export const moduleMap = {
   "react-error-boundary": ReactErrorBoundary,
   "react-native-safe-area-context": SafeArea,
 };
+
+// Their versions, as installed: what the app sends the server, so it never
+// sends a screen the app can't run. Written by `npm install`.
+export { default as installedPackages } from "../installed-packages.json";

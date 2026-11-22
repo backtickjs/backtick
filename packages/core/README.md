@@ -75,22 +75,25 @@ function Save() {
 
 A store build carries the modules it was built with, at their versions, for as long as it's installed, while your server moves on. Each build sends the modules it carries, and the server bundles its screens for exactly those: there's nothing to record before a build ships, and any version of your server can draw for any build.
 
-1. **The app's module map** offers what screens may require, each from a package in `package.json`'s dependencies. A platform that differs gets its own file, as Metro picks files: `client/moduleMap.web.ts` for the web.
+1. **The app's module map** offers what screens may require, each from a package in `package.json`'s dependencies. A platform that differs gets its own file, as Metro picks files: `client/backtick.web.ts` for the web.
 
-2. **The app's build records its installed packages.** `installedPackages`, from `@backtickjs/core/node`, reads the installed version of each of the app's dependencies from `node_modules`, and the build embeds them in the app. In an Expo app, the config plugin from [`@backtickjs/expo`](https://github.com/backtickjs/backtick/tree/main/packages/expo) does it:
+2. **The app records its installed packages on install.** `backtick-installed-packages` prints the installed version of each of the app's dependencies, which the app's `postinstall` writes beside `package.json`, and the build bundles with the app:
 
    ```json
-   // app.json
-   { "expo": { "plugins": ["@backtickjs/expo"] } }
+   // package.json
+   {
+     "scripts": {
+       "postinstall": "backtick-installed-packages > installed-packages.json"
+     }
+   }
    ```
 
 3. **The app sends its modules** however it reaches its server: a header, a GraphQL variable. `modulesOf` gives each module in the map its package's version, and throws as the app starts for a module from a package that isn't a dependency:
 
    ```ts
    import { modulesOf } from "@backtickjs/core";
-   import { getBacktickExtra } from "@backtickjs/expo";
+   import installedPackages from "../installed-packages.json";
 
-   const { installedPackages } = getBacktickExtra(Constants.expoConfig);
    const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
    fetch(url, { headers: { "x-backtick-modules": modules } });
    ```
@@ -104,9 +107,7 @@ A store build carries the modules it was built with, at their versions, for as l
 
    The bundler refuses modules that aren't `{ "specifier": "version" }`, and a screen that imports a module the build doesn't carry, or at a version it can't run. To draw differently for builds that lack a module, or to ask old ones to update, check with `supports` from [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler), in a server component: `supports("react-native", ">=0.86")`.
 
-In development, a reload keeps the app config the app was opened with, and its versions with it: after upgrading a package, close the app and open it again.
-
-A test draws a screen with a module map of its own, stand-ins included; its modules are that map's, at the versions the app installs: `modulesOf(moduleMap, installedPackages(projectRoot))`.
+A test draws a screen with a module map of its own, stand-ins included; its modules are that map's, at the versions the app sends: `modulesOf(moduleMap, installedPackages)`, from the same `installed-packages.json`.
 
 ## API
 

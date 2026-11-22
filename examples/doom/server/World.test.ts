@@ -1,13 +1,12 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
-import { fileURLToPath } from "node:url";
-import { installedPackages } from "@backtickjs/core/node";
 import { bundler } from "@backtickjs/bundler";
 import * as Fiber from "@react-three/fiber";
 import ReactThreeTestRenderer from "@react-three/test-renderer";
 import { modulesOf, createRuntime } from "@backtickjs/core";
 import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
+import installedPackages from "../installed-packages.json" with { type: "json" };
 import { readLevel, readLevels } from "./levels.js";
 import { type Input, type Stats, World, type WorldProps } from "./World.js";
 
@@ -15,18 +14,15 @@ import { type Input, type Stats, World, type WorldProps } from "./World.js";
   globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }
 ).IS_REACT_ACT_ENVIRONMENT = true;
 
-// What the app's web build provides, as client/moduleMap.web.ts says: R3F's
+// What the app's web build provides, as client/backtick.web.ts says: R3F's
 // web build, which the test renderer draws without a GPU.
 const moduleMap = {
   react: React,
   "react/jsx-runtime": JSXRuntime,
   "@react-three/fiber/native": Fiber,
 };
-// at the versions the app installs, as its build sends them
-const modules = modulesOf(
-  moduleMap,
-  installedPackages(fileURLToPath(new URL("..", import.meta.url))),
-);
+// at the versions the app sends
+const modules = modulesOf(moduleMap, installedPackages);
 
 // `World` as the phone gets it: bundled by the server, run by the app.
 const bundle = await bundler.build({ input: World, modules });

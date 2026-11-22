@@ -4,6 +4,7 @@
   "private": true,
   "main": "client/index.ts",
   "scripts": {
+    "postinstall": "backtick-installed-packages > installed-packages.json",
     "server": "nodemon --exec \"node --enable-source-maps --import @backtickjs/node-plugin server/index.tsx\"",
     "start": "concurrently --raw --kill-others npm:server \"expo start\"",
     "android": "concurrently --raw --kill-others npm:server \"expo start --android\"",

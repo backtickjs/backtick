@@ -159,12 +159,6 @@ server. Draw it in a script: `` cs`<$Card />` ``.
 
 ## From your app
 
-### No extra.backtick in the app config: is @backtickjs/expo in app.json's plugins?
-
-`getBacktickExtra` found nothing the config plugin records. Add
-`"@backtickjs/expo"` to `app.json`'s `plugins`, then close the app and open it
-again: a reload keeps the config it was opened with.
-
 ### The module map offers "…", but … isn't in package.json's dependencies
 
 The app can't say which version of the package it carries. Install it in the

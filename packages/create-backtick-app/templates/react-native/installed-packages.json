@@ -1,0 +1,18 @@
+{
+  "@backtickjs/bundler": "0.5.2",
+  "@backtickjs/core": "0.5.2",
+  "@backtickjs/expo": "0.5.2",
+  "@backtickjs/node-plugin": "0.5.2",
+  "@backtickjs/jsx-react": "0.5.2",
+  "@hono/node-server": "2.1.4",
+  "expo": "57.0.26",
+  "expo-constants": "57.0.20",
+  "expo-status-bar": "57.0.1",
+  "hono": "4.13.13",
+  "react": "19.2.3",
+  "react-dom": "19.2.3",
+  "react-error-boundary": "6.1.6",
+  "react-native": "0.86.3",
+  "react-native-web": "0.21.3",
+  "typescript": "6.0.3"
+}

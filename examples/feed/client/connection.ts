@@ -1,15 +1,13 @@
 import { type Bundle, createRuntime, modulesOf } from "@backtickjs/core";
-import { getBacktickExtra } from "@backtickjs/expo";
 import { QueryClient } from "@tanstack/react-query";
 import Constants from "expo-constants";
-import { moduleMap } from "./moduleMap";
+import { installedPackages, moduleMap } from "./backtick";
 
 // Your Backtick server runs on the computer Expo was started from.
 const host = Constants.expoConfig?.hostUri?.split(":")[0] ?? "localhost";
 const server = `http://${host}:3000`;
 
-// The modules this build carries, at the versions app.json's plugin records.
-const { installedPackages } = getBacktickExtra(Constants.expoConfig);
+// The modules this build carries, at their versions.
 const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
 // What runs the screens the server sends, with the modules the app provides:
 // one per app, so what a screen makes once stays made.

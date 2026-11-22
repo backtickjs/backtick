@@ -19,7 +19,7 @@ app.use(
 );
 
 // The game, bundled for the modules the requesting build carries, as
-// client/moduleMap.ts offers them at its packages' versions.
+// client/backtick.ts offers them at its packages' versions.
 app.get("/game", async (context) => {
   const start = performance.now();
   const modules = JSON.parse(context.req.header("x-backtick-modules") ?? "{}");

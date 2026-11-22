@@ -1,6 +1,4 @@
-import { fileURLToPath } from "node:url";
 import { type Bundle, modulesOf, createRuntime } from "@backtickjs/core";
-import { installedPackages } from "@backtickjs/core/node";
 import * as ReactQuery from "@tanstack/react-query";
 import { render } from "@testing-library/react";
 import * as React from "react";
@@ -8,9 +6,10 @@ import { act, createElement, Suspense } from "react";
 import * as ReactErrorBoundary from "react-error-boundary";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNativeWeb from "react-native-web";
+import installedPackages from "../../installed-packages.json" with { type: "json" };
 import { app } from "../app.js";
 
-// The app's web build, as client/moduleMap.ts says, with React Native's web build
+// The app's web build, as client/backtick.ts says, with React Native's web build
 // standing in for React Native: it sends its modules, at the versions the app
 // installs, as the app does.
 const moduleMap = {
@@ -21,10 +20,7 @@ const moduleMap = {
   "react-error-boundary": ReactErrorBoundary,
   "react-native-safe-area-context": { SafeAreaView: ReactNativeWeb.View },
 };
-const modules = modulesOf(
-  moduleMap,
-  installedPackages(fileURLToPath(new URL("../..", import.meta.url))),
-);
+const modules = modulesOf(moduleMap, installedPackages);
 const headers = { "x-backtick-modules": JSON.stringify(modules) };
 
 /** The requests the app made, in order: `GET /`, `GET /pages/1`… */

@@ -13,3 +13,7 @@ export const moduleMap = {
   "expo-haptics": Haptics,
   "expo-linear-gradient": LinearGradient,
 };
+
+// Their versions, as installed: what the app sends your server. Written by
+// `npm install`.
+export { default as installedPackages } from "../installed-packages.json";

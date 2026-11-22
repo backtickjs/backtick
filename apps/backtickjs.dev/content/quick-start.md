@@ -61,18 +61,19 @@ What you just wrote:
 
 ```text
 my-app/
-├── app.json           Expo's config, with Backtick's plugin
+├── app.json                  Expo's config
 ├── client/
-│   ├── App.tsx        The app: fetches each screen from your server and draws it
-│   └── moduleMap.ts   What screens may import from the app
+│   ├── App.tsx               The app: fetches each screen from your server and draws it
+│   └── backtick.ts           What screens may import from the app, and its versions
 ├── server/
-│   ├── index.tsx      Your server: its routes
-│   ├── Home.tsx       The screen you just changed
-│   ├── Home.test.tsx  A test that draws the welcome screen, run by npm test
-│   ├── HelloWave.tsx  The welcome screen's waving hand, safe to delete
-│   ├── test/          What the test draws the screen with
-│   └── tsconfig.json  TypeScript for your server
-├── scripts/           What npm start runs, and npm run reset-project
+│   ├── index.tsx             Your server: its routes
+│   ├── Home.tsx              The screen you just changed
+│   ├── Home.test.tsx         A test that draws the welcome screen, run by npm test
+│   ├── HelloWave.tsx         The welcome screen's waving hand, safe to delete
+│   ├── test/                 What the test draws the screen with
+│   └── tsconfig.json         TypeScript for your server
+├── scripts/                  What npm start runs, and npm run reset-project
+├── installed-packages.json   Your packages' versions, written by npm install
 └── package.json
 ```
 

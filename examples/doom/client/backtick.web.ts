@@ -3,7 +3,7 @@ import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import * as ReactNative from "react-native";
 
-// What a screen may require on the web, as `moduleMap.ts` is for iOS and
+// What a screen may require on the web, as `backtick.ts` is for iOS and
 // Android: R3F's own web build answers for `@react-three/fiber/native`, as it
 // draws to a canvas without expo-gl, so the server sends both the same bundle.
 export const moduleMap = {
@@ -12,3 +12,7 @@ export const moduleMap = {
   "react-native": ReactNative,
   "@react-three/fiber/native": Fiber,
 };
+
+// Their versions, as installed: what the app sends the server, so it never
+// sends a screen the app can't run. Written by `npm install`.
+export { default as installedPackages } from "../installed-packages.json";

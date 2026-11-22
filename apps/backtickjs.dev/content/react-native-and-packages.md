@@ -38,15 +38,16 @@ has to be in two places:
 **2. Your app's module map,** the modules a screen may require, which the app
 hands to `createRuntime`:
 
-```ts file=react-native-and-packages/client/moduleMap.ts
+```ts file=react-native-and-packages/client/backtick.ts
 
 ```
 
 Install the package in your app as usual, `npx expo install expo-haptics`, so
 it's built into the app and its native code ships with it, and listed in
-`package.json`'s dependencies. The app sends your server the modules its map
-offers, at the versions installed, so the server knows what each build of your
-app carries:
+`package.json`'s dependencies. `npm install` writes the versions installed to
+`installed-packages.json`, and the app sends your server the modules its map
+offers at those versions, so the server knows what each build of your app
+carries:
 
 ```tsx file=react-native-and-packages/server/index.tsx
 

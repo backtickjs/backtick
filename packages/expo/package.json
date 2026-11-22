@@ -1,7 +1,7 @@
 {
   "name": "@backtickjs/expo",
   "version": "0.5.2",
-  "description": "Backtick for Expo apps: the config plugin that records the app's installed packages, and reloading apps when the server restarts",
+  "description": "Backtick for Expo apps: scripts compiled as Expo compiles the app, and reloading apps when the server restarts",
   "keywords": [
     "backtick",
     "expo",
@@ -21,10 +21,6 @@
   "author": "Jean-François Bisson <jf@backtickjs.com>",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    },
     "./server": {
       "types": "./dist/server.d.ts",
       "default": "./dist/server.js"
@@ -32,9 +28,7 @@
     "./plugin": {
       "types": "./dist/plugin.d.ts",
       "default": "./dist/plugin.js"
-    },
-    "./app.plugin": "./dist/app.plugin.js",
-    "./app.plugin.js": "./dist/app.plugin.js"
+    }
   },
   "files": [
     "dist",
@@ -52,9 +46,6 @@
     "test": "node --test \"test/**/*.test.ts\"",
     "clean": "rm -rf node_modules dist .turbo",
     "prepack": "cp ../../LICENSE ."
-  },
-  "dependencies": {
-    "@backtickjs/core": "0.5.2"
   },
   "peerDependencies": {
     "expo": "*"

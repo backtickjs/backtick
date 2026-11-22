@@ -1,13 +1,10 @@
 import { type Bundle, createRuntime, modulesOf } from "@backtickjs/core";
-import { getBacktickExtra } from "@backtickjs/expo";
-import Constants from "expo-constants";
 import * as React from "react";
 import { Suspense, use, useState } from "react";
 import { ActivityIndicator } from "react-native";
-import { moduleMap } from "./moduleMap";
+import { installedPackages, moduleMap } from "./backtick";
 
-// The modules this build carries, at the versions app.json's plugin records.
-const { installedPackages } = getBacktickExtra(Constants.expoConfig);
+// The modules this build carries, at their versions.
 const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
 // What runs the screens the server sends, with the modules the app provides:
 // one per app, so what a screen makes once stays made.

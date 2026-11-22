@@ -1,6 +1,6 @@
 # @backtickjs/expo
 
-[Backtick](https://backtickjs.com) for Expo apps: a config plugin that records the versions your app is built with, so it can tell your server which modules it carries; a compile step that writes your scripts as Expo writes your app's own code; and a call that reloads the app when your server restarts in development.
+[Backtick](https://backtickjs.com) for Expo apps: a compile step that writes your scripts as Expo writes your app's own code, and a call that reloads the app when your server restarts in development.
 
 ## Install
 
@@ -9,35 +9,6 @@ npm install @backtickjs/expo
 ```
 
 ## Usage
-
-**The config plugin** puts the installed version of each of your app's dependencies in the app config, which Expo embeds in the app:
-
-```json
-// app.json
-{ "expo": { "plugins": ["@backtickjs/expo"] } }
-```
-
-**The app reads them back** with `getBacktickExtra`, and sends the modules its module map offers, at those versions, with each request. Your server bundles each screen for exactly those modules:
-
-```ts
-import { modulesOf } from "@backtickjs/core";
-import { getBacktickExtra } from "@backtickjs/expo";
-import Constants from "expo-constants";
-import { moduleMap } from "./moduleMap";
-
-const { installedPackages } = getBacktickExtra(Constants.expoConfig);
-const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
-fetch(url, { headers: { "x-backtick-modules": modules } });
-```
-
-A reload keeps the config the app was opened with: after upgrading a package, close the app and open it again.
-
-**With EAS Update and a fingerprint runtime version**, leave the config's `extra` out of the fingerprint, or every package upgrade (a Backtick release included) needs a new build instead of an update. An update carries its own config, so the new versions reach the app with it:
-
-```js
-// fingerprint.config.cjs
-module.exports = { sourceSkips: ["ExpoConfigExtraSection"] };
-```
 
 **Your server reloads the app** once it listens, so saving a server file shows its screens without pressing `r` in Expo's terminal:
 
@@ -64,8 +35,6 @@ A script is compiled once for every client, so it isn't told which platform it's
 
 ## API
 
-- `@backtickjs/expo` in `app.json`'s `plugins`: the config plugin, which sets `extra.backtick.installedPackages` to `installedPackages(projectRoot)` from `@backtickjs/core/node`.
-- `getBacktickExtra(expoConfig)`: what the plugin recorded, `{ installedPackages }`, from `Constants.expoConfig`. Throws as the app starts if the plugin isn't in `app.json`.
 - `@backtickjs/expo/plugin` in `package.json`'s `backtick.plugins`: the compile step, Expo's Babel preset for Hermes, from the app's own `expo`.
 - `reloadExpo(port?)`, from `@backtickjs/expo/server`: reloads the apps Expo serves, as pressing `r` in its terminal does. `port` is Expo's, 8081 or `RCT_METRO_PORT` by default.
 

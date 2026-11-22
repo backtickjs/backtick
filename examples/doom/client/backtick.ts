@@ -5,7 +5,7 @@ import * as ReactNative from "react-native";
 
 // What a screen may require, as the app imports it: the packages it's built
 // with, from package.json's dependencies: the app sends the server what it
-// offers, at the versions it's built with. On the web, moduleMap.web.ts
+// offers, at the versions it's built with. On the web, backtick.web.ts
 // stands in.
 export const moduleMap = {
   react: React,
@@ -13,3 +13,7 @@ export const moduleMap = {
   "react-native": ReactNative,
   "@react-three/fiber/native": Fiber,
 };
+
+// Their versions, as installed: what the app sends the server, so it never
+// sends a screen the app can't run. Written by `npm install`.
+export { default as installedPackages } from "../installed-packages.json";

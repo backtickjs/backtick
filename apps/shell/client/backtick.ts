@@ -313,3 +313,7 @@ export const moduleMap = {
     return require("hono/router/pattern-router");
   },
 } satisfies Record<Module, unknown>;
+
+// Their versions, as installed: what the app sends a server, so it never
+// sends a screen the app can't run. Written by `npm install`.
+export { default as installedPackages } from "../installed-packages.json";

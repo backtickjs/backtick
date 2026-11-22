@@ -8,3 +8,7 @@ export const moduleMap = {
   "react/jsx-runtime": JSXRuntime,
   "react-native": ReactNative,
 };
+
+// Their versions, as installed: what the app sends your server. Written by
+// `npm install`.
+export { default as installedPackages } from "../installed-packages.json";

@@ -6,9 +6,13 @@ import * as ReactNative from "react-native";
 // with. Add one when a screen uses another package, from package.json's
 // dependencies: the app sends your server what it offers, at the versions
 // it's built with. A platform that differs gets its own file, as
-// Metro picks files: moduleMap.web.ts, moduleMap.ios.ts.
+// Metro picks files: backtick.web.ts, backtick.ios.ts.
 export const moduleMap = {
   react: React,
   "react/jsx-runtime": JSXRuntime,
   "react-native": ReactNative,
 };
+
+// Their versions, as installed: what the app sends your server. Written by
+// `npm install`.
+export { default as installedPackages } from "../installed-packages.json";

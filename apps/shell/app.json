@@ -62,7 +62,6 @@
       }
     },
     "plugins": [
-      "@backtickjs/expo",
       [
         "expo-router",
         {

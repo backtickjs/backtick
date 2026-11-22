@@ -1,9 +1,16 @@
 {
   "private": true,
   "type": "module",
+  "scripts": {
+    "postinstall": "backtick-installed-packages > installed-packages.json"
+  },
   "backtick": {
     "plugins": [
       "@backtickjs/jsx-react/plugin"
     ]
+  },
+  "dependencies": {
+    "react": "19.2.3",
+    "react-native": "0.86.3"
   }
 }

@@ -1,6 +1,9 @@
 {
   "private": true,
   "type": "module",
+  "scripts": {
+    "postinstall": "backtick-installed-packages > installed-packages.json"
+  },
   "backtick": {
     "plugins": [
       "@backtickjs/jsx-react/plugin"

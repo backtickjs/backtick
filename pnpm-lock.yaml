@@ -1509,10 +1509,6 @@ importers:
         version: 3.8.4
 
   packages/expo:
-    dependencies:
-      '@backtickjs/core':
-        specifier: 0.5.2
-        version: link:../core
     devDependencies:
       '@types/node':
         specifier: ^25.9.1
