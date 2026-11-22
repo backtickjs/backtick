@@ -596,6 +596,14 @@
       "keyed": true,
       "dir": "tags-as-splices",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "37eb0b5",
+      "label": "cjs pages",
+      "date": "2026-11-22",
+      "keyed": true,
+      "dir": "37eb0b5",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }

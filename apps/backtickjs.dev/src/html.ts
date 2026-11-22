@@ -21,8 +21,6 @@ export async function toHtml({
   staticHtml,
 }: Page): Promise<string> {
   const bundle = await bundler.build({
-    // The page's component, which the document's script draws, as Solid's
-    // `render` takes it.
     input: Page,
     modules: {
       "solid-js": "1.9.17",

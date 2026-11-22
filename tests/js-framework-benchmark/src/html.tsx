@@ -1,10 +1,8 @@
 import { bundler } from "@backtickjs/bundler";
-import { cs } from "@backtickjs/core";
-import { render } from "solid-js/web" with { backtick: "client" };
 import { Main } from "./Main.js";
 
 const bundle = await bundler.build({
-  input: cs`$render(() => ${(<Main />)}, document.getElementById("main")!)`,
+  input: Main,
   modules: {
     "solid-js": "1.9.17",
     "solid-js/store": "1.9.17",
@@ -44,7 +42,6 @@ export const html = `<!doctype html>
         "solid-js/web": SolidWeb,
       };
 
-      // The bundle draws the page itself.
       const bundle = document.getElementById("bundle").textContent;
       const module = { exports: {} };
       new Function("module", "exports", "require", bundle)(
@@ -52,6 +49,9 @@ export const html = `<!doctype html>
         module.exports,
         (name) => moduleMap[name],
       );
+
+      const main = document.getElementById("main");
+      SolidWeb.render(module.exports, main);
     </script>
   </body>
 </html>
