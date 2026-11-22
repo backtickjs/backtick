@@ -47,19 +47,11 @@ export function realm(test: Test | null, out: (line: string) => void) {
   return context;
 }
 
-// The module a bundle's client imports resolve to: the realm's globals by
-// those names.
-export function test262Module(
+// What a bundle's `require("test262")` answers: the realm's globals by the
+// names it imports.
+export function test262Exports(
   context: vm.Context,
   names: string[],
-): vm.SyntheticModule {
-  return new vm.SyntheticModule(
-    names,
-    function () {
-      for (const name of names) {
-        this.setExport(name, context[name]);
-      }
-    },
-    { context },
-  );
+): Record<string, unknown> {
+  return Object.fromEntries(names.map((name) => [name, context[name]]));
 }

@@ -10,7 +10,7 @@ import { availableParallelism } from "node:os";
 import { join } from "node:path";
 import vm from "node:vm";
 import { type Compiled, compile } from "./compile.ts";
-import { realm, test262Module } from "./realm.ts";
+import { realm, test262Exports } from "./realm.ts";
 import { notApplicable, type Test, tests } from "./tests.ts";
 
 interface Result {
@@ -86,8 +86,14 @@ const plainly = (test: Test) =>
     };
   });
 
+// Where a bundle finds what it's run with, for the moment it starts: deleted
+// before the test's code runs.
+const HANDED = "__backtickRun";
+
 // Through Backtick: the test as a client script, compiled, bundled, and its
-// bundle run as the module a client loads.
+// bundle run as a client runs it: the body of a function of `module`,
+// `exports` and `require`, here in the test's realm, `require("test262")`
+// answering the realm's globals.
 async function throughBacktick(
   test: Test,
   compiled: Compiled,
@@ -97,15 +103,27 @@ async function throughBacktick(
     return early ? null : `refused: ${compiled.refused[0]}`;
   }
   return outcome(test, (context) => {
-    const module = new vm.SourceTextModule(compiled.bundle, {
-      context,
-      identifier: test.path,
-    });
+    // Called inside the realm, so the timeout covers the test's own run.
+    const script = new vm.Script(
+      `(($) => (delete globalThis.${HANDED}, (function (module, exports, require) {\n${compiled.bundle}\n})($.module, $.module.exports, $.require)))(globalThis.${HANDED});`,
+      { filename: test.path },
+    );
     return async () => {
-      await module.link(() => test262Module(context, compiled.imports));
+      const module = { exports: {} as unknown };
+      const exports = test262Exports(context, compiled.imports);
+      context[HANDED] = {
+        module,
+        require: (specifier: string) => {
+          if (specifier !== "test262") {
+            throw new Error(`The bundle requires "${specifier}".`);
+          }
+          return exports;
+        },
+      };
+      script.runInContext(context, { timeout: TIMEOUT });
       // Node awaits the realm's promise from outside the realm, which calls
       // its `then`: a test replacing `then` and counting calls sees one more.
-      await module.evaluate({ timeout: TIMEOUT });
+      await module.exports;
     };
   });
 }
