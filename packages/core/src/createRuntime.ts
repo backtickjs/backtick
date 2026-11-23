@@ -5,8 +5,7 @@ export interface RuntimeOptions {
   readonly moduleMap: Readonly<Record<string, unknown>>;
   // each package's installed version
   readonly installedPackages: Readonly<Record<string, string>>;
-  // sends requests; the global `fetch` by default. Swap it to add auth
-  // headers, or to call a server's `app.fetch` directly.
+  // sends requests; the global `fetch` by default
   readonly fetch?: (request: Request) => Response | Promise<Response>;
 }
 
