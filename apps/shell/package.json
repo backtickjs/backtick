@@ -42,11 +42,11 @@
     "screenshots": "python3 -m http.server 5199 -d store"
   },
   "dependencies": {
-    "@backtickjs/bundler": "0.7.0",
-    "@backtickjs/core": "0.7.0",
-    "@backtickjs/expo": "0.7.0",
-    "@backtickjs/jsx-react": "0.7.0",
-    "@backtickjs/vscode-extension": "0.7.0",
+    "@backtickjs/bundler": "0.8.0",
+    "@backtickjs/core": "0.8.0",
+    "@backtickjs/expo": "0.8.0",
+    "@backtickjs/jsx-react": "0.8.0",
+    "@backtickjs/vscode-extension": "0.8.0",
     "@expo/ui": "~58.0.27",
     "@expo/vector-icons": "^15.1.1",
     "@react-native-async-storage/async-storage": "2.2.0",
@@ -141,9 +141,9 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@backtickjs/prettier-plugin": "0.7.0",
-    "@backtickjs/tsc": "0.7.0",
-    "@backtickjs/tspatch-plugin": "0.7.0",
+    "@backtickjs/prettier-plugin": "0.8.0",
+    "@backtickjs/tsc": "0.8.0",
+    "@backtickjs/tspatch-plugin": "0.8.0",
     "@testing-library/react-native": "14.1.0",
     "@types/node": "^25.9.1",
     "@types/react": "19.3.0",
