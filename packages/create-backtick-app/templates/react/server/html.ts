@@ -30,6 +30,7 @@ export async function toHtml(element: JSX.Element): Promise<string> {
     <script type="importmap">
       {
         "imports": {
+          "@backtickjs/core": "https://cdn.jsdelivr.net/npm/@backtickjs/core@0.7.0/+esm",
           "react": "https://esm.sh/react@19.2.3",
           "react/jsx-runtime": "https://esm.sh/react@19.2.3/jsx-runtime",
           "react-dom/client": "https://esm.sh/react-dom@19.2.3/client?external=react"
@@ -41,6 +42,7 @@ export async function toHtml(element: JSX.Element): Promise<string> {
     <div id="app"></div>
     <script type="text/plain" id="bundle">${code}</script>
     <script type="module">
+      import { createRuntime } from "@backtickjs/core";
       import * as React from "react";
       import * as JSXRuntime from "react/jsx-runtime";
       import { createRoot } from "react-dom/client";
@@ -50,16 +52,16 @@ export async function toHtml(element: JSX.Element): Promise<string> {
         "react/jsx-runtime": JSXRuntime,
       };
 
-      const bundle = document.getElementById("bundle").textContent;
-      const module = { exports: {} };
-      new Function("module", "exports", "require", bundle)(
-        module,
-        module.exports,
-        (name) => moduleMap[name],
+      const runtime = createRuntime({
+        moduleMap,
+        installedPackages: { react: "19.2.3" },
+      });
+      const page = await runtime.exec(
+        document.getElementById("bundle").textContent,
       );
 
       const app = document.getElementById("app");
-      createRoot(app).render(module.exports);
+      createRoot(app).render(page);
     </script>
   </body>
 </html>`;

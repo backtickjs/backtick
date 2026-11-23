@@ -21,6 +21,7 @@ export const html = `<!doctype html>
     <script type="importmap">
       {
         "imports": {
+          "@backtickjs/core": "https://cdn.jsdelivr.net/npm/@backtickjs/core@0.7.0/+esm",
           "solid-js": "https://cdn.jsdelivr.net/npm/solid-js@1.9.17/dist/solid.js",
           "solid-js/web": "https://cdn.jsdelivr.net/npm/solid-js@1.9.17/web/dist/web.js",
           "solid-js/store": "https://cdn.jsdelivr.net/npm/solid-js@1.9.17/store/dist/store.js"
@@ -32,6 +33,7 @@ export const html = `<!doctype html>
     <div id="main"></div>
     <script type="text/plain" id="bundle">${code}</script>
     <script type="module">
+      import { createRuntime } from "@backtickjs/core";
       import * as Solid from "solid-js";
       import * as SolidStore from "solid-js/store";
       import * as SolidWeb from "solid-js/web";
@@ -42,16 +44,16 @@ export const html = `<!doctype html>
         "solid-js/web": SolidWeb,
       };
 
-      const bundle = document.getElementById("bundle").textContent;
-      const module = { exports: {} };
-      new Function("module", "exports", "require", bundle)(
-        module,
-        module.exports,
-        (name) => moduleMap[name],
+      const runtime = createRuntime({
+        moduleMap,
+        installedPackages: { "solid-js": "1.9.17" },
+      });
+      const page = await runtime.exec(
+        document.getElementById("bundle").textContent,
       );
 
       const main = document.getElementById("main");
-      SolidWeb.render(module.exports, main);
+      SolidWeb.render(page, main);
     </script>
   </body>
 </html>
