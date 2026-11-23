@@ -12,7 +12,10 @@ import {
 } from "react-native" with {
   backtick: "client",
 };
-import { useSafeAreaInsets } from "react-native-safe-area-context" with {
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context" with {
   backtick: "client",
 };
 import { Path, Svg } from "react-native-svg" with { backtick: "client" };
@@ -152,6 +155,11 @@ export function SignIn() {
       );
     }
 
-    return <SignIn />;
+    // Drawn on its own, outside any navigator, so it provides its own insets.
+    return (
+      <$SafeAreaProvider>
+        <SignIn />
+      </$SafeAreaProvider>
+    );
   }`;
 }
