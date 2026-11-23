@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "private": true,
   "exports": {
-    "./modules": {
-      "types": "./build/client/modules.d.ts",
-      "default": "./build/client/modules.js"
+    "./backtick": {
+      "types": "./build/client/backtick.d.ts",
+      "default": "./build/client/backtick.js"
     },
     "./screens": {
       "types": "./build/server/index.d.ts",
@@ -15,8 +15,8 @@
   },
   "typesVersions": {
     "*": {
-      "modules": [
-        "build/client/modules.d.ts"
+      "backtick": [
+        "build/client/backtick.d.ts"
       ],
       "screens": [
         "build/server/index.d.ts"

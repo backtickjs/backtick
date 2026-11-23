@@ -55,9 +55,9 @@ For iOS, run it with `EXPO_NO_CAPABILITY_SYNC=1`: the App ID's capabilities (Sig
 
 The shell is a workspace package too. `pnpm build` (`tsconfig.server.json`, with `tspc`) writes `build/`, which its `package.json` exports:
 
-| Import          | What it is                                                                                                                                                   |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `shell/screens` | Backtick's own screens (`server/`), compiled: what `apps/app.backtickjs.com` serves                                                                          |
-| `shell/modules` | The module map's names (`client/modules.ts`), as data: what `apps/mcp.backtickjs.com` lets an app import. `backtick.ts` must match it, or it won't typecheck |
+| Import           | What it is                                                                                                                                                                          |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `shell/screens`  | Backtick's own screens (`server/`), compiled: what `apps/app.backtickjs.com` serves                                                                                                 |
+| `shell/backtick` | The shell's runtime (`client/backtick.ts`), read in Node without loading a module: its `modules` are what `apps/mcp.backtickjs.com` lets an app import, at the versions phones send |
 
 Not `dist/`: that's where `eas update` exports the app. `pnpm typecheck` checks the client and the server.

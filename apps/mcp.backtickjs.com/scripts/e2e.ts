@@ -6,25 +6,13 @@
 // The phone's half needs auth.backtickjs.com's signing key (BACKTICK_SIGNING_JWK,
 // as Vercel has it) to make the phone's tokens; without it, it's skipped.
 import { importJWK, SignJWT, type JWK } from "jose";
-import { modules } from "shell/modules";
-import installedPackages from "../sandbox/installed-packages.json" with { type: "json" };
+import { backtick } from "shell/backtick";
 import { starter } from "../src/function/starter.ts";
 import { testUser } from "./testUser.ts";
 
 const base = process.env.BASE ?? "https://mcp.backtickjs.com";
 const auth = "https://auth.backtickjs.com";
 const { token, id: user } = await testUser();
-// What the phone sends: each of its modules at its package's version, which
-// the sandbox installs too.
-const installed: Record<string, string> = installedPackages;
-const packageOf = (specifier: string) =>
-  specifier
-    .split("/")
-    .slice(0, specifier.startsWith("@") ? 2 : 1)
-    .join("/");
-const phone = Object.fromEntries(
-  modules.map((specifier) => [specifier, installed[packageOf(specifier)]!]),
-);
 
 let failures = 0;
 function check(what: string, ok: boolean, detail: string) {
@@ -106,7 +94,7 @@ async function open(
       ...(options.signed === false
         ? {}
         : { authorization: `Bearer ${await phoneToken(origin)}` }),
-      "x-backtick-modules": JSON.stringify(options.modules ?? phone),
+      "x-backtick-modules": JSON.stringify(options.modules ?? backtick.modules),
     },
   });
   const body = await response.text();

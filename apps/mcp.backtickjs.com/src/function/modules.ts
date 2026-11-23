@@ -1,11 +1,11 @@
 // What an app may import, on each side. On the phone, what it provides for
-// client imports: the shell's module names (`shell/modules`), which its module
-// map must match. On the server, the packages a release bundles. save_app
-// refuses anything else (diagnostics/unavailable-module.ts).
-import { modules } from "shell/modules";
+// client imports: the shell's module map (`shell/backtick`). On the server,
+// the packages a release bundles. save_app refuses anything else
+// (diagnostics/unavailable-module.ts).
+import { backtick } from "shell/backtick";
 import sandbox from "../../sandbox/package.json" with { type: "json" };
 
-export const phoneModules: readonly string[] = modules;
+export const phoneModules: readonly string[] = Object.keys(backtick.modules);
 
 // Each phone module at its package's exact version: the sandbox pins the
 // shell's (sandbox/test/versions.test.ts), so an app is checked against what

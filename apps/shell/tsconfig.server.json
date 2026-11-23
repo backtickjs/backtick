@@ -2,7 +2,7 @@
   // What other projects import, built into build/ (dist/ is Expo's export): the screens in server/
   // (`shell/screens`), compiled with `tspc` from ts-patch since they're
   // scripts, with package.json's plugins (read beside this file); and the
-  // module names (`shell/modules`).
+  // runtime (`shell/backtick`).
   "extends": "./server/tsconfig.json",
   "compilerOptions": {
     "noEmit": false,
@@ -13,5 +13,5 @@
     "declaration": true,
     "plugins": [{ "transform": "@backtickjs/tspatch-plugin" }]
   },
-  "include": ["server", "client/modules.ts"]
+  "include": ["server", "client/backtick.ts"]
 }

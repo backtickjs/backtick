@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { it } from "node:test";
-import { modules } from "../../../shell/client/modules.ts";
+import { backtick } from "../../../shell/client/backtick.ts";
 
 // npm in the snapshot ignores pnpm's lockfile and takes the newest version a
 // range allows, so a range here drifts from what phones carry, and a screen
@@ -13,7 +13,7 @@ it("names each of the phone's packages at the shell's exact version", () => {
     readFileSync(join(import.meta.dirname, "../package.json"), "utf8"),
   );
   const packages = new Set(
-    modules.map((specifier) =>
+    Object.keys(backtick.modules).map((specifier) =>
       specifier
         .split("/")
         .slice(0, specifier.startsWith("@") ? 2 : 1)
