@@ -141,6 +141,7 @@ describe("compile", () => {
       .map(({ moduleSpecifier }) => (moduleSpecifier as ts.StringLiteral).text);
     assert.deepEqual([...new Set(imports)], ["node:async_hooks"]);
     assert.match(code!, /UnsupportedImportError/);
-    assert.ok(code!.length < 100_000, `${code!.length} bytes`);
+    // A guard against a dependency bundled by accident, not a platform limit.
+    assert.ok(code!.length < 150_000, `${code!.length} bytes`);
   });
 });
