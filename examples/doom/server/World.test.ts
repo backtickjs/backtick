@@ -3,7 +3,7 @@ import { it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import * as Fiber from "@react-three/fiber";
 import ReactThreeTestRenderer from "@react-three/test-renderer";
-import { modulesOf, createRuntime } from "@backtickjs/core";
+import { createRuntime } from "@backtickjs/core";
 import * as React from "react";
 import * as JSXRuntime from "react/jsx-runtime";
 import installedPackages from "../installed-packages.json" with { type: "json" };
@@ -21,14 +21,10 @@ const moduleMap = {
   "react/jsx-runtime": JSXRuntime,
   "@react-three/fiber/native": Fiber,
 };
-// at the versions the app sends
-const modules = modulesOf(moduleMap, installedPackages);
-
 // `World` as the phone gets it: bundled by the server, run by the app.
-const bundle = await bundler.build({ input: World, modules });
-const PlayedWorld = await createRuntime({ moduleMap, installedPackages }).exec(
-  bundle.generate().code,
-);
+const runtime = createRuntime({ moduleMap, installedPackages });
+const bundle = await bundler.build({ input: World, modules: runtime.modules });
+const PlayedWorld = await runtime.exec(bundle.generate().code);
 
 const start: Stats = { health: 100, ammo: 24, kills: 0, shots: 0, wounds: 0 };
 

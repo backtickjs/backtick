@@ -1,10 +1,10 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { modulesOf } from "../dist/index.js";
+import { createRuntime } from "../dist/index.js";
 
-const installed = { react: "19.2.3", "@facebook/sdk": "13.4.3" };
+const installedPackages = { react: "19.2.3", "@facebook/sdk": "13.4.3" };
 
-describe("the modules a build sends", () => {
+describe("a runtime's modules", () => {
   const moduleMap = {
     react: {},
     "react/jsx-runtime": {},
@@ -12,7 +12,7 @@ describe("the modules a build sends", () => {
   };
 
   it("are its module map's, at its packages' installed versions", () => {
-    assert.deepEqual(modulesOf(moduleMap, installed), {
+    assert.deepEqual(createRuntime({ moduleMap, installedPackages }).modules, {
       react: "19.2.3",
       "react/jsx-runtime": "19.2.3",
       "@facebook/sdk/login": "13.4.3",
@@ -21,7 +21,8 @@ describe("the modules a build sends", () => {
 
   it("need every package's version, or the app throws as it starts", () => {
     assert.throws(
-      () => modulesOf(moduleMap, { react: "19.2.3" }),
+      () =>
+        createRuntime({ moduleMap, installedPackages: { react: "19.2.3" } }),
       /offers "@facebook\/sdk\/login", but @facebook\/sdk isn't in package\.json's dependencies/,
     );
   });

@@ -88,14 +88,11 @@ A store build carries the modules it was built with, at their versions, for as l
    }
    ```
 
-3. **The app sends its modules** however it reaches its server: a header, a GraphQL variable. `modulesOf` gives each module in the map its package's version, and throws as the app starts for a module from a package that isn't a dependency:
+3. **The app sends its modules.** A runtime's `modules` gives each module in the map its package's version, and `createRuntime` throws as the app starts for a module from a package that isn't a dependency. `runtime.fetch` sends them as `x-backtick-modules`; another transport, such as a GraphQL variable, sends them itself:
 
    ```ts
-   import { modulesOf } from "@backtickjs/core";
-   import installedPackages from "../installed-packages.json";
-
-   const modules = JSON.stringify(modulesOf(moduleMap, installedPackages));
-   fetch(url, { headers: { "x-backtick-modules": modules } });
+   const backtick = createRuntime({ moduleMap, installedPackages });
+   const variables = { modules: JSON.stringify(backtick.modules) };
    ```
 
 4. **The server bundles for them:**
@@ -107,7 +104,7 @@ A store build carries the modules it was built with, at their versions, for as l
 
    The bundler refuses modules that aren't `{ "specifier": "version" }`, and a screen that imports a module the build doesn't carry, or at a version it can't run. To draw differently for builds that lack a module, or to ask old ones to update, check with `supports` from [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler), in a server component: `supports("react-native", ">=0.86")`.
 
-A test draws a screen with a module map of its own, stand-ins included; its modules are that map's, at the versions the app sends: `modulesOf(moduleMap, installedPackages)`, from the same `installed-packages.json`.
+A test draws a screen with a module map of its own, stand-ins included; its modules are that map's, at the versions the app sends: a runtime's `modules`, from the same `installed-packages.json`.
 
 ## API
 
@@ -118,8 +115,7 @@ A test draws a screen with a module map of its own, stand-ins included; its modu
 - `createImport<T>({ name, from, version })`: an export of a module the client provides, as a value a script can splice.
 - `isClientImport`, `ClientImport`: its check and type.
 - `Bundle<T>`: a bundle's code, branded with what it runs to. `bundler.build(…).generate(…)` writes one.
-- `createRuntime({ moduleMap, installedPackages, fetch? })`: what runs an app's bundles, a `Runtime`. `runtime.fetch(url, init?)` is `fetch` with the `x-backtick-modules` header the server bundles for. `runtime.exec(bundle)` runs a bundle to its value, as a promise, with `require` answered from `moduleMap`; the bundles it runs with `$exec` get the same modules, and they all share the runtime's cache: what a script makes once, made once per runtime.
-- `modulesOf(moduleMap, installedPackages)`: the modules `moduleMap`, a `ModuleMap`, offers, each at its package's version in `installedPackages`, for the app to send its server.
+- `createRuntime({ moduleMap, installedPackages, fetch? })`: what runs an app's bundles, a `Runtime`. `runtime.modules` is each module it provides at its package's version. `runtime.fetch(url, init?)` is `fetch` with the `x-backtick-modules` header the server bundles for. `runtime.exec(bundle)` runs a bundle to its value, as a promise, with `require` answered from `moduleMap`; the bundles it runs with `$exec` get the same modules, and they all share the runtime's cache: what a script makes once, made once per runtime.
 - `exec`: in a script, `$exec(bundle)` runs another bundle as the script's own was run, with the same modules, to a promise of its value.
 - `isClientExec`, `ClientExec`: its check and type.
 - `SplicesAs<T>`: `T` as a splice checks it, member by member. Used by the bundler to check its input.

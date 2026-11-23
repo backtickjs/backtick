@@ -40,7 +40,7 @@ A script is compiled once for every client, so it isn't told which platform it's
 
 ## Related
 
-- [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core#every-build-in-users-hands): `modulesOf`, and how every build in users' hands keeps being drawn for
+- [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core#every-build-in-users-hands): the runtime, and how every build in users' hands keeps being drawn for
 - [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler): bundles a screen for the modules a build sends
 
 ## License

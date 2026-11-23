@@ -107,8 +107,8 @@ shows. See
 
 ### Can't import `…` from "…": the request lists no modules
 
-The request didn't say what the app carries: check it sends what `modulesOf`
-gives it in `x-backtick-modules`. To fetch a screen yourself, with `curl` say,
+The request didn't say what the app carries: check it sends its runtime's `modules`
+in `x-backtick-modules`, as `runtime.fetch` does. To fetch a screen yourself, with `curl` say,
 send them there:
 `{"react":"19.2.3","react/jsx-runtime":"19.2.3","react-native":"0.86.3"}`.
 
@@ -134,7 +134,7 @@ component, which the bundler runs for the client it's drawing for.
 
 What the server passed the bundler as `modules` isn't an object of versions:
 the app sent something else in `x-backtick-modules`. It sends
-`JSON.stringify(modulesOf(…))`.
+`JSON.stringify(runtime.modules)`.
 [`@backtickjs/core`](https://github.com/backtickjs/backtick/tree/main/packages/core#every-build-in-users-hands)
 has the details.
 
