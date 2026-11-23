@@ -4,18 +4,32 @@ export const starter = `// A Backtick app:
 // 1. Import what the client provides \`with { backtick: "client" }\`.
 // 2. A splice \`$\` marks a server value crossing into a client script cs\`...\`
 // 3. Use + over template literals: a backtick ends the client script.
-// 4. Routes nest as in Next.js: /path/_layout around /path/_loading around the page.
+// 4. Navigate with React Navigation: each screen in App shows a route of this
+//    server, with <FetchedScreen>, and opens with StackActions.push.
 
-import { cs } from "@backtickjs/core";
-import { backtickApp } from "@backtickjs/hono";
+import { render } from "@backtickjs/bundler";
+import { cs, runtime } from "@backtickjs/core";
 import { Hono } from "hono";
-import { Link, Stack, useLocalSearchParams } from "expo-router" with { backtick: "client" };
-import { useState, type ReactNode } from "react" with { backtick: "client" };
+import { Link, NavigationContainer, NavigationIndependentTree, StackActions } from "@react-navigation/native" with { backtick: "client" };
+import { createNativeStackNavigator } from "@react-navigation/native-stack" with { backtick: "client" };
+import { Suspense, use, useState, type ReactNode } from "react" with { backtick: "client" };
 import { ActivityIndicator, Button, ScrollView, StyleSheet, Text } from "react-native" with { backtick: "client" };
 
-const recipes = [
-  { id: "pancakes", name: "Pancakes", steps: "Whisk flour, milk and eggs, then cook in a hot pan." },
-  { id: "omelette", name: "Omelette", steps: "Beat the eggs, cook, fold and serve." },
+type Screens = { Recipes: undefined; Recipe: { id: string; name: string } };
+
+type Recipe = { id: string; name: string; steps: string };
+
+const recipes: Recipe[] = [
+  {
+    id: "pancakes",
+    name: "Pancakes",
+    steps: "Whisk flour, milk and eggs, then cook in a hot pan.",
+  },
+  {
+    id: "omelette",
+    name: "Omelette",
+    steps: "Beat the eggs, cook, fold and serve.",
+  },
 ];
 
 const styles = cs\`$StyleSheet.create({
@@ -24,71 +38,106 @@ const styles = cs\`$StyleSheet.create({
   link: { fontSize: 18, color: "#0a7ea4" },
 })\`;
 
-function Home() {
-  return cs\`
-    <$ScrollView contentContainerStyle={$styles.screen} contentInsetAdjustmentBehavior="automatic">
-      {/* / has no _layout, so its page sets the title. */}
-      <$Stack.Screen options={{ title: "Recipes" }} />
-      {$recipes.map(({ id, name }) => (
-        <$Link key={id} href={{ pathname: "/recipe/" + id, params: { name } }} style={$styles.link}>
-          {name}
-        </$Link>
-      ))}
-    </$ScrollView>
-  \`;
-}
+const Navigator = cs\`$createNativeStackNavigator<Screens>()\`;
 
-// A client component, typed as strict TypeScript: its state lives on the phone.
+const screens = cs\`new Map<string, Promise<ReactNode>>()\`;
+const FetchedScreen = cs\`({ id, url }: { id: string; url: string }) => {
+  if (!$screens.has(id)) {
+    $screens.set(
+      id,
+      $runtime
+        .fetch(url)
+        .then((response) => response.text())
+        .then((bundle) => $runtime.exec(bundle as never) as Promise<ReactNode>),
+    );
+  }
+  return $use($screens.get(id)!);
+}\`;
+
+const App = cs\`({ origin }: { origin: string }) => (
+  <$NavigationIndependentTree>
+    <$NavigationContainer>
+      <$Navigator.Navigator
+        screenLayout={({ children }) => (
+          <$Suspense
+            fallback={<$ActivityIndicator style={{ marginTop: 40 }} />}
+          >
+            {children}
+          </$Suspense>
+        )}
+        screenOptions={{
+          headerStyle: { backgroundColor: "#fff" },
+          headerTitleStyle: { color: "#111" },
+        }}
+      >
+        <$Navigator.Screen name="Recipes" options={{ title: "Recipes" }}>
+          {({ route }) => (
+            <$FetchedScreen id={route.key} url={origin + "/recipes"} />
+          )}
+        </$Navigator.Screen>
+        <$Navigator.Screen
+          name="Recipe"
+          options={({ route }) => ({ title: route.params.name })}
+        >
+          {({ route }) => (
+            <$FetchedScreen
+              id={route.key}
+              url={origin + "/recipe/" + route.params.id}
+            />
+          )}
+        </$Navigator.Screen>
+      </$Navigator.Navigator>
+    </$NavigationContainer>
+  </$NavigationIndependentTree>
+)\`;
+
 const CookedButton = cs\`({ name }: { name: string }) => {
   const [cooked, setCooked] = $useState(false);
   const title = cooked ? name + " cooked!" : "Mark as cooked";
   return <$Button title={title} onPress={() => setCooked(!cooked)} />;
 }\`;
 
-// The root layout, /_layout: it draws the navigator, with every screen's
-// options (optional: without it, a plain Stack). A sheet or modal's go here
-// too, not on its screen: screenOptions as a function of route.path.
-const RootLayout = cs\`() => (
-  <$Stack
-    screenOptions={{
-      headerStyle: { backgroundColor: "#fff" },
-      headerTitleStyle: { color: "#111" },
-      statusBarStyle: "dark",
-    }}
-  />
+const RecipeList = cs\`({ recipes }: { recipes: Recipe[] }) => (
+  <$ScrollView
+    contentContainerStyle={$styles.screen}
+    contentInsetAdjustmentBehavior="automatic"
+  >
+    {recipes.map(({ id, name }) => (
+      <$Link
+        key={id}
+        action={$StackActions.push("Recipe", { id, name })}
+        style={$styles.link}
+      >
+        {name}
+      </$Link>
+    ))}
+  </$ScrollView>
+)\`;
+
+const RecipePage = cs\`({ recipe }: { recipe: Recipe }) => (
+  <$ScrollView
+    contentContainerStyle={$styles.screen}
+    contentInsetAdjustmentBehavior="automatic"
+  >
+    <$Text style={$styles.text}>{recipe.steps}</$Text>
+    <$CookedButton name={recipe.name} />
+  </$ScrollView>
 )\`;
 
 const app = new Hono();
-app.use(backtickApp(app));
-app.get("/_layout", (context) => context.render(RootLayout));
-app.get("/", (context) => context.render(<Home />));
-// A screen's header goes in its _layout, shown the moment it opens. Links
-// prefetch layouts, so a _layout never fetches: what the path doesn't say
-// comes with the link's params (useLocalSearchParams).
-app.get("/recipe/:id/_layout", (context) =>
-  context.render(cs\`({ children }: { children: ReactNode }) => {
-    const { name } = $useLocalSearchParams<{ name?: string }>();
-    return (
-      <>
-        <$Stack.Screen options={{ title: name ?? "" }} />
-        {children}
-      </>
-    );
-  }\`),
-);
-// Shown while the page loads; it takes no params.
-app.get("/recipe/:id/_loading", (context) =>
-  context.render(cs\`<$ActivityIndicator style={{ marginTop: 40 }} />\`),
+app.get("/", (context) => {
+  const origin = new URL(context.req.url).origin;
+  return render(context.req.raw, cs\`<$App origin={$origin} />\`);
+});
+app.get("/recipes", (context) =>
+  render(context.req.raw, cs\`<$RecipeList recipes={$recipes} />\`),
 );
 app.get("/recipe/:id", (context) => {
   const recipe = recipes.find((each) => each.id === context.req.param("id"));
-  if (!recipe) return context.notFound();
-  return context.render(cs\`
-    <$ScrollView contentContainerStyle={$styles.screen} contentInsetAdjustmentBehavior="automatic">
-      <$Text style={$styles.text}>{$recipe.steps}</$Text>
-      <$CookedButton name={$recipe.name} />
-    </$ScrollView>
-  \`);
+  if (!recipe) {
+    return context.notFound();
+  }
+  return render(context.req.raw, cs\`<$RecipePage recipe={$recipe} />\`);
 });
 
 export default app;

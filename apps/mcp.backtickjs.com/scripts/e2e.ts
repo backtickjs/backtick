@@ -175,13 +175,10 @@ await tool("update_app", "update_app", {
 if (signingKey === undefined) {
   console.log("skip the phone's fetches: BACKTICK_SIGNING_JWK isn't set");
 } else {
-  await open("the runtime", id, "/.well-known/backtick/runtime", 200);
-  await open("the root layout", id, "/_layout", 200);
-  await open("the home", id, "/", 200);
-  await open("a screen's layout", id, "/recipe/pancakes/_layout", 200);
-  await open("a screen's loading state", id, "/recipe/:id/_loading", 200);
-  await open("a screen", id, "/recipe/pancakes", 200);
-  await open("a missing screen", id, "/recipe/nowhere", 404);
+  await open("the app's screen", id, "/", 200);
+  await open("a page", id, "/recipes", 200);
+  await open("another page", id, "/recipe/pancakes", 200);
+  await open("a missing page", id, "/recipe/nowhere", 404);
   await open("a phone without the modules", id, "/", 406, { modules: {} });
   await open("no token", id, "/", 401, { signed: false });
   await open(
