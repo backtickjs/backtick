@@ -213,6 +213,12 @@ export const moduleMap = {
   get "react-native-screens"() {
     return require("react-native-screens");
   },
+  get "@react-navigation/native"() {
+    return require("@react-navigation/native");
+  },
+  get "@react-navigation/native-stack"() {
+    return require("@react-navigation/native-stack");
+  },
   get "react-native-view-shot"() {
     return require("react-native-view-shot");
   },

@@ -67,6 +67,8 @@ export const modules = [
   "react-native-keyboard-controller",
   "react-native-pager-view",
   "react-native-screens",
+  "@react-navigation/native",
+  "@react-navigation/native-stack",
   "react-native-view-shot",
   "three",
   "@react-three/fiber/native",
