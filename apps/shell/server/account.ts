@@ -91,17 +91,14 @@ export async function eraseDeletedApps(): Promise<number> {
   if (removed.error) {
     throw failed(removed.error);
   }
-  const erased = await supabase()
-    .from("apps")
-    .delete()
-    .in(
-      "id",
-      data.map((app) => app.id),
-    );
+  // Only through `erase_apps`, which erases nothing deleted under 30 days ago.
+  const erased = await supabase().rpc("erase_apps", {
+    ids: data.map((app) => app.id),
+  });
   if (erased.error) {
     throw failed(erased.error);
   }
-  return data.length;
+  return erased.data as number;
 }
 
 // Supabase's error isn't an `Error`, so its message would be lost.
