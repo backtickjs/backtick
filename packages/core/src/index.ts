@@ -25,7 +25,6 @@ export { runtime, isClientRuntime, type ClientRuntime } from "./runtime.js";
 // What runs an app's bundles, with the modules it provides.
 export {
   createRuntime,
-  type ModuleMap,
   type Runtime,
   type RuntimeOptions,
 } from "./createRuntime.js";

@@ -1,11 +1,8 @@
 import type { Bundle } from "./Bundle.js";
 
-// What a bundle may import, by specifier.
-export type ModuleMap = Readonly<Record<string, unknown>>;
-
 export interface RuntimeOptions {
   // the modules a bundle may require
-  readonly moduleMap: ModuleMap;
+  readonly moduleMap: Readonly<Record<string, unknown>>;
   // each package's installed version
   readonly installedPackages: Readonly<Record<string, string>>;
   // sends requests; the global `fetch` by default. Swap it to add auth
@@ -78,7 +75,7 @@ export function createRuntime(options: RuntimeOptions): Runtime {
 
 // Each module in `moduleMap`, at its package's installed version.
 function versionsOf(
-  moduleMap: ModuleMap,
+  moduleMap: Readonly<Record<string, unknown>>,
   installedPackages: Readonly<Record<string, string>>,
 ): Record<string, string> {
   return Object.fromEntries(
@@ -103,7 +100,9 @@ function packageOf(specifier: string): string {
 }
 
 // A bundle's `require`, answered from `moduleMap`.
-function requireFrom(moduleMap: ModuleMap): (specifier: string) => unknown {
+function requireFrom(
+  moduleMap: Readonly<Record<string, unknown>>,
+): (specifier: string) => unknown {
   return (specifier) => {
     if (!Object.hasOwn(moduleMap, specifier)) {
       throw new Error(
