@@ -219,6 +219,12 @@ export const moduleMap = {
   get "@react-navigation/native-stack"() {
     return require("@react-navigation/native-stack");
   },
+  get "@react-navigation/bottom-tabs"() {
+    return require("@react-navigation/bottom-tabs");
+  },
+  get "@react-navigation/bottom-tabs/unstable"() {
+    return require("@react-navigation/bottom-tabs/unstable");
+  },
   get "react-native-view-shot"() {
     return require("react-native-view-shot");
   },

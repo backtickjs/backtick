@@ -69,6 +69,8 @@ export const modules = [
   "react-native-screens",
   "@react-navigation/native",
   "@react-navigation/native-stack",
+  "@react-navigation/bottom-tabs",
+  "@react-navigation/bottom-tabs/unstable",
   "react-native-view-shot",
   "three",
   "@react-three/fiber/native",
