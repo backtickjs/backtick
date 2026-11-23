@@ -1,13 +1,18 @@
 import { cs } from "@backtickjs/core";
 import { shellURL } from "./links.js";
+import { reloadScreen } from "./navigator.js";
 import { Logo, useColors } from "./look.js";
 import { failed, supabase } from "./account.js";
-import { useCallback, useState } from "react" with {
+import { useCallback, useState, useTransition } from "react" with {
   backtick: "client",
 };
-import { Link, useFocusEffect } from "expo-router" with {
-  backtick: "client",
-};
+import {
+  Link,
+  StackActions,
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native" with { backtick: "client" };
 import {
   nativeApplicationVersion,
   nativeBuildVersion,
@@ -53,8 +58,8 @@ const home = process.env.BACKTICK_HOME_ORIGIN!;
 // builders list projects. A card opens its app by the shell's link to it; its
 // ⋯ opens a sheet with the app's details,
 // opening, editing and deleting, the avatar one with the account and signing out, and
-// + New one that asks Claude for a new app. Pulled down, it loads `/`
-// again. Only the user's own apps, and none they deleted.
+// + New one that asks Claude for a new app. Pulled down, it loads again in
+// place. Only the user's own apps, and none they deleted.
 export async function Home(props: { user: string; modules: string }) {
   // An app still at its starter, with no saved version, isn't one yet.
   const { data, error } = await supabase()
@@ -296,6 +301,7 @@ export async function Home(props: { user: string; modules: string }) {
       // app takes a moment. It waits off the card for its delay.
       const [scale] = $useState(() => new $Animated.Value(1));
       const [opening, setOpening] = $useState<boolean>(false);
+      const navigation = $useNavigation();
       const height = Math.round(width * 1.9);
       const spring = (toValue: number, bounciness: number) =>
         $Animated
@@ -312,35 +318,31 @@ export async function Home(props: { user: string; modules: string }) {
       return (
         <$View style={[styles.card, { width }]}>
           <$Animated.View style={{ transform: [{ scale }] }}>
-            <$Link href={$shellURL(app.id)} asChild>
-              <$Pressable
-                // One style object: Link's asChild drops an array, and a
-                // function of the press.
-                style={$StyleSheet.flatten([
-                  styles.shot,
-                  { borderColor: colors.line, height },
-                ])}
-                // One open at a time, however many taps.
-                disabled={opening}
-                onPressIn={() => spring(0.97, 0)}
-                onPressOut={() => spring(1, 8)}
-                onPress={() => {
-                  // On the tap, not the touch: a touch may be a scroll.
-                  void $impactAsync($ImpactFeedbackStyle.Light);
-                  setOpening(true);
-                }}
-                onLongPress={onMore}
-              >
-                <$Preview
-                  source={app.screenshot}
-                  style={{ width: width - 2, height: height - 2 }}
-                  // A phone's screen, from the top, where an app's title is.
-                  contentFit="cover"
-                  contentPosition="top"
-                  cachePolicy="memory-disk"
-                />
-              </$Pressable>
-            </$Link>
+            <$Pressable
+              style={[styles.shot, { borderColor: colors.line, height }]}
+              // One open at a time, however many taps.
+              disabled={opening}
+              onPressIn={() => spring(0.97, 0)}
+              onPressOut={() => spring(1, 8)}
+              onPress={() => {
+                // On the tap, not the touch: a touch may be a scroll.
+                void $impactAsync($ImpactFeedbackStyle.Light);
+                setOpening(true);
+                navigation.dispatch(
+                  $StackActions.push("App", { appId: app.id }),
+                );
+              }}
+              onLongPress={onMore}
+            >
+              <$Preview
+                source={app.screenshot}
+                style={{ width: width - 2, height: height - 2 }}
+                // A phone's screen, from the top, where an app's title is.
+                contentFit="cover"
+                contentPosition="top"
+                cachePolicy="memory-disk"
+              />
+            </$Pressable>
           </$Animated.View>
           <$View style={styles.caption}>
             <$View style={{ flex: 1 }}>
@@ -494,8 +496,8 @@ export async function Home(props: { user: string; modules: string }) {
       );
     }
 
-    // Set when the connect sheet opens Claude, for the home to load again on
-    // the way back. A reload starts a new home, with it unset.
+    // Set when the connect sheet opens Claude, for the apps to load again on
+    // the way back.
     let connecting = false;
 
     // How to connect Backtick to Claude, as Claude's app asks it
@@ -686,12 +688,14 @@ export async function Home(props: { user: string; modules: string }) {
       app: App;
       onClose: () => void;
       onEdit: () => void;
+      onDelete: () => void;
     }) {
-      const { app, onClose, onEdit } = props;
+      const { app, onClose, onEdit, onDelete } = props;
       const colors = $useColors();
+      const navigation = $useNavigation();
       const open = () => {
         onClose();
-        $Linking.openURL($shellURL(app.id));
+        navigation.dispatch($StackActions.push("App", { appId: app.id }));
       };
       const remove = () =>
         $Alert.alert(
@@ -702,13 +706,13 @@ export async function Home(props: { user: string; modules: string }) {
             {
               text: "Delete",
               style: "destructive",
-              // The home's own server deletes it, then the home loads again.
+              // The home's own server deletes it, then the apps load again.
               onPress: async () => {
                 onClose();
                 await fetch($home + "/apps/" + app.id + "/delete", {
                   method: "POST",
                 });
-                $Linking.openURL($shellURL("reload"));
+                onDelete();
               },
             },
           ],
@@ -722,7 +726,7 @@ export async function Home(props: { user: string; modules: string }) {
             {/* Tapped, it shows the version's source: for the curious, so
                 it looks like the rest of the details. */}
             <$Link
-              href={"/source/" + app.id}
+              action={$StackActions.push("Source", { id: app.id })}
               onPress={onClose}
               style={[styles.detail, { color: colors.muted }]}
             >
@@ -743,29 +747,29 @@ export async function Home(props: { user: string; modules: string }) {
       const colors = $useColors();
       const insets = $useSafeAreaInsets();
       const { width } = $useWindowDimensions();
-      const [refreshing, setRefreshing] = $useState(false);
-      // Loads the home again, in place: the spinner stays until the new one
-      // replaces this one.
-      const refresh = () => {
-        setRefreshing(true);
-        $Linking.openURL($shellURL("reload"));
-      };
+      const route = $useRoute();
+      // Loads the apps again, in place: the spinner stays until the new ones
+      // replace these.
+      const [refreshing, startRefresh] = $useTransition();
+      const refresh = $useCallback(
+        () => startRefresh(() => $reloadScreen(route.key)),
+        [route.key],
+      );
       // Back from Claude after the connect sheet sent the user there: load the
-      // home again, which reads the connection anew. Only from the background
-      // (not Control Center or Face ID), once, and only while the home is on
-      // top, as a reload link loads whichever screen is.
+      // apps again, which reads the connection anew. Only from the background
+      // (not Control Center or Face ID), once, and only while they're on top.
       $useFocusEffect(
         $useCallback(() => {
           let last = $AppState.currentState;
           const subscription = $AppState.addEventListener("change", (state) => {
             if (connecting && last === "background" && state === "active") {
               connecting = false;
-              $Linking.openURL($shellURL("reload"));
+              refresh();
             }
             last = state;
           });
           return () => subscription.remove();
-        }, []),
+        }, [refresh]),
       );
       const [asking, setAsking] = $useState<Ask | null>(null);
       const newApp = () =>
@@ -781,17 +785,16 @@ export async function Home(props: { user: string; modules: string }) {
       return (
         <>
           <$FlatList
-            style={{ backgroundColor: colors.paper }}
+            // Below the status bar, so the refresh spinner shows there too.
+            style={{ backgroundColor: colors.paper, marginTop: insets.top }}
             contentContainerStyle={[
               styles.list,
-              { paddingTop: insets.top, paddingBottom: insets.bottom + 32 },
+              { paddingBottom: insets.bottom + 32 },
             ]}
             numColumns={2}
             columnWrapperStyle={styles.columns}
             refreshing={refreshing}
             onRefresh={refresh}
-            // Android draws the spinner at the list's top, under the status bar.
-            progressViewOffset={insets.top + 8}
             data={$apps}
             keyExtractor={(app) => app.id}
             ListHeaderComponent={
@@ -848,6 +851,7 @@ export async function Home(props: { user: string; modules: string }) {
             <AppSheet
               app={selected}
               onClose={() => setSelected(null)}
+              onDelete={refresh}
               onEdit={() => {
                 setSelected(null);
                 setAsking({

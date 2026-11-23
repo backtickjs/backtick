@@ -24,7 +24,7 @@
     }
   },
   "description": "The Backtick app: sign in, see the apps your assistant made, and open them",
-  "main": "expo-router/entry",
+  "main": "client/index.tsx",
   "scripts": {
     "build:android": "taskpolicy -b pnpm dlx eas-cli build -p android --profile production --local",
     "start": "expo start",
@@ -38,10 +38,9 @@
     "screenshots": "python3 -m http.server 5199 -d store"
   },
   "dependencies": {
+    "@backtickjs/bundler": "0.7.0",
     "@backtickjs/core": "0.7.0",
     "@backtickjs/expo": "0.7.0",
-    "@backtickjs/expo-router": "0.7.0",
-    "@backtickjs/hono": "0.7.0",
     "@backtickjs/jsx-react": "0.7.0",
     "@backtickjs/vscode-extension": "0.7.0",
     "@expo/ui": "~58.0.27",
@@ -162,10 +161,5 @@
       "/node_modules/react-native-reanimated/plugin/",
       "/node_modules/@react-native/babel-preset/"
     ]
-  },
-  "dependenciesMeta": {
-    "@backtickjs/expo-router": {
-      "injected": true
-    }
   }
 }

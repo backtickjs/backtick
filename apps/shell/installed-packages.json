@@ -1,8 +1,7 @@
 {
+  "@backtickjs/bundler": "0.7.0",
   "@backtickjs/core": "0.7.0",
   "@backtickjs/expo": "0.7.0",
-  "@backtickjs/expo-router": "0.7.0",
-  "@backtickjs/hono": "0.7.0",
   "@backtickjs/jsx-react": "0.7.0",
   "@backtickjs/vscode-extension": "0.7.0",
   "@expo/ui": "58.0.27",

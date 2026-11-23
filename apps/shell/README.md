@@ -2,29 +2,20 @@
 
 Backtick on phones, as its own app: it signs the user in, and every screen it shows comes from a server, Backtick's own included. Laid out as `create-backtick-app` makes any app:
 
-| Folder        | What it is                                                                                                                                                                                                   |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `client/`     | The Expo app: the session, the screen stack, fetching and running screens, and nothing drawn of its own but errors                                                                                           |
-| `client/app/` | Its routes (expo-router, `app.json`'s `root`): `(home)/` is Backtick's screens and `(app)/` a navigator per app opened, each run by `client/App.tsx`; `+native-intent.tsx` handles every link into the shell |
-| `server/`     | Backtick's own screens: sign-in and the app list. Deployed by `apps/app.backtickjs.com`                                                                                                                      |
+| Folder    | What it is                                                                                                                                                                                                                                 |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `client/` | The Expo app, kept thin: its entry (`index.tsx`, `Shell.tsx`), the session and the links that are the shell's own commands (`links.ts`), Backtick's splash, and the home drawn from its server (`Home.tsx`), with Retry if it doesn't open |
+| `server/` | Backtick's home, deployed by `apps/app.backtickjs.com`: sign-in, the app list, an app's source, and the apps themselves                                                                                                                    |
 
-Where an app comes from (`client/open.ts`):
+The shell's client fetches `https://app.backtickjs.com/` and draws it, with a runtime of its own each time (`backtick.create()`, from `client/backtick.ts`), so nothing of a signed-out user is kept. Everything else is the home's, sent by its server (`server/navigator.tsx`): a React Navigation stack of the app list, an app's source, and an app, which it opens with a runtime of its own (`$runtime.create()`) from `https://<appId>.backtickjs.app/`, drawn in its own navigation tree. The home also follows links into apps and captures each app's preview. The module map (`client/backtick.ts`) hands screens unmodified packages, React Navigation's among them; not expo-router, which would be the shell's own router.
 
-| Open app              | Path          | Fetched from                             |
-| --------------------- | ------------- | ---------------------------------------- |
-| none: Backtick's home | `/`           | `https://app.backtickjs.com/`            |
-| `<id>`                | `/day?week=2` | `https://<id>.backtickjs.app/day?week=2` |
+Links into the phone are the Backtick app's: `backtick://<path>`, written by `shellURL` (`server/links.ts`), and an app's own address, `https://<appId>.backtickjs.app/<path>`, as a verified App Link.
 
-The path is never changed: an app's `<Link href="/day">` is its server's `app.get("/day")`, and expo-router works in its screens as its docs say. Each app, Backtick's home included, opens from one answer of its server: the runtime `backtickApp(app)` answers at `/.well-known/backtick/runtime` (`@backtickjs/hono`), which fetches each screen and keeps it while it shows, around the app's root layout, its `/_layout` route: an expo-router `Stack` with the app's own options and whatever it puts around it. The shell has no navigator or screen fetching of its own (`client/App.tsx`): it shows Backtick's splash until the first screen is in, renders the runtime's navigator, gives each route the runtime's screen for its href (`client/RouteScreen.tsx`), and gives each app's links the runtime's prefetch (`PrefetchProvider`). As in Next.js, a navigation pushes once what its screen needs to show is in, and without a loading state holds the screen on top until the next is in, which needs every navigation to be a transition (`router.setTransitionMode("always")`, in `client/app/_layout.tsx`). The module map (`client/backtick.ts`) hands screens unmodified packages, with one exception: `expo-router` is `@backtickjs/expo-router`, the same API with links that fetch ahead, as Next.js's do. It's installed injected, so it uses the shell's expo-router.
-
-Links into the shell (`client/app/+native-intent.tsx`) are the Backtick app's own: `backtick://<path>`, written by `shellURL` (`server/links.ts`), and an app's own address, `https://<id>.backtickjs.app/<path>`, as a verified App Link.
-
-| Link                             | Does                                                                                       |
-| -------------------------------- | ------------------------------------------------------------------------------------------ |
-| `backtick://<id>/<path>`         | Closes what's open and opens the app at the path, over the home                            |
-| `backtick://sign-in`, `sign-out` | Signs in while signed out; asks, then signs out                                            |
-| `backtick://delete-account`      | Asks, then deletes the account (`POST /account/delete` on the home's server) and signs out |
-| `backtick://reload`              | Loads the screen on top again, in place                                                    |
+| Link                                                       | Does                                                                                       |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `backtick://<appId>/…`, `https://<appId>.backtickjs.app/…` | The home opens the app over its list                                                       |
+| `backtick://sign-in`, `sign-out`                           | Signs in while signed out; asks, then signs out                                            |
+| `backtick://delete-account`                                | Asks, then deletes the account (`POST /account/delete` on the home's server) and signs out |
 
 Sign-in and the session are the native module's (`modules/backtick-session`): sign-in in the system's sign-in browser at `auth.backtickjs.com` (OAuth 2.1 for native apps, with PKCE and DPoP), a key that never leaves the phone, and access tokens attached to requests to Backtick's own hosts below JavaScript. Its return, `https://app.backtickjs.com/signed-in`, is caught by the module, never by these links.
 

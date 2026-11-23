@@ -1,13 +1,9 @@
 import { cs } from "@backtickjs/core";
-import { backtickApp } from "@backtickjs/hono";
-import { Stack, unstable_useIsNavigating } from "expo-router" with {
-  backtick: "client",
-};
+import { BundlerError, render } from "@backtickjs/bundler";
 import { Hono } from "hono";
 import { deleteAccount, failed, supabase, userOf } from "./account.js";
 import { Home } from "./Home.js";
-import { useColors } from "./look.js";
-import { Progress } from "./Progress.js";
+import { HomeNavigator } from "./navigator.js";
 import { SignIn } from "./SignIn.js";
 import { Source } from "./Source.js";
 
@@ -17,32 +13,6 @@ export { eraseDeletedApps } from "./account.js";
 // for the user the phone's access token names.
 export const app = new Hono<{ Variables: { user: string } }>();
 
-// The home's root layout: a Stack without headers, on its paper, and a
-// progress bar while a navigation waits for its screen.
-const RootLayout = cs`() => {
-  const colors = $useColors();
-  const navigating = $unstable_useIsNavigating();
-  return (
-    <>
-      <$Stack
-        screenOptions={{
-          title: "",
-          headerShown: false,
-          contentStyle: { backgroundColor: colors.paper },
-          // No back gesture while a navigation holds: it would be undone.
-          gestureEnabled: !navigating,
-        }}
-      />
-      <$Progress color={colors.ink} />
-    </>
-  );
-}`;
-
-// The home as the phone opens it, and its root layout: signed out too,
-// before the token check.
-app.use(backtickApp(app));
-app.get("/_layout", (context) => context.render(RootLayout));
-
 // Nothing of anyone's without a token for this origin: a phone without a
 // session gets sign-in for a screen, and a 401 for anything else, so a delete
 // or an upload never looks done when it wasn't. Every route after this has
@@ -51,16 +21,23 @@ app.use(async (context, next) => {
   const user = await userOf(context.req.header("authorization"));
   if (user === undefined) {
     return context.req.method === "GET"
-      ? context.render(<SignIn />)
+      ? render(context.req.raw, <SignIn />)
       : context.json({ error: "invalid_token" }, 401);
   }
   context.set("user", user);
   await next();
 });
 
+// The home as the phone opens it: its stack of screens.
+app.get("/", (context) => {
+  const origin = new URL(context.req.url).origin;
+  return render(context.req.raw, cs`<$HomeNavigator origin={$origin} />`);
+});
+
 // The user's apps.
-app.get("/", (context) =>
-  context.render(
+app.get("/apps", (context) =>
+  render(
+    context.req.raw,
     <Home
       user={context.var.user}
       modules={context.req.header("x-backtick-modules") ?? "{}"}
@@ -70,7 +47,8 @@ app.get("/", (context) =>
 
 // An app's source, from its ⋯ sheet.
 app.get("/source/:id", (context) =>
-  context.render(
+  render(
+    context.req.raw,
     <Source user={context.var.user} id={context.req.param("id")} />,
   ),
 );
@@ -130,8 +108,12 @@ app.post("/apps/:id/preview", async (context) => {
   return context.json({ saved: true });
 });
 
-// Answered rather than crashed on, so the app can show why.
+// Answered rather than crashed on, so the app can show why: a bundle the
+// phone can't run as the bundler's own 400 or 406.
 app.onError((error, context) => {
+  if (error instanceof BundlerError) {
+    return error.getResponse();
+  }
   console.error(error);
   return context.text("Something went wrong.", 500);
 });

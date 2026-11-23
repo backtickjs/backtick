@@ -15,7 +15,7 @@
 import { createRuntime } from "@backtickjs/core";
 import installedPackages from "../installed-packages.json" with { type: "json" };
 
-// The shell's runtime, its packages' versions as `npm install` wrote them:
+// The app's runtime, its packages' versions as `npm install` wrote them:
 // what it sends a server, so it never gets a screen it can't run. Each app
 // opened gets its own, with `create()`.
 export const backtick = createRuntime({
@@ -28,12 +28,6 @@ export const backtick = createRuntime({
     },
     get "react-native"() {
       return require("react-native");
-    },
-    // expo-router as Backtick runs it: the same API, with each Link fetching
-    // its screen ahead (packages/expo-router). The one package served as
-    // another, so an app's links prefetch without the app asking.
-    get "expo-router"() {
-      return require("@backtickjs/expo-router");
     },
     get "react-native-safe-area-context"() {
       return require("react-native-safe-area-context");

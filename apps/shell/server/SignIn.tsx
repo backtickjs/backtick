@@ -2,8 +2,8 @@ import { cs } from "@backtickjs/core";
 import { shellURL } from "./links.js";
 import { Logo, useColors } from "./look.js";
 import { Ionicons } from "@expo/vector-icons" with { backtick: "client" };
-import { Link } from "expo-router" with { backtick: "client" };
 import {
+  Linking,
   Platform,
   Pressable,
   StyleSheet,
@@ -81,29 +81,27 @@ export function SignIn() {
       const colors = $useColors();
       const text = props.solid ? colors.paper : colors.ink;
       return (
-        <$Link href={$shellURL(props.to)} asChild>
-          <$Pressable
-            // One style object: Link's asChild drops an array.
-            style={$StyleSheet.flatten([
-              styles.button,
-              {
-                borderColor: props.solid ? colors.ink : colors.line,
-                backgroundColor: props.solid ? colors.ink : "transparent",
-              },
-            ])}
-          >
-            {props.icon === "google" ? (
-              <GoogleG />
-            ) : (
-              <$Ionicons
-                name={props.icon === "apple" ? "logo-apple" : "mail-outline"}
-                size={19}
-                color={text}
-              />
-            )}
-            <$Text style={[styles.label, { color: text }]}>{props.label}</$Text>
-          </$Pressable>
-        </$Link>
+        <$Pressable
+          style={[
+            styles.button,
+            {
+              borderColor: props.solid ? colors.ink : colors.line,
+              backgroundColor: props.solid ? colors.ink : "transparent",
+            },
+          ]}
+          onPress={() => $Linking.openURL($shellURL(props.to))}
+        >
+          {props.icon === "google" ? (
+            <GoogleG />
+          ) : (
+            <$Ionicons
+              name={props.icon === "apple" ? "logo-apple" : "mail-outline"}
+              size={19}
+              color={text}
+            />
+          )}
+          <$Text style={[styles.label, { color: text }]}>{props.label}</$Text>
+        </$Pressable>
       );
     }
 

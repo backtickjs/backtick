@@ -60,7 +60,7 @@ const App = cs\`({ origin }: { origin: string }) => (
       <$Navigator.Navigator
         screenLayout={({ children }) => (
           <$Suspense
-            fallback={<$ActivityIndicator style={{ marginTop: 40 }} />}
+            fallback={<$ActivityIndicator style={{ flex: 1 }} />}
           >
             {children}
           </$Suspense>
