@@ -48,9 +48,10 @@ export function createRuntime(options: RuntimeOptions): Runtime {
     return moduleMap[specifier];
   };
 
-  return {
+  // Handed to every bundle it runs, as `module.runtime`: a script's `$runtime`.
+  const runtime: Runtime = {
     async exec<T>(bundle: Bundle<T>): Promise<Awaited<T>> {
-      const module = { exports: {} as unknown, cache };
+      const module = { exports: {} as unknown, cache, runtime };
       new Function("module", "exports", "require", bundle)(
         module,
         module.exports,
@@ -64,4 +65,5 @@ export function createRuntime(options: RuntimeOptions): Runtime {
       return transport(request);
     },
   };
+  return runtime;
 }

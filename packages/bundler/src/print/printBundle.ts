@@ -19,10 +19,16 @@ const RUNTIME = `const $require = (id) => {
 // Another bundle, executed as this one is, to its value, handed the `require`
 // this bundle was: inside the module table, `require` is the table's own.
 const EXEC = `const $exec = async (bundle) => {
-  const module = { exports: {}, cache: $cache };
-  new Function("module", "exports", "require", bundle)(module, module.exports, require);
-  return module.exports;
+  const executed = { exports: {}, cache: $cache, runtime: module.runtime };
+  new Function("module", "exports", "require", bundle)(executed, executed.exports, require);
+  return executed.exports;
 };`;
+
+// The runtime that ran this bundle, required of whatever runs it.
+const RUNTIME_DECLARATION = `if (module.runtime === undefined) {
+  throw new Error("$runtime is missing: run this bundle with createRuntime");
+}
+const $runtime = module.runtime;`;
 
 // The cache an app's bundles share: each value a script makes once, by key,
 // as a module's exports are shared by every chunk that imports it, made by the
@@ -60,6 +66,9 @@ export function printBundle(tree: BundleTree): { code: string; map: string } {
   }
   if (names.exec) {
     module.line(EXEC);
+  }
+  if (names.runtime) {
+    module.line(RUNTIME_DECLARATION);
   }
   // Each script a module table's entry, as webpack's and Metro's are: its body
   // under its id, run once by `$require`. The modules they require are the

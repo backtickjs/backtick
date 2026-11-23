@@ -1,0 +1,64 @@
+// 56:35
+($splice0) => $splice0()  → 56:38 $answer…
+ +                        → 56:45  + 
+1                         → 56:48 1
+);                        → 56:49 `);…
+
+// 58:33
+($splice0, $splice1) => (     → 58:36 (async…
+async                         → 58:37 async
+ ()                           → 58:42  () 
+=>                            → 58:46 =>
+ {                            → 58:48  {
+const                         → 59:7 const 
+response                      → 59:13 response
+ =                            → 59:21  = 
+await                         → 59:24 await 
+$splice0()                    → 59:30 $runtime.fetch("https://app.example/screen");…
+.                             → 59:38 .
+fetch                         → 59:39 fetch
+(                             → 59:44 (
+"https://app.example/screen"  → 59:45 "https://app.example/screen"
+)                             → 59:73 )
+;                             → 59:74 ;
+return                        → 60:7 return 
+$splice1()                    → 60:14 $runtime.exec((await…
+.                             → 60:22 .
+exec                          → 60:23 exec
+(                             → 60:27 (
+(                             → 60:28 (
+await                         → 60:29 await 
+response                      → 60:35 response
+.                             → 60:43 .
+text                          → 60:44 text
+()                            → 60:48 ()
+)                             → 60:50 )
+)                             → 60:60 )
+;                             → 60:61 ;
+}                             → 61:5 }
+)                             → 61:6 )
+()                            → 61:7 ()
+);                            → 61:9 `);…
+
+// 70:34
+($splice0) => $splice0()  → 70:37 $runtime`);…
+);                        → 70:45 `);…
+
+// 72:34
+($splice0, $splice1) => $splice0()  → 72:37 $runtime.exec($inner)`);…
+.                                   → 72:45 .
+exec                                → 72:46 exec
+(                                   → 72:50 (
+$splice1()                          → 72:51 $inner)`);…
+)                                   → 72:57 )
+);                                  → 72:58 `);…
+
+// 77:33
+($splice0) => ()   → 77:36 ()…
+=>                 → 77:39 =>
+$splice0()         → 77:42 $runtime`);…
+);                 → 77:50 `);…
+
+// 85:40
+() => 1  → 85:43 1`),…
+);       → 85:44 `),…

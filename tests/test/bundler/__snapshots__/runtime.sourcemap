@@ -1,0 +1,97 @@
+cs.lift((() =>                → cs` [-semantic -navigation]
+(cs.splice(                   →  [-semantic -navigation]
+(answer)                      → $answer
+))                            →  [-semantic -navigation]
+                              →  
++                             → +
+                              →  
+1                             → 1
+)())                          → ` [-semantic -navigation]
+cs.lift((() =>                → cs` [-semantic -navigation]
+(                             → (
+async                         → async
+                              →  
+(                             → (
+)                             → )
+                              →  
+=>                            → =>
+                              →  
+{                             → {
+\n                            → \n      
+const                         → const
+                              →  
+__cs_response                 → response
+                              →  
+=                             → =
+                              →  
+await                         → await
+                              →  
+(cs.splice(                   →  [-semantic -navigation]
+(runtime)                     → $runtime
+))                            →  [-semantic -navigation]
+.                             → .
+fetch                         → fetch
+(                             → (
+"https://app.example/screen"  → "https://app.example/screen"
+)                             → )
+;                             → ;
+\n                            → \n      
+return                        → return
+                              →  
+(cs.splice(                   →  [-semantic -navigation]
+(runtime)                     → $runtime
+))                            →  [-semantic -navigation]
+.                             → .
+exec                          → exec
+(                             → (
+(                             → (
+await                         → await
+                              →  
+__cs_response                 → response
+.                             → .
+text                          → text
+(                             → (
+)                             → )
+)                             → )
+                              →  
+as                            → as
+                              →  
+never                         → never
+)                             → )
+;                             → ;
+\n                            → \n    
+}                             → }
+)                             → )
+(                             → (
+)                             → )
+)())                          → ` [-semantic -navigation]
+cs.lift((() =>                → cs` [-semantic -navigation]
+(cs.splice(                   →  [-semantic -navigation]
+(runtime)                     → $runtime
+))                            →  [-semantic -navigation]
+)())                          → ` [-semantic -navigation]
+cs.lift((() =>                → cs` [-semantic -navigation]
+(cs.splice(                   →  [-semantic -navigation]
+(runtime)                     → $runtime
+))                            →  [-semantic -navigation]
+.                             → .
+exec                          → exec
+(                             → (
+(cs.splice(                   →  [-semantic -navigation]
+(inner)                       → $inner
+))                            →  [-semantic -navigation]
+)                             → )
+)())                          → ` [-semantic -navigation]
+cs.lift((() =>                → cs` [-semantic -navigation]
+(                             → (
+)                             → )
+                              →  
+=>                            → =>
+                              →  
+(cs.splice(                   →  [-semantic -navigation]
+(runtime)                     → $runtime
+))                            →  [-semantic -navigation]
+)())                          → ` [-semantic -navigation]
+cs.lift((() =>                → cs` [-semantic -navigation]
+1                             → 1
+)())                          → ` [-semantic -navigation]
