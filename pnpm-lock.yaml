@@ -643,6 +643,9 @@ importers:
       react-dom:
         specifier: 19.3.0
         version: 19.3.0(react@19.3.0)
+      react-error-boundary:
+        specifier: 6.1.6
+        version: 6.1.6(@types/react@19.3.0)(react@19.3.0)
       react-native:
         specifier: 0.88.1
         version: 0.88.1(@babel/core@7.29.7)(@react-native/metro-config@0.88.1(@babel/core@7.29.7))(@types/react@19.3.0)(react@19.3.0)

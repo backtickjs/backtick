@@ -224,6 +224,9 @@ export const backtick = createRuntime({
     get "@react-navigation/native-stack"() {
       return require("@react-navigation/native-stack");
     },
+    get "react-error-boundary"() {
+      return require("react-error-boundary");
+    },
     get "@react-navigation/bottom-tabs"() {
       return require("@react-navigation/bottom-tabs");
     },
