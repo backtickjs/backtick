@@ -20,6 +20,8 @@ export interface Runtime {
   exec<T>(bundle: Bundle<T>): Promise<Awaited<T>>;
   /** `fetch`, plus the `x-backtick-modules` header. */
   fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>;
+  /** A new runtime with the same modules and `fetch`, and its own cache. */
+  create(): Runtime;
 }
 
 /**
@@ -68,6 +70,7 @@ export function createRuntime(options: RuntimeOptions): Runtime {
       request.headers.set("x-backtick-modules", JSON.stringify(modules));
       return transport(request);
     },
+    create: () => createRuntime(options),
   };
   return runtime;
 }

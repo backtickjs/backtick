@@ -43,6 +43,14 @@ test("two runtimes keep their own cache", async () => {
   assert.equal(await createRuntime(empty).exec(counter), 1);
 });
 
+test("a created runtime keeps its own values, apart from its runtime's", async () => {
+  const runtime = createRuntime(empty);
+  assert.equal(await runtime.exec(counter), 1);
+  const created = runtime.create();
+  assert.equal(await created.exec(counter), 1);
+  assert.equal(await runtime.exec(counter), 2);
+});
+
 test("a module from a package without a version throws as the app starts", () => {
   assert.throws(
     () => createRuntime({ moduleMap: { app: {} }, installedPackages: {} }),
@@ -106,6 +114,27 @@ test("what fetch answers runs with exec", async () => {
   const response = await runtime.fetch("https://api.test/");
   assert.equal(
     await runtime.exec((await response.text()) as Bundle<number>),
+    42,
+  );
+});
+
+test("a created runtime has its runtime's modules and fetch", async () => {
+  const { requests, runtime } = serve(() => new Response("ok"));
+  const created = runtime.create();
+  assert.deepEqual(created.modules, runtime.modules);
+  await created.fetch("https://api.test/answer");
+  assert.equal(requests.length, 1);
+  assert.deepEqual(
+    JSON.parse(requests[0]!.headers.get("x-backtick-modules")!),
+    {
+      app: "1.0.0",
+      "app/extra": "1.0.0",
+    },
+  );
+  assert.equal(
+    await created.exec(
+      bundle<number>('module.exports = require("app").answer + 1;'),
+    ),
     42,
   );
 });
