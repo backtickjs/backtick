@@ -11,7 +11,8 @@
     "./screens": {
       "types": "./build/server/index.d.ts",
       "default": "./build/server/index.js"
-    }
+    },
+    "./modules": "./build/modules.json"
   },
   "typesVersions": {
     "*": {
@@ -20,6 +21,9 @@
       ],
       "screens": [
         "build/server/index.d.ts"
+      ],
+      "modules": [
+        "build/modules.json"
       ]
     }
   },
@@ -29,7 +33,7 @@
     "build:android": "taskpolicy -b pnpm dlx eas-cli build -p android --profile production --local",
     "start": "expo start",
     "android": "expo run:android",
-    "build": "tspc -p tsconfig.server.json --noCheck",
+    "build": "tspc -p tsconfig.server.json --noCheck && node scripts/modules.ts",
     "postinstall": "backtick-installed-packages > installed-packages.json && ([ -z \"$EAS_BUILD\" ] || turbo run build --filter=shell^...)",
     "typecheck": "tsc --noEmit && backtick-tsc -p server --noEmit",
     "format": "prettier --write --ignore-unknown .",
