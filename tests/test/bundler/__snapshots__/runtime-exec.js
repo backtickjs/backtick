@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { createImport, createRuntime, cs, exec } from "@backtickjs/core";
+import { createImport, createRuntime, cs, runtime } from "@backtickjs/core";
 const $module0 = {
-  id: "1d3tm13zxjtse:39:33",
+  id: "3lnjoyw047e9y:39:33",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + 1;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAsCoCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/runtime-exec.test.tsx"]}',
   dependencies: [],
@@ -12,7 +12,7 @@ const $module0 = {
   scope: "function",
 };
 const $module1 = {
-  id: "1d3tm13zxjtse:44:33",
+  id: "3lnjoyw047e9y:44:33",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + 1;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2CoCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/runtime-exec.test.tsx"]}',
   dependencies: [],
@@ -21,7 +21,7 @@ const $module1 = {
   scope: "function",
 };
 const $module2 = {
-  id: "1d3tm13zxjtse:52:34",
+  id: "3lnjoyw047e9y:52:34",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + 1;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBAmDqCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/runtime-exec.test.tsx"]}',
   dependencies: [],
@@ -30,9 +30,9 @@ const $module2 = {
   scope: "function",
 };
 const $module3 = {
-  id: "1d3tm13zxjtse:53:33",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()($splice1());\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAoDoC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAK,CAACC,QAAA,EAAM,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["bundler/runtime-exec.test.tsx"]}',
+  id: "3lnjoyw047e9y:53:33",
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0().exec($splice1());\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBAoDoC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAQ,CAACE,IAAI,CAACD,QAAA,EAAM,CAAC","names":["$splice0","$splice1","exec"],"ignoreList":[],"sources":["bundler/runtime-exec.test.tsx"]}',
   dependencies: [],
   params: [
     { kind: "splice", bindings: [] },
@@ -42,7 +42,7 @@ const $module3 = {
   scope: "function",
 };
 const $module4 = {
-  id: "1d3tm13zxjtse:59:34",
+  id: "3lnjoyw047e9y:59:34",
   code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + 1;\n}',
   map: '{"version":3,"file":"module.jsx","mappings":";;;kBA0DqCA,QAAA,IAAAA,QAAA,EAAO,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/runtime-exec.test.tsx"]}',
   dependencies: [],
@@ -51,9 +51,9 @@ const $module4 = {
   scope: "function",
 };
 const $module5 = {
-  id: "1d3tm13zxjtse:60:33",
-  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()($splice1());\n}',
-  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2DoC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAK,CAACC,QAAA,EAAM,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["bundler/runtime-exec.test.tsx"]}',
+  id: "3lnjoyw047e9y:60:33",
+  code: '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0().exec($splice1());\n}',
+  map: '{"version":3,"file":"module.jsx","mappings":";;;kBA2DoC,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAQ,CAACE,IAAI,CAACD,QAAA,EAAM,CAAC","names":["$splice0","$splice1","exec"],"ignoreList":[],"sources":["bundler/runtime-exec.test.tsx"]}',
   dependencies: [],
   params: [
     { kind: "splice", bindings: [] },
@@ -95,15 +95,15 @@ describe("a runtime's exec", () => {
       /requires "app", which this app doesn't provide/,
     );
   });
-  it("hands the bundles it runs with exec the same modules", async () => {
+  it("hands the bundles a script runs with $runtime.exec the same modules", async () => {
     const inner = await bundleCjs(cs.create($module2, [answer]));
-    const root = await bundleCjs(cs.create($module3, [exec, inner]));
+    const root = await bundleCjs(cs.create($module3, [runtime, inner]));
     const value = await withApp().exec(root);
     assert.equal(value, 42);
   });
-  it("refuses a module the map doesn't provide to the bundles exec runs", async () => {
+  it("refuses a module the map doesn't provide to the bundles $runtime.exec runs", async () => {
     const inner = await bundleCjs(cs.create($module4, [answer]));
-    const root = await bundleCjs(cs.create($module5, [exec, inner]));
+    const root = await bundleCjs(cs.create($module5, [runtime, inner]));
     await assert.rejects(
       withNothing().exec(root),
       /requires "app", which this app doesn't provide/,

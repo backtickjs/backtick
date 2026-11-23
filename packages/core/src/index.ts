@@ -20,7 +20,6 @@ export type { ClientModule } from "./ClientModule.js";
 // A bundle's code, typed by what it runs to, and, in a script, executing
 // another as this one was. The one an app starts from is run by a runtime.
 export type { Bundle } from "./Bundle.js";
-export { exec, isClientExec, type ClientExec } from "./exec.js";
 export { runtime, isClientRuntime, type ClientRuntime } from "./runtime.js";
 // What runs an app's bundles, with the modules it provides.
 export {

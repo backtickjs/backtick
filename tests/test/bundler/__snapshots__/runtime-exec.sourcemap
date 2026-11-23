@@ -27,8 +27,10 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 (cs.splice(      →  [-semantic -navigation]
-(exec)           → $exec
+(runtime)        → $runtime
 ))               →  [-semantic -navigation]
+.                → .
+exec             → exec
 (                → (
 (cs.splice(      →  [-semantic -navigation]
 (inner)          → $inner
@@ -46,8 +48,10 @@ cs.lift((() =>   → cs` [-semantic -navigation]
 )())             → ` [-semantic -navigation]
 cs.lift((() =>   → cs` [-semantic -navigation]
 (cs.splice(      →  [-semantic -navigation]
-(exec)           → $exec
+(runtime)        → $runtime
 ))               →  [-semantic -navigation]
+.                → .
+exec             → exec
 (                → (
 (cs.splice(      →  [-semantic -navigation]
 (inner)          → $inner

@@ -7,7 +7,7 @@ import {
   createImport,
   createRuntime,
   cs,
-  exec,
+  runtime,
 } from "@backtickjs/core";
 
 // What an app provides beside Solid, for a bundle to import.
@@ -48,16 +48,16 @@ describe("a runtime's exec", () => {
     );
   });
 
-  it("hands the bundles it runs with exec the same modules", async () => {
+  it("hands the bundles a script runs with $runtime.exec the same modules", async () => {
     const inner = await bundleCjs(cs.lift((() => (cs.splice((answer))) + 1)()));
-    const root = await bundleCjs(cs.lift((() => (cs.splice((exec)))((cs.splice((inner)))))()));
+    const root = await bundleCjs(cs.lift((() => (cs.splice((runtime))).exec((cs.splice((inner)))))()));
     const value = await withApp().exec(root);
     assert.equal(value, 42);
   });
 
-  it("refuses a module the map doesn't provide to the bundles exec runs", async () => {
+  it("refuses a module the map doesn't provide to the bundles $runtime.exec runs", async () => {
     const inner = await bundleCjs(cs.lift((() => (cs.splice((answer))) + 1)()));
-    const root = await bundleCjs(cs.lift((() => (cs.splice((exec)))((cs.splice((inner)))))()));
+    const root = await bundleCjs(cs.lift((() => (cs.splice((runtime))).exec((cs.splice((inner)))))()));
     await assert.rejects(
       withNothing().exec(root),
       /requires "app", which this app doesn't provide/,

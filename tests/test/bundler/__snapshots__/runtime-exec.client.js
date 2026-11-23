@@ -23,7 +23,7 @@ exports.default = (($splice0) => $splice0() + 1);
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $splice1) => $splice0()($splice1()));
+exports.default = (($splice0, $splice1) => $splice0().exec($splice1()));
 }
 
 // 59:35
@@ -37,5 +37,5 @@ exports.default = (($splice0) => $splice0() + 1);
 (module, exports, require) => {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (($splice0, $splice1) => $splice0()($splice1()));
+exports.default = (($splice0, $splice1) => $splice0().exec($splice1()));
 }

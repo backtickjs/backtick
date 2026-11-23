@@ -16,14 +16,6 @@ const RUNTIME = `const $require = (id) => {
   return $exports[id];
 };`;
 
-// Another bundle, executed as this one is, to its value, handed the `require`
-// this bundle was: inside the module table, `require` is the table's own.
-const EXEC = `const $exec = async (bundle) => {
-  const executed = { exports: {}, cache: $cache, runtime: module.runtime };
-  new Function("module", "exports", "require", bundle)(executed, executed.exports, require);
-  return executed.exports;
-};`;
-
 // The runtime that ran this bundle, required of whatever runs it.
 const RUNTIME_DECLARATION = `if (module.runtime === undefined) {
   throw new Error("$runtime is missing: run this bundle with createRuntime");
@@ -32,8 +24,8 @@ const $runtime = module.runtime;`;
 
 // The cache an app's bundles share: each value a script makes once, by key,
 // as a module's exports are shared by every chunk that imports it, made by the
-// first bundle that needs it: handed by whatever runs the bundle, which `$exec`
-// passes on, or the bundle's own.
+// first bundle that needs it: handed by whatever runs the bundle (a runtime
+// hands each bundle it runs its own), or the bundle's own.
 const CACHED = `const $cached = (key, make) => {
   if (!$cache.has(key)) {
     $cache.set(key, make());
@@ -63,9 +55,6 @@ export function printBundle(tree: BundleTree): { code: string; map: string } {
   module.line('"use strict";');
   for (const { from, name, local } of names.imports.values()) {
     module.line(requireDeclaration(from, name, local));
-  }
-  if (names.exec) {
-    module.line(EXEC);
   }
   if (names.runtime) {
     module.line(RUNTIME_DECLARATION);

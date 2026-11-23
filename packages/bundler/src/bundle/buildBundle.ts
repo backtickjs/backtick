@@ -1,7 +1,6 @@
 import {
   type ScriptModule,
   type ClientScript,
-  isClientExec,
   isClientRuntime,
   isClientImport,
   isClientScript,
@@ -229,10 +228,6 @@ export async function buildBundle(
     }
     if (isClientImport(spliceable)) {
       return imported(names, spliceable);
-    }
-    if (isClientExec(spliceable)) {
-      names.exec = true;
-      return "$exec";
     }
     if (isClientRuntime(spliceable)) {
       names.runtime = true;

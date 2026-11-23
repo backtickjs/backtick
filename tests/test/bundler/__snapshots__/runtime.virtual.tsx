@@ -66,7 +66,7 @@ describe("$runtime", () => {
     );
   });
 
-  it("is the same runtime in a bundle run with $exec", async () => {
+  it("is the same runtime in a bundle run with $runtime.exec", async () => {
     const inner = await bundleOf(cs.lift((() => (cs.splice((runtime))))()));
     const { runtime: app } = appRuntime({});
     const outer = await bundleOf(cs.lift((() => (cs.splice((runtime))).exec((cs.splice((inner)))))()));
