@@ -195,13 +195,3 @@ async function renderFence(info: string, content: string): Promise<string> {
 function escape(text: string): string {
   return markdown.utils.escapeHtml(text);
 }
-
-// A docs page as static HTML: its article where `DocsLayout` draws it, with
-// room for the header and sidebar, so little moves when the page is drawn.
-export function staticArticle(
-  title: string,
-  description: string,
-  html: string,
-): string {
-  return `<div class="mx-auto box-border max-w-[1200px] px-6 pt-[80px] text-[17px] leading-relaxed"><div class="grid grid-cols-[minmax(0,1fr)] gap-10 pt-4 lg:grid-cols-[210px_minmax(0,1fr)] xl:grid-cols-[210px_minmax(0,1fr)_190px]"><div class="max-lg:hidden"></div><article class="min-w-0"><h1 class="text-[clamp(32px,5vw,44px)] leading-[1.1] font-bold tracking-[-0.03em]">${escape(title)}</h1><p class="mt-4 text-lg text-muted">${escape(description)}</p><div class="docs-prose">${html}</div></article></div></div>`;
-}

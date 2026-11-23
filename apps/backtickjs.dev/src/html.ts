@@ -9,16 +9,13 @@ const sourcemap = process.env.NODE_ENV === "production" ? undefined : "inline";
 const STYLE = await readFile(new URL("style.css", import.meta.url), "utf8");
 
 // A page's document: its component, drawn into it by Solid, and what search
-// results and link previews show for it. A page with Markdown links to it, and
-// its static HTML stands in the document until Solid draws the page, for
-// readers that don't run scripts: agents' fetches and search engines.
+// results and link previews show for it. A page with Markdown links to it.
 export async function toHtml({
   path,
   Page,
   title,
   description,
   markdown,
-  staticHtml,
 }: Page): Promise<string> {
   const bundle = await bundler.build({
     input: Page,
@@ -81,7 +78,7 @@ export async function toHtml({
     </script>
   </head>
   <body>
-    <div id="app">${staticHtml ?? ""}</div>
+    <div id="app"></div>
     <script type="text/plain" id="bundle">${code}</script>
     <script type="module">
       import { createRuntime } from "@backtickjs/core";

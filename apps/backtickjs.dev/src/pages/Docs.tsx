@@ -5,7 +5,6 @@ import {
   type DocsSection,
   readPage,
   renderPage,
-  staticArticle,
 } from "../docs.js";
 import { markdownPathOf, type Page } from "../pages.js";
 
@@ -110,7 +109,6 @@ export const DOCS_PAGES: (Page & { path: string; markdown: string })[] =
         title: `Backtick · ${title}`,
         description,
         markdown: `# ${title}\n\n${description}\n\n${source}`,
-        staticHtml: staticArticle(title, description, html),
         Page: cs`() => (
           <$DocsLayout
             sections={$SECTIONS}
