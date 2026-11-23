@@ -1,17 +1,15 @@
 import assert from "node:assert/strict";
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, it } from "node:test";
 import ts from "typescript";
 import { compile } from "../src/compile.ts";
 import { typecheck } from "../src/typecheck.ts";
 import installed from "../installed-packages.json" with { type: "json" };
+import { positionOf, starter } from "./app.ts";
 
-// A counter app, as a model writes one from the service's starter.
-const counter = readFileSync(
-  join(import.meta.dirname, "fixtures/App.tsx"),
-  "utf8",
-);
+// The starter, and the starter with a type error.
+const typo = starter.replace("$useState(false)", '$useState<boolean>("no")');
 
 const root = join(import.meta.dirname, "..");
 
@@ -20,9 +18,9 @@ const phone = JSON.stringify({
   react: installed.react!,
   "react/jsx-runtime": installed.react!,
   "react-native": installed["react-native"]!,
-  "react-native-safe-area-context":
-    installed["react-native-safe-area-context"]!,
-  "expo-router": installed["expo-router"]!,
+  "@react-navigation/native": installed["@react-navigation/native"]!,
+  "@react-navigation/native-stack":
+    installed["@react-navigation/native-stack"]!,
 });
 
 // An app's `App.tsx`, in a directory of its own.
@@ -38,36 +36,32 @@ function write(name: string, source: string): string {
 }
 
 describe("typecheck", () => {
-  it("passes the counter", () => {
-    assert.deepEqual(typecheck(write("counter", counter)), {
+  it("passes the starter", () => {
+    assert.deepEqual(typecheck(write("starter", starter)), {
       errors: [],
       warnings: [],
     });
   });
 
   it("reports type errors where they are in the file", () => {
-    const file = write(
-      "type",
-      counter.replace("$useState<number>(0)", '$useState<number>("0")'),
-    );
-    assert.match(
-      typecheck(file).errors.join("\n"),
-      /^App\.tsx\(33,51\): error TS2345: Argument of type 'string'/,
+    assert.ok(
+      typecheck(write("type", typo)).errors[0]!.startsWith(
+        `App.tsx${positionOf(typo, '"no"')}: error TS2345`,
+      ),
     );
   });
   it("reports a regex escaped as if in a string as a warning, not an error", () => {
-    const file = write(
-      "warning",
-      counter.replace(
-        '{count + " taps"}',
-        '{String(count).replace(/\\\\B/g, ",") + " taps"}',
-      ),
+    const source = starter.replace(
+      'name + " cooked!"',
+      'name.replace(/\\\\B/g, ",") + " cooked!"',
     );
-    const { errors, warnings } = typecheck(file);
+    const { errors, warnings } = typecheck(write("warning", source));
     assert.deepEqual(errors, []);
-    assert.match(
-      warnings.join("\n"),
-      /^App\.tsx\(38,65\): warning TS0: `\\\\B` in this regex matches a backslash/,
+    assert.ok(
+      warnings[0]!.startsWith(
+        `App.tsx${positionOf(source, "/\\\\B/")}: warning TS0: \`\\\\B\` in this regex matches a backslash`,
+      ),
+      warnings[0],
     );
   });
 });
@@ -76,7 +70,7 @@ describe("typecheck's default export", () => {
   it("refuses an app whose default export isn't its Hono server", () => {
     const file = write(
       "export",
-      counter.replace("export default app;", "export default styles;"),
+      starter.replace("export default app;", "export default styles;"),
     );
     assert.match(
       typecheck(file).errors.join("\n"),
@@ -102,8 +96,8 @@ async function release(source: string, name: string) {
 
 describe("a release", () => {
   it("answers each route with its screen, bundled for the phone", async () => {
-    const open = await release(counter, "release-counter");
-    for (const path of ["/", "/day"]) {
+    const open = await release(starter, "release-starter");
+    for (const path of ["/", "/recipes", "/recipe/pancakes"]) {
       const answer = await open(path, phone);
       assert.equal(answer.status, 200);
       assert.equal(answer.headers.get("content-type"), "text/javascript");
@@ -114,26 +108,26 @@ describe("a release", () => {
   it("answers 406 for a module the phone doesn't provide", async () => {
     const open = await release(
       `import { isRunningInExpoGo } from "expo" with { backtick: "client" };\n` +
-        counter.replace(
-          "return <Screen />;",
-          "$isRunningInExpoGo(); return <Screen />;",
+        starter.replace(
+          "const [cooked, setCooked]",
+          "$isRunningInExpoGo();\n  const [cooked, setCooked]",
         ),
       "release-import",
     );
-    const answer = await open("/", phone);
+    const answer = await open("/recipe/pancakes", phone);
     assert.equal(answer.status, 406);
     assert.match((await answer.json()).message, /expo/);
   });
 
   it("answers 404 for a path the app has no route for", async () => {
-    const open = await release(counter, "release-404");
+    const open = await release(starter, "release-404");
     assert.equal((await open("/nowhere", phone)).status, 404);
   });
 });
 
 describe("compile", () => {
-  it("bundles the counter into one minified release, its server packages in it", async () => {
-    const { code, errors } = await compile(write("counter", counter));
+  it("bundles the starter into one minified release, its server packages in it", async () => {
+    const { code, errors } = await compile(write("starter", starter));
     assert.equal(errors, undefined);
     const imports = ts
       .createSourceFile("release.js", code!, ts.ScriptTarget.Latest)

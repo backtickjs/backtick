@@ -29,5 +29,4 @@ export const serverModules: readonly string[] = [
   "hono",
   "@backtickjs/core",
   "@backtickjs/bundler",
-  "@backtickjs/hono",
 ];

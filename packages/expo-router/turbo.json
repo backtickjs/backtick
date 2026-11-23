@@ -1,8 +1,0 @@
-{
-  "extends": ["//"],
-  "tasks": {
-    // Always run, never restored from the cache: the shell installs this
-    // package injected, a copy pnpm syncs only after the script itself runs.
-    "build": { "cache": false }
-  }
-}
