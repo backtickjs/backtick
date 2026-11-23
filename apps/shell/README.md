@@ -30,15 +30,24 @@ Sign-in and the session are the native module's (`modules/backtick-session`): si
 
 ## Publishing it
 
-The shell is its own app, built with EAS (`eas.json`): `development` builds an Android APK on its own update channel, for testing. EAS Update ships JavaScript changes to builds of the same runtime version on the same channel. The runtime version is Expo's fingerprint of the native side (`"policy": "fingerprint"` in `app.json`): native dependencies, the session module, config plugins and the native settings in `app.json`. A change to any of them gives the next build a new runtime version, and updates published after it reach only builds that have it; `eas fingerprint:compare` shows what changed.
+The shell is its own app, built with EAS (`eas.json`). The profiles differ by the JavaScript a build runs and who it's for:
+
+| Profile             | Runs                                                  | For                                                                 |
+| ------------------- | ----------------------------------------------------- | ------------------------------------------------------------------- |
+| `development`       | JavaScript from Metro on this Mac (Debug)             | working on the shell: an iOS simulator app, an Android APK over USB |
+| `preview`           | its own JavaScript, then production updates (Release) | trying what users get on your own phones before a release           |
+| `preview-simulator` | the same, on the iOS simulator                        | the same, and the store's screenshots                               |
+| `production`        | its own JavaScript, then production updates (Release) | the stores                                                          |
 
 ```sh
-pnpm dlx eas-cli build -p android --profile development --local
+pnpm dlx eas-cli build -p ios --profile development
 ```
 
-Without `--local`, EAS builds it in the cloud. A build signed by EAS is the only kind that can finish signing in: `app.backtickjs.com` vouches for EAS's certificate.
+A Debug build doesn't take updates; the others take EAS Update's `production` channel. EAS Update ships JavaScript changes to builds of the same runtime version on the same channel. The runtime version is Expo's fingerprint of the native side (`"policy": "fingerprint"` in `app.json`): native dependencies, the session module, config plugins and the native settings in `app.json`. A change to any of them gives the next build a new runtime version, and updates published after it reach only builds that have it; `eas fingerprint:compare` shows what changed.
 
-The store's Android build runs on this machine, `pnpm build:android`: EAS's free cloud workers run out of memory on it. Its profile, `production-local`, caps Gradle's memory (3 GB, the Kotlin compiler 1.5 GB) and runs one task at a time, and the script runs it at background priority, so the Mac stays usable; it takes longer. It's signed with EAS's keystore, like the cloud builds. Gradle needs `ANDROID_HOME` (Homebrew's SDK is `/opt/homebrew/share/android-commandlinetools`) and a JDK 17 as `JAVA_HOME`, both set in the shell that runs it.
+A build signed by EAS is the only kind that can finish signing in: `app.backtickjs.com` vouches for EAS's certificate.
+
+The store's Android build runs on this machine, `pnpm build:android` (`--profile production --local`): EAS's free cloud workers run out of memory on it. `production` caps Gradle's memory (3 GB, the Kotlin compiler 1.5 GB) and runs one task at a time, and the script runs it at background priority, so the Mac stays usable; it takes longer. It's signed with EAS's keystore, like the cloud builds. Gradle needs `ANDROID_HOME` (Homebrew's SDK is `/opt/homebrew/share/android-commandlinetools`) and a JDK 17 as `JAVA_HOME`, both set in the shell that runs it.
 
 For iOS, run it with `EXPO_NO_CAPABILITY_SYNC=1`: the App ID's capabilities (Sign in with Apple, Associated Domains) are set in Apple's developer console, and EAS would otherwise turn Sign in with Apple off, since the app signs in with Apple on the web rather than with its native API. Apple refuses that anyway: the sign-in Services ID, `com.backtickjs.app.signin`, depends on it.
 

@@ -3,44 +3,39 @@
     "appVersionSource": "remote"
   },
   "build": {
+    "development": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleDebug",
+        "env": {
+          "ORG_GRADLE_PROJECT_reactNativeArchitectures": "arm64-v8a"
+        }
+      },
+      "ios": {
+        "simulator": true,
+        "buildConfiguration": "Debug"
+      }
+    },
     "preview": {
       "distribution": "internal",
       "channel": "production",
       "android": {
-        "buildType": "apk"
-      },
-      "env": {
-        "ORG_GRADLE_PROJECT_reactNativeArchitectures": "arm64-v8a"
+        "buildType": "apk",
+        "env": {
+          "ORG_GRADLE_PROJECT_reactNativeArchitectures": "arm64-v8a"
+        }
       }
     },
-    "development": {
-      "distribution": "internal",
-      "channel": "development",
-      "android": {
-        "buildType": "apk"
-      },
-      "env": {
-        "ORG_GRADLE_PROJECT_reactNativeArchitectures": "arm64-v8a"
+    "preview-simulator": {
+      "extends": "preview",
+      "ios": {
+        "simulator": true
       }
     },
     "production": {
       "channel": "production",
       "autoIncrement": true,
-      "android": {
-        "env": {
-          "ORG_GRADLE_PROJECT_reactNativeArchitectures": "arm64-v8a,armeabi-v7a"
-        }
-      }
-    },
-    "simulator": {
-      "extends": "production",
-      "autoIncrement": false,
-      "ios": {
-        "simulator": true
-      }
-    },
-    "production-local": {
-      "extends": "production",
       "android": {
         "env": {
           "ORG_GRADLE_PROJECT_reactNativeArchitectures": "arm64-v8a,armeabi-v7a",
