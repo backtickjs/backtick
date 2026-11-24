@@ -2,10 +2,10 @@ import { cs } from "@backtickjs/core";
 import { BundlerError, render } from "@backtickjs/bundler";
 import { Hono } from "hono";
 import { deleteAccount, failed, supabase, userOf } from "./account.js";
-import { Home } from "./Home.js";
-import { HomeNavigator } from "./navigator.js";
-import { SignIn } from "./SignIn.js";
-import { Source } from "./Source.js";
+import { Home } from "./screens/Home.js";
+import { HomeNavigator } from "./screens/navigator.js";
+import { SignIn } from "./screens/SignIn.js";
+import { Source } from "./screens/Source.js";
 
 export { eraseDeletedApps } from "./account.js";
 

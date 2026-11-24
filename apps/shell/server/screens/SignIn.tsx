@@ -1,6 +1,6 @@
 import { cs } from "@backtickjs/core";
-import { shellURL } from "./links.js";
-import { Logo, useColors } from "./look.js";
+import { shellURL } from "../links.js";
+import { Logo, useColors } from "../components/look.js";
 import { Ionicons } from "@expo/vector-icons" with { backtick: "client" };
 import {
   Linking,

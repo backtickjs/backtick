@@ -1,7 +1,7 @@
 import { cs } from "@backtickjs/core";
-import { highlight } from "./highlight.js";
-import { palette } from "./look.js";
-import { failed, supabase } from "./account.js";
+import { highlight } from "../highlight.js";
+import { palette } from "../components/look.js";
+import { failed, supabase } from "../account.js";
 import { useSafeAreaInsets } from "react-native-safe-area-context" with {
   backtick: "client",
 };

@@ -1,5 +1,5 @@
 import { cs, runtime } from "@backtickjs/core";
-import { useColors } from "./look.js";
+import { useColors } from "../components/look.js";
 import {
   NavigationContainer,
   NavigationIndependentTree,
