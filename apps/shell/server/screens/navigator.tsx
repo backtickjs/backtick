@@ -5,6 +5,7 @@ import {
   NavigationIndependentTree,
   StackActions,
   useNavigationContainerRef,
+  useRoute,
 } from "@react-navigation/native" with { backtick: "client" };
 import { createNativeStackNavigator } from "@react-navigation/native-stack" with {
   backtick: "client",
@@ -74,9 +75,13 @@ const FetchedScreen = cs`({ id, url }: { id: string; url: string }) => {
   return $use($screens.get(id)!);
 }`;
 
-// Fetches the screen of route `id` again. In a transition, the screen stays
-// until the new one is drawn; outside one, its spinner shows meanwhile.
-export const reloadScreen = cs`(id: string) => $refetches.get(id)?.()`;
+// A screen's way to fetch itself again, and only itself. In a transition, the
+// screen stays until the new one is drawn; outside one, its spinner shows
+// meanwhile.
+export const useReloadScreen = cs`() => {
+  const { key } = $useRoute();
+  return $useCallback(() => $refetches.get(key)?.(), [key]);
+}`;
 
 // An app, as the phone opens it: its `/`, with a runtime of its own, so no
 // two apps share what they make.

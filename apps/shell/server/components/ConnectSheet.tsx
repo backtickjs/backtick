@@ -16,10 +16,6 @@ import {
   View,
 } from "react-native" with { backtick: "client" };
 
-// Set when a connect sheet sends the user to an assistant, for the screen
-// that opened it to load again on the way back.
-export const connecting = cs`({ current: false })`;
-
 const styles = cs`$StyleSheet.create({
   steps: { gap: 18, marginTop: 22, marginBottom: 26 },
   step: { flexDirection: "row", gap: 12 },
@@ -123,7 +119,6 @@ export const ConnectSheet = cs`(props: {
         // It leaves Backtick for the assistant's app.
         trailingIcon="open-outline"
         onPress={() => {
-          $connecting.current = true;
           onClose();
           $Linking.openURL(connect);
         }}

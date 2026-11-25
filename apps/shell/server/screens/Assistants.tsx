@@ -2,17 +2,13 @@ import { cs } from "@backtickjs/core";
 import { connectionsOf } from "../account.js";
 import { assistantIds, assistants } from "../components/assistants.js";
 import type { Assistant } from "../components/assistants.js";
-import { connecting, ConnectSheet } from "../components/ConnectSheet.js";
+import { ConnectSheet } from "../components/ConnectSheet.js";
 import { Menu, MenuItem } from "../components/Menu.js";
 import { useColors } from "../components/look.js";
-import { reloadScreen } from "./navigator.js";
+import { useReloadScreen } from "./navigator.js";
 import { Ionicons } from "@expo/vector-icons" with { backtick: "client" };
 import { selectionAsync } from "expo-haptics" with { backtick: "client" };
-import {
-  useFocusEffect,
-  useNavigation,
-  useRoute,
-} from "@react-navigation/native" with {
+import { useFocusEffect } from "@react-navigation/native" with {
   backtick: "client",
 };
 import { useCallback, useState } from "react" with {
@@ -62,11 +58,9 @@ const AssistantsScreen = cs`(props: {
 }) => {
   const { connected } = props;
   const colors = $useColors();
-  const route = $useRoute();
-  const navigation = $useNavigation();
   // Connections changed: this screen loads again. New, Edit and the account
   // sheet read the user's assistants as they open.
-  const reload = () => $reloadScreen(route.key);
+  const reload = $useReloadScreen();
   // The one New and Edit open: shown chosen at once, kept by the home's
   // server, and back as it was if that fails. Not loaded again, so it
   // doesn't flash; a load that answers differently (after connecting or
@@ -85,25 +79,20 @@ const AssistantsScreen = cs`(props: {
     }
   };
   const [connectingTo, setConnectingTo] = $useState<Assistant | null>(null);
-  // Back from an assistant a connect sheet sent the user to: load again,
-  // which reads the new connection. Only from the background, once, and only
-  // while this screen is on top.
+  // Back in Backtick while this screen is on top, from an assistant a connect
+  // sheet sent the user to or anywhere else: load again, which reads any new
+  // connection.
   $useFocusEffect(
     $useCallback(() => {
       let last = $AppState.currentState;
       const subscription = $AppState.addEventListener("change", (state) => {
-        if (
-          $connecting.current &&
-          last === "background" &&
-          state === "active"
-        ) {
-          $connecting.current = false;
+        if (last === "background" && state === "active") {
           reload();
         }
         last = state;
       });
       return () => subscription.remove();
-    }, [route.key, navigation]),
+    }, [reload]),
   );
   // The home's own server revokes it, then the screens load again. A
   // failure says so, and changes nothing.

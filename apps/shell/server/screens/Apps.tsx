@@ -1,6 +1,6 @@
 import { cs } from "@backtickjs/core";
 import { Logo, useColors } from "../components/look.js";
-import { reloadScreen } from "./navigator.js";
+import { useReloadScreen } from "./navigator.js";
 import { AppSheet } from "../components/AppSheet.js";
 import { Avatar } from "../components/Avatar.js";
 import { Card } from "../components/Card.js";
@@ -9,11 +9,7 @@ import type { Account } from "../components/Avatar.js";
 import { useCallback, useState, useTransition } from "react" with {
   backtick: "client",
 };
-import {
-  StackActions,
-  useNavigation,
-  useRoute,
-} from "@react-navigation/native" with {
+import { StackActions, useNavigation } from "@react-navigation/native" with {
   backtick: "client",
 };
 import { useSafeAreaInsets } from "react-native-safe-area-context" with {
@@ -73,15 +69,12 @@ export const Apps = cs`(props: { apps: App[]; account: Account }) => {
   const colors = $useColors();
   const insets = $useSafeAreaInsets();
   const { width } = $useWindowDimensions();
-  const route = $useRoute();
   const navigation = $useNavigation();
+  const reload = $useReloadScreen();
   // Loads the apps again, in place: the spinner stays until the new ones
   // replace these.
   const [refreshing, startRefresh] = $useTransition();
-  const refresh = $useCallback(
-    () => startRefresh(() => $reloadScreen(route.key)),
-    [route.key],
-  );
+  const refresh = $useCallback(() => startRefresh(() => reload()), [reload]);
   const [selected, setSelected] = $useState<App | null>(null);
   // Two columns, 20 at the edges and 14 between.
   const cardWidth = Math.floor((width - 40 - 14) / 2);
