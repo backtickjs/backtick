@@ -2,6 +2,7 @@ import { cs, runtime } from "@backtickjs/core";
 import { useColors } from "../components/look.js";
 import { AccountSkeleton } from "../components/AccountSheet.js";
 import { AskSkeleton } from "../components/AskSheet.js";
+import { Failed } from "../components/Failed.js";
 import { Sheet } from "../components/Sheet.js";
 import {
   NavigationContainer,
@@ -31,10 +32,10 @@ import {
   ActivityIndicator,
   Dimensions,
   Linking,
-  Pressable,
-  Text,
   View,
-} from "react-native" with { backtick: "client" };
+} from "react-native" with {
+  backtick: "client",
+};
 import { captureScreen } from "react-native-view-shot" with {
   backtick: "client",
 };
@@ -153,34 +154,8 @@ const AppScreen = cs`({
   );
 }`;
 
-// A screen that didn't load: why, in the home's colours, and Retry.
-const Failed = cs`({ error, retry }: { error: unknown; retry: () => void }) => {
-  const colors = $useColors();
-  return (
-    <$View style={{ margin: 24, marginTop: 80, gap: 20 }}>
-      <$Text style={{ fontSize: 16, lineHeight: 24, color: colors.ink }}>
-        {String(error)}
-      </$Text>
-      <$Pressable
-        onPress={retry}
-        style={{
-          alignSelf: "flex-start",
-          borderRadius: 999,
-          paddingHorizontal: 22,
-          paddingVertical: 13,
-          backgroundColor: colors.ink,
-        }}
-      >
-        <$Text style={{ fontSize: 15, fontWeight: "600", color: colors.paper }}>
-          Retry
-        </$Text>
-      </$Pressable>
-    </$View>
-  );
-}`;
-
 // A route's screen as it loads: `fallback` until it's in, and why it failed,
-// with Retry, if it didn't.
+// with Try again, if it didn't.
 const Loaded = cs`(props: { id: string; fallback: any; children: any }) => (
   <$ErrorBoundary
     fallbackRender={({ error, resetErrorBoundary }) => (
