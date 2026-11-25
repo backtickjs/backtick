@@ -46,7 +46,7 @@ type Screens = {
   App: { appId: string };
   Assistants: undefined;
   New: undefined;
-  Edit: { id: string };
+  Edit: { id: string; title: string };
   Account: undefined;
 };
 
@@ -179,14 +179,6 @@ const Failed = cs`({ error, retry }: { error: unknown; retry: () => void }) => {
   );
 }`;
 
-// Each sheet's contents as they load: its skeleton, drawn from the same
-// styles, so the sheet doesn't move when they arrive.
-const sheetSkeletons = cs`({
-  New: <$AskSkeleton />,
-  Edit: <$AskSkeleton />,
-  Account: <$AccountSkeleton />,
-}) as Record<string, ReactNode>`;
-
 // A route's screen as it loads: `fallback` until it's in, and why it failed,
 // with Retry, if it didn't.
 const Loaded = cs`(props: { id: string; fallback: any; children: any }) => (
@@ -203,6 +195,21 @@ const Loaded = cs`(props: { id: string; fallback: any; children: any }) => (
   >
     <$Suspense fallback={props.fallback}>{props.children}</$Suspense>
   </$ErrorBoundary>
+)`;
+
+// A sheet's route: the sheet slides in at once, with `skeleton` in it until
+// its contents are in.
+const SheetLayout = cs`(props: {
+  id: string;
+  onClose: () => void;
+  skeleton: ReactNode;
+  children: ReactNode;
+}) => (
+  <$Sheet onClose={props.onClose}>
+    <$Loaded id={props.id} fallback={props.skeleton}>
+      {props.children}
+    </$Loaded>
+  </$Sheet>
 )`;
 
 // The app a link into the phone names: `backtick://<appId>/…` or the app's own
@@ -291,32 +298,44 @@ export const HomeNavigator = cs`({ origin }: { origin: string }) => {
               )}
             </$Navigator.Screen>
             {/* Sheets over the apps, fetched as they open, so each shows
-                what's true now: the sheet slides in at once, over a screen
-                that's see-through, with its skeleton until its contents are
-                in. */}
+                what's true now, over a screen that's see-through. */}
             <$Navigator.Group
               screenOptions={{
                 presentation: "transparentModal",
                 animation: "none",
                 contentStyle: { backgroundColor: "transparent" },
               }}
-              screenLayout={({ route, navigation, children }) => (
-                <$Sheet onClose={() => navigation.goBack()}>
-                  <$Loaded
+            >
+              <$Navigator.Screen
+                name="New"
+                layout={({ route, navigation, children }) => (
+                  <$SheetLayout
                     id={route.key}
-                    fallback={$sheetSkeletons[route.name]}
+                    onClose={() => navigation.goBack()}
+                    skeleton={<$AskSkeleton title="New app" />}
                   >
                     {children}
-                  </$Loaded>
-                </$Sheet>
-              )}
-            >
-              <$Navigator.Screen name="New">
+                  </$SheetLayout>
+                )}
+              >
                 {({ route }) => (
                   <$FetchedScreen id={route.key} url={origin + "/new"} />
                 )}
               </$Navigator.Screen>
-              <$Navigator.Screen name="Edit">
+              <$Navigator.Screen
+                name="Edit"
+                layout={({ route, navigation, children }) => (
+                  <$SheetLayout
+                    id={route.key}
+                    onClose={() => navigation.goBack()}
+                    skeleton={
+                      <$AskSkeleton title={"Edit " + route.params.title} />
+                    }
+                  >
+                    {children}
+                  </$SheetLayout>
+                )}
+              >
                 {({ route }) => (
                   <$FetchedScreen
                     id={route.key}
@@ -324,7 +343,18 @@ export const HomeNavigator = cs`({ origin }: { origin: string }) => {
                   />
                 )}
               </$Navigator.Screen>
-              <$Navigator.Screen name="Account">
+              <$Navigator.Screen
+                name="Account"
+                layout={({ route, navigation, children }) => (
+                  <$SheetLayout
+                    id={route.key}
+                    onClose={() => navigation.goBack()}
+                    skeleton={<$AccountSkeleton />}
+                  >
+                    {children}
+                  </$SheetLayout>
+                )}
+              >
                 {({ route }) => (
                   <$FetchedScreen id={route.key} url={origin + "/account"} />
                 )}

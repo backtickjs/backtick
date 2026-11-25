@@ -4,7 +4,7 @@ import { assistants } from "./assistants.js";
 import type { Assistant } from "./assistants.js";
 import { Button } from "./Button.js";
 import { sheetStyles } from "./Sheet.js";
-import { Bone, Pulse } from "./Skeleton.js";
+import { Pulse } from "./Skeleton.js";
 import { useNavigation } from "@react-navigation/native" with {
   backtick: "client",
 };
@@ -28,6 +28,9 @@ const styles = cs`$StyleSheet.create({
   },
   note: { fontSize: 13, lineHeight: 19, textAlign: "center", marginTop: 4 },
 })`;
+
+// Under the sheet's button, loaded or not.
+const note = "Opens a new chat with what you wrote.";
 
 // What to ask the assistant: a new app, or a change to one.
 export type Ask = { title: string; placeholder: string; prompt: string };
@@ -75,28 +78,31 @@ export const AskSheet = cs`(props: { ask: Ask; assistant: Assistant }) => {
           );
         }}
       />
-      <$Text style={[$styles.note, { color: colors.muted }]}>
-        Opens a new chat with what you wrote.
-      </$Text>
+      <$Text style={[$styles.note, { color: colors.muted }]}>{$note}</$Text>
     </>
   );
 }`;
 
 // The sheet as it loads, drawn on the phone while its contents are fetched:
-// the same title, field, button and note, from the same styles, blank.
-export const AskSkeleton = cs`() => {
+// its title and note, known already, and between them the same field and
+// button, from the same styles, blank.
+export const AskSkeleton = cs`(props: { title: string }) => {
   const colors = $useColors();
   return (
-    <$Pulse>
-      <$Bone style={$sheetStyles.sheetTitle} width={140} />
-      <$View
-        style={[
-          $styles.idea,
-          { borderColor: colors.line, backgroundColor: colors.wash },
-        ]}
-      />
-      <$Button label=" " kind="filled" disabled onPress={() => {}} />
-      <$Bone style={[$styles.note, { alignSelf: "center" }]} width={220} />
-    </$Pulse>
+    <>
+      <$Text style={[$sheetStyles.sheetTitle, { color: colors.ink }]}>
+        {props.title}
+      </$Text>
+      <$Pulse>
+        <$View
+          style={[
+            $styles.idea,
+            { borderColor: colors.line, backgroundColor: colors.wash },
+          ]}
+        />
+        <$Button label=" " kind="filled" disabled onPress={() => {}} />
+      </$Pulse>
+      <$Text style={[$styles.note, { color: colors.muted }]}>{$note}</$Text>
+    </>
   );
 }`;

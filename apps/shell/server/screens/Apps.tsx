@@ -147,7 +147,10 @@ export const Apps = cs`(props: { apps: App[]; account: Account }) => {
           onEdit={() => {
             setSelected(null);
             navigation.dispatch(
-              $StackActions.push("Edit", { id: selected.id }),
+              $StackActions.push("Edit", {
+                id: selected.id,
+                title: selected.title,
+              }),
             );
           }}
         />
