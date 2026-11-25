@@ -8,8 +8,8 @@ import { StackActions, useNavigation } from "@react-navigation/native" with {
   backtick: "client",
 };
 
-// Asking the user's assistant, over the home: closing goes back. With none
-// connected, connecting one first, in its place.
+// Asking the user's assistant, in a sheet over the home. With none connected,
+// connecting one first, in its place.
 const AskScreen = cs`(props: { ask: Ask; assistant: Assistant | null }) => {
   const { ask, assistant } = props;
   const navigation = $useNavigation();
@@ -21,13 +21,7 @@ const AskScreen = cs`(props: { ask: Ask; assistant: Assistant | null }) => {
   if (assistant === null) {
     return null;
   }
-  return (
-    <$AskSheet
-      ask={ask}
-      assistant={assistant}
-      onClose={() => navigation.goBack()}
-    />
-  );
+  return <$AskSheet ask={ask} assistant={assistant} />;
 }`;
 
 // + New, from the server: the assistant it asks, as chosen now.

@@ -3,7 +3,10 @@ import { useColors } from "./look.js";
 import { assistants } from "./assistants.js";
 import type { Assistant } from "./assistants.js";
 import { Button } from "./Button.js";
-import { Sheet, sheetStyles } from "./Sheet.js";
+import { sheetStyles } from "./Sheet.js";
+import { useNavigation } from "@react-navigation/native" with {
+  backtick: "client",
+};
 import { useState } from "react" with { backtick: "client" };
 import { Linking, StyleSheet, Text, TextInput } from "react-native" with {
   backtick: "client",
@@ -31,19 +34,17 @@ export type Ask = { title: string; placeholder: string; prompt: string };
 // An app made or changed by the user's assistant: a new chat there, the
 // prompt written in and not yet sent. It names Backtick (and the app, for a
 // change), so the assistant uses Backtick rather than answering in text. The
-// card's Open in Backtick brings the app back here.
-export const AskSheet = cs`(props: {
-  ask: Ask;
-  assistant: Assistant;
-  onClose: () => void;
-}) => {
-  const { ask: what, assistant, onClose } = props;
+// card's Open in Backtick brings the app back here. A sheet's contents: the
+// navigator draws the sheet.
+export const AskSheet = cs`(props: { ask: Ask; assistant: Assistant }) => {
+  const { ask: what, assistant } = props;
+  const navigation = $useNavigation();
   const { name, chat } = $assistants[assistant];
   const colors = $useColors();
   const [idea, setIdea] = $useState("");
   const ready = idea.trim().length > 0;
   return (
-    <$Sheet onClose={onClose}>
+    <>
       <$Text style={[$sheetStyles.sheetTitle, { color: colors.ink }]}>
         {what.title}
       </$Text>
@@ -68,7 +69,7 @@ export const AskSheet = cs`(props: {
         kind="filled"
         disabled={!ready}
         onPress={() => {
-          onClose();
+          navigation.goBack();
           $Linking.openURL(
             chat + encodeURIComponent(what.prompt + idea.trim()),
           );
@@ -77,6 +78,6 @@ export const AskSheet = cs`(props: {
       <$Text style={[$styles.note, { color: colors.muted }]}>
         Opens a new chat with what you wrote.
       </$Text>
-    </$Sheet>
+    </>
   );
 }`;

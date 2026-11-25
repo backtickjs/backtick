@@ -1,5 +1,6 @@
 import { cs, runtime } from "@backtickjs/core";
 import { useColors } from "../components/look.js";
+import { Sheet } from "../components/Sheet.js";
 import {
   NavigationContainer,
   NavigationIndependentTree,
@@ -176,6 +177,24 @@ const Failed = cs`({ error, retry }: { error: unknown; retry: () => void }) => {
   );
 }`;
 
+// A route's screen as it loads: `fallback` until it's in, and why it failed,
+// with Retry, if it didn't.
+const Loaded = cs`(props: { id: string; fallback: any; children: any }) => (
+  <$ErrorBoundary
+    fallbackRender={({ error, resetErrorBoundary }) => (
+      <$Failed
+        error={error}
+        retry={() => {
+          $screens.delete(props.id);
+          resetErrorBoundary();
+        }}
+      />
+    )}
+  >
+    <$Suspense fallback={props.fallback}>{props.children}</$Suspense>
+  </$ErrorBoundary>
+)`;
+
 // The app a link into the phone names: `backtick://<appId>/…` or the app's own
 // address, `https://<appId>.backtickjs.app/…`.
 const appIdOf = cs`(url: string): string | undefined => {
@@ -220,23 +239,12 @@ export const HomeNavigator = cs`({ origin }: { origin: string }) => {
         >
           <$Navigator.Navigator
             screenLayout={({ route, children }) => (
-              <$ErrorBoundary
-                fallbackRender={({ error, resetErrorBoundary }) => (
-                  <$Failed
-                    error={error}
-                    retry={() => {
-                      $screens.delete(route.key);
-                      resetErrorBoundary();
-                    }}
-                  />
-                )}
+              <$Loaded
+                id={route.key}
+                fallback={<$ActivityIndicator style={{ flex: 1 }} />}
               >
-                <$Suspense
-                  fallback={<$ActivityIndicator style={{ flex: 1 }} />}
-                >
-                  {children}
-                </$Suspense>
-              </$ErrorBoundary>
+                {children}
+              </$Loaded>
             )}
             screenOptions={{
               headerShown: false,
@@ -273,14 +281,27 @@ export const HomeNavigator = cs`({ origin }: { origin: string }) => {
               )}
             </$Navigator.Screen>
             {/* Sheets over the apps, fetched as they open, so each shows
-                what's true now: the sheet slides itself in, over a screen
-                that's see-through. */}
+                what's true now: the sheet slides in at once, over a screen
+                that's see-through, with a spinner in it until its contents
+                are in. */}
             <$Navigator.Group
               screenOptions={{
                 presentation: "transparentModal",
                 animation: "none",
                 contentStyle: { backgroundColor: "transparent" },
               }}
+              screenLayout={({ route, navigation, children }) => (
+                <$Sheet onClose={() => navigation.goBack()}>
+                  <$Loaded
+                    id={route.key}
+                    fallback={
+                      <$ActivityIndicator style={{ marginVertical: 48 }} />
+                    }
+                  >
+                    {children}
+                  </$Loaded>
+                </$Sheet>
+              )}
             >
               <$Navigator.Screen name="New">
                 {({ route }) => (

@@ -5,7 +5,7 @@ import { assistants } from "./assistants.js";
 import type { Assistant } from "./assistants.js";
 import { Avatar } from "./Avatar.js";
 import { Menu, MenuItem } from "./Menu.js";
-import { Sheet, sheetStyles } from "./Sheet.js";
+import { sheetStyles } from "./Sheet.js";
 import type { Account } from "./Avatar.js";
 import Constants from "expo-constants" with { backtick: "client" };
 import { StackActions, useNavigation } from "@react-navigation/native" with {
@@ -58,27 +58,27 @@ export const copyDebugInfo = cs`(modules: Record<string, string>) => {
   );
 }`;
 
-// Who's signed in, their assistant, signing out, and deleting the account.
+// Who's signed in, their assistant, signing out, and deleting the account. A
+// sheet's contents: the navigator draws the sheet.
 export const AccountSheet = cs`(props: {
   account: Account;
   modules: Record<string, string>;
   assistant: Assistant | null;
-  onClose: () => void;
 }) => {
-  const { account, modules, assistant, onClose } = props;
+  const { account, modules, assistant } = props;
   const colors = $useColors();
   const navigation = $useNavigation();
   const signOut = () => {
-    onClose();
+    navigation.goBack();
     $Linking.openURL($shellURL("sign-out"));
   };
   // The shell asks first, deletes, and signs out.
   const deleteAccount = () => {
-    onClose();
+    navigation.goBack();
     $Linking.openURL($shellURL("delete-account"));
   };
   return (
-    <$Sheet onClose={onClose}>
+    <>
       <$View style={$styles.account}>
         <$Pressable onLongPress={() => $copyDebugInfo(modules)}>
           <$Avatar size={56} account={account} />
@@ -122,6 +122,6 @@ export const AccountSheet = cs`(props: {
       <$Menu>
         <$MenuItem label="Delete account" danger onPress={deleteAccount} />
       </$Menu>
-    </$Sheet>
+    </>
   );
 }`;
