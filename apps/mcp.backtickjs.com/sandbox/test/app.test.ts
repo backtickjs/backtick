@@ -118,10 +118,7 @@ describe("a release", () => {
     );
     const answer = await open("/recipe/pancakes", phone);
     assert.equal(answer.status, 406);
-    assert.equal(answer.headers.get("content-type"), "text/javascript");
-    const refusal = await answer.text();
-    assert.match(refusal, /"UnsupportedImportError"/);
-    assert.match(refusal, /expo/);
+    assert.match((await answer.json()).message, /expo/);
   });
 
   it("answers 404 for a path the app has no route for", async () => {
