@@ -16,7 +16,11 @@ export interface RuntimeOptions {
 export interface Runtime {
   /** Each module it provides, at its package's version. */
   readonly modules: Readonly<Record<string, string>>;
-  /** Runs `bundle` and returns its value. */
+  /**
+   * Runs `bundle` and returns its value. Throws a `TypeError` for text that
+   * isn't a bundle, one that doesn't start with `"use strict";`, as the
+   * bundler writes every bundle: an error page, JSON, an empty body.
+   */
   exec<T>(bundle: Bundle<T>): Promise<Awaited<T>>;
   /**
    * `fetch`, plus the `x-backtick-modules` header. Its body is typed as a
@@ -63,6 +67,11 @@ export function createRuntime(options: RuntimeOptions): Runtime {
   const runtime: Runtime = {
     modules,
     async exec<T>(bundle: Bundle<T>): Promise<Awaited<T>> {
+      if (!bundle.startsWith('"use strict";')) {
+        throw new TypeError(
+          `Not a bundle: it doesn't start with "use strict";. It starts ${JSON.stringify(bundle.slice(0, 80))}.`,
+        );
+      }
       const module = { exports: {} as unknown, cache, runtime };
       new Function("module", "exports", "require", bundle)(
         module,

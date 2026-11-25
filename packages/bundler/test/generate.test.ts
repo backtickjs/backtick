@@ -14,6 +14,20 @@ test("the output is a module whose default export is the value", async () => {
   assert.match(bundle.generate().code, /\nconst \$thunk0 = \(\) => \(42\);\n/);
 });
 
+test('every bundle starts with "use strict";', async () => {
+  // What the client's `exec` checks for: nothing may come before it, not
+  // even a comment.
+  const greet = createImport({ name: "greet", from: "app", version: "1.0.0" });
+  for (const input of [cs`${42}`, greet, cs`$greet("world")`]) {
+    const bundle = await bundler.build({ input, modules: { app: "1.0.0" } });
+    for (const sourcemap of [false, "inline", "hidden"] as const) {
+      assert.ok(
+        bundle.generate({ sourcemap }).code.startsWith('"use strict";\n'),
+      );
+    }
+  }
+});
+
 test("the modules are { specifier: version }, as a client sends them", async () => {
   for (const modules of [
     null,

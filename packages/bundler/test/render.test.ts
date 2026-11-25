@@ -87,6 +87,8 @@ test("a request that doesn't say what the app has is answered with a 400 that th
   assert.equal(response.status, 400);
   assert.equal(response.headers.get("content-type"), "text/javascript");
   assert.equal(response.headers.get("cache-control"), "no-store");
+  const text = await response.clone().text();
+  assert.ok(text.startsWith('"use strict";\n'));
   const { name, message } = await thrownBy(response);
   assert.equal(name, "BundlerError");
   assert.match(message, /^x-backtick-modules is missing/);

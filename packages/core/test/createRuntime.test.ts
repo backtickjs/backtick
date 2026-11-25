@@ -109,7 +109,7 @@ test("fetch's own errors pass through", async () => {
 
 test("what fetch answers runs with exec", async () => {
   const { runtime } = serve(
-    () => new Response('module.exports = require("app").answer + 1;'),
+    () => new Response(bundle('module.exports = require("app").answer + 1;')),
   );
   const response = await runtime.fetch<number>("https://api.test/");
   assert.equal(await runtime.exec(await response.text()), 42);
@@ -134,4 +134,30 @@ test("a created runtime has its runtime's modules and fetch", async () => {
     ),
     42,
   );
+});
+
+test("exec refuses text that isn't a bundle", async () => {
+  const runtime = createRuntime({ moduleMap: {}, installedPackages: {} });
+  // What reaches an app besides a bundle: error pages, JSON, empty bodies,
+  // which would otherwise throw far from their cause, or run to `{}`.
+  for (const text of [
+    "<!doctype html><title>502</title>",
+    '{"error":"invalid_token"}',
+    "Internal Server Error",
+    "",
+    "[]",
+    "null",
+    "module.exports = 1;",
+    ' "use strict";\nmodule.exports = 1;',
+  ]) {
+    await assert.rejects(
+      () => runtime.exec(text as Bundle<unknown>),
+      (error) =>
+        error instanceof TypeError &&
+        error.message.startsWith(
+          'Not a bundle: it doesn\'t start with "use strict";',
+        ) &&
+        error.message.includes(JSON.stringify(text.slice(0, 80))),
+    );
+  }
 });
