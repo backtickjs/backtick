@@ -54,7 +54,6 @@ export const AskSheet = cs`(props: { ask: Ask; assistant: Assistant }) => {
         placeholder={what.placeholder}
         placeholderTextColor={colors.muted}
         multiline
-        autoFocus
         style={[
           $styles.idea,
           {

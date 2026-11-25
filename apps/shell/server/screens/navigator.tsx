@@ -177,6 +177,14 @@ const Failed = cs`({ error, retry }: { error: unknown; retry: () => void }) => {
   );
 }`;
 
+// Each sheet's height once its contents are in, measured on an iPhone at the
+// default text size: blank at that height while they load, so the sheet
+// doesn't move when they arrive.
+const sheetHeights = cs`({ New: 267, Edit: 267, Account: 285 }) as Record<
+  string,
+  number
+>`;
+
 // A route's screen as it loads: `fallback` until it's in, and why it failed,
 // with Retry, if it didn't.
 const Loaded = cs`(props: { id: string; fallback: any; children: any }) => (
@@ -282,8 +290,7 @@ export const HomeNavigator = cs`({ origin }: { origin: string }) => {
             </$Navigator.Screen>
             {/* Sheets over the apps, fetched as they open, so each shows
                 what's true now: the sheet slides in at once, over a screen
-                that's see-through, with a spinner in it until its contents
-                are in. */}
+                that's see-through, blank until its contents are in. */}
             <$Navigator.Group
               screenOptions={{
                 presentation: "transparentModal",
@@ -295,7 +302,7 @@ export const HomeNavigator = cs`({ origin }: { origin: string }) => {
                   <$Loaded
                     id={route.key}
                     fallback={
-                      <$ActivityIndicator style={{ marginVertical: 48 }} />
+                      <$View style={{ height: $sheetHeights[route.name] }} />
                     }
                   >
                     {children}
