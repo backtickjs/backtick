@@ -14,6 +14,7 @@ import { Link, NavigationContainer, NavigationIndependentTree, StackActions } fr
 import { createNativeStackNavigator } from "@react-navigation/native-stack" with { backtick: "client" };
 import { Suspense, use, useState, type ReactNode } from "react" with { backtick: "client" };
 import { ActivityIndicator, Button, ScrollView, StyleSheet, Text } from "react-native" with { backtick: "client" };
+import { useSafeAreaInsets } from "react-native-safe-area-context" with { backtick: "client" };
 
 type Screens = { Recipes: undefined; Recipe: { id: string; name: string } };
 
@@ -97,32 +98,37 @@ const CookedButton = cs\`({ name }: { name: string }) => {
   return <$Button title={title} onPress={() => setCooked(!cooked)} />;
 }\`;
 
-const RecipeList = cs\`({ recipes }: { recipes: Recipe[] }) => (
-  <$ScrollView
-    contentContainerStyle={$styles.screen}
-    contentInsetAdjustmentBehavior="automatic"
-  >
-    {recipes.map(({ id, name }) => (
-      <$Link
-        key={id}
-        action={$StackActions.push("Recipe", { id, name })}
-        style={$styles.link}
-      >
-        {name}
-      </$Link>
-    ))}
-  </$ScrollView>
-)\`;
+// Below the header, clear of the home indicator and Android's navigation bar.
+const RecipeList = cs\`({ recipes }: { recipes: Recipe[] }) => {
+  const insets = $useSafeAreaInsets();
+  return (
+    <$ScrollView
+      contentContainerStyle={[$styles.screen, { paddingBottom: 20 + insets.bottom }]}
+    >
+      {recipes.map(({ id, name }) => (
+        <$Link
+          key={id}
+          action={$StackActions.push("Recipe", { id, name })}
+          style={$styles.link}
+        >
+          {name}
+        </$Link>
+      ))}
+    </$ScrollView>
+  );
+}\`;
 
-const RecipePage = cs\`({ recipe }: { recipe: Recipe }) => (
-  <$ScrollView
-    contentContainerStyle={$styles.screen}
-    contentInsetAdjustmentBehavior="automatic"
-  >
-    <$Text style={$styles.text}>{recipe.steps}</$Text>
-    <$CookedButton name={recipe.name} />
-  </$ScrollView>
-)\`;
+const RecipePage = cs\`({ recipe }: { recipe: Recipe }) => {
+  const insets = $useSafeAreaInsets();
+  return (
+    <$ScrollView
+      contentContainerStyle={[$styles.screen, { paddingBottom: 20 + insets.bottom }]}
+    >
+      <$Text style={$styles.text}>{recipe.steps}</$Text>
+      <$CookedButton name={recipe.name} />
+    </$ScrollView>
+  );
+}\`;
 
 const app = new Hono();
 app.get("/", (context) => {

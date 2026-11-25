@@ -21,6 +21,8 @@ const phone = JSON.stringify({
   "@react-navigation/native": installed["@react-navigation/native"]!,
   "@react-navigation/native-stack":
     installed["@react-navigation/native-stack"]!,
+  "react-native-safe-area-context":
+    installed["react-native-safe-area-context"]!,
 });
 
 // An app's `App.tsx`, in a directory of its own.
