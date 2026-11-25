@@ -7,7 +7,7 @@ export const starter = `// A Backtick app:
 // 4. Navigate with React Navigation: each screen in App shows a route of this
 //    server, with <FetchedScreen>, and opens with StackActions.push.
 
-import { render } from "@backtickjs/bundler";
+import { createRender } from "@backtickjs/bundler";
 import { cs, runtime } from "@backtickjs/core";
 import { Hono } from "hono";
 import { Link, NavigationContainer, NavigationIndependentTree, StackActions } from "@react-navigation/native" with { backtick: "client" };
@@ -47,9 +47,9 @@ const FetchedScreen = cs\`({ id, url }: { id: string; url: string }) => {
     $screens.set(
       id,
       $runtime
-        .fetch(url)
+        .fetch<ReactNode>(url)
         .then((response) => response.text())
-        .then((bundle) => $runtime.exec(bundle as never) as Promise<ReactNode>),
+        .then((bundle) => $runtime.exec(bundle)),
     );
   }
   return $use($screens.get(id)!);
@@ -131,6 +131,11 @@ const RecipePage = cs\`({ recipe }: { recipe: Recipe }) => {
 }\`;
 
 const app = new Hono();
+
+// A screen the bundler refuses (an old build without a module it imports) is
+// answered with a bundle that throws why, and logged here.
+const render = createRender({ onBundlerError: (error) => console.warn(error) });
+
 app.get("/", (context) => {
   const origin = new URL(context.req.url).origin;
   return render(context.req.raw, cs\`<$App origin={$origin} />\`);
