@@ -93,16 +93,20 @@ one: `` cs`<$View>…</$View>` ``.
 
 Thrown by `bundler.build`, for the screen it was building, and by `supports`,
 where it's called. Each is a `BundlerError`; an error your
-server component throws passes through as it is.
+server component throws passes through as it is. `render` answers each with a
+bundle that throws it, so the app's `exec` throws an error with the same name
+and message, and hands it to your `onBundlerError`.
 
 ### Can't import `…` from "…": this app doesn't have "…"
 
 A screen uses a module the app that asked doesn't provide. For future builds,
 add it to the app's module map and install it in the app. Builds already in
 users' hands don't have it: draw them something else with `supports`, as the
-message says, or catch the `UnsupportedImportError` and answer it as
+message says, or catch the `UnsupportedImportError` around `bundler.build` and
+draw something simpler, as
 [`@backtickjs/bundler`](https://github.com/backtickjs/backtick/tree/main/packages/bundler#modules)
-shows. See
+shows. Otherwise `render` answers it with a `406`, which the app can meet with
+a screen asking to update. See
 [where a package goes](/docs/react-native-and-packages/#any-package-your-app-ships).
 
 ### Can't import `…` from "…": the request lists no modules
