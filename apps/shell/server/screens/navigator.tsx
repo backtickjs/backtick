@@ -43,9 +43,6 @@ type Screens = {
   Assistants: undefined;
 };
 
-// Where each app is served, as `<appId>.backtickjs.app`.
-const apps = "backtickjs.app";
-
 const Navigator = cs`$createNativeStackNavigator<Screens>()`;
 
 const screens = cs`new Map<string, Promise<ReactNode>>()`;
@@ -79,25 +76,13 @@ const FetchedScreen = cs`({ id, url }: { id: string; url: string }) => {
 export const reloadScreen = cs`(id: string) => $refetches.get(id)?.()`;
 
 // An app, as the phone opens it: its `/`, with a runtime of its own, so no
-// two apps share what they make. Anything but a bundle says why it isn't one.
+// two apps share what they make.
 const openApp = cs`async (appId: string): Promise<ReactNode> => {
   const app = $runtime.create();
   const response = await app.fetch<ReactNode>(
-    "https://" + appId + "." + $apps + "/",
+    "https://" + appId + ".backtickjs.app/",
   );
-  const body = await response.text();
-  if (
-    !(response.headers.get("content-type") ?? "").startsWith("text/javascript")
-  ) {
-    let reason: string = body;
-    try {
-      reason = (JSON.parse(body) as { message?: string }).message ?? body;
-    } catch {}
-    throw new Error(
-      "This app couldn't be opened (" + response.status + "): " + reason,
-    );
-  }
-  return app.exec(body);
+  return app.exec(await response.text());
 }`;
 
 // An app's first screen is its preview on the home's card: captured at the
@@ -189,9 +174,7 @@ const appIdOf = cs`(url: string): string | undefined => {
   const id = "([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})";
   const match =
     new RegExp("^backtick://" + id + "(/|$|\\?)").exec(url) ??
-    new RegExp(
-      "^https://" + id + "\\." + $apps.replaceAll(".", "\\.") + "(/|$|\\?)",
-    ).exec(url);
+    new RegExp("^https://" + id + "\\.backtickjs\\.app(/|$|\\?)").exec(url);
   return match?.[1];
 }`;
 
