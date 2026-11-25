@@ -80,7 +80,8 @@ const AssistantsScreen = cs`(props: {
     reloadApps();
   };
   // The one New and Edit open: shown chosen at once, kept by the home's
-  // server, and back as it was if that fails.
+  // server, and back as it was if that fails. Each load with other
+  // connections starts over from the server's (the screen's key).
   const [assistant, setAssistant] = $useState(props.assistant);
   const choose = async (id: Assistant) => {
     const before = assistant;
@@ -94,7 +95,7 @@ const AssistantsScreen = cs`(props: {
       $Alert.alert("Couldn't choose " + $assistants[id].name, "Try again.");
       return;
     }
-    reloadApps();
+    reload();
   };
   const [connectingTo, setConnectingTo] = $useState<Assistant | null>(null);
   // Back from an assistant a connect sheet sent the user to: load again,
@@ -236,7 +237,13 @@ const AssistantsScreen = cs`(props: {
 // New and Edit open. Read each time the screen loads.
 export async function Assistants(props: { user: string }) {
   const { connected, assistant } = await connectionsOf(props.user);
+  // What the screen shows, so it starts over when that changes.
+  const shows = [...connected, assistant].join(" ");
   return cs`(
-    <$AssistantsScreen connected={$connected} assistant={$assistant} />
+    <$AssistantsScreen
+      key={$shows}
+      connected={$connected}
+      assistant={$assistant}
+    />
   )`;
 }

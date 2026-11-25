@@ -9,7 +9,14 @@ import { Pressable, StyleSheet, Text, View } from "react-native" with {
 
 const styles = cs`$StyleSheet.create({
   menu: { marginBottom: 16 },
-  title: { fontSize: 20, fontWeight: "700", marginBottom: 10, marginLeft: 2 },
+  // Further from the card above than from its own.
+  title: {
+    fontSize: 20,
+    fontWeight: "700",
+    marginTop: 12,
+    marginBottom: 10,
+    marginLeft: 2,
+  },
   card: { borderWidth: 1, borderRadius: 16 },
   // Inside the card's border, not touching it.
   divider: { height: 1, marginHorizontal: 18 },
@@ -89,7 +96,11 @@ export const MenuItem = cs`(props: {
         onPress={onPress}
         disabled={onPress === undefined}
         style={[$styles.press, { paddingRight: trailing ? 8 : 18 }]}
-        accessibilityRole={props.accessibilityRole ?? "button"}
+        // Only a row that does something is a button.
+        accessibilityRole={
+          props.accessibilityRole ??
+          (onPress === undefined ? undefined : "button")
+        }
         accessibilityState={
           props.checked === undefined ? undefined : { checked: props.checked }
         }
