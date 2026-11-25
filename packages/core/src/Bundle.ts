@@ -5,3 +5,8 @@ declare const value: unique symbol;
  * `Client<T>`, as it reaches the client, from the server.
  */
 export type Bundle<T> = string & { readonly [value]: T };
+
+/** A `Response` whose body is a `Bundle<T>`: the app runs it to a `T`. */
+export interface BundleResponse<T> extends Response {
+  text(): Promise<Bundle<T>>;
+}

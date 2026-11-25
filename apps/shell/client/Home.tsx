@@ -1,4 +1,3 @@
-import type { Bundle } from "@backtickjs/core";
 import { type ReactNode, Suspense, use, useEffect, useState } from "react";
 import { Linking } from "react-native";
 import { ErrorBoundary } from "react-error-boundary";
@@ -16,8 +15,8 @@ const homeOrigin = "https://app.backtickjs.com";
 // token is attached below JavaScript.
 async function openHome(): Promise<ReactNode> {
   const runtime = backtick.create();
-  const response = await runtime.fetch(`${homeOrigin}/`);
-  return runtime.exec((await response.text()) as Bundle<ReactNode>);
+  const response = await runtime.fetch<ReactNode>(`${homeOrigin}/`);
+  return runtime.exec(await response.text());
 }
 
 // The Backtick app: its home, drawn from its server afresh at each sign-in

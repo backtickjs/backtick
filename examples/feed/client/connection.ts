@@ -1,4 +1,4 @@
-import { type Bundle, createRuntime } from "@backtickjs/core";
+import { createRuntime } from "@backtickjs/core";
 import { QueryClient } from "@tanstack/react-query";
 import Constants from "expo-constants";
 import { installedPackages, moduleMap } from "./backtick";
@@ -29,7 +29,7 @@ export async function fetchBundle(
     ...init,
     headers,
   });
-  return runtime.exec((await response.text()) as Bundle<unknown>);
+  return runtime.exec(await response.text());
 }
 
 /**

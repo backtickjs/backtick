@@ -1,4 +1,3 @@
-import type { Bundle } from "@backtickjs/core";
 import { StatusBar } from "expo-status-bar";
 import { type ReactNode, Suspense, use, useState } from "react";
 import { ActivityIndicator, Text } from "react-native";
@@ -11,8 +10,8 @@ import { backtick, origin } from "./backtick";
 
 // The screen at `path` on your server, run with the app's modules.
 async function fetchScreen(path: string): Promise<ReactNode> {
-  const response = await backtick.fetch(`${origin}${path}`);
-  return backtick.exec((await response.text()) as Bundle<ReactNode>);
+  const response = await backtick.fetch<ReactNode>(`${origin}${path}`);
+  return backtick.exec(await response.text());
 }
 
 export default function App() {

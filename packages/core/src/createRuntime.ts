@@ -1,4 +1,4 @@
-import type { Bundle } from "./Bundle.js";
+import type { Bundle, BundleResponse } from "./Bundle.js";
 
 export interface RuntimeOptions {
   // the modules a bundle may require
@@ -18,8 +18,14 @@ export interface Runtime {
   readonly modules: Readonly<Record<string, string>>;
   /** Runs `bundle` and returns its value. */
   exec<T>(bundle: Bundle<T>): Promise<Awaited<T>>;
-  /** `fetch`, plus the `x-backtick-modules` header. */
-  fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>;
+  /**
+   * `fetch`, plus the `x-backtick-modules` header. Its body is typed as a
+   * bundle that runs to a `T`, as the caller says: nothing checks it.
+   */
+  fetch<T = unknown>(
+    input: RequestInfo | URL,
+    init?: RequestInit,
+  ): Promise<BundleResponse<T>>;
   /** A new runtime with the same modules and `fetch`, and its own cache. */
   create(): Runtime;
 }
@@ -43,7 +49,7 @@ export interface Runtime {
  *       },
  *       installedPackages,
  *     });
- *     const response = await runtime.fetch(origin);
+ *     const response = await runtime.fetch<ReactNode>(origin);
  *     const screen = await runtime.exec(await response.text());
  */
 export function createRuntime(options: RuntimeOptions): Runtime {
@@ -65,10 +71,10 @@ export function createRuntime(options: RuntimeOptions): Runtime {
       );
       return module.exports as Awaited<T>;
     },
-    async fetch(input, init) {
+    async fetch<T>(input: RequestInfo | URL, init?: RequestInit) {
       const request = new Request(input, init);
       request.headers.set("x-backtick-modules", JSON.stringify(modules));
-      return transport(request);
+      return (await transport(request)) as BundleResponse<T>;
     },
     create: () => createRuntime(options),
   };

@@ -87,14 +87,13 @@ The body of a function of `module`, `exports` and `require`, whose `module.expor
 - `supports(specifier, range)`: in a server component, whether the client being drawn for provides `specifier` at a version in `range`.
 - `BundlerError`: what `build` throws when it refuses its input, such as a value it can't splice. An error a server component throws passes through as it is. `getResponse()` answers it as JSON `{ name, message }` at its `status`, a 400: Hono's default error handler calls it on its own; elsewhere, the app's error handler returns it.
 - `UnsupportedImportError`, a `BundlerError`: what `build` throws for a script's import the client can't run. Its `status` is 406.
-- `render(request, input, init?)`, for a server that speaks the Fetch API's `Request` and `Response`, as Hono, Next.js route handlers and Workers do: `input`, a `Client<T>`, bundled for the modules the request's `x-backtick-modules` header lists, as CommonJS, which an app runs against its own modules on every platform, as a `BundleResponse<T>`: `text/javascript`, `no-store`, with `init`'s status and headers, which win over its own. A bundle it can't make throws a `BundlerError`, a missing or unreadable `x-backtick-modules` among them.
+- `render(request, input, init?)`, for a server that speaks the Fetch API's `Request` and `Response`, as Hono, Next.js route handlers and Workers do: `input`, a `Client<T>`, bundled for the modules the request's `x-backtick-modules` header lists, as CommonJS, which an app runs against its own modules on every platform, as a `BundleResponse<T>` (from `@backtickjs/core`): `text/javascript`, `no-store`, with `init`'s status and headers, which win over its own. A bundle it can't make throws a `BundlerError`, a missing or unreadable `x-backtick-modules` among them.
 
   ```tsx
   app.get("/", (c) => render(c.req.raw, <Home />));
   if (!show) return render(c.req.raw, <NotFound />, { status: 404 });
   ```
 
-- `BundleResponse<T>`: a `Response` whose `text()` is the `Bundle<T>`.
 - Types: `BuildOptions`, `OutputOptions`, `OutputChunk`, `Build`, `Modules`.
 
 ## Related

@@ -111,11 +111,8 @@ test("what fetch answers runs with exec", async () => {
   const { runtime } = serve(
     () => new Response('module.exports = require("app").answer + 1;'),
   );
-  const response = await runtime.fetch("https://api.test/");
-  assert.equal(
-    await runtime.exec((await response.text()) as Bundle<number>),
-    42,
-  );
+  const response = await runtime.fetch<number>("https://api.test/");
+  assert.equal(await runtime.exec(await response.text()), 42);
 });
 
 test("a created runtime has its runtime's modules and fetch", async () => {

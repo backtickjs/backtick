@@ -47,9 +47,9 @@ const FetchedScreen = cs\`({ id, url }: { id: string; url: string }) => {
     $screens.set(
       id,
       $runtime
-        .fetch(url)
+        .fetch<ReactNode>(url)
         .then((response) => response.text())
-        .then((bundle) => $runtime.exec(bundle as never) as Promise<ReactNode>),
+        .then((bundle) => $runtime.exec(bundle)),
     );
   }
   return $use($screens.get(id)!);

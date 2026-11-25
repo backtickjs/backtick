@@ -1,12 +1,7 @@
-import type { Bundle, Client } from "@backtickjs/core";
+import type { BundleResponse, Client } from "@backtickjs/core";
 import { bundler } from "./bundler.js";
 import { BundlerError } from "./errors.js";
 import type { Modules } from "./modules.js";
-
-/** A `Response` whose body is a `Bundle<T>`: the app runs it to a `T`. */
-export interface BundleResponse<T> extends Response {
-  text(): Promise<Bundle<T>>;
-}
 
 /**
  * Answers `request` with `input` bundled as CommonJS for the app that sent

@@ -55,9 +55,9 @@ const refetches = cs`new Map<string, () => void>()`;
 
 const fetchScreen = cs`(url: string) =>
   $runtime
-    .fetch(url)
+    .fetch<ReactNode>(url)
     .then((response) => response.text())
-    .then((bundle) => $runtime.exec(bundle as never) as Promise<ReactNode>)`;
+    .then((bundle) => $runtime.exec(bundle))`;
 
 const FetchedScreen = cs`({ id, url }: { id: string; url: string }) => {
   const [, setFetches] = $useState(0);
@@ -82,12 +82,14 @@ export const reloadScreen = cs`(id: string) => $refetches.get(id)?.()`;
 // two apps share what they make. Anything but a bundle says why it isn't one.
 const openApp = cs`async (appId: string): Promise<ReactNode> => {
   const app = $runtime.create();
-  const response = await app.fetch("https://" + appId + "." + $apps + "/");
+  const response = await app.fetch<ReactNode>(
+    "https://" + appId + "." + $apps + "/",
+  );
   const body = await response.text();
   if (
     !(response.headers.get("content-type") ?? "").startsWith("text/javascript")
   ) {
-    let reason = body;
+    let reason: string = body;
     try {
       reason = (JSON.parse(body) as { message?: string }).message ?? body;
     } catch {}
@@ -95,7 +97,7 @@ const openApp = cs`async (appId: string): Promise<ReactNode> => {
       "This app couldn't be opened (" + response.status + "): " + reason,
     );
   }
-  return app.exec(body as never) as Promise<ReactNode>;
+  return app.exec(body);
 }`;
 
 // An app's first screen is its preview on the home's card: captured at the

@@ -1,4 +1,4 @@
-import { type Bundle, createRuntime } from "@backtickjs/core";
+import { createRuntime } from "@backtickjs/core";
 import * as React from "react";
 import { Suspense, use, useState } from "react";
 import { ActivityIndicator } from "react-native";
@@ -10,8 +10,8 @@ import { installedPackages, moduleMap } from "./backtick";
 const runtime = createRuntime({ moduleMap, installedPackages });
 
 async function fetchScreen(url: string): Promise<React.ReactNode> {
-  const response = await runtime.fetch(url);
-  return runtime.exec((await response.text()) as Bundle<React.ReactNode>);
+  const response = await runtime.fetch<React.ReactNode>(url);
+  return runtime.exec(await response.text());
 }
 
 export default function App() {

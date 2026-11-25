@@ -1,4 +1,4 @@
-import { type Bundle, createRuntime } from "@backtickjs/core";
+import { createRuntime } from "@backtickjs/core";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
 import {
@@ -44,9 +44,9 @@ type Fetched = {
 async function fetchScreen(path: string): Promise<Fetched> {
   const heap = { started: readHeap() };
   const started = performance.now();
-  const response = await runtime.fetch(`${server}${path}`);
+  const response = await runtime.fetch<ReactNode>(`${server}${path}`);
   const firstByte = performance.now();
-  const bundle = (await response.text()) as Bundle<ReactNode>;
+  const bundle = await response.text();
   const downloaded = performance.now();
   const node = await runtime.exec(bundle);
   const evaluated = performance.now();
