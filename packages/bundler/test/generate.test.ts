@@ -15,7 +15,13 @@ test("the output is a module whose default export is the value", async () => {
 });
 
 test("the modules are { specifier: version }, as a client sends them", async () => {
-  for (const modules of [null, [], { react: 19 }]) {
+  for (const modules of [
+    null,
+    [],
+    { react: 19 },
+    { react: "latest" },
+    { react: "^19.0.0" },
+  ]) {
     await assert.rejects(
       () => bundler.build({ input: cs`${42}`, modules: modules as never }),
       /The modules aren't \{ specifier: version \}/,
@@ -147,6 +153,19 @@ test("a module is provided by its own specifier, not its package", async () => {
   await assert.rejects(
     () => bundler.build({ input: Portal, modules: { "solid-js": "1.9.14" } }),
     /Can't import `Portal` from "solid-js\/web": this app doesn't have "solid-js\/web"\.\nIt has solid-js@1\.9\.14\./,
+  );
+});
+
+test("an import typed against something that isn't a version is refused", async () => {
+  const greet = createImport({ name: "greet", from: "app", version: "latest" });
+  await assert.rejects(
+    () => bundler.build({ input: greet, modules: { app: "1.0.0" } }),
+    (error) =>
+      error instanceof BundlerError &&
+      !(error instanceof UnsupportedImportError) &&
+      /`greet` from "app" is typed against "latest", which isn't a version/.test(
+        error.message,
+      ),
   );
 });
 

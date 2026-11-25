@@ -1,5 +1,5 @@
 import type { ClientImport } from "@backtickjs/core";
-import { UnsupportedImportError } from "../errors.js";
+import { BundlerError, UnsupportedImportError } from "../errors.js";
 import semver from "semver";
 import type { Modules } from "../modules.js";
 
@@ -90,6 +90,11 @@ export function imported(
   // Where a script's import is written: a plugin's own (a framework's compile
   // step) are the plugin's, trusted as it is. Typed against one version, it
   // works with a later one of the same major.
+  if (semver.valid(version) === null) {
+    throw new BundlerError(
+      `\`${name}\` from "${from}" is typed against "${version}", which isn't a version: a client import's version is the exact one its types were checked against.`,
+    );
+  }
   const provided = names.modules[from];
   if (provided === undefined || !semver.satisfies(provided, `^${version}`)) {
     throw new UnsupportedImportError(from, name, version, names.modules);

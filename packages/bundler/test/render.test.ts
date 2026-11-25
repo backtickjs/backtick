@@ -100,6 +100,13 @@ test("modules that aren't JSON are answered with a 400 that throws why", async (
   assert.match(message, /^x-backtick-modules isn't JSON: /);
 });
 
+test("a version that isn't one is answered with a 400 that throws why", async () => {
+  // Not a 500: comparing it with the import's would throw.
+  const { response, error } = await refused(request('{"app": "not-semver"}'));
+  assert.equal(response.status, 400);
+  assert.match(error.message, /^The modules aren't \{ specifier: version \}/);
+});
+
 test("a client without a module the bundle needs is answered with a 406 that throws its name", async () => {
   const { response, error } = await refused(request("{}"));
   assert.ok(error instanceof UnsupportedImportError);
