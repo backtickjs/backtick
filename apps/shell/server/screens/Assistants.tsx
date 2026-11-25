@@ -80,8 +80,9 @@ const AssistantsScreen = cs`(props: {
     reloadApps();
   };
   // The one New and Edit open: shown chosen at once, kept by the home's
-  // server, and back as it was if that fails. Each load with other
-  // connections starts over from the server's (the screen's key).
+  // server, and back as it was if that fails. Not loaded again, so it
+  // doesn't flash; a load that answers differently (after connecting or
+  // disconnecting) starts over from the server's, by the screen's key.
   const [assistant, setAssistant] = $useState(props.assistant);
   const choose = async (id: Assistant) => {
     const before = assistant;
@@ -95,7 +96,7 @@ const AssistantsScreen = cs`(props: {
       $Alert.alert("Couldn't choose " + $assistants[id].name, "Try again.");
       return;
     }
-    reload();
+    reloadApps();
   };
   const [connectingTo, setConnectingTo] = $useState<Assistant | null>(null);
   // Back from an assistant a connect sheet sent the user to: load again,
