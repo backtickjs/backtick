@@ -6,6 +6,7 @@ import type { Assistant } from "./assistants.js";
 import { Avatar } from "./Avatar.js";
 import { Menu, MenuItem } from "./Menu.js";
 import { sheetStyles } from "./Sheet.js";
+import { Bone, Pulse } from "./Skeleton.js";
 import type { Account } from "./Avatar.js";
 import Constants from "expo-constants" with { backtick: "client" };
 import { StackActions, useNavigation } from "@react-navigation/native" with {
@@ -123,5 +124,36 @@ export const AccountSheet = cs`(props: {
         <$MenuItem label="Delete account" danger onPress={deleteAccount} />
       </$Menu>
     </>
+  );
+}`;
+
+// The sheet as it loads, drawn on the phone while its contents are fetched:
+// the avatar and who's signed in, then the two cards of rows, from the same
+// styles and components, blank.
+export const AccountSkeleton = cs`() => {
+  const colors = $useColors();
+  return (
+    <$Pulse>
+      <$View style={$styles.account}>
+        <$View
+          style={{
+            width: 56,
+            height: 56,
+            borderRadius: 28,
+            backgroundColor: colors.line,
+          }}
+        />
+        <$View style={{ flex: 1 }}>
+          <$Bone style={$styles.emailTitle} width={180} />
+        </$View>
+      </$View>
+      <$Menu>
+        <$MenuItem label="" />
+        <$MenuItem label="" />
+      </$Menu>
+      <$Menu>
+        <$MenuItem label="" />
+      </$Menu>
+    </$Pulse>
   );
 }`;

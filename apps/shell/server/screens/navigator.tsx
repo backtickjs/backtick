@@ -1,5 +1,7 @@
 import { cs, runtime } from "@backtickjs/core";
 import { useColors } from "../components/look.js";
+import { AccountSkeleton } from "../components/AccountSheet.js";
+import { AskSkeleton } from "../components/AskSheet.js";
 import { Sheet } from "../components/Sheet.js";
 import {
   NavigationContainer,
@@ -177,13 +179,13 @@ const Failed = cs`({ error, retry }: { error: unknown; retry: () => void }) => {
   );
 }`;
 
-// Each sheet's height once its contents are in, measured on an iPhone at the
-// default text size: blank at that height while they load, so the sheet
-// doesn't move when they arrive.
-const sheetHeights = cs`({ New: 267, Edit: 267, Account: 285 }) as Record<
-  string,
-  number
->`;
+// Each sheet's contents as they load: its skeleton, drawn from the same
+// styles, so the sheet doesn't move when they arrive.
+const sheetSkeletons = cs`({
+  New: <$AskSkeleton />,
+  Edit: <$AskSkeleton />,
+  Account: <$AccountSkeleton />,
+}) as Record<string, ReactNode>`;
 
 // A route's screen as it loads: `fallback` until it's in, and why it failed,
 // with Retry, if it didn't.
@@ -290,7 +292,8 @@ export const HomeNavigator = cs`({ origin }: { origin: string }) => {
             </$Navigator.Screen>
             {/* Sheets over the apps, fetched as they open, so each shows
                 what's true now: the sheet slides in at once, over a screen
-                that's see-through, blank until its contents are in. */}
+                that's see-through, with its skeleton until its contents are
+                in. */}
             <$Navigator.Group
               screenOptions={{
                 presentation: "transparentModal",
@@ -301,9 +304,7 @@ export const HomeNavigator = cs`({ origin }: { origin: string }) => {
                 <$Sheet onClose={() => navigation.goBack()}>
                   <$Loaded
                     id={route.key}
-                    fallback={
-                      <$View style={{ height: $sheetHeights[route.name] }} />
-                    }
+                    fallback={$sheetSkeletons[route.name]}
                   >
                     {children}
                   </$Loaded>

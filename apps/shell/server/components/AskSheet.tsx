@@ -4,11 +4,12 @@ import { assistants } from "./assistants.js";
 import type { Assistant } from "./assistants.js";
 import { Button } from "./Button.js";
 import { sheetStyles } from "./Sheet.js";
+import { Bone, Pulse } from "./Skeleton.js";
 import { useNavigation } from "@react-navigation/native" with {
   backtick: "client",
 };
 import { useState } from "react" with { backtick: "client" };
-import { Linking, StyleSheet, Text, TextInput } from "react-native" with {
+import { Linking, StyleSheet, Text, TextInput, View } from "react-native" with {
   backtick: "client",
 };
 
@@ -78,5 +79,24 @@ export const AskSheet = cs`(props: { ask: Ask; assistant: Assistant }) => {
         Opens a new chat with what you wrote.
       </$Text>
     </>
+  );
+}`;
+
+// The sheet as it loads, drawn on the phone while its contents are fetched:
+// the same title, field, button and note, from the same styles, blank.
+export const AskSkeleton = cs`() => {
+  const colors = $useColors();
+  return (
+    <$Pulse>
+      <$Bone style={$sheetStyles.sheetTitle} width={140} />
+      <$View
+        style={[
+          $styles.idea,
+          { borderColor: colors.line, backgroundColor: colors.wash },
+        ]}
+      />
+      <$Button label=" " kind="filled" disabled onPress={() => {}} />
+      <$Bone style={[$styles.note, { alignSelf: "center" }]} width={220} />
+    </$Pulse>
   );
 }`;
