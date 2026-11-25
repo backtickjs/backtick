@@ -6,6 +6,7 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { createRemoteJWKSet, jwtVerify } from "jose";
 import { assistantIds, assistantNamed } from "./components/assistants.js";
 import type { Assistant } from "./components/assistants.js";
+import type { Account } from "./components/Avatar.js";
 
 let keys: ReturnType<typeof createRemoteJWKSet> | undefined;
 
@@ -200,4 +201,19 @@ function required(name: string): string {
     throw new Error(`Set ${name}.`);
   }
   return value;
+}
+
+// Who's signed in, for the avatar: Apple's or Google's sign-in put the name
+// and picture in the user's metadata.
+export async function accountOf(user: string): Promise<Account> {
+  const profile = await supabase().auth.admin.getUserById(user);
+  if (profile.error) {
+    throw failed(profile.error);
+  }
+  const metadata = profile.data.user.user_metadata ?? {};
+  return {
+    name: String(metadata.full_name ?? metadata.name ?? ""),
+    email: profile.data.user.email ?? "",
+    picture: (metadata.avatar_url ?? metadata.picture ?? null) as string | null,
+  };
 }

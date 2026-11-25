@@ -112,10 +112,10 @@ export const AccountSheet = cs`(props: {
             assistant === null ? "Not connected" : $assistants[assistant].name
           }
           chevron
-          onPress={() => {
-            onClose();
-            navigation.dispatch($StackActions.push("Assistants"));
-          }}
+          // In the sheet's place, so back returns to the apps.
+          onPress={() =>
+            navigation.dispatch($StackActions.replace("Assistants"))
+          }
         />
         <$MenuItem label="Sign out" onPress={signOut} />
       </$Menu>

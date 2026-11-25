@@ -10,6 +10,8 @@ import {
   supabase,
   userOf,
 } from "./account.js";
+import { Account } from "./screens/Account.js";
+import { EditApp, NewApp } from "./screens/Ask.js";
 import { Home } from "./screens/Home.js";
 import { isAssistant } from "./components/assistants.js";
 import { Assistants } from "./screens/Assistants.js";
@@ -50,9 +52,27 @@ app.get("/", (context) => {
 
 // The user's apps.
 app.get("/apps", (context) =>
+  render(context.req.raw, <Home user={context.var.user} />),
+);
+
+// + New, over the apps: asking the user's assistant for a new app.
+app.get("/new", (context) =>
+  render(context.req.raw, <NewApp user={context.var.user} />),
+);
+
+// An app's Edit, from its ⋯ sheet: asking the user's assistant to change it.
+app.get("/apps/:id/edit", (context) =>
   render(
     context.req.raw,
-    <Home
+    <EditApp user={context.var.user} id={context.req.param("id")} />,
+  ),
+);
+
+// The account sheet, from the avatar.
+app.get("/account", (context) =>
+  render(
+    context.req.raw,
+    <Account
       user={context.var.user}
       modules={context.req.header("x-backtick-modules") ?? "{}"}
     />,

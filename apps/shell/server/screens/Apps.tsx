@@ -1,14 +1,10 @@
 import { cs } from "@backtickjs/core";
 import { Logo, useColors } from "../components/look.js";
 import { reloadScreen } from "./navigator.js";
-import { AccountSheet } from "../components/AccountSheet.js";
-import type { Assistant } from "../components/assistants.js";
 import { AppSheet } from "../components/AppSheet.js";
-import { AskSheet } from "../components/AskSheet.js";
 import { Avatar } from "../components/Avatar.js";
 import { Card } from "../components/Card.js";
 import type { App } from "../components/Card.js";
-import type { Ask } from "../components/AskSheet.js";
 import type { Account } from "../components/Avatar.js";
 import { useCallback, useState, useTransition } from "react" with {
   backtick: "client",
@@ -69,16 +65,11 @@ const styles = cs`$StyleSheet.create({
 
 // The home: the user's apps, last saved first, as a grid of cards the way app
 // builders list projects. A card opens its app; its ⋯ opens a sheet with the
-// app's details, opening, editing and deleting, the avatar one with the account
-// and signing out, and + New one that asks the user's assistant for a new app.
+// app's details, opening, editing and deleting; the avatar opens the account,
+// and + New asks the user's assistant for a new app, each a screen of its own.
 // Pulled down, it loads again in place.
-export const Apps = cs`(props: {
-  apps: App[];
-  account: Account;
-  modules: Record<string, string>;
-  assistant: Assistant | null;
-}) => {
-  const { apps, account, modules, assistant } = props;
+export const Apps = cs`(props: { apps: App[]; account: Account }) => {
+  const { apps, account } = props;
   const colors = $useColors();
   const insets = $useSafeAreaInsets();
   const { width } = $useWindowDimensions();
@@ -91,24 +82,7 @@ export const Apps = cs`(props: {
     () => startRefresh(() => $reloadScreen(route.key)),
     [route.key],
   );
-  const [asking, setAsking] = $useState<Ask | null>(null);
-  // New and Edit: to the user's assistant, or to connecting one first, which
-  // reloads these apps on the way back.
-  const ask = (what: Ask) => {
-    if (assistant === null) {
-      navigation.dispatch($StackActions.push("Assistants"));
-      return;
-    }
-    setAsking(what);
-  };
-  const newApp = () =>
-    ask({
-      title: "New app",
-      placeholder: "An app that…",
-      prompt: "New Backtick app: ",
-    });
   const [selected, setSelected] = $useState<App | null>(null);
-  const [accountOpen, setAccountOpen] = $useState(false);
   // Two columns, 20 at the edges and 14 between.
   const cardWidth = Math.floor((width - 40 - 14) / 2);
   return (
@@ -131,7 +105,9 @@ export const Apps = cs`(props: {
             <$View style={$styles.top}>
               <$Logo width={112} color={colors.ink} />
               <$Pressable
-                onPress={() => setAccountOpen(true)}
+                onPress={() =>
+                  navigation.dispatch($StackActions.push("Account"))
+                }
                 hitSlop={10}
                 accessibilityLabel="Account"
               >
@@ -143,7 +119,7 @@ export const Apps = cs`(props: {
                 Your apps
               </$Text>
               <$Pressable
-                onPress={newApp}
+                onPress={() => navigation.dispatch($StackActions.push("New"))}
                 style={[$styles.new, { backgroundColor: colors.ink }]}
                 accessibilityLabel="New app"
               >
@@ -170,21 +146,6 @@ export const Apps = cs`(props: {
           />
         )}
       />
-      {asking === null || assistant === null ? null : (
-        <$AskSheet
-          ask={asking}
-          assistant={assistant}
-          onClose={() => setAsking(null)}
-        />
-      )}
-      {accountOpen ? (
-        <$AccountSheet
-          account={account}
-          modules={modules}
-          assistant={assistant}
-          onClose={() => setAccountOpen(false)}
-        />
-      ) : null}
       {selected === null ? null : (
         <$AppSheet
           app={selected}
@@ -192,11 +153,9 @@ export const Apps = cs`(props: {
           onDelete={refresh}
           onEdit={() => {
             setSelected(null);
-            ask({
-              title: "Edit " + selected.title,
-              placeholder: "What should change?",
-              prompt: "Edit Backtick app " + selected.id + ": ",
-            });
+            navigation.dispatch(
+              $StackActions.push("Edit", { id: selected.id }),
+            );
           }}
         />
       )}

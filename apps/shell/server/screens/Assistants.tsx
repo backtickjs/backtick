@@ -64,21 +64,9 @@ const AssistantsScreen = cs`(props: {
   const colors = $useColors();
   const route = $useRoute();
   const navigation = $useNavigation();
-  // The apps under this screen load again: their account sheet and New read
-  // the user's assistants too.
-  const reloadApps = () => {
-    const apps = navigation
-      .getState()
-      ?.routes.find(({ name }) => name === "Apps");
-    if (apps !== undefined) {
-      $reloadScreen(apps.key);
-    }
-  };
-  // Connections changed: this screen loads again, and the apps too.
-  const reload = () => {
-    $reloadScreen(route.key);
-    reloadApps();
-  };
+  // Connections changed: this screen loads again. New, Edit and the account
+  // sheet read the user's assistants as they open.
+  const reload = () => $reloadScreen(route.key);
   // The one New and Edit open: shown chosen at once, kept by the home's
   // server, and back as it was if that fails. Not loaded again, so it
   // doesn't flash; a load that answers differently (after connecting or
@@ -94,9 +82,7 @@ const AssistantsScreen = cs`(props: {
     if (response === null || !response.ok) {
       setAssistant(before);
       $Alert.alert("Couldn't choose " + $assistants[id].name, "Try again.");
-      return;
     }
-    reloadApps();
   };
   const [connectingTo, setConnectingTo] = $useState<Assistant | null>(null);
   // Back from an assistant a connect sheet sent the user to: load again,

@@ -41,6 +41,9 @@ type Screens = {
   Source: { id: string };
   App: { appId: string };
   Assistants: undefined;
+  New: undefined;
+  Edit: { id: string };
+  Account: undefined;
 };
 
 const Navigator = cs`$createNativeStackNavigator<Screens>()`;
@@ -264,6 +267,35 @@ export const HomeNavigator = cs`({ origin }: { origin: string }) => {
                 <$FetchedScreen id={route.key} url={origin + "/assistants"} />
               )}
             </$Navigator.Screen>
+            {/* Sheets over the apps, fetched as they open, so each shows
+                what's true now: the sheet slides itself in, over a screen
+                that's see-through. */}
+            <$Navigator.Group
+              screenOptions={{
+                presentation: "transparentModal",
+                animation: "none",
+                contentStyle: { backgroundColor: "transparent" },
+              }}
+            >
+              <$Navigator.Screen name="New">
+                {({ route }) => (
+                  <$FetchedScreen id={route.key} url={origin + "/new"} />
+                )}
+              </$Navigator.Screen>
+              <$Navigator.Screen name="Edit">
+                {({ route }) => (
+                  <$FetchedScreen
+                    id={route.key}
+                    url={origin + "/apps/" + route.params.id + "/edit"}
+                  />
+                )}
+              </$Navigator.Screen>
+              <$Navigator.Screen name="Account">
+                {({ route }) => (
+                  <$FetchedScreen id={route.key} url={origin + "/account"} />
+                )}
+              </$Navigator.Screen>
+            </$Navigator.Group>
             <$Navigator.Screen name="App">
               {({ route }) => (
                 <$AppScreen
