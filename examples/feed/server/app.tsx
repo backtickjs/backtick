@@ -1,4 +1,4 @@
-import { render } from "@backtickjs/bundler";
+import { createRender } from "@backtickjs/bundler";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { Feed, pageFor } from "./Feed.js";
@@ -6,6 +6,10 @@ import { commentFor, commentsFor, itemFor, likeFor } from "./Item.js";
 import { commentsPath, itemPath, likesPath, pagePath } from "./paths.js";
 
 export const app = new Hono();
+
+// A screen the bundler refuses (an old build without a module it imports) is
+// answered with a bundle that throws why, and logged here.
+const render = createRender({ onBundlerError: (error) => console.warn(error) });
 
 // `npm run web` serves the app from another origin.
 app.use(
@@ -39,11 +43,8 @@ app.post(commentsPath(":id"), async (context) => {
   return render(context.req.raw, commentFor(context.req.param("id"), text));
 });
 
-// A screen the app can't run answers itself (406); anything else is a 500.
+// What a route throws: logged, and answered as a 500.
 app.onError((error, context) => {
-  if ("getResponse" in error) {
-    return error.getResponse();
-  }
   console.error(error);
   return context.text(String(error), 500);
 });

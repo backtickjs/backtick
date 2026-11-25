@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { BundlerError, render } from "@backtickjs/bundler";
+import { createRender } from "@backtickjs/bundler";
 import { Hono } from "hono";
 import {
   chooseAssistant,
@@ -22,6 +22,10 @@ export { eraseDeletedApps } from "./account.js";
 // Backtick's own screens, sign-in's included, served at app.backtickjs.com,
 // for the user the phone's access token names.
 export const app = new Hono<{ Variables: { user: string } }>();
+
+// A screen the bundler refuses (an old build without a module it imports) is
+// answered with a bundle that throws why, and logged here.
+const render = createRender({ onBundlerError: (error) => console.warn(error) });
 
 // Nothing of anyone's without a token for this origin: a phone without a
 // session gets sign-in for a screen, and a 401 for anything else, so a delete
@@ -150,12 +154,8 @@ app.post("/apps/:id/preview", async (context) => {
   return context.json({ saved: true });
 });
 
-// Answered rather than crashed on, so the app can show why: a bundle the
-// phone can't run as the bundler's own 400 or 406.
+// What a route throws: logged, and answered as a 500.
 app.onError((error, context) => {
-  if (error instanceof BundlerError) {
-    return error.getResponse();
-  }
   console.error(error);
   return context.text("Something went wrong.", 500);
 });

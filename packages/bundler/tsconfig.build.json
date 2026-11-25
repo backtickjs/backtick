@@ -2,6 +2,10 @@
   "extends": "../../configs/tsconfig.build.json",
   "compilerOptions": {
     "emitDeclarationOnly": false,
-    "sourceMap": true
+    "sourceMap": true,
+    "plugins": [
+      // Build with `tspc`, not `tsc`: a refusal is a script.
+      { "transform": "@backtickjs/tspatch-plugin" }
+    ]
   }
 }

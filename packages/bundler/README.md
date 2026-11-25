@@ -55,16 +55,16 @@ The modules the client provides, by specifier, each at the exact version of the 
 
 `supports(specifier, range)` makes the same check, for a server component choosing what to draw for the client the bundler is drawing for: `supports("expo-haptics", "^15")`. It asks about the modules of the build in progress, so it's called in a server component, while `build` runs it; outside one, it throws.
 
-A refused import throws `UnsupportedImportError`, carrying the module (`from`), the export (`imported`), the version it's typed against (`version`) and the one the client provides (`provided`, or `undefined` for none). The client can't change, so a server catches it to answer that client differently, such as with the 406 its `getResponse()` makes, which its app answers with a screen asking to update:
+A refused import throws `UnsupportedImportError`, carrying the module (`from`), the export (`imported`), the version it's typed against (`version`) and the one the client provides (`provided`, or `undefined` for none). The client can't change, so `render` answers it with a 406 whose bundle throws it, which the app answers with a screen asking to update, by the error's `name`, and hands it to `onBundlerError`. A server that draws such a client something else instead catches it around `build`:
 
 ```ts
 try {
-  bundle = await bundler.build({ input, modules });
+  bundle = await bundler.build({ input: <Home />, modules });
 } catch (error) {
   if (!(error instanceof UnsupportedImportError)) {
     throw error;
   }
-  return error.getResponse();
+  bundle = await bundler.build({ input: <Simpler />, modules });
 }
 ```
 
@@ -85,11 +85,15 @@ The body of a function of `module`, `exports` and `require`, whose `module.expor
 - `bundler.build({ input, modules })`: runs the server components in `input` and returns a `Build`. Async. `input` is a `Client<T>`: an element, as `<Home />`, or a script. Plain data is sent as a script, `` cs`${value}` ``.
 - `Build.generate({ sourcemap })`: writes the bundle; returns `{ code, map }`, where `code` is a `Bundle<T>` (from `@backtickjs/core`) for an `input` of `Client<T>`, which the client runs to a `T`, and `map` is `null` without a source map.
 - `supports(specifier, range)`: in a server component, whether the client being drawn for provides `specifier` at a version in `range`.
-- `BundlerError`: what `build` throws when it refuses its input, such as a value it can't splice. An error a server component throws passes through as it is. `getResponse()` answers it as JSON `{ name, message }` at its `status`, a 400: Hono's default error handler calls it on its own; elsewhere, the app's error handler returns it.
-- `UnsupportedImportError`, a `BundlerError`: what `build` throws for a script's import the client can't run. Its `status` is 406.
-- `render(request, input, init?)`, for a server that speaks the Fetch API's `Request` and `Response`, as Hono, Next.js route handlers and Workers do: `input`, a `Client<T>`, bundled for the modules the request's `x-backtick-modules` header lists, as CommonJS, which an app runs against its own modules on every platform, as a `BundleResponse<T>` (from `@backtickjs/core`): `text/javascript`, `no-store`, with `init`'s status and headers, which win over its own. A bundle it can't make throws a `BundlerError`, a missing or unreadable `x-backtick-modules` among them.
+- `BundlerError`: what `build` throws when it refuses its input, such as a value it can't splice. An error a server component throws passes through as it is.
+- `UnsupportedImportError`, a `BundlerError`: what `build` throws for a script's import the client can't run.
+- `createRender({ onBundlerError })`: makes `render`, for a server that speaks the Fetch API's `Request` and `Response`, as Hono, Next.js route handlers and Workers do. `onBundlerError(error, request)` is called with each `BundlerError` `render` answers; it's required, so where refusals go is a choice, and `() => {}` drops them.
+- `render(request, input, init?)`: `input`, a `Client<T>`, bundled for the modules the request's `x-backtick-modules` header lists, as CommonJS, which an app runs against its own modules on every platform, as a `BundleResponse<T>` (from `@backtickjs/core`): `text/javascript`, `no-store`, with `init`'s status and headers, which win over its own. A bundle it can't make, a missing or unreadable `x-backtick-modules` among them, is answered with a bundle that throws the `BundlerError`, so the app's `exec` throws an `Error` with its `name` and `message`: a 406 for an `UnsupportedImportError`, a 400 for anything else, never stored. An error a server component throws passes through.
 
   ```tsx
+  const render = createRender({
+    onBundlerError: (error) => console.warn(error),
+  });
   app.get("/", (c) => render(c.req.raw, <Home />));
   if (!show) return render(c.req.raw, <NotFound />, { status: 404 });
   ```

@@ -125,7 +125,7 @@ function logPipeline(fetched: Fetched) {
   );
 }
 
-// `build;dur=12.3, generate;dur=0.8` as { build: 12.3, generate: 0.8 }.
+// `bundle;dur=12.3` as { bundle: 12.3 }.
 function readServerTiming(header: string | null): Record<string, number> {
   const stages: Record<string, number> = {};
   for (const metric of header?.split(",") ?? []) {

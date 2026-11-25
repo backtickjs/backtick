@@ -1,5 +1,5 @@
 import { reloadExpo } from "@backtickjs/expo/server";
-import { render } from "@backtickjs/bundler";
+import { createRender } from "@backtickjs/bundler";
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
@@ -7,6 +7,10 @@ import { Home } from "./Home.js";
 import { saveOrder } from "./orders.js";
 
 const app = new Hono();
+
+// A screen the bundler refuses (an old build without a module it imports) is
+// answered with a bundle that throws why, and logged here.
+const render = createRender({ onBundlerError: (error) => console.warn(error) });
 
 // `npm run web` serves the app from another origin.
 app.use(
@@ -28,11 +32,8 @@ app.post("/orders", async (context) => {
   return context.body(null);
 });
 
-// A screen the app can't run answers itself (406); anything else is a 500.
+// What a route throws: logged, and answered as a 500.
 app.onError((error, context) => {
-  if ("getResponse" in error) {
-    return error.getResponse();
-  }
   console.error(error);
   return context.text(String(error), 500);
 });

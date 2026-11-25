@@ -4,20 +4,10 @@ import type { Modules } from "./modules.js";
 /**
  * What the bundler throws when it refuses its input, such as a value it can't
  * splice. An error a server component throws passes through unchanged.
- *
- * `getResponse()` turns it into a JSON response at its `status` (400). Hono's
- * default error handler calls it for you.
+ * `render` answers it, as a bundle that throws it.
  */
 export class BundlerError extends Error {
   override name: string = "BundlerError";
-  readonly status: 400 | 406 = 400;
-
-  getResponse(): Response {
-    return Response.json(
-      { name: this.name, message: this.message },
-      { status: this.status },
-    );
-  }
 }
 
 /**
@@ -26,12 +16,10 @@ export class BundlerError extends Error {
  * `provided`, a version the import isn't typed for (an earlier one, or
  * another major), or doesn't provide it at all. The client can't change, so
  * the server draws it something else: it catches this to answer differently,
- * or branches with `supports` before drawing. Answered as a 406.
+ * or branches with `supports` before drawing.
  */
 export class UnsupportedImportError extends BundlerError {
   override name = "UnsupportedImportError";
-  // Not Acceptable: no bundle the app can run, so it has to update.
-  override readonly status = 406;
 
   constructor(
     readonly from: string,

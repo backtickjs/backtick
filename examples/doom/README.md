@@ -31,9 +31,9 @@ The server never loads R3F or three, as it never loads React Native: `Canvas` an
 Each stage logs what it took, from the server to the phone's GPU. The server's lines print in the `npm start` terminal, and so do the phone's, which Expo forwards there; on the web, the app's print in the browser's console. The phone's numbers below are only an illustration:
 
 ```
-[server] /game: build 1.0 ms, generate 0.4 ms, 33.8 KB, heap 79.7 MB, rss 219.4 MB
+[server] /game: bundle 1.4 ms, heap 79.7 MB, rss 219.4 MB
 [pipeline] /game in 182.3 ms
-  server    1.4 ms (build 1.0 ms, generate 0.4 ms)
+  server    1.4 ms (bundle 1.4 ms)
   network   41.2 ms to first byte, 6.1 ms to download 33.8 KB
   evaluate  4.8 ms
   render    128.8 ms to commit
@@ -42,7 +42,7 @@ Each stage logs what it took, from the server to the phone's GPU. The server's l
 [runtime] 60 fps, worst frame 21.3 ms, 94 draw calls, 1128 triangles, heap 21.0 MB (+0.4 MB), 1 GCs
 ```
 
-- `[server]`, in `server/index.tsx`: running the server components and bundling them (`build`), then printing the code (`generate`), and the server's memory. The two times also travel to the app in a `Server-Timing` header.
+- `[server]`, in `server/index.tsx`: `render`'s time, running the server components, bundling and printing them (`bundle`), and the server's memory. The time also travels to the app in a `Server-Timing` header.
 - `[pipeline]`, in `client/App.tsx`, once per screen: the network is the time to the first byte less the server's share. `render` runs from `runtime.exec` to React's first commit of the screen, in development and production alike.
 - `[render]` and `[runtime]`, in `server/World.tsx`: the first frame R3F draws, its shaders compiled, then every 5 seconds the frame rate, the slowest frame and what the GPU was asked to draw.
 - `heap` is the JavaScript heap as Hermes reports it, and its garbage collections. On the web, Chrome reports the heap without its collections, and other browsers report neither. GL buffers and textures live in native memory, out of JavaScript's sight. When the OS runs short of memory, the app logs `[memory] warning from the OS` with the heap at that moment.
