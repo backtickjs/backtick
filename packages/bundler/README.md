@@ -92,7 +92,7 @@ The body of a function of `module`, `exports` and `require`, whose `module.expor
 
   ```tsx
   const render = createRender({
-    onBundlerError: (error) => console.warn(error),
+    onBundlerError: (error) => console.error(error),
   });
   app.get("/", (c) => render(c.req.raw, <Home />));
   if (!show) return render(c.req.raw, <NotFound />, { status: 404 });

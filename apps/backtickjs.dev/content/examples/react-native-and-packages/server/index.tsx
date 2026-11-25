@@ -5,9 +5,9 @@ import { Home } from "./Home.js";
 
 const app = new Hono();
 
-// A screen the bundler refuses (an old build without a module it imports) is
-// answered with a bundle that throws why, and logged here.
-const render = createRender({ onBundlerError: (error) => console.warn(error) });
+const render = createRender({
+  onBundlerError: (error) => console.error(error),
+});
 
 // Each screen is bundled for the modules the requesting build carries, from
 // its module map, at the versions it was built with.

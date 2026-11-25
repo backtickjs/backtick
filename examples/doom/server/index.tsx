@@ -8,9 +8,9 @@ import { Game } from "./Game.js";
 
 const app = new Hono();
 
-// A screen the bundler refuses (an old build without a module it imports) is
-// answered with a bundle that throws why, and logged here.
-const render = createRender({ onBundlerError: (error) => console.warn(error) });
+const render = createRender({
+  onBundlerError: (error) => console.error(error),
+});
 
 // `npm run web` serves the app from another origin, which sends its modules
 // and reads the server's timing only when they're allowed.

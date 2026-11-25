@@ -23,9 +23,9 @@ export { eraseDeletedApps } from "./account.js";
 // for the user the phone's access token names.
 export const app = new Hono<{ Variables: { user: string } }>();
 
-// A screen the bundler refuses (an old build without a module it imports) is
-// answered with a bundle that throws why, and logged here.
-const render = createRender({ onBundlerError: (error) => console.warn(error) });
+const render = createRender({
+  onBundlerError: (error) => console.error(error),
+});
 
 // Nothing of anyone's without a token for this origin: a phone without a
 // session gets sign-in for a screen, and a 401 for anything else, so a delete

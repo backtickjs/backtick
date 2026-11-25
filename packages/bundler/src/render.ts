@@ -28,7 +28,7 @@ export type Render = <T>(
  * `Response`, as Hono, Next.js route handlers and Workers do. CommonJS, on
  * every platform: the app runs it against its own modules.
  *
- *     const render = createRender({ onBundlerError: (error) => console.warn(error) });
+ *     const render = createRender({ onBundlerError: (error) => console.error(error) });
  *     app.get("/", (c) => render(c.req.raw, <Home />));
  *     return render(c.req.raw, <NotFound />, { status: 404 });
  *

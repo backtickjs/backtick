@@ -132,9 +132,7 @@ const RecipePage = cs\`({ recipe }: { recipe: Recipe }) => {
 
 const app = new Hono();
 
-// A screen the bundler refuses (an old build without a module it imports) is
-// answered with a bundle that throws why, and logged here.
-const render = createRender({ onBundlerError: (error) => console.warn(error) });
+const render = createRender({ onBundlerError: (error) => console.error(error) });
 
 app.get("/", (context) => {
   const origin = new URL(context.req.url).origin;
