@@ -7,21 +7,23 @@ import { AppSheet } from "../components/AppSheet.js";
 import { AskSheet } from "../components/AskSheet.js";
 import { Avatar } from "../components/Avatar.js";
 import { Card } from "../components/Card.js";
-import { connecting } from "../components/ConnectSheet.js";
 import type { App } from "../components/Card.js";
 import type { Ask } from "../components/AskSheet.js";
 import type { Account } from "../components/Avatar.js";
 import { useCallback, useState, useTransition } from "react" with {
   backtick: "client",
 };
-import { useFocusEffect, useRoute } from "@react-navigation/native" with {
+import {
+  StackActions,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native" with {
   backtick: "client",
 };
 import { useSafeAreaInsets } from "react-native-safe-area-context" with {
   backtick: "client",
 };
 import {
-  AppState,
   FlatList,
   Pressable,
   StyleSheet,
@@ -68,20 +70,20 @@ const styles = cs`$StyleSheet.create({
 // The home: the user's apps, last saved first, as a grid of cards the way app
 // builders list projects. A card opens its app; its ⋯ opens a sheet with the
 // app's details, opening, editing and deleting, the avatar one with the account
-// and signing out, and + New one that asks Claude for a new app. Pulled down, it
-// loads again in place.
+// and signing out, and + New one that asks the user's assistant for a new app.
+// Pulled down, it loads again in place.
 export const Apps = cs`(props: {
   apps: App[];
   account: Account;
   modules: Record<string, string>;
-  claude: boolean;
   assistant: Assistant | null;
 }) => {
-  const { apps, account, modules, claude, assistant } = props;
+  const { apps, account, modules, assistant } = props;
   const colors = $useColors();
   const insets = $useSafeAreaInsets();
   const { width } = $useWindowDimensions();
   const route = $useRoute();
+  const navigation = $useNavigation();
   // Loads the apps again, in place: the spinner stays until the new ones
   // replace these.
   const [refreshing, startRefresh] = $useTransition();
@@ -89,29 +91,18 @@ export const Apps = cs`(props: {
     () => startRefresh(() => $reloadScreen(route.key)),
     [route.key],
   );
-  // Back from Claude after the connect sheet sent the user there: load the
-  // apps again, which reads the connection anew. Only from the background
-  // (not Control Center or Face ID), once, and only while they're on top.
-  $useFocusEffect(
-    $useCallback(() => {
-      let last = $AppState.currentState;
-      const subscription = $AppState.addEventListener("change", (state) => {
-        if (
-          $connecting.current &&
-          last === "background" &&
-          state === "active"
-        ) {
-          $connecting.current = false;
-          refresh();
-        }
-        last = state;
-      });
-      return () => subscription.remove();
-    }, [refresh]),
-  );
   const [asking, setAsking] = $useState<Ask | null>(null);
+  // New and Edit: to the user's assistant, or to connecting one first, which
+  // reloads these apps on the way back.
+  const ask = (what: Ask) => {
+    if (assistant === null) {
+      navigation.dispatch($StackActions.push("Assistants"));
+      return;
+    }
+    setAsking(what);
+  };
   const newApp = () =>
-    setAsking({
+    ask({
       title: "New app",
       placeholder: "An app that…",
       prompt: "New Backtick app: ",
@@ -179,10 +170,10 @@ export const Apps = cs`(props: {
           />
         )}
       />
-      {asking === null ? null : (
+      {asking === null || assistant === null ? null : (
         <$AskSheet
           ask={asking}
-          claude={claude}
+          assistant={assistant}
           onClose={() => setAsking(null)}
         />
       )}
@@ -201,7 +192,7 @@ export const Apps = cs`(props: {
           onDelete={refresh}
           onEdit={() => {
             setSelected(null);
-            setAsking({
+            ask({
               title: "Edit " + selected.title,
               placeholder: "What should change?",
               prompt: "Edit Backtick app " + selected.id + ": ",

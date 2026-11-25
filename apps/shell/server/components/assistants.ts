@@ -3,9 +3,9 @@ import { cs } from "@backtickjs/core";
 // Each assistant that builds apps with Backtick, by its id, in the order the
 // Assistants screen lists them: its name, the word in the name its connector
 // registers with (supabase/migrations, assistants_of()), where Connect sends
-// the user, and the steps there, one with a value to copy if the
-// assistant's form asks for it. Claude: a custom connector, as Claude's app
-// asks for it (2026-10-24). ChatGPT: Backtick's page in its plugin directory
+// the user and the steps there, and a new chat with a prompt written in and
+// not yet sent. Claude: a custom connector, as Claude's app asks for it
+// (2026-10-24). ChatGPT: Backtick's page in its plugin directory
 // (2026-11-24).
 // A step to connect: what to do, and a value to copy if there's one.
 type Step = { text: string; copy?: string };
@@ -16,6 +16,7 @@ const table = {
     name: "Claude",
     registers: "claude",
     connect: "https://claude.ai/settings/connectors",
+    chat: "https://claude.ai/new?q=",
     steps: steps(
       { text: "Tap +, then Add custom connector." },
       {
@@ -30,6 +31,7 @@ const table = {
     registers: "chatgpt",
     connect:
       "https://chatgpt.com/plugins/plugin_asdk_app_6af289eab8708191b9d185133a50e7a4",
+    chat: "https://chatgpt.com/?q=",
     steps: steps(
       { text: "Tap Install plugin." },
       { text: "Sign in and allow Backtick." },
@@ -41,6 +43,7 @@ const table = {
     name: string;
     registers: string;
     connect: string;
+    chat: string;
     steps: Step[];
   }
 >;

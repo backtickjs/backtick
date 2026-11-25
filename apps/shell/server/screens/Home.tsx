@@ -51,10 +51,8 @@ export async function Home(props: { user: string; modules: string }) {
   const captured = new Map(
     (files ?? []).map((file) => [file.name, file.updated_at]),
   );
-  // The user's assistants, and the one New and Edit open: read each time
-  // the home loads.
-  const { connected, assistant } = await connectionsOf(props.user);
-  const claude = connected.includes("claude");
+  // The assistant New and Edit open: read each time the home loads.
+  const { assistant } = await connectionsOf(props.user);
   const apps = data
     .map(({ id, title, created_at, versions }, index) => {
       const latest = versions.reduce((a, b) => (b.version > a.version ? b : a));
@@ -79,7 +77,6 @@ export async function Home(props: { user: string; modules: string }) {
       apps={$apps}
       account={$account}
       modules={$modules}
-      claude={$claude}
       assistant={$assistant}
     />
   )`;

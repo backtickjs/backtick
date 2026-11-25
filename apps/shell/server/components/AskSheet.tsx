@@ -1,7 +1,8 @@
 import { cs } from "@backtickjs/core";
 import { useColors } from "./look.js";
+import { assistants } from "./assistants.js";
+import type { Assistant } from "./assistants.js";
 import { Button } from "./Button.js";
-import { ConnectSheet } from "./ConnectSheet.js";
 import { Sheet, sheetStyles } from "./Sheet.js";
 import { useState } from "react" with { backtick: "client" };
 import { Linking, StyleSheet, Text, TextInput } from "react-native" with {
@@ -24,26 +25,23 @@ const styles = cs`$StyleSheet.create({
   note: { fontSize: 13, lineHeight: 19, textAlign: "center", marginTop: 4 },
 })`;
 
-// What to ask Claude: a new app, or a change to one.
+// What to ask the assistant: a new app, or a change to one.
 export type Ask = { title: string; placeholder: string; prompt: string };
 
-// An app made or changed by Claude: a new chat there, the prompt written
-// in and not yet sent. It names Backtick (and the app, for a change), so
-// Claude uses the connector rather than answering in text. The card's
-// Open in Backtick brings the app back here. Not connected, it shows how
-// to connect instead, with nothing to write yet.
+// An app made or changed by the user's assistant: a new chat there, the
+// prompt written in and not yet sent. It names Backtick (and the app, for a
+// change), so the assistant uses Backtick rather than answering in text. The
+// card's Open in Backtick brings the app back here.
 export const AskSheet = cs`(props: {
   ask: Ask;
-  claude: boolean;
+  assistant: Assistant;
   onClose: () => void;
 }) => {
-  const { ask: what, claude, onClose } = props;
+  const { ask: what, assistant, onClose } = props;
+  const { name, chat } = $assistants[assistant];
   const colors = $useColors();
   const [idea, setIdea] = $useState("");
   const ready = idea.trim().length > 0;
-  if (!claude) {
-    return <$ConnectSheet assistant="claude" onClose={onClose} />;
-  }
   return (
     <$Sheet onClose={onClose}>
       <$Text style={[$sheetStyles.sheetTitle, { color: colors.ink }]}>
@@ -66,14 +64,13 @@ export const AskSheet = cs`(props: {
         ]}
       />
       <$Button
-        label="Ask Claude"
+        label={"Ask " + name}
         kind="filled"
         disabled={!ready}
         onPress={() => {
           onClose();
           $Linking.openURL(
-            "https://claude.ai/new?q=" +
-              encodeURIComponent(what.prompt + idea.trim()),
+            chat + encodeURIComponent(what.prompt + idea.trim()),
           );
         }}
       />

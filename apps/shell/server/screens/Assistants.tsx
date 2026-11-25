@@ -3,6 +3,7 @@ import { connectionsOf } from "../account.js";
 import { assistantIds, assistants } from "../components/assistants.js";
 import type { Assistant } from "../components/assistants.js";
 import { connecting, ConnectSheet } from "../components/ConnectSheet.js";
+import { Menu, MenuItem } from "../components/Menu.js";
 import { useColors } from "../components/look.js";
 import { reloadScreen } from "./navigator.js";
 import { Ionicons } from "@expo/vector-icons" with { backtick: "client" };
@@ -14,7 +15,7 @@ import {
 } from "@react-navigation/native" with {
   backtick: "client",
 };
-import { Fragment, useCallback, useState } from "react" with {
+import { useCallback, useState } from "react" with {
   backtick: "client",
 };
 import {
@@ -39,26 +40,7 @@ const styles = cs`$StyleSheet.create({
     letterSpacing: -1.6,
     marginBottom: 20,
   },
-  group: { borderWidth: 1, borderRadius: 16 },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-    minHeight: 56,
-    paddingLeft: 18,
-    paddingRight: 12,
-  },
-  section: { marginBottom: 28 },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: "700",
-    marginBottom: 10,
-    marginLeft: 2,
-  },
-  // From the names on, past the radios: 18 + 22 + 12.
-  divider: { height: $StyleSheet.hairlineWidth, marginLeft: 52 },
   noRadio: { width: 22 },
-  name: { flex: 1, fontSize: 17, fontWeight: "600" },
   // Connect, filled, and Disconnect, outlined.
   pill: {
     borderWidth: 1,
@@ -158,104 +140,69 @@ const AssistantsScreen = cs`(props: {
       },
     ]);
   };
-  const group = [
-    $styles.group,
-    { borderColor: colors.line, backgroundColor: colors.paper },
-  ];
   const unconnected = $assistantIds.filter((id) => !connected.includes(id));
-  // A group of assistants: each with its radio and Disconnect once
-  // connected, or Connect.
-  const list = (ids: Assistant[]) => (
-    <$View
-      style={group}
-      // The connected ones: one is selected, for screen readers too.
-      accessibilityRole={
-        ids.some((id) => connected.includes(id)) ? "radiogroup" : undefined
-      }
-    >
-      {ids.map((id, index) => {
-        const { name } = $assistants[id];
-        const linked = connected.includes(id);
-        return (
-          <$Fragment key={id}>
-            {index === 0 ? null : (
-              <$View
-                style={[$styles.divider, { backgroundColor: colors.line }]}
-              />
-            )}
-            <$View style={$styles.row}>
-              {linked ? (
-                <$Pressable
-                  onPress={() => {
-                    if (id !== assistant) {
-                      void choose(id);
-                    }
-                  }}
-                  // The row's own layout, inside its padding.
-                  style={[
-                    $styles.row,
-                    {
-                      flex: 1,
-                      minHeight: 0,
-                      paddingLeft: 0,
-                      paddingRight: 0,
-                    },
-                  ]}
-                  accessibilityRole="radio"
-                  accessibilityState={{ checked: id === assistant }}
-                >
-                  <$Ionicons
-                    name={
-                      id === assistant ? "radio-button-on" : "radio-button-off"
-                    }
-                    size={22}
-                    color={id === assistant ? colors.ink : colors.muted}
-                  />
-                  <$Text style={[$styles.name, { color: colors.ink }]}>
-                    {name}
-                  </$Text>
-                </$Pressable>
-              ) : (
-                <>
-                  {/* Where its radio will be, so the names line up. */}
-                  <$View style={$styles.noRadio} />
-                  <$Text style={[$styles.name, { color: colors.ink }]}>
-                    {name}
-                  </$Text>
-                </>
-              )}
-              {linked ? (
-                <$Pressable
-                  onPress={() => disconnect(id)}
-                  style={[$styles.pill, { borderColor: colors.line }]}
-                  accessibilityRole="button"
-                  accessibilityLabel={"Disconnect " + name}
-                >
-                  <$Text style={[$styles.pillLabel, { color: colors.ink }]}>
-                    Disconnect
-                  </$Text>
-                </$Pressable>
-              ) : (
-                <$Pressable
-                  onPress={() => setConnectingTo(id)}
-                  style={[
-                    $styles.pill,
-                    { borderColor: colors.ink, backgroundColor: colors.ink },
-                  ]}
-                  accessibilityRole="button"
-                  accessibilityLabel={"Connect " + name}
-                >
-                  <$Text style={[$styles.pillLabel, { color: colors.paper }]}>
-                    Connect
-                  </$Text>
-                </$Pressable>
-              )}
-            </$View>
-          </$Fragment>
-        );
-      })}
-    </$View>
-  );
+  // An assistant's row: its radio and Disconnect once connected, or Connect.
+  const item = (id: Assistant) => {
+    const { name } = $assistants[id];
+    if (!connected.includes(id)) {
+      return (
+        <$MenuItem
+          key={id}
+          label={name}
+          // Where its radio will be, so the names line up.
+          leading={<$View style={$styles.noRadio} />}
+          trailing={
+            <$Pressable
+              onPress={() => setConnectingTo(id)}
+              style={[
+                $styles.pill,
+                { borderColor: colors.ink, backgroundColor: colors.ink },
+              ]}
+              accessibilityRole="button"
+              accessibilityLabel={"Connect " + name}
+            >
+              <$Text style={[$styles.pillLabel, { color: colors.paper }]}>
+                Connect
+              </$Text>
+            </$Pressable>
+          }
+        />
+      );
+    }
+    const chosen = id === assistant;
+    return (
+      <$MenuItem
+        key={id}
+        label={name}
+        onPress={() => {
+          if (!chosen) {
+            void choose(id);
+          }
+        }}
+        accessibilityRole="radio"
+        checked={chosen}
+        leading={
+          <$Ionicons
+            name={chosen ? "radio-button-on" : "radio-button-off"}
+            size={22}
+            color={chosen ? colors.ink : colors.muted}
+          />
+        }
+        trailing={
+          <$Pressable
+            onPress={() => disconnect(id)}
+            style={[$styles.pill, { borderColor: colors.line }]}
+            accessibilityRole="button"
+            accessibilityLabel={"Disconnect " + name}
+          >
+            <$Text style={[$styles.pillLabel, { color: colors.ink }]}>
+              Disconnect
+            </$Text>
+          </$Pressable>
+        }
+      />
+    );
+  };
   return (
     <$ScrollView contentContainerStyle={$styles.screen}>
       <$Text style={[$styles.heading, { color: colors.ink }]}>
@@ -263,24 +210,17 @@ const AssistantsScreen = cs`(props: {
       </$Text>
       {connected.length === 0 ? (
         <$Text style={[$styles.lede, { color: colors.muted }]}>
-          Connect one to start building apps.
+          Connect one to create apps.
         </$Text>
       ) : null}
       {connected.length === 0 ? null : (
-        <$View style={$styles.section}>
-          <$Text style={[$styles.sectionTitle, { color: colors.ink }]}>
-            Connected
-          </$Text>
-          {list($assistantIds.filter((id) => connected.includes(id)))}
-        </$View>
+        // One of them is chosen, for screen readers too.
+        <$Menu title="Connected" accessibilityRole="radiogroup">
+          {$assistantIds.filter((id) => connected.includes(id)).map(item)}
+        </$Menu>
       )}
       {unconnected.length === 0 ? null : (
-        <$View style={$styles.section}>
-          <$Text style={[$styles.sectionTitle, { color: colors.ink }]}>
-            Not connected
-          </$Text>
-          {list(unconnected)}
-        </$View>
+        <$Menu title="Not connected">{unconnected.map(item)}</$Menu>
       )}
       {connectingTo === null ? null : (
         <$ConnectSheet

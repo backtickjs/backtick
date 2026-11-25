@@ -4,11 +4,10 @@ import { useColors } from "./look.js";
 import { assistants } from "./assistants.js";
 import type { Assistant } from "./assistants.js";
 import { Avatar } from "./Avatar.js";
-import { Button } from "./Button.js";
+import { Menu, MenuItem } from "./Menu.js";
 import { Sheet, sheetStyles } from "./Sheet.js";
 import type { Account } from "./Avatar.js";
 import Constants from "expo-constants" with { backtick: "client" };
-import { Ionicons } from "@expo/vector-icons" with { backtick: "client" };
 import { StackActions, useNavigation } from "@react-navigation/native" with {
   backtick: "client",
 };
@@ -31,19 +30,8 @@ const styles = cs`$StyleSheet.create({
     gap: 16,
     marginBottom: 24,
   },
-  // A setting's row, as iOS's Settings draws one: its name, then its value.
-  setting: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    borderWidth: $StyleSheet.hairlineWidth,
-    borderRadius: 16,
-    minHeight: 56,
-    paddingHorizontal: 18,
-    marginBottom: 24,
-  },
-  settingName: { flex: 1, fontSize: 17, fontWeight: "600" },
-  settingValue: { fontSize: 16 },
+  // The email as the account's title, without a name.
+  emailTitle: { fontSize: 17, fontWeight: "600" },
 })`;
 
 // The Backtick app's version, for people: its version, and when the
@@ -106,30 +94,34 @@ export const AccountSheet = cs`(props: {
           ) : null}
           <$Text
             numberOfLines={1}
-            style={[$sheetStyles.detail, { color: colors.muted }]}
+            style={
+              account.name
+                ? [$sheetStyles.detail, { color: colors.muted }]
+                : [$styles.emailTitle, { color: colors.ink }]
+            }
           >
             {account.email}
           </$Text>
         </$View>
       </$View>
-      <$Pressable
-        onPress={() => {
-          onClose();
-          navigation.dispatch($StackActions.push("Assistants"));
-        }}
-        style={[$styles.setting, { borderColor: colors.line }]}
-        accessibilityRole="button"
-      >
-        <$Text style={[$styles.settingName, { color: colors.ink }]}>
-          Assistant
-        </$Text>
-        <$Text style={[$styles.settingValue, { color: colors.muted }]}>
-          {assistant === null ? "Not connected" : $assistants[assistant].name}
-        </$Text>
-        <$Ionicons name="chevron-forward" size={18} color={colors.muted} />
-      </$Pressable>
-      <$Button label="Sign out" kind="outlined" onPress={signOut} />
-      <$Button label="Delete account" kind="danger" onPress={deleteAccount} />
+      {/* The assistant and signing out, then deleting on its own. */}
+      <$Menu>
+        <$MenuItem
+          label="Assistant"
+          value={
+            assistant === null ? "Not connected" : $assistants[assistant].name
+          }
+          chevron
+          onPress={() => {
+            onClose();
+            navigation.dispatch($StackActions.push("Assistants"));
+          }}
+        />
+        <$MenuItem label="Sign out" onPress={signOut} />
+      </$Menu>
+      <$Menu>
+        <$MenuItem label="Delete account" danger onPress={deleteAccount} />
+      </$Menu>
     </$Sheet>
   );
 }`;
