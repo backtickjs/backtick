@@ -40,6 +40,7 @@ type Screens = {
   Apps: undefined;
   Source: { id: string };
   App: { appId: string };
+  Assistants: undefined;
 };
 
 // Where each app is served, as `<appId>.backtickjs.app`.
@@ -260,6 +261,22 @@ export const HomeNavigator = cs`({ origin }: { origin: string }) => {
                   id={route.key}
                   url={origin + "/source/" + route.params.id}
                 />
+              )}
+            </$Navigator.Screen>
+            <$Navigator.Screen
+              name="Assistants"
+              // Its own large title, under the back button.
+              options={{
+                headerShown: true,
+                title: "",
+                headerBackTitle: "Apps",
+                headerTintColor: colors.ink,
+                headerStyle: { backgroundColor: colors.paper },
+                headerShadowVisible: false,
+              }}
+            >
+              {({ route }) => (
+                <$FetchedScreen id={route.key} url={origin + "/assistants"} />
               )}
             </$Navigator.Screen>
             <$Navigator.Screen name="App">

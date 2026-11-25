@@ -1,8 +1,18 @@
 import { cs } from "@backtickjs/core";
 import { BundlerError, render } from "@backtickjs/bundler";
 import { Hono } from "hono";
-import { deleteAccount, failed, supabase, userOf } from "./account.js";
+import {
+  chooseAssistant,
+  connectionsOf,
+  deleteAccount,
+  disconnectAssistant,
+  failed,
+  supabase,
+  userOf,
+} from "./account.js";
 import { Home } from "./screens/Home.js";
+import { isAssistant } from "./components/assistants.js";
+import { Assistants } from "./screens/Assistants.js";
 import { HomeNavigator } from "./screens/navigator.js";
 import { SignIn } from "./screens/SignIn.js";
 import { Source } from "./screens/Source.js";
@@ -44,6 +54,38 @@ app.get("/apps", (context) =>
     />,
   ),
 );
+
+// The assistants the user connected, and their default, from the account
+// sheet.
+app.get("/assistants", (context) =>
+  render(context.req.raw, <Assistants user={context.var.user} />),
+);
+
+// Choosing the assistant New and Edit open, from the Assistants screen: one
+// that's connected. A POST, so no link can do it.
+app.post("/assistants/:assistant/choose", async (context) => {
+  const assistant = context.req.param("assistant");
+  if (!isAssistant(assistant)) {
+    return context.notFound();
+  }
+  const { connected } = await connectionsOf(context.var.user);
+  if (!connected.includes(assistant)) {
+    return context.json({ error: "not_connected" }, 409);
+  }
+  await chooseAssistant(context.var.user, assistant);
+  return context.json({ chosen: true });
+});
+
+// Disconnecting an assistant, from the Assistants screen once the user
+// confirms: Backtick stops answering it. A POST, so no link can do it.
+app.post("/assistants/:assistant/disconnect", async (context) => {
+  const assistant = context.req.param("assistant");
+  if (!isAssistant(assistant)) {
+    return context.notFound();
+  }
+  await disconnectAssistant(context.var.user, assistant);
+  return context.json({ disconnected: true });
+});
 
 // An app's source, from its ⋯ sheet.
 app.get("/source/:id", (context) =>

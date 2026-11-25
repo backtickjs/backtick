@@ -2,6 +2,7 @@ import { cs } from "@backtickjs/core";
 import { Logo, useColors } from "../components/look.js";
 import { reloadScreen } from "./navigator.js";
 import { AccountSheet } from "../components/AccountSheet.js";
+import type { Assistant } from "../components/assistants.js";
 import { AppSheet } from "../components/AppSheet.js";
 import { AskSheet } from "../components/AskSheet.js";
 import { Avatar } from "../components/Avatar.js";
@@ -74,8 +75,9 @@ export const Apps = cs`(props: {
   account: Account;
   modules: Record<string, string>;
   claude: boolean;
+  assistant: Assistant | null;
 }) => {
-  const { apps, account, modules, claude } = props;
+  const { apps, account, modules, claude, assistant } = props;
   const colors = $useColors();
   const insets = $useSafeAreaInsets();
   const { width } = $useWindowDimensions();
@@ -188,6 +190,7 @@ export const Apps = cs`(props: {
         <$AccountSheet
           account={account}
           modules={modules}
+          assistant={assistant}
           onClose={() => setAccountOpen(false)}
         />
       ) : null}

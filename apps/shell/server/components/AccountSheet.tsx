@@ -1,11 +1,17 @@
 import { cs } from "@backtickjs/core";
 import { shellURL } from "../links.js";
 import { useColors } from "./look.js";
+import { assistants } from "./assistants.js";
+import type { Assistant } from "./assistants.js";
 import { Avatar } from "./Avatar.js";
 import { Button } from "./Button.js";
 import { Sheet, sheetStyles } from "./Sheet.js";
 import type { Account } from "./Avatar.js";
 import Constants from "expo-constants" with { backtick: "client" };
+import { Ionicons } from "@expo/vector-icons" with { backtick: "client" };
+import { StackActions, useNavigation } from "@react-navigation/native" with {
+  backtick: "client",
+};
 import {
   nativeApplicationVersion,
   nativeBuildVersion,
@@ -25,6 +31,19 @@ const styles = cs`$StyleSheet.create({
     gap: 16,
     marginBottom: 24,
   },
+  // A setting's row, as iOS's Settings draws one: its name, then its value.
+  setting: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    borderWidth: $StyleSheet.hairlineWidth,
+    borderRadius: 16,
+    minHeight: 56,
+    paddingHorizontal: 18,
+    marginBottom: 24,
+  },
+  settingName: { flex: 1, fontSize: 17, fontWeight: "600" },
+  settingValue: { fontSize: 16 },
 })`;
 
 // The Backtick app's version, for people: its version, and when the
@@ -51,14 +70,16 @@ export const copyDebugInfo = cs`(modules: Record<string, string>) => {
   );
 }`;
 
-// Who's signed in, signing out, and deleting the account.
+// Who's signed in, their assistant, signing out, and deleting the account.
 export const AccountSheet = cs`(props: {
   account: Account;
   modules: Record<string, string>;
+  assistant: Assistant | null;
   onClose: () => void;
 }) => {
-  const { account, modules, onClose } = props;
+  const { account, modules, assistant, onClose } = props;
   const colors = $useColors();
+  const navigation = $useNavigation();
   const signOut = () => {
     onClose();
     $Linking.openURL($shellURL("sign-out"));
@@ -91,6 +112,22 @@ export const AccountSheet = cs`(props: {
           </$Text>
         </$View>
       </$View>
+      <$Pressable
+        onPress={() => {
+          onClose();
+          navigation.dispatch($StackActions.push("Assistants"));
+        }}
+        style={[$styles.setting, { borderColor: colors.line }]}
+        accessibilityRole="button"
+      >
+        <$Text style={[$styles.settingName, { color: colors.ink }]}>
+          Assistant
+        </$Text>
+        <$Text style={[$styles.settingValue, { color: colors.muted }]}>
+          {assistant === null ? "Not connected" : $assistants[assistant].name}
+        </$Text>
+        <$Ionicons name="chevron-forward" size={18} color={colors.muted} />
+      </$Pressable>
       <$Button label="Sign out" kind="outlined" onPress={signOut} />
       <$Button label="Delete account" kind="danger" onPress={deleteAccount} />
     </$Sheet>

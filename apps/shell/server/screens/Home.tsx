@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { failed, supabase } from "../account.js";
+import { connectionsOf, failed, supabase } from "../account.js";
 import { Apps } from "./Apps.js";
 
 // A card's preview until its app has been opened on the phone, which captures
@@ -51,15 +51,10 @@ export async function Home(props: { user: string; modules: string }) {
   const captured = new Map(
     (files ?? []).map((file) => [file.name, file.updated_at]),
   );
-  // Whether the user connected Backtick to Claude (supabase/migrations,
-  // assistants_of()), which registers by its name. Read each time the home
-  // loads.
-  const { data: assistants } = await supabase().rpc("assistants_of", {
-    owner: props.user,
-  });
-  const claude = (assistants ?? []).some(({ name }: { name: string }) =>
-    /claude/i.test(name),
-  );
+  // The user's assistants, and the one New and Edit open: read each time
+  // the home loads.
+  const { connected, assistant } = await connectionsOf(props.user);
+  const claude = connected.includes("claude");
   const apps = data
     .map(({ id, title, created_at, versions }, index) => {
       const latest = versions.reduce((a, b) => (b.version > a.version ? b : a));
@@ -85,6 +80,7 @@ export async function Home(props: { user: string; modules: string }) {
       account={$account}
       modules={$modules}
       claude={$claude}
+      assistant={$assistant}
     />
   )`;
 }

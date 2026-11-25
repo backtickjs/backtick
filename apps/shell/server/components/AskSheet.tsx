@@ -42,7 +42,7 @@ export const AskSheet = cs`(props: {
   const [idea, setIdea] = $useState("");
   const ready = idea.trim().length > 0;
   if (!claude) {
-    return <$ConnectSheet onClose={onClose} />;
+    return <$ConnectSheet assistant="claude" onClose={onClose} />;
   }
   return (
     <$Sheet onClose={onClose}>

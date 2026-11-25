@@ -4,6 +4,8 @@
 // changes the user's apps with its own key, always filtered by that user.
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { createRemoteJWKSet, jwtVerify } from "jose";
+import { assistantIds, assistantNamed } from "./components/assistants.js";
+import type { Assistant } from "./components/assistants.js";
 
 let keys: ReturnType<typeof createRemoteJWKSet> | undefined;
 
@@ -99,6 +101,92 @@ export async function eraseDeletedApps(): Promise<number> {
     throw failed(erased.error);
   }
   return erased.data as number;
+}
+
+// The assistants the user connected (supabase/migrations, assistants_of()),
+// the latest first, each by the name it registered with: only those Backtick
+// knows (components/assistants.ts).
+export async function assistantsOf(
+  user: string,
+): Promise<{ assistant: Assistant; name: string }[]> {
+  const { data, error } = await supabase().rpc("assistants_of", {
+    owner: user,
+  });
+  if (error) {
+    throw failed(error);
+  }
+  return (data as { name: string; connected_at: string }[])
+    .toSorted((a, b) => b.connected_at.localeCompare(a.connected_at))
+    .flatMap(({ name }) => {
+      const assistant = assistantNamed(name);
+      return assistant === undefined ? [] : [{ assistant, name }];
+    });
+}
+
+// The user's assistants: those connected, in Backtick's order, and the one
+// New and Edit open, the one they chose (supabase/migrations, settings) while
+// it's connected, or else the latest connected. None until one is.
+export async function connectionsOf(
+  user: string,
+): Promise<{ connected: Assistant[]; assistant: Assistant | null }> {
+  const latest = (await assistantsOf(user)).map(({ assistant }) => assistant);
+  const { data, error } = await supabase()
+    .from("settings")
+    .select("assistant")
+    .eq("user_id", user)
+    .maybeSingle();
+  if (error) {
+    throw failed(error);
+  }
+  const chosen = latest.find((id) => id === data?.assistant);
+  return {
+    connected: assistantIds.filter((id) => latest.includes(id)),
+    assistant: chosen ?? latest[0] ?? null,
+  };
+}
+
+// Choosing the assistant New and Edit open, one of those connected.
+export async function chooseAssistant(
+  user: string,
+  assistant: Assistant,
+): Promise<void> {
+  const { error } = await supabase().from("settings").upsert({
+    user_id: user,
+    assistant,
+    updated_at: new Date().toISOString(),
+  });
+  if (error) {
+    throw failed(error);
+  }
+}
+
+// Disconnecting an assistant: each name it registered with
+// (supabase/migrations, disconnect_assistant()), and no longer the user's
+// choice, so reconnecting it later doesn't choose it again.
+export async function disconnectAssistant(
+  user: string,
+  assistant: Assistant,
+): Promise<void> {
+  const names = (await assistantsOf(user))
+    .filter((connected) => connected.assistant === assistant)
+    .map(({ name }) => name);
+  for (const name of names) {
+    const { error } = await supabase().rpc("disconnect_assistant", {
+      owner: user,
+      assistant: name,
+    });
+    if (error) {
+      throw failed(error);
+    }
+  }
+  const { error } = await supabase()
+    .from("settings")
+    .update({ assistant: null, updated_at: new Date().toISOString() })
+    .eq("user_id", user)
+    .eq("assistant", assistant);
+  if (error) {
+    throw failed(error);
+  }
 }
 
 // Supabase's error isn't an `Error`, so its message would be lost.
