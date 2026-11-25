@@ -69,7 +69,7 @@ export async function toHtml({
     <script type="importmap">
       {
         "imports": {
-          "@backtickjs/core": "https://cdn.jsdelivr.net/npm/@backtickjs/core@0.8.0/+esm",
+          "@backtickjs/core": "https://cdn.jsdelivr.net/npm/@backtickjs/core@0.9.0/+esm",
           "solid-js": "https://cdn.jsdelivr.net/npm/solid-js@1.9.17/dist/solid.js",
           "solid-js/web": "https://cdn.jsdelivr.net/npm/solid-js@1.9.17/web/dist/web.js",
           "solid-js/store": "https://cdn.jsdelivr.net/npm/solid-js@1.9.17/store/dist/store.js"
