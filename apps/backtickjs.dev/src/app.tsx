@@ -36,6 +36,13 @@ for (const page of DOCS_PAGES) {
   app.get(markdownPathOf(page.path), (context) => context.text(page.markdown));
 }
 
+app.get("/react-summit-talk", (context) =>
+  context.redirect(
+    "https://gitnation.com/contents/vibe-code-react-native-apps-from-your-phone-no-computer-needed",
+    302,
+  ),
+);
+
 app.get("/llms.txt", (context) => context.text(LLMS_TXT));
 app.get("/llms-full.txt", (context) => context.text(LLMS_FULL_TXT));
 
